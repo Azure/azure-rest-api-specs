@@ -18,6 +18,52 @@
     "application/json"
   ],
   "paths": {
+    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupStatus": {
+      "post": {
+        "tags": [
+          "BackupStatus"
+        ],
+        "summary": "Get the container backup status",
+        "operationId": "BackupStatus_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AzureRegion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Container Backup Status Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupStatusResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get Azure Virtual Machine Backup Status": {
+            "$ref": "./examples/AzureIaasVm_GetBackupStatus.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupconfig/vaultconfig": {
       "get": {
         "tags": [
@@ -145,6 +191,11 @@
         "x-ms-odata": "#/definitions/BMSBackupEnginesQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Dpm List Backup Enginers": {
+            "$ref": "./examples/DPM_BackupEngines_List.json"
+          }
         }
       }
     },
@@ -202,7 +253,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-odata": "#/definitions/BMSBackupEngineQueryObject"
+        "x-ms-odata": "#/definitions/BMSBackupEngineQueryObject",
+        "x-ms-examples": {
+          "Dpm Get Backup Engine Details": {
+            "$ref": "./examples/DPM_BackupEngines_Get.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}": {
@@ -362,7 +418,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get Protection Container Details": {
+            "$ref": "./examples/AzureWorkload_ProtectionContainers_Get.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -471,7 +532,12 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Unregister Protection Container": {
+            "$ref": "./examples/AzureWorkload_ProtectionContainers_Unregister.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/inquire": {
@@ -588,6 +654,11 @@
         "x-ms-odata": "#/definitions/BMSWorkloadItemQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Workload Items in Container": {
+            "$ref": "./examples/AzureWorkload_BackupWorkloadItems_List.json"
+          }
         }
       }
     },
@@ -2015,6 +2086,11 @@
         "x-ms-odata": "#/definitions/BMSContainerQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Backup Protection Containers": {
+            "$ref": "./examples/AzureWorkload_ProtectionContainers_List.json"
+          }
         }
       }
     },
@@ -2085,7 +2161,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get Vault Storage Configuration": {
+            "$ref": "./examples/AzureIaasVm_BackupStorageConfig_Get.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -2121,7 +2202,12 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/AzureIaasVm_BackupStorageConfig_Patch.json"
+          }
+        }
       }
     }
   },
@@ -3204,7 +3290,7 @@
           "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered.",
           "type": "string"
         },
-        "PropertyBag": {
+        "propertyBag": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -3628,6 +3714,84 @@
         "properties": {
           "$ref": "#/definitions/BackupResourceVaultConfig",
           "description": "BackupResourceVaultConfigResource properties"
+        }
+      }
+    },
+    "BackupStatusRequest": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "type": "string"
+        }
+      }
+    },
+    "BackupStatusResponse": {
+      "type": "object",
+      "properties": {
+        "protectionStatus": {
+          "enum": [
+            "Invalid",
+            "NotProtected",
+            "Protecting",
+            "Protected",
+            "ProtectionFailed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionStatus",
+            "modelAsString": true
+          }
+        },
+        "vaultId": {
+          "type": "string"
+        },
+        "fabricName": {
+          "enum": [
+            "Invalid",
+            "Azure"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FabricName",
+            "modelAsString": true
+          }
+        },
+        "containerName": {
+          "type": "string"
+        },
+        "protectedItemName": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "policyName": {
+          "type": "string"
         }
       }
     },
@@ -6209,6 +6373,14 @@
       "in": "query",
       "description": "Client Api Version.",
       "required": true,
+      "type": "string"
+    },
+    "AzureRegion": {
+      "name": "azureRegion",
+      "in": "path",
+      "description": "Azure region to hit Api",
+      "required": true,
+      "x-ms-parameter-location": "method",
       "type": "string"
     }
   },

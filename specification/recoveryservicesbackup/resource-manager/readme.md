@@ -35,8 +35,8 @@ azure-arm: true
 ### Validations
 
 ``` yaml $(validate)
-azure-validator: true # Azure specific validation
-model-validator: true # validation of examples against the API definition
+azure-validator: true
+model-validator: true
 semantic-validator: true
 json: true
 ```

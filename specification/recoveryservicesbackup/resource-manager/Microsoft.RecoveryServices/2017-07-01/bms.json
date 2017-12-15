@@ -18,6 +18,98 @@
     "application/json"
   ],
   "paths": {
+    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupPreValidateProtection": {
+      "post": {
+        "tags": [
+          "ProtectionIntent"
+        ],
+        "summary": "It will validate followings\r\n            1. Vault capacity\r\n            2. VM is already protected\r\n            3. Any VM related configuration passed in properties.",
+        "operationId": "ProtectionIntent_Validate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AzureRegion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Enable backup validation request on Virtual Machine",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreValidateEnableBackupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PreValidateEnableBackupResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Validate Enable Protection on Azure Vm": {
+            "$ref": "./examples/AzureIaasVm_ProtectionIntent_Validate.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupValidateFeatures": {
+      "post": {
+        "tags": [
+          "FeatureSupport"
+        ],
+        "summary": "It will validate if given feature with resource properties is supported in service",
+        "operationId": "FeatureSupport_Validate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AzureRegion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Feature support request object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeatureSupportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FeatureSupportResponseBase"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Check Azure Vm Backup Feature Support": {
+            "$ref": "./examples/AzureIaasVm_BackupFeature_Validate.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/backupProtectionIntent/{intentObjectName}": {
       "put": {
         "tags": [
@@ -69,7 +161,12 @@
             "description": "OK"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Create or Update Azure Vm Protection Intent": {
+            "$ref": "./examples/AzureIaasVm_ProtectionIntent_CreateOrUpdate.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs": {
@@ -443,6 +540,14 @@
         "x-ms-odata": "#/definitions/BMSBackupSummariesQueryObject",
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get Protected Item Backup Usages Summary": {
+            "$ref": "./examples/BackupProtectedItem_BackupUsageSummary_Get.json"
+          },
+          "Get Protected Containers Backup Usages Summary": {
+            "$ref": "./examples/BackupProtectionContainers_BackupUsageSummary_Get.json"
+          }
         }
       }
     }
@@ -1064,6 +1169,50 @@
         "status": {
           "description": "The status.",
           "type": "string"
+        }
+      }
+    },
+    "AzureVMResourceFeatureSupportRequest": {
+      "description": "AzureResource(IaaS VM) Specific feature support request",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeatureSupportRequest"
+        }
+      ],
+      "properties": {
+        "vmSize": {
+          "description": "Size of the resource: VM size(A/D series etc) in case of IaasVM",
+          "type": "string"
+        },
+        "vmSku": {
+          "description": "SKUs (Premium/Managed etc) in case of IaasVM",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureVMResourceFeatureSupportRequest"
+    },
+    "AzureVMResourceFeatureSupportResponse": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeatureSupportResponseBase"
+        }
+      ],
+      "properties": {
+        "supportStatus": {
+          "enum": [
+            "Invalid",
+            "Supported",
+            "DefaultOFF",
+            "DefaultON",
+            "NotSupported"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1722,6 +1871,20 @@
       },
       "x-ms-discriminator-value": "ExportJobsOperationResultInfo"
     },
+    "FeatureSupportRequest": {
+      "description": "Base class for feature request",
+      "type": "object",
+      "properties": {
+        "featureType": {
+          "description": "backup support feature type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "featureType"
+    },
+    "FeatureSupportResponseBase": {
+      "type": "object"
+    },
     "Job": {
       "description": "Defines workload agnostic properties for a job.",
       "required": [
@@ -2360,6 +2523,75 @@
               "type": "string"
             }
           }
+        }
+      }
+    },
+    "PreValidateEnableBackupRequest": {
+      "description": "contract to validate if backup can be enabled on the given resource in a given vault and given configuration.\r\n            It will validate followings\r\n            1. Vault capacity\r\n            2. VM is already protected\r\n            3. Any VM related configuration passed in properties.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "vaultId": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "string"
+        }
+      }
+    },
+    "PreValidateEnableBackupResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "Invalid",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsString": true
+          }
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "recommendation": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        },
+        "protectedItemName": {
+          "type": "string"
         }
       }
     },
@@ -3049,6 +3281,21 @@
       "required": true,
       "type": "string"
     },
+    "AzureRegion": {
+      "name": "azureRegion",
+      "in": "path",
+      "description": "Azure region to hit Api",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    },
     "ResourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
@@ -3063,13 +3310,6 @@
       "description": "The name of the recovery services vault.",
       "required": true,
       "x-ms-parameter-location": "method",
-      "type": "string"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client Api Version.",
-      "required": true,
       "type": "string"
     }
   },

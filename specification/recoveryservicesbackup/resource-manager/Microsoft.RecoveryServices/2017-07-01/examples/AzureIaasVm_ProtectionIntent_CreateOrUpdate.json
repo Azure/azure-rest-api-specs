@@ -1,0 +1,34 @@
+{
+    "parameters": {
+        "subscriptionId": "1a2311d9-66f5-47d3-a9fb-7a37da63934b",
+        "resourceGroupName": "myRG",
+        "vaultName": "myVault",
+        "backupFabricName": "Azure",
+		"intentName" : "vm;iaasvmcontainerv2;chamsrgtest;chamscandel",
+        "api-version": "2017-07-01",
+        "parameters": {
+            "properties": {
+                "sourceResourceId": "/subscriptions/1a2311d9-66f5-47d3-a9fb-7a37da63934b/resourceGroups/chamsrgtest/providers/Microsoft.Compute/virtualMachines/chamscandel",
+				"protectionIntentItemType": "AzureResourceItem",
+				"friendlyName": "oneboxTestVmIntent",
+				"policyId": "/subscriptions/1a2311d9-66f5-47d3-a9fb-7a37da63934b/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupPolicies/myPolicy"
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "body": 
+			{
+				"id": "/subscriptions/1a2311d9-66f5-47d3-a9fb-7a37da63934b/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupFabrics/Azure/backupProtectionIntent/vm;iaasvmcontainerv2;chamsrgtest;chamscandel",
+				"name": "vm;iaasvmcontainerv2;chamsrgtest;chamscandel",
+				"type": "Microsoft.RecoveryServices/vaults/backupProtectionIntent",
+				"properties": {
+					"friendlyName": "",
+					"backupManagementType": "AzureIaasVM",
+					"policyId": "/subscriptions/1a2311d9-66f5-47d3-a9fb-7a37da63934b/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupPolicies/myPolicy",
+					"protectionState": "Protected"
+				}
+			}
+        }
+    }
+}
