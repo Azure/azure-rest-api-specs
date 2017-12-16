@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017-10-01-preview",
+    "version": "2017-12-01-preview",
     "title": "ContainerInstanceManagementClient"
   },
   "host": "management.azure.com",
@@ -239,6 +239,36 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/usages": {
+      "get": {
+        "operationId": "ContainerGroupUsage_List",
+        "x-ms-examples": {
+          "ContainerUsage": {
+            "$ref": "./examples/ContainerGroupUsage.json"
+          }
+        },
+        "description": "Get the usage for a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsageListResult"
             }
           }
         }
@@ -532,6 +562,33 @@
       "type": "object",
       "properties": {}
     },
+    "SecretVolume": {
+      "description": "The secret volume.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "GitRepoVolume": {
+      "description": "Represents a volume that is populated with the contents of a git repository",
+      "required": [
+       "repository"
+      ],
+      "properties": {
+        "directory": {
+          "description": "Target directory name. Must not contain or start with '..'.  If '.' is supplied, the volume directory will be the git repository.  Otherwise, if specified, the volume will contain the git repository in the subdirectory with the given name.",
+          "type": "string"
+        },
+        "repository": {
+          "description": "Repository URL",
+          "type": "string"
+        },
+        "revision": {
+          "description": "Commit hash for the specified revision.",
+          "type": "string"
+        }
+      }
+    },
     "Volume": {
       "description": "The properties of the volume.",
       "type": "object",
@@ -544,12 +601,20 @@
           "type": "string"
         },
         "azureFile": {
-          "description": "The name of the Azure File volume.",
+          "description": "The Azure File volume.",
           "$ref": "#/definitions/AzureFileVolume"
         },
         "emptyDir": {
           "description": "The empty directory volume.",
           "$ref": "#/definitions/EmptyDirVolume"
+        },
+        "secret": {
+          "description": "The secret volume.",
+          "$ref": "#/definitions/SecretVolume"
+        },
+        "gitRepo": {
+          "description": "The git repo volume.",
+          "$ref": "#/definitions/GitRepoVolume"
         }
       }
     },
@@ -800,7 +865,7 @@
         "value"
       ]
     },
-    "OperationListResult": {
+    "OperationListResult":{
       "description": "The operation list response that contains all operations for Azure Container Instance service.",
       "type": "object",
       "properties": {
@@ -810,6 +875,10 @@
             "$ref": "#/definitions/Operation"
           },
           "description": "The list of operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of operations."
         }
       }
     },
@@ -853,6 +922,54 @@
           "x-ms-enum": {
             "name": "ContainerInstanceOperationsOrigin",
             "modelAsString": true
+          }
+        }
+      },
+      "required": [
+          "name",
+          "display"
+      ]
+    },
+    "UsageListResult": {
+      "description": "The response containing the usage data",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          }
+        }
+      }
+    },
+    "Usage": {
+      "description": "A single usage result",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "description": "Unit of the usage result"
+        },
+        "currentValue": {
+          "type": "integer",
+          "description": "The current usage of the resource"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The maximum permitted usage of the resource."
+        },
+        "name": {
+          "type": "object",
+          "description": "The name object of the resource",
+          "properties": {
+            "value":{
+              "type": "string",
+              "description": "The name of the resource"
+            },
+            "localizedValue": {
+              "type": "string",
+              "description": "The localized name of the resource"
+            }
           }
         }
       }
@@ -929,6 +1046,13 @@
       "type": "string",
       "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
       "x-ms-parameter-location": "client"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier for the physical azure location."
     },
     "ApiVersionParameter": {
       "name": "api-version",

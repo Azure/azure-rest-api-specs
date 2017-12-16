@@ -1,100 +1,83 @@
 {
   "parameters": {
-    "subscriptionId": "ae43b1e3-c35d-4c8c-bc0d-f148b4c52b78",
+    "subscriptionId": "subid",
     "resourceGroupName": "demo",
-    "api-version": "2017-10-01-preview"
+    "api-version": "2017-12-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+            "location": "WestUs",
+            "name": "demo1",
             "properties": {
-              "provisioningState": "Succeeded",
               "containers": [
                 {
-                  "name": "mycontainers",
+                  "name": "demo1",
                   "properties": {
+                    "command": null,
+                    "environmentVariables": [],
                     "image": "nginx",
-                    "command": [],
+                    "instanceView": null,
                     "ports": [
                       {
                         "port": 80
                       }
                     ],
-                    "environmentVariables": [],
-                    "instanceView": {
-                      "restartCount": 0,
-                      "currentState": {
-                        "state": "Running",
-                        "startTime": "2017-10-17T17:27:21Z",
-                        "detailStatus": ""
-                      },
-                      "events": [
-                        {
-                          "count": 1,
-                          "firstTimestamp": "2017-10-17T17:27:14Z",
-                          "lastTimestamp": "2017-10-17T17:27:14Z",
-                          "name": "Pulling",
-                          "message": "pulling image \"nginx\"",
-                          "type": "Normal"
-                        },
-                        {
-                          "count": 1,
-                          "firstTimestamp": "2017-10-17T17:27:20Z",
-                          "lastTimestamp": "2017-10-17T17:27:20Z",
-                          "name": "Pulled",
-                          "message": "Successfully pulled image \"nginx\"",
-                          "type": "Normal"
-                        },
-                        {
-                          "count": 1,
-                          "firstTimestamp": "2017-10-17T17:27:20Z",
-                          "lastTimestamp": "2017-10-17T17:27:20Z",
-                          "name": "Created",
-                          "message": "Created container with id 59ac4a83384ce9184c315ecd3c7cff39a7c9a3257646d41309758f8730b9a527",
-                          "type": "Normal"
-                        },
-                        {
-                          "count": 1,
-                          "firstTimestamp": "2017-10-17T17:27:21Z",
-                          "lastTimestamp": "2017-10-17T17:27:21Z",
-                          "name": "Started",
-                          "message": "Started container with id 59ac4a83384ce9184c315ecd3c7cff39a7c9a3257646d41309758f8730b9a527",
-                          "type": "Normal"
-                        }
-                      ]
-                    },
                     "resources": {
+                      "limits": null,
                       "requests": {
-                        "memoryInGB": 1.5,
-                        "cpu": 1
+                        "cpu": 1,
+                        "memoryInGb": 1.5
                       }
-                    }
+                    },
+                    "volumeMounts": [
+                      {
+                        "mountPath": "/mnt/volume1",
+                        "name": "volume1",
+                        "readOnly": false
+                      }
+                    ]
                   }
                 }
               ],
-              "imageRegistryCredentials": [],
+              "imageRegistryCredentials": [
+                {
+                  "password": null,
+                  "server": "azcloudconsoleregistry.azurecr.io",
+                  "username": "azcloudconsoleregistry"
+                }
+              ],
               "ipAddress": {
+                "ip": "10.0.0.1",
                 "ports": [
                   {
-                    "protocol": "TCP",
-                    "port": 80
+                    "port": 80,
+                    "protocol": "TCP"
                   }
-                ],
-                "ip": "13.64.70.13",
-                "type": "Public"
+                ]
               },
               "osType": "Linux",
-              "instanceView": {
-                "events": [],
-                "state": "Running"
-              }
+              "provisioningState": "Succeeded",
+              "restartPolicy": null,
+              "state": null,
+              "volumes": [
+                {
+                  "azureFile": {
+                    "readOnly": null,
+                    "shareName": "share1",
+                    "storageAccountKey": null,
+                    "storageAccountName": "stroage1"
+                  },
+                  "name": "volume1"
+                }
+              ]
             },
-            "id": "/subscriptions/ae43b1e3-c35d-4c8c-bc0d-f148b4c52b78/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/mycontainers",
-            "name": "mycontainers",
-            "type": "Microsoft.ContainerInstance/containerGroups",
-            "location": "westus"
+            "resourceGroup": "demo",
+            "tags": null,
+            "type": "Microsoft.ContainerInstance/containerGroups"
           }
         ]
       }
