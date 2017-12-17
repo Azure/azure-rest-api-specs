@@ -1740,16 +1740,19 @@
       "properties": {
         "moustache": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "beard": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "sideburns": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         }
@@ -1760,13 +1763,16 @@
       "description": "Properties indicating head pose of the face.",
       "properties": {
         "roll": {
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         },
         "yaw": {
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         },
         "pitch": {
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         }
       }
     },
@@ -1776,41 +1782,49 @@
       "properties": {
         "anger": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "contempt": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "disgust": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "fear": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "happiness": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "neutral": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "sadness": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "surprise": {
           "type": "number",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         }
@@ -1823,12 +1837,14 @@
         "bald": {
           "type": "number",
           "description": "A number describing confidence level of whether the person is bald.",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         },
         "invisible": {
           "type": "boolean",
-          "description": "A boolean value describing whether the hair is visible in the image."
+          "description": "A boolean value describing whether the hair is visible in the image.",
+          "x-nullable": false
         },
         "hairColor": {
           "$ref": "#/definitions/HairColors"
@@ -1862,11 +1878,13 @@
       "properties": {
         "eyeMakeup": {
           "type": "boolean",
-          "description": "A boolean value describing whether eye makeup is present on a face."
+          "description": "A boolean value describing whether eye makeup is present on a face.",
+          "x-nullable": false
         },
         "lipMakeup": {
           "type": "boolean",
-          "description": "A boolean value describing whether lip makeup is present on a face."
+          "description": "A boolean value describing whether lip makeup is present on a face.",
+          "x-nullable": false
         }
       }
     },
@@ -1876,15 +1894,18 @@
       "properties": {
         "foreheadOccluded": {
           "type": "boolean",
-          "description": "A boolean value indicating whether forehead is occluded."
+          "description": "A boolean value indicating whether forehead is occluded.",
+          "x-nullable": false
         },
         "eyeOccluded": {
           "type": "boolean",
-          "description": "A boolean value indicating whether eyes are occluded."
+          "description": "A boolean value indicating whether eyes are occluded.",
+          "x-nullable": false
         },
         "mouthOccluded": {
           "type": "boolean",
-          "description": "A boolean value indicating whether the mouth is occluded."
+          "description": "A boolean value indicating whether the mouth is occluded.",
+          "x-nullable": false
         }
       }
     },
@@ -1901,7 +1922,8 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Description of an accessory"
+          "description": "Description of an accessory",
+          "x-nullable": false
         },
         "confidence": {
           "x-nullable": false,
@@ -1916,6 +1938,7 @@
         "blurLevel": {
           "type": "string",
           "description": "An enum value indicating level of blurriness.",
+          "x-nullable": false,
           "x-ms-enum": {
             "name": "BlurLevels",
             "modelAsString": false
@@ -1929,6 +1952,7 @@
         "value": {
           "type": "number",
           "description": "A number indicating level of blurriness ranging from 0 to 1.",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         }
@@ -1941,6 +1965,7 @@
         "exposureLevel": {
           "type": "string",
           "description": "An enum value indicating level of exposure.",
+          "x-nullable": false,
           "x-ms-enum": {
             "name": "ExposureLevels",
             "modelAsString": false
@@ -1954,6 +1979,7 @@
         "value": {
           "type": "number",
           "description": "A number indicating level of exposure level ranging from 0 to 1. [0, 0.25) is under exposure. [0.25, 0.75) is good exposure. [0.75, 1] is over exposure.",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         }
@@ -1966,6 +1992,7 @@
         "noiseLevel": {
           "type": "string",
           "description": "An enum value indicating level of noise.",
+          "x-nullable": false,
           "x-ms-enum": {
             "name": "NoiseLevels",
             "modelAsString": false
@@ -1979,6 +2006,7 @@
         "value": {
           "type": "number",
           "description": "A number indicating level of noise level ranging from 0 to 1. [0, 0.25) is under exposure. [0.25, 0.75) is good exposure. [0.75, 1] is over exposure. [0, 0.3) is low noise level. [0.3, 0.7) is medium noise level. [0.7, 1] is high noise level.",
+          "x-nullable": false,
           "minimum": 0,
           "maximum": 1
         }
