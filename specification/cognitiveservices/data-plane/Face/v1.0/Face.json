@@ -320,7 +320,8 @@
             "in": "path",
             "description": "The target personId to delete.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -356,7 +357,8 @@
             "in": "path",
             "description": "Specifying the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "produces": [
@@ -398,7 +400,8 @@
             "in": "path",
             "description": "personId of the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "body",
@@ -449,14 +452,16 @@
             "in": "path",
             "description": "Specifying the person that the target persisted face belong to.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "The persisted face to remove.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -492,14 +497,16 @@
             "in": "path",
             "description": "Specifying the target person that the face belongs to.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "The persistedFaceId of the target persisted face of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "produces": [
@@ -541,14 +548,16 @@
             "in": "path",
             "description": "personId of the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "persistedFaceId of target face, which is persisted and will not expire.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "body",
@@ -1062,7 +1071,8 @@
             "in": "path",
             "description": "persistedFaceId of an existing face. ",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -1100,7 +1110,8 @@
             "in": "path",
             "description": "Target person that the face is added to.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "userData",
@@ -1364,7 +1375,8 @@
             "in": "path",
             "description": "Target person that the face is added to.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "userData",
@@ -1498,6 +1510,7 @@
       "properties": {
         "persistedFaceId": {
           "type": "string",
+          "format": "uuid",
           "description": "persistedFaceId of candidate face when find by faceListId. persistedFaceId in face list is persisted and will not expire. As showed in below response"
         }
       }
@@ -1511,7 +1524,7 @@
       "properties": {
         "faceId": {
           "type": "string",
-          "maxLength": 64
+          "format": "uuid"
         },
         "faceRectangle": {
           "$ref": "#/definitions/FaceRectangle"
@@ -1993,8 +2006,8 @@
       "properties": {
         "faceId": {
           "type": "string",
-          "description": "FaceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call",
-          "maxLength": 64
+          "format": "uuid",
+          "description": "FaceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call"
         },
         "faceListId": {
           "type": "string",
@@ -2008,7 +2021,7 @@
           "maxItems": 1000,
           "items": {
             "type": "string",
-            "maxLength": 64
+            "format": "uuid"
           }
         },
         "maxNumOfCandidatesReturned": {
@@ -2046,11 +2059,12 @@
       "properties": {
         "faceId": {
           "type": "string",
-          "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call",
-          "maxLength": 64
+          "format": "uuid",
+          "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call"
         },
         "persistedFaceId": {
           "type": "string",
+          "format": "uuid",
           "description": "persistedFaceId of candidate face when find by faceListId. persistedFaceId in face list is persisted and will not expire. As showed in below response"
         },
         "confidence": {
@@ -2072,7 +2086,7 @@
           "maxItems": 1000,
           "items": {
             "type": "string",
-            "maxLength": 64
+            "format": "uuid"
           }
         }
       }
@@ -2090,7 +2104,8 @@
           "items": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         },
@@ -2098,7 +2113,8 @@
           "type": "array",
           "description": "Face ids array of faces that cannot find any similar faces from original faces.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         }
       }
@@ -2120,7 +2136,8 @@
           "description": "Array of candidate faceId created by Face - Detect.",
           "maxItems": 1000,
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         },
         "maxNumOfCandidatesReturned": {
@@ -2152,8 +2169,8 @@
       "properties": {
         "faceId": {
           "type": "string",
-          "description": "faceId of the query face",
-          "maxLength": 64
+          "format": "uuid",
+          "description": "faceId of the query face"
         },
         "candidates": {
           "type": "array",
@@ -2173,6 +2190,7 @@
       "properties": {
         "personId": {
           "type": "string",
+          "format": "uuid",
           "description": "Id of candidate"
         },
         "confidence": {
@@ -2192,11 +2210,12 @@
       "properties": {
         "faceId": {
           "type": "string",
-          "description": "faceId the face, comes from Face - Detect",
-          "maxLength": 64
+          "format": "uuid",
+          "description": "faceId the face, comes from Face - Detect"
         },
         "personId": {
           "type": "string",
+          "format": "uuid",
           "description": "Specify a certain person in a person group. personId is created in Persons.Create."
         },
         "personGroupId": {
@@ -2215,13 +2234,13 @@
       "properties": {
         "faceId1": {
           "type": "string",
-          "description": "faceId of the first face, comes from Face - Detect",
-          "maxLength": 64
+          "format": "uuid",
+          "description": "faceId of the first face, comes from Face - Detect"
         },
         "faceId2": {
           "type": "string",
-          "description": "faceId of the second face, comes from Face - Detect",
-          "maxLength": 64
+          "format": "uuid",
+          "description": "faceId of the second face, comes from Face - Detect"
         }
       }
     },
@@ -2369,6 +2388,7 @@
       "properties": {
         "personId": {
           "type": "string",
+          "format": "uuid",
           "description": "personID of the new created person."
         }
       }
@@ -2382,13 +2402,15 @@
       "properties": {
         "personId": {
           "type": "string",
+          "format": "uuid",
           "description": "personId of the target face list."
         },
         "persistedFaceIds": {
           "type": "array",
           "description": "persistedFaceIds of registered faces in the person. These persistedFaceIds are returned from Person - Add a Person Face, and will not expire.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         },
         "name": {
@@ -2417,6 +2439,7 @@
       "properties": {
         "persistedFaceId": {
           "type": "string",
+          "format": "uuid",
           "description": "The persistedFaceId of the target face, which is persisted and will not expire. Different from faceId created by Face - Detect and will expire in 24 hours after the detection call."
         },
         "userData": {
