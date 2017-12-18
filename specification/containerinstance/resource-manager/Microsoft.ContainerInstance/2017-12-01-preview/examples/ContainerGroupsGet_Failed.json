@@ -2,6 +2,7 @@
   "parameters": {
     "subscriptionId": "subid",
     "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
     "api-version": "2017-12-01-preview"
   },
   "responses": {
@@ -15,7 +16,7 @@
             {
               "name": "demo1",
               "properties": {
-                "command": null,
+                "command": [],
                 "environmentVariables": [],
                 "image": "nginx",
                 "instanceView": {
@@ -50,10 +51,9 @@
                   }
                 ],
                 "resources": {
-                  "limits": null,
                   "requests": {
                     "cpu": 1,
-                    "memoryInGb": 1.5
+                    "memoryInGB": 1.5
                   }
                 },
                 "volumeMounts": [
@@ -68,7 +68,6 @@
           ],
           "imageRegistryCredentials": [
             {
-              "password": null,
               "server": "azcloudconsoleregistry.azurecr.io",
               "username": "azcloudconsoleregistry"
             }
@@ -93,11 +92,11 @@
                 "port": 80,
                 "protocol": "TCP"
               }
-            ]
+            ],
+            "type": "Public"
           },
           "osType": "Linux",
           "provisioningState": "Failed",
-          "restartPolicy": null,
           "volumes": [
             {
               "azureFile": {
@@ -110,8 +109,6 @@
             }
           ]
         },
-        "resourceGroup": "demo",
-        "tags": null,
         "type": "Microsoft.ContainerInstance/containerGroups"
       }
     }

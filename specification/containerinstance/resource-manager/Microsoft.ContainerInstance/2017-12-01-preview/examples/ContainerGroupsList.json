@@ -16,20 +16,27 @@
                 {
                   "name": "demo1",
                   "properties": {
-                    "command": null,
+                    "command": [],
                     "environmentVariables": [],
                     "image": "nginx",
-                    "instanceView": null,
+                    "instanceView": {
+                      "restartCount": 0,
+                      "currentState": {
+                        "state": "Running",
+                        "startTime": "2017-10-17T17:27:21Z",
+                        "detailStatus": ""
+                      },
+                      "events":[]
+                    },
                     "ports": [
                       {
                         "port": 80
                       }
                     ],
                     "resources": {
-                      "limits": null,
                       "requests": {
                         "cpu": 1,
-                        "memoryInGb": 1.5
+                        "memoryInGB": 1.5
                       }
                     },
                     "volumeMounts": [
@@ -44,7 +51,6 @@
               ],
               "imageRegistryCredentials": [
                 {
-                  "password": null,
                   "server": "azcloudconsoleregistry.azurecr.io",
                   "username": "azcloudconsoleregistry"
                 }
@@ -56,26 +62,22 @@
                     "port": 80,
                     "protocol": "TCP"
                   }
-                ]
+                ],
+                "type": "Public"
               },
               "osType": "Linux",
               "provisioningState": "Succeeded",
-              "restartPolicy": null,
-              "state": null,
               "volumes": [
                 {
                   "azureFile": {
-                    "readOnly": null,
+                    "readOnly": false,
                     "shareName": "share1",
-                    "storageAccountKey": null,
                     "storageAccountName": "stroage1"
                   },
                   "name": "volume1"
                 }
               ]
             },
-            "resourceGroup": "demo",
-            "tags": null,
             "type": "Microsoft.ContainerInstance/containerGroups"
           }
         ]

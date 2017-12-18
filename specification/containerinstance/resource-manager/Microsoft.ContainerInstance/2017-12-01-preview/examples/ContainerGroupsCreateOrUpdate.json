@@ -13,20 +13,18 @@
           {
             "name": "demo1",
             "properties": {
-              "command": null,
+              "command": [],
               "environmentVariables": [],
               "image": "nginx",
-              "instanceView": {},
               "ports": [
                 {
                   "port": 80
                 }
               ],
               "resources": {
-                "limits": null,
                 "requests": {
                   "cpu": 1,
-                  "memoryInGb": 1.5
+                  "memoryInGB": 1.5
                 }
               },
               "volumeMounts": [
@@ -49,14 +47,17 @@
             }
           }
         ],
-        "imageRegistryCredentials": null,
+        "imageRegistryCredentials": [],
         "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
           "type": "Public"
         },
         "osType": "Linux",
-        "provisioningState": null,
-        "restartPolicy": null,
-        "state": null,
         "volumes": [
           {
             "name": "volume1",
@@ -80,8 +81,6 @@
           }
         ]
       },
-      "resourceGroup": "demo",
-      "tags": null,
       "type": "Microsoft.ContainerInstance/containerGroups"
     }
   },
@@ -96,20 +95,18 @@
             {
               "name": "demo1",
               "properties": {
-                "command": null,
+                "command": [],
                 "environmentVariables": [],
                 "image": "nginx",
-                "instanceView": null,
                 "ports": [
                   {
                     "port": 80
                   }
                 ],
                 "resources": {
-                  "limits": null,
                   "requests": {
                     "cpu": 1,
-                    "memoryInGb": 1.5
+                    "memoryInGB": 1.5
                   }
                 },
                 "volumeMounts": [
@@ -132,7 +129,7 @@
               }
             }
           ],
-          "imageRegistryCredentials": null,
+          "imageRegistryCredentials": [],
           "ipAddress": {
             "ip": "10.0.0.1",
             "ports": [
@@ -144,8 +141,6 @@
           },
           "osType": "Linux",
           "provisioningState": "Succeeded",
-          "restartPolicy": null,
-          "state": null,
           "volumes": [
             {
               "name": "volume1",
@@ -165,8 +160,6 @@
             }
           ]
         },
-        "resourceGroup": "demo",
-        "tags": null,
         "type": "Microsoft.ContainerInstance/containerGroups"
       }
     },
@@ -180,20 +173,18 @@
             {
               "name": "demo1",
               "properties": {
-                "command": null,
+                "command": [],
                 "environmentVariables": [],
                 "image": "nginx",
-                "instanceView": null,
                 "ports": [
                   {
                     "port": 80
                   }
                 ],
                 "resources": {
-                  "limits": null,
                   "requests": {
                     "cpu": 1,
-                    "memoryInGb": 1.5
+                    "memoryInGB": 1.5
                   }
                 },
                 "volumeMounts": [
@@ -216,7 +207,7 @@
               }
             }
           ],
-          "imageRegistryCredentials": null,
+          "imageRegistryCredentials": [],
           "ipAddress": {
             "ip": "10.0.0.1",
             "ports": [
@@ -224,12 +215,11 @@
                 "port": 80,
                 "protocol": "TCP"
               }
-            ]
+            ],
+            "type": "Public"
           },
           "osType": "Linux",
           "provisioningState": "Succeeded",
-          "restartPolicy": null,
-          "state": null,
           "volumes": [
             {
               "name": "volume1",
@@ -249,8 +239,6 @@
             }
           ]
         },
-        "resourceGroup": "demo",
-        "tags": null,
         "type": "Microsoft.ContainerInstance/containerGroups"
       }
     }
