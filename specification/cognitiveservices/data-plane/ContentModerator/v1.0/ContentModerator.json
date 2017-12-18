@@ -17,6 +17,16 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "type": "apiKey",
+      "in": "header"
+    }
+  },
+  "security": [{
+    "apiKeyHeader": []
+  }],  
   "paths": {
     "/contentmoderator/moderate/v1.0/ProcessImage/FindFaces": {
       "post": {
@@ -28,9 +38,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/CacheImage"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
 
         ],
@@ -77,9 +84,6 @@
           },
           {
             "$ref": "#/parameters/enhanced"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -120,9 +124,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/CacheImage"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -165,9 +166,6 @@
           },
           {
             "$ref": "#/parameters/CacheImage"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
 
         ],
@@ -238,9 +236,6 @@
             ]
           },
           {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
-          {
             "$ref": "#/parameters/textContent"
           }
         ],
@@ -282,9 +277,6 @@
         "operationId": "TextModeration_DetectLanguage",
         "description": "This operation will detect the language of given input content. Returns the <a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a> for the predominant language comprising the submitted text. Over 110 languages supported.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
           {
             "name": "Content-Type",
             "description": "The content type.",
@@ -342,9 +334,6 @@
         "description": "Returns the details of the image list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
-          {
             "$ref": "#/parameters/listId"
           }
 
@@ -381,9 +370,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/listId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -428,9 +414,6 @@
           },
           {
             "$ref": "#/parameters/body"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -477,9 +460,6 @@
           },
           {
             "$ref": "#/parameters/body"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -514,11 +494,7 @@
         ],
         "operationId": "ListManagementImageLists_GetAllImageLists",
         "description": "Gets all the Image Lists.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -553,9 +529,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/listId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -595,9 +568,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/listId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -632,9 +602,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/listId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -679,9 +646,6 @@
           },
           {
             "$ref": "#/parameters/body"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -728,9 +692,6 @@
           },
           {
             "$ref": "#/parameters/body"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -765,11 +726,7 @@
         ],
         "operationId": "ListManagementTermLists_GetAllTermLists",
         "description": "gets all the Term Lists",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -804,9 +761,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/listId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
             "$ref": "#/parameters/language"
@@ -855,9 +809,6 @@
           },
           {
             "$ref": "#/parameters/label"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
 
         ],
@@ -901,9 +852,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/listId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -938,9 +886,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/listId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -980,9 +925,6 @@
           },
           {
             "$ref": "#/parameters/ImageId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -1025,9 +967,6 @@
           },
           {
             "$ref": "#/parameters/language"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
 
         ],
@@ -1072,9 +1011,6 @@
           },
           {
             "$ref": "#/parameters/language"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -1115,9 +1051,6 @@
           },
           {
             "$ref": "#/parameters/language"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
             "name": "offset",
@@ -1169,9 +1102,6 @@
           },
           {
             "$ref": "#/parameters/language"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -1219,9 +1149,6 @@
             "description": "Id of the review.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -1269,9 +1196,6 @@
             "description": "Id of the job.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "responses": {
@@ -1380,9 +1304,6 @@
                 }
               }
             }
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -1435,9 +1356,6 @@
           },
           {
             "$ref": "#/parameters/CallBackEndpoint"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
             "name": "Content-Type",
@@ -1527,9 +1445,6 @@
             "in": "query",
             "required": false,
             "type": "integer"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -1565,9 +1480,6 @@
           },
           {
             "$ref": "#/parameters/reviewId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
             "name": "startSeed",
@@ -1629,9 +1541,6 @@
           },
           {
             "$ref": "#/parameters/reviewId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -1683,9 +1592,6 @@
           },
           {
             "$ref": "#/parameters/transcriptModerationBody"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -1726,9 +1632,6 @@
           },
           {
             "$ref": "#/parameters/reviewId"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
             "name": "Content-Type",
@@ -1783,9 +1686,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
           
           {
             "$ref": "#/parameters/ImageStreamParameter"
@@ -1828,9 +1728,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/CacheImage"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
             "name": "Content-Type",
@@ -1888,9 +1785,6 @@
             "$ref": "#/parameters/enhanced"
           },
           {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
-          {
             "name": "Content-Type",
             "description": "The content type.",
             "required": true,
@@ -1945,9 +1839,6 @@
           {
             "$ref": "#/parameters/enhanced"
           },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
          
           {
             "$ref": "#/parameters/ImageStreamParameter"
@@ -1992,9 +1883,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
           
           {
             "$ref": "#/parameters/ImageStreamParameter"
@@ -2037,9 +1925,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/CacheImage"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
             "name": "Content-Type",
@@ -2094,9 +1979,6 @@
             "$ref": "#/parameters/CacheImage"
           },
           {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
-          {
             "name": "Content-Type",
             "description": "The content type.",
             "required": true,
@@ -2148,9 +2030,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
           
           {
             "$ref": "#/parameters/ImageStreamParameter"
@@ -2199,9 +2078,6 @@
           },
           {
             "$ref": "#/parameters/label"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
             "name": "Content-Type",
@@ -2258,9 +2134,6 @@
           {
             "$ref": "#/parameters/label"
           },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
           
           {
             "$ref": "#/parameters/ImageStreamParameter"
@@ -2316,9 +2189,6 @@
           },
           {
             "$ref": "#/parameters/CreateVideoReviewsBody"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -2375,9 +2245,6 @@
           },
           {
             "$ref": "#/parameters/videoFrameBody"
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -2457,9 +2324,6 @@
             "required": true,
             "type": "string"
 
-          },
-          {
-            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           }
         ],
         "consumes": [
@@ -3754,7 +3618,6 @@
               "type": "string"
             }
 
-
           }
         }
       },
@@ -3915,14 +3778,6 @@
       },
       "description": "The image file.",
       "x-ms-parameter-location": "method"
-    },
-    "ocpApimSubscriptionKeyParameter": {
-      "name": "Ocp-Apim-Subscription-Key",
-      "description": "The subscription key in header",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "header"
     },
     "baseUrl": {
       "name": "baseUrl",
