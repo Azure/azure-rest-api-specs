@@ -47,6 +47,14 @@ input-file:
 - Microsoft.Consumption/2017-04-24-preview/consumption.json
 ```
 
+### Tag: package-2017-12-preview
+
+These settings apply only when `--tag=package-2017-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-12-preview'
+input-file:
+- Microsoft.Consumption/2017-12-30-preview/consumption.json
+```
 
 ---
 # Code Generation
@@ -120,3 +128,12 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-11-30' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-11-30/consumption
+```
+
+### Tag: package-2017-12-30-preview and go
+These settings apply only when `--tag=package-2017-12-30-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-12-30-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-12-30-preview/consumption
+```
