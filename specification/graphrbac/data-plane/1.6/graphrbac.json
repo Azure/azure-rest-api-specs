@@ -1850,6 +1850,7 @@
   },
   "definitions": {
     "GraphError": {
+      "type": "object",
       "properties": {
         "odata.error": {
           "type": "object",
@@ -1861,6 +1862,7 @@
       "description": "Active Directory error information."
     },
     "OdataError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1876,6 +1878,7 @@
       "description": "Active Directory OData error information."
     },
     "ErrorMessage": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "string",
@@ -1886,6 +1889,7 @@
       "description": "Active Directory error message."
     },
     "DirectoryObject": {
+      "type": "object",
       "discriminator": "objectType",
       "properties": {
         "objectId": {
@@ -1908,6 +1912,7 @@
       "description": "Represents an Azure Active Directory object."
     },
     "KeyCredential": {
+      "type": "object",
       "properties": {
         "startDate": {
           "type": "string",
@@ -1939,6 +1944,7 @@
       "description": "Active Directory Key Credential information."
     },
     "PasswordCredential": {
+      "type": "object",
       "properties": {
         "startDate": {
           "type": "string",
@@ -1962,6 +1968,7 @@
       "description": "Active Directory Password Credential information."
     },
     "RequiredResourceAccess": {
+      "type": "object",
       "properties": {
         "resourceAccess": {
           "type": "array",
@@ -1981,6 +1988,7 @@
       "description": "Specifies the set of OAuth 2.0 permission scopes and app roles under the specified resource that an application requires access to. The specified OAuth 2.0 permission scopes may be requested by client applications (through the requiredResourceAccess collection) when calling a resource application. The requiredResourceAccess property of the Application entity is a collection of ReqiredResourceAccess."
     },
     "ResourceAccess": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1997,6 +2005,7 @@
       "description": "Specifies an OAuth 2.0 permission scope or an app role that an application requires. The resourceAccess property of the RequiredResourceAccess type is a collection of ResourceAccess."
     },
     "ApplicationCreateParameters": {
+      "type": "object",
       "properties": {
         "availableToOtherTenants": {
           "type": "boolean",
@@ -2058,6 +2067,7 @@
       "description": "Request parameters for creating a new application."
     },
     "ApplicationUpdateParameters": {
+      "type": "object",
       "properties": {
         "availableToOtherTenants": {
           "type": "boolean",
@@ -2114,6 +2124,7 @@
       "description": "Request parameters for updating an existing application."
     },
     "Application": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DirectoryObject"
@@ -2165,6 +2176,7 @@
       "description": "Active Directory application information."
     },
     "ApplicationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2181,6 +2193,7 @@
       "description": "Application list operation result."
     },
     "ApplicationAddOwnerParameters": {
+      "type": "object",
       "properties": {
         "url": {
           "type": "string",
@@ -2193,6 +2206,7 @@
       "description": "Request parameters for adding a owner to an application."
     },    
     "KeyCredentialListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2205,6 +2219,7 @@
       "description": "KeyCredential list operation result."
     },
     "DirectoryObjectListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2217,6 +2232,7 @@
       "description": "DirectoryObject list operation result."
     },
     "KeyCredentialsUpdateParameters": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2232,6 +2248,7 @@
       "description": "Request parameters for a KeyCredentials update operation"
     },
     "PasswordCredentialListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2244,6 +2261,7 @@
       "description": "PasswordCredential list operation result."
     },
     "PasswordCredentialsUpdateParameters": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2259,6 +2277,7 @@
       "description": "Request parameters for a PasswordCredentials update operation."
     },
     "AADObject": {
+      "type": "object",
       "properties": {
         "objectId": {
           "type": "string",
@@ -2356,6 +2375,7 @@
       "description": "The properties of an Active Directory object."
     },
     "GetObjectsResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2372,6 +2392,7 @@
       "description": "The response to an Active Directory object inquiry API request."
     },
     "GroupAddMemberParameters": {
+      "type": "object",
       "properties": {
         "url": {
           "type": "string",
@@ -2384,6 +2405,7 @@
       "description": "Request parameters for adding a member to a group."
     },
     "GroupCreateParameters": {
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -2413,6 +2435,7 @@
       "description": "Request parameters for creating a new group."
     },
     "ADGroup": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DirectoryObject"
@@ -2436,6 +2459,7 @@
       "description": "Active Directory group information."
     },
     "GroupListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2452,6 +2476,7 @@
       "description": "Server response for Get tenant groups API call"
     },
     "GroupGetMemberGroupsParameters": {
+      "type": "object",
       "properties": {
         "securityEnabledOnly": {
           "type": "boolean",
@@ -2464,6 +2489,7 @@
       "description": "Request parameters for GetMemberGroups API call."
     },
     "GroupGetMemberGroupsResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2476,6 +2502,7 @@
       "description": "Server response for GetMemberGroups API call."
     },
     "CheckGroupMembershipParameters": {
+      "type": "object",
       "properties": {
         "groupId": {
           "type": "string",
@@ -2493,6 +2520,7 @@
       "description": "Request parameters for IsMemberOf API call."
     },
     "CheckGroupMembershipResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "boolean",
@@ -2502,6 +2530,7 @@
       "description": "Server response for IsMemberOf API call"
     },
     "ServicePrincipalCreateParameters": {
+      "type": "object",
       "properties": {
         "appId": {
           "type": "string",
@@ -2537,7 +2566,8 @@
         {
           "$ref": "#/definitions/DirectoryObject"
         }
-      ],      
+      ],
+      "type": "object",     
       "properties": {
         "displayName": {
           "type": "string",
@@ -2558,6 +2588,7 @@
       "description": "Active Directory service principal information."
     },
     "ServicePrincipalListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2574,6 +2605,7 @@
       "description": "Server response for get tenant service principals API call."
     },
     "PasswordProfile": {
+      "type": "object",
       "properties": {
         "password": {
           "type": "string",
@@ -2590,6 +2622,7 @@
       "description": "The password profile associated with a user."
     },
     "UserBase": {
+      "type": "object",
       "properties": {
         "immutableId": {
           "type": "string",
@@ -2622,6 +2655,7 @@
       }
     },
     "UserCreateParameters": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/UserBase"
@@ -2663,6 +2697,7 @@
       "description": "Request parameters for creating a new work or school account user."
     },
     "UserUpdateParameters": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/UserBase"
@@ -2693,6 +2728,7 @@
       "description": "Request parameters for updating an existing work or school account user."
     },
     "User": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DirectoryObject"
@@ -2758,6 +2794,7 @@
       "description": "Active Directory user information."
     },
     "SignInName": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -2771,6 +2808,7 @@
       "description": "Contains information about a sign-in name of a local account user in an Azure Active Directory B2C tenant."
     },
     "UserGetMemberGroupsParameters": {
+      "type": "object",
       "properties": {
         "securityEnabledOnly": {
           "type": "boolean",
@@ -2783,6 +2821,7 @@
       "description": "Request parameters for GetMemberGroups API call."
     },
     "UserGetMemberGroupsResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2795,6 +2834,7 @@
       "description": "Server response for GetMemberGroups API call."
     },
     "UserListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2811,6 +2851,7 @@
       "description": "Server response for Get tenant users API call."
     },
     "GetObjectsParameters": {
+      "type": "object",
       "properties": {
         "objectIds": {
           "type": "array",
@@ -2837,6 +2878,7 @@
       "description": "Request parameters for the GetObjectsByObjectIds API."
     },
     "Domain": {
+      "type": "object",
       "properties": {
         "authenticationType": {
           "type": "string",
@@ -2864,6 +2906,7 @@
       "description": "Active Directory Domain information."
     },
     "DomainListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
