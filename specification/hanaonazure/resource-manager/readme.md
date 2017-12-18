@@ -29,9 +29,6 @@ title: HanaManagementClient
 description: HANA on Azure Client
 openapi-type: arm
 tag: package-2017-11
-namespace: azure.mgmt.saphanaonazure
-package-name: azure.mgmt.saphanaonazure
-package-version: 0.0.1
 azure-arm: true
 ```
 
@@ -65,4 +62,7 @@ python:
   output-folder: $(output-folder)/python
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
+  namespace: azure.mgmt.saphanaonazure
+  package-name: azure.mgmt.saphanaonazure
+  package-version: 0.0.1
 ```
