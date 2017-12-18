@@ -935,6 +935,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Usage"
@@ -947,26 +948,32 @@
       "type": "object",
       "properties": {
         "unit": {
+          "readOnly": true,
           "type": "string",
           "description": "Unit of the usage result"
         },
         "currentValue": {
+          "readOnly": true,
           "type": "integer",
           "description": "The current usage of the resource"
         },
         "limit": {
+          "readOnly": true,
           "type": "integer",
           "description": "The maximum permitted usage of the resource."
         },
         "name": {
+          "readOnly": true,
           "type": "object",
           "description": "The name object of the resource",
           "properties": {
             "value":{
+              "readOnly": true,
               "type": "string",
               "description": "The name of the resource"
             },
             "localizedValue": {
+              "readOnly": true,
               "type": "string",
               "description": "The localized name of the resource"
             }
@@ -1052,7 +1059,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The identifier for the physical azure location."
+      "description": "The identifier for the physical azure location.",
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "name": "api-version",
