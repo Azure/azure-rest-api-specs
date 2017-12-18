@@ -23,6 +23,7 @@ input-file:
 ## Validation
 
 ``` yaml
+add-credentials: true
 openapi-type: data-plane
 ```
 
@@ -38,7 +39,6 @@ csharp:
 directive:
   - suppress: R2022                        # the message to suppress
 ```
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
