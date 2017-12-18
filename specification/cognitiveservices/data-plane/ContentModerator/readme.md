@@ -7,7 +7,7 @@ Configuration for generating Content Moderator SDK.
 The current release is `release_1_0`.
 
 ``` yaml
-
+add-credentials: true
 tag: release_1_0
 ```
 # Releases
