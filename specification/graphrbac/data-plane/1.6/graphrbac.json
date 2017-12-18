@@ -1941,6 +1941,9 @@
           "description": "Type. Acceptable values are 'AsymmetricX509Cert' and 'Symmetric'."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Active Directory Key Credential information."
     },
     "PasswordCredential": {
@@ -1965,6 +1968,9 @@
           "description": "Key value."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Active Directory Password Credential information."
     },
     "RequiredResourceAccess": {
@@ -1982,6 +1988,9 @@
           "description": "The unique identifier for the resource that the application requires access to. This should be equal to the appId declared on the target resource application."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "resourceAccess"
       ],
@@ -1998,6 +2007,9 @@
           "type": "string",
           "description": "Specifies whether the id property references an OAuth2Permission or an AppRole. Possible values are \"scope\" or \"role\"."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "id"
@@ -2064,6 +2076,9 @@
         "displayName",
         "identifierUris"
       ],
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Request parameters for creating a new application."
     },
     "ApplicationUpdateParameters": {
@@ -2121,6 +2136,9 @@
           "description": "Specifies resources that this application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources. This pre-configuration of required resource access drives the consent experience."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Request parameters for updating an existing application."
     },
     "Application": {
@@ -2173,6 +2191,9 @@
           "description": "Whether to allow implicit grant flow for OAuth2"
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Active Directory application information."
     },
     "ApplicationListResult": {
@@ -2203,6 +2224,9 @@
       "required": [
         "url"
       ],
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Request parameters for adding a owner to an application."
     },    
     "KeyCredentialListResult": {
@@ -2372,6 +2396,9 @@
           "readOnly": true
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "The properties of an Active Directory object."
     },
     "GetObjectsResult": {
@@ -2402,6 +2429,9 @@
       "required": [
         "url"
       ],
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Request parameters for adding a member to a group."
     },
     "GroupCreateParameters": {
@@ -2432,6 +2462,9 @@
         "mailNickname",
         "securityEnabled"
       ],
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Request parameters for creating a new group."
     },
     "ADGroup": {
@@ -2454,6 +2487,9 @@
           "type": "string",
           "description": "The primary email address of the group."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "x-ms-discriminator-value": "Group",
       "description": "Active Directory group information."
@@ -2482,6 +2518,9 @@
           "type": "boolean",
           "description": "If true, only membership in security-enabled groups should be checked. Otherwise, membership in all groups should be checked."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "securityEnabledOnly"
@@ -2513,6 +2552,9 @@
           "description": "The object ID of the contact, group, user, or service principal to check for membership in the specified group."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "groupId",
         "memberId"
@@ -2526,6 +2568,9 @@
           "type": "boolean",
           "description": "True if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "description": "Server response for IsMemberOf API call"
     },
@@ -2554,6 +2599,9 @@
           },
           "description": "A collection of PasswordCredential objects"
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "appId",
@@ -2585,6 +2633,9 @@
           "description": "A collection of service principal names."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Active Directory service principal information."
     },
     "ServicePrincipalListResult": {
@@ -2615,6 +2666,9 @@
           "type": "boolean",
           "description": "Whether to force a password change on next login."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "password"
@@ -2652,6 +2706,9 @@
             "modelAsString": true
           }
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "UserCreateParameters": {
@@ -2686,6 +2743,9 @@
           "type": "string",
           "description": "The primary email address of the user."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "accountEnabled",
@@ -2724,6 +2784,9 @@
           "type": "string",
           "description": "The mail alias for the user."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "description": "Request parameters for updating an existing work or school account user."
     },
@@ -2791,6 +2854,9 @@
           "description": "The sign-in names of the user."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Active Directory user information."
     },
     "SignInName": {
@@ -2805,6 +2871,9 @@
           "description": "The sign-in used by the local account. Must be unique across the company/tenant. For example, 'johnc@example.com'."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Contains information about a sign-in name of a local account user in an Azure Active Directory B2C tenant."
     },
     "UserGetMemberGroupsParameters": {
@@ -2814,6 +2883,9 @@
           "type": "boolean",
           "description": "If true, only membership in security-enabled groups should be checked. Otherwise, membership in all groups should be checked."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "securityEnabledOnly"
@@ -2872,6 +2944,9 @@
           "description": "If true, also searches for object IDs in the partner tenant."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "includeDirectoryObjectReferences"
       ],
@@ -2903,6 +2978,9 @@
       "required": [
         "name"
       ],
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Active Directory Domain information."
     },
     "DomainListResult": {
