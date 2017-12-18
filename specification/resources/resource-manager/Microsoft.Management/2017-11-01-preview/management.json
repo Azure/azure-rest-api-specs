@@ -244,43 +244,6 @@
             }
         },
         "/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions/{subscriptionId}": {
-            "get": {
-                "tags": [
-                    "ManagementGroups"
-                ],
-                "operationId": "ManagementGroupSubscriptions_Get",
-                "description": "Returns subscription information.\n",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/GroupIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ManagementGroupChildInfo"
-                        }
-                    },
-                    "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "GetSubscriptionToManagementGroup": {
-                        "$ref": "./examples/getManagementGroupSubscription.json"
-                    }
-                }
-            },
             "put": {
                 "tags": [
                     "ManagementGroups"
@@ -300,10 +263,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ManagementGroupChildInfo"
-                        }
+                        "description": "OK"
                     },
                     "default": {
                         "description": "Error",
