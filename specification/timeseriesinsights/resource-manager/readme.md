@@ -26,7 +26,7 @@ These are the global settings for the TimeSeriesInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-02-preview
+tag: package-2017-11-15
 ```
 
 
@@ -37,4 +37,13 @@ These settings apply only when `--tag=package-2017-02-preview` is specified on t
 ``` yaml $(tag) == 'package-2017-02-preview'
 input-file:
 - Microsoft.TimeSeriesInsights/2017-02-28-preview/timeseriesinsights.json
+```
+
+### Tag: package-2017-11-15
+
+These settings apply only when `--tag=package-2017-11-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-15'
+input-file:
+- Microsoft.TimeSeriesInsights/2017-11-15/timeseriesinsights.json
 ```

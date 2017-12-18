@@ -329,6 +329,9 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_SynchronizeAutoStorageKeys",
+        "x-ms-examples": {
+          "BatchAccountSynchronizeAutoStorageKeys": { "$ref": "./examples/BatchAccountSynchronizeAutoStorageKeys.json" }
+        },
         "description": "Synchronizes access keys for the auto-storage account configured for the specified Batch account.",
         "parameters": [
           {
@@ -453,6 +456,9 @@
           "ApplicationPackage"
         ],
         "operationId": "ApplicationPackage_Activate",
+        "x-ms-examples": {
+          "ApplicationPackageActivate": { "$ref": "./examples/ApplicationPackageActivate.json" }
+        },
         "description": "Activates the specified application package.",
         "parameters": [
           {
@@ -510,6 +516,9 @@
           "Application"
         ],
         "operationId": "Application_Create",
+        "x-ms-examples": {
+          "ApplicationCreate": { "$ref": "./examples/ApplicationCreate.json" }
+        },
         "description": "Adds an application to the specified Batch account.",
         "parameters": [
           {
@@ -561,6 +570,9 @@
           "Application"
         ],
         "operationId": "Application_Delete",
+        "x-ms-examples": {
+          "ApplicationDelete": { "$ref": "./examples/ApplicationDelete.json" }
+        },
         "description": "Deletes an application.",
         "parameters": [
           {
@@ -600,6 +612,9 @@
           "Application"
         ],
         "operationId": "Application_Get",
+        "x-ms-examples": {
+          "ApplicationGet": { "$ref": "./examples/ApplicationGet.json" }
+        },
         "description": "Gets information about the specified application.",
         "parameters": [
           {
@@ -642,6 +657,9 @@
           "Application"
         ],
         "operationId": "Application_Update",
+        "x-ms-examples": {
+          "ApplicationUpdate": { "$ref": "./examples/ApplicationUpdate.json" }
+        },
         "description": "Updates settings for the specified application.",
         "parameters": [
           {
@@ -692,6 +710,9 @@
           "ApplicationPackage"
         ],
         "operationId": "ApplicationPackage_Create",
+        "x-ms-examples": {
+          "ApplicationPackageCreate": { "$ref": "./examples/ApplicationPackageCreate.json" }
+        },
         "description": "Creates an application package record.",
         "parameters": [
           {
@@ -741,6 +762,9 @@
           "ApplicationPackage"
         ],
         "operationId": "ApplicationPackage_Delete",
+        "x-ms-examples": {
+          "ApplicationPackageDelete": { "$ref": "./examples/ApplicationPackageDelete.json" }
+        },
         "description": "Deletes an application package record and its associated binary file.",
         "parameters": [
           {
@@ -787,6 +811,9 @@
           "ApplicationPackage"
         ],
         "operationId": "ApplicationPackage_Get",
+        "x-ms-examples": {
+          "ApplicationPackageGet": { "$ref": "./examples/ApplicationPackageGet.json" }
+        },
         "description": "Gets information about the specified application package.",
         "parameters": [
           {
@@ -838,6 +865,9 @@
           "Application"
         ],
         "operationId": "Application_List",
+        "x-ms-examples": {
+          "ApplicationList": { "$ref": "./examples/ApplicationList.json" }
+        },
         "description": "Lists all of the applications in the specified account.",
         "parameters": [
           {
@@ -2675,7 +2705,7 @@
           "type": "string",
           "format": "duration",
           "title": "The timeout for allocation of compute nodes to the pool.",
-          "description": "The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "targetDedicatedNodes": {
           "type": "integer",
