@@ -212,7 +212,9 @@
             "in": "path",
             "description": "Specifying the target person group to create the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
@@ -265,7 +267,9 @@
             "in": "path",
             "description": "personGroupId of the target person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "start",
@@ -313,7 +317,9 @@
             "in": "path",
             "description": "Specifying the person group containing the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
@@ -349,7 +355,9 @@
             "in": "path",
             "description": "Specifying the person group containing the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
@@ -391,7 +399,9 @@
             "in": "path",
             "description": "Specifying the person group containing the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
@@ -442,7 +452,9 @@
             "in": "path",
             "description": "Specifying the person group containing the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
@@ -485,7 +497,9 @@
             "in": "path",
             "description": "Specifying the person group containing the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
@@ -534,7 +548,9 @@
             "in": "path",
             "description": "Specifying the person group containing the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
@@ -636,7 +652,9 @@
             "in": "path",
             "description": "The personGroupId of the person group to be deleted.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -665,7 +683,9 @@
             "in": "path",
             "description": "personGroupId of the target person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -700,7 +720,9 @@
             "in": "path",
             "description": "personGroupId of the person group to be updated.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
@@ -744,7 +766,9 @@
             "in": "path",
             "description": "personGroupId of target person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -829,7 +853,9 @@
             "in": "path",
             "description": "Target person group to be trained.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "produces": [
@@ -939,7 +965,7 @@
         }
       },
       "patch": {
-        "description": "Update information of a face list. ",
+        "description": "Update information of a face list.",
         "operationId": "FaceList_Update",
         "parameters": [
           {
@@ -992,8 +1018,8 @@
             "description": "Id referencing a Face List.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9-_]+$",
-            "maxLength": 64
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -1060,7 +1086,7 @@
           {
             "name": "persistedFaceId",
             "in": "path",
-            "description": "persistedFaceId of an existing face. ",
+            "description": "persistedFaceId of an existing face.",
             "required": true,
             "type": "string"
           }
@@ -1093,7 +1119,9 @@
             "in": "path",
             "description": "Specifying the person group containing the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
@@ -1105,8 +1133,9 @@
           {
             "name": "userData",
             "in": "query",
-            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB. ",
-            "type": "string"
+            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB.",
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "$ref": "#/parameters/targetFace"
@@ -1176,7 +1205,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected. ",
+            "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected.",
             "schema": {
               "$ref": "#/definitions/DetectionResult"
             }
@@ -1197,7 +1226,7 @@
     },
     "/facelists/{faceListId}/persistedFaces": {
       "post": {
-        "description": "Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire. ",
+        "description": "Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.",
         "operationId": "FaceList_AddFace",
         "parameters": [
           {
@@ -1212,8 +1241,9 @@
           {
             "name": "userData",
             "in": "query",
-            "description": "User-specified data about the face list for any purpose. The  maximum length is 1KB.",
-            "type": "string"
+            "description": "User-specified data about the face list for any purpose. The maximum length is 1KB.",
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "$ref": "#/parameters/targetFace"
@@ -1328,7 +1358,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected. ",
+            "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected.",
             "schema": {
               "$ref": "#/definitions/DetectionResult"
             }
@@ -1357,7 +1387,9 @@
             "in": "path",
             "description": "Specifying the person group containing the target person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
@@ -1369,8 +1401,9 @@
           {
             "name": "userData",
             "in": "query",
-            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB. ",
-            "type": "string"
+            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB.",
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "$ref": "#/parameters/targetFace"
@@ -1424,7 +1457,8 @@
             "name": "userData",
             "in": "query",
             "description": "User-specified data about the face list for any purpose. The  maximum length is 1KB.",
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "$ref": "#/parameters/targetFace"
@@ -2113,8 +2147,10 @@
       "description": "Request body for identify face operation.",
       "properties": {
         "personGroupId": {
+          "description": "personGroupId of the target person group, created by PersonGroups.Create",
           "type": "string",
-          "description": "personGroupId of the target person group, created by PersonGroups.Create"
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
         },
         "faceIds": {
           "type": "array",
@@ -2201,8 +2237,10 @@
           "description": "Specify a certain person in a person group. personId is created in Persons.Create."
         },
         "personGroupId": {
+          "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in Person Groups.Create.",
           "type": "string",
-          "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in Person Groups.Create."
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
         }
       }
     },
@@ -2274,12 +2312,12 @@
         },
         "name": {
           "type": "string",
-          "description": "Face list's display name.",
+          "description": "Face list's display name, maximum length is 128.",
           "maxLength": 128
         },
         "userData": {
           "type": "string",
-          "description": "User-provided data attached to this face list.",
+          "description": "User-provided data attached to this face list. Length should not exceed 16KB.",
           "maxLength": 16384
         },
         "persistedFaces": {
@@ -2304,12 +2342,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the face list, maximum length is 128.",
+          "description": "Person group display name. The maximum length is 128.",
           "maxLength": 128
         },
         "userData": {
           "type": "string",
-          "description": "Optional user defined data for the face list. Length should not exceed 16KB.",
+          "description": "User-provided data attached to the person group. The size limit is 16KB.",
           "maxLength": 16384
         }
       }
@@ -2322,18 +2360,19 @@
       "description": "Person group object.",
       "properties": {
         "personGroupId": {
+          "description": "personGroupId of the existing person groups.",
           "type": "string",
-          "description": "faceListId of the target face list.",
-          "maxLength": 128
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
         },
         "name": {
           "type": "string",
-          "description": "Face list's display name.",
+          "description": "Person group's display name, maximum length is 128.",
           "maxLength": 128
         },
         "userData": {
           "type": "string",
-          "description": "User-provided data attached to this face list.",
+          "description": "User-provided data attached to this person group. Length should not exceed 16KB.",
           "maxLength": 16384
         }
       }
@@ -2394,11 +2433,13 @@
         },
         "name": {
           "type": "string",
-          "description": "Person's display name."
+          "description": "Person's display name, maximum length is 128.",
+          "maxLength": 128
         },
         "userData": {
           "type": "string",
-          "description": "User-provided data attached to this person."
+          "description": "User-provided data attached to this person. Length should not exceed 16KB.",
+          "maxLength": 16384
         }
       }
     },
@@ -2422,7 +2463,8 @@
         },
         "userData": {
           "type": "string",
-          "description": "User-provided data attached to the face."
+          "description": "User-provided data attached to the face. The size limit is 1KB.",
+          "maxLength": 1024
         }
       }
     },
@@ -2432,7 +2474,7 @@
       "properties": {
         "userData": {
           "type": "string",
-          "description": "User-provided data attached to the face. The size limit is 1KB",
+          "description": "User-provided data attached to the face. The size limit is 1KB.",
           "maxLength": 1024
         }
       }
@@ -2521,7 +2563,7 @@
     "targetFace": {
       "name": "targetFace",
       "in": "query",
-      "description": "A face rectangle to specify the target face to be added to a person in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
+      "description": "A face rectangle to specify the target face to be added to a person in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image.",
       "type": "array",
       "x-ms-parameter-location": "method",
       "required": false,
