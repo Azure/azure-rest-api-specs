@@ -689,13 +689,25 @@
                     "description": "Gets or sets the last modified time."
                 }
             },
-            "description": "Definition of the varible properties"
+            "description": "Definition of the source control properties"
         },
         "SourceControl": {
+            "x-ms-azure-resource": true,
             "properties": {
                 "name": {
+                    "readOnly": true,
                     "type": "string",
-                    "description": "Gets or sets the name of the source control."
+                    "description": "Resource name."
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type."
                 },
                 "properties": {
                     "$ref": "#/definitions/SourceControlProperties",
@@ -752,26 +764,30 @@
         },
         "SourceControlUpdateParameters": {
             "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Gets or sets the name of the source control."
-                },
                 "properties": {
                     "$ref": "#/definitions/SourceControlUpdateProperties",
                     "x-ms-client-flatten": true,
                     "description": "Gets or sets the value of the source control."
                 }
             },
-            "required": [
-                "name"
-            ],
             "description": "The parameters supplied to the update source control operation."
         },
         "SourceControlSyncJob": {
             "properties": {
-                "id": {
+                "name": {
+                    "readOnly": true,
                     "type": "string",
-                    "description": "Gets the id of the job."
+                    "description": "Resource name."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type."
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource id."
                 },
                 "properties": {
                     "$ref": "#/definitions/SourceControlSyncJobProperties",
