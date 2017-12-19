@@ -56,7 +56,7 @@
           "200": {
             "description": "A successful call returns an array of the most similar faces represented in faceId if the input parameter is faceIds or persistedFaceId if the input parameter is faceListId.",
             "schema": {
-              "$ref": "#/definitions/SimilarFaceResults"
+              "$ref": "#/definitions/FindSimilarResults"
             }
           },
           "default": {
@@ -99,7 +99,7 @@
           "200": {
             "description": "A successful call returns one or more groups of similar faces (rank by group size) and a messyGroup.",
             "schema": {
-              "$ref": "#/definitions/GroupResponse"
+              "$ref": "#/definitions/GroupResult"
             }
           },
           "default": {
@@ -249,18 +249,13 @@
         },
         "x-ms-examples": {
           "Create new person example": {
-            "$ref": "./examples//CreateNewPerson.json"
+            "$ref": "./examples/CreateNewPerson.json"
           }
         }
       },
       "get": {
         "description": "List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
         "operationId": "Person_List",
-        "x-ms-examples": {
-          "List persons in person group": {
-            "$ref": "./examples/ListPersonGroupPersons.json"
-          }
-        },
         "parameters": [
           {
             "name": "personGroupId",
@@ -303,6 +298,11 @@
             "schema": {
               "$ref": "#/definitions/APIError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List persons in person group": {
+            "$ref": "./examples/ListPersonGroupPersons.json"
           }
         }
       }
@@ -415,7 +415,7 @@
           },
           {
             "name": "body",
-            "description": "Request body  for person update operation.",
+            "description": "Request body for person update operation.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -1142,11 +1142,7 @@
             "format": "uuid"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB.",
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/faceUserData"
           },
           {
             "$ref": "#/parameters/targetFace"
@@ -1250,11 +1246,7 @@
             "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the face list for any purpose. The maximum length is 1KB.",
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/faceUserData"
           },
           {
             "$ref": "#/parameters/targetFace"
@@ -1411,11 +1403,7 @@
             "format": "uuid"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB.",
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/faceUserData"
           },
           {
             "$ref": "#/parameters/targetFace"
@@ -1466,11 +1454,7 @@
             "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the face list for any purpose. The  maximum length is 1KB.",
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/faceUserData"
           },
           {
             "$ref": "#/parameters/targetFace"
@@ -1603,7 +1587,7 @@
         }
       }
     },
-    "Position": {
+    "Coordinate": {
       "type": "object",
       "required": [
         "x",
@@ -1626,85 +1610,85 @@
       "description": "A collection of 27-point face landmarks pointing to the important positions of face components.",
       "properties": {
         "pupilLeft": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "pupilRight": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseTip": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "mouthLeft": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "mouthRight": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyebrowLeftOuter": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyebrowLeftInner": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeLeftOuter": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeLeftTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeLeftBottom": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeLeftInner": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyebrowRightInner": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyebrowRightOuter": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeRightInner": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeRightTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeRightBottom": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeRightOuter": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseRootLeft": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseRootRight": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseLeftAlarTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseRightAlarTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseLeftAlarOutTip": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseRightAlarOutTip": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "upperLipTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "upperLipBottom": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "underLipTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "underLipBottom": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         }
       }
     },
@@ -1730,11 +1714,8 @@
           ]
         },
         "smile": {
-          "type": "number",
-          "format": "float",
           "description": "Smile intensity, a number between [0,1] ",
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/LevelProperty"
         },
         "facialHair": {
           "$ref": "#/definitions/FacialHairProperties"
@@ -1787,22 +1768,16 @@
       "description": "Properties describing facial hair attributes.",
       "properties": {
         "moustache": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "beard": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "sideburns": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         }
       }
     },
@@ -1829,52 +1804,36 @@
       "description": "Properties describing facial emotion in form of confidence ranging from 0 to 1.",
       "properties": {
         "anger": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "contempt": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "disgust": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "fear": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "happiness": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "neutral": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "sadness": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "surprise": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         }
       }
     },
@@ -1883,11 +1842,9 @@
       "description": "Properties describing hair attributes.",
       "properties": {
         "bald": {
-          "type": "number",
           "description": "A number describing confidence level of whether the person is bald.",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/ConfidenceProperty"
         },
         "invisible": {
           "type": "boolean",
@@ -1903,10 +1860,10 @@
       "type": "array",
       "description": "An array of candidate colors and confidence level in the presence of each.",
       "items": {
-        "$ref": "#/definitions/ColorProperty"
+        "$ref": "#/definitions/HairColor"
       }
     },
-    "ColorProperty": {
+    "HairColor": {
       "type": "object",
       "description": "Hair color and associated confidence",
       "properties": {
@@ -1998,11 +1955,9 @@
           ]
         },
         "value": {
-          "type": "number",
           "description": "A number indicating level of blurriness ranging from 0 to 1.",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/LevelProperty"
         }
       }
     },
@@ -2025,11 +1980,9 @@
           ]
         },
         "value": {
-          "type": "number",
           "description": "A number indicating level of exposure level ranging from 0 to 1. [0, 0.25) is under exposure. [0.25, 0.75) is good exposure. [0.75, 1] is over exposure.",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/LevelProperty"
         }
       }
     },
@@ -2052,11 +2005,9 @@
           ]
         },
         "value": {
-          "type": "number",
           "description": "A number indicating level of noise level ranging from 0 to 1. [0, 0.25) is under exposure. [0.25, 0.75) is good exposure. [0.75, 1] is over exposure. [0, 0.3) is low noise level. [0.3, 0.7) is medium noise level. [0.7, 1] is high noise level.",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/LevelProperty"
         }
       }
     },
@@ -2110,13 +2061,13 @@
         }
       }
     },
-    "SimilarFaceResults": {
+    "FindSimilarResults": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/SimilarFaceResult"
+        "$ref": "#/definitions/FindSimilarResult"
       }
     },
-    "SimilarFaceResult": {
+    "FindSimilarResult": {
       "type": "object",
       "description": "Response body for find similar face operation.",
       "properties": {
@@ -2154,7 +2105,7 @@
         }
       }
     },
-    "GroupResponse": {
+    "GroupResult": {
       "type": "object",
       "required": [
         "groups"
@@ -2574,6 +2525,12 @@
       "type": "number",
       "minimum": 0,
       "maximum": 1
+    },
+    "LevelProperty": {
+      "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
     }
   },
   "parameters": {
@@ -2625,6 +2582,16 @@
         "maxItems": 4,
         "minItems": 4
       }
+    },
+    "faceUserData": {
+      "name": "userData",
+      "in": "query",
+      "description": "User-specified data about the face for any purpose. The maximum length is 1KB.",
+      "type": "string",
+      "maxLength": 1024,
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "collectionFormat": "csv"
     }
   }
 }
