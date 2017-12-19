@@ -1678,7 +1678,8 @@
           },
           "enum": [
             "male",
-            "female"
+            "female",
+            "genderless"
           ]
         },
         "smile": {
@@ -2448,7 +2449,7 @@
           "description": "Training status: notstarted, running, succeeded, failed. If the training process is waiting to perform, the status is notstarted. If the training is ongoing, the status is running. Status succeed means this person group is ready for Face - Identify. Status failed is often caused by no person or no persisted face exist in the person group",
           "x-nullable": false,
           "x-ms-enum": {
-            "name": "TrainingStatus",
+            "name": "TrainingStatusType",
             "modelAsString": false
           },
           "enum": [
@@ -2460,13 +2461,13 @@
         },
         "createdDateTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time",
           "description": "A combined UTC date and time string that describes person group created time.",
           "x-ms-client-name": "created"
         },
         "lastActionDateTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time",
           "description": "Person group last modify time in the UTC, could be null value when the person group is not successfully trained.",
           "x-ms-client-name": "lastAction"
         },
