@@ -44,16 +44,17 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.cognitiveservices.vision.customvision.training
-  package-name: azure-cognitiveservices-vision-customvision-training
+  package-name: azure-cognitiveservices-vision-customvision
   clear-output-folder: true
+
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision-training/azure/cognitiveservices/vision/customvision/training
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision/azure/cognitiveservices/vision/customvision/training
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision-training
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision
 ```

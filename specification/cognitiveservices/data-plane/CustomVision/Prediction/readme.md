@@ -44,16 +44,16 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.cognitiveservices.vision.customvision.prediction
-  package-name: azure-cognitiveservices-vision-customvision-prediction
+  package-name: azure-cognitiveservices-vision-customvision
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision-prediction/azure/cognitiveservices/vision/customvision/prediction
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision/azure/cognitiveservices/vision/customvision/prediction
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision-prediction
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision
 ```
