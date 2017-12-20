@@ -1,19 +1,19 @@
 # Compute
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Compute.
 
 
 The compute RP comprises of small services where each service has its own tag.
-Hence, each sub-service has its own swagger spec. 
+Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Compute, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -27,7 +27,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Compute API.
 
 ``` yaml
@@ -202,7 +202,7 @@ input-file:
 ---
 # Code Generation
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -246,7 +246,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-container-service-2017-01' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-01-31/containerservice
+output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-01-31/containerservice
 ```
 
 ### Tag: package-container-service-2016-09 and go
@@ -256,7 +256,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-container-service-2016-09' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2016-09-30/containerservice
+output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2016-09-30/containerservice
 ```
 
 ### Tag: package-compute-2016-04-preview and go
@@ -286,7 +286,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-container-service-2016-03' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2016-03-30/containerservice
+output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2016-03-30/containerservice
 ```
 
 ### Tag: package-container-service-2015-11-preview and go
@@ -296,7 +296,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-container-service-2015-11-preview' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2015-11-01-preview/containerservice
+output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2015-11-01-preview/containerservice
 ```
 
 ### Tag: package-compute-2015-06 and go

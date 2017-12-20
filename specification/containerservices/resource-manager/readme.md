@@ -81,6 +81,36 @@ go:
   clear-output-folder: true
 ```
 
+### Tag: package-2017-09 and go
+
+These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-09' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-09-30/containerservice
+```
+
+### Tag: package-2017-08 and go
+
+These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-08' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-08-31/containerservice
+```
+
+### Tag: package-2017-07 and go
+
+These settings apply only when `--tag=package-2017-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-07' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-07-01/containerservice
+```
+
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
