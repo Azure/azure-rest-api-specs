@@ -25,7 +25,7 @@
   "tags": [
     {
       "name": "Budgets-Preview",
-      "description": "Creates, Updates, Delets and Lists the budgets for a scope by Subscription. Budgets are available via this API only for December 30, 2017 or later.",
+      "description": "Perform CRUD (Create, Update, Read, Delete) operations on the budget entity at the Subscription scope.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
       }
@@ -131,7 +131,7 @@
           "Budgets-Preview"
         ],
         "operationId": "Budgets_CreateOrUpdate",
-        "description": "The operation to create or update a budget.",
+        "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
