@@ -37,7 +37,9 @@ csharp:
 
 ``` yaml
 directive:
-  - suppress: R2022                        # the message to suppress
+  - suppress: R2022                       # the message to suppress
+  - suppress: R3014                       # the message to suppress
+  - suppress: R3016                       # the message to suppress
 ```
 ## Python
 
