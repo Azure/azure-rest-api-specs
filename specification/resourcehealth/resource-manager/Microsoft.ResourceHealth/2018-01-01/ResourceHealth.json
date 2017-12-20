@@ -377,9 +377,6 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "$ref": "../../../../common-types/resource-management/v1/types.json"
-    },
     "events": {
       "properties": {
         "value": {
@@ -419,7 +416,7 @@
               ],
               "x-ms-enum": {
                 "name": "EventTypeValues",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "eventSource": {
@@ -431,7 +428,7 @@
               ],
               "x-ms-enum": {
                 "name": "EventSourceValues",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "status": {
@@ -443,7 +440,7 @@
               ],
               "x-ms-enum": {
                 "name": "EventStatusValues",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "title": {
@@ -480,7 +477,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ]
     },
@@ -516,7 +513,7 @@
           ],
           "x-ms-enum": {
             "name": "EventStatusValues",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "impactedSubscriptions": {
@@ -592,7 +589,7 @@
               ],
               "x-ms-enum": {
                 "name": "AvailabilityStateValues",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "summary": {
@@ -647,7 +644,7 @@
               ],
               "x-ms-enum": {
                 "name": "reasonChronicityTypes",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "reportedTime": {
