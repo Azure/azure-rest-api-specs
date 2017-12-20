@@ -1388,11 +1388,11 @@
             "required": true,
             "schema": {
               "required": [
-                "contentValue"
+                "ContentValue"
               ],
               "type": "object",
               "properties": {
-                "contentValue": {
+                "ContentValue": {
                   "description": "Content to evaluate for a job.",
                   "type": "string"
                 }
@@ -2375,11 +2375,11 @@
     "Frames": {
       "description": "The response for a Get Frames request.",
       "properties": {
-        "reviewId": {
+        "ReviewId": {
           "description": "Id of the review.",
           "type": "string"
         },
-        "videoFrames": {
+        "VideoFrames": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Frame"
@@ -2390,22 +2390,22 @@
     "Frame": {
       "description": "Video frame property details.",
       "properties": {
-        "timestamp": {
+        "Timestamp": {
           "description": "Timestamp of the frame.",
           "type": "string"
         },
-        "frameImage": {
+        "FrameImage": {
           "description": "Frame image.",
           "type": "string"
         },
-        "metadata": {
+        "Metadata": {
           "description": "Array of KeyValue.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
-        "reviewerResultTags": {
+        "ReviewerResultTags": {
           "description": "Reviewer result tags.",
           "type": "array",
           "items": {
@@ -2418,48 +2418,48 @@
     "Screen": {
       "description": "The response for a Screen text request.",
       "properties": {
-        "originalText": {
+        "OriginalText": {
           "description": "The original text.",
           "type": "string"
         },
-        "normalizedText": {
+        "NormalizedText": {
           "description": "The normalized text.",
           "type": "string"
         },
-        "autoCorrectedText": {
+        "AutoCorrectedText": {
           "description": "The autocorrected text",
           "type": "string"
         },
-        "misrepresentation": {
+        "Misrepresentation": {
           "description": "The misrepresentation text.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "classification": {
+        "Classification": {
           "description": "The classification details of the text.",
           "$ref": "#/definitions/Classification"
         },
-        "status": {
+        "Status": {
           "description": "The evaluate status.",
           "$ref": "#/definitions/Status"
         },
-        "pii": {
+        "PII": {
           "description": "Personal Identifier Information details.",
           "$ref": "#/definitions/PII"
         },
-        "language": {
+        "Language": {
           "description": "Language of the input text content.",
           "type": "string"
         },
-        "terms": {
+        "Terms": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DetectedTerms"
           }
         },
-        "trackingId": {
+        "TrackingId": {
           "description": "Unique Content Moderator transaction Id.",
           "type": "string"
         }
@@ -2468,19 +2468,19 @@
     "Classification": {
       "description": "The classification details of the text.",
       "properties": {
-        "adultScore": {
+        "AdultScore": {
           "description": "The adult score.",
           "type": "number"
         },
-        "racyScore": {
+        "RacyScore": {
           "description": "The racy score.",
           "type": "number"
         },
-        "offensiveScore": {
+        "OffensiveScore": {
           "description": "The offensive score.",
           "type": "number"
         },
-        "reviewRecommended": {
+        "ReviewRecommended": {
           "description": "The review recommended flag.",
           "type": "boolean"
         }
@@ -2489,27 +2489,27 @@
     "PII": {
       "description": "Personal Identifier Information details.",
       "properties": {
-        "email": {
+        "Email": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Email"
           }
 
         },
-        "ipa": {
+        "IPA": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPA"
 
           }
         },
-        "phone": {
+        "Phone": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Phone"
           }
         },
-        "address": {
+        "Address": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Address"
@@ -2520,19 +2520,19 @@
     "Email": {
       "description": "Email Address details.",
       "properties": {
-        "detected": {
+        "Detected": {
           "description": "Detected Email Address from the input text content.",
           "type": "string"
         },
-        "subType": {
+        "SubType": {
           "description": "Subtype of the detected Email Address.",
           "type": "string"
         },
-        "text": {
+        "Text": {
           "description": "Email Address in the input text content.",
           "type": "string"
         },
-        "index": {
+        "Index": {
           "description": "Index(Location) of the Email address in the input text content.",
           "type": "integer"
         }
@@ -2541,15 +2541,15 @@
     "IPA": {
       "description": "IP Address details.",
       "properties": {
-        "subType": {
+        "SubType": {
           "description": "Subtype of the detected IP Address.",
           "type": "string"
         },
-        "text": {
+        "Text": {
           "description": "Detected IP Address.",
           "type": "string"
         },
-        "index": {
+        "Index": {
           "description": "Index(Location) of the IP Address in the input text content.",
           "type": "integer"
         }
@@ -2558,15 +2558,15 @@
     "Phone": {
       "description": "Phone Property details.",
       "properties": {
-        "countryCode": {
+        "CountryCode": {
           "description": "CountryCode of the detected Phone number.",
           "type": "string"
         },
-        "text": {
+        "Text": {
           "description": "Detected Phone number.",
           "type": "string"
         },
-        "index": {
+        "Index": {
           "description": "Index(Location) of the Phone number in the input text content.",
           "type": "integer"
         }
@@ -2575,11 +2575,11 @@
     "Address": {
       "description": "Address details.",
       "properties": {
-        "text": {
+        "Text": {
           "description": "Detected Address.",
           "type": "string"
         },
-        "index": {
+        "Index": {
           "description": "Index(Location) of the Address in the input text content.",
           "type": "integer"
         }
@@ -2589,19 +2589,19 @@
     "DetectedTerms": {
       "description": "Detected Terms details.",
       "properties": {
-        "index": {
+        "Index": {
           "description": "Index(Location) of the detected profanity term in the input text content.",
           "type": "integer"
         },
-        "originalIndex": {
+        "OriginalIndex": {
           "description": "Original Index(Location) of the detected profanity term in the input text content.",
           "type": "integer"
         },
-        "listId": {
+        "ListId": {
           "description": "Matched Terms list Id.",
           "type": "integer"
         },
-        "term": {
+        "Term": {
           "description": "Detected profanity term.",
           "type": "string"
         }
@@ -2611,34 +2611,34 @@
     "FoundFaces": {
       "description": "Request object the contains found faces.",
       "properties": {
-        "status": {
+        "Status": {
           "description": "The evaluate status",
           "$ref": "#/definitions/Status"
         },
-        "trackingId": {
+        "TrackingId": {
           "description": "The tracking id.",
           "type": "string"
         },
-        "cacheId": {
+        "CacheId": {
           "description": "The cache id.",
           "type": "string"
         },
-        "result": {
+        "Result": {
           "description": "True if result was found.",
           "type": "boolean"
         },
-        "count": {
+        "Count": {
           "description": "Number of faces found.",
           "type": "integer"
         },
-        "advancedInfo": {
+        "AdvancedInfo": {
           "description": "The advanced info.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
-        "faces": {
+        "Faces": {
           "description": "The list of faces.",
           "type": "array",
           "items": {
@@ -2650,19 +2650,19 @@
     "Face": {
       "description": "Coordinates to the found face.",
       "properties": {
-        "bottom": {
+        "Bottom": {
           "description": "The bottom coordinate.",
           "type": "integer"
         },
-        "left": {
+        "Left": {
           "description": "The left coordinate.",
           "type": "integer"
         },
-        "right": {
+        "Right": {
           "description": "The right coordinate.",
           "type": "integer"
         },
-        "top": {
+        "Top": {
           "description": "The top coordinate.",
           "type": "integer"
         }
@@ -2671,34 +2671,34 @@
     "OCR": {
       "description": "Contains the text found in image for the language specified.",
       "properties": {
-        "status": {
+        "Status": {
           "description": "The evaluate status",
           "$ref": "#/definitions/Status"
         },
-        "metadata": {
+        "Metadata": {
           "description": "Array of KeyValue.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
-        "trackingId": {
+        "TrackingId": {
           "description": "The tracking id.",
           "type": "string"
         },
-        "cacheId": {
+        "CacheId": {
           "description": "The cache id.",
           "type": "string"
         },
-        "language": {
+        "Language": {
           "description": "The ISO 639-3 code.",
           "type": "string"
         },
-        "text": {
+        "Text": {
           "description": "The found text.",
           "type": "string"
         },
-        "candidates": {
+        "Candidates": {
           "description": "The list of candidate text.",
           "type": "array",
           "items": {
@@ -2710,11 +2710,11 @@
     "KeyValuePair": {
       "description": "The key value pair object properties.",
       "properties": {
-        "key": {
+        "Key": {
           "description": "The key parameter.",
           "type": "string"
         },
-        "value": {
+        "Value": {
           "description": "The value parameter.",
           "type": "string"
         }
@@ -2723,11 +2723,11 @@
     "Candidate": {
       "description": "OCR candidate text.",
       "properties": {
-        "text": {
+        "Text": {
           "description": "The text found.",
           "type": "string"
         },
-        "confidence": {
+        "Confidence": {
           "description": "The confidence level.",
           "type": "number"
         }
@@ -2736,42 +2736,42 @@
     "Evaluate": {
       "description": "Evaluate response object.",
       "properties": {
-        "cacheID": {
+        "CacheID": {
           "description": "The cache id.",
           "type": "string"
         },
-        "result": {
+        "Result": {
           "description": "Evaluate result.",
           "type": "boolean"
         },
-        "trackingId": {
+        "TrackingId": {
           "description": "The tracking id.",
           "type": "string"
         },
-        "adultClassificationScore": {
+        "AdultClassificationScore": {
           "description": "The adult classification score.",
           "type": "number"
         },
-        "isImageAdultClassified": {
+        "IsImageAdultClassified": {
           "description": "Indicates if an image is classified as adult.",
           "type": "boolean"
         },
-        "racyClassificationScore": {
+        "RacyClassificationScore": {
           "description": "The racy classication score.",
           "type": "number"
         },
-        "isImageRacyClassified": {
+        "IsImageRacyClassified": {
           "description": "Indicates if the image is classified as racy.",
           "type": "boolean"
         },
-        "advancedInfo": {
+        "AdvancedInfo": {
           "description": "The advanced info.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
-        "status": {
+        "Status": {
           "description": "The evaluate status",
           "$ref": "#/definitions/Status"
         }
@@ -2780,26 +2780,26 @@
     "MatchResponse": {
       "description": "The response for a Match request.",
       "properties": {
-        "trackingId": {
+        "TrackingId": {
           "description": "The tracking id.",
           "type": "string"
         },
-        "cacheID": {
+        "CacheID": {
           "description": "The cache id.",
           "type": "string"
         },
-        "isMatch": {
+        "IsMatch": {
           "description": "Indicates if there is a match.",
           "type": "boolean"
         },
-        "matches": {
+        "Matches": {
           "description": "The match details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Match"
           }
         },
-        "status": {
+        "Status": {
           "description": "The evaluate status",
           "$ref": "#/definitions/Status"
         }
@@ -2808,26 +2808,26 @@
     "Match": {
       "description": "The match details.",
       "properties": {
-        "score": {
+        "Score": {
           "description": "Confidence score of the image match.",
           "type": "number"
         },
-        "matchId": {
+        "MatchId": {
           "description": "The match id.",
           "type": "integer"
         },
-        "source": {
+        "Source": {
           "description": "The source.",
           "type": "string"
         },
-        "tags": {
+        "Tags": {
           "description": "The tags for match details.",
           "type": "array",
           "items": {
             "type": "integer"
           }
         },
-        "label": {
+        "Label": {
           "description": "The label.",
           "type": "string"
         }
@@ -2836,11 +2836,11 @@
     "Tag": {
       "description": "Tag details.",
       "properties": {
-        "key": {
+        "Key": {
           "description": "The key parameter.",
           "type": "string"
         },
-        "value": {
+        "Value": {
           "description": "The value parameter.",
           "type": "string"
         }
@@ -2849,15 +2849,15 @@
     "DetectedLanguage": {
       "description": "Detect language result.",
       "properties": {
-        "detectedLanguage": {
+        "DetectedLanguage": {
           "description": "The detected language.",
           "type": "string"
         },
-        "status": {
+        "Status": {
           "description": "The detect language status",
           "$ref": "#/definitions/Status"
         },
-        "trackingId": {
+        "TrackingId": {
           "description": "The tracking id.",
           "type": "string"
         }
@@ -2866,28 +2866,28 @@
     "ImageList": {
       "description": "Image List Properties.",
       "properties": {
-        "id": {
+        "Id": {
           "description": "Image List Id.",
           "type": "integer"
         },
-        "name": {
+        "Name": {
           "description": "Image List Name.",
           "type": "string"
         },
-        "description": {
+        "Description": {
           "description": "Description for image list.",
           "type": "string"
         },
-        "metadata": {
+        "Metadata": {
           "description": "Image List Metadata.",
           "type": "object",
 
           "properties": {
-            "key One": {
+            "Key One": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             },
-            "key Two": {
+            "Key Two": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             }
@@ -2899,27 +2899,27 @@
     "TermList": {
       "description": "Term List  Properties.",
       "properties": {
-        "id": {
+        "Id": {
           "description": "Term list Id.",
           "type": "integer"
         },
-        "name": {
+        "Name": {
           "description": "Term list name.",
           "type": "string"
         },
-        "description": {
+        "Description": {
           "description": "Description for term list.",
           "type": "string"
         },
-        "metadata": {
+        "Metadata": {
           "description": "Term list metadata.",
           "type": "object",
           "properties": {
-            "key One": {
+            "Key One": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             },
-            "key Two": {
+            "Key Two": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             }
@@ -2942,36 +2942,36 @@
     "RefreshIndex": {
       "description": "Refresh Index Response.",
       "properties": {
-        "contentSourceId": {
+        "ContentSourceId": {
           "description": "Content source Id.",
           "type": "string"
         },
-        "isUpdateSuccess": {
+        "IsUpdateSuccess": {
           "description": "Update success status.",
           "type": "boolean"
         },
-        "advancedInfo": {
+        "AdvancedInfo": {
           "description": "Advanced info list.",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "key One": {
+              "Key One": {
                 "description": "Key parameter to describe advanced info.",
                 "type": "string"
               },
-              "key Two": {
+              "Key Two": {
                 "description": "Key parameter to describe advanced info.",
                 "type": "string"
               }
             }
           }
         },
-        "status": {
+        "Status": {
           "description": "Refresh index status.",
           "$ref": "#/definitions/Status"
         },
-        "trackingId": {
+        "TrackingId": {
           "description": "Tracking Id.",
           "type": "string"
         }
@@ -2981,32 +2981,32 @@
       "description": "Image Properties.",
       "properties": {
 
-        "contentId": {
+        "ContentId": {
           "description": "Content Id.",
           "type": "string"
         },
-        "additionalInfo": {
+        "AdditionalInfo": {
           "description": "Advanced info list.",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "key": {
+              "Key": {
                 "description": "Key parameter.",
                 "type": "string"
               },
-              "value": {
+              "Value": {
                 "description": "Value parameter.",
                 "type": "string"
               }
             }
           }
         },
-        "status": {
+        "Status": {
           "description": "Status details.",
           "$ref": "#/definitions/Status"
         },
-        "trackingId": {
+        "TrackingId": {
           "description": "Tracking Id.",
           "type": "string"
         }
@@ -3016,15 +3016,15 @@
     "Status": {
       "description": "Status properties.",
       "properties": {
-        "code": {
+        "Code": {
           "description": "Status code.",
           "type": "integer"
         },
-        "description": {
+        "Description": {
           "description": "Status description.",
           "type": "string"
         },
-        "exception": {
+        "Exception": {
           "description": "Exception status.",
           "type": "string"
         }
@@ -3033,23 +3033,23 @@
     "ImageIds": {
       "description": "Image Id properties.",
       "properties": {
-        "contentSource": {
+        "ContentSource": {
           "description": "Source of the content.",
           "type": "string"
         },
-        "contentIds": {
+        "ContentIds": {
           "description": "Id of the contents.",
           "type": "array",
           "items": {
             "type": "integer"
           }
         },
-        "status": {
+        "Status": {
           "description": "Get Image status.",
           "type": "object",
           "$ref": "#/definitions/Status"
         },
-        "trackingId": {
+        "TrackingId": {
           "description": "Tracking Id.",
           "type": "string"
         }
@@ -3058,11 +3058,11 @@
     "Terms": {
       "description": "Terms properties.",
       "properties": {
-        "data": {
+        "Data": {
           "description": "Term data details.",
           "$ref": "#/definitions/TermsData"
         },
-        "paging": {
+        "Paging": {
           "description": "Paging details.",
           "properties": {
             "Total": {
@@ -3088,32 +3088,32 @@
     "TermsData": {
       "description": "All term Id response properties.",
       "properties": {
-        "language": {
+        "Language": {
           "description": "Language of the terms.",
           "type": "string"
         },
-        "terms": {
+        "Terms": {
           "description": "List of terms.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/termsInList"
+            "$ref": "#/definitions/TermsInList"
           }
         },
-        "status": {
+        "Status": {
           "description": "Term Status.",
           "type": "object",
           "$ref": "#/definitions/Status"
         },
-        "trackingId": {
+        "TrackingId": {
           "description": "Tracking Id.",
           "type": "string"
         }
       }
     },
-    "termsInList": {
+    "TermsInList": {
       "description": "Terms in list Id passed.",
       "properties": {
-        "term": {
+        "Term": {
           "description": "Added term details.",
           "type": "string"
         }
@@ -3122,49 +3122,49 @@
     "Review": {
       "description": "The Review object.",
       "properties": {
-        "reviewId": {
+        "ReviewId": {
           "description": "Id of the review.",
           "type": "string"
         },
-        "subTeam": {
+        "SubTeam": {
           "description": "Name of the subteam.",
           "type": "string"
         },
-        "status": {
+        "Status": {
           "description": "The status string (<Pending, Complete>).",
           "type": "string"
         },
-        "reviewerResultTags": {
+        "ReviewerResultTags": {
           "description": "Array of KeyValue with Reviewer set Tags.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
-        "createdBy": {
+        "CreatedBy": {
           "description": "The reviewer name.",
           "type": "string"
         },
-        "metadata": {
+        "Metadata": {
           "description": "Array of KeyValue.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
-        "type": {
+        "Type": {
           "description": "The type of content.",
           "type": "string"
         },
-        "content": {
+        "Content": {
           "description": "The content value.",
           "type": "string"
         },
-        "contentId": {
+        "ContentId": {
           "description": "Id of the content.",
           "type": "string"
         },
-        "callbackEndpoint": {
+        "CallbackEndpoint": {
           "description": "The callback endpoint.",
           "type": "string"
         }
@@ -3173,58 +3173,58 @@
     "Job": {
       "description": "The Job object.",
       "properties": {
-        "id": {
+        "Id": {
           "description": "The job id.",
           "type": "string"
         },
-        "teamName": {
+        "TeamName": {
           "description": "The team name associated with the job.",
           "type": "string"
         },
-        "status": {
+        "Status": {
           "description": "The status string (<Pending, Failed, Completed>).",
           "type": "string"
         },
-        "workflowId": {
+        "WorkflowId": {
           "description": "The Id of the workflow.",
           "type": "string"
         },
-        "type": {
+        "Type": {
           "description": "Type of the content.",
           "type": "string"
         },
-        "callBackEndpoint": {
+        "CallBackEndpoint": {
           "description": "The callback endpoint.",
           "type": "string"
         },
-        "reviewId": {
+        "ReviewId": {
           "description": "Review Id if one is created.",
           "type": "string"
         },
-        "resultMetaData": {
+        "ResultMetaData": {
           "description": "Array of KeyValue pairs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           }
         },
-        "jobExecutionReport": {
+        "JobExecutionReport": {
           "description": "Job execution report- Array of KeyValue pairs object.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/jobExecutionReportDetails"
+            "$ref": "#/definitions/JobExecutionReportDetails"
           }
         }
       }
     },
-    "jobExecutionReportDetails": {
+    "JobExecutionReportDetails": {
       "description": "Job Execution Report Values.",
       "properties": {
-        "ts": {
+        "Ts": {
           "description": "Time details.",
           "type": "string"
         },
-        "msg": {
+        "Msg": {
           "description": "Message details.",
           "type": "string"
         }
@@ -3240,7 +3240,7 @@
     "JobListResult": {
       "description": "The list of job ids.",
       "properties": {
-        "value": {
+        "Value": {
           "type": "array",
           "items": {
             "type": "string"
@@ -3251,7 +3251,7 @@
     },
     "JobId": {
       "properties": {
-        "jobId": {
+        "JobId": {
           "description": "Id of the created job.",
           "type": "string"
         }
@@ -3261,7 +3261,7 @@
       "type": "object",
       "description": "Error information returned by the API",
       "properties": {
-        "error": {
+        "Error": {
           "$ref": "#/definitions/Error"
         }
       }
@@ -3270,10 +3270,10 @@
       "type": "object",
       "description": "Error body.",
       "properties": {
-        "code": {
+        "Code": {
           "type": "string"
         },
-        "message": {
+        "Message": {
           "type": "string"
         }
       }
@@ -3656,24 +3656,24 @@
 
         "properties": {
 
-          "name": {
+          "Name": {
             "description": "Name of the list.",
             "type": "string"
           },
-          "description": {
+          "Description": {
             "description": "Description of the list.",
             "type": "string"
           },
-          "metadata": {
+          "Metadata": {
             "description": "Metadata of the list.",
             "type": "object",
 
             "properties": {
-              "key One": {
+              "Key One": {
                 "description": "Optional key value pair to describe your list.",
                 "type": "string"
               },
-              "key Two": {
+              "Key Two": {
                 "description": "Optional key value pair to describe your list.",
                 "type": "string"
               }
@@ -3709,11 +3709,11 @@
       "schema": {
         "type": "object",
         "properties": {
-          "dataRepresentation": {
+          "DataRepresentation": {
             "type": "string",
             "default": "URL"
           },
-          "value": {
+          "Value": {
             "type": "string"
           }
         }
@@ -3732,7 +3732,7 @@
         "items": {
           "required": [
             "Timestamp",
-            "frameImage"
+            "FrameImage"
           ],
           "type": "object",
           "description": "Schema items of the body.",
@@ -3741,7 +3741,7 @@
               "description": "Timestamp of the frame.",
               "type": "string"
             },
-            "frameImage": {
+            "FrameImage": {
               "description": "Content to review.",
               "type": "string"
             },
