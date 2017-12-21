@@ -4,8 +4,6 @@
 
 This is the AutoRest configuration file for RecoveryServicesBackup.
 
-
-
 ---
 ## Getting Started 
 To build the SDK for RecoveryServicesBackup, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
@@ -19,8 +17,6 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information 
 These are the global settings for the RecoveryServicesBackup API.
 
@@ -33,8 +29,17 @@ output-folder: ./
 csharp-sdks-folder: ./Generated/CSharp
 
 license-header: MICROSOFT_MIT
+azure-arm: true
 ```
 
+### Validations
+
+``` yaml $(validate)
+azure-validator: true
+model-validator: true
+semantic-validator: true
+json: true
+```
 
 ### Tag: package-2017-07
 
@@ -42,8 +47,8 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.RecoveryServices/2017-07-01/jobs.json
-- Microsoft.RecoveryServices/2016-12-01/backupManagement.json
+- Microsoft.RecoveryServices/2017-07-01/bms.json
+- Microsoft.RecoveryServices/2016-12-01/bms.json
 - Microsoft.RecoveryServices/2016-08-10/operations.json
 ```
  
@@ -56,7 +61,6 @@ input-file:
 - Microsoft.RecoveryServices/2016-06-01/recoveryservicesbackup.json
 - Microsoft.RecoveryServices/2016-06-01/registeredIdentities.json
 ```
-
 
 ---
 # Code Generation
@@ -101,15 +105,4 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup
-```
-
----
-# Validation
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: Autorest invalidates two letter acronyms as well and changes in data contracts require service wide changes and require more time
 ```

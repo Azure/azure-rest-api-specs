@@ -1,0 +1,38 @@
+{
+    "parameters": {
+        "subscriptionId": "00000000-0000-0000-0000-000000000000",
+        "resourceGroupName": "PythonSDKBackupTestRg",
+        "vaultName": "PySDKBackupTestRsVault",
+        "fabricName": "Azure",
+        "containerName": "iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
+        "protectedItemName": "vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
+        "api-version": "2016-12-01"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "id": "/backupmanagement/resources/636482643132986882/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainer;iaasvm-rg;iaasvm-1/protectedItems/VM;iaasvmcontainer;iaasvm-rg;iaasvm-1",
+                "name": "VM;iaasvmcontainer;iaasvm-rg;iaasvm-1",
+                "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
+                "properties": {
+                    "friendlyName": "iaasvm-1",
+                    "virtualMachineId": "/subscriptions/5f938a44-2a6a-4d2a-ac86-716e1d2821fb/resourceGroups/providers/Microsoft.ClassicCompute/virtualMachines/iaasvm-1",
+                    "protectionStatus": "Healthy",
+                    "protectionState": "Protected",
+                    "healthStatus": "Passed",
+                    "lastBackupStatus": "Completed",
+                    "lastBackupTime": "2018-01-22T12:25:32.048723Z",
+                    "protectedItemDataId": "636482643132986882",
+                    "protectedItemType": "Microsoft.ClassicCompute/virtualMachines",
+                    "backupManagementType": "AzureIaasVM",
+                    "workloadType": "VM",
+                    "containerName": "iaasvmcontainer;iaasvm-rg;iaasvm-1",
+                    "sourceResourceId": "/subscriptions/5f938a44-2a6a-4d2a-ac86-716e1d2821fb/resourceGroups/providers/Microsoft.ClassicCompute/virtualMachines/iaasvm-1",
+                    "policyId": "/backupmanagement/resources/636482643132986882/backupPolicies/testPolicy1",
+                    "lastRecoveryPoint": "2017-11-22T12:25:32.048723Z"
+                }
+            }
+        }
+    }
+}

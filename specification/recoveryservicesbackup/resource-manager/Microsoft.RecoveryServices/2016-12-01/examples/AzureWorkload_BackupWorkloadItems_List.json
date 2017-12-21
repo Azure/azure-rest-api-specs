@@ -1,0 +1,52 @@
+{
+	"parameters": {
+		"subscriptionId": "6c48fa17-39c7-45f1-90ac-47a587128ace",
+		"resourceGroupName": "dpmazure",
+		"vaultName": "sumitvaultcanary",
+		"api-version": "2016-12-01",
+		"$filter": "backupManagementType eq 'AzureWorkload'",
+		"backupFabrics": "Azure",
+		"protectionContainers": "VMAppContainer;Compute;sumitmalRG;sumitmalSQL"
+	},
+	"responses": {
+		"200": {
+			"body": {
+				"value": [
+					{
+						"backupManagementType": "AzureWorkload",
+						"dataDirectoryPaths": [
+							{
+								"type": "Data",
+								"path": "F:\\Data\\",
+								"logicalName": null
+							},
+							{
+								"type": "Log",
+								"path": "F:\\Log\\",
+								"logicalName": null
+							}
+						],
+						"name": null,
+						"id": null,
+						"status": {
+							"name": null,
+							"displayName": null,
+							"infoText": null,
+							"severity": null,
+							"operationState": null
+						},
+						"type": null,
+						"location": null,
+						"friendlyName": "MSSQLSERVER",
+						"resourceGroup": null,
+						"resourceName": null,
+						"subscriptionId": null,
+						"providerName": null,
+						"resourceType": null
+					}
+				],
+				"nextLink": null
+			}
+		}
+	}
+}
