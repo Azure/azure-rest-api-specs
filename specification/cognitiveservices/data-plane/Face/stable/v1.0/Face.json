@@ -2089,7 +2089,16 @@
     "FaceList": {
       "description": "Face list object.",
       "type": "object",
+      "required": [
+        "faceListId"
+      ],
       "properties": {
+        "faceListId": {
+          "type": "string",
+          "description": "faceListId of the target face list.",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        },
         "persistedFaces": {
           "type": "array",
           "description": "Persisted faces within the face list.",
@@ -2100,35 +2109,15 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/FaceListMetadata"
-        }
-      ]
-    },
-    "FaceListMetadata": {
-      "description": "Face list's metadata object.",
-      "type": "object",
-      "required": [
-        "faceListId"
-      ],
-      "properties": {
-        "faceListId": {
-          "type": "string",
-          "description": "faceListId of the target face list.",
-          "maxLength": 64,
-          "pattern": "^[a-z0-9-_]+$"
-        }
-      },
-      "allOf": [
-        {
           "$ref": "#/definitions/NameAndUserDataContract"
         }
       ]
     },
     "FaceLists": {
       "type": "array",
-      "description": "An array of face list results.",
+      "description": "An array of face list results, with fields of faceListId, name and userData",
       "items": {
-        "$ref": "#/definitions/FaceListMetadata"
+        "$ref": "#/definitions/FaceList"
       }
     },
     "PersonGroup": {
