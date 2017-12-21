@@ -231,7 +231,7 @@
           "200": {
             "description": "A successful call returns a new personId created.",
             "schema": {
-              "$ref": "#/definitions/CreatePersonResult"
+              "$ref": "#/definitions/Person"
             }
           },
           "default": {
@@ -2131,20 +2131,6 @@
       "description": "An array of person groups.",
       "items": {
         "$ref": "#/definitions/PersonGroup"
-      }
-    },
-    "CreatePersonResult": {
-      "type": "object",
-      "required": [
-        "personId"
-      ],
-      "description": "Result of creating person.",
-      "properties": {
-        "personId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "personID of the new created person."
-        }
       }
     },
     "Person": {
