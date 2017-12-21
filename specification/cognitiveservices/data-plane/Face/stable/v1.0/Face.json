@@ -986,7 +986,7 @@
           "200": {
             "description": "A successful call returns the new persistedFaceId.",
             "schema": {
-              "$ref": "#/definitions/AddPersistedFaceResult"
+              "$ref": "#/definitions/PersistedFace"
             }
           },
           "default": {
@@ -1084,7 +1084,7 @@
           "200": {
             "description": "A successful call returns a new persistedFaceId.",
             "schema": {
-              "$ref": "#/definitions/AddPersistedFaceResult"
+              "$ref": "#/definitions/PersistedFace"
             }
           },
           "default": {
@@ -1230,7 +1230,7 @@
           "200": {
             "description": "A successful call returns the new persistedFaceId.",
             "schema": {
-              "$ref": "#/definitions/AddPersistedFaceResult"
+              "$ref": "#/definitions/PersistedFace"
             }
           },
           "default": {
@@ -1272,7 +1272,7 @@
           "200": {
             "description": "A successful call returns a new persistedFaceId.",
             "schema": {
-              "$ref": "#/definitions/AddPersistedFaceResult"
+              "$ref": "#/definitions/PersistedFace"
             }
           },
           "default": {
@@ -1319,20 +1319,6 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/DetectedFace"
-      }
-    },
-    "AddPersistedFaceResult": {
-      "type": "object",
-      "required": [
-        "persistedFaceId"
-      ],
-      "description": "Persisted face result.",
-      "properties": {
-        "persistedFaceId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "persistedFaceId of candidate face when find by faceListId. persistedFaceId in face list is persisted and will not expire. As showed in below response"
-        }
       }
     },
     "DetectedFace": {
