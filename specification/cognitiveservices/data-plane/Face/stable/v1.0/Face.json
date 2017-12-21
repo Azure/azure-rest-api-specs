@@ -205,7 +205,7 @@
     "/persongroups/{personGroupId}/persons": {
       "post": {
         "description": "Create a new person in a specified person group.",
-        "operationId": "Person_Create",
+        "operationId": "PersonGroupPerson_Create",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -249,7 +249,7 @@
       },
       "get": {
         "description": "List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
-        "operationId": "Person_List",
+        "operationId": "PersonGroupPerson_List",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -298,7 +298,7 @@
     "/persongroups/{personGroupId}/persons/{personId}": {
       "delete": {
         "description": "Delete an existing person from a person group. Persisted face images of the person will also be deleted.",
-        "operationId": "Person_Delete",
+        "operationId": "PersonGroupPerson_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -326,7 +326,7 @@
       },
       "get": {
         "description": "Retrieve a person's information, including registered persisted faces, name and userData.",
-        "operationId": "Person_Get",
+        "operationId": "PersonGroupPerson_Get",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -360,7 +360,7 @@
       },
       "patch": {
         "description": "Update name or userData of a person.",
-        "operationId": "Person_Update",
+        "operationId": "PersonGroupPerson_Update",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -403,7 +403,7 @@
     "/persongroups/{personGroupId}/persons/{personId}/persistedFaces/{persistedFaceId}": {
       "delete": {
         "description": "Delete a face from a person. Relative image for the persisted face will also be deleted.",
-        "operationId": "Person_DeleteFace",
+        "operationId": "PersonGroupPerson_DeleteFace",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -434,7 +434,7 @@
       },
       "get": {
         "description": "Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging personGroupId).",
-        "operationId": "Person_GetFace",
+        "operationId": "PersonGroupPerson_GetFace",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -471,7 +471,7 @@
       },
       "patch": {
         "description": "Update a person persisted face's userData field.",
-        "operationId": "Person_UpdateFace",
+        "operationId": "PersonGroupPerson_UpdateFace",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -958,7 +958,7 @@
     "/persongroups/{personGroupId}/persons/{personId}/persistedFaces": {
       "post": {
         "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-        "operationId": "Person_AddPersonFaceFromUrl",
+        "operationId": "PersonGroupPerson_AddPersonFaceFromUrl",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -1202,7 +1202,7 @@
     "/persongroups/{personGroupId}/persons/{personId}/persistedFaces?overload=stream": {
       "post": {
         "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-        "operationId": "Person_AddPersonFaceFromStream",
+        "operationId": "PersonGroupPerson_AddPersonFaceFromStream",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
