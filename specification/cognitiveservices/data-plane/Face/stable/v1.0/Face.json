@@ -162,7 +162,7 @@
     "/verify": {
       "post": {
         "description": "Verify whether two faces belong to a same person or whether one face belongs to a person.",
-        "operationId": "Face_Verify",
+        "operationId": "Face_VerifyFaceToFace",
         "parameters": [
           {
             "name": "body",
@@ -1006,7 +1006,7 @@
     "/detect": {
       "post": {
         "description": "Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.",
-        "operationId": "Face_Detect",
+        "operationId": "Face_DetectWithUrl",
         "parameters": [
           {
             "name": "returnFaceId",
@@ -1106,7 +1106,7 @@
     "/verify?overload=persongroup": {
       "post": {
         "description": "Verify whether two faces belong to a same person. Compares a face Id with a Person Id",
-        "operationId": "Face_VerifyWithPersonGroup",
+        "operationId": "Face_VerifyFaceToPerson",
         "parameters": [
           {
             "name": "body",
@@ -1149,7 +1149,7 @@
     "/detect?overload=stream": {
       "post": {
         "description": "Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.",
-        "operationId": "Face_DetectInStream",
+        "operationId": "Face_DetectWithStream",
         "parameters": [
           {
             "name": "returnFaceId",
@@ -1903,7 +1903,8 @@
           "maxItems": 1000,
           "items": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-nullable": false
           }
         }
       }
@@ -1922,7 +1923,8 @@
             "type": "array",
             "items": {
               "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "x-nullable": false
             }
           }
         },
@@ -1931,7 +1933,8 @@
           "description": "Face ids array of faces that cannot find any similar faces from original faces.",
           "items": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-nullable": false
           }
         }
       }
@@ -1952,19 +1955,20 @@
         },
         "faceIds": {
           "type": "array",
-          "description": "Array of candidate faceId created by Face - Detect.",
-          "maxItems": 1000,
+          "description": "Array of query faces faceIds, created by the Face - Detect. Each of the faces are identified independently. The valid number of faceIds is between [1, 10].",
+          "maxItems": 10,
           "items": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-nullable": false
           }
         },
         "maxNumOfCandidatesReturned": {
           "type": "integer",
-          "description": "The number of top similar faces returned.",
+          "description": "The range of maxNumOfCandidatesReturned is between 1 and 5 (default is 1).",
           "default": 1,
           "minimum": 1,
-          "maximum": 1000
+          "maximum": 5
         },
         "confidenceThreshold": {
           "description": "Confidence threshold of identification, used to judge whether one face belong to one person. The range of confidenceThreshold is [0, 1] (default specified by algorithm).",
@@ -2162,7 +2166,8 @@
           "description": "persistedFaceIds of registered faces in the person. These persistedFaceIds are returned from Person - Add a Person Face, and will not expire.",
           "items": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-nullable": false
           }
         }
       },
