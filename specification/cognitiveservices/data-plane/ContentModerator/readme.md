@@ -16,7 +16,7 @@ tag: release_1_0
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: 
+input-file:
   - v1.0/ContentModerator.json
 ```
 
@@ -29,8 +29,8 @@ openapi-type: data-plane
 
 ## CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
-``` yaml $(csharp) 
-csharp: 
+``` yaml $(csharp)
+csharp:
   namespace: Microsoft.CognitiveServices.ContentModerator
   output-folder: out/csharp
 ```
@@ -67,4 +67,24 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-contentmoderator
+```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: contentmoderator
+  clear-output-folder: true
+```
+
+### Tag: release_1_0 and go
+
+These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'release_1_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/contentmoderator
 ```
