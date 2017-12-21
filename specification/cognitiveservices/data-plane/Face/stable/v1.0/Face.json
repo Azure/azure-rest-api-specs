@@ -958,7 +958,7 @@
     "/persongroups/{personGroupId}/persons/{personId}/persistedFaces": {
       "post": {
         "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-        "operationId": "Person_AddPersonFace",
+        "operationId": "Person_AddPersonFaceFromUrl",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -998,7 +998,7 @@
         },
         "x-ms-examples": {
           "Add Person face example": {
-            "$ref": "./examples/CreateNewPersonFace.json"
+            "$ref": "./examples/AddPersonFaceFromUrl.json"
           }
         }
       }
@@ -1051,7 +1051,7 @@
         },
         "x-ms-examples": {
           "Detect example": {
-            "$ref": "./examples/Detect.json"
+            "$ref": "./examples/DetectWithUrl.json"
           }
         }
       }
@@ -1059,7 +1059,7 @@
     "/facelists/{faceListId}/persistedFaces": {
       "post": {
         "description": "Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.",
-        "operationId": "FaceList_AddFace",
+        "operationId": "FaceList_AddFaceFromUrl",
         "parameters": [
           {
             "$ref": "#/parameters/faceListId"
@@ -1096,7 +1096,7 @@
         },
         "x-ms-examples": {
           "Create face list face example": {
-            "$ref": "./examples/CreateNewFaceListFace.json"
+            "$ref": "./examples/AddFaceListFaceFromUrl.json"
           }
         }
       }
@@ -1242,7 +1242,7 @@
         },
         "x-ms-examples": {
           "Add face to person with stream example": {
-            "$ref": "./examples/CreateNewPersonFaceFromStream.json"
+            "$ref": "./examples/AddPersonFaceFromStream.json"
           }
         }
       }
@@ -1287,7 +1287,7 @@
         ],
         "x-ms-examples": {
           "Add face to face list from stream example": {
-            "$ref": "./examples/CreateNewFaceListFaceFromStream.json"
+            "$ref": "./examples/AddFaceListFaceFromStream.json"
           }
         }
       }
@@ -1877,12 +1877,12 @@
         "faceId": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call"
+          "description": "FaceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call"
         },
         "persistedFaceId": {
           "type": "string",
           "format": "uuid",
-          "description": "persistedFaceId of candidate face when find by faceListId. persistedFaceId in face list is persisted and will not expire. As showed in below response"
+          "description": "PersistedFaceId of candidate face when find by faceListId. persistedFaceId in face list is persisted and will not expire. As showed in below response"
         },
         "confidence": {
           "description": "Similarity confidence of the candidate face. The higher confidence, the more similar. Range between [0,1].",
@@ -1948,7 +1948,7 @@
       "description": "Request body for identify face operation.",
       "properties": {
         "personGroupId": {
-          "description": "personGroupId of the target person group, created by PersonGroups.Create",
+          "description": "PersonGroupId of the target person group, created by PersonGroups.Create",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
@@ -1993,7 +1993,7 @@
         "faceId": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId of the query face"
+          "description": "FaceId of the query face"
         },
         "candidates": {
           "type": "array",
@@ -2035,7 +2035,7 @@
         "faceId": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId the face, comes from Face - Detect"
+          "description": "FaceId the face, comes from Face - Detect"
         },
         "personId": {
           "type": "string",
@@ -2061,12 +2061,12 @@
         "faceId1": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId of the first face, comes from Face - Detect"
+          "description": "FaceId of the first face, comes from Face - Detect"
         },
         "faceId2": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId of the second face, comes from Face - Detect"
+          "description": "FaceId of the second face, comes from Face - Detect"
         }
       }
     },
@@ -2097,7 +2097,7 @@
       "properties": {
         "faceListId": {
           "type": "string",
-          "description": "faceListId of the target face list.",
+          "description": "FaceListId of the target face list.",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
         },
@@ -2130,7 +2130,7 @@
       "description": "Person group object.",
       "properties": {
         "personGroupId": {
-          "description": "personGroupId of the existing person groups.",
+          "description": "PersonGroupId of the existing person groups.",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
@@ -2159,11 +2159,11 @@
         "personId": {
           "type": "string",
           "format": "uuid",
-          "description": "personId of the target face list."
+          "description": "PersonId of the target face list."
         },
         "persistedFaceIds": {
           "type": "array",
-          "description": "persistedFaceIds of registered faces in the person. These persistedFaceIds are returned from Person - Add a Person Face, and will not expire.",
+          "description": "PersistedFaceIds of registered faces in the person. These persistedFaceIds are returned from Person - Add a Person Face, and will not expire.",
           "items": {
             "type": "string",
             "format": "uuid",
@@ -2217,14 +2217,14 @@
     "TrainingStatus": {
       "type": "object",
       "required": [
-        "status"
+        "status",
+        "createdDateTime"
       ],
       "description": "Training status object.",
       "properties": {
         "status": {
           "type": "string",
           "description": "Training status: notstarted, running, succeeded, failed. If the training process is waiting to perform, the status is notstarted. If the training is ongoing, the status is running. Status succeed means this person group is ready for Face - Identify. Status failed is often caused by no person or no persisted face exist in the person group",
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "TrainingStatusType",
             "modelAsString": false
@@ -2268,16 +2268,16 @@
     },
     "NameAndUserDataContract": {
       "type": "object",
-      "description": "A combination of name and user defined data for the face collection (person, personGroup, faceList)",
+      "description": "A combination of user defined name and user specified data for the person, personGroup, and faceList",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the face collection, maximum length is 128.",
+          "description": "User defined name, maximum length is 128.",
           "maxLength": 128
         },
         "userData": {
           "type": "string",
-          "description": "Optional user defined data for the face collection. Length should not exceed 16KB.",
+          "description": "User specified data. Length should not exceed 16KB.",
           "maxLength": 16384
         }
       }
