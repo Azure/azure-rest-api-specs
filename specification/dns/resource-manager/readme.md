@@ -115,6 +115,15 @@ go:
   clear-output-folder: true
 ```
 
+### Tag: package-2017-09 and go
+
+These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-09' && $(go)
+output-folder: $(go-sdk-folder)/services/dns/mgmt/2017-09-01/dns
+```
+
 ### Tag: package-2016-04 and go
 
 These settings apply only when `--tag=package-2016-04 --go` is specified on the command line.
