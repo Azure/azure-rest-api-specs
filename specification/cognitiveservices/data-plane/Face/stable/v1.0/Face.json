@@ -197,7 +197,7 @@
         },
         "x-ms-examples": {
           "Verify faces example": {
-            "$ref": "./examples/VerifyFaces.json"
+            "$ref": "./examples/VerifyFaceToFace.json"
           }
         }
       }
@@ -1050,7 +1050,7 @@
           }
         },
         "x-ms-examples": {
-          "Detect example": {
+          "Detect with url example": {
             "$ref": "./examples/DetectWithUrl.json"
           }
         }
@@ -1140,8 +1140,8 @@
           }
         },
         "x-ms-examples": {
-          "Verify with person group example": {
-            "$ref": "./examples/VerifyPersonGroup.json"
+          "Verify face to person example": {
+            "$ref": "./examples/VerifyFaceToPerson.json"
           }
         }
       }
@@ -2037,16 +2037,16 @@
           "format": "uuid",
           "description": "FaceId the face, comes from Face - Detect"
         },
-        "personId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "Specify a certain person in a person group. personId is created in Persons.Create."
-        },
         "personGroupId": {
           "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in Person Groups.Create.",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "personId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Specify a certain person in a person group. personId is created in Persons.Create."
         }
       }
     },
