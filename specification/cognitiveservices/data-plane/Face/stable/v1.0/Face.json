@@ -1667,7 +1667,22 @@
       "properties": {
         "color": {
           "type": "string",
-          "description": "Name of the color."
+          "description": "Name of the hair color.",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "HairColorType",
+            "modelAsString": false
+          },
+          "enum": [
+            "unknown",
+            "white",
+            "gray",
+            "blond",
+            "brown",
+            "red",
+            "black",
+            "other"
+          ]
         },
         "confidence": {
           "x-nullable": false,
@@ -1726,8 +1741,17 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Description of an accessory",
-          "x-nullable": false
+          "description": "Type of an accessory",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "AccessoryType",
+            "modelAsString": false
+          },
+          "enum": [
+            "headWear",
+            "glasses",
+            "mask"
+          ]
         },
         "confidence": {
           "x-nullable": false,
