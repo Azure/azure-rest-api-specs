@@ -38,11 +38,11 @@ These settings apply only when `--tag=package-2016-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-12'
 input-file:
-- Microsoft.RecoveryServices/2016-12-01/backup.json
-- Microsoft.RecoveryServices/2016-06-01/registeredidentities.json
-- Microsoft.RecoveryServices/2016-06-01/replicationusages.json
-- Microsoft.RecoveryServices/2016-06-01/vaults.json
-- Microsoft.RecoveryServices/2016-06-01/vaultusages.json
+- Microsoft.RecoveryServices/stable/2016-12-01/backup.json
+- Microsoft.RecoveryServices/stable/2016-06-01/registeredidentities.json
+- Microsoft.RecoveryServices/stable/2016-06-01/replicationusages.json
+- Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
+- Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
 ```
  
 ### Tag: package-2016-06
@@ -51,10 +51,10 @@ These settings apply only when `--tag=package-2016-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-06'
 input-file:
-- Microsoft.RecoveryServices/2016-06-01/registeredidentities.json
-- Microsoft.RecoveryServices/2016-06-01/replicationusages.json
-- Microsoft.RecoveryServices/2016-06-01/vaults.json
-- Microsoft.RecoveryServices/2016-06-01/vaultusages.json
+- Microsoft.RecoveryServices/stable/2016-06-01/registeredidentities.json
+- Microsoft.RecoveryServices/stable/2016-06-01/replicationusages.json
+- Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
+- Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
 ```
 
 
@@ -74,3 +74,29 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.recoveryservices
+  package-name: azure-mgmt-recoveryservices
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservices/azure/mgmt/recoveryservices
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservices
+```

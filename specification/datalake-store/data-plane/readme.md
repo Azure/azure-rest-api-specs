@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-11'
 input-file:
-- Microsoft.DataLakeStore/2016-11-01/filesystem.json
+- Microsoft.DataLakeStore/stable/2016-11-01/filesystem.json
 ```
  
 ### Tag: package-2015-10-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2015-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-10-preview'
 input-file:
-- Microsoft.DataLakeStore/2015-10-01-preview/filesystem.json
+- Microsoft.DataLakeStore/preview/2015-10-01-preview/filesystem.json
 ```
 
 ---
@@ -63,4 +63,34 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataLake.Store
   output-folder: $(csharp-sdks-folder)/DataLake.Store/Management.DataLake.Store/Generated
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: filesystem
+  clear-output-folder: true
+```
+
+### Tag: package-2016-11 and go
+
+These settings apply only when `--tag=package-2016-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-11' && $(go)
+output-folder: $(go-sdk-folder)/services/datalake/store/2016-11-01/filesystem
+```
+
+### Tag: package-2015-10-preview and go
+
+These settings apply only when `--tag=package-2015-10-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-10-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/datalake/store/2015-10-01-preview/filesystem
 ```
