@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.Advisor/2017-04-19/advisor.json
+- Microsoft.Advisor/stable/2017-04-19/advisor.json
 ```
  
 ### Tag: package-2017-03
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
-- Microsoft.Advisor/2017-03-31/advisor.json
+- Microsoft.Advisor/stable/2017-03-31/advisor.json
 ```
  
 ### Tag: package-2016-07-preview
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2016-07-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2016-07-preview'
 input-file:
-- Microsoft.Advisor/2016-07-12-preview/advisor.json
+- Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
 ```
 
 

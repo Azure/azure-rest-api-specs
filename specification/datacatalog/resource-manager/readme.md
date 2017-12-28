@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-03-30` is specified on the co
 
 ``` yaml $(tag) == 'package-2016-03-30'
 input-file:
-- Microsoft.DataCatalog/2016-03-30/datacatalog.json
+- Microsoft.DataCatalog/stable/2016-03-30/datacatalog.json
 ```
 
 ---

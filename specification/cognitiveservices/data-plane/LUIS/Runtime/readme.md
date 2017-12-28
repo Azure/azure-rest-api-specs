@@ -18,7 +18,7 @@ The current release for the Runtime Endpoint is `runtime_2_0`.
 These settings apply only when `--tag=runtime_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'runtime_2_0'
-input-file: v2.0/LUIS-Runtime.json
+input-file: stable/v2.0/LUIS-Runtime.json
 
 # remove Resolve2 from code-generation (since the POST and GET operations are functionally identical)
 directive:

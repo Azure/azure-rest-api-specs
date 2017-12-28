@@ -34,8 +34,8 @@ These settings apply only when `--tag=package-2017-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-09-preview'
 input-file:
-- Microsoft.Network/2017-05-01/trafficmanager.json
-- Microsoft.Network/2017-09-01-preview/trafficmanageranalytics.json
+- Microsoft.Network/stable/2017-05-01/trafficmanager.json
+- Microsoft.Network/preview/2017-09-01-preview/trafficmanageranalytics.json
 
 # Needed when there is more than one input file
 override-info:
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2017-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-05'
 input-file:
-- Microsoft.Network/2017-05-01/trafficmanager.json
+- Microsoft.Network/stable/2017-05-01/trafficmanager.json
 ```
 
 
@@ -59,7 +59,7 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
-- Microsoft.Network/2017-03-01/trafficmanager.json
+- Microsoft.Network/stable/2017-03-01/trafficmanager.json
 ```
  
 ### Tag: package-2015-11
@@ -68,7 +68,7 @@ These settings apply only when `--tag=package-2015-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-11'
 input-file:
-- Microsoft.Network/2015-11-01/trafficmanager.json
+- Microsoft.Network/stable/2015-11-01/trafficmanager.json
 ```
 
 

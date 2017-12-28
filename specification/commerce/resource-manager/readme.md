@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2015-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-06-preview'
 input-file:
-- Microsoft.Commerce/2015-06-01-preview/commerce.json
+- Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
 ```
 
 ---

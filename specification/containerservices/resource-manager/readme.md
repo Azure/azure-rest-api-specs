@@ -43,9 +43,9 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- Microsoft.ContainerService/2017-07-01/containerService.json
-- Microsoft.ContainerService/2017-08-31/managedClusters.json
-- Microsoft.ContainerService/2017-09-30/location.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2017-08-31/managedClusters.json
+- Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2017-08
@@ -54,8 +54,8 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-- Microsoft.ContainerService/2017-07-01/containerService.json
-- Microsoft.ContainerService/2017-08-31/managedClusters.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2017-08-31/managedClusters.json
 ```
 
 ### Tag: package-2017-07
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.ContainerService/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
 ```
 
 ---

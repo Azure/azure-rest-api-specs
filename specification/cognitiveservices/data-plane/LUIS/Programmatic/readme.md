@@ -18,7 +18,7 @@ The current release for the Programmatic Endpoint is `programmatic_2_0`.
 These settings apply only when `--tag=programmatic_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'programmatic_2_0'
-input-file: v2.0/LUIS-Programmatic.json
+input-file: stable/v2.0/LUIS-Programmatic.json
 ```
 
 Deprecated Pattern's Operations
