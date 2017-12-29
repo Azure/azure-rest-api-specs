@@ -34,21 +34,9 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2017-12
+tag: package-2017-03
 ```
 
-### Tag: package-2017-12
-
-These settings apply only when `--tag=package-2017-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-12'
-input-file:
-- Microsoft.Compute/2017-12-01/compute.json
-- Microsoft.Compute/2017-09-01/skus.json
-- Microsoft.Compute/2017-03-30/disk.json
-- Microsoft.Compute/2017-03-30/runCommands.json
-- Microsoft.ContainerService/2017-01-31/containerService.json
-```
 
 ### Tag: package-2017-03
 
