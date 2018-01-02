@@ -45,7 +45,6 @@ input-file:
 - Microsoft.ApiManagement/preview/2017-03-01/apimgroups.json
 - Microsoft.ApiManagement/preview/2017-03-01/apimidentityprovider.json
 - Microsoft.ApiManagement/preview/2017-03-01/apimloggers.json
-- Microsoft.ApiManagement/preview/2017-03-01/apimnetworkstatus.json
 - Microsoft.ApiManagement/preview/2017-03-01/apimopenidconnectproviders.json
 - Microsoft.ApiManagement/preview/2017-03-01/apimportalsettings.json
 - Microsoft.ApiManagement/preview/2017-03-01/apimproducts.json
