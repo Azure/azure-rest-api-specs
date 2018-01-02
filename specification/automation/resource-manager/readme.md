@@ -65,31 +65,6 @@ These settings apply only when `--tag=package-2017-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-05-preview'
 input-file:
-<<<<<<< HEAD
-- Microsoft.Automation/2015-10-31/account.json
-- Microsoft.Automation/2015-10-31/certificate.json
-- Microsoft.Automation/2015-10-31/connection.json
-- Microsoft.Automation/2015-10-31/connectionType.json
-- Microsoft.Automation/2015-10-31/credential.json
-- Microsoft.Automation/2015-10-31/definitions.json
-- Microsoft.Automation/2015-10-31/dscCompilationJob.json
-- Microsoft.Automation/2015-10-31/dscConfiguration.json
-- Microsoft.Automation/2015-10-31/dscNode.json
-- Microsoft.Automation/2015-10-31/dscNodeConfiguration.json
-- Microsoft.Automation/2015-10-31/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/2015-10-31/job.json
-- Microsoft.Automation/2015-10-31/jobSchedule.json
-- Microsoft.Automation/2015-10-31/module.json
-- Microsoft.Automation/2015-10-31/runbook.json
-- Microsoft.Automation/2015-10-31/schedule.json
-- Microsoft.Automation/2015-10-31/variable.json
-- Microsoft.Automation/2015-10-31/webhook.json
-- Microsoft.Automation/2017-05-15-preview/softwareUpdateConfiguration.json
-- Microsoft.Automation/2017-05-15-preview/softwareUpdateConfigurationRun.json
-- Microsoft.Automation/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
-- Microsoft.Automation/2017-05-15-preview/sourceControl.json
-- Microsoft.Automation/2017-05-15-preview/sourceControlSyncJob.json
-=======
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
 - Microsoft.Automation/stable/2015-10-31/connection.json
@@ -108,12 +83,11 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
-- Microsoft.Automation/stable/2017-05-15-preview/softwareUpdateConfiguration.json
+- Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
->>>>>>> 195f74cfe30f5752631784cf128aac9fa8c28d04
 ```
 
 ---
