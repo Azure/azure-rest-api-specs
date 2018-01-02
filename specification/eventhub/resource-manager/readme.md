@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.EventHub/2017-04-01/EventHub.json
+- Microsoft.EventHub/stable/2017-04-01/EventHub.json
 ```
 
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2015-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-08'
 input-file:
-- Microsoft.EventHub/2015-08-01/EventHub.json
+- Microsoft.EventHub/stable/2015-08-01/EventHub.json
 ```
 
 

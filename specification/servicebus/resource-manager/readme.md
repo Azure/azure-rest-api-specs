@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.ServiceBus/2017-04-01/servicebus.json
+- Microsoft.ServiceBus/stable/2017-04-01/servicebus.json
 ```
 
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2015-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-08'
 input-file:
-- Microsoft.ServiceBus/2015-08-01/servicebus.json
+- Microsoft.ServiceBus/stable/2015-08-01/servicebus.json
 ```
 
 

@@ -37,17 +37,17 @@ These settings apply only when `--tag=package-2017-11-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-11-15-preview'
 input-file:
-- Microsoft.DataMigration/2017-11-15-preview/datamigration.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/Common.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/ConnectToSourceSqlServerTask.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/ConnectToTargetSqlDbTask.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/GetUserTablesSqlTask.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/MigrateSqlServerSqlDbTask.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/Projects.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/Services.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/Tasks.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/TasksCommon.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/datamigration.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Common.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Tasks.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/TasksCommon.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrationValidation.json
 ```
 ---
 

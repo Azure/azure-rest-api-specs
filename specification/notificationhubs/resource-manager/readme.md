@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.NotificationHubs/2017-04-01/notificationhubs.json
+- Microsoft.NotificationHubs/stable/2017-04-01/notificationhubs.json
 ```
  
 ### Tag: package-2016-03
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2016-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-03'
 input-file:
-- Microsoft.NotificationHubs/2016-03-01/notificationhubs.json
+- Microsoft.NotificationHubs/stable/2016-03-01/notificationhubs.json
 ```
  
 ### Tag: package-2014-09
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2014-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2014-09'
 input-file:
-- Microsoft.NotificationHubs/2014-09-01/notificationhubs.json
+- Microsoft.NotificationHubs/stable/2014-09-01/notificationhubs.json
 ```
 
 

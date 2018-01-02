@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
-- Microsoft.ServiceFabric/2016-09-01/servicefabric.json
+- Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
 ```
 
 ### Tag: package-2017-07
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.ServiceFabric/2017-07-01-preview/servicefabric.json
+- Microsoft.ServiceFabric/preview/2017-07-01-preview/servicefabric.json
 ```
 
 

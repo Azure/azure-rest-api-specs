@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
-- Microsoft.Consumption/2017-11-30/consumption.json
+- Microsoft.Consumption/stable/2017-11-30/consumption.json
 ```
 
 ### Tag: package-2017-04-preview
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2017-04-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-04-preview'
 input-file:
-- Microsoft.Consumption/2017-04-24-preview/consumption.json
+- Microsoft.Consumption/preview/2017-04-24-preview/consumption.json
 ```
 
 ### Tag: package-2017-12-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2017-12-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-12-preview'
 input-file:
-- Microsoft.Consumption/2017-12-30-preview/consumption.json
+- Microsoft.Consumption/preview/2017-12-30-preview/consumption.json
 ```
 
 ---

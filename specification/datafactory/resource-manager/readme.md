@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-09-preview'
 input-file:
-- Microsoft.DataFactory/2017-09-01-preview/datafactory.json
+- Microsoft.DataFactory/preview/2017-09-01-preview/datafactory.json
 ```
 
 ---
