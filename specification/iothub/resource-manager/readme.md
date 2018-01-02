@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.Devices/2017-07-01/iothub.json
+- Microsoft.Devices/stable/2017-07-01/iothub.json
 ```
 
 ### Tag: package-2017-01
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.Devices/2017-01-19/iothub.json
+- Microsoft.Devices/stable/2017-01-19/iothub.json
 ```
  
 ### Tag: package-2016-02
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2016-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-02'
 input-file:
-- Microsoft.Devices/2016-02-03/iothub.json
+- Microsoft.Devices/stable/2016-02-03/iothub.json
 ```
 
 ---

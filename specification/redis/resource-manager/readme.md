@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.Cache/2017-10-01/redis.json
+- Microsoft.Cache/stable/2017-10-01/redis.json
 ```
 
 
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2017-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-02'
 input-file:
-- Microsoft.Cache/2017-02-01/redis.json
+- Microsoft.Cache/stable/2017-02-01/redis.json
 ```
 
 
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2016-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-04'
 input-file:
-- Microsoft.Cache/2016-04-01/redis.json
+- Microsoft.Cache/stable/2016-04-01/redis.json
 ```
  
 ### Tag: package-2015-08
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2015-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-08'
 input-file:
-- Microsoft.Cache/2015-08-01/redis.json
+- Microsoft.Cache/stable/2015-08-01/redis.json
 ```
 
 

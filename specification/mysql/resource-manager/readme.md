@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-04-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-04-preview'
 input-file:
-- Microsoft.DBforMySQL/2017-04-30-preview/mysql.json
+- Microsoft.DBforMySQL/preview/2017-04-30-preview/mysql.json
 ```
 
 

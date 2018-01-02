@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- Microsoft.Batch/2017-09-01/BatchManagement.json
+- Microsoft.Batch/stable/2017-09-01/BatchManagement.json
 ```
 
 ## Suppression
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2017-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-05'
 input-file:
-- Microsoft.Batch/2017-05-01/BatchManagement.json
+- Microsoft.Batch/stable/2017-05-01/BatchManagement.json
 ```
 
 
@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.Batch/2017-01-01/BatchManagement.json
+- Microsoft.Batch/stable/2017-01-01/BatchManagement.json
 ```
  
 ### Tag: package-2015-12
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-2015-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-12'
 input-file:
-- Microsoft.Batch/2015-12-01/BatchManagement.json
+- Microsoft.Batch/stable/2015-12-01/BatchManagement.json
 ```
 
 

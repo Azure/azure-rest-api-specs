@@ -38,12 +38,12 @@ These settings apply only when `--tag=package-2016-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-03'
 input-file:
-- Microsoft.StreamAnalytics/2016-03-01/streamingjobs.json
-- Microsoft.StreamAnalytics/2016-03-01/inputs.json
-- Microsoft.StreamAnalytics/2016-03-01/outputs.json
-- Microsoft.StreamAnalytics/2016-03-01/transformations.json
-- Microsoft.StreamAnalytics/2016-03-01/functions.json
-- Microsoft.StreamAnalytics/2016-03-01/subscriptions.json
+- Microsoft.StreamAnalytics/stable/2016-03-01/streamingjobs.json
+- Microsoft.StreamAnalytics/stable/2016-03-01/inputs.json
+- Microsoft.StreamAnalytics/stable/2016-03-01/outputs.json
+- Microsoft.StreamAnalytics/stable/2016-03-01/transformations.json
+- Microsoft.StreamAnalytics/stable/2016-03-01/functions.json
+- Microsoft.StreamAnalytics/stable/2016-03-01/subscriptions.json
 ```
 
 

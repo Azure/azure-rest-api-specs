@@ -37,20 +37,22 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- microsoft.insights/2015-04-01/autoscale_API.json
-- microsoft.insights/2015-04-01/operations_API.json
-- microsoft.insights/2016-03-01/alertRulesIncidents_API.json
-- microsoft.insights/2016-03-01/alertRules_API.json
-- microsoft.insights/2016-03-01/logProfiles_API.json
-- microsoft.insights/2017-05-01-preview/diagnosticsSettings_API.json
-- microsoft.insights/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- microsoft.insights/2017-04-01/actionGroups_API.json
-- microsoft.insights/2017-04-01/activityLogAlerts_API.json
-- microsoft.insights/2015-04-01/activityLogs_API.json
-- microsoft.insights/2015-04-01/eventCategories_API.json
-- microsoft.insights/2015-04-01/tenantActivityLogs_API.json
-- microsoft.insights/2017-05-01-preview/metricDefinitions_API.json
-- microsoft.insights/2017-05-01-preview/metrics_API.json
+- microsoft.insights/stable/2015-04-01/autoscale_API.json
+- microsoft.insights/stable/2015-04-01/operations_API.json
+- microsoft.insights/stable/2016-03-01/alertRulesIncidents_API.json
+- microsoft.insights/stable/2016-03-01/alertRules_API.json
+- microsoft.insights/stable/2016-03-01/logProfiles_API.json
+- microsoft.insights/stable/2017-05-01-preview/diagnosticsSettings_API.json
+- microsoft.insights/stable/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- microsoft.insights/stable/2017-04-01/actionGroups_API.json
+- microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
+- microsoft.insights/stable/2015-04-01/activityLogs_API.json
+- microsoft.insights/stable/2015-04-01/eventCategories_API.json
+- microsoft.insights/stable/2015-04-01/tenantActivityLogs_API.json
+- microsoft.insights/preview/2017-05-01-preview/metricDefinitions_API.json
+- microsoft.insights/preview/2017-05-01-preview/metrics_API.json
+- microsoft.insights/preview/2017-11-01-preview/baseline_API.json
+- microsoft.insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-08
@@ -59,15 +61,15 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-- microsoft.insights/2015-04-01/autoscale_API.json
-- microsoft.insights/2015-04-01/operations_API.json
-- microsoft.insights/2016-03-01/alertRulesIncidents_API.json
-- microsoft.insights/2016-03-01/alertRules_API.json
-- microsoft.insights/2016-03-01/logProfiles_API.json
-- microsoft.insights/2017-05-01-preview/diagnosticsSettings_API.json
-- microsoft.insights/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- microsoft.insights/2017-04-01/actionGroups_API.json
-- microsoft.insights/2017-04-01/activityLogAlerts_API.json
+- microsoft.insights/stable/2015-04-01/autoscale_API.json
+- microsoft.insights/stable/2015-04-01/operations_API.json
+- microsoft.insights/stable/2016-03-01/alertRulesIncidents_API.json
+- microsoft.insights/stable/2016-03-01/alertRules_API.json
+- microsoft.insights/stable/2016-03-01/logProfiles_API.json
+- microsoft.insights/stable/2017-05-01-preview/diagnosticsSettings_API.json
+- microsoft.insights/stable/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- microsoft.insights/stable/2017-04-01/actionGroups_API.json
+- microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
 ```
 
 ---

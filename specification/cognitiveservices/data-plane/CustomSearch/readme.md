@@ -18,15 +18,15 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: v1.0/CustomSearch.json
+input-file: stable/v1.0/CustomSearch.json
 ```
 
 ## CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
-``` yaml $(csharp) 
-csharp: 
+``` yaml $(csharp)
+csharp:
   namespace: Microsoft.Azure.CognitiveServices.Search.CustomSearch
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingCustomSearch/Generated/CustomSearch
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingCustomSearch/BingCustomSearch/Generated/CustomSearch
   sync-methods: none
 ```
 
@@ -57,11 +57,30 @@ python:
   output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-customsearch
 ```
 
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: customsearch
+  clear-output-folder: true
+```
+
+### Tag: release_1_0 and go
+
+These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'release_1_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/customsearch
+```
 
 ## Suppressions
 Suppressing errors due to API design:
 ``` yaml
 directive:
   - suppress: R3016
-    reason: _type is a polymorphic discriminator that can't be changed. 
+    reason: _type is a polymorphic discriminator that can't be changed.
 ```

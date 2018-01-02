@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-10-preview'
 input-file:
-- Microsoft.ContainerInstance/2017-10-01-preview/containerInstance.json
+- Microsoft.ContainerInstance/preview/2017-10-01-preview/containerInstance.json
 ```
 
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2017-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-08-preview'
 input-file:
-- Microsoft.ContainerInstance/2017-08-01-preview/containerInstance.json
+- Microsoft.ContainerInstance/preview/2017-08-01-preview/containerInstance.json
 ```
 
 

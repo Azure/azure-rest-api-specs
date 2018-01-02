@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-05'
 input-file:
-- Microsoft.DevTestLab/2016-05-15/DTL.json
+- Microsoft.DevTestLab/stable/2016-05-15/DTL.json
 ```
  
 ### Tag: package-2015-05-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.DevTestLab/2015-05-21-preview/DTL.json
+- Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
 ```
 
 
