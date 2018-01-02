@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, log files and configurations.",
-    "version": "2017-04-30-preview"
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.",
+    "version": "2017-12-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1153,12 +1153,6 @@
           "type": "string",
           "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation)."
         },
-        "storageMB": {
-          "type": "integer",
-          "format": "int64",
-          "minimum": 1024,
-          "description": "The maximum storage allowed for a server."
-        },
         "version": {
           "$ref": "#/definitions/ServerVersion",
           "description": "Server version."
@@ -1183,20 +1177,49 @@
         "fullyQualifiedDomainName": {
           "type": "string",
           "description": "The fully qualified domain name of a server."
+        },
+        "EarliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Earliest restore point creation time (ISO8601 format)"
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile of a server."
         }
       },
       "description": "The properties of a server."
     },
+    "StorageProfile": {
+      "properties": {
+        "backupRetentionDays": {
+          "type": "integer",
+          "description": "Backup retention days for the server."
+        },
+        "geoRedundantBackup": {
+          "type": "string",
+          "description": "The tier of the particular SKU, e.g. Basic.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "GeoRedundantBackup",
+            "modelAsString": true
+          }
+        },
+        "storageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        }
+    },
+    "description": "Storage Profile properties of a server"
+  },
     "ServerPropertiesForCreate": {
       "discriminator": "createMode",
       "required": [ "createMode" ],
-      "properties": {
-        "storageMB": {
-          "type": "integer",
-          "format": "int64",
-          "minimum": 1024,
-          "description": "The maximum storage allowed for a server."
-        },
+      "properties": {       
         "version": {
           "$ref": "#/definitions/ServerVersion",
           "description": "Server version."
@@ -1204,6 +1227,21 @@
         "sslEnforcement": {
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile of a server."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
         },
         "createMode": {
           "type": "string",
@@ -1359,11 +1397,9 @@
         },
         "properties": {
           "properties": {
-            "storageMB": {
-              "type": "integer",
-              "format": "int64",
-              "minimum": 1024,
-              "description": "The max storage allowed for a server."
+            "storageProfile": {
+              "$ref": "#/definitions/StorageProfile",
+              "description": "Storage profile of a server."
             },
             "administratorLoginPassword": {
               "type": "string",

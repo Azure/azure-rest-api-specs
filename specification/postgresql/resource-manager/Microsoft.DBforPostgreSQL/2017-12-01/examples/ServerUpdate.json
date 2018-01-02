@@ -2,7 +2,7 @@
   "parameters": {
     "serverName": "testserver",
     "resourceGroupName": "TestGroup",
-    "api-version": "2017-04-30-preview",
+    "api-version": "2017-12-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "properties":{
@@ -28,7 +28,11 @@
         },
         "properties": {
           "administratorLogin": "cloudsa",
-          "storageMB": 1024,
+          "storageProfile": {
+            "StorageMB": 128000,
+            "BackupRetentionDays": 7,
+            "GeoRedundantBackup": "Enabled"
+          },
           "sslEnforcement": "Disabled",
           "userVisibleState": "Ready",
           "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com"
