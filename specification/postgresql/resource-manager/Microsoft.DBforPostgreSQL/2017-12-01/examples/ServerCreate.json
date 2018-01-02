@@ -2,26 +2,21 @@
   "parameters": {
     "serverName": "testserver",
     "resourceGroupName": "TestGroup",
-    "api-version": "2017-12-01",
+    "api-version": "2017-04-30-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "location": "OneBox",
       "properties": {
         "administratorLogin": "cloudsa",
         "administratorLoginPassword": "password",
+        "storageMB": 1024,
         "sslEnforcement": "Enabled",
-        "storageProfile": {
-          "StorageMB": 128000,
-          "BackupRetentionDays": 7,
-          "GeoRedundantBackup": "Enabled"
-        },
         "createMode": "Default"
       },
       "sku": {
         "name": "SkuName",
         "tier": "Basic",
-        "capacity": 2,
-        "Family": "Gen4"
+        "capacity": 100
       },
       "tags": {
         "ElasticServer": "1"
@@ -35,26 +30,21 @@
         "name": "testserver",
         "type": "Microsoft.DBforPostgreSQL/servers",
         "location": "onebox",
-        "storageProfile": {
-          "StorageMB": 128000,
-          "BackupRetentionDays": 7,
-          "GeoRedundantBackup": "Enabled"
-        },
         "sku": {
-          "Capacity": 2,
-          "Family": "Gen4",
-          "Name": "PGSQL_B_Gen4_2",
-          "Size": null,
-          "Tier": "Basic"
+          "name": "PGSQLB100",
+          "tier": "Basic",
+          "capacity": 100
         },
         "tags": {
           "elasticServer": "1"
         },
-        "administratorLogin": "cloudsa",
-        "sslEnforcement":"Enabled",
-        "userVisibleState": "Ready",
-        "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-        "EarliestRestoreDate": "null"        
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageMB": 1024,
+          "sslEnforcement":"Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com"
+        }
       }
     },
     "200": {
@@ -63,28 +53,23 @@
         "name": "testserver",
         "type": "Microsoft.DBforPostgreSQL/servers",
         "location": "onebox",
-        "storageProfile": {
-          "StorageMB": 128000,
-          "BackupRetentionDays": 7,
-          "GeoRedundantBackup": "Enabled"
-        },
         "sku": {
-          "Capacity": 2,
-          "Family": "Gen4",
-          "Name": "PGSQL_B_Gen4_2",
-          "Size": null,
-          "Tier": "Basic"
+          "name": "PGSQLB100",
+          "tier": "Basic",
+          "capacity": 100
         },
         "tags": {
           "elasticServer": "1"
         },
-        "administratorLogin": "cloudsa",
-        "sslEnforcement":"Enabled",
-        "userVisibleState": "Ready",
-        "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-        "EarliestRestoreDate": "null"        
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageMB": 1024,
+          "sslEnforcement":"Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com"
         }
       } 
     },
     "202": {}
   }
+}
