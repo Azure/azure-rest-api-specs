@@ -86,6 +86,8 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
 ```
 
 ---
