@@ -26,9 +26,17 @@ These are the global settings for the NotificationHubs API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2017-11
 ```
 
+### Tag: package-2017-11
+
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- Microsoft.NotificationHubs/stable/2017-11-01/notificationhubs.json
+```
 
 ### Tag: package-2017-04
 
