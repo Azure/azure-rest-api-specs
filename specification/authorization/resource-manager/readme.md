@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2017-10-01-preview
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
+    #where:
+    #  -   $.paths["/providers/Microsoft.Authorization/operations"]  
+
+```
 
 ### Tag: package-2015-07
 
@@ -36,7 +45,7 @@ These settings apply only when `--tag=package-2015-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-07'
 input-file:
-- Microsoft.Authorization/2015-07-01/authorization.json
+- Microsoft.Authorization/stable/2015-07-01/authorization.json
 ```
 
 ### Tag: package-2017-10-01-preview
@@ -45,8 +54,8 @@ These settings apply only when `--tag=package-2017-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
-- Microsoft.Authorization/2017-10-01-preview/authorization.json
-- Microsoft.Authorization/2017-10-01-preview/authorization-RACalls.json
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization.json
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
 ```
 
 
@@ -68,6 +77,32 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.authorization
+  package-name: azure-mgmt-authorization
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-authorization/azure/mgmt/authorization
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-authorization
+```
 
 ## Go
 

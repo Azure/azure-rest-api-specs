@@ -6,6 +6,20 @@
 
 This repository is the canonical source for REST API specifications for Microsoft Azure.
 
+## News
+
+While you're away for the holiday season, we're going to be making a few improvements to the Azure REST API Specs repository:
+
+  - We will stop merging PRs until the new year starting on **6:00 p.m. December 20th, 2017**.
+  - Starting on **December 21st, 2017**, we will be restoring `master` as the default branch for this repository.
+    - All open PRs will automatically be updated to target `master` instead of `current`.
+    - We will stop accepting contributions to the `current` branch.
+  - On **December 21st, 2017**, we will merge a refactoring of this repository where we introduce `preview` and `stable` directories to differentiate Swaggers and services that are ready for General Availability and those that are not yet.
+  - Beginning **December 21st, 2017**, the `master` branch in the private repository will become a read-only copy of the `master` branch in the public repository.
+
+For more information about this project, please see our wiki:
+[December 2017 Refactoring](https://github.com/Azure/azure-rest-api-specs/wiki/December-2017-Refactoring)
+
 ## Basics
 If you're a spec author looking for information about all of of the repositories and steps in the pipeline, go to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
 

@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-11-preview'
 input-file:
-- Microsoft.OperationalInsights/2015-11-01-preview/arm-service-map.json
+- Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json
 ```
 
 

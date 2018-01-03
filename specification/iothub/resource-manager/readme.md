@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.Devices/2017-07-01/iothub.json
+- Microsoft.Devices/stable/2017-07-01/iothub.json
 ```
 
 ### Tag: package-2017-01
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.Devices/2017-01-19/iothub.json
+- Microsoft.Devices/stable/2017-01-19/iothub.json
 ```
  
 ### Tag: package-2016-02
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2016-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-02'
 input-file:
-- Microsoft.Devices/2016-02-03/iothub.json
+- Microsoft.Devices/stable/2016-02-03/iothub.json
 ```
 
 ---
@@ -72,6 +72,33 @@ csharp:
   namespace: Microsoft.Azure.Management.IotHub
   output-folder: $(csharp-sdks-folder)/IotHub/Management.IotHub/Generated
   clear-output-folder: true
+```
+
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.iothub
+  package-name: azure-mgmt-iothub
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-iothub/azure/mgmt/iothub
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-iothub
 ```
 
 
