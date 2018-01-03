@@ -616,11 +616,11 @@
           "204": {
             "description": "Domain does not exist."
           },
-          "400": {
-            "description": "Malformed domain renewal request."
-          },
-          "500": {
-            "description": "Domain renewal request failed."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1339,6 +1339,19 @@
           "type": "string"
         }
       }
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
     }
   },
   "parameters": {
