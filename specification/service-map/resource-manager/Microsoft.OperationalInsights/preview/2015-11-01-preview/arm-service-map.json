@@ -899,7 +899,7 @@
           "MachineGroups"
         ],
         "operationId": "Machines_ListMachineGroupMembership",
-        "description": "Returns a collection of machine groups this machine belongs to.",
+        "description": "Returns a collection of machine groups this machine belongs to during the specified time interval.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -915,6 +915,22 @@
           },
           {
             "$ref": "#/parameters/MachineNameParameter"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
           }
         ],
         "responses": {
@@ -1222,7 +1238,7 @@
           "MachineGroups"
         ],
         "operationId": "MachineGroups_ListByWorkspace",
-        "description": "Returns all machine groups.",
+        "description": "Returns all machine groups during the specified time interval.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1235,6 +1251,22 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
           }
         ],
         "responses": {
@@ -1306,7 +1338,7 @@
           "MachineGroups"
         ],
         "operationId": "MachineGroups_Get",
-        "description": "Returns the specified machine group.",
+        "description": "Returns the specified machine group as it existed during the specified time interval.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1322,6 +1354,22 @@
           },
           {
             "$ref": "#/parameters/MachineGroupNameParameter"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
           }
         ],
         "responses": {
@@ -1673,6 +1721,10 @@
             "hypervisor": {
               "$ref": "#/definitions/HypervisorConfiguration",
               "description": "Hypervisor-related configuration. Present only when 'virtualizationState' is `hypervisor`."
+            },
+            "hosting": {
+              "$ref": "#/definitions/HostingConfiguration",
+              "description": "Hosting-related configuration. Present if hosting information is discovered for the VM."
             }
           }
         }
@@ -1711,6 +1763,7 @@
             },
             "displayName": {
               "type": "string",
+              "readonly": true,
               "description": "Name to use for display purposes"
             },
             "startTime": {
@@ -1720,6 +1773,7 @@
             },
             "role": {
               "type": "string",
+              "readonly": true,
               "enum": [
                 "webServer",
                 "appServer",
@@ -1732,6 +1786,11 @@
                 "modelAsString": true
               },
               "description": "The inferred role of this process based on its name, command line, etc."
+            },
+            "group": {
+              "type": "string",
+              "readonly": true,
+              "description": "The name of the product or suite of the process. The group is determined by its executable name, command line, etc."
             },
             "details": {
               "$ref": "#/definitions/ProcessDetails",
@@ -1748,6 +1807,10 @@
             "acceptorOf": {
               "$ref": "#/definitions/ResourceReference",
               "description": "Present only for a discovered process acting as a server. References the port on which the discovered process is accepting."
+            },
+            "hosting": {
+              "$ref": "#/definitions/ProcessHostingConfiguration",
+              "description": "Information about the hosting environment"
             }
           }
         }
@@ -1867,18 +1930,39 @@
           "type": "object",
           "description": "Resource properties.",
           "properties": {
+            "groupType": {
+              "type": "string",
+              "readonly": true,
+              "enum": [
+                "unknown",
+                "azure-cs",
+                "azure-sf",
+                "azure-vmss",
+                "user-static"
+              ],
+              "x-ms-enum": {
+                "name": "MachineGroupType",
+                "modelAsString": true
+              },
+              "description": "Type of the machine group"
+            },
             "displayName": {
               "type": "string",
               "description": "User defined name for the group",
               "minLength": 1,
               "maxLength": 256
             },
+            "count": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Count of machines in this group. The value of count may be bigger than the number of machines in case of the group has been truncated due to exceeding the max number of machines a group can handle."
+            },
             "machines": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/MachineReferenceWithHints"
               },
-              "description": "References of the machines in this group. The hints within each reference do not represent the current value of  the corresponding fields. They are a snapshot created during the last time the machine group was updated."
+              "description": "References of the machines in this group. The hints within each reference do not represent the current value of the corresponding fields. They are a snapshot created during the last time the machine group was updated."
             }
           },
           "required": [
@@ -2519,6 +2603,181 @@
         }
       }
     },
+    "HostingConfiguration": {
+      "description": "Describes the hosting configuration of a machine.",
+      "discriminator": "kind",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The hosting provider of the VM.",
+          "enum": [
+            "azure"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Additional hostring configuration type qualifier.",
+          "enum": [
+            "provider:azure"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AzureHostingConfiguration": {
+      "description": "Provides information about how a machine is hosted in Azure",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HostingConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "provider:azure",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "Virtual Machine ID (unique identifier)."
+        },
+        "location": {
+          "type": "string",
+          "description": "Geographical location of the VM."
+        },
+        "name": {
+          "type": "string",
+          "description": "Machine name according to the hosting provider."
+        },
+        "size": {
+          "type": "string",
+          "description": "Size of the VM."
+        },
+        "updateDomain": {
+          "type": "string",
+          "description": "Update domain of the VM."
+        },
+        "faultDomain": {
+          "type": "string",
+          "description": "Fault domain of the VM."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource group name within the specified subscription."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Unique identifier of the resource."
+        },
+        "image": {
+          "$ref": "#/definitions/ImageConfiguration",
+          "description": "Image of the machine."
+        },
+        "cloudService": {
+          "$ref": "#/definitions/AzureCloudServiceConfiguration",
+          "description": "Contains information about machines hosted as an Azure Cloud Service"
+        },
+        "vmScaleSet": {
+          "$ref": "#/definitions/AzureVmScaleSetConfiguration",
+          "description": "Contains information about machines hosted as an Azure Virtual Machine Scale Set"
+        },
+        "serviceFabricCluster": {
+          "$ref": "#/definitions/AzureServiceFabricClusterConfiguration",
+          "description": "Contains information about machines that belong an Azure Service Fabric Cluster"
+        }
+      }
+    },
+    "AzureCloudServiceConfiguration": {
+      "description": "Describes an Azure Cloud Service",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Cloud Service name"
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "Cloud Service instance identifier"
+        },
+        "deployment": {
+          "type": "string",
+          "description": "Cloud Service deployment identifier"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "Cloud Service role name"
+        },
+        "roleType": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "worker",
+            "web"
+          ],
+          "x-ms-enum": {
+            "name": "AzureCloudServiceRoleType",
+            "modelAsString": false
+          },
+          "description": "Used to specify type of an Azure Cloud Service role"
+        }
+      }
+    },
+    "AzureVmScaleSetConfiguration": {
+      "description": "Describes an Azure Virtual Machine Scale Set",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Virtual Machine Scale Set name"
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "Virtual Machine Scale Set instance identifier"
+        },
+        "deployment": {
+          "type": "string",
+          "description": "Virtual Machine Scale Set deployment identifier"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Unique identifier of the resource."
+        }
+      }
+    },
+    "AzureServiceFabricClusterConfiguration": {
+      "description": "Describes an Azure Service Fabric Cluster",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Service Fabric cluster name."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "Service Fabric cluster indentifier."
+        }
+      }
+    },
+    "ImageConfiguration": {
+      "description": "Describes the VM image of a machine.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "Publisher of the VM image."
+        },
+        "offering": {
+          "type": "string",
+          "description": "Offering of the VM image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "SKU of the VM image."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the VM image."
+        }
+      }
+    },
     "ProcessUser": {
       "description": "Describes the user under which a process is running.",
       "properties": {
@@ -2542,7 +2801,7 @@
         "poolId": {
           "type": "integer",
           "format": "int32",
-          "description": "Represents the identity of the process pool assigned to the process by Dependency Agent. "
+          "description": "Represents the identity of the process pool assigned to the process by Dependency Agent."
         },
         "firstPid": {
           "type": "integer",
@@ -2584,6 +2843,68 @@
         "workingDirectory": {
           "type": "string",
           "description": "Process workingDirectory."
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessHostedService"
+          },
+          "description": "Collection of services hosted by this Process (Windows only)."
+        },
+        "zoneName": {
+          "type": "string",
+          "description": "Process zone name (Linux only)."
+        }
+      }
+    },
+    "ProcessHostedService": {
+      "description": "A service hosted by a process.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the service."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The service's display name."
+        }
+      }
+    },
+    "ProcessHostingConfiguration": {
+      "description": "Describes the hosting configuration of a process.",
+      "discriminator": "kind",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The hosting provider of the VM.",
+          "enum": [
+            "azure"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Additional hostring configuration type qualifier.",
+          "enum": [
+            "provider:azure"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AzureProcessHostingConfiguration": {
+      "description": "Describes the hosting configuration of a process when hosted on azure",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcessHostingConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "provider:azure",
+      "properties": {
+        "cloudService": {
+          "$ref": "#/definitions/AzureCloudServiceConfiguration",
+          "description": "Contains information about the cloud service the process belongs to"
         }
       }
     },
@@ -2702,7 +3023,8 @@
           "description": "The type of map to create.",
           "enum": [
             "map:single-machine-dependency",
-            "map:machine-group-dependency"
+            "map:machine-group-dependency",
+            "map:machine-list-dependency"
           ]
         }
       },
@@ -2728,11 +3050,46 @@
         "machineId"
       ]
     },
-    "MachineGroupMapRequest": {
-      "description": "Specifies the computation of a machine group dependency map. A machine group dependency map includes all direct dependencies of a group of machines.",
+    "MultipleMachinesMapRequest": {
+      "description": "Provides a base class for describing map requests for a collection of machines",
       "allOf": [
         {
           "$ref": "#/definitions/MapRequest"
+        }
+      ],
+      "properties": {
+        "filterProcesses": {
+          "type": "boolean",
+          "description": "If true, only processes between specified machines will be included. Any connections in or out of those processes will be included."
+        }
+      }
+    },
+    "MachineListMapRequest": {
+      "description": "Specifies the computation of a one hope dependency map for a list of machines. The resulting map includes all direct dependencies for the specified machines.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultipleMachinesMapRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "map:machine-list-dependency",
+      "properties": {
+        "machineIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "a list of URIs of machine resources for which to generate the map."
+        }
+      },
+      "required": [
+        "machineIds"
+      ]
+    },
+    "MachineGroupMapRequest": {
+      "description": "Specifies the computation of a machine group dependency map. A machine group dependency map includes all direct dependencies the machines in the group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultipleMachinesMapRequest"
         }
       ],
       "x-ms-discriminator-value": "map:machine-group-dependency",
@@ -2740,10 +3097,6 @@
         "machineGroupId": {
           "type": "string",
           "description": "URI of machine group resource for which to generate the map."
-        },
-        "filterProcesses": {
-          "type": "boolean",
-          "description": "If true, only processes between grouped machines will be included. Any connections in or out of those processes will be included."
         }
       },
       "required": [
