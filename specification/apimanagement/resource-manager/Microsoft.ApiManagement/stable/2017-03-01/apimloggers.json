@@ -352,7 +352,8 @@
           "type": "string",
           "description": "Logger type.",
           "enum": [
-            "azureEventHub"
+            "azureEventHub",
+            "applicationInsights"
           ],
           "x-ms-enum": {
             "name": "LoggerType",
@@ -361,6 +362,10 @@
               {
                 "value": "azureEventHub",
                 "description": "Azure Event Hub as log destination."
+              },
+              {
+                "value": "applicationInsights",
+                "description": "Azure Application Insights as log destination."
               }
             ]
           }
@@ -375,7 +380,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The name and SendRule connection string of the event hub.",
+          "description": "The name and SendRule connection string of the event hub for azureEventHub logger.\nInstrumentation key for applicationInsights logger.",
           "example": {
             "name": "apim",
             "connectionString": "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=..."
@@ -408,7 +413,8 @@
           "type": "string",
           "description": "Logger type.",
           "enum": [
-            "azureEventHub"
+            "azureEventHub",
+            "applicationInsights"
           ],
           "x-ms-enum": {
             "name": "LoggerType",
@@ -417,6 +423,10 @@
               {
                 "value": "azureEventHub",
                 "description": "Azure Event Hub as log destination."
+              },
+              {
+                "value": "applicationInsights",
+                "description": "Azure Application Insights as log destination."
               }
             ]
           }
