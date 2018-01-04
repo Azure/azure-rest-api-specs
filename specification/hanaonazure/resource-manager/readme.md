@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
-- Microsoft.HanaOnAzure/2017-11-03-preview/hanaonazure.json
+- Microsoft.HanaOnAzure/preview/2017-11-03-preview/hanaonazure.json
 ```
 
 ### Tag: package-2017-06
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
-- Microsoft.HanaOnAzure/2017-06-15-preview/hanaonazure.json
+- Microsoft.HanaOnAzure/preview/2017-06-15-preview/hanaonazure.json
 ```
 
 
