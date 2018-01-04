@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-all-subscription` is specified on 
 
 ``` yaml $(tag) == 'package-all-subscription'
 input-file:
-- Microsoft.Subscription/2017-11-01-preview/subscriptionDefinitions.json
+- Microsoft.Subscription/preview/2017-11-01-preview/subscriptionDefinitions.json
 - ../../resources/resource-manager/Microsoft.Resources/stable/2016-06-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
