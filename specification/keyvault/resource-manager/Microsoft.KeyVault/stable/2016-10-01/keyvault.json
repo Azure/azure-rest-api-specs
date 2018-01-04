@@ -974,16 +974,6 @@
     },
     "VaultAccessPolicyProperties": {
       "properties": {
-          "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource id of access policy."
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type of the access policy."
-        },
         "accessPolicies": {
           "type": "array",
           "items": {
@@ -995,7 +985,7 @@
       "required": [
         "accessPolicies"
       ],
-      "description": "Properties of the vault access policy"
+      "description": "Properties of the vault access policy",
     },
     "DeletedVaultProperties": {
       "properties": {
@@ -1075,7 +1065,27 @@
       "x-ms-azure-resource": true
     },
     "VaultAccessPolicyParameters": {
-      "properties": {
+      "properties": {          
+          "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource id of access policy."
+        },
+          "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name of access policy."
+        },
+          "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name of access policy."
+        },
+          "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the access policy."
+        },
         "properties": {
           "$ref": "#/definitions/VaultAccessPolicyProperties",
           "description": "Properties of the vault"
