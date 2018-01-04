@@ -290,15 +290,15 @@
         ],
         "responses": {
           "201": {
-            "description": "Updated vault",
+            "description": "The updated access policies",
             "schema": {
-              "$ref": "#/definitions/Vault"
+              "$ref": "#/definitions/VaultAccessPolicyParameters"
             }
           },
           "200": {
-            "description": "Updated vault",
+            "description": "The updated access policies",
             "schema": {
-              "$ref": "#/definitions/Vault"
+              "$ref": "#/definitions/VaultAccessPolicyParameters"
             }
           }
         },
@@ -881,7 +881,6 @@
           "items": {
             "$ref": "#/definitions/AccessPolicyEntry"
           },
-          "maxItems": 16,
           "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID."
         },
         "vaultUri": {
@@ -940,7 +939,6 @@
           "items": {
             "$ref": "#/definitions/AccessPolicyEntry"
           },
-          "maxItems": 16,
           "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID."
         },
         "enabledForDeployment": {
@@ -976,12 +974,21 @@
     },
     "VaultAccessPolicyProperties": {
       "properties": {
+          "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource id of access policy."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the access policy."
+        },
         "accessPolicies": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessPolicyEntry"
           },
-          "maxItems": 16,
           "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID."
         }
       },
@@ -1128,11 +1135,11 @@
           "items": {
             "$ref": "#/definitions/Vault"
           },
-          "description": "Gets or sets the list of vaults."
+          "description": "The list of vaults."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of vaults."
+          "description": "The URL to get the next set of vaults."
         }
       },
       "description": "List of vaults"
@@ -1160,11 +1167,11 @@
           "items": {
             "$ref": "#/definitions/Resource"
           },
-          "description": "Gets the list of vault resources."
+          "description": "The list of vault resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets the URL to get the next set of vault resources."
+          "description": "The URL to get the next set of vault resources."
         }
       },
       "description": "List of vault resources."
@@ -1233,12 +1240,12 @@
         "nameAvailable": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
+          "description": "A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
         },
         "reason": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
+          "description": "The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
           "enum": [
             "AccountNameInvalid",
             "AlreadyExists"
@@ -1251,7 +1258,7 @@
         "message": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets an error message explaining the Reason value in more detail."
+          "description": "An error message explaining the Reason value in more detail."
         }
       },
       "description": "The CheckNameAvailability operation response."
@@ -1268,7 +1275,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of operations."
+          "description": "The URL to get the next set of operations."
         }
       }
     },
@@ -1358,7 +1365,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
