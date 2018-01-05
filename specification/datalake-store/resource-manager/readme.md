@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-11'
 input-file:
-- Microsoft.DataLakeStore/2016-11-01/account.json
+- Microsoft.DataLakeStore/stable/2016-11-01/account.json
 ```
  
 ### Tag: package-2015-10-preview
@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-2015-10-preview` is specified on t
 title: DataLakeStoreAccountManagementClient
 description: DataLake Store Client
 input-file:
-- Microsoft.DataLakeStore/2015-10-01-preview/account.json
+- Microsoft.DataLakeStore/preview/2015-10-01-preview/account.json
 ```
 
 ---

@@ -36,7 +36,9 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-10'
 input-file:
-- Microsoft.KeyVault/2016-10-01/keyvault.json
+- Microsoft.KeyVault/stable/2016-10-01/keyvault.json
+- Microsoft.KeyVault/stable/2016-10-01/providers.json
+- Microsoft.KeyVault/stable/2016-10-01/secrets.json
 ```
 
 
@@ -46,7 +48,7 @@ These settings apply only when `--tag=package-2015-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-06'
 input-file:
-- Microsoft.KeyVault/2015-06-01/keyvault.json
+- Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 ```
 
 

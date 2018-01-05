@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-10-01'
 input-file:
-- Microsoft.PowerBIdedicated/2017-10-01/powerbidedicated.json
+- Microsoft.PowerBIdedicated/stable/2017-10-01/powerbidedicated.json
 ```
 
 ---
@@ -56,3 +56,22 @@ csharp:
   clear-output-folder: true
 ```
 
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  clear-output-folder: true
+  namespace: powerbidedicated
+```
+
+### Tag: package-2017-10-01 and go
+
+These settings apply only when `--tag=package-2017-10-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-10-01' && $(go)
+output-folder: $(go-sdk-folder)/services/powerbidedicated/mgmt/2017-10-01/powerbidedicated
+```

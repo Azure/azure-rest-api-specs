@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2015-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-08'
 input-file:
-- Microsoft.Search/2015-08-19/search.json
+- Microsoft.Search/stable/2015-08-19/search.json
 ```
  
 ### Tag: package-2015-02
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2015-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-02'
 input-file:
-- Microsoft.Search/2015-02-28/search.json
+- Microsoft.Search/stable/2015-02-28/search.json
 ```
 
 

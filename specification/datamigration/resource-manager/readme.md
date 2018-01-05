@@ -37,17 +37,17 @@ These settings apply only when `--tag=package-2017-11-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-11-15-preview'
 input-file:
-- Microsoft.DataMigration/2017-11-15-preview/datamigration.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/Common.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/ConnectToSourceSqlServerTask.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/ConnectToTargetSqlDbTask.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/GetUserTablesSqlTask.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/MigrateSqlServerSqlDbTask.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/Projects.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/Services.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/Tasks.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/TasksCommon.json
-- Microsoft.DataMigration/2017-11-15-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/datamigration.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Common.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Tasks.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/TasksCommon.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrationValidation.json
 ```
 ---
 
@@ -78,4 +78,24 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.datamigration
+```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  clear-output-folder: true
+  namespace: datamigration
+```
+
+### Tag: package-2017-11-15-preview and go
+
+These settings apply only when `--tag=package-2017-11-15-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-11-15-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/datamigration/mgmt/2017-11-15-preview/datamigration
 ```

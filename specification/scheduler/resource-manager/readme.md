@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-03'
 input-file:
-- Microsoft.Scheduler/2016-03-01/scheduler.json
+- Microsoft.Scheduler/stable/2016-03-01/scheduler.json
 ```
  
 ### Tag: package-2016-01
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2016-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-01'
 input-file:
-- Microsoft.Scheduler/2016-01-01/scheduler.json
+- Microsoft.Scheduler/stable/2016-01-01/scheduler.json
 ```
  
 ### Tag: package-2014-08-preview
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2014-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2014-08-preview'
 input-file:
-- Microsoft.Scheduler/2014-08-01-preview/scheduler.json
+- Microsoft.Scheduler/preview/2014-08-01-preview/scheduler.json
 ```
 
 

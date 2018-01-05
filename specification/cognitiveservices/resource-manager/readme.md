@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.CognitiveServices/2017-04-18/cognitiveservices.json
+- Microsoft.CognitiveServices/stable/2017-04-18/cognitiveservices.json
 ```
  
 ### Tag: package-2016-02-preview
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2016-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2016-02-preview'
 input-file:
-- Microsoft.CognitiveServices/2016-02-01-preview/cognitiveservices.json
+- Microsoft.CognitiveServices/preview/2016-02-01-preview/cognitiveservices.json
 ```
 
 
