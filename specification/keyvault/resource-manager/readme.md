@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 input-file:
 - Microsoft.KeyVault/stable/2016-10-01/keyvault.json
 - Microsoft.KeyVault/stable/2016-10-01/providers.json
+- Microsoft.KeyVault/stable/2016-10-01/secrets.json
 ```
 
 
