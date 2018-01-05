@@ -57,7 +57,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS.Programmatic
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS-Programmatic/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Programmatic/Generated
   clear-output-folder: true
 ```
 
