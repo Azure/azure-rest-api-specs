@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.CognitiveServices/2017-04-18/cognitiveservices.json
+- Microsoft.CognitiveServices/stable/2017-04-18/cognitiveservices.json
 ```
  
 ### Tag: package-2016-02-preview
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2016-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2016-02-preview'
 input-file:
-- Microsoft.CognitiveServices/2016-02-01-preview/cognitiveservices.json
+- Microsoft.CognitiveServices/preview/2016-02-01-preview/cognitiveservices.json
 ```
 
 
@@ -64,6 +64,36 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.CognitiveServices
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/Management.CognitiveServices/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/management/Management.CognitiveServices/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: cognitiveservices
+  clear-output-folder: true
+```
+
+### Tag: package-2017-04 and go
+
+These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-04' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/mgmt/2017-04-18/cognitiveservices
+```
+
+### Tag: package-2016-02-preview and go
+
+These settings apply only when `--tag=package-2016-02-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-02-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/mgmt/2016-02-01-preview/cognitiveservices
 ```

@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-05'
 input-file:
-- Microsoft.DevTestLab/2016-05-15/DTL.json
+- Microsoft.DevTestLab/stable/2016-05-15/DTL.json
 ```
  
 ### Tag: package-2015-05-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.DevTestLab/2015-05-21-preview/DTL.json
+- Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
 ```
 
 
@@ -65,4 +65,61 @@ csharp:
   namespace: Microsoft.Azure.Management.DevTestLabs
   output-folder: $(csharp-sdks-folder)/DevTestLabs/Management.DevTestLabs/Generated
   clear-output-folder: true
+```
+
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.devtestlabs
+  package-name: azure-mgmt-devtestlabs
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-devtestlabs/azure/mgmt/devtestlabs
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-devtestlabs
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: dtl
+  clear-output-folder: true
+```
+
+### Tag: package-2016-05 and go
+
+These settings apply only when `--tag=package-2016-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-05' && $(go)
+output-folder: $(go-sdk-folder)/services/devtestlabs/mgmt/2016-05-15/dtl
+```
+
+### Tag: package-2015-05-preview and go
+
+These settings apply only when `--tag=package-2015-05-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-05-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/devtestlabs/mgmt/2015-05-21-preview/dtl
 ```

@@ -58,8 +58,13 @@ These settings apply only when `--tag=package-2015-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2015-06-01'
 input-file:
-- Microsoft.MarketplaceOrdering/2015-06-01/Agreements.json
+- Microsoft.MarketplaceOrdering/stable/2015-06-01/Agreements.json
 ```
+
+
+---
+# Code Generation
+
 
 ---
 ## C# 
@@ -74,4 +79,25 @@ csharp:
   namespace: Microsoft.Azure.Management.MarketplaceOrdering
   output-folder: $(csharp-sdks-folder)/Management.MarketplaceOrdering/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: marketplaceordering
+  clear-output-folder: true
+```
+
+### Tag: package-2015-06-01 and go
+
+These settings apply only when `--tag=package-2015-06-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-06-01' && $(go)
+output-folder: $(go-sdk-folder)/services/marketplaceordering/mgmt/2015-06-01/marketplaceordering
 ```

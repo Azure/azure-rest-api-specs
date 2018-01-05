@@ -155,12 +155,12 @@ These settings apply only when `--tag=package-2015-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-05'
 input-file:
-- microsoft.insights/2015-05-01/aiOperations_API.json
-- microsoft.insights/2015-05-01/components_API.json
-- microsoft.insights/2015-05-01/webTests_API.json
-- microsoft.insights/2015-05-01/componentContinuousExport_API.json
-- microsoft.insights/2015-05-01/componentFeaturesAndPricing_API.json
-- microsoft.insights/2015-05-01/componentApiKeys_API.json
+- microsoft.insights/stable/2015-05-01/aiOperations_API.json
+- microsoft.insights/stable/2015-05-01/components_API.json
+- microsoft.insights/stable/2015-05-01/webTests_API.json
+- microsoft.insights/stable/2015-05-01/componentContinuousExport_API.json
+- microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+- microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
 ```
 ---
 # Code Generation
@@ -179,4 +179,23 @@ csharp:
   namespace: Microsoft.Azure.Management.ApplicationInsights.Management
   output-folder: $(csharp-sdks-folder)/ApplicationInsights/Management.ApplicationInsights/Generated
   clear-output-folder: true
+```
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: insights
+  clear-output-folder: true
+```
+
+### Tag: package-2015-05 and go
+
+These settings apply only when `--tag=package-2015-05 --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-05' && $(go)
+output-folder: $(go-sdk-folder)/services/appinsights/mgmt/2015-05-01/insights
 ```

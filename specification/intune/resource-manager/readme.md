@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2015-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-01-preview'
 input-file:
-- Microsoft.Intune/2015-01-14-preview/intune.json
+- Microsoft.Intune/preview/2015-01-14-preview/intune.json
 ```
  
 ### Tag: package-2015-01-privatepreview
@@ -45,11 +45,12 @@ These settings apply only when `--tag=package-2015-01-privatepreview` is specifi
 
 ``` yaml $(tag) == 'package-2015-01-privatepreview'
 input-file:
-- Microsoft.Intune/2015-01-14-privatepreview/intune.json
+- Microsoft.Intune/preview/2015-01-14-privatepreview/intune.json
 ```
 
 ---
 # Code Generation
+
 
 ## C# 
 
@@ -63,4 +64,25 @@ csharp:
   namespace: Microsoft.Azure.Management.Intune
   output-folder: $(csharp-sdks-folder)/Intune/Intune/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: intune
+  clear-output-folder: true
+```
+
+### Tag: package-2015-01-preview and go
+
+These settings apply only when `--tag=package-2015-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-04' && $(go)
+output-folder: $(go-sdk-folder)/services/intune/mgmt/2015-01-14-preview/intune
 ```
