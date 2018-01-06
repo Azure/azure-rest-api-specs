@@ -1,0 +1,815 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataFactoryManagementClient",
+    "version": "2017-09-01-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "IntegrationRuntime": {
+      "description": "Azure Data Factory nested object which serves as a compute resource for activities.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "Type of integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeType"
+        },
+        "description": {
+          "description": "Integration runtime description.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "IntegrationRuntimeType": {
+      "description": "The type of integration runtime.",
+      "type": "string",
+      "enum": [
+        "Managed",
+        "SelfHosted"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationRuntimeType",
+        "modelAsString": true
+      }
+    },
+    "ManagedIntegrationRuntime": {
+      "x-ms-discriminator-value": "Managed",
+      "description": "Managed integration runtime, including managed elastic and managed dedicated integration runtimes.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntime"
+        }
+      ],
+      "properties": {
+        "state": {
+          "description": "Integration runtime state, only valid for managed dedicated integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeState",
+          "readOnly": true
+        },
+        "typeProperties": {
+          "description": "Managed integration runtime properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ManagedIntegrationRuntimeTypeProperties": {
+      "description": "Managed integration runtime type properties.",
+      "type": "object",
+      "properties": {
+        "computeProperties": {
+          "description": "The compute resource for managed integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeComputeProperties"
+        },
+        "ssisProperties": {
+          "description": "SSIS properties for managed integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeSsisProperties"
+        }
+      }
+    },
+    "IntegrationRuntimeComputeProperties": {
+      "description": "The compute resource properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The location for managed integration runtime. The supported regions could be found on https://docs.microsoft.com/en-us/azure/data-factory/data-factory-data-movement-activities",
+          "type": "string"
+        },
+        "nodeSize": {
+          "description": "The node size requirement to managed integration runtime.",
+          "type": "string"
+        },
+        "numberOfNodes": {
+          "description": "The required number of nodes for managed integration runtime.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxParallelExecutionsPerNode": {
+          "description": "Maximum parallel executions count per node for managed integration runtime.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "vNetProperties": {
+          "description": "VNet properties for managed integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeVNetProperties"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeVNetProperties": {
+      "description": "VNet properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "vNetId": {
+          "description": "The ID of the VNet that this integration runtime will join.",
+          "type": "string"
+        },
+        "subnet": {
+          "description": "The name of the subnet this integration runtime will join.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeSsisProperties": {
+      "description": "SSIS properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "catalogInfo": {
+          "description": "Catalog information for managed dedicated integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeSsisCatalogInfo"
+        },
+        "licenseType": {
+          "description": "License type for bringing your own license scenario.",
+          "type": "string",
+          "enum": [
+            "BasePrice",
+            "LicenseIncluded"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeLicenseType",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeSsisCatalogInfo": {
+      "description": "Catalog information for managed dedicated integration runtime.",
+      "type": "object",
+      "properties": {
+        "catalogServerEndpoint": {
+          "description": "The catalog database server URL.",
+          "type": "string"
+        },
+        "catalogAdminUserName": {
+          "description": "The administrator user name of catalog database.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "catalogAdminPassword": {
+          "description": "The password of the administrator user account of the catalog database.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "catalogPricingTier": {
+          "description": "The pricing tier for the catalog database. The valid values could be found in https://azure.microsoft.com/en-us/pricing/details/sql-database/",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium",
+            "PremiumRS"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeSsisCatalogPricingTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "SelfHostedIntegrationRuntime": {
+      "x-ms-discriminator-value": "SelfHosted",
+      "description": "Self-hosted integration runtime.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntime"
+        }
+      ]
+    },
+    "IntegrationRuntimeStatus": {
+      "description": "Integration runtime status.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "Type of integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeType"
+        },
+        "state": {
+          "description": "The state of integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeState",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeState": {
+      "description": "The state of integration runtime.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Initial",
+        "Stopped",
+        "Started",
+        "Starting",
+        "Stopping",
+        "NeedRegistration",
+        "Online",
+        "Limited",
+        "Offline"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationRuntimeState",
+        "modelAsString": true
+      }
+    },
+    "ManagedIntegrationRuntimeStatus": {
+      "x-ms-discriminator-value": "Managed",
+      "description": "Managed integration runtime status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntimeStatus"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Managed integration runtime status type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedIntegrationRuntimeStatusTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ManagedIntegrationRuntimeStatusTypeProperties": {
+      "description": "Managed integration runtime status type properties.",
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "description": "The time at which the integration runtime was created, in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "nodes": {
+          "description": "The list of nodes for managed integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedIntegrationRuntimeNode"
+          },
+          "readOnly": true
+        },
+        "otherErrors": {
+          "description": "The errors that occurred on this integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedIntegrationRuntimeError"
+          },
+          "readOnly": true
+        },
+        "lastOperation": {
+          "description": "The last operation result that occurred on this integration runtime.",
+          "$ref": "#/definitions/ManagedIntegrationRuntimeOperationResult",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeOperationResult": {
+      "description": "Properties of managed integration runtime operation result.",
+      "properties": {
+        "type": {
+          "description": "The operation type. Could be start or stop.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The start time of the operation.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "result": {
+          "description": "The operation result.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "Managed integration runtime error parameters.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Error message parameters."
+          },
+          "readOnly": true
+        },
+        "activityId": {
+          "description": "The activity id for the operation request.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "ManagedIntegrationRuntimeNode": {
+      "description": "Properties of integration runtime node.",
+      "properties": {
+        "nodeId": {
+          "description": "The managed integration runtime node id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The managed integration runtime node status.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Starting",
+            "Available",
+            "Recycling",
+            "Unavailable"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedIntegrationRuntimeNodeStatus",
+            "modelAsString": true
+          }
+        },
+        "errors": {
+          "description": "The errors that occurred on this integration runtime node.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedIntegrationRuntimeError"
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "ManagedIntegrationRuntimeError": {
+      "description": "Error definition for managed integration runtime.",
+      "properties": {
+        "time": {
+          "description": "The time when the error occurred.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "Managed integration runtime error parameters.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Error message parameters."
+          },
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "SelfHostedIntegrationRuntimeStatus": {
+      "x-ms-discriminator-value": "SelfHosted",
+      "description": "Self-hosted integration runtime status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntimeStatus"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Self-hosted integration runtime status type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SelfHostedIntegrationRuntimeStatusTypeProperties": {
+      "description": "Self-hosted integration runtime status type properties.",
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "description": "The time at which the integration runtime was created, in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "taskQueueId": {
+          "description": "The task queue id of the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "internalChannelEncryption": {
+          "description": "It is used to set the encryption mode for node-node communication channel (when more than 2 self-hosted integration runtime nodes exist).",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "NotSet",
+            "SslEncrypted",
+            "NotEncrypted"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeInternalChannelEncryptionMode",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "Version of the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nodes": {
+          "description": "The list of nodes for this integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
+          }
+        },
+        "scheduledUpdateDate": {
+          "description": "The date at which the integration runtime will be scheduled to update, in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updateDelayOffset": {
+          "description": "The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours",
+          "type": "string",
+          "readOnly": true
+        },
+        "localTimeZoneOffset": {
+          "description": "The local time zone offset in hours.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capabilities": {
+          "description": "Object with additional information about integration runtime capabilities.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "serviceUrls": {
+          "description": "The URLs for the services used in integration runtime backend service.",
+          "type": "array",
+          "items": {
+            "description": "The service URL",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "autoUpdate": {
+          "description": "Whether Self-hosted integration runtime auto update has been turned on.",
+          "$ref": "#/definitions/IntegrationRuntimeAutoUpdate",
+          "readOnly": true
+        },
+        "versionStatus": {
+          "description": "Status of the integration runtime version.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IntegrationRuntimeAutoUpdate": {
+      "description": "The state of integration runtime auto update.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "On",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationRuntimeAutoUpdate",
+        "modelAsString": true
+      }
+    },
+    "SelfHostedIntegrationRuntimeNode": {
+      "description": "Properties of Self-hosted integration runtime node.",
+      "properties": {
+        "nodeName": {
+          "description": "Name of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineName": {
+          "description": "Machine name of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostServiceUri": {
+          "description": "URI for the host machine of the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the integration runtime node.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "NeedRegistration",
+            "Online",
+            "Limited",
+            "Offline",
+            "Upgrading",
+            "Initializing",
+            "InitializeFailed"
+          ],
+          "x-ms-enum": {
+            "name": "SelfHostedIntegrationRuntimeNodeStatus",
+            "modelAsString": true
+          }
+        },
+        "capabilities": {
+          "description": "The integration runtime capabilities dictionary",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "versionStatus": {
+          "description": "Status of the integration runtime node version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "registerTime": {
+          "description": "The time at which the integration runtime node was registered in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastConnectTime": {
+          "description": "The most recent time at which the integration runtime was connected in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "expiryTime": {
+          "description": "The time at which the integration runtime will expire in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastStartTime": {
+          "description": "The time the node last started up.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastStopTime": {
+          "description": "The integration runtime node last stop time.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastUpdateResult": {
+          "description": "The result of the last integration runtime node update.",
+          "type": "string",
+          "enum": [
+            "Succeed",
+            "Fail"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeUpdateResult",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "lastStartUpdateTime": {
+          "description": "The last time for the integration runtime node update start.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastEndUpdateTime": {
+          "description": "The last time for the integration runtime node update end.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "isActiveDispatcher": {
+          "description": "Indicates whether this node is the active dispatcher for integration runtime requests.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "concurrentJobsLimit": {
+          "description": "Maximum concurrent jobs on the integration runtime node.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maxConcurrentJobs": {
+          "description": "The maximum concurrent jobs in this integration runtime.",
+          "type": "integer",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeRemoveNodeRequest": {
+      "description": "Request to remove a node.",
+      "type": "object",
+      "properties": {
+        "nodeName": {
+          "description": "The name of the node to be removed.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeConnectionInfo": {
+      "description": "Connection information for encrypting the on-premises data source credentials.",
+      "type": "object",
+      "properties": {
+        "serviceToken": {
+          "description": "The token generated in service. Callers use this token to authenticate to integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "identityCertThumbprint": {
+          "description": "The integration runtime SSL certificate thumbprint. Click-Once application uses it to do server validation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostServiceUri": {
+          "description": "The on-premises integration runtime host URL.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The integration runtime version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publicKey": {
+          "description": "The public key for encrypting a credential when transferring the credential to the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isIdentityCertExprired": {
+          "description": "Whether the identity certificate is expired.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeRegenerateKeyParameters": {
+      "description": "Parameters to regenerate the authentication key.",
+      "type": "object",
+      "properties": {
+        "keyName": {
+          "description": "The name of the authentication key to regenerate.",
+          "type": "string",
+          "enum": [
+            "authKey1",
+            "authKey2"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeAuthKeyName",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeAuthKeys": {
+      "description": "The integration runtime authentication keys.",
+      "type": "object",
+      "properties": {
+        "authKey1": {
+          "type": "string",
+          "description": "The primary integration runtime authentication key."
+        },
+        "authKey2": {
+          "type": "string",
+          "description": "The secondary integration runtime authentication key."
+        }
+      }
+    },
+    "IntegrationRuntimeMonitoringData": {
+      "description": "Get monitoring data response.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Integration runtime name."
+        },
+        "nodes": {
+          "type": "array",
+          "description": "Integration runtime node monitoring data.",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeNodeMonitoringData"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeNodeMonitoringData": {
+      "description": "Monitoring data for integration runtime node.",
+      "type": "object",
+      "properties": {
+        "nodeName": {
+          "description": "Name of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "availableMemoryInMB": {
+          "description": "Available memory (MB) on the integration runtime node.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cpuUtilization": {
+          "description": "CPU percentage on the integration runtime node.",
+          "type": "number",
+          "readOnly": true
+        },
+        "concurrentJobsLimit": {
+          "description": "Maximum concurrent jobs on the integration runtime node.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "concurrentJobsRunning": {
+          "description": "The number of jobs currently running on the integration runtime node.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maxConcurrentJobs": {
+          "description": "The maximum concurrent jobs in this integration runtime.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sentBytes": {
+          "description": "Sent bytes on the integration runtime node.",
+          "type": "number",
+          "readOnly": true
+        },
+        "receivedBytes": {
+          "description": "Received bytes on the integration runtime node.",
+          "type": "number",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeNodeIpAddress": {
+      "type": "object",
+      "description": "The IP address of self-hosted integration runtime node.",
+      "properties": {
+        "ipAddress": {
+          "description": "The IP address of self-hosted integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -11,5 +11,5 @@ This checklist is used to make sure that common issues in a pull request are add
 - [ ] I have read the [contribution guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/.github/CONTRIBUTING.md).
 - [ ] My spec meets the review criteria:
   - [ ] The spec conforms to the [Swagger 2.0 specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md).
-  - [ ] Validation errors from the [Linter extension for VS Code](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/linter.md) have all been fixed for this spec. (**Note:** for large, previously checked in specs, there will likely be many errors shown. Please contact our team so we can set a timeframe for fixing these errors if your PR is not going to address them).
-  - [ ] The spec follows the patterns described in the [Swagger good patterns](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-good-patterns.md) document unless the service API makes this impossible.
+  - [ ] The spec follows the guidelines described in the [Swagger checklist](../documentation/swagger-checklist.md) document.
+  - [ ] [Validation tools](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md#validation-tools-for-swagger-checklist) were run on swagger spec(s) and have all been fixed in this PR. 

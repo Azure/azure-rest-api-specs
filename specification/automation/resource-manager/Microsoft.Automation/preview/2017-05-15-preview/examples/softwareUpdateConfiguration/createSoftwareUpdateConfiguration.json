@@ -1,0 +1,163 @@
+{
+    "parameters": {
+        "subscriptionId": "51766542-3ed7-4a72-a187-0c8ab644ddab",
+        "resourceGroupName": "mygroup",
+        "automationAccountName": "myaccount",
+        "softwareUpdateConfigurationName": "testpatch",
+        "api-version": "2017-05-15-preview",
+        "parameters": {
+            "properties": {
+                "updateConfiguration": {
+                    "operatingSystem": "Windows",
+                    "duration": "PT2H0M",
+                    "windows": {
+                        "excludedKbNumbers": [
+                            "168934",
+                            "168973"
+                        ],
+                        "includedUpdateClassifications": "Critical,Definition,FeaturePack,Security,ServicePack,Tools,UpdateRollup,Updates"
+                    },
+                    "azureVirtualMachines": [
+                        "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
+                        "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
+                        "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
+                    ],
+                    "nonAzureComputerNames": [
+                        "box1.contoso.com",
+                        "box2.contoso.com"
+                    ]
+                },
+                "scheduleInfo": {
+                    "frequency": "Hour",
+                    "startTime": "2017-10-19T12:22:57+00:00",
+                    "timeZone": "America/Los_Angeles",
+                    "interval": 1,
+                    "expiryTime": "2018-11-09T11:22:57+00:00",
+                    "advancedSchedule": {
+                        "weekDays": [
+                            "Monday",
+                            "Thursday"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "name": "testpatch",
+                "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurations/testpatch",
+                "properties": {
+                    "updateConfiguration": {
+                        "operatingSystem": "Windows",
+                        "windows": {
+                            "includedUpdateClassifications": "Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates",
+                            "excludedKbNumbers": [
+                                "168934",
+                                "168973"
+                            ]
+                        },
+                        "linux": {},
+                        "duration": "PT2H",
+                        "azureVirtualMachines": [
+                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
+                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
+                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
+                        ],
+                        "nonAzureComputerNames": [
+                            "box1.contoso.com",
+                            "box2.contoso.com"
+                        ]
+                    },
+                    "scheduleInfo": {
+                        "description": "",
+                        "startTime": "2017-10-19T12:22:00-07:00",
+                        "startTimeOffsetMinutes": -420.0,
+                        "expiryTime": "2018-11-09T11:22:00-08:00",
+                        "expiryTimeOffsetMinutes": -480.0,
+                        "isEnabled": true,
+                        "nextRun": "2017-10-19T12:22:00-07:00",
+                        "nextRunOffsetMinutes": -420.0,
+                        "interval": 1,
+                        "frequency": "Week",
+                        "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+                        "lastModifiedTime": "2017-10-19T18:54:50.5233333+00:00",
+                        "timeZone": "America/Los_Angeles",
+                        "advancedSchedule": {}
+                    },
+                    "provisioningState": "Provisioning",
+                    "error": {},
+                    "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+                    "createdBy": "adam@contoso.com",
+                    "lastModifiedBy": "adam@contoso.com",
+                    "lastModifiedTime": "2017-10-19T18:54:50.68+00:00"
+                }
+            }
+        },
+        "201": {
+            "headers": {},
+            "body": {
+                "name": "testpatch",
+                "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurations/testpatch",
+                "properties": {
+                    "updateConfiguration": {
+                        "operatingSystem": "Windows",
+                        "windows": {
+                            "includedUpdateClassifications": "Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates",
+                            "excludedKbNumbers": [
+                                "168934",
+                                "168973"
+                            ]
+                        },
+                        "linux": {},
+                        "duration": "PT2H",
+                        "azureVirtualMachines": [
+                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
+                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
+                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
+                        ],
+                        "nonAzureComputerNames": [
+                            "box1.contoso.com",
+                            "box2.contoso.com"
+                        ]
+                    },
+                    "scheduleInfo": {
+                        "description": "",
+                        "startTime": "2017-10-19T12:22:00-07:00",
+                        "startTimeOffsetMinutes": -420.0,
+                        "expiryTime": "2018-11-09T11:22:00-08:00",
+                        "expiryTimeOffsetMinutes": -480.0,
+                        "isEnabled": true,
+                        "nextRun": "2017-10-19T12:22:00-07:00",
+                        "nextRunOffsetMinutes": -420.0,
+                        "interval": 1,
+                        "frequency": "Week",
+                        "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+                        "lastModifiedTime": "2017-10-19T18:54:50.5233333+00:00",
+                        "timeZone": "America/Los_Angeles",
+                        "advancedSchedule": null
+                    },
+                    "provisioningState": "Provisioning",
+                    "error": {},
+                    "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+                    "lastModifiedBy": "",
+                    "lastModifiedTime": "2017-10-19T18:54:50.68+00:00"
+                }
+            }
+        },
+        "400": {
+            "code": "BadRequest",
+            "message": "{\"Message\":\"The request is invalid.\",\"ModelState\":{\"softwareUpdateConfiguration.properties.scheduleInfo\":[\"The scheduleInfo field is required.\"]}}"
+        },
+        "404": {
+            "code": "NotFound",
+            "message": "{\"Message\":\"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount\"}"
+        },
+        "409": {
+            "code": "Conflict",
+            "message": "\"Software update configuration with the same name already exist.\""
+        }
+    }
+}
