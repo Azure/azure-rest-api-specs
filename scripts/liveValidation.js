@@ -11,7 +11,7 @@ const repoUrl = utils.getRepoUrl(),
     validationService = "https://app.azure-devex-tools.com/api/validations",
     branch = utils.getSourceBranch(),
     processingDelay = 20,
-    isRunningInTraviCI = process.env.MODE === 'liveValidation' && process.env.PR_ONLY === 'true',
+    isRunningInTravisCI = process.env.MODE === 'liveValidation' && process.env.PR_ONLY === 'true',
     specsPaths = utils.getFilesChangedInPR(),
     regex = /resource-manager[\\|\/](.*?)[\\|\/].*?[\\|\/](.*?)[\\|\/]/,
     successThreshold = 90,
@@ -24,7 +24,7 @@ if (isNaN(durationInSeconds)) {
 
 async function runScript() {
     // See whether script is in Travis CI context
-    console.log(`isRunningInTraviCI: ${isRunningInTraviCI}`);
+    console.log(`isRunningInTraviSCI: ${isRunningInTravisCI}`);
     for (const specPath of specsPaths) {
         let matchResult = specPath.match(regex);
 
@@ -45,9 +45,16 @@ async function runScript() {
     if (validationModels.size === 0) {
         console.log("Change didn't affect any swagger specs. No validation to be done.");
         return;
+    } else if (validationModels.size > 1) {
+        console.log("WARNING: Multiple resource provider have changes, only the first one will be validated.");
     }
 
     let resourceProvider = validationModels.keys().next().value;
+
+    if (validationModels.get(resourceProvider).size > 1) {
+        console.log("WARNING: Multiple api versions have changes, only the first one will be validated.");
+    }
+
     let apiVersion = validationModels.get(resourceProvider).values().next().value;
 
     console.log(`Changes detected in a swagger spec.`);
@@ -68,7 +75,7 @@ async function runScript() {
     let validationId = JSON.parse(response).validationId;
 
     let validationResultUrl = `${validationService}/${validationId}`;
-    console.log(`Request done, results will be available at ${validationResultUrl} in ${durationInSeconds} seconds...`);
+    console.log(`Request done, results will in ${durationInSeconds} seconds...`);
 
     await timeout((durationInSeconds + processingDelay) * 1000);
     let validationResult = JSON.parse(await request(validationResultUrl));
