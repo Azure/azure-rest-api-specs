@@ -1236,6 +1236,9 @@
               "$ref": "#/definitions/ConnectionMonitorResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorCreate.json" }
         }
       },
       "get": {
@@ -1280,6 +1283,9 @@
               "$ref": "#/definitions/ConnectionMonitorResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorGet.json" }
         }
       },
       "delete": {
@@ -1373,6 +1379,9 @@
             "description": "Accepted. The operation will complete asynchronously."
           }
         }
+      },
+      "x-ms-examples": {
+        "Stop connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorStop.json" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/start": {
@@ -1420,6 +1429,9 @@
             "description": "Accepted. The operation will complete asynchronously."
           }
         }
+      },
+      "x-ms-examples": {
+        "Start connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorStart.json" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/query": {
@@ -1473,6 +1485,9 @@
             }
           }
         }
+      },
+      "x-ms-examples": {
+        "Query connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorQuery.json" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors": {
@@ -1516,6 +1531,9 @@
           "nextLinkName": null
         }
       }
+    },
+    "x-ms-examples": {
+      "List connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorList.json" }
     }
   },
   "definitions": {
@@ -2816,6 +2834,7 @@
       "description": "List of connection monitors."
     },
     "ConnectionMonitorResult": {
+      "x-ms-azure-resource": true,
       "properties": {
         "name": {
           "readOnly": true,
