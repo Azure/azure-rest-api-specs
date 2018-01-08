@@ -10,6 +10,22 @@
   "consumes": [ "application/json" ],
   "produces": [ "application/json" ],
   "paths": {
+    "/providers/Microsoft.DevTestLab/operations": {
+      "get": {
+        "tags": [ "ProviderOperations" ],
+        "description": "Result of the request to list REST API operations",
+        "operationId": "ProviderOperations_List",
+        "parameters": [ { "$ref": "#/parameters/api-version" } ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/ProviderOperationResult" }
+          }
+        },
+        "security": [ { "azure_oauth": [ "user_impersonation" ] } ],
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/labs": {
       "get": {
         "tags": [ "Labs" ],
@@ -5581,7 +5597,7 @@
             "modelAsString": true
           }
         },
-        "NotificationSent": {
+        "notificationSent": {
           "description": "Indicates the datetime when notifications were last sent for this threshold.",
           "type": "string"
         }
@@ -6216,7 +6232,7 @@
       }
     },
     "IdentityProperties": {
-      "description": "IdentityProperties",
+      "description": "Properties of a managed identity",
       "type": "object",
       "properties": {
         "type": {
@@ -7287,6 +7303,42 @@
         }
       }
     },
+    "OperationMetadata": {
+      "description": "The REST API operation supported by DevTestLab ResourceProvider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationMetadataDisplay",
+          "description": "The object that describes the operations"
+        }
+      }
+    },
+    "OperationMetadataDisplay": {
+      "description": "The object that describes the operations",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Friendly name of the resource provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource type on which the operation is performed.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type: read, write, delete, listKeys/action, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Friendly name of the operation",
+          "type": "string"
+        }
+      }
+    },
     "OperationResult": {
       "description": "An Operation Result",
       "type": "object",
@@ -7552,6 +7604,22 @@
           "format": "int32",
           "description": "Backend port of the target virtual machine.",
           "type": "integer"
+        }
+      }
+    },
+    "ProviderOperationResult": {
+      "description": "Result of the request to list REST API operations",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the resource provider.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/OperationMetadata" }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -8647,7 +8715,7 @@
     }
   },
   "securityDefinitions": {
-    "azure_oauth": {
+    "azure_auth": {
       "type": "oauth2",
       "description": "OAuth2 Implicit Grant",
       "flow": "implicit",
