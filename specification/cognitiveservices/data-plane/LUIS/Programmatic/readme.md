@@ -18,7 +18,7 @@ The current release for the Programmatic Endpoint is `programmatic_2_0`.
 These settings apply only when `--tag=programmatic_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'programmatic_2_0'
-input-file: v2.0/LUIS-Programmatic.json
+input-file: stable/v2.0/LUIS-Programmatic.json
 ```
 
 Deprecated Pattern's Operations
@@ -57,6 +57,26 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS.Programmatic
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS-Programmatic/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Programmatic/Generated
   clear-output-folder: true
+```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: programmatic
+  clear-output-folder: true
+```
+
+### Tag: programmatic_2_0 and go
+
+These settings apply only when `--tag=programmatic_2_0 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'programmatic_2_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/luis/programmatic
 ```

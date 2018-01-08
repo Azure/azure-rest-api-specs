@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.Cdn/2017-04-02/cdn.json
+- Microsoft.Cdn/stable/2017-04-02/cdn.json
 ```
  
 ### Tag: package-2016-10
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-10'
 input-file:
-- Microsoft.Cdn/2016-10-02/cdn.json
+- Microsoft.Cdn/stable/2016-10-02/cdn.json
 ```
  
 ### Tag: package-2016-04
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2016-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-04'
 input-file:
-- Microsoft.Cdn/2016-04-02/cdn.json
+- Microsoft.Cdn/stable/2016-04-02/cdn.json
 ```
  
 ### Tag: package-2015-06
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2015-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-06'
 input-file:
-- Microsoft.Cdn/2015-06-01/cdn.json
+- Microsoft.Cdn/stable/2015-06-01/cdn.json
 ```
 
 

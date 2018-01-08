@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.ResourceHealth/2017-07-01/resourcehealth.json
+- Microsoft.ResourceHealth/stable/2017-07-01/resourcehealth.json
 ```
 
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2015-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-01'
 input-file:
-- Microsoft.ResourceHealth/2015-01-01/resourcehealth.json
+- Microsoft.ResourceHealth/stable/2015-01-01/resourcehealth.json
 ```
 
 

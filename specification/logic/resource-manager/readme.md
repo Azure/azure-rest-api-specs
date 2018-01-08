@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-06'
 input-file:
-- Microsoft.Logic/2016-06-01/logic.json
+- Microsoft.Logic/stable/2016-06-01/logic.json
 ```
  
 ### Tag: package-2015-08-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2015-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-08-preview'
 input-file:
-- Microsoft.Logic/2015-08-01-preview/logic.json
+- Microsoft.Logic/preview/2015-08-01-preview/logic.json
 ```
  
 ### Tag: package-2015-02-preview
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2015-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-02-preview'
 input-file:
-- Microsoft.Logic/2015-02-01-preview/logic.json
+- Microsoft.Logic/preview/2015-02-01-preview/logic.json
 ```
 
 

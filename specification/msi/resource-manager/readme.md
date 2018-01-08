@@ -32,7 +32,7 @@ These settings apply only when `--tag=package-2015-08-31-preview` is specified o
 
 ``` yaml $(tag) == 'package-2015-08-31-preview'
 input-file:
-- Microsoft.ManagedIdentity/2015-08-31-preview/ManagedIdentity.json
+- Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json
 ```
 
 ---
@@ -78,4 +78,24 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-msi
+```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: msi
+  clear-output-folder: true
+```
+
+### Tag: package-2015-08-31-preview and go
+
+These settings apply only when `--tag=package-2015-08-31-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-08-31-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/msi/mgmt/2015-08-31-preview/msi
 ```

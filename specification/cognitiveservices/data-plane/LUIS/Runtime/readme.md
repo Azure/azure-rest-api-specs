@@ -18,7 +18,7 @@ The current release for the Runtime Endpoint is `runtime_2_0`.
 These settings apply only when `--tag=runtime_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'runtime_2_0'
-input-file: v2.0/LUIS-Runtime.json
+input-file: stable/v2.0/LUIS-Runtime.json
 
 # remove Resolve2 from code-generation (since the POST and GET operations are functionally identical)
 directive:
@@ -34,10 +34,10 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS-Runtime/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Runtime/Generated
   clear-output-folder: true
 
-# csharp has support for modelAsExtensible now; replace modelAsString with that. 
+# csharp has support for modelAsExtensible now; replace modelAsString with that.
 directive:
   from: swagger-document
   where: $..['x-ms-enum']
@@ -46,4 +46,24 @@ directive:
       $['modelAsExtensible'] = true;
       $['modelAsString'] = false;
     }
+```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: runtime
+  clear-output-folder: true
+```
+
+### Tag: runtime_2_0 and go
+
+These settings apply only when `--tag=runtime_2_0 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'runtime_2_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/luis/runtime
 ```

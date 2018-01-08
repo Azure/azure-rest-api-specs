@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-07-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2016-07-preview'
 input-file:
-- Microsoft.ServerManagement/2016-07-01-preview/servermanagement.json
+- Microsoft.ServerManagement/preview/2016-07-01-preview/servermanagement.json
 ```
  
 ### Tag: package-2015-07-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2015-07-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-07-preview'
 input-file:
-- Microsoft.ServerManagement/2015-07-01-preview/servermanagement.json
+- Microsoft.ServerManagement/preview/2015-07-01-preview/servermanagement.json
 ```
 
 
