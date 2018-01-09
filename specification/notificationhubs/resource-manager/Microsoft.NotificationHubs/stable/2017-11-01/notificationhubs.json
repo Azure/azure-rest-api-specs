@@ -3,7 +3,7 @@
   "info": {
     "title": "NotificationHubsManagementClient",
     "description": "Azure NotificationHub client",
-    "version": "2017-04-01"
+    "version": "2017-11-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -132,7 +132,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
+                "$ref": "#/definitions/NamespaceResource"
               },
               "description": "Parameters supplied to create a Namespace Resource."
             },
@@ -162,7 +162,7 @@
           "tags": [
             "Namespaces"
           ],
-          "operationId": "Namespaces_Patch",
+          "operationId": "Namespaces_Update",
           "description": "Patches the existing namespace",
           "parameters": [
             {
@@ -313,14 +313,14 @@
               "in": "path",
               "required": true,
               "type": "string",
-              "description": "Aauthorization Rule Name."
+              "description": "Authorization Rule Name."
             },
             {
               "name": "parameters",
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+                "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
               },
               "description": "The shared access authorization rule."
             },
@@ -497,7 +497,7 @@
           "tags": [
             "Namespaces"
           ],
-          "operationId": "Namespaces_ListAuthorizationRules",
+          "operationId": "AuthorizationRules_ListByNamespace",
           "description": "Gets the authorization rules for a namespace.",
           "parameters": [
             {
@@ -765,7 +765,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/NotificationHubCreateOrUpdateParameters"
+                "$ref": "#/definitions/NotificationHubResource"
               },
               "description": "Parameters supplied to the create/update a NotificationHub Resource."
             },
@@ -784,6 +784,59 @@
               }
             },
             "201": {
+              "description": "NotificationHub is Created/Updated",
+              "schema": {
+                "$ref": "#/definitions/NotificationHubResource"
+              }
+            }
+          }
+        },
+		"patch": {
+          "tags": [
+            "NotificationHubs"
+          ],
+          "operationId": "NotificationHubs_Update",
+          "description": "Updates a NotificationHub in a namespace.",
+          "parameters": [
+            {
+              "name": "resourceGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the resource group."
+            },
+            {
+              "name": "namespaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The namespace name."
+            },
+            {
+              "name": "notificationHubName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The notification hub name."
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/NotificationHubPatchParameters"
+              },
+              "description": "Parameters supplied to the create/update a NotificationHub Resource."
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses": {
+            "200": {
               "description": "NotificationHub is Created/Updated",
               "schema": {
                 "$ref": "#/definitions/NotificationHubResource"
@@ -918,7 +971,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+                "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
               },
               "description": "The shared access authorization rule."
             },
@@ -1046,7 +1099,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "NotificationHubs_List",
+          "operationId": "NotificationHubs_ListByNamespace",
           "description": "Lists the notification hubs associated with a namespace.",
           "parameters": [
             {
@@ -1088,7 +1141,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "NotificationHubs_ListAuthorizationRules",
+          "operationId": "AuthorizationRules_ListByNotificationHub",
           "description": "Gets the authorization rules for a NotificationHub.",
           "parameters": [
             {
@@ -1297,36 +1350,37 @@
     "definitions": {
       "CheckNameAvailabilityRequestParameters": {
         "properties": {
-          "Name": {
+          "name": {
             "type": "string",
             "description": "Resource name"
           },
-          "Type": {
+          "type": {
             "readOnly": true,
             "type": "string",
             "description": "Resource type"
           }
         },
         "required": [
-          "Name"
+          "name"
         ],
         "description": "Parameters supplied to the Check Name Availability for Namespace and NotificationHubs."
       },
       "CheckNameAvailabilityResponse": {
         "properties": {
-          "NameAvailable": {
+          "nameAvailable": {
             "type": "boolean",
             "description": "Checks if the namespace name is available"
           },
-          "Reason": {
+          "reason": {
             "type": "string",
             "description": "States the reason due to which the namespace name is not available"
           },
-          "Message": {
+          "message": {
             "type": "string",
             "description": "The messsage returned when checking for namespace name availability"
           }
-        }
+		},
+		"description": "Response containing the status of namespace availability"
       },
       "CheckAvailabilityParameters": {
         "properties": {
@@ -1347,6 +1401,10 @@
           "location": {
             "type": "string",
             "description": "Resource location"
+          },
+		  "kind": {
+            "type": "string",
+            "description": "Resource kind"
           },
           "tags": {
             "type": "object",
@@ -1451,24 +1509,6 @@
         },
         "description": "Namespace properties."
       },
-      "NamespaceCreateOrUpdateParameters": {
-        "properties": {
-          "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/NamespaceProperties",
-            "description": "Properties of the Namespace."
-          }
-        },
-        "required": [
-          "location"
-        ],
-        "allOf": [
-          {
-            "$ref": "#/definitions/Resource"
-          }
-        ],
-        "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
-      },
       "NamespacePatchParameters": {
         "properties": {
           "tags": {
@@ -1521,31 +1561,17 @@
         },
         "description": "SharedAccessAuthorizationRule properties."
       },
-      "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-            "description": "Properties of the Namespace AuthorizationRules."
-          }
-        },
-        "required": [
-          "properties"
-        ],
-        "allOf": [
-          {
-            "$ref": "#/definitions/Resource"
-          }
-        ],
-        "description": "Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules."
-      },
       "SharedAccessAuthorizationRuleResource": {
         "properties": {
           "properties": {
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-            "description": "Pproperties of the Namespace AuthorizationRule."
+            "description": "Properties of the Namespace AuthorizationRule."
           }
         },
+		"required": [
+          "properties"
+        ],
         "allOf": [
           {
             "$ref": "#/definitions/Resource"
@@ -1814,9 +1840,9 @@
             },
             "description": "The AuthorizationRules of the created NotificationHub"
           },
-          "apnsCredential": {
+		  "apnsCredential": {
             "$ref": "#/definitions/ApnsCredential",
-            "description": "The ApnsCredential of the created NotificationHub"
+            "description": "The ApnsCredential of the created NotificationHub"          
           },
           "wnsCredential": {
             "$ref": "#/definitions/WnsCredential",
@@ -1841,24 +1867,41 @@
         },
         "description": "NotificationHub properties."
       },
-      "NotificationHubCreateOrUpdateParameters": {
-        "properties": {
-          "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/NotificationHubProperties",
-            "description": "Properties of the NotificationHub."
+	  "NotificationHubPatchParameters": {
+		"properties": {
+		"authorizationRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            "description": "The AuthorizationRules of the created NotificationHub"
+          },
+		  "apnsCredential": {
+            "$ref": "#/definitions/ApnsCredential",
+            "description": "The ApnsCredential of the created NotificationHub"          
+          },
+          "wnsCredential": {
+            "$ref": "#/definitions/WnsCredential",
+            "description": "The WnsCredential of the created NotificationHub"
+          },
+          "gcmCredential": {
+            "$ref": "#/definitions/GcmCredential",
+            "description": "The GcmCredential of the created NotificationHub"
+          },
+          "mpnsCredential": {
+            "$ref": "#/definitions/MpnsCredential",
+            "description": "The MpnsCredential of the created NotificationHub"
+          },
+          "admCredential": {
+            "$ref": "#/definitions/AdmCredential",
+            "description": "The AdmCredential of the created NotificationHub"
+          },
+          "baiduCredential": {
+            "$ref": "#/definitions/BaiduCredential",
+            "description": "The BaiduCredential of the created NotificationHub"
           }
         },
-        "required": [
-          "location",
-          "properties"
-        ],
-        "allOf": [
-          {
-            "$ref": "#/definitions/Resource"
-          }
-        ],
-        "description": "Parameters supplied to the CreateOrUpdate NotificationHub operation."
+        "description": "NotificationHub patch parameters."
       },
       "NotificationHubResource": {
         "properties": {
@@ -1868,6 +1911,10 @@
             "description": "Properties of the NotificationHub."
           }
         },
+		"required": [
+          "location",
+          "properties"
+        ],
         "allOf": [
           {
             "$ref": "#/definitions/Resource"
@@ -1954,7 +2001,8 @@
           },
           "location": {
             "type": "string",
-            "description": "Resource location"
+            "description": "Resource location",
+			"x-ms-mutability": [ "create", "read" ]
           },
           "tags": {
             "type": "object",
@@ -1971,7 +2019,8 @@
         "required": [
           "location"
         ],
-        "x-ms-azure-resource": true
+        "x-ms-azure-resource": true,
+		"description": "The properties of the resource"
       },
       "SubResource": {
         "properties": {
@@ -1980,7 +2029,8 @@
             "description": "Resource Id"
           }
         },
-        "x-ms-azure-resource": true
+        "x-ms-azure-resource": true,
+		"description": "The properties of subresource"
       },
       "Sku": {
         "properties": {
