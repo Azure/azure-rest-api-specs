@@ -26,13 +26,13 @@ These are the global settings for the Sql API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04-preview
+tag: package-2017-04-30-preview
 ```
 
 
-### Tag: package-2017-04-preview
+### Tag: package-2017-04-30-preview
 
-These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
+These settings apply only when `--tag=package-2017-04-30-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-04-preview'
 input-file:
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
-- Microsoft.DBforPostgreSQL/2017-12-01-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/2017-12-01/postgresql.json
 ```
 
 
@@ -93,12 +93,12 @@ go:
   clear-output-folder: true
 ```
 
-### Tag: package-2017-04-preview and go
+### Tag: package-2017-04-30-preview and go
 
-These settings apply only when `--tag=package-2017-04-preview --go` is specified on the command line.
+These settings apply only when `--tag=package-2017-04-30-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2017-04-preview' && $(go)
+``` yaml $(tag) == 'package-2017-04-30-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-04-30-preview/postgresql
 ```
 
@@ -109,5 +109,5 @@ These settings apply only when `--tag=package-2017-12-01 --go` is specified on t
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-12-01' && $(go)
-output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-04-30-preview/postgresql
+output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-12-01/postgresql
 ```
