@@ -1437,7 +1437,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/definitions/Resource"
+            "$ref": "#/definitions/NHResource"
           }
         ],
         "description": "Description of a CheckAvailibility resource."
@@ -1535,7 +1535,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/definitions/Resource"
+            "$ref": "#/definitions/NHResource"
           }
         ],
         "description": "Description of a Namespace resource."
@@ -1574,7 +1574,7 @@
         ],
         "allOf": [
           {
-            "$ref": "#/definitions/Resource"
+            "$ref": "#/definitions/NHResource"
           }
         ],
         "description": "Description of a Namespace AuthorizationRules."
@@ -1917,7 +1917,7 @@
         ],
         "allOf": [
           {
-            "$ref": "#/definitions/Resource"
+            "$ref": "#/definitions/NHResource"
           }
         ],
         "description": "Description of a NotificationHub Resource."
@@ -1932,7 +1932,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/definitions/Resource"
+            "$ref": "#/definitions/NHResource"
           }
         ],
         "description": "Description of a NotificationHub PNS Credentials."
@@ -1982,35 +1982,8 @@
         },
         "description": "The response of the List NotificationHub operation."
       },
-      "Resource": {
+      "NHResource": {
         "properties": {
-          "id": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Resource Id"
-          },
-          "name": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Resource name"
-          },
-          "type": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Resource type"
-          },
-          "location": {
-            "type": "string",
-            "description": "Resource location",
-			"x-ms-mutability": [ "create", "read" ]
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Resource tags"
-          },
           "sku": {
             "$ref": "#/definitions/Sku",
             "description": "The sku of the created namespace"
@@ -2019,6 +1992,11 @@
         "required": [
           "location"
         ],
+		"allOf": [
+		  {
+			"$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          }
+		],
         "x-ms-azure-resource": true,
 		"description": "The properties of the resource"
       },
