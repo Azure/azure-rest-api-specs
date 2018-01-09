@@ -30,6 +30,8 @@ description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
 tag: package-2017-07
 csharp-sdks-folder: ./Generated/CSharp
+python-sdks-folder: ./Generated/Python
+go-sdk-folder: ./Generated/Golang
 
 license-header: MICROSOFT_MIT
 ```

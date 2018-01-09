@@ -189,6 +189,7 @@
           {
             "name": "intentObjectName",
             "in": "path",
+            "description": "Intent object name.",
             "required": true,
             "type": "string"
           },
@@ -959,7 +960,7 @@
           }
         },
         "lastBackupStatus": {
-          "description": "Last backup operation status. Possible values: Healthy, Unhealthy.",
+          "description": "Last backup operation status.",
           "type": "string"
         },
         "lastBackupTime": {
@@ -1242,9 +1243,11 @@
       "x-ms-discriminator-value": "AzureVMResourceBackup"
     },
     "AzureVMResourceFeatureSupportResponse": {
+      "description": "Response for feature support requests for Azure IaasVm",
       "type": "object",
       "properties": {
         "supportStatus": {
+          "description": "Support status of feature",
           "enum": [
             "Invalid",
             "Supported",
@@ -1575,6 +1578,7 @@
       "type": "object",
       "properties": {
         "resourceType": {
+          "description": "Container Type - VM, SQLPaaS, DPM, AzureFileShare...",
           "enum": [
             "Invalid",
             "VM",
@@ -1597,9 +1601,11 @@
           }
         },
         "resourceId": {
+          "description": "Entire ARM resource id of the resource",
           "type": "string"
         },
         "poLogicalName": {
+          "description": "Protectable Item Logical Name",
           "type": "string"
         }
       }
@@ -1609,6 +1615,7 @@
       "type": "object",
       "properties": {
         "protectionStatus": {
+          "description": "Specifies whether the container is registered or not",
           "enum": [
             "Invalid",
             "NotProtected",
@@ -1623,9 +1630,11 @@
           }
         },
         "vaultId": {
+          "description": "Specifies the arm resource id of the vault",
           "type": "string"
         },
         "fabricName": {
+          "description": "Specifies the fabric name - Azure or AAD",
           "enum": [
             "Invalid",
             "Azure"
@@ -1637,21 +1646,27 @@
           }
         },
         "containerName": {
+          "description": "Specifies the product specific container name. E.g. iaasvmcontainer;iaasvmcontainer;csname;vmname. This is required for portal",
           "type": "string"
         },
         "protectedItemName": {
+          "description": "Specifies the product specific ds name. E.g. vm;iaasvmcontainer;csname;vmname. This is required for portal",
           "type": "string"
         },
         "errorCode": {
+          "description": "ErrorCode in case of intent failed",
           "type": "string"
         },
         "errorMessage": {
+          "description": "ErrorMessage in case of intent failed.",
           "type": "string"
         },
         "policyName": {
+          "description": "Specifies the policy name which is used for protection",
           "type": "string"
         },
         "registrationStatus": {
+          "description": "Container registration status",
           "type": "string"
         }
       }
@@ -2742,10 +2757,11 @@
       }
     },
     "PreValidateEnableBackupRequest": {
-      "description": "contract to validate if backup can be enabled on the given resource in a given vault and given configuration.\r\n            It will validate followings\r\n            1. Vault capacity\r\n            2. VM is already protected\r\n            3. Any VM related configuration passed in properties.",
+      "description": "Contract to validate if backup can be enabled on the given resource in a given vault and given configuration.\r\n            It will validate followings\r\n            1. Vault capacity\r\n            2. VM is already protected\r\n            3. Any VM related configuration passed in properties.",
       "type": "object",
       "properties": {
         "resourceType": {
+          "description": "Container Type - VM, SQLPaaS, DPM etc",
           "enum": [
             "Invalid",
             "VM",
@@ -2768,20 +2784,25 @@
           }
         },
         "resourceId": {
+          "description": "Entire ARM VM Id",
           "type": "string"
         },
         "vaultId": {
+          "description": "Entire vault id of the resource",
           "type": "string"
         },
         "properties": {
+          "description": "Configuration of VM if any needs to be validated like OS type etc",
           "type": "string"
         }
       }
     },
     "PreValidateEnableBackupResponse": {
+      "description": "Response contract for enable backup validation request",
       "type": "object",
       "properties": {
         "status": {
+          "description": "Validation Status",
           "enum": [
             "Invalid",
             "Succeeded",
@@ -2794,18 +2815,23 @@
           }
         },
         "errorCode": {
+          "description": "Response error code",
           "type": "string"
         },
         "errorMessage": {
+          "description": "Response error message",
           "type": "string"
         },
         "recommendation": {
+          "description": "Recommended action for user",
           "type": "string"
         },
         "containerName": {
+          "description": "Specifies the product specific container name. E.g. iaasvmcontainer;iaasvmcontainer;rgname;vmname. This is required for portal",
           "type": "string"
         },
         "protectedItemName": {
+          "description": "Specifies the product specific ds name. E.g. vm;iaasvmcontainer;rgname;vmname. This is required for portal",
           "type": "string"
         }
       }
@@ -3116,6 +3142,7 @@
           }
         },
         "fabricName": {
+          "description": "Fabric name for filter",
           "type": "string"
         }
       }
