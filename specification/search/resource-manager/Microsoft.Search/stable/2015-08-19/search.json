@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -890,7 +888,8 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Describes a particular API error with an error code and a message."
         }
       },
       "description": "Contains information about an API error.",
