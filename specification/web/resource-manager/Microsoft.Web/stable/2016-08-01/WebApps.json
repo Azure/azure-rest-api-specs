@@ -2262,7 +2262,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IdentifierCollection"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/IdentifierCollection"
             }
           }
         },
@@ -2308,7 +2308,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -2344,7 +2344,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           },
           {
@@ -2358,7 +2358,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -2435,7 +2435,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           },
           {
@@ -2449,7 +2449,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -8252,7 +8252,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IdentifierCollection"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/IdentifierCollection"
             }
           }
         },
@@ -8305,7 +8305,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -8341,7 +8341,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           },
           {
@@ -8362,7 +8362,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -8446,7 +8446,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           },
           {
@@ -8467,7 +8467,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -15059,7 +15059,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15579,7 +15580,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15715,7 +15717,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15879,7 +15882,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15894,47 +15898,6 @@
         "azureBlobStorage": {
           "$ref": "#/definitions/AzureBlobStorageHttpLogsConfig",
           "description": "Http logs to azure blob storage configuration."
-        }
-      }
-    },
-    "Identifier": {
-      "description": "A domain specific resource identifier.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Identifier resource specific properties",
-          "properties": {
-            "id": {
-              "description": "String representation of the identity.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "IdentifierCollection": {
-      "description": "Collection of identifiers.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Identifier"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string"
         }
       }
     },
@@ -16250,7 +16213,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -16593,7 +16557,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -16675,7 +16640,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -16768,7 +16734,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -16828,7 +16795,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17207,7 +17175,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17256,7 +17225,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17387,7 +17357,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17852,7 +17823,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17894,7 +17866,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -18030,7 +18003,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -18200,7 +18174,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -18220,7 +18195,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -18301,7 +18277,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     }
