@@ -34,6 +34,31 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Search/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.Search provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listAdminKeys": {
       "post": {
         "tags": [
@@ -920,6 +945,61 @@
             }
         },
         "x-ms-external": true
+    },
+    "Operation": {
+      "description": "Describes a REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation. This name is of the form {provider}/{resource}/{operation}.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that describes the operation.",
+          "readOnly": true,
+          "properties": {
+            "provider": {
+              "description": "The friendly name of the resource provider.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "operation": {
+              "description": "The operation type: read, write, delete, listKeys/action, etc.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "resource": {
+              "description": "The resource type on which the operation is performed.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "description": {
+              "description": "The friendly name of the operation.",
+              "readOnly": true,
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "The result of the request to list REST API operations. It contains a list of operations and a URL  to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "description": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of operation list results, if any."
+        }
+      }
     }
   },
   "parameters": {
