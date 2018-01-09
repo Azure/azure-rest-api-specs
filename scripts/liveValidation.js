@@ -7,7 +7,7 @@ const utils = require('../test/util/utils'),
     request = require('request-promise-native'),
     zlib = require('zlib');
 
-const repoUrl = utils.getRepoUrl(),
+const repoUrl = utils.getSourceRepoUrl(),
     validationService = "https://app.azure-devex-tools.com/api/validations",
     branch = utils.getSourceBranch(),
     processingDelay = 20,
@@ -75,7 +75,7 @@ async function runScript() {
     let validationId = JSON.parse(response).validationId;
 
     let validationResultUrl = `${validationService}/${validationId}`;
-    console.log(`Request done, results will in ${durationInSeconds} seconds...`);
+    console.log(`Request done, results will be available in ${durationInSeconds} seconds...`);
 
     await timeout((durationInSeconds + processingDelay) * 1000);
     let validationResult = JSON.parse(await request(validationResultUrl));
