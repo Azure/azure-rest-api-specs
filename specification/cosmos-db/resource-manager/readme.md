@@ -44,10 +44,16 @@ input-file:
 ``` yaml
 directive:
   - suppress: TrackedResourceGetOperation
+    from: cosmos-db.json
+    where: $.definitions.DatabaseAccountCreateUpdateParameters
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
   - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.DatabaseAccountCreateUpdateParameters
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
   - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.MetricValue.properties._count
     reason: The Metrics API has has a property name with a leading underscore character
 ```
 
