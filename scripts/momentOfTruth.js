@@ -23,13 +23,8 @@ var filename = `${pullRequestNumber}_${utils.getTimeStamp()}.json`;
 var logFilepath = path.join(getLogDir(), filename);
 var finalResult = {};
 finalResult["pullRequest"] = pullRequestNumber;
-finalResult["repositoryUrl"] = getRepository();
+finalResult["repositoryUrl"] = utils.getRepoUrl();
 finalResult["files"] = {};
-
-// Retrieves Git Repository Url
-function getRepository() {
-    return "https://github.com/" + utils.getRepoName();
-}
 
 // Creates and returns path to the logging directory
 function getLogDir() {
@@ -68,7 +63,7 @@ async function getLinterResult(swaggerPath) {
     }
     let cmd = linterCmd + swaggerPath;
     console.log(`Executing: ${cmd}`);
-    const {err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
+    const { err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
         (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
 
     let resultString = stderr;
@@ -94,7 +89,7 @@ async function getLinterResult(swaggerPath) {
 async function uploadToAzureStorage(json) {
     console.log(`Uploading data...`);
 
-    const {error, response, body } = await new Promise(res => request({
+    const { error, response, body } = await new Promise(res => request({
         url: "http://az-bot.azurewebsites.net/process",
         method: "POST",
         json: true,
@@ -125,7 +120,7 @@ async function updateResult(spec, errors, beforeOrAfter) {
 
 //main function
 async function runScript() {
-    // Useful when debugging a test for a particular swagger. 
+    // Useful when debugging a test for a particular swagger.
     // Just update the regex. That will return an array of filtered items.
     // configsToProcess = ['/Users/vishrut/git-repos/azure-rest-api-specs/specification/storage/resource-manager/readme.md',
     //                    '/Users/vishrut/git-repos/azure-rest-api-specs/specification/web/resource-manager/readme.md'];
