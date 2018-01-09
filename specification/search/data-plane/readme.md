@@ -68,6 +68,9 @@ input-file:
 ---
 # Code Generation
 
+!!! READ THIS !!!
+This swagger is not yet ready for languages other than C#.
+!!! READ THIS !!!
 
 ## C# 
 

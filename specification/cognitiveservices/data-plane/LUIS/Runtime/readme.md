@@ -34,7 +34,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS-Runtime/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Runtime/Generated
   clear-output-folder: true
 
 # csharp has support for modelAsExtensible now; replace modelAsString with that.
@@ -65,5 +65,5 @@ These settings apply only when `--tag=runtime_2_0 --go` is specified on the comm
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'runtime_2_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/luis/v2.0/runtime
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/luis/runtime
 ```
