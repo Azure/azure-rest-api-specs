@@ -27,6 +27,7 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 openapi-type: arm
 tag: package-2015-04
+azure-validator: true
 ```
 
 
@@ -39,6 +40,16 @@ input-file:
 - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: TrackedResourceGetOperation
+    reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
+  - suppress: TrackedResourcePatchOperation
+    reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The Metrics API has has a property name with a leading underscore character
+```
 
 ---
 # Code Generation
