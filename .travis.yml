@@ -9,14 +9,15 @@ env:
   - MODE=python
   - MODE=node
   - MODE=ruby
-  - MODE=linter PR_ONLY=false
+  # - MODE=linter PR_ONLY=false Disabling to save travis-ci resource for now
   - MODE=semantic PR_ONLY=false
   - MODE=model PR_ONLY=false
   - MODE=linter PR_ONLY=true
   - MODE=semantic PR_ONLY=true
   - MODE=model PR_ONLY=true
+  - MODE=azurebot PR_ONLY=true
   global:
-    secure: IwPVExGJQfL6QpTd6Utv3R/qBz7yApgMspzMLSkrq9cMP6t+NHk1vYg0n2evcWaq2rqNZE9xBMfRZi7Yy/RCUT++qALE89xlNvZ/A94PaDUiK3tYYNj1XxsgRauCHshXz6smmLwQMpTKsEl6lyjXeXpwQMDNRehhTu0Hg2tE7ZikfQVb+jjRNcP41RfzzGQyxEhd3fxF2G1G21WXH0cXtZssOd1MYcXhmXk8dR3DyEEMbPzDV1Bk3auXOvbqS79bnZ/Pi4p/7P/aTOm8O2ACKM0XAvww95vAQ0LcPzKnNe3sNjFVAssBiZbIk0Zs30wULBphlTxVoufHKSZuTf+QEBTKpH99v/+SBDDPu9+0q2esq7TKgf8bvzkeXjh54fECdJUqEo9E2gW08+RQxWCqryMJouOPcY2OMs4lZwSMOXQY68a/CYVRWFaFg5s6jntC8sLHtDxV0qem3xyjc+852v8rUfkyvMhOBoZJjWmnqYVqdamHOOfrzjc7AzPUEzSeiN6OPPVli+SzwLHdip0GxdK46pAISCOcbdyYn11VvTIn1QosE66eWhF6SViVH6lNWgSfVTpcQ2zq/qSKh0/zpwn82Ys+wKDOf3EwQAanndgk26npi7Ik4nIuexZ/TE56rQ7qjZqmHoxFz7QMeTZDiVmLFxtR19cTT3GLxDz8nBQ=
+    secure: n7Ptb5x7Zdq/7na2L68JlrRPbl/xWtiFQncO7fsrSVuVGI4Mhjj1LD2k07qWAdFPM1PaZYvCRWc3YwbXr1NTOOn485r6qcLUjpN9TICP0ErGcEA9SzctipfbFP1IV4aCh23WSaopMueBki52KfskaGcZ2ox9pvI2LCysCp7q4WwF/0vArLYf48FeZuscWHVaLsU4z8ZMFPT9yHg+RQoqPeBnaR/ZGtG96NZolT+VAlP445geb0qn8wWAuSl4bR1JQV2eA3MwdWu/iVkepBeKTN7d81l3yjWzTvFtP/JRJClWBNQbOMjAed3/2Tr2lGgyRUM6Uwp4KvfRmbX3Xrlggen1AO/YAb2mJDs+HARPnhZXIOtDjgft/ethVeLTTBUsbNFGUN2lcrJMw9dkFi+ai3XefatENJbULqWx8Xb+wMD1b0TrI6sZZpdC8vYHnM/DoqiEh5+h3okkSmQcjPF4K9js294G790PKf4u2CQdur41qh4Ze4IzbvulVsGMON+O93vA6ZRK1sTHC5VUTs2iMhCnf6LtMN59kBq1T2MJ8ndXRpGlFEn2wDTjJSpSr0k0sjoG5i+bIFhbqVF8xegBb/PH4H9/i1ifIypNNp0FGdz4o2cFsYrcUKFsx1C/kFJ6rC809r0odDt32hGSOkOCziTwFHusbR5Nwf0RjOWSgvc=
 matrix:
   fast_finish: true
   allow_failures:
@@ -26,6 +27,7 @@ matrix:
     - env: MODE=linter PR_ONLY=true
     - env: MODE=semantic PR_ONLY=true
     - env: MODE=model PR_ONLY=true
+    - env: MODE=azurebot PR_ONLY=true
 before_install:
   - docker pull lmazuel/swagger-to-sdk
   - python -c "import os; print('\n'.join(v for v in os.environ.keys() if v.startswith('TRAVIS')))" > /tmp/env_file
@@ -45,3 +47,4 @@ script:
   - if [[ $MODE == 'linter' ]]; then npm test -- test/linter.js; fi
   - if [[ $MODE == 'semantic' ]]; then npm test -- test/semantic.js; fi
   - if [[ $MODE == 'model' ]]; then npm test -- test/model.js; fi
+  - if [[ $MODE == 'azurebot' ]]; then node scripts/momentOfTruth.js; fi

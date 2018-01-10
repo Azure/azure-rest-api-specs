@@ -665,25 +665,8 @@
     "Sku": {
       "properties": {
         "name": {
-          "type": "string",
-          "description": "Gets or sets the sku name. Required for account creation, optional for update.",
-          "enum": [
-            "F0",
-            "P0",
-            "P1",
-            "P2",
-            "S0",
-            "S1",
-            "S2",
-            "S3",
-            "S4",
-            "S5",
-            "S6"
-          ],
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SkuName",
+          "description": "Gets or sets the sku name. Required for account creation, optional for update."
         },
         "tier": {
           "readOnly": true,
@@ -704,6 +687,27 @@
         "name"
       ],
       "description": "The SKU of the cognitive services account."
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "The name of SKU.",
+      "enum": [
+        "F0",
+        "P0",
+        "P1",
+        "P2",
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
+      }
     },
     "CognitiveServicesAccount": {
       "description": "Cognitive Services Account is an Azure resource representing the provisioned account, its type, location and SKU.",
@@ -825,6 +829,9 @@
           }
         }
       },
+      "required": [
+        "keyName"
+      ],
       "description": "Regenerate key parameters."
     },
     "CognitiveServicesAccountEnumerateSkusResult": {
@@ -946,7 +953,7 @@
         "skus": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Sku"
+            "$ref": "#/definitions/SkuName"
           },
           "description": "The SKU of the resource."
         },
@@ -958,7 +965,12 @@
           "type": "string",
           "description": "The Type of the resource."
         }
-      }
+      },
+      "required": [
+        "skus",
+        "kind",
+        "type"
+      ]
     },
     "CheckSkuAvailabilityResultList": {
       "description": "Check SKU availability result list.",
@@ -984,7 +996,7 @@
           "description": "The Type of the resource."
         },
         "skuName": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/SkuName",
           "description": "The SKU of Cognitive Services account."
         },
         "skuAvailable": {

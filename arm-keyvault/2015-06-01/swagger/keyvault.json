@@ -295,7 +295,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "encrypt", "decrypt", "wrapKey", "unwrapKey", "sign", "verify", "get", "list", "create", "update", "import", "delete", "backup", "restore" ],
+            "enum": [ "all", "encrypt", "decrypt", "wrapKey", "unwrapKey", "sign", "verify", "get", "list", "create", "update", "import", "delete", "backup", "restore", "recover", "purge" ],
             "x-ms-enum": {
               "name": "KeyPermissions",
               "modelAsString": true
@@ -307,7 +307,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "get", "list", "set", "delete" ],
+            "enum": [ "all", "get", "list", "set", "delete", "backup", "restore", "recover", "purge" ],
             "x-ms-enum": {
               "name": "SecretPermissions",
               "modelAsString": true
@@ -319,7 +319,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "get", "list", "delete", "create", "import", "update", "managecontacts", "getissuers", "listissuers", "setissuers", "deleteissuers", "manageissuers" ],
+            "enum": [ "all", "get", "list", "delete", "create", "import", "update", "managecontacts", "getissuers", "listissuers", "setissuers", "deleteissuers", "manageissuers", "recover", "purge" ],
             "x-ms-enum": {
               "name": "CertificatePermissions",
               "modelAsString": true
@@ -364,6 +364,10 @@
         "enabledForTemplateDeployment": {
           "type": "boolean",
           "description": "Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault."
+        },
+        "enableSoftDelete": {
+          "type": "boolean",
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault."
         }
       },
       "required": [

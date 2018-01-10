@@ -137,12 +137,12 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "registryCreateParameters",
+            "name": "registry",
             "in": "body",
             "description": "The parameters for creating a container registry.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegistryCreateParameters"
+              "$ref": "#/definitions/Registry"
             }
           }
         ],
@@ -153,8 +153,11 @@
               "$ref": "#/definitions/Registry"
             }
           },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
           }
         },
         "x-ms-examples": {
@@ -396,6 +399,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listUsages": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Gets the quota usages for the specified container registry.",
+        "operationId": "Registries_ListUsages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the registry usages retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegistryUsageListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryListUsages": {
+            "$ref": "../examples/RegistryListUsages.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications/{replicationName}": {
       "get": {
         "tags": [
@@ -459,7 +498,7 @@
           {
             "name": "replication",
             "in": "body",
-            "description": "The parameters for creating a replication.",
+            "description": "The parameters for creating or updating a replication.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Replication"
@@ -473,8 +512,11 @@
               "$ref": "#/definitions/Replication"
             }
           },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
           }
         },
         "x-ms-examples": {
@@ -642,8 +684,11 @@
               "$ref": "#/definitions/Webhook"
             }
           },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
           }
         },
         "x-ms-examples": {
@@ -732,13 +777,20 @@
             "schema": {
               "$ref": "#/definitions/Webhook"
             }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
           }
         },
         "x-ms-examples": {
           "WebhookUpdate": {
             "$ref": "../examples/WebhookUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks": {
@@ -917,7 +969,7 @@
           "type": "string"
         },
         "type": {
-          "description": "The resource type of the container registry. This field must be set to \"Microsoft.ContainerRegistry/registries\".",
+          "description": "The resource type of the container registry. This field must be set to 'Microsoft.ContainerRegistry/registries'.",
           "enum": [
             "Microsoft.ContainerRegistry/registries"
           ],
@@ -1028,9 +1080,9 @@
           "description": "The SKU name of the the container registry. Required for registry creation.",
           "enum": [
             "Basic",
-            "Standard_Small",
-            "Standard_Medium",
-            "Standard_Large"
+            "Managed_Basic",
+            "Managed_Standard",
+            "Managed_Premium"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1042,7 +1094,7 @@
           "description": "The SKU tier based on the SKU name.",
           "enum": [
             "Basic",
-            "Standard"
+            "Managed"
           ],
           "type": "string",
           "readOnly": true,
@@ -1068,17 +1120,26 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "The status of the container registry at the time the operation was called.",
+          "description": "The provisioning state of the container registry at the time the operation was called.",
           "enum": [
             "Creating",
-            "Succeeded"
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the container registry at the time the operation was called.",
+          "readOnly": true
         },
         "adminUserEnabled": {
           "description": "The value that indicates whether the admin user is enabled.",
@@ -1091,71 +1152,35 @@
         }
       }
     },
+    "Status": {
+      "description": "The status of an Azure resource at the time the operation was called.",
+      "properties": {
+        "displayStatus": {
+          "description": "The short label for the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The detailed message for the status, including alerts and error messages.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "The timestamp when the status was changed to the current value.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "StorageAccountProperties": {
       "description": "The properties of a storage account for a container registry. Only applicable to Basic SKU.",
-      "properties": {
-        "name": {
-          "description": "The name of the storage account.",
-          "type": "string"
-        }
-      }
-    },
-    "RegistryCreateParameters": {
-      "description": "The parameters for creating a container registry.",
       "required": [
-        "location",
-        "sku"
+        "id"
       ],
       "properties": {
-        "tags": {
-          "description": "The tags for the container registry.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "description": "The location of the container registry. This cannot be changed after the resource is created.",
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the container registry."
-        },
-        "properties": {
-          "$ref": "#/definitions/RegistryPropertiesCreateParameters",
-          "description": "The properties that the container registry will be created with.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RegistryPropertiesCreateParameters": {
-      "description": "The parameters for creating the properties of a container registry.",
-      "properties": {
-        "adminUserEnabled": {
-          "description": "The value that indicates whether the admin user is enabled.",
-          "default": false,
-          "type": "boolean"
-        },
-        "storageAccount": {
-          "$ref": "#/definitions/StorageAccountParameters",
-          "description": "The parameters of a storage account for the container registry. Only applicable to Basic SKU. If specified, the storage account must be in the same physical location as the container registry."
-        }
-      }
-    },
-    "StorageAccountParameters": {
-      "description": "The parameters of a storage account for a container registry. Only applicable to Basic SKU.",
-      "required": [
-        "name",
-        "accessKey"
-      ],
-      "properties": {
-        "name": {
-          "description": "The name of the storage account.",
-          "type": "string"
-        },
-        "accessKey": {
-          "description": "The access key to the storage account.",
+        "id": {
+          "description": "The resource ID of the storage account.",
           "type": "string"
         }
       }
@@ -1169,6 +1194,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the container registry."
         },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
@@ -1185,7 +1214,7 @@
           "type": "boolean"
         },
         "storageAccount": {
-          "$ref": "#/definitions/StorageAccountParameters",
+          "$ref": "#/definitions/StorageAccountProperties",
           "description": "The parameters of a storage account for the container registry. Only applicable to Basic SKU. If specified, the storage account must be in the same physical location as the container registry."
         }
       }
@@ -1263,6 +1292,49 @@
         }
       }
     },
+    "RegistryUsageListResult": {
+      "description": "The result of a request to get container registry quota usages.",
+      "properties": {
+        "value": {
+          "description": "The list of container registry quota usages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistryUsage"
+          }
+        }
+      }
+    },
+    "RegistryUsage": {
+      "description": "The quota usage for a container registry.",
+      "properties": {
+        "name": {
+          "description": "The name of the usage.",
+          "type": "string"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "The limit of the usage.",
+          "type": "integer"
+        },
+        "currentValue": {
+          "format": "int64",
+          "description": "The current value of the usage.",
+          "type": "integer"
+        },
+        "unit": {
+          "description": "The unit of measurement.",
+          "enum": [
+            "Count",
+            "Bytes"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RegistryUsageUnit",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "Replication": {
       "description": "An object that represents a replication for a container registry.",
       "allOf": [
@@ -1282,17 +1354,26 @@
       "description": "The properties of a replication.",
       "properties": {
         "provisioningState": {
-          "description": "The status of the replication at the time the operation was called.",
+          "description": "The provisioning state of the replication at the time the operation was called.",
           "enum": [
             "Creating",
-            "Succeeded"
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the replication at the time the operation was called.",
+          "readOnly": true
         }
       }
     },
@@ -1333,13 +1414,20 @@
         "actions"
       ],
       "properties": {
-        "isEnabled": {
-          "description": "The value that indicates whether the webhook is enabled.",
-          "default": true,
-          "type": "boolean"
+        "status": {
+          "description": "The status of the webhook at the time the operation was called.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WebhookStatus",
+            "modelAsString": true
+          }
         },
         "scope": {
-          "description": "The scope of repositories where the event can be triggered.",
+          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
           "type": "string"
         },
         "actions": {
@@ -1348,7 +1436,6 @@
           "items": {
             "enum": [
               "push",
-              "pull",
               "delete"
             ],
             "type": "string",
@@ -1356,6 +1443,23 @@
               "name": "WebhookAction",
               "modelAsString": true
             }
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the webhook at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
           }
         }
       }
@@ -1402,13 +1506,20 @@
             "type": "string"
           }
         },
-        "isEnabled": {
-          "description": "The value that indicates whether the webhook is enabled.",
-          "default": true,
-          "type": "boolean"
+        "status": {
+          "description": "The status of the webhook at the time the operation was called.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WebhookStatus",
+            "modelAsString": true
+          }
         },
         "scope": {
-          "description": "The scope of repositories where the event can be triggered.",
+          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
           "type": "string"
         },
         "actions": {
@@ -1417,7 +1528,6 @@
           "items": {
             "enum": [
               "push",
-              "pull",
               "delete"
             ],
             "type": "string",
@@ -1460,12 +1570,20 @@
             "type": "string"
           }
         },
-        "isEnabled": {
-          "description": "The value that indicates whether the webhook is enabled.",
-          "type": "boolean"
+        "status": {
+          "description": "The status of the webhook at the time the operation was called.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WebhookStatus",
+            "modelAsString": true
+          }
         },
         "scope": {
-          "description": "The scope of repositories where the event can be triggered.",
+          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
           "type": "string"
         },
         "actions": {
@@ -1474,7 +1592,6 @@
           "items": {
             "enum": [
               "push",
-              "pull",
               "delete"
             ],
             "type": "string",
@@ -1628,6 +1745,7 @@
           "type": "string"
         },
         "timestamp": {
+          "format": "date-time",
           "description": "The time at which the event occurred.",
           "type": "string"
         },

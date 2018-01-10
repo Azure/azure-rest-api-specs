@@ -15,11 +15,10 @@
                 "customHeaders": {
                     "Authorization": "Basic 000000000000000000000000000000000000000000000000000"
                 },
-                "isEnabled": true,
+                "status": "enabled",
                 "scope": "myRepository",
                 "actions": [
-                    "push",
-                    "pull"
+                    "push"
                 ]
             }
         }
@@ -35,15 +34,33 @@
                     "key": "value"
                 },
                 "properties": {
-                    "isEnabled": true,
+                    "status": "enabled",
                     "scope": "myRepository",
                     "actions": [
-                        "push",
-                        "pull"
-                    ]
+                        "push"
+                    ],
+                    "provisioningState": "Succeeded"
                 }
             }
         },
-        "202": {}
+        "201": {
+            "body": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/webhooks/myWebhook",
+                "name": "myWebhook",
+                "type": "Microsoft.ContainerRegistry/registries/webhooks",
+                "location": "westus",
+                "tags": {
+                    "key": "value"
+                },
+                "properties": {
+                    "status": "enabled",
+                    "scope": "myRepository",
+                    "actions": [
+                        "push"
+                    ],
+                    "provisioningState": "Creating"
+                }
+            }
+        }
     }
 }

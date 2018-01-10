@@ -141,9 +141,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The public part of the deleted key.",
+            "description": "The public part of the deleted key and deletion information on when the key will be purged.",
             "schema": {
-              "$ref": "#/definitions/KeyBundle"
+              "$ref": "#/definitions/DeletedKeyBundle"
             }
           },
           "default": {
@@ -733,6 +733,147 @@
         }
       }
     },
+    "/deletedkeys": {
+      "get": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "GetDeletedKeys",
+        "description": "List deleted keys in the specified vault. Authorization: Requires the keys/list permission.",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys",
+            "schema": {
+              "$ref": "#/definitions/DeletedKeyListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deletedkeys/{key-name}": {
+      "get": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "GetDeletedKey",
+        "description": "Retrieves the deleted key information plus its attributes. Authorization: Requires the keys/get permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info",
+            "schema": {
+              "$ref": "#/definitions/DeletedKeyBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "PurgeDeletedKey",
+        "description": "Permanently deletes the specified key. aka purges the key. Authorization: Requires the keys/purge permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content signaling that the key was purged forever."
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/deletedkeys/{key-name}/recover": {
+      "post": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "RecoverDeletedKey",
+        "description": "Recovers the deleted key back to its current version under /keys. Authorization: Requires the keys/recover permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted key"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Key bundle of the original key and its attributes",
+            "schema": {
+              "$ref": "#/definitions/KeyBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
     "/secrets/{secret-name}": {
       "put": {
         "tags": [
@@ -800,9 +941,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The deleted secret.",
+            "description": "The deleted secret and information on when the secret will be deleted, and how to recover the deleted secret.",
             "schema": {
-              "$ref": "#/definitions/SecretBundle"
+              "$ref": "#/definitions/DeletedSecretBundle"
             }
           },
           "default": {
@@ -999,6 +1140,220 @@
         }
       }
     },
+    "/deletedsecrets": {
+      "get": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "GetDeletedSecrets",
+        "description": "List deleted secrets in the specified vault. Authorization: requires the secrets/list permission.",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of deleted secrets in the vault along with a link to the next page of deleted secrets",
+            "schema": {
+              "$ref": "#/definitions/DeletedSecretListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deletedsecrets/{secret-name}": {
+      "get": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "GetDeletedSecret",
+        "description": "Retrieves the deleted secret information plus its attributes. Authorization: requires the secrets/get permission.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Secret bundle of the secret and its attributes",
+            "schema": {
+              "$ref": "#/definitions/DeletedSecretBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "PurgeDeletedSecret",
+        "description": "Permanently deletes the specified secret. aka purges the secret. Authorization: requires the secrets/purge permission.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content signaling that the secret was purged forever."
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/deletedsecrets/{secret-name}/recover": {
+      "post": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "RecoverDeletedSecret",
+        "description": "Recovers the deleted secret back to its current version under /secrets. Authorization: requires the secrets/recover permission.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted secret"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Secret bundle of the original secret and its attributes",
+            "schema": {
+              "$ref": "#/definitions/SecretBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/secrets/{secret-name}/backup": {
+      "post": {
+        "tags": [
+          "Secrets"
+        ],
+        "operationId": "BackupSecret",
+        "description": "Requests that a backup of the specified secret be downloaded to the client. Authorization: requires the secrets/backup permission.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The backup blob containing the backed up secret.",
+            "schema": {
+              "$ref": "#/definitions/BackupSecretResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/secrets/restore": {
+      "post": {
+        "tags": [
+          "Secrets"
+        ],
+        "operationId": "RestoreSecret",
+        "description": "Restores a backed up secret to a vault. Authorization: requires the secrets/restore permission.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/SecretRestoreParameters"
+            },
+            "description": "The parameters to restore the secret."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restored secret bundle in the vault.",
+            "schema": {
+              "$ref": "#/definitions/SecretBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },    
     "/certificates": {
       "get": {
         "tags": [
@@ -1065,7 +1420,7 @@
           "200": {
             "description": "The deleted certificate.",
             "schema": {
-              "$ref": "#/definitions/CertificateBundle"
+              "$ref": "#/definitions/DeletedCertificateBundle"
             }
           },
           "default": {
@@ -1083,8 +1438,8 @@
           "Certificates"
         ],
         "operationId": "SetCertificateContacts",
+        "description": "Sets the certificate contacts for the specified key vault. Authorization: requires the certificates/managecontacts permission.",
         "summary": "Sets the certificate contacts for the specified key vault.",
-        "description": " ",
         "parameters": [
           {
             "name": "contacts",
@@ -1146,8 +1501,8 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateContacts",
+        "description": "Deletes the certificate contacts for a specified key vault certificate. Authorization: requires the certificates/managecontacts permission.",
         "summary": "Deletes the certificate contacts for a specified key vault.",
-        "description": " ",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1218,7 +1573,7 @@
         ],
         "operationId": "SetCertificateIssuer",
         "summary": "Sets the specified certificate issuer.",
-        "description": " ",
+        "description": "The SetCertificateIssuer operation adds or updates the specified certificate issuer.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1262,7 +1617,7 @@
         ],
         "operationId": "UpdateCertificateIssuer",
         "summary": "Updates the specified certificate issuer.",
-        "description": " ",
+        "description": "The UpdateCertificateIssuer operation performs an update on the specified certificate issuer entity.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1340,7 +1695,7 @@
         ],
         "operationId": "DeleteCertificateIssuer",
         "summary": "Deletes the specified certificate issuer.",
-        "description": " ",
+        "description": "The DeleteCertificateIssuer operation permanently removes the specified certificate issuer from the vault.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1598,7 +1953,7 @@
         ],
         "operationId": "UpdateCertificate",
         "summary": "Updates the specified attributes associated with the given certificate.",
-        "description": " ",
+        "description": "The UpdateCertificate operation applies the specified update on the given certificate; note the only elements being updated are the certificate's attributes.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1648,8 +2003,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificate",
-        "summary": "Gets information about a specified certificate.",
-        "description": " The GetCertificate operation returns information about a specific certificate in the specified key vault",
+        "description": "Gets information about a specified certificate. Authorization: requires the certificates/get permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1691,8 +2045,7 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificateOperation",
-        "summary": "Updates a certificate operation.",
-        "description": " ",
+        "description": "Updates a certificate operation. Authorization: requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1735,8 +2088,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificateOperation",
-        "summary": "Gets the operation associated with a specified certificate.",
-        "description": "The GetCertificateOperation operation returns the certificate operation associated with the certificate.",
+        "description": "Gets the operation associated with a specified certificate. Authorization: requires the certificates/get permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1769,8 +2121,7 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateOperation",
-        "summary": "Deletes the operation for a specified certificate.",
-        "description": " ",
+        "description": "Deletes the operation for a specified certificate. Authorization: requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1806,7 +2157,7 @@
         ],
         "operationId": "MergeCertificate",
         "summary": "Merges a certificate or a certificate chain with a key pair existing on the server.",
-        "description": " ",
+        "description": "The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. Authorization: requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1841,6 +2192,690 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        }
+      }
+    },
+    "/deletedcertificates": {
+      "get": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "GetDeletedCertificates",
+        "summary": "Lists the deleted certificates in the specified vault, currently available for recovery.",
+        "description": "The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging.",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates",
+            "schema": {
+              "$ref": "#/definitions/DeletedCertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deletedcertificates/{certificate-name}": {
+      "get": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "GetDeletedCertificate",
+        "summary": "Retrieves information about the specified deleted certificate.",
+        "description": "The GetDeletedCertificate operation retrieves the deleted certificate information plus its attributes, such as retention interval, scheduled permanent deletion and the current deletion recovery level.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Certificate bundle of the certificate and its attributes",
+            "schema": {
+              "$ref": "#/definitions/DeletedCertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "PurgeDeletedCertificate",
+        "summary": "Permanently deletes the specified deleted certificate.",
+        "description": "The PurgeDeletedCertificate operation performs an irreversible deletion of the specified certificate, without possibility for recovery. The operation is not available if the recovery level does not specify 'Purgeable'. Requires the explicit granting of the 'purge' permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content signaling that the certificate was purged forever."
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/deletedcertificates/{certificate-name}/recover": {
+      "post": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "RecoverDeletedCertificate",
+        "summary": "Recovers the deleted certificate back to its current version under /certificates.",
+        "description": "The RecoverDeletedCertificate operation performs the reversal of the Delete operation. The operation is applicable in vaults enabled for soft-delete, and must be issued during the retention interval (available in the deleted certificate's attributes).",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted certificate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Certificate bundle of the original certificate and its attributes",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/storage": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "GetStorageAccounts",
+        "description": "List storage accounts managed by specified key vault",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of storage accounts along with a link to the next page of storage accounts.",
+            "schema": {
+              "$ref": "#/definitions/StorageListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Storage account": {
+            "$ref": "../examples/storage/listStorageAccount.json"
+          }
+        }
+      }
+    },
+    "/storage/{storage-account-name}": {
+      "delete": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "DeleteStorageAccount",
+        "description": "Deletes a storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Storage account": {
+            "$ref": "../examples/storage/deleteStorageAccount.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "GetStorageAccount",
+        "description": "Gets information about a specified storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Storage account": {
+            "$ref": "../examples/storage/getStorageAccount.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "SetStorageAccount",
+        "description": "Creates or updates a new storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCreateParameters"
+            },
+            "description": "The parameters to create a storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The created storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Set Storage account": {
+            "$ref": "../examples/storage/setStorageAccount.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "UpdateStorageAccount",
+        "description": "Updates the specified attributes associated with the given storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountUpdateParameters"
+            },
+            "description": "The parameters to update a storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Storage account": {
+            "$ref": "../examples/storage/updateStorageAccount.json"
+          }
+        }
+      }
+    },
+    "/storage/{storage-account-name}/regeneratekey": {
+      "post": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "RegenerateStorageAccountKey",
+        "description": "Regenerates the specified key value for the given storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountRegenerteKeyParameters"
+            },
+            "description": "The parameters to regenerate storage account key."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regenerate Storage account key": {
+            "$ref": "../examples/storage/regenerateStorageAccountKey.json"
+          }
+        }
+      }
+    },
+    "/storage/{storage-account-name}/sas": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "GetSasDefinitions",
+        "description": "List storage SAS definitions for the given storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of SAS definitions along with a link to the next page of SAS definitions.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Storage Sas Definition": {
+            "$ref": "../examples/storage/listStorageSasDefinition.json"
+          }
+        }
+      }
+    },
+    "/storage/{storage-account-name}/sas/{sas-definition-name}": {
+      "delete": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "DeleteSasDefinition",
+        "description": "Deletes a SAS definition from a specified storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "sas-definition-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the SAS definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted SAS definition.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Storage Sas Definition": {
+            "$ref": "../examples/storage/deleteStorageSasDefinition.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "GetSasDefinition",
+        "description": "Gets information about a SAS definition for the specified storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "sas-definition-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the SAS definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved SAS definition.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Storage Sas Definition": {
+            "$ref": "../examples/storage/getStorageSasDefinition.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "SetSasDefinition",
+        "description": "Creates or updates a new SAS definition for the specified storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "sas-definition-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the SAS definition."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionCreateParameters"
+            },
+            "description": "The parameters to create a SAS definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The created SAS definition.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Set Storage Sas definition": {
+            "$ref": "../examples/storage/setStorageSasDefinition.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "UpdateSasDefinition",
+        "description": "Updates the specified attributes associated with the given SAS definition.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "sas-definition-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the SAS definition."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionUpdateParameters"
+            },
+            "description": "The parameters to update a SAS definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated SAS definition.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Storage Sas definition": {
+            "$ref": "../examples/storage/updateStorageSasDefinition.json"
           }
         }
       }
@@ -1965,6 +3000,19 @@
           "$ref": "#/definitions/Attributes"
         }
       ],
+      "properties": {
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for keys in the current vault. If it contains 'Purgeable' the key can be permanently deleted by a privileged user; otherwise, only the system can purge the key, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
       "description": "The attributes of a key managed by the key vault service."
     },
     "KeyBundle": {
@@ -2016,6 +3064,58 @@
         }
       },
       "description": "The key item containing key metadata."
+    },
+    "DeletedKeyBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyBundle"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted key."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key was deleted, in UTC"
+        }
+      },
+      "description": "A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info"
+    },
+    "DeletedKeyItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyItem"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted key."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key was deleted, in UTC"
+        }
+      },
+      "description": "The deleted key item containing the deleted key metadata and information about deletion."
     },
     "SecretBundle": {
       "properties": {
@@ -2084,13 +3184,90 @@
       },
       "description": "The secret item containing secret metadata."
     },
+    "DeletedSecretBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBundle"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted secret."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret was deleted, in UTC"
+        }
+      },
+      "description": "A Deleted Secret consisting of its previous id, attributes and its tags, as well as information on when it will be purged."
+    },
+    "DeletedSecretItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretItem"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted secret."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret was deleted, in UTC"
+        }
+      },
+      "description": "The deleted secret item containing metadata about the deleted secret."
+    },
     "SecretAttributes": {
       "allOf": [
         {
           "$ref": "#/definitions/Attributes"
         }
       ],
+      "properties": {
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for secrets in the current vault. If it contains 'Purgeable', the secret can be permanently deleted by a privileged user; otherwise, only the system can purge the secret, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
       "description": "The secret management attributes."
+    },
+    "SecretRestoreParameters": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "secretBundleBackup",
+          "format": "base64url",
+          "description": "The backup blob associated with a secret bundle."
+        }
+      },
+      "description": "The secret restore parameters.",
+      "required": [ "value" ]
     },
     "CertificateAttributes": {
       "allOf": [
@@ -2098,6 +3275,19 @@
           "$ref": "#/definitions/Attributes"
         }
       ],
+      "properties": {
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains 'Purgeable', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
       "description": "The certificate management attributes."
     },
     "CertificateItem": {
@@ -2190,6 +3380,58 @@
         }
       },
       "description": "A certificate bundle consists of a certificate (X509) plus its attributes."
+    },
+    "DeletedCertificateBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateBundle"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted certificate."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate was deleted, in UTC"
+        }
+      },
+      "description": "A Deleted Certificate consisting of its previous id, attributes and its tags, as well as information on when it will be purged."
+    },
+    "DeletedCertificateItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateItem"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted certificate."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate was deleted, in UTC"
+        }
+      },
+      "description": "The deleted certificate item containing metadata about the deleted certificate."
     },
     "CertificateOperation": {
       "properties": {
@@ -2645,7 +3887,7 @@
           "type": "string",
           "minLength": 1,
           "description": "algorithm identifier",
-          "enum": [ "RSA-OAEP", "RSA1_5" ],
+          "enum": [ "RSA-OAEP", "RSA-OAEP-256", "RSA1_5" ],
           "x-ms-enum": {
             "name": "JsonWebKeyEncryptionAlgorithm",
             "modelAsString": true
@@ -2666,7 +3908,7 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "RS256", "RS384", "RS512", "RSNULL" ],
+          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true
@@ -2687,7 +3929,7 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "RS256", "RS384", "RS512", "RSNULL" ],
+          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true
@@ -2998,6 +4240,24 @@
       },
       "description": "The key list result."
     },
+    "DeletedKeyListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedKeyItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of deleted keys."
+        }
+      },
+      "description": "A list of keys that have been deleted in this vault."
+    },
     "SecretListResult": {
       "properties": {
         "value": {
@@ -3016,6 +4276,24 @@
       },
       "description": "The secret list result."
     },
+    "DeletedSecretListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedSecretItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of the deleted secrets in the vault along with a link to the next page of deleted secrets"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of deleted secrets."
+        }
+      },
+      "description": "The deleted secret list result"
+    },
     "CertificateListResult": {
       "properties": {
         "value": {
@@ -3033,6 +4311,24 @@
         }
       },
       "description": "The certificate list result."
+    },
+    "DeletedCertificateListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedCertificateItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of deleted certificates."
+        }
+      },
+      "description": "A list of certificates that have been deleted in this vault."
     },
     "CertificateIssuerListResult": {
       "properties": {
@@ -3063,6 +4359,17 @@
       },
       "description": "The backup key result, containing the backup blob."
     },
+    "BackupSecretResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "readOnly": true,
+          "description": "The backup blob containing the backed up secret."
+        }
+      },
+      "description": "The backup secret result, containing the backup blob."
+    },    
     "PendingCertificateSigningRequestResult": {
       "properties": {
         "value": {
@@ -3072,6 +4379,344 @@
         }
       },
       "description": "The pending certificate signing request result."
+    },
+    "StorageAccountAttributes": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "the enabled state of the object."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Creation time in UTC."
+        },
+        "updated": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Last updated time in UTC."
+        }
+      },
+      "description": "The storage account management attributes."
+    },
+    "StorageBundle": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The storage account id.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The storage account resource id.",
+          "readOnly": true
+        },
+        "activeKeyName": {
+          "type": "string",
+          "description": "The current active storage account key name.",
+          "readOnly": true
+        },
+        "autoRegenerateKey": {
+          "type": "boolean",
+          "description": "whether keyvault should manage the storage account for the user.",
+          "readOnly": true
+        },
+        "regenerationPeriod": {
+          "type": "string",
+          "description": "The key regeneration time duration specified in ISO-8601 format.",
+          "readOnly": true
+        },
+        "attributes": {
+          "$ref": "#/definitions/StorageAccountAttributes",
+          "description": "The storage account attributes.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs",
+          "readOnly": true
+        }
+      },
+      "description": "A Storage account bundle consists of key vault storage account details plus its attributes."
+    },
+    "StorageAccountCreateParameters": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Storage account resource id."
+        },
+        "activeKeyName": {
+          "type": "string",
+          "description": "Current active storage account key name."
+        },
+        "autoRegenerateKey": {
+          "type": "boolean",
+          "description": "whether keyvault should manage the storage account for the user."
+        },
+        "regenerationPeriod": {
+          "type": "string",
+          "description": "The key regeneration time duration specified in ISO-8601 format."
+        },
+        "attributes": {
+          "x-ms-client-name": "StorageAccountAttributes",
+          "$ref": "#/definitions/StorageAccountAttributes",
+          "description": "The attributes of the storage account."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The storage account create parameters.",
+      "required": [ "resourceId", "activeKeyName", "autoRegenerateKey" ]
+    },
+    "StorageAccountUpdateParameters": {
+      "properties": {
+        "activeKeyName": {
+          "type": "string",
+          "description": "The current active storage account key name."
+        },
+        "autoRegenerateKey": {
+          "type": "boolean",
+          "description": "whether keyvault should manage the storage account for the user."
+        },
+        "regenerationPeriod": {
+          "type": "string",
+          "description": "The key regeneration time duration specified in ISO-8601 format."
+        },
+        "attributes": {
+          "x-ms-client-name": "StorageAccountAttributes",
+          "$ref": "#/definitions/StorageAccountAttributes",
+          "description": "The attributes of the storage account."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The storage account update parameters."
+    },
+    "StorageAccountRegenerteKeyParameters": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The storage account key name."
+        }
+      },
+      "description": "The storage account key regenerate parameters.",
+      "required": [ "keyName" ]
+    },
+    "StorageAccountItem": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Storage identifier.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Storage account resource Id.",
+          "readOnly": true
+        },
+        "attributes": {
+          "$ref": "#/definitions/StorageAccountAttributes",
+          "description": "The storage account management attributes.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs.",
+          "readOnly": true
+        }
+      },
+      "description": "The storage account item containing storage account metadata."
+    },
+    "StorageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccountItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of storage accounts in the key vault along with a link to the next page of storage accounts."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of storage accounts."
+        }
+      },
+      "description": "The storage accounts list result."
+    },
+    "SasDefinitionAttributes": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "the enabled state of the object."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Creation time in UTC."
+        },
+        "updated": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Last updated time in UTC."
+        }
+      },
+      "description": "The SAS definition management attributes."
+    },
+    "SasDefinitionBundle": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The SAS definition id.",
+          "readOnly": true
+        },
+        "sid": {
+          "x-ms-client-name": "SecretId",
+          "type": "string",
+          "description": "Storage account SAS definition secret id.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The SAS definition metadata in the form of key-value pairs.",
+          "readOnly": true
+        },
+        "attributes": {
+          "$ref": "#/definitions/SasDefinitionAttributes",
+          "description": "The SAS definition attributes.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs",
+          "readOnly": true
+        }
+      },
+      "description": "A SAS definition bundle consists of key vault SAS definition details plus its attributes."
+    },
+    "SasDefinitionItem": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The storage SAS identifier.",
+          "readOnly": true
+        },
+        "sid": {
+          "x-ms-client-name": "SecretId",
+          "type": "string",
+          "description": "The storage account SAS definition secret id.",
+          "readOnly": true
+        },
+        "attributes": {
+          "$ref": "#/definitions/SasDefinitionAttributes",
+          "description": "The SAS definition management attributes.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs.",
+          "readOnly": true
+        }
+      },
+      "description": "The SAS definition item containing storage SAS definition metadata."
+    },
+    "SasDefinitionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SasDefinitionItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of SAS definitions along with a link to the next page of SAS definitions."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of SAS defintions."
+        }
+      },
+      "description": "The storage account SAS definition list result."
+    },
+    "SasDefinitionCreateParameters": {
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Sas definition creation metadata in the form of key-value pairs."
+        },
+
+        "attributes": {
+          "x-ms-client-name": "SasDefinitionAttributes",
+          "$ref": "#/definitions/SasDefinitionAttributes",
+          "description": "The attributes of the SAS definition."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The SAS definition create parameters.",
+      "required": [ "parameters" ]
+    },
+    "SasDefinitionUpdateParameters": {
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Sas definition update metadata in the form of key-value pairs."
+        },
+        "attributes": {
+          "x-ms-client-name": "SasDefinitionAttributes",
+          "$ref": "#/definitions/SasDefinitionAttributes",
+          "description": "The attributes of the SAS definition."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The SAS definition update parameters."
     },
     "KeyVaultError": {
       "properties": {

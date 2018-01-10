@@ -15,6 +15,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/containerServices": {
       "get": {
@@ -295,7 +313,7 @@
             "Kubernetes"
           ],
           "x-ms-enum": {
-            "name": "ContainerServiceOchestratorTypes",
+            "name": "ContainerServiceOrchestratorTypes",
             "modelAsString": false
           },
           "description": "The orchestrator to use to manage container service cluster resources. Valid values are Swarm, DCOS, and Custom."
