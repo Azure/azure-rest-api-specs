@@ -66,8 +66,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/timeseriesinsights/mgmt/2017-11-15/timeseriesinsights
 ```
 
-# Validation
-
 ## Suppression
 
 ``` yaml
