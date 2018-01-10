@@ -58,7 +58,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.IotHub
+  namespace: azure.mgmt.iothubprovisioningservices
   output-folder: $(csharp-sdks-folder)/ProvisioningServices/Management.ProvisioningServices/Generated
   clear-output-folder: true
 ```
