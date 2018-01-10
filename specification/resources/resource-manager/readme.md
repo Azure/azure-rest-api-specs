@@ -435,6 +435,8 @@ python:
   payload-flattening-threshold: 2
   clear-output-folder: true
   no-namespace-folders: true
+  verbose: true
+  debug: true
 ```
 
 ### Python multi-api
