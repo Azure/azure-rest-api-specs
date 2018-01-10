@@ -78,9 +78,9 @@
                 "tags": [
                     "EventSubscriptions"
                 ],
-                "summary": "Create an event subscription",
-                "description": "Asynchronously creates a new event subscription to the specified scope. Existing event subscriptions cannot be updated with this API and should instead use the Update event subscription API.",
-                "operationId": "EventSubscriptions_Create",
+                "summary": "Create or update an event subscription",
+                "description": "Asynchronously creates a new event subscription or updates an existing event subscription based on the specified scope.",
+                "operationId": "EventSubscriptions_CreateOrUpdate",
                 "consumes": [
                     "application/json"
                 ],
@@ -91,7 +91,7 @@
                     {
                         "name": "scope",
                         "in": "path",
-                        "description": "The scope of the resource to which the event subscription needs to be created. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an EventGrid topic. For example, use '/subscriptions/{subscriptionId}/' for a subscription, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a resource group, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}' for a resource, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}' for an EventGrid topic.",
+                        "description": "The identifier of the resource to which the event subscription needs to be created or updated. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an EventGrid topic. For example, use '/subscriptions/{subscriptionId}/' for a subscription, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a resource group, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}' for a resource, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}' for an EventGrid topic.",
                         "required": true,
                         "type": "string",
                         "x-ms-skip-url-encoding": true
@@ -99,7 +99,7 @@
                     {
                         "name": "eventSubscriptionName",
                         "in": "path",
-                        "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 64 characters in length and use alphanumeric letters only.",
+                        "description": "Name of the event subscription. Event subscription names must be between 3 and 64 characters in length and should use alphanumeric letters only.",
                         "required": true,
                         "type": "string"
                     },
@@ -118,7 +118,7 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created",
+                        "description": "EventSubscription CreateOrUpdate request accepted.",
                         "schema": {
                             "$ref": "#/definitions/EventSubscription"
                         }
@@ -128,17 +128,17 @@
                     }
                 },
                 "x-ms-examples": {
-                    "EventSubscriptions_CreateForSubscription": {
-                        "$ref": "./examples/EventSubscriptions_CreateForSubscription.json"
+                    "EventSubscriptions_CreateOrUpdateForSubscription": {
+                        "$ref": "./examples/EventSubscriptions_CreateOrUpdateForSubscription.json"
                     },
-                    "EventSubscriptions_CreateForResourceGroup": {
-                        "$ref": "./examples/EventSubscriptions_CreateForResourceGroup.json"
+                    "EventSubscriptions_CreateOrUpdateForResourceGroup": {
+                        "$ref": "./examples/EventSubscriptions_CreateOrUpdateForResourceGroup.json"
                     },
-                    "EventSubscriptions_CreateForResource": {
-                        "$ref": "./examples/EventSubscriptions_CreateForResource.json"
+                    "EventSubscriptions_CreateOrUpdateForResource": {
+                        "$ref": "./examples/EventSubscriptions_CreateOrUpdateForResource.json"
                     },
-                    "EventSubscriptions_CreateForCustomTopic": {
-                        "$ref": "./examples/EventSubscriptions_CreateForCustomTopic.json"
+                    "EventSubscriptions_CreateOrUpdateForCustomTopic": {
+                        "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic.json"
                     }
                 },
                 "x-ms-long-running-operation": true
