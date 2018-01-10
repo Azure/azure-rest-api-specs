@@ -181,6 +181,47 @@
           }
         }
       },
+      "patch": {
+        "operationId": "ContainerGroups_Update",
+        "x-ms-examples": {
+          "ContainerGroupsUpdate": {
+            "$ref": "./examples/ContainerGroupsUpdate.json"
+          }
+        },
+        "summary": "Update container groups.",
+        "description": "Updates container group tags with specified values.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          },
+          {
+            "name": "containerGroup",
+            "description": "The container group with tags to be updated.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/containerGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/containerGroup"
+            }
+          }
+        }
+      },
       "delete": {
         "operationId": "ContainerGroups_Delete",
         "x-ms-examples": {
