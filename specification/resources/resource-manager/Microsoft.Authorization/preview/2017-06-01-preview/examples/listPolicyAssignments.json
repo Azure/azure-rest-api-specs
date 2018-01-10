@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId":  "subId",
+    "api-version": "2017-06-01-preview",
+    "$filter":  "atScope()" 
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subId/providers/Microsoft.Authorization/policyAssignments/costManagement",
+            "type": "Microsoft.Authorization/policyAssignments",
+            "name": "costManagement",
+            "properties": {
+              "displayName": "Storage Cost Management",
+              "description": "Policies required to minimize the risk of accidental cost overruns",
+              "metadata": {
+                "category": "Cost Management"
+              },
+              "policyDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+              "parameters": { "allowedSkus": { "type": "Array" } },
+              "notScopes": [ "/subscriptions/subId/resourcegroups/testingResourceGroup" ],
+              "scope": "/subscriptions/subId"
+            },
+            "sku": {
+              "name": "A0",
+              "tier": "Free"
+            }
+          },
+          {
+            "id": "/subscriptions/subId/providers/Microsoft.Authorization/policyAssignments/tagEnforcement",
+            "type": "Microsoft.Authorization/policyAssignments",
+            "name": "tagEnforcement",
+            "properties": {
+              "displayName": "Enforces a tag key and value",
+              "description": "Policy that ensures a given tag key and value are present on all resources",
+              "policyDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/policyDefinitions/tagKeyValue",
+              "scope": "/subscriptions/subId"
+            },
+            "sku": {
+              "name": "A0",
+              "tier": "Free"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
