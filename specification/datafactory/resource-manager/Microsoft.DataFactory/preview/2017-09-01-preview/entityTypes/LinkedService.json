@@ -55,12 +55,12 @@
       "description": "Azure Storage linked service properties.",
       "properties": {
         "connectionString": {
-          "type": "object",
-          "description": "The connection string. It is mutually exclusive with sasUri property. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The connection string. It is mutually exclusive with sasUri property.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "sasUri": {
-          "type": "object",
-          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -92,8 +92,8 @@
       "description": "Azure SQL Data Warehouse linked service properties.",
       "properties": {
         "connectionString": {
-          "type": "object",
-          "description": "The connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -128,16 +128,16 @@
       "description": "SQL Server linked service properties.",
       "properties": {
         "connectionString": {
-          "type": "object",
-          "description": "The connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "userName": {
           "type": "object",
-          "description": "The on-premises Windows authentication user name. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "The on-premises Windows authentication password. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The on-premises Windows authentication password.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -172,8 +172,8 @@
       "description": "Azure SQL Database linked service properties.",
       "properties": {
         "connectionString": {
-          "type": "object",
-          "description": "The connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -209,19 +209,19 @@
       "properties": {
         "accountName": {
           "type": "object",
-          "description": "The Azure Batch account name. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Azure Batch account name. Type: string (or Expression with resultType string)."
         },
         "accessKey": {
-          "type": "object",
-          "description": "The Azure Batch account access key. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Azure Batch account access key.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "batchUri": {
           "type": "object",
-          "description": "The Azure Batch URI. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Azure Batch URI. Type: string (or Expression with resultType string)."
         },
         "poolName": {
           "type": "object",
-          "description": "The Azure Batch pool name. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Azure Batch pool name. Type: string (or Expression with resultType string)."
         },
         "linkedServiceName": {
           "description": "The Azure Storage linked service reference.",
@@ -264,7 +264,7 @@
       "properties": {
         "baseUrl": {
           "type": "object",
-          "description": "The base URL of the Azure Key Vault. e.g. https://myakv.vault.azure.net Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The base URL of the Azure Key Vault. e.g. https://myakv.vault.azure.net Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -295,8 +295,8 @@
       "description": "CosmosDB linked service properties.",
       "properties": {
         "connectionString": {
-          "type": "object",
-          "description": "The connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -340,11 +340,11 @@
             "OnPremisesWithIfd"
           ],
           "type": "object",
-          "description": "The deployment type of the Dynamics instance. 'Online' for Dynamics Online and 'OnPremisesWithIfd' for Dynamics on-premises with Ifd. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The deployment type of the Dynamics instance. 'Online' for Dynamics Online and 'OnPremisesWithIfd' for Dynamics on-premises with Ifd. Type: string (or Expression with resultType string)."
         },
         "hostName": {
           "type": "object",
-          "description": "The host name of the on-premises Dynamics server. The property is required for on-prem and not allowed for online. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The host name of the on-premises Dynamics server. The property is required for on-prem and not allowed for online. Type: string (or Expression with resultType string)."
         },
         "port": {
           "type": "object",
@@ -352,7 +352,7 @@
         },
         "organizationName": {
           "type": "object",
-          "description": "The organization name of the Dynamics instance. The property is required for on-prem and required for online when there are more than one Dynamics instances associated with the user. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The organization name of the Dynamics instance. The property is required for on-prem and required for online when there are more than one Dynamics instances associated with the user. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "x-ms-enum": {
@@ -364,15 +364,15 @@
             "Ifd"
           ],
           "type": "object",
-          "description": "The authentication type to connect to Dynamics server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The authentication type to connect to Dynamics server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
-          "description": "User name to access the Dynamics instance. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "User name to access the Dynamics instance. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password to access the Dynamics instance. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password to access the Dynamics instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
           "type": "object",
@@ -410,15 +410,15 @@
       "properties": {
         "clusterUri": {
           "type": "object",
-          "description": "HDInsight cluster URI. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "HDInsight cluster URI. Type: string (or Expression with resultType string)."
         },
         "userName": {
           "type": "object",
-          "description": "HDInsight cluster user name. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "HDInsight cluster user name. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "HDInsight cluster password. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "HDInsight cluster password.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "linkedServiceName": {
           "description": "The Azure Storage linked service reference.",
@@ -462,15 +462,15 @@
       "properties": {
         "host": {
           "type": "object",
-          "description": "Host name of the server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Host name of the server. Type: string (or Expression with resultType string)."
         },
         "userId": {
           "type": "object",
-          "description": "User ID to logon the server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "User ID to logon the server. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password to logon the server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password to logon the server.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -505,8 +505,8 @@
       "description": "Oracle database linked service properties.",
       "properties": {
         "connectionString": {
-          "type": "object",
-          "description": "The connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -541,8 +541,8 @@
       "description": "Azure MySQL database linked service properties.",
       "properties": {
         "connectionString": {
-          "type": "object",
-          "description": "The connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -578,23 +578,23 @@
       "properties": {
         "server": {
           "type": "object",
-          "description": "Server name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
         },
         "database": {
           "type": "object",
-          "description": "Database name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Database name for connection. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
-          "description": "Schema name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -631,23 +631,23 @@
       "properties": {
         "server": {
           "type": "object",
-          "description": "Server name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
         },
         "database": {
           "type": "object",
-          "description": "Database name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Database name for connection. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
-          "description": "Schema name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -684,15 +684,15 @@
       "properties": {
         "server": {
           "type": "object",
-          "description": "Server name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
         },
         "database": {
           "type": "object",
-          "description": "Database name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Database name for connection. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
-          "description": "Schema name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "description": "AuthenticationType to be used for connection.",
@@ -708,11 +708,11 @@
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -749,15 +749,15 @@
       "properties": {
         "server": {
           "type": "object",
-          "description": "Server name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
         },
         "database": {
           "type": "object",
-          "description": "Database name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Database name for connection. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
-          "description": "Schema name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "description": "AuthenticationType to be used for connection.",
@@ -772,11 +772,11 @@
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -813,11 +813,11 @@
       "properties": {
         "server": {
           "type": "object",
-          "description": "Server name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
-          "description": "Schema name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "description": "AuthenticationType to be used for connection.",
@@ -833,11 +833,11 @@
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -873,27 +873,27 @@
       "properties": {
         "mlEndpoint": {
           "type": "object",
-          "description": "The Batch Execution REST URL for an Azure ML Web Service endpoint. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Batch Execution REST URL for an Azure ML Web Service endpoint. Type: string (or Expression with resultType string)."
         },
         "apiKey": {
-          "type": "object",
-          "description": "The API key for accessing the Azure ML model endpoint. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The API key for accessing the Azure ML model endpoint.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "updateResourceEndpoint": {
           "type": "object",
-          "description": "The Update Resource REST URL for an Azure ML Web Service endpoint. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Update Resource REST URL for an Azure ML Web Service endpoint. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalId": {
           "type": "object",
-          "description": "The ID of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML web service. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The ID of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML web service. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalKey": {
-          "type": "object",
-          "description": "The key of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML web service. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "$ref": "../datafactory.json#/definitions/SecureString",
+          "description": "The key of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML web service."
         },
         "tenant": {
           "type": "object",
-          "description": "The name or ID of the tenant to which the service principal belongs. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -929,24 +929,24 @@
       "description": "ODBC linked service properties.",
       "properties": {
         "connectionString": {
-          "type": "object",
-          "description": "The non-access credential portion of the connection string as well as an optional encrypted credential. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The non-access credential portion of the connection string as well as an optional encrypted credential.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "authenticationType": {
           "type": "object",
-          "description": "Type of authentication used to connect to the ODBC data store. Possible values are: Anonymous and Basic. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Type of authentication used to connect to the ODBC data store. Possible values are: Anonymous and Basic. Type: string (or Expression with resultType string)."
         },
         "credential": {
-          "type": "object",
-          "description": "The access credential portion of the connection string specified in driver-specific property-value format. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The access credential portion of the connection string specified in driver-specific property-value format.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "userName": {
           "type": "object",
-          "description": "User name for Basic authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "User name for Basic authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for Basic authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -982,11 +982,11 @@
       "properties": {
         "url": {
           "type": "object",
-          "description": "The URL of the HDFS service endpoint, e.g. http://myhostname:50070/webhdfs/v1 . Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The URL of the HDFS service endpoint, e.g. http://myhostname:50070/webhdfs/v1 . Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "type": "object",
-          "description": "Type of authentication used to connect to the HDFS. Possible values are: Anonymous and Windows. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Type of authentication used to connect to the HDFS. Possible values are: Anonymous and Windows. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -994,11 +994,11 @@
         },
         "userName": {
           "type": "object",
-          "description": "User name for Windows authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "User name for Windows authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for Windows authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for Windows authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         }
       },
       "required": [
@@ -1030,7 +1030,7 @@
       "properties": {
         "url": {
           "type": "object",
-          "description": "The URL of the OData service endpoint. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The URL of the OData service endpoint. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "description": "Type of authentication used to connect to the OData service.",
@@ -1046,11 +1046,11 @@
         },
         "userName": {
           "type": "object",
-          "description": "User name of the OData service. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "User name of the OData service. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password of the OData service. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password of the OData service.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1087,7 +1087,7 @@
       "properties": {
         "url": {
           "type": "object",
-          "description": "The URL of the web service endpoint, e.g. http://www.microsoft.com . Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The URL of the web service endpoint, e.g. http://www.microsoft.com . Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "description": "Type of authentication used to connect to the web table source.",
@@ -1188,11 +1188,11 @@
       "properties": {
         "host": {
           "type": "object",
-          "description": "Host name for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Host name for connection. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "type": "object",
-          "description": "AuthenticationType to be used for connection. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "AuthenticationType to be used for connection. Type: string (or Expression with resultType string)."
         },
         "port": {
           "type": "object",
@@ -1200,11 +1200,11 @@
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1240,7 +1240,7 @@
       "properties": {
         "server": {
           "type": "object",
-          "description": "The IP address or server name of the MongoDB server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The IP address or server name of the MongoDB server. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "description": "The authentication type to be used to connect to the MongoDB database.",
@@ -1256,19 +1256,19 @@
         },
         "databaseName": {
           "type": "object",
-          "description": "The name of the MongoDB database that you want to access. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The name of the MongoDB database that you want to access. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "authSource": {
           "type": "object",
-          "description": "Database to verify the username and password. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Database to verify the username and password. Type: string (or Expression with resultType string)."
         },
         "port": {
           "type": "object",
@@ -1309,31 +1309,31 @@
       "properties": {
         "dataLakeStoreUri": {
           "type": "object",
-          "description": "Data Lake Store service URI. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Data Lake Store service URI. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalId": {
           "type": "object",
-          "description": "The ID of the application used to authenticate against the Azure Data Lake Store account. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The ID of the application used to authenticate against the Azure Data Lake Store account. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalKey": {
-          "type": "object",
-          "description": "The Key of the application used to authenticate against the Azure Data Lake Store account. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Key of the application used to authenticate against the Azure Data Lake Store account.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "tenant": {
           "type": "object",
-          "description": "The name or ID of the tenant to which the service principal belongs. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
         },
         "accountName": {
           "type": "object",
-          "description": "Data Lake Store account name. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Data Lake Store account name. Type: string (or Expression with resultType string)."
         },
         "subscriptionId": {
           "type": "object",
-          "description": "Data Lake Store account subscription ID (if different from Data Factory account). Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Data Lake Store account subscription ID (if different from Data Factory account). Type: string (or Expression with resultType string)."
         },
         "resourceGroupName": {
           "type": "object",
-          "description": "Data Lake Store account resource group name (if different from Data Factory account). Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Data Lake Store account resource group name (if different from Data Factory account). Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -1369,19 +1369,19 @@
       "properties": {
         "environmentUrl": {
           "type": "object",
-          "description": "The URL of Salesforce instance. Default is 'https://login.salesforce.com'. To copy data from sandbox, specify 'https://test.salesforce.com'. To copy data from custom domain, specify, for example, 'https://[domain].my.salesforce.com'. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The URL of Salesforce instance. Default is 'https://login.salesforce.com'. To copy data from sandbox, specify 'https://test.salesforce.com'. To copy data from custom domain, specify, for example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
-          "description": "The username for Basic authentication of the Salesforce instance. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The username for Basic authentication of the Salesforce instance. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "The password for Basic authentication of the Salesforce instance. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The password for Basic authentication of the Salesforce instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "securityToken": {
-          "type": "object",
-          "description": "The security token is required to remotely access Salesforce instance. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The security token is required to remotely access Salesforce instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1414,15 +1414,15 @@
       "properties": {
         "url": {
           "type": "object",
-          "description": "The URL of SAP Cloud for Customer OData API. For example, '[https://[tenantname].crm.ondemand.com/sap/c4c/odata/v1]'. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The URL of SAP Cloud for Customer OData API. For example, '[https://[tenantname].crm.ondemand.com/sap/c4c/odata/v1]'. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
-          "description": "The username for Basic authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The username for Basic authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "The password for Basic authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1458,11 +1458,11 @@
       "properties": {
         "accessKeyId": {
           "type": "object",
-          "description": "The access key identifier of the Amazon S3 Identity and Access Management (IAM) user. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The access key identifier of the Amazon S3 Identity and Access Management (IAM) user. Type: string (or Expression with resultType string)."
         },
         "secretAccessKey": {
-          "type": "object",
-          "description": "The secret access key of the Amazon S3 Identity and Access Management (IAM) user. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The secret access key of the Amazon S3 Identity and Access Management (IAM) user.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1495,19 +1495,19 @@
       "properties": {
         "server": {
           "type": "object",
-          "description": "The name of the Amazon Redshift server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The name of the Amazon Redshift server. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
-          "description": "The username of the Amazon Redshift source. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The username of the Amazon Redshift source. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "The password of the Amazon Redshift source. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The password of the Amazon Redshift source.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "database": {
           "type": "object",
-          "description": "The database name of the Amazon Redshift source. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The database name of the Amazon Redshift source. Type: string (or Expression with resultType string)."
         },
         "port": {
           "type": "object",
@@ -1568,11 +1568,11 @@
       "properties": {
         "url": {
           "type": "object",
-          "description": "URL for Azure Search service. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "URL for Azure Search service. Type: string (or Expression with resultType string)."
         },
         "key": {
-          "type": "object",
-          "description": "Admin Key for Azure Search service. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Admin Key for Azure Search service",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1608,7 +1608,7 @@
       "properties": {
         "url": {
           "type": "object",
-          "description": "The base URL of the HTTP endpoint, e.g. http://www.microsoft.com. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The base URL of the HTTP endpoint, e.g. http://www.microsoft.com. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "description": "The authentication type to be used to connect to the HTTP server.",
@@ -1627,19 +1627,19 @@
         },
         "userName": {
           "type": "object",
-          "description": "User name for Basic, Digest, or Windows authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "User name for Basic, Digest, or Windows authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password for Basic, Digest, Windows, or ClientCertificate with EmbeddedCertData authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password for Basic, Digest, Windows, or ClientCertificate with EmbeddedCertData authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "embeddedCertData": {
           "type": "object",
-          "description": "Base64 encoded certificate data for ClientCertificate authentication. For on-premises copy with ClientCertificate authentication, either CertThumbprint or EmbeddedCertData/Password should be specified. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Base64 encoded certificate data for ClientCertificate authentication. For on-premises copy with ClientCertificate authentication, either CertThumbprint or EmbeddedCertData/Password should be specified. Type: string (or Expression with resultType string)."
         },
         "certThumbprint": {
           "type": "object",
-          "description": "Thumbprint of certificate for ClientCertificate authentication. Only valid for on-premises copy. For on-premises copy with ClientCertificate authentication, either CertThumbprint or EmbeddedCertData/Password should be specified. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Thumbprint of certificate for ClientCertificate authentication. Only valid for on-premises copy. For on-premises copy with ClientCertificate authentication, either CertThumbprint or EmbeddedCertData/Password should be specified. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -1679,7 +1679,7 @@
       "properties": {
         "host": {
           "type": "object",
-          "description": "Host name of the FTP server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Host name of the FTP server. Type: string (or Expression with resultType string)."
         },
         "port": {
           "type": "object",
@@ -1699,11 +1699,11 @@
         },
         "userName": {
           "type": "object",
-          "description": "Username to logon the FTP server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username to logon the FTP server. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password to logon the FTP server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password to logon the FTP server.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1747,7 +1747,7 @@
       "properties": {
         "host": {
           "type": "object",
-          "description": "The SFTP server host name. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The SFTP server host name. Type: string (or Expression with resultType string)."
         },
         "port": {
           "type": "object",
@@ -1767,11 +1767,11 @@
         },
         "userName": {
           "type": "object",
-          "description": "The username used to log on to the SFTP server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The username used to log on to the SFTP server. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password to logon the SFTP server for Basic authentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password to logon the SFTP server for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1779,15 +1779,15 @@
         },
         "privateKeyPath": {
           "type": "object",
-          "description": "The SSH private key file path for SshPublicKey authentication. Only valid for on-premises copy. For on-premises copy with SshPublicKey authentication, either PrivateKeyPath or PrivateKeyContent should be specified. SSH private key should be OpenSSH format. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The SSH private key file path for SshPublicKey authentication. Only valid for on-premises copy. For on-premises copy with SshPublicKey authentication, either PrivateKeyPath or PrivateKeyContent should be specified. SSH private key should be OpenSSH format. Type: string (or Expression with resultType string)."
         },
         "privateKeyContent": {
-          "type": "object",
-          "description": "Base64 encoded SSH private key content for SshPublicKey authentication. For on-premises copy with SshPublicKey authentication, either PrivateKeyPath or PrivateKeyContent should be specified. SSH private key should be OpenSSH format. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Base64 encoded SSH private key content for SshPublicKey authentication. For on-premises copy with SshPublicKey authentication, either PrivateKeyPath or PrivateKeyContent should be specified. SSH private key should be OpenSSH format.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "passPhrase": {
-          "type": "object",
-          "description": "The password to decrypt the SSH private key if the SSH private key is encrypted. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The password to decrypt the SSH private key if the SSH private key is encrypted.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "skipHostKeyValidation": {
           "type": "object",
@@ -1795,7 +1795,7 @@
         },
         "hostKeyFingerprint": {
           "type": "object",
-          "description": "The host key finger-print of the SFTP server. When SkipHostKeyValidation is false, HostKeyFingerprint should be specified. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The host key finger-print of the SFTP server. When SkipHostKeyValidation is false, HostKeyFingerprint should be specified. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -1827,23 +1827,23 @@
       "properties": {
         "server": {
           "type": "object",
-          "description": "Host name of the SAP BW instance. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Host name of the SAP BW instance. Type: string (or Expression with resultType string)."
         },
         "systemNumber": {
           "type": "object",
-          "description": "System number of the BW system. (Usually a two-digit decimal number represented as a string.) Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "System number of the BW system. (Usually a two-digit decimal number represented as a string.) Type: string (or Expression with resultType string)."
         },
         "clientId": {
           "type": "object",
-          "description": "Client ID of the client on the BW system. (Usually a three-digit decimal number represented as a string) Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Client ID of the client on the BW system. (Usually a three-digit decimal number represented as a string) Type: string (or Expression with resultType string)."
         },
         "userName": {
           "type": "object",
-          "description": "Username to access the SAP BW server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username to access the SAP BW server. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password to access the SAP BW server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password to access the SAP BW server.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1881,7 +1881,7 @@
       "properties": {
         "server": {
           "type": "object",
-          "description": "Host name of the SAP HANA server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Host name of the SAP HANA server. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "description": "The authentication type to be used to connect to the SAP HANA server.",
@@ -1897,11 +1897,11 @@
         },
         "userName": {
           "type": "object",
-          "description": "Username to access the SAP HANA server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Username to access the SAP HANA server. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "type": "object",
-          "description": "Password to access the SAP HANA server. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Password to access the SAP HANA server.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "encryptedCredential": {
           "type": "object",
@@ -1948,16 +1948,16 @@
           "type": "object"
         },
         "mwsAuthToken": {
-          "type": "object",
-          "description": "The Amazon MWS authentication token. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Amazon MWS authentication token.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessKeyId": {
           "description": "The access key id used to access data.",
           "type": "object"
         },
         "secretKey": {
-          "type": "object",
-          "description": "The secret key used to access data. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The secret key used to access data.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -2006,9 +2006,9 @@
     "AzurePostgreSqlLinkedServiceTypeProperties": { 
       "description": "Azure PostgreSQL linked service properties.", 
       "properties": {
-        "connectionString": {
-          "type": "object",
-          "description": "An ODBC connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+        "connectionString": { 
+          "description": "An ODBC connection string.", 
+          "$ref": "../datafactory.json#/definitions/SecretBase" 
         }, 
         "encryptedCredential": { 
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
@@ -2048,8 +2048,8 @@
           "type": "object"
         },
         "password": {
-          "type": "object",
-          "description": "The password corresponding to the user name that you provided in the username field. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The password corresponding to the user name that you provided in the username field.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -2096,9 +2096,9 @@
     "CouchbaseLinkedServiceTypeProperties": { 
       "description": "Couchbase server linked service properties.", 
       "properties": {
-        "connectionString": {
-          "type": "object",
-          "description": "An ODBC connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+        "connectionString": { 
+          "description": "An ODBC connection string.", 
+          "$ref": "../datafactory.json#/definitions/SecretBase" 
         }, 
         "encryptedCredential": { 
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
@@ -2129,9 +2129,9 @@
     "DrillLinkedServiceTypeProperties": { 
       "description": "Drill server linked service properties.", 
       "properties": {
-        "connectionString": {
-          "type": "object",
-          "description": "An ODBC connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+        "connectionString": { 
+          "description": "An ODBC connection string.", 
+          "$ref": "../datafactory.json#/definitions/SecretBase" 
         }, 
         "encryptedCredential": { 
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
@@ -2171,8 +2171,8 @@
           "type": "object"
         },
         "password": {
-          "type": "object",
-          "description": "The password corresponding to the user name. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The password corresponding to the user name.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -2244,8 +2244,8 @@
           }
         },
         "refreshToken": {
-          "type": "object",
-          "description": "The refresh token obtained from Google for authorizing access to BigQuery for UserAuthentication. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The refresh token obtained from Google for authorizing access to BigQuery for UserAuthentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "email": {
           "description": "The service account email ID that is used for ServiceAuthentication and can only be used on self-hosted IR.",
@@ -2296,9 +2296,9 @@
     "GreenplumLinkedServiceTypeProperties": { 
       "description": "Greenplum Database linked service properties.", 
       "properties": {
-        "connectionString": {
-          "type": "object",
-          "description": "An ODBC connection string. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+        "connectionString": { 
+          "description": "An ODBC connection string.", 
+          "$ref": "../datafactory.json#/definitions/SecretBase" 
         }, 
         "encryptedCredential": { 
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
@@ -2358,8 +2358,8 @@
           "type": "object"
         },
         "password": {
-          "type": "object",
-          "description": "The password corresponding to the user name. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The password corresponding to the user name.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
@@ -2475,8 +2475,8 @@
           "type": "object"
         },
         "password": {
-          "type": "object",
-          "description": "The password corresponding to the user name that you provided in the Username field. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The password corresponding to the user name that you provided in the Username field",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "httpPath": {
           "description": "The partial URL corresponding to the Hive server.",
@@ -2540,16 +2540,16 @@
           "type": "object"
         },
         "clientSecret": {
-          "description": "The client secret associated with your Hubspot application. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The client secret associated with your Hubspot application.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessToken": {
-          "description": "The access token obtained when initially authenticating your OAuth integration. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The access token obtained when initially authenticating your OAuth integration.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "refreshToken": {
-          "description": "The refresh token obtained when initially authenticating your OAuth integration. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The refresh token obtained when initially authenticating your OAuth integration.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -2621,8 +2621,8 @@
           "type": "object"
         },
         "password": {
-          "description": "The password corresponding to the user name when using UsernameAndPassword. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The password corresponding to the user name when using UsernameAndPassword.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
@@ -2690,8 +2690,8 @@
           "type": "object"
         },
         "password": {
-          "description": "The password corresponding to the user name that you provided in the username field. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The password corresponding to the user name that you provided in the username field.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -2743,8 +2743,8 @@
           "type": "object"
         },
         "accessToken": {
-          "description": "The access token from Magento. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The access token from Magento.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -2790,9 +2790,9 @@
     "MariaDBLinkedServiceTypeProperties": { 
       "description": "MariaDB server linked service properties.", 
       "properties": {
-        "connectionString": {
-          "description": "An ODBC connection string. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+        "connectionString": { 
+          "description": "An ODBC connection string.", 
+          "$ref": "../datafactory.json#/definitions/SecretBase" 
         }, 
         "encryptedCredential": { 
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
@@ -2832,8 +2832,8 @@
           "type": "object"
         },
         "clientSecret": {
-          "description": "The client secret of your Marketo service. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The client secret of your Marketo service.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -2889,8 +2889,8 @@
           "type": "object"
         },
         "clientSecret": {
-          "description": "The client secret associated with your PayPal application. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The client secret associated with your PayPal application.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -2967,8 +2967,8 @@
           "type": "object"
         },
         "password": {
-          "description": "The password corresponding to the user name. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The password corresponding to the user name.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
@@ -3056,8 +3056,8 @@
           "type": "object"
         },
         "password": {
-          "description": "The password corresponding to the user name. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The password corresponding to the user name.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
@@ -3127,12 +3127,12 @@
           "type": "object"
         },
         "accessToken": {
-          "description": "The access token for OAuth 1.0 authentication. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The access token for OAuth 1.0 authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessTokenSecret": {
-          "description": "The access token secret for OAuth 1.0 authentication. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The access token secret for OAuth 1.0 authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -3192,16 +3192,16 @@
           "type": "object"
         },
         "password": {
-          "description": "The password corresponding to the user name for Basic and OAuth2 authentication. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The password corresponding to the user name for Basic and OAuth2 authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "clientId": {
           "description": "The client id for OAuth2 authentication.",
           "type": "object"
         },
         "clientSecret": {
-          "description": "The client secret for OAuth2 authentication. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The client secret for OAuth2 authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -3253,8 +3253,8 @@
           "type": "object"
         },
         "accessToken": {
-          "description": "The API access token that can be used to access Shopify’s data. The token won't expire if it is offline mode. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The API access token that can be used to access Shopify’s data. The token won't expire if it is offline mode.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -3353,8 +3353,8 @@
           "type": "object"
         },
         "password": {
-          "description": "The password corresponding to the user name that you provided in the Username field. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The password corresponding to the user name that you provided in the Username field",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "httpPath": {
           "description": "The partial URL corresponding to the Spark server.",
@@ -3423,8 +3423,8 @@
           "type": "object"
         },
         "clientSecret": {
-          "description": "The client secret associated with your Square application. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The client secret associated with your Square application.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "redirectUri": {
           "description": "The redirect URL assigned in the Square application dashboard. (i.e. http://localhost:2500)",
@@ -3481,12 +3481,12 @@
           "type": "object"
         },
         "consumerKey": {
-          "description": "The consumer key associated with the Xero application. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The consumer key associated with the Xero application.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "privateKey": {
-          "description": "The private key from the .pem file that was generated for your Xero private application. You must include all the text from the .pem file, including the Unix line endings(\n). Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The private key from the .pem file that was generated for your Xero private application. You must include all the text from the .pem file, including the Unix line endings(\n).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -3537,8 +3537,8 @@
           "type": "object"
         },
         "accessToken": {
-          "description": "The access token for Zoho authentication. Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The access token for Zoho authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
@@ -3586,15 +3586,15 @@
       "properties": {
         "clusterSize": {
           "type": "object",
-          "description": "Number of worker/data nodes in the cluster. Suggestion value: 4. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Number of worker/data nodes in the cluster. Suggestion value: 4. Type: string (or Expression with resultType string)."
         },
         "timeToLive": {
           "type": "object",
-          "description": "The allowed idle time for the on-demand HDInsight cluster. Specifies how long the on-demand HDInsight cluster stays alive after completion of an activity run if there are no other active jobs in the cluster. The minimum value is 5 mins. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The allowed idle time for the on-demand HDInsight cluster. Specifies how long the on-demand HDInsight cluster stays alive after completion of an activity run if there are no other active jobs in the cluster. The minimum value is 5 mins. Type: string (or Expression with resultType string)."
         },
         "version": {
           "type": "object",
-          "description": "Version of the HDInsight cluster.  Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Version of the HDInsight cluster.  Type: string (or Expression with resultType string)."
         },
         "linkedServiceName": {
           "description": "Azure Storage linked service to be used by the on-demand cluster for storing and processing data.",
@@ -3602,43 +3602,43 @@
         },
         "hostSubscriptionId": {
           "type": "object",
-          "description": "The customer’s subscription to host the cluster. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The customer’s subscription to host the cluster. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalId": {
           "type": "object",
-          "description": "The service principal id for the hostSubscriptionId. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The service principal id for the hostSubscriptionId. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalKey": {
-          "type": "object",
-          "description": "The key for the service principal id. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The key for the service principal id.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "tenant": {
           "type": "object",
-          "description": "The Tenant id/name to which the service principal belongs. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Tenant id/name to which the service principal belongs. Type: string (or Expression with resultType string)."
         },
         "clusterResourceGroup": {
           "type": "object",
-          "description": "The resource group where the cluster belongs. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The resource group where the cluster belongs. Type: string (or Expression with resultType string)."
         },
         "clusterNamePrefix": {
           "type": "object",
-          "description": "The prefix of cluster name, postfix will be distinct with timestamp. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The prefix of cluster name, postfix will be distinct with timestamp. Type: string (or Expression with resultType string)."
         },
         "clusterUserName": {
           "type": "object",
-          "description": "The username to access the cluster. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The username to access the cluster. Type: string (or Expression with resultType string)."
         },
         "clusterPassword": {
-          "type": "object",
-          "description": "The password to access the cluster. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The password to access the cluster.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "clusterSshUserName": {
           "type": "object",
-          "description": "The username to SSH remotely connect to cluster’s node (for Linux). Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The username to SSH remotely connect to cluster’s node (for Linux). Type: string (or Expression with resultType string)."
         },
         "clusterSshPassword": {
-          "description": "The password to SSH remotely connect cluster’s node (for Linux). Type: object (It can be string, secure-string or Azure Key Vault reference).",
-          "type": "object"
+          "description": "The password to SSH remotely connect cluster’s node (for Linux).",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "additionalLinkedServiceNames": {
           "description": "Specifies additional storage accounts for the HDInsight linked service so that the Data Factory service can register them on your behalf.",
@@ -3653,11 +3653,11 @@
         },
         "clusterType": {
           "type": "object",
-          "description": "The cluster type. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The cluster type. Type: string (or Expression with resultType string)."
         },
         "sparkVersion": {
           "type": "object",
-          "description": "The version of spark if the cluster type is 'spark'. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The version of spark if the cluster type is 'spark'. Type: string (or Expression with resultType string)."
         },
         "coreConfiguration": {
           "description": "Specifies the core configuration parameters (as in core-site.xml) for the HDInsight cluster to be created.",
@@ -3731,31 +3731,31 @@
       "properties": {
         "accountName": {
           "type": "object",
-          "description": "The Azure Data Lake Analytics account name. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Azure Data Lake Analytics account name. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalId": {
           "type": "object",
-          "description": "The ID of the application used to authenticate against the Azure Data Lake Analytics account. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The ID of the application used to authenticate against the Azure Data Lake Analytics account. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalKey": {
-          "type": "object",
-          "description": "The Key of the application used to authenticate against the Azure Data Lake Analytics account. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The Key of the application used to authenticate against the Azure Data Lake Analytics account.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         },
         "tenant": {
           "type": "object",
-          "description": "The name or ID of the tenant to which the service principal belongs. Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
         },
         "subscriptionId": {
           "type": "object",
-          "description": "Data Lake Analytics account subscription ID (if different from Data Factory account). Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Data Lake Analytics account subscription ID (if different from Data Factory account). Type: string (or Expression with resultType string)."
         },
         "resourceGroupName": {
           "type": "object",
-          "description": "Data Lake Analytics account resource group name (if different from Data Factory account). Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Data Lake Analytics account resource group name (if different from Data Factory account). Type: string (or Expression with resultType string)."
         },
         "dataLakeAnalyticsUri": {
           "type": "object",
-          "description": "Azure Data Lake Analytics URI Type: object (It can be string, secure-string or Azure Key Vault reference)."
+          "description": "Azure Data Lake Analytics URI Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
