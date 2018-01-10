@@ -587,7 +587,7 @@
           "maxLength": 255,
           "description": "Gets or sets the folder path of the source control. Path must be relative."
         },
-        "autoAsync": {
+        "autoSync": {
           "type": "boolean",
           "description": "Gets or sets auto async of the source control. Default is false."
         },
@@ -623,10 +623,6 @@
     },
     "SourceControlCreateOrUpdateParameters": {
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the source control."
-        },
         "properties": {
           "$ref": "#/definitions/SourceControlCreateOrUpdateProperties",
           "x-ms-client-flatten": true,
@@ -634,7 +630,6 @@
         }
       },
       "required": [
-        "name",
         "properties"
       ],
       "description": "The parameters supplied to the create or update source control operation."
@@ -653,7 +648,7 @@
           "type": "string",
           "description": "Gets or sets the folder path of the source control."
         },
-        "autoAsync": {
+        "autoSync": {
           "type": "boolean",
           "description": "Gets or sets auto async of the source control. Default is false."
         },
@@ -743,11 +738,11 @@
           "type": "string",
           "description": "Gets or sets the folder path of the source control. Path must be relative."
         },
-        "autoAsync": {
+        "autoSync": {
           "type": "boolean",
           "description": "Gets or sets auto async of the source control. Default is false."
         },
-        "autoPublish": {
+        "publishRunbook": {
           "type": "boolean",
           "description": "Gets or sets the auto publish of the source control. Default is true."
         },
