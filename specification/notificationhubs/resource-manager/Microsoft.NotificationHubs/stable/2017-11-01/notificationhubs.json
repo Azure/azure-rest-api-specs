@@ -73,7 +73,7 @@
           "tags": [
             "Namespaces"
           ],
-          "operationId": "Name_CheckAvailability",
+          "operationId": "Namespaces_CheckAvailability2",
           "description": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
           "parameters": [
             {
@@ -132,7 +132,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/NamespaceResource"
+                "$ref": "#/definitions/Namespace"
               },
               "description": "Parameters supplied to create a Namespace Resource."
             },
@@ -147,13 +147,13 @@
             "201": {
               "description": "Namespace is Create/Update",
               "schema": {
-                "$ref": "#/definitions/NamespaceResource"
+                "$ref": "#/definitions/Namespace"
               }
             },
             "200": {
               "description": "Namespace is Create/Update",
               "schema": {
-                "$ref": "#/definitions/NamespaceResource"
+                "$ref": "#/definitions/Namespace"
               }
             }
           }
@@ -199,7 +199,7 @@
             "200": {
               "description": "Namespace is Updated",
               "schema": {
-                "$ref": "#/definitions/NamespaceResource"
+                "$ref": "#/definitions/Namespace"
               }
             }
           }
@@ -280,7 +280,7 @@
             "200": {
               "description": "Get Namespace",
               "schema": {
-                "$ref": "#/definitions/NamespaceResource"
+                "$ref": "#/definitions/Namespace"
               }
             }
           }
@@ -291,7 +291,7 @@
           "tags": [
             "Namespaces"
           ],
-          "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
+          "operationId": "AuthorizationRules_CreateOrUpdate",
           "description": "Creates an authorization rule for a namespace",
           "parameters": [
             {
@@ -320,7 +320,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+                "$ref": "#/definitions/SharedAccessAuthorizationRule"
               },
               "description": "The shared access authorization rule."
             },
@@ -335,7 +335,7 @@
             "200": {
               "description": "Namespace Authorization Rule is Created/Updated",
               "schema": {
-                "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+                "$ref": "#/definitions/SharedAccessAuthorizationRule"
               }
             }
           }
@@ -344,7 +344,7 @@
           "tags": [
             "Namespaces"
           ],
-          "operationId": "Namespaces_DeleteAuthorizationRule",
+          "operationId": "AuthorizationRules_Delete",
           "description": "Deletes a namespace authorization rule",
           "parameters": [
             {
@@ -388,7 +388,7 @@
           "tags": [
             "Namespaces"
           ],
-          "operationId": "Namespaces_GetAuthorizationRule",
+          "operationId": "AuthorizationRules_Get",
           "description": "Gets an authorization rule for a namespace by name.",
           "parameters": [
             {
@@ -423,7 +423,7 @@
             "200": {
               "description": "Get the Namespace AuthorizationRule",
               "schema": {
-                "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+                "$ref": "#/definitions/SharedAccessAuthorizationRule"
               }
             }
           }
@@ -434,7 +434,7 @@
           "tags": [
             "Namespaces"
           ],
-          "operationId": "Namespaces_List",
+          "operationId": "Namespaces_ListByResourceGroup",
           "description": "Lists the available namespaces within a resourceGroup.",
           "parameters": [
             {
@@ -469,7 +469,7 @@
           "tags": [
             "Namespaces"
           ],
-          "operationId": "Namespaces_ListAll",
+          "operationId": "Namespaces_List",
           "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
           "parameters": [
             {
@@ -492,7 +492,7 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespace}/AuthorizationRules": {
         "get": {
           "tags": [
             "Namespaces"
@@ -508,7 +508,7 @@
               "description": "The name of the resource group."
             },
             {
-              "name": "namespaceName",
+              "name": "namespace",
               "in": "path",
               "required": true,
               "type": "string",
@@ -688,7 +688,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "Hubs_CheckAvailability",
+          "operationId": "NotificationHubs_CheckAvailability",
           "description": "Checks the availability of the given notificationHub in a namespace.",
           "parameters": [
             {
@@ -765,7 +765,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/NotificationHubResource"
+                "$ref": "#/definitions/NotificationHub"
               },
               "description": "Parameters supplied to the create/update a NotificationHub Resource."
             },
@@ -780,13 +780,13 @@
             "200": {
               "description": "NotificationHub is Created/Updated",
               "schema": {
-                "$ref": "#/definitions/NotificationHubResource"
+                "$ref": "#/definitions/NotificationHub"
               }
             },
             "201": {
               "description": "NotificationHub is Created/Updated",
               "schema": {
-                "$ref": "#/definitions/NotificationHubResource"
+                "$ref": "#/definitions/NotificationHub"
               }
             }
           }
@@ -839,7 +839,7 @@
             "200": {
               "description": "NotificationHub is Created/Updated",
               "schema": {
-                "$ref": "#/definitions/NotificationHubResource"
+                "$ref": "#/definitions/NotificationHub"
               }
             }
           }
@@ -924,7 +924,7 @@
             "200": {
               "description": "Get the NotificationHub",
               "schema": {
-                "$ref": "#/definitions/NotificationHubResource"
+                "$ref": "#/definitions/NotificationHub"
               }
             }
           }
@@ -935,7 +935,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "NotificationHubs_CreateOrUpdateAuthorizationRule",
+          "operationId": "AuthorizationRules_CreateOrUpdate",
           "description": "Creates/Updates an authorization rule for a NotificationHub",
           "parameters": [
             {
@@ -971,7 +971,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+                "$ref": "#/definitions/SharedAccessAuthorizationRule"
               },
               "description": "The shared access authorization rule."
             },
@@ -986,7 +986,7 @@
             "200": {
               "description": "NotificationHub AuthorizationRule is Created/Updated",
               "schema": {
-                "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+                "$ref": "#/definitions/SharedAccessAuthorizationRule"
               }
             }
           }
@@ -995,7 +995,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "NotificationHubs_DeleteAuthorizationRule",
+          "operationId": "AuthorizationRules_Delete",
           "description": "Deletes a notificationHub authorization rule",
           "parameters": [
             {
@@ -1046,7 +1046,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "NotificationHubs_GetAuthorizationRule",
+          "operationId": "AuthorizationRules_Get",
           "description": "Gets an authorization rule for a NotificationHub by name.",
           "parameters": [
             {
@@ -1088,7 +1088,7 @@
             "200": {
               "description": "Get NotificationHub AuthorizationRule",
               "schema": {
-                "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+                "$ref": "#/definitions/SharedAccessAuthorizationRule"
               }
             }
           }
@@ -1243,7 +1243,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "NotificationHubs_RegenerateKeys",
+          "operationId": "AuthorizationRules_RegenerateKeys",
           "description": "Regenerates the Primary/Secondary Keys to the NotificationHub Authorization Rule",
           "parameters": [
             {
@@ -1525,7 +1525,7 @@
         },
         "description": "Parameters supplied to the Patch Namespace operation."
       },
-      "NamespaceResource": {
+      "Namespace": {
         "properties": {
           "properties": {
             "x-ms-client-flatten": true,
@@ -1561,7 +1561,7 @@
         },
         "description": "SharedAccessAuthorizationRule properties."
       },
-      "SharedAccessAuthorizationRuleResource": {
+      "SharedAccessAuthorizationRule": {
         "properties": {
           "properties": {
             "x-ms-client-flatten": true,
@@ -1584,7 +1584,7 @@
           "value": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/Namespace"
             },
             "description": "Result of the List Namespace operation."
           },
@@ -1600,7 +1600,7 @@
           "value": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             },
             "description": "Result of the List AuthorizationRules operation."
           },
@@ -1903,7 +1903,7 @@
         },
         "description": "NotificationHub patch parameters."
       },
-      "NotificationHubResource": {
+      "NotificationHub": {
         "properties": {
           "properties": {
             "x-ms-client-flatten": true,
@@ -1971,7 +1971,7 @@
           "value": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/NotificationHubResource"
+              "$ref": "#/definitions/NotificationHub"
             },
             "description": "Result of the List NotificationHub operation."
           },

@@ -19,6 +19,13 @@ To see additional help and options, run:
 
 ## Configuration
 
+``` yaml
+directive:
+  - suppress: R3018
+    reason: existing api; values are booleans.
+  - suppress: R2066
+    reason: CheckAvailability is a suitable name.
+```
 
 
 ### Basic Information 
