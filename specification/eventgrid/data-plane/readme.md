@@ -5,6 +5,13 @@
 This is the AutoRest configuration file for EventGrid.
 
 
+Multiple Azure services publish events to Azure Event Grid. This is the configuration file for generating
+the Publish API and the schemas for those events. Each Azure service publishing to Azure Event Grid has its own tag OpenAPI specification
+that describes the schemas for its events.
+
+This configuration enables packaging all of the above as one EventGrid data plane library.
+This enables customers to download one EventGrid data plane library instead of having to install separate packages to get the event schemas for each service.
+
 
 ---
 ## Getting Started
@@ -29,17 +36,20 @@ openapi-type: data-plane
 tag: package-2018-01
 ```
 
-
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.EventGrid/2018-01-01/EventGrid.json
+- Microsoft.Storage/stable/2018-01-01/Storage.json
+- Microsoft.EventHub/stable/2018-01-01/EventHub.json
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 ```
 
 ---
+# Code Generation
+
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -54,6 +64,7 @@ csharp:
   output-folder: $(csharp-sdks-folder)/EventGrid/DataPlane/Microsoft.Azure.EventGrid/Generated
   clear-output-folder: true
 ```
+
 
 ## Python
 

@@ -18,7 +18,7 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: V1.0/SpellCheck.json
+input-file: stable/V1.0/SpellCheck.json
 ```
 
 ## CSharp Settings

@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-04-30-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-04-preview'
 input-file:
-- Microsoft.DBforPostgreSQL/2017-04-30-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/preview/2017-04-30-preview/postgresql.json
 ```
 
 

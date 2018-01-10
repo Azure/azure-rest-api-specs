@@ -32,7 +32,7 @@ These settings apply only when `--tag=package-2015-08-31-preview` is specified o
 
 ``` yaml $(tag) == 'package-2015-08-31-preview'
 input-file:
-- Microsoft.ManagedIdentity/2015-08-31-preview/ManagedIdentity.json
+- Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json
 ```
 
 ---

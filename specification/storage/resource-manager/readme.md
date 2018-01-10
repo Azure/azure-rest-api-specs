@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.Storage/2017-10-01/storage.json
+- Microsoft.Storage/stable/2017-10-01/storage.json
 ```
 
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
-- Microsoft.Storage/2017-06-01/storage.json
+- Microsoft.Storage/stable/2017-06-01/storage.json
 ```
 
 
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2016-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-12'
 input-file:
-- Microsoft.Storage/2016-12-01/storage.json
+- Microsoft.Storage/stable/2016-12-01/storage.json
 ```
  
 ### Tag: package-2016-05
@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-2016-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-05'
 input-file:
-- Microsoft.Storage/2016-05-01/storage.json
+- Microsoft.Storage/stable/2016-05-01/storage.json
 ```
  
 ### Tag: package-2016-01
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-2016-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-01'
 input-file:
-- Microsoft.Storage/2016-01-01/storage.json
+- Microsoft.Storage/stable/2016-01-01/storage.json
 ```
  
 ### Tag: package-2015-06
@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-2015-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-06'
 input-file:
-- Microsoft.Storage/2015-06-15/storage.json
+- Microsoft.Storage/stable/2015-06-15/storage.json
 ```
  
 ### Tag: package-2015-05-preview
@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.Storage/2015-05-01-preview/storage.json
+- Microsoft.Storage/preview/2015-05-01-preview/storage.json
 ```
 
 

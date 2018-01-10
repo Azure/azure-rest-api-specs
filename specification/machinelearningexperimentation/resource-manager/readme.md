@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-05-preview'
 input-file:
-- Microsoft.MachineLearningExperimentation/2017-05-01-preview/machineLearningExperimentation.json
+- Microsoft.MachineLearningExperimentation/preview/2017-05-01-preview/machineLearningExperimentation.json
 ```
 
 ---
@@ -55,4 +55,23 @@ csharp:
   namespace: Microsoft.Azure.Management.MachineLearningExperimentation
   output-folder: $(csharp-sdks-folder)/MachineLearningExperimentation/Management.MachineLearningExperimentation/Generated
   clear-output-folder: true
+```
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  clear-output-folder: true
+  namespace: experimentation
+```
+
+### Tag: package-2017-05-preview and go
+
+These settings apply only when `--tag=package-2017-05-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-05-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2017-05-01-preview/experimentation
 ```

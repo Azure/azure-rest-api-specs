@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.CustomerInsights/2017-04-26/customer-insights.json
+- Microsoft.CustomerInsights/stable/2017-04-26/customer-insights.json
 ```
 
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.CustomerInsights/2017-01-01/customer-insights.json
+- Microsoft.CustomerInsights/stable/2017-01-01/customer-insights.json
 ```
 
 

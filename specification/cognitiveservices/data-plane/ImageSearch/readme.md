@@ -18,7 +18,7 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: v1.0/ImageSearch.json
+input-file: stable/v1.0/ImageSearch.json
 ```
 
 ## CSharp Settings
@@ -83,3 +83,4 @@ Suppressing errors due to API design:
 directive:
   - suppress: R3016
     reason: _type is a polymorphic discriminator that can't be changed.
+```
