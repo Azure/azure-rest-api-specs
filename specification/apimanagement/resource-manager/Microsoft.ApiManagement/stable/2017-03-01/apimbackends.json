@@ -307,6 +307,57 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}/reconnect": {
+      "post": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backend_Reconnect",
+        "description": "Initiates .",
+        "x-ms-examples": {
+          "ApiManagementBackendReconnect": {
+            "$ref": "./examples/ApiManagementBackendReconnect.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BackendReconnectContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Reconnect request accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -632,6 +683,31 @@
         }
       ],
       "description": "Parameters supplied to the Update Backend operation."
+    },
+    "BackendReconnectContract": {
+      "properties": {
+        "properties":{
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackendReconnectProperties",
+          "description": "Reconnect request properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Reconnect request parameters."
+    },
+    "BackendReconnectProperties": {
+      "properties": {
+        "after": {
+          "type": "string",
+          "description": "Duration in ISO8601 format after which reconnect will be initiated.",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      }
     }
   },
   "parameters": {

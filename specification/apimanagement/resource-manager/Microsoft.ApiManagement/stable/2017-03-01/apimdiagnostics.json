@@ -42,7 +42,7 @@
         "operationId": "Diagnostic_ListByService",
         "description": "Lists all diagnostics of the API Management service instance.",
         "x-ms-examples": {
-          "ApiManagementListApis": {
+          "ApiManagementListDiagnostics": {
             "$ref": "./examples/ApiManagementListDiagnostics.json"
           }
         },
@@ -94,6 +94,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}": {
+      "head": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "operationId": "Diagnostic_Head",
+        "description": "Gets the entity state (Etag) version of the Diagnostic specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadDiagnostic": {
+            "$ref": "./examples/ApiManagementHeadDiagnostic.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Diagnostics"
@@ -101,7 +147,7 @@
         "operationId": "Diagnostic_Get",
         "description": "Gets the details of the Diagnostic specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementGetApiOperation": {
+          "ApiManagementGetDiagnostic": {
             "$ref": "./examples/ApiManagementGetDiagnostic.json"
           }
         },
@@ -150,7 +196,7 @@
         "operationId": "Diagnostic_CreateOrUpdate",
         "description": "Creates a new Diagnostic or updates an existing one.",
         "x-ms-examples": {
-          "ApiManagementCreateApiOperation": {
+          "ApiManagementCreateDiagnostic": {
             "$ref": "./examples/ApiManagementCreateDiagnostic.json"
           }
         },
@@ -208,7 +254,7 @@
         "operationId": "Diagnostic_Update",
         "description": "Updates the details of the Diagnostic specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementUpdateApiOperation": {
+          "ApiManagementUpdateDiagnostic": {
             "$ref": "./examples/ApiManagementUpdateDiagnostic.json"
           }
         },
@@ -264,8 +310,8 @@
         "operationId": "Diagnostic_Delete",
         "description": "Deletes the specified Diagnostic.",
         "x-ms-examples": {
-          "ApiManagementDeleteApiOperation": {
-            "$ref": "./examples/ApiManagementDeleteApiOperation.json"
+          "ApiManagementDeleteDiagnostic": {
+            "$ref": "./examples/ApiManagementDeleteDiagnostic.json"
           }
         },
         "parameters": [
@@ -313,7 +359,7 @@
         "operationId": "DiagnosticLogger_ListByService",
         "description": "Lists all loggers assosiated with the specified Diagnostic of the API Management service instance.",
         "x-ms-examples": {
-          "ApiManagementListApis": {
+          "ApiManagementListDiagnosticLoggers": {
             "$ref": "./examples/ApiManagementListDiagnosticLoggers.json"
           }
         },
@@ -375,7 +421,7 @@
         "operationId": "DiagnosticLogger_CreateOrUpdate",
         "description": "Attaches a logger to a dignostic.",
         "x-ms-examples": {
-          "ApiManagementCreateApiOperation": {
+          "ApiManagementCreateDiagnosticLogger": {
             "$ref": "./examples/ApiManagementCreateDiagnosticLogger.json"
           }
         },
@@ -401,10 +447,16 @@
         ],
         "responses": {
           "201": {
-            "description": "Logger was successfully attached to Diagnostic."
+            "description": "Logger was successfully attached to Diagnostic.",
+            "schema": {
+              "$ref": "./apimloggers.json#/definitions/LoggerContract"
+            }
           },
           "200": {
-            "description": "Logger to Diagnostic link was successfully updated."
+            "description": "Logger to Diagnostic link was successfully updated.",
+            "schema": {
+              "$ref": "./apimloggers.json#/definitions/LoggerContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -421,7 +473,7 @@
         "operationId": "DiagnosticLogger_Delete",
         "description": "Deletes the specified Logger from Diagnostic.",
         "x-ms-examples": {
-          "ApiManagementDeleteApiOperation": {
+          "ApiManagementDeleteDiagnosticLogger": {
             "$ref": "./examples/ApiManagementDeleteDiagnosticLogger.json"
           }
         },
