@@ -248,7 +248,7 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created",
+                        "description": "EventSubscription update request accepted.",
                         "schema": {
                             "$ref": "#/definitions/EventSubscription"
                         }
@@ -1571,7 +1571,7 @@
             }
         },
         "WebHookEventSubscriptionDestinationProperties": {
-            "description": "Information about the webhook destination properties for an event subscription",
+            "description": "Information about the webhook destination properties for an event subscription.",
             "type": "object",
             "properties": {
                 "endpointUrl": {
@@ -1738,16 +1738,7 @@
                 },
                 "origin": {
                     "description": "Origin of the operation",
-                    "enum": [
-                        "User",
-                        "System",
-                        "UserAndSystem"
-                    ],
-                    "type": "string",
-                    "x-ms-enum": {
-                        "name": "OperationOrigin",
-                        "modelAsString": true
-                    }
+                    "type": "string"
                 },
                 "properties": {
                     "description": "Properties of the operation",
