@@ -10,9 +10,9 @@ env:
   # - MODE=node
     - MODE=ruby
     - MODE=semantic PR_ONLY=true
+    - MODE=linter PR_ONLY=true
     - MODE=semantic PR_ONLY=false
     - MODE=model PR_ONLY=false
-    - MODE=linter PR_ONLY=true
     - MODE=model PR_ONLY=true
     - MODE=BreakingChange PR_ONLY=true
     - MODE=azurebot PR_ONLY=true
@@ -22,7 +22,6 @@ matrix:
   allow_failures:
     - env: MODE=semantic PR_ONLY=false
     - env: MODE=model PR_ONLY=false
-    - env: MODE=linter PR_ONLY=true
     - env: MODE=model PR_ONLY=true
     - env: MODE=BreakingChange PR_ONLY=true
     - env: MODE=azurebot PR_ONLY=true
