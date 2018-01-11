@@ -69,6 +69,7 @@ These settings apply only when `--tag=package-compute-only-2017-12` is specified
 ``` yaml $(tag) == 'package-compute-only-2017-12'
 input-file:
 - Microsoft.Compute/stable/2017-12-01/compute.json
+- Microsoft.Compute/stable/2017-12-01/runCommands.json
 ```
 
 ### Tag: package-skus-2017-09
