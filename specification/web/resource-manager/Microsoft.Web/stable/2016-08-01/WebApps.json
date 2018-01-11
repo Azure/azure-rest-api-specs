@@ -15076,15 +15076,9 @@
         "properties": {
           "description": "BackupRequest resource specific properties",
           "required": [
-            "name",
             "storageAccountUrl"
           ],
           "properties": {
-            "name": {
-              "description": "Name of the backup.",
-              "type": "string",
-              "x-ms-client-name": "BackupRequestName"
-            },
             "enabled": {
               "description": "True if the backup schedule is enabled (must be included in that case), false if the backup schedule should be disabled.",
               "type": "boolean"
@@ -15102,20 +15096,6 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DatabaseBackupSetting"
-              }
-            },
-            "type": {
-              "description": "Type of the backup.",
-              "enum": [
-                "Default",
-                "Clone",
-                "Relocation",
-                "Snapshot"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "BackupRestoreOperationType",
-                "modelAsString": false
               }
             }
           },
@@ -15330,7 +15310,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15508,14 +15489,6 @@
         "properties": {
           "description": "Deployment resource specific properties",
           "properties": {
-            "id": {
-              "description": "Identifier for deployment.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
             "status": {
               "format": "int32",
               "description": "Deployment status.",
@@ -15651,12 +15624,7 @@
         "properties": {
           "description": "FunctionEnvelope resource specific properties",
           "properties": {
-            "name": {
-              "description": "Function name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "functionAppId": {
+            "function_app_id": {
               "description": "Function App ID.",
               "type": "string",
               "readOnly": true
@@ -16315,22 +16283,6 @@
             "vendor": {
               "description": "Premier add on Vendor.",
               "type": "string"
-            },
-            "name": {
-              "description": "Premier add on Name.",
-              "type": "string",
-              "x-ms-client-name": "PremierAddOnName"
-            },
-            "location": {
-              "description": "Premier add on Location.",
-              "type": "string"
-            },
-            "tags": {
-              "description": "Premier add on Tags.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
             },
             "marketplacePublisher": {
               "description": "Premier add on Marketplace publisher.",
@@ -18109,12 +18061,7 @@
               "description": "Scheduler Logs URL.",
               "type": "string"
             },
-            "name": {
-              "description": "Job name. Used as job identifier in ARM resource URI.",
-              "type": "string",
-              "readOnly": true
-            },
-            "runCommand": {
+            "run_command": {
               "description": "Run command.",
               "type": "string"
             },
@@ -18212,12 +18159,7 @@
         "properties": {
           "description": "WebJob resource specific properties",
           "properties": {
-            "name": {
-              "description": "Job name. Used as job identifier in ARM resource URI.",
-              "type": "string",
-              "readOnly": true
-            },
-            "runCommand": {
+            "run_command": {
               "description": "Run command.",
               "type": "string"
             },
