@@ -78,7 +78,7 @@ directive:
     reason: These violations are false positives. The EventSources_Get operation returns an EventSourceResource, and both EventHubEventSourceResource and IoTHubEventSourceResource inherit from EventSourceResource.
 
   - suppress: R3026  # Tracked resource 'XXX' must have patch operation that at least supports the update of tags. It's strongly recommended that the PATCH operation supports update of all mutable properties as well.
-      where:
+    where:
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
     from: timeseriesinsights.json
