@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.",
+    "title": "MySQLManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.",
     "version": "2017-12-01"
   },
   "host": "management.azure.com",
@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_Create",
+        "operationId": "Servers_CreateOrUpdate",
         "x-ms-examples": {
           "ServerCreate": { "$ref": "./examples/ServerCreate.json" }
         },
-        "description": "Creates a new server, or will overwrite an existing server.",
+        "description": "Creates a new server or updates an existing server. The update action will overwrite the existing server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -200,7 +200,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -234,7 +234,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/servers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -265,7 +265,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
@@ -395,7 +395,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
@@ -432,7 +432,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -577,7 +577,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/virtualNetworkRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/virtualNetworkRules": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -619,7 +619,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
           "Databases"
@@ -749,7 +749,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases": {
       "get": {
         "tags": [
           "Databases"
@@ -786,7 +786,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/configurations/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
@@ -871,7 +871,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/configurations": {
       "get": {
         "tags": [
           "Configurations"
@@ -908,7 +908,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/logFiles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/logFiles": {
       "get": {
         "tags": [
           "LogFiles"
@@ -945,7 +945,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/performanceTiers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
           "LocationBasedPerformanceTier"
@@ -981,7 +981,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/checkNameAvailability": {
       "post": {
           "tags": [
               "CheckNameAvailability"
@@ -1007,6 +1007,7 @@
                   },
                   "description": "The required parameters for checking if resource name is available."
               }
+
           ],
           "responses": {
               "200": {
@@ -1018,7 +1019,7 @@
           }
       }
     },
-    "/providers/Microsoft.DBforPostgreSQL/operations": {
+    "/providers/Microsoft.DBforMySQL/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -1049,8 +1050,8 @@
       "type": "string",
       "description": "The version of a server.",
       "enum": [
-        "9.5",
-        "9.6"
+        "5.6",
+        "5.7"
       ],
       "x-ms-enum": {
         "name": "ServerVersion",
@@ -1215,7 +1216,8 @@
           "description": "The mode to create a new server.",
           "enum": [
             "Default",
-            "PointInTimeRestore"
+            "PointInTimeRestore",
+            "GeoRestore"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1272,6 +1274,24 @@
         "restorePointInTime"
       ],
       "description": "The properties to a new server by restoring from a backup."
+    },
+    "ServerPropertiesForGeoRestore": {
+      "x-ms-discriminator-value": "GeoRestore",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerPropertiesForCreate"
+        }
+      ],
+      "properties": {
+        "sourceServerId": {
+          "type": "string",
+          "description": "The source server id to restore from."
+        }
+      },
+      "required": [
+        "sourceServerId"
+      ],
+      "description": "The properties to a new server by restoring from a geo replicated backup."
     },
     "Sku": {
       "properties": {
@@ -1830,37 +1850,37 @@
       "description": "A list of performance tiers."
     },
     "NameAvailabilityRequest": {
-      "required": [
-          "name"
-      ],
-      "properties": {
-          "name": {
-              "type": "string",
-              "description": "Resource name to verify."
-          },
-          "type": {
-              "type": "string",
-              "description": "Resource type used for verification."
-          }
-      },
-      "description": "Request from client to check resource name availability."
+        "required": [
+            "name"
+        ],
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Resource name to verify."
+            },
+            "type": {
+                "type": "string",
+                "description": "Resource type used for verification."
+            }
+        },
+        "description": "Request from client to check resource name availability."
     },
     "NameAvailability": {
-      "properties": {
-          "message": {
-              "type": "string",
-              "description": "Error Message."
-          },
-          "nameAvailable": {
-              "type": "boolean",
-              "description": "Indicates whether the resource name is available."
-          },
-          "reason": {
-              "type": "string",
-              "description": "Reason for name being unavailable."
-          }
-      },
-      "description": "Represents a resource name availability."
+        "properties": {
+            "message": {
+                "type": "string",
+                "description": "Error Message."
+            },
+            "nameAvailable": {
+                "type": "boolean",
+                "description": "Indicates whether the resource name is available."
+            },
+            "reason": {
+                "type": "string",
+                "description": "Reason for name being unavailable."
+            }
+        },
+        "description": "Represents a resource name availability."
     }
   },
   "parameters": {
