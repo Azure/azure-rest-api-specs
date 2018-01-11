@@ -34,46 +34,12 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/checkNamespaceAvailability": {
-      "post": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_CheckAvailability",
-        "description": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckAvailabilityParameters"
-            },
-            "description": "The namespace name."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Checks if the Namespace name is a valid availabile name",
-            "schema": {
-              "$ref": "#/definitions/CheckAvailabilityResult"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/checkNameAvailability": {
         "post": {
           "tags": [
             "Namespaces"
           ],
-          "operationId": "Namespaces_CheckAvailability2",
+          "operationId": "Namespaces_CheckAvailability",
           "description": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
           "parameters": [
             {
@@ -635,54 +601,6 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/checkNotificationHubAvailability": {
-        "post": {
-          "tags": [
-            "NotificationHubs"
-          ],
-          "operationId": "NotificationHubs_CheckAvailability",
-          "description": "Checks the availability of the given notificationHub in a namespace.",
-          "parameters": [
-            {
-              "name": "resourceGroupName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "description": "The name of the resource group."
-            },
-            {
-              "name": "namespaceName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "description": "The namespace name."
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/CheckAvailabilityParameters"
-              },
-              "description": "The notificationHub name."
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Checks if the NotificationHub name is a valid availabile name",
-              "schema": {
-                "$ref": "#/definitions/CheckAvailabilityResult"
-              }
-            }
-          }
-        }
-      },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/checkHubAvailability": {
         "post": {
           "tags": [
@@ -935,7 +853,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "AuthorizationRules_CreateOrUpdate",
+          "operationId": "HubAuthorizationRules_CreateOrUpdate",
           "description": "Creates/Updates an authorization rule for a NotificationHub",
           "parameters": [
             {
@@ -995,7 +913,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "AuthorizationRules_Delete",
+          "operationId": "HubAuthorizationRules_Delete",
           "description": "Deletes a notificationHub authorization rule",
           "parameters": [
             {
@@ -1046,7 +964,7 @@
           "tags": [
             "NotificationHubs"
           ],
-          "operationId": "AuthorizationRules_Get",
+          "operationId": "HubAuthorizationRules_Get",
           "description": "Gets an authorization rule for a NotificationHub by name.",
           "parameters": [
             {
@@ -1427,20 +1345,6 @@
           "location"
         ],
         "description": "Parameters supplied to the Check Name Availability for Namespace and NotificationHubs."
-      },
-      "CheckAvailabilityResult": {
-        "properties": {
-          "isAvailiable": {
-            "type": "boolean",
-            "description": "True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/NHResource"
-          }
-        ],
-        "description": "Description of a CheckAvailibility resource."
       },
       "NamespaceProperties": {
         "properties": {
