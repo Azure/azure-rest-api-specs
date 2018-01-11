@@ -44,9 +44,9 @@ These settings apply only when `--tag=package-2017-12` is specified on the comma
 ``` yaml $(tag) == 'package-2017-12'
 input-file:
 - Microsoft.Compute/stable/2017-12-01/compute.json
+- Microsoft.Compute/stable/2017-12-01/runCommands.json
 - Microsoft.Compute/stable/2017-09-01/skus.json
 - Microsoft.Compute/stable/2017-03-30/disk.json
-- Microsoft.Compute/stable/2017-03-30/runCommands.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
@@ -57,9 +57,9 @@ These settings apply only when `--tag=package-compute-2017-12` is specified on t
 ``` yaml $(tag) == 'package-compute-2017-12'
 input-file:
 - Microsoft.Compute/stable/2017-12-01/compute.json
+- Microsoft.Compute/stable/2017-12-01/runCommands.json
 - Microsoft.Compute/stable/2017-09-01/skus.json
 - Microsoft.Compute/stable/2017-03-30/disk.json
-- Microsoft.Compute/stable/2017-03-30/runCommands.json
 ```
 
 ### Tag: package-compute-only-2017-12
@@ -69,6 +69,7 @@ These settings apply only when `--tag=package-compute-only-2017-12` is specified
 ``` yaml $(tag) == 'package-compute-only-2017-12'
 input-file:
 - Microsoft.Compute/stable/2017-12-01/compute.json
+- Microsoft.Compute/stable/2017-12-01/runCommands.json
 ```
 
 ### Tag: package-skus-2017-09
