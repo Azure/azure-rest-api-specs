@@ -435,6 +435,8 @@ python:
   payload-flattening-threshold: 2
   clear-output-folder: true
   no-namespace-folders: true
+  verbose: true
+  debug: true
 ```
 
 ### Python multi-api
@@ -448,7 +450,6 @@ batch:
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
   - tag: package-managedapplications-2017-09
-  - tag: package-compute-2015-06
   - tag: package-policy-2017-06
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
