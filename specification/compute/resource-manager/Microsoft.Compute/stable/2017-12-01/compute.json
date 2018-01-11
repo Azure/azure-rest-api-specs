@@ -3083,6 +3083,66 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}": {
+      "put": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_Update",
+        "description": "Updates a virtual machine of a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set where the extension should be create or updated."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVM"
+            },
+            "description": "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVM"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVM"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "tags": [
           "VirtualMachineScaleSetVMs"
@@ -5897,6 +5957,18 @@
         "licenseType": {
           "type": "string",
           "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
+        },
+        "priority": {
+          "type": "string",
+          "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview",
+          "enum": [
+            "Regular",
+            "Low"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachinePriorityTypes",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."

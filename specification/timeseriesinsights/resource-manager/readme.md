@@ -1,13 +1,13 @@
 # TimeSeriesInsights
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for TimeSeriesInsights.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for TimeSeriesInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,16 +19,14 @@ To see additional help and options, run:
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the TimeSeriesInsights API.
 
 ``` yaml
 openapi-type: arm
 tag: package-2017-11-15
 ```
-
 
 ### Tag: package-2017-02-preview
 
@@ -66,4 +64,23 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2017-11-15' && $(go)
 output-folder: $(go-sdk-folder)/services/timeseriesinsights/mgmt/2017-11-15/timeseriesinsights
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3025  # Tracked resource 'XXX' must have a get operation
+    where:
+      - $.definitions.EventHubEventSourceResource
+      - $.definitions.IoTHubEventSourceResource
+    from: timeseriesinsights.json
+    reason: These violations are false positives. The EventSources_Get operation returns an EventSourceResource, and both EventHubEventSourceResource and IoTHubEventSourceResource inherit from EventSourceResource.
+
+  - suppress: R3026  # Tracked resource 'XXX' must have patch operation that at least supports the update of tags. It's strongly recommended that the PATCH operation supports update of all mutable properties as well.
+    where:
+      - $.definitions.EventHubEventSourceResource
+      - $.definitions.IoTHubEventSourceResource
+    from: timeseriesinsights.json
+    reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
 ```
