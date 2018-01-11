@@ -2,37 +2,36 @@
   "parameters": {
     "subscriptionId": "24fb23e3-6ba3-41f0-9b6e-e41131d5d61e",
     "location": "SoutheastAsia",
-    "commandId": "PowerShellScript",
-    "api-version": "2017-03-30"
+    "commandId": "RunPowerShellScript",
+    "api-version": "2017-12-01"
   },
   "responses": {
     "200": {
       "body": {
         "script": [
-          "param(",
-          "  [string]$customScript,",
-          "  [string]$customParameters",
-          ")",
-          "$scriptBlock = [Scriptblock]::Create(\".{$customScript} $(&{$args} $customParameters)\")",
-          "Invoke-Command $scriptBlock"
+            "param(",
+            "    [string]$arg1,",
+            "    [string]$arg2",
+            ")",
+            "Write-Host This is a sample script with parameters $arg1 $arg2"
         ],
         "parameters": [
           {
-            "name": "customScript",
+            "name": "arg1",
             "type": "string",
-            "required": true
+            "value": "value1"
           },
           {
-            "name": "customParameters",
+            "name": "arg2",
             "type": "string",
-            "required": false
+            "value": "value2"
           }
         ],
         "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
-        "id": "PowerShellScript",
+        "id": "RunPowerShellScript",
         "osType": "Windows",
         "label": "Executes a PowerShell script",
-        "description": "Executes a custom PowerShell script with optional parameters."
+        "description": "Custom multiline PowerShell script should be defined in script property. Optional parameters can be set in parameters property."
       }
     }
   }
