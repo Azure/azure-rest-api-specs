@@ -98,7 +98,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/Namespace"
+                "$ref": "#/definitions/NamespaceResource"
               },
               "description": "Parameters supplied to create a Namespace Resource."
             },
@@ -113,13 +113,13 @@
             "201": {
               "description": "Namespace is Create/Update",
               "schema": {
-                "$ref": "#/definitions/Namespace"
+                "$ref": "#/definitions/NamespaceResource"
               }
             },
             "200": {
               "description": "Namespace is Create/Update",
               "schema": {
-                "$ref": "#/definitions/Namespace"
+                "$ref": "#/definitions/NamespaceResource"
               }
             }
           }
@@ -165,7 +165,7 @@
             "200": {
               "description": "Namespace is Updated",
               "schema": {
-                "$ref": "#/definitions/Namespace"
+                "$ref": "#/definitions/NamespaceResource"
               }
             }
           }
@@ -246,7 +246,7 @@
             "200": {
               "description": "Get Namespace",
               "schema": {
-                "$ref": "#/definitions/Namespace"
+                "$ref": "#/definitions/NamespaceResource"
               }
             }
           }
@@ -1429,7 +1429,7 @@
         },
         "description": "Parameters supplied to the Patch Namespace operation."
       },
-      "Namespace": {
+      "NamespaceResource": {
         "properties": {
           "properties": {
             "x-ms-client-flatten": true,
@@ -1488,7 +1488,7 @@
           "value": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             },
             "description": "Result of the List Namespace operation."
           },
