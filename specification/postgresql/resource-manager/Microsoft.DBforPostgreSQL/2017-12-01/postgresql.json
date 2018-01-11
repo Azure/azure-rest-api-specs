@@ -945,39 +945,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/performanceTiers": {
-      "get": {
-        "tags": [
-          "PerformanceTiers"
-        ],
-        "operationId": "PerformanceTiers_List",
-        "x-ms-examples": {
-          "PerformanceTiersList": {
-            "$ref": "./examples/PerformanceTiersList.json"
-          }
-        },
-        "description": "List all the performance tiers in a given subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PerformanceTierListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
@@ -1805,13 +1772,13 @@
           "type": "string",
           "description": "Edition of the performance tier."
         },
-        "dtu": {
+        "vCore": {
           "type": "integer",
-          "description": "Database throughput unit associated with the service level objective"
+          "description": "VCore associated with the service level objective"
         },
-        "storageMB": {
-          "type": "integer",
-          "description": "Maximum storage in MB associated with the service level objective"
+        "hardwareGeneration": {
+          "type": "string",
+          "description": "Hardware generation associated with the service level objective"
         }
       },
       "description": "Service level objectives for performance tier."
@@ -1822,9 +1789,23 @@
           "type": "string",
           "description": "ID of the performance tier."
         },
-        "backupRetentionDays": {
+        "maxBackupRetentionDays":{
           "type": "integer",
-          "description": "Backup retention in days for the performance tier edition"
+          "description": "Maximum Backup retention in days for the performance tier edition"
+        },
+        "minBackupRetentionDays": {
+          "type": "integer",
+          "description": "Minimum Backup retention in days for the performance tier edition"
+        },
+        "maxStorageMB":{
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "minStorageMB":{
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
         },
         "serviceLevelObjectives": {
           "type": "array",
