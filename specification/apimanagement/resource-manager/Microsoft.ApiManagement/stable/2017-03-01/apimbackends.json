@@ -314,7 +314,7 @@
           "Backends"
         ],
         "operationId": "Backend_Reconnect",
-        "description": "Initiates .",
+        "description": "Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.",
         "x-ms-examples": {
           "ApiManagementBackendReconnect": {
             "$ref": "./examples/ApiManagementBackendReconnect.json"
@@ -337,7 +337,7 @@
             "schema": {
               "$ref": "#/definitions/BackendReconnectContract"
             },
-            "description": "Create parameters."
+            "description": "Reconnect request parameters."
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -703,11 +703,13 @@
       "properties": {
         "after": {
           "type": "string",
+          "format": "duration",
           "description": "Duration in ISO8601 format after which reconnect will be initiated.",
           "minLength": 1,
           "maxLength": 2000
         }
-      }
+      },
+      "description": "Properties to control reconnect requests."
     }
   },
   "parameters": {
