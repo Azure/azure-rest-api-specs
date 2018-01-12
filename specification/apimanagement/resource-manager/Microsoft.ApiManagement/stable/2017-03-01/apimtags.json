@@ -376,7 +376,7 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "Contract details."
+      "description": "Tag Contract details."
     },
     "TagContractProperties": {
       "properties": {
@@ -396,43 +396,18 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagCreateParametersProperties",
+          "$ref": "#/definitions/TagContractProperties",
           "description": "Properties supplied to Create Tag operation."
         }
       },
-      "description": "Parameters supplied to the Create Tag operation."
-    },
-    "TagCreateParametersProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Tag name.",
-          "maxLength": 160,
-          "minLength": 1
-        }
-      },
-      "required": [
-        "displayName"
-      ],
       "description": "Parameters supplied to the Create Tag operation."
     },
     "TagUpdateParameters": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagUpdateParametersProperties",
+          "$ref": "#/definitions/TagContractProperties",
           "description": "Tag entity update contract properties."
-        }
-      },
-      "description": "Parameters supplied to the Update Tag operation."
-    },
-    "TagUpdateParametersProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Tag name.",
-          "maxLength": 160,
-          "minLength": 1
         }
       },
       "description": "Parameters supplied to the Update Tag operation."
@@ -475,22 +450,12 @@
           "description": "Tag name.",
           "maxLength": 160,
           "minLength": 1
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the Tag."
-        },
-        "externalDocsUrl": {
-          "type": "string",
-          "description": "Absolute URL of external resources describing the tag."
-        },
-        "externalDocsDescription": {
-          "type": "string",
-          "description": "Description of the external resources describing the tag."
         }
       },
-      "required": [
-        "displayName"
+      "allOf": [
+        {
+          "$ref": "#/definitions/TagDescriptionBaseProperties"
+        }
       ],
       "description": "TagDescription contract Properties."
     },
@@ -498,20 +463,14 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagDescriptionCreateParametersProperties",
+          "$ref": "#/definitions/TagDescriptionBaseProperties",
           "description": "Properties supplied to Create TagDescription operation."
         }
       },
       "description": "Parameters supplied to the Create TagDescription operation."
     },
-    "TagDescriptionCreateParametersProperties": {
+    "TagDescriptionBaseProperties": {
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Tag name.",
-          "maxLength": 160,
-          "minLength": 1
-        },
         "description": {
           "type": "string",
           "description": "Description of the Tag."
@@ -525,9 +484,6 @@
           "description": "Description of the external resources describing the tag."
         }
       },
-      "required": [
-        "displayName"
-      ],
       "description": "Parameters supplied to the Create TagDescription operation."
     }
   },

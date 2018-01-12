@@ -144,23 +144,28 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Operation name."
+          "description": "Operation name.",
+          "readOnly": true
         },
         "apiName": {
           "type": "string",
-          "description": "Api Name."
+          "description": "Api Name.",
+          "readOnly": true
         },
         "apiRevision": {
           "type": "string",
-          "description": "Api Revision."
+          "description": "Api Revision.",
+          "readOnly": true
         },
         "apiVersion": {
           "type": "string",
-          "description": "Api Version."
+          "description": "Api Version.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "Operation Description."
+          "description": "Operation Description.",
+          "readOnly": true
         },
         "method": {
           "type": "string",
@@ -168,16 +173,15 @@
           "externalDocs": {
             "description": "As defined by RFC.",
             "url": "http://www.rfc-editor.org/rfc/rfc7230.txt"
-          }
+          },
+          "readOnly": true
         },
         "urlTemplate": {
           "type": "string",
-          "description": "Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}"
+          "description": "Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}",
+          "readOnly": true
         }
       },
-      "required": [
-        "displayName"
-      ],
       "description": "Operation Entity Contract Properties."
     }
   },
