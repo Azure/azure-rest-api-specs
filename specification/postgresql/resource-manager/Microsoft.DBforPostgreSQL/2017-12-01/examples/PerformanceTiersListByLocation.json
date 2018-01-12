@@ -9,50 +9,83 @@
       "body": {
         "value": [
           {
-            "id": "Basic",
-            "backupRetentionDays": 7,
+            "Id": "Basic",
+            "MaxBackupRetentionDays": 35,
+            "MaxStorageMB": 1024000,
+            "MinBackupRetentionDays": 7,
+            "MinStorageMB": 5120,
             "serviceLevelObjectives": [
               {
-                "edition": "Basic",
-                "dtu": 50,
-                "storageMB": 51200,
-                "id": "PGSQLB50"
+                "Edition": "Basic",
+                "HardwareGeneration": "Gen4",
+                "Id": "PGSQL_B_Gen4_1",
+                "VCore": 1
               },
               {
-                "edition": "Basic",
-                "dtu": 100,
-                "storageMB": 51200,
-                "id": "PGSQLB100"
+                "Edition": "Basic",
+                "HardwareGeneration": "Gen4",
+                "Id": "PGSQL_B_Gen4_2",
+                "VCore": 2
               }
             ]
           },
           {
-            "id": "Standard",
-            "backupRetentionDays": 35,
+            "Id": "GeneralPurpose",
+            "MaxBackupRetentionDays": 35,
+            "MaxStorageMB": 2097152,
+            "MinBackupRetentionDays": 7,
+            "MinStorageMB": 5120,
             "serviceLevelObjectives": [
               {
-                "edition": "Standard",
-                "dtu": 100,
-                "storageMB": 128000,
-                "id": "PGSQLS100"
+                "Edition": "GeneralPurpose",
+                "HardwareGeneration": "Gen4",
+                "Id": "PGSQL_GP_Gen4_2",
+                "VCore": 2
               },
               {
-                "edition": "Standard",
-                "dtu": 200,
-                "storageMB": 128000,
-                "id": "PGSQLS200"
+                "Edition": "GeneralPurpose",
+                "HardwareGeneration": "Gen4",
+                "Id": "PGSQL_GP_Gen4_4",
+                "VCore": 4
               },
               {
-                "edition": "Standard",
-                "dtu": 400,
-                "storageMB": 128000,
-                "id": "PGSQLS400"
+                "Edition": "GeneralPurpose",
+                "HardwareGeneration": "Gen4",
+                "Id": "PGSQL_GP_Gen4_8",
+                "VCore": 8
               },
               {
-                "edition": "Standard",
-                "dtu": 800,
-                "storageMB": 128000,
-                "id": "PGSQLS800"
+                "Edition": "GeneralPurpose",
+                "HardwareGeneration": "Gen4",
+                "Id": "PGSQL_GP_Gen4_32",
+                "VCore": 32
+              }
+            ]
+          },
+          {
+            "Id": "MemoryOptimized",
+            "MaxBackupRetentionDays": 35,
+            "MaxStorageMB": 2097152,
+            "MinBackupRetentionDays": 7,
+            "MinStorageMB": 5120,
+            "serviceLevelObjectives": [
+              {
+                "Edition": "MemoryOptimized",
+                "HardwareGeneration": "Gen5",
+                "Id": "PGSQL_MO_Gen5_2",
+                "VCore": 2
+              },
+              {
+                "Edition": "MemoryOptimized",
+                "HardwareGeneration": "Gen5",
+                "Id": "PGSQL_MO_Gen5_8",
+                "VCore": 4
+              },
+              {
+                "Edition": "MemoryOptimized",
+                "HardwareGeneration": "Gen5",
+                "Id": "PGSQL_MO_Gen5_16",
+                "VCore": 8
               }
             ]
           }
