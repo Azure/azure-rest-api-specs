@@ -510,8 +510,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-locks-2015-01' && $(python)
 python:
-  namespace: azure.mgmt.resource.locks.v2016_09_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/locks/v2016_09_01
+  namespace: azure.mgmt.resource.locks.v2015_01_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/locks/v2015_01_01
 ```
 
 ### Tag: package-managedapplications-2017-09 and python
