@@ -32,6 +32,8 @@ To see additional help and options, run:
 These are the global settings for the EventGrid API.
 
 ``` yaml
+title: EventGridClient
+description: EventGrid Client
 openapi-type: data-plane
 tag: package-2018-01
 ```
