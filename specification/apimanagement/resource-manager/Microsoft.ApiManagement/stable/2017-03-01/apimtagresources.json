@@ -142,6 +142,21 @@
     },
     "OperationEntityContract": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationEntityContractProperties",
+          "description": "Operation entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Operation Entity Contract Properties."
+    },
+    "OperationEntityContractProperties": {
+      "properties": {
         "displayName": {
           "type": "string",
           "description": "Operation name.",
@@ -182,7 +197,10 @@
           "readOnly": true
         }
       },
-      "description": "Operation Entity Contract Properties."
+      "required": [
+        "displayName"
+      ],
+      "description": "Tag contract Properties."
     }
   },
   "parameters": {

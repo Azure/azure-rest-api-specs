@@ -209,7 +209,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagCreateParameters"
+              "$ref": "#/definitions/TagCreateUpdateParameters"
             },
             "description": "Create parameters."
           },
@@ -267,7 +267,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagUpdateParameters"
+              "$ref": "#/definitions/TagCreateUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -392,7 +392,7 @@
       ],
       "description": "Tag contract Properties."
     },
-    "TagCreateParameters": {
+    "TagCreateUpdateParameters": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -400,17 +400,7 @@
           "description": "Properties supplied to Create Tag operation."
         }
       },
-      "description": "Parameters supplied to the Create Tag operation."
-    },
-    "TagUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagContractProperties",
-          "description": "Tag entity update contract properties."
-        }
-      },
-      "description": "Parameters supplied to the Update Tag operation."
+      "description": "Parameters supplied to Create/Update Tag operations."
     },
     "TagDescriptionCollection": {
       "properties": {
@@ -477,7 +467,8 @@
         },
         "externalDocsUrl": {
           "type": "string",
-          "description": "Absolute URL of external resources describing the tag."
+          "description": "Absolute URL of external resources describing the tag.",
+          "maxLength": 2000
         },
         "externalDocsDescription": {
           "type": "string",

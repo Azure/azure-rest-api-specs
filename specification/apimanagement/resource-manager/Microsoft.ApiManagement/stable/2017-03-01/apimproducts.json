@@ -289,7 +289,11 @@
             "name": "deleteSubscriptions",
             "in": "query",
             "required": false,
-            "type": "boolean",
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
             "description": "Delete existing subscriptions to the product or not."
           },
           {
@@ -1000,7 +1004,7 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "#./apimtags.json#/parameters/TagIdParameter"
+            "$ref": "./apimtags.json#/parameters/TagIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1049,7 +1053,7 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "#./apimtags.json#/parameters/TagIdParameter"
+            "$ref": "./apimtags.json#/parameters/TagIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1062,7 +1066,7 @@
           "200": {
             "description": "Gets the details of the tag specified by its identifier.",
             "schema": {
-              "$ref": "#./apimtags.json#/definitions/TagContract"
+              "$ref": "./apimtags.json#/definitions/TagContract"
             },
             "headers": {
               "ETag": {
@@ -1101,7 +1105,7 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "#./apimtags.json#/parameters/TagIdParameter"
+            "$ref": "./apimtags.json#/parameters/TagIdParameter"
           },
           {
             "name": "If-Match",
@@ -1121,13 +1125,13 @@
           "201": {
             "description": "Tag was assigned to the Product.",
             "schema": {
-              "$ref": "#./apimtags.json#/definitions/TagContract"
+              "$ref": "./apimtags.json#/definitions/TagContract"
             }
           },
           "200": {
             "description": "Tag is already assigned to the Product.",
             "schema": {
-              "$ref": "#./apimtags.json#/definitions/TagContract"
+              "$ref": "./apimtags.json#/definitions/TagContract"
             }
           },
           "default": {
@@ -1160,7 +1164,7 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "#./apimtags.json#/parameters/TagIdParameter"
+            "$ref": "./apimtags.json#/parameters/TagIdParameter"
           },
           {
             "name": "If-Match",
