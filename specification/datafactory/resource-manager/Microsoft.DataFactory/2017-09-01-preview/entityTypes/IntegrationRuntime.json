@@ -187,33 +187,46 @@
         }
       ],
       "properties": {
-        "linkedIntegrationRuntimeInfo": {
+        "typeProperties": {
           "description": "When this property is not null, means this is a linked integration runtime. The property is used to access original integration runtime.",
-          "$ref": "#/definitions/LinkedIntegrationRuntimeInfo"
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinkedIntegrationRuntimeTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "LinkedIntegrationRuntimeTypeProperties": {
+      "description": "The base definition of a secret type.",
+      "type": "object",
+      "properties": {
+        "linkedInfo": {
+          "$ref": "#/definitions/LinkedIntegrationRuntimeProperties"
         }
       }
     },
-    "LinkedIntegrationRuntimeInfo": {
+    "LinkedIntegrationRuntimeProperties": {
       "description": "The base definition of a secret type.",
-      "discriminator": "authType",
+      "discriminator": "authorizationType",
       "type": "object",
       "properties": {
-        "authType": {
+        "authorizationType": {
           "type": "string",
           "description": "Type of the secret."
         }
       },
       "required": [
-        "authType"
+        "authorizationType"
       ]
     },
-    "LinkedIntegrationRuntimeKeyInfo": {
+    "LinkedIntegrationRuntimeKey": {
       "x-ms-discriminator-value": "Key",
       "description": "The base definition of a secret type.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/LinkedIntegrationRuntimeInfo"
+          "$ref": "#/definitions/LinkedIntegrationRuntimeProperties"
         }
       ],
       "properties": {
@@ -226,18 +239,18 @@
         "key"
       ]
     },
-    "LinkedIntegrationRuntimeRbacInfo": {
+    "LinkedIntegrationRuntimeRbac": {
       "x-ms-discriminator-value": "RBAC",
       "description": "The base definition of a secret type.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/LinkedIntegrationRuntimeInfo"
+          "$ref": "#/definitions/LinkedIntegrationRuntimeProperties"
         }
       ],
       "properties": {
         "resourceId": {
-          "description": "Type of the secret.",
+          "description": "The resource ID of the integration runtime to be shared.",
           "type": "string"
         }
       },
@@ -551,6 +564,13 @@
           "description": "Status of the integration runtime version.",
           "type": "string",
           "readOnly": true
+        },
+        "links": {
+          "description": "The list of linked integration runtimes that are created to share with this integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedIntegrationRuntime"
+          }
         }
       }
     },
@@ -565,6 +585,28 @@
       "x-ms-enum": {
         "name": "IntegrationRuntimeAutoUpdate",
         "modelAsString": true
+      }
+    },
+    "LinkedIntegrationRuntime": {
+      "description": "The linked integration runtime information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the linked integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataFactoryName": {
+          "description": "The data factory name for which the linked integration runtime belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createTime": {
+          "description": "The creating time of the linked integration runtime.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
       }
     },
     "SelfHostedIntegrationRuntimeNode": {
