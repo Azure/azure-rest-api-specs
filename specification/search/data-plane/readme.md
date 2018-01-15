@@ -40,8 +40,8 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
-- Microsoft.Search/2016-09-01/searchindex.json
-- Microsoft.Search/2016-09-01/searchservice.json
+- Microsoft.Search/preview/2016-09-01/searchindex.json
+- Microsoft.Search/preview/2016-09-01/searchservice.json
 ```
  
 ### Tag: package-2015-02-preview
@@ -50,8 +50,8 @@ These settings apply only when `--tag=package-2015-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-02-preview'
 input-file:
-- Microsoft.Search/2015-02-28-preview/searchindex.json
-- Microsoft.Search/2015-02-28-preview/searchservice.json
+- Microsoft.Search/preview/2015-02-28-preview/searchindex.json
+- Microsoft.Search/preview/2015-02-28-preview/searchservice.json
 ```
  
 ### Tag: package-2015-02
@@ -60,14 +60,17 @@ These settings apply only when `--tag=package-2015-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-02'
 input-file:
-- Microsoft.Search/2015-02-28/searchindex.json
-- Microsoft.Search/2015-02-28/searchservice.json
+- Microsoft.Search/preview/2015-02-28/searchindex.json
+- Microsoft.Search/preview/2015-02-28/searchservice.json
 ```
 
 
 ---
 # Code Generation
 
+!!! READ THIS !!!
+This swagger is not yet ready for languages other than C#.
+!!! READ THIS !!!
 
 ## C# 
 
