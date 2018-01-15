@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2015-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2015-06-01-preview'
 input-file:
-    - Microsoft.Commerce.Admin/2015-06-01-preview/CommerceAdmin.json
+    - Microsoft.Commerce.Admin/preview/2015-06-01-preview/CommerceAdmin.json
 ```
 
 ---
@@ -69,4 +69,24 @@ These settings apply only when `--tag=package-2015-06-01-preview --python` is sp
 
 ``` yaml $(tag) == 'package-2015-06-01-preview' && $(python)
 namespace: azure.mgmt.commerce.admin.v2015_06_01_preview
+```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  clear-output-folder: true
+  namespace: commerce
+```
+
+### Tag: package-2015-06-01-preview and go
+
+These settings apply only when `--tag=package-2015-06-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2015-06-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/azsadmin/mgmt/2015-06-01-preview/commerce
 ```

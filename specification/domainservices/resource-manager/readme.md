@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
-- Microsoft.AAD/2017-06-01/domainservices.json
+- Microsoft.AAD/stable/2017-06-01/domainservices.json
 ```
 
 ### Tag: package-2017-01
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.AAD/2017-01-01/domainservices.json
+- Microsoft.AAD/stable/2017-01-01/domainservices.json
 ```
 
 ---
