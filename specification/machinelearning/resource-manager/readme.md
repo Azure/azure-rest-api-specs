@@ -36,13 +36,17 @@ tag: package-webservices-2017-01
 tag: package-commitmentPlans-2016-05-preview
 ```
 
+``` yaml $(package-workspaces)
+tag: package-workspaces-2016-04
+```
+
 ### Tag: package-webservices-2017-01
 
 These settings apply only when `--tag=package-webservices-2017-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-webservices-2017-01'
 input-file:
-- Microsoft.MachineLearning/2017-01-01/webservices.json
+- Microsoft.MachineLearning/stable/2017-01-01/webservices.json
 ```
  
 ### Tag: package-commitmentPlans-2016-05-preview
@@ -51,16 +55,25 @@ These settings apply only when `--tag=package-commitmentPlans-2016-05-preview` i
 
 ``` yaml $(tag) == 'package-commitmentPlans-2016-05-preview'
 input-file:
-- Microsoft.MachineLearning/2016-05-01-preview/commitmentPlans.json
+- Microsoft.MachineLearning/preview/2016-05-01-preview/commitmentPlans.json
 ```
  
+### Tag: package-workspaces-2016-04
+
+These settings apply only when `--tag=package-workspaces-2016-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-workspaces-2016-04'
+input-file:
+- Microsoft.MachineLearning/stable/2016-04-01/workspaces.json
+```
+
 ### Tag: package-webservices-2016-05-preview
 
 These settings apply only when `--tag=package-webservices-2016-05-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-webservices-2016-05-preview'
 input-file:
-- Microsoft.MachineLearning/2016-05-01-preview/webservices.json
+- Microsoft.MachineLearning/preview/2016-05-01-preview/webservices.json
 ```
 
 
@@ -86,6 +99,9 @@ batch:
   - package-commitmentPlans: true
     namespace: Microsoft.Azure.Management.MachineLearning.CommitmentPlans
     output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/CommitmentPlans
+  - package-workspaces: true
+    namespace: Microsoft.Azure.Management.MachineLearning.Workspaces
+    output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/Workspaces
 ```
 
 
@@ -137,4 +153,5 @@ Since this RP has no unique default package, iterate over all of them for valida
 batch:
   - package-webservices: true
   - package-commitmentPlans: true
+  - package-workspaces: true
 ```
