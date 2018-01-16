@@ -204,12 +204,11 @@
             "$ref": "#/parameters/ContainerGroupNameParameter"
           },
           {
-            "name": "containerGroup",
-            "description": "The container group with tags to be updated.",
-            "required": true,
+            "name": "Resource",
+            "description": "The container group resource with just the tags to be updated.",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/ContainerGroup"
+              "$ref": "#/definitions/Resource"
             }
           }
         ],
@@ -1080,9 +1079,6 @@
           "description": "The resource tags."
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     }
   },
