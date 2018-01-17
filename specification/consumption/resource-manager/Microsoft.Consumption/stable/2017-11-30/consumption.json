@@ -125,6 +125,79 @@
           "nextLinkName": "nextLink"
         }
       }
+    },    
+    "/{scope}/providers/Microsoft.Consumption/marketplaces": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "operationId": "Marketplaces_List",
+        "description": "Lists the marketplace resource usage details for a scope by billing period. marketplaces are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "MarketplacesListForBillingPeriod": {
+            "$ref": "./examples/MarketplacesListForBillingPeriod.json"
+          },
+          "MarketplacesList": {
+            "$ref": "./examples/MarketplacesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "scope",
+            "description": "The scope of the marketplaces. The scope can be '/subscriptions/{subscriptionId}' for a subscription, or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}' for a billing perdiod.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N marketplaces.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketplacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     },
     "/{scope}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
@@ -661,6 +734,170 @@
           "description": "This is the total count of instances that are reserved for the reservationid.",
           "type": "number",
           "format": "decimal",
+          "readOnly": true
+        }
+      }
+    },
+    "Marketplace": {
+      "description": "An marketplace resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MarketplaceProperties",
+          "title": "Marketplace properties"
+        }
+      }
+    },
+    "MarketplacesListResult": {
+      "description": "Result of listing marketplaces. It contains a list of available marketplaces in reverse chronological order by billing period.",
+      "properties": {
+        "value": {
+          "description": "The list of marketplaces.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Marketplace"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MarketplaceProperties": {
+      "description": "The properties of the marketplace usage detail.",
+      "properties": {
+        "billingPeriodId": {
+          "description": "The id of the billing period resource that the usage belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usageStart": {
+          "description": "The start of the date time range covered by the usage detail.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "usageEnd": {
+          "description": "The end of the date time range covered by the usage detail.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "resourceRate": {
+          "description": "The marketplace resource rate.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },       
+        "offerType": {
+          "description": "The type of offer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "The name of resource group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "orderNumber": {
+          "description": "The order number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceName": {
+          "description": "The name of the resource instance that the usage is about.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceId": {
+          "description": "The uri of the resource instance that the usage is about.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "The ISO currency in which the meter is charged, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumedQuantity": {
+          "description": "The quantity of usage.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "The unit of measure.",
+          "type": "string",          
+          "readOnly": true
+        },
+        "pretaxCost": {
+          "description": "The amount of cost before tax.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "isEstimated": {
+          "description": "The estimated usage is subject to change.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "The meter id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionGuid": {
+          "description": "Subscription guid.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionName": {
+          "description": "Subscription name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountName": {
+          "description": "Account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "departmentName": {
+          "description": "Department name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumedService": {
+          "description": "Consumed service name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costCenter": {
+          "description": "The cost center of this department if it is a department and a costcenter exists",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalProperties": {
+          "description": "Additional details of this usage item. By default this is not populated, unless it's specified in $expand.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherName": {
+          "description": "The name of publisher.",
+          "type": "string",
+          "readOnly": true
+        },
+        "planName": {
+          "description": "The name of plan.",
+          "type": "string",
           "readOnly": true
         }
       }
