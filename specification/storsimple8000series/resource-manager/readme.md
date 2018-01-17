@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
 - Microsoft.StorSimple/stable/2017-06-01/storsimple.json
+directive:
+  -suppress:
+    -R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
+    -R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation) 
 ```
 
 ---
