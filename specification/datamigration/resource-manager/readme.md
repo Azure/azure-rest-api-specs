@@ -91,6 +91,14 @@ go:
   namespace: datamigration
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-11-15-preview
+```
+
+
 ### Tag: package-2017-11-15-preview and go
 
 These settings apply only when `--tag=package-2017-11-15-preview --go` is specified on the command line.

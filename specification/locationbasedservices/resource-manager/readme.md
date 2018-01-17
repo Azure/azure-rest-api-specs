@@ -66,6 +66,13 @@ go:
   namespace: location
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-01
+```
+
 ### Tag: package-2017-01 and go
 
 These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.

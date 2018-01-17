@@ -91,6 +91,13 @@ go:
   namespace: datacatalog
 ```
 
+### Go multi-api
+
+``` yaml ($go) && $(multiapi)
+batch:
+  - tag: package-2016-03-30
+```
+
 ### Tag: package-2016-03-30 and go
 
 These settings apply only when `--tag=package-2016-03-30 --go` is specified on the command line.

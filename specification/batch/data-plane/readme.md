@@ -256,6 +256,13 @@ go:
   namespace: batch
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-05.5.0
+```
+
 ### Tag: package-2017-05.5.0 and go
 
 These settings apply only when `--tag=package-2017-05.5.0 --go` is specified on the command line.

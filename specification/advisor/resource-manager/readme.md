@@ -112,6 +112,8 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-04

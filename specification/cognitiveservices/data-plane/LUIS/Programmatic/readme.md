@@ -72,6 +72,13 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: programmatic_2_0
+```
+
 ### Tag: programmatic_2_0 and go
 
 These settings apply only when `--tag=programmatic_2_0 --go` is specified on the command line.

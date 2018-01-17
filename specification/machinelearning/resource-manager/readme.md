@@ -115,6 +115,15 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-webservices-2017-01
+  - tag: package-webservices-2016-05-preview
+  - tag: package-commitmentPlans-2016-05-preview
+```
+
 ### Tag: package-webservices-2017-01 and go
 
 These settings apply only when `--tag=package-webservices-2017-01 --go` is specified on the command line.

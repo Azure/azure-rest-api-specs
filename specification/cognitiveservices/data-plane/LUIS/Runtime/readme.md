@@ -59,6 +59,13 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: runtime_2_0
+```
+
 ### Tag: runtime_2_0 and go
 
 These settings apply only when `--tag=runtime_2_0 --go` is specified on the command line.
