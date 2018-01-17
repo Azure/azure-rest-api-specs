@@ -57,6 +57,14 @@ go:
   namespace: timeseriesinsights
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-11-15
+  - tag: package-2017-02-preview
+```
+
 ### Tag: package-2017-11-15 and go
 
 These settings apply only when `--tag=package-2017-11-15 --go` is specified on the command line.
@@ -64,6 +72,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2017-11-15' && $(go)
 output-folder: $(go-sdk-folder)/services/timeseriesinsights/mgmt/2017-11-15/timeseriesinsights
+```
+
+### Tag: package-2017-11-15 and go
+
+These settings apply only when `--tag=package-2017-02-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-02-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/timeseriesinsights/mgmt/2017-02-28-preview/timeseriesinsights
 ```
 
 ## Suppression
