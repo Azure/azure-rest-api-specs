@@ -74,6 +74,13 @@ go:
   namespace: operationalinsights
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: v1
+```
+
 ### Tag: v1 and go
 
 These settings apply only when `--tag=v1 --go` is specified on the command line.

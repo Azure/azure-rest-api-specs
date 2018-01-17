@@ -67,6 +67,13 @@ go:
   namespace: experimentation
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-05-preview
+```
+
 ### Tag: package-2017-05-preview and go
 
 These settings apply only when `--tag=package-2017-05-preview --go` is specified on the command line.

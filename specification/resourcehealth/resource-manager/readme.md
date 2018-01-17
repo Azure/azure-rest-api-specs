@@ -65,6 +65,14 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-07
+  - tag: package-2015-01
+```
+
 ### Tag: package-2017-07 and go
 
 These settings apply only when `--tag=package-2017-07 --go` is specified on the command line.
