@@ -31,6 +31,16 @@ openapi-type: arm
 tag: package-2017-03
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: R3016
+    reason: existing properties, can't be changed without breaking API.
+    #where:
+    #  - $.definitions.ApiManagementServiceUploadCertificateParameters.properties.certificate_password
+    #  - $.definitions.QuotaCounterContract.properties.Value
+
+```
 
 ### Tag: package-2017-03
 
