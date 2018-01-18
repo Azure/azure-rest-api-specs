@@ -85,3 +85,33 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2016-03' && $(go)
 output-folder: $(go-sdk-folder)/services/streamanalytics/mgmt/2016-03-01/streamanalytics
 ```
+
+# Suppression
+
+``` yaml
+directive:
+  - suppress: R2020  # Model definition 'XXX' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
+    where: $.definitions.Input
+    from: inputs.json
+    reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
+
+  - suppress: R2020  # Model definition 'XXX' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
+    where: $.definitions.Output
+    from: outputs.json
+    reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
+    
+  - suppress: R2020  # Model definition 'XXX' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
+    where: $.definitions.Transformation
+    from: transformations.json
+    reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
+    
+  - suppress: R2020  # Model definition 'XXX' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
+    where: $.definitions.Function
+    from: functions.json
+    reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
+    
+  - suppress: R2020  # Model definition 'XXX' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
+    where: $.definitions.SubscriptionQuota
+    from: subscriptions.json
+    reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
+```
