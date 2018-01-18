@@ -128,8 +128,8 @@ These settings apply only when `--tag=package-2016-04-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2016-04-preview'
 input-file:
-- Microsoft.Compute/stable/2016-04-30-preview/compute.json
-- Microsoft.Compute/stable/2016-04-30-preview/disk.json
+- Microsoft.Compute/preview/2016-04-30-preview/compute.json
+- Microsoft.Compute/preview/2016-04-30-preview/disk.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
