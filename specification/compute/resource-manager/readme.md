@@ -177,7 +177,7 @@ These setings apply only when `--tag=package-container-service-2015-11-preview` 
 
 ``` yaml $(tag) == 'package-container-service-2015-11-preview'
 input-file:
-- Microsoft.ContainerService/stable/2015-11-01-preview/containerService.json
+- Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
 ```
 
 ### Tag: package-compute-2015-06
@@ -196,7 +196,7 @@ These settings apply only when `--tag=package-2015-06-preview` is specified on t
 ``` yaml $(tag) == 'package-2015-06-preview'
 input-file:
 - Microsoft.Compute/stable/2015-06-15/compute.json
-- Microsoft.ContainerService/stable/2015-11-01-preview/containerService.json
+- Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
 ```
 
 
