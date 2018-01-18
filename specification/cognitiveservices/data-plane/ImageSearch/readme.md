@@ -29,6 +29,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
 ```
 
 
@@ -94,4 +95,20 @@ Suppressing errors due to API design:
 directive:
   - suppress: R3016
     reason: _type is a polymorphic discriminator that can't be changed.
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.cognitiveservices.imagesearch
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/imagesearch
 ```
