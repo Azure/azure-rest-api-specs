@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2015-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-01-preview'
 input-file:
-- Microsoft.Intune/2015-01-14-preview/intune.json
+- Microsoft.Intune/preview/2015-01-14-preview/intune.json
 ```
  
 ### Tag: package-2015-01-privatepreview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2015-01-privatepreview` is specifi
 
 ``` yaml $(tag) == 'package-2015-01-privatepreview'
 input-file:
-- Microsoft.Intune/2015-01-14-privatepreview/intune.json
+- Microsoft.Intune/preview/2015-01-14-privatepreview/intune.json
 ```
 
 ---

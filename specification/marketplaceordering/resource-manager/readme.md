@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2015-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2015-06-01'
 input-file:
-- Microsoft.MarketplaceOrdering/2015-06-01/Agreements.json
+- Microsoft.MarketplaceOrdering/stable/2015-06-01/Agreements.json
 ```
 
 

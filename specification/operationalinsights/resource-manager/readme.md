@@ -38,8 +38,8 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-11-preview'
 input-file:
-- Microsoft.OperationalInsights/2015-11-01-preview/OperationalInsights.json
-- Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
+- Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
+- Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
 ```
  
 ### Tag: package-2015-03
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2015-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-03'
 input-file:
-- Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
+- Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
 ```
 
 ---

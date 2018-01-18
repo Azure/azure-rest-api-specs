@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.LocationBasedServices/2017-01-01-preview/locationbasedservices.json
+- Microsoft.LocationBasedServices/preview/2017-01-01-preview/locationbasedservices.json
 ```
 
 ---
@@ -53,4 +53,24 @@ csharp:
   namespace: Microsoft.Azure.Management.LocationBasedServices
   output-folder: $(csharp-sdks-folder)/LocationBasedServices/Management.LocationBasedServices/Generated
   clear-output-folder: true
+```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  clear-output-folder: true
+  namespace: location
+```
+
+### Tag: package-2017-01 and go
+
+These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-01' && $(go)
+output-folder: $(go-sdk-folder)/services/location/mgmt/2017-01-01-preview/location
 ```

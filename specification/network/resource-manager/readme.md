@@ -28,7 +28,35 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2017-10
+tag: package-2017-11
+```
+
+### Tag: package-2017-11
+
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- Microsoft.Network/stable/2017-11-01/applicationGateway.json
+- Microsoft.Network/stable/2017-11-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-11-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-11-01/endpointService.json
+- Microsoft.Network/stable/2017-11-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-11-01/loadBalancer.json
+- Microsoft.Network/stable/2017-11-01/network.json
+- Microsoft.Network/stable/2017-11-01/networkInterface.json
+- Microsoft.Network/stable/2017-11-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-11-01/networkWatcher.json
+- Microsoft.Network/stable/2017-11-01/operation.json
+- Microsoft.Network/stable/2017-11-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-11-01/routeFilter.json
+- Microsoft.Network/stable/2017-11-01/routeTable.json
+- Microsoft.Network/stable/2017-11-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-11-01/usage.json
+- Microsoft.Network/stable/2017-11-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-11-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-11-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-11-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-10
@@ -37,26 +65,26 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.Network/2017-10-01/applicationGateway.json
-- Microsoft.Network/2017-10-01/applicationSecurityGroup.json
-- Microsoft.Network/2017-10-01/checkDnsAvailability.json
-- Microsoft.Network/2017-10-01/endpointService.json
-- Microsoft.Network/2017-10-01/expressRouteCircuit.json
-- Microsoft.Network/2017-10-01/loadBalancer.json
-- Microsoft.Network/2017-10-01/network.json
-- Microsoft.Network/2017-10-01/networkInterface.json
-- Microsoft.Network/2017-10-01/networkSecurityGroup.json
-- Microsoft.Network/2017-10-01/networkWatcher.json
-- Microsoft.Network/2017-10-01/operation.json
-- Microsoft.Network/2017-10-01/publicIpAddress.json
-- Microsoft.Network/2017-10-01/routeFilter.json
-- Microsoft.Network/2017-10-01/routeTable.json
-- Microsoft.Network/2017-10-01/serviceCommunity.json
-- Microsoft.Network/2017-10-01/usage.json
-- Microsoft.Network/2017-10-01/virtualNetwork.json
-- Microsoft.Network/2017-10-01/virtualNetworkGateway.json
-- Microsoft.Network/2017-10-01/vmssNetworkInterface.json
-- Microsoft.Network/2017-10-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-10-01/applicationGateway.json
+- Microsoft.Network/stable/2017-10-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-10-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-10-01/endpointService.json
+- Microsoft.Network/stable/2017-10-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-10-01/loadBalancer.json
+- Microsoft.Network/stable/2017-10-01/network.json
+- Microsoft.Network/stable/2017-10-01/networkInterface.json
+- Microsoft.Network/stable/2017-10-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-10-01/networkWatcher.json
+- Microsoft.Network/stable/2017-10-01/operation.json
+- Microsoft.Network/stable/2017-10-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-10-01/routeFilter.json
+- Microsoft.Network/stable/2017-10-01/routeTable.json
+- Microsoft.Network/stable/2017-10-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-10-01/usage.json
+- Microsoft.Network/stable/2017-10-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-10-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-10-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-10-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-09
@@ -65,26 +93,26 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- Microsoft.Network/2017-09-01/applicationGateway.json
-- Microsoft.Network/2017-09-01/applicationSecurityGroup.json
-- Microsoft.Network/2017-09-01/checkDnsAvailability.json
-- Microsoft.Network/2017-09-01/endpointService.json
-- Microsoft.Network/2017-09-01/expressRouteCircuit.json
-- Microsoft.Network/2017-09-01/loadBalancer.json
-- Microsoft.Network/2017-09-01/network.json
-- Microsoft.Network/2017-09-01/networkInterface.json
-- Microsoft.Network/2017-09-01/networkSecurityGroup.json
-- Microsoft.Network/2017-09-01/networkWatcher.json
-- Microsoft.Network/2017-09-01/operation.json
-- Microsoft.Network/2017-09-01/publicIpAddress.json
-- Microsoft.Network/2017-09-01/routeFilter.json
-- Microsoft.Network/2017-09-01/routeTable.json
-- Microsoft.Network/2017-09-01/serviceCommunity.json
-- Microsoft.Network/2017-09-01/usage.json
-- Microsoft.Network/2017-09-01/virtualNetwork.json
-- Microsoft.Network/2017-09-01/virtualNetworkGateway.json
-- Microsoft.Network/2017-09-01/vmssNetworkInterface.json
-- Microsoft.Network/2017-09-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-09-01/applicationGateway.json
+- Microsoft.Network/stable/2017-09-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-09-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-09-01/endpointService.json
+- Microsoft.Network/stable/2017-09-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-09-01/loadBalancer.json
+- Microsoft.Network/stable/2017-09-01/network.json
+- Microsoft.Network/stable/2017-09-01/networkInterface.json
+- Microsoft.Network/stable/2017-09-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-09-01/networkWatcher.json
+- Microsoft.Network/stable/2017-09-01/operation.json
+- Microsoft.Network/stable/2017-09-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-09-01/routeFilter.json
+- Microsoft.Network/stable/2017-09-01/routeTable.json
+- Microsoft.Network/stable/2017-09-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-09-01/usage.json
+- Microsoft.Network/stable/2017-09-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-09-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-09-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-09-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-08
@@ -93,24 +121,24 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-- Microsoft.Network/2017-08-01/applicationGateway.json
-- Microsoft.Network/2017-08-01/checkDnsAvailability.json
-- Microsoft.Network/2017-08-01/endpointService.json
-- Microsoft.Network/2017-08-01/expressRouteCircuit.json
-- Microsoft.Network/2017-08-01/loadBalancer.json
-- Microsoft.Network/2017-08-01/network.json
-- Microsoft.Network/2017-08-01/networkInterface.json
-- Microsoft.Network/2017-08-01/networkSecurityGroup.json
-- Microsoft.Network/2017-08-01/networkWatcher.json
-- Microsoft.Network/2017-08-01/publicIpAddress.json
-- Microsoft.Network/2017-08-01/routeFilter.json
-- Microsoft.Network/2017-08-01/routeTable.json
-- Microsoft.Network/2017-08-01/serviceCommunity.json
-- Microsoft.Network/2017-08-01/usage.json
-- Microsoft.Network/2017-08-01/virtualNetwork.json
-- Microsoft.Network/2017-08-01/virtualNetworkGateway.json
-- Microsoft.Network/2017-08-01/vmssNetworkInterface.json
-- Microsoft.Network/2017-08-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-08-01/applicationGateway.json
+- Microsoft.Network/stable/2017-08-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-08-01/endpointService.json
+- Microsoft.Network/stable/2017-08-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-08-01/loadBalancer.json
+- Microsoft.Network/stable/2017-08-01/network.json
+- Microsoft.Network/stable/2017-08-01/networkInterface.json
+- Microsoft.Network/stable/2017-08-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-08-01/networkWatcher.json
+- Microsoft.Network/stable/2017-08-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-08-01/routeFilter.json
+- Microsoft.Network/stable/2017-08-01/routeTable.json
+- Microsoft.Network/stable/2017-08-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-08-01/usage.json
+- Microsoft.Network/stable/2017-08-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-08-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-08-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-08-01/vmssPublicIpAddress.json
 ```
 
 
@@ -120,24 +148,24 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
-- Microsoft.Network/2017-06-01/applicationGateway.json
-- Microsoft.Network/2017-06-01/checkDnsAvailability.json
-- Microsoft.Network/2017-06-01/endpointService.json
-- Microsoft.Network/2017-06-01/expressRouteCircuit.json
-- Microsoft.Network/2017-06-01/loadBalancer.json
-- Microsoft.Network/2017-06-01/network.json
-- Microsoft.Network/2017-06-01/networkInterface.json
-- Microsoft.Network/2017-06-01/networkSecurityGroup.json
-- Microsoft.Network/2017-06-01/networkWatcher.json
-- Microsoft.Network/2017-06-01/publicIpAddress.json
-- Microsoft.Network/2017-06-01/routeFilter.json
-- Microsoft.Network/2017-06-01/routeTable.json
-- Microsoft.Network/2017-06-01/serviceCommunity.json
-- Microsoft.Network/2017-06-01/usage.json
-- Microsoft.Network/2017-06-01/virtualNetwork.json
-- Microsoft.Network/2017-06-01/virtualNetworkGateway.json
-- Microsoft.Network/2017-06-01/vmssNetworkInterface.json
-- Microsoft.Network/2017-06-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-06-01/applicationGateway.json
+- Microsoft.Network/stable/2017-06-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-06-01/endpointService.json
+- Microsoft.Network/stable/2017-06-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-06-01/loadBalancer.json
+- Microsoft.Network/stable/2017-06-01/network.json
+- Microsoft.Network/stable/2017-06-01/networkInterface.json
+- Microsoft.Network/stable/2017-06-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-06-01/networkWatcher.json
+- Microsoft.Network/stable/2017-06-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-06-01/routeFilter.json
+- Microsoft.Network/stable/2017-06-01/routeTable.json
+- Microsoft.Network/stable/2017-06-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-06-01/usage.json
+- Microsoft.Network/stable/2017-06-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-06-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-06-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-06-01/vmssPublicIpAddress.json
 ```
 
 
@@ -147,23 +175,23 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
-- Microsoft.Network/2017-03-01/applicationGateway.json
-- Microsoft.Network/2017-03-01/checkDnsAvailability.json
-- Microsoft.Network/2017-03-01/expressRouteCircuit.json
-- Microsoft.Network/2017-03-01/loadBalancer.json
-- Microsoft.Network/2017-03-01/network.json
-- Microsoft.Network/2017-03-01/networkInterface.json
-- Microsoft.Network/2017-03-01/networkSecurityGroup.json
-- Microsoft.Network/2017-03-01/networkWatcher.json
-- Microsoft.Network/2017-03-01/publicIpAddress.json
-- Microsoft.Network/2017-03-01/routeFilter.json
-- Microsoft.Network/2017-03-01/routeTable.json
-- Microsoft.Network/2017-03-01/serviceCommunity.json
-- Microsoft.Network/2017-03-01/usage.json
-- Microsoft.Network/2017-03-01/virtualNetwork.json
-- Microsoft.Network/2017-03-01/virtualNetworkGateway.json
-- Microsoft.Network/2017-03-01/vmssNetworkInterface.json
-- Microsoft.Network/2017-03-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-03-01/applicationGateway.json
+- Microsoft.Network/stable/2017-03-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-03-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-03-01/loadBalancer.json
+- Microsoft.Network/stable/2017-03-01/network.json
+- Microsoft.Network/stable/2017-03-01/networkInterface.json
+- Microsoft.Network/stable/2017-03-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-03-01/networkWatcher.json
+- Microsoft.Network/stable/2017-03-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-03-01/routeFilter.json
+- Microsoft.Network/stable/2017-03-01/routeTable.json
+- Microsoft.Network/stable/2017-03-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-03-01/usage.json
+- Microsoft.Network/stable/2017-03-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-03-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-03-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-03-01/vmssPublicIpAddress.json
 ```
  
 ### Tag: package-2016-12
@@ -172,22 +200,22 @@ These settings apply only when `--tag=package-2016-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-12'
 input-file:
-- Microsoft.Network/2016-12-01/vmssNetworkInterface.json
-- Microsoft.Network/2016-12-01/applicationGateway.json
-- Microsoft.Network/2016-12-01/checkDnsAvailability.json
-- Microsoft.Network/2016-12-01/expressRouteCircuit.json
-- Microsoft.Network/2016-12-01/loadBalancer.json
-- Microsoft.Network/2016-12-01/network.json
-- Microsoft.Network/2016-12-01/networkInterface.json
-- Microsoft.Network/2016-12-01/networkSecurityGroup.json
-- Microsoft.Network/2016-12-01/networkWatcher.json
-- Microsoft.Network/2016-12-01/publicIpAddress.json
-- Microsoft.Network/2016-12-01/routeFilter.json
-- Microsoft.Network/2016-12-01/routeTable.json
-- Microsoft.Network/2016-12-01/serviceCommunity.json
-- Microsoft.Network/2016-12-01/usage.json
-- Microsoft.Network/2016-12-01/virtualNetwork.json
-- Microsoft.Network/2016-12-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2016-12-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2016-12-01/applicationGateway.json
+- Microsoft.Network/stable/2016-12-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2016-12-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2016-12-01/loadBalancer.json
+- Microsoft.Network/stable/2016-12-01/network.json
+- Microsoft.Network/stable/2016-12-01/networkInterface.json
+- Microsoft.Network/stable/2016-12-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2016-12-01/networkWatcher.json
+- Microsoft.Network/stable/2016-12-01/publicIpAddress.json
+- Microsoft.Network/stable/2016-12-01/routeFilter.json
+- Microsoft.Network/stable/2016-12-01/routeTable.json
+- Microsoft.Network/stable/2016-12-01/serviceCommunity.json
+- Microsoft.Network/stable/2016-12-01/usage.json
+- Microsoft.Network/stable/2016-12-01/virtualNetwork.json
+- Microsoft.Network/stable/2016-12-01/virtualNetworkGateway.json
 ```
  
 ### Tag: package-2016-09
@@ -196,20 +224,20 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
-- Microsoft.Network/2016-09-01/vmssNetworkInterface.json
-- Microsoft.Network/2016-09-01/applicationGateway.json
-- Microsoft.Network/2016-09-01/checkDnsAvailability.json
-- Microsoft.Network/2016-09-01/expressRouteCircuit.json
-- Microsoft.Network/2016-09-01/loadBalancer.json
-- Microsoft.Network/2016-09-01/network.json
-- Microsoft.Network/2016-09-01/networkInterface.json
-- Microsoft.Network/2016-09-01/networkSecurityGroup.json
-- Microsoft.Network/2016-09-01/networkWatcher.json
-- Microsoft.Network/2016-09-01/publicIpAddress.json
-- Microsoft.Network/2016-09-01/routeTable.json
-- Microsoft.Network/2016-09-01/usage.json
-- Microsoft.Network/2016-09-01/virtualNetwork.json
-- Microsoft.Network/2016-09-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2016-09-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2016-09-01/applicationGateway.json
+- Microsoft.Network/stable/2016-09-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2016-09-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2016-09-01/loadBalancer.json
+- Microsoft.Network/stable/2016-09-01/network.json
+- Microsoft.Network/stable/2016-09-01/networkInterface.json
+- Microsoft.Network/stable/2016-09-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2016-09-01/networkWatcher.json
+- Microsoft.Network/stable/2016-09-01/publicIpAddress.json
+- Microsoft.Network/stable/2016-09-01/routeTable.json
+- Microsoft.Network/stable/2016-09-01/usage.json
+- Microsoft.Network/stable/2016-09-01/virtualNetwork.json
+- Microsoft.Network/stable/2016-09-01/virtualNetworkGateway.json
 ```
  
 ### Tag: package-2016-06
@@ -218,7 +246,7 @@ These settings apply only when `--tag=package-2016-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-06'
 input-file:
-- Microsoft.Network/2016-06-01/network.json
+- Microsoft.Network/stable/2016-06-01/network.json
 ```
  
 ### Tag: package-2016-03
@@ -227,7 +255,7 @@ These settings apply only when `--tag=package-2016-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-03'
 input-file:
-- Microsoft.Network/2016-03-30/network.json
+- Microsoft.Network/stable/2016-03-30/network.json
 ```
  
 ### Tag: package-2015-06split
@@ -236,19 +264,19 @@ These settings apply only when `--tag=package-2015-06split` is specified on the 
 
 ``` yaml $(tag) == 'package-2015-06split'
 input-file:
-- Microsoft.Network/2015-06-15/applicationGateway.json
-- Microsoft.Network/2015-06-15/checkDnsAvailability.json
-- Microsoft.Network/2015-06-15/expressRouteCircuit.json
-- Microsoft.Network/2015-06-15/loadBalancer.json
-- Microsoft.Network/2015-06-15/network.json
-- Microsoft.Network/2015-06-15/networkInterface.json
-- Microsoft.Network/2015-06-15/networkSecurityGroup.json
-- Microsoft.Network/2015-06-15/publicIpAddress.json
-- Microsoft.Network/2015-06-15/routeTable.json
-- Microsoft.Network/2015-06-15/usage.json
-- Microsoft.Network/2015-06-15/virtualNetwork.json
-- Microsoft.Network/2015-06-15/virtualNetworkGateway.json
-- Microsoft.Network/2015-06-15/vmssNetworkInterface.json
+- Microsoft.Network/stable/2015-06-15/applicationGateway.json
+- Microsoft.Network/stable/2015-06-15/checkDnsAvailability.json
+- Microsoft.Network/stable/2015-06-15/expressRouteCircuit.json
+- Microsoft.Network/stable/2015-06-15/loadBalancer.json
+- Microsoft.Network/stable/2015-06-15/network.json
+- Microsoft.Network/stable/2015-06-15/networkInterface.json
+- Microsoft.Network/stable/2015-06-15/networkSecurityGroup.json
+- Microsoft.Network/stable/2015-06-15/publicIpAddress.json
+- Microsoft.Network/stable/2015-06-15/routeTable.json
+- Microsoft.Network/stable/2015-06-15/usage.json
+- Microsoft.Network/stable/2015-06-15/virtualNetwork.json
+- Microsoft.Network/stable/2015-06-15/virtualNetworkGateway.json
+- Microsoft.Network/stable/2015-06-15/vmssNetworkInterface.json
 ```
  
 ### Tag: package-2015-05-preview
@@ -257,11 +285,22 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.Network/2015-05-01-preview/network.json
+- Microsoft.Network/preview/2015-05-01-preview/network.json
 ```
 
 ---
 # Code Generation
+
+
+## Swagger to SDK
+
+This section describes what SDK should be generated by the automatic system.
+This is not used by Autorest itself.
+
+``` yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-sdk-for-python
+```
 
 
 ## C# 
@@ -401,6 +440,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2017-11
   - tag: package-2017-10
   - tag: package-2017-09
   - tag: package-2017-08
@@ -409,6 +449,17 @@ batch:
   - tag: package-2016-12
   - tag: package-2016-09
   - tag: package-2015-06split
+```
+
+### Tag: package-2017-11 and python
+
+These settings apply only when `--tag=package-2017-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2017-11' && $(python)
+python:
+  namespace: azure.mgmt.network.v2017_11_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-network/azure/mgmt/network/v2017_11_01
 ```
 
 ### Tag: package-2017-10 and python

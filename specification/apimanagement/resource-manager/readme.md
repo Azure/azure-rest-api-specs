@@ -38,26 +38,27 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
-- Microsoft.ApiManagement/2017-03-01/apimanagement.json
-- Microsoft.ApiManagement/2017-03-01/apimapis.json
-- Microsoft.ApiManagement/2017-03-01/apimauthorizationservers.json
-- Microsoft.ApiManagement/2017-03-01/apimbackends.json
-- Microsoft.ApiManagement/2017-03-01/apimcertificates.json
-- Microsoft.ApiManagement/2017-03-01/apimdeployment.json
-- Microsoft.ApiManagement/2017-03-01/apimemailtemplate.json
-- Microsoft.ApiManagement/2017-03-01/apimgroups.json
-- Microsoft.ApiManagement/2017-03-01/apimidentityprovider.json
-- Microsoft.ApiManagement/2017-03-01/apimloggers.json
-- Microsoft.ApiManagement/2017-03-01/apimnetworkstatus.json
-- Microsoft.ApiManagement/2017-03-01/apimopenidconnectproviders.json
-- Microsoft.ApiManagement/2017-03-01/apimportalsettings.json
-- Microsoft.ApiManagement/2017-03-01/apimproducts.json
-- Microsoft.ApiManagement/2017-03-01/apimproperties.json
-- Microsoft.ApiManagement/2017-03-01/apimquotas.json
-- Microsoft.ApiManagement/2017-03-01/apimreports.json
-- Microsoft.ApiManagement/2017-03-01/apimsubscriptions.json
-- Microsoft.ApiManagement/2017-03-01/apimtenant.json
-- Microsoft.ApiManagement/2017-03-01/apimusers.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimanagement.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimapis.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimauthorizationservers.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimbackends.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimcertificates.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimdeployment.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimemailtemplate.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimgroups.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimidentityprovider.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimloggers.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimnotifications.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimnetworkstatus.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimportalsettings.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimproducts.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimproperties.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimquotas.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimreports.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimsubscriptions.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimtenant.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimusers.json
 ```
 
 
@@ -67,24 +68,24 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-10'
 input-file:
-- Microsoft.ApiManagement/2016-10-10/apimanagement.json
-- Microsoft.ApiManagement/2016-10-10/apimapis.json
-- Microsoft.ApiManagement/2016-10-10/apimauthorizationservers.json
-- Microsoft.ApiManagement/2016-10-10/apimbackends.json
-- Microsoft.ApiManagement/2016-10-10/apimcertificates.json
-- Microsoft.ApiManagement/2016-10-10/apimdeployment.json
-- Microsoft.ApiManagement/2016-10-10/apimgroups.json
-- Microsoft.ApiManagement/2016-10-10/apimidentityprovider.json
-- Microsoft.ApiManagement/2016-10-10/apimloggers.json
-- Microsoft.ApiManagement/2016-10-10/apimnetworkstatus.json
-- Microsoft.ApiManagement/2016-10-10/apimopenidconnectproviders.json
-- Microsoft.ApiManagement/2016-10-10/apimproducts.json
-- Microsoft.ApiManagement/2016-10-10/apimproperties.json
-- Microsoft.ApiManagement/2016-10-10/apimquotas.json
-- Microsoft.ApiManagement/2016-10-10/apimreports.json
-- Microsoft.ApiManagement/2016-10-10/apimsubscriptions.json
-- Microsoft.ApiManagement/2016-10-10/apimtenant.json
-- Microsoft.ApiManagement/2016-10-10/apimusers.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimanagement.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimapis.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimauthorizationservers.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimbackends.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimcertificates.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimdeployment.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimgroups.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimidentityprovider.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimloggers.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimnetworkstatus.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimproducts.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimproperties.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimquotas.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimreports.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimsubscriptions.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimtenant.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimusers.json
 ```
  
 ### Tag: package-2016-07
@@ -93,8 +94,8 @@ These settings apply only when `--tag=package-2016-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-07'
 input-file:
-- Microsoft.ApiManagement/2016-07-07/apimanagement.json
-- Microsoft.ApiManagement/2016-07-07/apimdeployment.json
+- Microsoft.ApiManagement/stable/2016-07-07/apimanagement.json
+- Microsoft.ApiManagement/stable/2016-07-07/apimdeployment.json
 ```
 
 ---
