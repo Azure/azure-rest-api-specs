@@ -26,7 +26,7 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11
+tag: package-2018-01
 ```
 
 ### Tag: package-2017-11
@@ -36,6 +36,15 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
 - Microsoft.Consumption/stable/2017-11-30/consumption.json
+```
+
+### Tag: package-2018-01
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.Consumption/stable/2018-01-31/consumption.json
 ```
 
 ### Tag: package-2017-04-preview
@@ -136,4 +145,12 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-12-30-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-12-30-preview/consumption
+```
+
+### Tag: package-2018-01-31 and go
+These settings apply only when `--tag=package-2018-01-31 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01-31' && $(go)
+output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-01-31/consumption
 ```
