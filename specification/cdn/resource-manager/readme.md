@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.Cdn/2017-10-12/cdn.json
+- Microsoft.Cdn/stable/2017-10-12/cdn.json
 ```
 
 ### Tag: package-2017-04
