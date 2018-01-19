@@ -368,6 +368,11 @@
         ],
         "operationId": "ApiRevisions_List",
         "description": "Lists all revisions of an API.",
+        "x-ms-examples": {
+          "ApiManagementListApiRevisions": {
+            "$ref": "./examples/ApiManagementListApiRevisions.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -420,6 +425,11 @@
         ],
         "operationId": "ApiRelease_List",
         "description": "Lists all releases of an API. An API release is created when making an API Revision current. Releases are also used to rollback to previous revisions. Results will be paged and can be constrained by the $top and $skip parameters.",
+        "x-ms-examples": {
+          "ApiManagementListApiReleases": {
+            "$ref": "./examples/ApiManagementListApiReleases.json"
+          }
+        },        
         "parameters": [
           {
             "name": "$filter",
@@ -489,11 +499,16 @@
         ],
         "operationId": "ApiRelease_Get",
         "description": "Returns the details of an API release.",
+        "x-ms-examples": {
+          "ApiManagementGetApiRelease": {
+            "$ref": "./examples/ApiManagementGetApiRelease.json"
+          }
+        },
         "responses": {
           "200": {
-            "description": "The operation returns a list of API Releases.",
+            "description": "The operation returns the details of an API Release.",
             "schema": {
-              "$ref": "#/definitions/ApiReleaseCollection"
+              "$ref": "#/definitions/ApiReleaseContract"
             }
           },
           "default": {
@@ -503,17 +518,19 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-odata": "#/definitions/ApiReleaseContract"
       },
       "put": {
         "tags": [
           "Releases"
         ],
-        "operationId": "ApiRelease_CreateOrUpdate",
-        "description": "Creates a new Release for the API or updates an existing one.",
+        "operationId": "ApiRelease_Create",
+        "description": "Creates a new Release for the API.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiRelease": {
+            "$ref": "./examples/ApiManagementCreateApiRelease.json"
+          }
+        },
         "parameters": [
           {
             "name": "parameters",
@@ -552,6 +569,11 @@
         ],
         "operationId": "ApiRelease_Update",
         "description": "Updates the details of the release of the API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementUpdateApiRelease": {
+            "$ref": "./examples/ApiManagementUpdateApiRelease.json"
+          }
+        },
         "parameters": [
           {
             "name": "parameters",
@@ -584,6 +606,11 @@
         ],
         "operationId": "ApiRelease_Delete",
         "description": "Deletes the specified release in the API.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiRelease": {
+            "$ref": "./examples/ApiManagementDeleteApiRelease.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/IfMatch"
@@ -2063,7 +2090,8 @@
           "readOnly": true,
           "description": "Indicates if API revision is accessible via the gateway."
         }
-      }
+      },
+      "description": "Summary of revision metadata."
     },
     "ApiRevisionInfoContract" : {
         "description": "Object used to create an API Revision or Version based on an existing API Revision",
@@ -2072,12 +2100,12 @@
             "type": "string",
             "description": "Resource identifier of API to be used to create the revision from."
           },
-          "ApiVersionName": {
+          "apiVersionName": {
             "type": "string",
             "maxLength": 100,
             "description": "Version identifier for the new API Version."
           },
-          "ApiRevisionDescription": {
+          "apiRevisionDescription": {
             "type": "string",
             "maxLength": 256,
             "description": "Description of new API Revision."
@@ -2090,7 +2118,7 @@
     "ApiVersionSetContract" : {
       "description": "An API Version Set contains the common configuration for a set of API Versions relating ",
       "properties": {
-        "Id" : {
+        "id" : {
           "type": "string",
           "description": "Identifier for existing API Version Set. Omit this value to create a new Version Set."
         },
@@ -2132,12 +2160,23 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiReleaseContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiReleaseContractProperties",
+          "description": "Properties of the Api Release Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Api Release details."
+    },
+    "ApiReleaseContractProperties": {
       "description": "API Release details",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier of the release."
-        },
         "apiId": {
           "type": "string",
           "description": "Identifier of the API the release belongs to."
