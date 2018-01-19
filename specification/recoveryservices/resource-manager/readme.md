@@ -28,21 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2016-12
-```
-
-
-### Tag: package-2016-12
-
-These settings apply only when `--tag=package-2016-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-12'
-input-file:
-- Microsoft.RecoveryServices/stable/2016-12-01/backup.json
-- Microsoft.RecoveryServices/stable/2016-06-01/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2016-06-01/replicationusages.json
-- Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
-- Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
+tag: package-2016-06
 ```
  
 ### Tag: package-2016-06
