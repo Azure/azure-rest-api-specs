@@ -264,13 +264,13 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/budgets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets": {
       "get": {
         "tags": [
           "Budgets"
         ],
         "operationId": "Budgets_List",
-        "description": "Lists all budgets for a scope.",
+        "description": "Lists all budgets for a subscription.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -280,21 +280,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "scope",
-            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, 'subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}' for a resource group under a subscription, or 'subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/resources/{instanceId}' for a resource instance under a resource group and a subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter budgets by properties/resourceGroup, properties/instanceId, properties/tag, or properties/meterId. A filter of resouce group is allowed at a subscription level only. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -321,13 +306,13 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/budgets/{name}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{name}": {
       "get": {
         "tags": [
           "Budgets"
         ],
         "operationId": "Budgets_Get",
-        "description": "Gets the budget for a scope by budget name.",
+        "description": "Gets the budget for a subscription by budget name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -337,14 +322,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "scope",
-            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, 'subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}' for a resource group under a subscription, or 'subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/resources/{instanceId}' for a resource instance under a resource group and a subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -385,14 +362,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "scope",
-            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, 'subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}' for a resource group under a subscription, or 'subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/resources/{instanceId}' for a resource instance under a resource group and a subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -451,14 +420,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "scope",
-            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, 'subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}' for a resource group under a subscription, or 'subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/resources/{instanceId}' for a resource instance under a resource group and a subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
