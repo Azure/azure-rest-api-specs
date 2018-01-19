@@ -6,22 +6,24 @@
     "networkWatcherName" : "nw1",
     "packetCaptureName" : "pc1",
     "parameters" : {
-      "target" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
-      "bytesToCapturePerPacket" : "10000",
-      "totalBytesPerSession" : "100000",
-      "timeLimitInSeconds" : "100",
-      "storageLocation" : {
-        "storageId" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/pcstore",
-        "storagePath" : "https://mytestaccountname.blob.core.windows.net/capture/pc1.cap",
-        "filePath" : "D:\\capture\\pc1.cap"
-      },
-      "filters" : [
-        {
-          "protocol" : "TCP",
-          "localIPAddress" : "10.0.0.4",
-          "localPort" : "80"
-        }
-      ]
+      "properties" : {
+        "target" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+        "bytesToCapturePerPacket" : 10000,
+        "totalBytesPerSession" : 100000,
+        "timeLimitInSeconds" : 100,
+        "storageLocation" : {
+          "storageId" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/pcstore",
+          "storagePath" : "https://mytestaccountname.blob.core.windows.net/capture/pc1.cap",
+          "filePath" : "D:\\capture\\pc1.cap"
+        },
+        "filters" : [ 
+          {
+            "protocol" : "TCP",
+            "localIPAddress" : "10.0.0.4",
+            "localPort" : "80"
+          }
+        ]
+      }
     }
   },
   "responses" : {
@@ -32,9 +34,9 @@
         "etag": "W/\"a3a2b157-1edc-44c2-a759-f881be9f0069\"",
         "properties" : {
           "target" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
-          "bytesToCapturePerPacket" : "10000",
-          "totalBytesPerSession" : "100000",
-          "timeLimitInSeconds" : "100",
+          "bytesToCapturePerPacket" : 10000,
+          "totalBytesPerSession" : 100000,
+          "timeLimitInSeconds" : 100,
           "storageLocation" : {
             "storageId" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/pcstore",
             "storagePath" : "https://mytestaccountname.blob.core.windows.net/capture/pc1.cap",
