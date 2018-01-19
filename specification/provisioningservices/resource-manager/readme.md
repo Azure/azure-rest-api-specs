@@ -1,10 +1,11 @@
-# Provisioning Services
+# (DEPRECATED) Provisioning Services
     
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Provisioning Services.
 
-
+## Deprecation notice
+Please see [Device Provisioning Service](../../deviceprovisioningservice/resource-manager/) for on-going development
 
 ---
 ## Getting Started 
