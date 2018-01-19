@@ -30,10 +30,21 @@ description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
 tag: package-2017-07
 csharp-sdks-folder: ./Generated/CSharp
+python-sdks-folder: ./Generated/Python
+go-sdk-folder: ./Generated/Golang
 
 license-header: MICROSOFT_MIT
 ```
 
+### Validations
+Run validations when `--validate` is specified on command line
+
+``` yaml $(validate)
+azure-validator: true
+model-validator: true
+semantic-validator: true
+message-format: json
+```
 
 ### Tag: package-2017-07
 
@@ -41,8 +52,8 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.RecoveryServices/stable/2017-07-01/jobs.json
-- Microsoft.RecoveryServices/stable/2016-12-01/backupManagement.json
+- Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
 ```
  
@@ -112,17 +123,6 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup
-```
-
----
-# Validation
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: Autorest invalidates two letter acronyms as well and changes in data contracts require service wide changes and require more time
 ```
 
 ## Go
