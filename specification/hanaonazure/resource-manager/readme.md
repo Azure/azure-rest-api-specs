@@ -80,7 +80,7 @@ python:
   namespace: azure.mgmt.hanaonazure
   package-name: azure-mgmt-hanaonazure
   clear-output-folder: true
-  package-version: 0.1.0
+  package-version: 0.2.0
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
