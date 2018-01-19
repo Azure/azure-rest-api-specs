@@ -28,35 +28,36 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2017-11
+tag: package-2018-01
 ```
 
-### Tag: package-2017-11
+### Tag: package-2018-01
 
-These settings apply only when `--tag=package-2017-11` is specified on the command line.
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-11'
+``` yaml $(tag) == 'package-2018-01'
+
 input-file:
-- Microsoft.Network/stable/2017-11-01/applicationGateway.json
-- Microsoft.Network/stable/2017-11-01/applicationSecurityGroup.json
-- Microsoft.Network/stable/2017-11-01/checkDnsAvailability.json
-- Microsoft.Network/stable/2017-11-01/endpointService.json
-- Microsoft.Network/stable/2017-11-01/expressRouteCircuit.json
-- Microsoft.Network/stable/2017-11-01/loadBalancer.json
-- Microsoft.Network/stable/2017-11-01/network.json
-- Microsoft.Network/stable/2017-11-01/networkInterface.json
-- Microsoft.Network/stable/2017-11-01/networkSecurityGroup.json
-- Microsoft.Network/stable/2017-11-01/networkWatcher.json
-- Microsoft.Network/stable/2017-11-01/operation.json
-- Microsoft.Network/stable/2017-11-01/publicIpAddress.json
-- Microsoft.Network/stable/2017-11-01/routeFilter.json
-- Microsoft.Network/stable/2017-11-01/routeTable.json
-- Microsoft.Network/stable/2017-11-01/serviceCommunity.json
-- Microsoft.Network/stable/2017-11-01/usage.json
-- Microsoft.Network/stable/2017-11-01/virtualNetwork.json
-- Microsoft.Network/stable/2017-11-01/virtualNetworkGateway.json
-- Microsoft.Network/stable/2017-11-01/vmssNetworkInterface.json
-- Microsoft.Network/stable/2017-11-01/vmssPublicIpAddress.json
+- Microsoft.Network/2018-01-01/applicationGateway.json
+- Microsoft.Network/2018-01-01/applicationSecurityGroup.json
+- Microsoft.Network/2018-01-01/checkDnsAvailability.json
+- Microsoft.Network/2018-01-01/endpointService.json
+- Microsoft.Network/2018-01-01/expressRouteCircuit.json
+- Microsoft.Network/2018-01-01/loadBalancer.json
+- Microsoft.Network/2018-01-01/network.json
+- Microsoft.Network/2018-01-01/networkInterface.json
+- Microsoft.Network/2018-01-01/networkSecurityGroup.json
+- Microsoft.Network/2018-01-01/networkWatcher.json
+- Microsoft.Network/2018-01-01/operation.json
+- Microsoft.Network/2018-01-01/publicIpAddress.json
+- Microsoft.Network/2018-01-01/routeFilter.json
+- Microsoft.Network/2018-01-01/routeTable.json
+- Microsoft.Network/2018-01-01/serviceCommunity.json
+- Microsoft.Network/2018-01-01/usage.json
+- Microsoft.Network/2018-01-01/virtualNetwork.json
+- Microsoft.Network/2018-01-01/virtualNetworkGateway.json
+- Microsoft.Network/2018-01-01/vmssNetworkInterface.json
+- Microsoft.Network/2018-01-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-10
@@ -440,7 +441,11 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+<<<<<<< HEAD
   - tag: package-2017-11
+=======
+  - tag: package-2018-01
+>>>>>>> b86e05ad74b1f1d569284e397fd29b4995879ed1
   - tag: package-2017-10
   - tag: package-2017-09
   - tag: package-2017-08
@@ -451,6 +456,7 @@ batch:
   - tag: package-2015-06split
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2017-11 and python
 
 These settings apply only when `--tag=package-2017-11 --python` is specified on the command line.
@@ -460,6 +466,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.network.v2017_11_01
   output-folder: $(python-sdks-folder)/azure-mgmt-network/azure/mgmt/network/v2017_11_01
+=======
+### Tag: package-2018-01 and python
+
+These settings apply only when `--tag=package-2018-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(python)
+python:
+  namespace: azure.mgmt.network.v2018_01_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-network/azure/mgmt/network/v2018_01_01
+>>>>>>> b86e05ad74b1f1d569284e397fd29b4995879ed1
 ```
 
 ### Tag: package-2017-10 and python
