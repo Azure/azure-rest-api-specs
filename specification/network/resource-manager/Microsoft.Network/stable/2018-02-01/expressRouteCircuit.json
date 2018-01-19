@@ -428,6 +428,181 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}": {
+      "delete": {
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
+        "operationId": "ExpressRouteCircuitConnections_Delete",
+        "description": "Deletes the specified Express Route Circuit Connection from the specified express route circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+		  {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit connection."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
+        "operationId": "ExpressRouteCircuitConnections_Get",
+        "description": "Gets the specified Express Route Circuit Connection from the specified express route circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+		  {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit connection."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Express Route Circuit Connection resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
+        "operationId": "ExpressRouteCircuitConnections_CreateOrUpdate",
+        "description": "Creates or updates a Express Route Circuit Connection in the specified express route circuits.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+		  {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit connection."
+          },
+          {
+            "name": "expressroutecircuitconnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+            },
+            "description": "Parameters supplied to the create or update express route circuit circuit connection operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting ExpressRouteCircuitPeering resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting ExpressRouteCircuitPeering resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}": {
       "delete": {
         "tags": [
@@ -1219,6 +1394,13 @@
         "ipv6PeeringConfig": {
           "$ref": "#/definitions/Ipv6ExpressRouteCircuitPeeringConfig",
           "description": "The IPv6 peering configuration."
+        },
+		"connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitConnection"
+          },
+          "description": "The list of circuit connections associated with Azure Private Peering for this circuit."
         }
       }
     },
@@ -1260,6 +1442,77 @@
         }
       },
       "description": "Response for ListPeering API service call retrieves all peerings that belong to an ExpressRouteCircuit."
+    },
+	"ExpressRouteCircuitConnectionsPropertiesFormat": {
+      "properties": {
+	    "expressroutecircuitpeering": {
+			"$ref": "#/definitions/ExpressRouteCircuitPeering",
+			"description": "Reference to Express Route Circuit Private Peering Resource of the circuit initiating connection."
+		},
+		"peerexpressroutecircuitpeering": {
+			"$ref": "#/definitions/ExpressRouteCircuitPeering",
+			"description": "Reference to Express Route Circuit Private Peering Resource of the peered circuit."
+		},
+		"addressPrefix": {
+          "type": "string",
+          "description": "/29 IP address space to carve out Customer addresses for tunnels."
+        },
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorization key."
+        },
+        "circuitConnectionStatus": {
+          "type": "string",
+          "description": "Express Route Circuit Connection State. Possible values are: 'Connected' and 'Disconnected'.",
+          "enum": [
+            "Connected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+	"ExpressRouteCircuitConnections": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteCircuitConnectionsPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Express Route Circuit Connection in an ExpressRouteCircuitPeering resource."
+    },
+    "ExpressRouteCircuitConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitConnections"
+          },
+          "description": "The Express Route Circuit Connections in an ExpressRoute Circuit Private Peering."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for List Express Route Circuit Connections API service call retrieves all Circuit Connections that belongs to an ExpressRouteCircuit Private Peering."
     },
     "ExpressRouteCircuitSku": {
       "properties": {
