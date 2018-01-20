@@ -105,6 +105,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.notificationhubs
   package-name: azure-mgmt-notificationhubs
+  package-version: 2.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
