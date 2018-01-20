@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-08-preview'
 input-file:
-- Microsoft.MachineLearningCompute/2017-08-01-preview/machineLearningCompute.json
+- Microsoft.MachineLearningCompute/preview/2017-08-01-preview/machineLearningCompute.json
 ```
 
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2017-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-06-preview'
 input-file:
-- Microsoft.MachineLearningCompute/2017-06-01-preview/machineLearningCompute.json
+- Microsoft.MachineLearningCompute/preview/2017-06-01-preview/machineLearningCompute.json
 ```
 
 

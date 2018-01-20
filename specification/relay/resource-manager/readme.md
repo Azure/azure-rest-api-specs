@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.Relay/2017-04-01/relay.json
+- Microsoft.Relay/stable/2017-04-01/relay.json
 ```
 
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2016-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-07'
 input-file:
-- Microsoft.Relay/2016-07-01/relay.json
+- Microsoft.Relay/stable/2016-07-01/relay.json
 ```
 
 

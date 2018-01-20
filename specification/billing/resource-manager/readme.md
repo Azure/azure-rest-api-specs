@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-04-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-04-preview'
 input-file:
-- Microsoft.Billing/2017-04-24-preview/billing.json
+- Microsoft.Billing/preview/2017-04-24-preview/billing.json
 ```
  
 ### Tag: package-2017-02-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2017-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-02-preview'
 input-file:
-- Microsoft.Billing/2017-02-27-preview/billing.json
+- Microsoft.Billing/preview/2017-02-27-preview/billing.json
 ```
 
 ---

@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-08-beta` is specified on the 
 
 ``` yaml $(tag) == 'package-2017-08-beta'
 input-file:
-- Microsoft.AnalysisServices/2017-08-01-beta/analysisservices.json
+- Microsoft.AnalysisServices/preview/2017-08-01-beta/analysisservices.json
 ```
 
 ### Tag: package-2017-07
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.AnalysisServices/2017-07-14/analysisservices.json
+- Microsoft.AnalysisServices/stable/2017-07-14/analysisservices.json
 ```
 
 ### Tag: package-2016-05
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2016-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-05'
 input-file:
-- Microsoft.AnalysisServices/2016-05-16/analysisservices.json
+- Microsoft.AnalysisServices/stable/2016-05-16/analysisservices.json
 ```
 
 ---

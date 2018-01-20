@@ -26,7 +26,17 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-06
+tag: package-2017-10
+```
+
+
+### Tag: package-2017-10
+
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- Microsoft.Storage/stable/2017-10-01/storage.json
 ```
 
 
@@ -36,7 +46,7 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
-- Microsoft.Storage/2017-06-01/storage.json
+- Microsoft.Storage/stable/2017-06-01/storage.json
 ```
 
 
@@ -46,7 +56,7 @@ These settings apply only when `--tag=package-2016-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-12'
 input-file:
-- Microsoft.Storage/2016-12-01/storage.json
+- Microsoft.Storage/stable/2016-12-01/storage.json
 ```
  
 ### Tag: package-2016-05
@@ -55,7 +65,7 @@ These settings apply only when `--tag=package-2016-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-05'
 input-file:
-- Microsoft.Storage/2016-05-01/storage.json
+- Microsoft.Storage/stable/2016-05-01/storage.json
 ```
  
 ### Tag: package-2016-01
@@ -64,7 +74,7 @@ These settings apply only when `--tag=package-2016-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-01'
 input-file:
-- Microsoft.Storage/2016-01-01/storage.json
+- Microsoft.Storage/stable/2016-01-01/storage.json
 ```
  
 ### Tag: package-2015-06
@@ -73,7 +83,7 @@ These settings apply only when `--tag=package-2015-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-06'
 input-file:
-- Microsoft.Storage/2015-06-15/storage.json
+- Microsoft.Storage/stable/2015-06-15/storage.json
 ```
  
 ### Tag: package-2015-05-preview
@@ -82,7 +92,7 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.Storage/2015-05-01-preview/storage.json
+- Microsoft.Storage/preview/2015-05-01-preview/storage.json
 ```
 
 
@@ -191,10 +201,22 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2017-10
   - tag: package-2017-06
   - tag: package-2016-12
   - tag: package-2016-01
   - tag: package-2015-06
+```
+
+### Tag: package-2017-10 and python
+
+These settings apply only when `--tag=package-2017-10 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(python)
+python:
+  namespace: azure.mgmt.storage.v2017_10_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2017_10_01
 ```
 
 ### Tag: package-2017-06 and python

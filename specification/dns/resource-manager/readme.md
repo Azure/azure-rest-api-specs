@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- Microsoft.Network/2017-09-01/dns.json
+- Microsoft.Network/stable/2017-09-01/dns.json
 ```
 
 ### Tag: package-2016-04
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2016-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-04'
 input-file:
-- Microsoft.Network/2016-04-01/dns.json
+- Microsoft.Network/stable/2016-04-01/dns.json
 ```
 
 ### Tag: package-2015-05-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.Network/2015-05-04-preview/dns.json
+- Microsoft.Network/preview/2015-05-04-preview/dns.json
 ```
 
 
@@ -113,6 +113,15 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: dns
   clear-output-folder: true
+```
+
+### Tag: package-2017-09 and go
+
+These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-09' && $(go)
+output-folder: $(go-sdk-folder)/services/dns/mgmt/2017-09-01/dns
 ```
 
 ### Tag: package-2016-04 and go

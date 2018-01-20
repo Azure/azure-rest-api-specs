@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2017-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-09-preview'
 input-file: 
-- Microsoft.BatchAI/2017-09-01-preview/BatchAI.json
+- Microsoft.BatchAI/preview/2017-09-01-preview/BatchAI.json
 ```
 
 ---

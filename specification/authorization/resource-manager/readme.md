@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2017-10-01-preview
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
+    #where:
+    #  -   $.paths["/providers/Microsoft.Authorization/operations"]  
+
+```
 
 ### Tag: package-2015-07
 
@@ -36,7 +45,7 @@ These settings apply only when `--tag=package-2015-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-07'
 input-file:
-- Microsoft.Authorization/2015-07-01/authorization.json
+- Microsoft.Authorization/stable/2015-07-01/authorization.json
 ```
 
 ### Tag: package-2017-10-01-preview
@@ -45,8 +54,8 @@ These settings apply only when `--tag=package-2017-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
-- Microsoft.Authorization/2017-10-01-preview/authorization.json
-- Microsoft.Authorization/2017-10-01-preview/authorization-RACalls.json
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization.json
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
 ```
 
 
