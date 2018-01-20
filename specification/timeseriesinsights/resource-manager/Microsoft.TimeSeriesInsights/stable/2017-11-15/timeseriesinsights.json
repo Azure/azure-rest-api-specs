@@ -147,6 +147,9 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
+            "$ref": "#/parameters/ExpandParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -316,43 +319,6 @@
           },
           "default": {
             "description": "HTTP 404 (Not Found): The subscription could not be found.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TimeSeriesInsights/environments/{environmentName}/status": {
-      "get": {
-        "operationId": "Environments_GetStatus",
-        "x-ms-examples": {
-          "EnvironmentsBySubscription": { "$ref": "./examples/EnvironmentsStatusGet.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "description": "Gets the status of the environment, and its internal state in the Time Series Insights service.",
-        "responses": {
-          "200": {
-            "description": "The environment status was successfully retrieved and is in the response.",
-            "schema": {
-              "$ref": "#/definitions/EnvironmentStatus"
-            }
-          },
-          "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, or environment could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -1363,6 +1329,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The fully qualified domain name used to access the environment data, e.g. to query the environment's events or upload reference data for the environment."
+        },
+        "status": {
+          "$ref": "#/definitions/EnvironmentStatus",
+          "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service." 
         }
       },
       "allOf": [
@@ -1401,12 +1371,8 @@
     "EnvironmentStatus": {
       "readOnly": true,
       "type": "object",
-      "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service",
+      "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the environment."
-        },
         "ingress": {
           "$ref": "#/definitions/IngressEnvironmentStatus",
           "description": "An object that represents the status of ingress on an environment."
@@ -2104,6 +2070,14 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request."
+    },
+    "ExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Setting $expand=status will include the status of the internal services of the environment in the Time Series Insights service."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
