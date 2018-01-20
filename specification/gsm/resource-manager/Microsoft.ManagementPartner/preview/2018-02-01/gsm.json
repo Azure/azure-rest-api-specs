@@ -64,8 +64,8 @@
         }
       },
       "put": {
-        "summary": "Add a specific `Partner`.",
-        "description": "Add a management partner for the objectId and tenantId.",
+        "summary": "Create a specific `Partner`.",
+        "description": "Create a management partner for the objectId and tenantId.",
         "operationId": "Partner_Put",
         "x-ms-examples": {
           "PutPartnerDetails": {
@@ -173,7 +173,7 @@
         "operationId": "PartnerNoId_Get",
         "x-ms-examples": {
           "GetPartnerDetails": {
-            "$ref": "./examples/GetPartnerDetails.json"
+            "$ref": "./examples/GetPartnerDetails-NoPartnerId.json"
           }
         },
         "parameters": [
@@ -241,6 +241,7 @@
   "definitions": {
     "PartnerResponse": {
       "type": "object",
+      "description": "this is the management partner operations response",
       "x-ms-azure-resource": true,
       "properties": {
         "etag": {
@@ -269,6 +270,7 @@
     },
     "PartnerProperties": {
       "type": "object",
+      "description": "this is the management partner properties",
       "properties": {
         "partnerId": {
           "type": "string",
@@ -296,7 +298,7 @@
           "format": "date-time",
           "description": "This is the DateTime when the partner was created."
         },
-        "managementPartnerState": {
+        "state": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagementPartnerState"
         }
@@ -304,6 +306,7 @@
     },
     "ManagementPartnerState": {
       "type": "string",
+      "description": "this is the management partner state: Active or Deleted",
       "enum": [
         "Active",
         "Deleted"
@@ -311,6 +314,7 @@
     },
     "ErrorResponseCode": {
       "type": "string",
+      "description": "this is the error response code that management partner operations may return",
       "enum": [
         "NotFound",
         "Conflict",
@@ -319,6 +323,7 @@
     },
     "Error": {
       "type": "object",
+      "description": "this is the management partner operations error",
       "properties": {
         "error": {
           "$ref": "#/definitions/ExtendedErrorInfo"
@@ -327,6 +332,7 @@
     },
     "ExtendedErrorInfo": {
       "type": "object",
+      "description": "this is the extended error info",
       "properties": {
         "code": {
           "$ref": "#/definitions/ErrorResponseCode"
@@ -338,6 +344,7 @@
     },
     "OperationList": {
       "type": "object",
+      "description": "this is the management partner operations list",
       "properties": {
         "value": {
           "type": "array",
@@ -353,6 +360,7 @@
     },
     "OperationResponse": {
       "type": "object",
+      "description": "this is the management partner operations response",
       "properties": {
         "name": {
           "type": "string"
@@ -366,6 +374,7 @@
       }
     },
     "OperationDisplay": {
+      "description": "this is the management partner operation",
       "type": "object",
       "properties": {
         "provider": {
