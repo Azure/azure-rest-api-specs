@@ -270,8 +270,8 @@
           },
           "description": "Page values."
         },
-        "count":{
-          "type" : "integer",
+        "count": {
+          "type": "integer",
           "description": "Total number of entities"
         },
         "nextLink": {
@@ -283,12 +283,16 @@
     },
     "PropertyContract": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PropertyContractProperties",
-          "description": "Property entity contract properties."
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Property."
         }
       },
+      "allOf": [
+        {
+          "ref": "#/definitions/PropertyContractProperties"
+        }
+      ],
       "description": "Property details."
     },
     "PropertyContractProperties": {
@@ -319,16 +323,6 @@
       "description": "Property Contract properties."
     },
     "PropertyUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PropertyUpdateParameterProperties",
-          "description": "Property entity Update contract properties."
-        }
-      },
-      "description": "Property update Parameters."
-    },
-    "PropertyUpdateParameterProperties": {
       "properties": {
         "name": {
           "type": "string",
