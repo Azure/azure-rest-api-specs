@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017-12-01-preview",
+    "version": "2018-02-01-preview",
     "title": "ContainerInstanceManagementClient"
   },
   "host": "management.azure.com",
@@ -788,6 +788,15 @@
         "ip": {
           "type": "string",
           "description": "The IP exposed to the public internet."
+        },
+        "dnsnamelabel": {
+          "type": "string",
+          "description": "The Dns name label for the IP."
+        },
+        "fqdn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The FQDN for the IP."
         }
       },
       "required": [
