@@ -1,10 +1,11 @@
-# Provisioning Services
+# (DEPRECATED) Provisioning Services
     
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Provisioning Services.
 
-
+## Deprecation notice
+Please see [Device Provisioning Service](../../deviceprovisioningservice/resource-manager/) for on-going development
 
 ---
 ## Getting Started 
@@ -69,8 +70,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ProvisioningServices
-  output-folder: $(csharp-sdks-folder)/ProvisioningServices/Management.ProvisioningServices/Generated
+  namespace: Microsoft.Azure.Management.DeviceProvisioningServices
+  output-folder: $(csharp-sdks-folder)/DeviceProvisioningServices/Management.DeviceProvisioningServices/Generated
   clear-output-folder: true
 ```
 
