@@ -1,7 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "subid",
-    "api-version": "2017-12-01-preview",
+    "api-version": "2018-02-01-preview",
     "resourceGroupName": "demo",
     "containerGroupName": "demo1",
     "containerGroup": {
@@ -55,7 +55,8 @@
               "port": 80
             }
           ],
-          "type": "Public"
+          "type": "Public",
+          "dnsnamelabel": "dnsnamelabel1"
         },
         "osType": "Linux",
         "volumes": [
@@ -138,7 +139,9 @@
                 "protocol": "TCP"
               }
             ],
-            "type": "Public"
+            "type": "Public",
+            "dnsnamelabel": "dnsnamelabel1",
+            "fqdn": "dnsnamelabel1.azure-container.io"
           },
           "osType": "Linux",
           "provisioningState": "Succeeded",
@@ -216,7 +219,9 @@
                 "protocol": "TCP"
               }
             ],
-            "type": "Public"
+            "type": "Public",
+            "dnsnamelabel": "dnsnamelabel1",
+            "fqdn": "dnsnamelabel1.azure-container.io"
           },
           "osType": "Linux",
           "provisioningState": "Succeeded",
