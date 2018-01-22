@@ -23,6 +23,8 @@ To see additional help and options, run:
 directive:
   - suppress: R3018
     reason: existing api; values are booleans.
+  - suppress: R3016
+    reason: existing api; the names cannot be changed without breaking SDKs
   - suppress: R2066
     reason: CheckAvailability is a suitable name.
 ```
