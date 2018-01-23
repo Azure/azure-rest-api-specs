@@ -90,6 +90,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/restorePoint.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
@@ -202,6 +203,7 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
  - ./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
  - ./Microsoft.Sql/stable/2014-04-01/backups.json
+ - ./Microsoft.Sql/stable/2014-04-01/restorePoint.json
  - ./Microsoft.Sql/stable/2014-04-01/capabilities.json
  - ./Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
  - ./Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
