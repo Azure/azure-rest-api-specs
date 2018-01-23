@@ -1740,7 +1740,7 @@
           "Certificates"
         ],
         "operationId": "CreateCertificate",
-        "summary": "Creates a new certificate. ",
+        "summary": "Creates a new certificate.",
         "description": "If this is the first version, the certificate resource is created.",
         "parameters": [
           {
@@ -1963,7 +1963,7 @@
         ],
         "operationId": "UpdateCertificate",
         "summary": "Updates the specified attributes associated with the given certificate.",
-        "description": "The UpdateCertificate operation applies the specified update on the given certificate; note the only elements being updated are the certificate's attributes.",
+        "description": "The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2013,7 +2013,8 @@
           "Certificates"
         ],
         "operationId": "GetCertificate",
-        "description": "Gets information about a specified certificate. Authorization: requires the certificates/get permission.",
+        "summary": "Gets information about a certificate.",
+        "description": "Gets information about a specific certificate. It requires the certificates and get permissions.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2055,7 +2056,8 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificateOperation",
-        "description": "Updates a certificate operation. Authorization: requires the certificates/update permission.",
+        "summary": "Updates a certificate operation.",
+        "description": "Updates a certificate creation operation that is already in progress. It requires the certificate and update permissions.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2098,7 +2100,8 @@
           "Certificates"
         ],
         "operationId": "GetCertificateOperation",
-        "description": "Gets the operation associated with a specified certificate. Authorization: requires the certificates/get permission.",
+        "summary": "Gets the creation operation of a certificate.",
+        "description": "Gets the creation operation associated with a specified certificate. It requires the certificates and get permissions.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2131,7 +2134,8 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateOperation",
-        "description": "Deletes the operation for a specified certificate. Authorization: requires the certificates/update permission.",
+        "summary": "Deletes the creation operation for a specific certificate.",
+        "description": "Deletes the creation operation for a specified certificate that is in the process of being created. It requires the cerfiticate and update permissions. The certificate is no longer created.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2167,7 +2171,7 @@
         ],
         "operationId": "MergeCertificate",
         "summary": "Merges a certificate or a certificate chain with a key pair existing on the server.",
-        "description": "The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. Authorization: requires the certificates/update permission.",
+        "description": "The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. It requires the certificates and update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2212,7 +2216,7 @@
           "DeletedCertificates"
         ],
         "operationId": "GetDeletedCertificates",
-        "summary": "Lists the deleted certificates in the specified vault, currently available for recovery.",
+        "summary": "Lists the deleted certificates in the specified vault currently available for recovery.",
         "description": "The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging.",
         "parameters": [
           {
