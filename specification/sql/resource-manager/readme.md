@@ -72,6 +72,7 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/DatabaseRestorePoints.json
 
 # Needed when there is more than one input file
 override-info:
@@ -152,6 +153,7 @@ input-file:
  - ./Microsoft.Sql/preview/2017-03-01-preview/Databases.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/DatabaseRestorePoints.json
 
 # Needed when there is more than one input file
 override-info:
