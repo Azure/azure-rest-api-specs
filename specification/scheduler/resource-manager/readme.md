@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-03'
 input-file:
-- Microsoft.Scheduler/2016-03-01/scheduler.json
+- Microsoft.Scheduler/stable/2016-03-01/scheduler.json
 ```
  
 ### Tag: package-2016-01
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2016-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-01'
 input-file:
-- Microsoft.Scheduler/2016-01-01/scheduler.json
+- Microsoft.Scheduler/stable/2016-01-01/scheduler.json
 ```
  
 ### Tag: package-2014-08-preview
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2014-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2014-08-preview'
 input-file:
-- Microsoft.Scheduler/2014-08-01-preview/scheduler.json
+- Microsoft.Scheduler/preview/2014-08-01-preview/scheduler.json
 ```
 
 
@@ -75,6 +75,34 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Scheduler/Management.Scheduler/Generated
   clear-output-folder: true
 ```
+
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.scheduler
+  package-name: azure-mgmt-scheduler
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-scheduler/azure/mgmt/scheduler
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-scheduler
+```
+
 
 
 ## Go
