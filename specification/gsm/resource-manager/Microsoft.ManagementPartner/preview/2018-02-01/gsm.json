@@ -66,7 +66,7 @@
       "put": {
         "summary": "Create a specific `Partner`.",
         "description": "Create a management partner for the objectId and tenantId.",
-        "operationId": "Partner_Put",
+        "operationId": "Partner_Create",
         "x-ms-examples": {
           "PutPartnerDetails": {
             "$ref": "./examples/PutPartnerDetails.json"
@@ -101,7 +101,7 @@
       "patch": {
         "summary": "Update a specific `Partner`.",
         "description": "Update the management partner for the objectId and tenantId.",
-        "operationId": "Partner_Patch",
+        "operationId": "Partner_Update",
         "x-ms-examples": {
           "PatchPartnerDetails": {
             "$ref": "./examples/PatchPartnerDetails.json"
@@ -245,7 +245,8 @@
       "x-ms-azure-resource": true,
       "properties": {
         "etag": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Type of the partner"
         },
         "id": {
           "type": "string",
@@ -259,7 +260,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PartnerProperties"
+          "$ref": "#/definitions/PartnerProperties",
+          "description": "Properties of the partner"
         },
         "type": {
           "type": "string",
@@ -300,7 +302,8 @@
         },
         "state": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ManagementPartnerState"
+          "$ref": "#/definitions/ManagementPartnerState",
+          "description": "This is the partner state"
         }
       }
     },
@@ -326,7 +329,8 @@
       "description": "this is the management partner operations error",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ExtendedErrorInfo"
+          "$ref": "#/definitions/ExtendedErrorInfo",
+          "description": "this is the ExtendedErrorInfo property"
         }
       }
     },
@@ -335,10 +339,12 @@
       "description": "this is the extended error info",
       "properties": {
         "code": {
-          "$ref": "#/definitions/ErrorResponseCode"
+          "$ref": "#/definitions/ErrorResponseCode",
+          "description": "this is the error response code"
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "this is the extended error info message"
         }
       }
     },
@@ -349,8 +355,10 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationResponse"
-          }
+            "$ref": "#/definitions/OperationResponse",
+            "description": "this is the operation response property"
+          },
+          "description": "this is the operation response list"
         },
         "nextLink": {
           "type": "string",
@@ -363,13 +371,16 @@
       "description": "this is the management partner operations response",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "this is the operation response name"
         },
         "display": {
-          "$ref": "#/definitions/OperationDisplay"
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "this is the operation display"
         },
         "origin": {
-          "type": "string"
+          "type": "string",
+          "description": "the is operation response origin information"
         }
       }
     },
@@ -378,16 +389,21 @@
       "type": "object",
       "properties": {
         "provider": {
-          "type": "string"
+          "type": "string",
+          "description": "the is management partner provider"
         },
         "resource": {
-          "type": "string"
+          "type": "string",
+          "description": "the is management partner resource"
+
         },
         "operation": {
-          "type": "string"
+          "type": "string",
+          "description": "the is management partner operation"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "the is management partner operation description"
         }
       }
     }
