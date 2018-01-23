@@ -181,6 +181,46 @@
           }
         }
       },
+      "patch": {
+        "operationId": "ContainerGroups_Update",
+        "x-ms-examples": {
+          "ContainerGroupsUpdate": {
+            "$ref": "./examples/ContainerGroupsUpdate.json"
+          }
+        },
+        "summary": "Update container groups.",
+        "description": "Updates container group tags with specified values.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          },
+          {
+            "name": "Resource",
+            "description": "The container group resource with just the tags to be updated.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroup"
+            }
+          }
+        }
+      },
       "delete": {
         "operationId": "ContainerGroups_Delete",
         "x-ms-examples": {
@@ -1048,9 +1088,6 @@
           "description": "The resource tags."
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     }
   },
