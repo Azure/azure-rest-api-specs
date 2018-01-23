@@ -46,6 +46,7 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 input-file:
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
+- Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 ```
 

@@ -4312,6 +4312,10 @@
           "$ref": "#/definitions/Caching",
           "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**"
         },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
           "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
@@ -4353,6 +4357,10 @@
         "caching": {
           "$ref": "#/definitions/Caching",
           "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**"
+        },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
@@ -4828,6 +4836,18 @@
           "type": "integer",
           "format": "int32",
           "description": "Specifies the fault domain of the virtual machine."
+        },
+        "computerName": {
+          "type": "string",
+          "description": "The computer name assigned to the virtual machine."
+        },
+        "osName": {
+          "type": "string",
+          "description": "The Operating System running on the virtual machine."
+        },	
+        "osVersion": {
+          "type": "string",
+          "description": "The version of Operating System running on the virtual machine."
         },
         "rdpThumbPrint": {
           "type": "string",
@@ -5346,6 +5366,10 @@
           "$ref": "#/definitions/Caching",
           "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**"
         },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
           "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
@@ -5389,6 +5413,10 @@
           "$ref": "#/definitions/Caching",
           "description": "The caching type."
         },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
           "description": "The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist."
@@ -5422,6 +5450,10 @@
           "$ref": "#/definitions/Caching",
           "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**"
         },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },		
         "createOption": {
           "$ref": "#/definitions/CreateOption",
           "description": "The create option."

@@ -8,7 +8,7 @@
     "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
     "parameters": [
       {
-        "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
+        "$ref": "../../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
       }
     ]
   },
@@ -43,7 +43,7 @@
           },
           {
             "name": "q",
-            "x-ms-client-name":"query",
+            "x-ms-client-name": "query",
             "in": "query",
             "required": true,
             "maxLength": 500,
@@ -123,7 +123,7 @@
           },
           {
             "name": "q",
-            "x-ms-client-name":"query",
+            "x-ms-client-name": "query",
             "in": "body",
             "required": true,
             "schema": {
@@ -188,7 +188,7 @@
         "produces": [
           "application/json"
         ],
-        "x-ms-examples":{
+        "x-ms-examples": {
           "Successful Get Predictions From Endpoint Via Post request": {
             "$ref": "./examples/prediction/SuccessfulGetPredictionsFromEndpointViaPostRequest.json"
           }
@@ -304,7 +304,7 @@
     "EntityModel": {
       "description": "An entity extracted from the utterance.",
       "type": "object",
-      "properties":{
+      "properties": {
         "entity": {
           "type": "string",
           "description": "Name of the entity, as defined in LUIS."
@@ -326,7 +326,12 @@
         "type": "object",
         "description": "List of additional properties. E.g.: score and resolution values for pre-built LUIS entities."
       },
-      "required": [ "entity", "type", "startIndex", "endIndex" ]
+      "required": [
+        "entity",
+        "type",
+        "startIndex",
+        "endIndex"
+      ]
     },
     "EntityWithScore": {
       "allOf": [

@@ -664,7 +664,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability": {
       "post": {
         "tags": [
           "DisasterRecoveryConfigs"
@@ -675,7 +675,7 @@
         },
         "description": "Check the give Namespace name availability.",
         "parameters": [
-		  {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -970,7 +970,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules": {
       "get": {
         "tags": [
           "DisasterRecoveryConfigs"
@@ -987,7 +987,7 @@
           {
             "$ref": "#/parameters/namespaceNameParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/aliasNameParameter"
           },
           {
@@ -1016,7 +1016,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}": {      
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}": {
       "get": {
         "tags": [
           "DisasterRecoveryConfigs"
@@ -1032,8 +1032,8 @@
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
-          },		  
-		  {
+          },
+          {
             "$ref": "#/parameters/aliasNameParameter"
           },
           {
@@ -1062,7 +1062,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}/listKeys": {
       "post": {
         "tags": [
           "DisasterRecoveryConfigs"
@@ -1078,8 +1078,8 @@
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
-          },		  
-		  {
+          },
+          {
             "$ref": "#/parameters/aliasNameParameter"
           },
           {
@@ -2126,7 +2126,7 @@
         },
         "encoding": {
           "type": "string",
-          "description": "Enumerates the possible values for the encoding format of capture description.",
+          "description": "Enumerates the possible values for the encoding format of capture description. Note: 'AvroDeflate' will be deprecated in New API Version",
           "enum": [
             "Avro",
             "AvroDeflate"
@@ -2380,7 +2380,7 @@
               "type": "string",
               "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
             },
-			"alternateName": {
+            "alternateName": {
               "type": "string",
               "description": "Alternate name specified when alias and namespace names are same."
             },
