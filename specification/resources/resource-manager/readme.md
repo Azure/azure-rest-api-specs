@@ -57,7 +57,7 @@ tag: package-managedapplications-2016-09
 ```
 
 ``` yaml $(package-management)
-tag: package-management-2017-08
+tag: package-management-2017-11
 ```
 
 ### Tag: package-features-2015-12
@@ -207,12 +207,12 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
-### Tag: package-management-2017-08
-These settings apply only when `--tag=package-management-2017-08` is specified on the command line.
+### Tag: package-management-2017-11
+These settings apply only when `--tag=package-management-2017-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-management-2017-08'
+``` yaml $(tag) == 'package-management-2017-11'
 input-file:
-- Microsoft.Management/preview/2017-08-31-preview/management.json
+- Microsoft.Management/preview/2017-11-01-preview/management.json
 ```
 
 ---
@@ -413,14 +413,14 @@ namespace: managedapplications
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2016-09-01-preview/managedapplications
 ```
 
-### Tag: package-management-2017-08 and go
+### Tag: package-management-2017-11 and go
 
-These settings apply only when `--tag=package-management-2017-08 --go` is specified on the command line.
+These settings apply only when `--tag=package-management-2017-11 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-management-2017-08' && $(go)
+``` yaml $(tag) == 'package-management-2017-11' && $(go)
 namespace: management
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-08-31-preview/management
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-11-01-preview/management
 ```
 
 ## Python
