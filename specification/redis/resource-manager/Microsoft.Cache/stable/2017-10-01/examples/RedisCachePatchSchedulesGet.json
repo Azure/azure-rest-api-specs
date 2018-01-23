@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "name": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2017-10-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/patchSchedules/default",
+        "name": "default",
+        "type": "Microsoft.Cache/Redis/patchSchedules",
+        "properties": {
+          "scheduleEntries": [
+            {
+              "dayOfWeek": "Monday",
+              "startHourUtc": 12,
+              "maintenanceWindow": "PT3H"
+            },
+            {
+              "dayOfWeek": "Tuesday",
+              "startHourUtc": 12
+            }
+          ]
+        }
+      }
+    }
+  }
+}

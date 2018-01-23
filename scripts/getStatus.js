@@ -6,37 +6,14 @@ var exec = require('child_process').exec,
   path = require('path'),
   fs = require('fs'),
   glob = require('glob'),
-  _ = require('underscore'),
-  oav = require('oav');
+  oav = require('oav'),
+  utils = require("../test/util/utils");
 
-exports = module.exports;
-exports.globPath = path.join(__dirname, '../', '/**/swagger/*.json');
-exports.swaggers = _(glob.sync(exports.globPath));
-
-var swaggersToProcess = exports.swaggers;
+var swaggersToProcess = utils.swaggers;
+var readmesToProcess = utils.readmes;
 var finalResult = {};
-var filename = `log_${getTimeStamp()}.log`;
+var filename = `log_${utils.getTimeStamp()}.log`;
 var logFilepath = path.join(getLogDir(), filename);
-
-function getTimeStamp() {
-  // We pad each value so that sorted directory listings show the files in chronological order
-  function pad(number) {
-    if (number < 10) {
-      return '0' + number;
-    }
-
-    return number;
-  }
-
-  var now = new Date();
-  return now.getFullYear()
-    + pad(now.getMonth() + 1)
-    + pad(now.getDate())
-    + "_"
-    + pad(now.getHours())
-    + pad(now.getMinutes())
-    + pad(now.getSeconds());
-}
 
 function updateResult(spec, errors, updateLog) {
   if (!finalResult[spec]) {
@@ -47,7 +24,6 @@ function updateResult(spec, errors, updateLog) {
   if (updateLog) {
     writeContent(JSON.stringify(finalResult, null, 2));
   }
-  return;
 }
 
 function getLogDir() {
@@ -67,7 +43,6 @@ function createLogFile() {
   if (!fs.existsSync(logFilepath)) {
     fs.writeFileSync(logFilepath, '');
   }
-  return;
 }
 
 //appends the content to the log file
@@ -75,88 +50,85 @@ function writeContent(content) {
   fs.writeFileSync(logFilepath, content);
 }
 
-//executes promises sequentially by chaining them.
-function executePromisesSequentially(promiseFactories) {
-  let result = Promise.resolve();
-  promiseFactories.forEach(function (promiseFactory) {
-    result = result.then(promiseFactory);
-  });
-  return result;
-};
-
-//runs the linter on a given swagger spec.
-function runLinter(swagger) {
-  return new Promise((res) => {
-    let cmd = 'autorest --azure-validator=true --input-file=' + swagger + ' --message-format=json';
-    console.log(`\t- Running Linter.`);
-    exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 }, (err, stdout, stderr) => {
-      let resultObject = [];
-      if (err) {
-        console.log(`An error occurred while running the linter on ${swagger}:`);
-        console.dir(err, { depth: null, colors: true });
-      } else {
-        //console.log('>>>> Actual result...');
-        //console.log(resultString);
-        let resultString = stdout + stderr;
-        if (resultString.indexOf('{') !== -1) {
-          resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
-          //console.log('>>>>>> Trimmed Result...');
-          //console.log(resultString);
-          try {
-            resultObject = JSON.parse(resultString);
-            //console.log('>>>>>> Parsed Result...');
-            //console.dir(resultObject, {depth: null, colors: true});
-          } catch (e) {
-            console.log(`An error occurred while executing JSON.parse() on the linter output for ${swagger}:`);
-            console.dir(resultString);
-            console.dir(e, { depth: null, colors: true });
-          }
-        }
-      }
-      res(resultObject);
-    });
-  });
+//runs the command on a given swagger spec.
+async function runCmd(cmd) {
+  console.log(cmd);
+  const {err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
+    (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
+  let resultObject = [];
+  let resultString = stdout + stderr;
+  //console.log('>>>> Actual result...');
+  //console.log(resultString);
+  if (resultString.indexOf('{') !== -1) {
+    resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
+    //console.log('>>>>>> Trimmed Result...');
+    //console.log(resultString);
+    try {
+      resultObject = JSON.parse(resultString);
+      //console.log('>>>>>> Parsed Result...');
+      //console.dir(resultObject, {depth: null, colors: true});
+    } catch (e) {
+      console.log(`An error occurred while executing JSON.parse() on the output for ${cmd}:`);
+      console.dir(resultString);
+      console.dir(e, { depth: null, colors: true });
+    }
+  }
+  return resultObject;
 }
 
 //runs the semantic validator on a given swagger spec.
 function runSemanticValidator(swagger) {
-  console.log('\t- Running Semantic Validator.')
   return oav.validateSpec(swagger, {consoleLogLevel: 'off'}).then(function (validationResult) {
     //console.dir(validationResult, { depth: null, colors: true });
-    return Promise.resolve(validationResult.validateSpec.errors);
+    return validationResult.validateSpec.errors;
   }).catch(function (err) {
     console.dir(err, { depth: null, colors: true });
   });
 }
 
 //main function
-function runScript() {
+async function runScript() {
   // Useful when debugging a test for a particular swagger. 
   // Just update the regex. That will return an array of filtered items.
-  // swaggersToProcess = swaggersToProcess.filter(function (item) {
-  //   return (item.match(/.*arm-network/ig) !== null);
-  // });
+   // swaggersToProcess = swaggersToProcess.filter(function (item) {
+   //   return (item.match(/.*Microsoft.network/ig) !== null);
+   // });
+   // readmesToProcess = readmesToProcess.filter(function (item) {
+   //   return (item.match(/.*.network/ig) !== null);
+   // });
   createLogFile();
-  console.log(`The results will be logged here: "${logFilepath}".`)
-  let promiseFactories = _(swaggersToProcess).map(function (swagger) {
-    return function () { return runTools(swagger); };
-  });
-  return executePromisesSequentially(promiseFactories);
-}
+  console.log(`The results will be logged here: "${logFilepath}".`);
 
-//runs the validation and linting tools on all the swaggers in the repo.
-function runTools(swagger) {
-  console.log(`Processing "${swagger}":`);
-  return runSemanticValidator(swagger).then(function (validationErrors) {
-    updateResult(swagger, validationErrors, true);
-    return swagger;
-  }).then(function (swagger) {
-    return runLinter(swagger).then(function (linterErrors) {
-      updateResult(swagger, linterErrors, true);
-      //console.dir(finalResult, { depth: null, colors: true });
-      return finalResult;
-    });
-  });
+  console.log('\t- Running Semantic Validator.')
+  for (let swagger of swaggersToProcess) {
+      const validationErrors = await runSemanticValidator(swagger);
+	  swagger = swagger.split(/\/Microsoft\./gi)[0] + "/readme.md";
+	  console.log(`File Name: "${swagger}"`);
+	  if (validationErrors != null)
+	  {
+		updateResult(swagger, validationErrors, true);
+	  }
+  }
+
+  console.log(`\t- Running Linter.`);
+  for (let readme of readmesToProcess) {
+      console.log(`Linter Validation on configuration file: "${readme}"`);
+      let linterCmd = 'autorest ' + readme + ' --azure-validator=true --validation --message-format=json';
+      const linterErrors = await runCmd(linterCmd);
+      updateResult(readme, linterErrors, true);
+  }
+
+  console.log(`\t- Running Model Validator.`);
+    //model validator run
+  for (let readme of readmesToProcess) {
+      console.log(`Model Validation on configuration file: "${readme}"`);
+      let modelValCmd = 'autorest --version=2.0.4174 --model-validator --message-format=json ' + readme;
+      const modelValErrors = await runCmd(modelValCmd);
+      updateResult(readme, modelValErrors, true);
+  }
+  
+  //console.dir(finalResult, { depth: null, colors: true });
+  return finalResult;
 }
 
 //magic starts here
