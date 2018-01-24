@@ -740,7 +740,7 @@
         ],
         "operationId": "GetDeletedKeys",
         "summary": "Lists the deleted keys in the specified vault.",
-        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. This operation icludes deletion-specific information. The Get Deleted Keys operation is applicable for vaults enabled for soft-delete. It requires the keys/list permission to be enabled on this vault. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
+        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. This operation includes deletion-specific information. The Get Deleted Keys operation is applicable for vaults enabled for soft-delete. It requires the keys/list permission. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
         "parameters": [
           {
             "name": "maxresults",
@@ -782,7 +782,7 @@
         ],
         "operationId": "GetDeletedKey",
         "summary": "Gets the public part of a deleted key.",
-        "description": "The Get Deleted Key operation is applicable for soft-delete enabled vaults. It requires the keys/list permission to be enabled on this vault. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
+        "description": "The Get Deleted Key operation is applicable for soft-delete enabled vaults. It requires the keys/list permission. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
         "parameters": [
           {
             "name": "key-name",
@@ -816,7 +816,7 @@
         ],
         "operationId": "PurgeDeletedKey",
         "summary": "Permanently deletes the specified key.",
-        "description": "The Purge Deleted Key operation is applicable for soft-delete enabled vaults. It requires the keys/purge permission to be enabled on this vault. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
+        "description": "The Purge Deleted Key operation is applicable for soft-delete enabled vaults. It requires the keys/purge permission. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
         "parameters": [
           {
             "name": "key-name",
@@ -849,7 +849,7 @@
         ],
         "operationId": "RecoverDeletedKey",
         "summary": "Recovers the deleted key to its latest version.",
-        "description": "The Recover Deleted Key operation is applicable for deleted keys in soft-delete enabled vaults. It recovers the deleted key back to its latest version under /keys. It requires the keys/recover permissions to be enabled on this vault. An attempt to recover an non-deleted key will return an error. Consider this the inverse of the delete operation on soft-delete enabled vaults.",
+        "description": "The Recover Deleted Key operation is applicable for deleted keys in soft-delete enabled vaults. It recovers the deleted key back to its latest version under /keys. It requires the keys/recover permission. An attempt to recover an non-deleted key will return an error. Consider this the inverse of the delete operation on soft-delete enabled vaults.",
         "parameters": [
           {
             "name": "key-name",
@@ -1102,7 +1102,7 @@
         ],
         "operationId": "GetSecretVersions",
         "summary": "List all versions of the specified secret.",
-        "description": "The full secret identifier and attributes are provided in the response. No values are returned for the secrets.",
+        "description": "The full secret identifier and attributes are provided in the response. No values are returned for the secrets. This operations requires the secrets/list permissions. ",
         "parameters": [
           {
             "name": "secret-name",
@@ -1227,7 +1227,7 @@
         ],
         "operationId": "PurgeDeletedSecret",
         "summary": "Permanently deletes the specified secret.",
-        "description": "The purge deleted secret operation removes the secret permanently, without the possibility of recovery. It requires the secrets/purge permission, which must be assigned explicitly.",
+        "description": "The purge deleted secret operation removes the secret permanently, without the possibility of recovery. It requires the secrets/purge permission, which must be assigned explicitly. This operation can only be enabled on a soft-delete enabled vault.",
         "parameters": [
           {
             "name": "secret-name",
@@ -1260,7 +1260,7 @@
         ],
         "operationId": "RecoverDeletedSecret",
         "summary": "Recovers the deleted secret to the latest version.",
-        "description": "Recovers the deleted secret in the specified vault. It requires the secrets/recover permission.",
+        "description": "Recovers the deleted secret in the specified vault. It requires the secrets/recover permission. This operation can only be performed on a soft-delete enabled vault.",
         "parameters": [
           {
             "name": "secret-name",
@@ -1963,7 +1963,7 @@
         ],
         "operationId": "UpdateCertificate",
         "summary": "Updates the specified attributes associated with the given certificate.",
-        "description": "The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes.",
+        "description": "The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2014,7 +2014,7 @@
         ],
         "operationId": "GetCertificate",
         "summary": "Gets information about a certificate.",
-        "description": "Gets information about a specific certificate. It requires the certificates and get permissions.",
+        "description": "Gets information about a specific certificate. It requires the certificates/get permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2217,7 +2217,7 @@
         ],
         "operationId": "GetDeletedCertificates",
         "summary": "Lists the deleted certificates in the specified vault currently available for recovery.",
-        "description": "The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging. This operation includes deletion-specific information. It requires the certificates/update permission.",
+        "description": "The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging. This operation includes deletion-specific information. It requires the certificates/update permission. This operation can only be enabled on soft-delete enabled vaults.",
         "parameters": [
           {
             "name": "maxresults",
