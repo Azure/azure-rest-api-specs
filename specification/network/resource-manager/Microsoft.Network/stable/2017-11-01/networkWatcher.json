@@ -61,7 +61,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkWatcher"
             },
@@ -1612,6 +1612,9 @@
         {
           "$ref": "./network.json#/definitions/Resource"
         }
+      ],
+      "required": [
+        "location"
       ],
       "description": "Network watcher in a resource group."
     },
