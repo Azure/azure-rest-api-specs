@@ -45,6 +45,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/capabilities.json
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -91,6 +92,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -130,6 +132,7 @@ These settings apply only when `--tag=package-2014-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2014-04'
 input-file:
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/elasticPools.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
@@ -207,6 +210,7 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
  - ./Microsoft.Sql/stable/2014-04-01/backups.json
  - ./Microsoft.Sql/stable/2014-04-01/capabilities.json
+ - ./Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
  - ./Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
  - ./Microsoft.Sql/stable/2014-04-01/databases.json
  - ./Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json

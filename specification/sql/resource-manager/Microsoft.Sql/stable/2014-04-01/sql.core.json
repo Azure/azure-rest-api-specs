@@ -16,45 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_CheckNameAvailability",
-        "description": "Determines whether a resource can be created with the specified name.",
-        "x-ms-examples": {
-          "Check for a server name that is available": { "$ref": "./examples/CheckNameAvailabilityServerAvailable.json" },
-          "Check for a server name that already exists": { "$ref": "./examples/CheckNameAvailabilityServerAlreadyExists.json" },
-          "Check for a server name that is invalid": { "$ref": "./examples/CheckNameAvailabilityServerInvalid.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
-            },
-            "description": "The parameters to request for name availability."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolActivity": {
       "get": {
         "tags": [
@@ -568,62 +529,6 @@
           "$ref":"#/definitions/Resource"
         }
       ]
-    },
-    "CheckNameAvailabilityRequest": {
-      "properties":{
-        "name": {
-          "type": "string",
-          "description": "The name whose availability is to be checked."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of resource that is used as the scope of the availability check.",
-          "enum": [
-            "Microsoft.Sql/servers"
-          ],
-          "x-ms-enum": {
-            "name": "CheckNameAvailabilityResourceType",
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "name", "type"
-      ],
-      "description": "A request to check whether the specified name for a resource is available."
-    },
-    "CheckNameAvailabilityResponse": {
-      "properties":{
-        "available": {
-          "type": "boolean",
-          "description": "True if the name is available, otherwise false.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "A message explaining why the name is unavailable. Will be null if the name is available.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name whose availability was checked.",
-          "readOnly": true
-        },
-        "reason": {
-          "type": "string",
-          "description": "The reason code explaining why the name is unavailable. Will be null if the name is available.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
-          "x-ms-enum": {
-            "name": "CheckNameAvailabilityReason",
-            "modelAsString": false
-          },
-          "readOnly": true
-        }
-      },
-      "description": "A response indicating whether the specified name for a resource is available."
     },
     "RecommendedElasticPoolMetric": {
       "properties": {
