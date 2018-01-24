@@ -740,7 +740,7 @@
         ],
         "operationId": "GetDeletedKeys",
         "summary": "Lists the deleted keys in the specified vault.",
-        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. The Get Deleted Keys operation is applicable for soft-delete enabled vaults. It requires the keys/list permission to be enabled on this vault. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
+        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. This operation icludes deletion-specific information. The Get Deleted Keys operation is applicable for vaults enabled for soft-delete. It requires the keys/list permission to be enabled on this vault. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
         "parameters": [
           {
             "name": "maxresults",
@@ -1151,7 +1151,7 @@
         ],
         "operationId": "GetDeletedSecrets",
         "summary": "Lists deleted secrets for the specified vault.",
-        "description": "The Get Deleted Secrets operation returns the secrets that have been deleted for a vault enabled with soft-delete. It requires the secrets/list permission.",
+        "description": "The Get Deleted Secrets operation returns the secrets that have been deleted for a vault enabled for soft-delete. It requires the secrets/list permission.",
         "parameters": [
           {
             "name": "maxresults",
@@ -1227,7 +1227,7 @@
         ],
         "operationId": "PurgeDeletedSecret",
         "summary": "Permanently deletes the specified secret.",
-        "description": "The purge deleted secret operation purges the secret. It requires the secrets/purge permission.",
+        "description": "The purge deleted secret operation removes the secret permanently, without the possibility of recovery. It requires the secrets/purge permission, which must be assigned explicitly.",
         "parameters": [
           {
             "name": "secret-name",
@@ -1260,7 +1260,7 @@
         ],
         "operationId": "RecoverDeletedSecret",
         "summary": "Recovers the deleted secret to the latest version.",
-        "description": "Recovers the deleted secret to a vault. It requires the secrets/recover permission.",
+        "description": "Recovers the deleted secret in the specified vault. It requires the secrets/recover permission.",
         "parameters": [
           {
             "name": "secret-name",
@@ -2057,7 +2057,7 @@
         ],
         "operationId": "UpdateCertificateOperation",
         "summary": "Updates a certificate operation.",
-        "description": "Updates a certificate creation operation that is already in progress. It requires the certificate and update permissions.",
+        "description": "Updates a certificate creation operation that is already in progress. It requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2101,7 +2101,7 @@
         ],
         "operationId": "GetCertificateOperation",
         "summary": "Gets the creation operation of a certificate.",
-        "description": "Gets the creation operation associated with a specified certificate. It requires the certificates and get permissions.",
+        "description": "Gets the creation operation associated with a specified certificate. It requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2135,7 +2135,7 @@
         ],
         "operationId": "DeleteCertificateOperation",
         "summary": "Deletes the creation operation for a specific certificate.",
-        "description": "Deletes the creation operation for a specified certificate that is in the process of being created. It requires the cerfiticate and update permissions. The certificate is no longer created.",
+        "description": "Deletes the creation operation for a specified certificate that is in the process of being created. It requires the certificates/update permission. The certificate is no longer created.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2171,7 +2171,7 @@
         ],
         "operationId": "MergeCertificate",
         "summary": "Merges a certificate or a certificate chain with a key pair existing on the server.",
-        "description": "The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. It requires the certificates and update permission.",
+        "description": "The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. It requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -2217,7 +2217,7 @@
         ],
         "operationId": "GetDeletedCertificates",
         "summary": "Lists the deleted certificates in the specified vault currently available for recovery.",
-        "description": "The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging.",
+        "description": "The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging. This operation includes deletion-specific information. It requires the certificates/update permission.",
         "parameters": [
           {
             "name": "maxresults",
