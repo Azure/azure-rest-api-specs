@@ -1,4 +1,4 @@
-# API Management
+# API Management Direct Control Plane Client
     
 > see https://aka.ms/autorest
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information 
-These are the global settings for the API Management API.
+These are the global settings for the API Management Direct Control Plane API.
 
 ``` yaml
 openapi-type: default

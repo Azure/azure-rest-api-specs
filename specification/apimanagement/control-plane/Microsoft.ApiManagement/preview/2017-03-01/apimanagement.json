@@ -23,6 +23,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "apim_key": {
       "type": "apiKey",
@@ -71,6 +77,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "Returns an array of Policy Contracts.",
@@ -245,6 +254,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "Returns an array of Policy Contracts.",
@@ -335,7 +347,7 @@
         },
         "count": {
           "type": "integer",
-          "description": "Total number of records" 
+          "description": "Total number of records"
         },
         "nextLink": {
           "type": "string",

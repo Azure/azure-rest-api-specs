@@ -30,6 +30,12 @@
       "in": "header"
     }
   },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
       "apim_key": []
@@ -448,7 +454,7 @@
     },
     "BackendServiceFabricClusterProperties": {
       "properties": {
-        "clientCertificatethumbprint": {
+        "clientCertificateThumbprint": {
           "description": "The client certificate thumbprint for the management endpoint.",
           "type": "string"
         },
@@ -456,6 +462,11 @@
           "description": "Maximum number of retries while attempting resolve the parition.",
           "format": "int32",
           "type": "integer"
+        },
+        "partitionResolutionRequestTimeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "Maximum time allowed to update partition resolution data. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601"
         },
         "managementEndpoints": {
           "type": "array",
@@ -481,7 +492,7 @@
       },
       "required": [
         "managementEndpoints",
-        "clientCertificatethumbprint"
+        "clientCertificateThumbprint"
       ],
       "description": "Properties of the Service Fabric Type Backend."
     },

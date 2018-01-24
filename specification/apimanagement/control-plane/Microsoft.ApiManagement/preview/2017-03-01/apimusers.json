@@ -23,6 +23,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "apim_key": {
       "type": "apiKey",
@@ -449,6 +455,9 @@
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "Lists of User Identities.",
@@ -531,8 +540,8 @@
           },
           "description": "Page values."
         },
-        "count":{
-          "type" : "integer",
+        "count": {
+          "type": "integer",
           "description": "Total number of entities"
         },
         "nextLink": {
@@ -545,7 +554,7 @@
     "UserContract": {
       "properties": {
         "id": {
-          "type": "string",          
+          "type": "string",
           "description": "Identifier of the entity."
         }
       },

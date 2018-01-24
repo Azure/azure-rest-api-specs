@@ -23,6 +23,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "apim_key": {
       "type": "apiKey",
@@ -49,6 +55,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field          | Supported operators    | Supported functions                         |\n|----------------|------------------------|---------------------------------------------|\n| id             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
@@ -252,8 +265,8 @@
           },
           "description": "Page values."
         },
-        "count":{
-          "type" : "integer",
+        "count": {
+          "type": "integer",
           "description": "Total number of entities"
         },
         "nextLink": {

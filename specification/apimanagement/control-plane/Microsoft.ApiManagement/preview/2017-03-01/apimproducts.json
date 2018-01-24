@@ -23,6 +23,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "apim_key": {
       "type": "apiKey",
@@ -66,8 +72,16 @@
             "name": "expandGroups",
             "in": "query",
             "required": false,
-            "type": "boolean",
-            "description": "When set to true, the response contains an array of groups that have visibility to the product. The default is false."
+            "type": "string",
+            "description": "When set to true, the response contains an array of groups that have visibility to the product. The default is false.",
+            "enum": [
+              "False",
+              "True"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false,
+              "name": "ExpandGroups"
+            }
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
