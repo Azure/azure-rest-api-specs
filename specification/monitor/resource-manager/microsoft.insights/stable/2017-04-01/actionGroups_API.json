@@ -162,6 +162,52 @@
                         }
                     }
                 }
+            },
+            "patch": {
+                "description": "Updates an existing action group's tags. To update other fields use the CreateOrUpdate method.",
+                "operationId": "ActionGroups_Update",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ActionGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "actionGroupPatch",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ActionGroupPatchBody"
+                        },
+                        "description": "Parameters supplied to the operation."
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "An existing action group was successfully updated.",
+                        "schema": {
+                            "$ref": "#/definitions/ActionGroupResource"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Patch an action group": {
+                        "$ref": "./examples/patchActionGroup.json"
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/providers/microsoft.insights/actionGroups": {
@@ -391,6 +437,27 @@
                         "$ref": "#/definitions/WebhookReceiver"
                     },
                     "description": "The list of webhook receivers that are part of this action group."
+                },
+                "itsmReceivers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ItsmReceiver"
+                    },
+                    "description": "The list of ITSM receivers that are part of this action group."
+                },
+                "azureAppPushReceivers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AzureAppPushReceiver"
+                    },
+                    "description": "The list of AzureAppPush receivers that are part of this action group."
+                },
+                "automationRunbookReceivers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutomationRunbookReceiver"
+                    },
+                    "description": "The list of AutomationRunbook receivers that are part of this action group."
                 }
             },
             "required": [
@@ -464,6 +531,90 @@
                 "serviceUri"
             ]
         },
+        "ItsmReceiver": {
+            "description": "An Itsm receiver.",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Itsm receiver. Names must be unique across all receivers within an action group."
+                },
+                "workspaceId": {
+                    "type": "string",
+                    "description": "OMS LA instance identifier."
+                },
+                "connectionId": {
+                    "type": "string",
+                    "description": "Unique identification of ITSM connection among multiple defined in above workspace."
+                },
+                "ticketConfiguration": {
+                    "type": "string",
+                    "description": "JSON blob for the configurations of the ITSM action. CreateMultipleWorkItems option will be part of this blob as well."
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region in which workspace resides. Supported values:'centralindia','japaneast','southeastasia','australiasoutheast','uksouth','westcentralus','canadacentral','eastus','westeurope'"
+                }
+            },
+            "required": [
+                "name",
+                "workspaceId",
+                "connectionId",
+                "ticketConfiguration",
+                "region"
+            ]
+        },
+        "AzureAppPushReceiver": {
+                "description": "The Azure mobile App push notification receiver.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Azure mobile app push receiver. Names must be unique across all receivers within an action group."
+                    },
+                    "emailAddress": {
+                        "type": "string",
+                        "description": "The email address registered for the Azure mobile app."
+                    }
+                },
+                "required": [
+                    "name",
+                    "emailAddress"
+                ]
+        },
+        "AutomationRunbookReceiver": {
+            "description": "The Azure Automation Runbook notification receiver.",
+            "properties": {
+                "automationAccountId": {
+                    "type": "string",
+                    "description": "The Azure automation account Id which holds this runbook and authenticate to Azure resource."
+                },
+                "runbookName": {
+                    "type": "string",
+                    "description": "The name for this runbook."
+                },
+                "webhookResourceId": {
+                    "type": "string",
+                    "description": "The resource id for webhook linked to this runbook."
+                },
+                "isGlobalRunbook": {
+                    "type": "boolean",
+                    "description": "Indicates whether this instance is global runbook."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Indicates name of the webhook."
+                },
+                "serviceUri": {
+                    "type": "string",
+                    "description": "The URI where webhooks should be sent."
+                }
+            },
+            "required": [
+                "automationAccountId",
+                "runbookName",
+                "webhookResourceId",
+                "isGlobalRunbook"
+            ]
+        },
         "ReceiverStatus": {
             "type": "string",
             "enum": [
@@ -500,6 +651,32 @@
                 "message": {
                     "description": "Error message indicating why the operation failed.",
                     "type": "string"
+                }
+            }
+        },
+        "ActionGroupPatchBody": {
+            "description": "An action group object for the body of patch operations.",
+            "properties": {
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/ActionGroupPatch",
+                    "description": "The action group settings for an update operation."
+                }
+            }
+        },
+        "ActionGroupPatch": {
+            "description": "An Azure action group for patch operations.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indicates whether this action group is enabled. If an action group is not enabled, then none of its actions will be activated."
                 }
             }
         }
