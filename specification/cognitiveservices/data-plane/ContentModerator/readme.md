@@ -11,13 +11,19 @@ The current release is `release_1_1`.
 tag: release_1_1
 ```
 # Releases
-
 ### Release 1.1
 These settings apply only when `--tag=release_1_1` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_1'
 input-file: 
   - stable/v1.1/ContentModerator.json
+```
+### Release 1.0
+These settings apply only when `--tag=release_1_0` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_0'
+input-file: 
+  - stable/v1.0/ContentModerator.json
 ```
 
 ## Validation
@@ -91,11 +97,19 @@ go:
   clear-output-folder: true
 ```
 
+### Tag: release_1_0 and go
+
+These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'release_1_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/contentmoderator
+```
 ### Tag: release_1_1 and go
 
 These settings apply only when `--tag=release_1_1 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'release_1_1' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/contentmoderator
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.1/contentmoderator
 ```
