@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-2014-04-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2014-04-preview'
 input-file:
-- Microsoft.VisualStudio/2014-04-01-preview/Csm.json
+- Microsoft.VisualStudio/preview/2014-04-01-preview/Csm.json
 ```
 
 
