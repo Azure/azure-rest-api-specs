@@ -133,7 +133,7 @@ go:
 
 ### Go multi-api
 
-``` yaml ($go) && $(multiapi)
+``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-08-preview
 ```

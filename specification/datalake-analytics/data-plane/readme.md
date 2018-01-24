@@ -172,7 +172,7 @@ go:
 
 ### Go multi-api
 
-``` yaml ($go) && $(multiapi)
+``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-job-2017-09-preview
   - tag: package-catalog-2016-11

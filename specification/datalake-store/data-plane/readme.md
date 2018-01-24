@@ -90,7 +90,7 @@ go:
 
 ### Go multi-api
 
-``` yaml ($go) && $(multiapi)
+``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2016-11
   - tag: package-2015-10-preview
