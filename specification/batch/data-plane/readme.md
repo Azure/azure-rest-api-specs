@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-09.6.0` is specified on the c
 
 ``` yaml $(tag) == 'package-2017-09.6.0'
 input-file:
-- Microsoft.Batch/2017-09-01.6.0/BatchService.json
+- Microsoft.Batch/stable/2017-09-01.6.0/BatchService.json
 ```
 
 ### Tag: package-2017-06.5.1
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2017-06.5.1` is specified on the c
 
 ``` yaml $(tag) == 'package-2017-06.5.1'
 input-file:
-- Microsoft.Batch/2017-06-01.5.1/BatchService.json
+- Microsoft.Batch/stable/2017-06-01.5.1/BatchService.json
 ```
 
 ## Suppression
@@ -159,7 +159,7 @@ These settings apply only when `--tag=package-2017-05.5.0` is specified on the c
 
 ``` yaml $(tag) == 'package-2017-05.5.0'
 input-file:
-- Microsoft.Batch/2017-05-01.5.0/BatchService.json
+- Microsoft.Batch/stable/2017-05-01.5.0/BatchService.json
 ```
 
 
@@ -169,7 +169,7 @@ These settings apply only when `--tag=package-2017-01.4.0` is specified on the c
 
 ``` yaml $(tag) == 'package-2017-01.4.0'
 input-file:
-- Microsoft.Batch/2017-01-01.4.0/BatchService.json
+- Microsoft.Batch/stable/2017-01-01.4.0/BatchService.json
 ```
  
 ### Tag: package-2016-07.3.1
@@ -178,7 +178,7 @@ These settings apply only when `--tag=package-2016-07.3.1` is specified on the c
 
 ``` yaml $(tag) == 'package-2016-07.3.1'
 input-file:
-- Microsoft.Batch/2016-07-01.3.1/BatchService.json
+- Microsoft.Batch/stable/2016-07-01.3.1/BatchService.json
 ```
  
 ### Tag: package-2016-02.3.0
@@ -187,7 +187,7 @@ These settings apply only when `--tag=package-2016-02.3.0` is specified on the c
 
 ``` yaml $(tag) == 'package-2016-02.3.0'
 input-file:
-- Microsoft.Batch/2016-02-01.3.0/BatchService.json
+- Microsoft.Batch/stable/2016-02-01.3.0/BatchService.json
 ```
  
 ### Tag: package-2015-12.2.2
@@ -196,7 +196,7 @@ These settings apply only when `--tag=package-2015-12.2.2` is specified on the c
 
 ``` yaml $(tag) == 'package-2015-12.2.2'
 input-file:
-- Microsoft.Batch/2015-12-01.2.2/BatchService.json
+- Microsoft.Batch/stable/2015-12-01.2.2/BatchService.json
 ```
 
 
@@ -216,4 +216,51 @@ csharp:
   namespace: Microsoft.Azure.Batch.Protocol
   output-folder: $(csharp-sdks-folder)/Batch/DataPlane/Azure.Batch/GeneratedProtocol
   clear-output-folder: true
+```
+
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.batch
+  package-name: azure-batch
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-batch/azure/batch
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-batch
+```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  clear-output-folder: true
+  namespace: batch
+```
+
+### Tag: package-2017-05.5.0 and go
+
+These settings apply only when `--tag=package-2017-05.5.0 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-05.5.0' && $(go)
+output-folder: $(go-sdk-folder)/services/batch/2017-05-01.5.0/batch
 ```

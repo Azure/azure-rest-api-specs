@@ -39,13 +39,13 @@ These settings apply only when `--tag=package-2015-03-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-03-preview'
 input-file:
-- Microsoft.HDInsight/2015-03-01-preview/cluster.json
-- Microsoft.HDInsight/2015-03-01-preview/applications.json
-- Microsoft.HDInsight/2015-03-01-preview/capabilities.json
-- Microsoft.HDInsight/2015-03-01-preview/configurations.json
-- Microsoft.HDInsight/2015-03-01-preview/extensions.json
-- Microsoft.HDInsight/2015-03-01-preview/scriptActions.json
-- Microsoft.HDInsight/2015-03-01-preview/operations.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/applications.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/capabilities.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/configurations.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/operations.json
 ```
 
 
@@ -81,7 +81,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.HDInsight
+  namespace: Microsoft.Azure.Management.HDInsight
   output-folder: $(csharp-sdks-folder)/HDInsight/Management.HDInsight/Generated
   clear-output-folder: true
 ```
