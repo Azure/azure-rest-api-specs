@@ -1267,9 +1267,9 @@
       },
       "x-ms-azure-resource": true
     },
-	"PriceSheetListResult": {
-		"description": "price sheet result. It contains the pricesheet associated with billing period",		
-		"properties": {
+    "PriceSheetListResult": {
+      "description": "price sheet result. It contains the pricesheet associated with billing period",		
+      "properties": {
         "value": {
           "description": "Price sheet",
           "type": "array",
@@ -1277,7 +1277,7 @@
           "items": {
             "$ref": "#/definitions/PriceSheet"
           }
-		    },
+        },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
           "type": "string",
@@ -1285,7 +1285,7 @@
         }
       }
     },
-	"PriceSheet": {
+	  "PriceSheet": {
       "description": "An pricesheet resource.",
       "type": "object",
       "allOf": [
@@ -1293,7 +1293,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-     "properties": {
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PriceSheetProperties",
@@ -1301,8 +1301,8 @@
         }
       }
     },	
-	"PriceSheetProperties": {
-	"description": "The properties of the price sheet.",
+    "PriceSheetProperties": {
+      "description": "The properties of the price sheet.",
       "properties": {  
         "billingPeriodId": {
           "description": "The id of the billing period resource that the usage belongs to.",
@@ -1314,34 +1314,34 @@
           "type": "string",
           "readOnly": true
         },
-		"meterDetails": {
+        "meterDetails": {
           "description": "The details about the meter. By default this is not populated, unless it's specified in $expand.",
           "$ref": "#/definitions/MeterDetails",
           "readOnly": true
         },
-		"unitOfMeasure": {
+        "unitOfMeasure": {
           "description": "Unit of measure",
           "type": "string",
           "readOnly": true
         },
-		"includedQuantity": {
+        "includedQuantity": {
           "description": "Included quality for an offer",
-		   "type": "number",
+          "type": "number",
           "format": "decimal",          
           "readOnly": true
         },
-		"partNumber": {
+        "partNumber": {
           "description": "Part Number",
           "type": "string",
           "readOnly": true
         },
-		"unitPrice": {
+        "unitPrice": {
           "description": "Unit Price",
-		   "type": "number",
+          "type": "number",
           "format": "decimal",          
           "readOnly": true
         },
-		"currencyCode": {
+        "currencyCode": {
           "description": "Currency Code",
           "type": "string",
           "readOnly": true	
