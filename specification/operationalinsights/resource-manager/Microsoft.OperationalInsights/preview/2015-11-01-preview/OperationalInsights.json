@@ -1282,45 +1282,6 @@
       ],
       "description": "The SKU (tier) of a workspace."
     },
-    "Features": {
-      "properties": {
-        "legacy": {
-          "type": "string",
-          "description": "The legacy status of the workspace.",
-          "enum": [
-            "None",
-            "GrandfatheredNonSuite",
-            "GrandfatheredSuite"
-          ],
-          "x-ms-enum": {
-            "name": "legacyNameEnum",
-            "modelAsString": true
-          }
-        },
-        "searchVersion": {
-          "type": "string",
-          "description": "The search version of the workspace.",
-          "enum": [
-            "OQL",
-            "KQL"
-          ],
-          "x-ms-enum": {
-            "name": "searchVersionNameEnum",
-            "modelAsString": true
-          }
-        },
-        "searchVersionUpgradeTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The search version upgrade time of the workspace."
-        }
-      },
-      "required": [
-        "legacy",
-        "searchVersion"
-      ],
-      "description": "The features of the workspace."
-    },    
     "WorkspaceProperties": {
       "properties": {
         "provisioningState": {
@@ -1354,10 +1315,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the workspace."
-        },
-        "features": {
-          "$ref": "#/definitions/Features",
-          "description": "The Features of the workspace."
         },
         "retentionInDays":{
           "type":"integer",
