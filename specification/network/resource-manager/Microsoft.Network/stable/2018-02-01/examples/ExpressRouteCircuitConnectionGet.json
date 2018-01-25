@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "expressRouteConnectorName": "circuitConnectionUSAUS",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-02-01",
+    "subscriptionId": "subid",
+	"circuitName": "ExpressRouteARMCircuitA",
+	"peeringName": "AzurePrivatePeering",
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering/circuitConnectionUSAUS",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "location": "West US",
+        "name": "connectorCktAB",
+        "type": "Microsofot.Network/expressRouteCircuits/peerings/connections",
+        "tags": {
+          "key1": "value1"
+        },
+        "properties": {
+			"expressroutecircuitpeering": "/subscriptions/CustomerSubscriptionUS/resourceGroups/ExpressRouteResourceGroupUS/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering",
+			"peerexpressroutecircuitpeering": "/subscriptions/CustomerSubscriptionAUS/resourceGroups/ExpressRouteResourceGroupUS/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitB/peerings/AzurePrivatePeering",
+			"authorizationKeys": "abcdefgh^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+			"addressPrefix": "10.0.0.0/24",
+			"ConnectionStatus": "Connected"
+        }
+      }
+    }
+  }
+}
