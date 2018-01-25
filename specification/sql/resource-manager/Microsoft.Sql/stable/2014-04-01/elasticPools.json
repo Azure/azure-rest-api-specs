@@ -2,7 +2,7 @@
     "swagger":"2.0",
     "info":{
         "title":"Azure SQL Database",
-        "description":"Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, and operations.",
+        "description":"Provides create, read, update and delete functionality for Azure SQL Database elastic pools.",
         "version":"2014-04-01"
     },
     "host":"management.azure.com",
@@ -261,6 +261,60 @@
         }
     },
     "definitions":{
+        "Resource":{
+            "description":"ARM resource.",
+            "properties":{
+                "id":{
+                    "readOnly":true,
+                    "type":"string",
+                    "description":"Resource ID."
+                },
+                "name":{
+                    "readOnly":true,
+                    "type":"string",
+                    "description":"Resource name."
+                },
+                "type":{
+                    "readOnly":true,
+                    "type":"string",
+                    "description":"Resource type."
+                }
+            },
+            "x-ms-azure-resource":true
+        },
+        "TrackedResource":{
+            "description":"ARM tracked top level resource.",
+            "properties":{
+                "tags":{
+                    "type":"object",
+                    "additionalProperties":{
+                        "type":"string"
+                    },
+                    "x-ms-mutability":[
+                        "read",
+                        "create",
+                        "update"
+                    ],
+                    "description":"Resource tags."
+                },
+                "location":{
+                    "type":"string",
+                    "x-ms-mutability":[
+                        "read",
+                        "create"
+                    ],
+                    "description":"Resource location."
+                }
+            },
+            "required":[
+                "location"
+            ],
+            "allOf":[
+                {
+                    "$ref":"#/definitions/Resource"
+                }
+            ]
+        },
         "ElasticPoolProperties":{
             "properties":{
                 "creationDate":{
