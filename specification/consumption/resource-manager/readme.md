@@ -141,6 +141,7 @@ batch:
   - tag: package-2017-04-preview
   - tag: package-2017-11-30
   - tag: package-2017-12-30-preview
+  - tag: package-2018-01-31
 ```
 
 ### Tag: package-2017-04-preview and go
