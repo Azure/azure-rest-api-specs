@@ -29,6 +29,14 @@ openapi-type: arm
 tag: package-2017-07
 ```
 
+### Tag: package-2018-01
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.ResourceHealth/2018-01-01/ResourceHealth.json
+```
 
 ### Tag: package-2017-07
 
@@ -63,6 +71,15 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: resourcehealth
   clear-output-folder: true
+```
+
+### Tag: package-2018-01 and go
+
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/resourcehealth/mgmt/2018-01-01/resourcehealth
 ```
 
 ### Tag: package-2017-07 and go
