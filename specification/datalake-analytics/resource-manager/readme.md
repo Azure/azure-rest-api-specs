@@ -1,4 +1,3 @@
-
 # DataLakeAnalytics
     
 > see https://aka.ms/autorest
@@ -47,6 +46,20 @@ These settings apply only when `--tag=package-2015-10-preview` is specified on t
 ``` yaml $(tag) == 'package-2015-10-preview'
 input-file:
 - Microsoft.DataLakeAnalytics/preview/2015-10-01-preview/account.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: TrackedResourceGetOperation
+    reason: This is by design in that we return DataLakeAnalyticsAccountBasic only for Account_List
+    #where:
+    #  - $.definitions.DataLakeAnalyticsAccountBasic
+
+  - suppress: TrackedResourcePatchOperation
+    reason: DataLakeAnalyticsAccountBasic is not independent and its purpose is for Account_List only.  PATCH is for DataLakeAnalyticsAccount, which will effectively update DataLakeAnalyticsAccountBasic
+    #where:
+    #  - $.definitions.DataLakeAnalyticsAccountBasic
 ```
 
 ---
