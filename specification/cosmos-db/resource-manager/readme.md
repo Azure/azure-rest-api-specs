@@ -53,7 +53,7 @@ directive:
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.MetricValue.properties._count
+    where: $.definitions.MetricValue.properties._count, $.definitions.PercentileMetricValue
     reason: The Metrics API has has a property name with a leading underscore character
 ```
 
