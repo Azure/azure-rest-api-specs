@@ -552,7 +552,7 @@
 			"tags": [
 			"PriceSheet"
 			],
-			"operationId": "PriceSheet",
+			"operationId": "PriceSheet_List",
 			"description": "Returns the price sheet associated with subscription guid, for a scope by billing period",
 			"externalDocs": {
 			  "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -569,7 +569,7 @@
 			  }
 			},
 			"parameters": [
-			  {		  
+			  {
 				"name": "scope",
 				"description": "The scope of the price sheet. The scope can be '/subscriptions/{subscriptionId}' for a subscription, or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodId}' for a billing period.",
 				"in": "path",
@@ -599,7 +599,7 @@
 			  "200": {
 				"description": "OK. The request has succeeded.",
 				"schema": {
-				  "$ref": "#/definitions/PriceSheetResult"
+				  "$ref": "#/definitions/PriceSheetListResult"
 				}
 			  },
 			  "default": {
@@ -1437,25 +1437,46 @@
       },
       "x-ms-azure-resource": true
     },
-	"PriceSheetResult": {
-		"description": "An price sheet resource.",
-		"type": "object",
-		"allOf": [
+	"PriceSheetListResult": {
+		"description": "price sheet result. It contains the pricesheet associated with billing period",		
+		"properties": {
+         "value": {
+          "description": "Price sheet",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PriceSheet"
+          }
+		},
+		 "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+		}
+	},
+	"PriceSheet": {
+      "description": "An pricesheet resource.",
+      "type": "object",
+      "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
-      "properties": {
+     "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PriceSheetProperties",
           "title": "Price sheet properties"
         }
       }
-	},
+    },
+	
 	"PriceSheetProperties": {
 	"description": "The properties of the price sheet.",
       "properties": {
+	  
+	  
         "billingPeriodId": {
           "description": "The id of the billing period resource that the usage belongs to.",
           "type": "string",
@@ -1478,7 +1499,8 @@
         },
 		"includedQuantity": {
           "description": "Included quality for an offer",
-          "type": "decimal",
+		   "type": "number",
+          "format": "decimal",          
           "readOnly": true
         },
 		"partNumber": {
@@ -1488,7 +1510,8 @@
         },
 		"unitPrice": {
           "description": "Unit Price",
-          "type": "decimal",
+		   "type": "number",
+          "format": "decimal",          
           "readOnly": true
         },
 		"currencyCode": {
@@ -1497,6 +1520,7 @@
           "readOnly": true	
 		}
 	}
+  }
   },
   "parameters": {
     "apiVersionParameter": {
