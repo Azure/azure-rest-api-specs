@@ -166,40 +166,6 @@
         }
       }
     },
-    "/providers/Microsoft.ManagementPartner/partners": {
-      "get": {
-        "summary": "Get a specific `Partner`.",
-        "description": "Get the management partner using the objectId and tenantId..",
-        "operationId": "PartnerNoId_Get",
-        "x-ms-examples": {
-          "GetPartnerDetails": {
-            "$ref": "./examples/GetPartnerDetails-NoPartnerId.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "tags": [
-          "partner"
-        ],
-        "responses": {
-          "200": {
-            "description": "Get the details of the `Partner`.",
-            "schema": {
-              "$ref": "#/definitions/PartnerResponse"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.ManagementPartner/operations": {
       "get": {
         "summary": "Get operations.",
