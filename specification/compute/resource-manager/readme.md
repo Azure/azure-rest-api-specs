@@ -212,6 +212,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -240,6 +241,20 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-compute-2017-03
+  - tag: package-container-service-2017-01
+  - tag: package-container-service-2016-09
+  - tag: package-compute-2016-04-preview
+  - tag: package-compute-2016-03
+  - tag: package-container-service-2016-03
+  - tag: package-container-service-2015-11-preview
+  - tag: package-compute-2015-06
 ```
 
 ### Tag: package-compute-2017-03 and go

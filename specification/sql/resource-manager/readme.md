@@ -62,6 +62,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
@@ -74,6 +75,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 
 # Needed when there is more than one input file
@@ -249,6 +251,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -304,6 +307,15 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: sql
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-03-preview
+  - tag: package-2015-05-preview
+  - tag: package-2014-04
 ```
 
 ### Tag: package-2017-03-preview and go
