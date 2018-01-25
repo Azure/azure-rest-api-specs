@@ -108,6 +108,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.consumption
   package-name: azure-mgmt-consumption
+  package-version: 1.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
