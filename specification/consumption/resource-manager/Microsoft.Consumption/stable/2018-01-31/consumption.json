@@ -505,7 +505,74 @@
           "nextLinkName": "nextLink"
         }
       }
-    }
+    },
+	"/{scope}/providers/Microsoft.Consumption/pricesheets/default": {
+		"get": {
+			"tags": [
+			"PriceSheet"
+			],
+			"operationId": "PriceSheet_List",
+			"description": "Returns the price sheet associated with subscription guid, for a scope by billing period",
+			"externalDocs": {
+			  "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+			},
+			"x-ms-examples": {
+			  "PriceSheetForBillingPeriod": {
+				"$ref": "./examples/PriceSheetForBillingPeriod.json"
+			  },
+			  "PriceSheet": {
+				"$ref": "./examples/PriceSheet.json"
+			  },
+			  "PriceSheetExpand": {
+				"$ref": "./examples/PriceSheetExpand.json"
+			  }
+			},
+			"parameters": [
+			  {
+				"name": "scope",
+				"description": "The scope of the price sheet. The scope can be '/subscriptions/{subscriptionId}' for a subscription, or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodId}' for a billing period.",
+				"in": "path",
+				"required": true,
+				"type": "string",
+				"x-ms-skip-url-encoding": true
+			  },
+			  {
+				"name": "$expand",
+				"description": "May be used to expand the properties/meterDetails within a price sheet. By default, these fields are not included when returning price sheet.",
+				"in": "query",
+				"required": false,
+				"type": "string"
+			  },
+			  {
+				"name": "$skiptoken",
+				"description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+				"in": "query",
+				"required": false,
+				"type": "string"
+			  },
+			  {
+				"$ref": "#/parameters/apiVersionParameter"
+			  }
+			],
+			"responses": {
+			  "200": {
+				"description": "OK. The request has succeeded.",
+				"schema": {
+				  "$ref": "#/definitions/PriceSheetListResult"
+				}
+			  },
+			  "default": {
+				"description": "Error response describing why the operation failed.",
+				"schema": {
+				  "$ref": "#/definitions/ErrorResponse"
+				}
+			  }
+			},
+			"x-ms-pageable": {
+			  "nextLinkName": "nextLink"
+			}
+		}
+	}
   },
   "definitions": {
     "MeterDetails": {
@@ -1211,6 +1278,87 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+	"PriceSheetListResult": {
+		"description": "price sheet result. It contains the pricesheet associated with billing period",		
+		"properties": {
+        "value": {
+          "description": "Price sheet",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PriceSheet"
+          }
+		    },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+	"PriceSheet": {
+      "description": "An pricesheet resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+     "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PriceSheetProperties",
+          "title": "Price sheet properties"
+        }
+      }
+    },	
+	"PriceSheetProperties": {
+	"description": "The properties of the price sheet.",
+      "properties": {  
+        "billingPeriodId": {
+          "description": "The id of the billing period resource that the usage belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "The meter id",
+          "type": "string",
+          "readOnly": true
+        },
+		"meterDetails": {
+          "description": "The details about the meter. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/MeterDetails",
+          "readOnly": true
+        },
+		"unitOfMeasure": {
+          "description": "Unit of measure",
+          "type": "string",
+          "readOnly": true
+        },
+		"includedQuantity": {
+          "description": "Included quality for an offer",
+		   "type": "number",
+          "format": "decimal",          
+          "readOnly": true
+        },
+		"partNumber": {
+          "description": "Part Number",
+          "type": "string",
+          "readOnly": true
+        },
+		"unitPrice": {
+          "description": "Unit Price",
+		   "type": "number",
+          "format": "decimal",          
+          "readOnly": true
+        },
+		"currencyCode": {
+          "description": "Currency Code",
+          "type": "string",
+          "readOnly": true	
+		    }
+	    }
     }
   },
   "parameters": {
