@@ -264,13 +264,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets": {
+    "/{scope}/providers/Microsoft.Consumption/budgets": {
       "get": {
         "tags": [
           "Budgets"
         ],
         "operationId": "Budgets_List",
-        "description": "Lists all budgets for a subscription.",
+        "description": "Lists all budgets for a scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -280,6 +280,14 @@
           }
         },
         "parameters": [
+          {
+            "name": "scope",
+            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, or 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for a resource group under a subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -306,13 +314,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{name}": {
+    "/{scope}/providers/Microsoft.Consumption/budgets/{name}": {
       "get": {
         "tags": [
           "Budgets"
         ],
         "operationId": "Budgets_Get",
-        "description": "Gets the budget for a subscription by budget name.",
+        "description": "Gets the budget for a scope by budget name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -322,6 +330,14 @@
           }
         },
         "parameters": [
+          {
+            "name": "scope",
+            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, or 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for a resource group under a subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -362,6 +378,14 @@
           }
         },
         "parameters": [
+          {
+            "name": "scope",
+            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, or 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for a resource group under a subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -420,6 +444,14 @@
           }
         },
         "parameters": [
+          {
+            "name": "scope",
+            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, or 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for a resource group under a subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -868,10 +900,11 @@
       "description": "The properties of the budget.",
       "properties": {
         "category": {
-          "description": "The category of the budget, whether the budget tracks cost or something else.",
+          "description": "The category of the budget, whether the budget tracks cost or usage.",
           "type": "string",
           "enum": [
-            "Cost"
+            "Cost",
+            "Usage"
           ],
           "x-ms-enum": {
             "name": "CategoryType",
@@ -900,11 +933,16 @@
           "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain preiod. There are no restrictions on the end date.",
           "$ref": "#/definitions/BudgetTimePeriod"
         },
+        "filters": {
+          "description": "May be used to filter budgets by resource group, resource, or meter.",
+          "type": "object",
+          "$ref": "#/definitions/Filters"
+        },
         "currentSpend": {
           "description": "The current amount of cost which is being tracked for a budget.",
           "$ref": "#/definitions/CurrentSpend",
           "readOnly": true
-        },
+        },       
         "notifications": {
           "type": "object",
           "description": "Dictionary of notifications associated with the budget. Budget can have up to five notifications.",
@@ -939,6 +977,38 @@
       "required": [
         "startDate"
       ]
+    },
+    "Filters": {
+      "description": "May be used to filter budgets by resource group, resource, or meter.",
+      "properties": {
+        "resourceGroups": {
+          "description": "The list of filters on resource groups, allowed at subscription level only.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 10
+        },
+        "resources": {
+          "description": "The list of filters on resources.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 10
+        },
+        "meters": {
+          "description": "The list of filters on meters, mandatory for budgets of usage category. ",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 10
+        }
+      } 
     },
     "CurrentSpend": {
       "description": "The current amount of cost which is being tracked for a budget.",
@@ -996,6 +1066,15 @@
           "items": {
             "type": "string"
           }
+        },
+        "contactGroups": {
+          "description": "Action groups to send the budget notification to when the threshold is exceeded.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 50
         }
       },
       "required": [
