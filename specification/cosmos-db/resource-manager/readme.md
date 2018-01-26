@@ -53,8 +53,36 @@ directive:
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.MetricValue.properties._count, $.definitions.PercentileMetricValue
+    where: $.definitions.MetricValue.properties._count
     reason: The Metrics API has has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P10
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P25
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P50
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P75
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P90
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P95
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P99
+    reason: The Metrics API has percentile metrics property names with leading capital letters
 ```
 
 ---
