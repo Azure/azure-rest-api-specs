@@ -87,6 +87,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.cosmosdb
   package-name: azure-mgmt-cosmosdb
+  package-version: 0.3.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
