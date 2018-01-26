@@ -7,7 +7,7 @@ const utils = require('../test/util/utils'),
     request = require('request-promise-native'),
     zlib = require('zlib');
 
-const repoUrl = utils.getRepoUrl(),
+const repoUrl = utils.getSourceRepoUrl(),
     validationService = "https://app.azure-devex-tools.com/api/validations",
     branch = utils.getSourceBranch(),
     processingDelay = 20,
@@ -75,7 +75,7 @@ async function runScript() {
     let validationId = JSON.parse(response).validationId;
 
     let validationResultUrl = `${validationService}/${validationId}`;
-    console.log(`Request done, results will in ${durationInSeconds} seconds...`);
+    console.log(`Request done, results will be available in ${durationInSeconds} seconds...`);
 
     await timeout((durationInSeconds + processingDelay) * 1000);
     let validationResult = JSON.parse(await request(validationResultUrl));
@@ -99,7 +99,9 @@ async function runScript() {
     }
 
     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    if (failingOperations.length > 0 || noTrafficOperations.length > 0) {
+    if (validationResult.totalOperationCount === 0) {
+        console.log(`There was no traffic detected for the provided RP and API version:${resourceProvider}-${apiVersion}. Please make sure there is traffic so the changes can be validated.`);
+    } else if (failingOperations.length > 0 || noTrafficOperations.length > 0) {
         console.log(`The changes in the specs introduced by this PR potentially do not reflect the Service API.`);
 
         console.log(`Active traffic and success rate > ${successThreshold}% FOR EACH OPERATION is required. Please review the following operations before moving forward.`);
@@ -116,7 +118,7 @@ async function runScript() {
         `);
         process.exitCode = 1;
     } else {
-        console.log(`SUCCESS RATE: ${validationResult.SuccessRate} > ${successThreshold}. You can move forward:`);
+        console.log(`SUCCESS RATE: ${validationResult.successRate} > ${successThreshold}. You can move forward.`);
     }
 }
 
