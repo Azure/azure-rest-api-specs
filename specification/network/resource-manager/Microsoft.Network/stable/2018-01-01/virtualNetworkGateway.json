@@ -681,7 +681,7 @@
           "VirtualNetworkGateways"
         ],
         "operationId": "VirtualNetworkGateways_SetVpnclientIpsecParameters",
-        "description": "The Set VpnclientIpsecParameters operation sets the vpnclient ipsec policy for P2S client of virtual network gateway  in the specified resource group through Network resource provider.",
+        "description": "The Set VpnclientIpsecParameters operation sets the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -727,7 +727,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
       "post": {
         "tags": [
           "VirtualNetworkGateways"
@@ -763,7 +763,8 @@
               "$ref": "#/definitions/VpnClientIPsecParameters"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
 	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript": {
@@ -2251,8 +2252,8 @@
             "ECP256",
             "ECP384",
             "PFS24",
-			"PFS14",
-	        "PFSMM"
+	    "PFS14",
+	    "PFSMM"
           ],
           "x-ms-enum": {
             "name": "PfsGroup",
