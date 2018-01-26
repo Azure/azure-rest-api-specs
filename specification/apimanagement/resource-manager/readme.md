@@ -44,6 +44,7 @@ input-file:
 - Microsoft.ApiManagement/stable/2017-03-01/apimbackends.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimcertificates.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimdeployment.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimdiagnostics.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimemailtemplate.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimgroups.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimidentityprovider.json
