@@ -16,6 +16,43 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration": {
+        "get": {
+            "tags": [
+              "DisasterRecoveryConfigurations"
+            ],
+            "operationId": "DisasterRecoveryConfiguration_List",
+            "description": "Lists a server's disaster recovery configuration.",
+            "x-ms-examples": {
+              "List Replication links": { "$ref": "./examples/DisasterRecoveryConfigurationList.json" }
+            },
+            "parameters": [
+              {
+                "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                "$ref": "#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "#/parameters/ResourceGroupParameter"
+              },
+              {
+                "$ref": "#/parameters/ServerNameParameter"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/DisasterRecoveryConfigurationListResult"
+                }
+              }
+            },
+            "x-ms-pageable": {
+              "nextLinkName": null
+            }
+        }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}": {
       "delete": {
         "tags": [
@@ -23,6 +60,7 @@
         ],
         "operationId": "DisasterRecoveryConfigurations_Delete",
         "description": "Deletes a disaster recovery configuration.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete a disaster recovery configuration": { "$ref": "./examples/DisasterRecoveryConfigurationDelete.json" }
         },
@@ -62,6 +100,7 @@
         ],
         "operationId": "DisasterRecoveryConfigurations_CreateOrUpdate",
         "description": "Creates or updates a disaster recovery configuration.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a disaster recovery configuration": { "$ref": "./examples/DisasterRecoveryConfigurationCreateOrUpdate.json" }
         },
@@ -147,7 +186,7 @@
           "DisasterRecoveryConfigurations"
         ],
         "operationId": "DisasterRecoveryConfigurations_Failover",
-        "description": "Which disaster recovery configuration is being failed-over.",
+        "description": "Fails over from the current primary server to this server.",
         "x-ms-examples": {
           "Failover a disaster recovery configuration": { "$ref": "./examples/DisasterRecoveryConfigurationFailover.json" }
         },
@@ -182,14 +221,13 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}/forceFailoverAllowDataLoss": {
+    },    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}/forceFailoverAllowDataLoss": {
       "post": {
         "tags": [
           "DisasterRecoveryConfigurations"
         ],
         "operationId": "DisasterRecoveryConfigurations_FailoverAllowDataLoss",
-        "description": "Which disaster recovery configuration is being failed-over forcefully. This operation might result in data loss.",
+        "description": "Fails over from the current primary server to this server. This operation might result in data loss.",
         "x-ms-examples": {
           "Failover a disaster recovery configuration": { "$ref": "./examples/DisasterRecoveryConfigurationFailover.json" }
         },
@@ -261,7 +299,12 @@
         "status": {
           "readOnly": true,
           "type": "string",
-          "description": "The status of the disaster recovery configuration."
+          "description": "The status of the disaster recovery configuration.",
+          "enum": ["Creating", "Ready", "FailingOver", "Dropping"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DisasterRecoveryConfigurationAutoFailover"
+          }
         },
         "autoFailover": {
           "type": "string",
@@ -275,7 +318,7 @@
         "failoverPolicy": {
           "type": "string",
           "description": "How aggressive the automatic failover should be.",
-          "enum": ["Off", "On"],
+          "enum": ["Manual", "Automatic"],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "DisasterRecoveryConfigurationFailoverPolicy"
@@ -299,7 +342,7 @@
           "readOnly": true,
           "type": "string",
           "description": "The role of the current server in the disaster recovery configuration.",
-          "enum": ["Primary", "Secondary"],
+          "enum": ["None", "Primary", "Secondary"],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "DisasterRecoveryConfigurationRole"
