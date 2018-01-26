@@ -621,7 +621,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -715,7 +716,8 @@
     },
     "nextLink": {
      "description": "Link to next page of resources.",
-     "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -956,6 +958,48 @@
     }
    }
   },
+    "Identifier": {
+      "description": "A domain specific resource identifier.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Identifier resource specific properties",
+          "properties": {
+            "id": {
+              "description": "String representation of the identity.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentifierCollection": {
+      "description": "Collection of identifiers.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identifier"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
   "IpSecurityRestriction": {
    "description": "IP security restriction on an app.",
    "required": [
@@ -1443,7 +1487,8 @@
     },
     "nextLink": {
      "description": "Link to next page of resources.",
-     "type": "string"
+          "type": "string",
+          "readOnly": true
     }
    }
   },
@@ -1521,7 +1566,8 @@
     },
     "nextLink": {
      "description": "Link to next page of resources.",
-     "type": "string"
+          "type": "string",
+          "readOnly": true
     }
    }
   },
@@ -2662,7 +2708,8 @@
     },
     "nextLink": {
      "description": "Link to next page of resources.",
-     "type": "string"
+          "type": "string",
+          "readOnly": true
     }
    }
   },

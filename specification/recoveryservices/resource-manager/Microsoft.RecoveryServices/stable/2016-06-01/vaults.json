@@ -46,7 +46,13 @@
         },
         "deprecated": false,
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in SubscriptionId": {
+            "$ref": "./examples/ListBySubscriptionIds.json"
+          }
         }
       }
     },
@@ -75,8 +81,8 @@
         },
         "deprecated": false,
         "x-ms-pageable": {
-          "nextLinkName": "NextLink",
-          "itemName": "Value"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "x-ms-examples": {
           "ListOperations": {
@@ -116,7 +122,13 @@
         },
         "deprecated": false,
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink",
+          "itemName":"value"
+        },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in ResourceGroup": {
+            "$ref": "./examples/ListResources.json"
+          }
         }
       }
     },
@@ -152,7 +164,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get Recovery Services Resource": {
+            "$ref": "./examples/GETVault.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -203,7 +220,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Create of Update Recovery Services vault": {
+            "$ref": "./examples/PUTVault.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -233,7 +255,12 @@
             "description": "OK"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples":{
+          "Delete Recovery Services Vault": {
+            "$ref": "./examples/DeleteVault.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -266,7 +293,7 @@
             "description": "Recovery Services Vault to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Vault"
+              "$ref": "#/definitions/PatchVault"
             }
           }
         ],
@@ -284,7 +311,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Update Resource": {
+            "$ref": "./examples/PATCHVault.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/extendedInformation/vaultExtendedInfo": {
@@ -319,7 +351,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get ExtendedInfo of Resource": {
+            "$ref": "./examples/GETVaultExtendedInfo.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -349,7 +386,7 @@
           {
             "name": "resourceResourceExtendedInfoDetails",
             "in": "body",
-            "description": "resourceResourceExtendedInfoDetails",
+            "description": "Details of ResourceExtendedInfo",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VaultExtendedInfoResource"
@@ -364,7 +401,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Put ExtendedInfo of Resource": {
+            "$ref": "./examples/UpdateVaultExtendedInfo.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -394,7 +436,7 @@
           {
             "name": "resourceResourceExtendedInfoDetails",
             "in": "body",
-            "description": "resourceResourceExtendedInfoDetails",
+            "description": "Details of ResourceExtendedInfo",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VaultExtendedInfoResource"
@@ -409,7 +451,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "PATCH ExtendedInfo of Resource": {
+            "$ref": "./examples/UpdateVaultExtendedInfo.json"
+          }
+        }
       }
     }
   },
@@ -418,20 +465,20 @@
       "description": "Localized display information of an operation.",
       "type": "object",
       "properties": {
-        "Provider": {
+        "provider": {
           "description": "Name of the provider for display purposes",
           "type": "string"
         },
-        "Resource": {
-          "description": "Name of the resource type for display purposes",
+        "resource": {
+          "description": "ResourceType for which this Operation can be performed.",
           "type": "string"
         },
-        "Operation": {
-          "description": "Name of the operation for display purposes",
+        "operation": {
+          "description": "Operations Name itself.",
           "type": "string"
         },
-        "Description": {
-          "description": "Description of the operation for display purposes",
+        "description": {
+          "description": "Description of the operation having details of what operation is about.",
           "type": "string"
         }
       }
@@ -481,15 +528,15 @@
       "description": "Operations List response which contains list of available APIs.",
       "type": "object",
       "properties": {
-        "Value": {
+        "value": {
           "description": "List of available operationss.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
           }
         },
-        "NextLink": {
-          "description": "NextLink of the Response.",
+        "nextLink": {
+          "description": "Link to the next chunk of the response",
           "type": "string"
         }
       }
@@ -498,21 +545,21 @@
       "description": "Available operation details.",
       "type": "object",
       "properties": {
-        "Name": {
-          "description": "Name of the operation",
+        "name": {
+          "description": "Name of the Operation.",
           "type": "string"
         },
-        "Display": {
+        "display": {
           "$ref": "#/definitions/ClientDiscoveryDisplay",
           "description": "Contains the localized display information for this particular operation"
         },
-        "Origin": {
+        "origin": {
           "description": "The intended executor of the operation;governs the display of the operation in the RBAC UX and the audit logs UX",
           "type": "string"
         },
-        "Properties": {
+        "properties": {
           "$ref": "#/definitions/ClientDiscoveryForProperties",
-          "description": "Properties"
+          "description": "ShoeBox properties for the given operation."
         }
       }
     },
@@ -569,6 +616,28 @@
       "required": [
         "location"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties":{
+        "location": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchTrackedResource": {
+      "description": "Tracked resource with location.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -677,6 +746,23 @@
         }
       }
     },
+    "PatchVault": {
+      "description": "Patch Resource information, as returned by the resource provider.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchTrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        }
+      }
+    },
     "VaultExtendedInfo": {
       "description": "Vault extended information.",
       "type": "object",
@@ -694,7 +780,7 @@
           "type": "string"
         },
         "algorithm": {
-          "description": "Algorithm.",
+          "description": "Algorithm for Vault ExtendedInfo",
           "type": "string"
         }
       }

@@ -1,0 +1,30 @@
+{
+  "operationId": "GetDeployedApplicationInfoListByName",
+  "description": "This example demonstrates the paging functionality available when getting information about applications deployed on a specific node. This example uses the ContinuationToken parameter. The value of this parameter is provided from the previous query; in this case the example shown above. The response contains the remaining results and an empty ContinuationToken. The empty ContinuationToken indicates that additional results are not available.",
+  "parameters": {
+    "api-version": "6.1",
+    "nodeName": "_Node_0",
+    "ContinuationToken": "fabric:/samples/PQueueApp1"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "ContinuationToken": "",
+        "Items": [
+          {
+          "Id": "samples~VQueueApp1",
+          "Name": "fabric:/samples/VQueueApp1",
+          "TypeName": "VolatileQueueApp",
+          "Status": "Active",
+          "WorkDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\VolatileQueueApp_App2\\work",
+          "LogDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\VolatileQueueApp_App2\\log",
+          "TempDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\VolatileQueueApp_App2\\temp",
+          "HealthState": "Unknown"
+          }
+        ]
+      }
+    }
+  }
+}
