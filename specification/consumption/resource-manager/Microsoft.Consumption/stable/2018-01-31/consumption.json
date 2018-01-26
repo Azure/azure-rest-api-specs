@@ -264,13 +264,13 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/budgets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets": {
       "get": {
         "tags": [
           "Budgets"
         ],
         "operationId": "Budgets_List",
-        "description": "Lists all budgets for a scope.",
+        "description": "Lists all budgets for a subscription.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -281,15 +281,10 @@
         },
         "parameters": [
           {
-            "name": "scope",
-            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, or 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for a resource group under a subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -311,13 +306,58 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/budgets/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Consumption/budgets": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_ListByResourceGroupName",
+        "description": "Lists all budgets for a resource group under a subscription.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BudgetsList": {
+            "$ref": "./examples/BudgetsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{budgetName}": {
       "get": {
         "tags": [
           "Budgets"
         ],
         "operationId": "Budgets_Get",
-        "description": "Gets the budget for a scope by budget name.",
+        "description": "Gets the budget for a subscription by budget name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -328,15 +368,10 @@
         },
         "parameters": [
           {
-            "name": "scope",
-            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, or 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for a resource group under a subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/budgetNameParameter"
@@ -373,15 +408,10 @@
         },
         "parameters": [
           {
-            "name": "scope",
-            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, or 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for a resource group under a subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/budgetNameParameter"
@@ -436,15 +466,156 @@
         },
         "parameters": [
           {
-            "name": "scope",
-            "description": "The scope of the budgets. The scope can be 'subscriptions/{subscriptionId}' for a subscription, or 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for a resource group under a subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Consumption/budgets/{budgetName}": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_GetByResourceGroupName",
+        "description": "Gets the budget for a resource group under a subscription by budget name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Budget": {
+            "$ref": "./examples/Budget.json"
+          }
+        },
+        "parameters": [
+          {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_CreateOrUpdateByResourceGroupName",
+        "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateBudget": {
+            "$ref": "./examples/CreateOrUpdateBudget.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            },
+            "description": "Parameters supplied to the Create Budget operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "delete": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_DeleteByResourceGroupName",
+        "description": "The operation to delete a budget.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "DeleteBudget": {
+            "$ref": "./examples/DeleteBudget.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/budgetNameParameter"
@@ -1361,6 +1532,13 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Azure Resource Group Name.",
       "required": true,
       "type": "string"
     },
