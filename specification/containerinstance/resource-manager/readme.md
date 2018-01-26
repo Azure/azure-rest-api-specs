@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-12-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-12-preview'
 input-file:
-- Microsoft.ContainerInstance/2017-12-01-preview/containerInstance.json
+- Microsoft.ContainerInstance/preview/2017-12-01-preview/containerInstance.json
 ```
 
 
@@ -106,6 +106,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.containerinstance
   package-name: azure-mgmt-containerinstance
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
