@@ -59,6 +59,34 @@ input-file:
 - Microsoft.Network/stable/2018-01-01/vmssPublicIpAddress.json
 ```
 
+### Tag: package-2017-11
+
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- Microsoft.Network/stable/2017-11-01/applicationGateway.json
+- Microsoft.Network/stable/2017-11-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-11-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-11-01/endpointService.json
+- Microsoft.Network/stable/2017-11-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-11-01/loadBalancer.json
+- Microsoft.Network/stable/2017-11-01/network.json
+- Microsoft.Network/stable/2017-11-01/networkInterface.json
+- Microsoft.Network/stable/2017-11-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-11-01/networkWatcher.json
+- Microsoft.Network/stable/2017-11-01/operation.json
+- Microsoft.Network/stable/2017-11-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-11-01/routeFilter.json
+- Microsoft.Network/stable/2017-11-01/routeTable.json
+- Microsoft.Network/stable/2017-11-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-11-01/usage.json
+- Microsoft.Network/stable/2017-11-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-11-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-11-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-11-01/vmssPublicIpAddress.json
+```
+
 ### Tag: package-2017-10
 
 These settings apply only when `--tag=package-2017-10` is specified on the command line.
