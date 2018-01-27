@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.Cdn/2017-10-12/cdn.json
+- Microsoft.Cdn/stable/2017-10-12/cdn.json
 ```
 
 ### Tag: package-2017-04
@@ -87,6 +87,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -142,6 +143,17 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: cdn
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-10
+  - tag: package-2017-04
+  - tag: package-2016-10
+  - tag: package-2016-04
+  - tag: package-2015-06
 ```
 
 ### Tag: package-2017-10 and go

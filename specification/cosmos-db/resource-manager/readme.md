@@ -55,6 +55,34 @@ directive:
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
     reason: The Metrics API has has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P10
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P25
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P50
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P75
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P90
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P95
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P99
+    reason: The Metrics API has percentile metrics property names with leading capital letters
 ```
 
 ---
@@ -69,6 +97,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -86,6 +115,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.cosmosdb
   package-name: azure-mgmt-cosmosdb
+  package-version: 0.3.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -108,6 +138,13 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: documentdb
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2015-04
 ```
 
 ### Tag: package-2015-04 and go

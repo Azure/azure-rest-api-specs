@@ -1,4 +1,3 @@
-
 # DataLakeAnalytics
     
 > see https://aka.ms/autorest
@@ -49,6 +48,20 @@ input-file:
 - Microsoft.DataLakeAnalytics/preview/2015-10-01-preview/account.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: TrackedResourceGetOperation
+    reason: This is by design in that we return DataLakeAnalyticsAccountBasic only for Account_List
+    #where:
+    #  - $.definitions.DataLakeAnalyticsAccountBasic
+
+  - suppress: TrackedResourcePatchOperation
+    reason: DataLakeAnalyticsAccountBasic is not independent and its purpose is for Account_List only.  PATCH is for DataLakeAnalyticsAccount, which will effectively update DataLakeAnalyticsAccountBasic
+    #where:
+    #  - $.definitions.DataLakeAnalyticsAccountBasic
+```
+
 ---
 # Code Generation
 
@@ -61,6 +74,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -105,6 +119,14 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: account
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2016-11
+  - tag: package-2015-10-preview
 ```
 
 ### Tag: package-2016-11 and go
