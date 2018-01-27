@@ -124,8 +124,10 @@
       "properties": {
         "orchestrators": {
           "type": "array",
-          "$ref": "#/definitions/OrchestratorVersionProfile",
-          "description": "List of orchstrator version profiles."
+          "items": {
+            "$ref": "#/definitions/OrchestratorVersionProfile"
+          },
+          "description": "List of orchestrator version profiles."
         }
       },
       "required": [
