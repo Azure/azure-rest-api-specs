@@ -21,7 +21,7 @@
             "tags": [
               "DisasterRecoveryConfigurations"
             ],
-            "operationId": "DisasterRecoveryConfiguration_List",
+            "operationId": "DisasterRecoveryConfigurations_List",
             "description": "Lists a server's disaster recovery configuration.",
             "x-ms-examples": {
               "List Replication links": { "$ref": "./examples/DisasterRecoveryConfigurationList.json" }
@@ -89,6 +89,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "NoContent"
           }
@@ -126,6 +129,12 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DisasterRecoveryConfiguration"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
@@ -221,7 +230,8 @@
         },
         "x-ms-long-running-operation": true
       }
-    },    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}/forceFailoverAllowDataLoss": {
+    }, 
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}/forceFailoverAllowDataLoss": {
       "post": {
         "tags": [
           "DisasterRecoveryConfigurations"
