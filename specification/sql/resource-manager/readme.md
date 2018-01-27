@@ -41,37 +41,42 @@ This section contains the input swagger files that are used when generating clie
 
 ``` yaml $(tag) == 'package-2017-03-preview'
 input-file:
-- Microsoft.Sql/2014-04-01/backupLongTermRetentionPolicies.json
-- Microsoft.Sql/2014-04-01/backupLongTermRetentionVaults.json
-- Microsoft.Sql/2014-04-01/backups.json
-- Microsoft.Sql/2014-04-01/capabilities.json
-- Microsoft.Sql/2014-04-01/connectionPolicies.json
-- Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
-- Microsoft.Sql/2014-04-01/dataMasking.json
-- Microsoft.Sql/2014-04-01/firewallRules.json
-- Microsoft.Sql/2014-04-01/geoBackupPolicies.json
-- Microsoft.Sql/2014-04-01/importExport.json
-- Microsoft.Sql/2014-04-01/metrics.json
-- Microsoft.Sql/2014-04-01/replicationLinks.json
-- Microsoft.Sql/2014-04-01/serverAzureADAdministrators.json
-- Microsoft.Sql/2014-04-01/serverCommunicationLinks.json
-- Microsoft.Sql/2014-04-01/serviceObjectives.json
-- Microsoft.Sql/2014-04-01/sql.core.json
-- Microsoft.Sql/2014-04-01/usages.json
-- Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
-- Microsoft.Sql/2015-05-01-preview/encryptionProtectors.json
-- Microsoft.Sql/2015-05-01-preview/failoverGroups.json
-- Microsoft.Sql/2015-05-01-preview/operations.json
-- Microsoft.Sql/2015-05-01-preview/serverKeys.json
-- Microsoft.Sql/2015-05-01-preview/servers.json
-- Microsoft.Sql/2015-05-01-preview/syncAgents.json
-- Microsoft.Sql/2015-05-01-preview/syncGroups.json
-- Microsoft.Sql/2015-05-01-preview/syncMembers.json
-- Microsoft.Sql/2015-05-01-preview/usages.json
-- Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
-- Microsoft.Sql/2017-03-01-preview/cancelOperations.json
-- Microsoft.Sql/2017-03-01-preview/renameDatabase.json
-- Microsoft.Sql/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
+- Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/capabilities.json
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
+- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/databases.json
+- Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
+- Microsoft.Sql/stable/2014-04-01/dataMasking.json
+- Microsoft.Sql/stable/2014-04-01/elasticPools.json
+- Microsoft.Sql/stable/2014-04-01/firewallRules.json
+- Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
+- Microsoft.Sql/stable/2014-04-01/importExport.json
+- Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
+- Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
+- Microsoft.Sql/stable/2014-04-01/sql.core.json
+- Microsoft.Sql/stable/2014-04-01/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
+- Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
+- Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/operations.json
+- Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
+- Microsoft.Sql/preview/2015-05-01-preview/servers.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
+- Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 
 # Needed when there is more than one input file
 override-info:
@@ -86,34 +91,37 @@ This section contains the input swagger files that are used when generating clie
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.Sql/2014-04-01/backupLongTermRetentionPolicies.json
-- Microsoft.Sql/2014-04-01/backupLongTermRetentionVaults.json
-- Microsoft.Sql/2014-04-01/backups.json
-- Microsoft.Sql/2014-04-01/connectionPolicies.json
-- Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
-- Microsoft.Sql/2014-04-01/dataMasking.json
-- Microsoft.Sql/2014-04-01/firewallRules.json
-- Microsoft.Sql/2014-04-01/geoBackupPolicies.json
-- Microsoft.Sql/2014-04-01/importExport.json
-- Microsoft.Sql/2014-04-01/metrics.json
-- Microsoft.Sql/2014-04-01/replicationLinks.json
-- Microsoft.Sql/2014-04-01/serverAzureADAdministrators.json
-- Microsoft.Sql/2014-04-01/serverCommunicationLinks.json
-- Microsoft.Sql/2014-04-01/serviceObjectives.json
-- Microsoft.Sql/2014-04-01/sql.core.json
-- Microsoft.Sql/2014-04-01/usages.json
-- Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
-- Microsoft.Sql/2015-05-01/capabilities.json
-- Microsoft.Sql/2015-05-01-preview/encryptionProtectors.json
-- Microsoft.Sql/2015-05-01-preview/failoverGroups.json
-- Microsoft.Sql/2015-05-01-preview/operations.json
-- Microsoft.Sql/2015-05-01-preview/serverKeys.json
-- Microsoft.Sql/2015-05-01-preview/servers.json
-- Microsoft.Sql/2015-05-01-preview/syncAgents.json
-- Microsoft.Sql/2015-05-01-preview/syncGroups.json
-- Microsoft.Sql/2015-05-01-preview/syncMembers.json
-- Microsoft.Sql/2015-05-01-preview/usages.json
-- Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
+- Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
+- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/databases.json
+- Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
+- Microsoft.Sql/stable/2014-04-01/dataMasking.json
+- Microsoft.Sql/stable/2014-04-01/elasticPools.json
+- Microsoft.Sql/stable/2014-04-01/firewallRules.json
+- Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
+- Microsoft.Sql/stable/2014-04-01/importExport.json
+- Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
+- Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
+- Microsoft.Sql/stable/2014-04-01/sql.core.json
+- Microsoft.Sql/stable/2014-04-01/usages.json
+- Microsoft.Sql/stable/2015-05-01/capabilities.json
+- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
+- Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/operations.json
+- Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
+- Microsoft.Sql/preview/2015-05-01-preview/servers.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
 override-info:
@@ -126,11 +134,14 @@ These settings apply only when `--tag=package-2014-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2014-04'
 input-file:
-- Microsoft.Sql/2014-04-01/firewallRules.json
-- Microsoft.Sql/2014-04-01/importExport.json
-- Microsoft.Sql/2014-04-01/replicationLinks.json
-- Microsoft.Sql/2014-04-01/sql.core.json
-- Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
+- Microsoft.Sql/stable/2014-04-01/databases.json
+- Microsoft.Sql/stable/2014-04-01/elasticPools.json
+- Microsoft.Sql/stable/2014-04-01/firewallRules.json
+- Microsoft.Sql/stable/2014-04-01/importExport.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/sql.core.json
+- Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
 
 # Needed when there is more than one input file
 override-info:
@@ -149,9 +160,9 @@ These can be regenerated by running the following PowerShell script from this re
 
 ``` yaml $(tag) == 'schema-2017-03-preview'
 input-file:
- - ./Microsoft.Sql/2017-03-01-preview/Databases.json
- - ./Microsoft.Sql/2017-03-01-preview/renameDatabase.json
- - ./Microsoft.Sql/2017-03-01-preview/serverDnsAliases.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/databases.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 
 # Needed when there is more than one input file
 override-info:
@@ -168,18 +179,18 @@ These can be regenerated by running the following PowerShell script from this re
 
 ``` yaml $(tag) == 'schema-2015-05-preview'
 input-file:
- - ./Microsoft.Sql/2015-05-01-preview/advisors.json
- - ./Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
- - ./Microsoft.Sql/2015-05-01-preview/encryptionProtectors.json
- - ./Microsoft.Sql/2015-05-01-preview/failoverGroups.json
- - ./Microsoft.Sql/2015-05-01-preview/operations.json
- - ./Microsoft.Sql/2015-05-01-preview/serverKeys.json
- - ./Microsoft.Sql/2015-05-01-preview/servers.json
- - ./Microsoft.Sql/2015-05-01-preview/syncAgents.json
- - ./Microsoft.Sql/2015-05-01-preview/syncGroups.json
- - ./Microsoft.Sql/2015-05-01-preview/syncMembers.json
- - ./Microsoft.Sql/2015-05-01-preview/usages.json
- - ./Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/advisors.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/operations.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/servers.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/usages.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
 override-info:
@@ -196,29 +207,32 @@ These can be regenerated by running the following PowerShell script from this re
 
 ``` yaml $(tag) == 'schema-2014-04'
 input-file:
- - ./Microsoft.Sql/2014-04-01/advisors.json
- - ./Microsoft.Sql/2014-04-01/backupLongTermRetentionPolicies.json
- - ./Microsoft.Sql/2014-04-01/backupLongTermRetentionVaults.json
- - ./Microsoft.Sql/2014-04-01/backups.json
- - ./Microsoft.Sql/2014-04-01/capabilities.json
- - ./Microsoft.Sql/2014-04-01/connectionPolicies.json
- - ./Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
- - ./Microsoft.Sql/2014-04-01/dataMasking.json
- - ./Microsoft.Sql/2014-04-01/deprecated.json
- - ./Microsoft.Sql/2014-04-01/firewallRules.json
- - ./Microsoft.Sql/2014-04-01/geoBackupPolicies.json
- - ./Microsoft.Sql/2014-04-01/importExport.json
- - ./Microsoft.Sql/2014-04-01/metrics.json
- - ./Microsoft.Sql/2014-04-01/operations.json
- - ./Microsoft.Sql/2014-04-01/queries.json
- - ./Microsoft.Sql/2014-04-01/replicationLinks.json
- - ./Microsoft.Sql/2014-04-01/serverAzureADAdministrators.json
- - ./Microsoft.Sql/2014-04-01/serverCommunicationLinks.json
- - ./Microsoft.Sql/2014-04-01/servers.json
- - ./Microsoft.Sql/2014-04-01/serviceObjectives.json
- - ./Microsoft.Sql/2014-04-01/sql.core.json
- - ./Microsoft.Sql/2014-04-01/tableAuditing.json
- - ./Microsoft.Sql/2014-04-01/usages.json
+ - ./Microsoft.Sql/stable/2014-04-01/advisors.json
+ - ./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
+ - ./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
+ - ./Microsoft.Sql/stable/2014-04-01/backups.json
+ - ./Microsoft.Sql/stable/2014-04-01/capabilities.json
+ - ./Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
+ - ./Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+ - ./Microsoft.Sql/stable/2014-04-01/databases.json
+ - ./Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
+ - ./Microsoft.Sql/stable/2014-04-01/dataMasking.json
+ - ./Microsoft.Sql/stable/2014-04-01/deprecated.json
+ - ./Microsoft.Sql/stable/2014-04-01/elasticPools.json
+ - ./Microsoft.Sql/stable/2014-04-01/firewallRules.json
+ - ./Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
+ - ./Microsoft.Sql/stable/2014-04-01/importExport.json
+ - ./Microsoft.Sql/stable/2014-04-01/metrics.json
+ - ./Microsoft.Sql/stable/2014-04-01/operations.json
+ - ./Microsoft.Sql/stable/2014-04-01/queries.json
+ - ./Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+ - ./Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
+ - ./Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
+ - ./Microsoft.Sql/stable/2014-04-01/servers.json
+ - ./Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
+ - ./Microsoft.Sql/stable/2014-04-01/sql.core.json
+ - ./Microsoft.Sql/stable/2014-04-01/tableAuditing.json
+ - ./Microsoft.Sql/stable/2014-04-01/usages.json
 
 # Needed when there is more than one input file
 override-info:
@@ -227,6 +241,18 @@ override-info:
 
 ---
 # Code Generation
+
+
+## Swagger to SDK
+
+This section describes what SDK should be generated by the automatic system.
+This is not used by Autorest itself.
+
+``` yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
+```
 
 
 ## C#
@@ -281,6 +307,15 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: sql
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-03-preview
+  - tag: package-2015-05-preview
+  - tag: package-2014-04
 ```
 
 ### Tag: package-2017-03-preview and go
