@@ -96,8 +96,54 @@
         "x-ms-odata": "#/definitions/ApiContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}": {      
+      "head": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "Api_Head",
+        "description": "Gets the entity state (Etag) version of the API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApi": {
+            "$ref": "./examples/ApiManagementHeadApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified API entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+               "ETag": {
+                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                 "type": "string"
+               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }                    
+        }
+      },
+	  "get": {
         "tags": [
           "Apis"
         ],
@@ -399,7 +445,56 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}": {
-      "get": {
+      "head": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ApiOperation_Head",
+        "description": "Gets the entity state (Etag) version of the API operation specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiOperation": {
+            "$ref": "./examples/ApiManagementHeadApiOperation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified API operation entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+               "ETag": {
+                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                 "type": "string"
+               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "get": {
         "tags": [
           "Operations"
         ],
@@ -671,7 +766,59 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/policies/{policyId}": {
-      "get": {
+      "head": {
+        "tags": [
+          "ApiOperationPolicies"
+        ],
+        "operationId": "ApiOperationPolicy_Head",
+        "description": "Gets the entity state (Etag) version of the API operation policy specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiOperationPolicy": {
+            "$ref": "./examples/ApiManagementHeadApiOperationPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified API operation policy entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+               "ETag": {
+                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                 "type": "string"
+               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "get": {
         "tags": [
           "ApiOperationPolicies"
         ],
@@ -965,7 +1112,56 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}": {
-      "get": {
+      "head": {
+        "tags": [
+          "ApiPolicy"
+        ],
+        "operationId": "ApiPolicy_Head",
+        "description": "Gets the entity state (Etag) version of the API policy specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiPolicy": {
+            "$ref": "./examples/ApiManagementHeadApiPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified API Policy entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+               "ETag": {
+                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                 "type": "string"
+               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "get": {
         "tags": [
           "ApiPolicy"
         ],
@@ -1191,7 +1387,56 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/schemas/{schemaId}": {
-      "get": {
+      "head": {
+        "tags": [
+          "ApiSchema"
+        ],
+        "operationId": "ApiSchema_Head",
+        "description": "Gets the entity state (Etag) version of the schema specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiSchema": {
+            "$ref": "./examples/ApiManagementHeadApiSchema.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified schema entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+               "ETag": {
+                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                 "type": "string"
+               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "get": {
         "tags": [
           "ApiSchema"
         ],
