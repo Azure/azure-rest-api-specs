@@ -124,24 +124,6 @@
               "$ref": "#/definitions/ManagementGroup"
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -188,22 +170,10 @@
               "$ref": "#/definitions/ManagementGroup"
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "202": {
+            "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OperationResults"
             }
           },
           "default": {
@@ -217,7 +187,8 @@
           "PutManagementGroup": {
             "$ref": "./examples/PutManagementGroup.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -233,7 +204,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/CreateGroupRequestParameter"
+            "$ref": "#/parameters/PatchGroupRequestParameter"
           },
           {
             "$ref": "#/parameters/CacheControlHeader"
@@ -244,24 +215,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementGroup"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -295,11 +248,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK - management group deleted successfully"
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/OperationResults"
+            }
           },
           "204": {
-            "description": "NoContent - management group does not exist"
+            "description": "NoContent"
           },
           "default": {
             "description": "Error",
@@ -312,7 +268,8 @@
           "DeleteManagementGroup": {
             "$ref": "./examples/DeleteManagementGroup.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions/{subscriptionId}": {
@@ -337,8 +294,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error",
@@ -374,8 +331,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK - subscription deleted successfully"
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error",
@@ -458,8 +415,8 @@
         }
       }
     },
-    "/providers/Microsoft.Management/entities": {
-      "get": {
+    "/providers/Microsoft.Management/getEntities": {
+      "post": {
         "tags": [
           "Entities"
         ],
@@ -476,6 +433,9 @@
             "$ref": "#/parameters/GroupNameParameter"
           },
           {
+            "$ref": "#/parameters/EntityViewParameter"
+          },
+          {
             "$ref": "#/parameters/CacheControlHeader"
           }
         ],
@@ -484,12 +444,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/EntityListResult"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -503,99 +457,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetManagementGroups": {
+          "GetEntities": {
             "$ref": "./examples/GetEntities.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/entities/hierarchy": {
-      "get": {
-        "tags": [
-          "Entities"
-        ],
-        "operationId": "EntitiesHierarchy_Get",
-        "description": "Gets the root node hierarchy trimmed to only the entities the user has access to.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
-          {
-            "$ref": "#/parameters/GroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CacheControlHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Returns the root node hierarchy",
-            "schema": {
-              "$ref": "#/definitions/EntityHierarchyItem"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Hierarchy": {
+          "GetEntitiesWithHierarchyView": {
             "$ref": "./examples/EntitiesGetHierarchy.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/operationResults/{operationResultId}": {
-      "get": {
-        "tags": [
-          "OperationResults"
-        ],
-        "operationId": "Get_OperationResults",
-        "x-ms-long-running-operation": true,
-        "description": "Get management group creation or deletion operation provisioning status\n",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/OperationResultIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ManagementGroup"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/OperationResults"
-            }
-          },
-          "204": {
-            "description": "No Content - management group does not exist"
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetCreateGroupOperationResult": {
-            "$ref": "./examples/GetOperationResult.json"
           }
         }
       }
@@ -988,7 +854,7 @@
       }
     },
     "EntityInfoProperties": {
-      "description": "The generic properties of a entity.",
+      "description": "The generic properties of an entity.",
       "type": "object",
       "properties": {
         "tenantId": {
@@ -1067,8 +933,8 @@
         }
       }
     },
-    "CreateGroupRequest": {
-      "description": "Management group creation parameters.",
+    "PatchManagementGroupRequest": {
+      "description": "Management group patch parameters.",
       "type": "object",
       "properties": {
         "displayName": {
@@ -1078,6 +944,158 @@
         "parentId": {
           "type": "string",
           "description": "(Optional) The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "CreateManagementGroupRequest": {
+      "description": "Management group creation parameters.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, /providers/Microsoft.Management/managementGroups",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the management group. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateManagementGroupProperties"
+        }
+      }
+    },
+    "CreateManagementGroupProperties": {
+      "description": "The generic properties of a management group used during creation.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group."
+        },
+        "roles": {
+          "description": "The roles associated with the management group.",
+          "readOnly": true,
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "details": {
+          "title": "Details",
+          "$ref": "#/definitions/CreateManagementGroupDetails"
+        },
+        "children": {
+          "description": "The list of children.",
+          "readOnly": true,
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateManagementGroupChildInfo"
+          }
+        }
+      }
+    },
+    "CreateManagementGroupDetails": {
+      "description": "The details of a management group used during creation.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "number",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The version number of the object."
+        },
+        "updatedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The date and time when this object was last updated."
+        },
+        "updatedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity of the principal or process that updated the object."
+        },
+        "parent": {
+          "title": "Parent",
+          "$ref": "#/definitions/CreateParentGroupInfo"
+        }
+      }
+    },
+    "CreateManagementGroupChildInfo": {
+      "description": "The child information of a management group used during creation.",
+      "properties": {
+        "type": {
+          "title": "The type of child resource.",
+          "readOnly": true,
+          "$ref": "#/definitions/ManagementGroupChildType",
+          "description": "The fully qualified resource type which includes provider namespace (e.g. /providers/Microsoft.Management/managementGroups)"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The fully qualified ID for the child resource (management group or subscription).  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the child entity."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The friendly name of the child resource."
+        },
+        "roles": {
+          "description": "The roles associated with the management group.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "children": {
+          "description": "The list of children.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateManagementGroupChildInfo"
+          }
+        }
+      }
+    },
+    "CreateParentGroupInfo": {
+      "description": "(Optional) The ID of the parent management group used during creation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the parent management group"
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The friendly name of the parent management group."
         }
       }
     },
@@ -1174,7 +1192,16 @@
       "required": true,
       "description": "Management group creation parameters.",
       "schema": {
-        "$ref": "#/definitions/CreateGroupRequest"
+        "$ref": "#/definitions/CreateManagementGroupRequest"
+      }
+    },
+    "PatchGroupRequestParameter": {
+      "name": "createGroupRequest",
+      "in": "body",
+      "required": true,
+      "description": "Management group patch parameters.",
+      "schema": {
+        "$ref": "#/definitions/PatchManagementGroupRequest"
       }
     },
     "FilterParameter": {
@@ -1226,6 +1253,17 @@
       "default": "no-cache",
       "description": "Indicates that the request shouldn't utilize any caches.",
       "type": "string"
+    },
+    "EntityViewParameter": {
+      "name": "view",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "hierarchy"
+      ],
+      "x-ms-parameter-location": "method",
+      "description": "The view parameter allows clients to request that the list of entities be returned in the form of a hierarchy."
     }
   }
 }
