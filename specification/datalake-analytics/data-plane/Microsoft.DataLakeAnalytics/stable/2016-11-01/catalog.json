@@ -2558,6 +2558,9 @@
             "description": "404 - Not found."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/Acl"
       }
     },
@@ -2632,6 +2635,9 @@
           "default": {
             "description": "404 - Not found."
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-odata": "#/definitions/Acl"
       }
@@ -3059,6 +3065,11 @@
       "description": "A Data Lake Analytics catalog access control list (ACL) entry."
     },
     "AclList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
