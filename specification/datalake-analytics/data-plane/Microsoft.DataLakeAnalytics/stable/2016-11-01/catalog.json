@@ -2553,9 +2553,6 @@
             "schema": {
               "$ref": "#/definitions/AclList"
             }
-          },
-          "default": {
-            "description": "404 - Not found."
           }
         },
         "x-ms-pageable": {
@@ -2631,9 +2628,6 @@
             "schema": {
               "$ref": "#/definitions/AclList"
             }
-          },
-          "default": {
-            "description": "404 - Not found."
           }
         },
         "x-ms-pageable": {
@@ -2751,6 +2745,47 @@
     }
   },
   "x-ms-paths": {
+    "/catalog/usql/acl?op=GRANTACE": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GrantAcl",
+        "description": "Grants an access control list (ACL) entry to the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Grants an access control list (ACL) entry to the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_GrantAcl.json" }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AclCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to create or update an access control list (ACL) entry for a Data Lake Analytics catalog."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "GRANTACE"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully granted the access control list (ACL) entry to the Data Lake Analytics catalog."
+          }
+        }
+      }
+    },
     "/catalog/usql/databases/{databaseName}/acl?op=GRANTACE": {
       "post": {
         "tags": [
@@ -2795,9 +2830,47 @@
         "responses": {
           "200": {
             "description": "Successfully granted the access control list (ACL) entry to the specified database."
+          }
+        }
+      }
+    },
+    "/catalog/usql/acl?op=REVOKEACE": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_RevokeAcl",
+        "description": "Revokes an access control list (ACL) entry from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Revokes an access control list (ACL) entry from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_RevokeAcl.json" }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AclDeleteParameters"
+            },
+            "description": "Parameters supplied to delete an access control list (ACL) entry from a Data Lake Analytics catalog."
           },
-          "default": {
-            "description": "404 - Not found."
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "REVOKEACE"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully revoked the access control list (ACL) entry from the Data Lake Analytics catalog."
           }
         }
       }
@@ -2846,97 +2919,6 @@
         "responses": {
           "200": {
             "description": "Successfully revoked the access control list (ACL) entry from the specified database."
-          },
-          "default": {
-            "description": "404 - Not found."
-          }
-        }
-      }
-    },
-    "/catalog/usql/acl?op=GRANTACE": {
-      "post": {
-        "tags": [
-          "Catalog"
-        ],
-        "operationId": "Catalog_GrantAcl",
-        "description": "Grants an access control list (ACL) entry to the Data Lake Analytics catalog.",
-        "x-ms-examples": {
-          "Grants an access control list (ACL) entry to the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_GrantAcl.json" }
-        },
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AclCreateOrUpdateParameters"
-            },
-            "description": "Parameters supplied to create or update an access control list (ACL) entry for a Data Lake Analytics catalog."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "GRANTACE"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully granted the access control list (ACL) entry to the Data Lake Analytics catalog."
-          },
-          "default": {
-            "description": "404 - Not found."
-          }
-        }
-      }
-    },
-    "/catalog/usql/acl?op=REVOKEACE": {
-      "post": {
-        "tags": [
-          "Catalog"
-        ],
-        "operationId": "Catalog_RevokeAcl",
-        "description": "Revokes an access control list (ACL) entry from the Data Lake Analytics catalog.",
-        "x-ms-examples": {
-          "Revokes an access control list (ACL) entry from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_RevokeAcl.json" }
-        },
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AclDeleteParameters"
-            },
-            "description": "Parameters supplied to delete an access control list (ACL) entry from a Data Lake Analytics catalog."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "REVOKEACE"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully revoked the access control list (ACL) entry from the Data Lake Analytics catalog."
-          },
-          "default": {
-            "description": "404 - Not found."
           }
         }
       }
