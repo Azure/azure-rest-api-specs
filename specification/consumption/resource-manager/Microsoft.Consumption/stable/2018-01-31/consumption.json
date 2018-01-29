@@ -1499,11 +1499,12 @@
       "x-ms-azure-resource": true
     },
     "PriceSheetListResult": {
-      "description": "price sheet result. It contains the pricesheet associated with billing period",		
+      "description": "price sheet result. It contains the pricesheet associated with billing period",	
+      "type": "object",	
       "properties": {
         "value": {
           "description": "Price sheet",
-          "type": "array",
+          "type": "object",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/PriceSheetModel"
@@ -1534,6 +1535,7 @@
     },	
     "PriceSheetProperties": {
       "description": "The properties of the price sheet.",
+      "type": "object",
       "properties": {  
         "billingPeriodId": {
           "description": "The id of the billing period resource that the usage belongs to.",
