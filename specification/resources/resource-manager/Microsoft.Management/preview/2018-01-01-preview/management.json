@@ -939,11 +939,13 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "The friendly name of the management group."
+          "description": "The friendly name of the management group.",
+          "x-nullable": true
         },
         "parentId": {
           "type": "string",
-          "description": "(Optional) The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+          "description": "(Optional) The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "x-nullable": true
         }
       }
     },
@@ -985,7 +987,8 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The friendly name of the management group."
+          "description": "The friendly name of the management group. If no value is passed then this  field will be set to the groupId.",
+          "x-nullable": true
         },
         "roles": {
           "description": "The roles associated with the management group.",
@@ -1138,8 +1141,7 @@
     "ProvisioningState": {
       "type": "string",
       "enum": [
-        "Updating",
-        "Failed"
+        "Updating"
       ],
       "description": "The provisioning status."
     }
@@ -1208,7 +1210,7 @@
       "name": "$filter",
       "in": "query",
       "required": false,
-      "description": "A filter which allows the inclusion/exclusion of specific types of groups.",
+      "description": "A filter which allows the exclusion of subscriptions from results (i.e. '$filter=children.childType ne Subscription')",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
