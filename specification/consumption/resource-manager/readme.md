@@ -175,6 +175,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-01-31' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-01-31/consumption
+```
 
 ## Java
 
