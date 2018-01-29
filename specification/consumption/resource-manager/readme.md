@@ -134,7 +134,6 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption
 ```
 
-
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
