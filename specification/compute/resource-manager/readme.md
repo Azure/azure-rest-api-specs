@@ -128,8 +128,8 @@ These settings apply only when `--tag=package-2016-04-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2016-04-preview'
 input-file:
-- Microsoft.Compute/stable/2016-04-30-preview/compute.json
-- Microsoft.Compute/stable/2016-04-30-preview/disk.json
+- Microsoft.Compute/preview/2016-04-30-preview/compute.json
+- Microsoft.Compute/preview/2016-04-30-preview/disk.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
@@ -177,7 +177,7 @@ These setings apply only when `--tag=package-container-service-2015-11-preview` 
 
 ``` yaml $(tag) == 'package-container-service-2015-11-preview'
 input-file:
-- Microsoft.ContainerService/stable/2015-11-01-preview/containerService.json
+- Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
 ```
 
 ### Tag: package-compute-2015-06
@@ -196,7 +196,7 @@ These settings apply only when `--tag=package-2015-06-preview` is specified on t
 ``` yaml $(tag) == 'package-2015-06-preview'
 input-file:
 - Microsoft.Compute/stable/2015-06-15/compute.json
-- Microsoft.ContainerService/stable/2015-11-01-preview/containerService.json
+- Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
 ```
 
 
@@ -213,6 +213,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -241,6 +242,20 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-compute-2017-03
+  - tag: package-container-service-2017-01
+  - tag: package-container-service-2016-09
+  - tag: package-compute-2016-04-preview
+  - tag: package-compute-2016-03
+  - tag: package-container-service-2016-03
+  - tag: package-container-service-2015-11-preview
+  - tag: package-compute-2015-06
 ```
 
 ### Tag: package-compute-2017-03 and go

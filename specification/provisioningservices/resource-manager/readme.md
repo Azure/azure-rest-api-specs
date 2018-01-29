@@ -58,6 +58,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -113,6 +114,14 @@ go:
   namespace: iothub
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-11
+  - tag: package-2017-08
+```
+
 ### Tag: package-2017-11 and go
 
 These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
@@ -122,6 +131,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/provisioningservices/mgmt/2017-11-15/iothub
 ```
 
+### Tag: package-2017-08 and go
+
+These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-08' && $(go)
+output-folder: $(go-sdk-folder)/services/provisioningservices/mgmt/2017-08-21-preview/iothub
+```
 
 ## Java
 

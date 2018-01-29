@@ -30,10 +30,21 @@ description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
 tag: package-2017-07
 csharp-sdks-folder: ./Generated/CSharp
+python-sdks-folder: ./Generated/Python
+go-sdk-folder: ./Generated/Golang
 
 license-header: MICROSOFT_MIT
 ```
 
+### Validations
+Run validations when `--validate` is specified on command line
+
+``` yaml $(validate)
+azure-validator: true
+model-validator: true
+semantic-validator: true
+message-format: json
+```
 
 ### Tag: package-2017-07
 
@@ -41,8 +52,8 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.RecoveryServices/stable/2017-07-01/jobs.json
-- Microsoft.RecoveryServices/stable/2016-12-01/backupManagement.json
+- Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
 ```
  
@@ -70,6 +81,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -115,7 +127,6 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup
 ```
 
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -131,17 +142,6 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservicesbackup
 ```
 
----
-# Validation
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: Autorest invalidates two letter acronyms as well and changes in data contracts require service wide changes and require more time
-```
-
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
@@ -151,6 +151,13 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
   namespace: backup
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-07
 ```
 
 ### Tag: package-2017-07 and go

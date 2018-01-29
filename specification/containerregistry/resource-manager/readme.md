@@ -79,6 +79,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -156,6 +157,16 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-10
+  - tag: package-2017-06-preview
+  - tag: package-2017-03
+  - tag: package-2016-06-preview
+```
+
 ### Tag: package-2017-10 and go
 
 These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
@@ -188,7 +199,7 @@ output-folder: $(go-sdk-folder)/services/containerregistry/mgmt/2017-03-01/conta
 These settings apply only when `--tag=package-2016-06-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2016-06' && $(go)
+``` yaml $(tag) == 'package-2016-06-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/containerregistry/mgmt/2016-06-27-preview/containerregistry
 ```
 

@@ -30,6 +30,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -41,7 +42,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Vision.Face
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Vision/Generated/Face
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Face/Face/Generated
   clear-output-folder: true
 ```
 
@@ -81,6 +82,13 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: face
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: release_1_0
 ```
 
 ### Tag: release_1_0 and go

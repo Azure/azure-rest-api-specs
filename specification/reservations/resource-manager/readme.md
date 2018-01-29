@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
-- Microsoft.Capacity/stable/2017-11-01/reservation.json
+- Microsoft.Capacity/stable/2017-11-01/reservations.json
 ```
 
 ---
@@ -52,6 +52,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 ## C# 
@@ -105,6 +106,13 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
   namespace: reservations
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-11
 ```
 
 ### Tag: package-2017-11 and go

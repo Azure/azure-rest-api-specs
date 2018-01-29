@@ -91,6 +91,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -147,6 +148,15 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: batch
   clear-output-folder: true
+```
+
+### Go multi-api
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-09
+  - tag: package-2017-05
+  - tag: package-2017-01
+  - tag: package-2015-12
 ```
 
 ### Tag: package-2017-09 and go

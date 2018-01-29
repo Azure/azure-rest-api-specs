@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2017-04
 ```
 
+### Tag: package-2017-10
+
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- Microsoft.Cdn/stable/2017-10-12/cdn.json
+```
+
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
@@ -79,6 +88,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -134,6 +144,26 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: cdn
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-10
+  - tag: package-2017-04
+  - tag: package-2016-10
+  - tag: package-2016-04
+  - tag: package-2015-06
+```
+
+### Tag: package-2017-10 and go
+
+These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(go)
+output-folder: $(go-sdk-folder)/services/cdn/mgmt/2017-10-12/cdn
 ```
 
 ### Tag: package-2017-04 and go
