@@ -218,6 +218,7 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
  - ./Microsoft.Sql/stable/2014-04-01/dataMasking.json
  - ./Microsoft.Sql/stable/2014-04-01/deprecated.json
+ - ./Microsoft.Sql/stable/2014-04-01/disasterRecoveryConfigurations.json
  - ./Microsoft.Sql/stable/2014-04-01/elasticPools.json
  - ./Microsoft.Sql/stable/2014-04-01/firewallRules.json
  - ./Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
