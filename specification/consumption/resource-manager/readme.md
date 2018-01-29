@@ -38,6 +38,7 @@ input-file:
 - Microsoft.Consumption/stable/2017-11-30/consumption.json
 ```
 
+---
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
@@ -56,6 +57,7 @@ directive:
 	approved-by: @fearthecowboy
 ```
 
+---
 ### Tag: package-2017-04-preview
 
 These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
@@ -65,6 +67,7 @@ input-file:
 - Microsoft.Consumption/preview/2017-04-24-preview/consumption.json
 ```
 
+---
 ### Tag: package-2017-12-preview
 
 These settings apply only when `--tag=package-2017-12-preview` is specified on the command line.
@@ -86,7 +89,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-go
 ```
 
 
@@ -118,6 +120,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.consumption
   package-name: azure-mgmt-consumption
+  package-version: 1.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -131,6 +134,7 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption
 ```
 
+
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
@@ -142,16 +146,6 @@ go:
   clear-output-folder: true
 ```
 
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-04-preview
-  - tag: package-2017-11
-  - tag: package-2017-12-preview
-  - tag: package-2018-01
-```
-
 ### Tag: package-2017-04-preview and go
 
 These settings apply only when `--tag=package-2017-04-preview --go` is specified on the command line.
@@ -161,26 +155,26 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-04-24-preview/consumption
 ```
 
-### Tag: package-2017-11 and go
-These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
+### Tag: package-2017-11-30 and go
+These settings apply only when `--tag=package-2017-11-30 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2017-11' && $(go)
+``` yaml $(tag) == 'package-2017-11-30' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-11-30/consumption
 ```
 
-### Tag: package-2017-12-preview and go
-These settings apply only when `--tag=package-2017-12-preview --go` is specified on the command line.
+### Tag: package-2017-12-30-preview and go
+These settings apply only when `--tag=package-2017-12-30-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2017-12-preview' && $(go)
+``` yaml $(tag) == 'package-2017-12-30-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-12-30-preview/consumption
 ```
 
-### Tag: package-2018-01 and go
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+### Tag: package-2018-01-31 and go
+These settings apply only when `--tag=package-2018-01-31 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-01' && $(go)
+``` yaml $(tag) == 'package-2018-01-31' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-01-31/consumption
 ```
