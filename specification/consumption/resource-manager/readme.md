@@ -27,6 +27,7 @@ These are the global settings for the Consumption API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-01
+azure-validator: true
 ```
 
 ### Tag: package-2017-11
@@ -52,9 +53,10 @@ input-file:
 ``` yaml
 directive:
   - suppress: R2059
-    from: consumption.json    
+    from: consumption.json
+	where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodId}/providers/Microsoft.Consumption/marketplaces"]
     reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
-    approved-by: @fearthecowboy
+	approved-by: "@fearthecowboy"
 ```
 
 ---
@@ -133,6 +135,7 @@ python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption
 ```
+
 
 ## Go
 
