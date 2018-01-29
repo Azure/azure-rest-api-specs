@@ -54,7 +54,7 @@ directive:
   - suppress: R2059
     from: consumption.json    
     reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
-	approved-by: @fearthecowboy
+    approved-by: @fearthecowboy
 ```
 
 ---
