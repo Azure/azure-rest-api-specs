@@ -1,14 +1,14 @@
-# gsm
+# ManagementPartner
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for gsm RP.
+This is the AutoRest configuration file for ManagementPartner RP.
 
 
 
 ---
 ## Getting Started 
-To build the SDK for gsm, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for ManagementPartner, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information 
-These are the global settings for the gsm API.
+These are the global settings for the ManagementPartner API.
 
 ``` yaml
 openapi-type: arm
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.ManagementPartner/preview/2018-02-01/gsm.json
+- Microsoft.ManagementPartner/preview/2018-02-01/ManagementPartner.json
 ```
 
 ---
@@ -53,7 +53,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.GSM
-  output-folder: $(csharp-sdks-folder)/GSM/Management.Partner/Generated
+  namespace: Microsoft.Azure.Management.ManagementPartner
+  output-folder: $(csharp-sdks-folder)/ManagementPartner/Management.ManagementPartner/Generated
   clear-output-folder: true
 ```
