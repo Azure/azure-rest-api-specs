@@ -65,7 +65,6 @@ These settings apply only when `--tag=package-2018-01-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-01-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
 ```
 
