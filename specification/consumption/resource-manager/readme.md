@@ -47,6 +47,15 @@ input-file:
 - Microsoft.Consumption/stable/2018-01-31/consumption.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: R2059
+    from: consumption.json    
+    reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
+	approved-by: @fearthecowboy
+```
+
 ### Tag: package-2017-04-preview
 
 These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
@@ -120,13 +129,6 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption
-```
-
-``` yaml 
-directive: 
-  suppress: R2059 
-  reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path. 
-  approved-by: @fearthecowboy 
 ```
 
 ## Go
