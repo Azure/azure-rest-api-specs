@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights client for synthetic monitor locations.",
+    "version": "2015-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/syntheticmonitorlocations": {
+      "get": {
+        "description": "Gets a list of synthetic monitor locations available to this Application Insights component.",
+        "operationId": "syntheticMonitorLocations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more synthetic monitor location names available to the Application Insights component.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentSyntheticMonitorLocationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SyntheticMonitorLocationsList": {
+            "$ref": "./examples/SyntheticMonitorLocationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "APIKeyRequest": {
+      "description": "An Application Insights component API Key createion request definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the API Key."
+        },
+        "linkedReadProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The read access rights of this API Key."
+        },
+        "linkedWriteProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The write access rights of this API Key."
+        }
+      }
+    },
+    "ApplicationInsightsComponentSyntheticMonitorLocationListResult": {
+      "description": "Describes the list of synthetic monitor locations available to an Application Insights Component.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of synthetic monitor locations.",
+          "items": {
+            "$ref": "#/definitions/ApplicationInsightsComponentSyntheticMonitorLocation"
+          }
+        }
+      }
+    },
+    "ApplicationInsightsComponentSyntheticMonitorLocation": {
+      "description": "Properties that define a synthetic monitor location available to an Application Insights Component.",
+      "type": "object",
+      "properties": {
+        "DisplayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the synthetic monitor location."
+        },
+        "Tag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Geographic location tag providing more precise location information."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
