@@ -428,7 +428,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}": {
+	  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}": {
       "delete": {
         "tags": [
           "ExpressRouteCircuitConnections"
@@ -482,7 +482,7 @@
             "description": "Delete successful."
           }
         },
-		"x-ms-examples": {
+		    "x-ms-examples": {
           "ExpressRouteCircuitConnectionDelete": { "$ref": "./examples/ExpressRouteCircuitConnectionDelete.json" }
         },
         "x-ms-long-running-operation": true
@@ -537,7 +537,7 @@
             }
           }
         },
-		"x-ms-examples": {
+		    "x-ms-examples": {
           "ExpressRouteCircuitConnectionGet": { "$ref": "./examples/ExpressRouteCircuitConnectionGet.json" }
         }
       },
@@ -569,7 +569,7 @@
             "type": "string",
             "description": "The name of the peering."
           },
-		  {
+		      {
             "name": "connectionName",
             "in": "path",
             "required": true,
@@ -606,7 +606,7 @@
             }
           }
         },
-		"x-ms-examples": {
+		    "x-ms-examples": {
           "ExpressRouteCircuitConnectionCreate": { "$ref": "./examples/ExpressRouteCircuitConnectionCreate.json" }
         },
         "x-ms-long-running-operation": true
@@ -1452,17 +1452,17 @@
       },
       "description": "Response for ListPeering API service call retrieves all peerings that belong to an ExpressRouteCircuit."
     },
-	"ExpressRouteCircuitConnectionsPropertiesFormat": {
+	  "ExpressRouteCircuitConnectionsPropertiesFormat": {
       "properties": {
-	    "expressroutecircuitpeering": {
-			"$ref": "#/definitions/ExpressRouteCircuitPeering",
-			"description": "Reference to Express Route Circuit Private Peering Resource of the circuit initiating connection."
-		},
-		"peerexpressroutecircuitpeering": {
-			"$ref": "#/definitions/ExpressRouteCircuitPeering",
-			"description": "Reference to Express Route Circuit Private Peering Resource of the peered circuit."
-		},
-		"addressPrefix": {
+        "expressroutecircuitpeering": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeering",
+          "description": "Reference to Express Route Circuit Private Peering Resource of the circuit initiating connection."
+        },
+        "peerexpressroutecircuitpeering": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeering",
+          "description": "Reference to Express Route Circuit Private Peering Resource of the peered circuit."
+        },
+		    "addressPrefix": {
           "type": "string",
           "description": "/29 IP address space to carve out Customer addresses for tunnels."
         },
@@ -1477,7 +1477,7 @@
             "Connected",
             "Disconnected"
           ],
-		  "readOnly": true, 
+		      "readOnly": true, 
           "x-ms-enum": {
             "name": "ConnectionStatus",
             "modelAsString": true
@@ -1485,7 +1485,7 @@
         }
       }
     },
-	"ExpressRouteCircuitConnections": {
+	  "ExpressRouteCircuitConnections": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
