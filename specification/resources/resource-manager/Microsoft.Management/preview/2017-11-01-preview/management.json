@@ -262,8 +262,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK"
+                    "204": {
+                        "description": "No Content"
                     },
                     "default": {
                         "description": "Error",
@@ -296,8 +296,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK - subscription deleted successfully"
+                    "204": {
+                        "description": "No Content - subscription deleted successfully"
                     },
                     "default": {
                         "description": "Error",
@@ -459,6 +459,7 @@
                 },
                 "properties": {
                     "title": "Properties",
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ManagementGroupInfoProperties"
                 }
             }
@@ -469,7 +470,6 @@
             "properties": {
                 "tenantId": {
                     "type": "string",
-                    "format": "uuid",
                     "description": "The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000"
                 },
                 "displayName": {
@@ -499,6 +499,7 @@
                 },
                 "properties": {
                     "title": "Properties",
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ManagementGroupProperties"
                 }
             }
@@ -509,7 +510,6 @@
             "properties": {
                 "tenantId": {
                     "type": "string",
-                    "format": "uuid",
                     "description": "The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000"
                 },
                 "displayName": {
@@ -626,7 +626,6 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "description": "Subscription ID."
         },
         "ApiVersionParameter": {

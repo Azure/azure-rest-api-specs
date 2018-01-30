@@ -184,34 +184,23 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/marketplaces": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/marketplaces": {
       "get": {
         "tags": [
           "Marketplaces"
         ],
+        "x-ms-odata": "#/definitions/Marketplace",
         "operationId": "Marketplaces_List",
-        "description": "Lists the marketplace resource usage details for a scope by billing period. marketplaces are available via this API only for May 1, 2014 or later.",
+        "description": "Lists the marketplaces for a scope by subscriptionId. Marketplaces are available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
-        "x-ms-odata": "#/definitions/Marketplace",
         "x-ms-examples": {
-          "MarketplacesListForBillingPeriod": {
-            "$ref": "./examples/MarketplacesListForBillingPeriod.json"
-          },
           "MarketplacesList": {
             "$ref": "./examples/MarketplacesList.json"
           }
         },
         "parameters": [
-          {
-            "name": "scope",
-            "description": "The scope of the marketplaces. The scope can be '/subscriptions/{subscriptionId}' for a subscription, or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}' for a billing perdiod.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
           {
             "name": "$filter",
             "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
@@ -237,6 +226,78 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketplacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "x-ms-odata": "#/definitions/Marketplace",
+        "operationId": "Marketplaces_ListByBillingPeriod",
+        "description": "Lists the marketplaces for a scope by billing period and subscripotionId. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "MarketplacesListForBillingPeriod": {
+            "$ref": "./examples/MarketplacesListForBillingPeriod.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N marketplaces.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
           }
         ],
         "responses": {
@@ -1294,7 +1355,7 @@
           "readOnly": true
         },
         "offerName": {
-          "description": "The name of offer.",
+          "description": "The type of offer.",
           "type": "string",
           "readOnly": true
         },
@@ -2039,6 +2100,13 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "billingPeriodNameParameter": {
+      "name": "billingPeriodName",
+      "in": "path",
+      "description": "Billing Period Id.",
+      "required": true,
+      "type": "string"
     }
   }
 }
