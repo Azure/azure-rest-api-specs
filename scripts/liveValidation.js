@@ -99,7 +99,10 @@ async function runScript() {
     }
 
     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    if (failingOperations.length > 0 || noTrafficOperations.length > 0) {
+    if (validationResult.totalOperationCount === 0) {
+        console.log(`There was no traffic detected for the provided RP and API version:${resourceProvider}-${apiVersion}. Please make sure there is traffic so the changes can be validated.`);
+        process.exitCode = 1;
+    } else if (failingOperations.length > 0 || noTrafficOperations.length > 0) {
         console.log(`The changes in the specs introduced by this PR potentially do not reflect the Service API.`);
 
         console.log(`Active traffic and success rate > ${successThreshold}% FOR EACH OPERATION is required. Please review the following operations before moving forward.`);
@@ -116,7 +119,7 @@ async function runScript() {
         `);
         process.exitCode = 1;
     } else {
-        console.log(`SUCCESS RATE: ${validationResult.SuccessRate} > ${successThreshold}. You can move forward:`);
+        console.log(`SUCCESS RATE: ${validationResult.successRate} > ${successThreshold}. You can move forward.`);
     }
 }
 

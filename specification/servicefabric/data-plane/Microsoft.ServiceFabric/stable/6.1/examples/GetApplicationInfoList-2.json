@@ -1,0 +1,30 @@
+{
+  "operationId": "GetApplicationInfoList",
+  "description": "This example shows how to page through the information about applications on the cluster using the ContinuationToken parameter. The value of this parameter is provided from the previous query, in this case the example shown above. The response contains the remaining one result and an empty ContinuationToken. The empty ContinuationToken indicates that additional results are not available.",
+  "parameters": {
+    "api-version": "6.1",
+    "MaxResults": 2,
+    "ContinuationToken": "fabric:/samples/PQueueApp1"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "ContinuationToken": "",
+        "Items": [
+          {
+            "Id": "samples~VQueueApp1",
+            "Name": "fabric:/samples/VQueueApp1",
+            "TypeName": "VolatileQueueApp",
+            "TypeVersion": "1.0",
+            "Status": "Ready",
+            "Parameters": [],
+            "HealthState": "Ok",
+            "ApplicationDefinitionKind": "ServiceFabricApplicationDescription"
+          }
+        ]
+      }
+    }
+  }
+}
