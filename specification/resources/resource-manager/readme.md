@@ -643,6 +643,28 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2016_06_01
 ```
 
+### Tag: package-management-2017-08 and python
+
+These settings apply only when `--tag=package-management-2017-08 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-management-2017-08' && $(python)
+python:
+  namespace: azure.mgmt.resource.subscriptions.v2017_08_31
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/management/v2017_08_31
+```
+
+### Tag: package-management-2017-11 and python
+
+These settings apply only when `--tag=package-management-2017-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-management-2017-11' && $(python)
+python:
+  namespace: azure.mgmt.resource.subscriptions.v2017_11_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/management/v2017_11_01
+```
+
 
 
 # Validation
