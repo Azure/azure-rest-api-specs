@@ -2468,21 +2468,27 @@
     "Classification": {
       "description": "The classification details of the text.",
       "properties": {
-        "AdultScore": {
-          "description": "The adult score.",
-          "type": "number"
+        "Category1": {
+          "$ref": "#/definitions/Score"
         },
-        "RacyScore": {
-          "description": "The racy score.",
-          "type": "number"
+        "Category2": {
+         "$ref": "#/definitions/Score"
         },
-        "OffensiveScore": {
-          "description": "The offensive score.",
-          "type": "number"
+        "Category3": {
+          "$ref": "#/definitions/Score"
         },
         "ReviewRecommended": {
           "description": "The review recommended flag.",
           "type": "boolean"
+        }
+      }
+    },
+    "Score": {
+      "description": "The classification score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+      "properties": {
+        "Score": {
+           "description": "The category score.",
+           "type": "number"
         }
       }
     },
