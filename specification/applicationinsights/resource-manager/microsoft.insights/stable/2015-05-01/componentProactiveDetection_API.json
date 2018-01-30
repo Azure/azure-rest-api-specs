@@ -123,7 +123,7 @@
             "200": {
               "description": "The ProactiveDetection configuration for this configuration id.",
               "schema": {
-                "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfigurationListResult"
+                "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
               }
             }
           },
@@ -163,10 +163,10 @@
             }
           ],
           "responses": {
-            "201": {
+            "200": {
               "description": "The ProactiveDetection configuration that was successfully updated.",
               "schema": {
-                "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfigurationListResult"
+                "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
               }
             }
           },
@@ -192,7 +192,7 @@
         "properties": {
           "Name": {
             "type": "string",
-            "readOnly": true,
+            "readOnly": false,
             "description": "The rule name"
           },
           "Enabled": {
@@ -220,47 +220,47 @@
           },
           "RuleDefinitions": {
             "type": "object",
-            "readOnly": true,
+            "readOnly": false,
             "description": "Static definitions of the ProactiveDetection configuration rule (same values for all components).",
             "properties": {
               "Name": {
                 "type": "string",
-                "readOnly": true,
+                "readOnly": false,
                 "description": "The rule name"
               },
               "DisplayName": {
                 "type": "string",
-                "readOnly": true,
+                "readOnly": false,
                 "description": "The rule name as it is displayed in UI"
               },
               "Description": {
                 "type": "string",
-                "readOnly": true,
+                "readOnly": false,
                 "description": "The rule description"
               },
               "HelpUrl": {
                 "type": "string",
-                "readOnly": true,
+                "readOnly": false,
                 "description": "URL which displays aditional info about the proactive detection rule"
               },
               "IsHidden": {
                 "type": "boolean",
-                "readOnly": true,
+                "readOnly": false,
                 "description": "A flag indicating whether the rule is hidden (from the UI)"
               },
               "IsEnabledByDefault": {
                 "type": "boolean",
-                "readOnly": true,
+                "readOnly": false,
                 "description": "A flag indicating whether the rule is enabled by default"
               },
               "IsInPreview": {
                 "type": "boolean",
-                "readOnly": true,
+                "readOnly": false,
                 "description": "A flag indicating whether the rule is in preview"
               },
               "SupportsEmailNotifications": {
                 "type": "string",
-                "readOnly": true,
+                "readOnly": false,
                 "description": "A flag indicating whether email notifications are supported for detections for this rule"
               }
             }
