@@ -277,8 +277,24 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2017-04-preview
-  - tag: package-2017-04-preview
+  - tag: package-features-2015-12
+  - tag: package-locks-2016-09
+  - tag: package-locks-2015-01
+  - tag: package-policy-2017-06
+  - tag: package-policy-2016-12
+  - tag: package-policy-2016-04
+  - tag: package-policy-2015-10
+  - tag: package-resources-2017-05
+  - tag: package-resources-2016-09
+  - tag: package-resources-2016-07
+  - tag: package-resources-2016-02
+  - tag: package-resources-2015-11
+  - tag: package-subscriptions-2016-06
+  - tag: package-subscriptions-2015-11
+  - tag: package-links-2016-09
+  - tag: package-managedapplications-2016-09
+  - tag: package-management-2017-11
+  - tag: package-management-2017-08
 ```
 
 ### Tag: package-features-2015-12 and go
