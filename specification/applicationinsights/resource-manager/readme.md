@@ -147,6 +147,9 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.AppId
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.ShouldBeThrottled
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.ExpirationTime
+  - suppress: R2066
+    reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
+
 ```
 
 ### Tag: package-2015-05
