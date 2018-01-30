@@ -92,6 +92,7 @@ python-mode: create
 python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
+  add-credentials: true
   namespace: azure.eventgrid
   package-name: azure-eventgrid
   package-version: 0.1.0
