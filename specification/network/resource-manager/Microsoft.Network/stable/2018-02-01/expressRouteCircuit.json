@@ -535,7 +535,7 @@
           "200": {
             "description": "Request successful. The operation returns the resulting Express Route Circuit Connection resource.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
             }
           }
         },
@@ -585,7 +585,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
             },
             "description": "Parameters supplied to the create or update express route circuit circuit connection operation."
           },
@@ -600,13 +600,13 @@
           "200": {
             "description": "Update successful. The operation returns the resulting ExpressRouteCircuitPeering resource.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
             }
           },
           "201": {
             "description": "Create successful. The operation returns the resulting ExpressRouteCircuitPeering resource.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
             }
           }
         },
@@ -1415,7 +1415,7 @@
         "connections": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitConnections"
+            "$ref": "#/definitions/ExpressRouteCircuitConnection"
           },
           "description": "The list of circuit connections associated with Azure Private Peering for this circuit."
         }
@@ -1460,7 +1460,7 @@
       },
       "description": "Response for ListPeering API service call retrieves all peerings that belong to an ExpressRouteCircuit."
     },
-    "ExpressRouteCircuitConnectionsPropertiesFormat": {
+    "ExpressRouteCircuitConnectionPropertiesFormat": {
       "properties": {
         "expressroutecircuitpeering": {
           "$ref": "#/definitions/ExpressRouteCircuitPeering",
@@ -1493,11 +1493,11 @@
         }
       }
     },
-    "ExpressRouteCircuitConnections": {
+    "ExpressRouteCircuitConnection": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExpressRouteCircuitConnectionsPropertiesFormat"
+          "$ref": "#/definitions/ExpressRouteCircuitConnectionPropertiesFormat"
         },
         "name": {
           "type": "string",
