@@ -27,6 +27,7 @@ These are the global settings for the Consumption API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-01
+azure-validator: true
 ```
 
 ### Tag: package-2017-11
@@ -38,6 +39,7 @@ input-file:
 - Microsoft.Consumption/stable/2017-11-30/consumption.json
 ```
 
+---
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
@@ -47,6 +49,16 @@ input-file:
 - Microsoft.Consumption/stable/2018-01-31/consumption.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: R2059
+    from: consumption.json
+    reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
+    approved-by: "@fearthecowboy"
+```
+
+---
 ### Tag: package-2017-04-preview
 
 These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
@@ -56,6 +68,7 @@ input-file:
 - Microsoft.Consumption/preview/2017-04-24-preview/consumption.json
 ```
 
+---
 ### Tag: package-2017-12-preview
 
 These settings apply only when `--tag=package-2017-12-preview` is specified on the command line.
@@ -77,7 +90,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-go
 ```
 
 
@@ -136,13 +148,13 @@ go:
 ```
 
 ### Go multi-api
-
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2017-04-preview
-  - tag: package-2017-11-30
-  - tag: package-2017-12-30-preview
+   - tag: package-2017-04-preview
+   - tag: package-2017-11-30
+   - tag: package-2017-12-30-preview
 ```
+ 
 
 ### Tag: package-2017-04-preview and go
 
