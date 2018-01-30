@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Consumption/usageDetails": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
         "tags": [
           "UsageDetails"
@@ -45,11 +45,80 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "UsageDetailsListForBillingPeriod": {
-            "$ref": "./examples/UsageDetailsListForBillingPeriod.json"
-          },
           "UsageDetailsList": {
             "$ref": "./examples/UsageDetailsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListByBillingPeriod",
+        "description": "Lists the usage details for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsListForBillingPeriod": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriod.json"
           },
           "UsageDetailsExpand": {
             "$ref": "./examples/UsageDetailsExpand.json"
@@ -57,12 +126,10 @@
         },
         "parameters": [
           {
-            "name": "scope",
-            "description": "The scope of the usage details. The scope can be '/subscriptions/{subscriptionId}' for a subscription, or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}' for a billing period.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
           },
           {
             "name": "$expand",
@@ -191,12 +258,12 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationSummaries": {
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservedInstances"
         ],
-        "operationId": "ReservationsSummaries_List",
+        "operationId": "ReservationsSummaries_ListByReservationOrder",
         "description": "Lists the reservations summaries for daily or monthly grain.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -205,24 +272,13 @@
           "ReservationSummariesDaily": {
             "$ref": "./examples/ReservationSummariesDaily.json"
           },
-          "ReservationSummariesDailyWithReservationId": {
-            "$ref": "./examples/ReservationSummariesDailyWithReservationId.json"
-          },
           "ReservationSummariesMonthly": {
             "$ref": "./examples/ReservationSummariesMonthly.json"
-          },
-          "ReservationSummariesMonthlyWithReservationId": {
-            "$ref": "./examples/ReservationSummariesMonthlyWithReservationId.json"
           }
         },
         "parameters": [
           {
-            "name": "scope",
-            "description": "The scope of the reservation summaries. The scope can be 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}' or 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}/reservations/{ReservationId}'",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/reservationOrderIdParameter"
           },
           {
             "name": "grain",
@@ -281,12 +337,94 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationDetails": {
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservedInstances"
         ],
-        "operationId": "ReservationsDetails_List",
+        "operationId": "ReservationsSummaries_ListByReservationOrderAndReservation",
+        "description": "Lists the reservations summaries for daily or monthly grain.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationSummariesDailyWithReservationId": {
+            "$ref": "./examples/ReservationSummariesDailyWithReservationId.json"
+          },
+          "ReservationSummariesMonthlyWithReservationId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithReservationId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationIdParameter"
+          },
+          {
+            "name": "grain",
+            "description": "Can be daily or monthly",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "daily",
+              "monthly"
+            ],
+            "x-ms-enum": {
+              "name": "datagrain",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "daily",
+                  "description": "Daily grain of data",
+                  "name": "DailyGrain"
+                },
+                {
+                  "value": "monthly",
+                  "description": "Monthly grain of data",
+                  "name": "MonthlyGrain"
+                }
+              ]
+            }
+          },
+          {
+            "name": "$filter",
+            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationDetails": {
+      "get": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "ReservationsDetails_ListByReservationOrder",
         "description": "Lists the reservations details for provided date range.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -294,19 +432,63 @@
         "x-ms-examples": {
           "ReservationDetails": {
             "$ref": "./examples/ReservationDetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
           },
+          {
+            "name": "$filter",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.Consumption/reservationDetails": {
+      "get": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "ReservationsDetails_ListByReservationOrderAndReservation",
+        "description": "Lists the reservations details for provided date range.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
           "ReservationDetailsWithReservationId": {
             "$ref": "./examples/ReservationDetailsWithReservationId.json"
           }
         },
         "parameters": [
           {
-            "name": "scope",
-            "description": "The scope of the reservation details. The scope can be 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}' or 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}/reservations/{ReservationId}'",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationIdParameter"
           },
           {
             "name": "$filter",
@@ -1838,6 +2020,22 @@
       "name": "billingPeriodName",
       "in": "path",
       "description": "Billing Period Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reservationOrderIdParameter": {
+      "name": "reservationOrderId",
+      "in": "path",
+      "description": "Order Id of the reservation",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reservationIdParameter": {
+      "name": "reservationId",
+      "in": "path",
+      "description": "Id of the reservation",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
