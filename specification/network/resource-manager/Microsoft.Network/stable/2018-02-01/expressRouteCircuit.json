@@ -428,7 +428,7 @@
         }
       }
     },
-	  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}": {
       "delete": {
         "tags": [
           "ExpressRouteCircuitConnections"
@@ -457,7 +457,7 @@
             "type": "string",
             "description": "The name of the peering."
           },
-		      {
+          {
             "name": "connectionName",
             "in": "path",
             "required": true,
@@ -482,8 +482,10 @@
             "description": "Delete successful."
           }
         },
-		    "x-ms-examples": {
-          "ExpressRouteCircuitConnectionDelete": { "$ref": "./examples/ExpressRouteCircuitConnectionDelete.json" }
+        "x-ms-examples": {
+          "ExpressRouteCircuitConnectionDelete": {
+            "$ref": "./examples/ExpressRouteCircuitConnectionDelete.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -515,7 +517,7 @@
             "type": "string",
             "description": "The name of the peering."
           },
-		      {
+          {
             "name": "connectionName",
             "in": "path",
             "required": true,
@@ -533,12 +535,14 @@
           "200": {
             "description": "Request successful. The operation returns the resulting Express Route Circuit Connection resource.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
             }
           }
         },
-		    "x-ms-examples": {
-          "ExpressRouteCircuitConnectionGet": { "$ref": "./examples/ExpressRouteCircuitConnectionGet.json" }
+        "x-ms-examples": {
+          "ExpressRouteCircuitConnectionGet": {
+            "$ref": "./examples/ExpressRouteCircuitConnectionGet.json"
+          }
         }
       },
       "put": {
@@ -569,7 +573,7 @@
             "type": "string",
             "description": "The name of the peering."
           },
-		      {
+          {
             "name": "connectionName",
             "in": "path",
             "required": true,
@@ -581,7 +585,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
             },
             "description": "Parameters supplied to the create or update express route circuit circuit connection operation."
           },
@@ -596,18 +600,20 @@
           "200": {
             "description": "Update successful. The operation returns the resulting ExpressRouteCircuitPeering resource.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
             }
           },
           "201": {
             "description": "Create successful. The operation returns the resulting ExpressRouteCircuitPeering resource.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitConnections"
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
             }
           }
         },
-		    "x-ms-examples": {
-          "ExpressRouteCircuitConnectionCreate": { "$ref": "./examples/ExpressRouteCircuitConnectionCreate.json" }
+        "x-ms-examples": {
+          "ExpressRouteCircuitConnectionCreate": {
+            "$ref": "./examples/ExpressRouteCircuitConnectionCreate.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -790,7 +796,9 @@
           }
         },
         "x-ms-examples": {
-          "Update Express Route Circuit Tags": { "$ref": "./examples/ExpressRouteCircuitUpdateTags.json" }
+          "Update Express Route Circuit Tags": {
+            "$ref": "./examples/ExpressRouteCircuitUpdateTags.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -1393,8 +1401,8 @@
           "description": "The GatewayManager Etag."
         },
         "lastModifiedBy": {
-            "type": "string",
-            "description": "Gets whether the provider or the customer last modified the peering."
+          "type": "string",
+          "description": "Gets whether the provider or the customer last modified the peering."
         },
         "routeFilter": {
           "$ref": "./routeFilter.json#/definitions/RouteFilter",
@@ -1404,10 +1412,10 @@
           "$ref": "#/definitions/Ipv6ExpressRouteCircuitPeeringConfig",
           "description": "The IPv6 peering configuration."
         },
-		    "connections": {
+        "connections": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitConnections"
+            "$ref": "#/definitions/ExpressRouteCircuitConnection"
           },
           "description": "The list of circuit connections associated with Azure Private Peering for this circuit."
         }
@@ -1452,7 +1460,7 @@
       },
       "description": "Response for ListPeering API service call retrieves all peerings that belong to an ExpressRouteCircuit."
     },
-	  "ExpressRouteCircuitConnectionsPropertiesFormat": {
+    "ExpressRouteCircuitConnectionPropertiesFormat": {
       "properties": {
         "expressroutecircuitpeering": {
           "$ref": "#/definitions/ExpressRouteCircuitPeering",
@@ -1462,7 +1470,7 @@
           "$ref": "#/definitions/ExpressRouteCircuitPeering",
           "description": "Reference to Express Route Circuit Private Peering Resource of the peered circuit."
         },
-		    "addressPrefix": {
+        "addressPrefix": {
           "type": "string",
           "description": "/29 IP address space to carve out Customer addresses for tunnels."
         },
@@ -1477,7 +1485,7 @@
             "Connected",
             "Disconnected"
           ],
-		      "readOnly": true, 
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ConnectionStatus",
             "modelAsString": true
@@ -1485,11 +1493,11 @@
         }
       }
     },
-	  "ExpressRouteCircuitConnections": {
+    "ExpressRouteCircuitConnection": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExpressRouteCircuitConnectionsPropertiesFormat"
+          "$ref": "#/definitions/ExpressRouteCircuitConnectionPropertiesFormat"
         },
         "name": {
           "type": "string",
