@@ -89,11 +89,11 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 python-mode: create
 python:
-  azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.eventgrid
   package-name: azure-eventgrid
+  package-version: 0.1.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
