@@ -36,7 +36,7 @@ azure-validator: true
 ``` yaml
 directive:
   - suppress: TrackedResourceListByImmediateParent
-    reason: we do have a list api to get all export configuraitons as "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration"
+    reason: we do have a list api to get all export configurations as "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration"
     #where:
     #  -   $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration/{exportId}  
 
