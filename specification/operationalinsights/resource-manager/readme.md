@@ -128,3 +128,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2015-11-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/operationalinsights/mgmt/2015-11-01-preview/operationalinsights
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
+    where:
+      - $.definitions.Workspace.properties
+    from: OperationalInsights.json
+    reason: properties etag defined as eTag in model
+```

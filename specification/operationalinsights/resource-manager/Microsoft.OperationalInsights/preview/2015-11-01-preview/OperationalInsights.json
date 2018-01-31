@@ -931,9 +931,6 @@
         "tags": [
           "Operations"
         ],
-        "x-ms-examples": {
-          "OperationsList": { "$ref": "./examples/OperationsList.json" }
-          },        
         "operationId": "Operations_List",
         "description": "Lists all of the available OperationalInsights Rest API operations.",
         "parameters": [
@@ -948,9 +945,12 @@
               "$ref": "#/definitions/OperationListResult"
             }
           }
+        },
+		"x-ms-pageable": {
+		  "nextLinkName": "nextLink"
         }
       }
-    }    
+    }
   },
   "definitions": {
   "OperationListResult": {
@@ -962,7 +962,12 @@
               "$ref": "#/definitions/Operation"
           },
           "description": "List of solution operations supported by the OperationsManagement resource provider."
-          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of operation list results if there are any."
+        }
       }
   },
   "Operation": {
@@ -1333,7 +1338,7 @@
           "$ref": "#/definitions/WorkspaceProperties",
           "description":"Workspace properties." 
         },
-        "etag": {
+        "eTag": {
           "type": "string",
           "description": "The ETag of the workspace."
         }
