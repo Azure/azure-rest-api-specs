@@ -147,6 +147,14 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.AppId
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.ShouldBeThrottled
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.ExpirationTime
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Enabled
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.SendEmailsToSubscriptionOwners
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.CustomEmails
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.LastUpdatedTime
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.RuleDefinitions
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
 ```
 
 ### Tag: package-2015-05
@@ -159,6 +167,7 @@ input-file:
 - microsoft.insights/stable/2015-05-01/components_API.json
 - microsoft.insights/stable/2015-05-01/webTests_API.json
 - microsoft.insights/stable/2015-05-01/componentContinuousExport_API.json
+- microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json
 - microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
 - microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
 ```
