@@ -7,27 +7,22 @@
     },
     "responses": {
         "200": {
-            "body": {                
-                "id": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",             
+            "body": {
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rgaba12041/providers/Microsoft.DataLakeAnalytics/accounts/testaba15818",
                 "name": "test_account",
-                "type": "test_type",
+                "type": "Microsoft.DataLakeAnalytics/accounts",
                 "location": "test_location",
                 "tags": { 
                     "test_key": "test_value" 
                 },
                 "properties": {
+                    "accountId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
                     "provisioningState": "Succeeded",
                     "state": "Active",
                     "creationTime": "2017-04-14T13:21:56.6819037-07:00",
                     "lastModifiedTime": "2017-04-14T13:21:56.6819037-07:00",
                     "endpoint": "test_endpoint",
-                    "accountId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
                     "defaultDataLakeStoreAccount": "test_account",
-                    "maxDegreeOfParallelism": 30,
-                    "queryStoreRetention": 30,
-                    "maxJobCount": 3,
-                    "systemMaxDegreeOfParallelism": 1,
-                    "systemMaxJobCount": 1,
                     "dataLakeStoreAccounts": [{
                         "id": "test_adls_id",             
                         "name": "test_adls",
@@ -41,14 +36,20 @@
                         "name": "test_storage",
                         "type": "test_type",
                         "properties": {
-                            "accessKey": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab346",
                             "suffix": "test_suffix"
                         }
                     }],
-                    "newTier": "Consumption",
-                    "currentTier": "Consumption",
-                    "firewallState": "Enabled",
-                    "firewallAllowAzureIps": "Enabled",
+                    "computePolicies": [{         
+                        "id": "test_policy_id",             
+                        "name": "test_policy",
+                        "type": "test_type",
+                        "properties": {
+                            "objectId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+                            "objectType": "User",
+                            "maxDegreeOfParallelismPerJob": 1,
+                            "minPriorityPerJob": 1
+                        }
+                    }],
                     "firewallRules": [{
                         "id": "test_firewall_id",             
                         "name": "test_rule",
@@ -58,17 +59,17 @@
                             "endIpAddress": "2.2.2.2"
                         }
                     }],
+                    "firewallState": "Enabled",
+                    "firewallAllowAzureIps": "Enabled",
+                    "newTier": "Consumption",
+                    "currentTier": "Consumption",
+                    "maxJobCount": 3,
+                    "systemMaxJobCount": 1,
+                    "maxDegreeOfParallelism": 30,
+                    "systemMaxDegreeOfParallelism": 1,
                     "maxDegreeOfParallelismPerJob": 1,
                     "minPriorityPerJob": 1,
-                    "computePolicies": [{         
-                        "name": "test_policy",
-                        "properties": {
-                            "objectId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-                            "objectType": "User",
-                            "maxDegreeOfParallelismPerJob": 1,
-                            "minPriorityPerJob": 1
-                        }
-                    }]
+                    "queryStoreRetention": 30
                 }
             }
         }
