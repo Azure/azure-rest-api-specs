@@ -504,29 +504,33 @@
           "readOnly": true
         },
         "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "The name of the provider.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "The resource on which the operation is performed.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "The operation that can be performed.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "Operation description.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "title": "Display",
+          "$ref": "#/definitions/OperationDisplayProperties"
+        }
+      }
+    },
+    "OperationDisplayProperties": {
+      "description": "The object that represents the operation.",
+      "properties": {
+        "provider": {
+          "description": "The name of the provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The operation that can be performed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Operation description.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -679,7 +683,7 @@
           "description": "The friendly name of the management group."
         },
         "roles": {
-          "description": "The roles associated with the management group.",
+          "description": "The role definitions associated with the management group.",
           "type": "array",
           "x-nullable": true,
           "items": {
@@ -745,7 +749,7 @@
           "description": "The friendly name of the child resource."
         },
         "roles": {
-          "description": "The roles associated with the management group.",
+          "description": "The roles definitions associated with the management group.",
           "type": "array",
           "items": {
             "type": "string"
@@ -804,8 +808,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "type": "string",
-          "description": "The current state of the object."
+          "title": "Provisioning State",
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
@@ -987,7 +991,7 @@
           "x-nullable": true
         },
         "roles": {
-          "description": "The roles associated with the management group.",
+          "description": "The roles definitions associated with the management group.",
           "readOnly": true,
           "type": "array",
           "x-nullable": true,
@@ -1062,7 +1066,7 @@
           "description": "The friendly name of the child resource."
         },
         "roles": {
-          "description": "The roles associated with the management group.",
+          "description": "The roles definitions associated with the management group.",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -1249,7 +1253,8 @@
       "in": "header",
       "default": "no-cache",
       "description": "Indicates that the request shouldn't utilize any caches.",
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "EntityViewParameter": {
       "name": "view",
