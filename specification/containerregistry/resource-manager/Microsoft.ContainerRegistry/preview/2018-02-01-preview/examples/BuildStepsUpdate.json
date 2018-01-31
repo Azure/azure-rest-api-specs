@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2018-02-01-preview",
+    "buildDefinitionName": "myBuildDefinition",
+    "stepName": "dockerbuild",
+    "buildStepUpdateParameters": {
+      "type": "Docker",
+      "imageName": "azurerest:testtag",
+      "dockerFilePath": "src/DockerFile",
+      "contextPath": "src",
+      "isPushEnabled": true,
+      "buildArguments": [
+        {
+          "type": "DockerBuildArgument",
+          "name": "mytestargument",
+          "value": "mytestvalue",
+          "isSecret": false
+        },
+        {
+          "type": "DockerBuildArgument",
+          "name": "mysecrettestargument",
+          "value": "mysecrettestvalue",
+          "isSecret": true
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Docker",
+        "name": "dockerbuild",
+        "branch": "master",
+        "imageName": "azurerest:testtag",
+        "dockerFilePath": "src/DockerFile",
+        "contextPath": "src",
+        "isPushEnabled": true,
+        "buildArguments": [
+          {
+            "type": "DockerBuildArgument",
+            "name": "mytestargument",
+            "value": "mytestvalue",
+            "isSecret": false
+          },
+          {
+            "type": "DockerBuildArgument",
+            "name": "mysecrettestargument",
+            "value": "mysecrettestvalue",
+            "isSecret": true
+          }
+        ],
+        "baseImageDependencies": [
+          {
+            "imageName": "microsoft/aspnetcore",
+            "tag": "2.0",
+            "digest": "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0"
+          }
+        ]
+      }
+    },
+    "404": {}
+  }
+}

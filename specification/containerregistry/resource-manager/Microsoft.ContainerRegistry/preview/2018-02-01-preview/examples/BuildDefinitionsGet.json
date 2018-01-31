@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2018-02-01-preview",
+    "buildDefinitionName": "myBuildDefinition"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "creationDate": "2018-01-25T06:54:23.536Z",
+          "alias": "myalias",
+          "status": "Enabled",
+          "sourceRepository": {
+            "sourceControlType": "Github",
+            "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
+            "isCommitTriggerEnabled": true
+          },
+          "platform": {
+            "osType": "Linux",
+            "CPU": 2
+          },
+          "isBaseImageTriggersEnabled": true
+        },
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/buildDefinitions/myBuildDefinition",
+        "name": "myBuildDefinition",
+        "type": "Microsoft.ContainerRegistry/registries/buildDefinitions",
+        "location": "eastus",
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "404": {}
+  }
+}
