@@ -74,6 +74,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
+- Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
