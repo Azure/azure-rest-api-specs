@@ -72,16 +72,8 @@
             "name": "expandGroups",
             "in": "query",
             "required": false,
-            "type": "string",
-            "description": "When set to true, the response contains an array of groups that have visibility to the product. The default is false.",
-            "enum": [
-              "False",
-              "True"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false,
-              "name": "ExpandGroups"
-            }
+            "type": "boolean",
+            "description": "When set to true, the response contains an array of groups that have visibility to the product. The default is false."            
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -263,15 +255,7 @@
             "name": "deleteSubscriptions",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "false",
-              "true"
-            ],
-            "x-ms-enum": {
-              "name": "DeleteSubscriptions",
-              "modelAsString": false
-            },
+            "type": "boolean",
             "description": "Delete existing subscriptions to the product or not."
           },
           {
