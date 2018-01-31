@@ -50,6 +50,9 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FavoriteTypeParameter"
           }
         ],
         "responses": {
@@ -106,76 +109,6 @@
         "x-ms-examples": {
           "APIKeyCreate": {
             "$ref": "./examples/APIKeysCreate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/APIKeys/{keyId}": {
-      "delete": {
-        "description": "Delete an API Key of an Application Insights component.",
-        "operationId": "APIKeys_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/KeyId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The API Key that was successfully deleted.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationInsightsComponentAPIKey"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "APIKeyDelete": {
-            "$ref": "./examples/APIKeysDelete.json"
-          }
-        }
-      },
-      "get": {
-        "description": "Get the API Key for this key id.",
-        "operationId": "APIKeys_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/KeyId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The API Key for this key id.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationInsightsComponentAPIKey"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "APIKeysGet": {
-            "$ref": "./examples/APIKeysGet.json"
           }
         }
       }
@@ -291,12 +224,17 @@
       "description": "The name of the Application Insights component resource.",
       "x-ms-parameter-location": "method"
     },
-    "KeyId": {
-      "name": "keyId",
+    "FavoriteTypeParameter": {
+      "name": "favoriteType",
       "in": "path",
-      "required": true,
+      "required": false,
       "type": "string",
-      "description": "The API Key ID. This is unique within a Application Insights component.",
+      "default": "Shared",
+      "enum": [
+        "Shared",
+        "User"
+      ],
+      "description": "The type of favorite. Value can be either Shared or User.",
       "x-ms-parameter-location": "method"
     }
   }
