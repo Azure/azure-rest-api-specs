@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "description": "Azure Application Insights client for synthetic monitor locations.",
+    "description": "Azure Application Insights client for web test locations.",
     "version": "2015-05-01"
   },
   "host": "management.azure.com",
@@ -36,8 +36,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/syntheticmonitorlocations": {
       "get": {
-        "description": "Gets a list of synthetic monitor locations available to this Application Insights component.",
-        "operationId": "syntheticMonitorLocations_List",
+        "description": "Gets a list of web test locations available to this Application Insights component.",
+        "operationId": "webTestLocations_List",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -54,15 +54,15 @@
         ],
         "responses": {
           "200": {
-            "description": "A list containing 0 or more synthetic monitor location names available to the Application Insights component.",
+            "description": "A list containing 0 or more web test location names available to the Application Insights component.",
             "schema": {
-              "$ref": "#/definitions/ApplicationInsightsComponentSyntheticMonitorLocationListResult"
+              "$ref": "#/definitions/ApplicationInsightsWebTestLocationsListResult"
             }
           }
         },
         "x-ms-examples": {
-          "SyntheticMonitorLocationsList": {
-            "$ref": "./examples/SyntheticMonitorLocationsList.json"
+          "WebTestLocationsList": {
+            "$ref": "./examples/WebTestLocationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -72,58 +72,34 @@
     }
   },
   "definitions": {
-    "APIKeyRequest": {
-      "description": "An Application Insights component API Key createion request definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the API Key."
-        },
-        "linkedReadProperties": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The read access rights of this API Key."
-        },
-        "linkedWriteProperties": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The write access rights of this API Key."
-        }
-      }
-    },
-    "ApplicationInsightsComponentSyntheticMonitorLocationListResult": {
-      "description": "Describes the list of synthetic monitor locations available to an Application Insights Component.",
+    "ApplicationInsightsWebTestLocationsListResult": {
+      "description": "Describes the list of web test locations available to an Application Insights Component.",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of synthetic monitor locations.",
+          "description": "List of web test locations.",
           "items": {
-            "$ref": "#/definitions/ApplicationInsightsComponentSyntheticMonitorLocation"
+            "$ref": "#/definitions/ApplicationInsightsComponentWebTestLocation"
           }
         }
       }
     },
-    "ApplicationInsightsComponentSyntheticMonitorLocation": {
-      "description": "Properties that define a synthetic monitor location available to an Application Insights Component.",
+    "ApplicationInsightsComponentWebTestLocation": {
+      "description": "Properties that define a web test location available to an Application Insights Component.",
       "type": "object",
       "properties": {
         "DisplayName": {
           "type": "string",
           "readOnly": true,
-          "description": "The display name of the synthetic monitor location."
+          "description": "The display name of the web test location."
         },
         "Tag": {
           "type": "string",
           "readOnly": true,
-          "description": "Geographic location tag providing more precise location information."
+          "description": "Internally defined geographic location tag."
         }
       }
     }
