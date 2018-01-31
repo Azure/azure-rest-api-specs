@@ -86,6 +86,8 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
 ```
 
 ---
@@ -100,6 +102,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -155,6 +158,14 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: automation
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go)
+batch:
+  - tag: package-2015-10
+  - tag: package-2017-05-preview
 ```
 
 ### Tag: package-2015-10 and go

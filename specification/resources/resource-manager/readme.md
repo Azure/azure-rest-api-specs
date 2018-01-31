@@ -57,7 +57,7 @@ tag: package-managedapplications-2016-09
 ```
 
 ``` yaml $(package-management)
-tag: package-management-2017-08
+tag: package-management-2017-11
 ```
 
 ### Tag: package-features-2015-12
@@ -207,6 +207,14 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
+### Tag: package-management-2017-11
+These settings apply only when `--tag=package-management-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-management-2017-11'
+input-file:
+- Microsoft.Management/preview/2017-11-01-preview/management.json
+```
+
 ### Tag: package-management-2017-08
 These settings apply only when `--tag=package-management-2017-08` is specified on the command line.
 
@@ -227,6 +235,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -262,6 +271,30 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-features-2015-12
+  - tag: package-locks-2016-09
+  - tag: package-locks-2015-01
+  - tag: package-policy-2017-06
+  - tag: package-policy-2016-12
+  - tag: package-policy-2016-04
+  - tag: package-policy-2015-10
+  - tag: package-resources-2017-05
+  - tag: package-resources-2016-09
+  - tag: package-resources-2016-07
+  - tag: package-resources-2016-02
+  - tag: package-resources-2015-11
+  - tag: package-subscriptions-2016-06
+  - tag: package-subscriptions-2015-11
+  - tag: package-links-2016-09
+  - tag: package-managedapplications-2016-09
+  - tag: package-management-2017-11
+  - tag: package-management-2017-08
 ```
 
 ### Tag: package-features-2015-12 and go
@@ -424,6 +457,16 @@ namespace: managedapplications
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2016-09-01-preview/managedapplications
 ```
 
+### Tag: package-management-2017-11 and go
+
+These settings apply only when `--tag=package-management-2017-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-management-2017-11' && $(go)
+namespace: management
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-11-01-preview/management
+```
+
 ### Tag: package-management-2017-08 and go
 
 These settings apply only when `--tag=package-management-2017-08 --go` is specified on the command line.
@@ -469,6 +512,7 @@ batch:
   - tag: package-resources-2016-09
   - tag: package-resources-2016-02
   - tag: package-subscriptions-2016-06
+  - tag: package-management-2017-11
 ```
 
 ### Tag: package-features-2015-12 and python
@@ -614,7 +658,16 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2016_06_01
 ```
 
+### Tag: package-management-2017-11 and python
 
+These settings apply only when `--tag=package-management-2017-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-management-2017-11' && $(python)
+python:
+  namespace: azure.mgmt.resource.managementgroups
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/managementgroups
+```
 
 # Validation
 
