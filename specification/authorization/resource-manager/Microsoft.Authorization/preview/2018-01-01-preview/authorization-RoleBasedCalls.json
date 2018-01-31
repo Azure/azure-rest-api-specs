@@ -41,18 +41,10 @@
         "description": "Gets provider operations metadata for the specified resource provider.",
         "parameters": [
           {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$expand",
@@ -87,11 +79,7 @@
         "description": "Gets provider operations metadata for all resource providers.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for this operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$expand",
@@ -129,11 +117,7 @@
         "description": "Gets all permissions the caller has for a resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group to get the permissions for. The name is case insensitive."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -169,18 +153,10 @@
         "description": "Gets all permissions the caller has for a resource.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group containing the resource. The name is case insensitive."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
           },
           {
             "name": "parentResourcePath",
@@ -238,18 +214,10 @@
         "operationId": "RoleAssignments_ListForResource",
         "description": "Gets role assignments for a resource.",
         "parameters": [{
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
           },
           {
             "name": "parentResourcePath",
@@ -315,11 +283,7 @@
         "operationId": "RoleAssignments_ListForResourceGroup",
         "description": "Gets role assignments for a resource group.",
         "parameters": [{
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "$filter",
@@ -802,40 +766,6 @@
         }
       }
     },
-    "/{roleDefinitionId}": {
-      "get": {
-        "tags": [
-          "RoleDefinitions"
-        ],
-        "operationId": "RoleDefinitions_GetById",
-        "description": "Gets a role definition by ID.",
-        "parameters": [{
-            "name": "roleDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns information about the role definition.",
-            "schema": {
-              "$ref": "#/definitions/RoleDefinition"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetRoleDefinitionById.json"
-          }
-        }
-      }
-    },
     "/{scope}/providers/Microsoft.Authorization/roleDefinitions": {
       "get": {
         "tags": [
@@ -877,6 +807,42 @@
         "x-ms-examples": {
           "GetConfigurations": {
             "$ref": "./examples/GetRoleDefinitionAtScope.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths":{
+    "/{roleDefinitionId}": {
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_GetById",
+        "description": "Gets a role definition by ID.",
+        "parameters": [{
+            "name": "roleDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetRoleDefinitionById.json"
           }
         }
       }
@@ -1232,6 +1198,20 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for this operation."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group."
+    },
+    "ResourceProviderNamespaceParameter": {
+      "name": "resourceProviderNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The namespace of the resource provider."
     }
   }
 }
