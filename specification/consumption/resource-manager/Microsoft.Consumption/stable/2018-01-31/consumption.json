@@ -987,8 +987,8 @@
         "tags": [
           "PriceSheet"
         ],
-        "operationId": "PriceSheet_List",
-        "description": "Lists the price sheet for a scope by subscriptionId. Price sheets are available via this API only for May 1, 2014 or later.",
+        "operationId": "Pricesheet_Get",
+        "description": "Gets the price sheet for a scope by subscriptionId. Price sheet is available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1023,7 +1023,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PriceSheetListResult"
+              "$ref": "#/definitions/PriceSheetResult"
             }
           },
           "default": {
@@ -1040,8 +1040,8 @@
         "tags": [
           "PriceSheet"
         ],
-        "operationId": "PriceSheet_ListByBillingPeriod",
-        "description": "Lists the price sheet for a scope by subscriptionId and billing period. Price sheets are available via this API only for May 1, 2014 or later.",
+        "operationId": "PriceSheet_GetByBillingPeriod",
+        "description": "Get the price sheet for a scope by subscriptionId and billing period. Price sheet is available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1082,7 +1082,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PriceSheetListResult"
+              "$ref": "#/definitions/PriceSheetResult"
             }
           },
           "default": {
@@ -1966,7 +1966,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "PriceSheetListResult": {
+    "PriceSheetResult": {
       "description": "price sheet result. It contains the pricesheet associated with billing period",	
       "properties": {
         "value": {
