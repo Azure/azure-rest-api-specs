@@ -133,9 +133,7 @@ output-folder: $(go-sdk-folder)/services/operationalinsights/mgmt/2015-11-01-pre
 
 ``` yaml
 directive:
-  - suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
-    where:
-      - $.definitions.Workspace.properties
-    from: OperationalInsights.json
+  - from: OperationalInsights.json
+    suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
     reason: properties etag defined as eTag in model
 ```
