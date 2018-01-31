@@ -4,13 +4,17 @@
         "subscriptionId": "subid",
         "resourceGroupName": "my-resource-group",
         "resourceName": "my-component",
-        "configurationId": "slowpageloadtime"
+        "ConfigurationId": "slowpageloadtime"
     },
     "responses": {
         "200": {
             "body": 
                 {
                     "name": "slowpageloadtime",
+                    "enabled": true,
+                    "sendEmailsToSubscriptionOwners": true,
+                    "customEmails": ["foo@microsoft.com", "foo2@microsoft.com"],
+                    "lastUpdatedTime": null,
                     "ruleDefinitions": {
                         "Name": "slowpageloadtime",
                         "DisplayName": "Slow page load time",
@@ -20,11 +24,7 @@
                         "IsEnabledByDefault": true,
                         "IsInPreview": false,
                         "SupportsEmailNotifications": true
-                    },
-                    "enabled": true,
-                    "sendEmailsToSubscriptionOwners": true,
-                    "customEmails": ["foo@microsoft.com", "foo2@microsoft.com"],
-                    "lastUpdatedTime": null
+                    }
                 }
         }
     }
