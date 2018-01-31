@@ -640,14 +640,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Management Group ID."
+            "description": "Management Group ID.",
+            "x-ms-parameter-location": "method"
         },
         "SubscriptionIdParameter": {
             "name": "subscriptionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Subscription ID."
+            "description": "Subscription ID.",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",
@@ -680,6 +682,7 @@
             "in": "body",
             "required": true,
             "description": "Management group creation parameters.",
+            "x-ms-parameter-location": "method",
             "schema": {
                 "$ref": "#/definitions/CreateGroupRequest"
             }
@@ -689,6 +692,7 @@
             "in": "header",
             "default": "no-cache",
             "description": "Indicates that the request shouldn't utilize any caches.",
+            "x-ms-parameter-location": "method",
             "type": "string"
         }
     }
