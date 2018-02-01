@@ -1,0 +1,1380 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ML Team Account Management Client",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Team Account resources. They support CRUD operations for Azure Machine Learning Team Accounts.",
+    "version": "2017-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.MachineLearningExperimentation/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Machine Learning Team Accounts REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningExperimentation/accounts/{accountName}": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Gets the properties of the specified machine learning team account.",
+        "operationId": "Accounts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "AccountGet": {
+            "$ref": "examples/GetAccount.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Creates or updates a team account with the specified parameters.",
+        "operationId": "Accounts_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for creating or updating a machine learning team account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "AccountCreate": {
+            "$ref": "examples/CreateAccount.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the resource already exists and was updated.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Deletes a machine learning team account.",
+        "operationId": "Accounts_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "AccountCreate": {
+            "$ref": "examples/DeleteAccount.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "The machine learning team account does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Updates a machine learning team account with the specified parameters.",
+        "operationId": "Accounts_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for updating a machine learning team account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "AccountUpdate": {
+            "$ref": "examples/UpdateAccount.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }, 
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningExperimentation/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Lists all the available machine learning team accounts under the specified resource group.",
+        "operationId": "Accounts_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "AccountCreate": {
+            "$ref": "examples/ListAccountResourceGroup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningExperimentation/accounts/{accountName}/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets the properties of the specified machine learning workspace.",
+        "operationId": "Workspaces_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceGet": {
+            "$ref": "examples/WorkspaceGet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Creates or updates a machine learning workspace with the specified parameters.",
+        "operationId": "Workspaces_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for creating or updating a machine learning workspace.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceCreate": {
+            "$ref": "examples/WorkspaceCreate.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the resource already exists and was updated.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Deletes a machine learning workspace.",
+        "operationId": "Workspaces_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceDelete": {
+            "$ref": "examples/WorkspaceDelete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "The machine learning workspace does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Updates a machine learning workspace with the specified parameters.",
+        "operationId": "Workspaces_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for updating a machine learning workspace.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceUpdate": {
+            "$ref": "examples/WorkspaceUpdate.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }, 
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningExperimentation/accounts/{accountName}/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Lists all the available machine learning workspaces under the specified team account.",
+        "operationId": "Workspaces_ListByAccounts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ListWorkspacesByAccounts": {
+            "$ref": "examples/ListWorkspacesByAccounts.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+	},
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningExperimentation/accounts/{accountName}/workspaces/{workspaceName}/projects/{projectName}": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Gets the properties of the specified machine learning project.",
+        "operationId": "Projects_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "GetProject": {
+            "$ref": "examples/GetProject.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Creates or updates a project with the specified parameters.",
+        "operationId": "Projects_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for creating or updating a project.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "CreateProject": {
+            "$ref": "examples/CreateProject.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the resource already exists and was updated.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Deletes a project.",
+        "operationId": "Projects_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "AccountCreate": {
+            "$ref": "examples/DeleteProject.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "The machine learning team account does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Updates a project with the specified parameters.",
+        "operationId": "Projects_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for updating a machine learning team account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "UpdateProject": {
+            "$ref": "examples/UpdateProject.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }, 
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningExperimentation/accounts/{accountName}/workspaces{workspaceName}/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Lists all the available machine learning projects under the specified workspace.",
+        "operationId": "Projects_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProjectListByWorkspaces": {
+            "$ref": "examples/ProjectListByWorkspaces.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+	},
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningExperimentation/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Lists all the available machine learning team accounts under the specified subscription.",
+        "operationId": "Accounts_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "AccountCreate": {
+            "$ref": "examples/ListAccount.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Workspace": {
+      "type": "object",
+      "description": "An object that represents a machine learning team account workspace.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The properties of the machine learning team account workspace.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkspaceProperties": {
+      "type": "object",
+      "description": "The properties of a machine learning team account workspace.",
+      "required": [
+        "friendlyName"
+      ],
+      "properties": {
+        "description": {
+          "description": "The description of this workspace.",
+          "type": "string"
+        },
+        "accountId": {
+          "description": "The immutable id of the team account which contains this workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "workspaceId": {
+          "description": "The immutable id of this workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "description": "The friendly name for this workspace. This will be the workspace name in the arm id when the workspace object gets created",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the machine learning workspace in ISO8601 format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          },
+          "readOnly": true,
+          "description": "The current deployment state of team account workspace resource. The provisioningState is to indicate states for resource provisioning."
+        }
+      }
+    },
+    "WorkspaceUpdateParameters": {
+      "description": "The parameters for updating a machine learning team account workspace.",
+      "properties": {
+        "tags": {
+          "description": "The resource tags for the machine learning team account workspace.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",
+          "description": "The properties that the machine learning workspace will be updated with.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkspacePropertiesUpdateParameters": {
+      "description": "The parameters for updating the properties of a machine learning team account workspace.",
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of this workspace.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description for this workspace.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceListResult": {
+      "description": "The result of a request to list machine learning team account workspaces.",
+      "properties": {
+        "value": {
+          "description": "The list of machine learning team account workspaces. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning team accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of machine learning workspaces.",
+          "type": "string"
+        }
+      }
+    },
+    "Project": {
+      "type": "object",
+      "description": "An object that represents a machine learning project.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "The properties of the Project.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProjectProperties": {
+      "type": "object",
+      "description": "The properties of a machine learning project.",
+      "required": [
+        "friendlyName"
+      ],
+      "properties": {
+        "description": {
+          "description": "The description of this project.",
+          "type": "string"
+        },
+        "accountId": {
+          "description": "The immutable id of the team account which contains this project.",
+          "type": "string",
+          "readOnly": true
+        },
+        "workspaceId": {
+          "description": "The immutable id of the workspace which contains this project.",
+          "type": "string",
+          "readOnly": true
+        },
+        "projectId": {
+          "description": "The immutable id of this project.",
+          "type": "string",
+          "readOnly": true
+        },
+        "gitrepo": {
+          "description": "The reference to git repo for this project.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name for this project.",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the project in ISO8601 format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          },
+          "readOnly": true,
+          "description": "The current deployment state of project resource. The provisioningState is to indicate states for resource provisioning."
+        }
+      }
+    },
+    "ProjectUpdateParameters": {
+      "description": "The parameters for updating a machine learning project.",
+      "properties": {
+        "tags": {
+          "description": "The resource tags for the machine learning project.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ProjectPropertiesUpdateParameters",
+          "description": "The properties that the project will be updated with.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProjectPropertiesUpdateParameters": {
+      "description": "The parameters for updating the properties of a project.",
+      "properties": {
+        "friendlyName": {
+          "description": "The friendly name for this project.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of this project.",
+          "type": "string"
+        },
+        "gitrepo": {
+          "description": "The reference to git repo for this project.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectListResult": {
+      "description": "The result of a request to list projects.",
+      "properties": {
+        "value": {
+          "description": "The list of projects. Since this list may be incomplete, the nextLink field should be used to request the next list of projects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of projects.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response send when an operation fails.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "error message"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Account": {
+      "type": "object",
+      "description": "An object that represents a machine learning team account.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "The properties of the machine learning team account.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AccountProperties": {
+      "type": "object",
+      "description": "The properties of a machine learning team account.",
+      "required": [
+        "storageAccount",
+        "vsoAccountId",
+        "keyVaultId"
+      ],
+      "properties": {
+        "vsoAccountId": {
+          "description": "The fully qualified arm id of the vso account to be used for this team account.",
+          "type": "string"
+        },
+        "accountId": {
+          "description": "The immutable id associated with this team account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of this workspace.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name for this workspace. This will be the workspace name in the arm id when the workspace object gets created",
+          "type": "string"
+        },
+        "keyVaultId": {
+          "description": "The fully qualified arm id of the user key vault.",
+          "type": "string"
+        },
+        "seats": {
+          "description": "The no of users/seats who can access this team account. This property defines the charge on the team account.",
+          "type": "string"
+        },
+        "discoveryUri": {
+          "description": "The uri for this machine learning team account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the machine learning team account in ISO8601 format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "The properties of the storage account for the machine learning team account."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          },
+          "readOnly": true,
+          "description": "The current deployment state of team account resource. The provisioningState is to indicate states for resource provisioning."
+        }
+      }
+    },
+    "StorageAccountProperties": {
+      "description": "The properties of a storage account for a machine learning team account.",
+      "required": [
+        "storageAccountId",
+        "accessKey"
+      ],
+      "properties": {
+        "storageAccountId": {
+          "description": "The fully qualified arm Id of the storage account.",
+          "type": "string"
+        },
+        "accessKey": {
+          "description": "The access key to the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "AccountUpdateParameters": {
+      "description": "The parameters for updating a machine learning team account.",
+      "properties": {
+        "tags": {
+          "description": "The resource tags for the machine learning team account.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AccountPropertiesUpdateParameters",
+          "description": "The properties that the machine learning team account will be updated with.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AccountPropertiesUpdateParameters": {
+      "description": "The parameters for updating the properties of a machine learning team account.",
+      "properties": {
+        "description": {
+          "description": "The description of this workspace.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name for this workspace. This will be the workspace name in the arm id when the workspace object gets created",
+          "type": "string"
+        },
+        "seats": {
+          "description": "The no of users/seats who can access this team account. This property defines the charge on the team account.",
+          "type": "string"
+        },
+        "storageAccountKey": {
+          "description": "The key for storage account associated with this team account",
+          "type": "string"
+        }
+      }
+    },
+    "AccountListResult": {
+      "description": "The result of a request to list machine learning team accounts.",
+      "properties": {
+        "value": {
+          "description": "The list of machine learning team accounts. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning team accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of machine learning team accounts.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Azure Machine Learning team account REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display name of operation",
+          "properties": {
+            "provider": {
+              "description": "The resource provider name: Microsoft.MachineLearningExperimentation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "The resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "The operation that users can perform.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description for the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "An array of operations supported by the resource provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of AML team account operations supported by the AML team account resource provider."
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the resource. This cannot be changed after the resource is created.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Microsoft Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The client API version.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group to which the machine learning team account belongs.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the machine learning team account workspace.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "ProjectNameParameter": {
+      "name": "projectName",
+      "in": "path",
+      "description": "The name of the machine learning project under a team account workspace.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the machine learning team account.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
