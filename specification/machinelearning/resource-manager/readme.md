@@ -165,6 +165,22 @@ namespace: commitmentplans
 output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2016-05-01-preview/commitmentplans
 ```
 
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.machinelearning
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning
+```
+
 # Validation
 
 Since this RP has no unique default package, iterate over all of them for validation:

@@ -1,8 +1,9 @@
 {
   "parameters": {
     "api-version": "2018-01-31",
-    "subscriptionId": "{subscription-id}",
-    "name": "TestBudget",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MPDEVTESTRG",
+    "budgetName": "TestBudget",
     "parameters": {
       "eTag": "\"1d34d016a593709\"",
       "properties": {
@@ -12,6 +13,18 @@
         "timePeriod": {
           "startDate": "2017-10-01T00:00:00Z",
           "endDate": "2018-10-31T00:00:00Z"
+        },
+        "filters": {
+          "resourceGroups": [
+            "MPDEVTESTRG"
+          ],
+          "resources": [
+            "/subscriptions/{subscription-id}/resourceGroups/MPDEVTESTRG/providers/Microsoft.Compute/virtualMachines/MSAWSIFT2",
+            "/subscriptions/{subscription-id}/resourceGroups/MPDEVTESTRG/providers/Microsoft.Compute/virtualMachines/platformcloudplatformGeneric1"
+          ],
+          "meters": [
+            "fe167397-a38d-43c3-9bb3-8e2907e56a41"
+          ]  
         },
         "notifications": {
           "Actual_GreaterThan_80_Percent": {
@@ -25,6 +38,9 @@
             "contactRoles": [
               "Contributor",
               "Reader"
+            ],
+            "contactGroups": [
+              "/subscriptions/{subscription-id}/resourceGroups/MPDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
             ]
           }
         }
@@ -46,6 +62,18 @@
             "startDate": "2017-10-01T00:00:00Z",
             "endDate": "2018-10-31T00:00:00Z"
           },
+          "filters": {
+            "resourceGroups": [
+              "MPDEVTESTRG"
+            ],
+            "resources": [
+              "/subscriptions/{subscription-id}/resourceGroups/MPDEVTESTRG/providers/Microsoft.Compute/virtualMachines/MSAWSIFT2",
+              "/subscriptions/{subscription-id}/resourceGroups/MPDEVTESTRG/providers/Microsoft.Compute/virtualMachines/platformcloudplatformGeneric1"
+            ],
+            "meters": [
+              "fe167397-a38d-43c3-9bb3-8e2907e56a41"
+            ]  
+          },
           "currentSpend": {
             "amount": 80.89,
             "unit": "USD"
@@ -62,6 +90,9 @@
               "contactRoles": [
                 "Contributor",
                 "Reader"
+              ],
+              "contactGroups": [
+                "/subscriptions/{subscription-id}/resourceGroups/MPDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
               ]
             }
           }
@@ -82,6 +113,18 @@
             "startDate": "2017-10-01T00:00:00Z",
             "endDate": "2018-10-31T00:00:00Z"
           },
+          "filters": {
+            "resourceGroups": [
+              "MPDEVTESTRG"
+            ],
+            "resources": [
+              "/subscriptions/{subscription-id}/resourceGroups/MPDEVTESTRG/providers/Microsoft.Compute/virtualMachines/MSAWSIFT2",
+              "/subscriptions/{subscription-id}/resourceGroups/MPDEVTESTRG/providers/Microsoft.Compute/virtualMachines/platformcloudplatformGeneric1"
+            ],
+            "meters": [
+              "fe167397-a38d-43c3-9bb3-8e2907e56a41"
+            ]  
+          },
           "currentSpend": {
             "amount": 80.89,
             "unit": "USD"
@@ -98,6 +141,9 @@
               "contactRoles": [
                 "Contributor",
                 "Reader"
+              ],
+              "contactGroups": [
+                "/subscriptions/{subscription-id}/resourceGroups/MPDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
               ]
             }
           }
