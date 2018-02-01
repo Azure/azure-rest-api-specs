@@ -2,7 +2,8 @@
     "parameters": {
         "api-version": "2018-01-01-preview",
         "groupId": "20000000-0001-0000-0000-000000000000",
-        "$expand": "children"
+        "$expand": "children",
+        "Cache-Control": "no-cache"
     },
     "responses": {
         "200": {
@@ -17,7 +18,11 @@
                         "version": 1,
                         "updatedTime": "2018-01-01T00:00:00.00Z",
                         "updatedBy": "Test",
-                        "parent": null
+						"parent": {
+							"id": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
+							"name": "20000000-0000-0000-0000-000000000000",
+							"displayName": "20000000-0000-0000-0000-000000000000"
+						}
                     },
                     "children": [
                         {
