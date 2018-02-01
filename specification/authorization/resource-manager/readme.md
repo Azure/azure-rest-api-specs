@@ -142,6 +142,7 @@ go:
 batch:
   - tag: package-2015-07
   - tag: package-2017-10-01-preview
+  - tag: package-2018-01-01-preview
 ```
 
 ### Tag: package-2015-07 and go

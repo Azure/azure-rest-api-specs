@@ -553,6 +553,40 @@
         }
       }
     },
+    "/{roleDefinitionId}": {
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_GetById",
+        "description": "Gets a role definition by ID.",
+        "parameters": [{
+            "name": "roleDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetRoleDefinitionById.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments": {
       "get": {
         "tags": [
