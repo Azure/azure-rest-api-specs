@@ -68,6 +68,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.cognitiveservices.vision.contentmoderator
   package-name: azure-cognitiveservices-vision-contentmoderator
+  package-version: 0.1.0
   clear-output-folder: true
   title: "Content Moderator API"
 ```
