@@ -235,6 +235,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```
 
@@ -667,6 +668,20 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.resource.managementgroups
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/managementgroups
+```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.resources
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
 ```
 
 # Validation
