@@ -1966,6 +1966,22 @@
       },
       "x-ms-azure-resource": true
     },
+    "PriceSheetResult": {
+      "description": "An pricesheet resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PriceSheetModel",
+          "title": "Price sheet properties"
+        }
+      }
+    },
     "PriceSheetModel": {
       "description": "price sheet result. It contains the pricesheet associated with billing period",
       "properties": {
@@ -1981,22 +1997,6 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-	"PriceSheetResult": {
-      "description": "An pricesheet resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PriceSheetModel",
-          "title": "Price sheet properties"
         }
       }
     },
