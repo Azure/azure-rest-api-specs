@@ -7077,40 +7077,18 @@
     },
     "LogAnalyticsOperationResult": {
       "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation ID"
-        },
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation status"
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the operation"
-        },
-        "endTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the operation"
-        },
-        "error": {
-          "readOnly": true,
-          "$ref": "#/definitions/ApiError",
-          "description": "Api error"
-        },
         "properties" :{
           "readOnly": true,
           "$ref": "#/definitions/LogAnalyticsOutput",
           "description": "LogAnalyticsOutput"
         }
       },
-      "description": "Operation status response"
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusResponse"
+        }
+      ],
+      "description": "LogAnalytics operation status response"
     },
     "LogAnalyticsOutput": {
       "properties": {
