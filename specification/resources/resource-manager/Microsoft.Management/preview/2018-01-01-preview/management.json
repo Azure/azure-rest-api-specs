@@ -147,7 +147,7 @@
         "tags": [
           "ManagementGroups"
         ],
-        "operationId": "ManagementGroups_Create",
+        "operationId": "ManagementGroups_CreateOrUpdate",
         "description": "Create or update a management group.\nIf a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.\n",
         "parameters": [
           {
@@ -157,10 +157,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/CreateGroupRequestParameter"
+            "$ref": "#/parameters/CacheControlHeader"
           },
           {
-            "$ref": "#/parameters/CacheControlHeader"
+            "$ref": "#/parameters/CreateGroupRequestParameter"
           }
         ],
         "responses": {
@@ -204,10 +204,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PatchGroupRequestParameter"
+            "$ref": "#/parameters/CacheControlHeader"
           },
           {
-            "$ref": "#/parameters/CacheControlHeader"
+            "$ref": "#/parameters/PatchGroupRequestParameter"
           }
         ],
         "responses": {
@@ -459,9 +459,6 @@
         "x-ms-examples": {
           "GetEntities": {
             "$ref": "./examples/GetEntities.json"
-          },
-          "GetEntitiesWithHierarchyView": {
-            "$ref": "./examples/EntitiesGetHierarchy.json"
           }
         }
       }
@@ -807,9 +804,16 @@
           "description": "The name of the management group. For example, 00000000-0000-0000-0000-000000000000",
           "readOnly": true
         },
-        "provisioningState": {
-          "title": "Provisioning State",
-          "$ref": "#/definitions/ProvisioningState"
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "title": "Provisioning State",
+              "$ref": "#/definitions/ProvisioningState"
+            }
+          }
         }
       }
     },
@@ -1139,6 +1143,7 @@
       }
     },
     "ProvisioningState": {
+      "title": "Provisioning State",
       "type": "string",
       "enum": [
         "Updating"
@@ -1198,7 +1203,7 @@
       }
     },
     "PatchGroupRequestParameter": {
-      "name": "createGroupRequest",
+      "name": "patchGroupRequest",
       "in": "body",
       "required": true,
       "description": "Management group patch parameters.",
