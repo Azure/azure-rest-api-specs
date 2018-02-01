@@ -100,6 +100,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -169,6 +171,18 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-job-2017-09-preview
+  - tag: package-catalog-2016-11
+  - tag: package-job-2016-11
+  - tag: package-job-2016-03-preview
+  - tag: package-job-2015-11-preview
+  - tag: package-catalog-2015-10-preview
+```
+
 ### Tag: package-job-2017-09-preview and go
 
 These settings apply only when `--tag=package-job-2017-09-preview --go` is specified on the command line.
@@ -227,6 +241,21 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-catalog-2015-10-preview' && $(go)
 namespace: catalog
 output-folder: $(go-sdk-folder)/services/datalake/analytics/2015-10-01-preview/catalog
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  namespace: com.microsoft.azure.datalake.analytics
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-datalake/analytics
 ```
 
 # Validation

@@ -147,6 +147,14 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.AppId
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.ShouldBeThrottled
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.ExpirationTime
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Enabled
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.SendEmailsToSubscriptionOwners
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.CustomEmails
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.LastUpdatedTime
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.RuleDefinitions
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
+    #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
 ```
 
 ### Tag: package-2015-05
@@ -159,6 +167,7 @@ input-file:
 - microsoft.insights/stable/2015-05-01/components_API.json
 - microsoft.insights/stable/2015-05-01/webTests_API.json
 - microsoft.insights/stable/2015-05-01/componentContinuousExport_API.json
+- microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json
 - microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
 - microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
 ```
@@ -174,6 +183,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -231,6 +242,13 @@ go:
   clear-output-folder: true
 ```
 
+### Go mult-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2015-05
+```
+
 ### Tag: package-2015-05 and go
 
 These settings apply only when `--tag=package-2015-05 --go` is specified on he command line.
@@ -238,4 +256,20 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2015-05' && $(go)
 output-folder: $(go-sdk-folder)/services/appinsights/mgmt/2015-05-01/insights
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.applicationinsights
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-applicationinsights
 ```

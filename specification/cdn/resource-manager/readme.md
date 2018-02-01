@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.Cdn/2017-10-12/cdn.json
+- Microsoft.Cdn/stable/2017-10-12/cdn.json
 ```
 
 ### Tag: package-2017-04
@@ -87,6 +87,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -144,6 +146,17 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-10
+  - tag: package-2017-04
+  - tag: package-2016-10
+  - tag: package-2016-04
+  - tag: package-2015-06
+```
+
 ### Tag: package-2017-10 and go
 
 These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
@@ -187,4 +200,20 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2015-06' && $(go)
 output-folder: $(go-sdk-folder)/services/cdn/mgmt/2015-06-01/cdn
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.cdn
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-cdn
 ```

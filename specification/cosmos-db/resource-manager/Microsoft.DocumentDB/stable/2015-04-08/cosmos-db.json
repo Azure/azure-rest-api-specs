@@ -1003,7 +1003,10 @@
               "$ref": "#/definitions/UsagesResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/usages": {
@@ -1040,7 +1043,10 @@
               "$ref": "#/definitions/UsagesResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/usages": {
@@ -1080,7 +1086,10 @@
               "$ref": "#/definitions/UsagesResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/usages": {
@@ -1120,6 +1129,9 @@
               "$ref": "#/definitions/PartitionUsagesResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1154,7 +1166,10 @@
               "$ref": "#/definitions/MetricDefinitionsListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions": {
@@ -1191,7 +1206,10 @@
               "$ref": "#/definitions/MetricDefinitionsListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metricDefinitions": {
@@ -1222,7 +1240,10 @@
               "$ref": "#/definitions/MetricDefinitionsListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     }
   },
@@ -1250,6 +1271,9 @@
           }
         }
       },
+      "required": [
+        "failoverPolicies"
+      ],
       "description": "The list of new failover policies for the failover priority change."
     },
     "FailoverPolicy": {
@@ -1430,6 +1454,13 @@
           "description": "The consistency policy for the Cosmos DB database account.",
           "$ref": "#/definitions/ConsistencyPolicy"
         },
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        },
         "writeLocations": {
           "type": "array",
           "readOnly": true,
@@ -1452,6 +1483,19 @@
           "description": "An array that contains the regions ordered by their failover priorities.",
           "items": {
             "$ref": "#/definitions/FailoverPolicy"
+          }
+        }
+      }
+    },
+    "DatabaseAccountPatchProperties": {
+      "description": "Properties to update Azure Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
           }
         }
       }
@@ -1481,6 +1525,13 @@
         "enableAutomaticFailover": {
           "description": "Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.",
           "type": "boolean"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
         }
       },
       "required": [
@@ -1526,6 +1577,10 @@
       "properties": {
         "tags": {
           "$ref": "#/definitions/Tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountPatchProperties"
         }
       }
     },
@@ -1622,6 +1677,16 @@
       "x-ms-enum": {
         "name": "DatabaseAccountOfferType",
         "modelAsString": false
+      }
+    },
+    "Capability": {
+      "type": "object",
+      "description": "Cosmos DB capability object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Cosmos DB capability"
+        }
       }
     },
     "Tags": {
@@ -2139,6 +2204,7 @@
       "in": "query",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq."
     },
     "usageFilterParameter": {
@@ -2146,6 +2212,7 @@
       "in": "query",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names)."
     },
     "databaseRidParameter": {
@@ -2153,6 +2220,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Cosmos DB database rid."
     },
     "collectionRidParameter": {
@@ -2160,6 +2228,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Cosmos DB collection rid."
     },
     "regionParameter": {
@@ -2167,6 +2236,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Cosmos DB region, with spaces between words and each word capitalized."
     },
     "sourceRegionParameter": {
@@ -2174,6 +2244,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized."
     },
     "targetRegionParameter": {
@@ -2181,6 +2252,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized."
     },
     "partitionKeyRangeIdParameter": {
@@ -2188,6 +2260,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Partition Key Range Id for which to get data."
     }
   }
