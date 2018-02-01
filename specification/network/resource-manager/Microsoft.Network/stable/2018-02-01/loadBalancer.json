@@ -180,7 +180,8 @@
           }
         },
         "x-ms-examples": {
-          "Create load balancer": { "$ref": "./examples/LoadBalancerCreate.json" }
+          "Create load balancer": { "$ref": "./examples/LoadBalancerCreate.json" },
+          "Create load balancer with inbound nat pool": { "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json" }
         },
         "x-ms-long-running-operation": true
       },
@@ -1356,6 +1357,15 @@
           "type": "integer",
           "format": "int32",
           "description": "The port used for internal connections on the endpoint. Acceptable values are between 1 and 65535."
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP."
+        },
+        "enableFloatingIP": {
+          "type": "boolean",
+          "description": "Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint."
         },
         "provisioningState": {
           "type": "string",
