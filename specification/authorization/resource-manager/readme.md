@@ -171,6 +171,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-01-01-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/authorization/mgmt/2018-01-01-preview/authorization
+```
 
 ## Java
 
