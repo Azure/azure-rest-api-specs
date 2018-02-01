@@ -217,11 +217,11 @@
         "tags": [
           "NotificationRecipientUser"
         ],
-        "operationId": "NotificationRecipientUser_Get",
+        "operationId": "NotificationRecipientUser_CheckEntityExists",
         "description": "Determine if the Notification Recipient User is subscribed to the notification.",
         "x-ms-examples": {
-          "ApiManagementGetNotificationRecipientUser": {
-            "$ref": "./examples/ApiManagementGetNotificationRecipientUser.json"
+          "ApiManagementHeadNotificationRecipientUser": {
+            "$ref": "./examples/ApiManagementHeadNotificationRecipientUser.json"
           }
         },
         "parameters": [
@@ -247,6 +247,9 @@
         "responses": {
           "204": {
             "description": "The User is subscribed to receive the notification."
+          },
+		  "404": {
+            "description": "The User is not subscribed to receive the notification."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -402,11 +405,11 @@
         "tags": [
           "NotificationRecipientEmail"
         ],
-        "operationId": "NotificationRecipientEmail_Get",
+        "operationId": "NotificationRecipientEmail_CheckEntityExists",
         "description": "Determine if Notification Recipient Email subscribed to the notification.",
         "x-ms-examples": {
-          "ApiManagementGetNotificationRecipientEmail": {
-            "$ref": "./examples/ApiManagementGetNotificationRecipientEmail.json"
+          "ApiManagementHeadNotificationRecipientEmail": {
+            "$ref": "./examples/ApiManagementHeadNotificationRecipientEmail.json"
           }
         },
         "parameters": [
@@ -432,6 +435,9 @@
         "responses": {
           "204": {
             "description": "The Users is subscribed to receive the notification."
+          },
+		  "404": {
+            "description": "The Users is not subscribed to receive the notification."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
