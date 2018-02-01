@@ -147,6 +147,9 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
+            "$ref": "#/parameters/ExpandParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -1116,7 +1119,8 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability":["read", "create"]
         },
         "tags": {
           "type": "object",
@@ -1139,21 +1143,8 @@
     "ResourceProperties": {
       "properties": {
         "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Provisioning state of the resource.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource."
         },
         "creationTime": {
           "readOnly": true,
@@ -1163,6 +1154,23 @@
         }
       },
       "description": "Properties that are common to all tracked resources."
+    },
+    "ProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false
+      }
     },
     "Sku": {
       "type": "object",
@@ -1197,7 +1205,8 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The location of the resource."
+          "description": "The location of the resource.",
+          "x-ms-mutability":["read", "create"]
         },
         "tags": {
           "type": "object",
@@ -1215,7 +1224,8 @@
     "EnvironmentCreateOrUpdateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku",
+          "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1270,7 +1280,8 @@
     "EnvironmentResource": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku",
+          "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1318,6 +1329,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The fully qualified domain name used to access the environment data, e.g. to query the environment's events or upload reference data for the environment."
+        },
+        "status": {
+          "$ref": "#/definitions/EnvironmentStatus",
+          "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service." 
         }
       },
       "allOf": [
@@ -1350,6 +1365,58 @@
             "name": "StorageLimitExceededBehavior",
             "modelAsString": false
           }
+        }
+      }
+    },
+    "EnvironmentStatus": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service.",
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/IngressEnvironmentStatus",
+          "description": "An object that represents the status of ingress on an environment."
+        }
+      }
+    },
+    "IngressEnvironmentStatus": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that represents the status of ingress on an environment.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "This string represents the state of ingress operations on an environment. It can be \"Disabled\", \"Ready\", \"Running\", \"Paused\" or \"Unknown\"",
+          "enum": [ 
+            "Disabled", 
+            "Ready", 
+            "Running", 
+            "Paused", 
+            "Unknown" 
+          ],
+          "x-ms-enum": {
+            "name": "IngressState",
+            "modelAsString": false
+          }
+        },
+        "stateDetails": {
+          "$ref": "#/definitions/EnvironmentStateDetails",
+          "description": "An object that contains the details about an environment's state."
+        }
+      }
+    },
+    "EnvironmentStateDetails": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that contains the details about an environment's state.",
+      "properties":{
+        "code": {
+          "type": "string",
+          "description": "Contains the code that represents the reason of an environment being in a particular state. Can be used to programatically handle specific cases."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message that describes the state in detail."
         }
       }
     },
@@ -1706,7 +1773,8 @@
           "description": "The event property that will be used as the event source's timestamp. If a value isn't specified for timestampPropertyName, or if null or empty-string is specified, the event creation time will be used."
         },
         "localTimestamp": {
-          "$ref": "#/definitions/LocalTimestamp"
+          "$ref": "#/definitions/LocalTimestamp",
+          "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events."          
         }
       }
     },
@@ -1950,7 +2018,8 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Describes a particular API error with an error code and a message."
         }
       },
       "description": "Contains information about an API error.",
@@ -1975,7 +2044,8 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/CloudErrorBody",
+            "description": "Describes a particular API error with an error code and a message."
           },
           "description": "Contains nested errors that are related to this error."
         }
@@ -1997,6 +2067,14 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request."
+    },
+    "ExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Setting $expand=status will include the status of the internal services of the environment in the Time Series Insights service."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",

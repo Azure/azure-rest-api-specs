@@ -56,6 +56,9 @@
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
+                        "$ref": "#/parameters/CacheControlHeader"
+                    },
+                    {
                         "name": "$skiptoken",
                         "in": "query",
                         "required": false,
@@ -106,6 +109,9 @@
                     },
                     {
                         "$ref": "#/parameters/RecurseParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/CacheControlHeader"
                     }
                 ],
                 "responses": {
@@ -149,6 +155,9 @@
                     },
                     {
                         "$ref": "#/parameters/CreateGroupRequestParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/CacheControlHeader"
                     }
                 ],
                 "responses": {
@@ -186,7 +195,10 @@
                     },
                     {
                         "$ref": "#/parameters/CreateGroupRequestParameter"
-                    }
+                    },
+                    {
+                        "$ref": "#/parameters/CacheControlHeader"
+                    }					
                 ],
                 "responses": {
                     "200": {
@@ -220,7 +232,10 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    }
+                    },
+                    {
+                        "$ref": "#/parameters/CacheControlHeader"
+                    }					
                 ],
                 "responses": {
                     "200": {
@@ -259,11 +274,14 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    }
+                    },
+                    {
+                        "$ref": "#/parameters/CacheControlHeader"
+                    }					
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK"
+                    "204": {
+                        "description": "No Content"
                     },
                     "default": {
                         "description": "Error",
@@ -293,11 +311,14 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    }
+                    },
+                    {
+                        "$ref": "#/parameters/CacheControlHeader"
+                    }					
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK - subscription deleted successfully"
+                    "204": {
+                        "description": "No Content - subscription deleted successfully"
                     },
                     "default": {
                         "description": "Error",
@@ -459,6 +480,7 @@
                 },
                 "properties": {
                     "title": "Properties",
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ManagementGroupInfoProperties"
                 }
             }
@@ -469,7 +491,6 @@
             "properties": {
                 "tenantId": {
                     "type": "string",
-                    "format": "uuid",
                     "description": "The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000"
                 },
                 "displayName": {
@@ -499,6 +520,7 @@
                 },
                 "properties": {
                     "title": "Properties",
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ManagementGroupProperties"
                 }
             }
@@ -509,7 +531,6 @@
             "properties": {
                 "tenantId": {
                     "type": "string",
-                    "format": "uuid",
                     "description": "The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000"
                 },
                 "displayName": {
@@ -619,15 +640,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Management Group ID."
+            "description": "Management Group ID.",
+            "x-ms-parameter-location": "method"
         },
         "SubscriptionIdParameter": {
             "name": "subscriptionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "format": "uuid",
-            "description": "Subscription ID."
+            "description": "Subscription ID.",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",
@@ -660,9 +682,18 @@
             "in": "body",
             "required": true,
             "description": "Management group creation parameters.",
+            "x-ms-parameter-location": "method",
             "schema": {
                 "$ref": "#/definitions/CreateGroupRequest"
             }
+        },
+        "CacheControlHeader": {
+            "name": "Cache-Control",
+            "in": "header",
+            "default": "no-cache",
+            "description": "Indicates that the request shouldn't utilize any caches.",
+            "x-ms-parameter-location": "method",
+            "type": "string"
         }
     }
 }
