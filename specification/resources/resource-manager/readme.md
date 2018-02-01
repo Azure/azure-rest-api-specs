@@ -277,8 +277,24 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2017-04-preview
-  - tag: package-2017-04-preview
+  - tag: package-features-2015-12
+  - tag: package-locks-2016-09
+  - tag: package-locks-2015-01
+  - tag: package-policy-2017-06
+  - tag: package-policy-2016-12
+  - tag: package-policy-2016-04
+  - tag: package-policy-2015-10
+  - tag: package-resources-2017-05
+  - tag: package-resources-2016-09
+  - tag: package-resources-2016-07
+  - tag: package-resources-2016-02
+  - tag: package-resources-2015-11
+  - tag: package-subscriptions-2016-06
+  - tag: package-subscriptions-2015-11
+  - tag: package-links-2016-09
+  - tag: package-managedapplications-2016-09
+  - tag: package-management-2017-11
+  - tag: package-management-2017-08
 ```
 
 ### Tag: package-features-2015-12 and go
@@ -497,7 +513,6 @@ batch:
   - tag: package-resources-2016-02
   - tag: package-subscriptions-2016-06
   - tag: package-management-2017-11
-  - tag: package-management-2017-08
 ```
 
 ### Tag: package-features-2015-12 and python
@@ -643,7 +658,16 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2016_06_01
 ```
 
+### Tag: package-management-2017-11 and python
 
+These settings apply only when `--tag=package-management-2017-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-management-2017-11' && $(python)
+python:
+  namespace: azure.mgmt.resource.managementgroups
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/managementgroups
+```
 
 # Validation
 
