@@ -1696,7 +1696,7 @@
           "description": "The current amount of cost which is being tracked for a budget.",
           "$ref": "#/definitions/CurrentSpend",
           "readOnly": true
-        },       
+        },
         "notifications": {
           "type": "object",
           "description": "Dictionary of notifications associated with the budget. Budget can have up to five notifications.",
@@ -1762,7 +1762,7 @@
           "minItems": 0,
           "maxItems": 10
         }
-      } 
+      }
     },
     "CurrentSpend": {
       "description": "The current amount of cost which is being tracked for a budget.",
@@ -1966,15 +1966,15 @@
       },
       "x-ms-azure-resource": true
     },
-    "PriceSheetResult": {
-      "description": "price sheet result. It contains the pricesheet associated with billing period",	
+    "PriceSheetModel": {
+      "description": "price sheet result. It contains the pricesheet associated with billing period",
       "properties": {
-        "value": {
+        "pricesheets": {
           "description": "Price sheet",
-          "type": "object",
+          "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/PriceSheetModel"
+            "$ref": "#/definitions/PriceSheetProperties"
           }
         },
         "nextLink": {
@@ -1984,7 +1984,7 @@
         }
       }
     },
-	  "PriceSheetModel": {
+	"PriceSheetResult": {
       "description": "An pricesheet resource.",
       "type": "object",
       "allOf": [
@@ -1995,14 +1995,14 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PriceSheetProperties",
+          "$ref": "#/definitions/PriceSheetModel",
           "title": "Price sheet properties"
         }
       }
-    },	
+    },
     "PriceSheetProperties": {
       "description": "The properties of the price sheet.",
-      "properties": {  
+      "properties": {
         "billingPeriodId": {
           "description": "The id of the billing period resource that the usage belongs to.",
           "type": "string",
@@ -2026,7 +2026,7 @@
         "includedQuantity": {
           "description": "Included quality for an offer",
           "type": "number",
-          "format": "decimal",          
+          "format": "decimal",
           "readOnly": true
         },
         "partNumber": {
@@ -2037,13 +2037,13 @@
         "unitPrice": {
           "description": "Unit Price",
           "type": "number",
-          "format": "decimal",          
+          "format": "decimal",
           "readOnly": true
         },
         "currencyCode": {
           "description": "Currency Code",
           "type": "string",
-          "readOnly": true	
+          "readOnly": true
 		    }
 	    }
     }
