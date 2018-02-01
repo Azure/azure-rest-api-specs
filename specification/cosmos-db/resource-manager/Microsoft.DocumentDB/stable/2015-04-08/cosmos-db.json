@@ -1466,6 +1466,19 @@
         }
       }
     },
+    "DatabaseAccountPatchProperties": {
+      "description": "Properties to update Azure Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        }
+      }
+    },
     "DatabaseAccountCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB database accounts.",
       "type": "object",
@@ -1544,12 +1557,9 @@
         "tags": {
           "$ref": "#/definitions/Tags"
         },
-        "capabilities": {
-          "type": "array",
-          "description": "List of Cosmos DB capabilities for the account",
-          "items": {
-            "$ref": "#/definitions/Capability"
-          }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountPatchProperties"
         }
       }
     },
