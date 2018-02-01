@@ -40,6 +40,16 @@ input-file:
 ```
 
 
+### Tag: package-2017-12-01
+
+These settings apply only when `--tag=package-2017-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-12-01'
+input-file:
+- Microsoft.DBforMySQL/2017-12-01/mysql.json
+```
+
+
 ---
 # Code Generation
 
@@ -109,4 +119,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-04-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-04-30-preview/mysql
+```
+
+
+### Tag: package-2017-12-01 and go
+
+These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-12-01' && $(go)
+output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-12-01/postgresql
 ```
