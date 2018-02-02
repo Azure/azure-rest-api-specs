@@ -155,6 +155,9 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.RuleDefinitions
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
+    
+  - suppress: R2066
+    reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
 ```
 
 ### Tag: package-2015-05
