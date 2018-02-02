@@ -38,26 +38,28 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
-- Microsoft.ApiManagement/2017-03-01/apimanagement.json
-- Microsoft.ApiManagement/2017-03-01/apimapis.json
-- Microsoft.ApiManagement/2017-03-01/apimauthorizationservers.json
-- Microsoft.ApiManagement/2017-03-01/apimbackends.json
-- Microsoft.ApiManagement/2017-03-01/apimcertificates.json
-- Microsoft.ApiManagement/2017-03-01/apimdeployment.json
-- Microsoft.ApiManagement/2017-03-01/apimemailtemplate.json
-- Microsoft.ApiManagement/2017-03-01/apimgroups.json
-- Microsoft.ApiManagement/2017-03-01/apimidentityprovider.json
-- Microsoft.ApiManagement/2017-03-01/apimloggers.json
-- Microsoft.ApiManagement/2017-03-01/apimnetworkstatus.json
-- Microsoft.ApiManagement/2017-03-01/apimopenidconnectproviders.json
-- Microsoft.ApiManagement/2017-03-01/apimportalsettings.json
-- Microsoft.ApiManagement/2017-03-01/apimproducts.json
-- Microsoft.ApiManagement/2017-03-01/apimproperties.json
-- Microsoft.ApiManagement/2017-03-01/apimquotas.json
-- Microsoft.ApiManagement/2017-03-01/apimreports.json
-- Microsoft.ApiManagement/2017-03-01/apimsubscriptions.json
-- Microsoft.ApiManagement/2017-03-01/apimtenant.json
-- Microsoft.ApiManagement/2017-03-01/apimusers.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimanagement.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimapis.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimauthorizationservers.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimbackends.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimcertificates.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimdeployment.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimdiagnostics.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimemailtemplate.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimgroups.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimidentityprovider.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimloggers.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimnotifications.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimnetworkstatus.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimportalsettings.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimproducts.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimproperties.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimquotas.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimreports.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimsubscriptions.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimtenant.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimusers.json
 ```
 
 
@@ -67,24 +69,24 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-10'
 input-file:
-- Microsoft.ApiManagement/2016-10-10/apimanagement.json
-- Microsoft.ApiManagement/2016-10-10/apimapis.json
-- Microsoft.ApiManagement/2016-10-10/apimauthorizationservers.json
-- Microsoft.ApiManagement/2016-10-10/apimbackends.json
-- Microsoft.ApiManagement/2016-10-10/apimcertificates.json
-- Microsoft.ApiManagement/2016-10-10/apimdeployment.json
-- Microsoft.ApiManagement/2016-10-10/apimgroups.json
-- Microsoft.ApiManagement/2016-10-10/apimidentityprovider.json
-- Microsoft.ApiManagement/2016-10-10/apimloggers.json
-- Microsoft.ApiManagement/2016-10-10/apimnetworkstatus.json
-- Microsoft.ApiManagement/2016-10-10/apimopenidconnectproviders.json
-- Microsoft.ApiManagement/2016-10-10/apimproducts.json
-- Microsoft.ApiManagement/2016-10-10/apimproperties.json
-- Microsoft.ApiManagement/2016-10-10/apimquotas.json
-- Microsoft.ApiManagement/2016-10-10/apimreports.json
-- Microsoft.ApiManagement/2016-10-10/apimsubscriptions.json
-- Microsoft.ApiManagement/2016-10-10/apimtenant.json
-- Microsoft.ApiManagement/2016-10-10/apimusers.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimanagement.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimapis.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimauthorizationservers.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimbackends.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimcertificates.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimdeployment.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimgroups.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimidentityprovider.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimloggers.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimnetworkstatus.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimproducts.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimproperties.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimquotas.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimreports.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimsubscriptions.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimtenant.json
+- Microsoft.ApiManagement/stable/2016-10-10/apimusers.json
 ```
  
 ### Tag: package-2016-07
@@ -93,12 +95,23 @@ These settings apply only when `--tag=package-2016-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-07'
 input-file:
-- Microsoft.ApiManagement/2016-07-07/apimanagement.json
-- Microsoft.ApiManagement/2016-07-07/apimdeployment.json
+- Microsoft.ApiManagement/stable/2016-07-07/apimanagement.json
+- Microsoft.ApiManagement/stable/2016-07-07/apimdeployment.json
 ```
 
 ---
 # Code Generation
+
+
+## Swagger to SDK
+
+This section describes what SDK should be generated by the automatic system.
+This is not used by Autorest itself.
+
+``` yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-sdk-for-go
+```
 
 
 ## C# 
@@ -127,6 +140,15 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-03
+  - tag: package-2016-10
+  - tag: package-2016-07
+```
+
 ### Tag: package-2017-03 and go
 
 These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
@@ -152,4 +174,20 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2016-07' && $(go)
 output-folder: $(go-sdk-folder)/services/apimanagement/mgmt/2016-07-07/apimanagement
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.apimanagement
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-apimanagement
 ```

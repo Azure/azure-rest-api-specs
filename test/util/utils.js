@@ -30,7 +30,7 @@ exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.json'
 exports.swaggers = glob.sync(exports.globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] });
 exports.exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
 exports.examples = glob.sync(exports.exampleGlobPath);
-exports.readmes =  glob.sync(path.join(__dirname, '../', '../', '/specification/**/readme.md'));
+exports.readmes = glob.sync(path.join(__dirname, '../', '../', '/specification/**/readme.md'));
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
 // because the buffer-to-string conversion in `fs.readFile()`
@@ -79,18 +79,17 @@ exports.getTargetBranch = function getTargetBranch() {
 exports.checkoutTargetBranch = function checkoutTargetBranch() {
   let targetBranch = exports.getTargetBranch();
   let cmds = [`git remote -vv`, `git branch --all`,
-  `git remote set-branches origin --add ${targetBranch}`,
-  `git fetch origin ${targetBranch}`,
-  `git diff`,
-  `git stash`,
-  `git checkout ${targetBranch}`,
-  `git log -3`];
+    `git remote set-branches origin --add ${targetBranch}`,
+    `git fetch origin ${targetBranch}`,
+    `git diff`,
+    `git stash`,
+    `git checkout ${targetBranch}`,
+    `git log -3`];
 
   console.log(`Changing the branch to ${targetBranch}...`);
-  for(let cmd of cmds)
-  {
+  for (let cmd of cmds) {
     console.log(cmd);
-    execSync(cmd,  { encoding: 'utf8', stdio: 'inherit' });
+    execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
   }
 }
 
@@ -135,13 +134,46 @@ exports.getPullRequestNumber = function getPullRequestNumber() {
  * Gets the Repo name. We are using the environment
  * variable provided by travis-ci. It is called TRAVIS_REPO_SLUG. More info can be found here:
  * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
- * @returns {string} PR number or 'undefined'.
+ * @returns {string} repo name or 'undefined'.
  */
 exports.getRepoName = function getRepoName() {
   let result = process.env['TRAVIS_REPO_SLUG'];
-  console.log(`@@@@@ process.env['TRAVIS_REPO_SLUG'] - ${process.env['TRAVIS_REPO_SLUG']}`);
+  console.log(`@@@@@ process.env['TRAVIS_REPO_SLUG'] - ${result}`);
 
   return result;
+};
+
+/**
+ * Gets the source repo name for PR's. We are using the environment
+ * variable provided by travis-ci. It is called TRAVIS_PULL_REQUEST_SLUG. More info can be found here:
+ * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
+ * @returns {string} repo name or 'undefined'.
+ */
+exports.getSourceRepoName = function getSourceRepoName() {
+  let result = process.env['TRAVIS_PULL_REQUEST_SLUG'];
+  console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST_SLUG'] - ${result}`);
+
+  return result;
+};
+
+// Retrieves Git Repository Url
+/**
+ * Gets the repo URL
+ * @returns {string} repo URL or 'undefined'
+ */
+exports.getRepoUrl = function getRepoUrl() {
+  let repoName = exports.getRepoName();
+  return `https://github.com/${repoName}`;
+};
+
+// Retrieves the source Git Repository Url
+/**
+ * Gets the repo URL from where the PR originated
+ * @returns {string} repo URL or 'undefined'
+ */
+exports.getSourceRepoUrl = function getSourceRepoUrl() {
+  let repoName = exports.getSourceRepoName();
+  return `https://github.com/${repoName}`;
 };
 
 exports.getTimeStamp = function getTimeStamp() {
@@ -238,13 +270,13 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
       });
       console.log(`>>>> Number of swaggers found in this PR: ${swaggerFilesInPR.length}`);
 
-      var deletedFiles = swaggerFilesInPR.filter(function(swaggerFile){
+      var deletedFiles = swaggerFilesInPR.filter(function (swaggerFile) {
         return !fs.existsSync(swaggerFile);
       });
       console.log('>>>>> Files deleted in this PR are as follows:')
       console.log(deletedFiles);
       // Remove files that have been deleted in the PR
-      swaggerFilesInPR = swaggerFilesInPR.filter(function(x) { return deletedFiles.indexOf(x) < 0 });
+      swaggerFilesInPR = swaggerFilesInPR.filter(function (x) { return deletedFiles.indexOf(x) < 0 });
 
       result = swaggerFilesInPR;
     } catch (err) {
