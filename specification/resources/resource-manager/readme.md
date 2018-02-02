@@ -57,7 +57,7 @@ tag: package-managedapplications-2016-09
 ```
 
 ``` yaml $(package-management)
-tag: package-management-2017-11
+tag: package-management-2018-01
 ```
 
 ### Tag: package-features-2015-12
@@ -205,6 +205,14 @@ These settings apply only when `--tag=package-managedapplications-2016-09` is sp
 ``` yaml $(tag) == 'package-managedapplications-2016-09'
 input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
+```
+
+### Tag: package-management-2018-01
+These settings apply only when `--tag=package-management-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-management-2018-11'
+input-file:
+- Microsoft.Management/preview/2018-01-01-preview/management.json
 ```
 
 ### Tag: package-management-2017-11
