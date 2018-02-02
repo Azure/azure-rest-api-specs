@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2017-09
 ```
 
+### Tag: package-2018-03-preview
+
+These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-03-preview'
+input-file:
+- Microsoft.Network/preview/2018-03-01-preview/dns.json
+```
+
 ### Tag: package-2017-09
 
 These settings apply only when `--tag=package-2017-09` is specified on the command line.
