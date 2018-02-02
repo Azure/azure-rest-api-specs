@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10-01-preview
+tag: package-2018-01-01-preview
 ```
 
 ## Suppression
@@ -58,6 +58,15 @@ input-file:
 - Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
 ```
 
+### Tag: package-2018-01-01-preview
+
+These settings apply only when `--tag=package-2018-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+```
 
 ---
 # Code Generation
@@ -134,6 +143,7 @@ go:
 batch:
   - tag: package-2015-07
   - tag: package-2017-10-01-preview
+  - tag: package-2018-01-01-preview
 ```
 
 ### Tag: package-2015-07 and go
@@ -154,6 +164,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/authorization/mgmt/2017-10-01-preview/authorization
 ```
 
+### Tag: package-2018-01-01-preview and go
+
+These settings apply only when `--tag=package-2018-01-01-preview --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/authorization/mgmt/2018-01-01-preview/authorization
+```
 
 ## Java
 
