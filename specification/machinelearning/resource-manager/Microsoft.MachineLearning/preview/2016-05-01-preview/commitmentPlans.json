@@ -16,6 +16,31 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/skus": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "operationId": "Skus_List",
+        "description": "Lists the available commitment plan SKUs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuListResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations/{commitmentAssociationName}": {
       "get": {
         "tags": [
@@ -387,6 +412,141 @@
     }
   },
   "definitions": {
+    "SkuListResult": {
+      "type": "object",
+      "description": "The list of commitment plan SKUs.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogSku"
+          },
+          
+        }
+      }
+    },
+    "CatalogSku": {
+      "type": "object",
+      "description": "Details of a commitment plan SKU.",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "SKU name",
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "SKU tier",
+        },
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Regions where the SKU is available."
+        },
+        "capacity": {
+          "readOnly": true,
+          "description": "SKU scaling information",
+          "$ref": "#/definitions/SkuCapacity"
+        },
+        "capabilities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "description": "The capability information for the specified SKU."
+        },
+        "costs": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCost"
+          },
+          "description": "The cost information for the specified SKU."
+        }
+      }
+    },
+    "SkuCapacity": {
+      "type": "object",
+      "description": "Describes scaling information of a SKU.",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The maximum capacity that can be set."
+        },
+        "default": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The default capacity."
+        },
+        "scaleType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The scale type applicable to the sku.",
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "SkuCapacityScaleType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SkuCost": {
+      "type": "object",
+      "description": "Describes metadata for SKU cost info.",
+      "properties": {
+        "meterID": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The meter used for this part of a SKU's cost."
+        },
+        "quantity": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The multiplier for the meter ID."
+        },
+        "extendedUnit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall duration represented by the quantity."
+        }
+      }
+    },
+    "SkuCapability": {
+      "type": "object",
+      "description": "Describes The SKU capabilites object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The capability name."
+        },
+        "value": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The capability value."
+        }
+      }
+    },
     "Tags": {
       "type": "object",
       "description": "Resource tags",
