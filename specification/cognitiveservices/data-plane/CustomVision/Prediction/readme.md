@@ -22,6 +22,12 @@ input-file: v1.1/Prediction.json
 
 # Code Generation
 
+## Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Live service and portal doesn't use came case properties
+```
 
 ## Swagger to SDK
 
