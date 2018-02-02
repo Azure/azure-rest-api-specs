@@ -39,7 +39,6 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 ``` yaml $(tag) == 'package-2015-11-preview'
 input-file:
 - Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
-- Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
 ```
  
 ### Tag: package-2015-03
@@ -147,4 +146,29 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2015-11-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/operationalinsights/mgmt/2015-11-01-preview/operationalinsights
+```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.operationalinsights
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-operationalinsights
+```
+
+
+## Suppression
+
+``` yaml
+directive:
+  - from: OperationalInsights.json
+    suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
+    reason: properties etag defined as eTag in model
 ```
