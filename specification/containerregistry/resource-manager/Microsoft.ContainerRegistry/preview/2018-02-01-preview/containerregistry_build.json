@@ -25,7 +25,9 @@
         "operationId": "BuildDefinitions_List",
         "consumes": [],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -36,21 +38,21 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildDefinitionListResult"
             }
@@ -76,7 +78,9 @@
         "operationId": "BuildDefinitions_ListBuilds",
         "consumes": [],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -87,24 +91,24 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildListResult"
             }
@@ -130,28 +134,30 @@
         "operationId": "BuildDefinitions_Get",
         "consumes": [],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
             }
@@ -173,10 +179,15 @@
         "summary": "Creates a build definition for a container registry with the specified parameters.",
         "operationId": "BuildDefinitions_Create",
         "consumes": [
-          "application/json"
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
         ],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -189,30 +200,30 @@
             }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
             }
           },
           "201": {
-            "description": "Success",
+            "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
             }
@@ -235,27 +246,27 @@
         "produces": [],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "Success"
+            "description": "The request was successful; the operation will complete asynchronously."
           },
           "204": {
             "description": "Success"
@@ -275,10 +286,15 @@
         "summary": "Updates a build definition with the specified parameters.",
         "operationId": "BuildDefinitions_Update",
         "consumes": [
-          "application/json"
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
         ],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -291,30 +307,30 @@
             }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
             }
           },
           "201": {
-            "description": "Success",
+            "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
             }
@@ -336,38 +352,40 @@
         "tags": [
           "BuildDefinitions"
         ],
-        "summary": "Creates a new build against the given build definition and add it to the build queue.",
+        "summary": "Creates a new build against the given build definition and adds it to the build queue.",
         "operationId": "BuildDefinitions_QueueBuild",
         "consumes": [],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Build"
             }
           },
           "202": {
-            "description": "Success"
+            "description": "The request was successful; the operation will complete asynchronously."
           },
           "404": {
             "description": "Not Found"
@@ -389,10 +407,15 @@
         "summary": "Adds a build trigger to a build definition.",
         "operationId": "BuildDefinitions_AddTrigger",
         "consumes": [
-          "application/json"
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
         ],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -405,30 +428,30 @@
             }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildTrigger"
             }
           },
           "202": {
-            "description": "Success"
+            "description": "The request was successful; the operation will complete asynchronously."
           },
           "404": {
             "description": "Not Found"
@@ -451,7 +474,9 @@
         "operationId": "Builds_List",
         "consumes": [],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -462,21 +487,21 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildListResult"
             }
@@ -498,36 +523,38 @@
         "tags": [
           "Builds"
         ],
-        "summary": "Get the detailed information for a given build.",
+        "summary": "Gets the detailed information for a given build.",
         "operationId": "Builds_Get",
         "consumes": [],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
             "name": "buildId",
             "in": "path",
-            "description": "The build id.",
+            "description": "The build ID.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Build"
             }
@@ -549,16 +576,21 @@
         "summary": "Patch the build properties.",
         "operationId": "Builds_Update",
         "consumes": [
-          "application/json"
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
         ],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
             "name": "buildId",
             "in": "path",
-            "description": "The build id.",
+            "description": "The build ID.",
             "required": true,
             "type": "string"
           },
@@ -572,27 +604,27 @@
             }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Build"
             }
           },
           "202": {
-            "description": "Success"
+            "description": "The request was successful; the operation will complete asynchronously."
           },
           "404": {
             "description": "Not Found"
@@ -614,16 +646,21 @@
         "summary": "Get the links to the various build logs.",
         "operationId": "Builds_GetLogLink",
         "consumes": [
-          "application/json"
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
         ],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
             "name": "buildId",
             "in": "path",
-            "description": "The build id.",
+            "description": "The build ID.",
             "required": true,
             "type": "string"
           },
@@ -637,21 +674,21 @@
             }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildLogResult"
             }
@@ -675,10 +712,15 @@
         "summary": "Creates a new build based on the request parameters and add it to the build queue.",
         "operationId": "Builds_Queue",
         "consumes": [
-          "application/json"
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
         ],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -691,27 +733,27 @@
             }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Build"
             }
           },
           "202": {
-            "description": "Success"
+            "description": "The request was successful; the operation will complete asynchronously."
           }
         },
         "x-ms-long-running-operation": true,
@@ -735,29 +777,29 @@
           {
             "name": "buildId",
             "in": "path",
-            "description": "The build identifier.",
+            "description": "The build ID.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "Success"
+            "description": "The request was successful; the operation will complete asynchronously."
           },
           "404": {
             "description": "Not Found"
@@ -780,7 +822,9 @@
         "operationId": "BuildSteps_Get",
         "consumes": [],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -791,24 +835,24 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildStep"
             }
@@ -830,10 +874,15 @@
         "summary": "Updates a build step in a build definition.",
         "operationId": "BuildSteps_Update",
         "consumes": [
-          "application/json"
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
         ],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -853,24 +902,24 @@
             }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildStep"
             }
@@ -895,28 +944,30 @@
         "operationId": "BuildSteps_List",
         "consumes": [],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildStepList"
             }
@@ -941,28 +992,30 @@
         "operationId": "BuildTriggers_List",
         "consumes": [],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildTriggerList"
             }
@@ -996,27 +1049,27 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref ": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref ": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref ": "#/parameters/registryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref ": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref ": "#/parameters/buildDefinitionNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "Success"
+            "description": "The request was successful; the operation will complete asynchronously."
           },
           "204": {
             "description": "Success"
@@ -1050,7 +1103,6 @@
       }
     },
     "BuildDefinition": {
-      "description": "The Build defintion that has the resource and all build items. The build definition will have all information to schedule a build against it.",
       "type": "object",
       "allOf": [
         {
@@ -1060,17 +1112,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BuildDefinitionProperties",
-          "description": "The properties of a build definition.",
           "x-ms-client-flatten": true
         }
       }
     },
     "BuildDefinitionProperties": {
-      "description": "The properties of a build definition.",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "The provisioning state of the build definition.",
           "enum": [
             "Creating",
             "Updating",
@@ -1088,16 +1137,13 @@
         },
         "creationDate": {
           "format": "date-time",
-          "description": "The creation date of build definition.",
           "type": "string",
           "readOnly": true
         },
         "alias": {
-          "description": "The alternative updatable name for a build definition.",
           "type": "string"
         },
         "status": {
-          "description": "The current status of build definition.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1109,23 +1155,19 @@
           }
         },
         "sourceRepository": {
-          "$ref": "#/definitions/SourceRepositoryProperties",
-          "description": "The properties that describes the source(code) for the build definition."
+          "$ref": "#/definitions/SourceRepositoryProperties"
         },
         "timeout": {
           "format": "int32",
-          "description": "Build Time out in seconds.",
           "type": "integer"
         },
         "isBaseImageTriggersEnabled": {
-          "description": "The value of this property indicates whether auto triggers of the build items trigger a build against this definition.",
           "default": false,
           "type": "boolean"
         }
       }
     },
     "SourceRepositoryProperties": {
-      "description": "The properties of the source code repository.",
       "required": [
         "sourceControlType",
         "repositoryUrl"
@@ -1133,7 +1175,6 @@
       "type": "object",
       "properties": {
         "sourceControlType": {
-          "description": "The type of source control service.",
           "enum": [
             "Github",
             "VisualStudioTeamService"
@@ -1145,22 +1186,18 @@
           }
         },
         "repositoryUrl": {
-          "description": "The full URL to the source code respository",
           "type": "string"
         },
         "isCommitTriggerEnabled": {
-          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
           "default": false,
           "type": "boolean"
         }
       }
     },
     "BuildDefinitionFilter": {
-      "description": "The filter that can be used for listing build definitions.",
       "type": "object",
       "properties": {
         "alias": {
-          "description": "The alternative name for build definition.",
           "type": "string"
         }
       }
@@ -1183,15 +1220,12 @@
       }
     },
     "BuildBase": {
-      "description": "The shallow information about build.",
       "type": "object",
       "properties": {
         "buildId": {
-          "description": "The unique identifier for the build.",
           "type": "string"
         },
         "status": {
-          "description": "The current status of the build.",
           "enum": [
             "Queued",
             "Started",
@@ -1208,21 +1242,17 @@
         },
         "lastUpdatedTime": {
           "format": "date-time",
-          "description": "The last updated time for the build.",
           "type": "string"
         }
       }
     },
     "BuildFilter": {
-      "description": "Properties that are enabled for Odata querying.",
       "type": "object",
       "properties": {
         "buildId": {
-          "description": "The unique identifier for the build.",
           "type": "string"
         },
         "buildType": {
-          "description": "The type of build.",
           "enum": [
             "AutoBuild",
             "QuickBuild"
@@ -1234,7 +1264,6 @@
           }
         },
         "status": {
-          "description": "The current status of the build.",
           "enum": [
             "Queued",
             "Started",
@@ -1251,42 +1280,34 @@
         },
         "createTime": {
           "format": "date-time",
-          "description": "The create time for a build.",
           "type": "string"
         },
         "finishTime": {
           "format": "date-time",
-          "description": "The time the build finished.",
           "type": "string"
         },
         "outputImageNames": {
-          "description": "The list of all images that were generated from the build.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "isArchiveEnabled": {
-          "description": "The value that indicates whether archiving is enabled or not.",
           "type": "boolean"
         }
       }
     },
     "BuildDefinitionCreateParameters": {
-      "description": "The parameters for creating a build definition.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BuildDefinitionPropertiesCreateParameters",
-          "description": "The properties for creating a build definition.",
           "x-ms-client-flatten": true
         },
         "location": {
-          "description": "The region of the resource.",
           "type": "string"
         },
         "tags": {
-          "description": "The ARM resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -1295,36 +1316,30 @@
       }
     },
     "BuildDefinitionPropertiesCreateParameters": {
-      "description": "The properties for creating a build definition.",
       "required": [
         "steps"
       ],
       "type": "object",
       "properties": {
         "sourceRepository": {
-          "$ref": "#/definitions/SourceRepositoryCreateParameters",
-          "description": "The properties that describes the source(code) for the build definition."
+          "$ref": "#/definitions/SourceRepositoryCreateParameters"
         },
         "steps": {
-          "description": "The list of build steps in a build definition.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BuildStepCreateParameters"
           }
         },
         "triggers": {
-          "description": "A collection of custom triggers for this build definition.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BuildTriggerParameters"
           }
         },
         "alias": {
-          "description": "The alternative updatable name for a build definition.",
           "type": "string"
         },
         "status": {
-          "description": "The current status of build definition.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1337,18 +1352,15 @@
         },
         "timeout": {
           "format": "int32",
-          "description": "Build Time out in seconds.",
           "type": "integer"
         },
         "isBaseImageTriggersEnabled": {
-          "description": "The value of this property indicates whether auto triggers of the build items trigger a build against this definition.",
           "default": false,
           "type": "boolean"
         }
       }
     },
     "SourceRepositoryCreateParameters": {
-      "description": "The properties for creating the source code repository configuration.",
       "required": [
         "sourceControlType",
         "repositoryUrl"
@@ -1356,7 +1368,6 @@
       "type": "object",
       "properties": {
         "sourceControlType": {
-          "description": "The type of source control service.",
           "enum": [
             "Github",
             "VisualStudioTeamService"
@@ -1368,29 +1379,24 @@
           }
         },
         "repositoryUrl": {
-          "description": "The type of source control service.",
           "type": "string"
         },
         "sourceControlAuthProperties": {
-          "$ref": "#/definitions/SourceControlAuthInfo",
-          "description": "The authorization properties for accessing the source code repository."
+          "$ref": "#/definitions/SourceControlAuthInfo"
         },
         "isCommitTriggerEnabled": {
-          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
           "default": false,
           "type": "boolean"
         }
       }
     },
     "BuildStepCreateParameters": {
-      "description": "The base properties for creating any build step.",
       "required": [
         "name"
       ],
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the step.",
           "enum": [
             "Docker"
           ],
@@ -1402,18 +1408,15 @@
           }
         },
         "name": {
-          "description": "The unique name of the step.",
           "type": "string"
         }
       },
       "discriminator": "type"
     },
     "BuildTriggerParameters": {
-      "description": "Properties for adding any build trigger.",
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the trigger.",
           "enum": [
             "ImageTrigger"
           ],
@@ -1428,14 +1431,12 @@
       "discriminator": "type"
     },
     "SourceControlAuthInfo": {
-      "description": "The authorization properties for accessing the source code repository.",
       "required": [
         "token"
       ],
       "type": "object",
       "properties": {
         "tokenType": {
-          "description": "The type of Auth token.",
           "enum": [
             "PAT",
             "OAuth"
@@ -1447,35 +1448,28 @@
           }
         },
         "token": {
-          "description": "The Access token used to access the source control provider.",
           "type": "string"
         },
         "refreshToken": {
-          "description": "The refresh token used to refresh the access token.",
           "type": "string"
         },
         "scope": {
-          "description": "The scope of the access token.",
           "type": "string"
         },
         "expiresIn": {
           "format": "int32",
-          "description": "Time in seconds that the token remains valid",
           "type": "integer"
         }
       }
     },
     "BuildDefinitionUpdateParameters": {
-      "description": "The parameters for updating a build definition.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BuildDefinitionPropertiesUpdateParameters",
-          "description": "The properties for updating a build definition.",
           "x-ms-client-flatten": true
         },
         "tags": {
-          "description": "The ARM resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -1484,15 +1478,12 @@
       }
     },
     "BuildDefinitionPropertiesUpdateParameters": {
-      "description": "The properties for updating a build definition.",
       "type": "object",
       "properties": {
         "alias": {
-          "description": "The alternative updatable name for a build definition.",
           "type": "string"
         },
         "status": {
-          "description": "The current status of build definition.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1505,45 +1496,36 @@
         },
         "timeout": {
           "format": "int32",
-          "description": "Build Time out in seconds.",
           "type": "integer"
         },
         "isBaseImageTriggersEnabled": {
-          "description": "The value of this property indicates whether auto triggers of the build items trigger a build against this definition.",
           "default": false,
           "type": "boolean"
         },
         "sourceRepository": {
-          "$ref": "#/definitions/SourceRepositoryUpdateParameters",
-          "description": "The properties that describes the source(code) for the build definition."
+          "$ref": "#/definitions/SourceRepositoryUpdateParameters"
         }
       }
     },
     "SourceRepositoryUpdateParameters": {
-      "description": "The properties for updating the source code repository configuration.",
       "type": "object",
       "properties": {
         "sourceControlAuthProperties": {
-          "$ref": "#/definitions/SourceControlAuthInfo",
-          "description": "The authorization properties for accessing the source code repository."
+          "$ref": "#/definitions/SourceControlAuthInfo"
         },
         "isCommitTriggerEnabled": {
-          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
           "default": false,
           "type": "boolean"
         }
       }
     },
     "Build": {
-      "description": "The properties for a build.",
       "type": "object",
       "properties": {
         "buildId": {
-          "description": "The unique identifier for the build.",
           "type": "string"
         },
         "status": {
-          "description": "The current status of the build.",
           "enum": [
             "Queued",
             "Started",
@@ -1560,11 +1542,9 @@
         },
         "lastUpdatedTime": {
           "format": "date-time",
-          "description": "The last updated time for the build.",
           "type": "string"
         },
         "buildType": {
-          "description": "The type of build.",
           "enum": [
             "AutoBuild",
             "QuickBuild"
@@ -1577,46 +1557,37 @@
         },
         "createTime": {
           "format": "date-time",
-          "description": "The time the build was created.",
           "type": "string"
         },
         "startTime": {
           "format": "date-time",
-          "description": "The time the build started.",
           "type": "string"
         },
         "finishTime": {
           "format": "date-time",
-          "description": "The time the build finished.",
           "type": "string"
         },
         "outputImages": {
-          "description": "The list of all images that were generated from the build.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageDescriptor"
           }
         },
         "buildDefinition": {
-          "description": "All the properties of the build definition with which the build was started.",
           "type": "string"
         },
         "trigger": {
-          "description": "The trigger that caused the build.",
           "type": "string"
         },
         "isArchiveEnabled": {
-          "description": "The value that indicates whether archiving is enabled or not.",
           "type": "boolean"
         },
         "platform": {
-          "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "$ref": "#/definitions/PlatformProperties"
         }
       }
     },
     "ImageDescriptor": {
-      "description": "Properties for a registry image.",
       "required": [
         "imageName",
         "digest"
@@ -1624,28 +1595,23 @@
       "type": "object",
       "properties": {
         "imageName": {
-          "description": "Name of the repository or image.",
           "type": "string"
         },
         "tag": {
-          "description": "The tag name.",
           "type": "string"
         },
         "digest": {
-          "description": "The image digest.",
           "type": "string"
         }
       }
     },
     "PlatformProperties": {
-      "description": "The platform properties against which the build has to happen.",
       "required": [
         "osType"
       ],
       "type": "object",
       "properties": {
         "osType": {
-          "description": "The operating system type required for the build.",
           "enum": [
             "Windows",
             "Linux"
@@ -1658,17 +1624,14 @@
         },
         "cpu": {
           "format": "int32",
-          "description": "The CPU configuration in terms of number of cores required for the build.",
           "type": "integer"
         }
       }
     },
     "BuildTrigger": {
-      "description": "Base properties for any build trigger.",
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the trigger.",
           "enum": [
             "ImageTrigger"
           ],
@@ -1683,24 +1646,20 @@
       "discriminator": "type"
     },
     "BuildUpdateParameters": {
-      "description": "The set of build properties that can be updated.",
       "type": "object",
       "properties": {
         "isArchiveEnabled": {
-          "description": "The value that indicates whether archiving is enabled or not.",
           "type": "boolean"
         }
       }
     },
     "BuildLogParameters": {
-      "description": "The parameters for requesting build logs.",
       "required": [
         "logType"
       ],
       "type": "object",
       "properties": {
         "logType": {
-          "description": "The type of build log.",
           "enum": [
             "RawText"
           ],
@@ -1713,7 +1672,6 @@
       }
     },
     "BuildLogResult": {
-      "description": "The result of get build logs.",
       "required": [
         "logType",
         "logLink"
@@ -1721,7 +1679,6 @@
       "type": "object",
       "properties": {
         "logType": {
-          "description": "The type of build log.",
           "enum": [
             "RawText"
           ],
@@ -1732,13 +1689,11 @@
           }
         },
         "logLink": {
-          "description": "The link to the build log.",
           "type": "string"
         }
       }
     },
     "QueueBuildRequest": {
-      "description": "The queue build request parameters.",
       "required": [
         "imageName",
         "sourceLocation",
@@ -1747,42 +1702,34 @@
       "type": "object",
       "properties": {
         "imageName": {
-          "description": "The fully qualified image name with the tag that the build tags it.",
           "type": "string"
         },
         "sourceLocation": {
-          "description": "The URL to the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.",
           "type": "string"
         },
         "buildArguments": {
-          "description": "The collection of build arguments to be used.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BuildArgument"
           }
         },
         "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
           "default": false,
           "type": "boolean"
         },
         "timeout": {
           "format": "int32",
-          "description": "Build Time out in seconds.",
           "type": "integer"
         },
         "platform": {
-          "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "$ref": "#/definitions/PlatformProperties"
         },
         "buildParameters": {
-          "$ref": "#/definitions/QueueBuildParameters",
-          "description": "The build parameters depending on the type of the build."
+          "$ref": "#/definitions/QueueBuildParameters"
         }
       }
     },
     "BuildArgument": {
-      "description": "Properties of a build argument.",
       "required": [
         "type",
         "name",
@@ -1791,7 +1738,6 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the argument.",
           "enum": [
             "DockerBuildArgument"
           ],
@@ -1802,25 +1748,20 @@
           }
         },
         "name": {
-          "description": "The name of the argument.",
           "type": "string"
         },
         "value": {
-          "description": "The value of the argument.",
           "type": "string"
         },
         "isSecret": {
-          "description": "Flag to indicate whether the argument represents a secret and want to be removed from build logs.",
           "type": "boolean"
         }
       }
     },
     "QueueBuildParameters": {
-      "description": "The properties of a quick build.",
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the build.",
           "type": "string",
           "readOnly": true
         }
@@ -1828,14 +1769,12 @@
       "discriminator": "type"
     },
     "BuildStep": {
-      "description": "Base properties for any  build step.",
       "required": [
         "name"
       ],
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the step.",
           "enum": [
             "Docker"
           ],
@@ -1847,18 +1786,15 @@
           }
         },
         "name": {
-          "description": "The unique name of the step.",
           "type": "string"
         }
       },
       "discriminator": "type"
     },
     "BuildStepUpdateParameters": {
-      "description": "The base properties for updating any build step.",
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the step.",
           "type": "string",
           "readOnly": true
         }
@@ -1939,7 +1875,6 @@
       "x-ms-azure-resource": true
     },
     "DockerBuildParameters": {
-      "description": "Build parameters for a docker build.",
       "required": [
         "type",
         "dockerFilePath"
@@ -1952,18 +1887,15 @@
       ],
       "properties": {
         "dockerFilePath": {
-          "description": "The Docker file path relative to the source control root.",
           "type": "string"
         },
         "contextPath": {
-          "description": "The relative context path for a docker build in the source.",
           "type": "string"
         }
       },
       "x-ms-discriminator-value": "Docker"
     },
     "DockerBuildStep": {
-      "description": "The Docker build step.",
       "required": [
         "branch",
         "imageName",
@@ -1977,35 +1909,28 @@
       ],
       "properties": {
         "branch": {
-          "description": "The repository branch name.",
           "type": "string"
         },
         "imageName": {
-          "description": "The full qualified name of the image including the repository and tag.",
           "type": "string"
         },
         "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
           "default": false,
           "type": "boolean"
         },
         "dockerFilePath": {
-          "description": "The Docker file path relative to the source control root.",
           "type": "string"
         },
         "contextPath": {
-          "description": "The relative context path for a docker build in the source.",
           "type": "string"
         },
         "buildArguments": {
-          "description": "The custom arguments for building this build step.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BuildArgument"
           }
         },
         "baseImageDependencies": {
-          "description": "The collection of base image dependencies that got generated by the latest build against this build item.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageDescriptor"
@@ -2016,7 +1941,6 @@
       "x-ms-discriminator-value": "Docker"
     },
     "DockerBuildStepUpdateParameters": {
-      "description": "The properties for updating a docker build step.",
       "required": [
         "type"
       ],
@@ -2028,24 +1952,19 @@
       ],
       "properties": {
         "imageName": {
-          "description": "The full qualified name of the image including the repository and tag.",
           "type": "string"
         },
         "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
           "default": false,
           "type": "boolean"
         },
         "dockerFilePath": {
-          "description": "The Docker file path relative to the source control root.",
           "type": "string"
         },
         "contextPath": {
-          "description": "The relative context path for a docker build in the source.",
           "type": "string"
         },
         "buildArguments": {
-          "description": "The custom arguments for building this build step.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BuildArgument"
@@ -2055,7 +1974,6 @@
       "x-ms-discriminator-value": "Docker"
     },
     "DockerBuildStepCreateParameters": {
-      "description": "The properties for creating Docker build step.",
       "required": [
         "type",
         "branch",
@@ -2070,28 +1988,22 @@
       ],
       "properties": {
         "branch": {
-          "description": "The repository branch name.",
           "type": "string"
         },
         "imageName": {
-          "description": "The full qualified name of the image including the repository and tag.",
           "type": "string"
         },
         "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
           "default": false,
           "type": "boolean"
         },
         "dockerFilePath": {
-          "description": "The Docker file path relative to the source control root.",
           "type": "string"
         },
         "contextPath": {
-          "description": "The relative context path for a docker build in the source.",
           "type": "string"
         },
         "buildArguments": {
-          "description": "The custom arguments for building this build step.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BuildArgument"
@@ -2101,7 +2013,6 @@
       "x-ms-discriminator-value": "Docker"
     },
     "ImageTrigger": {
-      "description": "A build trigger based on Image updates.",
       "required": [
         "id",
         "imageName"
@@ -2114,22 +2025,18 @@
       ],
       "properties": {
         "id": {
-          "description": "The unique identifier of a trigger.",
           "type": "string"
         },
         "imageName": {
-          "description": "Name of the repository or image.",
           "type": "string"
         },
         "tag": {
-          "description": "The tag name.",
           "type": "string"
         }
       },
       "x-ms-discriminator-value": "ImageTrigger"
     },
     "ImageTriggerParameters": {
-      "description": "The parameters that identify a image trigger.",
       "required": [
         "type",
         "imageName"
@@ -2142,11 +2049,9 @@
       ],
       "properties": {
         "imageName": {
-          "description": "Name of the repository or image.",
           "type": "string"
         },
         "tag": {
-          "description": "The tag name.",
           "type": "string"
         }
       },
