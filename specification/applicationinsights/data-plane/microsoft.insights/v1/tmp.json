@@ -105,11 +105,6 @@
         "operationId": "GetMetrics",
         "summary": "Retrieve metric data",
         "description": "Gets metric values for multiple metrics",
-        "x-ms-examples": {
-          "postMetric": {
-            "$ref": "examples/metric-post.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/appId"
@@ -139,11 +134,6 @@
         "operationId": "GetMetricsMetadata",
         "summary": "Retrieve metric metatadata",
         "description": "Gets metadata describing the available metrics",
-        "x-ms-examples": {
-          "metricMetadata": {
-            "$ref": "examples/metrics-get-metadata.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/appId"
@@ -170,11 +160,6 @@
         "operationId": "GetEvents",
         "summary": "Execute OData query",
         "description": "Executes an OData query for events",
-        "x-ms-examples": {
-          "eventByType": {
-            "$ref": "examples/events-get-by-type.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/appId"
@@ -239,11 +224,6 @@
         "operationId": "GetEvent",
         "summary": "Get an event",
         "description": "Gets the data for a single event",
-        "x-ms-examples": {
-          "eventById": {
-            "$ref": "examples/events-get-by-id.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/appId"
@@ -285,11 +265,6 @@
         "operationId": "GetEventsMetadataOData",
         "summary": "Get OData metadata",
         "description": "Gets OData EDMX metadata describing the event data model",
-        "x-ms-examples": {
-          "eventMetadata": {
-            "$ref": "examples/events-get-metadata.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/appId"
@@ -319,11 +294,6 @@
         "operationId": "GetQuery",
         "summary": "Execute an Analytics query",
         "description": "Executes an Analytics query for data",
-        "x-ms-examples": {
-          "queryGet": {
-            "$ref": "examples/query-get.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/appId"
@@ -354,11 +324,6 @@
         "operationId": "Query",
         "summary": "Execute an Analytics query",
         "description": "Executes an Analytics query for data. [Here](/documentation/2-Using-the-API/Query) is an example for using POST with an Analytics query.",
-        "x-ms-examples": {
-          "queryPost": {
-            "$ref": "examples/query-post.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/appId"
@@ -391,11 +356,6 @@
         "operationId": "GetQuerySchema",
         "summary": "Get Analytics query metadata",
         "description": "Gets Analytics query schema describing the data model",
-        "x-ms-examples": {
-          "querySchema": {
-            "$ref": "examples/query-schema.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/appId"
@@ -405,7 +365,7 @@
           "200": {
             "description": "Successful responses",
             "schema": {
-              "$ref": "#/definitions/queryResults"
+              "type": "object"
             }
           },
           "default": {
@@ -598,7 +558,8 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "description": "ID of event.",
-      "type": "string"
+      "type": "string",
+      "format": "uuid"
     },
     "eventsTimespan": {
       "name": "timespan",
@@ -973,7 +934,8 @@
     },
     "eventId": {
       "description": "ID of event.",
-      "type": "string"
+      "type": "string",
+      "format": "uuid"
     },
     "eventsTimespan": {
       "description": "Optional. The timespan over which to retrieve events. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the Odata expression.",
@@ -1061,47 +1023,24 @@
       "properties": {
         "id": {
           "description": "The unique ID for this event.",
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "type": {
           "description": "The type of event.",
           "type": "string",
-          "x-ms-enum": {
-            "name": "EventType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "trace"
-              },
-              {
-                "value": "customEvent"
-              },
-              {
-                "value": "pageView"
-              },
-              {
-                "value": "browserTiming"
-              },
-              {
-                "value": "request"
-              },
-              {
-                "value": "dependency"
-              },
-              {
-                "value": "exception"
-              },
-              {
-                "value": "availabilityResult"
-              },
-              {
-                "value": "performanceCounter"
-              },
-              {
-                "value": "customMetric"
-              }
-            ]
-          }
+          "enum": [
+            "trace",
+            "customEvent",
+            "pageView",
+            "browserTiming",
+            "request",
+            "dependency",
+            "exception",
+            "availabilityResult",
+            "performanceCounter",
+            "customMetric"
+          ]
         },
         "count": {
           "description": "Count of the event",
