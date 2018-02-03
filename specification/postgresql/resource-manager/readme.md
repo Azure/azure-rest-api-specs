@@ -40,14 +40,14 @@ input-file:
 ```
 
 
-### Tag: package-2017-12-01 
+### Tag: package-2017-12-01-preview 
 
-These settings apply only when `--tag=package-2017-12-01` is specified on the command line. 
+These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line. 
 
 
-``` yaml $(tag) == 'package-2017-12-01' 
+``` yaml $(tag) == 'package-2017-12-01-preview' 
 input-file: 
-- Microsoft.DBforPostgreSQL/2017-12-01/postgresql.json 
+- Microsoft.DBforPostgreSQL/2017-12-01-preview/postgresql.json 
 ``` 
 
 
