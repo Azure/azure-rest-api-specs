@@ -29,6 +29,15 @@ openapi-type: default
 tag: package-2017-03
 ```
 
++## Suppression
+ ``` yaml
+ directive:
+   - suppress: R3016
+     reason: existing properties, which is properly camel cased in newer api-version
+     #where:     
+     #  - $.definitions.QuotaCounterContract.Value
+ 
+ ```
 
 ### Tag: package-2017-03
 
