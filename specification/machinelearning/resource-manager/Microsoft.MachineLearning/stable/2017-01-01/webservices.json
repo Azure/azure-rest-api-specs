@@ -16,46 +16,18 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/locations/{location}/operationsStatus/{operationId}": {
+    "/providers/Microsoft.MachineLearning/operations": {
       "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "WebServices_GetOperationStatus",
-        "description": "Get the status of an operation.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The region in which the operation was created."
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The operation Id."
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
+        "description": "Lists all the available REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [{
+          "$ref": "#/parameters/APIVersionParameter"
+        }],
         "responses": {
           "200": {
-            "description": "OK. The operation completed.",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/AsyncOperationStatus"
-            }
-          },
-          "202": {
-            "description": "Accepted. The operation is ongoing.",
-            "schema": {
-              "$ref": "#/definitions/AsyncOperationStatus"
+              "$ref": "#/definitions/OperationEntityListResult"
             }
           }
         }
@@ -436,9 +408,6 @@
     "Resource": {
       "description": "Azure resource.",
       "x-ms-azure-resource": true,
-      "required": [
-        "location"
-      ],
       "properties": {
         "id": {
           "description": "Specifies the resource ID.",
@@ -481,10 +450,7 @@
           "$ref": "#/definitions/WebServiceProperties",
           "description": "Contains the property payload that describes the web service."
         }
-      },
-      "required": [
-        "properties"
-      ]
+      }
     },
     "WebServiceProperties": {
       "type": "object",
@@ -1263,6 +1229,66 @@
             "$ref": "#/definitions/AsyncOperationErrorInfo"
           }
         }
+      }
+    },
+    "OperationEntityListResult": {
+      "description": "The list of REST API operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "An API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The API operation info."
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The API operation info.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "The service provider.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
     }
   }
