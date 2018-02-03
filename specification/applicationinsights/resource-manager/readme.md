@@ -173,14 +173,16 @@ These settings apply only when `--tag=package-2015-05` is specified on the comma
 ``` yaml $(tag) == 'package-2015-05'
 input-file:
 - microsoft.insights/stable/2015-05-01/aiOperations_API.json
-- microsoft.insights/stable/2015-05-01/components_API.json
-- microsoft.insights/stable/2015-05-01/webTests_API.json
+- microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
 - microsoft.insights/stable/2015-05-01/componentContinuousExport_API.json
 - microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json
 - microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
-- microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
+- microsoft.insights/stable/2015-05-01/components_API.json
 - microsoft.insights/stable/2015-05-01/componentAnnotations_API.json
 - microsoft.insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+- microsoft.insights/stable/2015-05-01/favorites_API.json
+- microsoft.insights/stable/2015-05-01/webTestLocations_API.json
+- microsoft.insights/stable/2015-05-01/webTests_API.json
 ```
 ---
 # Code Generation
