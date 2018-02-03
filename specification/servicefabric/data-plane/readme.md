@@ -26,7 +26,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.0'
+tag: '6.1'
 ```
 
 
@@ -59,6 +59,15 @@ input-file:
 - Microsoft.ServiceFabric/stable/6.0/servicefabric.json
 ```
 
+
+### Tag: 6.1
+
+These settings apply only when `--tag=6.1` is specified on the command line.
+
+``` yaml $(tag) == '6.1'
+input-file:
+- Microsoft.ServiceFabric/stable/6.1/servicefabric.json
+```
 
 ---
 # Code Generation
