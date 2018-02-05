@@ -59,6 +59,9 @@ input-file:
 - Microsoft.Web/stable/2016-08-01/WebApps.json
 - Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2016-09-01/AppServicePlans.json
+directive:
+  suppress: 
+  - R3019    # Refer to comments in https://github.com/Azure/azure-rest-api-specs/pull/2258. Suppressing this violation for Azure App Service.
 ```
  
 ### Tag: package-2015-08-preview
