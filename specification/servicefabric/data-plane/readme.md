@@ -72,6 +72,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -114,6 +116,15 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: "1.0.0"
+  - tag: "5.6"
+  - tag: "6.0"
+```
+
 ### Tag: 1.0.0 and go
 
 These settings apply only when `--tag=1.0.0 --go` is specified on the command line.
@@ -136,4 +147,20 @@ These settings apply only when `--tag=6.0 --go` is specified on the command line
 
 ``` yaml $(tag) == '6.0' && $(go)
 output-folder: $(go-sdk-folder)/services/servicefabric/6.0/servicefabric
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.servicefabric
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-servicefabric
 ```

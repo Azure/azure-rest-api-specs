@@ -212,6 +212,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -240,6 +242,31 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-12
+  - tag: package-compute-2017-03
+  - tag: package-container-service-2017-01
+  - tag: package-container-service-2016-09
+  - tag: package-compute-2016-04-preview
+  - tag: package-compute-2016-03
+  - tag: package-container-service-2016-03
+  - tag: package-container-service-2015-11-preview
+  - tag: package-compute-2015-06
+```
+
+### Tag: package-2017-12 and go
+
+These settings apply only when `--tag=package-2017-12 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-12' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-12-01/compute
 ```
 
 ### Tag: package-compute-2017-03 and go
@@ -415,5 +442,21 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.compute.v2015_06_15
   output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2015_06_15
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.compute
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-compute
 ```
 
