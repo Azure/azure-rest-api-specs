@@ -173,6 +173,7 @@ input-file:
 - microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json
 - microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
 - microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
+- microsoft.insights/stable/2015-05-01/componentAnnotations_API.json
 ```
 ---
 # Code Generation
