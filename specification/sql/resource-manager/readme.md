@@ -77,7 +77,7 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
-- Microsoft.Sql/preview/2017-10-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
 
 # Needed when there is more than one input file
 override-info:
