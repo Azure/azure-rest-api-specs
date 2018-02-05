@@ -258,14 +258,7 @@
    "properties": {
     "properties": {
      "description": "AppServicePlan resource specific properties",
-     "required": [
-      "name"
-     ],
      "properties": {
-      "name": {
-       "description": "Name for the App Service plan.",
-       "type": "string"
-      },
       "workerTierName": {
        "description": "Target worker tier assigned to the App Service plan.",
        "type": "string"
@@ -396,7 +389,8 @@
     },
     "nextLink": {
      "description": "Link to next page of resources.",
-     "type": "string"
+          "type": "string",
+          "readOnly": true
     }
    }
   },
@@ -1504,11 +1498,6 @@
     "properties": {
      "description": "ResourceMetricDefinition resource specific properties",
      "properties": {
-      "name": {
-       "$ref": "#/definitions/ResourceMetricName",
-       "description": "Name of the metric.",
-       "readOnly": true
-      },
       "unit": {
        "description": "Unit of the metric.",
        "type": "string",
@@ -1529,11 +1518,6 @@
       },
       "resourceUri": {
        "description": "Resource URI.",
-       "type": "string",
-       "readOnly": true
-      },
-      "id": {
-       "description": "Resource ID.",
        "type": "string",
        "readOnly": true
       },
@@ -2445,11 +2429,6 @@
       "publishingUserName"
      ],
      "properties": {
-      "name": {
-       "description": "Username",
-       "type": "string",
-       "x-ms-client-name": "UserName"
-      },
       "publishingUserName": {
        "description": "Username used for publishing.",
        "type": "string"
@@ -2657,15 +2636,6 @@
     "properties": {
      "description": "VnetRoute resource specific properties",
      "properties": {
-      "name": {
-       "description": "The name of this route. This is only returned by the server and does not need to be set by the client.",
-       "type": "string",
-       "x-ms-mutability": [
-        "create",
-        "read"
-       ],
-       "x-ms-client-name": "vnetRouteName"
-      },
       "startAddress": {
        "description": "The starting address for this route. This may also include a CIDR notation, in which case the end address must not be specified.",
        "type": "string"
