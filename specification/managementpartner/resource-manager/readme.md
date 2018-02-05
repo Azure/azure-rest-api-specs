@@ -80,8 +80,8 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.managementpartner
   package-name: azure-mgmt-managementpartner
-  clear-output-folder: true
   package-version: 0.1.0
+  clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
