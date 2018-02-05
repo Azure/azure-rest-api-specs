@@ -99,6 +99,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.servicefabric
   package-name: azure-servicefabric
+  package-version: 6.1.2.9
   add-credentials: true
   clear-output-folder: true
 ```
