@@ -1352,6 +1352,30 @@
       ], 
       "properties": { 
       }
+    },
+    "NetezzaTableDataset" : {
+      "x-ms-discriminator-value": "NetezzaTable",
+      "description": "Netezza dataset.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+            "$ref": "#/definitions/Dataset" 
+        } 
+      ], 
+      "properties": { 
+      }
+    },
+    "VerticaTableDataset" : {
+      "x-ms-discriminator-value": "VerticaTable",
+      "description": "Vertica dataset.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+            "$ref": "#/definitions/Dataset" 
+        } 
+      ], 
+      "properties": { 
+      }
     }
   }
 }

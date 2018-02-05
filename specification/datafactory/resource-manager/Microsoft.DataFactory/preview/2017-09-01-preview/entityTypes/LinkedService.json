@@ -2271,6 +2271,14 @@
           "description": "The refresh token obtained from Google for authorizing access to BigQuery for UserAuthentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "clientId": {
+          "description": "The client id of the google application used to acquire the refresh token.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "clientSecret": {
+          "description": "The client secret of the google application used to acquire the refresh token.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
         "email": {
           "description": "The service account email ID that is used for ServiceAuthentication and can only be used on self-hosted IR.",
           "type": "object"
@@ -3584,6 +3592,72 @@
       "required": [
         "endpoint"
       ] 
+    },
+    "VerticaLinkedService": { 
+      "x-ms-discriminator-value": "Vertica", 
+      "description": "Vertica linked service.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/LinkedService" 
+        } 
+      ], 
+      "properties": { 
+        "typeProperties": { 
+          "description": "Vertica linked service properties.", 
+          "x-ms-client-flatten": true, 
+          "$ref": "#/definitions/VerticaLinkedServiceTypeProperties" 
+        } 
+      }, 
+      "required": [ 
+        "typeProperties" 
+      ] 
+    }, 
+    "VerticaLinkedServiceTypeProperties": { 
+      "description": "Vertica linked service properties.", 
+      "properties": {
+        "connectionString": { 
+          "description": "An ODBC connection string.", 
+          "$ref": "../datafactory.json#/definitions/SecretBase" 
+        }, 
+        "encryptedCredential": { 
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+          "type": "object"
+        }
+      } 
+    },
+    "NetezzaLinkedService": { 
+      "x-ms-discriminator-value": "Netezza", 
+      "description": "Netezza linked service.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/LinkedService" 
+        } 
+      ], 
+      "properties": { 
+        "typeProperties": { 
+          "description": "Netezza linked service properties.", 
+          "x-ms-client-flatten": true, 
+          "$ref": "#/definitions/NetezzaLinkedServiceTypeProperties" 
+        } 
+      }, 
+      "required": [ 
+        "typeProperties" 
+      ] 
+    }, 
+    "NetezzaLinkedServiceTypeProperties": { 
+      "description": "Netezza linked service properties.", 
+      "properties": {
+        "connectionString": { 
+          "description": "An ODBC connection string.", 
+          "$ref": "../datafactory.json#/definitions/SecretBase" 
+        }, 
+        "encryptedCredential": { 
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+          "type": "object"
+        }
+      } 
     },
     "HDInsightOnDemandLinkedService": {
       "x-ms-discriminator-value": "HDInsightOnDemand",
