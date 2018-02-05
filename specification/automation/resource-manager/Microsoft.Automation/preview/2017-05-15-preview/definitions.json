@@ -34,6 +34,37 @@
   },
   "paths": {},
   "definitions": {
+    "Job": {
+      "description": "Definition of the job.",         
+      "properties": {                
+        "properties": {
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the job."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "./definitions.json#/definitions/Job"
+          },
+          "description": "Gets or sets a list of jobs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job operation."
+    },
     "softwareUpdateConfigurationProperties": {
       "description": "Software update configuration properties.",
       "properties": {
@@ -179,7 +210,7 @@
           "$ref": "../../stable/2015-10-31/definitions.json#/definitions/scheduleFrequency"
         },
         "startTime": {
-          "type": "string",
+          "typeb": "string",
           "format": "date-time",
           "description": "the start time of the update."
         },

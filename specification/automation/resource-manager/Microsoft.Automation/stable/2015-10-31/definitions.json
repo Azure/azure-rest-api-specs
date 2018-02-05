@@ -1949,21 +1949,6 @@
           "$ref": "./definitions.json#/definitions/JobCreateProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the list of job properties."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the tags attached to the resource."
         }
       },
       "required": [
@@ -2512,6 +2497,27 @@
       "required": [
         "location"
       ],
+      "description": "The Resource definition.",
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
       "description": "The Resource definition.",
       "x-ms-azure-resource": true
     },

@@ -76,7 +76,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/dscNode.json
 - Microsoft.Automation/stable/2015-10-31/dscNodeConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/stable/2015-10-31/job.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
@@ -88,6 +87,7 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2017-05-15-preview/job.json
 ```
 
 ---
