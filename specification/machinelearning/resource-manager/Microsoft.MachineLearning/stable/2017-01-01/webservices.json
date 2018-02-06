@@ -23,6 +23,9 @@
         "parameters": [{
           "$ref": "#/parameters/APIVersionParameter"
         }],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK.",
@@ -408,6 +411,9 @@
     "Resource": {
       "description": "Azure resource.",
       "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ],
       "properties": {
         "id": {
           "description": "Specifies the resource ID.",
@@ -450,7 +456,10 @@
           "$ref": "#/definitions/WebServiceProperties",
           "description": "Contains the property payload that describes the web service."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "WebServiceProperties": {
       "type": "object",
@@ -1212,15 +1221,18 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code."
+          "description": "The error code.",
+          "readOnly": true
         },
         "target": {
           "type": "string",
-          "description": "The error target."
+          "description": "The error target.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "The error message."
+          "description": "The error message.",
+          "readOnly": true
         },
         "details": {
           "type": "array",
@@ -1250,7 +1262,8 @@
       "properties": {
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "display": {
           "$ref": "#/definitions/OperationDisplayInfo",
@@ -1264,19 +1277,23 @@
       "properties": {
         "description": {
           "description": "The description of the operation.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "operation": {
           "description": "The action that users can perform, based on their permission level.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "provider": {
           "description": "The service provider.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resource": {
           "description": "The resource on which the operation is performed.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     }

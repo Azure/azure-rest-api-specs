@@ -23,6 +23,9 @@
         ],
         "operationId": "Skus_List",
         "description": "Lists the available commitment plan SKUs.",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -421,8 +424,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CatalogSku"
-          },
-          
+          }
         }
       }
     },
