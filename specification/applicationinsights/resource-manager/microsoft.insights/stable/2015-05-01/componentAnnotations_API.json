@@ -111,8 +111,11 @@
           "200": {
             "description": "An object containing the annotation definition created by this PUT call.",
             "schema": {
-              "$ref": "#/definitions/Annotation"
-            }
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Annotation"
+              }
+			}
           },
           "409": {
             "description": "Annotation with Id already exists.",
@@ -155,11 +158,7 @@
         "responses": {
           "200": {
             "description": "The annotation that was successfully deleted.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Annotation"
-              }
+            "schema": {              
 			  }
           }
         },
@@ -266,7 +265,7 @@
       "type": "object",
       "description": "Error associated with trying to create annotation with Id that already exist",
       "properties": {
-        "Code": {
+        "code": {
           "type": "string",
           "description": "Error detail code and explanation"
         },
