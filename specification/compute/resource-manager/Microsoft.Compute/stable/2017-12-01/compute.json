@@ -34,6 +34,28 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Compute/operations": {
+      "get": {
+        "tags": [
+          "ComputeOperations"
+        ],
+        "operationId": "ComputeOperations_List",
+        "description": "Gets a list of compute operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ComputeOperationListResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
       "put": {
         "tags": [
@@ -83,6 +105,52 @@
         "x-ms-examples": {
           "Create an availability set.": {
             "$ref": "./examples/CreateAnAvailabilitySet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_Update",
+        "description": "Update an availability set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            },
+            "description": "Parameters supplied to the Create Availability Set operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
           }
         }
       },
@@ -976,6 +1044,59 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Update",
+        "description": "Update an image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Image"
+            },
+            "description": "Parameters supplied to the Create Image operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "tags": [
           "Images"
@@ -1280,6 +1401,59 @@
             "$ref": "./examples/CreateACustomImageVmFromAnUnmanagedGeneralizedOsImage.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Update",
+        "description": "The operation to update a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "description": "Parameters supplied to the Update Virtual Machine operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -3685,6 +3859,67 @@
     }
   },
   "definitions": {
+    "ComputeOperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeOperationValue"
+          },
+          "description": "The list of compute operations"
+        }
+      },
+      "description": "The List Compute Operation operation response."
+    },
+    "ComputeOperationValue": {
+      "properties": {
+        "origin": {
+          "type": "string",
+          "description": "The origin of the compute operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the compute operation."
+        },
+        "display": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ComputeOperationValueDisplay"
+        }
+      },
+      "required": [
+        "origin",
+        "name",
+        "display"
+      ],
+      "description": "Describes the properties of a Compute Operation value."
+    },
+    "ComputeOperationValueDisplay": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The display name of the compute operation."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The display name of the resource the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "description": "The resource provider for the operation."
+        }
+      },
+      "required": [
+        "operation",
+        "resource",
+        "description",
+        "provider"
+      ],
+      "description": "Describes the properties of a Compute Operation Value Display."
+    },
     "InstanceViewStatus": {
       "properties": {
         "code": {
@@ -4216,7 +4451,7 @@
       "properties": {
         "vmSize": {
           "type": "string",
-          "description": "Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  <br><br> [List all available virtual machine sizes in an availability set](virtualmachines-list-sizes-availability-set.md) <br><br> [List all available virtual machine sizes in a region](virtualmachines-list-sizes-region.md) <br><br> [List all available virtual machine sizes for resizing](virtualmachines-list-sizes-for-resizing.md)",
+          "description": "Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  <br><br> [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) <br><br> [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) <br><br> [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)",
           "enum": [
             "Basic_A0",
             "Basic_A1",
