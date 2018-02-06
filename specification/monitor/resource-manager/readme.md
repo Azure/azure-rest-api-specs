@@ -28,7 +28,30 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2017-09
+tag: package-2018-02
+```
+### Tag: package-2018-02
+
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02'
+input-file:
+- microsoft.insights/stable/2015-04-01/autoscale_API.json
+- microsoft.insights/stable/2015-04-01/operations_API.json
+- microsoft.insights/stable/2016-03-01/alertRulesIncidents_API.json
+- microsoft.insights/stable/2016-03-01/alertRules_API.json
+- microsoft.insights/stable/2016-03-01/logProfiles_API.json
+- microsoft.insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- microsoft.insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- microsoft.insights/stable/2017-04-01/actionGroups_API.json
+- microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
+- microsoft.insights/stable/2015-04-01/activityLogs_API.json
+- microsoft.insights/stable/2015-04-01/eventCategories_API.json
+- microsoft.insights/stable/2015-04-01/tenantActivityLogs_API.json
+- microsoft.insights/stable/2018-01-01/metricDefinitions_API.json
+- microsoft.insights/stable/2018-01-01/metrics_API.json
+- microsoft.insights/preview/2017-11-01-preview/baseline_API.json
+- microsoft.insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-09
