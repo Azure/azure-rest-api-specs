@@ -974,7 +974,18 @@
         "services": {
           "$ref": "#/definitions/EncryptionServices",
           "description": "List of services which support encryption."
-        },
+        }    
+      },
+      "allOf":  [       
+        {        
+          "$ref": "#/definitions/EncryptionKeySource"          
+        }    
+      ],
+      "required": [ "keySource" ],
+      "description": "The encryption settings on the storage account."
+    },
+    "EncryptionKeySource": {
+      "properties": {        
         "keySource": {
           "type": "string",
           "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault",
@@ -995,7 +1006,7 @@
         }
       },
       "required": [ "keySource" ],
-      "description": "The encryption settings on the storage account."
+      "description": "The encryption keysource settings on the storage account."
     },
     "VirtualNetworkRule": {
       "properties": {
@@ -1120,8 +1131,8 @@
           "description": "User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
         },
         "encryption": {
-          "$ref": "#/definitions/Encryption",
-          "description": "Provides the encryption settings on the account. If left unspecified the account encryption settings will remain the same. The default setting is unencrypted."
+          "$ref": "#/definitions/EncryptionKeySource",
+          "description": "Provides the encryption settings on the account. If left unspecified the account encryption settings will remain the same."
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
@@ -1473,8 +1484,8 @@
           "description": "Custom domain assigned to the storage account by the user. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
         },
         "encryption": {
-          "$ref": "#/definitions/Encryption",
-          "description": "Provides the encryption settings on the account. The default setting is unencrypted."
+          "$ref": "#/definitions/EncryptionKeySource",
+          "description": "Provides the encryption settings on the account."
         },
         "accessTier": {
           "type": "string",
