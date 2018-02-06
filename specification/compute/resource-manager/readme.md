@@ -35,6 +35,77 @@ title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
 tag: package-2017-12
+
+directive:
+  - where:
+      - $..definitions["VirtualMachine"]["properties"]
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $..definitions["VirtualMachineScaleSetVM"]["properties"]
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $..definitions["ImageReference"]["properties"]
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $..definitions["ManagedDiskParameters"]["properties"]
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $..definitions["Disk"]["properties"]
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $..definitions["Snapshot"]["properties"]
+    suppress:
+      - BodyTopLevelProperties
+
+  - where:
+      - $..definitions["VirtualMachineScaleSetExtension"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["VirtualMachineImageResource"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["VirtualMachineImage"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["ImageReference"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["ManagedDiskParameters"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["NetworkInterfaceReference"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["VirtualMachineScaleSetIPConfiguration"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["VirtualMachineScaleSetUpdateIPConfiguration"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["VirtualMachineScaleSetNetworkConfiguration"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["VirtualMachineScaleSetUpdateNetworkConfiguration"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $..definitions["VirtualMachineScaleSetUpdate"]["properties"]
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
 ```
 
 ### Tag: package-2017-12
