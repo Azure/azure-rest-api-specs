@@ -113,6 +113,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.authorization
   package-name: azure-mgmt-authorization
+  package-version: 0.40.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
