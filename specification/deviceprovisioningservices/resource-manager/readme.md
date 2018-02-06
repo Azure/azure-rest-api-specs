@@ -1,14 +1,14 @@
-# Provisioning Services
+# Device Provisioning Services
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Provisioning Services.
+This is the AutoRest configuration file for Device Provisioning Services.
 
 
 
 ---
 ## Getting Started 
-To build the SDK for ProvisioningServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for DeviceProvisioningServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -71,8 +71,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ProvisioningServices
-  output-folder: $(csharp-sdks-folder)/ProvisioningServices/Management.ProvisioningServices/Generated
+  namespace: Microsoft.Azure.Management.DeviceProvisioningServices
+  output-folder: $(csharp-sdks-folder)/DeviceProvisioningServices/Management.DeviceProvisioningServices/Generated
   clear-output-folder: true
 ```
 
