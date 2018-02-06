@@ -155,6 +155,12 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.RuleDefinitions
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
+    #  - $.definitions.Annotation.AnnotationName
+    #  - $.definitions.Annotation.EventTime
+    #  - $.definitions.Annotation.Category
+    #  - $.definitions.Annotation.Id
+    #  - $.definitions.Annotation.Properties
+    #  - $.definitions.Annotation.RelatedAnnotation
     
   - suppress: R2066
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
