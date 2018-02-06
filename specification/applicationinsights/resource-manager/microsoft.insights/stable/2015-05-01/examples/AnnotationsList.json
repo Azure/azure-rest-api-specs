@@ -3,12 +3,13 @@
     "api-version": "2015-05-01",
     "subscriptionId": "subid",
     "resourceGroupName": "my-resource-group",
-    "resourceName": "my-component"
+    "resourceName": "my-component",
+		"start": "2018-02-05T00%253A30%253A00.000Z",
+		"end": "2018-02-06T00%253A33A00.000Z"
   },
   "responses": {
     "200": {
-      "body": {
-        "value": [
+      "body": [
 		   {
 			  "AnnotationName":"InsightsPortal-20180126-1",
 			  "Id":"4de4524f-fca5-44a8-b7e6-a67d5107796e",
@@ -26,7 +27,6 @@
 			  "RelatedAnnotation":null
 		   }
 		]
-      }
     },
 	"400": {"code":"Invalid end time","message":"Invalid end time","innererror":{"diagnosticcontext":"e70c9679-a4cd-480f-93ce-6ddc7732a6bc","time":"2018-02-06T00:08:27.6971029Z","method":"GET","outboundurl":"https://cds.aimon.applicationinsights.io/apps/b123a2f0-0bf9-42ad-9de3-6d5c4446954f/annotations?start=2018-02-05T00:30:00.000Z&end=2018-02-06T00:33A00.000Z&api-version=2015-05-01&accountId=ad825170-845c-47db-8f00-11978947b089&applicationName=workitemintegrationtest2","stacktrace":"System.ArgumentException: Invalid end time\r\n   at Microsoft.ManagementServices.Rules.Endpoint.Controllers.Nexus.AnnotationsNxController.<>c__DisplayClass5_0.<<GetAnnotationsForTimeRange>b__0>d.MoveNext()\r\n--- End of stack trace from previous location where exception was thrown ---\r\n   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()\r\n   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)\r\n   at Microsoft.ManagementServices.Rules.Endpoint.Controllers.Nexus.NexusControllerBase.<PerformActionAsync>d__17.MoveNext()"}}
   }
