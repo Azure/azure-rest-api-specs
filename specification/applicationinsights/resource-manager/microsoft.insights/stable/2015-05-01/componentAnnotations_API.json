@@ -156,8 +156,10 @@
           "200": {
             "description": "The annotation that was successfully deleted.",
             "schema": {
-              "$ref": "#/definitions/Annotation"
-            }
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Annotation"
+              }
           }
         },
         "x-ms-examples": {
@@ -190,8 +192,10 @@
           "200": {
             "description": "The Annotation object for this id.",
             "schema": {
-              "$ref": "#/definitions/Annotation"
-            }
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Annotation"
+              }
           },
           "404": {
             "description": "The Annotation with given id does not exist.",
@@ -316,7 +320,7 @@
       "x-ms-parameter-location": "method"
     },
     "StartParameter": {
-      "name": "Start",
+      "name": "start",
       "in": "query",
       "required": true,
       "type": "string",
@@ -324,7 +328,7 @@
       "x-ms-parameter-location": "method"
     },
     "EndParameter": {
-      "name": "End",
+      "name": "end",
       "in": "query",
       "required": true,
       "type": "string",
