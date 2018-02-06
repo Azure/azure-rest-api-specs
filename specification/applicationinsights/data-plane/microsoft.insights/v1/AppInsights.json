@@ -45,14 +45,75 @@
     }
   ],
   "paths": {
-    "/apps/{app-id}/metrics/{metric-id}": {
+    "/apps/{appId}/metrics/{metricType}/{metricId}": {
       "get": {
         "operationId": "GetMetric",
         "summary": "Retrieve metric data",
-        "description": "Gets metric values for a single metric",
+        "description": "Gets data for a single metric.",
         "x-ms-examples": {
           "simpleMetric": {
             "$ref": "examples/metric-get.json"
+          },
+          "intervaledMetric": {
+            "$ref": "examples/metric-get-full.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/metricType"
+          },
+          {
+            "$ref": "#/parameters/metricId"
+          },
+          {
+            "$ref": "#/parameters/metricsTimespan"
+          },
+          {
+            "$ref": "#/parameters/metricsInterval"
+          },
+          {
+            "$ref": "#/parameters/metricsAggregation"
+          },
+          {
+            "$ref": "#/parameters/metricsSegment"
+          },
+          {
+            "$ref": "#/parameters/metricsTop"
+          },
+          {
+            "$ref": "#/parameters/metricsOrderBy"
+          },
+          {
+            "$ref": "#/parameters/metricsFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metricsResult"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/metrics/customEvents/custom/{metricId}": {
+      "get": {
+        "operationId": "GetCustomEventCustomMetric",
+        "summary": "Retrieve metric data",
+        "description": "Gets data for a single metric.",
+        "x-ms-examples": {
+          "customEventsMetric": {
+            "$ref": "examples/metric-get-custom.json"
           }
         },
         "parameters": [
@@ -100,7 +161,7 @@
         }
       }
     },
-    "/apps/{app-id}/metrics": {
+    "/apps/{appId}/metrics": {
       "post": {
         "operationId": "GetMetrics",
         "summary": "Retrieve metric data",
@@ -134,7 +195,7 @@
         }
       }
     },
-    "/apps/{app-id}/metrics/metadata": {
+    "/apps/{appId}/metrics/metadata": {
       "get": {
         "operationId": "GetMetricsMetadata",
         "summary": "Retrieve metric metatadata",
@@ -165,7 +226,7 @@
         }
       }
     },
-    "/apps/{app-id}/events/{event-type}": {
+    "/apps/{appId}/events/{eventType}": {
       "get": {
         "operationId": "GetEvents",
         "summary": "Execute OData query",
@@ -234,7 +295,7 @@
         }
       }
     },
-    "/apps/{app-id}/events/{event-type}/{event-id}": {
+    "/apps/{appId}/events/{eventType}/{eventId}": {
       "get": {
         "operationId": "GetEvent",
         "summary": "Get an event",
@@ -280,7 +341,7 @@
         }
       }
     },
-    "/apps/{app-id}/events/$metadata": {
+    "/apps/{appId}/events/$metadata": {
       "get": {
         "operationId": "GetEventsMetadataOData",
         "summary": "Get OData metadata",
@@ -314,7 +375,7 @@
         }
       }
     },
-    "/apps/{app-id}/query": {
+    "/apps/{appId}/query": {
       "get": {
         "operationId": "GetQuery",
         "summary": "Execute an Analytics query",
@@ -386,7 +447,7 @@
         }
       }
     },
-    "/apps/{app-id}/query/schema": {
+    "/apps/{appId}/query/schema": {
       "get": {
         "operationId": "GetQuerySchema",
         "summary": "Get Analytics query metadata",
@@ -420,7 +481,7 @@
   },
   "parameters": {
     "appId": {
-      "name": "app-id",
+      "name": "appId",
       "description": "ID of the application. This is Application ID from the API Access settings blade in the Azure portal.",
       "in": "path",
       "required": true,
@@ -428,46 +489,20 @@
       "x-ms-parameter-location": "client"
     },
     "metricId": {
-      "name": "metric-id",
+      "name": "metricId",
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method",
-      "description": "ID of the metric. This is either a standard AI metric, or an application-specific custom metric.",
-      "type": "string",
-      "enum": [
-        "requests/count",
-        "requests/duration",
-        "requests/failed",
-        "users/count",
-        "users/authenticated",
-        "pageViews/count",
-        "pageViews/duration",
-        "client/processingDuration",
-        "client/receiveDuration",
-        "client/networkDuration",
-        "client/sendDuration",
-        "client/totalDuration",
-        "dependencies/count",
-        "dependencies/failed",
-        "dependencies/duration",
-        "exceptions/count",
-        "exceptions/browser",
-        "exceptions/server",
-        "sessions/count",
-        "performanceCounters/requestExecutionTime",
-        "performanceCounters/requestsPerSecond",
-        "performanceCounters/requestsInQueue",
-        "performanceCounters/memoryAvailableBytes",
-        "performanceCounters/exceptionsPerSecond",
-        "performanceCounters/processCpuPercentage",
-        "performanceCounters/processIOBytesPerSecond",
-        "performanceCounters/processPrivateBytes",
-        "performanceCounters/processorCpuPercentage",
-        "availabilityResults/availabilityPercentage",
-        "availabilityResults/duration",
-        "billing/telemetryCount",
-        "customEvents/count"
-      ]
+      "description": "Specific metric to operate over within a type (e.g. count, duration, failed)",
+      "type": "string"
+    },
+    "metricType": {
+      "name": "metricType",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "Type of metric to operate over. Must be paired with id for a distinct metric.",
+      "type": "string"
     },
     "metricsTimespan": {
       "name": "timespan",
@@ -568,7 +603,7 @@
       "x-ms-parameter-location": "method"
     },
     "eventType": {
-      "name": "event-type",
+      "name": "eventType",
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method",
@@ -593,7 +628,7 @@
       }
     },
     "eventId": {
-      "name": "event-id",
+      "name": "eventId",
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method",
@@ -704,7 +739,7 @@
     }
   },
   "definitions": {
-    "metricId": {
+    "metricEnumId": {
       "description": "ID of the metric. This is either a standard AI metric, or an application-specific custom metric.",
       "type": "string",
       "enum": [
@@ -741,6 +776,14 @@
         "billing/telemetryCount",
         "customEvents/count"
       ]
+    },
+    "metricType": {
+      "description": "Type of metric to operate over. Must be paired with id for a distinct metric.",
+      "type": "string"
+    },
+    "metricId": {
+      "description": "Specific metric to operate over within a type (e.g. count, duration, failed)",
+      "type": "string"
     },
     "metricsTimespan": {
       "description": "The timespan over which to retrieve metric values. This is an ISO8601 time period value. If timespan is omitted, a default time range of `PT12H` (\"last 12 hours\") is used. The actual timespan that is queried may be adjusted by the server based. In all cases, the actual time span used for the query is included in the response.",
@@ -1022,6 +1065,10 @@
       "description": "An events query result.",
       "type": "object",
       "properties": {
+        "@odata.context": {
+          "description": "OData context metadata endpoint for this response",
+          "type": "string"
+        },
         "@ai.messages": {
           "description": "OData messages for this response.",
           "type": "array",
@@ -1972,10 +2019,11 @@
           "type": "array",
           "items": {
             "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "items": {}
           }
+        },
+        "primaryTimeStampColumn": {
+          "description": "name of column in database containing primary"
         }
       },
       "required": [
