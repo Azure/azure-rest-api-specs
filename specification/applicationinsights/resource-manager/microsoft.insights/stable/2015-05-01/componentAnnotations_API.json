@@ -127,7 +127,10 @@
             }
           },
           "400": {
-            "description": "Invalid time"
+            "description": "Invalid time",
+			"schema": {
+              "$ref": "#/definitions/AnnotationCreateError"
+            }
           }
         },
         "x-ms-examples": {
@@ -204,7 +207,7 @@
           "404": {
             "description": "The Annotation with given id does not exist.",
             "schema": {
-              "$ref": "#/definitions/InnerError"
+              "$ref": "#/definitions/AnnotationCreateError"
             }
           }
         },
@@ -276,7 +279,7 @@
           "type": "string",
           "description": "Error message"
         },
-        "innerError": {
+        "innererror": {
           "$ref": "#/definitions/InnerError"
         }
       }
