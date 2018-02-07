@@ -9,14 +9,22 @@
   "paths": {},
   "definitions": {
     "IotHubDeviceCreatedEventData": {
-      "x-ms-client-flatten": true,
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Devices.DeviceCreated event.",
-      "$ref": "#/definitions/DeviceLifeCycleEventProperties"
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceLifeCycleEventProperties"
+        }
+      ],
+      "properties": {}
     },
     "IotHubDeviceDeletedEventData": {
-      "x-ms-client-flatten": true,
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Devices.DeviceDeleted event.",
-      "$ref": "#/definitions/DeviceLifeCycleEventProperties"
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceLifeCycleEventProperties"
+        }
+      ],
+      "properties": {}
     },
     "DeviceLifeCycleEventProperties": {
       "type": "object",
