@@ -45,8 +45,8 @@ input-file:
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line. 
 
 ``` yaml $(tag) == 'package-2017-12-01-preview' 
-+input-file: 
-- Microsoft.DBforMySQL/2017-12-01-preview/mysql.json 
+input-file: 
+- Microsoft.DBforMySQL/preview/2017-12-01-preview/mysql.json 
 ``` 
 
 
