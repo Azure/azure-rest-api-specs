@@ -2569,6 +2569,91 @@
         }
       }
     },
+    "/storage/{storage-account-name}/backup": {
+      "post": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "BackupStorageAccount",
+        "summary": "Backs up the specified storage account.",
+        "description": "Requests that a backup of the specified storage account be downloaded to the client. This operation requires the storage/backup permission.",
+        "parameters": [
+          {
+            "name": "storge-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The backup blob containing the backed up storage account.",
+            "schema": {
+              "$ref": "#/definitions/BackupStorageResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Recover Deleted Storage Account": {
+            "$ref": "./examples//backupStorageAccount.json"
+          }
+        }
+      }
+    },
+    "/storage/restore": {
+      "post": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "RestoreStorageAccount",
+        "summary": "Restores a backed up storage account to a vault.",
+        "description": "Restores a backed up storage account to a vault. This operation requires the storage/restore permission.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/StorageRestoreParameters"
+            },
+            "description": "The parameters to restore the storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restored storage account bundle in the vault.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Recover Deleted Storage Account": {
+            "$ref": "./examples//restoreStorageAccount.json"
+          }
+        }
+      }
+    },    
     "/storage/{storage-account-name}": {
       "delete": {
         "tags": [
@@ -2964,7 +3049,7 @@
         ],
         "operationId": "RecoverDeletedSasDefinition",
         "summary": "Recovers the deleted SAS definition.",
-        "description": "Recovers the deleted SAS definition for the specified storage account. This operation can only be performed on a soft-delete enabled vault. This operation requires the storage/recoversas permission.",
+        "description": "Recovers the deleted SAS definition for the specified storage account. This operation can only be performed on a soft-delete enabled vault. This operation requires the storage/recover permission.",
         "parameters": [
           {
             "name": "storage-account-name",
@@ -3620,6 +3705,18 @@
           "x-ms-client-name": "secretBundleBackup",
           "format": "base64url",
           "description": "The backup blob associated with a secret bundle."
+        }
+      },
+      "description": "The secret restore parameters.",
+      "required": [ "value" ]
+    },
+    "StorageRestoreParameters": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "storageBundleBackup",
+          "format": "base64url",
+          "description": "The backup blob associated with a storage account."
         }
       },
       "description": "The secret restore parameters.",
@@ -4735,6 +4832,17 @@
         }
       },
       "description": "The backup secret result, containing the backup blob."
+    },    
+    "BackupStorageResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "readOnly": true,
+          "description": "The backup blob containing the backed up storage account."
+        }
+      },
+      "description": "The backup storage result, containing the backup blob."
     },    
     "PendingCertificateSigningRequestResult": {
       "properties": {
