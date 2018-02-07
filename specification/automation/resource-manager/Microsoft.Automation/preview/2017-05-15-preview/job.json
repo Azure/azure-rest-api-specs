@@ -40,6 +40,9 @@
         ],
         "operationId": "Job_GetOutput",
         "description": "Retrieve the job output identified by job name.",
+        "produces": [
+          "text/plain"
+        ],
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/joboperations"
         },
@@ -95,6 +98,9 @@
         ],
         "operationId": "Job_GetRunbookContent",
         "description": "Retrieve the runbook content of the job identified by job name.",
+        "produces": [
+          "text/plain"
+        ],
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/joboperations"
         },
@@ -317,6 +323,9 @@
         },
         "parameters": [
           {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -324,10 +333,10 @@
           },
           {
             "name": "jobName",
-             "description": "The job name.",
-             "type": "string",
-             "required": true,
-             "in": "path"
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
            },
           {
             "name": "parameters",
@@ -337,10 +346,7 @@
               "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobCreateParameters"
             },
             "description": "The parameters supplied to the create job operation."
-          },
-          {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
-          },
+          },          
           {
             "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
           },
