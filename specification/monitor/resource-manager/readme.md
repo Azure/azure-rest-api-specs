@@ -28,13 +28,13 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2018-02
+tag: package-2018-02-preview
 ```
-### Tag: package-2018-02
+### Tag: package-2018-02-preview
 
-These settings apply only when `--tag=package-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-2018-02-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-02'
+``` yaml $(tag) == 'package-2018-02-preview'
 input-file:
 - microsoft.insights/stable/2015-04-01/autoscale_API.json
 - microsoft.insights/stable/2015-04-01/operations_API.json
