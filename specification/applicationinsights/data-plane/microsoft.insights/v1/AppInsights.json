@@ -45,7 +45,7 @@
     }
   ],
   "paths": {
-    "/apps/{appId}/metrics/{metricType}/{metricId}": {
+    "/apps/{appId}/metrics/{metricId}": {
       "get": {
         "operationId": "GetMetric",
         "summary": "Retrieve metric data",
@@ -56,64 +56,6 @@
           },
           "intervaledMetric": {
             "$ref": "examples/metric-get-full.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/appId"
-          },
-          {
-            "$ref": "#/parameters/metricType"
-          },
-          {
-            "$ref": "#/parameters/metricId"
-          },
-          {
-            "$ref": "#/parameters/metricsTimespan"
-          },
-          {
-            "$ref": "#/parameters/metricsInterval"
-          },
-          {
-            "$ref": "#/parameters/metricsAggregation"
-          },
-          {
-            "$ref": "#/parameters/metricsSegment"
-          },
-          {
-            "$ref": "#/parameters/metricsTop"
-          },
-          {
-            "$ref": "#/parameters/metricsOrderBy"
-          },
-          {
-            "$ref": "#/parameters/metricsFilter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/metricsResult"
-            }
-          },
-          "default": {
-            "description": "An error response object.",
-            "schema": {
-              "$ref": "#/definitions/errorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/apps/{appId}/metrics/customEvents/custom/{metricId}": {
-      "get": {
-        "operationId": "GetCustomEventCustomMetric",
-        "summary": "Retrieve metric data",
-        "description": "Gets data for a single metric.",
-        "x-ms-examples": {
-          "customEventsMetric": {
-            "$ref": "examples/metric-get-custom.json"
           }
         },
         "parameters": [
@@ -493,16 +435,42 @@
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method",
-      "description": "Specific metric to operate over within a type (e.g. count, duration, failed)",
-      "type": "string"
-    },
-    "metricType": {
-      "name": "metricType",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "description": "Type of metric to operate over. Must be paired with id for a distinct metric.",
-      "type": "string"
+      "description": "ID of the metric. This is either a standard AI metric, or an application-specific custom metric.",
+      "type": "string",
+      "enum": [
+        "requests/count",
+        "requests/duration",
+        "requests/failed",
+        "users/count",
+        "users/authenticated",
+        "pageViews/count",
+        "pageViews/duration",
+        "client/processingDuration",
+        "client/receiveDuration",
+        "client/networkDuration",
+        "client/sendDuration",
+        "client/totalDuration",
+        "dependencies/count",
+        "dependencies/failed",
+        "dependencies/duration",
+        "exceptions/count",
+        "exceptions/browser",
+        "exceptions/server",
+        "sessions/count",
+        "performanceCounters/requestExecutionTime",
+        "performanceCounters/requestsPerSecond",
+        "performanceCounters/requestsInQueue",
+        "performanceCounters/memoryAvailableBytes",
+        "performanceCounters/exceptionsPerSecond",
+        "performanceCounters/processCpuPercentage",
+        "performanceCounters/processIOBytesPerSecond",
+        "performanceCounters/processPrivateBytes",
+        "performanceCounters/processorCpuPercentage",
+        "availabilityResults/availabilityPercentage",
+        "availabilityResults/duration",
+        "billing/telemetryCount",
+        "customEvents/count"
+      ]
     },
     "metricsTimespan": {
       "name": "timespan",
@@ -739,7 +707,7 @@
     }
   },
   "definitions": {
-    "metricEnumId": {
+    "metricId": {
       "description": "ID of the metric. This is either a standard AI metric, or an application-specific custom metric.",
       "type": "string",
       "enum": [
@@ -776,14 +744,6 @@
         "billing/telemetryCount",
         "customEvents/count"
       ]
-    },
-    "metricType": {
-      "description": "Type of metric to operate over. Must be paired with id for a distinct metric.",
-      "type": "string"
-    },
-    "metricId": {
-      "description": "Specific metric to operate over within a type (e.g. count, duration, failed)",
-      "type": "string"
     },
     "metricsTimespan": {
       "description": "The timespan over which to retrieve metric values. This is an ISO8601 time period value. If timespan is omitted, a default time range of `PT12H` (\"last 12 hours\") is used. The actual timespan that is queried may be adjusted by the server based. In all cases, the actual time span used for the query is included in the response.",
