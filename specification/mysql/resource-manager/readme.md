@@ -26,7 +26,7 @@ These are the global settings for the Sql API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04-preview
+tag: package-2017-12-01-preview
 ```
 
 
