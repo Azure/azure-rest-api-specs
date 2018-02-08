@@ -2280,11 +2280,6 @@
           },
           "description": "Page values."
         },
-        "count": {
-          "type" : "integer",
-          "format": "int64",
-          "description": "Number of revisions of the API"
-        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -2293,6 +2288,21 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiRevisionContract": {
+      "properties": {        
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiRevisionContractProperties",
+          "description": "Properties of the Api Revision Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Api Revision details."
+    },
+    "ApiRevisionContractProperties": {
       "properties": {
         "apiId": {
           "type":"string",
