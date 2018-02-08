@@ -2356,6 +2356,7 @@
             "description": "Description of new API Revision."
           },
           "apiVersionSet" : {
+            "description": "Version set details",
             "$ref" : "#/definitions/ApiVersionSetContract"
           }
         }
@@ -2848,7 +2849,8 @@
       "in": "header",
       "required": true,
       "description": "ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "SchemaIdParameter": {
       "name": "schemaId",
