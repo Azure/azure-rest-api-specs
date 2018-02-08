@@ -35,11 +35,6 @@
         "name": "testserver",
         "type": "Microsoft.DBforMySQL/servers",
         "location": "onebox",
-        "storageProfile": {
-          "storageMB": 128000,
-          "backupRetentionDays": 7,
-          "geoRedundantBackup": "Enabled"
-        },
         "sku": {
           "capacity": 2,
           "family": "Gen4",
@@ -50,11 +45,18 @@
         "tags": {
           "elasticServer": "1"
         },
-        "administratorLogin": "cloudsa",
-        "sslEnforcement":"Enabled",
-        "userVisibleState": "Ready",
-        "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-        "earliestRestoreDate": "null"        
+        "properties": {
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Enabled"
+          },
+          "administratorLogin": "cloudsa",
+          "sslEnforcement": "Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
+          "earliestRestoreDate": "null"
+        }
       }
     },
     "200": {
@@ -63,11 +65,6 @@
         "name": "testserver",
         "type": "Microsoft.DBforMySQL/servers",
         "location": "onebox",
-        "storageProfile": {
-          "storageMB": 128000,
-          "backupRetentionDays": 7,
-          "geoRedundantBackup": "Enabled"
-        },
         "sku": {
           "capacity": 2,
           "family": "Gen4",
@@ -78,12 +75,19 @@
         "tags": {
           "elasticServer": "1"
         },
-        "administratorLogin": "cloudsa",
-        "sslEnforcement":"Enabled",
-        "userVisibleState": "Ready",
-        "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-        "earliestRestoreDate": "null"
-      } 
+        "properties": {
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Enabled"
+          },
+          "administratorLogin": "cloudsa",
+          "sslEnforcement": "Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
+          "earliestRestoreDate": "null"
+        }
+      }
     },
     "202": {}
   }
