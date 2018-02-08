@@ -2471,7 +2471,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A storage bundle of the storage account and its attributes.",
+            "description": "The deleted storage account and information on when it will be purged, and how to recover the deleted storage account.",
             "schema": {
               "$ref": "#/definitions/DeletedStorageBundle"
             }
@@ -2604,7 +2604,7 @@
           }
         },
         "x-ms-examples": {
-          "Recover Deleted Storage Account": {
+          "Backup Storage Account": {
             "$ref": "./examples//backupStorageAccount.json"
           }
         }
@@ -2648,7 +2648,7 @@
           }
         },
         "x-ms-examples": {
-          "Recover Deleted Storage Account": {
+          "Restore Storage Account": {
             "$ref": "./examples//restoreStorageAccount.json"
           }
         }
@@ -3023,7 +3023,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A deleted SAS definition bundle of the SAS definition and its attributes.",
+            "description": "The deleted SAS definition and information on when the it will be purged, and how to recover the deleted SAS definition.",
             "schema": {
               "$ref": "#/definitions/DeletedSasDefinitionBundle"
             }
@@ -4871,6 +4871,17 @@
           "format": "unixtime",
           "readOnly": true,
           "description": "Last updated time in UTC."
+        },        
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for storage accounts in the current vault. If it contains 'Purgeable' the storage account can be permanently deleted by a privileged user; otherwise, only the system can purge the storage account, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
         }
       },
       "description": "The storage account management attributes."
@@ -5124,6 +5135,17 @@
           "format": "unixtime",
           "readOnly": true,
           "description": "Last updated time in UTC."
+        },        
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for SAS definitions in the current vault. If it contains 'Purgeable' the SAS definition can be permanently deleted by a privileged user; otherwise, only the system can purge the SAS definition, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
         }
       },
       "description": "The SAS definition management attributes."
@@ -5289,10 +5311,10 @@
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "The URL to get the next set of deleted storage accounts."
+          "description": "The URL to get the next set of deleted SAS definitions."
         }
       },
-      "description": "The deleted storage account list result"
+      "description": "The deleted SAS definition list result"
     },
     "SasDefinitionCreateParameters": {
       "properties": {
