@@ -12,7 +12,9 @@
     "application/json"
   ],
   "produces": [
-    "application/json"
+    "application/json",
+    "text/plain",
+    "text/powershell"
   ],
   "security": [
     {
@@ -2182,6 +2184,9 @@
             "type": "string"
           },
           "description": "Gets or sets the parameters of the job."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateProperty"
         }
       },
       "description": "Definition of job properties."
@@ -2520,6 +2525,15 @@
       },
       "description": "The Resource definition.",
       "x-ms-azure-resource": true
+    },
+    "ProvisioningStateProperty": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets the provisioning state."
+        }
+      },
+      "description": "The provisioning state property."
     },
     "RunAsCredentialAssociationProperty": {
       "properties": {

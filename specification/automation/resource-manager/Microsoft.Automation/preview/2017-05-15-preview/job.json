@@ -47,8 +47,8 @@
           "url": "http://aka.ms/azureautomationsdk/joboperations"
         },
         "x-ms-examples": {
-          "Get Job": {
-            "$ref": "./examples/job/getJob.json"
+          "Get Job Output": {
+            "$ref": "./examples/job/getJobOutput.json"
           }
         },
         "parameters": [
@@ -99,13 +99,13 @@
         "operationId": "Job_GetRunbookContent",
         "description": "Retrieve the runbook content of the job identified by job name.",
         "produces": [
-          "text/plain"
+          "text/powershell"
         ],
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/joboperations"
         },
         "x-ms-examples": {
-          "Get Job": {
+          "Get Job Runbook Content": {
             "$ref": "./examples/job/getJobRunbookContent.json"
           }
         },
@@ -121,10 +121,10 @@
           },
           {
             "name": "jobName",
-             "description": "The job name.",
-             "type": "string",
-             "required": true,
-             "in": "path"
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
           },          
           {
             "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"

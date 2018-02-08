@@ -35,8 +35,8 @@
   "paths": {},
   "definitions": {
     "Job": {
-      "description": "Definition of the job.",         
-      "properties": {                
+      "description": "Definition of the job.",      
+      "properties": {        
         "properties": {
           "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobProperties",
           "x-ms-client-flatten": true,
@@ -45,16 +45,95 @@
       },
       "allOf": [
         {
-          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProxyResource"
+            "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProxyResource"
         }
+      ]      
+    },
+    "jobCollectionItem": {
+      "description": "Job collection item properties.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Job properties.",
+          "$ref": "#/definitions/jobCollectionItemProperties"
+        }
+      },
+      "allOf": [
+        {
+            "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
       ]
+    },
+    "jobCollectionItemProperties": {
+      "description": "Job collection item properties.",
+      "properties": {       
+        "runbook": {
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/RunbookAssociationProperty",
+          "description": "The runbook association."
+        },
+        "jobId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Gets or sets the id of the job."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the job."
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the status of the job.",
+          "enum": [
+            "New",
+            "Activating",
+            "Running",
+            "Completed",
+            "Failed",
+            "Stopped",
+            "Blocked",
+            "Suspended",
+            "Disconnected",
+            "Suspending",
+            "Stopping",
+            "Resuming",
+            "Removing"
+          ],
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time of the job."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time of the job."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time of the job."
+        },
+        "provisioningState": {
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProvisioningStateProperty"
+        }  
+      }
     },
     "JobListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "./definitions.json#/definitions/Job"
+            "$ref": "./definitions.json#/definitions/jobCollectionItem"            
           },
           "description": "Gets or sets a list of jobs."
         },
