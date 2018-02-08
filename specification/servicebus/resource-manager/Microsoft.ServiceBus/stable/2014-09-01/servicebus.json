@@ -93,6 +93,40 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/CheckNamespaceSpaceAvailability": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CheckNamespaceSpaceAvailability",
+        "description": "Check the give namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            },
+            "description": "Parameters to check availability of the given namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
       "get": {
         "tags": [
@@ -336,6 +370,41 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListAuthorizationRules",
+        "description": "Gets the authorization rules for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace authorization rules returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListAuthorizationRulesPost",
         "description": "Gets the authorization rules for a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
@@ -1492,7 +1561,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/eventhubs/{eventhubName}/authorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/eventhubs/{eventhubName}/authorizationRules": {
       "get": {
         "tags": [
           "EventHub"
