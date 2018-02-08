@@ -40,7 +40,7 @@
         "properties": {
           "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the properties of the job."
+          "description": "The properties of the job."
         }
       },
       "allOf": [
@@ -78,16 +78,16 @@
         "jobId": {
           "type": "string",
           "format": "uuid",
-          "description": "Gets or sets the id of the job."
+          "description": "The id of the job."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the job."
+          "description": "The creation time of the job."
         },
         "status": {
           "type": "string",
-          "description": "Gets or sets the status of the job.",
+          "description": "The status of the job.",
           "enum": [
             "New",
             "Activating",
@@ -111,20 +111,21 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the job."
+          "description": "The start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the job."
+          "description": "The end time of the job."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time of the job."
+          "description": "The last modified time of the job."
         },
         "provisioningState": {
-          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProvisioningStateProperty"
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProvisioningStateProperty",
+          "description": "The current provisioning state of the job."
         }  
       }
     },
@@ -135,11 +136,11 @@
           "items": {
             "$ref": "./definitions.json#/definitions/jobCollectionItem"            
           },
-          "description": "Gets or sets a list of jobs."
+          "description": "List of jobs."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the next link."
+          "description": "The  link to the next page."
         }
       },
       "description": "The response model for the list job operation."
