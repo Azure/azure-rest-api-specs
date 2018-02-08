@@ -19,10 +19,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints": {
       "get": {
         "tags": [
-          "DatabaseRestorePoints"
+          "RestorePoints"
         ],
         "description": "Gets a collection of restore points that belongs to the database.",
-        "operationId": "DatabaseRestorePoints_ListByDatabase",
+        "operationId": "RestorePoints_ListByDatabase",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -65,10 +65,10 @@
       },
       "post": {
         "tags": [
-          "DatabaseRestorePoints"
+          "RestorePoints"
         ],
         "description": "Creates a restore point for a data warehouse.",
-        "operationId": "DatabaseRestorePoints_Create",
+        "operationId": "RestorePoints_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -126,10 +126,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints/{restorePointName}": {
       "get": {
         "tags": [
-          "DatabaseRestorePoints"
+          "RestorePoints"
         ],
         "description": "Gets a restore point.",
-        "operationId": "DatabaseRestorePoints_Get",
+        "operationId": "RestorePoints_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -166,11 +166,11 @@
           }
         },
         "x-ms-examples": {
-          "Gets a database restore point.": {
-            "$ref": "./examples/DatabaseRestorePointsGet.json"
-          },
           "Gets a datawarehouse database restore point.": {
             "$ref": "./examples/DataWarehouseRestorePointsGet.json"
+          },
+          "Gets a database restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsGet.json"
           }
         }
       }
