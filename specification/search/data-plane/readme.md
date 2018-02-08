@@ -33,6 +33,15 @@ openapi-type: data-plane
 tag: package-2016-09
 ```
 
+### Tag: package-2016-09-preview
+
+These settings apply only when `--tag=package-2016-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09-preview'
+input-file:
+- Microsoft.Search/preview/2016-09-01-preview/searchindex.json
+- Microsoft.Search/preview/2016-09-01-preview/searchservice.json
+```
 
 ### Tag: package-2016-09
 

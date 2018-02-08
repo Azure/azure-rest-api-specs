@@ -114,6 +114,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.redis
   package-name: azure-mgmt-redis
+  package-version: 5.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

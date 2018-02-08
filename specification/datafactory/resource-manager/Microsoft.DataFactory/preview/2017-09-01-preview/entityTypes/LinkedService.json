@@ -237,7 +237,7 @@
         },
         "accessKey": {
           "description": "The Azure Batch account access key.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "batchUri": {
           "type": "object",
@@ -442,7 +442,7 @@
         },
         "password": {
           "description": "HDInsight cluster password.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "linkedServiceName": {
           "description": "The Azure Storage linked service reference.",
@@ -901,7 +901,7 @@
         },
         "apiKey": {
           "description": "The API key for accessing the Azure ML model endpoint.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "updateResourceEndpoint": {
           "type": "object",
@@ -912,7 +912,7 @@
           "description": "The ID of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML web service. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalKey": {
-          "$ref": "../datafactory.json#/definitions/SecureString",
+          "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The key of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML web service."
         },
         "tenant": {
@@ -1156,7 +1156,7 @@
         },
         "password": {
           "description": "The password for Basic authentication.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         }
       },
       "required": [
@@ -1175,11 +1175,11 @@
       "properties": {
         "pfx": {
           "description": "Base64-encoded contents of a PFX file.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "password": {
           "description": "Password for the PFX file.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         }
       },
       "required": [
@@ -1457,7 +1457,51 @@
         "url"
       ]
     },
-    "AmazonS3LinkedService": {
+    "SapEccLinkedService": {
+      "x-ms-discriminator-value": "SapEcc",
+      "description": "Linked service for SAP ERP Central Component(SAP ECC).",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP ECC linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapEccLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapEccLinkedServiceTypeProperties": {
+      "description": "SAP ECC linked service properties.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of SAP ECC OData API. For example, '[https://hostname:port/sap/opu/odata/sap/servicename/]'. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username for Basic authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+	"AmazonS3LinkedService": {
       "x-ms-discriminator-value": "AmazonS3",
       "description": "Linked service for Amazon S3.",
       "type": "object",
@@ -2500,7 +2544,7 @@
         },
         "password": {
           "description": "The password corresponding to the user name that you provided in the Username field",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "httpPath": {
           "description": "The partial URL corresponding to the Hive server.",
@@ -3634,7 +3678,7 @@
         },
         "servicePrincipalKey": {
           "description": "The key for the service principal id.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "tenant": {
           "type": "object",
@@ -3654,7 +3698,7 @@
         },
         "clusterPassword": {
           "description": "The password to access the cluster.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "clusterSshUserName": {
           "type": "object",
@@ -3662,7 +3706,7 @@
         },
         "clusterSshPassword": {
           "description": "The password to SSH remotely connect cluster’s node (for Linux).",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "additionalLinkedServiceNames": {
           "description": "Specifies additional storage accounts for the HDInsight linked service so that the Data Factory service can register them on your behalf.",
@@ -3763,7 +3807,7 @@
         },
         "servicePrincipalKey": {
           "description": "The Key of the application used to authenticate against the Azure Data Lake Analytics account.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "tenant": {
           "type": "object",

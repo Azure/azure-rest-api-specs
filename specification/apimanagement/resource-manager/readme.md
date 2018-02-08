@@ -31,6 +31,16 @@ openapi-type: arm
 tag: package-2017-03
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: R3016
+    reason: existing properties, can't be changed without breaking API.
+    #where:
+    #  - $.definitions.ApiManagementServiceUploadCertificateParameters.properties.certificate_password
+    #  - $.definitions.QuotaCounterContract.properties.Value
+
+```
 
 ### Tag: package-2017-03
 
@@ -40,6 +50,7 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 input-file:
 - Microsoft.ApiManagement/stable/2017-03-01/apimanagement.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimapis.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimapisbytags.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimauthorizationservers.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimbackends.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimcertificates.json
@@ -58,6 +69,8 @@ input-file:
 - Microsoft.ApiManagement/stable/2017-03-01/apimquotas.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimreports.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimsubscriptions.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimtagresources.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimtags.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimtenant.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimusers.json
 ```

@@ -77,6 +77,7 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 
 # Needed when there is more than one input file
 override-info:
@@ -94,6 +95,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/restorePoints.json
 - Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
@@ -163,6 +165,7 @@ input-file:
  - ./Microsoft.Sql/preview/2017-03-01-preview/databases.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 
 # Needed when there is more than one input file
 override-info:
@@ -211,6 +214,7 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
  - ./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
  - ./Microsoft.Sql/stable/2014-04-01/backups.json
+ - ./Microsoft.Sql/stable/2014-04-01/restorePoints.json
  - ./Microsoft.Sql/stable/2014-04-01/capabilities.json
  - ./Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
  - ./Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
