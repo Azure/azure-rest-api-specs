@@ -1457,7 +1457,51 @@
         "url"
       ]
     },
-    "AmazonS3LinkedService": {
+    "SapEccLinkedService": {
+      "x-ms-discriminator-value": "SapEcc",
+      "description": "Linked service for SAP ERP Central Component(SAP ECC).",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP ECC linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapEccLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapEccLinkedServiceTypeProperties": {
+      "description": "SAP ECC linked service properties.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of SAP ECC OData API. For example, '[https://hostname:port/sap/opu/odata/sap/servicename/]'. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username for Basic authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+	"AmazonS3LinkedService": {
       "x-ms-discriminator-value": "AmazonS3",
       "description": "Linked service for Amazon S3.",
       "type": "object",
