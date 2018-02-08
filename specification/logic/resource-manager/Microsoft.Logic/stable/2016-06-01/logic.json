@@ -7528,7 +7528,25 @@
     },
     "IsolatedEnvironmentProperties": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/IsolatedEnvironmentProvisioningState",
+          "description": "The provisioning state."
+        }
+      }
+    },
+    "IsolatedEnvironmentProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Accepted",
+        "Deploying",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "IsolatedEnvironmentProvisioningState",
+        "modelAsString": false
+      }
     },
     "IsolatedEnvironmentListResult": {
       "type": "object",
