@@ -38,72 +38,72 @@ tag: package-2017-12
 
 directive:
   - where:
-      - $..definitions["VirtualMachine"]["properties"]
+      - $.definitions.VirtualMachine.properties
     suppress:
       - BodyTopLevelProperties
   - where:
-      - $..definitions["VirtualMachineScaleSetVM"]["properties"]
+      - $.definitions.VirtualMachineScaleSetVM.properties
     suppress:
       - BodyTopLevelProperties
   - where:
-      - $..definitions["ImageReference"]["properties"]
+      - $.definitions.ImageReference.properties
     suppress:
       - BodyTopLevelProperties
   - where:
-      - $..definitions["ManagedDiskParameters"]["properties"]
+      - $.definitions.ManagedDiskParameters.properties
     suppress:
       - BodyTopLevelProperties
   - where:
-      - $..definitions["Disk"]["properties"]
+      - $.definitions.Disk.properties
     suppress:
       - BodyTopLevelProperties
   - where:
-      - $..definitions["Snapshot"]["properties"]
+      - $.definitions.Snapshot.properties
     suppress:
       - BodyTopLevelProperties
 
   - where:
-      - $..definitions["VirtualMachineScaleSetExtension"]["properties"]
+      - $.definitions.VirtualMachineScaleSetExtension
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["VirtualMachineImageResource"]["properties"]
+      - $.definitions.VirtualMachineImageResource
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["VirtualMachineImage"]["properties"]
+      - $.definitions.VirtualMachineImage
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["ImageReference"]["properties"]
+      - $.definitions.ImageReference
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["ManagedDiskParameters"]["properties"]
+      - $.definitions.ManagedDiskParameters
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["NetworkInterfaceReference"]["properties"]
+      - $.definitions.NetworkInterfaceReference
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["VirtualMachineScaleSetIPConfiguration"]["properties"]
+      - $.definitions.VirtualMachineScaleSetIPConfiguration
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["VirtualMachineScaleSetUpdateIPConfiguration"]["properties"]
+      - $.definitions.VirtualMachineScaleSetUpdateIPConfiguration
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["VirtualMachineScaleSetNetworkConfiguration"]["properties"]
+      - $.definitions.VirtualMachineScaleSetNetworkConfiguration
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["VirtualMachineScaleSetUpdateNetworkConfiguration"]["properties"]
+      - $.definitions.VirtualMachineScaleSetUpdateNetworkConfiguration
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $..definitions["VirtualMachineScaleSetUpdate"]["properties"]
+      - $.definitions.VirtualMachineScaleSetUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
 ```
