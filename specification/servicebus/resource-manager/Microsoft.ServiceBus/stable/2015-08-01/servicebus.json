@@ -868,11 +868,14 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_PostCreateOrUpdateAuthorizationRule",
+        "operationId": "Queues_PostAuthorizationRule",
         "x-ms-examples": {
-          "QueueAuthorizationRuleCreate": { "$ref": "./examples/SBQueueAuthorizationRuleCreate.json" }
+          "QueueAutorizationRuleGet": { "$ref": "./examples/SBQueueAutorizationRuleGet.json" }
         },
-        "description": "Creates an authorization rule for a queue.",
+        "description": "Gets an authorization rule for a queue by rule name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -887,15 +890,6 @@
             "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
-            },
-            "description": "The shared access authorization rule."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -904,7 +898,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Authorization rule successfully created.",
+            "description": "Authorization rule successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -1352,13 +1346,13 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_PostCreateOrUpdateAuthorizationRule",
+        "operationId": "Topics_PostAuthorizationRule",
         "x-ms-examples": {
-          "TopicAuthorizationRuleCreate": { "$ref": "./examples/SBTopicAuthorizationRuleCreate.json" }
+          "TopicAutorizationRuleGet": { "$ref": "./examples/SBTopicAutorizationRuleGet.json" }
         },
-        "description": "Creates an authorizatio rule for the specified topic.",
+        "description": "Returns the specified authorization rule.",
         "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx"
         },
         "parameters": [
           {
@@ -1374,15 +1368,6 @@
             "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
-            },
-            "description": "The shared access authorization rule."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1391,7 +1376,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topic authorization rule successfully created.",
+            "description": "Topic authorization rule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }

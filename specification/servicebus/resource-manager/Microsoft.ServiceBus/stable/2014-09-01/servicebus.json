@@ -485,10 +485,10 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_PostCreateOrUpdateAuthorizationRule",
-        "description": "Creates or updates an authorization rule for a namespace.",
+        "operationId": "Namespaces_PostAuthorizationRule",
+        "description": "Gets an authorization rule for a namespace by rule name.",
         "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
         },
         "parameters": [
           {
@@ -501,15 +501,6 @@
             "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
-            },
-            "description": "The shared access authorization rule."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -518,7 +509,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace authorization rule created.",
+            "description": "Namespace authorization rule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -590,7 +581,7 @@
           "200": {
             "description": "Namespace authorization rule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleGetResource"
             }
           }
         }
@@ -838,8 +829,11 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_UpdateAuthorizationRule",
-        "description": "Creates an authorization rule for a queue.",
+        "operationId": "Queues_PostAuthorizationRule",
+        "description": "Gets an authorization rule for a queue by rule name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -854,15 +848,6 @@
             "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
-            },
-            "description": "The shared access authorization rule."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -871,7 +856,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Authorization rule successfully created.",
+            "description": "Authorization rule successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -949,7 +934,7 @@
           "200": {
             "description": "Authorization rule successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleGetResource"
             }
           }
         }
@@ -1200,10 +1185,10 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_UpdateAuthorizationRule",
-        "description": "Creates an authorizatio rule for the specified topic.",
+        "operationId": "Topics_PostAuthorizationRule",
+        "description": "Returns the specified authorization rule.",
         "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx"
         },
         "parameters": [
           {
@@ -1219,15 +1204,6 @@
             "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
-            },
-            "description": "The shared access authorization rule."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1236,7 +1212,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topic authorization rule successfully created.",
+            "description": "Topic authorization rule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -1276,7 +1252,7 @@
           "200": {
             "description": "Topic authorization rule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleGetResource"
             }
           }
         }
@@ -1969,6 +1945,44 @@
         "rights"
       ],
       "description": "AuthorizationRule properties."
+    },
+	"SharedAccessAuthorizationRuleGetResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleGetProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a namespace authorization rule."
+    },
+    "SharedAccessAuthorizationRuleGetProperties": {
+      "properties": {
+        "rights": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Manage",
+              "Send",
+              "Listen"
+            ],
+            "x-ms-enum": {
+              "name": "AccessRights",
+              "modelAsString": false
+            }
+          },
+          "description": "The rights associated with the rule."
+        }
+      },
+      "required": [
+        "rights"
+      ],
+      "description": "SharedAccessAuthorizationRule properties."
     },
     "QueueCreateOrUpdateParameters": {
       "properties": {
