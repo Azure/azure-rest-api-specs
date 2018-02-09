@@ -19,10 +19,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints": {
       "get": {
         "tags": [
-          "DatabaseRestorePoints"
+          "RestorePoints"
         ],
         "description": "Gets a collection of restore points that belongs to the database.",
-        "operationId": "DatabaseRestorePoints_ListByDatabase",
+        "operationId": "RestorePoints_ListByDatabase",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -44,7 +44,7 @@
           "200": {
             "description": "Successfully returned restore points.",
             "schema": {
-              "$ref": "#/definitions/DatabaseRestorePointListResult"
+              "$ref": "#/definitions/RestorePointListResult"
             }
           },
           "default": {
@@ -52,7 +52,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "List database restore points.": {
@@ -65,10 +65,10 @@
       },
       "post": {
         "tags": [
-          "DatabaseRestorePoints"
+          "RestorePoints"
         ],
         "description": "Creates a restore point for a data warehouse.",
-        "operationId": "DatabaseRestorePoints_Create",
+        "operationId": "RestorePoints_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -99,7 +99,7 @@
           "200": {
             "description": "Successfully created the restore point request.",
             "schema": {
-              "$ref": "#/definitions/DatabaseRestorePoint"
+              "$ref": "#/definitions/RestorePoint"
             }
           },
           "default": {
@@ -111,7 +111,7 @@
           "201": {
             "description": "Successfully created the restore point request.",
             "schema": {
-              "$ref": "#/definitions/DatabaseRestorePoint"
+              "$ref": "#/definitions/RestorePoint"
             }
           }
         },
@@ -126,10 +126,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints/{restorePointName}": {
       "get": {
         "tags": [
-          "DatabaseRestorePoints"
+          "RestorePoints"
         ],
         "description": "Gets a restore point.",
-        "operationId": "DatabaseRestorePoints_Get",
+        "operationId": "RestorePoints_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -158,7 +158,7 @@
           "200": {
             "description": "Successfully returned the restore point.",
             "schema": {
-              "$ref": "#/definitions/DatabaseRestorePoint"
+              "$ref": "#/definitions/RestorePoint"
             }
           },
           "default": {
@@ -166,18 +166,18 @@
           }
         },
         "x-ms-examples": {
-          "Gets a database restore point.": {
-            "$ref": "./examples/DatabaseRestorePointsGet.json"
-          },
           "Gets a datawarehouse database restore point.": {
             "$ref": "./examples/DataWarehouseRestorePointsGet.json"
+          },
+          "Gets a database restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsGet.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "DatabaseRestorePointListResult": {
+    "RestorePointListResult": {
       "description": "A list of long term retention bacukps.",
       "type": "object",
       "properties": {
@@ -185,7 +185,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DatabaseRestorePoint"
+            "$ref": "#/definitions/RestorePoint"
           },
           "readOnly": true
         },
@@ -196,7 +196,7 @@
         }
       }
     },
-    "DatabaseRestorePointProperties": {
+    "RestorePointProperties": {
       "description": "Properties of a database restore point",
       "type": "object",
       "properties": {
@@ -210,7 +210,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "RestorePointType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "earliestRestoreDate": {
@@ -264,7 +264,7 @@
       ],
       "properties": {}
     },
-    "DatabaseRestorePoint": {
+    "RestorePoint": {
       "description": "Database restore points.",
       "type": "object",
       "allOf": [
@@ -279,7 +279,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/DatabaseRestorePointProperties",
+          "$ref": "#/definitions/RestorePointProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
