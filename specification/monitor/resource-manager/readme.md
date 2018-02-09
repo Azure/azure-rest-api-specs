@@ -44,7 +44,7 @@ input-file:
 - microsoft.insights/stable/2016-03-01/logProfiles_API.json
 - microsoft.insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - microsoft.insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- microsoft.insights/stable/2017-04-01/actionGroups_API.json
+- microsoft.insights/stable/2018-03-01/actionGroups_API.json
 - microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
 - microsoft.insights/stable/2015-04-01/activityLogs_API.json
 - microsoft.insights/stable/2015-04-01/eventCategories_API.json
@@ -84,6 +84,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```
 
@@ -159,17 +160,20 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-monitor
 ```
 
+
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
 java:
-  # override the default output folder
-  output-folder: $(output-folder)/azure-mgmt-monitor/src/main/java/com/microsoft/azure/management/monitor
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
+  azure-arm: true
+  fluent: true
   namespace: com.microsoft.azure.management.monitor
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 ```
 
 # Validation
