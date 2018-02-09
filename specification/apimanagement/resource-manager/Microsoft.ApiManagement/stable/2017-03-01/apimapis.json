@@ -563,8 +563,7 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-odata": "#/definitions/ApiReleaseContract"
+        }
       },
       "put": {
         "tags": [
@@ -2342,6 +2341,21 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiRevisionContract": {
+      "properties": {        
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiRevisionContractProperties",
+          "description": "Properties of the Api Revision Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Api Revision details."
+    },
+    "ApiRevisionContractProperties": {
       "properties": {
         "apiId": {
           "type":"string",
@@ -2409,6 +2423,7 @@
             "description": "Description of new API Revision."
           },
           "apiVersionSet" : {
+            "description": "Version set details",
             "$ref" : "#/definitions/ApiVersionSetContract"
           }
         }
@@ -2458,7 +2473,7 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiReleaseContract": {
-      "properties": {
+      "properties": {        
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiReleaseContractProperties",
@@ -2479,13 +2494,13 @@
           "type": "string",
           "description": "Identifier of the API the release belongs to."
         },
-        "createdDate": {
+        "createdDateTime": {
           "type":"string",
           "readOnly": true,
           "format": "date-time",
           "description": "The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."        
         },
-        "updatedDate": {
+        "updatedDateTime": {
           "type":"string",
           "readOnly": true,
           "format": "date-time",
@@ -2901,7 +2916,8 @@
       "in": "header",
       "required": true,
       "description": "ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "SchemaIdParameter": {
       "name": "schemaId",
