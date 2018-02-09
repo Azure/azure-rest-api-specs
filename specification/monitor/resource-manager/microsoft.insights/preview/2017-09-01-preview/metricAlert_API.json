@@ -105,7 +105,7 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": { "$ref": "../../stable/2016-03-01/alertRules_Api.json#/definitions/ErrorResponse" }
           }
         },
         "x-ms-pageable": {
@@ -191,7 +191,7 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": { "$ref": "../../stable/2016-03-01/alertRules_Api.json#/definitions/ErrorResponse" }
           }
         },
         "x-ms-pageable": {
@@ -278,7 +278,7 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": { "$ref": "../../stable/2016-03-01/alertRules_Api.json#/definitions/ErrorResponse" }
           }
         },
         "x-ms-examples": {
@@ -369,7 +369,7 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": { "$ref": "../../stable/2016-03-01/alertRules_Api.json#/definitions/ErrorResponse" }
           }
         },
         "x-ms-examples": {
@@ -460,7 +460,7 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": { "$ref": "../../stable/2016-03-01/alertRules_Api.json#/definitions/ErrorResponse" }
           }
         },
         "x-ms-examples": {
@@ -528,7 +528,7 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": { "$ref": "../../stable/2016-03-01/alertRules_Api.json#/definitions/ErrorResponse" }
           }
         },
         "x-ms-examples": {
@@ -575,7 +575,7 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": { "$ref": "../../stable/2016-03-01/alertRules_Api.json#/definitions/ErrorResponse" }
           }
         },
         "x-ms-examples": {
@@ -822,27 +822,6 @@
           "description": "The alert status properties of the metric alert status."
         }
       }
-    },
-    "CloudError": {
-      "description": "Error from a REST request.",
-      "type": "object",
-      "properties": { "error": { "$ref": "#/definitions/CloudErrorBody" } },
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "description": "Body of an error from a REST request.",
-      "type": "object",
-      "properties": {
-        "code": { "type": "string" },
-        "message": { "type": "string" },
-        "target": { "type": "string" },
-        "details": {
-          "description": "Inner errors.",
-          "type": "array",
-          "items": { "$ref": "#/definitions/CloudErrorBody" }
-        }
-      },
-      "x-ms-external": true
     }
   },
   "parameters": {
