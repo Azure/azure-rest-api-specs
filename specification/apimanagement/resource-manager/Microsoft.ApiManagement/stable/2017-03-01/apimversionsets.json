@@ -77,7 +77,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Lists a collection of User entities.",
+                        "description": "Lists a collection of Api Version Set entities.",
                         "schema": {
                             "$ref": "#/definitions/UserCollection"
                         }
@@ -95,7 +95,7 @@
                 "x-ms-odata": "#/definitions/ApiVersionSetContract"
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/api-version-sets/{uid}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/api-version-sets/{versionSetId}": {
             "parameters": [
                 {
                     "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -108,6 +108,9 @@
                 },
                 {
                     "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+                },
+                {
+                    "$ref": "#/parameters/ApiVersionSetIdParameter"
                 }
             ],
             "head": {
@@ -121,11 +124,6 @@
                         "$ref": "./examples/ApiManagementHeadApiVersionSet.json"
                     }
                 },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionSetIdParameter"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Specified Api Version Set entity exists and current entity state version is present in the ETag header.",
@@ -151,27 +149,10 @@
                 "operationId": "ApiVersionSet_Get",
                 "description": "Gets the details of the Api Version Set specified by its identifier.",
                 "x-ms-examples": {
-                    "ApiManagementGetUser": {
+                    "ApiManagementGetApiVersionSet": {
                         "$ref": "./examples/ApiManagementGetApiVersionSet.json"
                     }
                 },
-                "parameters": [
-                    {
-                        "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/UserIdParameter"
-                    },
-                    {
-                        "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Gets the specified Api Version Set entity.",
@@ -206,16 +187,20 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/parameters/ApiVersionSetIdParameter"
-                    },
-                    {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/UserCreateParameters"
+                            "$ref": "#/definitions/ApiVersionSetContract"
                         },
                         "description": "Create or update parameters."
+                    },
+                    {
+                        "name": "If-Match",
+                        "in": "header",
+                        "required": false,
+                        "description": "The entity state (Etag) version of the user to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -252,14 +237,11 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/parameters/ApiVersionSetIdParameter"
-                    },
-                    {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/UserUpdateParameters"
+                            "$ref": "#/definitions/ApiVersionSetContract"
                         },
                         "description": "Update parameters."
                     },
@@ -296,9 +278,6 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/parameters/ApiVersionSetIdParameter"
-                    },
-                    {
                         "name": "If-Match",
                         "in": "header",
                         "required": true,
@@ -308,7 +287,7 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "The user details were successfully deleted."
+                        "description": "The ApiVersion Set details were successfully deleted."
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -324,9 +303,11 @@
         "ApiVersionSetContractProperties": {
             "description": "An API Version Set contains the common configuration for a set of API Versions relating ",
             "properties": {
-                "id": {
+                "displayName": {
                     "type": "string",
-                    "description": "Identifier for existing API Version Set. Omit this value to create a new Version Set."
+                    "description": "Name of API Version Set",
+                    "minLength": 1,
+                    "maxLength": 100
                 },
                 "description": {
                     "type": "string",
@@ -343,11 +324,15 @@
                 },
                 "versionQueryName": {
                     "type": "string",
-                    "description": "Name of query parameter that indicates the API Version if versioningScheme is set to `query`."
+                    "description": "Name of query parameter that indicates the API Version if versioningScheme is set to `query`.",
+                    "minLength": 1,
+                    "maxLength": 100
                 },
                 "versionHeaderName": {
                     "type": "string",
-                    "description": "Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`."
+                    "description": "Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.",
+                    "minLength": 1,
+                    "maxLength": 100
                 }
             }
         },
@@ -369,7 +354,7 @@
     },
     "parameters": {
         "ApiVersionSetIdParameter": {
-            "name": "uid",
+            "name": "versionSetId",
             "in": "path",
             "required": true,
             "type": "string",
