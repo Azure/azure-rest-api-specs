@@ -329,7 +329,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
-      - python .\scripts\multiapi_init_gen.py azure-mgmt-network
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-network
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```
