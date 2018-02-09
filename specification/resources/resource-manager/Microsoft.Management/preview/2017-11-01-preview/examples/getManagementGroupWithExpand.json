@@ -1,9 +1,10 @@
 {
-    "parameters": {
-        "api-version": "2017-11-01-preview",
-        "groupId": "00000000-0000-0000-0000-000000000001",
-        "$expand": "children"
-    },
+  "parameters": {
+    "api-version": "2017-11-01-preview",
+    "groupId": "00000000-0000-0000-0000-000000000001",
+    "$expand": "children",
+    "Cache-Control": "no-cache"
+  },
     "responses": {
         "200": {
             "body": {
@@ -14,11 +15,14 @@
                     "tenantId": "00000000-0000-0000-0000-000000000000",
                     "displayName": "Group Name 1",
                     "details": {
-                        "version": 1,
-                        "updatedTime": "2017-01-01T00:00:00Z",
-                        "updatedBy": "Test",
-                        "parent": null
-                    },
+                    "version": 1,
+                    "updatedTime": "2017-01-01T00:00:00Z",
+                    "updatedBy": "Test",
+                      "parent": {
+                        "parentId": "/providers/Microsoft.Management/managementGroups/RootGroup",
+                        "displayName": "RootGroup"
+                      }
+                  },
                     "children": [
                         {
                             "childType": "ManagementGroup",
