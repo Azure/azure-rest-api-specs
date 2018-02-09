@@ -387,7 +387,22 @@
         }
       }
     },
-    "SqlSource": {
+    "SapEccSource": {
+      "description": "A copy activity source for SAP ECC source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "SAP ECC OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+	"SqlSource": {
       "description": "A copy activity SQL source.",
       "type": "object",
       "allOf": [

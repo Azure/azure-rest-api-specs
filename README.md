@@ -33,18 +33,18 @@ The structure of the directory should strictly follow these rules:
 
 1. **Profile**: The profile holder contains the profiles' definition MD files. these files will contain information and references to the snapshots of the RPs' Resource types or Dataplane API versions that represent a specific profile.
 
-2. **Specification**: This folder the is root folder for all Specs (Management and Dataplane) related docs. 
+2. **Specification**: This folder the is root folder for all Specs (Management and Dataplane) related docs.
 
-3. **<RP-Name>** Folders - each RP will have a seperate folder
+3. **<RP-Name>** Folders - each RP will have a separate folder
 
-4. **'resource-manager' and 'data-plane' Folders**: the RPs can put specs in one of two categories: `resource-manager` (for ARM resources) and `data-plane` (for everything else) . The autorest configuration file (`readme.md`) for the RP should be inside this folder 
+4. **'resource-manager' and 'data-plane' Folders**: the RPs can put specs in one of two categories: `resource-manager` (for ARM resources) and `data-plane` (for everything else) . The autorest configuration file (`readme.md`) for the RP should be inside this folder
 
-4. **API versions**: this folder will be the direct child of the category folder. there will be one such folder per resource type or dataplane service version. This folder will contain the OpenAPI validation Specs (Swaggers previously) and the examples folder. 
+4. **API versions**: this folder will be the direct child of the category folder. there will be one such folder per resource type or dataplane service version. This folder will contain the OpenAPI validation Specs (Swaggers previously) and the examples folder.
 
-6. **Examples**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples. 
+6. **Examples**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples.
 
-7. **Notes**: 
-    - folder names should be singular (ie, 'profile' not 'profiles' ) -- this removes ambiguity for some non-english speakers. 
+7. **Notes**:
+    - folder names should be singular (ie, 'profile' not 'profiles' ) -- this removes ambiguity for some non-english speakers.
     - generic folder names should be lower-case
     - proper-name/product name/namespace folders can be PascalCased (ie, "KeyVault")
     - files are whatever case you think is good for your soul.
