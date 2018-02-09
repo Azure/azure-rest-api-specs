@@ -864,6 +864,53 @@
           }
         }
       },
+	  "post": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queues_PostCreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleCreate": { "$ref": "./examples/SBQueueAuthorizationRuleCreate.json" }
+        },
+        "description": "Creates an authorization rule for a queue.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/queueNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+            },
+            "description": "The shared access authorization rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rule successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Queues"
@@ -1256,6 +1303,56 @@
           "Topics"
         ],
         "operationId": "Topics_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleCreate": { "$ref": "./examples/SBTopicAuthorizationRuleCreate.json" }
+        },
+        "description": "Creates an authorizatio rule for the specified topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/topicNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+            },
+            "description": "The shared access authorization rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic authorization rule successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      },
+	  "post": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topics_PostCreateOrUpdateAuthorizationRule",
         "x-ms-examples": {
           "TopicAuthorizationRuleCreate": { "$ref": "./examples/SBTopicAuthorizationRuleCreate.json" }
         },

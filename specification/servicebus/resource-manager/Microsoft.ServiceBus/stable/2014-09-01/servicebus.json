@@ -93,12 +93,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/CheckNamespaceSpaceAvailability": {
+	"/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/CheckNameSpaceAvailability": {
       "post": {
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_CheckNamespaceSpaceAvailability",
+        "operationId": "Namespaces_CheckNameSpaceAvailability",
         "description": "Check the give namespace name availability.",
         "parameters": [
           {
@@ -126,7 +126,7 @@
           }
         }
       }
-    },
+    },    
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
       "get": {
         "tags": [
@@ -404,7 +404,7 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_ListAuthorizationRulesPost",
+        "operationId": "Namespaces_ListPostAuthorizationRules",
         "description": "Gets the authorization rules for a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
@@ -485,7 +485,7 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_UpdateAuthorizationRule",
+        "operationId": "Namespaces_PostCreateOrUpdateAuthorizationRule",
         "description": "Creates or updates an authorization rule for a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
@@ -518,7 +518,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace authorization rule updated.",
+            "description": "Namespace authorization rule created.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
