@@ -1172,10 +1172,12 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "Async operation id."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Async operation name."
         },
         "provisioningState": {
@@ -1207,10 +1209,12 @@
         },
         "percentComplete": {
           "type": "number",
+          "readOnly": true,
           "description": "Async operation progress."
         },
         "errorInfo": {
           "$ref": "#/definitions/AsyncOperationErrorInfo",
+          "readOnly": true,
           "description": "If the async operation fails, this structure contains the error details."
         }
       }
@@ -1237,6 +1241,7 @@
         "details": {
           "type": "array",
           "description": "An array containing error information.",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/AsyncOperationErrorInfo"
           }
@@ -1249,6 +1254,7 @@
       "properties": {
         "value": {
           "description": "The list of operations.",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationEntity"
