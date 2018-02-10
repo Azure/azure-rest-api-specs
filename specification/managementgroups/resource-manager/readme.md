@@ -30,9 +30,9 @@ tag: package-2018-01
 ### Tag: package-2018-01
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-11'
+``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.Management/preview/2018-01-01-preview/management.json
+  - Microsoft.Management/preview/2018-01-01-preview/management.json
 ```
 
 ### Tag: package-2017-11
@@ -40,7 +40,7 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
-- Microsoft.Management/preview/2017-11-01-preview/management.json
+  - Microsoft.Management/preview/2017-11-01-preview/management.json
 ```
 
 ### Tag: package-2017-08
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-- Microsoft.Management/preview/2017-08-31-preview/management.json
+  - Microsoft.Management/preview/2017-08-31-preview/management.json
 ```
 
 ---
