@@ -1,14 +1,14 @@
-# SearchClient
+# SearchManagementClient
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for SearchClient.
+This is the AutoRest configuration file for SearchManagementClient.
 
 
 
 ---
 ## Getting Started 
-To build the SDK for SearchClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for SearchManagementClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information 
-These are the global settings for the SearchClient API.
+These are the global settings for the SearchManagementClient API.
 
 ``` yaml
 openapi-type: arm

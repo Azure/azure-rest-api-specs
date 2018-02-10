@@ -6314,6 +6314,15 @@
         "singlePlacementGroup": {
           "type": "boolean",
           "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+        },
+        "zoneBalance": {
+          "type": "boolean",
+          "description": "Whether to force stictly even Virtual Machine distribution cross x-zones in case there is zone outage."
+        },
+        "platformFaultDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Fault Domain count for each placement group."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."

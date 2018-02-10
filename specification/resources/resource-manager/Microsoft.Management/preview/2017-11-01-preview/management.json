@@ -135,7 +135,7 @@
                     "GetManagementGroupWithExpand": {
                         "$ref": "./examples/getManagementGroupWithExpand.json"
                     },
-                    "GetManagementGroupsWithExpandAndResurse": {
+                    "GetManagementGroupsWithExpandAndRecurse": {
                         "$ref": "./examples/getManagementGroupWithExpandAndRecurse.json"
                     }
                 }
@@ -154,7 +154,7 @@
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/CreateGroupRequestParameter"
+                        "$ref": "#/parameters/CreateManagementGroupRequestParameter"
                     },
                     {
                         "$ref": "#/parameters/CacheControlHeader"
@@ -194,7 +194,7 @@
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/CreateGroupRequestParameter"
+                        "$ref": "#/parameters/CreateManagementGroupRequestParameter"
                     },
                     {
                         "$ref": "#/parameters/CacheControlHeader"
@@ -619,7 +619,7 @@
             ],
             "description": "The type of child resource."
         },
-        "CreateGroupRequest": {
+        "CreateManagementGroupRequest": {
             "description": "Management group creation parameters.",
             "type": "object",
             "properties": {
@@ -677,14 +677,14 @@
             "x-ms-parameter-location": "method",
             "description": "The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload."
         },
-        "CreateGroupRequestParameter": {
-            "name": "createGroupRequest",
+        "CreateManagementGroupRequestParameter": {
+            "name": "createManagementGroupRequest",
             "in": "body",
             "required": true,
             "description": "Management group creation parameters.",
             "x-ms-parameter-location": "method",
             "schema": {
-                "$ref": "#/definitions/CreateGroupRequest"
+                "$ref": "#/definitions/CreateManagementGroupRequest"
             }
         },
         "CacheControlHeader": {
