@@ -41,7 +41,6 @@ This section contains the input swagger files that are used when generating clie
 
 ``` yaml $(tag) == 'package-2017-03-preview'
 input-file:
-- Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/capabilities.json
