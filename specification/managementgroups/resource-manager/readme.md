@@ -134,7 +134,7 @@ These settings apply only when `--tag=package-2018-01 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/managementgroups/mgmt/2018-01-01-preview/managementgroups
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-01-01-preview/management
 ```
 
 ### Tag: package-2017-11 and go
@@ -143,7 +143,7 @@ These settings apply only when `--tag=package-2017-11 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-11' && $(go)
-output-folder: $(go-sdk-folder)/services/managementgroups/mgmt/2017-11-01-preview/managementgroups
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-11-01-preview/management
 ```
 
 ### Tag: package-2017-08 and go
