@@ -474,8 +474,12 @@
         },
         "enableSoftDelete": {
           "type": "boolean",
-          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. It does not accept false value."
+          "description": "Property specifying whether recoverable deletion ('soft' delete) is enabled for this key vault. The property may not be set to false."
         },
+		"enablePurgeProtection": {
+			"type": "boolean",
+			"description": "Property specifying whether protection against purge is enabled for this vault; it is only effective if soft delete is also enabled. Once activated, the property may no longer be reset to false."
+		},
         "createMode": {
           "type": "string",
           "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
