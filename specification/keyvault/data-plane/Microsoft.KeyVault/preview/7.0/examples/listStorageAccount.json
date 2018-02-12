@@ -1,7 +1,7 @@
 {
    "parameters":{
       "vaultBaseUrl":"https://storage-sdk-test.vault-int.azure-int.net/",
-      "api-version":"2016-10-01"
+      "api-version":"7.0-preview"
    },
    "responses":{
       "200":{
@@ -16,7 +16,8 @@
                   "attributes":{
                      "enabled":true,
                      "created":1490738386,
-                     "updated":1490738386
+                     "updated":1490738386,
+                     "recoveryLevel": "Recoverable+Purgeable"
                   },
                   "tags":{"tag1":"val1", "tag2":"val2"}
                },
@@ -26,12 +27,13 @@
                   "attributes":{
                      "enabled":true,
                      "created":1490738386,
-                     "updated":1490738386
+                     "updated":1490738386,
+                     "recoveryLevel": "Recoverable+Purgeable"
                   },
                   "tags":{"tag3":"val3", "tag4":"val4"}
                }
             ],
-            "nextLink":"https://{BaseUri}/storage?api-version=2016-10-01&%24skiptoken=<token>"
+            "nextLink":"https://{BaseUri}/storage?api-version=7.0-preview&%24skiptoken=<token>"
          }
       }
    }

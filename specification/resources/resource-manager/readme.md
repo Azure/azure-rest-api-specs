@@ -57,7 +57,7 @@ tag: package-managedapplications-2016-09
 ```
 
 ``` yaml $(package-management)
-tag: package-management-2018-01
+tag: package-management-2017-11
 ```
 
 ### Tag: package-features-2015-12
@@ -210,7 +210,7 @@ input-file:
 ### Tag: package-management-2018-01
 These settings apply only when `--tag=package-management-2018-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-management-2018-11'
+``` yaml $(tag) == 'package-management-2018-01'
 input-file:
 - Microsoft.Management/preview/2018-01-01-preview/management.json
 ```
@@ -243,6 +243,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#features
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#locks
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#policy
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```

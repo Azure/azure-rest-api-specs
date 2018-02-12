@@ -35,6 +35,77 @@ title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
 tag: package-2017-12
+
+directive:
+  - where:
+      - $.definitions.VirtualMachine.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.VirtualMachineScaleSetVM.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.ImageReference.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.ManagedDiskParameters.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.Disk.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.Snapshot.properties
+    suppress:
+      - BodyTopLevelProperties
+
+  - where:
+      - $.definitions.VirtualMachineScaleSetExtension
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineImage
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.ImageReference
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.ManagedDiskParameters
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.NetworkInterfaceReference
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetIPConfiguration
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetUpdateIPConfiguration
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetNetworkConfiguration
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetUpdateNetworkConfiguration
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
 ```
 
 ### Tag: package-2017-12
@@ -212,6 +283,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-compute
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```

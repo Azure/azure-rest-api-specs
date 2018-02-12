@@ -50,7 +50,6 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 input-file:
 - Microsoft.ApiManagement/stable/2017-03-01/apimanagement.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimapis.json
-- Microsoft.ApiManagement/stable/2017-03-01/apimapisbytags.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimauthorizationservers.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimbackends.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimcertificates.json
