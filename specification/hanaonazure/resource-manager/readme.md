@@ -119,7 +119,7 @@ batch:
 These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(go) && $(tag) == 'package-2017-11'
+``` yaml $(tag) == 'package-2017-11' && $(go)
 output-folder: $(go-sdk-folder)/services/hanaonazure/mgmt/2017-11-03-preview/hanaonazure
 ```
 
@@ -128,7 +128,7 @@ output-folder: $(go-sdk-folder)/services/hanaonazure/mgmt/2017-11-03-preview/han
 These settings apply only when `--tag=package-2017-06 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(go) && $(tag) == 'package-2017-06'
+``` yaml $(tag) == 'package-2017-06' && $(go)
 output-folder: $(go-sdk-folder)/services/hanaonazure/mgmt/2017-06-15-preview/hanaonazure
 ```
 
