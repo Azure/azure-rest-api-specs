@@ -328,7 +328,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/longTermRetentionPolicies/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}": {
       "get": {
         "tags": [
           "LongTermRetentionPolicies"
@@ -451,7 +451,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/longTermRetentionPolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies": {
       "get": {
         "tags": [
           "LongTermRetentionPolicies"
@@ -526,6 +526,12 @@
           "description": "The time the backup was taken",
           "type": "string",
           "readOnly": true
+        },
+        "backupExpirationTime": {
+          "format": "date-time",
+          "description": "The time the long term retention backup will expire.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -558,7 +564,8 @@
         {
           "$ref": "#/definitions/Resource"
         }
-      ]
+      ],
+      "properties": {}
     },
     "LongTermRetentionBackup": {
       "description": "A long term retention backup.",
@@ -613,7 +620,7 @@
         },
         "weekOfYear": {
           "format": "int32",
-          "description": "The week of year to take the yearly backup.",
+          "description": "The week of year to take the yearly backup in an ISO 8601 format.",
           "type": "integer"
         }
       }
@@ -682,6 +689,17 @@
       "description": "The name of the database.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
       "x-ms-parameter-location": "method"
     },
     "SqlVirtualMachineInstanceNameParameter": {
