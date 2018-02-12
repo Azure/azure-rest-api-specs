@@ -133,6 +133,7 @@ batch:
   - tag: "1.0.0"
   - tag: "5.6"
   - tag: "6.0"
+  - tag: "6.1"
 ```
 
 ### Tag: 1.0.0 and go
@@ -157,6 +158,14 @@ These settings apply only when `--tag=6.0 --go` is specified on the command line
 
 ``` yaml $(tag) == '6.0' && $(go)
 output-folder: $(go-sdk-folder)/services/servicefabric/6.0/servicefabric
+```
+
+### Tag: 6.1 and go
+
+These settings apply only when `--tag=6.1 --go` is specified on the command line.
+
+``` yaml $(tag) == '6.1' && $(go)
+output-folder: $(go-sdk-folder)/services/servicefabric/6.1/servicefabric
 ```
 
 
