@@ -85,12 +85,6 @@
         "2018-02-02"
       ]
     },
-    "contentType": {
-      "name": "Content-Type",
-      "description": "Standard request header. Used by service to identify format of client's request body.",
-      "type": "string",
-      "in": "header"
-    },
     "acceptLanguage": {
       "description": "Standard request header. Used by service to respond to client in appropriate language.",
       "name": "Accept-Language",
@@ -109,6 +103,13 @@
       }
     }
   },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "definitions": {
     "Project": {
       "type": "object",
@@ -192,7 +193,7 @@
           "type": "string",
           "format": "date-time",
           "description": "Time when this project was created. Date-Time represented in ISO-8601 format. This value will be null until discovery is complete.",
-          "default": "null",
+          "x-nullable": true,
           "readOnly": true
         },
         "lastDiscoverySessionId": {
@@ -222,7 +223,7 @@
           "type": "string",
           "format": "date-time",
           "description": "Time when last assessment was created. Date-Time represented in ISO-8601 format. This value will be null until assessment is created.",
-          "default": "null",
+          "x-nullable": true,
           "readOnly": true
         },
         "provisioningState": {
@@ -243,1470 +244,1468 @@
         }
       }
     },
-      "Group": {
-        "type": "object",
-        "x-ms-azure-resource": true,
-        "description": "A group created in a Migration project.",
-        "required": [
-          "properties"
-        ],
+    "Group": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "A group created in a Migration project.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "description": "Path reference to this group. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "For optimistic concurrency control."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/projects/groups].",
+          "readOnly": true
+        },
         "properties": {
-          "id": {
-            "description": "Path reference to this group. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}",
+          "description": "Properties of the group.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GroupProperties"
+        }
+      }
+    },
+    "GroupProperties": {
+      "type": "object",
+      "description": "Properties of group resource.",
+      "required": [
+        "machines"
+      ],
+      "properties": {
+        "machines": {
+          "type": "array",
+          "description": "List of machine names that are part of this group.",
+          "items": {
             "type": "string",
+            "description": "Reference to a machine. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines/{machineName}"
+          }
+        },
+        "assessments": {
+          "type": "array",
+          "description": "List of References to Assessments created on this group.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "Reference to an Assessment. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}",
             "readOnly": true
-          },
-          "name": {
-            "description": "Name of the group.",
+          }
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this project was created. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this project was last updated. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        }
+      }
+    },
+    "Assessment": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "An assessment created for a group in the Migration project.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Path reference to this assessment. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessment/{assessmentName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Unique name of an assessment.",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "For optimistic concurrency control."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/projects/groups/assessments].",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the assessment.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssessmentProperties"
+        }
+      }
+    },
+    "AssessmentProperties": {
+      "type": "object",
+      "description": "Properties of an assessment.",
+      "required": [
+        "stage",
+        "azureOfferCode",
+        "timeRange",
+        "percentile",
+        "azureLocation",
+        "azureStorageRedundancy",
+        "scalingFactor",
+        "azurePricingTier",
+        "currency",
+        "azureHybridUseBenefit",
+        "discountPercentage",
+        "sizingCriterion"
+      ],
+      "properties": {
+        "azureLocation": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "EastAsia",
+            "SoutheastAsia",
+            "AustraliaEast",
+            "AustraliaSoutheast",
+            "BrazilSouth",
+            "CanadaCentral",
+            "CanadaEast",
+            "WestEurope",
+            "NorthEurope",
+            "CentralIndia",
+            "SouthIndia",
+            "WestIndia",
+            "JapanEast",
+            "JapanWest",
+            "KoreaCentral",
+            "KoreaSouth",
+            "UkWest",
+            "UkSouth",
+            "NorthCentralUs",
+            "EastUs",
+            "WestUs2",
+            "SouthCentralUs",
+            "CentralUs",
+            "EastUs2",
+            "WestUs",
+            "WestCentralUs",
+            "GermanyCentral",
+            "GermanyNortheast",
+            "ChinaNorth",
+            "ChinaEast"
+          ],
+          "description": "Target Azure location for which the machines should be assessed. These enums are the same as used by Compute API.",
+          "x-ms-enum": {
+            "name": "AzureLocation",
+            "modelAsString": true
+          }
+        },
+        "azureOfferCode": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "MSAZR0003P",
+            "MSAZR0044P",
+            "MSAZR0059P",
+            "MSAZR0060P",
+            "MSAZR0062P",
+            "MSAZR0063P",
+            "MSAZR0064P",
+            "MSAZR0029P",
+            "MSAZR0022P",
+            "MSAZR0023P",
+            "MSAZR0148P",
+            "MSAZR0025P",
+            "MSAZR0036P",
+            "MSAZR0120P",
+            "MSAZR0121P",
+            "MSAZR0122P",
+            "MSAZR0123P",
+            "MSAZR0124P",
+            "MSAZR0125P",
+            "MSAZR0126P",
+            "MSAZR0127P",
+            "MSAZR0128P",
+            "MSAZR0129P",
+            "MSAZR0130P",
+            "MSAZR0111P",
+            "MSAZR0144P",
+            "MSAZR0149P",
+            "MSMCAZR0044P",
+            "MSMCAZR0059P",
+            "MSMCAZR0060P",
+            "MSMCAZR0063P",
+            "MSMCAZR0120P",
+            "MSMCAZR0121P",
+            "MSMCAZR0125P",
+            "MSMCAZR0128P",
+            "MSAZRDE0003P",
+            "MSAZRDE0044P"
+          ],
+          "description": "Offer code according to which cost estimation is done.",
+          "x-ms-enum": {
+            "name": "AzureOfferCode",
+            "modelAsString": true
+          }
+        },
+        "azurePricingTier": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Basic"
+          ],
+          "description": "Pricing tier for Size evaluation.",
+          "x-ms-enum": {
+            "name": "AzurePricingTier",
+            "modelAsString": true
+          }
+        },
+        "azureStorageRedundancy": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "GeoRedundant",
+            "ReadAccessGeoRedundant"
+          ],
+          "description": "Storage Redundancy type offered by Azure.",
+          "x-ms-enum": {
+            "name": "AzureStorageRedundancy",
+            "modelAsString": true
+          }
+        },
+        "scalingFactor": {
+          "type": "number",
+          "format": "double",
+          "description": "Scaling factor used over utilization data to add a performance buffer for new machines to be created in Azure. Min Value = 1.0, Max value = 1.9, Default = 1.3."
+        },
+        "percentile": {
+          "type": "string",
+          "enum": [
+            "Percentile50",
+            "Percentile90",
+            "Percentile95",
+            "Percentile99"
+          ],
+          "description": "Percentile of performance data used to recommend Azure size.",
+          "x-ms-enum": {
+            "name": "Percentile",
+            "modelAsString": true
+          }
+        },
+        "timeRange": {
+          "type": "string",
+          "enum": [
+            "Day",
+            "Week",
+            "Month"
+          ],
+          "description": "Time range of performance data used to recommend a size.",
+          "x-ms-enum": {
+            "name": "TimeRange",
+            "modelAsString": true
+          }
+        },
+        "stage": {
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "UnderReview",
+            "Approved"
+          ],
+          "description": "User configurable setting that describes the status of the assessment.",
+          "x-ms-enum": {
+            "name": "AssessmentStage",
+            "modelAsString": true
+          }
+        },
+        "currency": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "USD",
+            "DKK",
+            "CAD",
+            "IDR",
+            "JPY",
+            "KRW",
+            "NZD",
+            "NOK",
+            "RUB",
+            "SAR",
+            "ZAR",
+            "SEK",
+            "TRY",
+            "GBP",
+            "MXN",
+            "MYR",
+            "INR",
+            "HKD",
+            "BRL",
+            "TWD",
+            "EUR",
+            "CHF",
+            "ARS",
+            "AUD",
+            "CNY"
+          ],
+          "description": "Currency to report prices in.",
+          "x-ms-enum": {
+            "name": "Currency",
+            "modelAsString": true
+          }
+        },
+        "azureHybridUseBenefit": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Yes",
+            "No"
+          ],
+          "description": "AHUB discount on windows virtual machines.",
+          "x-ms-enum": {
+            "name": "AzureHybridUseBenefit",
+            "modelAsString": true
+          }
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Custom discount percentage to be applied on final costs. Can be in the range [0, 100]."
+        },
+        "confidenceRatingInPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence rating percentage for assessment. Can be in the range [0, 100].",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "sizingCriterion": {
+          "type": "string",
+          "enum": [
+            "PerformanceBased",
+            "AsOnPremises"
+          ],
+          "description": "Assessment sizing criterion.",
+          "x-ms-enum": {
+            "name": "AssessmentSizingCriterion",
+            "modelAsString": true
+          }
+        },
+        "pricesTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the Azure Prices were queried. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this project was created. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this project was last updated. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "monthlyComputeCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Monthly compute cost estimate for the machines that are part of this assessment as a group, for a 31-day month.",
+          "readOnly": true
+        },
+        "monthlyBandwidthCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Monthly network cost estimate for the machines that are part of this assessment as a group, for a 31-day month.",
+          "readOnly": true
+        },
+        "monthlyStorageCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Monthly storage cost estimate for the machines that are part of this assessment as a group, for a 31-day month.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Created",
+            "Updated",
+            "Running",
+            "Completed",
+            "Invalid"
+          ],
+          "description": "Wheter the assessment has been created and is valid.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AssessmentStatus",
+            "modelAsString": true
+          }
+        },
+        "numberOfMachines": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of assessed machines part of this assessment.",
+          "readOnly": true
+        }
+      }
+    },
+    "Disk": {
+      "type": "object",
+      "description": "A disk discovered on a machine.",
+      "properties": {
+        "gigabytesProvisioned": {
+          "type": "number",
+          "format": "double",
+          "description": "Gigabytes of storage provisioned for this disk.",
+          "readOnly": true
+        },
+        "gigabytesConsumed": {
+          "format": "double",
+          "type": "number",
+          "description": "Gigabytes of storage consumed by this disk.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkAdapter": {
+      "type": "object",
+      "description": "A network adapter discovered on a machine.",
+      "properties": {
+        "macAddress": {
+          "type": "string",
+          "description": "MAC Address of the network adapter.",
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "type": "array",
+          "description": "List of IP Addresses on the network adapter.",
+          "readOnly": true,
+          "items": {
             "type": "string",
+            "description": "IP Address of the network adapter.",
             "readOnly": true
-          },
-          "eTag": {
-            "type": "string",
-            "description": "For optimistic concurrency control."
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object = [Microsoft.Migrate/projects/groups].",
-            "readOnly": true
-          },
-          "properties": {
-            "description": "Properties of the group.",
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/GroupProperties"
           }
         }
-      },
-      "GroupProperties": {
-        "type": "object",
-        "description": "Properties of group resource.",
-        "required": [
-          "machines"
-        ],
+      }
+    },
+    "Machine": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "A machine in a migration project.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Path reference to this machine. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines/{machineName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the machine. It is a GUID which is unique identifier of machine in private data center. For user-readable name, we have a displayName property on this machine.",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "For optimistic concurrency control."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/projects/machines].",
+          "readOnly": true
+        },
         "properties": {
-          "machines": {
-            "type": "array",
-            "description": "List of machine names that are part of this group.",
-            "items": {
-              "type": "string",
-              "description": "Reference to a machine. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines/{machineName}"
-            }
-          },
-          "assessments": {
-            "type": "array",
-            "description": "List of References to Assessments created on this group.",
+          "description": "Properties of the machine.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MachineProperties"
+        }
+      }
+    },
+    "MachineProperties": {
+      "type": "object",
+      "description": "Properties of a machine.",
+      "properties": {
+        "bootType": {
+          "type": "string",
+          "description": "Boot type of the machine.",
+          "enum": [
+            "Unknown",
+            "EFI",
+            "BIOS"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MachineBootType",
+            "modelAsString": true
+          }
+        },
+        "datacenterContainer": {
+          "type": "string",
+          "description": "Container defined in the management solution that this machine is part of in the datacenter.",
+          "readOnly": true
+        },
+        "datacenterManagementServer": {
+          "type": "string",
+          "description": "Name of the server hosting the datacenter management solution.",
+          "readOnly": true
+        },
+        "datacenterMachineId": {
+          "type": "string",
+          "description": "ID of the machine as tracked by the datacenter management solution.",
+          "readOnly": true
+        },
+        "datacenterManagementServerId": {
+          "type": "string",
+          "description": "ID of the server hosting the datacenter management solution.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the machine",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User readable name of the machine as defined by the user in their private datacenter.",
+          "readOnly": true
+        },
+        "megabytesOfMemory": {
+          "type": "number",
+          "description": "Memory in Megabytes.",
+          "readOnly": true
+        },
+        "numberOfCores": {
+          "type": "integer",
+          "description": "Processor count.",
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Operating System of the machine.",
+          "readOnly": true
+        },
+        "groups": {
+          "type": "array",
+          "description": "List of references to the groups that the machine is member of.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
             "readOnly": true,
-            "items": {
+            "description": "Reference to a group that this machine is member of. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}"
+          }
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this machine was created. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this machine was last updated. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "discoveredTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this machine was discovered by Azure Migrate agent. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "disks": {
+          "type": "object",
+          "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object",
+          "readOnly": true,
+          "properties": {
+            "key": {
               "type": "string",
-              "description": "Reference to an Assessment. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}",
+              "description": "Unique identifier of a disk.",
               "readOnly": true
-            }
-          },
-          "createdTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this project was created. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          },
-          "updatedTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this project was last updated. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          }
-        }
-      },
-      "Assessment": {
-        "type": "object",
-        "x-ms-azure-resource": true,
-        "description": "An assessment created for a group in the Migration project.",
-        "required": [
-          "properties"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Path reference to this assessment. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessment/{assessmentName}",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Unique name of an assessment.",
-            "readOnly": true
-          },
-          "eTag": {
-            "type": "string",
-            "description": "For optimistic concurrency control."
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object = [Microsoft.Migrate/projects/groups/assessments].",
-            "readOnly": true
-          },
-          "properties": {
-            "description": "Properties of the assessment.",
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/AssessmentProperties"
-          }
-        }
-      },
-      "AssessmentProperties": {
-        "type": "object",
-        "description": "Properties of an assessment.",
-        "required": [
-          "stage",
-          "azureOfferCode",
-          "timeRange",
-          "percentile",
-          "azureLocation",
-          "azureStorageRedundancy",
-          "scalingFactor",
-          "azurePricingTier",
-          "currency",
-          "azureHybridUseBenefit",
-          "discountPercentage",
-          "sizingCriterion"
-        ],
-        "properties": {
-          "azureLocation": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "EastAsia",
-              "SoutheastAsia",
-              "AustraliaEast",
-              "AustraliaSoutheast",
-              "BrazilSouth",
-              "CanadaCentral",
-              "CanadaEast",
-              "WestEurope",
-              "NorthEurope",
-              "CentralIndia",
-              "SouthIndia",
-              "WestIndia",
-              "JapanEast",
-              "JapanWest",
-              "KoreaCentral",
-              "KoreaSouth",
-              "UkWest",
-              "UkSouth",
-              "NorthCentralUs",
-              "EastUs",
-              "WestUs2",
-              "SouthCentralUs",
-              "CentralUs",
-              "EastUs2",
-              "WestUs",
-              "WestCentralUs",
-              "GermanyCentral",
-              "GermanyNortheast",
-              "ChinaNorth",
-              "ChinaEast"
-            ],
-            "description": "Target Azure location for which the machines should be assessed. These enums are the same as used by Compute API.",
-            "x-ms-enum": {
-              "name": "AzureLocation",
-              "modelAsString": true
-            }
-          },
-          "azureOfferCode": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "MSAZR0003P",
-              "MSAZR0044P",
-              "MSAZR0059P",
-              "MSAZR0060P",
-              "MSAZR0062P",
-              "MSAZR0063P",
-              "MSAZR0064P",
-              "MSAZR0029P",
-              "MSAZR0022P",
-              "MSAZR0023P",
-              "MSAZR0148P",
-              "MSAZR0025P",
-              "MSAZR0036P",
-              "MSAZR0120P",
-              "MSAZR0121P",
-              "MSAZR0122P",
-              "MSAZR0123P",
-              "MSAZR0124P",
-              "MSAZR0125P",
-              "MSAZR0126P",
-              "MSAZR0127P",
-              "MSAZR0128P",
-              "MSAZR0129P",
-              "MSAZR0130P",
-              "MSAZR0111P",
-              "MSAZR0144P",
-              "MSAZR0149P",
-              "MSMCAZR0044P",
-              "MSMCAZR0059P",
-              "MSMCAZR0060P",
-              "MSMCAZR0063P",
-              "MSMCAZR0120P",
-              "MSMCAZR0121P",
-              "MSMCAZR0125P",
-              "MSMCAZR0128P",
-              "MSAZRDE0003P",
-              "MSAZRDE0044P"
-            ],
-            "description": "Offer code according to which cost estimation is done.",
-            "x-ms-enum": {
-              "name": "AzureOfferCode",
-              "modelAsString": true
-            }
-          },
-          "azurePricingTier": {
-            "type": "string",
-            "enum": [
-              "Standard",
-              "Basic"
-            ],
-            "description": "Pricing tier for Size evaluation.",
-            "x-ms-enum": {
-              "name": "AzurePricingTier",
-              "modelAsString": true
-            }
-          },
-          "azureStorageRedundancy": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "LocallyRedundant",
-              "ZoneRedundant",
-              "GeoRedundant",
-              "ReadAccessGeoRedundant"
-            ],
-            "description": "Storage Redundancy type offered by Azure.",
-            "x-ms-enum": {
-              "name": "AzureStorageRedundancy",
-              "modelAsString": true
-            }
-          },
-          "scalingFactor": {
-            "type": "number",
-            "format": "double",
-            "description": "Scaling factor used over utilization data to add a performance buffer for new machines to be created in Azure. Min Value = 1.0, Max value = 1.9, Default = 1.3."
-          },
-          "percentile": {
-            "type": "string",
-            "enum": [
-              "Percentile50",
-              "Percentile90",
-              "Percentile95",
-              "Percentile99"
-            ],
-            "description": "Percentile of performance data used to recommend Azure size.",
-            "x-ms-enum": {
-              "name": "Percentile",
-              "modelAsString": true
-            }
-          },
-          "timeRange": {
-            "type": "string",
-            "enum": [
-              "Day",
-              "Week",
-              "Month"
-            ],
-            "description": "Time range of performance data used to recommend a size.",
-            "x-ms-enum": {
-              "name": "TimeRange",
-              "modelAsString": true
-            }
-          },
-          "stage": {
-            "type": "string",
-            "enum": [
-              "InProgress",
-              "UnderReview",
-              "Approved"
-            ],
-            "description": "User configurable setting that describes the status of the assessment.",
-            "x-ms-enum": {
-              "name": "AssessmentStage",
-              "modelAsString": true
-            }
-          },
-          "currency": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "USD",
-              "DKK",
-              "CAD",
-              "IDR",
-              "JPY",
-              "KRW",
-              "NZD",
-              "NOK",
-              "RUB",
-              "SAR",
-              "ZAR",
-              "SEK",
-              "TRY",
-              "GBP",
-              "MXN",
-              "MYR",
-              "INR",
-              "HKD",
-              "BRL",
-              "TWD",
-              "EUR",
-              "CHF",
-              "ARS",
-              "AUD",
-              "CNY"
-            ],
-            "description": "Currency to report prices in.",
-            "x-ms-enum": {
-              "name": "Currency",
-              "modelAsString": true
-            }
-          },
-          "azureHybridUseBenefit": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "Yes",
-              "No"
-            ],
-            "description": "AHUB discount on windows virtual machines.",
-            "x-ms-enum": {
-              "name": "AzureHybridUseBenefit",
-              "modelAsString": true
-            }
-          },
-          "discountPercentage": {
-            "type": "number",
-            "format": "double",
-            "description": "Custom discount percentage to be applied on final costs. Can be in the range [0, 100]."
-          },
-          "confidenceRatingInPercentage": {
-            "type": "number",
-            "format": "double",
-            "description": "Confidence rating percentage for assessment. Can be in the range [0, 100].",
-            "default": "null",
-            "readOnly": true
-          },
-          "sizingCriterion": {
-            "type": "string",
-            "enum": [
-              "PerformanceBased",
-              "AsOnPremises"
-            ],
-            "description": "Assessment sizing criterion.",
-            "x-ms-enum": {
-              "name": "AssessmentSizingCriterion",
-              "modelAsString": true
-            }
-          },
-          "pricesTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when the Azure Prices were queried. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          },
-          "createdTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this project was created. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          },
-          "updatedTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this project was last updated. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          },
-          "monthlyComputeCost": {
-            "type": "number",
-            "format": "double",
-            "description": "Monthly compute cost estimate for the machines that are part of this assessment as a group, for a 31-day month.",
-            "readOnly": true
-          },
-          "monthlyBandwidthCost": {
-            "type": "number",
-            "format": "double",
-            "description": "Monthly network cost estimate for the machines that are part of this assessment as a group, for a 31-day month.",
-            "readOnly": true
-          },
-          "monthlyStorageCost": {
-            "type": "number",
-            "format": "double",
-            "description": "Monthly storage cost estimate for the machines that are part of this assessment as a group, for a 31-day month.",
-            "readOnly": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "Created",
-              "Updated",
-              "Running",
-              "Completed",
-              "Invalid"
-            ],
-            "description": "Wheter the assessment has been created and is valid.",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "AssessmentStatus",
-              "modelAsString": true
-            }
-          },
-          "numberOfMachines": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of assessed machines part of this assessment.",
-            "readOnly": true
-          }
-        }
-      },
-      "Disk": {
-        "type": "object",
-        "description": "A disk discovered on a machine.",
-        "properties": {
-          "gigabytesProvisioned": {
-            "type": "number",
-            "format": "double",
-            "description": "Gigabytes of storage provisioned for this disk.",
-            "readOnly": true
-          },
-          "gigabytesConsumed": {
-            "format": "double",
-            "type": "number",
-            "description": "Gigabytes of storage consumed by this disk.",
-            "readOnly": true
-          }
-        }
-      },
-      "NetworkAdapter": {
-        "type": "object",
-        "description": "A network adapter discovered on a machine.",
-        "properties": {
-          "macAddress": {
-            "type": "string",
-            "description": "MAC Address of the network adapter.",
-            "readOnly": true
-          },
-          "ipAddresses": {
-            "type": "array",
-            "description": "List of IP Addresses on the network adapter.",
-            "readOnly": true,
-            "items": {
-              "type": "string",
-              "description": "IP Address of the network adapter.",
-              "readOnly": true
-            }
-          }
-        }
-      },
-      "Machine": {
-        "type": "object",
-        "x-ms-azure-resource": true,
-        "description": "A machine in a migration project.",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Path reference to this machine. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines/{machineName}",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the machine. It is a GUID which is unique identifier of machine in private data center. For user-readable name, we have a displayName property on this machine.",
-            "readOnly": true
-          },
-          "eTag": {
-            "type": "string",
-            "description": "For optimistic concurrency control."
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object = [Microsoft.Migrate/projects/machines].",
-            "readOnly": true
-          },
-          "properties": {
-            "description": "Properties of the machine.",
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/MachineProperties"
-          }
-        }
-      },
-      "MachineProperties": {
-        "type": "object",
-        "description": "Properties of a machine.",
-        "properties": {
-          "bootType": {
-            "type": "string",
-            "description": "Boot type of the machine.",
-            "enum": [
-              "Unknown",
-              "EFI",
-              "BIOS"
-            ],
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "MachineBootType",
-              "modelAsString": true
-            }
-          },
-          "datacenterContainer": {
-            "type": "string",
-            "description": "Container defined in the management solution that this machine is part of in the datacenter.",
-            "readOnly": true
-          },
-          "datacenterManagementServer": {
-            "type": "string",
-            "description": "Name of the server hosting the datacenter management solution.",
-            "readOnly": true
-          },
-          "datacenterMachineId": {
-            "type": "string",
-            "description": "ID of the machine as tracked by the datacenter management solution.",
-            "readOnly": true
-          },
-          "datacenterManagementServerId": {
-            "type": "string",
-            "description": "ID of the server hosting the datacenter management solution.",
-            "readOnly": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the machine",
-            "readOnly": true
-          },
-          "displayName": {
-            "type": "string",
-            "description": "User readable name of the machine as defined by the user in their private datacenter.",
-            "readOnly": true
-          },
-          "megabytesOfMemory": {
-            "type": "number",
-            "description": "Memory in Megabytes.",
-            "readOnly": true
-          },
-          "numberOfCores": {
-            "type": "integer",
-            "description": "Processor count.",
-            "readOnly": true
-          },
-          "operatingSystem": {
-            "type": "string",
-            "description": "Operating System of the machine.",
-            "readOnly": true
-          },
-          "groups": {
-            "type": "array",
-            "description": "List of references to the groups that the machine is member of.",
-            "readOnly": true,
-            "items": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Reference to a group that this machine is member of. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}"
-            }
-          },
-          "createdTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this machine was created. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          },
-          "updatedTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this machine was last updated. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          },
-          "discoveredTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this machine was discovered by Azure Migrate agent. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          },
-          "disks": {
-            "type": "object",
-            "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object",
-            "readOnly": true,
-            "properties": {
-              "key": {
-                "type": "string",
-                "description": "Unique identifier of a disk.",
-                "readOnly": true
-              },
-              "value": {
-                "description": "Disk object.",
-                "$ref": "#/definitions/Disk"
-              }
-            }
-          },
-          "networkAdapters": {
-            "type": "object",
-            "description": "Dictionary of network adapters attached to the machine. Key is ID of disk. Value is a network adapter object",
-            "readOnly": true,
-            "properties": {
-              "key": {
-                "type": "string",
-                "description": "Unique identifier of a network adapter.",
-                "readOnly": true
-              },
-              "value": {
-                "description": "Network Adapter object.",
-                "$ref": "#/definitions/NetworkAdapter"
-              }
-            }
-          }
-        }
-      },
-      "AssessedDisk": {
-        "type": "object",
-        "description": "A disk assessed for an assessment.",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the assessed disk.",
-            "readOnly": true
-          },
-          "gigabytesProvisioned": {
-            "type": "number",
-            "format": "double",
-            "description": "Gigabytes of storage provisioned for this disk.",
-            "readOnly": true
-          },
-          "gigabytesConsumed": {
-            "type": "number",
-            "format": "double",
-            "description": "Gigabytes of storage consumed by this disk.",
-            "readOnly": true
-          },
-          "megabytesPerSecondOfRead": {
-            "type": "number",
-            "format": "double",
-            "description": "Disk throughput in MegaBytes per second.",
-            "readOnly": true
-          },
-          "megabytesPerSecondOfReadDataPointsExpected": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Expected data points for MegaBytes per second of read.",
-            "default": null,
-            "readOnly": true
-          },
-          "megabytesPerSecondOfReadDataPointsReceived": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Received data points for MegaBytes per second of read.",
-            "default": null,
-            "readOnly": true
-          },
-          "megabytesPerSecondOfWrite": {
-            "type": "number",
-            "format": "double",
-            "description": "Disk throughput in MegaBytes per second.",
-            "readOnly": true
-          },
-          "megabytesPerSecondOfWriteDataPointsExpected": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Expected data points for MegaBytes per second of write.",
-            "default": null,
-            "readOnly": true
-          },
-          "megabytesPerSecondOfWriteDataPointsReceived": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Received data points for MegaBytes per second of write.",
-            "default": null,
-            "readOnly": true
-          },
-          "numberOfReadOperationsPerSecond": {
-            "type": "number",
-            "format": "double",
-            "description": "Number of read operations per second for the disk.",
-            "readOnly": true
-          },
-          "numberOfReadOperationsPerSecondDataPointsExpected": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Expected number of data points for read operations per second.",
-            "default": null,
-            "readOnly": true
-          },
-          "numberOfReadOperationsPerSecondDataPointsReceived": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Received number of data points for read operations per second.",
-            "default": null,
-            "readOnly": true
-          },
-          "numberOfWriteOperationsPerSecond": {
-            "type": "number",
-            "format": "double",
-            "description": "Number of read and write operations per second for the disk.",
-            "readOnly": true
-          },
-          "numberOfWriteOperationsPerSecondDataPointsExpected": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Expected number of data points for write operations per second.",
-            "default": null,
-            "readOnly": true
-          },
-          "numberOfWriteOperationsPerSecondDataPointsReceived": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Received number of data points for write operations per second.",
-            "default": null,
-            "readOnly": true
-          },
-          "monthlyStorageCost": {
-            "type": "number",
-            "format": "double",
-            "description": "Estimated aggregate storage cost for a 31-day month for this disk.",
-            "readOnly": true
-          },
-          "recommendedDiskType": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "Standard",
-              "Premium"
-            ],
-            "description": "Storage type selected for this disk.",
-            "x-ms-enum": {
-              "name": "AzureDiskType",
-              "modelAsString": true
             },
-            "readOnly": true
-          },
-          "recommendedDiskSize": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "Standard_S4",
-              "Standard_S6",
-              "Standard_S10",
-              "Standard_S20",
-              "Standard_S30",
-              "Standard_S40",
-              "Standard_S50",
-              "Premium_P4",
-              "Premium_P6",
-              "Premium_P10",
-              "Premium_P20",
-              "Premium_P30",
-              "Premium_P40",
-              "Premium_P50"
-            ],
-            "description": "Recommended Azure size for the disk, given utilization data and preferences set on Assessment.",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "AzureDiskSize",
-              "modelAsString": true
-            }
-          },
-          "gigabytesForRecommendedSize": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Gigabytes of storage provided by the recommended Azure disk size.",
-            "readOnly": true
-          },
-          "suitability": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "NotSuitable",
-              "Suitable",
-              "ConditionallySuitable",
-              "ReadinessUnknown"
-            ],
-            "description": "Whether this disk is suitable for Azure.",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "CloudSuitability",
-              "modelAsString": true
-            }
-          },
-          "suitabilityExplanation": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "NotApplicable",
-              "DiskSizeGreaterThanSupported",
-              "NoSuitableDiskSizeForIops",
-              "NoSuitableDiskSizeForThroughput",
-              "NoDiskSizeFoundInSelectedLocation",
-              "NoDiskSizeFoundForSelectedRedundancy",
-              "InternalErrorOccurredForDiskEvaluation"
-            ],
-            "description": "If disk is suitable, this explains the reasons and mitigation steps.",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "AzureDiskSuitabilityExplanation",
-              "modelAsString": true
+            "value": {
+              "description": "Disk object.",
+              "$ref": "#/definitions/Disk"
             }
           }
-        }
-      },
-      "AssessedNetworkAdapter": {
-        "type": "object",
-        "description": "A network adapter assessed for an assessment.",
-        "properties": {
-          "macAddress": {
-            "type": "string",
-            "description": "MAC Address of the network adapter.",
-            "readOnly": true
-          },
-          "ipAddresses": {
-            "type": "array",
-            "description": "List of IP Addresses on the network adapter.",
-            "readOnly": true,
-            "items": {
-              "type": "string",
-              "description": "IP Address of the network adapter.",
-              "readOnly": true
-            }
-          },
-          "monthlyBandwidthCosts": {
-            "type": "number",
-            "format": "double",
-            "description": "Monthly cost estimate for network bandwidth used by this network adapter.",
-            "readOnly": true
-          },
-          "megabytesPerSecondReceived": {
-            "type": "number",
-            "format": "double",
-            "description": "Adapter throughput for incoming traffic in MegaBytes per second.",
-            "readOnly": true
-          },
-          "megabytesPerSecondReceivedDataPointsExpected": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Expected data points for incoming traffic in MegaBytes per second.",
-            "default": null,
-            "readOnly": true
-          },
-          "megabytesPerSecondOfReadDataPointsReceived": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Received data points for incoming traffic in MegaBytes per second.",
-            "default": null,
-            "readOnly": true
-          },
-          "megabytesPerSecondTransmitted": {
-            "type": "number",
-            "format": "double",
-            "description": "Adapter throughput for outgoing traffic in MegaBytes per second.",
-            "readOnly": true
-          },
-          "megabytesPerSecondTransmittedDataPointsExpected": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Expected data points for outgoing traffic in MegaBytes per second.",
-            "default": null,
-            "readOnly": true
-          },
-          "megabytesPerSecondTransmittedDataPointsReceived": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Received data points for outgoing traffic in MegaBytes per second.",
-            "default": null,
-            "readOnly": true
-          },
-          "netGigabytesTransmittedPerMonth": {
-            "type": "number",
-            "format": "double",
-            "description": "Gigabytes transmitted through this adapter each month."
-          },
-          "suitability": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "NotSuitable",
-              "Suitable",
-              "ConditionallySuitable",
-              "ReadinessUnknown"
-            ],
-            "description": "Whether this adapter is suitable for Azure.",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "CloudSuitability",
-              "modelAsString": true
-            }
-          },
-          "suitabilityExplanation": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "NotApplicable",
-              "InternalErrorOccured"
-            ],
-            "description": "If network adapter is suitable, this explains the reasons and mitigation steps.",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "AzureNetworkAdapterSuitabilityExplanation",
-              "modelAsString": true
-            }
-          }
-        }
-      },
-      "AssessedMachine": {
-        "type": "object",
-        "x-ms-azure-resource": true,
-        "description": "A machine evaluated as part of an assessment.",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Path reference to this assessed machine. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the machine.",
-            "readOnly": true
-          },
-          "eTag": {
-            "type": "string",
-            "description": "For optimistic concurrency control."
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object = [Microsoft.Migrate/projects/groups/assessments/assessedMachines].",
-            "readOnly": true
-          },
+        },
+        "networkAdapters": {
+          "type": "object",
+          "description": "Dictionary of network adapters attached to the machine. Key is ID of disk. Value is a network adapter object",
+          "readOnly": true,
           "properties": {
-            "description": "Properties of an assessed machine.",
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/AssessedMachineProperties"
-          }
-        }
-      },
-      "AssessedMachineProperties": {
-        "type": "object",
-        "description": "Properties of an assessed machine.",
-        "properties": {
-          "groups": {
-            "type": "array",
-            "description": "List of references to the groups that the machine is member of.",
-            "readOnly": true,
-            "items": {
+            "key": {
               "type": "string",
-              "readOnly": true,
-              "description": "Reference to a group that this machine is member of. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}"
-            }
-          },
-          "discoveredTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this machine was discovered by Azure Migrate agent. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          },
-          "bootType": {
-            "type": "string",
-            "description": "Boot type of the machine.",
-            "enum": [
-              "Unknown",
-              "EFI",
-              "BIOS"
-            ],
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "MachineBootType",
-              "modelAsString": true
-            }
-          },
-          "datacenterContainer": {
-            "type": "string",
-            "description": "Container defined in the management solution that this machine is part of in the datacenter.",
-            "readOnly": true
-          },
-          "datacenterManagementServer": {
-            "type": "string",
-            "description": "Name of the server hosting the datacenter management solution.",
-            "readOnly": true
-          },
-          "datacenterMachineId": {
-            "type": "string",
-            "description": "ID of the machine as tracked by the datacenter management solution.",
-            "readOnly": true
-          },
-          "datacenterManagementServerId": {
-            "type": "string",
-            "description": "ID of the server hosting the datacenter management solution.",
-            "readOnly": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the machine",
-            "readOnly": true
-          },
-          "displayName": {
-            "type": "string",
-            "description": "User readable name of the machine as defined by the user in their private datacenter.",
-            "readOnly": true
-          },
-          "megabytesOfMemory": {
-            "type": "number",
-            "format": "double",
-            "description": "Memory in Megabytes.",
-            "readOnly": true
-          },
-          "numberOfCores": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Processor count.",
-            "readOnly": true
-          },
-          "operatingSystem": {
-            "type": "string",
-            "description": "Operating System of the machine.",
-            "readOnly": true
-          },
-          "monthlyBandwidthCost": {
-            "type": "number",
-            "format": "double",
-            "description": "Monthly network cost estimate for the network adapters that are attached to this machine as a group, for a 31-day month.",
-            "readOnly": true
-          },
-          "monthlyStorageCost": {
-            "type": "number",
-            "format": "double",
-            "description": "Monthly storage cost estimate for the disks that are attached to this machine as a group, for a 31-day month.",
-            "readOnly": true
-          },
-          "disks": {
-            "type": "object",
-            "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object",
-            "readOnly": true,
-            "properties": {
-              "key": {
-                "type": "string",
-                "description": "Name of the disk.",
-                "readOnly": true
-              },
-              "value": {
-                "description": "Assessed Disk object.",
-                "$ref": "#/definitions/AssessedDisk"
-              }
-            }
-          },
-          "networkAdapters": {
-            "type": "object",
-            "description": "Dictionary of network adapters attached to the machine. Key is name of the adapter. Value is a network adapter object",
-            "readOnly": true,
-            "properties": {
-              "key": {
-                "type": "string",
-                "description": "Name of the network adapter.",
-                "readOnly": true
-              },
-              "value": {
-                "description": "Assessed Network Adapter object.",
-                "$ref": "#/definitions/AssessedNetworkAdapter"
-              }
-            }
-          },
-          "recommendedSize": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "Basic_A0",
-              "Basic_A1",
-              "Basic_A2",
-              "Basic_A3",
-              "Basic_A4",
-              "Standard_A0",
-              "Standard_A1",
-              "Standard_A2",
-              "Standard_A3",
-              "Standard_A4",
-              "Standard_A5",
-              "Standard_A6",
-              "Standard_A7",
-              "Standard_A8",
-              "Standard_A9",
-              "Standard_A10",
-              "Standard_A11",
-              "Standard_A1_v2",
-              "Standard_A2_v2",
-              "Standard_A4_v2",
-              "Standard_A8_v2",
-              "Standard_A2m_v2",
-              "Standard_A4m_v2",
-              "Standard_A8m_v2",
-              "Standard_D1",
-              "Standard_D2",
-              "Standard_D3",
-              "Standard_D4",
-              "Standard_D11",
-              "Standard_D12",
-              "Standard_D13",
-              "Standard_D14",
-              "Standard_D1_v2",
-              "Standard_D2_v2",
-              "Standard_D3_v2",
-              "Standard_D4_v2",
-              "Standard_D5_v2",
-              "Standard_D11_v2",
-              "Standard_D12_v2",
-              "Standard_D13_v2",
-              "Standard_D14_v2",
-              "Standard_D15_v2",
-              "Standard_DS1",
-              "Standard_DS2",
-              "Standard_DS3",
-              "Standard_DS4",
-              "Standard_DS11",
-              "Standard_DS12",
-              "Standard_DS13",
-              "Standard_DS14",
-              "Standard_DS1_v2",
-              "Standard_DS2_v2",
-              "Standard_DS3_v2",
-              "Standard_DS4_v2",
-              "Standard_DS5_v2",
-              "Standard_DS11_v2",
-              "Standard_DS12_v2",
-              "Standard_DS13_v2",
-              "Standard_DS14_v2",
-              "Standard_DS15_v2",
-              "Standard_F1",
-              "Standard_F2",
-              "Standard_F4",
-              "Standard_F8",
-              "Standard_F16",
-              "Standard_F1s",
-              "Standard_F2s",
-              "Standard_F4s",
-              "Standard_F8s",
-              "Standard_F16s",
-              "Standard_G1",
-              "Standard_G2",
-              "Standard_G3",
-              "Standard_G4",
-              "Standard_G5",
-              "Standard_GS1",
-              "Standard_GS2",
-              "Standard_GS3",
-              "Standard_GS4",
-              "Standard_GS5",
-              "Standard_H8",
-              "Standard_H16",
-              "Standard_H8m",
-              "Standard_H16m",
-              "Standard_H16r",
-              "Standard_H16mr",
-              "Standard_L4s",
-              "Standard_L8s",
-              "Standard_L16s",
-              "Standard_L32s"
-            ],
-            "description": "Recommended Azure size for this machine.",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "AzureVmSize",
-              "modelAsString": true
-            }
-          },
-          "numberOfCoresForRecommendedSize": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of CPU cores in the Recommended Azure VM Size.",
-            "readOnly": true
-          },
-          "megabytesOfMemoryForRecommendedSize": {
-            "type": "number",
-            "format": "double",
-            "description": "Megabytes of memory in the Recommended Azure VM Size.",
-            "readOnly": true
-          },
-          "monthlyComputeCostForRecommendedSize": {
-            "type": "number",
-            "format": "double",
-            "description": "Compute Cost for a 31-day month, if the machine is migrated to Azure with the Recommended Size.",
-            "readOnly": true
-          },
-          "percentageCoresUtilization": {
-            "type": "number",
-            "format": "double",
-            "description": "Utilization percentage of the processor core as observed in the private data center, in the Time Range selected on Assessment, reported as the Percentile value based on the percentile number selected in assessment.",
-            "readOnly": true
-          },
-          "percentageMemoryUtilization": {
-            "type": "number",
-            "format": "double",
-            "description": "Utilization percentage of the memory as observed in the private data center, in the Time Range selected on Assessment, reported as the Percentile value based on the percentile number selected in assessment.",
-            "readOnly": true
-          },
-          "percentageCoresUtilizationDataPointsExpected": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Expected data points for percentage of cores utilization.",
-            "default": null,
-            "readOnly": true
-          },
-          "percentageCoresUtilizationDataPointsReceived": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Received data points for percentage of cores utilization.",
-            "default": null,
-            "readOnly": true
-          },
-          "percentageMemoryUtilizationDataPointsExpected": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Expected data points for percentage of memory utilization.",
-            "default": null,
-            "readOnly": true
-          },
-          "percentageMemoryUtilizationDataPointsReceived": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Received data points for percentage of memory utilization.",
-            "default": null,
-            "readOnly": true
-          },
-          "suitability": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "NotSuitable",
-              "Suitable",
-              "ConditionallySuitable",
-              "ReadinessUnknown"
-            ],
-            "description": "Whether machine is suitable for migration to Azure.",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "CloudSuitability",
-              "modelAsString": true
-            }
-          },
-          "suitabilityExplanation": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "NotApplicable",
-              "GuestOperatingSystemArchitectureNotSupported",
-              "GuestOperatingSystemNotSupported",
-              "BootTypeNotSupported",
-              "MoreDisksThanSupported",
-              "NoSuitableVmSizeFound",
-              "OneOrMoreDisksNotSuitable",
-              "OneOrMoreAdaptersNotSuitable",
-              "InternalErrorOccuredDuringComputeEvaluation",
-              "InternalErrorOccuredDuringStorageEvaluation",
-              "InternalErrorOccuredDuringNetworkEvaluation",
-              "NoVmSizeSupportsStoragePerformance",
-              "NoVmSizeSupportsNetworkPerformance",
-              "NoVmSizeForSelectedPricingTier",
-              "NoVmSizeForSelectedAzureLocation",
-              "CheckRedHatLinuxVersion",
-              "CheckOpenSuseLinuxVersion",
-              "CheckWindowsServer2008R2Version",
-              "CheckCentOsVersion",
-              "CheckDebianLinuxVersion",
-              "CheckSuseLinuxVersion",
-              "CheckOracleLinuxVersion",
-              "CheckUbuntuLinuxVersion",
-              "CheckCoreOsLinuxVersion",
-              "WindowsServerVersionConditionallySupported",
-              "NoGuestOperatingSystemConditionallySupported",
-              "WindowsClientVersionsConditionallySupported",
-              "BootTypeUnknown",
-              "GuestOperatingSystemUnknown",
-              "WindowsServerVersionsSupportedWithCaveat",
-              "WindowsOSNoLongerUnderMSSupport",
-              "EndorsedWithConditionsLinuxDistributions",
-              "UnendorsedLinuxDistributions",
-              "NoVmSizeForStandardPricingTier",
-              "NoVmSizeForBasicPricingTier"
-            ],
-            "description": "If machine is not ready to be migrated, this explains the reasons and mitigation steps.",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "AzureVmSuitabilityExplanation",
-              "modelAsString": true
-            }
-          },
-          "createdTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this machine was created. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          },
-          "updatedTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time when this machine was last updated. Date-Time represented in ISO-8601 format.",
-            "readOnly": true
-          }
-        }
-      },
-      "ProjectKey": {
-        "type": "object",
-        "x-ms-azure-resource": true,
-        "description": "ID and Key for Migration Project.",
-        "properties": {
-          "workspaceId": {
-            "type": "string",
-            "description": "ID of Migration Project.",
-            "readOnly": true
-          },
-          "workspaceKey": {
-            "type": "string",
-            "description": "Key of Migration Project.",
-            "readOnly": true
-          }
-        }
-      },
-      "Operation": {
-        "type": "object",
-        "description": "A REST API operation supported by the provider.",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the operation.",
-            "readOnly": true
-          },
-          "display": {
-            "type": "object",
-            "description": "Displayable properties of the operation.",
-            "readOnly": true,
-            "properties": {
-              "provider": {
-                "type": "string",
-                "description": "Provider of the operation.",
-                "readOnly": true
-              },
-              "resource": {
-                "type": "string",
-                "description": "Resource operated on by the operation.",
-                "readOnly": true
-              },
-              "operation": {
-                "type": "string",
-                "description": "Operation Type.",
-                "readOnly": true
-              },
-              "description": {
-                "type": "string",
-                "description": "Description of the operation.",
-                "readOnly": true
-              }
-            }
-          },
-          "origin": {
-            "type": "string",
-            "description": "Origin of the operation.",
-            "readOnly": true
-          }
-        }
-      },
-      "DownloadUrl": {
-        "type": "object",
-        "description": "Download URL for assessment report.",
-        "properties": {
-          "assessmentReportUrl": {
-            "type": "string",
-            "description": "Hyperlink to download report.",
-            "readOnly": true
-          },
-          "expirationTime": {
-            "type": "string",
-            "description": "Expiry date of download url.",
-            "readOnly": true
-          }
-        }
-      },
-      "ProjectResultList": {
-        "type": "object",
-        "description": "List of projects.",
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of projects.",
-            "items": {
-              "$ref": "#/definitions/Project"
-            }
-          }
-        }
-      },
-      "MachineResultList": {
-        "type": "object",
-        "description": "List of machines.",
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of machines.",
-            "items": {
-              "$ref": "#/definitions/Machine"
-            }
-          }
-        }
-      },
-      "GroupResultList": {
-        "type": "object",
-        "description": "List of groups.",
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of groups.",
-            "items": {
-              "$ref": "#/definitions/Group"
-            }
-          }
-        }
-      },
-      "AssessedMachineResultList": {
-        "type": "object",
-        "description": "List of assessed machines.",
-        "properties": {
-          "value": {
-            "description": "List of assessed machines.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AssessedMachine"
-            }
-          }
-        }
-      },
-      "AssessmentResultList": {
-        "type": "object",
-        "description": "List of assessments.",
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of assessments.",
-            "items": {
-              "$ref": "#/definitions/Assessment"
-            }
-          }
-        }
-      },
-      "OperationResultList": {
-        "type": "object",
-        "description": "List of API operations.",
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of operations.",
-            "items": {
-              "$ref": "#/definitions/Operation"
+              "description": "Unique identifier of a network adapter.",
+              "readOnly": true
+            },
+            "value": {
+              "description": "Network Adapter object.",
+              "$ref": "#/definitions/NetworkAdapter"
             }
           }
         }
       }
     },
+    "AssessedDisk": {
+      "type": "object",
+      "description": "A disk assessed for an assessment.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the assessed disk.",
+          "readOnly": true
+        },
+        "gigabytesProvisioned": {
+          "type": "number",
+          "format": "double",
+          "description": "Gigabytes of storage provisioned for this disk.",
+          "readOnly": true
+        },
+        "gigabytesConsumed": {
+          "type": "number",
+          "format": "double",
+          "description": "Gigabytes of storage consumed by this disk.",
+          "readOnly": true
+        },
+        "megabytesPerSecondOfRead": {
+          "type": "number",
+          "format": "double",
+          "description": "Disk throughput in MegaBytes per second.",
+          "readOnly": true
+        },
+        "megabytesPerSecondOfReadDataPointsExpected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Expected data points for MegaBytes per second of read.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "megabytesPerSecondOfReadDataPointsReceived": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Received data points for MegaBytes per second of read.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "megabytesPerSecondOfWrite": {
+          "type": "number",
+          "format": "double",
+          "description": "Disk throughput in MegaBytes per second.",
+          "readOnly": true
+        },
+        "megabytesPerSecondOfWriteDataPointsExpected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Expected data points for MegaBytes per second of write.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "megabytesPerSecondOfWriteDataPointsReceived": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Received data points for MegaBytes per second of write.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "numberOfReadOperationsPerSecond": {
+          "type": "number",
+          "format": "double",
+          "description": "Number of read operations per second for the disk.",
+          "readOnly": true
+        },
+        "numberOfReadOperationsPerSecondDataPointsExpected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Expected number of data points for read operations per second.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "numberOfReadOperationsPerSecondDataPointsReceived": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Received number of data points for read operations per second.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "numberOfWriteOperationsPerSecond": {
+          "type": "number",
+          "format": "double",
+          "description": "Number of read and write operations per second for the disk.",
+          "readOnly": true
+        },
+        "numberOfWriteOperationsPerSecondDataPointsExpected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Expected number of data points for write operations per second.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "numberOfWriteOperationsPerSecondDataPointsReceived": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Received number of data points for write operations per second.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "monthlyStorageCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Estimated aggregate storage cost for a 31-day month for this disk.",
+          "readOnly": true
+        },
+        "recommendedDiskType": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Standard",
+            "Premium"
+          ],
+          "description": "Storage type selected for this disk.",
+          "x-ms-enum": {
+            "name": "AzureDiskType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "recommendedDiskSize": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Standard_S4",
+            "Standard_S6",
+            "Standard_S10",
+            "Standard_S20",
+            "Standard_S30",
+            "Standard_S40",
+            "Standard_S50",
+            "Premium_P4",
+            "Premium_P6",
+            "Premium_P10",
+            "Premium_P20",
+            "Premium_P30",
+            "Premium_P40",
+            "Premium_P50"
+          ],
+          "description": "Recommended Azure size for the disk, given utilization data and preferences set on Assessment.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AzureDiskSize",
+            "modelAsString": true
+          }
+        },
+        "gigabytesForRecommendedSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gigabytes of storage provided by the recommended Azure disk size.",
+          "readOnly": true
+        },
+        "suitability": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NotSuitable",
+            "Suitable",
+            "ConditionallySuitable",
+            "ReadinessUnknown"
+          ],
+          "description": "Whether this disk is suitable for Azure.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CloudSuitability",
+            "modelAsString": true
+          }
+        },
+        "suitabilityExplanation": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NotApplicable",
+            "DiskSizeGreaterThanSupported",
+            "NoSuitableDiskSizeForIops",
+            "NoSuitableDiskSizeForThroughput",
+            "NoDiskSizeFoundInSelectedLocation",
+            "NoDiskSizeFoundForSelectedRedundancy",
+            "InternalErrorOccurredForDiskEvaluation"
+          ],
+          "description": "If disk is suitable, this explains the reasons and mitigation steps.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AzureDiskSuitabilityExplanation",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AssessedNetworkAdapter": {
+      "type": "object",
+      "description": "A network adapter assessed for an assessment.",
+      "properties": {
+        "macAddress": {
+          "type": "string",
+          "description": "MAC Address of the network adapter.",
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "type": "array",
+          "description": "List of IP Addresses on the network adapter.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "IP Address of the network adapter.",
+            "readOnly": true
+          }
+        },
+        "monthlyBandwidthCosts": {
+          "type": "number",
+          "format": "double",
+          "description": "Monthly cost estimate for network bandwidth used by this network adapter.",
+          "readOnly": true
+        },
+        "megabytesPerSecondReceived": {
+          "type": "number",
+          "format": "double",
+          "description": "Adapter throughput for incoming traffic in MegaBytes per second.",
+          "readOnly": true
+        },
+        "megabytesPerSecondReceivedDataPointsExpected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Expected data points for incoming traffic in MegaBytes per second.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "megabytesPerSecondOfReadDataPointsReceived": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Received data points for incoming traffic in MegaBytes per second.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "megabytesPerSecondTransmitted": {
+          "type": "number",
+          "format": "double",
+          "description": "Adapter throughput for outgoing traffic in MegaBytes per second.",
+          "readOnly": true
+        },
+        "megabytesPerSecondTransmittedDataPointsExpected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Expected data points for outgoing traffic in MegaBytes per second.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "megabytesPerSecondTransmittedDataPointsReceived": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Received data points for outgoing traffic in MegaBytes per second.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "netGigabytesTransmittedPerMonth": {
+          "type": "number",
+          "format": "double",
+          "description": "Gigabytes transmitted through this adapter each month."
+        },
+        "suitability": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NotSuitable",
+            "Suitable",
+            "ConditionallySuitable",
+            "ReadinessUnknown"
+          ],
+          "description": "Whether this adapter is suitable for Azure.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CloudSuitability",
+            "modelAsString": true
+          }
+        },
+        "suitabilityExplanation": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NotApplicable",
+            "InternalErrorOccured"
+          ],
+          "description": "If network adapter is suitable, this explains the reasons and mitigation steps.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AzureNetworkAdapterSuitabilityExplanation",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AssessedMachine": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "A machine evaluated as part of an assessment.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Path reference to this assessed machine. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the machine.",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "For optimistic concurrency control."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/projects/groups/assessments/assessedMachines].",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of an assessed machine.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssessedMachineProperties"
+        }
+      }
+    },
+    "AssessedMachineProperties": {
+      "type": "object",
+      "description": "Properties of an assessed machine.",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "List of references to the groups that the machine is member of.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Reference to a group that this machine is member of. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}"
+          }
+        },
+        "discoveredTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this machine was discovered by Azure Migrate agent. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "bootType": {
+          "type": "string",
+          "description": "Boot type of the machine.",
+          "enum": [
+            "Unknown",
+            "EFI",
+            "BIOS"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MachineBootType",
+            "modelAsString": true
+          }
+        },
+        "datacenterContainer": {
+          "type": "string",
+          "description": "Container defined in the management solution that this machine is part of in the datacenter.",
+          "readOnly": true
+        },
+        "datacenterManagementServer": {
+          "type": "string",
+          "description": "Name of the server hosting the datacenter management solution.",
+          "readOnly": true
+        },
+        "datacenterMachineId": {
+          "type": "string",
+          "description": "ID of the machine as tracked by the datacenter management solution.",
+          "readOnly": true
+        },
+        "datacenterManagementServerId": {
+          "type": "string",
+          "description": "ID of the server hosting the datacenter management solution.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the machine",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User readable name of the machine as defined by the user in their private datacenter.",
+          "readOnly": true
+        },
+        "megabytesOfMemory": {
+          "type": "number",
+          "format": "double",
+          "description": "Memory in Megabytes.",
+          "readOnly": true
+        },
+        "numberOfCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Processor count.",
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Operating System of the machine.",
+          "readOnly": true
+        },
+        "monthlyBandwidthCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Monthly network cost estimate for the network adapters that are attached to this machine as a group, for a 31-day month.",
+          "readOnly": true
+        },
+        "monthlyStorageCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Monthly storage cost estimate for the disks that are attached to this machine as a group, for a 31-day month.",
+          "readOnly": true
+        },
+        "disks": {
+          "type": "object",
+          "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object",
+          "readOnly": true,
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "Name of the disk.",
+              "readOnly": true
+            },
+            "value": {
+              "description": "Assessed Disk object.",
+              "$ref": "#/definitions/AssessedDisk"
+            }
+          }
+        },
+        "networkAdapters": {
+          "type": "object",
+          "description": "Dictionary of network adapters attached to the machine. Key is name of the adapter. Value is a network adapter object",
+          "readOnly": true,
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "Name of the network adapter.",
+              "readOnly": true
+            },
+            "value": {
+              "description": "Assessed Network Adapter object.",
+              "$ref": "#/definitions/AssessedNetworkAdapter"
+            }
+          }
+        },
+        "recommendedSize": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Basic_A0",
+            "Basic_A1",
+            "Basic_A2",
+            "Basic_A3",
+            "Basic_A4",
+            "Standard_A0",
+            "Standard_A1",
+            "Standard_A2",
+            "Standard_A3",
+            "Standard_A4",
+            "Standard_A5",
+            "Standard_A6",
+            "Standard_A7",
+            "Standard_A8",
+            "Standard_A9",
+            "Standard_A10",
+            "Standard_A11",
+            "Standard_A1_v2",
+            "Standard_A2_v2",
+            "Standard_A4_v2",
+            "Standard_A8_v2",
+            "Standard_A2m_v2",
+            "Standard_A4m_v2",
+            "Standard_A8m_v2",
+            "Standard_D1",
+            "Standard_D2",
+            "Standard_D3",
+            "Standard_D4",
+            "Standard_D11",
+            "Standard_D12",
+            "Standard_D13",
+            "Standard_D14",
+            "Standard_D1_v2",
+            "Standard_D2_v2",
+            "Standard_D3_v2",
+            "Standard_D4_v2",
+            "Standard_D5_v2",
+            "Standard_D11_v2",
+            "Standard_D12_v2",
+            "Standard_D13_v2",
+            "Standard_D14_v2",
+            "Standard_D15_v2",
+            "Standard_DS1",
+            "Standard_DS2",
+            "Standard_DS3",
+            "Standard_DS4",
+            "Standard_DS11",
+            "Standard_DS12",
+            "Standard_DS13",
+            "Standard_DS14",
+            "Standard_DS1_v2",
+            "Standard_DS2_v2",
+            "Standard_DS3_v2",
+            "Standard_DS4_v2",
+            "Standard_DS5_v2",
+            "Standard_DS11_v2",
+            "Standard_DS12_v2",
+            "Standard_DS13_v2",
+            "Standard_DS14_v2",
+            "Standard_DS15_v2",
+            "Standard_F1",
+            "Standard_F2",
+            "Standard_F4",
+            "Standard_F8",
+            "Standard_F16",
+            "Standard_F1s",
+            "Standard_F2s",
+            "Standard_F4s",
+            "Standard_F8s",
+            "Standard_F16s",
+            "Standard_G1",
+            "Standard_G2",
+            "Standard_G3",
+            "Standard_G4",
+            "Standard_G5",
+            "Standard_GS1",
+            "Standard_GS2",
+            "Standard_GS3",
+            "Standard_GS4",
+            "Standard_GS5",
+            "Standard_H8",
+            "Standard_H16",
+            "Standard_H8m",
+            "Standard_H16m",
+            "Standard_H16r",
+            "Standard_H16mr",
+            "Standard_L4s",
+            "Standard_L8s",
+            "Standard_L16s",
+            "Standard_L32s"
+          ],
+          "description": "Recommended Azure size for this machine.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AzureVmSize",
+            "modelAsString": true
+          }
+        },
+        "numberOfCoresForRecommendedSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of CPU cores in the Recommended Azure VM Size.",
+          "readOnly": true
+        },
+        "megabytesOfMemoryForRecommendedSize": {
+          "type": "number",
+          "format": "double",
+          "description": "Megabytes of memory in the Recommended Azure VM Size.",
+          "readOnly": true
+        },
+        "monthlyComputeCostForRecommendedSize": {
+          "type": "number",
+          "format": "double",
+          "description": "Compute Cost for a 31-day month, if the machine is migrated to Azure with the Recommended Size.",
+          "readOnly": true
+        },
+        "percentageCoresUtilization": {
+          "type": "number",
+          "format": "double",
+          "description": "Utilization percentage of the processor core as observed in the private data center, in the Time Range selected on Assessment, reported as the Percentile value based on the percentile number selected in assessment.",
+          "readOnly": true
+        },
+        "percentageMemoryUtilization": {
+          "type": "number",
+          "format": "double",
+          "description": "Utilization percentage of the memory as observed in the private data center, in the Time Range selected on Assessment, reported as the Percentile value based on the percentile number selected in assessment.",
+          "readOnly": true
+        },
+        "percentageCoresUtilizationDataPointsExpected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Expected data points for percentage of cores utilization.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "percentageCoresUtilizationDataPointsReceived": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Received data points for percentage of cores utilization.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "percentageMemoryUtilizationDataPointsExpected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Expected data points for percentage of memory utilization.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "percentageMemoryUtilizationDataPointsReceived": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Received data points for percentage of memory utilization.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "suitability": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NotSuitable",
+            "Suitable",
+            "ConditionallySuitable",
+            "ReadinessUnknown"
+          ],
+          "description": "Whether machine is suitable for migration to Azure.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CloudSuitability",
+            "modelAsString": true
+          }
+        },
+        "suitabilityExplanation": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NotApplicable",
+            "GuestOperatingSystemArchitectureNotSupported",
+            "GuestOperatingSystemNotSupported",
+            "BootTypeNotSupported",
+            "MoreDisksThanSupported",
+            "NoSuitableVmSizeFound",
+            "OneOrMoreDisksNotSuitable",
+            "OneOrMoreAdaptersNotSuitable",
+            "InternalErrorOccuredDuringComputeEvaluation",
+            "InternalErrorOccuredDuringStorageEvaluation",
+            "InternalErrorOccuredDuringNetworkEvaluation",
+            "NoVmSizeSupportsStoragePerformance",
+            "NoVmSizeSupportsNetworkPerformance",
+            "NoVmSizeForSelectedPricingTier",
+            "NoVmSizeForSelectedAzureLocation",
+            "CheckRedHatLinuxVersion",
+            "CheckOpenSuseLinuxVersion",
+            "CheckWindowsServer2008R2Version",
+            "CheckCentOsVersion",
+            "CheckDebianLinuxVersion",
+            "CheckSuseLinuxVersion",
+            "CheckOracleLinuxVersion",
+            "CheckUbuntuLinuxVersion",
+            "CheckCoreOsLinuxVersion",
+            "WindowsServerVersionConditionallySupported",
+            "NoGuestOperatingSystemConditionallySupported",
+            "WindowsClientVersionsConditionallySupported",
+            "BootTypeUnknown",
+            "GuestOperatingSystemUnknown",
+            "WindowsServerVersionsSupportedWithCaveat",
+            "WindowsOSNoLongerUnderMSSupport",
+            "EndorsedWithConditionsLinuxDistributions",
+            "UnendorsedLinuxDistributions",
+            "NoVmSizeForStandardPricingTier",
+            "NoVmSizeForBasicPricingTier"
+          ],
+          "description": "If machine is not ready to be migrated, this explains the reasons and mitigation steps.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AzureVmSuitabilityExplanation",
+            "modelAsString": true
+          }
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this machine was created. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this machine was last updated. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectKey": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "ID and Key for Migration Project.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "ID of Migration Project.",
+          "readOnly": true
+        },
+        "workspaceKey": {
+          "type": "string",
+          "description": "Key of Migration Project.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Displayable properties of the operation.",
+      "readOnly": true,
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider of the operation.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource operated on by the operation.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation Type.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "A REST API operation supported by the provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation.",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Displayable properties of the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "DownloadUrl": {
+      "type": "object",
+      "description": "Download URL for assessment report.",
+      "properties": {
+        "assessmentReportUrl": {
+          "type": "string",
+          "description": "Hyperlink to download report.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry date of download url.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectResultList": {
+      "type": "object",
+      "description": "List of projects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of projects.",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        }
+      }
+    },
+    "MachineResultList": {
+      "type": "object",
+      "description": "List of machines.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of machines.",
+          "items": {
+            "$ref": "#/definitions/Machine"
+          }
+        }
+      }
+    },
+    "GroupResultList": {
+      "type": "object",
+      "description": "List of groups.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of groups.",
+          "items": {
+            "$ref": "#/definitions/Group"
+          }
+        }
+      }
+    },
+    "AssessedMachineResultList": {
+      "type": "object",
+      "description": "List of assessed machines.",
+      "properties": {
+        "value": {
+          "description": "List of assessed machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssessedMachine"
+          }
+        }
+      }
+    },
+    "AssessmentResultList": {
+      "type": "object",
+      "description": "List of assessments.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of assessments.",
+          "items": {
+            "$ref": "#/definitions/Assessment"
+          }
+        }
+      }
+    },
+    "OperationResultList": {
+      "type": "object",
+      "description": "List of API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all projects.",
         "description": "Get all the projects in the resource group.",
         "operationId": "Projects_List",
@@ -1723,9 +1722,6 @@
           {
             "$ref": "#/parameters/acceptLanguage"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -1753,6 +1749,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Projects_List": {
             "$ref": "./examples/Projects_List.json"
@@ -1762,16 +1761,9 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get the specified project.",
         "description": "Get the project with the specified name.",
-        "operationId": "GetProject",
+        "operationId": "Projects_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1788,9 +1780,6 @@
           {
             "$ref": "#/parameters/acceptLanguage"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -1819,22 +1808,15 @@
           }
         },
         "x-ms-examples": {
-          "GetProject": {
-            "$ref": "./examples/GetProject.json"
+          "Projects_Get": {
+            "$ref": "./examples/Projects_Get.json"
           }
         }
       },
       "put": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Create or update project.",
         "description": "Create a project with specified name. If a project already exists, update it.",
-        "operationId": "CreateProject",
+        "operationId": "Projects_Create",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1847,9 +1829,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/contentType"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -1902,22 +1881,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateProject": {
-            "$ref": "./examples/CreateProject.json"
+          "Projects_Create": {
+            "$ref": "./examples/Projects_Create.json"
           }
         }
       },
       "patch": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Update project.",
         "description": "Update a project with specified name. Supports partial updates, for example only tags can be provided.",
-        "operationId": "UpdateProject",
+        "operationId": "Projects_Update",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1930,9 +1902,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/contentType"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -1976,22 +1945,15 @@
           }
         },
         "x-ms-examples": {
-          "UpdateProject": {
-            "$ref": "./examples/UpdateProject.json"
+          "Projects_Update": {
+            "$ref": "./examples/Projects_Update.json"
           }
         }
       },
       "delete": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Delete the project",
         "description": "Delete the project. Deleting non-existent project is a no-operation.",
-        "operationId": "DeleteProject",
+        "operationId": "Projects_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2036,24 +1998,17 @@
           }
         },
         "x-ms-examples": {
-          "DeleteProject": {
-            "$ref": "./examples/DeleteProject.json"
+          "Projects_Delete": {
+            "$ref": "./examples/Projects_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/keys": {
       "post": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get shared keys for the project.",
         "description": "Gets the Log Analytics Workspace ID and Primary Key for the specified project.",
-        "operationId": "KeysPost",
+        "operationId": "Projects_GetKeys",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2070,9 +2025,6 @@
           {
             "$ref": "#/parameters/acceptLanguage"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -2101,21 +2053,14 @@
           }
         },
         "x-ms-examples": {
-          "KeysPost": {
-            "$ref": "./examples/KeysPost.json"
+          "Projects_GetKeys": {
+            "$ref": "./examples/Projects_GetKeys.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all machines in the project",
         "description": "Get data of all the machines available in the project. Returns a json array of objects of type 'machine' defined in Models section.",
         "operationId": "Machines_ListByProject",
@@ -2135,9 +2080,6 @@
           {
             "$ref": "#/parameters/api-version"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -2165,6 +2107,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Machines_ListByProject": {
             "$ref": "./examples/Machines_ListByProject.json"
@@ -2174,16 +2119,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines/{machineName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get a specific machine.",
         "description": "Get the machine with the specified name. Returns a json object of type 'machine' defined in Models section.",
-        "operationId": "GetMachine",
+        "operationId": "Machines_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2203,9 +2141,6 @@
           {
             "$ref": "#/parameters/api-version"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -2234,21 +2169,14 @@
           }
         },
         "x-ms-examples": {
-          "GetMachine": {
-            "$ref": "./examples/GetMachine.json"
+          "Machines_Get": {
+            "$ref": "./examples/Machines_Get.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all groups",
         "description": "Get all groups created in the project. Returns a json array of objects of type 'group' as specified in the Models section.",
         "operationId": "Groups_ListByProject",
@@ -2268,9 +2196,6 @@
           {
             "$ref": "#/parameters/api-version"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -2298,6 +2223,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Groups_ListByProject": {
             "$ref": "./examples/Groups_ListByProject.json"
@@ -2307,19 +2235,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get a specific group.",
         "description": "Get information related to a specific group in the project. Returns a json object of type 'group' as specified in the models section.",
-        "operationId": "GetGroup",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Groups_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2367,22 +2285,15 @@
           }
         },
         "x-ms-examples": {
-          "GetGroup": {
-            "$ref": "./examples/GetGroup.json"
+          "Groups_Get": {
+            "$ref": "./examples/Groups_Get.json"
           }
         }
       },
       "put": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Create a new group with specified settings. If group with the name provided already exists, then the existing group is updated.",
         "description": "Create a new group by sending a json object of type 'group' as given in Models section as part of the Request Body. The group name in a project is unique. Labels can be applied on a group as part of creation.\n\nIf a group with the groupName specified in the URL already exists, then this call acts as an update.\n\nThis operation is Idempotent.\n",
-        "operationId": "CreateGroup",
+        "operationId": "Groups_Create",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2395,9 +2306,6 @@
           },
           {
             "$ref": "#/parameters/groupName"
-          },
-          {
-            "$ref": "#/parameters/contentType"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -2453,22 +2361,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateGroup": {
-            "$ref": "./examples/CreateGroup.json"
+          "Groups_Create": {
+            "$ref": "./examples/Groups_Create.json"
           }
         }
       },
       "delete": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Delete the group",
         "description": "Delete the group from the project. The machines remain in the project. Deleting a non-existent group results in a no-operation.\n\nA group is an aggregation mechanism for machines in a project. Therefore, deleting group does not delete machines in it.\n",
-        "operationId": "DeleteGroup",
+        "operationId": "Groups_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2516,21 +2417,14 @@
           }
         },
         "x-ms-examples": {
-          "DeleteGroup": {
-            "$ref": "./examples/DeleteGroup.json"
+          "Groups_Delete": {
+            "$ref": "./examples/Groups_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all assessments created for the specified group.",
         "description": "Get all assessments created for the specified group.\n\nReturns a json array of objects of type 'assessment' as specified in Models section.\n",
         "operationId": "Assessments_ListByGroup",
@@ -2554,9 +2448,6 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK. Returns list of Assessment objects.",
@@ -2583,6 +2474,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Assessments_ListByGroup": {
             "$ref": "./examples/Assessments_ListByGroup.json"
@@ -2592,13 +2486,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/assessments": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all assessments created in the project.",
         "description": "Get all assessments created in the project.\n\nReturns a json array of objects of type 'assessment' as specified in Models section.\n",
         "operationId": "Assessments_ListByProject",
@@ -2619,9 +2506,6 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK. Returns list of Assessment objects.",
@@ -2648,6 +2532,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Assessments_ListByProject": {
             "$ref": "./examples/Assessments_ListByProject.json"
@@ -2657,19 +2544,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get an assessment.",
         "description": "Get an existing assessment with the specified name. Returns a json object of type 'assessment' as specified in Models section.",
-        "operationId": "GetAssessment",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Assessments_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2720,22 +2597,15 @@
           }
         },
         "x-ms-examples": {
-          "GetAssessment": {
-            "$ref": "./examples/GetAssessment.json"
+          "Assessments_Get": {
+            "$ref": "./examples/Assessments_Get.json"
           }
         }
       },
       "put": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Create or Update assessment.",
         "description": "Create a new assessment with the given name and the specified settings. Since name of an assessment in a project is a unique identiefier, if an assessment with the name provided already exists, then the existing assessment is updated.\n\nAny PUT operation, resulting in either create or update on an assessment, will cause the assessment to go in a \"InProgress\" state. This will be indicated by the field 'computationState' on the Assessment object. During this time no other PUT operation will be allowed on that assessment object, nor will a Delete operation. Once the computation for the assessment is complete, the field 'computationState' will be updated to 'Ready', and then other PUT or DELETE operations can happen on the assessment.\n\nWhen assessment is under computation, any PUT will lead to a 400 - Bad Request error.\n",
-        "operationId": "CreateAssessment",
+        "operationId": "Assessments_Create",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2806,22 +2676,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateAssessment": {
-            "$ref": "./examples/CreateAssessment.json"
+          "Assessments_Create": {
+            "$ref": "./examples/Assessments_Create.json"
           }
         }
       },
       "delete": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Deletes an assessment from the project.",
         "description": "Delete an assessment from the project. The machines remain in the assessment. Deleting a non-existent assessment results in a no-operation.\n\nWhen an assessment is under computation, as indicated by the 'computationState' field, it cannot be deleted. Any such attempt will return a 400 - Bad Request.\n",
-        "operationId": "DeleteAssessment",
+        "operationId": "Assessments_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2872,24 +2735,17 @@
           }
         },
         "x-ms-examples": {
-          "DeleteAssessment": {
-            "$ref": "./examples/DeleteAssessment.json"
+          "Assessments_Delete": {
+            "$ref": "./examples/Assessments_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/downloadUrl": {
       "post": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get download URL for the assessment report.",
         "description": "Get the URL for downloading the assessment in a report format.",
-        "operationId": "DownloadUrlPost",
+        "operationId": "Assessments_GetReportDownloadUrl",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2912,9 +2768,6 @@
           {
             "$ref": "#/parameters/acceptLanguage"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -2943,27 +2796,17 @@
           }
         },
         "x-ms-examples": {
-          "DownloadUrlPost": {
-            "$ref": "./examples/DownloadUrlPost.json"
+          "Assessments_GetReportDownloadUrl": {
+            "$ref": "./examples/Assessments_GetReportDownloadUrl.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get assessed machines for assessment.",
         "description": "Get list of machines that assessed as part of the specified assessment. Returns a json array of objects of type 'assessedMachine' as specified in the Models section.\n\nWhenever an assessment is created or updated, it goes under computation. During this phase, the 'status' field of Assessment object reports 'Computing'.\nDuring the period when the assessment is under computation, the list of assessed machines is empty and no assessed machines are returned by this call.\n",
         "operationId": "AssessedMachines_ListByAssessment",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3013,6 +2856,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "AssessedMachines_ListByAssessment": {
             "$ref": "./examples/AssessedMachines_ListByAssessment.json"
@@ -3022,19 +2868,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get an assessed machine.",
         "description": "Get an assessed machine with its size & cost estimnate that was evaluated in the specified assessment.",
-        "operationId": "GetAssessedMachine",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "AssessedMachines_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3088,8 +2924,8 @@
           }
         },
         "x-ms-examples": {
-          "GetAssessedMachine": {
-            "$ref": "./examples/GetAssessedMachine.json"
+          "AssessedMachines_Get": {
+            "$ref": "./examples/AssessedMachines_Get.json"
           }
         }
       }
@@ -3098,10 +2934,7 @@
       "get": {
         "summary": "Get list of operations supported in the API.",
         "description": "Get a list of REST API supported by Microsoft.Migrate provider.",
-        "operationId": "Operations_list",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Operations_List",
         "responses": {
           "200": {
             "description": "OK. Returns list of operations.",
@@ -3110,8 +2943,11 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
-          "Operations_list": {
+          "Operations_List": {
             "$ref": "./examples/Operations_List.json"
           }
         }

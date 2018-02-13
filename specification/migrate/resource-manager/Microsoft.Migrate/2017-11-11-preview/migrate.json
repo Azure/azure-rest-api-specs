@@ -85,12 +85,6 @@
         "2017-11-11-preview"
       ]
     },
-    "contentType": {
-      "name": "Content-Type",
-      "description": "Standard request header. Used by service to identify format of client's request body.",
-      "type": "string",
-      "in": "header"
-    },
     "acceptLanguage": {
       "description": "Standard request header. Used by service to respond to client in appropriate language.",
       "name": "Accept-Language",
@@ -109,6 +103,13 @@
       }
     }
   },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "definitions": {
     "Project": {
       "type": "object",
@@ -1378,6 +1379,33 @@
         }
       }
     },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Displayable properties of the operation.",
+      "readOnly": true,
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider of the operation.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource operated on by the operation.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation Type.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation.",
+          "readOnly": true
+        }
+      }
+    },
     "Operation": {
       "type": "object",
       "description": "A REST API operation supported by the provider.",
@@ -1388,31 +1416,8 @@
           "readOnly": true
         },
         "display": {
-          "type": "object",
           "description": "Displayable properties of the operation.",
-          "readOnly": true,
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Provider of the operation.",
-              "readOnly": true
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource operated on by the operation.",
-              "readOnly": true
-            },
-            "operation": {
-              "type": "string",
-              "description": "Operation Type.",
-              "readOnly": true
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation.",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/OperationDisplay"
         },
         "origin": {
           "type": "string",
@@ -1432,6 +1437,7 @@
         },
         "expirationTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Expiry date of download url.",
           "readOnly": true
         }
@@ -1519,13 +1525,6 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all projects.",
         "description": "Get all the projects in the resource group.",
         "operationId": "Projects_List",
@@ -1542,9 +1541,6 @@
           {
             "$ref": "#/parameters/acceptLanguage"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -1572,6 +1568,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Projects_List": {
             "$ref": "./examples/Projects_List.json"
@@ -1581,16 +1580,9 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get the specified project.",
         "description": "Get the project with the specified name.",
-        "operationId": "GetProject",
+        "operationId": "Projects_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1607,9 +1599,6 @@
           {
             "$ref": "#/parameters/acceptLanguage"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -1638,22 +1627,15 @@
           }
         },
         "x-ms-examples": {
-          "GetProject": {
-            "$ref": "./examples/GetProject.json"
+          "Projects_Get": {
+            "$ref": "./examples/Projects_Get.json"
           }
         }
       },
       "put": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Create or update project.",
         "description": "Create a project with specified name. If a project already exists, update it.",
-        "operationId": "CreateProject",
+        "operationId": "Projects_Create",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1666,9 +1648,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/contentType"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -1721,22 +1700,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateProject": {
-            "$ref": "./examples/CreateProject.json"
+          "Projects_Create": {
+            "$ref": "./examples/Projects_Create.json"
           }
         }
       },
       "patch": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Update project.",
         "description": "Update a project with specified name. Supports partial updates, for example only tags can be provided.",
-        "operationId": "UpdateProject",
+        "operationId": "Projects_Update",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1749,9 +1721,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/contentType"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -1795,22 +1764,15 @@
           }
         },
         "x-ms-examples": {
-          "UpdateProject": {
-            "$ref": "./examples/UpdateProject.json"
+          "Projects_Update": {
+            "$ref": "./examples/Projects_Update.json"
           }
         }
       },
       "delete": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Delete the project",
         "description": "Delete the project. Deleting non-existent project is a no-operation.",
-        "operationId": "DeleteProject",
+        "operationId": "Projects_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1855,24 +1817,17 @@
           }
         },
         "x-ms-examples": {
-          "DeleteProject": {
-            "$ref": "./examples/DeleteProject.json"
+          "Projects_Delete": {
+            "$ref": "./examples/Projects_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/keys": {
       "post": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get shared keys for the project.",
         "description": "Gets the Log Analytics Workspace ID and Primary Key for the specified project.",
-        "operationId": "KeysPost",
+        "operationId": "Projects_GetKeys",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1889,9 +1844,6 @@
           {
             "$ref": "#/parameters/acceptLanguage"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -1920,21 +1872,14 @@
           }
         },
         "x-ms-examples": {
-          "KeysPost": {
-            "$ref": "./examples/KeysPost.json"
+          "Projects_GetKeys": {
+            "$ref": "./examples/Projects_GetKeys.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all machines in the project",
         "description": "Get data of all the machines available in the project. Returns a json array of objects of type 'machine' defined in Models section.",
         "operationId": "Machines_ListByProject",
@@ -1954,9 +1899,6 @@
           {
             "$ref": "#/parameters/api-version"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -1984,6 +1926,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Machines_ListByProject": {
             "$ref": "./examples/Machines_ListByProject.json"
@@ -1993,16 +1938,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines/{machineName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get a specific machine.",
         "description": "Get the machine with the specified name. Returns a json object of type 'machine' defined in Models section.",
-        "operationId": "GetMachine",
+        "operationId": "Machines_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2022,9 +1960,6 @@
           {
             "$ref": "#/parameters/api-version"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -2053,21 +1988,14 @@
           }
         },
         "x-ms-examples": {
-          "GetMachine": {
-            "$ref": "./examples/GetMachine.json"
+          "Machines_Get": {
+            "$ref": "./examples/Machines_Get.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all groups",
         "description": "Get all groups created in the project. Returns a json array of objects of type 'group' as specified in the Models section.",
         "operationId": "Groups_ListByProject",
@@ -2087,9 +2015,6 @@
           {
             "$ref": "#/parameters/api-version"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -2117,6 +2042,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Groups_ListByProject": {
             "$ref": "./examples/Groups_ListByProject.json"
@@ -2126,19 +2054,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get a specific group.",
         "description": "Get information related to a specific group in the project. Returns a json object of type 'group' as specified in the models section.",
-        "operationId": "GetGroup",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Groups_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2186,22 +2104,15 @@
           }
         },
         "x-ms-examples": {
-          "GetGroup": {
-            "$ref": "./examples/GetGroup.json"
+          "Groups_Get": {
+            "$ref": "./examples/Groups_Get.json"
           }
         }
       },
       "put": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Create a new group with specified settings. If group with the name provided already exists, then the existing group is updated.",
         "description": "Create a new group by sending a json object of type 'group' as given in Models section as part of the Request Body. The group name in a project is unique. Labels can be applied on a group as part of creation.\n\nIf a group with the groupName specified in the URL already exists, then this call acts as an update.\n\nThis operation is Idempotent.\n",
-        "operationId": "CreateGroup",
+        "operationId": "Groups_Create",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2214,9 +2125,6 @@
           },
           {
             "$ref": "#/parameters/groupName"
-          },
-          {
-            "$ref": "#/parameters/contentType"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -2272,22 +2180,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateGroup": {
-            "$ref": "./examples/CreateGroup.json"
+          "Groups_Create": {
+            "$ref": "./examples/Groups_Create.json"
           }
         }
       },
       "delete": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Delete the group",
         "description": "Delete the group from the project. The machines remain in the project. Deleting a non-existent group results in a no-operation.\n\nA group is an aggregation mechanism for machines in a project. Therefore, deleting group does not delete machines in it.\n",
-        "operationId": "DeleteGroup",
+        "operationId": "Groups_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2335,21 +2236,14 @@
           }
         },
         "x-ms-examples": {
-          "DeleteGroup": {
-            "$ref": "./examples/DeleteGroup.json"
+          "Groups_Delete": {
+            "$ref": "./examples/Groups_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all assessments created for the specified group.",
         "description": "Get all assessments created for the specified group.\n\nReturns a json array of objects of type 'assessment' as specified in Models section.\n",
         "operationId": "Assessments_ListByGroup",
@@ -2373,9 +2267,6 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK. Returns list of Assessment objects.",
@@ -2402,6 +2293,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Assessments_ListByGroup": {
             "$ref": "./examples/Assessments_ListByGroup.json"
@@ -2411,13 +2305,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/assessments": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get all assessments created in the project.",
         "description": "Get all assessments created in the project.\n\nReturns a json array of objects of type 'assessment' as specified in Models section.\n",
         "operationId": "Assessments_ListByProject",
@@ -2438,9 +2325,6 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK. Returns list of Assessment objects.",
@@ -2467,6 +2351,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Assessments_ListByProject": {
             "$ref": "./examples/Assessments_ListByProject.json"
@@ -2476,19 +2363,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get an assessment.",
         "description": "Get an existing assessment with the specified name. Returns a json object of type 'assessment' as specified in Models section.",
-        "operationId": "GetAssessment",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Assessments_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2539,22 +2416,15 @@
           }
         },
         "x-ms-examples": {
-          "GetAssessment": {
-            "$ref": "./examples/GetAssessment.json"
+          "Assessments_Get": {
+            "$ref": "./examples/Assessments_Get.json"
           }
         }
       },
       "put": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Create or Update assessment.",
         "description": "Create a new assessment with the given name and the specified settings. Since name of an assessment in a project is a unique identiefier, if an assessment with the name provided already exists, then the existing assessment is updated.\n\nAny PUT operation, resulting in either create or update on an assessment, will cause the assessment to go in a \"InProgress\" state. This will be indicated by the field 'computationState' on the Assessment object. During this time no other PUT operation will be allowed on that assessment object, nor will a Delete operation. Once the computation for the assessment is complete, the field 'computationState' will be updated to 'Ready', and then other PUT or DELETE operations can happen on the assessment.\n\nWhen assessment is under computation, any PUT will lead to a 400 - Bad Request error.\n",
-        "operationId": "CreateAssessment",
+        "operationId": "Assessments_Create",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2625,22 +2495,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateAssessment": {
-            "$ref": "./examples/CreateAssessment.json"
+          "Assessments_Create": {
+            "$ref": "./examples/Assessments_Create.json"
           }
         }
       },
       "delete": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Deletes an assessment from the project.",
         "description": "Delete an assessment from the project. The machines remain in the assessment. Deleting a non-existent assessment results in a no-operation.\n\nWhen an assessment is under computation, as indicated by the 'computationState' field, it cannot be deleted. Any such attempt will return a 400 - Bad Request.\n",
-        "operationId": "DeleteAssessment",
+        "operationId": "Assessments_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2691,24 +2554,17 @@
           }
         },
         "x-ms-examples": {
-          "DeleteAssessment": {
-            "$ref": "./examples/DeleteAssessment.json"
+          "Assessments_Delete": {
+            "$ref": "./examples/Assessments_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/downloadUrl": {
       "post": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get download URL for the assessment report.",
         "description": "Get the URL for downloading the assessment in a report format.",
-        "operationId": "DownloadUrlPost",
+        "operationId": "Assessments_GetReportDownloadUrl",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2731,9 +2587,6 @@
           {
             "$ref": "#/parameters/acceptLanguage"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -2762,27 +2615,17 @@
           }
         },
         "x-ms-examples": {
-          "DownloadUrlPost": {
-            "$ref": "./examples/DownloadUrlPost.json"
+          "Assessments_GetReportDownloadUrl": {
+            "$ref": "./examples/Assessments_GetReportDownloadUrl.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get assessed machines for assessment.",
         "description": "Get list of machines that assessed as part of the specified assessment. Returns a json array of objects of type 'assessedMachine' as specified in the Models section.\n\nWhenever an assessment is created or updated, it goes under computation. During this phase, the 'status' field of Assessment object reports 'Computing'.\nDuring the period when the assessment is under computation, the list of assessed machines is empty and no assessed machines are returned by this call.\n",
         "operationId": "AssessedMachines_ListByAssessment",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2832,6 +2675,9 @@
             "description": "Service Unavailable."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "AssessedMachines_ListByAssessment": {
             "$ref": "./examples/AssessedMachines_ListByAssessment.json"
@@ -2841,19 +2687,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}": {
       "get": {
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "summary": "Get an assessed machine.",
         "description": "Get an assessed machine with its size & cost estimnate that was evaluated in the specified assessment.",
-        "operationId": "GetAssessedMachine",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "AssessedMachines_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2907,8 +2743,8 @@
           }
         },
         "x-ms-examples": {
-          "GetAssessedMachine": {
-            "$ref": "./examples/GetAssessedMachine.json"
+          "AssessedMachines_Get": {
+            "$ref": "./examples/AssessedMachines_Get.json"
           }
         }
       }
@@ -2917,10 +2753,7 @@
       "get": {
         "summary": "Get list of operations supported in the API.",
         "description": "Get a list of REST API supported by Microsoft.Migrate provider.",
-        "operationId": "Operations_list",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Operations_List",
         "responses": {
           "200": {
             "description": "OK. Returns list of operations.",
@@ -2929,8 +2762,11 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
-          "Operations_list": {
+          "Operations_List": {
             "$ref": "./examples/Operations_List.json"
           }
         }
