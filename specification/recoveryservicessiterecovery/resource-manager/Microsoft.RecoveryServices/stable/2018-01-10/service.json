@@ -6832,7 +6832,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "CreateNetworkMappingInput": {
       "description": "Create network mappings input.",
@@ -9480,7 +9481,15 @@
         },
         "multiVmGroupCreateOption": {
           "description": "Whether Multi VM group is auto created or specified by user.",
-          "type": "string"
+          "enum": [
+            "AutoCreated",
+            "UserSpecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MultiVmGroupCreateOption",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -11577,7 +11586,15 @@
         },
         "multiVmGroupCreateOption": {
           "description": "Whether Multi VM group is auto created or specified by user.",
-          "type": "string"
+          "enum": [
+            "AutoCreated",
+            "UserSpecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MultiVmGroupCreateOption",
+            "modelAsString": false
+          }
         },
         "managementId": {
           "description": "The management Id.",
@@ -12372,6 +12389,48 @@
           "type": "string"
         }
       }
+    },
+    "AzureToAzureNetworkMappingSettings": {
+      "description": "A2A Network Mapping fabric specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkMappingFabricSpecificSettings"
+        }
+      ],
+      "properties": {
+        "primaryFabricLocation": {
+          "description": "The primary fabric location.",
+          "type": "string"
+        },
+        "recoveryFabricLocation": {
+          "description": "The recovery fabric location.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureToAzure"
+    },
+    "VmmToAzureNetworkMappingSettings": {
+      "description": "E2A Network Mapping fabric specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkMappingFabricSpecificSettings"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "VmmToAzure"
+    },
+    "VmmToVmmNetworkMappingSettings": {
+      "description": "E2E Network Mapping fabric specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkMappingFabricSpecificSettings"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "VmmToVmm"
     },
     "AzureToAzureCreateNetworkMappingInput": {
       "description": "Create network mappings input properties/behaviour specific to Azure to Azure Network mapping.",
