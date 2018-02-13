@@ -79,7 +79,7 @@
                     "200": {
                         "description": "Lists a collection of Api Version Set entities.",
                         "schema": {
-                            "$ref": "#/definitions/UserCollection"
+                            "$ref": "#/definitions/ApiVersionSetCollection"
                         }
                     },
                     "default": {
@@ -300,6 +300,22 @@
         }
     },
     "definitions": {
+        "ApiVersionSetCollection": {
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/ApiVersionSetContract"
+                },
+                "description": "Page values."
+              },
+              "nextLink": {
+                "type": "string",
+                "description": "Next page link if any."
+              }
+            },
+            "description": "Paged Api Version Set list representation."
+          },
         "ApiVersionSetEntityBase": {
             "properties": {
                 "description": {
