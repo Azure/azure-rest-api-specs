@@ -4,7 +4,7 @@
     "version": "2018-02-01-preview",
     "title": "ContainerRegistryManagementClient"
   },
-  "host": "localhost",
+  "host": "management.azure.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -660,6 +660,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/builds/getSourceUploadUrl": {
+      "post": {
+        "tags": [
+          "Builds"
+        ],
+        "summary": "Get the upload location for the user to be upload the source.",
+        "operationId": "Builds_GetSourceUploadUrl",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/SourceUploadDefinition"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "x-ms-examples": {
+          "Builds_GetSourceUploadUrl": {
+            "$ref": "./examples/BuildsGetSourceUploadUrl.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/builds/{buildId}/cancel": {
       "post": {
         "tags": [
@@ -1028,6 +1067,10 @@
           "$ref": "#/definitions/SourceRepositoryProperties",
           "description": "The properties that describes the source(code) for the build definition."
         },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the build has to happen."
+        },
         "timeout": {
           "format": "int32",
           "description": "Build timeout in seconds.",
@@ -1068,6 +1111,32 @@
           "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
           "default": false,
           "type": "boolean"
+        }
+      }
+    },
+    "PlatformProperties": {
+      "description": "The platform properties against which the build has to happen.",
+      "required": [
+        "osType"
+      ],
+      "type": "object",
+      "properties": {
+        "osType": {
+          "description": "The operating system type required for the build.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OsTypes",
+            "modelAsString": true
+          }
+        },
+        "cpu": {
+          "format": "int32",
+          "description": "The CPU configuration in terms of number of cores required for the build.",
+          "type": "integer"
         }
       }
     },
@@ -1251,6 +1320,10 @@
             "modelAsString": true
           }
         },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the build has to happen."
+        },
         "timeout": {
           "format": "int32",
           "description": "Build timeout in seconds.",
@@ -1419,6 +1492,10 @@
             "modelAsString": true
           }
         },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the build has to happen."
+        },
         "timeout": {
           "format": "int32",
           "description": "Build timeout in seconds.",
@@ -1553,32 +1630,6 @@
         }
       }
     },
-    "PlatformProperties": {
-      "description": "The platform properties against which the build has to happen.",
-      "required": [
-        "osType"
-      ],
-      "type": "object",
-      "properties": {
-        "osType": {
-          "description": "The operating system type required for the build.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OsTypes",
-            "modelAsString": true
-          }
-        },
-        "cpu": {
-          "format": "int32",
-          "description": "The CPU configuration in terms of number of cores required for the build.",
-          "type": "integer"
-        }
-      }
-    },
     "BuildTrigger": {
       "description": "Base properties for any build trigger.",
       "type": "object",
@@ -1656,7 +1707,6 @@
     "QueueBuildRequest": {
       "description": "The queue build request parameters.",
       "required": [
-        "imageName",
         "sourceLocation",
         "buildParameters"
       ],
@@ -1667,7 +1717,7 @@
           "type": "string"
         },
         "sourceLocation": {
-          "description": "The URL to the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.",
+          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
           "type": "string"
         },
         "buildArguments": {
@@ -1742,6 +1792,20 @@
         }
       },
       "discriminator": "type"
+    },
+    "SourceUploadDefinition": {
+      "description": "The properties of a response to source upload request.",
+      "type": "object",
+      "properties": {
+        "uploadUrl": {
+          "description": "The URL where the client can upload the source.",
+          "type": "string"
+        },
+        "relativePath": {
+          "description": "The relative path to the source. This is used to submit the subsequent queue build request.",
+          "type": "string"
+        }
+      }
     },
     "BuildStep": {
       "description": "Base properties for any  build step.",
