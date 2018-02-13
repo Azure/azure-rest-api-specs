@@ -143,9 +143,6 @@
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
             }
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-examples": {
@@ -238,7 +235,7 @@
             "description": "The request was successful; the operation will complete asynchronously."
           },
           "204": {
-            "description": "Success"
+            "description": "No Content - the specified resource was not found."
           }
         },
         "x-ms-long-running-operation": true,
@@ -292,9 +289,6 @@
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
             }
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-long-running-operation": true,
@@ -338,9 +332,6 @@
           },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously."
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-long-running-operation": true,
@@ -393,9 +384,6 @@
           },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously."
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-long-running-operation": true,
@@ -487,9 +475,6 @@
             "schema": {
               "$ref": "#/definitions/Build"
             }
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-examples": {
@@ -543,9 +528,6 @@
           },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously."
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-long-running-operation": true,
@@ -599,9 +581,6 @@
             "schema": {
               "$ref": "#/definitions/BuildLogResult"
             }
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-examples": {
@@ -665,7 +644,7 @@
         "tags": [
           "Builds"
         ],
-        "summary": "Get the upload location for the user to be upload the source.",
+        "summary": "Get the upload location for the user to be able to upload the source.",
         "operationId": "Builds_GetSourceUploadUrl",
         "parameters": [
           {
@@ -687,9 +666,6 @@
             "schema": {
               "$ref": "#/definitions/SourceUploadDefinition"
             }
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-examples": {
@@ -733,9 +709,6 @@
           },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously."
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-long-running-operation": true,
@@ -783,9 +756,6 @@
             "schema": {
               "$ref": "#/definitions/BuildStep"
             }
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
         "x-ms-examples": {
@@ -840,10 +810,11 @@
               "$ref": "#/definitions/BuildStep"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "BuildSteps_Update": {
             "$ref": "./examples/BuildStepsUpdate.json"
@@ -974,7 +945,7 @@
             "description": "The request was successful; the operation will complete asynchronously."
           },
           "204": {
-            "description": "Success"
+            "description": "No Content - the specified resource was not found."
           }
         },
         "x-ms-long-running-operation": true,
@@ -999,7 +970,7 @@
           }
         },
         "nextLink": {
-          "description": "The full NextLink used for paging.",
+          "description": "The URI that can be used to request the next set of paged results.",
           "type": "string"
         }
       }
@@ -1099,7 +1070,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SourceControlTypes",
+            "name": "SourceControlType",
             "modelAsString": true
           }
         },
@@ -1129,7 +1100,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "OsTypes",
+            "name": "OsType",
             "modelAsString": true
           }
         },
@@ -1162,7 +1133,7 @@
           }
         },
         "nextLink": {
-          "description": "The full NextLink used for paging.",
+          "description": "The URI that can be used to request the next set of paged results.",
           "type": "string"
         }
       }
@@ -1183,7 +1154,7 @@
             "Running",
             "Succeeded",
             "Failed",
-            "Cancelled"
+            "Canceled"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1226,7 +1197,7 @@
             "Running",
             "Succeeded",
             "Failed",
-            "Cancelled"
+            "Canceled"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1352,7 +1323,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SourceControlTypes",
+            "name": "SourceControlType",
             "modelAsString": true
           }
         },
@@ -1386,7 +1357,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "BuildStepTypes",
+            "name": "BuildStepType",
             "modelAsString": true
           }
         },
@@ -1543,7 +1514,7 @@
             "Running",
             "Succeeded",
             "Failed",
-            "Cancelled"
+            "Canceled"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1609,15 +1580,15 @@
       }
     },
     "ImageDescriptor": {
-      "description": "Properties for a registry image.",
+      "description": "Properties for a docker image.",
       "required": [
-        "imageName",
+        "repositoryName",
         "digest"
       ],
       "type": "object",
       "properties": {
-        "imageName": {
-          "description": "Name of the repository or image.",
+        "repositoryName": {
+          "description": "Name of the repository.",
           "type": "string"
         },
         "tag": {
@@ -1625,7 +1596,7 @@
           "type": "string"
         },
         "digest": {
-          "description": "The image digest.",
+          "description": "The image digest. Example: SHA256 based digest.",
           "type": "string"
         }
       }
@@ -1777,6 +1748,7 @@
         },
         "isSecret": {
           "description": "Flag to indicate whether the argument represents a secret and want to be removed from build logs.",
+          "default": false,
           "type": "boolean"
         }
       }
@@ -1822,7 +1794,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "BuildStepTypes",
+            "name": "BuildStepType",
             "modelAsString": true
           }
         },
@@ -1857,7 +1829,7 @@
           }
         },
         "nextLink": {
-          "description": "The full NextLink used for paging.",
+          "description": "The URI that can be used to request the next set of paged results.",
           "type": "string"
         }
       }
@@ -1874,7 +1846,7 @@
           }
         },
         "nextLink": {
-          "description": "The full NextLink used for paging.",
+          "description": "The URI that can be used to request the next set of paged results.",
           "type": "string"
         }
       }
@@ -2084,7 +2056,7 @@
       "description": "A build trigger based on Image updates.",
       "required": [
         "id",
-        "imageName"
+        "repositoryName"
       ],
       "type": "object",
       "allOf": [
@@ -2097,8 +2069,8 @@
           "description": "The unique identifier of a trigger.",
           "type": "string"
         },
-        "imageName": {
-          "description": "Name of the repository or image.",
+        "repositoryName": {
+          "description": "Name of the repository.",
           "type": "string"
         },
         "tag": {
@@ -2112,7 +2084,7 @@
       "description": "The parameters that identify a image trigger.",
       "required": [
         "type",
-        "imageName"
+        "repositoryName"
       ],
       "type": "object",
       "allOf": [
@@ -2121,8 +2093,8 @@
         }
       ],
       "properties": {
-        "imageName": {
-          "description": "Name of the repository or image.",
+        "repositoryName": {
+          "description": "Name of the repository.",
           "type": "string"
         },
         "tag": {
