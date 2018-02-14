@@ -264,10 +264,10 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "Gets or sets the agent registration key name - Primary or Secondary.",
+          "description": "Gets or sets the agent registration key name - primary or secondary.",
           "enum": [
-            "Primary",
-            "Secondary"
+            "primary",
+            "secondary"
           ],
           "x-ms-enum": {
             "name": "AgentRegistrationKeyName",
@@ -524,6 +524,7 @@
       "description": "Properties of the certificate."
     },
     "Certificate": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -534,6 +535,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets the name of the certificate."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
         },
         "properties": {
           "$ref": "#/definitions/CertificateProperties",
@@ -580,9 +586,6 @@
           "description": "Gets or sets the properties of the certificate."
         }
       },
-      "required": [
-        "name"
-      ],
       "description": "The parameters supplied to the update certificate operation."
     },
     "ConnectionCreateOrUpdateProperties": {
@@ -660,6 +663,7 @@
       "description": "Definition of the connection properties."
     },
     "Connection": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -670,6 +674,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets the name of the connection."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
         },
         "properties": {
           "$ref": "#/definitions/ConnectionProperties",
@@ -723,9 +732,6 @@
           "description": "Gets or sets the properties of the connection."
         }
       },
-      "required": [
-        "properties"
-      ],
       "description": "The parameters supplied to the update connection operation."
     },
     "ConnectionTypeAssociationProperty": {
@@ -818,6 +824,11 @@
           "readOnly": true,
           "description": "Gets the name of the connection type."
         },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
         "properties": {
           "$ref": "#/definitions/ConnectionTypeProperties",
           "x-ms-client-flatten": true,
@@ -908,6 +919,7 @@
       "description": "Definition of the credential properties"
     },
     "Credential": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -916,7 +928,13 @@
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the name of the credential."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
         },
         "properties": {
           "$ref": "#/definitions/CredentialProperties",
@@ -971,9 +989,6 @@
           "description": "Gets or sets the properties of the variable."
         }
       },
-      "required": [
-        "name"
-      ],
       "description": "The parameters supplied to the Update credential operation."
     },
     "ContentHash": {
@@ -1113,6 +1128,14 @@
           "readOnly": true,
           "description": "Gets the creation time of the job."
         },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateProperty",
+          "description": "The current provisioning state of the job."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
+        },
         "status": {
           "type": "string",
           "description": "Gets or sets the status of the job.",
@@ -1185,6 +1208,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Dsc Compilation Job name"
         },
         "properties": {
           "$ref": "#/definitions/DscCompilationJobProperties",
@@ -1305,6 +1333,7 @@
       "description": "Definition of the configuration property type."
     },
     "DscConfiguration": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DscConfigurationProperties",
@@ -1479,7 +1508,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Definition of the dsc node type."
@@ -1535,6 +1564,7 @@
           "description": "Gets or sets the id of the resource."
         }
       },
+      "x-ms-azure-resource": true,
       "description": "Definition of the dsc node configuration."
     },
     "DscNodeConfigurationListResult": {
@@ -2060,7 +2090,18 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the name of the variable."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
         },
         "properties": {
           "$ref": "#/definitions/JobScheduleProperties",
@@ -2514,6 +2555,37 @@
       ],
       "description": "The Resource definition.",
       "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "description": "The Resource definition.",
+      "x-ms-azure-resource": true
+    },
+    "ProvisioningStateProperty": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "The provisioning state property."
     },
     "RunAsCredentialAssociationProperty": {
       "properties": {
@@ -3133,11 +3205,18 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the schedule."
+          "readOnly": true,
+          "description": "Gets name of the schedule."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
         },
         "properties": {
           "$ref": "#/definitions/ScheduleProperties",
@@ -3172,9 +3251,6 @@
           "description": "Gets or sets the list of schedule properties."
         }
       },
-      "required": [
-        "name"
-      ],
       "description": "The parameters supplied to the update schedule operation."
     },
     "ScheduleListResult": {
@@ -3506,14 +3582,22 @@
       "description": "Definition of the varible properties"
     },
     "Variable": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the variable."
+          "readOnly": true,
+          "description": "Gets the name of the variable."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
         },
         "properties": {
           "$ref": "#/definitions/VariableProperties",
@@ -3564,9 +3648,6 @@
           "description": "Gets or sets the value of the variable."
         }
       },
-      "required": [
-        "name"
-      ],
       "description": "The parameters supplied to the update variable operation."
     },
     "WebhookCreateOrUpdateProperties": {
@@ -3677,11 +3758,18 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the webhook."
+          "readOnly": true,
+          "description": "Gets the name of the webhook."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the type of the resource."
         },
         "properties": {
           "$ref": "#/definitions/WebhookProperties",

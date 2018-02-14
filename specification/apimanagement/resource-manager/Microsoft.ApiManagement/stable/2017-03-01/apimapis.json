@@ -104,7 +104,7 @@
         "x-ms-odata": "#/definitions/ApiContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}": {      
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}": {
       "head": {
         "tags": [
           "Apis"
@@ -137,10 +137,10 @@
           "200": {
             "description": "Specified API entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -148,10 +148,10 @@
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
-          }                    
+          }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Apis"
         ],
@@ -162,6 +162,12 @@
             "$ref": "./examples/ApiManagementGetApiContract.json"
           }
         },
+        "produces": [
+          "application/json",
+          "application/vnd.sun.wadl+xml",
+          "application/vnd.swagger.doc+json",
+          "application/wsdl+xml"
+        ],
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -220,6 +226,12 @@
             "$ref": "./examples/ApiManagementCreateApi.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/vnd.sun.wadl+xml",
+          "application/vnd.swagger.doc+json",
+          "application/wsdl+xml"
+        ],
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -475,7 +487,7 @@
           "ApiManagementListApiReleases": {
             "$ref": "./examples/ApiManagementListApiReleases.json"
           }
-        },        
+        },
         "parameters": [
           {
             "name": "$filter",
@@ -511,35 +523,35 @@
         "x-ms-odata": "#/definitions/ApiReleaseContract"
       }
     },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases/{releaseId}": {
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiIdParameter"
-          },
-          {
-            "name": "releaseId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Release identifier within an API. Must be unique in the current API Management service instance.",
-            "minLength": 1,
-            "maxLength": 256,
-            "pattern": "^[^*#&+:<>?]+$"   
-          }
-        ],
-        "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases/{releaseId}": {
+      "parameters": [
+        {
+          "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiIdParameter"
+        },
+        {
+          "name": "releaseId",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "Release identifier within an API. Must be unique in the current API Management service instance.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[^*#&+:<>?]+$"
+        }
+      ],
+      "get": {
         "tags": [
           "Releases"
         ],
@@ -563,8 +575,7 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-odata": "#/definitions/ApiReleaseContract"
+        }
       },
       "put": {
         "tags": [
@@ -773,10 +784,10 @@
           "200": {
             "description": "Specified API operation entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -787,7 +798,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Operations"
         ],
@@ -1097,10 +1108,10 @@
           "200": {
             "description": "Specified API operation policy entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1111,7 +1122,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "ApiOperationPolicies"
         ],
@@ -1440,10 +1451,10 @@
           "200": {
             "description": "Specified API Policy entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1454,7 +1465,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "ApiPolicy"
         ],
@@ -1715,10 +1726,10 @@
           "200": {
             "description": "Specified schema entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1729,7 +1740,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "ApiSchema"
         ],
@@ -1898,6 +1909,59 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apisByTags": {
+      "get": {
+        "tags": [
+          "ApisByTags"
+        ],
+        "operationId": "Api_ListByTags",
+        "description": "Lists a collection of apis associated with tags.",
+        "x-ms-examples": {
+          "ApiManagementListApisByTags": {
+            "$ref": "./examples/ApiManagementListApisByTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| aid         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| apiRevision | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| path        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| serviceUrl  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| isCurrent   | eq                     | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of TagResource entities.",
+            "schema": {
+              "$ref": "./apimtagresources.json#/definitions/TagResourceCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./apimtagresources.json#/definitions/TagResourceContract"
       }
     }
   },
@@ -2289,6 +2353,21 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiRevisionContract": {
+      "properties": {        
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiRevisionContractProperties",
+          "description": "Properties of the Api Revision Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Api Revision details."
+    },
+    "ApiRevisionContractProperties": {
       "properties": {
         "apiId": {
           "type":"string",
@@ -2356,6 +2435,7 @@
             "description": "Description of new API Revision."
           },
           "apiVersionSet" : {
+            "description": "Version set details",
             "$ref" : "#/definitions/ApiVersionSetContract"
           }
         }
@@ -2405,7 +2485,7 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiReleaseContract": {
-      "properties": {
+      "properties": {        
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiReleaseContractProperties",
@@ -2426,13 +2506,13 @@
           "type": "string",
           "description": "Identifier of the API the release belongs to."
         },
-        "createdDate": {
+        "createdDateTime": {
           "type":"string",
           "readOnly": true,
           "format": "date-time",
           "description": "The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."        
         },
-        "updatedDate": {
+        "updatedDateTime": {
           "type":"string",
           "readOnly": true,
           "format": "date-time",
@@ -2777,7 +2857,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
       "description": "Schema Contract details."
@@ -2848,7 +2928,8 @@
       "in": "header",
       "required": true,
       "description": "ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "SchemaIdParameter": {
       "name": "schemaId",

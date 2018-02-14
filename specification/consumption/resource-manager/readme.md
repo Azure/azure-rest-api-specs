@@ -166,26 +166,41 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-04-24-preview/consumption
 ```
 
-### Tag: package-2017-11-30 and go
-These settings apply only when `--tag=package-2017-11-30 --go` is specified on the command line.
+### Tag: package-2017-11 and go
+These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2017-11-30' && $(go)
+``` yaml $(tag) == 'package-2017-11' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-11-30/consumption
 ```
 
-### Tag: package-2017-12-30-preview and go
-These settings apply only when `--tag=package-2017-12-30-preview --go` is specified on the command line.
+### Tag: package-2017-12-preview and go
+These settings apply only when `--tag=package-2017-12-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2017-12-30-preview' && $(go)
+``` yaml $(tag) == 'package-2017-12-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-12-30-preview/consumption
 ```
 
-### Tag: package-2018-01-31 and go
-These settings apply only when `--tag=package-2018-01-31 --go` is specified on the command line.
+### Tag: package-2018-01 and go
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-01-31' && $(go)
+``` yaml $(tag) == 'package-2018-01' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-01-31/consumption
+```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.consumption
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-consumption
 ```
