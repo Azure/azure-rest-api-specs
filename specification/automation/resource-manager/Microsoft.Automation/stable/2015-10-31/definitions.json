@@ -1204,22 +1204,17 @@
     },
     "DscCompilationJob": {
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Dsc Compilation Job name"
-        },
         "properties": {
           "$ref": "#/definitions/DscCompilationJobProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the Dsc Compilation job."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the Dsc Compilation job."
     },
     "DscCompilationJobListResult": {
@@ -1541,10 +1536,6 @@
     },
     "DscNodeConfiguration": {
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the node configuration name."
-        },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
@@ -1558,13 +1549,13 @@
         "configuration": {
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
           "description": "Gets or sets the configuration of the node."
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id of the resource."
         }
       },
-      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the dsc node configuration."
     },
     "DscNodeConfigurationListResult": {
