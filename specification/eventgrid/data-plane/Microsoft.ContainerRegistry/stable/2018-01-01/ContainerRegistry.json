@@ -11,7 +11,7 @@
             "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.",
             "allOf": [
                 {
-                    "$ref": "#/definitions/EventContent"
+                    "$ref": "#/definitions/ContainerRegistryEventData"
                 }
             ],
             "properties": {}
@@ -20,12 +20,12 @@
             "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event.",
             "allOf": [
                 {
-                    "$ref": "#/definitions/EventContent"
+                    "$ref": "#/definitions/ContainerRegistryEventData"
                 }
             ],
             "properties": {}
         },
-        "EventContent": {
+        "ContainerRegistryEventData": {
             "description": "The content of the event request message.",
             "properties": {
                 "id": {
@@ -42,24 +42,24 @@
                     "type": "string"
                 },
                 "target": {
-                    "$ref": "#/definitions/Target",
+                    "$ref": "#/definitions/ContainerRegistryEventTarget",
                     "description": "The target of the event."
                 },
                 "request": {
-                    "$ref": "#/definitions/Request",
+                    "$ref": "#/definitions/ContainerRegistryEventRequest",
                     "description": "The request that generated the event."
                 },
                 "actor": {
-                    "$ref": "#/definitions/Actor",
+                    "$ref": "#/definitions/ContainerRegistryEventActor",
                     "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request."
                 },
                 "source": {
-                    "$ref": "#/definitions/Source",
+                    "$ref": "#/definitions/ContainerRegistryEventSource",
                     "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it."
                 }
             }
         },
-        "Target": {
+        "ContainerRegistryEventTarget": {
             "description": "The target of the event.",
             "properties": {
                 "mediaType": {
@@ -94,7 +94,7 @@
                 }
             }
         },
-        "Request": {
+        "ContainerRegistryEventRequest": {
             "description": "The request that generated the event.",
             "properties": {
                 "id": {
@@ -119,7 +119,7 @@
                 }
             }
         },
-        "Actor": {
+        "ContainerRegistryEventActor": {
             "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request.",
             "properties": {
                 "name": {
@@ -128,7 +128,7 @@
                 }
             }
         },
-        "Source": {
+        "ContainerRegistryEventSource": {
             "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it.",
             "properties": {
                 "addr": {
