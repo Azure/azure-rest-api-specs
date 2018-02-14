@@ -1003,7 +1003,10 @@
               "$ref": "#/definitions/UsagesResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/usages": {
@@ -1040,7 +1043,10 @@
               "$ref": "#/definitions/UsagesResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/usages": {
@@ -1080,7 +1086,10 @@
               "$ref": "#/definitions/UsagesResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/usages": {
@@ -1120,6 +1129,9 @@
               "$ref": "#/definitions/PartitionUsagesResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1154,7 +1166,10 @@
               "$ref": "#/definitions/MetricDefinitionsListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions": {
@@ -1191,7 +1206,10 @@
               "$ref": "#/definitions/MetricDefinitionsListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metricDefinitions": {
@@ -1222,7 +1240,10 @@
               "$ref": "#/definitions/MetricDefinitionsListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }        
       }
     }
   },
@@ -1466,6 +1487,19 @@
         }
       }
     },
+    "DatabaseAccountPatchProperties": {
+      "description": "Properties to update Azure Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        }
+      }
+    },
     "DatabaseAccountCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB database accounts.",
       "type": "object",
@@ -1544,12 +1578,9 @@
         "tags": {
           "$ref": "#/definitions/Tags"
         },
-        "capabilities": {
-          "type": "array",
-          "description": "List of Cosmos DB capabilities for the account",
-          "items": {
-            "$ref": "#/definitions/Capability"
-          }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountPatchProperties"
         }
       }
     },
@@ -2213,6 +2244,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized."
     },
     "targetRegionParameter": {
@@ -2220,6 +2252,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized."
     },
     "partitionKeyRangeIdParameter": {
@@ -2227,6 +2260,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Partition Key Range Id for which to get data."
     }
   }

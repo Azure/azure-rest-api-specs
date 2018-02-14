@@ -16,6 +16,26 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.MachineLearning/operations": {
+      "get": {
+        "description": "Lists all the available REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [{
+          "$ref": "#/parameters/APIVersionParameter"
+        }],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}": {
       "put": {
         "tags": [
@@ -1152,10 +1172,12 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "Async operation id."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Async operation name."
         },
         "provisioningState": {
@@ -1187,10 +1209,12 @@
         },
         "percentComplete": {
           "type": "number",
+          "readOnly": true,
           "description": "Async operation progress."
         },
         "errorInfo": {
           "$ref": "#/definitions/AsyncOperationErrorInfo",
+          "readOnly": true,
           "description": "If the async operation fails, this structure contains the error details."
         }
       }
@@ -1201,23 +1225,93 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code."
+          "description": "The error code.",
+          "readOnly": true
         },
         "target": {
           "type": "string",
-          "description": "The error target."
+          "description": "The error target.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "The error message."
+          "description": "The error message.",
+          "readOnly": true
         },
         "details": {
           "type": "array",
           "description": "An array containing error information.",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/AsyncOperationErrorInfo"
           }
         }
+      }
+    },
+    "OperationEntityListResult": {
+      "description": "The list of REST API operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of operations.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "An API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The API operation info."
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The API operation info.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provider": {
+          "description": "The service provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
     }
   }
