@@ -177,51 +177,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/namespaces": {
-      "get": {
-        "tags": [
-          "Event Hubs Namespaces in Cluster"
-        ],
-        "operationId": "Clusters_NamespacesGet",
-        "x-ms-examples": {
-          "ClusterNamespaces": {
-            "$ref": "./examples/Clusters/EHNamespacesInClusterGet.json"
-          }
-        },
-        "description": "Get all Event Hubs Namespaces within the Event Hubs Cluster.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Event Hubs Cluster Namespace list returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/EHNamespaceListResult"
-            }
-          },
-          "default": {
-            "description": "Event Hubs Cluster error response describing why the namespaces in cluster get operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default": {
       "patch": {
         "tags": [
