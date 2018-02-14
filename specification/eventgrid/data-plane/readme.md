@@ -49,6 +49,7 @@ input-file:
 - Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
+- Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
 ```
 
 ---
