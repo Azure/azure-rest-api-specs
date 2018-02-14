@@ -54,8 +54,8 @@ These settings apply only when `--tag=package-2017-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2017-10-01-preview/authorization.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-RACalls.json
+- Microsoft.Authorization/preview/2015-07-01/authorization.json
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
 ```
 
 ### Tag: package-2018-01-01-preview
