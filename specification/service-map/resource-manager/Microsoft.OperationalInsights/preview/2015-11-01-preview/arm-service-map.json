@@ -1650,7 +1650,8 @@
             "ref:machinewithhints",
             "ref:process",
             "ref:port",
-            "ref:onmachine"
+            "ref:onmachine",
+            "ref:clientgroup"
           ]
         }
       },
@@ -1751,6 +1752,15 @@
           }
         }
       }
+    },
+    "ClientGroupReference": {
+      "description": "Reference to a client group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ],
+      "x-ms-discriminator-value": "ref:clientgroup"
     },
     "CoreResource": {
       "description": "Marker resource for the core Service Map resources",
