@@ -1,16 +1,17 @@
-# SearchClient
+# Search
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for SearchClient.
+This is the AutoRest configuration file for the Azure Search data plane.
 
 
 
 ---
 ## Getting Started 
-To build the SDK for SearchClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+The Azure Search data plane SDK is comprised of two clients: SearchServiceClient, and SearchIndexClient. To build the data plane SDK for Azure Search, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
-> `autorest`
+> `autorest --service`
+> `autorest --index`
 
 To see additional help and options, run:
 
@@ -22,57 +23,16 @@ To see additional help and options, run:
 
 
 ### Basic Information 
-These are the global settings for the SearchClient API.
+These are the global settings for the Azure Search data plane API.
 
-C# packages this RP a little different from the others, so the following defaults don't apply to it.
+C# packages this service a little different from the others, so the following defaults don't apply to it.
 
 ``` yaml !$(csharp)
 title: SearchClient
 description: Search Client
 openapi-type: data-plane
-tag: package-2016-09
+tag: package-2016-09-preview
 ```
-
-### Tag: package-2016-09-preview
-
-These settings apply only when `--tag=package-2016-09-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-09-preview'
-input-file:
-- Microsoft.Search/preview/2016-09-01-preview/searchindex.json
-- Microsoft.Search/preview/2016-09-01-preview/searchservice.json
-```
-
-### Tag: package-2016-09
-
-These settings apply only when `--tag=package-2016-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-09'
-input-file:
-- Microsoft.Search/preview/2016-09-01/searchindex.json
-- Microsoft.Search/preview/2016-09-01/searchservice.json
-```
- 
-### Tag: package-2015-02-preview
-
-These settings apply only when `--tag=package-2015-02-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-02-preview'
-input-file:
-- Microsoft.Search/preview/2015-02-28-preview/searchindex.json
-- Microsoft.Search/preview/2015-02-28-preview/searchservice.json
-```
- 
-### Tag: package-2015-02
-
-These settings apply only when `--tag=package-2015-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-02'
-input-file:
-- Microsoft.Search/preview/2015-02-28/searchindex.json
-- Microsoft.Search/preview/2015-02-28/searchservice.json
-```
-
 
 ---
 # Code Generation
@@ -91,22 +51,5 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Search
-  output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search/Generated$(search-folder)
   clear-output-folder: true
-```
-
-
-## Java
-
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.search
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-search
 ```

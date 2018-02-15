@@ -264,10 +264,10 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "Gets or sets the agent registration key name - Primary or Secondary.",
+          "description": "Gets or sets the agent registration key name - primary or secondary.",
           "enum": [
-            "Primary",
-            "Secondary"
+            "primary",
+            "secondary"
           ],
           "x-ms-enum": {
             "name": "AgentRegistrationKeyName",
@@ -1128,6 +1128,14 @@
           "readOnly": true,
           "description": "Gets the creation time of the job."
         },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateProperty",
+          "description": "The current provisioning state of the job."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
+        },
         "status": {
           "type": "string",
           "description": "Gets or sets the status of the job.",
@@ -1196,17 +1204,17 @@
     },
     "DscCompilationJob": {
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
         "properties": {
           "$ref": "#/definitions/DscCompilationJobProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the Dsc Compilation job."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the Dsc Compilation job."
     },
     "DscCompilationJobListResult": {
@@ -1320,6 +1328,7 @@
       "description": "Definition of the configuration property type."
     },
     "DscConfiguration": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DscConfigurationProperties",
@@ -1494,7 +1503,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Definition of the dsc node type."
@@ -1527,10 +1536,6 @@
     },
     "DscNodeConfiguration": {
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the node configuration name."
-        },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
@@ -1544,12 +1549,13 @@
         "configuration": {
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
           "description": "Gets or sets the configuration of the node."
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id of the resource."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the dsc node configuration."
     },
     "DscNodeConfigurationListResult": {
@@ -2540,6 +2546,37 @@
       ],
       "description": "The Resource definition.",
       "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "description": "The Resource definition.",
+      "x-ms-azure-resource": true
+    },
+    "ProvisioningStateProperty": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "The provisioning state property."
     },
     "RunAsCredentialAssociationProperty": {
       "properties": {
@@ -3712,11 +3749,18 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the webhook."
+          "readOnly": true,
+          "description": "Gets the name of the webhook."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the type of the resource."
         },
         "properties": {
           "$ref": "#/definitions/WebhookProperties",
