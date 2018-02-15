@@ -609,11 +609,6 @@
       "type": "object",
       "description": "A disk discovered on a machine.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the disk as defined in private data-center.",
-          "readOnly": true
-        },
         "gigabytesProvisioned": {
           "type": "number",
           "format": "double",
@@ -773,33 +768,29 @@
         },
         "disks": {
           "type": "object",
-          "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object",
-          "readOnly": true,
+          "description": "Dictionary of disks attached to the machine.",
           "properties": {
-            "key": {
-              "type": "string",
-              "description": "Unique identifier of a disk.",
-              "readOnly": true
-            },
-            "value": {
-              "description": "Disk object.",
-              "$ref": "#/definitions/Disk"
+            "disks": {
+              "type": "object",
+              "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object",
+              "readOnly": true,
+              "additionalProperties": {
+                "$ref": "#/definitions/Disk"
+              }
             }
           }
         },
         "networkAdapters": {
           "type": "object",
-          "description": "Dictionary of network adapters attached to the machine. Key is ID of disk. Value is a network adapter object",
-          "readOnly": true,
+          "description": "Dictionary of network adapters attached to the machine.",
           "properties": {
-            "key": {
-              "type": "string",
-              "description": "Unique identifier of a network adapter.",
-              "readOnly": true
-            },
-            "value": {
-              "description": "Network Adapter object.",
-              "$ref": "#/definitions/NetworkAdapter"
+            "networkAdapters": {
+              "type": "object",
+              "description": "Dictionary of network adapters attached to the machine. Key is ID of network adapter. Value is a network adapter object",
+              "readOnly": true,
+              "additionalProperties": {
+                "$ref": "#/definitions/NetworkAdapter"
+              }
             }
           }
         }
@@ -1132,33 +1123,29 @@
         },
         "disks": {
           "type": "object",
-          "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object",
-          "readOnly": true,
+          "description": "Dictionary of disks attached to the machine. Key is ID of disk.",
           "properties": {
-            "key": {
-              "type": "string",
-              "description": "Name of the disk.",
-              "readOnly": true
-            },
-            "value": {
-              "description": "Assessed Disk object.",
-              "$ref": "#/definitions/AssessedDisk"
+            "disks": {
+              "type": "object",
+              "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object.",
+              "readOnly": true,
+              "additionalProperties": {
+                "$ref": "#/definitions/AssessedDisk"
+              }
             }
           }
         },
         "networkAdapters": {
           "type": "object",
-          "description": "Dictionary of network adapters attached to the machine. Key is name of the adapter. Value is a network adapter object",
-          "readOnly": true,
+          "description": "Dictionary of network adapters attached to the machine.",
           "properties": {
-            "key": {
+            "networkAdapters": {
               "type": "string",
-              "description": "Name of the network adapter.",
-              "readOnly": true
-            },
-            "value": {
-              "description": "Assessed Network Adapter object.",
-              "$ref": "#/definitions/AssessedNetworkAdapter"
+              "description": "Dictionary of network adapters attached to the machine. Key is name of the adapter. Value is a network adapter object.",
+              "readOnly": true,
+              "additionalProperties": {
+                "$ref": "#/definitions/AssessedNetworkAdapter"
+              }
             }
           }
         },
