@@ -22,7 +22,18 @@
         "description": {
           "description": "Linked service description.",
           "type": "string"
-        }
+        },
+        "parameters": {
+          "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
+          "description": "Parameters for linked service."
+        },
+        "annotations": {
+					"description": "List of tags that can be used for describing the Linked Service.",
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				} 
       },
       "additionalProperties": {
         "type": "object"
