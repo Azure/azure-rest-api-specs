@@ -135,6 +135,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.automation
   package-name: azure-mgmt-automation
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
