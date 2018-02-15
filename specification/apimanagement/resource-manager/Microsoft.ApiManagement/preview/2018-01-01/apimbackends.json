@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on Backend entity in Azure API Management deployment. The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -126,10 +126,10 @@
           "200": {
             "description": "Specified backend entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -140,7 +140,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Backends"
         ],
@@ -223,6 +223,9 @@
             "description": "Create parameters."
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -281,11 +284,7 @@
             "description": "Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the backend to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -328,11 +327,7 @@
             "$ref": "#/parameters/BackendIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the backend to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -342,6 +337,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The backend was successfully deleted."
+          },
           "204": {
             "description": "The backend was successfully deleted."
           },
@@ -732,7 +730,7 @@
     },
     "BackendReconnectContract": {
       "properties": {
-        "properties":{
+        "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BackendReconnectProperties",
           "description": "Reconnect request properties."
@@ -750,9 +748,7 @@
         "after": {
           "type": "string",
           "format": "duration",
-          "description": "Duration in ISO8601 format after which reconnect will be initiated.",
-          "minLength": 1,
-          "maxLength": 2000
+          "description": "Duration in ISO8601 format after which reconnect will be initiated."
         }
       },
       "description": "Properties to control reconnect requests."

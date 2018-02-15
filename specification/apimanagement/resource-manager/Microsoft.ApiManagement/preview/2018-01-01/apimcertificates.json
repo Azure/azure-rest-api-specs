@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on Certificate entity in your Azure API Management deployment. Certificates can be used to setup mutual authentication with your Backend in API Management. For more information refer to [How to secure backend using Mutual Auth Certificate](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-mutual-certificates).",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,7 +41,7 @@
         ],
         "operationId": "Certificate_ListByService",
         "description": "Lists a collection of all certificates in the specified service instance.",
-         "x-ms-examples": {
+        "x-ms-examples": {
           "ApiManagementListCertificates": {
             "$ref": "./examples/ApiManagementListCertificates.json"
           }
@@ -126,10 +126,10 @@
           "200": {
             "description": "Specified certificate entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -140,7 +140,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Certificates"
         ],
@@ -224,11 +224,7 @@
             "description": "Create or Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "The entity state (Etag) version of the certificate to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation..",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -280,11 +276,7 @@
             "$ref": "#/parameters/CertificateIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the certificate to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -294,6 +286,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The certificate was successfully deleted."
+          },
           "204": {
             "description": "The certificate was successfully deleted."
           },
@@ -362,8 +357,8 @@
       ],
       "description": "Properties of the Certificate contract."
     },
-    "CertificateCreateOrUpdateParameters":{
-       "properties": {
+    "CertificateCreateOrUpdateParameters": {
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CertificateCreateOrUpdateProperties",
@@ -398,7 +393,7 @@
       "type": "string",
       "description": "Identifier of the certificate entity. Must be unique in the current API Management service instance.",
       "minLength": 1,
-      "maxLength": 256,
+      "maxLength": 80,
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     }

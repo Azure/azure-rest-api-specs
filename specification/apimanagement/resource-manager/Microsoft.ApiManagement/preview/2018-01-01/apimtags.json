@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on Tag entity in your Azure API Management deployment. Tags can be assigned to APIs, Operations and Products.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -272,11 +272,7 @@
             "description": "Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Tag Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -319,11 +315,7 @@
             "$ref": "#/parameters/TagIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Tag Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -333,6 +325,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The tag was successfully deleted."
+          },
           "204": {
             "description": "The tag was successfully deleted."
           },
@@ -534,11 +529,7 @@
             "$ref": "#/parameters/TagIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "The entity state (Etag) version of the Tag to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -593,11 +584,7 @@
             "$ref": "#/parameters/TagIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Api schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -607,6 +594,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully detached the tag from the Api."
+          },
           "204": {
             "description": "Successfully detached the tag from the Api."
           },
@@ -817,11 +807,7 @@
             "description": "Create parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "The entity state (Etag) version of the Tag to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -876,11 +862,7 @@
             "$ref": "#/parameters/TagIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Api schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -890,6 +872,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted tag description for the Api."
+          },
           "204": {
             "description": "Successfully deleted tag description for the Api."
           },
@@ -1103,11 +1088,7 @@
             "$ref": "#/parameters/TagIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "The entity state (Etag) version of the Tag to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1165,11 +1146,7 @@
             "$ref": "#/parameters/TagIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Api schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1179,6 +1156,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully detached the tag from the Operation."
+          },
           "204": {
             "description": "Successfully detached the tag from the Operation."
           },
@@ -1436,11 +1416,7 @@
             "$ref": "#/parameters/TagIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "The entity state (Etag) version of the Tag to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1495,11 +1471,7 @@
             "$ref": "#/parameters/TagIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Api schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1509,6 +1481,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully detached the tag from the Product."
+          },
           "204": {
             "description": "Successfully detached the tag from the Product."
           },
@@ -1521,7 +1496,6 @@
         }
       }
     }
-
   },
   "definitions": {
     "TagCollection": {
@@ -1663,7 +1637,7 @@
       "type": "string",
       "description": "Tag identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
-      "maxLength": 256,
+      "maxLength": 80,
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     }

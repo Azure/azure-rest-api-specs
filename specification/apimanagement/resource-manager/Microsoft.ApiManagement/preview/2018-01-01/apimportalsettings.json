@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on PortalSettings entity associated with your Azure API Management deployment. Using this entity you can manage settings for a Developer Portal.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -39,7 +39,7 @@
         "tags": [
           "SignInSettings"
         ],
-        "operationId": "SignInSettings_Head",
+        "operationId": "SignInSettings_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the SignInSettings.",
         "x-ms-examples": {
           "ApiManagementHeadSignInSettings": {
@@ -146,11 +146,7 @@
             "description": "Update Sign-In settings."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the property to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -226,7 +222,7 @@
         "tags": [
           "SignUpSettings"
         ],
-        "operationId": "SignUpSettings_Head",
+        "operationId": "SignUpSettings_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the SignUpSettings.",
         "x-ms-examples": {
           "ApiManagementHeadSignUpSettings": {
@@ -333,11 +329,7 @@
             "description": "Update Sign-Up settings."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the property to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -413,7 +405,7 @@
         "tags": [
           "DelegationSettings"
         ],
-        "operationId": "DelegationSettings_Head",
+        "operationId": "DelegationSettings_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the DelegationSettings.",
         "x-ms-examples": {
           "ApiManagementHeadDelegationSettings": {
@@ -520,11 +512,7 @@
             "description": "Update Delegation settings."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the property to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -662,7 +650,7 @@
         },
         "consentRequired": {
           "type": "boolean",
-          "description": "Ask user for concent."
+          "description": "Ask user for consent to the terms of service."
         }
       },
       "description": "Terms of service contract properties."

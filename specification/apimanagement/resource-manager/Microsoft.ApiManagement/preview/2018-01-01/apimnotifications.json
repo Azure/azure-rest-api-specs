@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on who is going to receive notifications associated with your Azure API Management deployment.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -145,6 +145,9 @@
             "$ref": "#/parameters/NotificationNameParameter"
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -217,7 +220,7 @@
         "tags": [
           "NotificationRecipientUser"
         ],
-        "operationId": "NotificationRecipientUser_Get",
+        "operationId": "NotificationRecipientUser_CheckEntityExists",
         "description": "Determine if the Notification Recipient User is subscribed to the notification.",
         "x-ms-examples": {
           "ApiManagementHeadNotificationRecipientUser": {
@@ -340,6 +343,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Recipient User was successfully removed from the notification list."
+          },
           "204": {
             "description": "Recipient User was successfully removed from the notification list."
           },
@@ -402,7 +408,7 @@
         "tags": [
           "NotificationRecipientEmail"
         ],
-        "operationId": "NotificationRecipientEmail_Get",
+        "operationId": "NotificationRecipientEmail_CheckEntityExists",
         "description": "Determine if Notification Recipient Email subscribed to the notification.",
         "x-ms-examples": {
           "ApiManagementHeadNotificationRecipientEmail": {
@@ -525,6 +531,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Recipient Email was successfully removed to the notification list."
+          },
           "204": {
             "description": "Recipient Email was successfully removed to the notification list."
           },
@@ -709,7 +718,7 @@
       ],
       "x-ms-enum": {
         "name": "NotificationName",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "RequestPublisherNotificationMessage",

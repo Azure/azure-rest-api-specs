@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on Email Templates associated with your Azure API Management deployment.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -112,10 +112,10 @@
           "200": {
             "description": "Specified email template entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -126,7 +126,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "EmailTemplates"
         ],
@@ -204,6 +204,9 @@
               "$ref": "#/definitions/EmailTemplateUpdateParameters"
             },
             "description": "Email Template update parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -304,11 +307,7 @@
             "$ref": "#/parameters/TemplateNameParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Email Template to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -318,6 +317,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Email Template was successfully reset to default."
+          },
           "204": {
             "description": "Email Template was successfully reset to default."
           },

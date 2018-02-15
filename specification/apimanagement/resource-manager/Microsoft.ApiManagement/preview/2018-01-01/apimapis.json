@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on API entity and their Operations associated with your Azure API Management deployment.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -252,11 +252,7 @@
             "description": "Create or update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "ETag of the Api Entity. For Create Api Etag should not be specified. For Update Etag should match the existing Entity or it can be * for unconditional update."
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -329,11 +325,7 @@
             "description": "API Update Contract parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the API entity. ETag should match the current entity state in the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -376,11 +368,7 @@
             "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the API Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -390,6 +378,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The API was successfully deleted."
+          },
           "204": {
             "description": "The API was successfully deleted."
           },
@@ -432,6 +423,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|apiRevision | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+          },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
@@ -642,7 +640,7 @@
             "description": "API Release Update parameters."
           },
           {
-            "$ref": "#/parameters/IfMatch"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           }
         ],
         "responses": {
@@ -670,10 +668,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/IfMatch"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "The release was successfully deleted."
+          },
           "204": {
             "description": "The release was successfully deleted."
           },
@@ -884,6 +885,9 @@
             "description": "Create parameters."
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -945,11 +949,7 @@
             "description": "API Operation Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the API Operation Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -995,11 +995,7 @@
             "$ref": "#/parameters/OperationIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the API Operation Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1009,6 +1005,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The operation was successfully deleted."
+          },
           "204": {
             "description": "The operation was successfully deleted."
           },
@@ -1214,11 +1213,7 @@
             "description": "The policy contents to apply."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Api Operation policy to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1273,11 +1268,7 @@
             "$ref": "#/parameters/OperationIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Api Operation Policy to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
@@ -1290,6 +1281,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the policy configuration at the API Operation level."
+          },
           "204": {
             "description": "Successfully deleted the policy configuration at the API Operation level."
           },
@@ -1561,11 +1555,7 @@
             "description": "The policy contents to apply."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Api Policy to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1620,11 +1610,7 @@
             "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Api policy to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1634,6 +1620,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the policy configuration at the API level."
+          },
           "204": {
             "description": "Successfully deleted the policy configuration at the API level."
           },
@@ -1836,11 +1825,7 @@
             "description": "The schema contents to apply."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "The entity state (Etag) version of the Api Schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1895,11 +1880,7 @@
             "$ref": "#/parameters/SchemaIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the Api schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1909,6 +1890,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the schema configuration at the API level."
+          },
           "204": {
             "description": "Successfully deleted the schema configuration at the API level."
           },
@@ -1999,31 +1983,31 @@
             "$ref": "#/parameters/ApiIdParameter"
           },
           {
-            "name": "Accept",
-            "in": "header",
+            "name": "format",
+            "in": "query",
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.swagger.link+json",
-              "application/vnd.sun.wadl.link+json",
-              "application/vnd.ms.wsdl.link+xml"
+              "swagger-link",
+              "wadl-link",
+              "wsdl-link"
             ],
             "x-ms-enum": {
               "name": "ExportFormat",
               "modelAsString": true,
               "values": [
                 {
-                  "value": "application/vnd.swagger.link+json",
+                  "value": "swagger-link",
                   "description": "Export the Api Definition in OpenApi Specification 2.0 format to the Storage Blob.",
-                  "name": "OpenApi2"
+                  "name": "Swagger"
                 },
                 {
-                  "value": "application/vnd.ms.wsdl.link+xml",
+                  "value": "wadl-link",
                   "description": "Export the Api Definition in WSDL Schema to Storage Blob.",
                   "name": "Wsdl"
                 },
                 {
-                  "value": "application/vnd.sun.wadl.link+json",
+                  "value": "wsdl-link",
                   "description": "Export the Api Definition in WADL Schema to Storage Blob.",
                   "name": "Wadl"
                 }
@@ -2169,6 +2153,7 @@
           }
         },
         "wsdlSelector": {
+          "type": "object",
           "description": "Criteria to limit import of WSDL to a subset of the document.",
           "properties": {
             "wsdlServiceName": {
@@ -2200,7 +2185,7 @@
         "serviceUrl": {
           "type": "string",
           "description": "Absolute URL of the backend service implementing this API.",
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 2000
         },
         "path": {
@@ -2224,8 +2209,8 @@
           },
           "description": "Describes on which protocols the operations in this API can be invoked."
         },
-        "apiVersionSet" : {
-          "$ref" : "#/definitions/ApiVersionSetContract"
+        "apiVersionSet": {
+          "$ref": "#/definitions/ApiVersionSetContract"
         }
       },
       "allOf": [
@@ -2363,42 +2348,27 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiRevisionContract": {
-      "properties": {        
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiRevisionContractProperties",
-          "description": "Properties of the Api Revision Contract."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Api Revision details."
-    },
-    "ApiRevisionContractProperties": {
       "properties": {
         "apiId": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "description": "Identifier of the API Revision."
         },
         "apiRevision": {
-          "type":"string",
+          "type": "string",
           "minLength": 1,
-          "maxLength": 100,          
+          "maxLength": 100,
           "readOnly": true,
           "description": "Revision number of API."
         },
         "createdDateTime": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The time the API Revision was created. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
         },
         "updatedDateTime": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The time the API Revision were updated. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
@@ -2427,33 +2397,33 @@
       },
       "description": "Summary of revision metadata."
     },
-    "ApiRevisionInfoContract" : {
-        "description": "Object used to create an API Revision or Version based on an existing API Revision",
-        "properties": {
-          "sourceApiId": {
-            "type": "string",
-            "description": "Resource identifier of API to be used to create the revision from."
-          },
-          "apiVersionName": {
-            "type": "string",
-            "maxLength": 100,
-            "description": "Version identifier for the new API Version."
-          },
-          "apiRevisionDescription": {
-            "type": "string",
-            "maxLength": 256,
-            "description": "Description of new API Revision."
-          },
-          "apiVersionSet" : {
-            "description": "Version set details",
-            "$ref" : "#/definitions/ApiVersionSetContract"
-          }
+    "ApiRevisionInfoContract": {
+      "description": "Object used to create an API Revision or Version based on an existing API Revision",
+      "properties": {
+        "sourceApiId": {
+          "type": "string",
+          "description": "Resource identifier of API to be used to create the revision from."
+        },
+        "apiVersionName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Version identifier for the new API Version."
+        },
+        "apiRevisionDescription": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Description of new API Revision."
+        },
+        "apiVersionSet": {
+          "description": "Version set details",
+          "$ref": "#/definitions/ApiVersionSetContract"
         }
+      }
     },
-    "ApiVersionSetContract" : {
+    "ApiVersionSetContract": {
       "description": "An API Version Set contains the common configuration for a set of API Versions relating ",
       "properties": {
-        "id" : {
+        "id": {
           "type": "string",
           "description": "Identifier for existing API Version Set. Omit this value to create a new Version Set."
         },
@@ -2465,7 +2435,9 @@
           "type": "string",
           "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
           "enum": [
-            "Segment", "Query", "Header"
+            "Segment",
+            "Query",
+            "Header"
           ]
         },
         "versionQueryName": {
@@ -2495,7 +2467,7 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiReleaseContract": {
-      "properties": {        
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiReleaseContractProperties",
@@ -2517,13 +2489,13 @@
           "description": "Identifier of the API the release belongs to."
         },
         "createdDateTime": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."        
+          "description": "The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
         },
         "updatedDateTime": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The time the API release was updated."
@@ -2907,7 +2879,7 @@
       "type": "string",
       "description": "API identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
-      "maxLength": 256,
+      "maxLength": 80,
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
@@ -2918,7 +2890,7 @@
       "type": "string",
       "description": "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.",
       "minLength": 1,
-      "maxLength": 256,
+      "maxLength": 80,
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
@@ -2929,16 +2901,8 @@
       "type": "string",
       "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
       "minLength": 1,
-      "maxLength": 256,
+      "maxLength": 80,
       "pattern": "^[^*#&+:<>?]+$",
-      "x-ms-parameter-location": "method"
-    },
-    "IfMatch": {
-      "name": "If-Match",
-      "in": "header",
-      "required": true,
-      "description": "ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "SchemaIdParameter": {
@@ -2948,7 +2912,7 @@
       "type": "string",
       "description": "Schema identifier within an API. Must be unique in the current API Management service instance.",
       "minLength": 1,
-      "maxLength": 256,
+      "maxLength": 80,
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     }

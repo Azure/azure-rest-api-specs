@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on Subscription entity associated with your Azure API Management deployment. The Subscription entity represents the association between a user and a product in API Management. Products contain one or more APIs, and once a product is published, developers can subscribe to the product and begin to use the product’s APIs.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -126,10 +126,10 @@
           "200": {
             "description": "Specified apimanagement subscription entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -140,7 +140,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Subscriptions"
         ],
@@ -220,6 +220,12 @@
             "description": "Create parameters."
           },
           {
+            "$ref": "#/parameters/NotifySubscriptionStateChangeParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -278,11 +284,10 @@
             "description": "Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Subscription Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "#/parameters/NotifySubscriptionStateChangeParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -325,11 +330,7 @@
             "$ref": "#/parameters/SubscriptionEntityIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Subscription Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -339,6 +340,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The subscription details were successfully deleted."
+          },
           "204": {
             "description": "The subscription details were successfully deleted."
           },
@@ -686,8 +690,16 @@
       "required": true,
       "type": "string",
       "description": "Subscription entity Identifier. The entity represents the association between a user and a product in API Management.",
-      "maxLength": 256,
+      "maxLength": 80,
       "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "NotifySubscriptionStateChangeParameter": {
+      "name": "notify",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Notify change in Subscription State. \n - If false, do not send any email notification for change of state of subscription \n - If true, send email notification of change of state of subscription ",
       "x-ms-parameter-location": "method"
     }
   }

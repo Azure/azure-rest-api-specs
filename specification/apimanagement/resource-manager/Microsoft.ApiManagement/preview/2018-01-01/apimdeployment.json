@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs to manage Azure API Management deployment.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -535,7 +535,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/uploadcertificate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/updatecertificate": {
       "post": {
         "tags": [
           "ApiManagementService"
@@ -668,7 +668,7 @@
           "description": "Certificate Password."
         },
         "storeName": {
-          "description": "The local certificate store location. Only Root and CertificateAuthority are valid locations.",
+          "description": "The System.Security.Cryptography.x509certificates.Storename certificate store location. Only Root and CertificateAuthority are valid locations.",
           "type": "string",
           "enum": [
             "CertificateAuthority",
@@ -770,7 +770,7 @@
           "$ref": "#/definitions/ApiManagementServiceSkuProperties",
           "description": "SKU properties of the API Management service."
         },
-        "staticIps": {
+        "publicIPAddresses": {
           "type": "array",
           "items": {
             "type": "string"
@@ -920,13 +920,21 @@
           },
           "description": "Custom hostname configuration of the API Management service."
         },
-        "staticIps": {
+        "publicIPAddresses": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "readOnly": true,
-          "description": "Static IP addresses of the API Management service virtual machines. Available only for Standard and Premium SKU."
+          "description": "Public Static Load Balanced IP addresses of the API Management service. Available only for Basic, Standard and Premium SKU."
+        },
+        "privateIPAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Private Static Load Balanced IP addresses of the API Management service which is deployed in an Internal Virtual Network. Available only for Basic, Standard and Premium SKU."
         },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",

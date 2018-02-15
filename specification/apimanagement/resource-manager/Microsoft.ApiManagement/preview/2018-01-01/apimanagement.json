@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on entities like API, Product, and Subscription associated with your Azure API Management deployment.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -218,11 +218,7 @@
             "$ref": "#/parameters/PolicyIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the policy to be deleted. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -232,6 +228,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the policy configuration at the Global level."
+          },
           "204": {
             "description": "Successfully deleted the policy configuration at the Global level."
           },
@@ -333,7 +332,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": ""
+          "nextLinkName": null
         }
       }
     }
@@ -584,6 +583,22 @@
         "modelAsString": true,
         "name": "PolicyIdName"
       },
+      "x-ms-parameter-location": "method"
+    },    
+    "IfMatchRequiredParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "required": true,
+      "description": "ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IfMatchOptionalParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "required": false,
+      "description": "ETag of the Entity. Not required when creating an entity, but required when updating an entity.",
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

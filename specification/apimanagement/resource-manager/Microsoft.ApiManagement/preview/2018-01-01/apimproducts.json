@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on Product entity associated with your Azure API Management deployment. The Product entity represents a product in API Management. Products include one or more APIs and their associated terms of use. Once a product is published, developers can subscribe to the product and begin to use the product’s APIs.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -227,6 +227,9 @@
             "description": "Create or update parameters."
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -285,11 +288,7 @@
             "description": "Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Product Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -336,14 +335,10 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Delete existing subscriptions to the product or not."
+            "description": "Delete existing subscriptions associated with the product or not."            
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Product Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -353,6 +348,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The product was successfully deleted."
+          },
           "204": {
             "description": "The product was successfully deleted."
           },
@@ -555,6 +553,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The API was successfully removed from the product."
+          },
           "204": {
             "description": "The API was successfully removed from the product."
           },
@@ -757,6 +758,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The group was successfully disassociated with the product."
+          },
           "204": {
             "description": "The group was successfully disassociated with the product."
           },
@@ -960,6 +964,9 @@
             "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "schema": {
@@ -1021,11 +1028,7 @@
             "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the product policy to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1035,6 +1038,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the policy configuration at the Product level."
+          },
           "204": {
             "description": "Successfully deleted the policy configuration at the Product level."
           },
@@ -1174,7 +1180,7 @@
       "type": "string",
       "description": "Product identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
-      "maxLength": 256,
+      "maxLength": 80,
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     }

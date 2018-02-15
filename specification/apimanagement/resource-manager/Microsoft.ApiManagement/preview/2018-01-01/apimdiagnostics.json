@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on Diagnostic entity associated with your Azure API Management deployment. Diagnostics are used to log requests/responses in the APIM proxy.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -98,7 +98,7 @@
         "tags": [
           "Diagnostics"
         ],
-        "operationId": "Diagnostic_Head",
+        "operationId": "Diagnostic_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Diagnostic specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementHeadDiagnostic": {
@@ -220,11 +220,7 @@
             "description": "Create parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "ETag of the Diagnostic Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -285,11 +281,7 @@
             "description": "Diagnostic Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Diagnostic Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -332,11 +324,7 @@
             "$ref": "#/parameters/DiagnosticIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Diagnostic Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -346,6 +334,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The Diagnostic was successfully deleted."
+          },
           "204": {
             "description": "The Diagnostic was successfully deleted."
           },
@@ -442,7 +433,7 @@
           {
             "$ref": "#/parameters/DiagnosticIdParameter"
           },
-		  {
+          {
             "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
           },
           {
@@ -464,7 +455,7 @@
           }
         }
       },
-	  "put": {
+      "put": {
         "tags": [
           "DiagnosticLoggers"
         ],
@@ -548,6 +539,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The Logger was successfully detached from Diagnostic."
+          },
           "204": {
             "description": "The Logger was successfully detached from Diagnostic."
           },

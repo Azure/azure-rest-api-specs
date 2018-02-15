@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on User entity in Azure API Management deployment. The User entity in API Management represents the developers that call the APIs of the products to which they are subscribed.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -126,10 +126,10 @@
           "200": {
             "description": "Specified user entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -140,7 +140,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Users"
         ],
@@ -220,6 +220,9 @@
             "description": "Create or update parameters."
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -278,11 +281,7 @@
             "description": "Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the user to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -332,11 +331,14 @@
             "description": "Whether to delete user's subscription or not."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the user to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "name": "notify",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Send an Account Closed Email notification to the User."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -346,6 +348,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The user details were successfully deleted."
+          },
           "204": {
             "description": "The user details were successfully deleted."
           },
@@ -557,6 +562,9 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "Lists of User Identities.",
@@ -693,7 +701,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./apimgroups.json#/definitions/GroupContract"
+            "$ref": "./apimgroups.json#/definitions/GroupContractProperties"
           },
           "description": "Collection of groups user is part of."
         }
@@ -945,7 +953,7 @@
       "type": "string",
       "description": "User identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
-      "maxLength": 256,
+      "maxLength": 80,
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     }

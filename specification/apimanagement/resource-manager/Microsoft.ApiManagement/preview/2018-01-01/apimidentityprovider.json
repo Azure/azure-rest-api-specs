@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "Use these REST APIs for performing operations on Identity Provider entity associated with your Azure API Management deployment. Setting up an external Identity Provider for authentication can help you manage the developer portal logins using the OAuth2 flow.",
-    "version": "2017-03-01"
+    "version": "2018-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -63,6 +63,9 @@
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "Lists a collection of Identity Providers.",
@@ -206,6 +209,9 @@
             "description": "Create parameters."
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -264,11 +270,7 @@
             "description": "Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the identity provider configuration to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -311,11 +313,7 @@
             "$ref": "#/parameters/IdentityProviderNameParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state (Etag) version of the backend to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -325,6 +323,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The identity provider configuration was successfully deleted."
+          },
           "204": {
             "description": "The identity provider configuration was successfully deleted."
           },
@@ -386,7 +387,7 @@
             "$ref": "#/definitions/IdentityProviderContract"
           },
           "description": "Identity Provider configuration values."
-        },        
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -394,8 +395,8 @@
       },
       "description": "List of all the Identity Providers configured on the service instance."
     },
-    "IdentityProviderUpdateParameters":{
-       "properties": {
+    "IdentityProviderUpdateParameters": {
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/IdentityProviderUpdateProperties",
@@ -415,7 +416,7 @@
           "type": "string",
           "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
           "minLength": 1
-        }                
+        }
       },
       "allOf": [
         {
