@@ -68,10 +68,10 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid start or end time",
-			"schema": {
-              "$ref": "#/definitions/AnnotationCreateError"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AnnotationError"
             }
           }
         },
@@ -120,16 +120,10 @@
               }
 			}
           },
-          "409": {
-            "description": "Annotation with Id already exists.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/AnnotationCreateError"
-            }
-          },
-          "400": {
-            "description": "Invalid time",
-			"schema": {
-              "$ref": "#/definitions/AnnotationCreateError"
+              "$ref": "#/definitions/AnnotationError"
             }
           }
         },
@@ -204,10 +198,10 @@
               }
 		    }
           },
-          "404": {
-            "description": "The Annotation with given id does not exist.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/AnnotationCreateError"
+              "$ref": "#/definitions/AnnotationError"
             }
           }
         },
@@ -267,7 +261,7 @@
         }
       }
     },
-    "AnnotationCreateError": {
+    "AnnotationError": {
       "type": "object",
       "description": "Error associated with trying to create annotation with Id that already exist",
       "properties": {
