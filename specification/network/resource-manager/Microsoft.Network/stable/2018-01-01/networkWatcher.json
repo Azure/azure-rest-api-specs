@@ -1599,9 +1599,24 @@
   "definitions": {
     "NetworkWatcher": {
       "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the network watcher."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ID of the network watcher."
+        },
         "etag": {
           "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
+          "default": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Network watcher type."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1978,6 +1993,21 @@
     },
     "PacketCapture": {
       "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the packet capture."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ID of the packet capture."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Packet capture type."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PacketCaptureParameters"
