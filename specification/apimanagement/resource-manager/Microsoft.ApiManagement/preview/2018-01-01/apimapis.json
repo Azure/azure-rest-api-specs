@@ -224,6 +224,9 @@
           },
           "ApiManagementCreateApi": {
             "$ref": "./examples/ApiManagementCreateApi.json"
+          },
+          "ApiManagementCreateApiRevision": {
+            "$ref": "./examples/ApiManagementCreateApiRevision.json"
           }
         },
         "consumes": [
@@ -549,6 +552,35 @@
           "pattern": "^[^*#&+:<>?]+$"
         }
       ],
+      "head": {
+        "tags": [
+          "Releases"
+        ],
+        "operationId": "ApiRelease_GetEntityTag",
+        "description": "Returns the etag of an API release.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiRelease": {
+            "$ref": "./examples/ApiManagementHeadApiRelease.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation returns the details of an API Release.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Releases"

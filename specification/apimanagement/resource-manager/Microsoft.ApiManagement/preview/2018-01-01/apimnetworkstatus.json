@@ -62,9 +62,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets the Network status details.",
+            "description": "Gets the list Network status details for all regions in which service is deployed.",
             "schema": {
-              "$ref": "#/definitions/NetworkStatusContract"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkStatusContractByLocation"
+              },
+              "description": "List of Network Status values."
             }
           },
           "default": {
@@ -165,6 +169,20 @@
         "lastStatusChange"
       ],
       "description": "Details about connectivity to a resource."
+    },
+    "NetworkStatusContractByLocation": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of service",
+          "minLength": 1
+        },
+        "networkStatus": {
+          "$ref": "#/definitions/NetworkStatusContract",
+          "description": "Network status in Location"
+        }
+      },
+      "description": "Network Status in the Location"
     },
     "NetworkStatusContract": {
       "properties": {
