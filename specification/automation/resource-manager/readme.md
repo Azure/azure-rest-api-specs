@@ -51,6 +51,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/job.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
+- Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
@@ -78,6 +79,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/job.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
+- Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
@@ -135,6 +137,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.automation
   package-name: azure-mgmt-automation
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

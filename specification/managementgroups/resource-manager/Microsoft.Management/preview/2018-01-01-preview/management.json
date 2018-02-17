@@ -160,7 +160,7 @@
             "$ref": "#/parameters/CacheControlHeader"
           },
           {
-            "$ref": "#/parameters/CreateGroupRequestParameter"
+            "$ref": "#/parameters/CreateManagementGroupRequestParameter"
           }
         ],
         "responses": {
@@ -1166,7 +1166,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription ID."
+      "description": "Subscription ID.",
+      "x-ms-parameter-location": "method"      
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -1194,8 +1195,8 @@
       "x-ms-parameter-location": "method",
       "description": "The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload. Note that  $expand=children must be passed up if $recurse is set to true."
     },
-    "CreateGroupRequestParameter": {
-      "name": "createGroupRequest",
+    "CreateManagementGroupRequestParameter": {
+      "name": "createManagementGroupRequest",
       "in": "body",
       "required": true,
       "description": "Management group creation parameters.",
@@ -1261,7 +1262,7 @@
       "default": "no-cache",
       "description": "Indicates that the request shouldn't utilize any caches.",
       "type": "string",
-      "required": true
+      "x-ms-parameter-location": "method"
     },
     "EntityViewParameter": {
       "name": "view",
