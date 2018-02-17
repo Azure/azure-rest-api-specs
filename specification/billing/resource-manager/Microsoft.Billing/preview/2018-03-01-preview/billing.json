@@ -1,4 +1,4 @@
-{
+f{
   "swagger": "2.0",
   "info": {
     "version": "2018-03-01-preview",
@@ -16,18 +16,18 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Billing/classicAccounts": {
+    "/providers/Microsoft.Billing/billingAccounts": {
       "get": {
         "tags": [
-          "ClassicAccounts"
+          "BillingAccounts"
         ],
         "x-ms-examples": {
           "BillingPeriodsList": {
-            "$ref": "./examples/ClassicAccountsList.json"
+            "$ref": "./examples/BillingAccountsList.json"
           }
         },
-        "operationId": "ClassicAccounts_List",
-        "description": "Lists the classic accounts the caller has access to.",
+        "operationId": "BillingAccounts_List",
+        "description": "Lists the billing accounts the caller has access to.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -37,7 +37,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ClassicAccountListResult"
+              "$ref": "#/definitions/BillingAccountListResult"
             }
           },
           "default": {
@@ -49,23 +49,23 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/classicAccounts/{name}": {
+    "/providers/Microsoft.Billing/billingAccounts/{name}": {
       "get": {
         "tags": [
-          "ClassicAccounts"
+          "BillingAccounts"
         ],
         "x-ms-examples": {
           "BillingPeriodsList": {
-            "$ref": "./examples/ClassicAccountsGet.json"
+            "$ref": "./examples/BillingAccountsGet.json"
           }
         },
-        "operationId": "ClassicAccounts_Get",
-        "description": "Gets a classic account by name.",
+        "operationId": "BillingAccounts_Get",
+        "description": "Gets a billing account by name.",
         "parameters": [
           {
             "name": "name",
             "in": "path",
-            "description": "Classic Account name.",
+            "description": "Billing Account name.",
             "format": "uuid",
             "required": true,
             "type": "string"
@@ -78,7 +78,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ClassicAccountResult"
+              "$ref": "#/definitions/BillingAccountResult"
             }
           },
           "default": {
@@ -385,8 +385,8 @@
     }
   },
   "definitions": {
-    "ClassicAccountResult": {
-      "description": "A classic account resource.",
+    "BillingAccountResult": {
+      "description": "A billing account resource.",
       "type": "object",
       "allOf": [
         {
@@ -396,25 +396,25 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClassicAccountProperties"
+          "$ref": "#/definitions/BillingAccountProperties"
         }
       }
     },
-    "ClassicAccountListResult": {
-      "description": "Result of listing classic accounts.",
+    "BillingAccountListResult": {
+      "description": "Result of listing billing accounts.",
       "properties": {
         "value": {
-          "description": "The list of classic accounts.",
+          "description": "The list of billing accounts.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ClassicAccountResult"
+            "$ref": "#/definitions/BillingAccountResult"
           }
         }
       }
     },
-    "ClassicAccountProperties": {
-      "description": "The properties of the classic account.",
+    "BillingAccountProperties": {
+      "description": "The properties of the billing account.",
       "properties": {
 	    "principalName": {
           "description": "The account owner's principal name.",
@@ -666,7 +666,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2017-04-24-preview."
+      "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
