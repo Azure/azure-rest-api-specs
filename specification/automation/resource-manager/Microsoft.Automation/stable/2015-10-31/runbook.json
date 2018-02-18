@@ -142,10 +142,7 @@
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK."
-          },
+        "responses": {         
           "202": {
             "description": "Accepted and  the operation will complete asynchronously.",
             "headers": {
@@ -262,9 +259,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK."
-          },
           "202": {
             "description": "Accepted and  the operation will complete asynchronously.",
             "headers": {
@@ -384,7 +378,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "200": {            
             "description": "OK",
             "schema": {
               "type": "string"
@@ -507,10 +501,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Runbook"
+            }
           },
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Runbook"
+            }
           },
           "400": {
             "description": "Bad Request. Cannot specify the content link for a published runbook and draft at the same time."
@@ -890,13 +890,13 @@
         "tags": [
           "TestJob"
         ],
-        "operationId": "TestJobs_Get",
+        "operationId": "TestJob_Get",
         "description": "Retrieve the test job for the specified runbook.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/testjoboperations"
         },
         "x-ms-examples": {
-          "Create test job": {
+          "Get test job": {
             "$ref": "./examples/getTestJob.json"
           }
         },

@@ -14,7 +14,9 @@
   "produces": [
     "application/json",
     "text/plain",
-    "text/powershell"
+    "text/powershell",
+    "application/graph-runbook",
+    "application/octet-stream"
   ],
   "security": [
     {
@@ -3363,10 +3365,6 @@
     },
     "TestJobCreateParameters": {
       "properties": {
-        "runbookName": {
-          "type": "string",
-          "description": "Gets or sets the runbook name."
-        },
         "parameters": {
           "type": "object",
           "additionalProperties": {
@@ -3378,10 +3376,7 @@
           "type": "string",
           "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
         }
-      },
-      "required": [
-        "runbookName"
-      ],
+      },      
       "description": "The parameters supplied to the create test job operation."
     },
     "TestJob": {
@@ -3437,6 +3432,11 @@
             "type": "string"
           },
           "description": "Gets or sets the parameters of the test job."
+        },
+        "logActivityTrace": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The activity-level tracing options of the runbook."
         }
       },
       "description": "Definition of the test job."
