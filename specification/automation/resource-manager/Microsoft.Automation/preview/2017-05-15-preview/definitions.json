@@ -77,20 +77,24 @@
       "properties": {       
         "runbook": {
           "$ref": "../../stable/2015-10-31/definitions.json#/definitions/RunbookAssociationProperty",
+          "readOnly": true,
           "description": "The runbook association."
         },
         "jobId": {
           "type": "string",
           "format": "uuid",
+          "readOnly": true,
           "description": "The id of the job."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation time of the job."
         },
         "status": {
           "type": "string",
+          "readOnly": true,
           "description": "The status of the job.",
           "enum": [
             "New",
@@ -115,20 +119,23 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The end time of the job."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The last modified time of the job."
         },
         "provisioningState": {
-          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProvisioningStateProperty",
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobProvisioningStateProperty",
           "description": "The current provisioning state of the job."
         }  
       }
@@ -138,12 +145,14 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "./definitions.json#/definitions/jobCollectionItem"            
+            "$ref": "./definitions.json#/definitions/jobCollectionItem",
+            "readOnly": true
           },
           "description": "List of jobs."
         },
         "nextLink": {
           "type": "string",
+          "readOnly": true,
           "description": "The  link to the next page."
         }
       },
