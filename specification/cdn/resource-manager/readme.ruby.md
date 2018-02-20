@@ -26,7 +26,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2017-10' && $(ruby)
 namespace: "Azure::CDN::Mgmt::V2017_10_23"
-output-folder: $(ruby-sdk-folder)/management/azure_mgmt_cdn/lib/2017-10-12
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2017-10-12
 ```
 
 
@@ -37,7 +37,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2017-04' && $(ruby)
 namespace: "Azure::CDN::Mgmt::V2017_04_02"
-output-folder: $(ruby-sdk-folder)/management/azure_mgmt_cdn/lib/2017-04-02
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2017-04-02
 ```
 
 ### Tag: package-2016-10 and ruby
@@ -47,7 +47,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2016-10'  && $(ruby)
 namespace: "Azure::CDN::Mgmt::V2016_10_02"
-output-folder: $(ruby-sdk-folder)/management/azure_mgmt_cdn/lib/2016-10-02
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2016-10-02
 ```
 
 ### Tag: package-2016-04 and ruby
@@ -57,7 +57,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2016-04'  && $(ruby)
 namespace: "Azure::CDN::Mgmt::V2016_04_02"
-output-folder: $(ruby-sdk-folder)/management/azure_mgmt_cdn/lib/2016-04-02
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2016-04-02
 ```
 
 ### Tag: package-2015-06 and ruby
@@ -67,5 +67,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2015-06' && $(ruby)
 namespace: "Azure::CDN::Mgmt::V2015_06_01"
-output-folder: $(ruby-sdk-folder)/management/azure_mgmt_cdn/lib/2015-06-01
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2015-06-01
 ```
