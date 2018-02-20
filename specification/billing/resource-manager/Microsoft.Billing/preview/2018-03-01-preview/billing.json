@@ -3,7 +3,7 @@
   "info": {
     "version": "2018-03-01-preview",
     "title": "BillingManagementClient",
-    "description": "Billing client provides access to billing resources for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API."
+    "description": "Billing client provides access to billing resources for Azure subscriptions."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -95,7 +95,7 @@
           "BillingPeriods"
         ],
         "operationId": "BillingPeriods_List",
-        "description": "Lists the available billing periods for a subscription in reverse chronological order.",
+        "description": "Lists the available billing periods for a subscription in reverse chronological order. This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
         "externalDocs": {
           "url": "https://go.microsoft.com/fwlink/?linkid=844490"
         },
@@ -160,7 +160,7 @@
           "BillingPeriods"
         ],
         "operationId": "BillingPeriods_Get",
-        "description": "Gets a named billing period.",
+        "description": "Gets a named billing period.  This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
         "x-ms-examples": {
           "BillingPeriodsGet": {
             "$ref": "./examples/BillingPeriodsGet.json"
@@ -203,7 +203,7 @@
           "Invoices"
         ],
         "operationId": "Invoices_List",
-        "description": "Lists the available invoices for a subscription in reverse chronological order beginning with the most recent invoice. In preview, invoices are available via this API only for invoice periods which end December 1, 2016 or later.",
+        "description": "Lists the available invoices for a subscription in reverse chronological order beginning with the most recent invoice. In preview, invoices are available via this API only for invoice periods which end December 1, 2016 or later.  This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
         "externalDocs": {
           "url": "https://go.microsoft.com/fwlink/?linkid=842057"
         },
@@ -278,7 +278,7 @@
           "Invoices"
         ],
         "operationId": "Invoices_Get",
-        "description": "Gets a named invoice resource. When getting a single invoice, the downloadUrl property is expanded automatically.",
+        "description": "Gets a named invoice resource. When getting a single invoice, the downloadUrl property is expanded automatically.  This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
         "x-ms-examples": {
           "InvoicesGet": {
             "$ref": "./examples/InvoicesGet.json"
@@ -321,7 +321,7 @@
           "Invoices"
         ],
         "operationId": "Invoices_GetLatest",
-        "description": "Gets the most recent invoice. When getting a single invoice, the downloadUrl property is expanded automatically.",
+        "description": "Gets the most recent invoice. When getting a single invoice, the downloadUrl property is expanded automatically.  This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
         "x-ms-examples": {
           "InvoicesGetLatest": {
             "$ref": "./examples/InvoicesGetLatest.json"
