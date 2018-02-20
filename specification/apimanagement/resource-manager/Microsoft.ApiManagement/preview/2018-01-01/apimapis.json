@@ -548,8 +548,8 @@
           "type": "string",
           "description": "Release identifier within an API. Must be unique in the current API Management service instance.",
           "minLength": 1,
-          "maxLength": 256,
-          "pattern": "^[^*#&+:<>?]+$"
+          "maxLength": 80,
+          "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)"
         }
       ],
       "head": {
@@ -2034,12 +2034,12 @@
                   "name": "Swagger"
                 },
                 {
-                  "value": "wadl-link",
+                  "value": "wsdl-link",
                   "description": "Export the Api Definition in WSDL Schema to Storage Blob.",
                   "name": "Wsdl"
                 },
                 {
-                  "value": "wsdl-link",
+                  "value": "wadl-link",
                   "description": "Export the Api Definition in WADL Schema to Storage Blob.",
                   "name": "Wadl"
                 }
@@ -2912,7 +2912,7 @@
       "description": "API identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
       "x-ms-parameter-location": "method"
     },
     "ApiIdRevParameter": {
@@ -2923,7 +2923,7 @@
       "description": "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
       "x-ms-parameter-location": "method"
     },
     "OperationIdParameter": {
@@ -2934,7 +2934,7 @@
       "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
       "x-ms-parameter-location": "method"
     },
     "SchemaIdParameter": {
@@ -2945,7 +2945,7 @@
       "description": "Schema identifier within an API. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
       "x-ms-parameter-location": "method"
     }
   }

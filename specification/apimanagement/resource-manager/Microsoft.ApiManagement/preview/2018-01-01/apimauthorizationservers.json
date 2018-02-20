@@ -673,8 +673,9 @@
       "required": true,
       "type": "string",
       "description": "Identifier of the authorization server.",
-      "maxLength": 256,
-      "pattern": "^[^*#&+:<>?]+$",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
       "x-ms-parameter-location": "method"
     }
   }
