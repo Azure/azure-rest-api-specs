@@ -71,6 +71,15 @@
         "description": "Checks that the redis cache name is valid and is not already in use.",
         "parameters": [
           {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the CheckNameAvailability Redis operation."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -93,7 +102,7 @@
         "x-ms-examples": {
           "RedisCacheGet": { "$ref": "./examples/RedisCacheListUpgradeNotifications.json" }
         },
-        "description": "Gets all notifications for a Redis cache.",
+        "description": "Gets any upgrade notifications for a Redis cache.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -121,12 +130,12 @@
             "required": true,
             "type": "number",
             "format": "double",
-            "description": "how many minutes in past to look for notifications"
+            "description": "how many minutes in past to look for upgrade notifications"
           }
         ],
         "responses": {
           "200": {
-            "description": "All notifications in given time range",
+            "description": "All upgrade notifications in given time range",
             "schema": {
               "$ref": "#/definitions/NotificationListResponse"
             }
@@ -1950,18 +1959,31 @@
         }
       }
     },
+    "CheckNameAvailabilityParameters": {
+      "description": "Parameters body to pass for  name availability check.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
+        }
+      }
+    },
     "CustomersToUpsell": {
       "properties": {
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Name of notification."
+          "description": "Name of upgrade notification."
         },
         "timestamp": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Timesstamp when notification occured."
+          "description": "Timestamp when upgrade notification occured."
         },
         "upsellNotification": {
           "readOnly": true,
@@ -1969,10 +1991,10 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Details about this notification"
+          "description": "Details about this upgrade notification"
         }
       },
-      "description": "Properties of notification."
+      "description": "Properties of upgrade notification."
     },
     "NotificationListResponse": {
       "properties": {
