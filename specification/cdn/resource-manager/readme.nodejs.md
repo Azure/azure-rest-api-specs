@@ -8,6 +8,6 @@ nodejs:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  package-name: azure-mgmt-cdn
+  package-name: azure-arm-cdn
   output-folder: $(node-sdks-folder)/lib/services/cdnManagement/lib
 ```
