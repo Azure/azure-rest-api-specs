@@ -43,6 +43,11 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/agentregistrationoperations"
         },
+        "x-ms-examples": {
+          "Get Agent Registration Information": {
+            "$ref": "./examples/getAgentRegistrationInformation.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
@@ -86,6 +91,11 @@
         "description": "Regenerate a primary or secondary agent registration key",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/agentregistrationoperations"
+        },
+        "x-ms-examples": {
+          "Regenerate the Primary Agent Registration Key": {
+            "$ref": "./examples/regenerateAgentRegistrationKey.json"
+          }
         },
         "parameters": [
           {
@@ -139,6 +149,11 @@
         "description": "Delete the dsc node identified by node id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeoperations"
+        },
+        "x-ms-examples": {
+          "Delete a DSC Node": {
+            "$ref": "./examples/deleteDscNode.json"
+          }
         },
         "parameters": [
           {
@@ -537,7 +552,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "file"
+              "type": "object"
             }
           },
           "default": {
