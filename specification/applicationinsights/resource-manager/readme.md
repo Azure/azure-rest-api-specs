@@ -155,6 +155,12 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.RuleDefinitions
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
+    #  - $.definitions.Annotation.AnnotationName
+    #  - $.definitions.Annotation.EventTime
+    #  - $.definitions.Annotation.Category
+    #  - $.definitions.Annotation.Id
+    #  - $.definitions.Annotation.Properties
+    #  - $.definitions.Annotation.RelatedAnnotation
     
   - suppress: R2066
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
@@ -173,6 +179,8 @@ input-file:
 - microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json
 - microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
 - microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
+- microsoft.insights/stable/2015-05-01/componentAnnotations_API.json
+- microsoft.insights/stable/2015-05-01/componentWorkItemConfigs_API.json
 ```
 ---
 # Code Generation
