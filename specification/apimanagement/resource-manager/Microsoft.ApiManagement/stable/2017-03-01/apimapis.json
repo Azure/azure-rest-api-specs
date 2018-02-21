@@ -2235,7 +2235,7 @@
           "description": "Describes on which protocols the operations in this API can be invoked."
         },
         "apiVersionSet" : {
-          "$ref" : "#/definitions/ApiVersionSetContract"
+          "$ref" : "./apimversionsets.json#/definitions/ApiVersionSetContract"
         }
       },
       "allOf": [
@@ -2456,37 +2456,9 @@
           },
           "apiVersionSet" : {
             "description": "Version set details",
-            "$ref" : "#/definitions/ApiVersionSetContract"
+            "$ref" : "./apimversionsets.json#/definitions/ApiVersionSetContractProperties"
           }
         }
-    },
-    "ApiVersionSetContract" : {
-      "description": "An API Version Set contains the common configuration for a set of API Versions relating ",
-      "properties": {
-        "id" : {
-          "type": "string",
-          "description": "Identifier for existing API Version Set. Omit this value to create a new Version Set."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of API Version Set."
-        },
-        "versioningScheme": {
-          "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
-          "enum": [
-            "Segment", "Query", "Header"
-          ]
-        },
-        "versionQueryName": {
-          "type": "string",
-          "description": "Name of query parameter that indicates the API Version if versioningScheme is set to `query`."
-        },
-        "versionHeaderName": {
-          "type": "string",
-          "description": "Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`."
-        }
-      }
     },
     "ApiReleaseCollection": {
       "properties": {

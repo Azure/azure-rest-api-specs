@@ -72,6 +72,7 @@ input-file:
 - Microsoft.ApiManagement/stable/2017-03-01/apimtags.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimtenant.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimusers.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimversionsets.json
 ```
 
 
