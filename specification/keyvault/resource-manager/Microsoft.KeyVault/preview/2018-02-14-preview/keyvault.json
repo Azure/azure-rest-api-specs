@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2016-10-01",
+    "version": "2018-02-14-preview",
     "title": "KeyVaultManagementClient",
     "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault."
   },
@@ -16,6 +16,7 @@
           "Vaults"
         ],
         "operationId": "Vaults_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
         "description": "Create or update a key vault in the specified subscription.",
         "parameters": [
           {
@@ -66,6 +67,9 @@
         "x-ms-examples": {
           "Create a new vault or update an existing vault": {
             "$ref": "./examples//createVault.json"
+          },
+          "Create or update a vault with network acls": {
+            "$ref": "./examples//createVaultWithNetworkAcls.json"
           }
         },
         "produces": [
@@ -853,7 +857,8 @@
         },
         "vaultUri": {
           "type": "string",
-          "description": "The URI of the vault for performing operations on keys and secrets."
+          "description": "The URI of the vault for performing operations on keys and secrets.",
+          "readOnly": true
         },
         "enabledForDeployment": {
           "type": "boolean",
@@ -869,7 +874,7 @@
         },
         "enableSoftDelete": {
           "type": "boolean",
-          "description": "Property specifying whether recoverable deletion is enabled for this key vault. Setting this property to true activates the soft delete feature, whereby vaults or vault entities can be recovered after deletion. Enabling this functionality is irreversible - that is, the property does not accept false as its value."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. It does not accept false value."
         },
         "createMode": {
           "type": "string",
@@ -884,8 +889,12 @@
           }
         },
         "enablePurgeProtection": {
-		  "type": "boolean",
+          "type": "boolean",
           "description": "Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility of the vault from specific network locations."
         }
       },
       "required": [
@@ -926,7 +935,7 @@
         },
         "enableSoftDelete": {
           "type": "boolean",
-          "description": "Property specifying whether recoverable deletion ('soft' delete) is enabled for this key vault. The property may not be set to false."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. It does not accept false value."
         },
         "createMode": {
           "type": "string",
@@ -941,8 +950,12 @@
           }
         },
         "enablePurgeProtection": {
-		  "type": "boolean",
-          "description": "Property specifying whether protection against purge is enabled for this vault; it is only effective if soft delete is also enabled. Once activated, the property may no longer be reset to false."
+          "type": "boolean",
+          "description": "Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility of the vault from specific network locations."
         }
       },
       "description": "Properties of the vault"
@@ -1247,6 +1260,73 @@
         }
       },
       "description": "The CheckNameAvailability operation response."
+    },
+    "NetworkRuleSet": {
+      "properties": {
+        "bypass": {         
+          "type": "string",
+          "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
+          "enum": [
+            "AzureServices",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleBypassOptions",
+            "modelAsString": true
+          }
+        },
+        "defaultAction": {
+          "type": "string",
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleAction",
+            "modelAsString": true
+          }
+        },      
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          },
+          "description": "The list of IP address rules."
+        },      
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The list of virtual network rules."
+        }
+      },
+      "description": "A set of rules governing the network accessibility of a vault."
+    },
+    "IPRule": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "A rule governing the accesibility of a vault from a specific ip address or ip range."
+    },
+    "VirtualNetworkRule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "A rule governing the accesibility of a vault from a specific virtual network."
     }
   },
   "parameters": {
