@@ -84,6 +84,24 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentDataVolumeCap.properties.StopSendNotificationWhenHitCap
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.ShouldBeThrottled
 
+  - suppress: DescriptionAndTitleMissing
+    reason: Error addresses missing description/title in inner reference. Referenced model contains title and description. Redundant.
+    from: componentAnnotations_API.json
+    where:
+      - $.definitions.AnnotationError.properties.innererror
+
+  - suppress: DescriptionAndTitleMissing
+    reason: Error addresses missing description/title in inner reference. Referenced model contains title and description. Redundant.
+    from: componentWorkItemConfigs_API.json
+    where:
+      - $.definitions.WorkItemConfigurationError.properties.innererror
+
+  - suppress: LROStatusCodesReturnTypeSchema
+    reason: The response for 200 does define a schema in place. The test likely expects a 'ref' member. False failure.
+    from: componentAnnotations_API.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/Annotations"].put.responses["200"]
+
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This api was existing there from 2015, it will break existing client if we change the name
     # where:
