@@ -39,7 +39,7 @@
         "tags": [
           "ComputeOperations"
         ],
-        "operationId": "ComputeOperations_List",
+        "operationId": "Operations_List",
         "description": "Gets a list of compute operations.",
         "parameters": [
           {
@@ -53,6 +53,9 @@
               "$ref": "#/definitions/ComputeOperationListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -134,9 +137,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AvailabilitySet"
+              "$ref": "#/definitions/AvailabilitySetUpdate"
             },
-            "description": "Parameters supplied to the Create Availability Set operation."
+            "description": "Parameters supplied to the Update Availability Set operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1070,9 +1073,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Image"
+              "$ref": "#/definitions/ImageUpdate"
             },
-            "description": "Parameters supplied to the Create Image operation."
+            "description": "Parameters supplied to the Update Image operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1428,7 +1431,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualMachine"
+              "$ref": "#/definitions/VirtualMachineUpdate"
             },
             "description": "Parameters supplied to the Update Virtual Machine operation."
           },
@@ -3145,7 +3148,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/forceRecoveryServiceFabricPlatformUpdateDomainWalk": {
-      "post":{
+      "post": {
         "tags": [
           "VirtualMachineScaleSets"
         ],
@@ -3765,7 +3768,8 @@
         "operationId": "LogAnalytics_ExportRequestRateByInterval",
         "x-ms-examples": {
           "Export logs which contain all Api requests made to Compute Resource Provider within the given time period broken down by intervals.": {
-            "$ref": "./examples/LogAnalyticsRequestRateByInterval.json" }
+            "$ref": "./examples/LogAnalyticsRequestRateByInterval.json"
+          }
         },
         "description": "Export logs that show Api requests made by this subscription in the given time window to show throttling activities.",
         "parameters": [
@@ -3815,7 +3819,8 @@
         "operationId": "LogAnalytics_ExportThrottledRequests",
         "x-ms-examples": {
           "Export logs which contain all throttled Api requests made to Compute Resource Provider within the given time period.": {
-            "$ref": "./examples/LogAnalyticsThrottledRequests.json" }
+            "$ref": "./examples/LogAnalyticsThrottledRequests.json"
+          }
         },
         "description": "Export logs that show total throttled Api requests for this subscription in the given time window.",
         "parameters": [
@@ -3863,6 +3868,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ComputeOperationValue"
           },
@@ -3875,10 +3881,12 @@
       "properties": {
         "origin": {
           "type": "string",
+          "readOnly": true,
           "description": "The origin of the compute operation."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of the compute operation."
         },
         "display": {
@@ -3897,18 +3905,22 @@
       "properties": {
         "operation": {
           "type": "string",
+          "readOnly": true,
           "description": "The display name of the compute operation."
         },
         "resource": {
           "type": "string",
+          "readOnly": true,
           "description": "The display name of the resource the operation applies to."
         },
         "description": {
           "type": "string",
+          "readOnly": true,
           "description": "The description of the operation."
         },
         "provider": {
           "type": "string",
+          "readOnly": true,
           "description": "The resource provider for the operation."
         }
       },
@@ -3999,6 +4011,24 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+    },
+    "AvailabilitySetUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AvailabilitySetProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the availability set"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
         }
       ],
       "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
@@ -5462,6 +5492,43 @@
       ],
       "description": "Describes a Virtual Machine."
     },
+    "VirtualMachineUpdate": {
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/Plan",
+          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineProperties"
+        },
+        "resources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineExtension"
+          },
+          "description": "The virtual machine child extension resources."
+        },
+        "identity": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "The identity of the virtual machine, if configured."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine zones."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Describes a Virtual Machine."
+    },
     "VirtualMachineListResult": {
       "properties": {
         "value": {
@@ -5716,6 +5783,20 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist."
+    },
+    "ImageUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
         }
       ],
       "description": "The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist."
@@ -7387,7 +7468,7 @@
     },
     "LogAnalyticsOperationResult": {
       "properties": {
-        "properties" :{
+        "properties": {
           "readOnly": true,
           "$ref": "#/definitions/LogAnalyticsOutput",
           "description": "LogAnalyticsOutput"
