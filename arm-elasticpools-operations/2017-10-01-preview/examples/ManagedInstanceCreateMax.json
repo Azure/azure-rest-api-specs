@@ -1,0 +1,75 @@
+{
+  "parameters" : {
+    "subscriptionId" : "20D7082A-0FC7-4468-82BD-542694D5042B",
+    "resourceGroupName" : "testrg",
+    "managedInstanceName" : "testinstance",
+    "api-version" : "2015-05-01-preview",
+    "parameters" : {
+      "tags" : {
+        "tagKey1" : "TagValue1"
+      },
+      "location" : "Japan East",
+      "sku" : {
+        "name" : "CLS3",
+        "tier" : "Standard",
+        "capacity" : 1
+      },
+      "properties" : {
+        "fullyQualifiedDomainName" : "testinstance.database.windows.net",
+        "administratorLogin" : "dummylogin",
+        "administratorLoginPassword" : "Un53cuRE!",
+        "subnetId" : "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+        "vCores": 8,
+        "storageSizeInGB": 1024,
+        "licenseType": "Full"
+      }
+    }
+  },
+  "responses" : {
+    "200" : {
+      "body" : {
+        "tags" : {
+          "tagKey1" : "TagValue1"
+        },
+        "id" : "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance1",
+        "name" : "testinstance1",
+        "type" : "Microsoft.Sql/managedInstances",
+        "location" : "japaneast",
+        "sku" : {
+          "name" : "CLS3",
+          "tier" : "Standard",
+          "capacity" : 1
+        },
+        "properties" : {
+          "fullyQualifiedDomainName" : "testinstance.database.windows.net",
+          "administratorLogin" : "dummylogin",
+          "subnetId" : "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "state" : "Ready"
+        }
+      }
+    },
+    "201" : {
+      "body" : {
+        "tags" : {
+          "tagKey1" : "TagValue1"
+        },
+        "id" : "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance2",
+        "name" : "testinstance2",
+        "type" : "Microsoft.Sql/managedInstances",
+        "location" : "japaneast",
+        "sku" : {
+          "name" : "CLS3",
+          "tier" : "Standard",
+          "capacity" : 1
+        },
+        "properties" : {
+          "fullyQualifiedDomainName" : "testinstance.database.windows.net",
+          "administratorLogin" : "dummylogin",
+          "subnetId" : "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "state" : "Ready"
+        }
+      }
+    },
+    "202" : {}
+  }
+}
