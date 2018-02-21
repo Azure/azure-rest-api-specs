@@ -9,8 +9,7 @@
   "schemes": [
     "https"
   ],
-  "consumes": [
-  ],
+  "consumes": [],
   "produces": [
     "application/json"
   ],
@@ -97,6 +96,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -106,58 +110,120 @@
     },
     "TagResourceContract": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagResourceContractProperties",
-          "description": "TagResource entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Contract details."
-    },
-    "TagResourceContractProperties": {
-      "properties": {
         "tag": {
-          "$ref": "./apimtags.json#/definitions/TagContract",
+          "$ref": "#/definitions/TagTagResourceContractProperties",
           "description": "Tag associated with the resource."
         },
         "api": {
-          "$ref": "./apimapis.json#/definitions/ApiContract",
+          "$ref": "#/definitions/ApiTagResourceContractProperties",
           "description": "Api associated with the tag."
         },
         "operation": {
-          "$ref": "#/definitions/OperationEntityContract",
-          "description": "Api associated with the tag."
+          "$ref": "#/definitions/OperationTagResourceContractProperties",
+          "description": "Operation associated with the tag."
         },
         "product": {
-          "$ref": "./apimproducts.json#/definitions/ProductContract",
+          "$ref": "#/definitions/ProductTagResourceContractProperties",
           "description": "Product associated with the tag."
         }
       },
+      "required": [
+        "tag"
+      ],
       "description": "TagResource contract properties."
     },
-    "OperationEntityContract": {
+    "TagTagResourceContractProperties": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OperationEntityContractProperties",
-          "description": "Operation entity contract properties."
+        "id": {
+          "type": "string",
+          "description": "Tag identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Tag Name",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      },
+      "description": "Contract defining the Tag property in the Tag Resource Contract"
+    },
+    "ApiTagResourceContractProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "API identifier in the form /apis/{apiId}."
+        },
+        "name": {
+          "type": "string",
+          "description": "API name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "serviceUrl": {
+          "type": "string",
+          "description": "Absolute URL of the backend service implementing this API.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.",
+          "minLength": 0,
+          "maxLength": 400
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "http",
+              "https"
+            ],
+            "x-ms-enum": {
+              "name": "Protocol",
+              "modelAsString": false
+            }
+          },
+          "description": "Describes on which protocols the operations in this API can be invoked."
         }
       },
       "allOf": [
         {
-          "$ref": "./apimanagement.json#/definitions/Resource"
+          "$ref": "./apimapis.json#/definitions/ApiEntityBaseContract"
         }
       ],
-      "description": "Operation Entity Contract Properties."
+      "description": "API contract properties for the Tag Resources."
     },
-    "OperationEntityContractProperties": {
+    "ProductTagResourceContractProperties": {
       "properties": {
-        "displayName": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the product in the form of /products/{productId}"
+        },
+        "name": {
+          "type": "string",
+          "description": "Product name.",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimproducts.json#/definitions/ProductEntityBaseParameters"
+        }
+      ],
+      "required": [
+        "name"
+      ],
+      "description": "Product profile."
+    },
+    "OperationTagResourceContractProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the operation in form /operations/{operationId}."
+        },
+        "name": {
           "type": "string",
           "description": "Operation name.",
           "readOnly": true
@@ -200,6 +266,5 @@
       "description": "Operation Entity contract Properties."
     }
   },
-  "parameters": {
-  }
+  "parameters": {}
 }

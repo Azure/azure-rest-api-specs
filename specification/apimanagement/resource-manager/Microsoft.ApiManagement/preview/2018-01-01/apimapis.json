@@ -2922,8 +2922,8 @@
       "type": "string",
       "description": "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.",
       "minLength": 1,
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "OperationIdParameter": {
