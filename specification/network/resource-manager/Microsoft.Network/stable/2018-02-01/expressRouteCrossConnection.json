@@ -1,0 +1,738 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "ExpressRouteCrossConnection REST APIs",
+		"description": "The Microsoft Azure ExpressRouteCrossConnection Resource Provider REST APIs describes the operations for the connectivity provider to provision ExpressRoute circuit, create and modify BGP peering entities and troubleshoot connectivity on customer's ExpressRoute circuit. ",
+		"version": "2018-02-01"
+	},
+	"host": "management.azure.com",
+	"schemes": [
+		"https"
+	],
+	"consumes": [
+		"application/json",
+		"text/json"
+	],
+	"produces": [
+		"application/json",
+		"text/json"
+	],
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow": "implicit",
+			"description": "Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
+	"paths": {
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteCrossConnections": {
+			"get": {
+				"tags": [
+					"ExpressRouteCrossConnections"
+				],
+				"operationId": "ExpressRouteCrossConnections_ListAll",
+				"description": "Retrieves all the ExpressRouteCrossConnections in a subscription.",
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns a list of ExpressRouteCrossConnection resources. If there are no crossconnection resources an empty list is returned.",
+						"schema": {
+							"$ref": "#/definitions/ExpressRouteCrossConnectionListResult"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections": {
+			"get": {
+				"tags": [
+					"ExpressRouteCrossConnections"
+				],
+				"operationId": "ExpressRouteCrossConnectionsByResourceGroup_List",
+				"description": "Retrieves all the ExpressRouteCrossConnections in a resource group.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful.The operation returns a list of ExpressRouteCrossConnection resources. If there are no crossconnection resources an empty list is returned.",
+						"schema": {
+							"$ref": "#/definitions/ExpressRouteCrossConnectionListResult"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}": {
+		  "get": {
+			"tags": [
+			  "ExpressRouteCrossConnections"
+			],
+			"operationId": "ExpressRouteCrossConnections_Get",
+			"description": "Gets details about the specified ExpressRouteCrossConnection.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "crossConnectionName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the ExpressRouteCrossConnection."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns the resulting ExpressRouteCrossConnection resource.",
+						"schema": {
+							"$ref": "#/definitions/ExpressRouteCrossConnection"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"ExpressRouteCrossConnections"
+				],
+				"operationId": "ExpressRouteCrossConnections_Put",
+				"description": "Update the specified ExpressRouteCrossConnection.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "crossConnectionName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the ExpressRouteCrossConnection."
+					},
+					{
+					  "name": "parameters",
+					  "in": "body",
+					  "required": true,
+					  "schema": {
+						"$ref": "#/definitions/ExpressRouteCrossConnection"
+					  },
+					  "description": "Parameters supplied to the update express route crossConnection operation."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Update successful. The operation returns the resulting ExpressRouteCrossConnection resource."
+					}
+				},
+				"x-ms-long-running-operation": true
+			},
+			"patch": {
+			  "tags": [
+				"ExpressRouteCrossConnections"
+			  ],
+			  "operationId": "ExpressRouteCrossConnections_UpdateTags",
+			  "description": "Updates an express route cross connection tags.",
+			  "parameters": [
+				{
+				  "name": "resourceGroupName",
+				  "in": "path",
+				  "required": true,
+				  "type": "string",
+				  "description": "The name of the resource group."
+				},
+				{
+				  "name": "crossConnectionName",
+				  "in": "path",
+				  "required": true,
+				  "type": "string",
+				  "description": "The name of the cross connection."
+				},
+				{
+				  "name": "parameters",
+				  "in": "body",
+				  "required": true,
+				  "schema": {
+					"$ref": "./network.json#/definitions/TagsObject"
+				  },
+				  "description": "Parameters supplied to update express route cross connection tags."
+				},
+				{
+				  "$ref": "#/parameters/ApiVersionParameter"
+				},
+				{
+				  "$ref": "#/parameters/SubscriptionIdParameter"
+				}
+			  ],
+			  "responses": {
+				"200": {
+				  "description": "Update successful. The operation returns the resulting ExpressRouteCrossConnection resource.",
+				  "schema": {
+					"$ref": "#/definitions/ExpressRouteCrossConnection"
+				  }
+				}
+			  },
+			  "x-ms-examples": {
+				"Update Express Route CrossConnection Tags": {
+				  "$ref": "./examples/ExpressRouteCrossConnectionUpdateTags.json"
+				}
+			  },
+			  "x-ms-long-running-operation": true
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings": {
+			"get": {
+				"tags": [
+					"ExpressRouteCrossConnectionPeerings"
+				],
+				"operationId": "ExpressRouteCrossConnectionPeerings_List",
+				"description": "Gets all peerings in a specified ExpressRouteCrossConnection.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "crossConnectionName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the ExpressRouteCrossConnection."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns a list of ExpressRouteCrossConnectionPeering resources.",
+						"schema": {
+							"$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeeringListResult"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}": {
+			"delete": {
+				"tags": [
+					"ExpressRouteCrossConnectionPeerings"
+				],
+				"operationId": "ExpressRouteCrossConnectionPeerings_Delete",
+				"description": "Deletes the specified peering from the ExpressRouteCrossConnection.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "crossConnectionName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the ExpressRouteCrossConnection."
+					},
+					{
+						"name": "peeringName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the peering."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Delete successful."
+					},
+					"202": {
+						"description": "Accepted and the operation will complete asynchronously."
+					},
+					"204": {
+						"description": "Delete successful."
+					}
+				},
+				"x-ms-long-running-operation": true
+			},
+			"get": {
+				"tags": [
+					"ExpressRouteCrossConnectionPeerings"
+				],
+				"operationId": "ExpressRouteCrossConnectionPeerings_Get",
+				"description": "Gets the specified peering for the ExpressrouteCrossConnection.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "crossConnectionName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the ExpressRouteCrossConnection."
+					},
+					{
+						"name": "peeringName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the peering."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns the resulting ExpressRouteCrossConnectionPeering resource.",
+						"schema": {
+							"$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"ExpressRouteCrossConnectionPeerings"
+				],
+				"operationId": "ExpressRouteCrossConnectionPeerings_CreateOrUpdate",
+				"description": "Creates or updates a peering in the specified ExpressrouteCrossConnection.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "crossConnectionName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the ExpressRouteCrossConnection."
+					},
+					{
+						"name": "peeringName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the peering."
+					},
+					{
+						"name": "peeringParameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
+						},
+						"description": "Parameters supplied to the create or update ExpressRouteCrossConnection peering operation."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Update successful. The operation returns the resulting ExpressRouteCrossConnectionPeering resource.",
+						"schema": {
+							"$ref": "#/definitions/ExpressRouteCircuitPeering"
+						}
+					},
+					"201": {
+						"description": "Create successful. The operation returns the resulting ExpressRouteCrossConnectionPeering resource.",
+						"schema": {
+							"$ref": "#/definitions/ExpressRouteCircuitPeering"
+						}
+					}
+				},
+				"x-ms-long-running-operation": true
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}": {
+			"post": {
+				"tags": [
+					"ExpressRouteCrossConnectionArpTable"
+				],
+				"operationId": "ExpressRouteCrossConnections_ListArpTable",
+				"description": "Gets the currently advertised ARP table associated with the express route circuit in a resource group.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "crossConnectionName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the ExpressRouteCrossConnection."
+					},
+					{
+						"name": "peeringName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the peering."
+					},
+					{
+						"name": "devicePath",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The path of the device"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns the resulting ExpressRouteCrossConnectionsArpTable resource.",
+						"schema": {
+							"$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsArpTableListResult"
+						}
+					},
+					"202": {
+						"description": "Accepted and the operation will complete asynchronously."
+					}
+				},
+				"x-ms-long-running-operation": true
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
+			"post": {
+				"tags": [
+					"ExpressRouteCrossConnectionRouteTableSummary"
+				],
+				"operationId": "ExpressRouteCrossConnections_ListRouteTableSummary",
+				"description": "Gets the route table summary associated with the expressrouteCrossConnection in a resource group.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "crossConnectionName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the ExpressRouteCrossConnection."
+					},
+					{
+						"name": "peeringName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the peering."
+					},
+					{
+						"name": "devicePath",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The path of the device."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns the resulting ExpressRouteCrossConnectionsRoutesTableSummary resource.",
+						"schema": {
+						"$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
+						}
+					},
+					"202": {
+						"description": "Accepted and the operation will complete asynchronously."
+					}
+				},
+				"x-ms-long-running-operation": true
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}": {
+			"post": {
+				"tags": [
+					"ExpressRouteCrossConnectionRouteTable"
+				],
+				"operationId": "ExpressRouteCrossConnections_ListRoutesTable",
+				"description": "Gets the currently advertised routes table associated with the express route crossConnection in a resource group.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "crossConnectionName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the ExpressRouteCrossConnection."
+					},
+					{
+						"name": "peeringName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the peering."
+					},
+					{
+						"name": "devicePath",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The path of the device."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+							"description": "Request successful. The operation returns the resulting ExpressRouteCrossConnectionsRouteTable resource.",
+							"schema": {
+								"$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+							}
+					},
+					"202": {
+						"description": "Accepted and the operation will complete asynchronously."
+					}
+				},
+				"x-ms-long-running-operation": true
+			}
+		}
+	},
+	"definitions": {
+		"ExpressRouteCircuitReference": {
+			"properties": {
+				"id": {
+					"type":"string",
+					"description": "Corresponding Express Route Circuit Id."
+				}
+			}
+		},
+		"ExpressRouteCrossConnectionServiceProviderProperties": {
+			"properties": {
+				"serviceProviderName": {
+					"type": "string",
+					"description": "The serviceProviderName."
+				},
+				"peeringLocation": {
+					"type": "string",
+					"description": "The peering location of the ExpressRoute circuit."
+				},
+				"bandwidthInMbps": {
+					"type": "integer",
+					"format": "int32",
+					"description": "The circuit bandwidth In Mbps."
+				}
+			},
+			"description": "Contains ServiceProviderProperties in an ExpressRouteCrossConnection"
+		},
+		"ExpressRouteCrossConnectionPropertiesFormat": {
+			"properties": {
+				"primaryAzurePort": {
+					"type": "string",
+					"description": "The name of the primary  port."
+				},
+				"secondaryAzurePort": {
+					"type": "string",
+					"description": "The name of the secondary  port."
+				},
+				"sTag": {
+					"type": "integer",
+					"description": "The identifier of the circuit traffic."
+				},
+				"serviceProviderProperties": {
+					"$ref": "#/definitions/ExpressRouteCrossConnectionServiceProviderProperties",
+					"description": "The ServiceProviderProperties."
+				},
+				"expressRouteCircuit": {
+					"$ref": "#/definitions/ExpressRouteCircuitReference",
+					"description": "The ExpressRouteCircuit"
+				},
+				"serviceProviderProvisioningState": {
+					"type": "string",
+					"description": "The provisioning state of the circuit in the connectivity provider system. Possible values are 'NotProvisioned', 'Provisioning', 'Provisioned'.",
+					"enum": [
+						"NotProvisioned",
+						"Provisioning",
+            "Provisioned",
+            "Deprovisioning"
+					],
+					"x-ms-enum": {
+						"name": "ServiceProviderProvisioningState",
+						"modelAsString": true
+					}
+				},
+				"serviceProviderNotes": {
+					"type": "string",
+					"description": "Additional read only notes set by the connectivity provider."
+				},
+				"provisioningState": {
+					"type": "string",
+					"description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+				},
+				"peerings": {
+					"type": "array",
+					"items": {
+						"$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
+					},
+					"description": "The list of peerings."
+				}
+			},
+			"description": "Properties of ExpressRouteCrossConnection."
+		},
+		"ExpressRouteCrossConnection": {
+			"properties": {
+				"properties": {
+				  "x-ms-client-flatten": true,
+				  "$ref": "#/definitions/ExpressRouteCrossConnectionPropertiesFormat"
+				},
+				"etag": {
+				  "readOnly": true,
+				  "type": "string",
+				  "description": "Gets a unique read-only string that changes whenever the resource is updated."
+				}
+			},
+			"allOf": [
+				{
+				  "$ref": "./network.json#/definitions/Resource"
+				}
+			],
+			  "description": "ExpressRouteCrossConnection resource"
+		},
+		"ExpressRouteCrossConnectionListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ExpressRouteCrossConnection"
+					},
+					"description": "A list of ExpressRouteCrossConnection resources."
+				},
+				"nextLink": {
+					"type": "string",
+					"description": "The URL to get the next set of results."
+				}
+			},
+			"description": "Response for ListExpressRouteCrossConnection API service call."
+		}
+	},
+	"parameters": {
+		"SubscriptionIdParameter": {
+			"name": "subscriptionId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+	  "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+		},
+		"ApiVersionParameter": {
+			"name": "api-version",
+			"in": "query",
+			"required": true,
+			"type": "string",
+			"description": "Client API version."
+		}
+	}
+}
