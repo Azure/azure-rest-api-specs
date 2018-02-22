@@ -279,6 +279,42 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/operations/{purgeId}": {
+      "get": {
+        "description": "Gets the status of a previously submitted purge using the id returned from the original purge request.",
+        "operationId": "Components_GetPurgeStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComponentPurgeIdParameter"
+          }         
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPurgeStatusResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentPurgeStatus": {
+            "$ref": "./examples/ComponentsPurgeStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -515,6 +551,18 @@
       "required": [
         "operationId"
       ]
+    },
+    "ComponentPurgeStatusResponse": {
+      "description": "Response containing status for a specific purge operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the operation represented by the requested Id.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ]
     }
   },
   "parameters": {
@@ -556,6 +604,13 @@
       "schema": {
         "$ref": "#/definitions/ComponentPurgeBody"
       }
+    },
+    "ComponentPurgeIdParameter": {
+      "name": "purgeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "In a purge status request, this is the Id of the operation the status of which is returned."
     }
   }
 }
