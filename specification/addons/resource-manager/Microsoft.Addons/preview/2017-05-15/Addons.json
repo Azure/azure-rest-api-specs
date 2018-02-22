@@ -1,0 +1,424 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Azure Addons Resource Provider",
+        "description": "The service for managing third party addons.",
+        "version": "2017-05-15"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/providers/Microsoft.Addons/operations": {
+            "get": {
+                "tags": [
+                    "Operations"
+                ],
+                "operationId": "Operations_List",
+                "description": "Lists all of the available Addons RP operations.",
+                "x-ms-examples": {
+                    "Operations_List": {
+                        "$ref": "./examples/Operations_List.json"
+                    }
+                },
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersionParameter"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "List all the operations.",
+                        "schema": {
+                            "$ref": "#/definitions/OperationList"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorDefinition"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Addons/supportProviders/{providerName}/supportPlanTypes/{planTypeName}": {
+            "get": {
+                "tags": [
+                    "AddonDetails"
+                ],
+                "operationId": "SupportPlanTypes_Get",
+                "summary": "Returns whether or not the canonical support plan of type {type} is enabled for the subscription.",
+                "description": "",
+                "x-ms-examples": {
+                    "SupportPlanTypes_Get": {
+                        "$ref": "./examples/SupportPlanTypes_Get.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SupportProviderName"
+                    },
+                    {
+                        "$ref": "#/parameters/CanonicalSupportPlanType"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CanonicalSupportPlanResponseEnvelope"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "description": "'404' - 'Not Found'.\n'400' - 'Bad Request'",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorDefinition"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "AddonDetails"
+                ],
+                "operationId": "SupportPlanTypes_CreateOrUpdate",
+                "summary": "Creates or updates the Canonical support plan of type {type} for the subscription.",
+                "description": "",
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "SupportPlanTypes_CreateOrUpdate": {
+                        "$ref": "./examples/SupportPlanTypes_CreateOrUpdate.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SupportProviderName"
+                    },
+                    {
+                        "$ref": "#/parameters/CanonicalSupportPlanType"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CanonicalSupportPlanResponseEnvelope"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/CanonicalSupportPlanResponseEnvelope"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "description": "'404' - 'Not Found'.\n'400' - 'Bad Request'",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorDefinition"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "SupportPlanTypes_Delete",
+                "summary": "Cancels the Canonical support plan of type {type} for the subscription.",
+                "description": "",
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "SupportPlanTypes_Delete": {
+                        "$ref": "./examples/SupportPlanTypes_Delete.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SupportProviderName"
+                    },
+                    {
+                        "$ref": "#/parameters/CanonicalSupportPlanType"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "headers": {
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/CanonicalSupportPlanResponseEnvelope"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorDefinition"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Addons/supportProviders/{providerName}/supportPlanTypes":  {
+            "get": {
+                "tags": [
+                    "CanonicalSupportPlanStatus"
+                ],
+                "operationId": "CanonicalSupportPlanTypes_Get",
+                "summary": "Returns the Canonical Support Plans.",
+                "description": "Returns the Canonical Support Plans as well as whether they are enabled or not for the subscription.",
+                "x-ms-examples": {
+                    "CanonicalSupportPlanTypes_Get": {
+                        "$ref": "./examples/CanonicalSupportPlanTypes_Get.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SupportProviderName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CanonicalSupportPlanStatus"
+                        }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorDefinition"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "CanonicalSupportPlanProperties": {
+            "type": "object",
+            "description": "The properties of the Canonical support plan.",
+            "properties": {
+                "provisioningState": {
+                    "type": "string",
+                    "description": "The provisioning state of the resource.",
+                    "enum": ["Succeeded", "Failed", "Cancelled", "Purchasing", "Downgrading", "Cancelling", "Upgrading"],
+                    "x-ms-enum": {
+                        "name": "ProvisioningState",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "CanonicalSupportPlanResponseEnvelope": {
+            "type": "object",
+            "description": "The status of the Canonical support plan.",
+            "required": [
+                "properties"
+            ],
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The id of the ARM resource, e.g. \"/subscriptions/{id}/providers/Microsoft.Addons/supportProvider/{supportProviderName}/supportPlanTypes/{planTypeName}\"."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The name of the Canonical support plan, i.e. \"essentials\", \"standard\" or \"advanced\"."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Microsoft.Addons/supportProvider"
+                },
+                "properties": {
+                    "type": "object",
+                    "$ref": "#/definitions/CanonicalSupportPlanProperties",
+                    "description": "Describes Canonical support plan type and status.",
+                    "x-ms-client-flatten": true
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "CanonicalSupportPlanStatus" : {
+            "type": "array",
+            "title": "Canonical Support Plan Status",
+            "description": "Contains Canonical support plan status information.",
+            "items": {
+                "properties": {
+                    "supportPlanType": {
+                        "type": "string",
+                        "description": "Support plan type.",
+                        "enum": ["essentials", "standard", "advanced"]
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "Whether the support plan is enabled for this subscription."
+                    },
+                    "willEmitOneTimeChargeWhenEnabled": {
+                        "type": "boolean",
+                        "description": "This indicates that when this support plan is enabled if AddonsRP will emit a one-time charge."
+                    },
+                    "willEmitOneTimeChargeIfReEnabled": {
+                        "type": "boolean",
+                        "description": "This indicates that when this support plan is cancelled and then enabled that AddonsRP will emit a one-time charge."
+                    }
+                }
+            } 
+        },
+        "OperationList": {
+            "type": "array",
+            "title": "Operation List",
+            "description": "List of supported operations.",
+            "items": {
+                "$ref": "#/definitions/OperationsDefinition"
+            }
+        },
+        "OperationsDefinition": {
+            "type": "object",
+            "title": "Operations",
+            "description": "Operations definition.",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "Name"
+                },
+                "display": {
+                    "$ref": "#/definitions/OperationsDisplayDefinition",
+                    "title": "Display"
+                }
+            }
+        },
+        "OperationsDisplayDefinition": {
+            "type": "object",
+            "title": "Operations Display",
+            "description": "Operations display definition.",
+            "properties": {
+                "provider": {
+                    "type": "string",
+                    "title": "Provider"
+                },
+                "resource": {
+                    "type": "string",
+                    "title": "Resource"
+                },
+                "operation": {
+                    "type": "string",
+                    "title": "Operation"
+                },
+                "description": {
+                    "type": "string",
+                    "title": "Description"
+                }
+            }
+        },
+        "ErrorDefinition": {
+            "type": "object",
+            "title": "Error",
+            "description": "Error description.",
+            "required": [
+                "message",
+                "code"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "title": "Message"
+                },
+                "code": {
+                    "type": "integer",
+                    "title": "Code",
+                    "minimum": 100,
+                    "maximum": 600
+                }
+            }
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Subscription credentials that uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client API version."
+        },
+        "SupportProviderName": {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The support plan type. For now the only valid type is \"canonical\".",
+			"x-ms-parameter-location": "method"
+        },
+        "CanonicalSupportPlanType": {
+            "name": "planTypeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Canonical support plan type. Can be \"essentials\", \"standard\" or \"advanced\".",
+			"x-ms-parameter-location": "method"
+        },
+        "OperationResultsIdParameter": {
+            "name": "operationResultsId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id representing an async operation.",
+			"x-ms-parameter-location": "method"
+        }
+    }
+}
