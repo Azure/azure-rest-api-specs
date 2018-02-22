@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2017-11-15-preview"
+    "version": "2018-03-15-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -115,7 +115,8 @@
         "CompatLevel140"
       ],
       "x-ms-enum": {
-        "name": "DatabaseCompatLevel"
+        "name": "DatabaseCompatLevel",
+        "modelAsString": true
       }
     },
     "DatabaseState": {
@@ -133,7 +134,8 @@
         "OfflineSecondary"
       ],
       "x-ms-enum": {
-        "name": "DatabaseState"
+        "name": "DatabaseState",
+        "modelAsString": true
       }
     },
     "DatabaseObjectType": {
@@ -147,7 +149,8 @@
         "Function"
       ],
       "x-ms-enum": {
-        "name": "ObjectType"
+        "name": "ObjectType",
+        "modelAsString": true
       }
     },
     "DatabaseObjectName": {
@@ -293,7 +296,7 @@
       ],
       "x-ms-enum": {
         "name": "MigrationState",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "MigrationStatus": {
@@ -313,7 +316,7 @@
       ],
       "x-ms-enum": {
         "name": "MigrationStatus",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "SqlMigrationTaskInput": {
@@ -374,7 +377,54 @@
       ],
       "x-ms-enum": {
         "name": "ErrorType",
-        "modelAsString": false
+        "modelAsString": true
+      }
+    },
+    "MigrateSqlServerSqlMIDatabaseInput": {
+      "type": "object",
+      "description": "Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "restoreDatabaseName": {
+          "type": "string",
+          "description": "Name of the database at destination"
+        },
+        "backupFileShare": {
+          "$ref": "#/definitions/FileShare",
+          "description": "Backup file share information for backing up this database."
+        }
+      },
+      "required": [
+        "name",
+        "restoreDatabaseName"
+      ]
+    },
+    "MigrateSqlServerSqlServerDatabaseInput": {
+      "type": "object",
+      "description": "Database specific information for SQL to SQL migration task inputs",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "restoreDatabaseName": {
+          "type": "string",
+          "description": "Name of the database at destination"
+        },
+        "backupFileShare": {
+          "$ref": "#/definitions/FileShare",
+          "description": "Backup file share information for this database."
+        },
+        "databaseFiles": {
+          "type": "array",
+          "description": "The list of database files",
+          "items": {
+            "$ref": "#/definitions/DatabaseFileInput"
+          }
+        }
       }
     },
     "DatabaseFileInput": {
@@ -449,7 +499,8 @@
         "Fulltext"
       ],
       "x-ms-enum": {
-        "name": "DatabaseFileType"
+        "name": "DatabaseFileType",
+        "modelAsString": true
       }
     },
     "DatabaseMigrationStage": {
@@ -465,8 +516,42 @@
       ],
       "x-ms-enum": {
         "name": "DatabaseMigrationStage",
-        "modelAsString": false
+        "modelAsString": true
       }
+    },
+    "BlobShare": {
+      "type": "object",
+      "description": "Blob container storage information.",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "description": "SAS URI of Azure Storage Account Container."
+        }
+      },
+      "required": [
+        "sasUri"
+      ]
+    },
+    "FileShare": {
+      "type": "object",
+      "description": "File share information with Path, Username, and Password.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "User name credential to connect to the share location"
+        },
+        "password": {
+          "type": "string",
+          "description": "Password credential used to connect to the share location."
+        },
+        "path": {
+          "type": "string",
+          "description": "The folder path for this share."
+        }
+      },
+      "required": [
+        "path"
+      ]
     }
   }
 }

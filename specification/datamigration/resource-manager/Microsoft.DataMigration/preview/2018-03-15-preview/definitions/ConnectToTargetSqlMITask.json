@@ -17,12 +17,12 @@
   },
   "paths": {},
   "definitions": {
-    "ConnectToTargetSqlDbTaskInput": {
+    "ConnectToTargetSqlMITaskInput": {
       "type": "object",
-      "description": "Input for the task that validates connection to SQL DB and target server requirements",
+      "description": "Input for the task that validates connection to Azure SQL Database Managed Instance.",
       "properties": {
         "targetConnectionInfo": {
-          "description": "Connection information for target SQL DB",
+          "description": "Connection information for target SQL Server",
           "$ref": "./Common.json#/definitions/SqlConnectionInfo"
         }
       },
@@ -30,26 +30,26 @@
         "targetConnectionInfo"
       ]
     },
-    "ConnectToTargetSqlDbTaskOutput": {
+    "ConnectToTargetSqlMITaskOutput": {
       "type": "object",
-      "description": "Output for the task that validates connection to SQL DB and target server requirements",
+      "description": "Output for the task that validates connection to Azure SQL Database Managed Instance.",
       "properties": {
-        "databases": {
-          "type": "string",
-          "description": "Source databases as a map from database name to database id",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
         "targetServerVersion": {
           "type": "string",
-          "description": "Version of the target server",
+          "description": "Target server version",
           "readOnly": true
         },
         "targetServerBrandVersion": {
           "type": "string",
           "description": "Target server brand version",
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
           "readOnly": true
         }
       },
