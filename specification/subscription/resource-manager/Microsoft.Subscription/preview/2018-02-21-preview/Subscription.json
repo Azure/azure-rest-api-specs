@@ -1,0 +1,214 @@
+{  
+   "swagger":"2.0",
+   "info":{  
+      "version":"1",
+      "title":"SubscriptionCreationClient",
+      "description":"Subscription creation client provides an interface to create, modify and retrieve azure subscriptions programmatically."
+   },
+   "schemes":[  
+      "https"
+   ],
+   "host":"management.azure.com",
+   "consumes":[  
+      "application/json"
+   ],
+   "produces":[  
+      "application/json"
+   ],
+   "paths":{  
+      "/providers/Microsoft.Subscription/subscriptionOperations/{operationId}":{  
+         "get":{
+            "description":"Retrieves the status of the subscription definition POST operation. The URI of this API is returned in the Location field of the response header.",
+            "operationId":"getSubscriptionOperation",
+            "responses":{  
+               "202":{  
+                  "description":"Accepted. Subscription update is in progress.",
+                  "headers":{  
+                     "Location":{  
+                        "description":"The URL where the status of the asynchronous operation can be checked.",
+                        "type":"string"
+                     },
+                     "Retry-After":{  
+                        "description":"The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                        "type":"string"
+                     }
+                  }
+               },
+               "200":{  
+                  "description":"Successful completion of the asynchronous operation",
+                  "schema":{  
+                     "$ref":"#/definitions/SubscriptionCreationResult"
+                  }
+               }
+            },
+            "parameters":[  
+               {  
+                  "$ref":"#/parameters/apiVersionParameter"
+               },
+               {  
+                  "name":"operationId",
+                  "in":"path",
+                  "description":"The operation ID, which can be found from the Location field in the generate recommendation response header.",
+                  "required":true,
+                  "type":"string",
+                  "format":"uuid"
+               }
+            ]
+         }
+      },
+      "/providers/Microsoft.Subscription/subscriptionOperations":{  
+         "get":{  
+            "description":"Lists all of the available pending Microsoft.Subscription API operations.",
+            "operationId":"getAllSubscriptionOperations",
+            "responses":{  
+               "200":{  
+                  "description":"OK. The request has succeeded.",
+                  "schema":{  
+                     "$ref":"#/definitions/OperationListResult"
+                  }
+               }
+            },
+            "parameters":[  
+               {  
+                  "$ref":"#/parameters/apiVersionParameter"
+               }
+            ]
+         }
+      },
+      "/{scope}/providers/Microsoft.Subscription/createSubscription":{  
+         "post":{  
+            "description":"Creates an Azure subscription",
+            "operationId":"createAzureSubscription",
+            "x-ms-long-running-operation": true,
+            "responses":{  
+               "200":{  
+                  "description":"Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
+                  "schema":{  
+                     "$ref":"#/definitions/SubscriptionCreationResult"
+                  }
+               },
+               "202":{  
+                  "description":"Accepted. Subscription creation is in progress.",
+                  "headers":{  
+                     "Location":{  
+                        "description":"GET this URL to retrieve the status of the asynchronous operation.",
+                        "type":"string"
+                     },
+                     "Retry-After":{  
+                        "description":"The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                        "type":"string"
+                     }
+                  }
+               }
+            },
+            "parameters":[  
+               {  
+                  "name":"scope",
+                  "in":"path",
+                  "description":"Uri path corresponding to commercial subscription or legacy subscription",
+                  "required":true,
+                  "type":"string"
+               },
+               {  
+                  "$ref":"#/parameters/apiVersionParameter"
+               },
+               {  
+                  "name":"body",
+                  "in":"body",
+                  "description":"The subscription creation request object.",
+                  "required":true,
+                  "schema":{  
+                     "$ref":"#/definitions/SubscriptionCreationRequest"
+                  }
+               }
+            ]
+         }
+      }
+   },
+   "definitions":{  
+      "SubscriptionCreationResult":{  
+         "properties":{  
+            "subscriptionId":{  
+               "type":"string"
+            }
+         }
+      },
+      "SubscriptionCreationRequest":{  
+         "properties":{  
+            "subscriptionDisplayName":{  
+               "type":"string"
+            },
+            "Owners":{  
+               "type":"array",
+               "items":{  
+                  "$ref":"#/definitions/AdPrincipal"
+               },
+               "description":"An array of Active Directory Principals"
+            },
+            "offerId":{  
+               "type":"string"
+            }
+         }
+      },
+      "ErrorResponse":{  
+         "description":"Describes the format of Error response.",
+         "type":"object",
+         "properties":{  
+            "code":{  
+               "description":"Error code",
+               "type":"string"
+            },
+            "message":{  
+               "description":"Error message indicating why the operation failed.",
+               "type":"string"
+            }
+         }
+      },
+      "AdPrincipal":{  
+         "description":"Active Directory Principal for subscription creation delegated permission",
+         "properties":{  
+            "tenantId":{  
+               "description":"Tenant id of the Principal",
+               "type":"string"
+            },
+            "objectId":{  
+               "description":"Object id of the Principal",
+               "type":"string"
+            }
+         }
+      },
+      "OperationListResult":{  
+         "description":"status of the subscription POST operation.",
+         "properties":{  
+            "pendingOperations":{  
+               "type":"array",
+               "items":{  
+                  "$ref":"#/definitions/SubscriptionOperation"
+               }
+            }
+         }
+      },
+      "SubscriptionOperation":{  
+         "description":"status of the subscription POST operation.",
+         "properties":{  
+            "Location":{  
+               "description":"GET this URL to retrieve the status of the asynchronous operation.",
+               "type":"string"
+            },
+            "Retry-After":{  
+               "description":"The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+               "type":"string"
+            }
+         }
+      }
+   },
+   "parameters":{  
+      "apiVersionParameter":{  
+         "name":"api-version",
+         "in":"query",
+         "required":true,
+         "type":"string",
+         "description":"Version of the API to be used with the client request. Current version is 2015-06-01"
+      }
+   }
+}
