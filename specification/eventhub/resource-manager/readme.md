@@ -95,6 +95,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.eventhub
   package-name: azure-mgmt-eventhub
+  package-version: 1.3.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
