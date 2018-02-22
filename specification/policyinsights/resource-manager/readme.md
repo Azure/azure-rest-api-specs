@@ -31,21 +31,49 @@ azure-validator: true
 tag: package-2017-12
 ```
 
+### Validations
+Run validations when `--validate` is specified on command line
+
+``` yaml $(validate)
+azure-validator: true
+semantic-validator: true
+model-validator: true
+message-format: json
+```
 
 ## Suppression
 ``` yaml
 directive:
   - suppress: EnumInsteadOfBoolean
     reason: The data type in store is boolean. If we change the type in RP, it will break existing clients, and we will incur runtime conversion cost.
-    #where:
-    #  - $.definitions.PolicyEvent.properties.isCompliant
-    #  - $.definitions.PolicyState.properties.isCompliant
+    where:
+      - $.definitions.PolicyEvent.properties.isCompliant
+      - $.definitions.PolicyState.properties.isCompliant
 
   - suppress: NonApplicationJsonType
     reason: ODATA $metadata endpoint for each resource type returns metadata document as XML.
-    #where:
-    #  -   $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata"]  
-    #  -   $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata"]  
+    where:
+      - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata"].get.produces[0]
+      - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata"].get.produces[0]
+
+  - suppress: EQUIVALENT_PATH
+    reason: These paths are semantically different paths that need to be modelled separately.
+    where:
+      - $.paths["/{managementGroupId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.paths["/{resourceId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.paths["/{policySetDefinitionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.paths["/{policyDefinitionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.paths["/{policyAssignmentId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.paths["/{managementGroupId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.paths["/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.paths["/{policySetDefinitionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.paths["/{policyDefinitionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.paths["/{policyAssignmentId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.paths["/{managementGroupId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
+      - $.paths["/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
+      - $.paths["/{policySetDefinitionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
+      - $.paths["/{policyDefinitionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
+      - $.paths["/{policyAssignmentId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
 
 ```
 
