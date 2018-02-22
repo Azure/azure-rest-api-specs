@@ -447,7 +447,6 @@
           "maxLength": 2000
         },
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/BackendProperties",
           "description": "Backend Properties contract"
         },
@@ -749,7 +748,7 @@
         "after": {
           "type": "string",
           "format": "duration",
-          "description": "Duration in ISO8601 format after which reconnect will be initiated."
+          "description": "Duration in ISO8601 format after which reconnect will be initiated. Minimum duration of the Reconect is PT2M."
         }
       },
       "description": "Properties to control reconnect requests."
