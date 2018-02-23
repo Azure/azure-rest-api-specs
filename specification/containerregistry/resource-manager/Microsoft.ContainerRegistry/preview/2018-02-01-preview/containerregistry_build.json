@@ -543,7 +543,7 @@
         "tags": [
           "Builds"
         ],
-        "summary": "Get the links to the various build logs.",
+        "summary": "Gets a link to download the build logs.",
         "operationId": "Builds_GetLogLink",
         "parameters": [
           {
@@ -552,15 +552,6 @@
             "description": "The build ID.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "logParameters",
-            "in": "body",
-            "description": "The build log parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BuildLogParameters"
-            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -579,7 +570,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/BuildLogResult"
+              "type": "string"
             }
           }
         },
@@ -943,9 +934,6 @@
           },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously."
-          },
-          "204": {
-            "description": "No Content - the specified resource was not found."
           }
         },
         "x-ms-long-running-operation": true,
@@ -1603,6 +1591,9 @@
     },
     "BuildTrigger": {
       "description": "Base properties for any build trigger.",
+      "required": [
+        "id"
+      ],
       "type": "object",
       "properties": {
         "type": {
@@ -1616,6 +1607,10 @@
             "name": "TriggerType",
             "modelAsString": true
           }
+        },
+        "id": {
+          "description": "The unique identifier of a trigger.",
+          "type": "string"
         }
       },
       "discriminator": "type"
@@ -1627,51 +1622,6 @@
         "isArchiveEnabled": {
           "description": "The value that indicates whether archiving is enabled or not.",
           "type": "boolean"
-        }
-      }
-    },
-    "BuildLogParameters": {
-      "description": "The parameters for requesting build logs.",
-      "required": [
-        "logType"
-      ],
-      "type": "object",
-      "properties": {
-        "logType": {
-          "description": "The type of build log.",
-          "enum": [
-            "RawText"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuildLogType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "BuildLogResult": {
-      "description": "The result of get build logs.",
-      "required": [
-        "logType",
-        "logLink"
-      ],
-      "type": "object",
-      "properties": {
-        "logType": {
-          "description": "The type of build log.",
-          "enum": [
-            "RawText"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuildLogType",
-            "modelAsString": true
-          }
-        },
-        "logLink": {
-          "description": "The link to the build log.",
-          "type": "string"
         }
       }
     },
@@ -1979,6 +1929,10 @@
         }
       ],
       "properties": {
+        "branch": {
+          "description": "The repository branch name.",
+          "type": "string"
+        },
         "imageName": {
           "description": "The full qualified name of the image including the repository and tag.",
           "type": "string"
@@ -2011,7 +1965,6 @@
       "required": [
         "type",
         "branch",
-        "imageName",
         "name"
       ],
       "type": "object",
@@ -2055,8 +2008,8 @@
     "ImageTrigger": {
       "description": "A build trigger based on Image updates.",
       "required": [
-        "id",
-        "repositoryName"
+        "repositoryName",
+        "id"
       ],
       "type": "object",
       "allOf": [
@@ -2065,10 +2018,6 @@
         }
       ],
       "properties": {
-        "id": {
-          "description": "The unique identifier of a trigger.",
-          "type": "string"
-        },
         "repositoryName": {
           "description": "Name of the repository.",
           "type": "string"
