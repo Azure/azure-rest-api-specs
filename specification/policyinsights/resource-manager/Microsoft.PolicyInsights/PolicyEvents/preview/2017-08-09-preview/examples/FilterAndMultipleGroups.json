@@ -7,7 +7,7 @@
     "$filter": "PolicyDefinitionAction eq 'deny'",
     "$apply": "groupby((PolicyAssignmentId, PolicyDefinitionId, ResourceId))/groupby((PolicyAssignmentId, PolicyDefinitionId), aggregate($count as NumDeniedResources))",
     "$orderby": "NumDeniedResources desc",
-    "$top": "10"
+    "$top": 10
   },
   "responses": {
     "200": {

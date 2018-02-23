@@ -6,7 +6,7 @@
     "$filter": "IsCompliant eq false",
     "$apply": "groupby((PolicyAssignmentId, PolicySetDefinitionId, PolicyDefinitionId, PolicyDefinitionReferenceId, ResourceId))/groupby((PolicyAssignmentId, PolicySetDefinitionId, PolicyDefinitionId, PolicyDefinitionReferenceId), aggregate($count as NumNonCompliantResources))",
     "$orderby": "NumNonCompliantResources desc",
-    "$top": "10"
+    "$top": 10
   },
   "responses": {
     "200": {
