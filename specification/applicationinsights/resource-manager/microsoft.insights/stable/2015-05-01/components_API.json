@@ -557,7 +557,15 @@
       "properties": {
         "status": {
           "description": "Status of the operation represented by the requested Id.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "PurgeState",
+            "modelAsString": true
+          }
         }
       },
       "required": [
