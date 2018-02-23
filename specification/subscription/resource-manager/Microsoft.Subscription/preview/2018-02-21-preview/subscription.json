@@ -46,57 +46,6 @@
         }
       }
     },
-    "/providers/Microsoft.Subscription/subscriptionOperations/{operationId}": {
-      "get": {
-        "description": "Retrieves the status of the subscription definition POST operation.",
-        "operationId": "SubscriptionOperations_Get",
-        "x-ms-examples": {
-          "getSubscriptionOperation": {
-            "$ref": "./examples/getSubscriptionOperation.json"
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "Accepted. Subscription update is in progress.",
-            "headers": {
-              "Location": {
-                "description": "The URL where the status of the asynchronous operation can be checked.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
-            }
-          },
-          "200": {
-            "description": "Successful completion of the asynchronous operation",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionCreationResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ]
-      }
-    },
     "/providers/Microsoft.Subscription/subscriptionOperations": {
       "get": {
         "description": "Lists all of the available pending Microsoft.Subscription API operations.",
