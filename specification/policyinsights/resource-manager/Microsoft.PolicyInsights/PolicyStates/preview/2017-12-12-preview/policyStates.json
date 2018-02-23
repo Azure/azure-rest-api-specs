@@ -949,6 +949,12 @@
         "policyDefinitionReferenceId": {
           "description": "Reference ID for the policy definition inside the policy set, if the policy assignment is for a policy set.",
           "type": "string"
+        },
+        "extendedProperties": {
+          "description": "The collection of extended properties, e.g. aggregates.",
+          "type": "object",
+          "additionalProperties": {
+          }
         }
       }
     },
@@ -1082,6 +1088,12 @@
     "Operations": {
       "description": "List of available operations.",
       "properties": {
+        "@odata.count": {
+          "description": "OData entity count; represents the number of operations returned.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1
+        },
         "value": {
           "description": "List of available operations.",
           "type": "array",

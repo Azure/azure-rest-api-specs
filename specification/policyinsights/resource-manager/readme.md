@@ -56,25 +56,6 @@ directive:
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata"].get.produces[0]
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata"].get.produces[0]
 
-  - suppress: EQUIVALENT_PATH
-    reason: These paths are semantically different paths that need to be modelled separately.
-    where:
-      - $.paths["/{managementGroupId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
-      - $.paths["/{resourceId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
-      - $.paths["/{policySetDefinitionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
-      - $.paths["/{policyDefinitionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
-      - $.paths["/{policyAssignmentId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
-      - $.paths["/{managementGroupId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
-      - $.paths["/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
-      - $.paths["/{policySetDefinitionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
-      - $.paths["/{policyDefinitionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
-      - $.paths["/{policyAssignmentId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
-      - $.paths["/{managementGroupId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
-      - $.paths["/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
-      - $.paths["/{policySetDefinitionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
-      - $.paths["/{policyDefinitionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
-      - $.paths["/{policyAssignmentId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"]
-
 ```
 
 ### Tag: package-2017-12

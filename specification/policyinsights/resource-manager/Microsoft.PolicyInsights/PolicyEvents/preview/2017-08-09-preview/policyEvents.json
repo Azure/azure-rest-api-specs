@@ -425,6 +425,13 @@
             "PrincipalOid": {
               "description": "Principal object ID for the user who initiated the resource operation that triggered the policy event.",
               "$ref": "#/definitions/Column"
+            },
+            "ExtendedProperties": {
+              "type": "object",
+              "description": "The collection of extended properties, e.g. aggregates.",
+              "additionalProperties": {
+                "$ref": "#/definitions/Column"
+              }
             }
           }
         },
@@ -432,9 +439,10 @@
           "description": "Query result rows, each representing a policy event record.",
           "type": "array",
           "items": {
+           "description": "Query result row.",
             "type": "array",
             "items": {
-              "type": "object"
+              "description": "Each column of the query result row."
             }
           }
         }

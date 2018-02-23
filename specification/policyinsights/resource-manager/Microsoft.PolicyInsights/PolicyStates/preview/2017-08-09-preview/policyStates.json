@@ -417,6 +417,13 @@
             "PolicyDefinitionReferenceId": {
               "description": "Reference ID for the policy definition inside the policy set, if the policy assignment is for a policy set.",
               "$ref": "#/definitions/Column"
+            },
+            "ExtendedProperties": {
+              "type": "object",
+              "description": "The collection of extended properties, e.g. aggregates.",
+              "additionalProperties": {
+                "$ref": "#/definitions/Column"
+              }
             }
           }
         },
@@ -424,9 +431,10 @@
           "description": "Query result rows, each representing a policy state record.",
           "type": "array",
           "items": {
+           "description": "Query result row.",
             "type": "array",
             "items": {
-              "type": "object"
+              "description": "Each column of the query result row."
             }
           }
         }
