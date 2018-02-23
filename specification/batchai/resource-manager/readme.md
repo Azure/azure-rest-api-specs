@@ -24,7 +24,7 @@ These are the global settings for the Batch AI.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-09-preview
+tag: package-2018-03
 ```
 
 
@@ -35,6 +35,15 @@ These settings apply only when `--tag=package-2017-09-preview` is specified on t
 ``` yaml $(tag) == 'package-2017-09-preview'
 input-file: 
 - Microsoft.BatchAI/preview/2017-09-01-preview/BatchAI.json
+```
+
+### Tag: package-2018-03
+
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file: 
+- Microsoft.BatchAI/stable/2018-03-01/BatchAI.json
 ```
 
 ---
@@ -112,6 +121,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-09-preview
+  - tag: package-2018-03
 ```
 
 ### Tag: package-2017-09-preview and go
@@ -123,6 +133,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/batchai/mgmt/2017-09-preview/batchai
 ```
 
+### Tag: package-2018-03 and go
+
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-03' && $(go)
+output-folder: $(go-sdk-folder)/services/batchai/mgmt/2018-03-01/batchai
+```
 
 ## Java
 
