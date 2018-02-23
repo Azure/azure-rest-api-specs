@@ -1139,7 +1139,7 @@
           "description": "For information about available VM sizes for fileservers from the Virtual Machines Marketplace, see Sizes for Virtual Machines (Linux)."
         },
         "sshConfiguration": {
-          "title": "SSH settings for the file server.",
+          "title": "SSH configuration for the file server.",
           "$ref": "#/definitions/SshConfiguration"
         },
         "dataDisks": {
@@ -1293,11 +1293,11 @@
           "items": {
             "type": "string"
           },
-          "title": "List of source IP ranges to allow SSH connection to VM.",
-          "description": "Default value is '*' can be used to match all source IPs. Maximum number of publicIPs that can be specified are 400."
+          "title": "List of source IP ranges to allow SSH connection to a node.",
+          "description": "Default value is '*' can be used to match all source IPs. Maximum number of IP ranges that can be specified are 400."
         },
         "userAccountSettings": {
-          "title": "Settings for user account of VMs.",
+          "title": "Settings for user account to be created on a node.",
           "$ref": "#/definitions/UserAccountSettings"
         }
       },
@@ -1435,9 +1435,10 @@
           "title": "Setup to be done on all compute nodes in the cluster.",
           "$ref": "#/definitions/NodeSetup"
         },
-        "userAccountSettings": {
-          "title": "Settings for user account that will be created on all compute nodes of the cluster.",
-          "$ref": "#/definitions/UserAccountSettings"
+        "sshConfiguration": {
+          "title": "SSH configuration for cluster nodes.",
+          "description": "Batch AI will apply this configuration to each node in the cluser.",
+          "$ref": "#/definitions/SshConfiguration"
         },
         "subnet": {
           "title": "Specifies the identifier of the subnet. ",
@@ -1446,7 +1447,7 @@
       },
       "required": [
         "vmSize",
-        "userAccountSettings"
+        "sshConfiguration"
       ],
       "description": "The properties of a Cluster."
     },
@@ -1633,15 +1634,22 @@
     },
     "PerformanceCountersSettings": {
       "properties": {
-        "appInsightsDestination": {
-          "title": "Specifies Azure Application Insights instrumentation key for performance counters reporting.",
+        "appInsightsReference": {
+          "title": "Specifies Azure Application Insights information for performance counters reporting.",
           "description": "If provided, Batch AI will upload node performance counters to the corresponding Application Insights account.",
-          "$ref": "#/definitions/AppInsightsDestination"
+          "$ref": "#/definitions/AppInsightsReference"
         }
-      }
+      },
+      "required": [
+        "appInsightsReference"
+      ]
     },
-    "AppInsightsDestination": {
+    "AppInsightsReference": {
       "properties": {
+        "component": {
+          "title": "Specifies the App Insight component resource id.",
+          "$ref": "#/definitions/ResourceId"
+        },
         "instrumentationKey": {
           "type": "string",
           "title": "Value of the App Insight instrumentation key."
@@ -1694,13 +1702,20 @@
         },
         "runElevated": {
           "type": "boolean",
-          "title": "Specifies whether to run the setup task in elevated mode. The default value is false.",
+          "title": "Specifies whether to run the setup task under root account. The default value is false.",
+          "description": "Note. The not elevated tasks are run under an account added into sudoer list and can perform sudo when required.",
           "default": false
         },
         "stdOutErrPathPrefix": {
           "type": "string",
-          "description": "The path where the Batch AI service will upload the stdout and stderror of setup task."
-        }
+          "description": "The prefix of a path where the Batch AI service will upload the stdout and stderr of the setup task."
+        },
+        "stdOutErrPathSuffix": {
+          "type": "string",
+          "title": "A path segment appended by Batch AI to stdOutErrPathPrefix to form a path where stdout and stderr of the setup task will be uploaded.",
+          "description": "Batch AI creates the setup task output directories under an unique path to avoid conflicts between different clusters. You can concatinate stdOutErrPathPrefix and stdOutErrPathSuffix to get the full path to the output directory.",
+          "readonly": true
+       }
       },
       "required": [
         "commandLine",
