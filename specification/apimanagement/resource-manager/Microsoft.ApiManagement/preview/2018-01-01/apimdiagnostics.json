@@ -445,13 +445,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Entity exists"
+            "description": "The logger is associated with the diagnostic entity."
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
+          "404" : {
+            "description": "The logger is not associated with the diagnostic entity."
           }
         }
       },

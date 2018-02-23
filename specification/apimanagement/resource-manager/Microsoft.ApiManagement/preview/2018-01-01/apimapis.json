@@ -396,24 +396,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions": {
-      "parameters": [
-        {
-          "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiIdParameter"
-        }
-      ],
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions": {      
       "get": {
         "tags": [
           "Revisions"
@@ -426,6 +409,21 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
           {
             "name": "$filter",
             "in": "query",
@@ -461,23 +459,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases": {
-      "parameters": [
-        {
-          "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiIdParameter"
-        },
-        {
-          "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-        }
-      ],
       "get": {
         "tags": [
           "Releases"
@@ -490,6 +471,21 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "name": "$filter",
             "in": "query",
@@ -525,33 +521,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases/{releaseId}": {
-      "parameters": [
-        {
-          "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiIdParameter"
-        },
-        {
-          "name": "releaseId",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "Release identifier within an API. Must be unique in the current API Management service instance.",
-          "minLength": 1,
-          "maxLength": 80,
-          "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)"
-        }
-      ],
       "head": {
         "tags": [
           "Releases"
@@ -563,6 +532,26 @@
             "$ref": "./examples/ApiManagementHeadApiRelease.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReleaseIdParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The operation returns the details of an API Release.",
@@ -592,6 +581,26 @@
             "$ref": "./examples/ApiManagementGetApiRelease.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReleaseIdParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The operation returns the details of an API Release.",
@@ -619,6 +628,24 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReleaseIdParameter"
+          },
           {
             "name": "parameters",
             "in": "body",
@@ -663,6 +690,24 @@
         },
         "parameters": [
           {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReleaseIdParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -699,6 +744,24 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReleaseIdParameter"
+          },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           }
@@ -2943,6 +3006,17 @@
       "required": true,
       "type": "string",
       "description": "Schema identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
+      "x-ms-parameter-location": "method"
+    },
+    "ReleaseIdParameter": {
+      "name": "releaseId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Release identifier within an API. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
       "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
