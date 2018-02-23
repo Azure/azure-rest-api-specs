@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017-03-01-preview",
+    "version": "2017-10-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations/{operationId}/cancel": {
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations/{operationId}/cancel": {
       "post": {
         "tags": [
           "Databases"
@@ -63,7 +63,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations": {
       "get": {
         "tags": [
           "Databases"
@@ -110,7 +110,7 @@
     }
   },
   "definitions": {
-	"DatabaseOperationListResult": {
+    "DatabaseOperationListResult": {
       "description": "The response to a list database operations request",
       "type": "object",
       "properties": {
@@ -129,7 +129,33 @@
         }
       }
     },
-    "DatabaseOperationProperties": {
+	"DatabaseOperation": {
+      "description": "A database operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseOperationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+	"ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+	"DatabaseOperationProperties": {
       "description": "The properties of a database operation.",
       "type": "object",
       "properties": {
@@ -222,33 +248,7 @@
         }
       }
     },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
-    },
-    "DatabaseOperation": {
-      "description": "A database operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DatabaseOperationProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "Resource": {
+	"Resource": {
       "description": "ARM resource.",
       "type": "object",
       "properties": {
@@ -368,4 +368,3 @@
     }
   }
 }
-    
