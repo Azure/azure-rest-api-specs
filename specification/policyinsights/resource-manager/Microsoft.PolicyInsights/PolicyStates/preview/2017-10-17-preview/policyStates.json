@@ -30,7 +30,7 @@
     }
   },
   "paths": {
-    "/{managementGroupId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults": {
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults": {
       "post": {
         "operationId": "PolicyStates_ListQueryResultsForManagementGroup",
         "description": "Queries policy states for the resources under the management group.",
@@ -39,7 +39,10 @@
             "$ref": "#/parameters/policyStatesResourceParameter"
           },
           {
-            "$ref": "#/parameters/managementGroupIdParameter"
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -348,6 +351,7 @@
       }
     },
     "PolicyState": {
+      "type": "object",
       "description": "Policy state record.",
       "properties": {
         "@odata.id": {
@@ -458,13 +462,10 @@
         "policyDefinitionReferenceId": {
           "description": "Reference ID for the policy definition inside the policy set, if the policy assignment is for a policy set.",
           "type": "string"
-        },
-        "extendedProperties": {
-          "description": "The collection of extended properties, e.g. aggregates.",
-          "type": "object",
-          "additionalProperties": {
-          }
         }
+      },
+      "additionalProperties": {
+        "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
       }
     },
     "QueryFailure": {
@@ -555,14 +556,24 @@
       "description": "The virtual resource under PolicyStates resource type. In a given time range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).",
       "x-ms-parameter-location": "method"
     },
-    "managementGroupIdParameter": {
-      "name": "managementGroupId",
+    "managementGroupsNamespaceParameter": {
+      "name": "managementGroupsNamespace",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Management group ID, e.g. /providers/Microsoft.Management/managementGroups/{name}.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "enum": [
+        "Microsoft.Management"
+      ],
+      "description": "The namespace for Microsoft Management resource provider; only \"Microsoft.Management\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupNameParameter": {
+      "name": "managementGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Management group name.",
+      "x-ms-parameter-location": "method"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",

@@ -30,7 +30,7 @@
     }
   },
   "paths": {
-    "/{managementGroupId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
         "operationId": "PolicyEvents_ListQueryResultsForManagementGroup",
         "description": "Queries policy events for the resources under the management group.",
@@ -39,7 +39,10 @@
             "$ref": "#/parameters/policyEventsResourceParameter"
           },
           {
-            "$ref": "#/parameters/managementGroupIdParameter"
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -261,16 +264,22 @@
         }
       }
     },
-    "/{policySetDefinitionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+    "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
         "operationId": "PolicyEvents_ListQueryResultsForPolicySetDefinition",
-        "description": "Queries policy events for the policy set definition.",
+        "description": "Queries policy events for the subscription level policy set definition.",
         "parameters": [
           {
             "$ref": "#/parameters/policyEventsResourceParameter"
           },
           {
-            "$ref": "#/parameters/policySetDefinitionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/policySetDefinitionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -316,16 +325,22 @@
         }
       }
     },
-    "/{policyDefinitionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+    "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
         "operationId": "PolicyEvents_ListQueryResultsForPolicyDefinition",
-        "description": "Queries policy events for the policy definition.",
+        "description": "Queries policy events for the subscription level policy definition.",
         "parameters": [
           {
             "$ref": "#/parameters/policyEventsResourceParameter"
           },
           {
-            "$ref": "#/parameters/policyDefinitionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/policyDefinitionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -371,16 +386,22 @@
         }
       }
     },
-    "/{policyAssignmentId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+    "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
-        "operationId": "PolicyEvents_ListQueryResultsForPolicyAssignment",
-        "description": "Queries policy events for the policy assignment.",
+        "operationId": "PolicyEvents_ListQueryResultsForSubscriptionLevelPolicyAssignment",
+        "description": "Queries policy events for the subscription level policy assignment.",
         "parameters": [
           {
             "$ref": "#/parameters/policyEventsResourceParameter"
           },
           {
-            "$ref": "#/parameters/policyAssignmentIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/policyAssignmentNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -422,7 +443,70 @@
           }
         },
         "x-ms-examples": {
-          "Query at subscription level policy assignment scope": { "$ref": "./examples/QuerySubscriptionLevelPolicyAssignmentScope.json" },
+          "Query at subscription level policy assignment scope": { "$ref": "./examples/QuerySubscriptionLevelPolicyAssignmentScope.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyEvents_ListQueryResultsForResourceGroupLevelPolicyAssignment",
+        "description": "Queries policy events for the resource group level policy assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyEventsResourceParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/policyAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/orderByParameter"
+          },
+          {
+            "$ref": "#/parameters/selectParameter"
+          },
+          {
+            "$ref": "#/parameters/fromParameter"
+          },
+          {
+            "$ref": "#/parameters/toParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/applyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
           "Query at resource group level policy assignment scope": { "$ref": "./examples/QueryResourceGroupLevelPolicyAssignmentScope.json" }
         }
       }
@@ -514,6 +598,7 @@
       }
     },
     "PolicyEvent": {
+      "type": "object",
       "description": "Policy event record.",
       "properties": {
         "@odata.id": {
@@ -632,13 +717,10 @@
         "principalOid": {
           "description": "Principal object ID for the user who initiated the resource operation that triggered the policy event.",
           "type": "string"
-        },
-        "extendedProperties": {
-          "description": "The collection of extended properties, e.g. aggregates.",
-          "type": "object",
-          "additionalProperties": {
-          }
         }
+      },
+      "additionalProperties": {
+        "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
       }
     },
     "QueryFailure": {
@@ -724,14 +806,24 @@
       "description": "The name of the virtual resource under PolicyEvents resource type; only \"default\" is allowed.",
       "x-ms-parameter-location": "method"
     },
-    "managementGroupIdParameter": {
-      "name": "managementGroupId",
+    "managementGroupsNamespaceParameter": {
+      "name": "managementGroupsNamespace",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Management group ID, e.g. /providers/Microsoft.Management/managementGroups/{name}.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "enum": [
+        "Microsoft.Management"
+      ],
+      "description": "The namespace for Microsoft Management RP; only \"Microsoft.Management\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupNameParameter": {
+      "name": "managementGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Management group name.",
+      "x-ms-parameter-location": "method"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
@@ -758,32 +850,40 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
-    "policySetDefinitionIdParameter": {
-      "name": "policySetDefinitionId",
+    "authorizationNamespaceParameter": {
+      "name": "authorizationNamespace",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription level policy set definition ID.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "enum": [
+        "Microsoft.Authorization"
+      ],
+      "description": "The namespace for Microsoft Authorization resource provider; only \"Microsoft.Authorization\" is allowed.",
+      "x-ms-parameter-location": "method"
     },
-    "policyDefinitionIdParameter": {
-      "name": "policyDefinitionId",
+    "policySetDefinitionNameParameter": {
+      "name": "policySetDefinitionName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription level policy definition ID.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "description": "Policy set definition name.",
+      "x-ms-parameter-location": "method"
     },
-    "policyAssignmentIdParameter": {
-      "name": "policyAssignmentId",
+    "policyDefinitionNameParameter": {
+      "name": "policyDefinitionName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription level or a resource group level policy assignment ID.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "description": "Policy definition name.",
+      "x-ms-parameter-location": "method"
+    },
+    "policyAssignmentNameParameter": {
+      "name": "policyAssignmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Policy assignment name.",
+      "x-ms-parameter-location": "method"
     },
     "scopeParameter": {
       "name": "scope",

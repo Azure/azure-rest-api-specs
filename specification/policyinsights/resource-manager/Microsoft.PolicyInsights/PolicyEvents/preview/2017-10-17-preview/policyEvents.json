@@ -30,7 +30,7 @@
     }
   },
   "paths": {
-    "/{managementGroupId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
         "operationId": "PolicyEvents_ListQueryResultsForManagementGroup",
         "description": "Queries policy events for the resources under the management group.",
@@ -39,7 +39,10 @@
             "$ref": "#/parameters/policyEventsResourceParameter"
           },
           {
-            "$ref": "#/parameters/managementGroupIdParameter"
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -348,6 +351,7 @@
       }
     },
     "PolicyEvent": {
+      "type": "object",
       "description": "Policy event record.",
       "properties": {
         "@odata.id": {
@@ -466,13 +470,10 @@
         "principalOid": {
           "description": "Principal object ID for the user who initiated the resource operation that triggered the policy event.",
           "type": "string"
-        },
-        "extendedProperties": {
-          "description": "The collection of extended properties, e.g. aggregates.",
-          "type": "object",
-          "additionalProperties": {
-          }
         }
+      },
+      "additionalProperties": {
+        "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
       }
     },
     "QueryFailure": {
@@ -558,14 +559,24 @@
       "description": "The name of the virtual resource under PolicyEvents resource type; only \"default\" is allowed.",
       "x-ms-parameter-location": "method"
     },
-    "managementGroupIdParameter": {
-      "name": "managementGroupId",
+    "managementGroupsNamespaceParameter": {
+      "name": "managementGroupsNamespace",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Management group ID, e.g. /providers/Microsoft.Management/managementGroups/{name}.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "enum": [
+        "Microsoft.Management"
+      ],
+      "description": "The namespace for Microsoft Management resource provider; only \"Microsoft.Management\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupNameParameter": {
+      "name": "managementGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Management group name.",
+      "x-ms-parameter-location": "method"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
