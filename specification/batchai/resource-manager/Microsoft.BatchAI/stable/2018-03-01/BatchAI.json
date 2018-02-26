@@ -1635,7 +1635,7 @@
       "properties": {
         "appInsightsReference": {
           "title": "Specifies Azure Application Insights information for performance counters reporting.",
-          "description": "If provided, Batch AI will upload node performance counters to the corresponding Application Insights account.",
+          "description": "If provided, Batch AI will upload node performance counters to the corresponding Azure Application Insights account.",
           "$ref": "#/definitions/AppInsightsReference"
         }
       },
@@ -1647,16 +1647,16 @@
     "AppInsightsReference": {
       "properties": {
         "component": {
-          "title": "Specifies the App Insight component resource id.",
+          "title": "Specifies the Azure Application Insights component resource id.",
           "$ref": "#/definitions/ResourceId"
         },
         "instrumentationKey": {
           "type": "string",
-          "title": "Value of the App Insight instrumentation key."
+          "title": "Value of the Azure Application Insights instrumentation key."
         },
         "instrumentationKeySecretReference": {
-          "title": "Specifies a KeyVault Secret containing Application Insights instrumentation key.",
-          "description": "Specifies KeyVault Store and Secret which contains Application Insights instrumentation key. One of instumentationKey or instrumentationKeySecretReference must be specified.",
+          "title": "Specifies a KeyVault Secret containing Azure Application Insights instrumentation key.",
+          "description": "Specifies KeyVault Store and Secret which contains Azure Application Insights instrumentation key. One of instumentationKey or instrumentationKeySecretReference must be specified.",
           "$ref": "#/definitions/KeyVaultSecretReference"
         }
       },
