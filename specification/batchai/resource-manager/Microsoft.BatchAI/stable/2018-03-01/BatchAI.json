@@ -1139,7 +1139,7 @@
           "description": "For information about available VM sizes for fileservers from the Virtual Machines Marketplace, see Sizes for Virtual Machines (Linux)."
         },
         "sshConfiguration": {
-          "title": "SSH settings for the file server.",
+          "title": "SSH configuration for the file server.",
           "$ref": "#/definitions/SshConfiguration"
         },
         "dataDisks": {
@@ -1293,11 +1293,11 @@
           "items": {
             "type": "string"
           },
-          "title": "List of source IP ranges to allow SSH connection to VM.",
-          "description": "Default value is '*' can be used to match all source IPs. Maximum number of publicIPs that can be specified are 400."
+          "title": "List of source IP ranges to allow SSH connection to a node.",
+          "description": "Default value is '*' can be used to match all source IPs. Maximum number of IP ranges that can be specified are 400."
         },
         "userAccountSettings": {
-          "title": "Settings for user account of VMs.",
+          "title": "Settings for user account to be created on a node.",
           "$ref": "#/definitions/UserAccountSettings"
         }
       },
@@ -1633,25 +1633,37 @@
     },
     "PerformanceCountersSettings": {
       "properties": {
-        "appInsightsDestination": {
-          "title": "Specifies Azure Application Insights instrumentation key for performance counters reporting.",
-          "description": "If provided, Batch AI will upload node performance counters to the corresponding Application Insights account.",
-          "$ref": "#/definitions/AppInsightsDestination"
+        "appInsightsReference": {
+          "title": "Specifies Azure Application Insights information for performance counters reporting.",
+          "description": "If provided, Batch AI will upload node performance counters to the corresponding Azure Application Insights account.",
+          "$ref": "#/definitions/AppInsightsReference"
         }
-      }
+      },
+      "required": [
+        "appInsightsReference"
+      ],
+      "description": "Performance counters reporting settings."
     },
-    "AppInsightsDestination": {
+    "AppInsightsReference": {
       "properties": {
+        "component": {
+          "title": "Specifies the Azure Application Insights component resource id.",
+          "$ref": "#/definitions/ResourceId"
+        },
         "instrumentationKey": {
           "type": "string",
-          "title": "Value of the App Insight instrumentation key."
+          "title": "Value of the Azure Application Insights instrumentation key."
         },
         "instrumentationKeySecretReference": {
-          "title": "Specifies a KeyVault Secret containing Application Insights instrumentation key.",
-          "description": "Specifies KeyVault Store and Secret which contains Application Insights instrumentation key. One of instumentationKey or instrumentationKeySecretReference must be specified.",
+          "title": "Specifies a KeyVault Secret containing Azure Application Insights instrumentation key.",
+          "description": "Specifies KeyVault Store and Secret which contains Azure Application Insights instrumentation key. One of instumentationKey or instrumentationKeySecretReference must be specified.",
           "$ref": "#/definitions/KeyVaultSecretReference"
         }
-      }
+      },
+      "required": [
+        "component"
+      ],
+      "description": "Specifies Azure Application Insights information for performance counters reporting."
     },
     "NodeSetup": {
       "properties": {
@@ -1694,13 +1706,20 @@
         },
         "runElevated": {
           "type": "boolean",
-          "title": "Specifies whether to run the setup task in elevated mode. The default value is false.",
+          "title": "Specifies whether to run the setup task under root account. The default value is false.",
+          "description": "Note. Non-elevated tasks are run under an account added into sudoer list and can perform sudo when required.",
           "default": false
         },
         "stdOutErrPathPrefix": {
           "type": "string",
-          "description": "The path where the Batch AI service will upload the stdout and stderror of setup task."
-        }
+          "description": "The prefix of a path where the Batch AI service will upload the stdout and stderr of the setup task."
+        },
+        "stdOutErrPathSuffix": {
+          "type": "string",
+          "title": "A path segment appended by Batch AI to stdOutErrPathPrefix to form a path where stdout and stderr of the setup task will be uploaded.",
+          "description": "Batch AI creates the setup task output directories under an unique path to avoid conflicts between different clusters. You can concatinate stdOutErrPathPrefix and stdOutErrPathSuffix to get the full path to the output directory.",
+          "readOnly": true
+       }
       },
       "required": [
         "commandLine",
