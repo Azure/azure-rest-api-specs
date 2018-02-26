@@ -41,7 +41,7 @@
         "tags": [
           "ExpressRouteCrossConnections"
         ],
-        "operationId": "ExpressRouteCrossConnections_ListAll",
+        "operationId": "ExpressRouteCrossConnections_List",
         "description": "Retrieves all the ExpressRouteCrossConnections in a subscription.",
         "parameters": [
           {
@@ -69,7 +69,7 @@
         "tags": [
           "ExpressRouteCrossConnections"
         ],
-        "operationId": "ExpressRouteCrossConnectionsByResourceGroup_List",
+        "operationId": "ExpressRouteCrossConnections_ListByResourceGroup",
         "description": "Retrieves all the ExpressRouteCrossConnections in a resource group.",
         "parameters": [
           {
@@ -227,7 +227,7 @@
         }
         },
         "x-ms-examples": {
-        "Update Express Route CrossConnection Tags": {
+        "UpdateExpressRouteCrossConnectionTags": {
           "$ref": "./examples/ExpressRouteCrossConnectionUpdateTags.json"
         }
         },
@@ -435,7 +435,7 @@
         "tags": [
           "ExpressRouteCrossConnectionArpTable"
         ],
-        "operationId": "ExpressRouteCrossConnections_ListArpTable",
+        "operationId": "ExpressRouteCircuitsArpTable_List",
         "description": "Gets the currently advertised ARP table associated with the express route circuit in a resource group.",
         "parameters": [
           {
@@ -492,7 +492,7 @@
         "tags": [
           "ExpressRouteCrossConnectionRouteTableSummary"
         ],
-        "operationId": "ExpressRouteCrossConnections_ListRouteTableSummary",
+        "operationId": "ExpressRouteCircuitsRouteTableSummary_List",
         "description": "Gets the route table summary associated with the expressrouteCrossConnection in a resource group.",
         "parameters": [
           {
@@ -549,7 +549,7 @@
         "tags": [
           "ExpressRouteCrossConnectionRouteTable"
         ],
-        "operationId": "ExpressRouteCrossConnections_ListRoutesTable",
+        "operationId": "ExpressRouteCircuitsRoutesTable_List",
         "description": "Gets the currently advertised routes table associated with the express route crossConnection in a resource group.",
         "parameters": [
           {
@@ -670,6 +670,7 @@
           "description": "Additional read only notes set by the connectivity provider."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         },
@@ -700,7 +701,7 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-        "description": "ExpressRouteCrossConnection resource"
+      "description": "ExpressRouteCrossConnection resource"
     },
     "ExpressRouteCrossConnectionListResult": {
       "properties": {
@@ -725,7 +726,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-    "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
