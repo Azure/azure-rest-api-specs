@@ -1384,6 +1384,13 @@
             "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
           },
           {
+            "name": "includePending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Specifies whether to include certificates which are not completely provisioned."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -2228,6 +2235,13 @@
             "minimum": 1,
             "maximum": 25,
             "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "name": "includePending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Specifies whether to include certificates which are not completely provisioned."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4039,6 +4053,11 @@
           "format": "int32",
           "minimum": 0,
           "description": "The duration that the ceritifcate is valid in months."
+        },
+        "cert_transparency": {
+          "x-ms-client-name": "CertificateTransparency",
+          "type": "boolean",
+          "description": "Indicates if the certificates generated under this policy should be published to certificate transparency logs."
         }
       },
       "description": "Properties of the X509 component of a certificate."
