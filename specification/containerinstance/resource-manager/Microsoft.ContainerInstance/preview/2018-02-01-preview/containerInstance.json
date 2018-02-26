@@ -175,6 +175,12 @@
           },
           "201": {
             "description": "Created - the container group is created.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ContainerGroup"
             }
@@ -206,6 +212,7 @@
           {
             "name": "Resource",
             "description": "The container group resource with just the tags to be updated.",
+            "required": true,
             "in": "body",
             "schema": {
               "$ref": "#/definitions/Resource"
@@ -314,6 +321,39 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/operations/{operationId}": {
+      "get": {
+        "operationId": "AsyncContainerGroupOperation_Get",
+        "x-ms-examples": {
+          "ContainerUsage": {
+            "$ref": "./examples/ContainerGroupUsage.json"
+          }
+        },
+        "description": "Get the usage for a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperation"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs": {
       "get": {
         "operationId": "ContainerLogs_List",
@@ -356,6 +396,56 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Logs"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/exec": {
+      "post": {
+        "operationId": "StartContainer_Exec",
+        "x-ms-examples": {
+          "ContainerExecStart": {
+            "$ref": "./examples/ContainerExecStart.json"
+          }
+        },
+        "summary": "Starts the exec command for a specific container instance.",
+        "description": "Starts the exec command for a specified container instance in a specified resource group and container group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "The name of the container instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name":"containerExecRequest",
+            "in":"body",
+            "description":"The request for the exec command.",
+            "required":true,
+            "schema":{
+                "$ref":"#/definitions/ContainerExecRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerExecResponse"
             }
           }
         }
@@ -1030,6 +1120,73 @@
         }
       }
     },
+    "AsyncOperation": {
+      "type": "object",
+      "description": "Azure async operation status.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Async operation id."
+        },
+        "status": {
+          "type": "string",
+          "description": "Async operation status."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The date time that the async operation started.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AsyncOperationProperties",
+          "description": "this structure contains the detailed properties of the operation."
+        },
+        "error": {
+          "$ref": "#/definitions/AzureResourceExtendedErrorInfo",
+          "description": "If the async operation fails, this structure contains the error details."
+        }
+      }
+    },
+    "AsyncOperationProperties": {
+      "type": "object",
+      "description": "The properties of the async operation",
+      "properties": {
+        "events": {
+          "readOnly": true,
+          "description": "The events of the async operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        }
+      }
+    },
+    "AzureResourceExtendedErrorInfo": {
+      "type": "object",
+      "description": "The error detail information for async operation",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array containing error information.",
+          "items": {
+            "$ref": "#/definitions/AzureResourceExtendedErrorInfo"
+          }
+        }
+      }
+    },
     "ContainerGroupListResult": {
       "description": "The container group list response that contains the container group properties.",
       "type": "object",
@@ -1054,6 +1211,44 @@
         "content": {
           "type": "string",
           "description": "The content of the log."
+        }
+      }
+    },
+    "ContainerExecRequest": {
+      "description": "The start container exec request.",
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "The command to be executed."
+        },
+        "terminalSize": {
+          "type": "object",
+          "description": "The size of the terminal.",
+          "properties": {
+            "row":{
+              "type": "integer",
+              "description": "The row size of the terminal"
+            },
+            "column": {
+              "type": "interger",
+              "description": "The column size of the terminal"
+            }
+          }
+        }
+      }
+    },
+    "ContainerExecResponse": {
+      "description": "The information for the container exec command.",
+      "type": "object",
+      "properties": {
+        "webSocketUri": {
+          "type": "string",
+          "description": "The uri for the exec websocket."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password to start the exec command."
         }
       }
     },
@@ -1130,6 +1325,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the container group.",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The operation Id.",
       "x-ms-parameter-location": "method"
     }
   }
