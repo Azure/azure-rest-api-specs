@@ -296,7 +296,11 @@
                     "supportPlanType": {
                         "type": "string",
                         "description": "Support plan type.",
-                        "enum": ["essential", "standard", "advanced"]
+                        "enum": ["essential", "standard", "advanced"],
+                        "x-ms-enum": {
+                            "name": "SupportPlanType",
+                            "modelAsString": true
+                        }
                     },
                     "enabled": {
                         "type": "boolean",
@@ -315,7 +319,6 @@
         },
         "OperationList": {
             "type": "array",
-            "title": "Operation List",
             "description": "List of supported operations.",
             "items": {
                 "$ref": "#/definitions/OperationsDefinition"
@@ -323,39 +326,37 @@
         },
         "OperationsDefinition": {
             "type": "object",
-            "title": "Operations",
-            "description": "Operations definition.",
+            "description": "Definition object with the name and properties of an operation.",
             "properties": {
                 "name": {
                     "type": "string",
-                    "title": "Name"
+                    "description": "Name of the operation."
                 },
                 "display": {
                     "$ref": "#/definitions/OperationsDisplayDefinition",
-                    "title": "Display"
+                    "description": "Display object with properties of the operation."
                 }
             }
         },
         "OperationsDisplayDefinition": {
             "type": "object",
-            "title": "Operations Display",
-            "description": "Operations display definition.",
+            "description": "Display object with properties of the operation.",
             "properties": {
                 "provider": {
                     "type": "string",
-                    "title": "Provider"
+                    "description": "Resource provider of the operation."
                 },
                 "resource": {
                     "type": "string",
-                    "title": "Resource"
+                    "description": "Resource for the operation."
                 },
                 "operation": {
                     "type": "string",
-                    "title": "Operation"
+                    "description": "Short description of the operation."
                 },
                 "description": {
                     "type": "string",
-                    "title": "Description"
+                    "description": "Description of the operation."
                 }
             }
         },
@@ -410,7 +411,12 @@
             "required": true,
             "type": "string",
             "description": "The Canonical support plan type. Can be \"essential\", \"standard\" or \"advanced\".",
-			"x-ms-parameter-location": "method"
+            "enum": ["essential", "standard", "advanced"],
+            "x-ms-enum": {
+                "name": "PlanTypeName",
+                "modelAsString": true
+            },
+            "x-ms-parameter-location": "method"
         },
         "OperationResultsIdParameter": {
             "name": "operationResultsId",
@@ -418,7 +424,7 @@
             "required": true,
             "type": "string",
             "description": "The id representing an async operation.",
-			"x-ms-parameter-location": "method"
+            "x-ms-parameter-location": "method"
         }
     }
 }
