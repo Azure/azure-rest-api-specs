@@ -1435,10 +1435,9 @@
           "title": "Setup to be done on all compute nodes in the cluster.",
           "$ref": "#/definitions/NodeSetup"
         },
-        "sshConfiguration": {
-          "title": "SSH configuration for cluster nodes.",
-          "description": "Batch AI will apply this configuration to each node in the cluser.",
-          "$ref": "#/definitions/SshConfiguration"
+        "userAccountSettings": {
+          "title": "Settings for user account that will be created on all compute nodes of the cluster.",
+          "$ref": "#/definitions/UserAccountSettings"
         },
         "subnet": {
           "title": "Specifies the identifier of the subnet. ",
@@ -1447,7 +1446,7 @@
       },
       "required": [
         "vmSize",
-        "sshConfiguration"
+        "userAccountSettings"
       ],
       "description": "The properties of a Cluster."
     },
@@ -1642,7 +1641,8 @@
       },
       "required": [
         "appInsightsReference"
-      ]
+      ],
+      "description": "Performance counters reporting settings."
     },
     "AppInsightsReference": {
       "properties": {
@@ -1659,7 +1659,11 @@
           "description": "Specifies KeyVault Store and Secret which contains Application Insights instrumentation key. One of instumentationKey or instrumentationKeySecretReference must be specified.",
           "$ref": "#/definitions/KeyVaultSecretReference"
         }
-      }
+      },
+      "required": [
+        "component"
+      ],
+      "description": "Specifies Azure Application Insights information for performance counters reporting."
     },
     "NodeSetup": {
       "properties": {
@@ -1714,7 +1718,7 @@
           "type": "string",
           "title": "A path segment appended by Batch AI to stdOutErrPathPrefix to form a path where stdout and stderr of the setup task will be uploaded.",
           "description": "Batch AI creates the setup task output directories under an unique path to avoid conflicts between different clusters. You can concatinate stdOutErrPathPrefix and stdOutErrPathSuffix to get the full path to the output directory.",
-          "readonly": true
+          "readOnly": true
        }
       },
       "required": [

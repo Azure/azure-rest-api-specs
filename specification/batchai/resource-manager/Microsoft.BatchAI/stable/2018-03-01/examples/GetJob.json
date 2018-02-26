@@ -8,7 +8,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/jobs/job",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/jobs/demo_job",
         "name": "job",
         "type": "Microsoft.BatchAI/Jobs",
         "properties": {
@@ -27,6 +27,7 @@
             "commandLine": "echo hi | tee $AZ_BATCHAI_OUTPUT_OUTPUTS/hi.txt"
           },
           "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles",
+          "jobOutputDirectoryPathSegment": "00000000-0000-0000-0000-000000000000/demo_resource_group/jobs/demo_job/00000000-0000-0000-0000-000000000000",
           "inputDirectories": [
             {
               "id": "INPUT",
