@@ -185,7 +185,7 @@
         "tags": [
         "ExpressRouteCrossConnections"
         ],
-        "operationId": "ExpressRouteCrossConnections_UpdateTags",
+        "operationId": "ExpressRouteCrossConnectionsTags_Update",
         "description": "Updates an express route cross connection tags.",
         "parameters": [
         {
@@ -203,7 +203,7 @@
           "description": "The name of the cross connection."
         },
         {
-          "name": "parameters",
+          "name": "crossConnectionParameters",
           "in": "body",
           "required": true,
           "schema": {
@@ -632,18 +632,22 @@
     "ExpressRouteCrossConnectionPropertiesFormat": {
       "properties": {
         "primaryAzurePort": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the primary  port."
         },
         "secondaryAzurePort": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the secondary  port."
         },
         "sTag": {
+          "readOnly": true,
           "type": "integer",
           "description": "The identifier of the circuit traffic."
         },
         "serviceProviderProperties": {
+          "readOnly": true,
           "$ref": "#/definitions/ExpressRouteCrossConnectionServiceProviderProperties",
           "description": "The ServiceProviderProperties."
         },
@@ -713,6 +717,7 @@
           "description": "A list of ExpressRouteCrossConnection resources."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
