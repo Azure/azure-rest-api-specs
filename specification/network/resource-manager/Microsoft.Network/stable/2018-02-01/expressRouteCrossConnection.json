@@ -227,9 +227,9 @@
         }
         },
         "x-ms-examples": {
-        "UpdateExpressRouteCrossConnectionTags": {
-          "$ref": "./examples/ExpressRouteCrossConnectionUpdateTags.json"
-        }
+          "UpdateExpressRouteCrossConnectionTags": {
+            "$ref": "./examples/ExpressRouteCrossConnectionUpdateTags.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -534,7 +534,7 @@
           "200": {
             "description": "Request successful. The operation returns the resulting ExpressRouteCrossConnectionsRouteTableSummary resource.",
             "schema": {
-            "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
+              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
             }
           },
           "202": {
@@ -589,10 +589,10 @@
         ],
         "responses": {
           "200": {
-              "description": "Request successful. The operation returns the resulting ExpressRouteCrossConnectionsRouteTable resource.",
-              "schema": {
-                "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableListResult"
-              }
+            "description": "Request successful. The operation returns the resulting ExpressRouteCrossConnectionsRouteTable resource.",
+            "schema": {
+              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+            }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
@@ -629,7 +629,7 @@
       },
       "description": "Contains ServiceProviderProperties in an ExpressRouteCrossConnection"
     },
-    "ExpressRouteCrossConnectionPropertiesFormat": {
+    "ExpressRouteCrossConnectionProperties": {
       "properties": {
         "primaryAzurePort": {
           "readOnly": true,
@@ -691,7 +691,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExpressRouteCrossConnectionPropertiesFormat"
+          "$ref": "#/definitions/ExpressRouteCrossConnectionProperties"
         },
         "etag": {
           "readOnly": true,
