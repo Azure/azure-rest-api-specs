@@ -2728,6 +2728,45 @@
         "condition",
         "items"
       ]
+    },
+    "DatabricksNotebookActivity": {
+      "description": "DatabricksNotebook activity.",
+      "x-ms-discriminator-value": "DatabricksNotebook",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Databricks Notebook activity properties.",
+          "$ref": "#/definitions/DatabricksNotebookActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DatabricksNotebookActivityTypeProperties": {
+      "description": "Databricks Notebook activity properties.",
+      "properties": {
+        "notebookPath": {
+          "type": "object",
+          "description": "The absolute path of the notebook to be run in the Databricks Workspace. This path must begin with a slash. Type: string (or Expression with resultType string)."
+        },
+        "baseParameters": {
+          "description": "Base parameters to be used for each run of this job.If the notebook takes a parameter that is not specified, the default value from the notebook will be used.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        }
+      },
+      "required": [
+        "notebookPath"
+      ]
     }
   }
 }
