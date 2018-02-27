@@ -277,6 +277,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/Replicas": {
+      "get": {
+        "tags": [
+          "Replicas"
+        ],
+        "operationId": "Replicas_ListByServer",
+        "x-ms-examples": {
+          "ReplicasListByServer": {
+            "$ref": "./examples/ReplicasListByServer.json"
+          }
+        },
+        "description": "List all the replicas for a given server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
@@ -1006,6 +1045,20 @@
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile of a server."
+        },
+        "replicationRole": {
+          "type": "string",
+          "description": "The replication role of the server."
+        },
+        "primaryServerId": {
+          "type": "string",
+          "description": "The primary server id of a relica server."
+        },
+        "replicaCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The maximum number of replicas that a primary server can have."
         }
       },
       "description": "The properties of a server."
@@ -1060,7 +1113,8 @@
           "enum": [
             "Default",
             "PointInTimeRestore",
-            "GeoRestore"
+            "GeoRestore",
+            "Replica"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1135,6 +1189,24 @@
         "sourceServerId"
       ],
       "description": "The properties to a new server by restoring from a geo replicated backup."
+    },
+    "ServerPropertiesForReplica": {
+      "x-ms-discriminator-value": "Replica",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerPropertiesForCreate"
+        }
+      ],
+      "properties": {
+        "sourceServerId": {
+          "type": "string",
+          "description": "The primary server id to create replica from."
+        }
+      },
+      "required": [
+        "sourceServerId"
+      ],
+      "description": "The properties to create a new replica."
     },
     "Sku": {
       "properties": {
@@ -1244,6 +1316,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "replicationRole": {
+              "type": "string",
+              "description": "The replication role of the server."
             }
           },
           "x-ms-client-flatten": true,
