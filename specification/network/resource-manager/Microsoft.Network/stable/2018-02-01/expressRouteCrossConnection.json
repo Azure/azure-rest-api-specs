@@ -59,6 +59,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ExpressRouteCrossConnectionList": {
+            "$ref": "./examples/ExpressRouteCrossConnectionList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -92,6 +97,11 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCrossConnectionListResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCrossConnectionListByResourceGroup": {
+            "$ref": "./examples/ExpressRouteCrossConnectionListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -135,6 +145,11 @@
               "$ref": "#/definitions/ExpressRouteCrossConnection"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetExpressRouteCrossConnection": {
+            "$ref": "./examples/ExpressRouteCrossConnectionGet.json"
+          }
         }
       },
       "put": {
@@ -176,7 +191,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting ExpressRouteCrossConnection resource."
+            "description": "Update successful. The operation returns the resulting ExpressRouteCrossConnection resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnection"
+              }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateExpressRouteCrossConnection": {
+            "$ref": "./examples/ExpressRouteCrossConnectionUpdate.json"
           }
         },
         "x-ms-long-running-operation": true
