@@ -228,6 +228,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.web
   package-name: azure-mgmt-web
+  package-version: 0.36.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
