@@ -264,34 +264,6 @@
         }
       }
     },
-    "/providers/Microsoft.PolicyInsights/operations": {
-      "get": {
-        "operationId": "PolicyInsights_ListOperations",
-        "description": "Lists available operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of available operations.",
-            "schema": {
-              "$ref": "#/definitions/Operations"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/QueryFailure"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List operations": { "$ref": "./examples/ListOperations.json" }
-        }
-      }
-    },
     "/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata": {
       "get": {
         "operationId": "PolicyEvents_GetMetadata",
@@ -488,54 +460,6 @@
             },
             "message": {
               "description": "Description of the error.",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "Operations": {
-      "description": "List of available operations.",
-      "properties": {
-        "@odata.count": {
-          "description": "OData entity count; represents the number of operations returned.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1
-        },
-        "value": {
-          "description": "List of available operations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        }
-      }
-    },
-    "Operation": {
-      "description": "Operation definition.",
-      "properties": {
-        "name": {
-          "description": "Operation name.",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Resource provider name.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource name on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation name.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Operation description.",
               "type": "string"
             }
           }
