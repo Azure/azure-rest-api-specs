@@ -70,7 +70,7 @@ The structure should appear like so:
 |    |   |       |   +---2016-02-01.3.0
 |    |   |       |   +---2016-07-01.3.1
 |    |   |       |   +---2017-01-01.4.0
-|    |   |       |   |   \---examples
+|    |   |       |       \---examples
 |    |   |       \---preview
 |    |   |           \---2017-05-01.5.0
 |    |   \---resource-manager
