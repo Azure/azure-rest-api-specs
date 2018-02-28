@@ -4,7 +4,7 @@
     "resourceGroupName": "myResourceGroup",
     "registryName": "myRegistry",
     "api-version": "2018-02-01-preview",
-    "$filter": "alias%20eq'myalias'"
+    "$filter": "alias%20eq%20'myalias'"
   },
   "responses": {
     "200": {
@@ -32,12 +32,11 @@
             "type": "Microsoft.ContainerRegistry/registries/buildDefinitions",
             "location": "eastus",
             "tags": {
-              "key": "value"
+              "testkey": "value"
             }
           }
         ]
       }
-    },
-    "404": {}
+    }
   }
 }

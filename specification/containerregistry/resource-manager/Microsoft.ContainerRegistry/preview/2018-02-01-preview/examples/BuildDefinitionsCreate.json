@@ -21,44 +21,13 @@
           "osType": "Linux",
           "cpu": 2
         },
-        "steps": [
-          {
-            "type": "Docker",
-            "name": "dockerbuild",
-            "branch":  "master",
-            "imageName": "azurerest:testtag",
-            "dockerFilePath": "DockerFile",
-            "isPushEnabled": true,
-            "buildArguments": [
-              {
-                "type": "DockerBuildArgument",
-                "name": "mytestargument",
-                "value": "mytestvalue",
-                "isSecret": false
-              },
-              {
-                "type": "DockerBuildArgument",
-                "name": "mysecrettestargument",
-                "value": "mysecrettestvalue",
-                "isSecret": true
-              }
-            ]
-          }
-        ],
-        "triggers": [
-          {
-            "type": "ImageTrigger",
-            "imageName": "microsoft/aspnetcore",
-            "tag": "2.0"
-          }
-        ],
         "alias": "myalias",
         "status": "Enabled",
         "isBaseImageTriggersEnabled": true
       },
       "location": "eastus",
       "tags": {
-        "key": "value"
+        "testkey": "value"
       }
     }
   },

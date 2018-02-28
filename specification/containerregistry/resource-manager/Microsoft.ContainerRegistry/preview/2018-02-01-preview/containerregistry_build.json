@@ -25,13 +25,6 @@
         "operationId": "BuildDefinitions_List",
         "parameters": [
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData Filter options",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -42,6 +35,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The build definition filter to apply on the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "$skipToken is supported on get list of build definitions, which provides the next page in the list of definitions.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -49,6 +56,12 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -59,56 +72,6 @@
         "x-ms-examples": {
           "BuildDefinitions_List": {
             "$ref": "./examples/BuildDefinitionsList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/builds": {
-      "get": {
-        "tags": [
-          "BuildDefinitions"
-        ],
-        "summary": "Get all the builds for a given build definition.",
-        "operationId": "BuildDefinitions_ListBuilds",
-        "parameters": [
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData Filter options",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BuildListResult"
-            }
-          }
-        },
-        "x-ms-odata": "#/definitions/BuildFilter",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "BuildDefinitions_ListBuilds": {
-            "$ref": "./examples/BuildDefinitionsListBuilds.json"
           }
         }
       }
@@ -143,6 +106,12 @@
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -159,15 +128,6 @@
         "operationId": "BuildDefinitions_Create",
         "parameters": [
           {
-            "name": "buildDefinitionCreateParameters",
-            "in": "body",
-            "description": "The parameters for creating a build definition.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BuildDefinitionCreateParameters"
-            }
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -181,6 +141,15 @@
           },
           {
             "$ref": "#/parameters/buildDefinitionNameParameter"
+          },
+          {
+            "name": "buildDefinitionCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a build definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildDefinition"
+            }
           }
         ],
         "responses": {
@@ -191,9 +160,15 @@
             }
           },
           "201": {
-            "description": "The request was successful; the operation will complete asynchronously.",
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -232,10 +207,16 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
           },
           "204": {
             "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -253,15 +234,6 @@
         "operationId": "BuildDefinitions_Update",
         "parameters": [
           {
-            "name": "buildDefinitionUpdateParameters",
-            "in": "body",
-            "description": "The parameters for updating a build definition.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BuildDefinitionUpdateParameters"
-            }
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -275,6 +247,15 @@
           },
           {
             "$ref": "#/parameters/buildDefinitionNameParameter"
+          },
+          {
+            "name": "buildDefinitionUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a build definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildDefinition"
+            }
           }
         ],
         "responses": {
@@ -285,9 +266,15 @@
             }
           },
           "201": {
-            "description": "The request was successful; the operation will complete asynchronously.",
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
             "schema": {
               "$ref": "#/definitions/BuildDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -295,101 +282,6 @@
         "x-ms-examples": {
           "BuildDefinitions_Update": {
             "$ref": "./examples/BuildDefinitionsUpdate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/queue": {
-      "post": {
-        "tags": [
-          "BuildDefinitions"
-        ],
-        "summary": "Creates a new build against the given build definition and adds it to the build queue.",
-        "operationId": "BuildDefinitions_QueueBuild",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Build"
-            }
-          },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BuildDefinitions_QueueBuild": {
-            "$ref": "./examples/BuildDefinitionsQueueBuild.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/addTrigger": {
-      "post": {
-        "tags": [
-          "BuildDefinitions"
-        ],
-        "summary": "Adds a build trigger to a build definition.",
-        "operationId": "BuildDefinitions_AddTrigger",
-        "parameters": [
-          {
-            "name": "buildTriggerParameters",
-            "in": "body",
-            "description": "The parameters for adding a build trigger.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BuildTriggerParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BuildTrigger"
-            }
-          },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BuildDefinitions_AddTrigger": {
-            "$ref": "./examples/BuildDefinitionsAddTrigger.json"
           }
         }
       }
@@ -403,13 +295,6 @@
         "operationId": "Builds_List",
         "parameters": [
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData Filter options",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -420,6 +305,28 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The builds filter to apply on the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is supported for get list of builds, which limits the maximum number of builds to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "$skipToken is supported on get list of builds, which provides the next page in the list of builds.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -427,6 +334,12 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/BuildListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -450,13 +363,6 @@
         "operationId": "Builds_Get",
         "parameters": [
           {
-            "name": "buildId",
-            "in": "path",
-            "description": "The build ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -467,6 +373,13 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "buildId",
+            "in": "path",
+            "description": "The build ID.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -474,6 +387,12 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Build"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -491,6 +410,18 @@
         "operationId": "Builds_Update",
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
             "name": "buildId",
             "in": "path",
             "description": "The build ID.",
@@ -505,18 +436,6 @@
             "schema": {
               "$ref": "#/definitions/BuildUpdateParameters"
             }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -527,7 +446,13 @@
             }
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -547,13 +472,6 @@
         "operationId": "Builds_GetLogLink",
         "parameters": [
           {
-            "name": "buildId",
-            "in": "path",
-            "description": "The build ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -564,6 +482,13 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "buildId",
+            "in": "path",
+            "description": "The build ID.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -572,96 +497,17 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
           "Builds_GetLogLink": {
             "$ref": "./examples/BuildsGetLogLink.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/builds/queue": {
-      "post": {
-        "tags": [
-          "Builds"
-        ],
-        "summary": "Creates a new build based on the request parameters and add it to the build queue.",
-        "operationId": "Builds_Queue",
-        "parameters": [
-          {
-            "name": "buildRequest",
-            "in": "body",
-            "description": "The parameters of a build that needs to queued.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueueBuildRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Build"
-            }
-          },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Builds_Queue": {
-            "$ref": "./examples/BuildsQueue.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/builds/getSourceUploadUrl": {
-      "post": {
-        "tags": [
-          "Builds"
-        ],
-        "summary": "Get the upload location for the user to be able to upload the source.",
-        "operationId": "Builds_GetSourceUploadUrl",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/SourceUploadDefinition"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Builds_GetSourceUploadUrl": {
-            "$ref": "./examples/BuildsGetSourceUploadUrl.json"
           }
         }
       }
@@ -675,13 +521,6 @@
         "operationId": "Builds_Cancel",
         "parameters": [
           {
-            "name": "buildId",
-            "in": "path",
-            "description": "The build ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -692,6 +531,13 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "buildId",
+            "in": "path",
+            "description": "The build ID.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -699,116 +545,19 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Builds_Cancel": {
             "$ref": "./examples/BuildsCancel.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps/{stepName}": {
-      "post": {
-        "tags": [
-          "BuildSteps"
-        ],
-        "summary": "Gets the build step configuration that includes all sensitive properties.",
-        "operationId": "BuildSteps_Get",
-        "parameters": [
-          {
-            "name": "stepName",
-            "in": "path",
-            "description": "The name of the build item.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BuildStep"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BuildSteps_Get": {
-            "$ref": "./examples/BuildStepsGet.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "BuildSteps"
-        ],
-        "summary": "Updates a build step in a build definition.",
-        "operationId": "BuildSteps_Update",
-        "parameters": [
-          {
-            "name": "stepName",
-            "in": "path",
-            "description": "The name of the build step.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "buildStepUpdateParameters",
-            "in": "body",
-            "description": "The parameters for updating a build step.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BuildStepUpdateParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BuildStep"
-            }
-          },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BuildSteps_Update": {
-            "$ref": "./examples/BuildStepsUpdate.json"
           }
         }
       }
@@ -843,6 +592,12 @@
             "schema": {
               "$ref": "#/definitions/BuildStepList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -855,13 +610,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/triggers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps/{stepName}": {
       "get": {
         "tags": [
-          "BuildTriggers"
+          "BuildSteps"
         ],
-        "summary": "List all the build triggers configured for a given build definition.",
-        "operationId": "BuildTriggers_List",
+        "summary": "Gets the build step for a build definition.",
+        "operationId": "BuildSteps_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -877,41 +632,38 @@
           },
           {
             "$ref": "#/parameters/buildDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/stepNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/BuildTriggerList"
+              "$ref": "#/definitions/BuildStep"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "BuildTriggers_List": {
-            "$ref": "./examples/BuildTriggersList.json"
+          "BuildSteps_Get": {
+            "$ref": "./examples/BuildStepsGet.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/triggers/{triggerId}": {
-      "delete": {
+      },
+      "put": {
         "tags": [
-          "BuildTriggers"
+          "BuildSteps"
         ],
-        "summary": "Deletes a build trigger from the build definition.",
-        "operationId": "BuildTriggers_Delete",
+        "summary": "Creates a build step for a build definition.",
+        "operationId": "BuildSteps_Create",
         "parameters": [
-          {
-            "name": "triggerId",
-            "in": "path",
-            "description": "The trigger identifier.",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -926,6 +678,68 @@
           },
           {
             "$ref": "#/parameters/buildDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/stepNameParameter"
+          },
+          {
+            "name": "buildStepCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a build step.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildStep"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BuildStep"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BuildSteps_Create": {
+            "$ref": "./examples/BuildStepsCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BuildSteps"
+        ],
+        "summary": "Deletes a build step from the build definition.",
+        "operationId": "BuildSteps_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/stepNameParameter"
           }
         ],
         "responses": {
@@ -933,13 +747,280 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "BuildTriggers_Delete": {
-            "$ref": "./examples/BuildTriggersDelete.json"
+          "BuildSteps_Delete": {
+            "$ref": "./examples/BuildStepsDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BuildSteps"
+        ],
+        "summary": "Updates a build step in a build definition.",
+        "operationId": "BuildSteps_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/stepNameParameter"
+          },
+          {
+            "name": "buildStepUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a build step.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildStep"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BuildStep"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BuildSteps_Update": {
+            "$ref": "./examples/BuildStepsUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps/{stepName}/listBuildArguments": {
+      "post": {
+        "tags": [
+          "BuildSteps"
+        ],
+        "summary": "List the build arguments for a step including the secret arguments.",
+        "operationId": "BuildSteps_ListBuildArguments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/stepNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BuildArgumentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildSteps_ListBuildArguments": {
+            "$ref": "./examples/BuildStepsListBuildArguments.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps/{stepName}/updateBaseImageDependency": {
+      "post": {
+        "tags": [
+          "BuildSteps"
+        ],
+        "summary": "Updates the base image dependency.",
+        "operationId": "BuildSteps_UpdateBaseImageDependency",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/stepNameParameter"
+          },
+          {
+            "name": "imageDependency",
+            "in": "body",
+            "description": "The properties of a base image dependency.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BaseImageDependency"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BaseImageDependency"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildSteps_UpdateBaseImageDependency": {
+            "$ref": "./examples/BuildStepsUpdateBaseImageDependency.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/queueBuild": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "summary": "Creates a new build based on the request parameters and add it to the build queue.",
+        "operationId": "Registries_QueueBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "buildRequest",
+            "in": "body",
+            "description": "The parameters of a build that needs to queued.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueueBuildRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BuildBaseProperties"
+            }
+          },
+          "202": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Registries_QueueBuild": {
+            "$ref": "./examples/RegistriesQueueBuild.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/getBuildSourceUploadUrl": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "summary": "Get the upload location for the user to be able to upload the source.",
+        "operationId": "Registries_GetBuildSourceUploadUrl",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/SourceUploadDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Registries_GetBuildSourceUploadUrl": {
+            "$ref": "./examples/RegistriesGetBuildSourceUploadUrl.json"
           }
         }
       }
@@ -1070,6 +1151,10 @@
           "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
           "default": false,
           "type": "boolean"
+        },
+        "sourceControlAuthProperties": {
+          "$ref": "#/definitions/SourceControlAuthInfo",
+          "description": "The authorization properties for accessing the source code repository."
         }
       }
     },
@@ -1098,282 +1183,6 @@
           "type": "integer"
         }
       }
-    },
-    "BuildDefinitionFilter": {
-      "description": "The filter that can be used for listing build definitions.",
-      "type": "object",
-      "properties": {
-        "alias": {
-          "description": "The alternative name for build definition.",
-          "type": "string"
-        }
-      }
-    },
-    "BuildListResult": {
-      "description": "Collection of builds.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildBase"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
-        }
-      }
-    },
-    "BuildBase": {
-      "description": "The basic properties about a build.",
-      "type": "object",
-      "properties": {
-        "buildId": {
-          "description": "The unique identifier for the build.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The current status of the build.",
-          "enum": [
-            "Queued",
-            "Started",
-            "Running",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuildStatus",
-            "modelAsString": true
-          }
-        },
-        "lastUpdatedTime": {
-          "format": "date-time",
-          "description": "The last updated time for the build.",
-          "type": "string"
-        }
-      }
-    },
-    "BuildFilter": {
-      "description": "Properties that are enabled for Odata querying.",
-      "type": "object",
-      "properties": {
-        "buildId": {
-          "description": "The unique identifier for the build.",
-          "type": "string"
-        },
-        "buildType": {
-          "description": "The type of build.",
-          "enum": [
-            "AutoBuild",
-            "QuickBuild"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuildType",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "description": "The current status of the build.",
-          "enum": [
-            "Queued",
-            "Started",
-            "Running",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuildStatus",
-            "modelAsString": true
-          }
-        },
-        "createTime": {
-          "format": "date-time",
-          "description": "The create time for a build.",
-          "type": "string"
-        },
-        "finishTime": {
-          "format": "date-time",
-          "description": "The time the build finished.",
-          "type": "string"
-        },
-        "outputImageNames": {
-          "description": "The list of all images that were generated from the build.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isArchiveEnabled": {
-          "description": "The value that indicates whether archiving is enabled or not.",
-          "type": "boolean"
-        }
-      }
-    },
-    "BuildDefinitionCreateParameters": {
-      "description": "The parameters for creating a build definition.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BuildDefinitionPropertiesCreateParameters",
-          "description": "The properties for creating a build definition.",
-          "x-ms-client-flatten": true
-        },
-        "location": {
-          "description": "The region of the resource.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "The ARM resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "BuildDefinitionPropertiesCreateParameters": {
-      "description": "The properties for creating a build definition.",
-      "required": [
-        "steps"
-      ],
-      "type": "object",
-      "properties": {
-        "sourceRepository": {
-          "$ref": "#/definitions/SourceRepositoryCreateParameters",
-          "description": "The properties that describes the source(code) for the build definition."
-        },
-        "steps": {
-          "description": "The list of build steps in a build definition.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildStepCreateParameters"
-          }
-        },
-        "triggers": {
-          "description": "A collection of custom triggers for this build definition.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildTriggerParameters"
-          }
-        },
-        "alias": {
-          "description": "The alternative updatable name for a build definition.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The current status of build definition.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuildDefinitionStatus",
-            "modelAsString": true
-          }
-        },
-        "platform": {
-          "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build has to happen."
-        },
-        "timeout": {
-          "format": "int32",
-          "description": "Build timeout in seconds.",
-          "type": "integer"
-        },
-        "isBaseImageTriggersEnabled": {
-          "description": "The value of this property indicates whether auto triggers of the build items trigger a build against this definition.",
-          "default": false,
-          "type": "boolean"
-        }
-      }
-    },
-    "SourceRepositoryCreateParameters": {
-      "description": "The properties for creating the source code repository configuration.",
-      "required": [
-        "sourceControlType",
-        "repositoryUrl"
-      ],
-      "type": "object",
-      "properties": {
-        "sourceControlType": {
-          "description": "The type of source control service.",
-          "enum": [
-            "Github",
-            "VisualStudioTeamService"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SourceControlType",
-            "modelAsString": true
-          }
-        },
-        "repositoryUrl": {
-          "description": "The type of source control service.",
-          "type": "string"
-        },
-        "sourceControlAuthProperties": {
-          "$ref": "#/definitions/SourceControlAuthInfo",
-          "description": "The authorization properties for accessing the source code repository."
-        },
-        "isCommitTriggerEnabled": {
-          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
-          "default": false,
-          "type": "boolean"
-        }
-      }
-    },
-    "BuildStepCreateParameters": {
-      "description": "The base properties for creating any build step.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the step.",
-          "enum": [
-            "Docker"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "BuildStepType",
-            "modelAsString": true
-          }
-        },
-        "name": {
-          "description": "The unique name of the step.",
-          "type": "string"
-        }
-      },
-      "discriminator": "type"
-    },
-    "BuildTriggerParameters": {
-      "description": "Properties for adding any build trigger.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the trigger.",
-          "enum": [
-            "ImageTrigger"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "TriggerType",
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "type"
     },
     "SourceControlAuthInfo": {
       "description": "The authorization properties for accessing the source code repository.",
@@ -1413,80 +1222,50 @@
         }
       }
     },
-    "BuildDefinitionUpdateParameters": {
-      "description": "The parameters for updating a build definition.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BuildDefinitionPropertiesUpdateParameters",
-          "description": "The properties for updating a build definition.",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "description": "The ARM resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "BuildDefinitionPropertiesUpdateParameters": {
-      "description": "The properties for updating a build definition.",
+    "BuildDefinitionFilter": {
+      "description": "The filter that can be used for listing build definitions.",
       "type": "object",
       "properties": {
         "alias": {
-          "description": "The alternative updatable name for a build definition.",
+          "description": "The alternative name for build definition.",
           "type": "string"
-        },
-        "status": {
-          "description": "The current status of build definition.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuildDefinitionStatus",
-            "modelAsString": true
-          }
-        },
-        "platform": {
-          "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build has to happen."
-        },
-        "timeout": {
-          "format": "int32",
-          "description": "Build timeout in seconds.",
-          "type": "integer"
-        },
-        "isBaseImageTriggersEnabled": {
-          "description": "The value of this property indicates whether auto triggers of the build items trigger a build against this definition.",
-          "default": false,
-          "type": "boolean"
-        },
-        "sourceRepository": {
-          "$ref": "#/definitions/SourceRepositoryUpdateParameters",
-          "description": "The properties that describes the source(code) for the build definition."
         }
       }
     },
-    "SourceRepositoryUpdateParameters": {
-      "description": "The properties for updating the source code repository configuration.",
+    "BuildListResult": {
+      "description": "Collection of builds.",
       "type": "object",
       "properties": {
-        "sourceControlAuthProperties": {
-          "$ref": "#/definitions/SourceControlAuthInfo",
-          "description": "The authorization properties for accessing the source code repository."
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Build"
+          }
         },
-        "isCommitTriggerEnabled": {
-          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
-          "default": false,
-          "type": "boolean"
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
         }
       }
     },
     "Build": {
+      "description": "Build resource properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildProperties",
+          "description": "The properties of a build.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BuildProperties": {
       "description": "The properties for a build.",
       "type": "object",
       "properties": {
@@ -1564,11 +1343,27 @@
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
           "description": "The platform properties against which the build will happen."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of a build.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
     "ImageDescriptor": {
-      "description": "Properties for a docker image.",
+      "description": "Properties that describes a Docker image.",
       "required": [
         "repositoryName",
         "digest"
@@ -1589,31 +1384,68 @@
         }
       }
     },
-    "BuildTrigger": {
-      "description": "Base properties for any build trigger.",
-      "required": [
-        "id"
-      ],
+    "BuildFilter": {
+      "description": "Properties that are enabled for Odata querying.",
       "type": "object",
       "properties": {
-        "type": {
-          "description": "The type of the trigger.",
+        "buildId": {
+          "description": "The unique identifier for the build.",
+          "type": "string"
+        },
+        "buildType": {
+          "description": "The type of build.",
           "enum": [
-            "ImageTrigger"
+            "AutoBuild",
+            "QuickBuild"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
-            "name": "TriggerType",
+            "name": "BuildType",
             "modelAsString": true
           }
         },
-        "id": {
-          "description": "The unique identifier of a trigger.",
+        "status": {
+          "description": "The current status of the build.",
+          "enum": [
+            "Queued",
+            "Started",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BuildStatus",
+            "modelAsString": true
+          }
+        },
+        "createTime": {
+          "format": "date-time",
+          "description": "The create time for a build.",
+          "type": "string"
+        },
+        "finishTime": {
+          "format": "date-time",
+          "description": "The time the build finished.",
+          "type": "string"
+        },
+        "outputImageNames": {
+          "description": "The list of all images that were generated from the build.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isArchiveEnabled": {
+          "description": "The value that indicates whether archiving is enabled or not.",
+          "type": "boolean"
+        },
+        "buildDefinitionName": {
+          "description": "The name of the build definition that the build corresponds to.",
           "type": "string"
         }
-      },
-      "discriminator": "type"
+      }
     },
     "BuildUpdateParameters": {
       "description": "The set of build properties that can be updated.",
@@ -1625,46 +1457,88 @@
         }
       }
     },
-    "QueueBuildRequest": {
-      "description": "The queue build request parameters.",
-      "required": [
-        "sourceLocation",
-        "buildParameters"
-      ],
+    "BuildStepList": {
+      "description": "The collection of build items.",
       "type": "object",
       "properties": {
-        "imageName": {
-          "description": "The fully qualified image name with the tag that the build tags it.",
-          "type": "string"
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildStep"
+          }
         },
-        "sourceLocation": {
-          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
           "type": "string"
+        }
+      }
+    },
+    "BuildStep": {
+      "description": "Build step resource properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildStepProperties",
+          "description": "The properties of a build step.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BuildStepProperties": {
+      "description": "Base properties for any  build step.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the build step.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
-        "buildArguments": {
-          "description": "The collection of build arguments to be used.",
+        "type": {
+          "description": "The type of the step.",
+          "enum": [
+            "Docker"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuildStepType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type"
+    },
+    "BuildArgumentList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BuildArgument"
           }
         },
-        "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
-          "default": false,
-          "type": "boolean"
-        },
-        "timeout": {
-          "format": "int32",
-          "description": "Build timeout in seconds.",
-          "type": "integer"
-        },
-        "platform": {
-          "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
-        },
-        "buildParameters": {
-          "$ref": "#/definitions/QueueBuildParameters",
-          "description": "The build parameters depending on the type of the build."
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
         }
       }
     },
@@ -1703,17 +1577,103 @@
         }
       }
     },
-    "QueueBuildParameters": {
-      "description": "The properties of a quick build.",
+    "BaseImageDependency": {
+      "description": "Properties that describe a base image dependency.",
+      "required": [
+        "repositoryName",
+        "digest"
+      ],
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the build.",
+          "description": "The type of the base image dependency.",
+          "enum": [
+            "BuildTime",
+            "RunTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BaseImageDependencyType",
+            "modelAsString": true
+          }
+        },
+        "isAutoTriggerEnabled": {
+          "description": "The value of this flag indicates if build has to be auto triggered when this image is updated.",
+          "type": "boolean"
+        },
+        "repositoryName": {
+          "description": "Name of the repository.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "The tag name.",
+          "type": "string"
+        },
+        "digest": {
+          "description": "The image digest. Example: SHA256 based digest.",
+          "type": "string"
+        }
+      }
+    },
+    "QueueBuildRequest": {
+      "description": "The queue build request parameters.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the build parameters.",
           "type": "string",
           "readOnly": true
         }
       },
       "discriminator": "type"
+    },
+    "BuildBaseProperties": {
+      "description": "The basic properties about a build.",
+      "type": "object",
+      "properties": {
+        "buildId": {
+          "description": "The unique identifier for the build.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the build.",
+          "enum": [
+            "Queued",
+            "Started",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BuildStatus",
+            "modelAsString": true
+          }
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "The last updated time for the build.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of a build.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "SourceUploadDefinition": {
       "description": "The properties of a response to source upload request.",
@@ -1725,78 +1685,6 @@
         },
         "relativePath": {
           "description": "The relative path to the source. This is used to submit the subsequent queue build request.",
-          "type": "string"
-        }
-      }
-    },
-    "BuildStep": {
-      "description": "Base properties for any  build step.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the step.",
-          "enum": [
-            "Docker"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "BuildStepType",
-            "modelAsString": true
-          }
-        },
-        "name": {
-          "description": "The unique name of the step.",
-          "type": "string"
-        }
-      },
-      "discriminator": "type"
-    },
-    "BuildStepUpdateParameters": {
-      "description": "The base properties for updating any build step.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the step.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "discriminator": "type"
-    },
-    "BuildStepList": {
-      "description": "The collection of build items.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildStep"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
-        }
-      }
-    },
-    "BuildTriggerList": {
-      "description": "The collection of build triggers.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildTrigger"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
           "type": "string"
         }
       }
@@ -1840,41 +1728,47 @@
       },
       "x-ms-azure-resource": true
     },
-    "DockerBuildParameters": {
-      "description": "Build parameters for a docker build.",
-      "required": [
-        "type",
-        "dockerFilePath"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/QueueBuildParameters"
-        }
-      ],
+    "Error": {
+      "description": "Azure container registry build API error object.",
       "properties": {
-        "dockerFilePath": {
-          "description": "The Docker file path relative to the source control root.",
-          "type": "string"
-        },
-        "contextPath": {
-          "description": "The relative context path for a docker build in the source.",
-          "type": "string"
+        "properties": {
+          "$ref": "#/definitions/ErrorBody",
+          "description": "Azure container registry build API error body."
         }
-      },
-      "x-ms-discriminator-value": "Docker"
+      }
+    },
+    "ErrorBody": {
+      "description": "Azure container registry build API error body.",
+      "properties": {
+        "properties": {
+          "description": "Azure container registry build API error body.",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "description": "error code.",
+              "type": "string"
+            },
+            "message": {
+              "description": "error message.",
+              "type": "string"
+            }
+          }
+        }
+      }
     },
     "DockerBuildStep": {
       "description": "The Docker build step.",
       "required": [
         "branch",
-        "imageName",
-        "name"
+        "imageName"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BuildStep"
+          "$ref": "#/definitions/BuildStepProperties"
         }
       ],
       "properties": {
@@ -1910,38 +1804,107 @@
           "description": "The collection of base image dependencies that got generated by the latest build against this build item.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImageDescriptor"
-          },
+            "$ref": "#/definitions/BaseImageDependency"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Docker"
+    },
+    "BuildDefinitionBuildRequest": {
+      "description": "The queue build parameters based on a build definition.",
+      "required": [
+        "type",
+        "buildDefinitionName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueueBuildRequest"
+        }
+      ],
+      "properties": {
+        "buildDefinitionName": {
+          "description": "The name of build definition against which build has to be queued.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "BuildDefinition"
+    },
+    "QuickBuildRequest": {
+      "description": "The queue build request parameters for a quick build.",
+      "required": [
+        "type",
+        "sourceLocation",
+        "buildParameters"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueueBuildRequest"
+        }
+      ],
+      "properties": {
+        "imageName": {
+          "description": "The fully qualified image name with the tag that the build tags it.",
+          "type": "string"
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
+          "type": "string"
+        },
+        "buildArguments": {
+          "description": "The collection of build arguments to be used.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildArgument"
+          }
+        },
+        "isPushEnabled": {
+          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
+          "default": false,
+          "type": "boolean"
+        },
+        "timeout": {
+          "format": "int32",
+          "description": "Build timeout in seconds.",
+          "type": "integer"
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the build will happen."
+        },
+        "buildParameters": {
+          "$ref": "#/definitions/QueueBuildParameters",
+          "description": "The build parameters depending on the type of the build."
+        }
+      },
+      "x-ms-discriminator-value": "QuickBuild"
+    },
+    "QueueBuildParameters": {
+      "description": "The properties of a quick build.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the build parameters.",
+          "type": "string",
           "readOnly": true
         }
       },
-      "x-ms-discriminator-value": "Docker"
+      "discriminator": "type"
     },
-    "DockerBuildStepUpdateParameters": {
-      "description": "The properties for updating a docker build step.",
+    "DockerBuildParameters": {
+      "description": "Build parameters for a docker build.",
       "required": [
-        "type"
+        "type",
+        "dockerFilePath"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BuildStepUpdateParameters"
+          "$ref": "#/definitions/QueueBuildParameters"
         }
       ],
       "properties": {
-        "branch": {
-          "description": "The repository branch name.",
-          "type": "string"
-        },
-        "imageName": {
-          "description": "The full qualified name of the image including the repository and tag.",
-          "type": "string"
-        },
-        "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
-          "default": false,
-          "type": "boolean"
-        },
         "dockerFilePath": {
           "description": "The Docker file path relative to the source control root.",
           "type": "string"
@@ -1949,109 +1912,9 @@
         "contextPath": {
           "description": "The relative context path for a docker build in the source.",
           "type": "string"
-        },
-        "buildArguments": {
-          "description": "The custom arguments for building this build step.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildArgument"
-          }
         }
       },
       "x-ms-discriminator-value": "Docker"
-    },
-    "DockerBuildStepCreateParameters": {
-      "description": "The properties for creating Docker build step.",
-      "required": [
-        "type",
-        "branch",
-        "name"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BuildStepCreateParameters"
-        }
-      ],
-      "properties": {
-        "branch": {
-          "description": "The repository branch name.",
-          "type": "string"
-        },
-        "imageName": {
-          "description": "The full qualified name of the image including the repository and tag.",
-          "type": "string"
-        },
-        "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
-          "default": false,
-          "type": "boolean"
-        },
-        "dockerFilePath": {
-          "description": "The Docker file path relative to the source control root.",
-          "type": "string"
-        },
-        "contextPath": {
-          "description": "The relative context path for a docker build in the source.",
-          "type": "string"
-        },
-        "buildArguments": {
-          "description": "The custom arguments for building this build step.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildArgument"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "Docker"
-    },
-    "ImageTrigger": {
-      "description": "A build trigger based on Image updates.",
-      "required": [
-        "repositoryName",
-        "id"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BuildTrigger"
-        }
-      ],
-      "properties": {
-        "repositoryName": {
-          "description": "Name of the repository.",
-          "type": "string"
-        },
-        "tag": {
-          "description": "The tag name.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "ImageTrigger"
-    },
-    "ImageTriggerParameters": {
-      "description": "The parameters that identify a image trigger.",
-      "required": [
-        "type",
-        "repositoryName"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BuildTriggerParameters"
-        }
-      ],
-      "properties": {
-        "repositoryName": {
-          "description": "Name of the repository.",
-          "type": "string"
-        },
-        "tag": {
-          "description": "The tag name.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "ImageTrigger"
     }
   },
   "parameters": {
@@ -2092,6 +1955,17 @@
       "name": "buildDefinitionName",
       "in": "path",
       "description": "The name of the container registry build definition.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "stepNameParameter": {
+      "name": "stepName",
+      "in": "path",
+      "description": "The name of a build step for a container registry build definition.",
       "required": true,
       "type": "string",
       "maxLength": 50,

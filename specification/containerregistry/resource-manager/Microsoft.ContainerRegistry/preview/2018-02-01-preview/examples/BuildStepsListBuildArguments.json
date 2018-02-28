@@ -5,19 +5,26 @@
     "registryName": "myRegistry",
     "api-version": "2018-02-01-preview",
     "buildDefinitionName": "myBuildDefinition",
-    "$filter": "buildId%20eq%20'0accec26-d6de-4757-8e74-d080f38eaaab'"
+    "stepName": "myStep"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "buildId": "0accec26-d6de-4757-8e74-d080f38eaaab",
-            "status": "Queued",
-            "lastUpdatedTime": "2018-01-25T05:13:51.597Z"
+            "type": "DockerBuildArgument",
+            "name": "mytestargument",
+            "value": "mytestvalue",
+            "isSecret": false
+          },
+          {
+            "type": "DockerBuildArgument",
+            "name": "mysecrettestargument",
+            "value": "mysecrettestvalue",
+            "isSecret": true
           }
         ]
       }
     }
   }
-} 
+}

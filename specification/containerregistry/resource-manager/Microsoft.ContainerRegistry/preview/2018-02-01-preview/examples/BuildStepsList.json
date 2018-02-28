@@ -11,32 +11,34 @@
       "body": {
         "value": [
           {
-            "type": "Docker",
-            "name": "dockerbuild",
-            "imageName": "azurerest:testtag",
-            "dockerFilePath": "DockerFile",
-            "isPushEnabled": true,
-            "buildArguments": [
-              {
-                "type": "DockerBuildArgument",
-                "name": "mytestargument",
-                "value": "mytestvalue",
-                "isSecret": false
-              },
-              {
-                "type": "DockerBuildArgument",
-                "name": "mysecrettestargument",
-                "value": "mysecrettestvalue",
-                "isSecret": true
-              }
-            ],
-            "baseImageDependencies": [
-              {
-                "imageName": "microsoft/aspnetcore",
-                "tag": "2.0",
-                "digest": "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0"
-              }
-            ]
+            "properties": {
+              "type": "Docker",
+              "branch": "master",
+              "imageName": "azurerest:testtag",
+              "dockerFilePath": "DockerFile",
+              "isPushEnabled": true,
+              "buildArguments": [
+                {
+                  "type": "DockerBuildArgument",
+                  "name": "mytestargument",
+                  "value": "mytestvalue",
+                  "isSecret": false
+                }
+              ],
+              "baseImageDependencies": [
+                {
+                  "type": "Runtime",
+                  "imageName": "microsoft/aspnetcore",
+                  "tag": "2.0",
+                  "digest": "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0",
+                  "isAutoTriggerEnabled": false
+                }
+              ]
+            },
+            "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/buildDefinitions/myBuildDefinition/steps/myStep",
+            "name": "myStep",
+            "type": "Microsoft.ContainerRegistry/registries/buildDefinitions/steps",
+            "location": "eastus"
           }
         ]
       }
