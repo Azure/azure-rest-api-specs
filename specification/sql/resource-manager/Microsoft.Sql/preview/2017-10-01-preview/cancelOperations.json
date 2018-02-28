@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017-03-01-preview",
+    "version": "2017-10-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -129,6 +129,32 @@
         }
       }
     },
+    "DatabaseOperation": {
+      "description": "A database operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseOperationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
     "DatabaseOperationProperties": {
       "description": "The properties of a database operation.",
       "type": "object",
@@ -219,32 +245,6 @@
           "description": "Whether the operation can be cancelled.",
           "type": "boolean",
           "readOnly": true
-        }
-      }
-    },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
-    },
-    "DatabaseOperation": {
-      "description": "A database operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DatabaseOperationProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     },
