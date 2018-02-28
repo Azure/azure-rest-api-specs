@@ -26,7 +26,16 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2017-09.6.0
+tag: package-2018-03.6.1
+```
+
+### Tag: package-2018-03.6.1
+
+These settings apply only when `--tag=package-2018-03.6.1` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03.6.1'
+input-file:
+- Microsoft.Batch/stable/2018-03-01.6.1/BatchService.json
 ```
 
 ### Tag: package-2017-09.6.0
@@ -272,6 +281,15 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-05.5.0
+```
+
+### Tag: package-2018-03.6.1 and go
+
+These settings apply only when `--tag=package-2018-03.6.1 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-03.6.1' && $(go)
+output-folder: $(go-sdk-folder)/services/batch/2018-03-01.6.1/batch
 ```
 
 ### Tag: package-2017-09.6.0 and go

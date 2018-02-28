@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchService",
-    "version": "2017-09-01.6.0",
+    "version": "2018-03-01.6.1",
     "description": "A client for issuing REST requests to the Azure Batch service.",
     "x-ms-code-generation-settings": {
       "name": "BatchServiceClient"
@@ -28,6 +28,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "Application_List",
+        "x-ms-examples": {
+          "List applications": { "$ref": "./examples/ApplicationList.json" }
+        },
         "summary": "Lists all of the applications available in the specified account.",
         "description": "This operation returns only applications and versions that are available for use on compute nodes; that is, that can be used in an application package reference. For administrator information about applications and versions that are not yet available to compute nodes, use the Azure portal or the Azure Resource Manager API.",
         "x-ms-request-id": "request-id",
@@ -140,6 +143,9 @@
           "Applications"
         ],
         "operationId": "Application_Get",
+        "x-ms-examples": {
+          "Get applications": { "$ref": "./examples/ApplicationGet.json" }
+        },
         "summary": "Gets information about the specified application.",
         "description": "This operation returns only applications and versions that are available for use on compute nodes; that is, that can be used in an application package reference. For administrator information about applications and versions that are not yet available to compute nodes, use the Azure portal or the Azure Resource Manager API.",
         "x-ms-request-id": "request-id",
@@ -506,6 +512,123 @@
             "description": "A response containing the list of node agent SKUs.",
             "schema": {
               "$ref": "#/definitions/AccountListNodeAgentSkusResult"
+            }
+          },
+          "default": {
+            "description": "The error from the Batch service.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        }
+      }
+    },
+    "/nodecounts": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        },
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Account_ListPoolNodeCounts",
+        "description": "Gets the number of nodes in each state, grouped by pool.",
+        "x-ms-examples": {
+          "NodeCountsPayload": { "$ref": "./examples/AccountListPoolNodeCounts.json" }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "An OData $filter clause.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "maxresults",
+            "x-ms-client-name": "maxResults",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 10,
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of items to return in the response.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            },
+            "x-ms-client-request-id": true
+          },
+          {
+            "name": "return-client-request-id",
+            "default": false,
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "The time the request was issued. Client libraries typically set this to the current system clock time; set it explicitly if you are calling the REST API directly.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "client-request-id": {
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "request-id": {
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch account against which the request was made, and the region that account resides in.",
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "description": "The response contains the number of nodes in each node state, grouped by pool.",
+            "schema": {
+              "$ref": "#/definitions/PoolNodeCountsListResult"
             }
           },
           "default": {
@@ -1425,6 +1548,9 @@
           "Files"
         ],
         "operationId": "File_GetFromTask",
+        "x-ms-examples": {
+          "Get File From Task": { "$ref": "./examples/FileGetFromTask.json" }
+        },
         "description": "Returns the content of the specified task file.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -1530,6 +1656,10 @@
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
+        ],
+        "produces": [
+          "application/json",
+          "application/octet-stream"
         ],
         "responses": {
           "200": {
@@ -1874,6 +2004,9 @@
           "Files"
         ],
         "operationId": "File_GetFromComputeNode",
+        "x-ms-examples": {
+          "Get File From Compute Node": { "$ref": "./examples/FileGetFromNode.json" }
+        },
         "description": "Returns the content of the specified compute node file.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -1979,6 +2112,10 @@
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
+        ],
+        "produces": [
+          "application/json",
+          "application/octet-stream"
         ],
         "responses": {
           "200": {
@@ -2508,6 +2645,9 @@
           "JobSchedules"
         ],
         "operationId": "JobSchedule_Exists",
+        "x-ms-examples": {
+          "Check Job Schedule Exists": { "$ref": "./examples/JobScheduleExists.json" }
+        },
         "summary": "Checks the specified job schedule exists.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -3969,6 +4109,9 @@
           "Jobs"
         ],
         "operationId": "Job_Delete",
+        "x-ms-examples": {
+          "Delete Job": { "$ref": "./examples/JobDelete.json" }
+        },
         "summary": "Deletes a job.",
         "description": "Deleting a job also deletes all tasks that are part of that job, and all job statistics. This also overrides the retention period for task data; that is, if the job contains tasks which are still retained on compute nodes, the Batch services deletes those tasks' working directories and all their contents.  When a Delete Job request is received, the Batch service sets the job to the deleting state. All update operations on a job that is in deleting state will fail with status code 409 (Conflict), with additional information indicating that the job is being deleted.",
         "x-ms-request-id": "request-id",
@@ -5307,6 +5450,9 @@
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         },
+        "x-ms-examples": {
+          "List Job Under Job Schedule": { "$ref": "./examples/JobListFromJobSchedule.json" }
+        },
         "operationId": "Job_ListFromJobSchedule",
         "summary": "Lists the jobs that have been created under the specified job schedule.",
         "x-ms-request-id": "request-id",
@@ -6089,6 +6235,9 @@
           "Pools"
         ],
         "operationId": "Pool_Exists",
+        "x-ms-examples": {
+          "Check Pool Exists": { "$ref": "./examples/PoolExists.json" }
+        },
         "description": "Gets basic properties of a pool.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -6398,6 +6547,9 @@
           "Pools"
         ],
         "operationId": "Pool_Patch",
+        "x-ms-examples": {
+          "Patch the Pool": { "$ref": "./examples/PoolPatch.json" }
+        },
         "summary": "Updates the properties of the specified pool.",
         "description": "This only replaces the pool properties specified in the request. For example, if the pool has a start task associated with it, and a request does not specify a start task element, then the pool keeps the existing start task.",
         "x-ms-request-id": "request-id",
@@ -6554,6 +6706,9 @@
           "Pools"
         ],
         "operationId": "Pool_DisableAutoScale",
+        "x-ms-examples": {
+          "Disable pool autoscale": { "$ref": "./examples/PoolDisableAutoScale.json" }
+        },
         "summary": "Disables automatic scaling for a pool.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -7363,6 +7518,9 @@
           "Pools"
         ],
         "operationId": "Pool_UpgradeOS",
+        "x-ms-examples": {
+          "Upgrade OS of the pool": { "$ref": "./examples/PoolUpgradeOS.json" }
+        },
         "summary": "Upgrades the operating system of the specified pool.",
         "description": "During an upgrade, the Batch service upgrades each compute node in the pool. When a compute node is chosen for upgrade, any tasks running on that node are removed from the node and returned to the queue to be rerun later (or on a different compute node). The node will be unavailable until the upgrade is complete. This operation results in temporarily reduced pool capacity as nodes are taken out of service to be upgraded. Although the Batch service tries to avoid upgrading all compute nodes at the same time, it does not guarantee to do this (particularly on small pools); therefore, the pool may be temporarily unavailable to run tasks. When this operation runs, the pool state changes to upgrading. When all compute nodes have finished upgrading, the pool state returns to active. While the upgrade is in progress, the pool's currentOSVersion reflects the OS version that nodes are upgrading from, and targetOSVersion reflects the OS version that nodes are upgrading to. Once the upgrade is complete, currentOSVersion is updated to reflect the OS version now running on all nodes. This operation can only be invoked on pools created with the cloudServiceConfiguration property.",
         "x-ms-request-id": "request-id",
@@ -10061,6 +10219,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_GetRemoteDesktop",
+        "x-ms-examples": {
+          "Get RDP file of the compute node": { "$ref": "./examples/NodeGetRemoteDesktop.json" }
+        },
         "summary": "Gets the Remote Desktop Protocol file for the specified compute node.",
         "description": "Before you can access a node by using the RDP file, you must create a user account on the node. This API can only be invoked on pools created with a cloud service configuration. For pools created with a virtual machine configuration, see the GetRemoteLoginSettings API.",
         "x-ms-request-id": "request-id",
@@ -10129,6 +10290,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
+        "produces": [
+          "application/json",
+          "application/octet-stream"
+        ],
         "responses": {
           "200": {
             "headers": {
@@ -10156,6 +10321,120 @@
             "schema": {
               "type": "file"
             }
+          },
+          "default": {
+            "description": "The error from the Batch service.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        }
+      }
+    },
+    "/pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs": {
+      "post": {
+        "tags": [
+          "ComputeNodes"
+        ],
+        "operationId": "ComputeNode_UploadBatchServiceLogs",
+        "summary": "Upload Azure Batch service log files from the specified compute node.",
+        "description": "This is for gathering Azure Batch service log files in an automated fashion from nodes if you are experiencing an error and wish to escalate to Azure support. The Azure Batch service log files should be shared with Azure support to aid in debugging issues with the Batch service.",
+        "x-ms-examples": {
+          "Upload BatchService Logs": { "$ref": "./examples/NodeUploadBatchServiceLogs.json" }
+        },
+        "x-ms-request-id": "request-id",
+        "parameters": [
+          {
+            "name": "poolId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the pool that contains the compute node."
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the compute node from which you want to upload the Azure Batch service log files."
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            },
+            "x-ms-client-request-id": true
+          },
+          {
+            "name": "return-client-request-id",
+            "default": false,
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "The time the request was issued. Client libraries typically set this to the current system clock time; set it explicitly if you are calling the REST API directly.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "uploadBatchServiceLogsConfiguration",
+            "in": "body",
+            "description": "The Azure Batch service log files upload configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadBatchServiceLogsConfiguration"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "client-request-id": {
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "request-id": {
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch account against which the request was made, and the region that account resides in.",
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "description": "The request to the Batch service was successful.",
+            "schema": {
+              "$ref": "#/definitions/UploadBatchServiceLogsResult"
+            }            
           },
           "default": {
             "description": "The error from the Batch service.",
@@ -11147,7 +11426,7 @@
         },
         "elevationLevel": {
           "title": "The elevation level of the auto user.",
-          "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
+          "description": "The default value is nonAdmin.",
           "$ref": "#/definitions/ElevationLevel"
         }
       },
@@ -15474,6 +15753,166 @@
           }
         ]
       }
+    },
+    "UploadBatchServiceLogsConfiguration": {
+      "properties": {
+        "containerUrl": {
+          "type": "string",
+          "title": "The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s).",
+          "description": "The URL must include a Shared Access Signature (SAS) granting write permissions to the container."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The start of the time range from which to upload Batch Service log file(s).",
+          "description": "Any log file containing a log message in the time range will be uploaded. This means that the operation might retrieve more logs than have been requested since the entire log file is always uploaded, but the operation should not retrieve less logs than have been requested."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The end of the time range from which to upload Batch Service log file(s).",
+          "description": "Any log file containing a log message in the time range will be uploaded. This means that the operation might retrieve more logs than have been requested since the entire log file is always uploaded, but the operation should not retrieve less logs than have been requested. If omitted, the default is the current time, meaning all currently existing log files after the start time will be uploaded."
+        }
+      },
+      "required": [ "containerUrl", "startTime" ],
+      "title": "The Azure Batch service log files upload configuration for a compute node."
+    },
+    "UploadBatchServiceLogsResult": {
+      "properties": {
+        "virtualDirectoryName": {
+          "type": "string",
+          "title": "The virtual directory within Azure Blob Storage container to which the Batch Service log file(s) will be uploaded.",
+          "description": "The virtual directory name is part of the blob name for each log file uploaded."
+        },
+        "uploadSetSize": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of log files which will be uploaded."
+        }
+      },
+      "required": ["virtualDirectoryName", "uploadSetSize"],
+      "title": "The result of uploading batch service log files from a specific compute node."
+    },
+    "PoolNodeCountsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PoolNodeCounts"
+          },
+          "description": "A list of node counts by pool."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "title": "The URL to get the next set of results."
+        }
+      },
+      "title": "The result of listing the node counts in the account."
+    },
+    "PoolNodeCounts": {
+      "properties": {
+        "poolId": {
+          "type": "string",
+          "title": "The ID of the pool."
+        },
+        "dedicated": {
+          "$ref": "#/definitions/NodeCounts",
+          "title": "The number of dedicated nodes in each state."
+        },
+        "lowPriority": {
+          "$ref": "#/definitions/NodeCounts",
+          "title": "The number of low priority nodes in each state."
+        }
+      },
+      "required": [
+        "poolId"
+      ],
+      "title": "The number of nodes in each state for a pool."
+    },
+    "NodeCounts": {
+      "properties": {
+        "creating": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in creating state."
+        },
+        "idle": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in idle state."
+        },
+        "offline": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in offline state."
+        },
+        "preempted": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in preempted state."
+        },
+        "rebooting": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The count of nodes in rebooting state."
+        },
+        "reimaging": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in reimaging state."
+        },
+        "running": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in running state."
+        },
+        "starting": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in starting state."
+        },
+        "startTaskFailed": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in startTaskFailed state."
+        },
+        "unknown": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in unknown state."
+        },
+        "unusable": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in unusable state."
+        },
+        "waitingForStartTask": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in waitingForStartTask state."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The total number of nodes."
+        }
+      },
+      "required": [
+        "creating",
+        "idle",
+        "offline",
+        "preempted",
+        "rebooting",
+        "reimaging",
+        "running",
+        "starting",
+        "startTaskFailed",
+        "unknown",
+        "unusable",
+        "waitingForStartTask",
+        "total"
+      ],
+      "title": "The number of nodes in each node state."
     }
   },
   "parameters": {
