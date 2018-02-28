@@ -26,9 +26,17 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-08
+tag: package-2018-01
 ```
 
+### Tag: package-2016-08
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.RecoveryServices/stable/2018-01-10/service.json
+```
 
 ### Tag: package-2016-08
 
@@ -86,7 +94,17 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-01
   - tag: package-2016-08
+```
+
+### Tag: package-2018-01 and go
+
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2018-01-10/siterecovery
 ```
 
 ### Tag: package-2016-08 and go

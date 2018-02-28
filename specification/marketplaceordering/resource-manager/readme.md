@@ -130,6 +130,24 @@ directive:
     transform: delete $.format
 ```
 
+## Node.js
+
+``` yaml $(nodejs)
+directive:
+  - from: swagger-document
+    where: $.definitions.AgreementProperties.properties.retrieveDatetime
+    transform: delete $.format
+```
+
+## TypeScript
+
+``` yaml $(typescript)
+directive:
+  - from: swagger-document
+    where: $.definitions.AgreementProperties.properties.retrieveDatetime
+    transform: delete $.format
+```
+
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
