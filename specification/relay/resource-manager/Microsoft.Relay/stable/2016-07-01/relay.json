@@ -403,6 +403,47 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListPostAuthorizationRules",
+        "x-ms-examples": {
+          "RelayNameSpaceAutorizationRuleListAll": { "$ref": "./examples/RelayNameSpaceAutorizationRuleListAll.json" }
+        },
+        "description": "Authorization rules for a namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace Authorization rule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
@@ -502,6 +543,47 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
+        "x-ms-examples": {
+          "RelayNameSpaceAutorizationRuleGet": { "$ref": "./examples/RelayNameSpaceAutorizationRuleGet.json" }
+        },
+        "description": "Authorization rule for a namespace by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace Authorization rule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_PostAuthorizationRule",
         "x-ms-examples": {
           "RelayNameSpaceAutorizationRuleGet": { "$ref": "./examples/RelayNameSpaceAutorizationRuleGet.json" }
         },
@@ -849,6 +931,44 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "post": {
+        "tags": [
+          "HybridConnections"
+        ],
+        "operationId": "HybridConnections_ListPostAuthorizationRules",
+        "x-ms-examples": {
+          "RelayHybridConnectionAutorizationRuleListAll": { "$ref": "./examples/RelayHybridConnectionAutorizationRuleListAll.json" }
+        },
+        "description": "Authorization rules for a HybridConnection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/hybridConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rules successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}": {
@@ -954,6 +1074,50 @@
           "HybridConnections"
         ],
         "operationId": "HybridConnections_GetAuthorizationRule",
+        "x-ms-examples": {
+          "RelayHybridConnectionAutorizationRuleGet": { "$ref": "./examples/RelayHybridConnectionAutorizationRuleGet.json" }
+        },
+        "description": "HybridConnection authorizationRule for a HybridConnection by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/hybridConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HybridConnection AuthorizationRule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "HybridConnections"
+        ],
+        "operationId": "HybridConnections_PostAuthorizationRule",
         "x-ms-examples": {
           "RelayHybridConnectionAutorizationRuleGet": { "$ref": "./examples/RelayHybridConnectionAutorizationRuleGet.json" }
         },
@@ -1313,6 +1477,44 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "post": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_ListPostAuthorizationRules",
+        "x-ms-examples": {
+          "RelayAutorizationRuleListAll": { "$ref": "./examples/RelayAutorizationRuleListAll.json" }
+        },
+        "description": "Authorization rules for a WCFRelays.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/relayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rules successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays/{relayName}/authorizationRules/{authorizationRuleName}": {
@@ -1418,6 +1620,50 @@
           "WCFRelays"
         ],
         "operationId": "WCFRelays_GetAuthorizationRule",
+        "x-ms-examples": {
+          "RelayAutorizationRuleGet": { "$ref": "./examples/RelayAutorizationRuleGet.json" }
+        },
+        "description": "Get authorizationRule for a WCFRelays by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/relayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request for WCFRelays AuthorizationRule succeeded",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_PostAuthorizationRule",
         "x-ms-examples": {
           "RelayAutorizationRuleGet": { "$ref": "./examples/RelayAutorizationRuleGet.json" }
         },

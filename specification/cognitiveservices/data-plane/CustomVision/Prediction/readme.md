@@ -47,7 +47,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Vision/Generated/CustomVision/Prediction
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/CustomVision/Prediction/Generated
   clear-output-folder: true
 ```
 
