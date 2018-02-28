@@ -159,7 +159,7 @@
           "items": {
             "$ref": "#/definitions/AdPrincipal"
           },
-          "description": "The list of principals that should be granted Owner access on the subscription."
+          "description": "The list of principals that should be granted Owner access on the subscription. Principals should be of type User, Service Principal or Security Group."
         },
         "offerType": {
           "description": "The offer type of the subscription. For example, MS-AZR-0017P (EnterpriseAgreement) and MS-AZR-0148P (EnterpriseAgreement devTest) are available. Only valid when creating a subscription in a billing account scope.",
@@ -193,7 +193,7 @@
       "description": "Active Directory Principal for subscription creation delegated permission",
       "properties": {
         "tenantId": {
-          "description": "Tenant id of the Principal",
+          "description": "Tenant id of the Principal. Must be the current tenant the caller is logged in to.",
           "format": "uuid",
           "type": "string"
         },
