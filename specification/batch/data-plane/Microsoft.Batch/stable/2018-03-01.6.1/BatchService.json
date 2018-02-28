@@ -15759,7 +15759,7 @@
         "containerUrl": {
           "type": "string",
           "title": "The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s).",
-          "description": "The URL must include a Shared Access Signature (SAS) granting write permissions to the container."
+          "description": "The URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified."
         },
         "startTime": {
           "type": "string",
@@ -15771,7 +15771,7 @@
           "type": "string",
           "format": "date-time",
           "title": "The end of the time range from which to upload Batch Service log file(s).",
-          "description": "Any log file containing a log message in the time range will be uploaded. This means that the operation might retrieve more logs than have been requested since the entire log file is always uploaded, but the operation should not retrieve less logs than have been requested. If omitted, the default is the current time, meaning all currently existing log files after the start time will be uploaded."
+          "description": "Any log file containing a log message in the time range will be uploaded. This means that the operation might retrieve more logs than have been requested since the entire log file is always uploaded, but the operation should not retrieve less logs than have been requested. If omitted, the default is to upload all logs available after the startTime."
         }
       },
       "required": [ "containerUrl", "startTime" ],
@@ -15782,15 +15782,15 @@
         "virtualDirectoryName": {
           "type": "string",
           "title": "The virtual directory within Azure Blob Storage container to which the Batch Service log file(s) will be uploaded.",
-          "description": "The virtual directory name is part of the blob name for each log file uploaded."
+          "description": "The virtual directory name is part of the blob name for each log file uploaded, and it is built based poolId, nodeId and a unique identifier."
         },
-        "uploadSetSize": {
+        "numberOfFilesUploaded": {
           "type": "integer",
           "format": "int32",
           "title": "The number of log files which will be uploaded."
         }
       },
-      "required": ["virtualDirectoryName", "uploadSetSize"],
+      "required": ["virtualDirectoryName", "numberOfFilesUploaded"],
       "title": "The result of uploading batch service log files from a specific compute node."
     },
     "PoolNodeCountsListResult": {
