@@ -43,6 +43,7 @@ input-file:
 - Microsoft.Network/stable/2018-02-01/checkDnsAvailability.json
 - Microsoft.Network/stable/2018-02-01/endpointService.json
 - Microsoft.Network/stable/2018-02-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-02-01/expressRouteCrossConnection.json
 - Microsoft.Network/stable/2018-02-01/loadBalancer.json
 - Microsoft.Network/stable/2018-02-01/network.json
 - Microsoft.Network/stable/2018-02-01/networkInterface.json
