@@ -609,7 +609,7 @@
       "type": "object",
       "description": "A disk discovered on a machine.",
       "properties": {
-        "gigabytesProvisioned": {
+        "gigabytesAllocated": {
           "type": "number",
           "format": "double",
           "description": "Gigabytes of storage provisioned for this disk.",
@@ -768,30 +768,18 @@
         },
         "disks": {
           "type": "object",
-          "description": "Dictionary of disks attached to the machine.",
-          "properties": {
-            "disks": {
-              "type": "object",
-              "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object",
-              "readOnly": true,
-              "additionalProperties": {
-                "$ref": "#/definitions/Disk"
-              }
-            }
+          "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/Disk"
           }
         },
         "networkAdapters": {
           "type": "object",
-          "description": "Dictionary of network adapters attached to the machine.",
-          "properties": {
-            "networkAdapters": {
-              "type": "object",
-              "description": "Dictionary of network adapters attached to the machine. Key is ID of network adapter. Value is a network adapter object",
-              "readOnly": true,
-              "additionalProperties": {
-                "$ref": "#/definitions/NetworkAdapter"
-              }
-            }
+          "description": "Dictionary of network adapters attached to the machine. Key is ID of network adapter. Value is a network adapter object",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/NetworkAdapter"
           }
         }
       }
@@ -800,6 +788,11 @@
       "type": "object",
       "description": "A disk assessed for an assessment.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the assessed disk.",
+          "readOnly": true
+        },
         "gigabytesProvisioned": {
           "type": "number",
           "format": "double",
@@ -882,7 +875,7 @@
             "modelAsString": true
           }
         },
-        "gigabytesForRecommendedSize": {
+        "gigabytesForRecommendedDiskSize": {
           "type": "integer",
           "format": "int32",
           "description": "Gigabytes of storage provided by the recommended Azure disk size.",
@@ -1123,30 +1116,18 @@
         },
         "disks": {
           "type": "object",
-          "description": "Dictionary of disks attached to the machine. Key is ID of disk.",
-          "properties": {
-            "disks": {
-              "type": "object",
-              "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object.",
-              "readOnly": true,
-              "additionalProperties": {
-                "$ref": "#/definitions/AssessedDisk"
-              }
-            }
+          "description": "Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object.",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/AssessedDisk"
           }
         },
         "networkAdapters": {
           "type": "object",
-          "description": "Dictionary of network adapters attached to the machine.",
-          "properties": {
-            "networkAdapters": {
-              "type": "string",
-              "description": "Dictionary of network adapters attached to the machine. Key is name of the adapter. Value is a network adapter object.",
-              "readOnly": true,
-              "additionalProperties": {
-                "$ref": "#/definitions/AssessedNetworkAdapter"
-              }
-            }
+          "description": "Dictionary of network adapters attached to the machine. Key is name of the adapter. Value is a network adapter object.",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/AssessedNetworkAdapter"
           }
         },
         "recommendedSize": {
