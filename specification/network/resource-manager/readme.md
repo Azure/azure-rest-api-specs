@@ -41,6 +41,7 @@ input-file:
 - Microsoft.Network/stable/2018-02-01/applicationGateway.json
 - Microsoft.Network/stable/2018-02-01/applicationSecurityGroup.json
 - Microsoft.Network/stable/2018-02-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-02-01/ddosProtectionPlan.json
 - Microsoft.Network/stable/2018-02-01/endpointService.json
 - Microsoft.Network/stable/2018-02-01/expressRouteCircuit.json
 - Microsoft.Network/stable/2018-02-01/loadBalancer.json
