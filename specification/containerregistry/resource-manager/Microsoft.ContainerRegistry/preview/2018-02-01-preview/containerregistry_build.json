@@ -445,8 +445,11 @@
               "$ref": "#/definitions/Build"
             }
           },
-          "202": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/Build"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
@@ -700,7 +703,10 @@
             }
           },
           "201": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource."
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/BuildStep"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned.",
@@ -806,7 +812,10 @@
             }
           },
           "201": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource."
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/BuildStep"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned.",
@@ -2088,10 +2097,6 @@
       "properties": {
         "dockerFilePath": {
           "description": "The Docker file path relative to the source control root.",
-          "type": "string"
-        },
-        "contextPath": {
-          "description": "The relative context path for a docker build in the source.",
           "type": "string"
         }
       },
