@@ -3,7 +3,7 @@
   "info": {
     "title": "DnsManagementClient",
     "description": "The DNS Management Client.",
-    "version": "2017-10-01"
+    "version": "2017-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -119,35 +119,8 @@
           }
         },
         "x-ms-examples": {
-          "Patch A recordset": {
-            "$ref": "./examples/PatchARecordset.json"
-          },
-          "Patch AAAA recordset": {
-            "$ref": "./examples/PatchAAAARecordset.json"
-          },
           "Patch CAA recordset": {
             "$ref": "./examples/PatchCaaRecordset.json"
-          },
-          "Patch CNAME recordset": {
-            "$ref": "./examples/PatchCNAMERecordset.json"
-          },
-          "Patch MX recordset": {
-            "$ref": "./examples/PatchMXRecordset.json"
-          },
-          "Patch NS recordset": {
-            "$ref": "./examples/PatchNSRecordset.json"
-          },
-          "Patch PTR recordset": {
-            "$ref": "./examples/PatchPTRRecordset.json"
-          },
-          "Patch SOA recordset": {
-            "$ref": "./examples/PatchSOARecordset.json"
-          },
-          "Patch SRV recordset": {
-            "$ref": "./examples/PatchSRVRecordset.json"
-          },
-          "Patch TXT recordset": {
-            "$ref": "./examples/PatchTXTRecordset.json"
           }
         }
       },
@@ -256,35 +229,8 @@
           }
         },
         "x-ms-examples": {
-          "Create A recordset": {
-            "$ref": "./examples/CreateOrUpdateARecordset.json"
-          },
-          "Create AAAA recordset": {
-            "$ref": "./examples/CreateOrUpdateAAAARecordset.json"
-          },
           "Create CAA recordset": {
             "$ref": "./examples/CreateOrUpdateCaaRecordset.json"
-          },
-          "Create CNAME recordset": {
-            "$ref": "./examples/CreateOrUpdateCNAMERecordset.json"
-          },
-          "Create MX recordset": {
-            "$ref": "./examples/CreateOrUpdateMXRecordset.json"
-          },
-          "Create NS recordset": {
-            "$ref": "./examples/CreateOrUpdateNSRecordset.json"
-          },
-          "Create PTR recordset": {
-            "$ref": "./examples/CreateOrUpdatePTRRecordset.json"
-          },
-          "Create SOA recordset": {
-            "$ref": "./examples/CreateOrUpdateSOARecordset.json"
-          },
-          "Create SRV recordset": {
-            "$ref": "./examples/CreateOrUpdateSRVRecordset.json"
-          },
-          "Create TXT recordset": {
-            "$ref": "./examples/CreateOrUpdateTXTRecordset.json"
           }
         }
       },
@@ -370,32 +316,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete A recordset": {
-            "$ref": "./examples/DeleteARecordset.json"
-          },
-          "Delete AAAA recordset": {
-            "$ref": "./examples/DeleteAAAARecordset.json"
-          },
           "Delete CAA recordset": {
             "$ref": "./examples/DeleteCaaRecordset.json"
-          },
-          "Delete CNAME recordset": {
-            "$ref": "./examples/DeleteARecordset.json"
-          },
-          "Delete MX recordset": {
-            "$ref": "./examples/DeleteARecordset.json"
-          },
-          "Delete NS recordset": {
-            "$ref": "./examples/DeleteARecordset.json"
-          },
-          "Delete PTR recordset": {
-            "$ref": "./examples/DeletePTRRecordset.json"
-          },
-          "Delete SRV recordset": {
-            "$ref": "./examples/DeleteSRVRecordset.json"
-          },
-          "Delete TXT recordset": {
-            "$ref": "./examples/DeleteTXTRecordset.json"
           }
         }
       },
@@ -473,35 +395,8 @@
           }
         },
         "x-ms-examples": {
-          "Get A recordset": {
-            "$ref": "./examples/GetARecordset.json"
-          },
-          "Get AAAA recordset": {
-            "$ref": "./examples/GetAAAARecordset.json"
-          },
           "Get CAA recordset": {
             "$ref": "./examples/GetCaaRecordset.json"
-          },
-          "Get CNAME recordset": {
-            "$ref": "./examples/GetCNAMERecordset.json"
-          },
-          "Get MX recordset": {
-            "$ref": "./examples/GetMXRecordset.json"
-          },
-          "Get NS recordset": {
-            "$ref": "./examples/GetNSRecordset.json"
-          },
-          "Get PTR recordset": {
-            "$ref": "./examples/GetPTRRecordset.json"
-          },
-          "Get SOA recordset": {
-            "$ref": "./examples/GetSOARecordset.json"
-          },
-          "Get SRV recordset": {
-            "$ref": "./examples/GetSRVRecordset.json"
-          },
-          "Get TXT recordset": {
-            "$ref": "./examples/GetTXTRecordset.json"
           }
         }
       }
@@ -591,35 +486,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List A recordsets": {
-            "$ref": "./examples/ListARecordset.json"
-          },
-          "List AAAA recordsets": {
-            "$ref": "./examples/ListAAAARecordset.json"
-          },
-          "List CAA recordsets": {
+          "List CAA recordset": {
             "$ref": "./examples/ListCaaRecordset.json"
-          },
-          "List CNAME recordsets": {
-            "$ref": "./examples/ListCNAMERecordset.json"
-          },
-          "List MX recordsets": {
-            "$ref": "./examples/ListMXRecordset.json"
-          },
-          "List NS recordsets": {
-            "$ref": "./examples/ListNSRecordset.json"
-          },
-          "List PTR recordsets": {
-            "$ref": "./examples/ListPTRRecordset.json"
-          },
-          "List SOA recordsets": {
-            "$ref": "./examples/ListSOARecordset.json"
-          },
-          "List SRV recordsets": {
-            "$ref": "./examples/ListSRVRecordset.json"
-          },
-          "List TXT recordsets": {
-            "$ref": "./examples/ListTXTRecordset.json"
           }
         }
       }
@@ -630,74 +498,6 @@
           "RecordSets"
         ],
         "operationId": "RecordSets_ListByDnsZone",
-        "description": "Lists all record sets in a DNS zone.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "zoneName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the DNS zone (without a terminating dot)."
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
-          },
-          {
-            "name": "$recordsetnamesuffix",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "schema": {
-              "$ref": "#/definitions/RecordSetListResult"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List recordsets by zone": {
-            "$ref": "./examples/ListRecordSetsByZone.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/all": {
-      "get": {
-        "tags": [
-          "RecordSets"
-        ],
-        "operationId": "RecordSets_ListAllByDnsZone",
         "description": "Lists all record sets in a DNS zone.",
         "parameters": [
           {
@@ -945,71 +745,6 @@
         "x-ms-examples": {
           "Get zone": {
             "$ref": "./examples/GetZone.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Zones"
-        ],
-        "operationId": "Zones_Update",
-        "description": "Updates a DNS zone. Does not modify DNS records within the zone.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "zoneName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the DNS zone (without a terminating dot)."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Zone"
-            },
-            "description": "Parameters supplied to the Update operation."
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwritting any concurrent changes."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The DNS zone has been updated.",
-            "schema": {
-              "$ref": "#/definitions/Zone"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Patch zone": {
-            "$ref": "./examples/PatchZone.json"
           }
         }
       }
@@ -1515,6 +1250,9 @@
           "description": "Resource tags."
         }
       },
+      "required": [
+        "location"
+      ],
       "description": "Common properties of an Azure Resource Manager resource"
     },
     "SubResource": {
