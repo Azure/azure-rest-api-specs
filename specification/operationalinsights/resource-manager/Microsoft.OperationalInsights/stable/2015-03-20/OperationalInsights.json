@@ -634,6 +634,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purge": {
       "post": {
         "description": "Purges data in an Log Analytics workspace by a set of user-defined filters.",
+        "x-ms-long-running-operation": true,
         "operationId": "Workspace_Purge",
         "parameters": [
           {
@@ -658,37 +659,7 @@
             "schema": {
               "$ref": "#/definitions/WorkspacePurgeResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "WorkspacePurge": {
-            "$ref": "./examples/WorkspacesPurge.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/operations/{purgeId}": {
-      "get": {
-        "description": "Gets the status of a previously submitted purge using the id returned from the original purge request.",
-        "operationId": "Workspace_GetPurgeStatus",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspacePurgeIdParameter"
-          }         
-        ],
-        "responses": {
           "200": {
             "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
             "schema": {
@@ -697,8 +668,8 @@
           }
         },
         "x-ms-examples": {
-          "WorkspacePurgeStatus": {
-            "$ref": "./examples/WorkspacesPurgeStatus.json"
+          "WorkspacePurge": {
+            "$ref": "./examples/WorkspacesPurge.json"
           }
         }
       }
