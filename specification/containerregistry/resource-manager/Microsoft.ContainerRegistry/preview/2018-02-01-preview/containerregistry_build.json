@@ -2025,7 +2025,7 @@
         "type",
         "sourceLocation",
         "platform",
-        "buildParameters"
+        "dockerFilePath"
       ],
       "type": "object",
       "allOf": [
@@ -2063,44 +2063,12 @@
           "$ref": "#/definitions/PlatformProperties",
           "description": "The platform properties against which the build will happen."
         },
-        "buildParameters": {
-          "$ref": "#/definitions/QueueBuildParameters",
-          "description": "The build parameters depending on the type of the build."
-        }
-      },
-      "x-ms-discriminator-value": "QuickBuild"
-    },
-    "QueueBuildParameters": {
-      "description": "The properties of a quick build.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the build parameters.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "discriminator": "type"
-    },
-    "DockerBuildParameters": {
-      "description": "Build parameters for a docker build.",
-      "required": [
-        "type",
-        "dockerFilePath"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/QueueBuildParameters"
-        }
-      ],
-      "properties": {
         "dockerFilePath": {
           "description": "The Docker file path relative to the source control root.",
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "Docker"
+      "x-ms-discriminator-value": "QuickBuild"
     }
   },
   "parameters": {
