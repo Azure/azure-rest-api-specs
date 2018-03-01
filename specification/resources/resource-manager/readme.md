@@ -41,7 +41,7 @@ tag: package-policy-2017-06
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2017-05
+tag: package-resources-2018-02
 ```
 
 ``` yaml $(package-subscriptions)
@@ -121,6 +121,14 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2018-02
+These settings apply only when `--tag=package-resources-2018-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2018-02'
+input-file:
+- Microsoft.Resources/stable/2018-02-01/resources.json
 ```
 
 ### Tag: package-resources-2017-05
@@ -271,6 +279,7 @@ batch:
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - tag: package-resources-2018-02
   - tag: package-resources-2017-05
   - tag: package-resources-2016-09
   - tag: package-resources-2016-07
@@ -350,6 +359,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-policy-2015-10' && $(go)
 namespace: policy
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-10-01-preview/policy
+```
+
+### Tag: package-resources-2018-02 and go
+
+These settings apply only when `--tag=package-resources-2018-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-resources-2018-02' && $(go)
+namespace: resources
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-02-01/resources
 ```
 
 ### Tag: package-resources-2017-05 and go
@@ -473,6 +492,7 @@ batch:
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - tag: package-resources-2018-02
   - tag: package-resources-2017-05
   - tag: package-resources-2016-09
   - tag: package-resources-2016-02
@@ -576,6 +596,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.resource.policy.v2015_10_01_preview
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
+```
+
+### Tag: package-resources-2018-02 and python
+
+These settings apply only when `--tag=package-resources-2018-02 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2018-02' && $(python)
+python:
+  namespace: azure.mgmt.resource.resources.v2018_02_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/resources/v2018_02_01
 ```
 
 ### Tag: package-resources-2017-05 and python
