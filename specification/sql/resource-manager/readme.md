@@ -33,6 +33,17 @@ tag: package-2017-03-preview
 
 ## Configuration for generating client SDKs
 
+### Tag: package-2017-10-preview
+
+These settings apply only when `--tag=package-2017-10-preview` is specified on the command line.
+
+This section contains the input swagger files that are used when generating client SDKs up to and including api-version 2017-10-01-preview. APIs should only be added to this section when the API is ready for production and the generated client code has been tested end-to-end.
+
+``` yaml $(tag) == 'package-2017-10-preview'
+input-file:
+- Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+
 ### Tag: package-2017-03-preview
 
 These settings apply only when `--tag=package-2017-03-preview` is specified on the command line.
@@ -78,6 +89,8 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
+- Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
+
 
 # Needed when there is more than one input file
 override-info:
