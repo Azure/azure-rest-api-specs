@@ -254,7 +254,7 @@
             "description": "The parameters for updating a build definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BuildDefinition"
+              "$ref": "#/definitions/BuildDefinitionUpdateParameters"
             }
           }
         ],
@@ -495,7 +495,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/BuildGetLogResult"
             }
           },
           "default": {
@@ -794,7 +794,7 @@
             "description": "The parameters for updating a build step.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BuildStep"
+              "$ref": "#/definitions/BuildStepUpdateParameters"
             }
           }
         ],
@@ -867,6 +867,54 @@
         "x-ms-examples": {
           "BuildSteps_ListBuildArguments": {
             "$ref": "./examples/BuildStepsListBuildArguments.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps/{stepName}/listBaseImageDependencies": {
+      "post": {
+        "tags": [
+          "BuildSteps"
+        ],
+        "summary": "List all the base image dependencies for a step if available.",
+        "operationId": "BuildSteps_ListBaseImageDependencies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/stepNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BaseImageDependencyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildSteps_ListBaseImageDependencies": {
+            "$ref": "./examples/BuildStepsListBaseImageDependencies.json"
           }
         }
       }
@@ -1062,6 +1110,11 @@
     },
     "BuildDefinitionProperties": {
       "description": "The properties of a build definition.",
+      "required": [
+        "alias",
+        "sourceRepository",
+        "platform"
+      ],
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1115,11 +1168,6 @@
           "format": "int32",
           "description": "Build timeout in seconds.",
           "type": "integer"
-        },
-        "isBaseImageTriggersEnabled": {
-          "description": "The value of this property indicates whether auto triggers of the build items trigger a build against this definition.",
-          "default": false,
-          "type": "boolean"
         }
       }
     },
@@ -1229,6 +1277,79 @@
         "alias": {
           "description": "The alternative name for build definition.",
           "type": "string"
+        }
+      }
+    },
+    "BuildDefinitionUpdateParameters": {
+      "description": "The parameters for updating a build definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildDefinitionPropertiesUpdateParameters",
+          "description": "The properties for updating a build definition.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The ARM resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BuildDefinitionPropertiesUpdateParameters": {
+      "description": "The properties for updating a build definition.",
+      "type": "object",
+      "properties": {
+        "alias": {
+          "description": "The alternative updatable name for a build definition.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of build definition.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BuildDefinitionStatus",
+            "modelAsString": true
+          }
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the build has to happen."
+        },
+        "timeout": {
+          "format": "int32",
+          "description": "Build timeout in seconds.",
+          "type": "integer"
+        },
+        "isBaseImageTriggersEnabled": {
+          "description": "The value of this property indicates whether auto triggers of the build items trigger a build against this definition.",
+          "default": false,
+          "type": "boolean"
+        },
+        "sourceRepository": {
+          "$ref": "#/definitions/SourceRepositoryUpdateParameters",
+          "description": "The properties that describes the source(code) for the build definition."
+        }
+      }
+    },
+    "SourceRepositoryUpdateParameters": {
+      "description": "The properties for updating the source code repository configuration.",
+      "type": "object",
+      "properties": {
+        "sourceControlAuthProperties": {
+          "$ref": "#/definitions/SourceControlAuthInfo",
+          "description": "The authorization properties for accessing the source code repository."
+        },
+        "isCommitTriggerEnabled": {
+          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
@@ -1457,6 +1578,16 @@
         }
       }
     },
+    "BuildGetLogResult": {
+      "description": "The result of get log link operation.",
+      "type": "object",
+      "properties": {
+        "logLink": {
+          "description": "The link to logs for a azure container registry build.",
+          "type": "string"
+        }
+      }
+    },
     "BuildStepList": {
       "description": "The collection of build items.",
       "type": "object",
@@ -1526,6 +1657,42 @@
       },
       "discriminator": "type"
     },
+    "BuildStepUpdateParameters": {
+      "description": "The parameters for updating a build step.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildStepPropertiesUpdateParameters",
+          "description": "The properties for updating a build step.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The ARM resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BuildStepPropertiesUpdateParameters": {
+      "description": "The properties for updating a build step.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the step.",
+          "enum": [
+            "Docker"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuildStepType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "BuildArgumentList": {
       "type": "object",
       "properties": {
@@ -1577,6 +1744,22 @@
         }
       }
     },
+    "BaseImageDependencyList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseImageDependency"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
     "BaseImageDependency": {
       "description": "Properties that describe a base image dependency.",
       "required": [
@@ -1599,6 +1782,7 @@
         },
         "isAutoTriggerEnabled": {
           "description": "The value of this flag indicates if build has to be auto triggered when this image is updated.",
+          "default": false,
           "type": "boolean"
         },
         "repositoryName": {
@@ -1620,7 +1804,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the build parameters.",
+          "description": "The type of the build request.",
           "type": "string",
           "readOnly": true
         }
@@ -1761,10 +1945,6 @@
     },
     "DockerBuildStep": {
       "description": "The Docker build step.",
-      "required": [
-        "branch",
-        "imageName"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -1835,6 +2015,7 @@
       "required": [
         "type",
         "sourceLocation",
+        "platform",
         "buildParameters"
       ],
       "type": "object",
