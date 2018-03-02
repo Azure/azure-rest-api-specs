@@ -3,7 +3,7 @@
     "info": {
         "title": "ApiManagementClient",
         "description": "Use these REST APIs for performing operations on the ApiVersionSet entity associated with your Azure API Management deployment. Using this entity you create and manage API Version Sets that are used to group APIs for consistent versioning.",
-        "version": "2017-03-01"
+        "version": "2018-01-01"
     },
     "host": "management.azure.com",
     "schemes": [
@@ -35,20 +35,6 @@
     },
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/api-version-sets": {
-            "parameters": [
-                {
-                    "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-                },
-                {
-                    "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-                },
-                {
-                    "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-                },
-                {
-                    "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-                }
-            ],
             "get": {
                 "tags": [
                     "ApiVersionSets"
@@ -61,6 +47,18 @@
                     }
                 },
                 "parameters": [
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+                    },
                     {
                         "name": "$filter",
                         "in": "query",
@@ -96,23 +94,6 @@
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/api-version-sets/{versionSetId}": {
-            "parameters": [
-                {
-                    "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-                },
-                {
-                    "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-                },
-                {
-                    "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-                },
-                {
-                    "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionSetIdParameter"
-                }
-            ],
             "head": {
                 "tags": [
                     "ApiVersionSets"
@@ -124,6 +105,23 @@
                         "$ref": "./examples/ApiManagementHeadApiVersionSet.json"
                     }
                 },
+                "parameters": [
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionSetIdParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Specified Api Version Set entity exists and current entity state version is present in the ETag header.",
@@ -153,6 +151,23 @@
                         "$ref": "./examples/ApiManagementGetApiVersionSet.json"
                     }
                 },
+                "parameters": [
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionSetIdParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Gets the specified Api Version Set entity.",
@@ -187,6 +202,21 @@
                 },
                 "parameters": [
                     {
+                        "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionSetIdParameter"
+                    },
+                    {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
@@ -196,11 +226,7 @@
                         "description": "Create or update parameters."
                     },
                     {
-                        "name": "If-Match",
-                        "in": "header",
-                        "required": false,
-                        "description": "The entity state (Etag) version of the user to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-                        "type": "string"
+                        "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
                     }
                 ],
                 "responses": {
@@ -237,6 +263,21 @@
                 },
                 "parameters": [
                     {
+                        "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionSetIdParameter"
+                    },
+                    {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
@@ -246,11 +287,7 @@
                         "description": "Update parameters."
                     },
                     {
-                        "name": "If-Match",
-                        "in": "header",
-                        "required": true,
-                        "description": "The entity state (Etag) version of the user to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-                        "type": "string"
+                        "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
                     }
                 ],
                 "responses": {
@@ -278,14 +315,28 @@
                 },
                 "parameters": [
                     {
-                        "name": "If-Match",
-                        "in": "header",
-                        "required": true,
-                        "description": "The entity state (Etag) version of the Api Version Set to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-                        "type": "string"
+                        "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionSetIdParameter"
+                    },
+                    {
+                        "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "The ApiVersion Set details were successfully deleted."
+                    },
                     "204": {
                         "description": "The ApiVersion Set details were successfully deleted."
                     },
@@ -334,7 +385,8 @@
                     "minLength": 1,
                     "maxLength": 100
                 }
-            }
+            },
+            "description": "Api Version set base parameters"
         },
         "ApiVersionSetContractProperties": {
             "properties": {
@@ -387,7 +439,8 @@
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ApiVersionSetContractProperties"
+                    "$ref": "#/definitions/ApiVersionSetContractProperties",
+                    "description": "Api VersionSet contract properties."
                 }
             },
             "allOf": [
@@ -459,8 +512,8 @@
             "type": "string",
             "description": "Api Version Set identifier. Must be unique in the current API Management service instance.",
             "minLength": 1,
-            "maxLength": 256,
-            "pattern": "^[^*#&+:<>?]+$",
+            "maxLength": 80,
+            "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
             "x-ms-parameter-location": "method"
         }
     }

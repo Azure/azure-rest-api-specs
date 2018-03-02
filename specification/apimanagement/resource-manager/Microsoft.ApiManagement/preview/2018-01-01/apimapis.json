@@ -124,7 +124,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -219,8 +219,11 @@
           "ApiManagementCreateApiUsingWadlImport": {
             "$ref": "./examples/ApiManagementCreateApiUsingWadlImport.json"
           },
-          "ApiManagementCreateApiUsingWsdlImport": {
-            "$ref": "./examples/ApiManagementCreateApiUsingWsdlImport.json"
+          "ApiManagementCreateSoapToRestApiUsingWsdlImport": {
+            "$ref": "./examples/ApiManagementCreateSoapToRestApiUsingWsdlImport.json"
+          },
+          "ApiManagementCreateSoapPassThroughApiUsingWsdlImport": {
+            "$ref": "./examples/ApiManagementCreateSoapPassThroughApiUsingWsdlImport.json"
           },
           "ApiManagementCreateApi": {
             "$ref": "./examples/ApiManagementCreateApi.json"
@@ -1315,7 +1318,7 @@
             "description": "The policy contents to apply."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1657,7 +1660,7 @@
             "description": "The policy contents to apply."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -2127,7 +2130,7 @@
         "tags": [
           "ApiDiagnostics"
         ],
-        "operationId": "ApiDiagnostic_Head",
+        "operationId": "ApiDiagnostic_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementHeadApiDiagnostic": {
@@ -2258,11 +2261,7 @@
             "description": "Create parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "ETag of the Diagnostic Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -2326,11 +2325,7 @@
             "description": "Diagnostic Update parameters."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Diagnostic Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -2376,11 +2371,7 @@
             "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Diagnostic Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-            "type": "string"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -2390,6 +2381,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The Diagnostic was successfully deleted."
+          },
           "204": {
             "description": "The Diagnostic was successfully deleted."
           },
@@ -2506,6 +2500,9 @@
           "204": {
             "description": "Entity exists"
           },
+          "404": {
+            "description": "Entity does not exists."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2594,7 +2591,7 @@
             "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -2604,6 +2601,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The Logger was successfully detached from Diagnostic."
+          },
           "204": {
             "description": "The Logger was successfully detached from Diagnostic."
           },
@@ -2661,7 +2661,7 @@
                 },
                 {
                   "value": "wsdl-link",
-                  "description": "Export the Api Definition in WSDL Schema to Storage Blob.",
+                  "description": "Export the Api Definition in WSDL Schema to Storage Blob. This is only supported for APIs of Type `soap`",
                   "name": "Wsdl"
                 },
                 {
@@ -2823,6 +2823,19 @@
               "description": "Name of endpoint(port) to import from WSDL"
             }
           }
+        },
+        "apiType": {
+          "type": "string",
+          "description": "Type of Api to create. \n * `http` creates a SOAP to REST API \n * `soap` creates a SOAP pass-through API .",
+          "enum": [
+            "http",
+            "soap"
+          ],
+          "x-ms-client-name": "SoapApiType",
+          "x-ms-enum": {
+            "name": "SoapApiType",
+            "modelAsString": true
+          }
         }
       },
       "allOf": [
@@ -2868,7 +2881,7 @@
           "description": "Describes on which protocols the operations in this API can be invoked."
         },
         "apiVersionSet": {
-          "$ref": "#/definitions/ApiVersionSetContract"
+          "$ref": "#/definitions/ApiVersionSetContractDetails"
         }
       },
       "allOf": [
@@ -3074,11 +3087,11 @@
         },
         "apiVersionSet": {
           "description": "Version set details",
-          "$ref": "#/definitions/ApiVersionSetContract"
+          "$ref": "#/definitions/ApiVersionSetContractDetails"
         }
       }
     },
-    "ApiVersionSetContract": {
+    "ApiVersionSetContractDetails": {
       "description": "An API Version Set contains the common configuration for a set of API Versions relating ",
       "properties": {
         "id": {
