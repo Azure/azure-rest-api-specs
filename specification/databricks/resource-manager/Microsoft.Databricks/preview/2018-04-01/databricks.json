@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ManagedApplicationClient",
-    "version": "2016-09-01-preview",
-    "description": "ARM managed applications (appliances)"
+    "title": "DatabricksClient",
+    "version": "2018-04-01",
+    "description": "ARM Databricks"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/appliances/{applianceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}": {
       "get": {
         "tags": [
-          "Appliances"
+          "Workspaces"
         ],
-        "operationId": "Appliances_Get",
-        "description": "Gets the appliance.",
+        "operationId": "Workspaces_Get",
+        "description": "Gets the workspace.",
         "x-ms-examples": {
-          "Get an appliance": {
-            "$ref": "./examples/getAppliance.json"
+          "Get a workspace": {
+            "$ref": "./examples/WorkspaceGet.json"
           }
         },
         "parameters": [
@@ -58,11 +58,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceName",
+            "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance.",
+            "description": "The name of the workspace.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -75,9 +75,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the appliance.",
+            "description": "OK - Returns the workspace.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Workspace"
             }
           },
           "404": {
@@ -93,10 +93,15 @@
       },
       "delete": {
         "tags": [
-          "Appliances"
+          "Workspaces"
         ],
-        "operationId": "Appliances_Delete",
-        "description": "Deletes the appliance.",
+        "operationId": "Workspaces_Delete",
+        "description": "Deletes the workspace.",
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/WorkspaceDelete.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -109,11 +114,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceName",
+            "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance.",
+            "description": "The name of the workspace.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -142,13 +147,13 @@
       },
       "put": {
         "tags": [
-          "Appliances"
+          "Workspaces"
         ],
-        "operationId": "Appliances_CreateOrUpdate",
-        "description": "Creates a new appliance.",
+        "operationId": "Workspaces_CreateOrUpdate",
+        "description": "Creates a new workspace.",
         "x-ms-examples": {
-          "Create or update appliance": {
-            "$ref": "./examples/createOrUpdateAppliance.json"
+          "Create or update workspace": {
+            "$ref": "./examples/WorkspaceCreate.json"
           }
         },
         "parameters": [
@@ -163,11 +168,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceName",
+            "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance.",
+            "description": "The name of the workspace.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -176,9 +181,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Workspace"
             },
-            "description": "Parameters supplied to the create or update an appliance."
+            "description": "Parameters supplied to the create or update a workspace."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -189,15 +194,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Created - Returns information about the appliance, including provisioning status.",
+            "description": "Created - Returns information about the workspace, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Workspace"
             }
           },
           "201": {
-            "description": "Created - Returns information about the appliance, including provisioning status.",
+            "description": "Created - Returns information about the workspace, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Workspace"
             }
           },
           "default": {
@@ -208,85 +213,65 @@
           }
         },
         "x-ms-long-running-operation": true
-      },
-    },
+      }
+    }
   },
   "definitions": {
-    "Appliance": {
+    "Workspace": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApplianceProperties",
-          "description": "The appliance properties."
-        },
-        "plan": {
-          "$ref": "#/definitions/Plan",
-          "description": "The plan information."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of the appliance. Allowed values are MarketPlace and ServiceCatalog.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$"
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The workspace properties."
         }
       },
       "required": [
-        "properties",
-        "kind"
+        "properties"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/GenericResource"
         }
       ],
-      "description": "Information about appliance."
+      "description": "Information about workspace."
     },
-    "ApplianceProperties": {
+    "WorkspaceProperties": {
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
           "description": "The managed resource group Id."
         },
-        "applianceDefinitionId": {
-          "type": "string",
-          "description": "The fully qualified path of appliance definition Id."
-        },
         "parameters": {
           "type": "object",
-          "description": "Name and value pairs that define the appliance parameters. It can be a JObject or a well formed JSON string."
-        },
-        "outputs": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Name and value pairs that define the appliance outputs."
+          "description": "Name and value pairs that define the workspace parameters. It can be a JObject or a well formed JSON string."
         },
         "provisioningState": {
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The appliance provisioning state."
+          "description": "The workspace provisioning state."
         },
         "uiDefinitionUri": {
           "type": "string",
           "description": "The blob URI where the UI definition file is located."
+        },
+        "authorizations": {
+          "description": "The workspace provider authorizations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceProviderAuthorization"
+          }
         }
       },
       "required": [
         "managedResourceGroupId"
       ],
-      "description": "The appliance properties."
+      "description": "The workspace properties."
     },
     "GenericResource": {
       "properties": {
-        "managedBy": {
-          "type": "string",
-          "description": "ID of the resource that manages this resource."
-        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
         }
       },
       "allOf": [
@@ -305,55 +290,12 @@
         "tier": {
           "type": "string",
           "description": "The SKU tier."
-        },
-        "size": {
-          "type": "string",
-          "description": "The SKU size."
-        },
-        "family": {
-          "type": "string",
-          "description": "The SKU family."
-        },
-        "model": {
-          "type": "string",
-          "description": "The SKU model."
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The SKU capacity."
         }
       },
       "required": [
         "name"
       ],
       "description": "SKU for the resource."
-    },
-    "Identity": {
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Identity for the resource."
     },
     "Resource": {
       "properties": {
@@ -388,7 +330,7 @@
       "x-ms-azure-resource": true
     },
     "ProvisioningState": {
-      "description": "Provisioning status of the appliance.",
+      "description": "Provisioning status of the workspace.",
       "readOnly": true,
       "enum": [
         "Accepted",
@@ -409,25 +351,25 @@
         "modelAsString": true
       }
     },
-    "ApplianceProviderAuthorization": {
+    "WorkspaceProviderAuthorization": {
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "The provider's principal identifier. This is the identity that the provider will use to call ARM to manage the appliance resources."
+          "description": "The provider's principal identifier. This is the identity that the provider will use to call ARM to manage the workspace resources."
         },
         "roleDefinitionId": {
           "type": "string",
-          "description": "The provider's role definition identifier. This role will define all the permissions that the provider must have on the appliance's container resource group. This role definition cannot have permission to delete the resource group."
+          "description": "The provider's role definition identifier. This role will define all the permissions that the provider must have on the workspace's container resource group. This role definition cannot have permission to delete the resource group."
         }
       },
       "required": [
         "principalId",
         "roleDefinitionId"
       ],
-      "description": "The appliance provider authorization."
+      "description": "The workspace provider authorization."
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates ARM appliance is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates ARM workspace is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "httpStatus": {
