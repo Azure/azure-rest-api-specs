@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2018-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-04-01'
 input-file:
-- Microsoft.Databricks/preview/2018-04-01/databricks.json
+- Microsoft.Databricks/stable/2018-04-01/databricks.json
 ```
 
 ---
