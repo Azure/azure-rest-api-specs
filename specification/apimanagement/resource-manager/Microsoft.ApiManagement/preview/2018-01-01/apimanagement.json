@@ -411,6 +411,29 @@
         "policyContent": {
           "type": "string",
           "description": "Json escaped Xml Encoded contents of the Policy."
+        },
+        "contentFormat": {
+          "type": "string",
+          "description": "Format of the policyContent.",
+          "enum": [
+            "xml",
+            "xml-link"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyContentFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "xml",
+                "description": "The contents are inline and Content type is an XML document."
+              },
+              {
+                "value": "xml-link",
+                "description": "The policy XML document is hosted on a http endpoint accessible from the API Management service."
+              }
+            ]
+          },
+          "default": "xml"
         }
       },
       "required": [
@@ -584,7 +607,7 @@
         "name": "PolicyIdName"
       },
       "x-ms-parameter-location": "method"
-    },    
+    },
     "IfMatchRequiredParameter": {
       "name": "If-Match",
       "in": "header",
