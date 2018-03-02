@@ -2304,7 +2304,7 @@
           "description": "The debug setting of the deployment."
         },
         "onErrorDeployment": {
-          "$ref": "#/definitions/OnErrorDeployment",
+          "$ref": "#/definitions/OnErrorDeploymentExtended",
           "description": "The deployment on error behavior."
         }
       },
@@ -2330,6 +2330,32 @@
         }
       },
       "description": "Deployment on error behavior."
+    },
+    "OnErrorDeploymentExtended": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The state of the provisioning for the on error deployment."
+        },
+        "type": {
+          "type": "string",
+          "description": "The deployment on error behavior type. Possible values are LastSuccessful and SpecificDeployment.",
+          "enum": [
+            "LastSuccessful",
+            "SpecificDeployment"
+          ],
+          "x-ms-enum": {
+            "name": "OnErrorDeploymentType",
+            "modelAsString": false
+          }
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The deployment to be used on error case."
+        }
+      },
+      "description": "Deployment on error behavior with additional details."
     },
     "DeploymentValidateResult": {
       "properties": {
