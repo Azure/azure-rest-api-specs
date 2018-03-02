@@ -3,7 +3,7 @@
   "info": {
     "title": "RedisManagementClient",
     "description": "REST API for Azure Redis Cache Service.",
-    "version": "2017-10-01"
+    "version": "2018-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -187,13 +187,13 @@
         ],
         "responses": {
           "201": {
-            "description": "The new redis cache was successfully created. Check provisioningStatus to see detailed status.",
+            "description": "The new redis cache was successfully created. Check provisioningState to see detailed status.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
           },
           "200": {
-            "description": "The existing redis cache was successfully updated. Check provisioningStatus to see detailed status.",
+            "description": "The existing redis cache was successfully updated. Check provisioningState to see detailed status.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -242,7 +242,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The existing redis cache was successfully updated. Check provisioningStatus to see detailed status.",
+            "description": "The existing redis cache was successfully updated. Check provisioningState to see detailed status.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -283,10 +283,13 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "The redis cache was successfully deleted."
+          },
+          "202": {
+            "description": "The redis cache 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome."
           },
           "204": {
-            "description": ""
+            "description": "The redis cache was successfully deleted."
           }
         }
       },
@@ -323,7 +326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The redis cache was successfully found.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -1307,6 +1310,19 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of shards to be created on a Premium Cluster Cache."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "description": "Optional: requires clients to use a specified TLS version (or higher) to connect (e,g, '1.0', '1.1', '1.2')",
+          "enum": [
+            "1.0",
+            "1.1",
+            "1.2"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVersion",
+            "modelAsString": true
+          }
         }
       },
       "description": "Create/Update/Get common properties of the redis cache.",
@@ -1365,7 +1381,25 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Redis instance provisioning status."
+          "description": "Redis instance provisioning status.",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Disabled",
+            "Failed",
+            "Linking",
+            "Provisioning",
+            "RecoveringScaleFailure",
+            "Scaling",
+            "Succeeded",
+            "Unlinking",
+            "Unprovisioning",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "hostName": {
           "readOnly": true,
