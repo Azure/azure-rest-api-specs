@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/servers/{serverName}/databases/{databaseName}/longTermRetentionBackups/{backupName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}": {
       "get": {
         "tags": [
           "LongTermRetentionBackups"
@@ -32,10 +32,16 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/DatabaseNameParameter"
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "backupName",
@@ -83,10 +89,16 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/DatabaseNameParameter"
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "backupName",
@@ -121,7 +133,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/servers/{serverName}/databases/{databaseName}/longTermRetentionBackups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups": {
       "get": {
         "tags": [
           "LongTermRetentionBackups"
@@ -137,10 +149,16 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/DatabaseNameParameter"
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "onlyLatestPerDatabase",
@@ -259,7 +277,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/servers/{serverName}/longTermRetentionBackups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups": {
       "get": {
         "tags": [
           "LongTermRetentionBackups"
@@ -275,7 +293,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "onlyLatestPerDatabase",
@@ -620,7 +641,7 @@
         },
         "weekOfYear": {
           "format": "int32",
-          "description": "The week of year to take the yearly backup, between 1 and 52.",
+          "description": "The week of year to take the yearly backup in an ISO 8601 format.",
           "type": "integer"
         }
       }
