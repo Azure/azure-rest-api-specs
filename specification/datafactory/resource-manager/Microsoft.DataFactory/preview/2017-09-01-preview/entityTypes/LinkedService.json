@@ -1,4 +1,4 @@
-{
+﻿{
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
@@ -22,6 +22,17 @@
         "description": {
           "description": "Linked service description.",
           "type": "string"
+        },
+        "parameters": {
+          "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
+          "description": "Parameters for linked service."
+        },
+        "annotations": {
+          "description": "List of tags that can be used for describing the Dataset.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
         }
       },
       "additionalProperties": {
@@ -3836,6 +3847,18 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "headNodeSize": {
+          "type": "object",
+          "description": "Specifies the size of the head node for the HDInsight cluster."
+        },
+        "dataNodeSize": {
+          "type": "object",
+          "description": "Specifies the size of the data node for the HDInsight cluster."
+        },
+        "zookeeperNodeSize": {
+          "type": "object",
+          "description": "Specifies the size of the Zoo Keeper node for the HDInsight cluster."
         }
       },
       "required": [
@@ -3907,6 +3930,71 @@
       "required": [
         "accountName",
         "tenant"
+      ]
+    },
+    "AzureDatabricksLinkedService": {
+      "x-ms-discriminator-value": "AzureDatabricks",
+      "description": "Azure Databricks linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Databricks linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDatabricksLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureDatabricksLinkedServiceTypeProperties": {
+      "description": "Azure Databricks linked service properties.",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "<REGION>.azuredatabricks.net, domain name of your Databricks deployment. Type: string (or Expression with resultType string)."
+        },
+        "accessToken": {
+          "description": "Access token for databricks REST API. Refer to https://docs.azuredatabricks.net/api/latest/authentication.html. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "existingClusterId": {
+          "type": "object",
+          "description": "The id of an existing cluster that will be used for all runs of this job. Type: string (or Expression with resultType string)."
+        },
+        "newClusterVersion": {
+          "type": "object",
+          "description": "The Spark version of new cluster. Type: string (or Expression with resultType string)."
+        },
+        "newClusterNumOfWorker": { 
+          "type": "object",
+          "description": "Number of worker nodes that new cluster should have. A string formatted Int32, like '1' means numOfWorker is 1 or '1:10' means auto-scale from 1 as min and 10 as max. Type: string (or Expression with resultType string)."
+        },
+        "newClusterNodeType": {
+          "type": "object",
+          "description": "The node types of new cluster. Type: string (or Expression with resultType string)."
+        },
+        "newClusterSparkConf": {
+          "description": "a set of optional, user-specified Spark configuration key-value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "domain",
+        "accessToken"
       ]
     }
   }

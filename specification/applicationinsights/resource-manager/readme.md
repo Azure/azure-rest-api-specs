@@ -36,9 +36,10 @@ azure-validator: true
 ``` yaml
 directive:
   - suppress: TrackedResourceListByImmediateParent
-    reason: we do have a list api to get all export configuraitons as "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration"
-    #where:
-    #  -   $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration/{exportId}  
+    where: 
+      - $.definitions
+    reason:
+      - we do have list operations available for our operations on individual instances of objects returned. False positives.
 
   - suppress: PutRequestResponseScheme
     reason: This api was existing there from 2015, it will break existing client if we change the request/response format
@@ -83,9 +84,27 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentDataVolumeCap.properties.StopSendNotificationWhenHitCap
     #  - $.definitions.ApplicationInsightsComponentQuotaStatus.properties.ShouldBeThrottled
 
+  - suppress: DescriptionAndTitleMissing
+    reason: Error addresses missing description/title in inner reference. Referenced model contains title and description. Redundant.
+    from: componentAnnotations_API.json
+    where:
+      - $.definitions.AnnotationError.properties.innererror
+
+  - suppress: DescriptionAndTitleMissing
+    reason: Error addresses missing description/title in inner reference. Referenced model contains title and description. Redundant.
+    from: componentWorkItemConfigs_API.json
+    where:
+      - $.definitions.WorkItemConfigurationError.properties.innererror
+
+  - suppress: LROStatusCodesReturnTypeSchema
+    reason: The response for 200 does define a schema in place. The test likely expects a 'ref' member. False failure.
+    from: componentAnnotations_API.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/Annotations"].put.responses["200"]
+
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This api was existing there from 2015, it will break existing client if we change the name
-    #where:
+    # where:
     #  - $.definitions.ApplicationInsightsComponentProperties.properties.ApplicationId
     #  - $.definitions.ApplicationInsightsComponentProperties.properties.AppId
     #  - $.definitions.ApplicationInsightsComponentProperties.properties.Application_Type
@@ -155,7 +174,52 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.RuleDefinitions
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
     #  - $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration.properties.Name
-    
+    #  - $.definitions.ApplicationInsightsComponentWebTestLocation.properties.Tag
+    #  - $.definitions.ApplicationInsightsComponentWebTestLocation.properties.DisplayName
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.UserId
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.IsGeneratedFromTemplate
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.Category
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.Tags
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.TimeModified
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.SourceType
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.FavoriteType
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.FavoriteId
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.Version
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.Config
+    #  - $.definitions.ApplicationInsightsComponentFavorite.properties.Name
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapability.properties.MeterRateFrequency
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapability.properties.MeterId
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapability.properties.Unit
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapability.properties.Value
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapability.properties.Description
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapability.properties.Name
+    #  - $.definitions.ApplicationInsightsComponentFeature.properties.SupportedAddonFeatures
+    #  - $.definitions.ApplicationInsightsComponentFeature.properties.IsMainFeature
+    #  - $.definitions.ApplicationInsightsComponentFeature.properties.Title
+    #  - $.definitions.ApplicationInsightsComponentFeature.properties.Capabilities
+    #  - $.definitions.ApplicationInsightsComponentFeature.properties.IsHidden
+    #  - $.definitions.ApplicationInsightsComponentFeature.properties.ResouceId
+    #  - $.definitions.ApplicationInsightsComponentFeature.properties.MeterRateFrequency
+    #  - $.definitions.ApplicationInsightsComponentFeature.properties.MeterId
+    #  - $.definitions.ApplicationInsightsComponentFeature.properties.FeatureName
+    #  - $.definitions.ApplicationInsightsComponentAvailableFeatures.properties.Result
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.ThrottleRate
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.DailyCapResetTime
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.DailyCap
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.TrackingType
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.ApiAccessLevel
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.SupportExportData
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.BurstThrottlePolicy
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.MetadataClass
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.LiveStreamMetrics
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.ApplicationMap
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.WorkItemIntegration
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.PowerBIIntegration
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.OpenSchema
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.ProactiveDetection
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.AnalyticsIntegration
+    #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.MultipleStepWebTest
+
   - suppress: R2066
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
 ```
@@ -167,12 +231,16 @@ These settings apply only when `--tag=package-2015-05` is specified on the comma
 ``` yaml $(tag) == 'package-2015-05'
 input-file:
 - microsoft.insights/stable/2015-05-01/aiOperations_API.json
-- microsoft.insights/stable/2015-05-01/components_API.json
-- microsoft.insights/stable/2015-05-01/webTests_API.json
-- microsoft.insights/stable/2015-05-01/componentContinuousExport_API.json
-- microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json
-- microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+- microsoft.insights/stable/2015-05-01/componentAnnotations_API.json
 - microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
+- microsoft.insights/stable/2015-05-01/componentContinuousExport_API.json
+- microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+- microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json
+- microsoft.insights/stable/2015-05-01/components_API.json
+- microsoft.insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+- microsoft.insights/stable/2015-05-01/favorites_API.json
+- microsoft.insights/stable/2015-05-01/webTestLocations_API.json
+- microsoft.insights/stable/2015-05-01/webTests_API.json
 ```
 ---
 # Code Generation
