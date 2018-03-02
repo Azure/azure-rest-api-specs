@@ -266,7 +266,7 @@
     },
     "/providers/Microsoft.PolicyInsights/operations": {
       "get": {
-        "operationId": "PolicyInsights_ListOperations",
+        "operationId": "Operations_List",
         "description": "Lists available operations.",
         "parameters": [
           {
@@ -277,7 +277,7 @@
           "200": {
             "description": "List of available operations.",
             "schema": {
-              "$ref": "#/definitions/Operations"
+              "$ref": "#/definitions/OperationsListResults"
             }
           },
           "default": {
@@ -476,7 +476,7 @@
         }
       }
     },
-    "Operations": {
+    "OperationsListResults": {
       "description": "List of available operations.",
       "properties": {
         "value": {
