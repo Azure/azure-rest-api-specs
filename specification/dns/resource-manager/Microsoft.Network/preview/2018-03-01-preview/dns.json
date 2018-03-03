@@ -3,7 +3,7 @@
   "info": {
     "title": "DnsManagementClient",
     "description": "The DNS Management Client.",
-    "version": "2017-10-01"
+    "version": "2018-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1442,8 +1442,38 @@
           },
           "description": "The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
           "readOnly": true
+        },
+        "zoneType": {
+          "type": "string",
+          "enum": [
+            "Public",
+            "Private"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneType",
+            "modelAsString": false
+          },
+          "default": "Public",
+          "description": "The type of this DNS zone (Public or Private)."
+        },
+        "registrationVirtualNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private."
+        },
+        "resolutionVirtualNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private."
         }
       },
+      "required": [
+        "zoneType"
+      ],
       "description": "Represents the properties of the zone."
     },
     "Zone": {
@@ -1525,7 +1555,6 @@
           "description": "Resource Id."
         }
       },
-      "x-ms-external": true,
       "description": "A reference to a another resource"
     },
     "CloudError": {
