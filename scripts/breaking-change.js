@@ -10,7 +10,7 @@ var utils = require('../test/util/utils'),
   execSync = require('child_process').execSync,
   oad = require('oad');
 
-  // This map is used to store the mapping between files resolved and stored location
+// This map is used to store the mapping between files resolved and stored location
 var resolvedMapForNewSpecs = {};
 let outputFolder = path.join(os.tmpdir(), "resolved");
 // Used to enable running script outside TravisCI for debugging
@@ -46,6 +46,7 @@ function runOad(oldSpec, newSpec) {
     return Promise.resolve();
   }).catch(err => {
     console.log(err);
+    process.exitCode = 1;
   });
 }
 
@@ -71,7 +72,7 @@ function processViaAutoRest(swaggerPath) {
     let result = execSync(`${autoRestCmd}`, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
     resolvedMapForNewSpecs[outputFileNameWithExt] = path.join(outputFolder, outputFileNameWithExt);
   } catch (err) {
-    // Do not update map in case of errors
+    // Do not update map in case of errors.
   }
 
   return Promise.resolve();
