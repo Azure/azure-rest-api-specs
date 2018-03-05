@@ -156,7 +156,7 @@
         "tags": [
           "ExpressRouteCrossConnections"
         ],
-        "operationId": "ExpressRouteCrossConnections_Put",
+        "operationId": "ExpressRouteCrossConnections_CreateOrUpdate",
         "description": "Update the specified ExpressRouteCrossConnection.",
         "parameters": [
           {
@@ -455,13 +455,13 @@
           "200": {
             "description": "Update successful. The operation returns the resulting ExpressRouteCrossConnectionPeering resource.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitPeering"
+              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
             }
           },
           "201": {
             "description": "Create successful. The operation returns the resulting ExpressRouteCrossConnectionPeering resource.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitPeering"
+              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
             }
           }
         },
@@ -582,7 +582,7 @@
           "200": {
             "description": "Request successful. The operation returns the resulting ExpressRouteCrossConnectionsRouteTableSummary resource.",
             "schema": {
-              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionsRoutesTableSummaryListResult"
             }
           },
           "202": {
@@ -661,6 +661,45 @@
     }
   },
   "definitions": {
+    "ExpressRouteCrossConnectionRoutesTableSummary": {
+      "properties": {
+        "neighbor": {
+          "type": "string",
+          "description": "IP address of Neighbor router"
+        },
+        "asn": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Autonomous system number."
+        },
+        "upDown": {
+          "type": "string",
+          "description": "The length of time that the BGP session has been in the Established state, or the current status if not in the Established state."
+        },
+        "stateOrPrefixesReceived": {
+          "type": "string",
+          "description": "Current state of the BGP session, and the number of prefixes that have been received from a neighbor or peer group."
+        }
+      },
+      "description": "The routes table associated with the ExpressRouteCircuit."
+    },
+    "ExpressRouteCrossConnectionsRoutesTableSummaryListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCrossConnectionRoutesTableSummary"
+          },
+          "description": "A list of the routes table."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListRoutesTable associated with the Express Route Cross Connections."
+    },
     "ExpressRouteCircuitReference": {
       "properties": {
         "id": {
