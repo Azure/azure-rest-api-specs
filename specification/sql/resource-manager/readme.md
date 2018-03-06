@@ -53,6 +53,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
@@ -108,6 +109,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
@@ -253,6 +255,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/elasticPools.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
 - Microsoft.Sql/stable/2014-04-01/importExport.json
+- Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -371,6 +374,7 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/metrics.json
  - ./Microsoft.Sql/stable/2014-04-01/operations.json
  - ./Microsoft.Sql/stable/2014-04-01/queries.json
+ - ./Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
  - ./Microsoft.Sql/stable/2014-04-01/replicationLinks.json
  - ./Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
  - ./Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
