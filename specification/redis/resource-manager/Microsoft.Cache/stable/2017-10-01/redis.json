@@ -59,6 +59,90 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_CheckNameAvailability",
+        "x-ms-examples": {
+          "RedisCacheList": { "$ref": "./examples/RedisCacheCheckNameAvailability.json" }
+        },
+        "description": "Checks that the redis cache name is valid and is not already in use.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the CheckNameAvailability Redis operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Name is available"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/listUpgradeNotifications": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ListUpgradeNotifications",
+        "x-ms-examples": {
+          "RedisCacheGet": { "$ref": "./examples/RedisCacheListUpgradeNotifications.json" }
+        },
+        "description": "Gets any upgrade notifications for a Redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "history",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "format": "double",
+            "description": "how many minutes in past to look for upgrade notifications"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All upgrade notifications in given time range",
+            "schema": {
+              "$ref": "#/definitions/NotificationListResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}": {
       "put": {
         "tags": [
@@ -247,7 +331,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis": {
       "get": {
         "tags": [
           "Redis"
@@ -285,7 +369,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/Redis/": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/Redis": {
       "get": {
         "tags": [
           "Redis"
@@ -777,7 +861,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/{default}": {
       "put": {
         "tags": [
           "Redis"
@@ -801,6 +885,20 @@
             "required": true,
             "type": "string",
             "description": "The name of the Redis cache."
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "defaultName",
+              "modelAsString": true
+            }
           },
           {
             "name": "parameters",
@@ -858,6 +956,20 @@
             "description": "The name of the redis cache."
           },
           {
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "defaultName",
+              "modelAsString": true
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -896,6 +1008,20 @@
             "required": true,
             "type": "string",
             "description": "The name of the redis cache."
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "defaultName",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1832,6 +1958,60 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
+    },
+    "CheckNameAvailabilityParameters": {
+      "description": "Parameters body to pass for  name availability check.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
+        }
+      }
+    },
+    "UpgradeNotification": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of upgrade notification."
+        },
+        "timestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when upgrade notification occured."
+        },
+        "upsellNotification": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Details about this upgrade notification"
+        }
+      },
+      "description": "Properties of upgrade notification."
+    },
+    "NotificationListResponse": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpgradeNotification"
+          },
+          "description": "List of all notifications."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set of notifications."
+        }
+      },
+      "description": "The response of listUpgradeNotifications."
     }
   },
   "parameters": {
