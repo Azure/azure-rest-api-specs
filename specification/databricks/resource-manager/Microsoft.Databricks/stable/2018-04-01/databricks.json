@@ -48,23 +48,10 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the workspace.",
-            "minLength": 3,
-            "maxLength": 64
+            "$ref": "#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -104,23 +91,10 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the workspace.",
-            "minLength": 3,
-            "maxLength": 64
+            "$ref": "#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -158,25 +132,6 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the workspace.",
-            "minLength": 3,
-            "maxLength": 64
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -184,6 +139,12 @@
               "$ref": "#/definitions/Workspace"
             },
             "description": "Parameters supplied to the create or update a workspace."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -213,6 +174,59 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Update",
+        "description": "Updates a workspace.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdate"
+            },
+            "description": "The update to the workspace."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a workspace's tags.": {
+            "$ref": "./examples/WorkspaceUpdate.json"
+          }
+        }
       }
     }
   },
@@ -230,7 +244,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GenericResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Information about workspace."
@@ -267,19 +281,62 @@
       ],
       "description": "The workspace properties."
     },
-    "GenericResource": {
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the resource."
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "description": "Resource information."
+      ]
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "Sku": {
       "properties": {
@@ -296,38 +353,6 @@
         "name"
       ],
       "description": "SKU for the resource."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "Resource information.",
-      "x-ms-azure-resource": true
     },
     "ProvisioningState": {
       "description": "Provisioning status of the workspace.",
@@ -355,10 +380,12 @@
       "properties": {
         "principalId": {
           "type": "string",
+          "format": "uuid",
           "description": "The provider's principal identifier. This is the identity that the provider will use to call ARM to manage the workspace resources."
         },
         "roleDefinitionId": {
           "type": "string",
+          "format": "uuid",
           "description": "The provider's role definition identifier. This role will define all the permissions that the provider must have on the workspace's container resource group. This role definition cannot have permission to delete the resource group."
         }
       },
@@ -367,6 +394,19 @@
         "roleDefinitionId"
       ],
       "description": "The workspace provider authorization."
+    },
+    "WorkspaceUpdate": {
+      "description": "An update to a workspace.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Error response indicates ARM workspace is not able to process the incoming request. The reason is provided in the error message.",
@@ -401,6 +441,25 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for this operation."
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "WorkspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace.",
+      "minLength": 3,
+      "maxLength": 64
     }
   }
 }
