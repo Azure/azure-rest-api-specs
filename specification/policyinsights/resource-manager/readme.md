@@ -64,8 +64,8 @@ These settings apply only when `--tag=package-2017-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-12'
 input-file:
-- Microsoft.PolicyInsights/PolicyEvents/preview/2017-12-12-preview/policyEvents.json
-- Microsoft.PolicyInsights/PolicyStates/preview/2017-12-12-preview/policyStates.json
+- Microsoft.PolicyInsights/preview/2017-12-12-preview/policyEvents.json
+- Microsoft.PolicyInsights/preview/2017-12-12-preview/policyStates.json
 ```
 
 
@@ -75,8 +75,8 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.PolicyInsights/PolicyEvents/preview/2017-10-17-preview/policyEvents.json
-- Microsoft.PolicyInsights/PolicyStates/preview/2017-10-17-preview/policyStates.json
+- Microsoft.PolicyInsights/preview/2017-10-17-preview/policyEvents.json
+- Microsoft.PolicyInsights/preview/2017-10-17-preview/policyStates.json
 ```
 
 
@@ -86,8 +86,8 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-- Microsoft.PolicyInsights/PolicyEvents/preview/2017-08-09-preview/policyEvents.json
-- Microsoft.PolicyInsights/PolicyStates/preview/2017-08-09-preview/policyStates.json
+- Microsoft.PolicyInsights/preview/2017-08-09-preview/policyEvents.json
+- Microsoft.PolicyInsights/preview/2017-08-09-preview/policyStates.json
 ```
 
 
