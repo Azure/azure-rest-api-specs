@@ -108,6 +108,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.keyvault
   package-name: azure-mgmt-keyvault
+  package-version: 1.0.0a2
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
