@@ -7,7 +7,7 @@ This is the AutoRest configuration file for PolicyInsights.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for PolicyInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
