@@ -175,17 +175,12 @@
           },
           "201": {
             "description": "Created - the container group is created.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Operation Status Location URI",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/ContainerGroup"
             }
           }
-        }
+        }, 
+        "x-ms-long-running-operation": true 
       },
       "patch": {
         "operationId": "ContainerGroups_Update",
