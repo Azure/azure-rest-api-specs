@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PolicyStatesClient",
-    "version": "2017-08-09-preview"
+    "title": "PolicyEventsClient",
+    "version": "2017-10-17-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -30,13 +30,13 @@
     }
   },
   "paths": {
-    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults": {
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
-        "operationId": "PolicyStates_ListQueryResultsForManagementGroup",
-        "description": "Queries policy states for the resources under the management group.",
+        "operationId": "PolicyEvents_ListQueryResultsForManagementGroup",
+        "description": "Queries policy events for the resources under the management group.",
         "parameters": [
           {
-            "$ref": "#/parameters/policyStatesResourceParameter"
+            "$ref": "#/parameters/policyEventsResourceParameter"
           },
           {
             "$ref": "#/parameters/managementGroupsNamespaceParameter"
@@ -73,7 +73,7 @@
           "200": {
             "description": "Query results.",
             "schema": {
-              "$ref": "#/definitions/PolicyStatesQueryResults"
+              "$ref": "#/definitions/PolicyEventsQueryResults"
             }
           },
           "default": {
@@ -84,17 +84,17 @@
           }
         },
         "x-ms-examples": {
-          "Query latest at management group scope": { "$ref": "./examples/QueryManagementGroupScope.json" }
+          "Query at management group scope": { "$ref": "./examples/PolicyEvents_QueryManagementGroupScope.json" }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
-        "operationId": "PolicyStates_ListQueryResultsForSubscription",
-        "description": "Queries policy states for the resources under the subscription.",
+        "operationId": "PolicyEvents_ListQueryResultsForSubscription",
+        "description": "Queries policy events for the resources under the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/policyStatesResourceParameter"
+            "$ref": "#/parameters/policyEventsResourceParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -128,7 +128,7 @@
           "200": {
             "description": "Query results.",
             "schema": {
-              "$ref": "#/definitions/PolicyStatesQueryResults"
+              "$ref": "#/definitions/PolicyEventsQueryResults"
             }
           },
           "default": {
@@ -139,22 +139,22 @@
           }
         },
         "x-ms-examples": {
-          "Query latest at subscription scope": { "$ref": "./examples/QuerySubscriptionScope.json" },
-          "Time range; sort, select and limit": { "$ref": "./examples/TimeRangeSortSelectTop.json" },
-          "Filter and group with aggregate": { "$ref": "./examples/FilterAndGroupByWithAggregate.json" },
-          "Filter and group without aggregate": { "$ref": "./examples/FilterAndGroupByWithoutAggregate.json" },
-          "Filter and aggregate only": { "$ref": "./examples/FilterAndAggregateOnly.json" },
-          "Filter and multiple groups": { "$ref": "./examples/FilterAndMultipleGroups.json" }
+          "Query at subscription scope": { "$ref": "./examples/PolicyEvents_QuerySubscriptionScope.json" },
+          "Time range; sort, select and limit": { "$ref": "./examples/PolicyEvents_TimeRangeSortSelectTop.json" },
+          "Filter and group with aggregate": { "$ref": "./examples/PolicyEvents_FilterAndGroupByWithAggregate.json" },
+          "Filter and group without aggregate": { "$ref": "./examples/PolicyEvents_FilterAndGroupByWithoutAggregate.json" },
+          "Filter and aggregate only": { "$ref": "./examples/PolicyEvents_FilterAndAggregateOnly.json" },
+          "Filter and multiple groups": { "$ref": "./examples/PolicyEvents_FilterAndMultipleGroups.json" }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
-        "operationId": "PolicyStates_ListQueryResultsForResourceGroup",
-        "description": "Queries policy states for the resources under the resource group.",
+        "operationId": "PolicyEvents_ListQueryResultsForResourceGroup",
+        "description": "Queries policy events for the resources under the resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/policyStatesResourceParameter"
+            "$ref": "#/parameters/policyEventsResourceParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -191,7 +191,7 @@
           "200": {
             "description": "Query results.",
             "schema": {
-              "$ref": "#/definitions/PolicyStatesQueryResults"
+              "$ref": "#/definitions/PolicyEventsQueryResults"
             }
           },
           "default": {
@@ -202,17 +202,17 @@
           }
         },
         "x-ms-examples": {
-          "Query latest at resource group scope": { "$ref": "./examples/QueryResourceGroupScope.json" }
+          "Query at resource group scope": { "$ref": "./examples/PolicyEvents_QueryResourceGroupScope.json" }
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults": {
+    "/{resourceId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
-        "operationId": "PolicyStates_ListQueryResultsForResource",
-        "description": "Queries policy states for the resource.",
+        "operationId": "PolicyEvents_ListQueryResultsForResource",
+        "description": "Queries policy events for the resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/policyStatesResourceParameter"
+            "$ref": "#/parameters/policyEventsResourceParameter"
           },
           {
             "$ref": "#/parameters/resourceIdParameter"
@@ -246,7 +246,7 @@
           "200": {
             "description": "Query results.",
             "schema": {
-              "$ref": "#/definitions/PolicyStatesQueryResults"
+              "$ref": "#/definitions/PolicyEventsQueryResults"
             }
           },
           "default": {
@@ -257,27 +257,33 @@
           }
         },
         "x-ms-examples": {
-          "Query all policy states at resource scope": { "$ref": "./examples/QueryResourceScope.json" },
-          "Query all policy states at subscription level resource scope": { "$ref": "./examples/QuerySubscriptionLevelResourceScope.json" },
-          "Query all policy states at nested resource scope": { "$ref": "./examples/QueryNestedResourceScope.json" },
-          "Query all policy states at subscription level nested resource scope": { "$ref": "./examples/QuerySubscriptionLevelNestedResourceScope.json" }
+          "Query at resource scope": { "$ref": "./examples/PolicyEvents_QueryResourceScope.json" },
+          "Query at subscription level resource scope": { "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelResourceScope.json" },
+          "Query at nested resource scope": { "$ref": "./examples/PolicyEvents_QueryNestedResourceScope.json" },
+          "Query at subscription level nested resource scope": { "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelNestedResourceScope.json" }
         }
       }
     },
-    "/providers/Microsoft.PolicyInsights/operations": {
+    "/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata": {
       "get": {
-        "operationId": "Operations_List",
-        "description": "Lists available operations.",
+        "operationId": "PolicyEvents_GetMetadata",
+        "description": "Gets OData metadata XML document.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/scopeParameter"
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "List of available operations.",
+            "description": "OData metadata XML document.",
             "schema": {
-              "$ref": "#/definitions/OperationsListResults"
+              "$ref": "#/definitions/MetadataDocument"
             }
           },
           "default": {
@@ -288,175 +294,159 @@
           }
         },
         "x-ms-examples": {
-          "List operations": { "$ref": "./examples/ListOperations.json" }
+          "Get metadata": { "$ref": "./examples/PolicyEvents_GetMetadata.json" }
         }
-      }
-    }
+      } 
+    } 
   },
   "definitions": {
-    "PolicyStatesQueryResults": {
+    "PolicyEventsQueryResults": {
       "description": "Query results.",
       "properties": {
+        "@odata.context": {
+          "description": "OData context string; used by OData clients to resolve type information based on metadata.",
+          "type": "string"
+        },
+        "@odata.count": {
+          "description": "OData entity count; represents the number of policy event records returned.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
         "value": {
           "description": "Query results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PolicyStatesQueryResultsTable"
+            "$ref": "#/definitions/PolicyEvent"
           }
         }
       }
     },
-    "PolicyStatesQueryResultsTable": {
-      "description": "Query results table.",
+    "PolicyEvent": {
+      "type": "object",
+      "description": "Policy event record.",
       "properties": {
-        "metadata": {
-          "description": "Metadata about the query results.",
-          "properties": {
-            "generatedQuery": {
-              "description": "Internal query generated. Used for diagnostics purposes.",
-              "type": "string"
-            }
-          }
+        "@odata.id": {
+          "description": "OData entity ID; always set to null since policy event records do not have an entity ID.",
+          "type": "string"
         },
-        "columns": {
-          "type": "object",
-          "description": "List of columns included in query results.",
-          "properties": {
-            "Timestamp": {
-              "description": "Timestamp for the policy state record.",
-              "$ref": "#/definitions/Column"
-            },
-            "ResourceId": {
-              "description": "Resource ID.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyAssignmentId": {
-              "description": "Policy assignment ID.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyDefinitionId": {
-              "description": "Policy definition ID.",
-              "$ref": "#/definitions/Column"
-            },
-            "EffectiveParameters": {
-              "description": "Effective parameters for the policy assignment.",
-              "$ref": "#/definitions/Column"
-            },
-            "IsCompliant": {
-              "description": "Flag which states whether the resource is compliant against the policy assignment it was evaluated against.",
-              "$ref": "#/definitions/Column"
-            },
-            "SubscriptionId": {
-              "description": "Subscription ID.",
-              "$ref": "#/definitions/Column"
-            },
-            "ResourceType": {
-              "description": "Resource type.",
-              "$ref": "#/definitions/Column"
-            },
-            "ResourceLocation": {
-              "description": "Resource location.",
-              "$ref": "#/definitions/Column"
-            },
-            "ResourceGroup": {
-              "description": "Resource group name.",
-              "$ref": "#/definitions/Column"
-            },
-            "ResourceTags": {
-              "description": "List of resource tags.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyAssignmentName": {
-              "description": "Policy assignment name.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyAssignmentOwner": {
-              "description": "Policy assignment owner.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyAssignmentParameters": {
-              "description": "Policy assignment parameters.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyAssignmentScope": {
-              "description": "Policy assignment scope.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyDefinitionName": {
-              "description": "Policy definition name.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyDefinitionAction": {
-              "description": "Policy definition action, i.e. effect.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyDefinitionCategory": {
-              "description": "Policy definition category.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicySetDefinitionId": {
-              "description": "Policy set definition ID, if the policy assignment is for a policy set.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicySetDefinitionName": {
-              "description": "Policy set definition name, if the policy assignment is for a policy set.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicySetDefinitionOwner": {
-              "description": "Policy set definition owner, if the policy assignment is for a policy set.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicySetDefinitionCategory": {
-              "description": "Policy set definition category, if the policy assignment is for a policy set.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicySetDefinitionParameters": {
-              "description": "Policy set definition parameters, if the policy assignment is for a policy set.",
-              "$ref": "#/definitions/Column"
-            },
-            "ManagementGroupIds": {
-              "description": "Comma seperated list of management group IDs, which represent the hierarchy of the management groups the resource is under.",
-              "$ref": "#/definitions/Column"
-            },
-            "PolicyDefinitionReferenceId": {
-              "description": "Reference ID for the policy definition inside the policy set, if the policy assignment is for a policy set.",
-              "$ref": "#/definitions/Column"
-            }
-          },
-          "additionalProperties": {
-            "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
-          }
+        "@odata.context": {
+          "description": "OData context string; used by OData clients to resolve type information based on metadata.",
+          "type": "string"
         },
-        "rows": {
-          "description": "Query result rows, each representing a policy state record.",
-          "type": "array",
-          "items": {
-           "description": "Query result row.",
-            "type": "array",
-            "items": {
-              "description": "Each column of the query result row."
-            }
-          }
+        "timestamp": {
+          "description": "Timestamp for the policy event record.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "resourceId": {
+          "description": "Resource ID.",
+          "type": "string"
+        },
+        "policyAssignmentId": {
+          "description": "Policy assignment ID.",
+          "type": "string"
+        },
+        "policyDefinitionId": {
+          "description": "Policy definition ID.",
+          "type": "string"
+        },
+        "effectiveParameters": {
+          "description": "Effective parameters for the policy assignment.",
+          "type": "string"
+        },
+        "isCompliant": {
+          "description": "Flag which states whether the resource is compliant against the policy assignment it was evaluated against.",
+          "type": "boolean"
+        },
+        "subscriptionId": {
+          "description": "Subscription ID.",
+          "type": "string"
+        },
+        "resourceType": {
+          "description": "Resource type.",
+          "type": "string"
+        },
+        "resourceLocation": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group name.",
+          "type": "string"
+        },
+        "resourceTags": {
+          "description": "List of resource tags.",
+          "type": "string"
+        },
+        "policyAssignmentName": {
+          "description": "Policy assignment name.",
+          "type": "string"
+        },
+        "policyAssignmentOwner": {
+          "description": "Policy assignment owner.",
+          "type": "string"
+        },
+        "policyAssignmentParameters": {
+          "description": "Policy assignment parameters.",
+          "type": "string"
+        },
+        "policyAssignmentScope": {
+          "description": "Policy assignment scope.",
+          "type": "string"
+        },
+        "policyDefinitionName": {
+          "description": "Policy definition name.",
+          "type": "string"
+        },
+        "policyDefinitionAction": {
+          "description": "Policy definition action, i.e. effect.",
+          "type": "string"
+        },
+        "policyDefinitionCategory": {
+          "description": "Policy definition category.",
+          "type": "string"
+        },
+        "policySetDefinitionId": {
+          "description": "Policy set definition ID, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "policySetDefinitionName": {
+          "description": "Policy set definition name, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "policySetDefinitionOwner": {
+          "description": "Policy set definition owner, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "policySetDefinitionCategory": {
+          "description": "Policy set definition category, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "policySetDefinitionParameters": {
+          "description": "Policy set definition parameters, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "managementGroupIds": {
+          "description": "Comma seperated list of management group IDs, which represent the hierarchy of the management groups the resource is under.",
+          "type": "string"
+        },
+        "policyDefinitionReferenceId": {
+          "description": "Reference ID for the policy definition inside the policy set, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Tenant ID for the policy event record.",
+          "type": "string"
+        },
+        "principalOid": {
+          "description": "Principal object ID for the user who initiated the resource operation that triggered the policy event.",
+          "type": "string"
         }
+      },
+      "additionalProperties": {
+        "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
       }
-    },
-    "Column": {
-      "description": "Column definition.",
-      "properties": {
-        "ordinal": {
-          "description": "Ordinal value of the column in a record.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "name": {
-          "description": "Name of the column.",
-          "type": "string"
-        },
-        "dataType": {
-          "description": "Data type of the column.",
-          "type": "string"
-        }
-      } 
     },
     "QueryFailure": {
       "description": "Error response.",
@@ -476,64 +466,21 @@
         }
       }
     },
-    "OperationsListResults": {
-      "description": "List of available operations.",
-      "properties": {
-        "value": {
-          "description": "List of available operations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        }
-      }
-    },
-    "Operation": {
-      "description": "Operation definition.",
-      "properties": {
-        "name": {
-          "description": "Operation name.",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Resource provider name.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource name on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation name.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Operation description.",
-              "type": "string"
-            }
-          }
-        }
-      }
+    "MetadataDocument": {
+      "description": "Metadata XML document.",
+      "type": "string"
     }
   },
   "parameters": {
-    "policyStatesResourceParameter": {
-      "name": "policyStatesResource",
+    "policyEventsResourceParameter": {
+      "name": "policyEventsResource",
       "in": "path",
       "required": true,
       "type": "string",
       "enum": [
-        "default",
-        "latest"
+        "default"
       ],
-      "x-ms-enum": {
-        "name": "PolicyStatesResource",
-        "modelAsString": false
-      },
-      "description": "The virtual resource under PolicyStates resource type. In a given time range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).",
+      "description": "The name of the virtual resource under PolicyEvents resource type; only \"default\" is allowed.",
       "x-ms-parameter-location": "method"
     },
     "managementGroupsNamespaceParameter": {
@@ -577,6 +524,15 @@
       "required": true,
       "type": "string",
       "description": "Resource ID.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A valid scope, i.e. management group, subscription, resource group, or resource ID. Scope used has no effect on metadata returned.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
