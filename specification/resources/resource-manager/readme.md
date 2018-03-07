@@ -631,8 +631,75 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   azure-arm: true
   fluent: true
-  namespace: com.microsoft.azure.management.resources
   license-header: MICROSOFT_MIT_NO_CODEGEN
+```
+
+### Java multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(java) && $(multiapi)
+batch:
+  - tag: package-features-2015-12
+  - tag: package-locks-2016-09
+  - tag: package-policy-2016-04
+  - tag: package-resources-2016-09
+  - tag: package-subscriptions-2016-06
+```
+
+### Tag: package-features-2015-12 and java
+
+These settings apply only when `--tag=package-features-2015-12 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-features-2015-12' && $(java)
+java:
+  namespace: com.microsoft.azure.management.resources
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
+```
+
+### Tag: package-locks-2016-09 and java
+
+These settings apply only when `--tag=package-locks-2016-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-locks-2016-09' && $(java)
+java:
+  payload-flattening-threshold: 1
+  namespace: com.microsoft.azure.management.locks
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-locks
+```
+
+### Tag: package-policy-2016-04 and java
+
+These settings apply only when `--tag=package-policy-2016-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-policy-2016-04' && $(java)
+java:
+  namespace: com.microsoft.azure.management.resources
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
+```
+
+### Tag: package-resources-2016-09 and java
+
+These settings apply only when `--tag=package-resources-2016-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2016-09' && $(java)
+java:
+  namespace: com.microsoft.azure.management.resources
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
+```
+
+### Tag: package-subscriptions-2016-06 and java
+
+These settings apply only when `--tag=package-subscriptions-2016-06--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2016-06' && $(java)
+java:
+  namespace: com.microsoft.azure.management.resources
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
 ```
 
