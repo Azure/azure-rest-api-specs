@@ -36,6 +36,10 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
 - Microsoft.Network/stable/2017-10-01/dns.json
+directive:
+  - suppress:
+    - R3023
+    - R3016
 ```
 
 ### Tag: package-2017-09
