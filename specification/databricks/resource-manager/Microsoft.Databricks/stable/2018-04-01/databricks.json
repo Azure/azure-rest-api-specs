@@ -237,6 +237,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "The workspace properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the resource."
         }
       },
       "required": [
@@ -257,7 +261,7 @@
         },
         "parameters": {
           "type": "object",
-          "description": "Name and value pairs that define the workspace parameters. It can be a JObject or a well formed JSON string."
+          "description": "Name and value pairs that define the workspace parameters."
         },
         "provisioningState": {
           "readOnly": true,
@@ -303,10 +307,6 @@
             "create"
           ],
           "description": "The geo-location where the resource lives"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the resource."
         }
       },
       "required": [
