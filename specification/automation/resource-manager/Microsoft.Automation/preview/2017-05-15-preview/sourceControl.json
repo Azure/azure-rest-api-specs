@@ -1,0 +1,335 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2017-05-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}": {
+      "put": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_CreateOrUpdate",
+        "description": "Create a source control.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "Create or update a source control": {
+            "$ref": "./examples/sourceControl/createOrUpdateSourceControl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The source control name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SourceControlCreateOrUpdateParameters"
+            },
+            "description": "The parameters supplied to the create or update source control operation."
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SourceControl"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_Update",
+        "description": "Update a source control.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "Update a source control": {
+            "$ref": "./examples/sourceControl/updateSourceControl_patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The source control name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SourceControlUpdateParameters"
+            },
+            "description": "The parameters supplied to the update source control operation."
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_Delete",
+        "description": "Delete the source control.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "Delete a source control": {
+            "$ref": "./examples/sourceControl/deleteSourceControl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of source control."
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_Get",
+        "description": "Retrieve the source control identified by source control name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "Get a source control": {
+            "$ref": "./examples/sourceControl/getSourceControl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of source control."
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls": {
+      "get": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_ListByAutomationAccount",
+        "description": "Retrieve a list of source controls.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "List sourceControls": {
+            "$ref": "./examples/sourceControl/getAllSourceControls.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SourceControlListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  }
+}

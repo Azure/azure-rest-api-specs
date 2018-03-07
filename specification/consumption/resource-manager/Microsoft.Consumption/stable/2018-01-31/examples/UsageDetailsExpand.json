@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2018-01-31",
+    "subscriptionId": "subid",
+    "billingPeriodName": "201702",
+    "$expand": "meterDetails,additionalProperties",
+    "$filter": "properties/usageEnd ge '2018-01-14' AND properties/usageEnd le '2018-02-14'",
+    "$top": 1
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702/providers/Microsoft.Consumption/usageDetails/usageDetailsId1",
+            "name": "usageDetailsId1",
+            "type": "Microsoft.Consumption/usageDetails",
+            "tags": {
+              "env": "newcrp",
+              "dev": "tools"
+            },
+            "properties": {
+              "billingPeriodId": "/subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702",
+              "invoiceId": "/subscriptions/subid/providers/Microsoft.Billing/invoices/201703-123456789",
+              "usageStart": "2017-02-13T00:00:00Z",
+              "usageEnd": "2017-02-13T23:59:59Z",
+              "instanceName": "shared1",
+              "instanceId": "/subscriptions/subid/resourceGroups/Default-Web-eastasia/providers/Microsoft.Web/sites/shared1",
+              "instanceLocation": "eastasia",
+              "currency": "USD",
+              "usageQuantity": 0.00328,
+              "billableQuantity": 0.00328,
+              "pretaxCost": 0.67,
+              "isEstimated": false,
+              "meterId": "fe167397-a38d-43c3-9bb3-8e2907e56a41",
+              "meterDetails": {
+                "meterName": "Data Transfer Out (GB)",
+                "meterCategory": "Networking",
+                "unit": "GB",
+                "meterLocation": "Zone 2",
+                "totalIncludedQuantity": 0,
+                "pretaxStandardRate": 0.138
+              },
+              "subscriptionGuid": "fe167397-a38d-43c3-9bb3-8e2907e56a41",
+              "subscriptionName": "Dummy subscription",
+              "accountName": "My account name",
+              "departmentName": "My department name",
+              "product": "My product name",
+              "consumedService": "My consumed service",
+              "costCenter": "Cost center 1",
+              "additionalProperties": "{\"MyType\":\"\",\"ServiceType\":\"\",\"VMName\":\"\",\"UsageType\":\"MyUsage\"}"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

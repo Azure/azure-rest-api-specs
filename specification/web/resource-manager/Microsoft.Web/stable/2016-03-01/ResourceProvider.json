@@ -254,6 +254,41 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/listSitesAssignedToHostName": {
+      "post": {
+        "summary": "List all apps that are assigned to a hostname.",
+        "description": "List all apps that are assigned to a hostname.",
+        "operationId": "ListSiteIdentifiersAssignedToHostName",
+        "parameters": [
+          {
+            "name": "nameIdentifier",
+            "in": "body",
+            "description": "Hostname information.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/NameIdentifier"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/IdentifierCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/premieraddonoffers": {
       "get": {
         "summary": "List all premier add-on offers.",
@@ -534,7 +569,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -682,7 +718,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -819,7 +856,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
