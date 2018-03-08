@@ -328,6 +328,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@~3.0"
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-network
   - repo: azure-libraries-for-java
@@ -365,6 +367,9 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-01
+  - tag: package-2017-11
+  - tag: package-2017-10
   - tag: package-2017-09
   - tag: package-2017-08
   - tag: package-2017-06
@@ -375,6 +380,33 @@ batch:
   - tag: package-2016-03
   - tag: package-2015-06split
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2018-01 and go
+
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2018-01-01/network
+```
+
+### Tag: package-2017-11 and go
+
+These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-11' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-11-01/network
+```
+
+### Tag: package-2017-10 and go
+
+These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-10-01/network
 ```
 
 ### Tag: package-2017-09 and go
