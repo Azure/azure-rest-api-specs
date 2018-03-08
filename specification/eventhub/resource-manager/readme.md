@@ -50,6 +50,16 @@ input-file:
 ```
 
 
+### Tag: package-2014-09
+
+These settings apply only when `--tag=package-2014-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2014-09'
+input-file:
+- Microsoft.EventHub/stable/2014-09-01/EventHub.json
+```
+
+
 ---
 # Code Generation
 
@@ -95,6 +105,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.eventhub
   package-name: azure-mgmt-eventhub
+  package-version: 1.3.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

@@ -874,6 +874,47 @@
           }
         }
       },
+      "post": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_PosttAuthorizationRule",
+        "x-ms-examples": {
+          "EventHubAutorizationRuleGet": { "$ref": "./examples/EHEventHubAutorizationRuleGet.json" }
+        },
+        "description": "Gets an AuthorizationRule for an Event Hub by rule name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt706097.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/eventHubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hub AuthorizationRule successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "EventHubs"

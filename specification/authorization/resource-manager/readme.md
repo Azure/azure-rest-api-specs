@@ -54,7 +54,8 @@ These settings apply only when `--tag=package-2017-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2017-10-01-preview/authorization.json
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2015-07-01/authorization.json
 - Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
 ```
 
@@ -64,7 +65,7 @@ These settings apply only when `--tag=package-2018-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-01-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
 ```
 
@@ -113,6 +114,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.authorization
   package-name: azure-mgmt-authorization
+  package-version: 0.40.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
