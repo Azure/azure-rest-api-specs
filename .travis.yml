@@ -48,23 +48,23 @@ script:
   - DOCKER_CMD="docker run --rm --env-file /tmp/env_file -e GH_TOKEN -v $PWD:/git-restapi/ lmazuel/swagger-to-sdk"
   - >-
     if [[ $MODE == 'python' ]]; then
-      $DOCKER_CMD Azure/azure-sdk-for-python -v
+      $DOCKER_CMD Azure/azure-sdk-for-python
     fi
   - >-
     if [[ $MODE == 'node' ]]; then
-      $DOCKER_CMD Azure/azure-sdk-for-node -v
+      $DOCKER_CMD Azure/azure-sdk-for-node
     fi
   - >-
     if [[ $MODE == 'ruby' ]]; then
-      $DOCKER_CMD Azure/azure-sdk-for-ruby -v
+      $DOCKER_CMD Azure/azure-sdk-for-ruby
     fi
   - >-
     if [[ $MODE == 'go' ]]; then
-      $DOCKER_CMD Azure/azure-sdk-for-go -o latest -v
+      $DOCKER_CMD Azure/azure-sdk-for-go -o latest
     fi
   - >-
     if [[ $MODE == 'java' ]]; then
-      $DOCKER_CMD Azure/azure-libraries-for-java -v
+      $DOCKER_CMD Azure/azure-libraries-for-java
     fi
   - >-
     if [[ $MODE == 'syntax' ]]; then
