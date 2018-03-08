@@ -3,49 +3,7 @@
     "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
     "resourceGroupName": "gigtest",
     "ruleName": "chiricutin",
-    "api-version": "2017-09-01-preview",
-    "parameters": {
-      "location": "global",
-      "tags": {},
-      "properties": {
-        "description": "This is the description of the rule1",
-        "severity": 3,
-        "enabled": true,
-        "scopes": [
-          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
-        ],
-        "evaluationFrequency": "Pt1m",
-        "windowSize": "Pt15m",
-        "templateType": "CorrelatedEvents",
-        "templateSpecificParameters": {
-          "param1": "value1",
-          "param2": "value2"
-        },
-        "criteriaSchemaId": "SingleResourceMultipleMetricCriteria",
-        "criteria": {
-          "allOf": [
-            {
-              "name": "High_CPU_80",
-              "metricName": "\\Processor(_Total)\\% Processor Time",
-              "dimensions": [
-              ],
-              "operator": "GreaterThan",
-              "threshold": 80.50,
-              "timeAggregation": "Average"
-            }
-          ]
-        },
-        "actions": [
-          {
-            "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2",
-            "webhookProperties": {
-              "key11": "value11",
-              "key12": "value12"
-            }
-          }
-        ]
-      }
-    }
+    "api-version": "2018-03-01"
   },
   "responses": {
     "200": {
@@ -66,8 +24,8 @@
           ],
           "evaluationFrequency": "Pt1m",
           "windowSize": "Pt15m",
-          "criteriaSchemaId": "SingleResourceMultipleMetricCriteria",
           "criteria": {
+            "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
             "allOf": [
               {
                 "name": "High_CPU_80",
@@ -88,11 +46,7 @@
                 "key12": "value12"
               }
             }
-          ],
-          "currentStatus": {
-            "value": "Healthy",
-            "timestamp": "2018-01-17T20:17:25.6293237Z"
-          }
+          ]
         }
       }
     }

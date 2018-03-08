@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
     "resourceGroupName": "gigtest",
-    "api-version": "2017-09-01-preview"
+    "api-version": "2018-03-01"
   },
   "responses": {
     "200": {
@@ -25,8 +25,8 @@
               ],
               "evaluationFrequency": "Pt1m",
               "windowSize": "Pt15m",
-              "criteriaSchemaId": "SingleREsourceMULTipleMetRICCriteria",
               "criteria": {
+                "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
                 "allOf": [
                   {
                     "name": "High_CPU_80",
@@ -47,11 +47,7 @@
                     "key12": "value12"
                   }
                 }
-              ],
-              "currentStatus": {
-                "value": "Healthy",
-                "timestamp": "2018-01-17T20:17:25.6293237Z"
-              }
+              ]
             }
           },
           {
@@ -70,8 +66,8 @@
               ],
               "evaluationFrequency": "Pt1m",
               "windowSize": "Pt15m",
-              "criteriaSchemaId": "SingleREsourceMULTipleMetRICCriteria",
               "criteria": {
+                "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
                 "allOf": [
                   {
                     "name": "Medium_CPU_50",
@@ -92,11 +88,7 @@
                     "key12": "value12"
                   }
                 }
-              ],
-              "currentStatus": {
-                "value": "Healthy",
-                "timestamp": "2018-01-17T20:17:25.6293237Z"
-              }
+              ]
             }
           }
         ]

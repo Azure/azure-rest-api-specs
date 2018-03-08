@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017-09-01-preview",
+    "version": "2018-03-01",
     "title": "MonitorManagementClient",
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
@@ -66,8 +66,8 @@
                       ],
                       "evaluationFrequency": "PT1M",
                       "windowSize": "PT15M",
-                      "criteriaSchemaId": "SingleResourceMultipleMetricCriteria",
                       "criteria": {
+                        "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
                         "allOf": [
                           {
                             "name": "HowManyBytes",
@@ -92,11 +92,7 @@
                         {
                           "actionGroupId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/microsoft.insights/actionGroups/testActionGroup"
                         }
-                      ],
-                      "currentStatus": {
-                        "value": "Healthy",
-                        "timestamp": "2018-01-17T20:17:25.6293237Z"
-                      }
+                      ]
                     }
                   }
                 ]
@@ -152,8 +148,8 @@
                       ],
                       "evaluationFrequency": "PT1M",
                       "windowSize": "PT15M",
-                      "criteriaSchemaId": "SingleResourceMultipleMetricCriteria",
                       "criteria": {
+                        "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
                         "allOf": [
                           {
                             "name": "HowManyBytes",
@@ -178,11 +174,7 @@
                         {
                           "actionGroupId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/microsoft.insights/actionGroups/testActionGroup"
                         }
-                      ],
-                      "currentStatus": {
-                        "value": "Healthy",
-                        "timestamp": "2018-01-17T20:17:25.6293237Z"
-                      }
+                      ]
                     }
                   }
                 ]
@@ -239,8 +231,8 @@
                       ],
                       "evaluationFrequency": "PT1M",
                       "windowSize": "PT15M",
-                      "criteriaSchemaId": "SingleResourceMultipleMetricCriteria",
                       "criteria": {
+                        "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
                         "allOf": [
                           {
                             "name": "HowManyBytes",
@@ -265,11 +257,7 @@
                         {
                           "actionGroupId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/microsoft.insights/actionGroups/testActionGroup"
                         }
-                      ],
-                      "currentStatus": {
-                        "value": "Healthy",
-                        "timestamp": "2018-01-17T20:17:25.6293237Z"
-                      }
+                      ]
                     }
                   }
                 ]
@@ -333,8 +321,8 @@
                     "Param1": "Value1",
                     "Param2": "Value2"
                   },
-                  "criteriaSchemaId": "SingleREsourceMULTipleMetRICCriteria",
                   "criteria": {
+                    "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
                     "allOf": [
                       {
                         "name": "High_CPU_80",
@@ -424,8 +412,8 @@
                     "Param1": "Value1",
                     "Param2": "Value2"
                   },
-                  "criteriaSchemaId": "SingleREsourceMULTipleMetRICCriteria",
                   "criteria": {
+                    "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
                     "allOf": [
                       {
                         "name": "High_CPU_80",
@@ -820,6 +808,104 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MetricAlertStatus",
           "description": "The alert status properties of the metric alert status."
+        }
+      }
+    },
+    "MetricAlertCriteria": {
+      "type": "object",
+      "discriminator": "odata.type",
+      "properties": {
+        "odata.type": {
+          "type": "string",
+          "description": "specifies the type of the alert criteria."
+        }
+      },
+      "required": [ "odata.type" ],
+      "description": "The rule criteria that defines the conditions of the alert rule."
+    },
+    "MetricAlertSingleResourceMultipleMetricCriteria": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricAlertCriteria"
+        }
+      ],
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/MetricCriteria"
+          },
+          "description": "The list of metric criteria for this 'all of' operation. "
+        }
+      },
+      "description": "Specifies the metric alert criteria for a single resource that has multiple metric criteria."
+    },
+    "MetricCriteria": {
+      "required": [
+        "name",
+        "metricName",
+        "operator",
+        "timeAggregation",
+        "threshold"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the criteria."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "Namespace of the metric."
+        },
+        "operator": {
+          "type": "string",
+          "description": "the criteria operator."
+        },
+        "timeAggregation": {
+          "type": "string",
+          "description": "the criteria time aggregation value."
+        },
+        "threshold": {
+          "type": "number",
+          "format":  "double",
+          "description": "the criteria threshold value that activates the alert."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/MetricDimension"
+          },
+          "description": "List of dimension conditions."
+        }
+      }
+    },
+    "MetricDimension": {
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "operator": {
+          "type": "string",
+          "description": "the dimension operator."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "list of dimension values."
         }
       }
     }
