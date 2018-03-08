@@ -61,6 +61,7 @@ input-file:
 - Microsoft.ApiManagement/preview/2018-01-01/apimtags.json
 - Microsoft.ApiManagement/preview/2018-01-01/apimtenant.json
 - Microsoft.ApiManagement/preview/2018-01-01/apimusers.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimversionsets.json
 ```
 
 ## Suppression
