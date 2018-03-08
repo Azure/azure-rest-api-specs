@@ -241,7 +241,19 @@ input-file:
 - microsoft.insights/stable/2015-05-01/favorites_API.json
 - microsoft.insights/stable/2015-05-01/webTestLocations_API.json
 - microsoft.insights/stable/2015-05-01/webTests_API.json
+
 ```
+
+### Tag: package-2017-10
+
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- microsoft.insights/preview/2017-10-01/eaSubscriptionMigration_API.json
+- microsoft.insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
+```
+
 ---
 # Code Generation
 
@@ -318,6 +330,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2015-05
+  - tag: pacakge-2017-10
 ```
 
 ### Tag: package-2015-05 and go
