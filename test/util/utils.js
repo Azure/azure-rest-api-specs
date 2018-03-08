@@ -138,7 +138,20 @@ exports.getPullRequestNumber = function getPullRequestNumber() {
  */
 exports.getRepoName = function getRepoName() {
   let result = process.env['TRAVIS_REPO_SLUG'];
-  console.log(`@@@@@ process.env['TRAVIS_REPO_SLUG'] - ${process.env['TRAVIS_REPO_SLUG']}`);
+  console.log(`@@@@@ process.env['TRAVIS_REPO_SLUG'] - ${result}`);
+
+  return result;
+};
+
+/**
+ * Gets the source repo name for PR's. We are using the environment
+ * variable provided by travis-ci. It is called TRAVIS_PULL_REQUEST_SLUG. More info can be found here:
+ * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
+ * @returns {string} repo name or 'undefined'.
+ */
+exports.getSourceRepoName = function getSourceRepoName() {
+  let result = process.env['TRAVIS_PULL_REQUEST_SLUG'];
+  console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST_SLUG'] - ${result}`);
 
   return result;
 };
@@ -151,7 +164,17 @@ exports.getRepoName = function getRepoName() {
 exports.getRepoUrl = function getRepoUrl() {
   let repoName = exports.getRepoName();
   return `https://github.com/${repoName}`;
-}
+};
+
+// Retrieves the source Git Repository Url
+/**
+ * Gets the repo URL from where the PR originated
+ * @returns {string} repo URL or 'undefined'
+ */
+exports.getSourceRepoUrl = function getSourceRepoUrl() {
+  let repoName = exports.getSourceRepoName();
+  return `https://github.com/${repoName}`;
+};
 
 exports.getTimeStamp = function getTimeStamp() {
   // We pad each value so that sorted directory listings show the files in chronological order
