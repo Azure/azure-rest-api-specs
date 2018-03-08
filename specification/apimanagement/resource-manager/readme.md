@@ -157,6 +157,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@~3.0"  
 ```
 
 
@@ -174,6 +177,9 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
