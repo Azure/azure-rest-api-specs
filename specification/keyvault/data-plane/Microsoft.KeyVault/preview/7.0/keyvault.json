@@ -1385,7 +1385,14 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          }
+          },
+		  {
+		    "name": "includePending",
+			"in": "query",
+			"required": false,
+			"type": "boolean",
+			"description": "Specifies whether to include pending certificates in the listing result."
+		  }
         ],
         "responses": {
           "200": {
@@ -2210,6 +2217,81 @@
         }
       }
     },
+    "/certificates/{certificate-name}/backup": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "BackupCertificate",
+        "summary": "Backs up the specified certificate.",
+        "description": "Requests that a backup of the specified certificate be downloaded to the client. All versions of the certificate will be downloaded. This operation requires the certificates/backup permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The backup blob containing the backed up certificate.",
+            "schema": {
+              "$ref": "#/definitions/BackupCertificateResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/certificates/restore": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "RestoreCertificate",
+        "summary": "Restores a backed up certificate to a vault.",
+        "description": "Restores a backed up certificate, and all its versions, to a vault. This operation requires the certificates/restore permission.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateRestoreParameters"
+            },
+            "description": "The parameters to restore the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restored certificate bundle in the vault.",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },    
     "/deletedcertificates": {
       "get": {
         "tags": [
@@ -2231,7 +2313,14 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          }
+          },
+		  {
+		    "name": "includePending",
+			"in": "query",
+			"required": false,
+			"type": "boolean",
+			"description": "Specifies whether to include pending certificates in the listing result."
+		  }
         ],
         "responses": {
           "200": {
@@ -4053,7 +4142,12 @@
           "x-ms-client-name": "CertificateType",
           "type": "string",
           "description": "Type of certificate to be requested from the issuer provider."
-        }
+        },
+		"cert_transparency": {
+		  "x-ms-client-name": "CertificateTransparency",
+		  "type": "boolean",
+		  "description": "Determines whether certificate transparency is enabled or not for this issuer."
+		}
       },
       "description": "Parameters for the issuer of the X509 component of a certificate."
     },
@@ -5413,7 +5507,30 @@
         }
       },
       "description": "The key vault server error."
-    }
+    },
+    "CertificateRestoreParameters": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "certificateBundleBackup",
+          "format": "base64url",
+          "description": "The backup blob associated with a certificate bundle."
+        }
+      },
+      "description": "The certificate restore parameters.",
+      "required": [ "value" ]
+    },
+    "BackupCertificateResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "readOnly": true,
+          "description": "The backup blob containing the backed up certificate."
+        }
+      },
+      "description": "The backup certificate result, containing the backup blob."
+    }   
   },
   "parameters": {
     "ApiVersionParameter": {
