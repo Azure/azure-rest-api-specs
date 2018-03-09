@@ -408,23 +408,70 @@
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response indicates ARM workspace is not able to process the incoming request. The reason is provided in the error message.",
+    "ErrorDetail": {
+      "title": "Error details.",
       "type": "object",
       "properties": {
-        "httpStatus": {
-          "description": "Http status code.",
+        "code": {
+          "description": "The error's code.",
           "type": "string"
         },
-        "errorCode": {
-          "description": "Error code.",
+        "message": {
+          "description": "A human readable error message.",
           "type": "string"
         },
-        "errorMessage": {
-          "description": "Error message indicating why the operation failed.",
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInfo": {
+      "title": "The code and message for an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "A machine readable error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "innererror": {
+          "description": "Inner error details if they exist.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "title": "Error response.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/ErrorInfo"
+        }
+      },
+      "required": [
+        "error"
+      ]
     }
   },
   "parameters": {
