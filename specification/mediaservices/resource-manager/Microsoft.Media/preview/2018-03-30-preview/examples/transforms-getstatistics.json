@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2018-03-30-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoresources",
+    "accountName": "contosomedia",
+    "transformName": "ExampleTransform",
+    "query": [
+      {
+        "state": "Queued",
+        "timePeriod": "Now"
+      },
+      {
+        "state": "Processing",
+        "timePeriod": "Now"
+      }
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "state": "Queued",
+            "timePeriod": "Now",
+            "value": 10
+          },
+          {
+            "state": "Processing",
+            "timePeriod": "Now",
+            "value": 10
+          }
+        ]
+      }
+    }
+  }
+}
