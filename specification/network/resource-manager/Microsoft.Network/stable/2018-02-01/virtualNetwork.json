@@ -1083,14 +1083,17 @@
         },
         "enableDdosProtection": {
           "type": "boolean",
+          "default": false,
           "description": "Indicates if DDoS protection is enabled for all the protected resources in the virtual network. It requires a DDoS protection plan associated with the resource."
         },
         "enableVmProtection": {
           "type": "boolean",
+          "default": false,
           "description": "Indicates if VM protection is enabled for all the subnets in the virtual network."
         },
         "ddosProtectionPlan": {
           "$ref": "#/definitions/SubResource",
+          "default": null,
           "description": "The DDoS protection plan associated with the virtual network."
         }
       },
