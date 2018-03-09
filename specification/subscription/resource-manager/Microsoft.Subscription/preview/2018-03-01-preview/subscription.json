@@ -76,10 +76,10 @@
         ]
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Subscription/createSubscription": {
+    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "Creates an Azure subscription",
-        "operationId": "SubscriptionFactory_CreateSubscriptionInBillingAccount",
+        "operationId": "SubscriptionFactory_CreateSubscriptionInEnrollmentAccount",
         "x-ms-examples": {
           "createSubscription": {
             "$ref": "./examples/createSubscription.json"
@@ -115,7 +115,7 @@
         },
         "parameters": [
           {
-            "name": "billingAccountName",
+            "name": "enrollmentAccountName",
             "in": "path",
             "description": "The name of the billing account to which the subscription will be billed.",
             "required": true,
@@ -162,7 +162,7 @@
           "description": "The list of principals that should be granted Owner access on the subscription. Principals should be of type User, Service Principal or Security Group."
         },
         "offerType": {
-          "description": "The offer type of the subscription. For example, MS-AZR-0017P (EnterpriseAgreement) and MS-AZR-0148P (EnterpriseAgreement devTest) are available. Only valid when creating a subscription in a billing account scope.",
+          "description": "The offer type of the subscription. For example, MS-AZR-0017P (EnterpriseAgreement) and MS-AZR-0148P (EnterpriseAgreement devTest) are available. Only valid when creating a subscription in a enrollment account scope.",
           "type": "string",
           "x-ms-enum": {
             "name": "offerType",
