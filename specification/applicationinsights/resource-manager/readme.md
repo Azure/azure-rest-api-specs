@@ -330,7 +330,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2015-05
-  - tag: pacakge-2017-10
+  - tag: package-2017-10
 ```
 
 ### Tag: package-2015-05 and go
