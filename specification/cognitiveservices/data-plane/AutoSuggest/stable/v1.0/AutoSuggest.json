@@ -122,7 +122,7 @@
             "200": {
               "description": "Success.",
               "schema": {
-                "$ref": "#/definitions/News"
+                "$ref": "#/definitions/SuggestionGroup"
               }
             },
             "default": {
@@ -160,11 +160,32 @@
       },
       "QueryContext": {
         "description": "Defines the query term that Bing used for the request.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/Thing"
-          }
+        "type": "object",
+        "required": [
+            "value"
         ],
+        "properties": {
+            "value": {
+                "description": "A string term used to generate suggestions.",
+                "type": "string"
+            }
+        }
+      },
+      "Suggestions": {
+        "description": "Defines the query term that Bing used for the request.",
+        "type": "object",
+        "required": [
+            "value"
+        ],
+        "properties": {
+            "value": {
+                "description": "A string term used to generate suggestions.",
+                "type": "string"
+            }
+        }
+      },
+      "SuggestionGroup": {
+        "description": "Defines the query term that Bing used for the request.",
         "type": "object",
         "required": [
             "value"
