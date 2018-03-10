@@ -1,5 +1,7 @@
 # Cognitive Services Auto Suggest SDK
 
+> see https://aka.ms/autorest
+
 Configuration for generating Auto Suggest SDK.
 
 The current release is `release_1_0`.
