@@ -40,6 +40,16 @@ input-file:
 ```
 
 ---
+### Tag: package-2018-01
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.Consumption/stable/2018-01-31/consumption.json
+```
+
+---
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
