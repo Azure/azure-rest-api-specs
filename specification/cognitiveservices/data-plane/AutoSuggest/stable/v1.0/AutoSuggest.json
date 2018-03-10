@@ -176,6 +176,22 @@
             }
         }
       },
+      "Identifiable": {
+        "description": "Defines the identity of a resource.",
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResponseBase"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "A String identifier.",
+            "readOnly": true,
+            "type": "string"
+          }
+        }
+      },
       "ErrorResponse": {
         "description": "The top-level response that represents a failed request.",
         "allOf": [
