@@ -159,12 +159,22 @@
         "type": "object"
       },
       "QueryContext": {
-        "description": "",
+        "description": "Defines the query term that Bing used for the request.",
         "allOf": [
           {
-            "$ref": "#/definitions/"
+            "$ref": "#/definitions/Thing"
           }
-        ]
+        ],
+        "type": "object",
+        "required": [
+            "value"
+        ],
+        "properties": {
+            "value": {
+                "description": "A string term used to generate suggestions.",
+                "type": "string"
+            }
+        }
       },
       "ErrorResponse": {
         "description": "The top-level response that represents a failed request.",
