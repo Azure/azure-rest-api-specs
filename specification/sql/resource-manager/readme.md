@@ -33,6 +33,58 @@ tag: package-2017-03-preview
 
 ## Configuration for generating client SDKs
 
+### Tag: package-2017-10-preview
+
+These settings apply only when `--tag=package-2017-10-preview` is specified on the command line.
+
+This section contains the input swagger files that are used when generating client SDKs up to and including api-version 2017-10-01-preview. APIs should only be added to this section when the API is ready for production and the generated client code has been tested end-to-end.
+
+``` yaml $(tag) == 'package-2017-10-preview'
+input-file:
+- Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
+- Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/capabilities.json
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
+- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/databases.json
+- Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
+- Microsoft.Sql/stable/2014-04-01/dataMasking.json
+- Microsoft.Sql/stable/2014-04-01/elasticPools.json
+- Microsoft.Sql/stable/2014-04-01/firewallRules.json
+- Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
+- Microsoft.Sql/stable/2014-04-01/importExport.json
+- Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
+- Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
+- Microsoft.Sql/stable/2014-04-01/sql.core.json
+- Microsoft.Sql/stable/2014-04-01/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
+- Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
+- Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/operations.json
+- Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
+- Microsoft.Sql/preview/2015-05-01-preview/servers.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
+```
+
 ### Tag: package-2017-03-preview
 
 These settings apply only when `--tag=package-2017-03-preview` is specified on the command line.
@@ -74,6 +126,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
+- Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
