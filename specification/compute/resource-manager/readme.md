@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2017-12
+tag: package-2018-04
 
 directive:
   - where:
@@ -106,6 +106,18 @@ directive:
       - $.definitions.VirtualMachineScaleSetUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
+```
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04'
+input-file:
+- Microsoft.Compute/stable/2017-12-01/compute.json
+- Microsoft.Compute/stable/2017-12-01/runCommands.json
+- Microsoft.Compute/stable/2017-09-01/skus.json
+- Microsoft.Compute/stable/2018-04-01/disk.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
 ### Tag: package-2017-12
