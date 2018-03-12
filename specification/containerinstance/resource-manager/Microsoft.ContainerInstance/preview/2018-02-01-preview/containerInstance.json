@@ -180,7 +180,7 @@
             }
           }
         }, 
-        "x-ms-long-running-operation": true 
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ContainerGroups_Update",
@@ -316,39 +316,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/operations/{operationId}": {
-      "get": {
-        "operationId": "AsyncContainerGroupOperation_Get",
-        "x-ms-examples": {
-          "ContainerGroupAsyncOperation": {
-            "$ref": "./examples/ContainerGroupAsyncOperation.json"
-          }
-        },
-        "description": "Get the container group async operation status.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/OperationIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AsyncOperation"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs": {
       "get": {
         "operationId": "ContainerLogs_List",
@@ -398,7 +365,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/exec": {
       "post": {
-        "operationId": "StartContainer_Exec",
+        "operationId": "StartContainer_LaunchExec",
         "x-ms-examples": {
           "ContainerExecStart": {
             "$ref": "./examples/ContainerExecStart.json"
@@ -1111,73 +1078,6 @@
               "type": "string",
               "description": "The localized name of the resource"
             }
-          }
-        }
-      }
-    },
-    "AsyncOperation": {
-      "type": "object",
-      "description": "Azure async operation status.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Async operation id."
-        },
-        "status": {
-          "type": "string",
-          "description": "Async operation status."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "The date time that the async operation started.",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/AsyncOperationProperties",
-          "description": "this structure contains the detailed properties of the operation."
-        },
-        "error": {
-          "$ref": "#/definitions/AzureResourceExtendedErrorInfo",
-          "description": "If the async operation fails, this structure contains the error details."
-        }
-      }
-    },
-    "AsyncOperationProperties": {
-      "type": "object",
-      "description": "The properties of the async operation",
-      "properties": {
-        "events": {
-          "readOnly": true,
-          "description": "The events of the async operation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Event"
-          }
-        }
-      }
-    },
-    "AzureResourceExtendedErrorInfo": {
-      "type": "object",
-      "description": "The error detail information for async operation",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The error target."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array containing error information.",
-          "items": {
-            "$ref": "#/definitions/AzureResourceExtendedErrorInfo"
           }
         }
       }
