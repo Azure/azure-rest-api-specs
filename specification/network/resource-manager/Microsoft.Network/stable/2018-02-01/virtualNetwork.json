@@ -1081,13 +1081,20 @@
           "type": "string",
           "description": "The provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         },
-        "enableDdosProtection": { 
-          "type": "boolean", 
-          "description": "Indicates if DDoS protection is enabled for all the protected resources in a Virtual Network." 
-        }, 
-        "enableVmProtection": { 
-          "type": "boolean", 
-          "description": "Indicates if Vm protection is enabled for all the subnets in a Virtual Network." 
+        "enableDdosProtection": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates if DDoS protection is enabled for all the protected resources in the virtual network. It requires a DDoS protection plan associated with the resource."
+        },
+        "enableVmProtection": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates if VM protection is enabled for all the subnets in the virtual network."
+        },
+        "ddosProtectionPlan": {
+          "$ref": "#/definitions/SubResource",
+          "default": null,
+          "description": "The DDoS protection plan associated with the virtual network."
         }
       },
       "description": "Properties of the virtual network."
