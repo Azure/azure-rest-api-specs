@@ -57,20 +57,20 @@
             "Equal"
           ],
           "x-ms-enum": {
-            "name": "TrackPropertyCompareOperator",
+            "name": "TrackPropertyCompareOperation",
             "values": [
               {
                 "value": "Unknown",
-                "description": "Unknown track property compare operator"
+                "description": "Unknown track property compare operation"
               },
               {
                 "value": "Equal",
-                "description": "Equal operator"
+                "description": "Equal operation"
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Track property condition operator"
+          "description": "Track property condition operation"
         },
         "value": {
           "type": "string",
@@ -153,7 +153,7 @@
       "properties": {
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "LicenseAcquistionUrlTemplate is used to point to user speicified service to delivery content keys"
+          "description": "The template for a customer service to deliver keys to end users.  Not needed if using the built in Key Delivery service."
         },
         "playReadyCustomAttributes": {
           "type": "string",
@@ -167,7 +167,7 @@
       "properties": {
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "LicenseAcquistionUrlTemplate is used to point to user speicified service to delivery content keys"
+          "description": "The template for a customer service to deliver keys to end users.  Not needed if using the built in Key Delivery service."
         }
       },
       "type": "object",
@@ -177,7 +177,7 @@
       "properties": {
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "LicenseAcquistionUrlTemplate is used to point to user speicified service to delivery content keys"
+          "description": "The template for a customer service to deliver keys to end users.  Not needed if using the built in Key Delivery service."
         },
         "allowPersistentLicense": {
           "type": "boolean",
@@ -279,11 +279,11 @@
         },
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "LicenseAcquistionUrlTemplate is used to point to user speicified service to delivery content keys"
+          "description": "The template for a customer service to deliver keys to end users.  Not needed if using the built in Key Delivery service."
         }
       },
       "type": "object",
-      "description": "Class for EnvelopeEncryption encryption scheme"
+      "description": "Represents configuration specific to Dynamic Envelope Encryption.  This form of encryption is also referred to as the AES-128 CBC Encryption System in ISO/IEC 23009-4."
     },
     "CommonEncryptionCenc": {
       "properties": {
@@ -304,11 +304,11 @@
         },
         "drm": {
           "$ref": "#/definitions/CencDrmConfiguration",
-          "description": "Configuration of DRMs for CommonEncryptionCenc encryption scheme"
+          "description": "Represents configuration specific to Dynamic Encryption using the scheme defined in ISO/IEC 23001-7 (also known as MPEG Common Encryption) using the 'cbcs' scheme."
         }
       },
       "type": "object",
-      "description": "Class for envelope encryption scheme"
+      "description": "Represents configuration specific to Dynamic Encryption using the scheme defined in ISO/IEC 23001-7 (also known as MPEG Common Encryption) using the 'cenc' scheme."
     },
     "CommonEncryptionCbcs": {
       "properties": {
@@ -744,8 +744,33 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Restricts the set of items returned."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Specifies the the key by which the result collection should be ordered."
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
+        "x-ms-odata": "#/definitions/StreamingPolicy",
         "x-ms-examples": {
           "Lists Streaming Policies": {
             "$ref": "examples/streaming-policies-list.json"
@@ -945,8 +970,33 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Restricts the set of items returned."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Specifies the the key by which the result collection should be ordered."
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
+        "x-ms-odata": "#/definitions/StreamingLocator",
         "x-ms-examples": {
           "Lists Streaming Locators": {
             "$ref": "examples/streaming-locators-list.json"
