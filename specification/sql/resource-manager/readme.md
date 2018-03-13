@@ -449,19 +449,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/sql/mgmt/2014-04-01/sql
 ```
 
-### Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.sql
-```
-
 ### Java
 
 These settings apply only when `--java` is specified on the command line.
