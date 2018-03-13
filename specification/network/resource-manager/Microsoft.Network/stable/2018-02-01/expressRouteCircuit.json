@@ -1462,11 +1462,11 @@
     },
     "ExpressRouteCircuitConnectionPropertiesFormat": {
       "properties": {
-        "expressroutecircuitpeering": {
+        "expressRouteCircuitPeering": {
           "$ref": "#/definitions/ExpressRouteCircuitPeering",
           "description": "Reference to Express Route Circuit Private Peering Resource of the circuit initiating connection."
         },
-        "peerexpressroutecircuitpeering": {
+        "peerExpressRouteCircuitPeering": {
           "$ref": "#/definitions/ExpressRouteCircuitPeering",
           "description": "Reference to Express Route Circuit Private Peering Resource of the peered circuit."
         },
@@ -1482,16 +1482,20 @@
           "type": "string",
           "description": "Express Route Circuit Connection State. Possible values are: 'Connected' and 'Disconnected'.",
           "enum": [
-            "Unknown",
             "Connected",
-            "Disconnected",
-            "Degraded"
+            "Connecting",
+            "Disconnected"
           ],
           "readOnly": true,
           "x-ms-enum": {
-            "name": "ConnectionStatus",
+            "name": "circuitConnectionStatus",
             "modelAsString": true
           }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state of the circuit connection resource. Possible values are: 'Succeded', 'Updating', 'Deleting', and 'Failed'."
         }
       }
     },
