@@ -557,6 +557,19 @@
     }
    }
   },
+  "ComputeModeOptions": {
+   "description": "Shared or dedicated app hosting.",
+   "enum": [
+    "Shared",
+    "Dedicated",
+    "Dynamic"
+   ],
+   "type": "string",
+   "x-ms-enum": {
+    "name": "ComputeModeOptions",
+    "modelAsString": true
+   }
+  },
   "ConnStringInfo": {
    "description": "Database connection string information.",
    "type": "object",
@@ -2229,17 +2242,8 @@
      "type": "string"
     },
     "computeMode": {
-     "description": "Shared or dedicated app hosting.",
-     "enum": [
-      "Shared",
-      "Dedicated",
-      "Dynamic"
-     ],
-     "type": "string",
-     "x-ms-enum": {
-      "name": "ComputeModeOptions",
-      "modelAsString": true
-     }
+     "$ref": "#/definitions/ComputeModeOptions",
+     "description": "Shared or dedicated app hosting."
     },
     "capacity": {
      "format": "int32",
@@ -2384,17 +2388,8 @@
      "type": "string"
     },
     "computeMode": {
-     "description": "Shared/dedicated workers.",
-     "enum": [
-      "Shared",
-      "Dedicated",
-      "Dynamic"
-     ],
-     "type": "string",
-     "x-ms-enum": {
-      "name": "ComputeModeOptions",
-      "modelAsString": true
-     }
+     "$ref": "#/definitions/ComputeModeOptions",
+     "description": "Shared or dedicated app hosting."
     },
     "workerSize": {
      "description": "Size of the machines.",
@@ -2755,17 +2750,8 @@
      "type": "integer"
     },
     "computeMode": {
-     "description": "Shared or dedicated app hosting.",
-     "enum": [
-      "Shared",
-      "Dedicated",
-      "Dynamic"
-     ],
-     "type": "string",
-     "x-ms-enum": {
-      "name": "ComputeModeOptions",
-      "modelAsString": true
-     }
+     "$ref": "#/definitions/ComputeModeOptions",
+     "description": "Shared or dedicated app hosting."
     },
     "workerSize": {
      "description": "VM size of the worker pool instances.",
