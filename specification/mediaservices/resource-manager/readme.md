@@ -39,6 +39,19 @@ input-file:
 - Microsoft.Media/stable/2015-10-01/media.json
 ```
 
+### Tag: package-2018-03-preview
+
+These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-preview'
+input-file:
+- Microsoft.Media/preview/2018-03-30-preview/Accounts.json
+- Microsoft.Media/preview/2018-03-30-preview/Assets.json
+- Microsoft.Media/preview/2018-03-30-preview/ContentKeyPolicies.json
+- Microsoft.Media/preview/2018-03-30-preview/Encoding.json
+- Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
+- Microsoft.Media/preview/2018-03-30-preview/streamingservice.json
+
 ---
 # Code Generation
 
