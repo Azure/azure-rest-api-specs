@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "zoneName": "zone1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-03-01-preview",
+    "subscriptionId": "subid",
+    "relativeRecordSetName": "record1",
+    "recordType": "A"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/A/record1",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "record1",
+        "type": "Microsoft.Network/dnsZones/A",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "TTL": 3600,
+          "fqdn": "record1.zone1",
+          "ARecords": [
+            {
+              "ipv4Address": "127.0.0.1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
