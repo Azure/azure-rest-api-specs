@@ -122,14 +122,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the resource group (peering location of the circuit)."
           },
           {
             "name": "crossConnectionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ExpressRouteCrossConnection."
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit)."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -708,27 +708,6 @@
         }
       }
     },
-    "ExpressRouteCrossConnectionServiceProviderProperties": {
-      "properties": {
-        "serviceProviderName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The serviceProviderName."
-        },
-        "peeringLocation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The peering location of the ExpressRoute circuit."
-        },
-        "bandwidthInMbps": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The circuit bandwidth In Mbps."
-        }
-      },
-      "description": "Contains ServiceProviderProperties in an ExpressRouteCrossConnection"
-    },
     "ExpressRouteCrossConnectionProperties": {
       "properties": {
         "primaryAzurePort": {
@@ -746,9 +725,16 @@
           "type": "integer",
           "description": "The identifier of the circuit traffic."
         },
-        "serviceProviderProperties": {
-          "$ref": "#/definitions/ExpressRouteCrossConnectionServiceProviderProperties",
-          "description": "The ServiceProviderProperties."
+        "peeringLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The peering location of the ExpressRoute circuit."
+        },
+        "bandwidthInMbps": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The circuit bandwidth In Mbps."
         },
         "expressRouteCircuit": {
           "$ref": "#/definitions/ExpressRouteCircuitReference",
