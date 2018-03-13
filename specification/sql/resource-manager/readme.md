@@ -403,6 +403,8 @@ go:
 
 #### Go multi-api
 
+From api-version 2017-10 and onwards, only pure package versions should be used. Composite package versions are used for earlier api-versions (2017-03 and earlier) in order to ensure backwards compatibility with previously released versions of Go SDK,
+
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-pure-2017-10-preview
