@@ -284,6 +284,10 @@
   "definitions": {
     "EHCluster": {
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/ClusterSku",
+          "description": "Properties of the cluster SKU."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "properties": {
@@ -297,11 +301,10 @@
               "type": "string",
               "description": "The UTC time when the Event Hubs Cluster was last updated."
             },
-            "capacity": {
+            "metricId": {
               "readOnly": true,
-              "type": "integer",
-              "format": "int32",
-              "description": "The number of Capacity Units contained in this cluster."
+              "type": "string",
+              "description": "The metric ID of the cluster resource. Provided by the service and not modifiable by the user."
             }
           },
           "description": "Event Hubs Cluster properties supplied in responses in List or Get operations."
@@ -520,6 +523,33 @@
         "name"
       ],
       "description": "SKU parameters supplied to the create namespace operation"
+    },
+    "ClusterSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of this SKU.",
+          "enum": [
+            "Dedicated"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "format": "int32",
+          "maximum": 32,
+          "minimum": 1,
+          "type": "integer",
+          "description": "The quantity of Event Hubs Cluster Capacity Units contained in this cluster."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "SKU parameters particular to a cluster instance."
     }
   },
   "parameters": {
