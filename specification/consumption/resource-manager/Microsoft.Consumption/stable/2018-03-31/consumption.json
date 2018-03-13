@@ -1207,6 +1207,7 @@
         "meterId": {
           "description": "The meter id (GUID).",
           "type": "string",
+          "format":"uuid",
           "readOnly": true
         },
         "meterDetails": {
@@ -1217,6 +1218,7 @@
         "subscriptionGuid": {
           "description": "Subscription guid.",
           "type": "string",
+          "format":"uuid",
           "readOnly": true
         },
         "subscriptionName": {
@@ -1373,11 +1375,13 @@
         "meterId": {
           "description": "The meter id (GUID).",
           "type": "string",
+          "format":"uuid",
           "readOnly": true
         },
         "subscriptionGuid": {
           "description": "Subscription guid.",
           "type": "string",
+          "format":"uuid",
           "readOnly": true
         },
         "subscriptionName": {
@@ -1736,7 +1740,8 @@
           "description": "The list of filters on meters (GUID), mandatory for budgets of usage category. ",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format":"uuid"
           },
           "minItems": 0,
           "maxItems": 10
@@ -2002,6 +2007,7 @@
         "meterId": {
           "description": "The meter id (GUID)",
           "type": "string",
+          "format":"uuid",
           "readOnly": true
         },
         "meterDetails": {
