@@ -342,31 +342,7 @@
             "$ref": "#/parameters/reservationOrderIdParameter"
           },
           {
-            "name": "grain",
-            "description": "Can be daily or monthly",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "daily",
-              "monthly"
-            ],
-            "x-ms-enum": {
-              "name": "datagrain",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "daily",
-                  "description": "Daily grain of data",
-                  "name": "DailyGrain"
-                },
-                {
-                  "value": "monthly",
-                  "description": "Monthly grain of data",
-                  "name": "MonthlyGrain"
-                }
-              ]
-            }
+            "$ref": "#/parameters/grainParameter"
           },
           {
             "name": "$filter",
@@ -424,31 +400,7 @@
             "$ref": "#/parameters/reservationIdParameter"
           },
           {
-            "name": "grain",
-            "description": "Can be daily or monthly",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "daily",
-              "monthly"
-            ],
-            "x-ms-enum": {
-              "name": "datagrain",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "daily",
-                  "description": "Daily grain of data",
-                  "name": "DailyGrain"
-                },
-                {
-                  "value": "monthly",
-                  "description": "Monthly grain of data",
-                  "name": "MonthlyGrain"
-                }
-              ]
-            }
+            "$ref": "#/parameters/grainParameter"
           },
           {
             "name": "$filter",
@@ -2141,6 +2093,33 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "grainParameter": {
+      "name": "grain",
+      "description": "Can be daily or monthly",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "daily",
+        "monthly"
+      ],
+      "x-ms-enum": {
+        "name": "datagrain",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "daily",
+            "description": "Daily grain of data",
+            "name": "DailyGrain"
+          },
+          {
+            "value": "monthly",
+            "description": "Monthly grain of data",
+            "name": "MonthlyGrain"
+          }
+        ]
+      }
     }
   }
 }
