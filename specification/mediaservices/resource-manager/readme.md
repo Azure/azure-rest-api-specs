@@ -51,6 +51,7 @@ input-file:
 - Microsoft.Media/preview/2018-03-30-preview/Encoding.json
 - Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
 - Microsoft.Media/preview/2018-03-30-preview/streamingservice.json
+```
 
 ---
 # Code Generation
