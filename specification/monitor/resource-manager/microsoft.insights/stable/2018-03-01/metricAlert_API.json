@@ -647,7 +647,6 @@
         "severity",
         "evaluationFrequency",
         "windowSize",
-        "criteriaSchemaId",
         "criteria"
       ],
       "properties": {
@@ -680,13 +679,9 @@
           "format": "duration",
           "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
         },
-        "criteriaSchemaId": {
-          "type": "string",
-          "description": "schema to use to interpret the criteria JSON."
-        },
         "criteria": {
-          "type": "string",
-          "description": "json data that follows the schema defined by criteria schema id."
+          "$ref": "#/definitions/MetricAlertCriteria",
+          "description": "criteria"
         },
         "actions": {
           "type": "array",
