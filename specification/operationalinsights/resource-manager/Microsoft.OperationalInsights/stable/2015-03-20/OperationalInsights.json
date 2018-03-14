@@ -633,9 +633,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purge": {
       "post": {
+        "tags": [
+          "Workspaces"
+        ],
         "description": "Purges data in an Log Analytics workspace by a set of user-defined filters.",
         "x-ms-long-running-operation": true,
-        "operationId": "Workspace_Purge",
+        "operationId": "Workspaces_Purge",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1398,14 +1401,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/WorkspacePurgeBody"
-      }
+      },
+      "x-ms-parameter-location": "client"
     },
     "WorkspacePurgeIdParameter": {
       "name": "purgeId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "In a purge status request, this is the Id of the operation the status of which is returned."
+      "description": "In a purge status request, this is the Id of the operation the status of which is returned.",
+      "x-ms-parameter-location": "client"
     }
   }
 }

@@ -120,6 +120,15 @@ input-file:
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
+### Tag: package-disks-2018-04
+
+These settings apply only when `--tag=package-disks-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-disks-2018-04'
+input-file:
+- Microsoft.Compute/stable/2018-04-01/disk.json
+```
+
 ### Tag: package-2017-12
 
 These settings apply only when `--tag=package-2017-12` is specified on the command line.
@@ -333,6 +342,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-disks-2018-04
   - tag: package-2017-12
   - tag: package-compute-2017-03
   - tag: package-container-service-2017-01
@@ -342,6 +352,16 @@ batch:
   - tag: package-container-service-2016-03
   - tag: package-container-service-2015-11-preview
   - tag: package-compute-2015-06
+```
+
+### Tag: package-disks-2018-04 and go
+
+These settings apply only when `--tag=package-disks-2018-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-disks-2018-04' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/compute/mgmt/2018-04-01/compute
 ```
 
 ### Tag: package-2017-12 and go
@@ -455,12 +475,24 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-disks-2018-04
   - tag: package-compute-only-2017-12
   - tag: package-skus-2017-09
   - tag: package-compute-2017-03
   - tag: package-compute-2016-04-preview
   - tag: package-compute-2016-03
   - tag: package-compute-2015-06
+```
+
+### Tag: package-disks-2018-04 and python
+
+These settings apply only when `--tag=package-disks-2018-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-disks-2018-04' && $(python)
+python:
+  namespace: azure.mgmt.compute.v2018_04_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2018_04_01
 ```
 
 ### Tag: package-compute-only-2017-12 and python
