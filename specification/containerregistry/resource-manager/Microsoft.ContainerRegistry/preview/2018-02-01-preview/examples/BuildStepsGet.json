@@ -15,7 +15,22 @@
           "branch": "master",
           "imageName": "azurerest:testtag",
           "dockerFilePath": "DockerFile",
-          "isPushEnabled": true
+          "isPushEnabled": true,
+          "baseImageTrigger": "Runtime",
+          "baseImageDependencies": [
+            {
+              "type": "RunTime",
+              "repositoryName": "testimage",
+              "tag": "latest",
+              "digest": "sha256:77af4d6b9913e693e8d0b4b294fa62ade6054e6b2f1ffb617ac955dd63"
+            },
+            {
+              "type": "BuildTime",
+              "repositoryName": "testimage1",
+              "tag": "testtag",
+              "digest": "sha256:77af4d6b9913e693e8d0b4b294fa62ade6054e6b2f1ffb617ac955dd63"
+            }
+          ]
         },
         "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/buildDefinitions/myBuildDefinition/steps/myStep",
         "name": "myStep",

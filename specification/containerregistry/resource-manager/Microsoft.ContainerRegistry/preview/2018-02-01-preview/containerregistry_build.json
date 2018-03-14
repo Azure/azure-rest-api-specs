@@ -880,111 +880,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps/{stepName}/listBaseImageDependencies": {
-      "post": {
-        "tags": [
-          "BuildSteps"
-        ],
-        "summary": "List all the base image dependencies for a step if available.",
-        "operationId": "BuildSteps_ListBaseImageDependencies",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          },
-          {
-            "$ref": "#/parameters/stepNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BaseImageDependencyList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BuildSteps_ListBaseImageDependencies": {
-            "$ref": "./examples/BuildStepsListBaseImageDependencies.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps/{stepName}/updateBaseImageDependency": {
-      "post": {
-        "tags": [
-          "BuildSteps"
-        ],
-        "summary": "Updates the base image dependency.",
-        "operationId": "BuildSteps_UpdateBaseImageDependency",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          },
-          {
-            "$ref": "#/parameters/stepNameParameter"
-          },
-          {
-            "name": "imageDependency",
-            "in": "body",
-            "description": "The properties of a base image dependency.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BaseImageDependency"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BaseImageDependency"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BuildSteps_UpdateBaseImageDependency": {
-            "$ref": "./examples/BuildStepsUpdateBaseImageDependency.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/queueBuild": {
       "post": {
         "tags": [
@@ -1748,61 +1643,6 @@
         }
       }
     },
-    "BaseImageDependencyList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseImageDependency"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
-        }
-      }
-    },
-    "BaseImageDependency": {
-      "description": "Properties that describe a base image dependency.",
-      "required": [
-        "repositoryName",
-        "digest"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the base image dependency.",
-          "enum": [
-            "BuildTime",
-            "RunTime"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BaseImageDependencyType",
-            "modelAsString": true
-          }
-        },
-        "isAutoTriggerEnabled": {
-          "description": "The value of this flag indicates if build has to be auto triggered when this image is updated.",
-          "default": false,
-          "type": "boolean"
-        },
-        "repositoryName": {
-          "description": "Name of the repository.",
-          "type": "string"
-        },
-        "tag": {
-          "description": "The tag name.",
-          "type": "string"
-        },
-        "digest": {
-          "description": "The image digest. Example: SHA256 based digest.",
-          "type": "string"
-        }
-      }
-    },
     "QueueBuildRequest": {
       "description": "The queue build request parameters.",
       "type": "object",
@@ -1935,9 +1775,68 @@
           "items": {
             "$ref": "#/definitions/BuildArgument"
           }
+        },
+        "baseImageDependencies": {
+          "description": "List of base image dependencies for a step.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseImageDependency"
+          },
+          "readOnly": true
+        },
+        "baseImageTrigger": {
+          "description": "The type of the auto trigger for base image dependency update.",
+          "enum": [
+            "Runtime",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BaseImageTriggerType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "Docker"
+    },
+    "BaseImageDependency": {
+      "description": "Properties that describe a base image dependency.",
+      "required": [
+        "repositoryName",
+        "digest"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the base image dependency.",
+          "enum": [
+            "BuildTime",
+            "RunTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BaseImageDependencyType",
+            "modelAsString": true
+          }
+        },
+        "isAutoTriggerEnabled": {
+          "description": "The value of this flag indicates if build has to be auto triggered when this image is updated.",
+          "default": false,
+          "type": "boolean"
+        },
+        "repositoryName": {
+          "description": "Name of the repository.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "The tag name.",
+          "type": "string"
+        },
+        "digest": {
+          "description": "The image digest. Example: SHA256 based digest.",
+          "type": "string"
+        }
+      }
     },
     "BuildDefinitionBuildRequest": {
       "description": "The queue build parameters based on a build definition.",

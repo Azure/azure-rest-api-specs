@@ -13,6 +13,7 @@
         "dockerFilePath": "src/DockerFile",
         "contextPath": "src",
         "isPushEnabled": true,
+        "baseImageTrigger": "None",
         "buildArguments": [
           {
             "type": "DockerBuildArgument",
@@ -40,6 +41,21 @@
           "dockerFilePath": "src/DockerFile",
           "contextPath": "src",
           "isPushEnabled": true,
+          "baseImageTrigger": "None",
+          "baseImageDependencies": [
+            {
+              "type": "RunTime",
+              "repositoryName": "testimage",
+              "tag": "latest",
+              "digest": "sha256:77af4d6b9913e693e8d0b4b294fa62ade6054e6b2f1ffb617ac955dd63"
+            },
+            {
+              "type": "BuildTime",
+              "repositoryName": "testimage1",
+              "tag": "testtag",
+              "digest": "sha256:77af4d6b9913e693e8d0b4b294fa62ade6054e6b2f1ffb617ac955dd63"
+            }
+          ],
           "buildArguments": [
             {
               "type": "DockerBuildArgument",
