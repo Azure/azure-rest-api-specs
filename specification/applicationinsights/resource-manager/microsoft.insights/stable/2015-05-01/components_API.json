@@ -124,7 +124,7 @@
           }
         },
         "x-ms-examples": {
-          "webTestDelete": {
+          "ComponentsDelete": {
             "$ref": "./examples/ComponentsDelete.json"
           }
         }
@@ -240,6 +240,78 @@
         "x-ms-examples": {
           "ComponentUpdateTagsOnly": {
             "$ref": "./examples/ComponentsUpdateTagsOnly.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/purge": {
+      "post": {
+        "description": "Purges data in an Application Insights component by a set of user-defined filters.",
+        "operationId": "Components_Purge",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComponentPurgeParameter"
+          }         
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted request for purging an Application Insights component.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPurgeResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentPurge": {
+            "$ref": "./examples/ComponentsPurge.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/operations/{purgeId}": {
+      "get": {
+        "description": "Gets the status of a previously submitted purge using the id returned from the original purge request.",
+        "operationId": "Components_GetPurgeStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComponentPurgeIdParameter"
+          }         
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPurgeStatusResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentPurgeStatus": {
+            "$ref": "./examples/ComponentsPurgeStatus.json"
           }
         }
       }
@@ -434,6 +506,71 @@
           "description": "The URI to get the next set of Application Insights component defintions if too many components where returned in the result set."
         }
       }
+    },
+    "ComponentPurgeBody": {
+      "description": "Describes the body of a purge request for an App Insights component",
+      "required": [
+        "table",
+        "filters"
+      ],
+      "properties": {
+        "table": {
+          "type": "string",
+          "description": "Table from which to purge data."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The set of columns and filters (queries) to run over them to purge the resulting data.",
+          "items": {
+            "$ref": "#/definitions/ComponentPurgeBodyFilters"
+          }
+        }
+      }
+    },
+    "ComponentPurgeBodyFilters": {
+      "description": "User-defined filters to return data which will be purged from the table.",
+      "properties": {
+        "column": {
+          "description": "The column of the table over which the given query should run",
+          "type": "string"
+        },
+        "filter": {
+          "description": "A query to to run over the provided table and column to purge the corresponding data.",
+          "type": "string"
+        }
+      }
+    },
+    "ComponentPurgeResponse": {
+      "description": "Response containing operationId for a specific purge action.",
+      "properties": {
+        "operationId": {
+          "description": "Id to use when querying for status for a particular purge operation.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "ComponentPurgeStatusResponse": {
+      "description": "Response containing status for a specific purge operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the operation represented by the requested Id.",
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "PurgeState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "status"
+      ]
     }
   },
   "parameters": {
@@ -466,6 +603,22 @@
       "type": "string",
       "description": "The name of the Application Insights component resource.",
       "x-ms-parameter-location": "method"
+    }, 
+    "ComponentPurgeParameter": {
+      "name": "body",
+      "in": "body",
+      "description": "Describes the body of a request to purge data in a single table of an Application Insights component",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ComponentPurgeBody"
+      }
+    },
+    "ComponentPurgeIdParameter": {
+      "name": "purgeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "In a purge status request, this is the Id of the operation the status of which is returned."
     }
   }
 }

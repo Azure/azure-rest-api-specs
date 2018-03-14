@@ -1040,6 +1040,7 @@
      "enum": [
       "SystemAssigned"
      ],
+     "type": "string",
      "x-ms-enum": {
       "name": "ManagedServiceIdentityType",
       "modelAsString": true
@@ -2117,6 +2118,24 @@
      "type": "array",
      "items": {
       "$ref": "#/definitions/IpSecurityRestriction"
+     }
+    },
+    "http20Enabled": {
+     "description": "Http20Enabled: configures a web site to allow clients to connect over http2.0",
+     "default": true,
+     "type": "boolean"
+    },
+    "minTlsVersion": {
+     "description": "MinTlsVersion: configures the minimum version of TLS required for SSL requests",
+     "enum": [
+      "1.0",
+      "1.1",
+      "1.2"
+      ],
+     "type": "string",
+     "x-ms-enum": {
+      "name": "SupportedTlsVersions",
+      "modelAsString": true
      }
     }
    }

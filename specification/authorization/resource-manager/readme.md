@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10-01-preview
+tag: package-2018-01-01-preview
 ```
 
 ## Suppression
@@ -54,10 +54,20 @@ These settings apply only when `--tag=package-2017-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2017-10-01-preview/authorization.json
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2015-07-01/authorization.json
 - Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
 ```
 
+### Tag: package-2018-01-01-preview
+
+These settings apply only when `--tag=package-2018-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+```
 
 ---
 # Code Generation
@@ -71,6 +81,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -102,6 +114,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.authorization
   package-name: azure-mgmt-authorization
+  package-version: 0.40.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -126,6 +139,15 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2015-07
+  - tag: package-2017-10-01-preview
+  - tag: package-2018-01-01-preview
+```
+
 ### Tag: package-2015-07 and go
 
 These settings apply only when `--tag=package-2015-07 --go` is specified on he command line.
@@ -142,4 +164,28 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-10-01-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/authorization/mgmt/2017-10-01-preview/authorization
+```
+
+### Tag: package-2018-01-01-preview and go
+
+These settings apply only when `--tag=package-2018-01-01-preview --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/authorization/mgmt/2018-01-01-preview/authorization
+```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.authorization
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-authorization
 ```

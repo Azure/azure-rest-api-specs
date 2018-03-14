@@ -30,10 +30,21 @@ description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
 tag: package-2017-07
 csharp-sdks-folder: ./Generated/CSharp
+python-sdks-folder: ./Generated/Python
+go-sdk-folder: ./Generated/Golang
 
 license-header: MICROSOFT_MIT
 ```
 
+### Validations
+Run validations when `--validate` is specified on command line
+
+``` yaml $(validate)
+azure-validator: true
+model-validator: true
+semantic-validator: true
+message-format: json
+```
 
 ### Tag: package-2017-07
 
@@ -41,8 +52,8 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.RecoveryServices/stable/2017-07-01/jobs.json
-- Microsoft.RecoveryServices/stable/2016-12-01/backupManagement.json
+- Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
 ```
  
@@ -69,6 +80,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -114,15 +127,19 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup
 ```
 
----
-# Validation
+## Java
 
-## Suppression
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: Autorest invalidates two letter acronyms as well and changes in data contracts require service wide changes and require more time
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.recoveryservicesbackup
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservicesbackup
 ```
 
 ## Go
@@ -136,6 +153,14 @@ go:
   namespace: backup
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-07
+  - tag: package-2016-06
+```
+
 ### Tag: package-2017-07 and go
 
 These settings apply only when `--tag=package-2017-07 --go` is specified on the command line.
@@ -143,4 +168,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2017-07' && $(go)
 output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2017-07-01/backup
+```
+
+### Tag: package-2016-06 and go
+
+These settings apply only when `--tag=package-2016-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2016-06' && $(go)
+output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2016-06-01/backup
 ```

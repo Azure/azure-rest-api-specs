@@ -34,11 +34,16 @@ tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
 
+
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
 - Microsoft.ServiceBus/stable/2017-04-01/servicebus.json
 ```
 
+Important notes:
+On the advice of @fearthecowboy, the  `EncodingCaptureDescription` enum previously contained two values [`Avro`,`AvroDeflate`] ; the service has been changed (on 2018-01-17) and will not ever return the `AvroDeflate` value,
+ however, we have left the value in the enum (in servicebus.json) so that existing clients won't suffer a binary breaking change 
+The `AvroDeflate` value will likely be removed in a future API version, and at that a breaking binary change may happen.
 
 ### Tag: package-2015-08
 
@@ -62,6 +67,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -119,6 +126,14 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-04
+  - tag: package-2015-08
+```
+
 ### Tag: package-2017-04 and go
 
 These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
@@ -135,4 +150,20 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2015-08' && $(go)
 output-folder: $(go-sdk-folder)/services/servicebus/mgmt/2015-08-01/servicebus
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.servicebus
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicebus
 ```

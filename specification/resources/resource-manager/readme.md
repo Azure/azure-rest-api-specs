@@ -41,7 +41,7 @@ tag: package-policy-2017-06
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2017-05
+tag: package-resources-2018-02
 ```
 
 ``` yaml $(package-subscriptions)
@@ -54,10 +54,6 @@ tag: package-links-2016-09
 
 ``` yaml $(package-managedapplications)
 tag: package-managedapplications-2016-09
-```
-
-``` yaml $(package-management)
-tag: package-management-2017-08
 ```
 
 ### Tag: package-features-2015-12
@@ -125,6 +121,14 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2018-02
+These settings apply only when `--tag=package-resources-2018-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2018-02'
+input-file:
+- Microsoft.Resources/stable/2018-02-01/resources.json
 ```
 
 ### Tag: package-resources-2017-05
@@ -207,14 +211,6 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
-### Tag: package-management-2017-08
-These settings apply only when `--tag=package-management-2017-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-management-2017-08'
-input-file:
-- Microsoft.Management/preview/2017-08-31-preview/management.json
-```
-
 ---
 # Code Generation
 
@@ -227,6 +223,15 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#features
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#locks
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#policy
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -249,7 +254,6 @@ batch:
   - package-resources: true
   - package-subscriptions: true
   - package-links: true
-  - package-management: true
 #  - package-managedapplications: true
 ```
 
@@ -262,6 +266,29 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-features-2015-12
+  - tag: package-locks-2016-09
+  - tag: package-locks-2015-01
+  - tag: package-policy-2017-06
+  - tag: package-policy-2016-12
+  - tag: package-policy-2016-04
+  - tag: package-policy-2015-10
+  - tag: package-resources-2018-02
+  - tag: package-resources-2017-05
+  - tag: package-resources-2016-09
+  - tag: package-resources-2016-07
+  - tag: package-resources-2016-02
+  - tag: package-resources-2015-11
+  - tag: package-subscriptions-2016-06
+  - tag: package-subscriptions-2015-11
+  - tag: package-links-2016-09
+  - tag: package-managedapplications-2016-09
 ```
 
 ### Tag: package-features-2015-12 and go
@@ -332,6 +359,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-policy-2015-10' && $(go)
 namespace: policy
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-10-01-preview/policy
+```
+
+### Tag: package-resources-2018-02 and go
+
+These settings apply only when `--tag=package-resources-2018-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-resources-2018-02' && $(go)
+namespace: resources
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-02-01/resources
 ```
 
 ### Tag: package-resources-2017-05 and go
@@ -424,16 +461,6 @@ namespace: managedapplications
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2016-09-01-preview/managedapplications
 ```
 
-### Tag: package-management-2017-08 and go
-
-These settings apply only when `--tag=package-management-2017-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-management-2017-08' && $(go)
-namespace: management
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-08-31-preview/management
-```
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
@@ -465,6 +492,7 @@ batch:
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - tag: package-resources-2018-02
   - tag: package-resources-2017-05
   - tag: package-resources-2016-09
   - tag: package-resources-2016-02
@@ -570,6 +598,17 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
 ```
 
+### Tag: package-resources-2018-02 and python
+
+These settings apply only when `--tag=package-resources-2018-02 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2018-02' && $(python)
+python:
+  namespace: azure.mgmt.resource.resources.v2018_02_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/resources/v2018_02_01
+```
+
 ### Tag: package-resources-2017-05 and python
 
 These settings apply only when `--tag=package-resources-2017-05 --python` is specified on the command line.
@@ -614,7 +653,86 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2016_06_01
 ```
 
+## Java
 
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+```
+
+### Java multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(java) && $(multiapi)
+batch:
+  - tag: package-features-2015-12
+  - tag: package-locks-2016-09
+  - tag: package-policy-2016-04
+  - tag: package-resources-2016-09
+  - tag: package-subscriptions-2016-06
+```
+
+### Tag: package-features-2015-12 and java
+
+These settings apply only when `--tag=package-features-2015-12 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-features-2015-12' && $(java)
+java:
+  namespace: com.microsoft.azure.management.resources
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
+```
+
+### Tag: package-locks-2016-09 and java
+
+These settings apply only when `--tag=package-locks-2016-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-locks-2016-09' && $(java)
+java:
+  payload-flattening-threshold: 1
+  namespace: com.microsoft.azure.management.locks
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-locks
+```
+
+### Tag: package-policy-2016-04 and java
+
+These settings apply only when `--tag=package-policy-2016-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-policy-2016-04' && $(java)
+java:
+  namespace: com.microsoft.azure.management.resources
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
+```
+
+### Tag: package-resources-2016-09 and java
+
+These settings apply only when `--tag=package-resources-2016-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2016-09' && $(java)
+java:
+  namespace: com.microsoft.azure.management.resources
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
+```
+
+### Tag: package-subscriptions-2016-06 and java
+
+These settings apply only when `--tag=package-subscriptions-2016-06--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2016-06' && $(java)
+java:
+  namespace: com.microsoft.azure.management.resources
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
+```
 
 # Validation
 
@@ -629,5 +747,4 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
-  - package-management: true
 ```

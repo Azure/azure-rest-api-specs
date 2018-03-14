@@ -28,21 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2016-12
-```
-
-
-### Tag: package-2016-12
-
-These settings apply only when `--tag=package-2016-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-12'
-input-file:
-- Microsoft.RecoveryServices/stable/2016-12-01/backup.json
-- Microsoft.RecoveryServices/stable/2016-06-01/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2016-06-01/replicationusages.json
-- Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
-- Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
+tag: package-2016-06
 ```
  
 ### Tag: package-2016-06
@@ -70,6 +56,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -126,11 +114,34 @@ go:
   namespace: recoveryservices
 ```
 
-### Tag: package-2016-12 and go
+### Go multi-api
 
-These settings apply only when `--tag=package-2016-12 --go` is specified on the command line.
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2016-06
+```
+
+### Tag: package-2016-06 and go
+
+These settings apply only when `--tag=package-2016-06 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag)=='package-2016-12' && $(go)
-output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2016-12-01/recoveryservices
+``` yaml $(tag)=='package-2016-06' && $(go)
+output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2016-06-01/recoveryservices
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.recoveryservices
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservices
 ```

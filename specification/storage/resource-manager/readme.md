@@ -108,6 +108,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-storage
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -136,6 +140,28 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: storage
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-10
+  - tag: package-2017-06
+  - tag: package-2016-12
+  - tag: package-2016-05
+  - tag: package-2016-01
+  - tag: package-2015-06
+  - tag: package-2015-05-preview
+```
+
+### Tag: package-2017-10 and go
+
+These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(go)
+output-folder: $(go-sdk-folder)/services/storage/mgmt/2017-10-01/storage
 ```
 
 ### Tag: package-2017-06 and go
@@ -272,5 +298,21 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.storage.v2015_06_15
   output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2015_06_15
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.storage
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 2
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storage
 ```
 
