@@ -69,7 +69,7 @@ script:
     fi
   - >-
     if [[ $MODE == 'branchStrategy' ]]; then
-      [[ $TRAVIS_PULL_REQUEST && $TRAVIS_REPO_SLUG == 'Azure/azure-rest-api-specs-pr' && $TRAVIS_BRANCH == 'master' ]]
+      [[ $TRAVIS_PULL_REQUEST != 'false' && $TRAVIS_REPO_SLUG == 'Azure/azure-rest-api-specs-pr' && $TRAVIS_BRANCH == 'master' ]]
     fi
   - >-
     if [[ $MODE == 'syntax' ]]; then
