@@ -290,7 +290,7 @@
           "200": {
             "description": "Request successful. The operation returns a list of ExpressRouteCrossConnectionPeering resources.",
             "schema": {
-              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeeringListResult"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringListResult"
             }
           }
         },
@@ -397,7 +397,7 @@
           "200": {
             "description": "Request successful. The operation returns the resulting ExpressRouteCrossConnectionPeering resource.",
             "schema": {
-              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
             }
           }
         },
@@ -440,7 +440,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
             },
             "description": "Parameters supplied to the create or update ExpressRouteCrossConnection peering operation."
           },
@@ -455,13 +455,13 @@
           "200": {
             "description": "Update successful. The operation returns the resulting ExpressRouteCrossConnectionPeering resource.",
             "schema": {
-              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
             }
           },
           "201": {
             "description": "Create successful. The operation returns the resulting ExpressRouteCrossConnectionPeering resource.",
             "schema": {
-              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
             }
           }
         },
@@ -737,6 +737,7 @@
           "description": "The circuit bandwidth In Mbps."
         },
         "expressRouteCircuit": {
+          "readOnly": true,
           "$ref": "#/definitions/ExpressRouteCircuitReference",
           "description": "The ExpressRouteCircuit"
         },
@@ -766,7 +767,7 @@
         "peerings": {
           "type": "array",
           "items": {
-            "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
+            "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
           },
           "description": "The list of peerings."
         }
@@ -808,6 +809,117 @@
         }
       },
       "description": "Response for ListExpressRouteCrossConnection API service call."
+    },
+    "ExpressRouteCrossConnectionPeeringPropertiesFormat": {
+      "properties": {
+        "peeringType": {
+          "$ref": "#/definitions/ExpressRoutePeeringType",
+          "description": "The peering type."
+        },
+        "state": {
+          "$ref": "#/definitions/ExpressRoutePeeringState",
+          "description": "The peering state."
+        },
+        "azureASN": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The Azure ASN."
+        },
+        "peerASN": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 4294967295,
+          "description": "The peer ASN."
+        },
+        "primaryPeerAddressPrefix": {
+          "type": "string",
+          "description": "The primary address prefix."
+        },
+        "secondaryPeerAddressPrefix": {
+          "type": "string",
+          "description": "The secondary address prefix."
+        },
+        "primaryAzurePort": {
+          "type": "string",
+          "description": "The primary port."
+        },
+        "secondaryAzurePort": {
+          "type": "string",
+          "description": "The secondary port."
+        },
+        "sharedKey": {
+          "type": "string",
+          "description": "The shared key."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The VLAN ID."
+        },
+        "microsoftPeeringConfig": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig",
+          "description": "The Microsoft peering configuration."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        },
+        "gatewayManagerEtag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The GatewayManager Etag."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Gets whether the provider or the customer last modified the peering."
+        },
+        "ipv6PeeringConfig": {
+          "$ref": "#/definitions/Ipv6ExpressRouteCircuitPeeringConfig",
+          "description": "The IPv6 peering configuration."
+        }
+      }
+    },
+    "ExpressRouteCrossConnectionPeering": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Peering in an ExpressRoute Cross Connection resource."
+    },
+    "ExpressRouteCrossConnectionPeeringListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
+          },
+          "description": "The peerings in an express route cross connection."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListPeering API service call retrieves all peerings that belong to an ExpressRouteCrossConnection."
     }
   },
   "parameters": {
