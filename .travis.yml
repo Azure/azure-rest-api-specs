@@ -68,8 +68,8 @@ script:
       $DOCKER_CMD Azure/azure-libraries-for-java -v
     fi
   - >-
-    if [[ $MODE == 'branchStrategy']]; then
-      [[ $TRAVIS_PULL_REQUEST && $TRAVIS_PULL_REQUEST == 'Azure/azure-rest-api-specs-pr' && $TRAVIS_BRANCH == 'master' ]]
+    if [[ $MODE == 'branchStrategy' ]]; then
+      [[ $TRAVIS_PULL_REQUEST && $TRAVIS_REPO_SLUG == 'Azure/azure-rest-api-specs-pr' && $TRAVIS_BRANCH == 'master' ]]
     fi
   - >-
     if [[ $MODE == 'syntax' ]]; then
