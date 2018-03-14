@@ -421,7 +421,50 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}/loggers/{loggerid}": {
-      "put": {
+      "head": {
+        "tags": [
+          "DiagnosticLoggers"
+        ],
+        "operationId": "DiagnosticLogger_CheckEntityExists",
+        "description": "Checks that logger entity specified by identifier is associated with the diagnostics entity.",
+        "x-ms-examples": {
+          "ApiManagementHeadDiagnosticLogger": {
+            "$ref": "./examples/ApiManagementHeadDiagnosticLogger.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiagnosticIdParameter"
+          },
+		  {
+            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "put": {
         "tags": [
           "DiagnosticLoggers"
         ],
@@ -495,7 +538,7 @@
             "$ref": "#/parameters/DiagnosticIdParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
