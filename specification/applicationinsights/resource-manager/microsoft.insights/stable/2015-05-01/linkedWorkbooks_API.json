@@ -61,22 +61,7 @@
                 "$ref": "#/definitions/Workbook"
               }
             }
-          },
-          "400": {
-              "description": "Bad Request.",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-          },
-          "404": {
-              "description": "Resource Not Found."
-          },
-          "default": {
-              "description": "Default Response.",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-          } 
+          }
         },
         "x-ms-examples": {
           "WorkbooksList": {
@@ -109,19 +94,7 @@
         "responses": {
           "200": {
             "description": "The link has been created."
-          },
-          "400": {
-              "description": "Bad Request.",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-          },
-          "default": {
-              "description": "Default Response.",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-          } 
+          }
         },
         "x-ms-examples": {
           "WorkbookAdd": {
@@ -152,22 +125,7 @@
         "responses": {
           "200": {
             "description": "The workbook definition updated."
-          },
-          "400": {
-              "description": "Bad Request.",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-          },
-          "404": {
-              "description": "Resource Not Found."
-          },
-          "default": {
-              "description": "Default Response.",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-          } 
+          }
         },
         "x-ms-examples": {
           "WorkbookAdd": {
@@ -195,22 +153,7 @@
         "responses": {
           "200": {
             "description": "The workbook link has been successfully deleted."
-          },
-          "400": {
-              "description": "Bad Request.",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-          },
-          "404": {
-              "description": "Resource Not Found."
-          },
-          "default": {
-              "description": "Default Response.",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-          } 
+          }
         },
         "x-ms-examples": {
           "WorkbookList": {
@@ -221,6 +164,44 @@
     }
   },
   "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
     "Workbook": {
       "description": "An Application Insights workbook definition.",
       "allOf": [
@@ -331,7 +312,7 @@
       "description": "Client Api Version."
     },
     "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
+      "name": "resourceGroup",
       "in": "path",
       "required": true,
       "type": "string",
