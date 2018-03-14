@@ -26,7 +26,8 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11
+tag: package-2018-03
+azure-validator: true
 ```
 
 ### Tag: package-2017-11
@@ -38,6 +39,36 @@ input-file:
 - Microsoft.Consumption/stable/2017-11-30/consumption.json
 ```
 
+---
+### Tag: package-2018-01
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.Consumption/stable/2018-01-31/consumption.json
+```
+
+---
+### Tag: package-2018-03
+
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file:
+- Microsoft.Consumption/stable/2018-03-31/consumption.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: R2059
+    from: consumption.json
+    reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
+    approved-by: "@fearthecowboy"
+```
+
+---
 ### Tag: package-2017-04-preview
 
 These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
@@ -47,6 +78,7 @@ input-file:
 - Microsoft.Consumption/preview/2017-04-24-preview/consumption.json
 ```
 
+---
 ### Tag: package-2017-12-preview
 
 These settings apply only when `--tag=package-2017-12-preview` is specified on the command line.
@@ -99,6 +131,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.consumption
   package-name: azure-mgmt-consumption
+  package-version: 1.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -124,6 +157,17 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+``` yaml $(go) && $(multiapi)
+batch:
+   - tag: package-2017-04-preview
+   - tag: package-2017-11-30
+   - tag: package-2017-12-30-preview
+   - tag: package-2018-01-31
+   - tag: package-2018-03-31
+```
+ 
+
 ### Tag: package-2017-04-preview and go
 
 These settings apply only when `--tag=package-2017-04-preview --go` is specified on the command line.
@@ -133,18 +177,49 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-04-24-preview/consumption
 ```
 
-### Tag: package-2017-11-30 and go
-These settings apply only when `--tag=package-2017-11-30 --go` is specified on the command line.
+### Tag: package-2017-11 and go
+These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2017-11-30' && $(go)
+``` yaml $(tag) == 'package-2017-11' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-11-30/consumption
 ```
 
-### Tag: package-2017-12-30-preview and go
-These settings apply only when `--tag=package-2017-12-30-preview --go` is specified on the command line.
+### Tag: package-2017-12-preview and go
+These settings apply only when `--tag=package-2017-12-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2017-12-30-preview' && $(go)
+``` yaml $(tag) == 'package-2017-12-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-12-30-preview/consumption
+```
+
+### Tag: package-2018-01 and go
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-01-31/consumption
+```
+
+### Tag: package-2018-03 and go
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(go)
+output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-03-31/consumption
+```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.consumption
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-consumption
 ```

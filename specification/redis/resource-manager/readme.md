@@ -80,6 +80,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -112,6 +114,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.redis
   package-name: azure-mgmt-redis
+  package-version: 5.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -135,6 +138,16 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: redis
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-10
+  - tag: package-2017-02
+  - tag: package-2016-04
+  - tag: package-2015-08
 ```
 
 ### Tag: package-2017-10 and go
@@ -172,6 +185,22 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2015-08' && $(go)
 output-folder: $(go-sdk-folder)/services/redis/mgmt/2015-08-01/redis
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.redis
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-redis
 ```
 
 # Validation

@@ -62,6 +62,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -98,7 +100,7 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-relay/azure/mgmt/remay
+  output-folder: $(python-sdks-folder)/azure-mgmt-relay/azure/mgmt/relay
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
@@ -118,6 +120,14 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-04
+  - tag: package-2016-07
+```
+
 ### Tag: package-2017-04 and go
 
 These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
@@ -134,4 +144,20 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2016-07' && $(go)
 output-folder: $(go-sdk-folder)/services/relay/mgmt/2016-07-01/relay
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.relay
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-relay
 ```

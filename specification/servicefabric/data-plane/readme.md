@@ -26,7 +26,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.0'
+tag: '6.1'
 ```
 
 
@@ -60,6 +60,15 @@ input-file:
 ```
 
 
+### Tag: 6.1
+
+These settings apply only when `--tag=6.1` is specified on the command line.
+
+``` yaml $(tag) == '6.1'
+input-file:
+- Microsoft.ServiceFabric/stable/6.1/servicefabric.json
+```
+
 ---
 # Code Generation
 
@@ -72,6 +81,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -88,6 +99,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.servicefabric
   package-name: azure-servicefabric
+  package-version: 6.1.2.9
   add-credentials: true
   clear-output-folder: true
 ```
@@ -114,6 +126,16 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: "1.0.0"
+  - tag: "5.6"
+  - tag: "6.0"
+  - tag: "6.1"
+```
+
 ### Tag: 1.0.0 and go
 
 These settings apply only when `--tag=1.0.0 --go` is specified on the command line.
@@ -136,4 +158,28 @@ These settings apply only when `--tag=6.0 --go` is specified on the command line
 
 ``` yaml $(tag) == '6.0' && $(go)
 output-folder: $(go-sdk-folder)/services/servicefabric/6.0/servicefabric
+```
+
+### Tag: 6.1 and go
+
+These settings apply only when `--tag=6.1 --go` is specified on the command line.
+
+``` yaml $(tag) == '6.1' && $(go)
+output-folder: $(go-sdk-folder)/services/servicefabric/6.1/servicefabric
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.servicefabric
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-servicefabric
 ```
