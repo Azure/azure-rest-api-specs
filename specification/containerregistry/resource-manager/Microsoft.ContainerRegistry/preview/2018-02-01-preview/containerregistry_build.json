@@ -873,6 +873,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "BuildSteps_ListBuildArguments": {
             "$ref": "./examples/BuildStepsListBuildArguments.json"
@@ -1590,7 +1593,8 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "discriminator": "type"
     },
     "BuildArgumentList": {
       "type": "object",
@@ -1785,7 +1789,7 @@
           "readOnly": true
         },
         "baseImageTrigger": {
-          "description": "The type of the auto trigger for base image dependency update.",
+          "description": "The type of the auto trigger for base image dependency updates.",
           "enum": [
             "Runtime",
             "None"
@@ -1837,6 +1841,61 @@
           "type": "string"
         }
       }
+    },
+    "DockerBuildStepUpdateParameters": {
+      "description": "The properties for updating a docker build step.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BuildStepPropertiesUpdateParameters"
+        }
+      ],
+      "properties": {
+        "branch": {
+          "description": "The repository branch name.",
+          "type": "string"
+        },
+        "imageName": {
+          "description": "The full qualified name of the image including the repository and tag.",
+          "type": "string"
+        },
+        "isPushEnabled": {
+          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
+          "default": false,
+          "type": "boolean"
+        },
+        "dockerFilePath": {
+          "description": "The Docker file path relative to the source control root.",
+          "type": "string"
+        },
+        "contextPath": {
+          "description": "The relative context path for a docker build in the source.",
+          "type": "string"
+        },
+        "buildArguments": {
+          "description": "The custom arguments for building this build step.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildArgument"
+          }
+        },
+        "baseImageTrigger": {
+          "description": "The type of the auto trigger for base image dependency updates.",
+          "enum": [
+            "Runtime",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BaseImageTriggerType",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Docker"
     },
     "BuildDefinitionBuildRequest": {
       "description": "The queue build parameters based on a build definition.",
