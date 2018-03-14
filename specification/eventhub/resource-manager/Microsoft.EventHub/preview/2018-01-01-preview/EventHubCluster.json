@@ -39,10 +39,10 @@
         "tags": [
           "Event Hubs Clusters"
         ],
-        "operationId": "EHClusters_ListByResourceGroup",
+        "operationId": "Clusters_ListByResourceGroup",
         "x-ms-examples": {
           "ClustersListByResourceGroup": {
-            "$ref": "./examples/Clusters/EHClustersListByResourceGroup.json"
+            "$ref": "./examples/Clusters/ClustersListByResourceGroup.json"
           }
         },
         "description": "Lists the available Event Hubs Clusters within an ARM resource group.",
@@ -61,7 +61,7 @@
           "200": {
             "description": "Clusters returned successfully.",
             "schema": {
-              "$ref": "#/definitions/EHClusterListResult"
+              "$ref": "#/definitions/ClusterListResult"
             }
           },
           "default": {
@@ -84,7 +84,7 @@
         "operationId": "Clusters_Get",
         "x-ms-examples": {
           "ClusterGet": {
-            "$ref": "./examples/Clusters/EHClusterGet.json"
+            "$ref": "./examples/Clusters/ClusterGet.json"
           }
         },
         "description": "Gets the resource description of the specified Event Hubs Cluster.",
@@ -106,7 +106,7 @@
           "200": {
             "description": "Event Hubs Cluster resource description returned successfully.",
             "schema": {
-              "$ref": "#/definitions/EHCluster"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "default": {
@@ -124,7 +124,7 @@
         "operationId": "Clusters_Patch",
         "x-ms-examples": {
           "ClusterPatch": {
-            "$ref": "./examples/Clusters/EHClusterPatch.json"
+            "$ref": "./examples/Clusters/ClusterPatch.json"
           }
         },
         "description": "Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.",
@@ -146,7 +146,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EHCluster"
+              "$ref": "#/definitions/Cluster"
             },
             "description": "The properties of the Event Hubs Cluster which should be updated."
           }
@@ -155,13 +155,13 @@
           "200": {
             "description": "Event Hubs Cluster successfully created.",
             "schema": {
-              "$ref": "#/definitions/EHCluster"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "201": {
             "description": "Event Hubs Cluster update request accepted.",
             "schema": {
-              "$ref": "#/definitions/EHCluster"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "202": {
@@ -201,7 +201,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EHClusterQuotaConfigurationProperties",
+              "$ref": "#/definitions/ClusterQuotaConfigurationProperties",
               "required": [
                 "settings"
               ]
@@ -211,7 +211,7 @@
         ],
         "x-ms-examples": {
           "ClustersQuotasConfigurationPatch": {
-            "$ref": "./examples/Clusters/EHClusterQuotaConfigurationPatch.json"
+            "$ref": "./examples/Clusters/ClusterQuotaConfigurationPatch.json"
           }
         },
         "description": "Replace all specified Event Hubs Cluster settings with those contained in the request body. Leaves the settings not specified in the request body unmodified.",
@@ -219,13 +219,13 @@
           "200": {
             "description": "Event Hubs Cluster settings configuration returned.",
             "schema": {
-              "$ref": "#/definitions/EHClusterQuotaConfigurationProperties"
+              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
             }
           },
           "201": {
             "description": "Event Hubs Cluster setting configuration request successfully accepted.",
             "schema": {
-              "$ref": "#/definitions/EHClusterQuotaConfigurationProperties"
+              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
             }
           },
           "202": {
@@ -260,7 +260,7 @@
         ],
         "x-ms-examples": {
           "ClustersQuotasConfigurationGet": {
-            "$ref": "./examples/Clusters/EHClusterQuotaConfigurationGet.json"
+            "$ref": "./examples/Clusters/ClusterQuotaConfigurationGet.json"
           }
         },
         "description": "Get all Event Hubs Cluster settings - a collection of key/value pairs which represent the quotas and settings imposed on the cluster.",
@@ -268,7 +268,7 @@
           "200": {
             "description": "Event Hubs Cluster settings configuration returned.",
             "schema": {
-              "$ref": "#/definitions/EHClusterQuotaConfigurationProperties"
+              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
             }
           },
           "default": {
@@ -282,7 +282,7 @@
     }
   },
   "definitions": {
-    "EHCluster": {
+    "Cluster": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/ClusterSku",
@@ -317,12 +317,12 @@
       ],
       "description": "Single Event Hubs Cluster resource in List or Get operations."
     },
-    "EHClusterListResult": {
+    "ClusterListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EHCluster"
+            "$ref": "#/definitions/Cluster"
           },
           "description": "The Event Hubs Clusters present in the List Event Hubs operation results."
         },
@@ -333,7 +333,7 @@
       },
       "description": "The response of the List Event Hubs Clusters operation."
     },
-    "EHClusterQuotaConfigurationProperties": {
+    "ClusterQuotaConfigurationProperties": {
       "properties": {
         "settings": {
           "type": "object",
