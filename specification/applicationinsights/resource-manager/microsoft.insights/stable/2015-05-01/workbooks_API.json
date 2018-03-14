@@ -67,7 +67,22 @@
                 "$ref": "#/definitions/Workbook"
               }
             }
-          }
+          },
+          "400": {
+              "description": "Bad Request.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          },
+          "404": {
+              "description": "Resource Not Found."
+          },
+          "default": {
+              "description": "Default Response.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          } 
         },
         "x-ms-examples": {
           "WorkbooksList": {
@@ -100,7 +115,22 @@
             "schema": {
                 "$ref": "#/definitions/Workbook"
             }
-          }
+          },
+          "400": {
+              "description": "Bad Request.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          },
+          "404": {
+              "description": "Resource Not Found."
+          },
+          "default": {
+              "description": "Default Response.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          } 
         },
         "x-ms-examples": {
           "WorkbookGet": {
@@ -140,7 +170,19 @@
             "schema": {
                 "$ref": "#/definitions/Workbook"
             }
-          }
+          },
+          "400": {
+              "description": "Bad Request.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          },
+          "default": {
+              "description": "Default Response.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          } 
         },
         "x-ms-examples": {
           "WorkbookAdd": {
@@ -180,7 +222,22 @@
             "schema": {
                 "$ref": "#/definitions/Workbook"
             }
-          }
+          },
+          "400": {
+              "description": "Bad Request.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          },
+          "404": {
+              "description": "Resource Not Found."
+          },
+          "default": {
+              "description": "Default Response.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          } 
         },
         "x-ms-examples": {
           "WorkbookList": {
@@ -208,11 +265,26 @@
         "responses": {
           "200": {
             "description": "The workbook has been successfully deleted."
-          }
+          },
+          "400": {
+              "description": "Bad Request.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          },
+          "404": {
+              "description": "Resource Not Found."
+          },
+          "default": {
+              "description": "Default Response.",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+          } 
         },
         "x-ms-examples": {
           "WorkbookList": {
-            "$ref": "./examples/WorkbookOKResponse.json"
+            "$ref": "./examples/WorkbookResponseOnly.json"
           }
         }
       }
