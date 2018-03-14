@@ -692,7 +692,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability": {
       "post": {
         "tags": [
           "DisasterRecoveryConfigs"
@@ -709,7 +709,7 @@
           {
             "$ref": "#/parameters/namespaceNameParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -998,7 +998,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules": {
       "get": {
         "tags": [
           "DisasterRecoveryConfigs"
@@ -1047,7 +1047,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}": {      
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}": {
       "get": {
         "tags": [
           "DisasterRecoveryConfigs"
@@ -2548,7 +2548,7 @@
         ],
         "operationId": "Regions_ListBySku",
         "x-ms-examples": {
-          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/SkuRegions.json" }
+          "RegionsListBySku": { "$ref": "./examples/SkuRegions/SkuRegions.json" }
         },
         "description": "Gets the available Regions for a given sku",
         "parameters": [
@@ -2588,7 +2588,7 @@
         ],
         "operationId": "PremiumMessagingRegions_List",
         "x-ms-examples": {
-          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/PremiumMessagingRegions.json" }
+          "PremiumMessagingRegionsList": { "$ref": "./examples/SkuRegions/PremiumMessagingRegions.json" }
         },
         "description": "Gets the available premium messaging regions for servicebus ",
         "parameters": [
@@ -3112,6 +3112,10 @@
           "$ref": "#/definitions/EntityStatus",
           "description": "Enumerates the possible values for the status of a messaging entity."
         },
+        "enableBatchedOperations": {
+          "type": "boolean",
+          "description": "Value that indicates whether server-side batched operations are enabled."
+        },
         "autoDeleteOnIdle": {
           "format": "duration",
           "type": "string",
@@ -3125,11 +3129,11 @@
           "type": "boolean",
           "description": "A value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage."
         },
-		"forwardTo": {
+        "forwardTo": {
           "type": "string",
           "description": "Queue/Topic name to forward the messages"
         },
-		"forwardDeadLetteredMessagesTo": {
+        "forwardDeadLetteredMessagesTo": {
           "type": "string",
           "description": "Queue/Topic name to forward the Dead Letter message"
         }
@@ -3363,6 +3367,10 @@
           "type": "string",
           "description": "ISO 8061 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
+        "deadLetteringOnFilterEvaluationExceptions": {
+          "type": "boolean",
+          "description": "Value that indicates whether a subscription has dead letter support on filter evaluation exceptions."
+        },
         "deadLetteringOnMessageExpiration": {
           "type": "boolean",
           "description": "Value that indicates whether a subscription has dead letter support when a message expires."
@@ -3390,11 +3398,11 @@
           "type": "string",
           "description": "ISO 8061 timeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
-		"forwardTo": {
+        "forwardTo": {
           "type": "string",
           "description": "Queue/Topic name to forward the messages"
         },
-		"forwardDeadLetteredMessagesTo": {
+        "forwardDeadLetteredMessagesTo": {
           "type": "string",
           "description": "Queue/Topic name to forward the Dead Letter message"
         }
@@ -3924,7 +3932,7 @@
               "type": "string",
               "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
             },
-			"alternateName": {
+            "alternateName": {
               "type": "string",
               "description": "Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
             },
