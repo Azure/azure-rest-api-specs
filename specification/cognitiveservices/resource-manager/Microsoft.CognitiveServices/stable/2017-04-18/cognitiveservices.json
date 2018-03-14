@@ -956,12 +956,14 @@
           "description": "The quota period used to summarize the usage values."
         },
         "limit": {
-          "type": "integer",
+          "type": "number",
+          "format": "double",
           "readOnly": true,
           "description": "Maximum value for this metric."
         },
         "currentValue": {
-          "type": "integer",
+          "type": "number",
+          "format": "double",
           "readOnly": true,
           "description": "Current value for this metric."
         },
@@ -1202,7 +1204,8 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names)."
+      "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+      "x-ms-parameter-location": "client"
     }
   }
 }
