@@ -5,6 +5,7 @@ services:
   - docker
 env:
   matrix:
+    - MODE=branchStrategy
     - MODE=syntax
     - MODE=python
     - MODE=node
@@ -66,6 +67,11 @@ script:
   - >-
     if [[ $MODE == 'java' ]]; then
       $DOCKER_CMD Azure/azure-libraries-for-java -v
+    fi
+  - >-
+    if [[ $MODE == 'branchStrategy' ]]; then
+      # Check to ensure CI is not executing for a PR against the master branch in the private repository
+      ! [[ $TRAVIS_PULL_REQUEST != 'false' && $TRAVIS_REPO_SLUG == 'Azure/azure-rest-api-specs-pr' && $TRAVIS_BRANCH == 'master' ]]
     fi
   - >-
     if [[ $MODE == 'syntax' ]]; then
