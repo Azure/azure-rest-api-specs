@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "description": "Azure Application Insights client for Annotations for a component.",
+    "description": "Azure Application Insights client for work item configurations for a component.",
     "version": "2015-05-01"
   },
   "host": "management.azure.com",
@@ -34,10 +34,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/Annotations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs": {
       "get": {
-        "description": "Gets the list of annotations for a component for given time range",
-        "operationId": "Annotations_List",
+        "description": "Gets the list work item configurations that exist for the application",
+        "operationId": "WorkItemConfigurations_List",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -50,12 +50,6 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/StartParameter"
-          },
-          {
-            "$ref": "#/parameters/EndParameter"
           }
         ],
         "responses": {
@@ -64,29 +58,29 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Annotation"
+                "$ref": "#/definitions/WorkItemConfiguration"
               }
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/AnnotationError"
+              "$ref": "#/definitions/WorkItemConfigurationError"
             }
           }
         },
         "x-ms-examples": {
-          "AnnotationsList": {
-            "$ref": "./examples/AnnotationsList.json"
+          "WorkItemConfigurationsList": {
+            "$ref": "./examples/WorkItemConfigsGet.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         }
       },
-      "put": {
-        "description": "Create an Annotation of an Application Insights component.",
-        "operationId": "Annotations_Create",
+      "post": {
+        "description": "Create a work item configuration for an Application Insights component.",
+        "operationId": "WorkItemConfigurations_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -101,43 +95,70 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "AnnotationProperties",
-            "description": "Properties that need to be specified to create an annotation of a Application Insights component.",
+            "name": "WorkItemConfigurationProperties",
+            "description": "Properties that need to be specified to create a work item configuration of a Application Insights component.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Annotation"
+              "$ref": "#/definitions/WorkItemCreateConfiguration"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "An object containing the annotation definition created by this PUT call.",
+            "description": "An object containing the work item configuration definition created by this PUT call.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Annotation"
-              }
-			}
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AnnotationError"
+              "$ref": "#/definitions/WorkItemConfiguration"
             }
           }
         },
         "x-ms-examples": {
-          "AnnotationsCreate": {
-            "$ref": "./examples/AnnotationsCreate.json"
+          "WorkItemConfigurationsCreate": {
+            "$ref": "./examples/WorkItemConfigsCreate.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/Annotations/{annotationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/DefaultWorkItemConfig": {
+      "get": {
+        "description": "Gets default work item configurations that exist for the application",
+        "operationId": "WorkItemConfigurations_GetDefault",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkItemConfiguration"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "WorkItemConfigurationsGetDefault": {
+              "$ref": "./examples/WorkItemConfigDefaultGet.json"
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": null
+          }
+        }
+      },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}": {
       "delete": {
-        "description": "Delete an Annotation of an Application Insights component.",
-        "operationId": "Annotations_Delete",
+        "description": "Delete an workitem configuration of an Application Insights component.",
+        "operationId": "WorkItemConfigurations_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -152,97 +173,70 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/AnnotationIdParameter"
+            "$ref": "#/parameters/WorkItemConfigIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The annotation that was successfully deleted.",
+            "description": "The work item configuration that was successfully deleted.",
             "schema": {              
 			  }
           }
         },
         "x-ms-examples": {
-          "AnnotationsDelete": {
-            "$ref": "./examples/AnnotationsDelete.json"
-          }
-        }
-      },
-      "get": {
-        "description": "Get the annotation for given id.",
-        "operationId": "Annotations_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AnnotationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Annotation object for this id.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Annotation"
-              }
-		    }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AnnotationError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AnnotationsGet": {
-            "$ref": "./examples/AnnotationsGet.json"
+          "WorkItemConfigurationDelete": {
+            "$ref": "./examples/WorkItemConfigDelete.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Annotation": {
+    "WorkItemConfiguration": {
       "type": "object",
-      "description": "Annotation associated with an application insights resource.",
+      "description": "Work item configuration associated with an application insights resource.",
       "properties": {
-        "AnnotationName": {
+        "ConnectorId": {
           "type": "string",
-          "description": "Name of annotation"
+          "description": "Connector identifier where work item is created"
         },
-        "Category": {
+        "ConfigDisplayName": {
           "type": "string",
-          "description": "Category of annotation, free form"
+          "description": "Configuration friendly name"
         },
-        "EventTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time when event occurred"
+        "IsDefault": {
+          "type": "boolean",
+          "description": "Boolean value indicating whether configuration is default"
         },
         "Id": {
           "type": "string",
-          "description": "Unique Id for annotation"
+          "description": "Unique Id for work item"
         },
-        "Properties": {
+        "ConfigProperties": {
           "type": "string",
           "description": "Serialized JSON object for detailed properties"
-        },
-        "RelatedAnnotation": {
+        }
+      }
+    },
+    "WorkItemCreateConfiguration": {
+      "type": "object",
+      "description": "Work item configuration creation payload",
+      "properties": {
+        "ConnectorId": {
           "type": "string",
-          "description": "Related parent annotation if any",
-          "default": "null"
+          "description": "Unique connector id"
+        },
+        "ConnectorDataConfiguration": {
+          "type": "string",
+          "description": "Serialized JSON object for detaile d properties"
+        },
+        "ValidateOnly": {
+          "type": "boolean",
+          "description": "Boolean indicating validate only"
+        },
+        "WorkItemProperties": {
+          "type": "string",
+          "description": "Custom work item properties"
         }
       }
     },
@@ -261,9 +255,9 @@
         }
       }
     },
-    "AnnotationError": {
+    "WorkItemConfigurationError": {
       "type": "object",
-      "description": "Error associated with trying to create annotation with Id that already exist",
+      "description": "Error associated with trying to get work item configuration or configurations",
       "properties": {
         "code": {
           "type": "string",
@@ -310,28 +304,12 @@
       "description": "The name of the Application Insights component resource.",
       "x-ms-parameter-location": "method"
     },
-    "AnnotationIdParameter": {
-      "name": "annotationId",
+    "WorkItemConfigIdParameter": {
+      "name": "workItemConfigId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The unique annotation ID. This is unique within a Application Insights component.",
-      "x-ms-parameter-location": "method"
-    },
-    "StartParameter": {
-      "name": "start",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The start time to query from for annotations, cannot be older than 90 days from current date.",
-      "x-ms-parameter-location": "method"
-    },
-    "EndParameter": {
-      "name": "end",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The end time to query for annotations.",
+      "description": "The unique work item configuration Id. This can be either friendly name of connector as defined in connector configuration",
       "x-ms-parameter-location": "method"
     }
   }
