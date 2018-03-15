@@ -47,6 +47,12 @@
         "x-ms-examples": {
           "UsageDetailsList": {
             "$ref": "./examples/UsageDetailsList.json"
+          },
+          "UsageDetailsListFilterByTag": {
+            "$ref": "./examples/UsageDetailsListFilterByTag.json"
+          },
+          "UsageDetailsListGroupByTagDate": {
+            "$ref": "./examples/UsageDetailsListGroupByTagDate.json"
           }
         },
         "parameters": [
@@ -62,7 +68,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName, properties/instanceId or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -82,6 +88,18 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 1000
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregatie usageDetails by tags or (tags and properties/usageStart)",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -122,6 +140,9 @@
           },
           "UsageDetailsExpand": {
             "$ref": "./examples/UsageDetailsExpand.json"
+          },
+          "UsageDetailsListForBillingPeriodGroupByTag": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodGroupByTag.json"
           }
         },
         "parameters": [
@@ -140,10 +161,22 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregatie usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
           },
           {
             "name": "$skiptoken",
@@ -519,6 +552,55 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ReservationDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/reservationRecommendations": {
+      "get": {
+        "tags": [
+          "ReservationRecommendations"
+        ],
+        "operationId": "reservationRecommendations_List",
+        "description": "List of recomendations for purchasing reserved instances.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationRecommendations": {
+            "$ref": "./examples/ReservationRecommendations.json"
+          },
+          "ReservationRecommendationsFilterByScopeLookBackPeriod": {
+            "$ref": "./examples/ReservationRecommendationsFilterByScopeLookBackPeriod.json"
+          }
+        },
+        "parameters": [          
+          {
+            "name": "$filter",
+            "description": "May be used to filter reservationRecommendations by properties/scope and properties/lookBackPeriod.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationRecommendationsListResult"
             }
           },
           "default": {
@@ -1541,6 +1623,66 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ReservationDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationsProperties": {
+      "description": "The properties of the reservation summaries.",
+      "properties": {
+        "reservationOrderId": {
+          "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationId": {
+          "description": "The reservation ID is the identifier of a reservation within a reservation order. Each reservation is the grouping for applying the benefit scope and also specifies the number of instances to which the reservation benefit can be applied to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuName": {
+          "description": "This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedHours": {
+          "description": "This is the total hours reserved. E.g. if reservation for 1 instance was made on 1 PM, this will be 11 hours for that day and 24 hours from subsequent days",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendations": {
+      "description": "reservation recommendations resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationRecommendationsProperties",
+          "title": "Reservation Recommendations properties"
+        }
+      }
+    },
+    "ReservationRecommendationsListResult": {
+      "description": "Result of listing reservation recommendations.",
+      "properties": {
+        "value": {
+          "description": "The list of reservation recommendations.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReservationRecommendations"
           }
         },
         "nextLink": {
