@@ -28,7 +28,40 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-2017-03
+tag: package-2018-01
+```
+
+### Tag: package-2018-01
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.ApiManagement/preview/2018-01-01/apimanagement.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimapis.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimauthorizationservers.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimbackends.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimcertificates.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimdeployment.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimdiagnostics.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimemailtemplate.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimgroups.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimidentityprovider.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimloggers.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimnotifications.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimnetworkstatus.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimportalsettings.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimproducts.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimproperties.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimquotas.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimreports.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimsubscriptions.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimtagresources.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimtags.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimtenant.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimusers.json
+- Microsoft.ApiManagement/preview/2018-01-01/apimversionsets.json
 ```
 
 ## Suppression
@@ -72,6 +105,7 @@ input-file:
 - Microsoft.ApiManagement/stable/2017-03-01/apimtags.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimtenant.json
 - Microsoft.ApiManagement/stable/2017-03-01/apimusers.json
+- Microsoft.ApiManagement/stable/2017-03-01/apimversionsets.json
 ```
 
 
@@ -123,6 +157,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@~3.0"  
 ```
 
 
@@ -140,6 +177,9 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 

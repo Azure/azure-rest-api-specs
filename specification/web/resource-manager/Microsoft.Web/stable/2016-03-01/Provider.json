@@ -25,6 +25,15 @@
         "operationId": "Provider_GetAvailableStacks",
         "parameters": [
           {
+            "name": "osTypeSelected",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ]
+          },
+          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -32,9 +41,12 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ApplicationStackCollection"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -79,6 +91,15 @@
         "operationId": "Provider_GetAvailableStacksOnPrem",
         "parameters": [
           {
+            "name": "osTypeSelected",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ]
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -89,14 +110,114 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ApplicationStackCollection"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "ApplicationStack": {
+      "description": "Application stack.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Application stack name.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Application stack display name.",
+          "type": "string"
+        },
+        "dependency": {
+          "description": "Application stack dependency.",
+          "type": "string"
+        },
+        "majorVersions": {
+          "description": "List of major versions available.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackMajorVersion"
+          }
+        },
+        "frameworks": {
+          "description": "List of frameworks associated with application stack.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationStack"
+          }
+        }
+      }
+    },
+    "ApplicationStackCollection": {
+      "description": "Collection of Application Stacks",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationStack"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StackMajorVersion": {
+      "description": "Application stack major version.",
+      "type": "object",
+      "properties": {
+        "displayVersion": {
+          "description": "Application stack major version (display only).",
+          "type": "string"
+        },
+        "runtimeVersion": {
+          "description": "Application stack major version (runtime only).",
+          "type": "string"
+        },
+        "isDefault": {
+          "description": "<code>true</code> if this is the default major version; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "minorVersions": {
+          "description": "Minor versions associated with the major version.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackMinorVersion"
+          }
+        }
+      }
+    },
+    "StackMinorVersion": {
+      "description": "Application stack minor version.",
+      "type": "object",
+      "properties": {
+        "displayVersion": {
+          "description": "Application stack minor version (display only).",
+          "type": "string"
+        },
+        "runtimeVersion": {
+          "description": "Application stack minor version (runtime only).",
+          "type": "string"
+        },
+        "isDefault": {
+          "description": "<code>true</code> if this is the default minor version; otherwise, <code>false</code>.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
   "parameters": {
     "subscriptionIdParameter": {
       "name": "subscriptionId",

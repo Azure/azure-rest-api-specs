@@ -51,6 +51,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/job.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
+- Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
@@ -76,8 +77,8 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/dscNode.json
 - Microsoft.Automation/stable/2015-10-31/dscNodeConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/stable/2015-10-31/job.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
+- Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
@@ -88,6 +89,7 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2017-05-15-preview/job.json
 ```
 
 ---
@@ -135,6 +137,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.automation
   package-name: azure-mgmt-automation
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -183,7 +186,7 @@ These settings apply only when `--tag=package-2017-05-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/automation/mgmt/2017-05-15-preview
+output-folder: $(go-sdk-folder)/services/automation/mgmt/2017-05-15-preview/automation
 ```
 
 

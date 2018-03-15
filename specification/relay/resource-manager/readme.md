@@ -100,7 +100,7 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-relay/azure/mgmt/remay
+  output-folder: $(python-sdks-folder)/azure-mgmt-relay/azure/mgmt/relay
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:

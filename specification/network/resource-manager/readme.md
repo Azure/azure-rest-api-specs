@@ -328,6 +328,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@~3.0"
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-network
   - repo: azure-libraries-for-java

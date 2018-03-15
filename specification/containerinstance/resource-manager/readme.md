@@ -115,7 +115,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.containerinstance
   package-name: azure-mgmt-containerinstance
-  package-version: 0.2.0
+  package-version: 0.4.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
