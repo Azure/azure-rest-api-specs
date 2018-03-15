@@ -1,0 +1,39 @@
+{
+  "parameters" : {
+    "api-version" : "2018-02-01",
+    "subscriptionId" : "subid",
+    "resourceGroupName" : "CrossConnection-SiliconValley",
+    "crossConnectionName" : "CrossConnection-6e918437-5077-4ffe-b45f-0b7c0672da4b",
+    "parameters": {
+      "properties": {
+        "serviceProviderProvisioningState": "NotProvisioned"
+      }
+    }
+  },
+  "responses" : {
+    "200" : {
+      "body" : {
+        "name": "CrossConnection-6e918437-5077-4ffe-b45f-0b7c0672da4b",
+        "id": "/subscriptions/subid/resourceGroups/CrossConnectionSiliconValley/providers/Microsoft.Network/expressRouteCrossConnections/CrossConnection-6e918437-5077-4ffe-b45f-0b7c0672da4b",
+        "type": "Microsoft.Network/expressRouteCrossConnections",
+        "location": "brazilsouth",
+        "properties": {
+          "provisioningState": "Enabled",
+          "expressRouteCircuit": {
+            "id": "/subscriptions/subid/resourceGroups/ertest/providers/Microsoft.Network/expressRouteCircuits/er1"
+          },
+          "peerings": [],
+          "serviceProviderProperties": {
+            "serviceProviderName": "Equinix",
+            "peeringLocation": "SiliconValley",
+            "bandwidthInMbps": 1000
+          },
+          "primaryAzurePort": "bvtazureixp01",
+          "secondaryAzurePort": "bvtazureixp01",
+          "sTag": 2,
+          "serviceProviderProvisioningState": "NotProvisioned"
+        }        
+      }
+    }
+  }
+}
