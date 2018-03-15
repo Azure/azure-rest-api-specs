@@ -44,6 +44,9 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
           },          
           {
             "$ref": "#/parameters/CategoryParameter"
@@ -86,6 +89,9 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
           },          
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -125,12 +131,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "WorkbookRequest",
+            "name": "WorkbookPayload",
             "description": "Properties that need to be specified to create a new workbook.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkbookRequest"
+              "$ref": "#/definitions/Workbook"
             }
           }
         ],
@@ -165,12 +171,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "WorkbookRequest",
+            "name": "WorkbookPayload",
             "description": "Properties that need to be specified to create a new workbook.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkbookRequest"
+              "$ref": "#/definitions/Workbook"
             }
           }
         ],
@@ -257,20 +263,6 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },    
-    "WorkbookRequest": {
-      "description": "Properties that contain a workbook.",
-      "properties": {
-        "sourceResourceId": {
-          "type": "string",
-          "description": "The source resource Id that will be used to link with a workbook resource when specified."
-        },
-        "workbook": {
-          "type": "object",
-          "$ref": "#/definitions/Workbook",
-          "description": "Properties that define a workbook."
-        }
-      }
-    },
     "Workbook": {
       "description": "An Application Insights workbook definition.",
       "allOf": [
@@ -394,6 +386,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the Application Insights workbook resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of location where workbook is stored.",
       "x-ms-parameter-location": "method"
     },
     "CategoryParameter": {
