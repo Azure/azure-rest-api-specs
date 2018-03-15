@@ -627,19 +627,6 @@
         }
       }
     },
-    "AlertStatus": {
-      "description": "An alert status.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "status value"
-        },
-        "timestamp": {
-          "type": "string",
-          "description": "UTC time when the status was checked."
-        }
-      }
-    },
     "MetricAlertProperties": {
       "required": [
         "enabled",
@@ -773,6 +760,7 @@
         },
         "timestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "UTC time when the status was checked."
         }
       }
@@ -796,7 +784,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MetricAlertStatus",
+          "$ref": "#/definitions/MetricAlertStatusProperties",
           "description": "The alert status properties of the metric alert status."
         }
       }
