@@ -36,8 +36,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/providers/microsoft.insights/workbooks/category/{category}": {  
       "get": {
-        "description": "Gets a list of workbooks.",
-        "operationId": "Workbooks_List",
+        "description": "Get all Workbooks defined within a specified resource group and category.",
+        "operationId": "Workbooks_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -76,10 +76,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/resourceName/{resourceName}/providers/microsoft.insights/workbooks": {  
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/providers/microsoft.insights/workbooks/{resourceName}": {  
       "get": {
         "description": "Get a single workbook by its resourceName.",
-        "operationId": "Workbook_GetByResourceName",
+        "operationId": "Workbooks_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -110,7 +110,7 @@
       },
       "put": {
         "description": "Create a new workbook.",
-        "operationId": "Workbook_Create",
+        "operationId": "Workbooks_Create",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -150,7 +150,7 @@
       },
       "patch": {
         "description": "Updates a workbook that has already been added.",
-        "operationId": "Workbook_Update",
+        "operationId": "Workbooks_Update",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -190,7 +190,7 @@
       },
       "delete": {
         "description": "Delete a workbook.",
-        "operationId": "Workbook_Delete",
+        "operationId": "Workbooks_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
