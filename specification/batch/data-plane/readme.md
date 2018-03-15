@@ -281,6 +281,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-05.5.0
+  - tag: package-2018-03.6.1
 ```
 
 ### Tag: package-2018-03.6.1 and go
