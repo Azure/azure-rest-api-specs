@@ -70,7 +70,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/resourceName/{resourceName}/providers/microsoft.insights/workbooks": {  
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/resourceName/{resourceName}/providers/microsoft.insights/workbooks": {  
       "put": {
         "description": "Create a new workbook.",
         "operationId": "Workbook_CreateLink",
@@ -79,7 +79,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -110,7 +110,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -138,7 +138,7 @@
         "operationId": "Workbook_DeleteLink",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -226,7 +226,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a web test for an Azure resource.",
-          "$ref": "#/definitions/Workbook"
+          "$ref": "#/definitions/WorkbookProperties"
         }
       }
     },
@@ -311,8 +311,8 @@
       "type": "string",
       "description": "Client Api Version."
     },
-    "ResourceGroupParameter": {
-      "name": "resourceGroup",
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",

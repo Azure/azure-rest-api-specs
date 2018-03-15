@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/providers/microsoft.insights/workbooks/category/{category}": {  
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/category/{category}": {  
       "get": {
         "description": "Get all Workbooks defined within a specified resource group and category.",
         "operationId": "Workbooks_ListByResourceGroup",
@@ -43,7 +43,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },          
           {
             "$ref": "#/parameters/CategoryParameter"
@@ -76,7 +76,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/providers/microsoft.insights/workbooks/{resourceName}": {  
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {  
       "get": {
         "description": "Get a single workbook by its resourceName.",
         "operationId": "Workbooks_Get",
@@ -85,7 +85,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },          
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -116,7 +116,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -156,7 +156,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -196,7 +196,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },                    
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -295,7 +295,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a web test for an Azure resource.",
-          "$ref": "#/definitions/Workbook"
+          "$ref": "#/definitions/WorkbookProperties"
         }
       }
     },
@@ -380,8 +380,8 @@
       "type": "string",
       "description": "Client Api Version."
     },
-    "ResourceGroupParameter": {
-      "name": "resourceGroup",
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
