@@ -5,6 +5,7 @@ services:
   - docker
 env:
   matrix:
+    - MODE=branchStrategy
     - MODE=syntax
     - MODE=python
     - MODE=node
@@ -30,6 +31,7 @@ matrix:
     - env: MODE=azurebot PR_ONLY=true
     - env: MODE=liveValidation PR_ONLY=true
     - env: MODE=java
+    - env: MODE=ruby
     - env: MODE=go
     - env: MODE=node
 before_install:
@@ -65,6 +67,10 @@ script:
   - >-
     if [[ $MODE == 'java' ]]; then
       $DOCKER_CMD Azure/azure-libraries-for-java -v
+    fi
+  - >-
+    if [[ $MODE == 'branchStrategy' && $TRAVIS_PULL_REQUEST != 'false' && $TRAVIS_REPO_SLUG == 'Azure/azure-rest-api-specs-pr' && $TRAVIS_BRANCH == 'master' ]]; then
+      exit 1
     fi
   - >-
     if [[ $MODE == 'syntax' ]]; then
