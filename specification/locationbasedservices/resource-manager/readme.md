@@ -48,6 +48,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
 ```
 
@@ -65,6 +66,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/LocationBasedServices/Management.LocationBasedServices/Generated
   clear-output-folder: true
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
