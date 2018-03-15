@@ -27,7 +27,6 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 openapi-type: arm
 tag: package-2015-04
-azure-validator: true
 ```
 
 
