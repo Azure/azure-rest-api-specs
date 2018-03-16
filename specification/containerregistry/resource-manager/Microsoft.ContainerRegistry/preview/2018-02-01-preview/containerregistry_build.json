@@ -286,6 +286,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/listSourceRepositoryProperties": {
+      "post": {
+        "tags": [
+          "BuildDefinitions"
+        ],
+        "summary": "Get the source control properties for a build definition.",
+        "operationId": "BuildDefinitions_ListSourceRepositoryProperties",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildDefinitionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/SourceRepositoryProperties"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildDefinitions_ListSourceRepositoryProperties": {
+            "$ref": "./examples/BuildDefinitionsListSourceRepositoryProperties.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/builds": {
       "get": {
         "tags": [
@@ -1004,7 +1049,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1277,7 +1322,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1512,7 +1557,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1674,13 +1719,10 @@
       }
     },
     "Resource": {
-      "description": "An Azure resource.",
-      "required": [
-        "location"
-      ],
+      "description": "The core properties of ARM resources",
       "properties": {
         "id": {
-          "description": "The resource ID.",
+          "description": "Fully qualified resource Id for the resource",
           "type": "string",
           "readOnly": true
         },
@@ -1693,9 +1735,23 @@
           "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
-        },
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
         "location": {
-          "description": "The location of the resource. This cannot be changed after the resource is created.",
+          "description": "The Azure Region where the resource lives. This cannot be changed after the resource is created.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -1707,10 +1763,22 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
         }
-      },
-      "x-ms-azure-resource": true
+      }
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "Error": {
       "description": "Azure container registry build API error object.",
