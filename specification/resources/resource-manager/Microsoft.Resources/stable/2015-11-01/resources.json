@@ -2066,23 +2066,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/providers/Microsoft.Resources/operations": {
-      "get": {
-        "tags": [
-          "Features"
-        ],
-        "operationId": "Features_Operations",
-        "description": "Gets all the preview feature operations.",
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array containing metadata about the feature operations. The metadata includes the name of the feature operation, the provider, the resource, the operation, and the description.",
-            "schema": {
-              "$ref": "#/definitions/FeatureOperationResult"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -2918,41 +2901,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "OperationDisplay": {
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Operation provider."
-        },
-        "resource": {
-          "type": "string",
-          "description": "Operation resource."
-        },
-        "operation": {
-          "type": "string",
-          "description": "Operation."
-        },
-        "description": {
-          "type": "string",
-          "description": "Operation description."
-        }
-      }
-    },
-    "FeatureOperationResult": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the operation."
-        },
-        "operations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationDisplay"
-          },
-          "description": "The array of feature operations."
-        }
-      }
     }
   },
   "parameters": {
