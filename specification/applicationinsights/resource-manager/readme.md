@@ -29,7 +29,6 @@ title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
 tag: package-2015-05
-azure-validator: true
 ```
 
 ## Suppression
