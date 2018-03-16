@@ -794,7 +794,13 @@
       "discriminator": "odata.type",
       "properties": {
         "odata.type": {
-          "type": "string",
+          "enum": [
+            "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria"
+          ],
+          "x-ms-enum": {
+            "name": "Unit",
+            "modelAsString": true
+          },
           "description": "specifies the type of the alert criteria."
         }
       },
