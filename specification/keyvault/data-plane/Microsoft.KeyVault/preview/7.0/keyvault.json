@@ -1363,7 +1363,7 @@
           }
         }
       }
-    },    
+    },
     "/certificates": {
       "get": {
         "tags": [
@@ -2217,6 +2217,81 @@
         }
       }
     },
+    "/certificates/{certificate-name}/backup": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "BackupCertificate",
+        "summary": "Backs up the specified certificate.",
+        "description": "Requests that a backup of the specified certificate be downloaded to the client. All versions of the certificate will be downloaded. This operation requires the certificates/backup permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The backup blob containing the backed up certificate.",
+            "schema": {
+              "$ref": "#/definitions/BackupCertificateResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/certificates/restore": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "RestoreCertificate",
+        "summary": "Restores a backed up certificate to a vault.",
+        "description": "Restores a backed up certificate, and all its versions, to a vault. This operation requires the certificates/restore permission.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateRestoreParameters"
+            },
+            "description": "The parameters to restore the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restored certificate bundle in the vault.",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
     "/deletedcertificates": {
       "get": {
         "tags": [
@@ -2667,7 +2742,7 @@
           }
         }
       }
-    },    
+    },
     "/storage/{storage-account-name}": {
       "delete": {
         "tags": [
@@ -4851,7 +4926,7 @@
         }
       },
       "description": "The backup secret result, containing the backup blob."
-    },    
+    },
     "BackupStorageResult": {
       "properties": {
         "value": {
@@ -4862,7 +4937,7 @@
         }
       },
       "description": "The backup storage result, containing the backup blob."
-    },    
+    },
     "PendingCertificateSigningRequestResult": {
       "properties": {
         "value": {
@@ -4890,7 +4965,7 @@
           "format": "unixtime",
           "readOnly": true,
           "description": "Last updated time in UTC."
-        },        
+        },
         "recoveryLevel": {
           "type": "string",
           "description": "Reflects the deletion recovery level currently in effect for storage accounts in the current vault. If it contains 'Purgeable' the storage account can be permanently deleted by a privileged user; otherwise, only the system can purge the storage account, at the end of the retention interval.",
@@ -5154,7 +5229,7 @@
           "format": "unixtime",
           "readOnly": true,
           "description": "Last updated time in UTC."
-        },        
+        },
         "recoveryLevel": {
           "type": "string",
           "description": "Reflects the deletion recovery level currently in effect for SAS definitions in the current vault. If it contains 'Purgeable' the SAS definition can be permanently deleted by a privileged user; otherwise, only the system can purge the SAS definition, at the end of the retention interval.",
@@ -5432,6 +5507,29 @@
         }
       },
       "description": "The key vault server error."
+    },
+    "CertificateRestoreParameters": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "certificateBundleBackup",
+          "format": "base64url",
+          "description": "The backup blob associated with a certificate bundle."
+        }
+      },
+      "description": "The certificate restore parameters.",
+      "required": [ "value" ]
+    },
+    "BackupCertificateResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "readOnly": true,
+          "description": "The backup blob containing the backed up certificate."
+        }
+      },
+      "description": "The backup certificate result, containing the backup blob."
     }
   },
   "parameters": {
