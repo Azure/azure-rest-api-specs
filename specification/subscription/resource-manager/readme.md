@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-all-subscription` is specified on 
 ``` yaml $(tag) == 'package-all-subscription'
 input-file:
 - Microsoft.Subscription/preview/2018-03-01-preview/subscription.json
-- ../../resources/resource-manager/Microsoft.Resources/stable/2016-06-01/subscriptions.json
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -137,7 +137,6 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2018-03-preview
-  - tag: package-2017-11-preview
 ```
 
 ### Tag: package-2018-03-preview and go
