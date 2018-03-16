@@ -571,7 +571,7 @@
         "tags": [
           "ReservationRecommendations"
         ],
-        "operationId": "reservationRecommendations_List",
+        "operationId": "ReservationRecommendations_List",
         "description": "List of recomendations for purchasing reserved instances.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -594,6 +594,9 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1678,7 +1681,7 @@
         "firstUsageDate": {
           "description": "The usage date for looking back.",
           "type": "string",
-          "format": "date-time",
+          "format": "date",
           "readOnly": true
         },        
         "scope": {
