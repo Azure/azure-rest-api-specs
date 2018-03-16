@@ -9,7 +9,7 @@ nodejs:
   package-name: azure-arm-datalake-analytics
   batch:
     - output-folder: $(node-sdks-folder)/lib/services/dataLake.Analytics/lib/catalog
-      tag: package-catalog-2016-11
+      tag: package-catalog
     - output-folder: $(node-sdks-folder)/lib/services/dataLake.Analytics/lib/job
-      tag: package-job-2016-11
+      tag: package-job
 ```
