@@ -1,5 +1,5 @@
 # RecoveryServices.Backup
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for RecoveryServicesBackup.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for RecoveryServicesBackup.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for RecoveryServicesBackup, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the RecoveryServicesBackup API.
 
 ``` yaml
@@ -56,7 +56,7 @@ input-file:
 - Microsoft.RecoveryServices/stable/2016-12-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
 ```
- 
+
 ### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
@@ -82,6 +82,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 

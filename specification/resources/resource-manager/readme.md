@@ -1,5 +1,5 @@
 # Resource
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Resource.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Resource.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Resource, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Resource API.
 
 ``` yaml
@@ -232,6 +232,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 

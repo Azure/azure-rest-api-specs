@@ -1,5 +1,5 @@
 # TrafficManager
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for TrafficManager.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for TrafficManager.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for TrafficManager, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -20,7 +20,7 @@ To see additional help and options, run:
 ## Configuration
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the TrafficManager API.
 
 ``` yaml
@@ -61,7 +61,7 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 input-file:
 - Microsoft.Network/stable/2017-03-01/trafficmanager.json
 ```
- 
+
 ### Tag: package-2015-11
 
 These settings apply only when `--tag=package-2015-11` is specified on the command line.
@@ -86,10 +86,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
