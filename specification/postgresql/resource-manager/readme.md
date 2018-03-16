@@ -26,7 +26,7 @@ These are the global settings for the Sql API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04-preview
+tag: package-2017-12-01-preview
 ```
 
 
@@ -38,6 +38,17 @@ These settings apply only when `--tag=package-2017-04-preview` is specified on t
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2017-04-30-preview/postgresql.json
 ```
+
+
+### Tag: package-2017-12-01-preview 
+
+These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line. 
+
+
+``` yaml $(tag) == 'package-2017-12-01-preview' 
+input-file: 
+- Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json 
+``` 
 
 
 ---
@@ -69,14 +80,14 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.rdbms.postgres
+  namespace: azure.mgmt.rdbms.postgresql
   package-name: azure-mgmt-rdbms
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms/azure/mgmt/rdbms/postgres
+  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
@@ -112,6 +123,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-04-30-preview/postgresql
 ```
 
+### Tag: package-2017-12-01-preview and go 
+
+These settings apply only when `--tag=package-2017-12-01-preview --go` is specified on the command line. 
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`. 
+
+``` yaml $(tag) == 'package-2017-12-01-preview' && $(go) 
+output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-12-01-preview/postgresql 
+```
 
 ## Java
 
