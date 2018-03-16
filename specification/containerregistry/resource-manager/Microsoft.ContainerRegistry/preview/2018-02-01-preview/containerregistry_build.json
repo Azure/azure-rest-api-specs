@@ -1049,7 +1049,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1719,10 +1719,13 @@
       }
     },
     "Resource": {
-      "description": "The core properties of ARM resources",
+      "description": "An Azure resource.",
+      "required": [
+        "location"
+      ],
       "properties": {
         "id": {
-          "description": "Fully qualified resource Id for the resource",
+          "description": "The resource ID.",
           "type": "string",
           "readOnly": true
         },
@@ -1735,23 +1738,9 @@
           "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
+        },
         "location": {
-          "description": "The Azure Region where the resource lives. This cannot be changed after the resource is created.",
+          "description": "The location of the resource. This cannot be changed after the resource is created.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -1770,15 +1759,29 @@
             "update"
           ]
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
         }
-      ]
+      },
+      "x-ms-azure-resource": true
     },
     "Error": {
       "description": "Azure container registry build API error object.",
