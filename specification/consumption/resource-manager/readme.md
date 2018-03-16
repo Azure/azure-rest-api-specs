@@ -27,7 +27,6 @@ These are the global settings for the Consumption API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-03
-azure-validator: true
 ```
 
 ### Tag: package-2017-11
