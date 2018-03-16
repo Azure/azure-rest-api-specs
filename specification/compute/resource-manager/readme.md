@@ -34,7 +34,99 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2017-12
+tag: package-2018-04
+
+directive:
+  - where:
+      - $.definitions.VirtualMachine.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.VirtualMachineScaleSetVM.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.ImageReference.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.ManagedDiskParameters.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.Disk.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.Snapshot.properties
+    suppress:
+      - BodyTopLevelProperties
+
+  - where:
+      - $.definitions.VirtualMachineScaleSetExtension
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineImage
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.ImageReference
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.ManagedDiskParameters
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.NetworkInterfaceReference
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetIPConfiguration
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetUpdateIPConfiguration
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetNetworkConfiguration
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetUpdateNetworkConfiguration
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineScaleSetUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+```
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04'
+input-file:
+- Microsoft.Compute/stable/2017-12-01/compute.json
+- Microsoft.Compute/stable/2017-12-01/runCommands.json
+- Microsoft.Compute/stable/2017-09-01/skus.json
+- Microsoft.Compute/stable/2018-04-01/disk.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-disks-2018-04
+
+These settings apply only when `--tag=package-disks-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-disks-2018-04'
+input-file:
+- Microsoft.Compute/stable/2018-04-01/disk.json
 ```
 
 ### Tag: package-2017-12
@@ -212,6 +304,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-compute
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```
 
@@ -247,6 +342,8 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-disks-2018-04
+  - tag: package-2017-12
   - tag: package-compute-2017-03
   - tag: package-container-service-2017-01
   - tag: package-container-service-2016-09
@@ -255,6 +352,26 @@ batch:
   - tag: package-container-service-2016-03
   - tag: package-container-service-2015-11-preview
   - tag: package-compute-2015-06
+```
+
+### Tag: package-disks-2018-04 and go
+
+These settings apply only when `--tag=package-disks-2018-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-disks-2018-04' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/compute/mgmt/2018-04-01/compute
+```
+
+### Tag: package-2017-12 and go
+
+These settings apply only when `--tag=package-2017-12 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-12' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-12-01/compute
 ```
 
 ### Tag: package-compute-2017-03 and go
@@ -358,12 +475,24 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-disks-2018-04
   - tag: package-compute-only-2017-12
   - tag: package-skus-2017-09
   - tag: package-compute-2017-03
   - tag: package-compute-2016-04-preview
   - tag: package-compute-2016-03
   - tag: package-compute-2015-06
+```
+
+### Tag: package-disks-2018-04 and python
+
+These settings apply only when `--tag=package-disks-2018-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-disks-2018-04' && $(python)
+python:
+  namespace: azure.mgmt.compute.v2018_04_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2018_04_01
 ```
 
 ### Tag: package-compute-only-2017-12 and python
@@ -430,5 +559,21 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.compute.v2015_06_15
   output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2015_06_15
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.compute
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-compute
 ```
 
