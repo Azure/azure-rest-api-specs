@@ -51,6 +51,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```
 
@@ -83,6 +84,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.datafactory
   package-name: azure-mgmt-dafactory
+  package-version: 0.6.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -122,6 +124,22 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-09-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/datafactory/mgmt/2017-09-01-preview/datafactory
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.datafactory
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datafactory
 ```
 
 # Validation
