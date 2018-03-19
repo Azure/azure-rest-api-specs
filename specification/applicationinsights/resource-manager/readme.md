@@ -29,7 +29,6 @@ title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
 tag: package-2015-05
-azure-validator: true
 ```
 
 ## Suppression
@@ -44,24 +43,24 @@ directive:
   - suppress: PutRequestResponseScheme
     reason: This api was existing there from 2015, it will break existing client if we change the request/response format
     #where:
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration/{exportId}"].put
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}"].put
 
   - suppress: ListInOperationName
     reason: The return value is an object, not an array. Looks like a false positive of the validation tool.
     #where:
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/currentbillingfeatures"].get.operationId
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures"].get.operationId
 
   - suppress: PutInOperationName
     reason: We are not doing create on this api, it is only doing update in this PUT api call.
     #where:
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration/{exportId}"].put.operationId
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/currentbillingfeatures"].put.operationId
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}"].put.operationId
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures"].put.operationId
   
   - suppress: XmsResourceInPutResponse
     reason: This api was existing there from 2015, it will break existing client if we change the request/response format
     #where:
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration/{exportId}"].put
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/currentbillingfeatures"].put 
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}"].put
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures"].put 
 
   - suppress: RequiredPropertiesMissingInResourceModel  
     reason: This api was existing there from 2015, it will break existing client if we change the response format
@@ -100,7 +99,7 @@ directive:
     reason: The response for 200 does define a schema in place. The test likely expects a 'ref' member. False failure.
     from: componentAnnotations_API.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/Annotations"].put.responses["200"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations"].put.responses["200"]
 
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This api was existing there from 2015, it will break existing client if we change the name
@@ -230,18 +229,17 @@ These settings apply only when `--tag=package-2015-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-05'
 input-file:
-- microsoft.insights/stable/2015-05-01/aiOperations_API.json
-- microsoft.insights/stable/2015-05-01/componentAnnotations_API.json
-- microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
-- microsoft.insights/stable/2015-05-01/componentContinuousExport_API.json
-- microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
-- microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json
-- microsoft.insights/stable/2015-05-01/components_API.json
-- microsoft.insights/stable/2015-05-01/componentWorkItemConfigs_API.json
-- microsoft.insights/stable/2015-05-01/favorites_API.json
-- microsoft.insights/stable/2015-05-01/webTestLocations_API.json
-- microsoft.insights/stable/2015-05-01/webTests_API.json
-
+- Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+- Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+- Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+- Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+- Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+- Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+- Microsoft.Insights/stable/2015-05-01/components_API.json
+- Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+- Microsoft.Insights/stable/2015-05-01/favorites_API.json
+- Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+- Microsoft.Insights/stable/2015-05-01/webTests_API.json
 ```
 
 ### Tag: package-2017-10
@@ -356,4 +354,24 @@ java:
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-applicationinsights
+```
+
+### Tag: schema-2015-05-preview
+
+These settings apply only when `--tag=schema-2015-05-01` is specified on the
+command line.
+
+This section contains the input swagger files that are used when generating 
+resource manager schemas for version 2015-05-01. Note that many of our
+pre-existing APIs are note currently compatible with ARM schemas, upon any
+updates applied to our services we will bring them up to compliance.
+
+``` yaml $(tag) == 'schema-2015-05-01'
+input-file:
+ - ./Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/components_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/webTests_API.json
+
+override-info:
+  title: ApplicationInsightsManagementClient
 ```
