@@ -98,6 +98,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
 ```
 
@@ -160,10 +161,10 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
    - tag: package-2017-04-preview
-   - tag: package-2017-11-30
-   - tag: package-2017-12-30-preview
-   - tag: package-2018-01-31
-   - tag: package-2018-03-31
+   - tag: package-2017-11
+   - tag: package-2017-12-preview
+   - tag: package-2018-01
+   - tag: package-2018-03
 ```
  
 
