@@ -248,8 +248,8 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.Insights/preview/2017-10-01/eaSubscriptionMigration_API.json
-- Microsoft.Insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
+- microsoft.insights/preview/2017-10-01/eaSubscriptionMigration_API.json
+- microsoft.insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
 ```
 
 ---
