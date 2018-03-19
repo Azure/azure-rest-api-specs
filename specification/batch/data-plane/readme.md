@@ -1,5 +1,5 @@
 # Batch
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Batch.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Batch.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Batch, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Batch API.
 
 ``` yaml
@@ -180,7 +180,7 @@ These settings apply only when `--tag=package-2017-01.4.0` is specified on the c
 input-file:
 - Microsoft.Batch/stable/2017-01-01.4.0/BatchService.json
 ```
- 
+
 ### Tag: package-2016-07.3.1
 
 These settings apply only when `--tag=package-2016-07.3.1` is specified on the command line.
@@ -189,7 +189,7 @@ These settings apply only when `--tag=package-2016-07.3.1` is specified on the c
 input-file:
 - Microsoft.Batch/stable/2016-07-01.3.1/BatchService.json
 ```
- 
+
 ### Tag: package-2016-02.3.0
 
 These settings apply only when `--tag=package-2016-02.3.0` is specified on the command line.
@@ -198,7 +198,7 @@ These settings apply only when `--tag=package-2016-02.3.0` is specified on the c
 input-file:
 - Microsoft.Batch/stable/2016-02-01.3.0/BatchService.json
 ```
- 
+
 ### Tag: package-2015-12.2.2
 
 These settings apply only when `--tag=package-2015-12.2.2` is specified on the command line.
@@ -221,9 +221,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.

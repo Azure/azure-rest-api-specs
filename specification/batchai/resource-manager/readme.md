@@ -33,7 +33,7 @@ tag: package-2018-03
 These settings apply only when `--tag=package-2017-09-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-09-preview'
-input-file: 
+input-file:
 - Microsoft.BatchAI/preview/2017-09-01-preview/BatchAI.json
 ```
 
@@ -60,6 +60,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
