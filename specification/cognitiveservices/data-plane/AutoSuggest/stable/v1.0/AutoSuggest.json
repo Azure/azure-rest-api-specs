@@ -131,6 +131,11 @@
                 "$ref": "#/definitions/ErrorResponse"
               }
             }
+          },
+          "x-ms-examples": {
+            "Successful query": {
+                "$ref": "./examples//SuccessfulAutoSuggestRequest.json"
+            }
           }
         }
       }
@@ -156,7 +161,14 @@
             "$ref": "#/definitions/Identifiable"
           }
         ],
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "webSearchUrl": {
+            "description": "The URL to the auto suggest result for this item.",
+            "readOnly": true,
+            "type": "string"
+          }
+        }
       },
       "QueryContext": {
         "description": "Defines the query term that Bing used for the request.",
