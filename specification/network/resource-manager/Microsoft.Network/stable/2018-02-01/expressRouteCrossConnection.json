@@ -290,7 +290,7 @@
           "200": {
             "description": "Request successful. The operation returns a list of ExpressRouteCrossConnectionPeering resources.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringListResult"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringList"
             }
           }
         },
@@ -810,7 +810,7 @@
       },
       "description": "Response for ListExpressRouteCrossConnection API service call."
     },
-    "ExpressRouteCrossConnectionPeeringPropertiesFormat": {
+    "ExpressRouteCrossConnectionPeeringProperties": {
       "properties": {
         "peeringType": {
           "$ref": "./expressRouteCircuit.json#/definitions/ExpressRoutePeeringType",
@@ -888,7 +888,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringPropertiesFormat"
+          "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringProperties"
         },
         "name": {
           "type": "string",
@@ -907,7 +907,7 @@
       ],
       "description": "Peering in an ExpressRoute Cross Connection resource."
     },
-    "ExpressRouteCrossConnectionPeeringListResult": {
+    "ExpressRouteCrossConnectionPeeringList": {
       "properties": {
         "value": {
           "type": "array",
