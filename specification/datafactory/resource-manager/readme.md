@@ -84,6 +84,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.datafactory
   package-name: azure-mgmt-dafactory
+  package-version: 0.6.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
