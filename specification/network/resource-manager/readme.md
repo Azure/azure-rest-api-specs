@@ -41,6 +41,7 @@ input-file:
 - Microsoft.Network/stable/2018-02-01/applicationGateway.json
 - Microsoft.Network/stable/2018-02-01/applicationSecurityGroup.json
 - Microsoft.Network/stable/2018-02-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-02-01/ddosProtectionPlan.json
 - Microsoft.Network/stable/2018-02-01/endpointService.json
 - Microsoft.Network/stable/2018-02-01/expressRouteCircuit.json
 - Microsoft.Network/stable/2018-02-01/expressRouteCrossConnection.json
@@ -358,6 +359,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@~3.0"
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-network
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```
 
@@ -392,6 +398,9 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-01
+  - tag: package-2017-11
+  - tag: package-2017-10
   - tag: package-2017-09
   - tag: package-2017-08
   - tag: package-2017-06
@@ -402,6 +411,33 @@ batch:
   - tag: package-2016-03
   - tag: package-2015-06split
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2018-01 and go
+
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2018-01-01/network
+```
+
+### Tag: package-2017-11 and go
+
+These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-11' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-11-01/network
+```
+
+### Tag: package-2017-10 and go
+
+These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-10-01/network
 ```
 
 ### Tag: package-2017-09 and go
@@ -635,4 +671,20 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.network.v2015_06_15
   output-folder: $(python-sdks-folder)/azure-mgmt-network/azure/mgmt/network/v2015_06_15
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.network
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 ```

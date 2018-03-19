@@ -1323,29 +1323,12 @@
     "ExpressRouteCircuitPeeringPropertiesFormat": {
       "properties": {
         "peeringType": {
-          "type": "string",
-          "description": "The PeeringType. Possible values are: 'AzurePublicPeering', 'AzurePrivatePeering', and 'MicrosoftPeering'.",
-          "enum": [
-            "AzurePublicPeering",
-            "AzurePrivatePeering",
-            "MicrosoftPeering"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteCircuitPeeringType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ExpressRoutePeeringType",
+          "description": "The peering type."
         },
         "state": {
-          "type": "string",
-          "description": "The state of peering. Possible values are: 'Disabled' and 'Enabled'",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteCircuitPeeringState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ExpressRoutePeeringState",
+          "description": "The peering state."
         },
         "azureASN": {
           "type": "integer",
@@ -1460,14 +1443,39 @@
       },
       "description": "Response for ListPeering API service call retrieves all peerings that belong to an ExpressRouteCircuit."
     },
+    "ExpressRoutePeeringType": {
+      "type": "string",
+      "description": "The PeeringType. Possible values are: 'AzurePublicPeering', 'AzurePrivatePeering', and 'MicrosoftPeering'.",
+      "enum": [
+        "AzurePublicPeering",
+        "AzurePrivatePeering",
+        "MicrosoftPeering"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRoutePeeringType",
+        "modelAsString": true
+      }
+    },
+    "ExpressRoutePeeringState": {
+      "type": "string",
+      "description": "The state of peering. Possible values are: 'Disabled' and 'Enabled'",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRoutePeeringState",
+        "modelAsString": true
+      }
+    },
     "ExpressRouteCircuitConnectionPropertiesFormat": {
       "properties": {
         "expressRouteCircuitPeering": {
-          "$ref": "#/definitions/ExpressRouteCircuitPeering",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference to Express Route Circuit Private Peering Resource of the circuit initiating connection."
         },
         "peerExpressRouteCircuitPeering": {
-          "$ref": "#/definitions/ExpressRouteCircuitPeering",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference to Express Route Circuit Private Peering Resource of the peered circuit."
         },
         "addressPrefix": {

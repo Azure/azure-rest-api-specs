@@ -26,9 +26,17 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-12-preview
+tag: package-2018-02-preview
 ```
 
+### Tag: package-2018-02-preview
+
+These settings apply only when `--tag=package-2018-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-preview'
+input-file:
+- Microsoft.ContainerInstance/preview/2018-02-01-preview/containerInstance.json
+```
 
 ### Tag: package-2017-12-preview
 
@@ -72,6 +80,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```
 
@@ -106,7 +115,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.containerinstance
   package-name: azure-mgmt-containerinstance
-  package-version: 0.2.0
+  package-version: 0.4.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -136,7 +145,37 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-02-preview
+  - tag: package-2017-12-preview
+  - tag: package-2017-10-preview
   - tag: package-2017-08-preview
+```
+
+### Tag: package-2018-02-preview and go
+
+These settings apply only when `--tag=package-2018-02-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-02-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-02-01-preview/containerinstance
+```
+
+### Tag: package-2017-12-preview and go
+
+These settings apply only when `--tag=package-2017-12-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-12-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2017-12-01-preview/containerinstance
+```
+
+### Tag: package-2017-10-preview and go
+
+These settings apply only when `--tag=package-2017-10-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2017-10-01-preview/containerinstance
 ```
 
 ### Tag: package-2017-08-preview and go
@@ -146,4 +185,20 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-08-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2017-08-01-preview/containerinstance
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.containerinstance
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerinstance
 ```

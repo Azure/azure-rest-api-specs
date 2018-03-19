@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2017-11-01-preview",
+    "groupId": "00000000-0000-0000-0000-000000000002",
+    "createManagementGroupRequest": {
+      "properties ": {
+        "displayName": "Group Name 2",
+        "parentGroupId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000001"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000002",
+        "type": "/providers/Microsoft.Management/managementGroups",
+        "name": "00000000-0000-0000-0000-000000000002",
+        "properties": {
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "displayName": "Group Name 2",
+          "details": {
+            "version": 1,
+            "updatedTime": "2017-01-01T00:00:00.00Z",
+            "updatedBy": "Test",
+            "parent": {
+              "parentId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000001",
+              "displayName": "Group Name 1"
+            }
+          }
+        }
+      }
+    }
+  }
+}
