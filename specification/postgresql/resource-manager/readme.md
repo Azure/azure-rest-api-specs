@@ -26,7 +26,7 @@ These are the global settings for the Sql API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-12-01-preview
+tag: package-2017-12-01
 ```
 
 
@@ -48,6 +48,16 @@ These settings apply only when `--tag=package-2017-12-01-preview` is specified o
 ``` yaml $(tag) == 'package-2017-12-01-preview' 
 input-file: 
 - Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json 
+``` 
+
+### Tag: package-2017-12-01 
+
+These settings apply only when `--tag=package-2017-12-01` is specified on the command line. 
+
+
+``` yaml $(tag) == 'package-2017-12-01' 
+input-file: 
+- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json 
 ``` 
 
 
@@ -111,7 +121,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2017-04-preview
+  - tag: package-2017-12-01
 ```
 
 ### Tag: package-2017-04-preview and go
@@ -130,6 +140,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-12-01-preview' && $(go) 
 output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-12-01-preview/postgresql 
+```
+
+### Tag: package-2017-12-01 and go 
+
+These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line. 
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`. 
+
+``` yaml $(tag) == 'package-2017-12-01' && $(go) 
+output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-12-01/postgresql 
 ```
 
 ## Java
