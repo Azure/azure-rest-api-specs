@@ -16,321 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions": {
-      "get": {
-        "tags": [
-          "BuildDefinitions"
-        ],
-        "summary": "Lists all the build definitions for a specified container registry.",
-        "operationId": "BuildDefinitions_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The build definition filter to apply on the operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "$skipToken is supported on get list of build definitions, which provides the next page in the list of definitions.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BuildDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-odata": "#/definitions/BuildDefinitionFilter",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "BuildDefinitions_List": {
-            "$ref": "./examples/BuildDefinitionsList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}": {
-      "get": {
-        "tags": [
-          "BuildDefinitions"
-        ],
-        "summary": "Get the properties of a specified build definition.",
-        "operationId": "BuildDefinitions_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BuildDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BuildDefinitions_Get": {
-            "$ref": "./examples/BuildDefinitionsGet.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "BuildDefinitions"
-        ],
-        "summary": "Creates a build definition for a container registry with the specified parameters.",
-        "operationId": "BuildDefinitions_Create",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          },
-          {
-            "name": "buildDefinitionCreateParameters",
-            "in": "body",
-            "description": "The parameters for creating a build definition.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BuildDefinition"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BuildDefinition"
-            }
-          },
-          "201": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
-            "schema": {
-              "$ref": "#/definitions/BuildDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BuildDefinitions_Create": {
-            "$ref": "./examples/BuildDefinitionsCreate.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "BuildDefinitions"
-        ],
-        "summary": "Deletes a specified build definition.",
-        "operationId": "BuildDefinitions_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
-          "202": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously."
-          },
-          "204": {
-            "description": "No Content - the specified resource was not found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BuildDefinitions_Delete": {
-            "$ref": "./examples/BuildDefinitionsDelete.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "BuildDefinitions"
-        ],
-        "summary": "Updates a build definition with the specified parameters.",
-        "operationId": "BuildDefinitions_Update",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          },
-          {
-            "name": "buildDefinitionUpdateParameters",
-            "in": "body",
-            "description": "The parameters for updating a build definition.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BuildDefinitionUpdateParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/BuildDefinition"
-            }
-          },
-          "201": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
-            "schema": {
-              "$ref": "#/definitions/BuildDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BuildDefinitions_Update": {
-            "$ref": "./examples/BuildDefinitionsUpdate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/listSourceRepositoryProperties": {
-      "post": {
-        "tags": [
-          "BuildDefinitions"
-        ],
-        "summary": "Get the source control properties for a build definition.",
-        "operationId": "BuildDefinitions_ListSourceRepositoryProperties",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/registryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/SourceRepositoryProperties"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BuildDefinitions_ListSourceRepositoryProperties": {
-            "$ref": "./examples/BuildDefinitionsListSourceRepositoryProperties.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/builds": {
       "get": {
         "tags": [
@@ -610,12 +295,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildTasks/{buildTaskName}/steps": {
       "get": {
         "tags": [
           "BuildSteps"
         ],
-        "summary": "List all the build steps for a given build definition.",
+        "summary": "List all the build steps for a given build task.",
         "operationId": "BuildSteps_List",
         "parameters": [
           {
@@ -631,7 +316,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref": "#/parameters/buildTaskNameParameter"
           }
         ],
         "responses": {
@@ -658,12 +343,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps/{stepName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildTasks/{buildTaskName}/steps/{stepName}": {
       "get": {
         "tags": [
           "BuildSteps"
         ],
-        "summary": "Gets the build step for a build definition.",
+        "summary": "Gets the build step for a build task.",
         "operationId": "BuildSteps_Get",
         "parameters": [
           {
@@ -679,7 +364,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref": "#/parameters/buildTaskNameParameter"
           },
           {
             "$ref": "#/parameters/stepNameParameter"
@@ -709,7 +394,7 @@
         "tags": [
           "BuildSteps"
         ],
-        "summary": "Creates a build step for a build definition.",
+        "summary": "Creates a build step for a build task.",
         "operationId": "BuildSteps_Create",
         "parameters": [
           {
@@ -725,7 +410,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref": "#/parameters/buildTaskNameParameter"
           },
           {
             "$ref": "#/parameters/stepNameParameter"
@@ -771,7 +456,7 @@
         "tags": [
           "BuildSteps"
         ],
-        "summary": "Deletes a build step from the build definition.",
+        "summary": "Deletes a build step from the build task.",
         "operationId": "BuildSteps_Delete",
         "parameters": [
           {
@@ -787,7 +472,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref": "#/parameters/buildTaskNameParameter"
           },
           {
             "$ref": "#/parameters/stepNameParameter"
@@ -818,7 +503,7 @@
         "tags": [
           "BuildSteps"
         ],
-        "summary": "Updates a build step in a build definition.",
+        "summary": "Updates a build step in a build task.",
         "operationId": "BuildSteps_Update",
         "parameters": [
           {
@@ -834,7 +519,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref": "#/parameters/buildTaskNameParameter"
           },
           {
             "$ref": "#/parameters/stepNameParameter"
@@ -877,7 +562,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildDefinitions/{buildDefinitionName}/steps/{stepName}/listBuildArguments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildTasks/{buildTaskName}/steps/{stepName}/listBuildArguments": {
       "post": {
         "tags": [
           "BuildSteps"
@@ -898,7 +583,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildDefinitionNameParameter"
+            "$ref": "#/parameters/buildTaskNameParameter"
           },
           {
             "$ref": "#/parameters/stepNameParameter"
@@ -924,6 +609,321 @@
         "x-ms-examples": {
           "BuildSteps_ListBuildArguments": {
             "$ref": "./examples/BuildStepsListBuildArguments.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildTasks": {
+      "get": {
+        "tags": [
+          "BuildTasks"
+        ],
+        "summary": "Lists all the build tasks for a specified container registry.",
+        "operationId": "BuildTasks_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The build task filter to apply on the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "$skipToken is supported on get list of build tasks, which provides the next page in the list of tasks.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BuildTaskListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/BuildTaskFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BuildTasks_List": {
+            "$ref": "./examples/BuildTasksList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildTasks/{buildTaskName}": {
+      "get": {
+        "tags": [
+          "BuildTasks"
+        ],
+        "summary": "Get the properties of a specified build task.",
+        "operationId": "BuildTasks_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildTaskNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BuildTask"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildTasks_Get": {
+            "$ref": "./examples/BuildTasksGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BuildTasks"
+        ],
+        "summary": "Creates a build task for a container registry with the specified parameters.",
+        "operationId": "BuildTasks_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildTaskNameParameter"
+          },
+          {
+            "name": "buildTaskCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a build task.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildTask"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BuildTask"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/BuildTask"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BuildTasks_Create": {
+            "$ref": "./examples/BuildTasksCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BuildTasks"
+        ],
+        "summary": "Deletes a specified build task.",
+        "operationId": "BuildTasks_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildTaskNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BuildTasks_Delete": {
+            "$ref": "./examples/BuildTasksDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BuildTasks"
+        ],
+        "summary": "Updates a build task with the specified parameters.",
+        "operationId": "BuildTasks_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildTaskNameParameter"
+          },
+          {
+            "name": "buildTaskUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a build task.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildTaskUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/BuildTask"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/BuildTask"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BuildTasks_Update": {
+            "$ref": "./examples/BuildTasksUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/buildTasks/{buildTaskName}/listSourceRepositoryProperties": {
+      "post": {
+        "tags": [
+          "BuildTasks"
+        ],
+        "summary": "Get the source control properties for a build task.",
+        "operationId": "BuildTasks_ListSourceRepositoryProperties",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/registryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/buildTaskNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/SourceRepositoryProperties"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildTasks_ListSourceRepositoryProperties": {
+            "$ref": "./examples/BuildTasksListSourceRepositoryProperties.json"
           }
         }
       }
@@ -1027,279 +1027,6 @@
     }
   },
   "definitions": {
-    "BuildDefinitionListResult": {
-      "description": "The collection of build definitions.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildDefinition"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
-        }
-      }
-    },
-    "BuildDefinition": {
-      "description": "The build defintion that has the resource properties and all build items. The build definition will have all information to schedule a build against it.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BuildDefinitionProperties",
-          "description": "The properties of a build definition.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "BuildDefinitionProperties": {
-      "description": "The properties of a build definition.",
-      "required": [
-        "alias",
-        "sourceRepository",
-        "platform"
-      ],
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "description": "The provisioning state of the build definition.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "creationDate": {
-          "format": "date-time",
-          "description": "The creation date of build definition.",
-          "type": "string",
-          "readOnly": true
-        },
-        "alias": {
-          "description": "The alternative updatable name for a build definition.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The current status of build definition.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuildDefinitionStatus",
-            "modelAsString": true
-          }
-        },
-        "sourceRepository": {
-          "$ref": "#/definitions/SourceRepositoryProperties",
-          "description": "The properties that describes the source(code) for the build definition."
-        },
-        "platform": {
-          "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build has to happen."
-        },
-        "timeout": {
-          "format": "int32",
-          "description": "Build timeout in seconds.",
-          "type": "integer"
-        }
-      }
-    },
-    "SourceRepositoryProperties": {
-      "description": "The properties of the source code repository.",
-      "required": [
-        "sourceControlType",
-        "repositoryUrl"
-      ],
-      "type": "object",
-      "properties": {
-        "sourceControlType": {
-          "description": "The type of source control service.",
-          "enum": [
-            "Github",
-            "VisualStudioTeamService"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SourceControlType",
-            "modelAsString": true
-          }
-        },
-        "repositoryUrl": {
-          "description": "The full URL to the source code respository",
-          "type": "string"
-        },
-        "isCommitTriggerEnabled": {
-          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
-          "default": false,
-          "type": "boolean"
-        },
-        "sourceControlAuthProperties": {
-          "$ref": "#/definitions/SourceControlAuthInfo",
-          "description": "The authorization properties for accessing the source code repository."
-        }
-      }
-    },
-    "PlatformProperties": {
-      "description": "The platform properties against which the build has to happen.",
-      "required": [
-        "osType"
-      ],
-      "type": "object",
-      "properties": {
-        "osType": {
-          "description": "The operating system type required for the build.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OsType",
-            "modelAsString": true
-          }
-        },
-        "cpu": {
-          "format": "int32",
-          "description": "The CPU configuration in terms of number of cores required for the build.",
-          "type": "integer"
-        }
-      }
-    },
-    "SourceControlAuthInfo": {
-      "description": "The authorization properties for accessing the source code repository.",
-      "required": [
-        "token"
-      ],
-      "type": "object",
-      "properties": {
-        "tokenType": {
-          "description": "The type of Auth token.",
-          "enum": [
-            "PAT",
-            "OAuth"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TokenType",
-            "modelAsString": true
-          }
-        },
-        "token": {
-          "description": "The access token used to access the source control provider.",
-          "type": "string"
-        },
-        "refreshToken": {
-          "description": "The refresh token used to refresh the access token.",
-          "type": "string"
-        },
-        "scope": {
-          "description": "The scope of the access token.",
-          "type": "string"
-        },
-        "expiresIn": {
-          "format": "int32",
-          "description": "Time in seconds that the token remains valid",
-          "type": "integer"
-        }
-      }
-    },
-    "BuildDefinitionFilter": {
-      "description": "The filter that can be used for listing build definitions.",
-      "type": "object",
-      "properties": {
-        "alias": {
-          "description": "The alternative name for build definition.",
-          "type": "string"
-        }
-      }
-    },
-    "BuildDefinitionUpdateParameters": {
-      "description": "The parameters for updating a build definition.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BuildDefinitionPropertiesUpdateParameters",
-          "description": "The properties for updating a build definition.",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "description": "The ARM resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "BuildDefinitionPropertiesUpdateParameters": {
-      "description": "The properties for updating a build definition.",
-      "type": "object",
-      "properties": {
-        "alias": {
-          "description": "The alternative updatable name for a build definition.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The current status of build definition.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuildDefinitionStatus",
-            "modelAsString": true
-          }
-        },
-        "platform": {
-          "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build has to happen."
-        },
-        "timeout": {
-          "format": "int32",
-          "description": "Build timeout in seconds.",
-          "type": "integer"
-        },
-        "sourceRepository": {
-          "$ref": "#/definitions/SourceRepositoryUpdateParameters",
-          "description": "The properties that describes the source(code) for the build definition."
-        }
-      }
-    },
-    "SourceRepositoryUpdateParameters": {
-      "description": "The properties for updating the source code repository configuration.",
-      "type": "object",
-      "properties": {
-        "sourceControlAuthProperties": {
-          "$ref": "#/definitions/SourceControlAuthInfo",
-          "description": "The authorization properties for accessing the source code repository."
-        },
-        "isCommitTriggerEnabled": {
-          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
-          "default": false,
-          "type": "boolean"
-        }
-      }
-    },
     "BuildListResult": {
       "description": "Collection of builds.",
       "type": "object",
@@ -1396,8 +1123,8 @@
             "$ref": "#/definitions/ImageDescriptor"
           }
         },
-        "buildDefinition": {
-          "description": "All the properties of the build definition with which the build was started.",
+        "buildTask": {
+          "description": "All the properties of the build task with which the build was started.",
           "type": "string"
         },
         "trigger": {
@@ -1449,6 +1176,32 @@
         "digest": {
           "description": "The image digest. Example: SHA256 based digest.",
           "type": "string"
+        }
+      }
+    },
+    "PlatformProperties": {
+      "description": "The platform properties against which the build has to happen.",
+      "required": [
+        "osType"
+      ],
+      "type": "object",
+      "properties": {
+        "osType": {
+          "description": "The operating system type required for the build.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OsType",
+            "modelAsString": true
+          }
+        },
+        "cpu": {
+          "format": "int32",
+          "description": "The CPU configuration in terms of number of cores required for the build.",
+          "type": "integer"
         }
       }
     },
@@ -1509,8 +1262,8 @@
           "description": "The value that indicates whether archiving is enabled or not.",
           "type": "boolean"
         },
-        "buildDefinitionName": {
-          "description": "The name of the build definition that the build corresponds to.",
+        "buildTaskName": {
+          "description": "The name of the build task that the build corresponds to.",
           "type": "string"
         }
       }
@@ -1687,6 +1440,253 @@
         },
         "isSecret": {
           "description": "Flag to indicate whether the argument represents a secret and want to be removed from build logs.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "BuildTaskListResult": {
+      "description": "The collection of build tasks.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildTask"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
+    "BuildTask": {
+      "description": "The build task that has the resource properties and all build items. The build task will have all information to schedule a build against it.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildTaskProperties",
+          "description": "The properties of a build task.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BuildTaskProperties": {
+      "description": "The properties of a build task.",
+      "required": [
+        "alias",
+        "sourceRepository",
+        "platform"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the build task.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of build task.",
+          "type": "string",
+          "readOnly": true
+        },
+        "alias": {
+          "description": "The alternative updatable name for a build task.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of build task.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BuildTaskStatus",
+            "modelAsString": true
+          }
+        },
+        "sourceRepository": {
+          "$ref": "#/definitions/SourceRepositoryProperties",
+          "description": "The properties that describes the source(code) for the build task."
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the build has to happen."
+        },
+        "timeout": {
+          "format": "int32",
+          "description": "Build timeout in seconds.",
+          "type": "integer"
+        }
+      }
+    },
+    "SourceRepositoryProperties": {
+      "description": "The properties of the source code repository.",
+      "required": [
+        "sourceControlType",
+        "repositoryUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceControlType": {
+          "description": "The type of source control service.",
+          "enum": [
+            "Github",
+            "VisualStudioTeamService"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SourceControlType",
+            "modelAsString": true
+          }
+        },
+        "repositoryUrl": {
+          "description": "The full URL to the source code respository",
+          "type": "string"
+        },
+        "isCommitTriggerEnabled": {
+          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
+          "default": false,
+          "type": "boolean"
+        },
+        "sourceControlAuthProperties": {
+          "$ref": "#/definitions/SourceControlAuthInfo",
+          "description": "The authorization properties for accessing the source code repository."
+        }
+      }
+    },
+    "SourceControlAuthInfo": {
+      "description": "The authorization properties for accessing the source code repository.",
+      "required": [
+        "token"
+      ],
+      "type": "object",
+      "properties": {
+        "tokenType": {
+          "description": "The type of Auth token.",
+          "enum": [
+            "PAT",
+            "OAuth"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenType",
+            "modelAsString": true
+          }
+        },
+        "token": {
+          "description": "The access token used to access the source control provider.",
+          "type": "string"
+        },
+        "refreshToken": {
+          "description": "The refresh token used to refresh the access token.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "The scope of the access token.",
+          "type": "string"
+        },
+        "expiresIn": {
+          "format": "int32",
+          "description": "Time in seconds that the token remains valid",
+          "type": "integer"
+        }
+      }
+    },
+    "BuildTaskFilter": {
+      "description": "The filter that can be used for listing build tasks.",
+      "type": "object",
+      "properties": {
+        "alias": {
+          "description": "The alternative name for build task.",
+          "type": "string"
+        }
+      }
+    },
+    "BuildTaskUpdateParameters": {
+      "description": "The parameters for updating a build task.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildTaskPropertiesUpdateParameters",
+          "description": "The properties for updating a build task.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The ARM resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BuildTaskPropertiesUpdateParameters": {
+      "description": "The properties for updating a build task.",
+      "type": "object",
+      "properties": {
+        "alias": {
+          "description": "The alternative updatable name for a build task.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of build task.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BuildTaskStatus",
+            "modelAsString": true
+          }
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the build has to happen."
+        },
+        "timeout": {
+          "format": "int32",
+          "description": "Build timeout in seconds.",
+          "type": "integer"
+        },
+        "sourceRepository": {
+          "$ref": "#/definitions/SourceRepositoryUpdateParameters",
+          "description": "The properties that describes the source(code) for the build task."
+        }
+      }
+    },
+    "SourceRepositoryUpdateParameters": {
+      "description": "The properties for updating the source code repository configuration.",
+      "type": "object",
+      "properties": {
+        "sourceControlAuthProperties": {
+          "$ref": "#/definitions/SourceControlAuthInfo",
+          "description": "The authorization properties for accessing the source code repository."
+        },
+        "isCommitTriggerEnabled": {
+          "description": "The value of this property indicates whether the source control commit trigger is enabled or not.",
           "default": false,
           "type": "boolean"
         }
@@ -1968,11 +1968,11 @@
       },
       "x-ms-discriminator-value": "Docker"
     },
-    "BuildDefinitionBuildRequest": {
-      "description": "The queue build parameters based on a build definition.",
+    "BuildTaskBuildRequest": {
+      "description": "The queue build parameters based on a build task.",
       "required": [
         "type",
-        "buildDefinitionName"
+        "buildTaskName"
       ],
       "type": "object",
       "allOf": [
@@ -1981,12 +1981,12 @@
         }
       ],
       "properties": {
-        "buildDefinitionName": {
-          "description": "The name of build definition against which build has to be queued.",
+        "buildTaskName": {
+          "description": "The name of build task against which build has to be queued.",
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "BuildDefinition"
+      "x-ms-discriminator-value": "BuildTask"
     },
     "QuickBuildRequest": {
       "description": "The queue build request parameters for a quick build.",
@@ -2074,10 +2074,10 @@
       "required": true,
       "type": "string"
     },
-    "buildDefinitionNameParameter": {
-      "name": "buildDefinitionName",
+    "buildTaskNameParameter": {
+      "name": "buildTaskName",
       "in": "path",
-      "description": "The name of the container registry build definition.",
+      "description": "The name of the container registry build task.",
       "required": true,
       "type": "string",
       "maxLength": 50,
@@ -2088,7 +2088,7 @@
     "stepNameParameter": {
       "name": "stepName",
       "in": "path",
-      "description": "The name of a build step for a container registry build definition.",
+      "description": "The name of a build step for a container registry build task.",
       "required": true,
       "type": "string",
       "maxLength": 50,
