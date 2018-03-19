@@ -114,6 +114,36 @@
           }
         }
       },
+      "delete": {
+        "description": "Delete a workbook.",
+        "operationId": "Workbooks_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },                    
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workbook has been successfully deleted."
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookList": {
+            "$ref": "./examples/WorkbookResponseOnly.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {  
       "put": {
         "description": "Create a new workbook.",
         "operationId": "Workbooks_Create",
@@ -191,34 +221,6 @@
         "x-ms-examples": {
           "WorkbookList": {
             "$ref": "./examples/WorkbookUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "description": "Delete a workbook.",
-        "operationId": "Workbooks_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },                    
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The workbook has been successfully deleted."
-          }
-        },
-        "x-ms-examples": {
-          "WorkbookList": {
-            "$ref": "./examples/WorkbookResponseOnly.json"
           }
         }
       }
