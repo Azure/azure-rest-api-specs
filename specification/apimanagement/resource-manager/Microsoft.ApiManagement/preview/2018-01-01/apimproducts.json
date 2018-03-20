@@ -133,10 +133,10 @@
           "200": {
             "description": "Specified Product entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -147,7 +147,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Products"
         ],
@@ -335,7 +335,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Delete existing subscriptions associated with the product or not."            
+            "description": "Delete existing subscriptions associated with the product or not."
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -461,7 +461,7 @@
           "204": {
             "description": "Entity exists"
           },
-          "404" : {
+          "404": {
             "description": "API is not associated with the product."
           },
           "default": {
@@ -472,7 +472,7 @@
           }
         }
       },
-	  "put": {
+      "put": {
         "tags": [
           "ProductApis"
         ],
@@ -669,7 +669,7 @@
           "204": {
             "description": "The Group is associated with the Product."
           },
-          "404" : {
+          "404": {
             "description": "The Group entity is not associated with the Product."
           },
           "default": {
@@ -680,7 +680,7 @@
           }
         }
       },
-	  "put": {
+      "put": {
         "tags": [
           "ProductGroups"
         ],
@@ -893,6 +893,55 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}": {
+      "head": {
+        "tags": [
+          "ProductPolicy"
+        ],
+        "operationId": "ProductPolicy_GetEntityTag",
+        "description": "Get the ETag of the policy configuration at the Product level.",
+        "x-ms-examples": {
+          "ApiManagementHeadProductPolicy": {
+            "$ref": "./examples/ApiManagementHeadProductPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product Policy Etag information.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "ProductPolicy"
