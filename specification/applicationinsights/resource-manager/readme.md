@@ -34,6 +34,11 @@ tag: package-2015-05
 ## Suppression
 ``` yaml
 directive:
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/purge"].post
+    reason: Original creation of the service did not comply with current ARM schema standards. The team is aware of it and any future updates should rectify the issue.
+    
   - suppress: TrackedResourceListByImmediateParent
     where:
       - $.definitions
