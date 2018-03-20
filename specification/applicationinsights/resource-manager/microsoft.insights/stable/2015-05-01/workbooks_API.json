@@ -164,7 +164,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "WorkbookPayload",
+            "name": "workbookProperties",
             "description": "Properties that need to be specified to create a new workbook.",
             "in": "body",
             "required": true,
@@ -204,7 +204,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "WorkbookPayload",
+            "name": "workbookProperties",
             "description": "Properties that need to be specified to create a new workbook.",
             "in": "body",
             "required": true,
@@ -227,7 +227,141 @@
           }
         }
       }
-    }
+    },
+    "/providers/microsoft.insights/workbooks/category/{category}": {  
+      "get": {
+        "description": "Gets a list of workbooks.",
+        "operationId": "Workbooks_ListBySourceId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
+          },
+          {
+            "$ref": "#/parameters/CanFetchWorkbookContentParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more workbook definitions.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Workbook"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbooksList": {
+            "$ref": "./examples/WorkbooksListLink.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/resourceName/{resourceName}/providers/microsoft.insights/workbooks": {  
+      "put": {
+        "description": "Create a new workbook.",
+        "operationId": "Workbook_CreateLink",
+        "parameters": [          
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The link has been created."
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookAdd": {
+            "$ref": "./examples/LinkedWorkbookResponseOnly.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates a workbook that has already been added.",
+        "operationId": "Workbook_UpdateLink",
+        "parameters": [          
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workbook link updated.",
+            "schema": {
+                "$ref": "#/definitions/Workbook"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookAdd": {
+            "$ref": "./examples/LinkedWorkbookResponseOnly.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a workbook.",
+        "operationId": "Workbook_DeleteLink",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workbook link has been successfully deleted."
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookList": {
+            "$ref": "./examples/WorkbookResponseOnly.json"
+          }
+        }
+      }
+    }    
   },
   "definitions": {
     "Resource": {
@@ -262,9 +396,6 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },    
@@ -277,9 +408,8 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
+          "type": "string",          
           "description": "The kind of workbook. Choices are user and shared.",
-          "default": "shared",
           "enum": [
             "user",
             "shared"
@@ -321,8 +451,7 @@
         },
         "workbookId": {
           "type": "string",
-          "description": "Internally assigned unique id of the workbook definition.",
-          "readOnly": true
+          "description": "Internally assigned unique id of the workbook definition."
         },
         "kind": {
           "description": "Enum indicating if this workbook definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
@@ -356,8 +485,11 @@
         },
         "userId": {
           "type": "string",
-          "readOnly": true,
           "description": "Unique user id of the specific user that owns this workbook."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Optional resourceId for a source resource."
         }
       }
     }
@@ -419,6 +551,14 @@
       "description": "Category of workbook to return.",
       "x-ms-parameter-location": "method"
     },
+    "SourceIdParameter": {
+      "name": "sourceId",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Azure Resource Id that will fetch all linked workbooks.",
+      "x-ms-parameter-location": "method"
+    },    
     "CanFetchWorkbookContentParameter": {
       "name": "canFetchContent",
       "in": "query",
