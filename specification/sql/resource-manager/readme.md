@@ -132,6 +132,7 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 
 # Needed when there is more than one input file
 override-info:
