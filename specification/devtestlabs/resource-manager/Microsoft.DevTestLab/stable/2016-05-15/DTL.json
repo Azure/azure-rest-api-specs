@@ -10,6 +10,22 @@
   "consumes": [ "application/json" ],
   "produces": [ "application/json" ],
   "paths": {
+    "/providers/Microsoft.DevTestLab/operations": {
+      "get": {
+        "tags": [ "ProviderOperations" ],
+        "description": "Result of the request to list REST API operations",
+        "operationId": "ProviderOperations_List",
+        "parameters": [ { "$ref": "#/parameters/api-version" } ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/ProviderOperationResult" }
+          }
+        },
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/labs": {
       "get": {
         "tags": [ "Labs" ],
@@ -58,7 +74,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Lab"
       }
@@ -90,7 +106,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/schedules": {
@@ -141,7 +157,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Schedule"
       }
@@ -195,7 +211,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Lab"
       }
@@ -256,7 +272,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/ArtifactSource"
       }
@@ -324,7 +340,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/ArmTemplate"
       }
@@ -377,7 +393,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts": {
@@ -443,7 +459,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Artifact"
       }
@@ -496,7 +512,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}/generateArmTemplate": {
@@ -547,7 +563,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{name}": {
@@ -591,7 +607,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "ArtifactSources" ],
@@ -637,7 +653,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "ArtifactSources" ],
@@ -670,7 +686,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "patch": {
         "tags": [ "ArtifactSources" ],
@@ -712,7 +728,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}": {
@@ -756,7 +772,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Costs" ],
@@ -802,7 +818,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages": {
@@ -861,7 +877,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/CustomImage"
       }
@@ -907,7 +923,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "CustomImages" ],
@@ -953,7 +969,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -987,7 +1003,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -1047,7 +1063,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Formula"
       }
@@ -1093,7 +1109,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Formulas" ],
@@ -1139,7 +1155,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1173,7 +1189,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryimages": {
@@ -1232,7 +1248,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/GalleryImage"
       }
@@ -1293,7 +1309,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/NotificationChannel"
       }
@@ -1339,7 +1355,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "NotificationChannels" ],
@@ -1385,7 +1401,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "NotificationChannels" ],
@@ -1418,7 +1434,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "patch": {
         "tags": [ "NotificationChannels" ],
@@ -1460,7 +1476,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{name}/notify": {
@@ -1501,7 +1517,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies": {
@@ -1545,7 +1561,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies": {
@@ -1611,7 +1627,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Policy"
       }
@@ -1664,7 +1680,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Policies" ],
@@ -1717,7 +1733,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "Policies" ],
@@ -1757,7 +1773,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "patch": {
         "tags": [ "Policies" ],
@@ -1806,7 +1822,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules": {
@@ -1865,7 +1881,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Schedule"
       }
@@ -1911,7 +1927,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Schedules" ],
@@ -1957,7 +1973,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "Schedules" ],
@@ -1990,7 +2006,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "patch": {
         "tags": [ "Schedules" ],
@@ -2032,7 +2048,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}/execute": {
@@ -2067,7 +2083,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -2105,7 +2121,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
@@ -2158,7 +2174,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/ServiceRunner"
       }
@@ -2197,7 +2213,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "ServiceRunners" ],
@@ -2243,7 +2259,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "ServiceRunners" ],
@@ -2276,7 +2292,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users": {
@@ -2335,7 +2351,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/User"
       }
@@ -2381,7 +2397,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Users" ],
@@ -2427,7 +2443,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "Users" ],
@@ -2460,7 +2476,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -2503,7 +2519,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks": {
@@ -2569,7 +2585,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Disk"
       }
@@ -2622,7 +2638,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Disks" ],
@@ -2675,7 +2691,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -2716,7 +2732,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -2766,7 +2782,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -2816,7 +2832,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -2883,7 +2899,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/DtlEnvironment"
       }
@@ -2936,7 +2952,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Environments" ],
@@ -2989,7 +3005,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -3030,7 +3046,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -3097,7 +3113,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Secret"
       }
@@ -3150,7 +3166,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Secrets" ],
@@ -3203,7 +3219,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "Secrets" ],
@@ -3243,7 +3259,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines": {
@@ -3302,7 +3318,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/LabVirtualMachine"
       }
@@ -3348,7 +3364,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "VirtualMachines" ],
@@ -3394,7 +3410,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -3428,7 +3444,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -3471,7 +3487,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/addDataDisk": {
@@ -3513,7 +3529,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -3556,7 +3572,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -3592,7 +3608,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -3635,7 +3651,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -3673,7 +3689,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/start": {
@@ -3708,7 +3724,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -3744,7 +3760,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -3811,7 +3827,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Schedule"
       }
@@ -3864,7 +3880,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "VirtualMachineSchedules" ],
@@ -3917,7 +3933,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "VirtualMachineSchedules" ],
@@ -3957,7 +3973,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "patch": {
         "tags": [ "VirtualMachineSchedules" ],
@@ -4006,7 +4022,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules/{name}/execute": {
@@ -4048,7 +4064,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -4108,7 +4124,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/VirtualNetwork"
       }
@@ -4154,7 +4170,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "VirtualNetworks" ],
@@ -4200,7 +4216,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -4234,7 +4250,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -4277,7 +4293,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}": {
@@ -4314,7 +4330,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Labs" ],
@@ -4353,7 +4369,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -4380,7 +4396,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -4416,7 +4432,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/claimAnyVm": {
@@ -4444,7 +4460,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -4480,7 +4496,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -4516,7 +4532,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -4554,7 +4570,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/listVhds": {
@@ -4584,7 +4600,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
@@ -4637,7 +4653,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Schedule"
       }
@@ -4676,7 +4692,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "GlobalSchedules" ],
@@ -4715,7 +4731,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "GlobalSchedules" ],
@@ -4741,7 +4757,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       },
       "patch": {
         "tags": [ "GlobalSchedules" ],
@@ -4776,7 +4792,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules/{name}/execute": {
@@ -4804,7 +4820,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -4840,7 +4856,7 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     }
@@ -5581,7 +5597,7 @@
             "modelAsString": true
           }
         },
-        "NotificationSent": {
+        "notificationSent": {
           "description": "Indicates the datetime when notifications were last sent for this threshold.",
           "type": "string"
         }
@@ -6216,7 +6232,7 @@
       }
     },
     "IdentityProperties": {
-      "description": "IdentityProperties",
+      "description": "Properties of a managed identity",
       "type": "object",
       "properties": {
         "type": {
@@ -7287,6 +7303,42 @@
         }
       }
     },
+    "OperationMetadata": {
+      "description": "The REST API operation supported by DevTestLab ResourceProvider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationMetadataDisplay",
+          "description": "The object that describes the operations"
+        }
+      }
+    },
+    "OperationMetadataDisplay": {
+      "description": "The object that describes the operations",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Friendly name of the resource provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource type on which the operation is performed.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type: read, write, delete, listKeys/action, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Friendly name of the operation",
+          "type": "string"
+        }
+      }
+    },
     "OperationResult": {
       "description": "An Operation Result",
       "type": "object",
@@ -7552,6 +7604,22 @@
           "format": "int32",
           "description": "Backend port of the target virtual machine.",
           "type": "integer"
+        }
+      }
+    },
+    "ProviderOperationResult": {
+      "description": "Result of the request to list REST API operations",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the resource provider.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/OperationMetadata" }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -8647,7 +8715,7 @@
     }
   },
   "securityDefinitions": {
-    "oauth2": {
+    "azure_auth": {
       "type": "oauth2",
       "description": "OAuth2 Implicit Grant",
       "flow": "implicit",
@@ -8655,5 +8723,5 @@
       "scopes": { "user_impersonation": "Access Microsoft Azure" }
     }
   },
-  "security": [ { "oauth2": [ "user_impersonation" ] } ]
+  "security": [ { "azure_auth": [ "user_impersonation" ] } ]
 }
