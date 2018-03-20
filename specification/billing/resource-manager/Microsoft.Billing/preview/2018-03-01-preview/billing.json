@@ -77,7 +77,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EnrollmentAccountResult"
+              "$ref": "#/definitions/EnrollmentAccount"
             }
           },
           "default": {
@@ -384,7 +384,7 @@
     }
   },
   "definitions": {
-    "EnrollmentAccountResult": {
+    "EnrollmentAccount": {
       "description": "An enrollment account resource.",
       "type": "object",
       "allOf": [
@@ -408,15 +408,20 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/EnrollmentAccountResult"
+            "$ref": "#/definitions/EnrollmentAccount"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "EnrollmentAccountProperties": {
       "description": "The properties of the enrollment account.",
       "properties": {
-	    "principalName": {
+        "principalName": {
           "description": "The account owner's principal name.",
           "type": "string",
           "readOnly": true
