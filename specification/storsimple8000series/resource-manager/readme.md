@@ -1,5 +1,5 @@
 # StorSimple
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for StorSimple.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for StorSimple.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for StorSimple, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the StorSimple API.
 
 ``` yaml
@@ -40,7 +40,7 @@ input-file:
 directive:
   - suppress:
     - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
-    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation) 
+    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation)
 ```
 
 ---
@@ -55,10 +55,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.

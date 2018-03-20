@@ -1,5 +1,5 @@
 # MachineLearning
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for MachineLearning.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for MachineLearning.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for MachineLearning, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the MachineLearning API.
 
 ``` yaml
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-webservices-2017-01` is specified 
 input-file:
 - Microsoft.MachineLearning/stable/2017-01-01/webservices.json
 ```
- 
+
 ### Tag: package-commitmentPlans-2016-05-preview
 
 These settings apply only when `--tag=package-commitmentPlans-2016-05-preview` is specified on the command line.
@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-commitmentPlans-2016-05-preview` i
 input-file:
 - Microsoft.MachineLearning/preview/2016-05-01-preview/commitmentPlans.json
 ```
- 
+
 ### Tag: package-workspaces-2016-04
 
 These settings apply only when `--tag=package-workspaces-2016-04` is specified on the command line.
@@ -89,10 +89,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
