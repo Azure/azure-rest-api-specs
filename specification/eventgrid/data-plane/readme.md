@@ -48,6 +48,8 @@ input-file:
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.Devices/stable/2018-01-01/IotHub.json
+- Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
 ```
 
 ---
@@ -63,6 +65,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-node
 ```
 
 ## C#

@@ -1,19 +1,19 @@
 # Web
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Web.
 
 
 The App service RP comprises of services where each service has its own tag.
-Hence, each sub-service has its own swagger spec. 
+Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Web, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -27,7 +27,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Web API.
 
 ``` yaml
@@ -55,12 +55,123 @@ input-file:
 - Microsoft.Web/stable/2016-03-01/Diagnostics.json
 - Microsoft.Web/stable/2016-03-01/Provider.json
 - Microsoft.Web/stable/2016-03-01/Recommendations.json
+- Microsoft.Web/stable/2016-03-01/ResourceHealthMetadata.json
 - Microsoft.Web/stable/2016-03-01/ResourceProvider.json
 - Microsoft.Web/stable/2016-08-01/WebApps.json
 - Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2016-09-01/AppServicePlans.json
+directive:
+  # suppress each RPC 3019 error
+- where: $.definitions.User.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.SourceControl.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.BackupRequest.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.Deployment.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.PremierAddOn.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.SiteExtensionInfo.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.AppServicePlan.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.VnetRoute.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.FunctionEnvelope.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.CertificateOrderAction.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.ResourceMetricDefinition.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.TopLevelDomain.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.GeoRegion.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.PremierAddOnOffer.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.ContinuousWebJob.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.ProcessInfo.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.ProcessThreadInfo.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.SiteConfigurationSnapshotInfo.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.SiteInstance.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.SlotDifference.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.TriggeredJobRun.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.TriggeredWebJob.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.WebJob.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.MetricDefinition.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.Usage.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.AppServicePlanPatchResource.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
 ```
- 
+
 ### Tag: package-2015-08-preview
 
 These settings apply only when `--tag=package-2015-08-preview` is specified on the command line.
@@ -86,10 +197,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -118,6 +230,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.web
   package-name: azure-mgmt-web
+  package-version: 0.36.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

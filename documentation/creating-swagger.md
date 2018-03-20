@@ -414,6 +414,35 @@ Please note, that the use of "x-ms-paths" should be minimized to the above scena
 The request body and response definitions become simple model types in the generated code. The models include 
 basic validation methods, but are generally stateless serialization definitions.
 
+### Understanding the importance of "type" keyword while definining model types.
+"Type-specific" keywords such as properties, items, minLength, etc. do not enforce a type on the schema. It works the other way around – when an instance is validated against a schema, these keywords only apply when the instance is of the corresponding type, otherwise they are ignored. Here's the relevant part of the [JSON Schema Validation](https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-4.1) spec:
+
+> 4.1. Keywords and instance primitive types
+Some validation keywords only apply to one or more primitive types. When the primitive type of the instance cannot be validated by a given keyword, validation for this keyword and instance SHOULD succeed.
+
+For example, consider this schema:
+
+```yaml
+definitions:
+  Something:
+    properties:
+      id:
+        type: integer
+    required: [id]
+    minLength: 8
+```
+It's a valid schema, even though it combines object-specific keywords properties and required and string-specific keyword minLength. This schema means:
+- If the instance is an object, it must have an integer property named id. For example, `{"id": 4}` and `{"id": -1, "foo": "bar"}` are valid, but `{}` and `{"id": "ACB123"}` are not.
+- If the instance is a string, it must contain at least 8 characters. `"Hello, world!"` is valid, but `""` and `abc` are not.
+- Any instances of other types are valid - `true`, `false`, `-1.234`, `[]`, `[1, 2, 3]`, `[1, "foo", true]`, etc.
+(Except `null` - OpenAPI 2.0 does not have the `null` type and does not support `null` except in extension properties. OpenAPI 3.0 supports the `null` value for schemas with nullable: true.)
+
+If there are tools that infer the `type` from other keywords (for example, handle schemas with no `type` but with `properties` as always objects), then these tools are not exactly following the OpenAPI Specification and JSON Schema.
+
+> Bottom line: If a schema must always be an object, add `"type": "object"` explicitly. Otherwise you might get unexpected results.
+
+**Credits** - Stack Overflow [link](https://stackoverflow.com/questions/47374980/schema-object-without-a-type-attribute-in-swagger-2-0).
+
 ### Model Inheritance<a name="ModelInheritance"></a>
 Swagger schema allows for specifying that one type is `allOf` other types, meaning that the entire specification of 
 the referenced schema applies is included in the new schema. By convention, if a schema has an 'allOf' that references 

@@ -1,5 +1,5 @@
 # Network
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Network.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Network.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Network, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Network API.
 
 ``` yaml
@@ -221,7 +221,7 @@ input-file:
 - Microsoft.Network/stable/2017-03-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2017-03-01/vmssPublicIpAddress.json
 ```
- 
+
 ### Tag: package-2016-12
 
 These settings apply only when `--tag=package-2016-12` is specified on the command line.
@@ -245,7 +245,7 @@ input-file:
 - Microsoft.Network/stable/2016-12-01/virtualNetwork.json
 - Microsoft.Network/stable/2016-12-01/virtualNetworkGateway.json
 ```
- 
+
 ### Tag: package-2016-09
 
 These settings apply only when `--tag=package-2016-09` is specified on the command line.
@@ -267,7 +267,7 @@ input-file:
 - Microsoft.Network/stable/2016-09-01/virtualNetwork.json
 - Microsoft.Network/stable/2016-09-01/virtualNetworkGateway.json
 ```
- 
+
 ### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
@@ -276,7 +276,7 @@ These settings apply only when `--tag=package-2016-06` is specified on the comma
 input-file:
 - Microsoft.Network/stable/2016-06-01/network.json
 ```
- 
+
 ### Tag: package-2016-03
 
 These settings apply only when `--tag=package-2016-03` is specified on the command line.
@@ -285,7 +285,7 @@ These settings apply only when `--tag=package-2016-03` is specified on the comma
 input-file:
 - Microsoft.Network/stable/2016-03-30/network.json
 ```
- 
+
 ### Tag: package-2015-06split
 
 These settings apply only when `--tag=package-2015-06split` is specified on the command line.
@@ -306,7 +306,7 @@ input-file:
 - Microsoft.Network/stable/2015-06-15/virtualNetworkGateway.json
 - Microsoft.Network/stable/2015-06-15/vmssNetworkInterface.json
 ```
- 
+
 ### Tag: package-2015-05-preview
 
 These settings apply only when `--tag=package-2015-05-preview` is specified on the command line.
@@ -328,12 +328,17 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@~3.0"
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-network
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -363,6 +368,9 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-01
+  - tag: package-2017-11
+  - tag: package-2017-10
   - tag: package-2017-09
   - tag: package-2017-08
   - tag: package-2017-06
@@ -373,6 +381,33 @@ batch:
   - tag: package-2016-03
   - tag: package-2015-06split
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2018-01 and go
+
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2018-01-01/network
+```
+
+### Tag: package-2017-11 and go
+
+These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-11' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-11-01/network
+```
+
+### Tag: package-2017-10 and go
+
+These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-10-01/network
 ```
 
 ### Tag: package-2017-09 and go

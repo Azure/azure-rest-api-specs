@@ -2979,11 +2979,19 @@
       "type": "string",
       "description": "Get subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "The name of the Azure resource group."
     },
     "AccountNameParameter": {
@@ -2991,14 +2999,8 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "The name of the Data Lake Analytics account."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }

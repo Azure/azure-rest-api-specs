@@ -1,5 +1,5 @@
 # Automation
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Automation.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Automation.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Automation, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Automation API.
 
 ``` yaml
@@ -51,6 +51,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/job.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
+- Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
@@ -76,8 +77,8 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/dscNode.json
 - Microsoft.Automation/stable/2015-10-31/dscNodeConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/stable/2015-10-31/job.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
+- Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
@@ -88,6 +89,7 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2017-05-15-preview/job.json
 ```
 
 ---
@@ -103,10 +105,11 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -135,6 +138,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.automation
   package-name: azure-mgmt-automation
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -183,7 +187,7 @@ These settings apply only when `--tag=package-2017-05-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/automation/mgmt/2017-05-15-preview
+output-folder: $(go-sdk-folder)/services/automation/mgmt/2017-05-15-preview/automation
 ```
 
 
