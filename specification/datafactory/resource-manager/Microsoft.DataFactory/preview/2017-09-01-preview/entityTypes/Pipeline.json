@@ -2022,6 +2022,10 @@
           "description": "The environment path to execution the SSIS package.",
           "type": "string"
         },
+        "connectVia": {
+          "description": "The integration runtime reference.",
+          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        },
         "projectParameters": {
           "description": "The project level parameters to execution the SSIS package.",
           "type": "object",
@@ -2056,10 +2060,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/SSISPropertyOverride"
           }
-        },
-        "connectVia": {
-          "description": "The integration runtime reference.",
-          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         }
       },
       "required": [
