@@ -1,0 +1,1034 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2018-03-01-preview",
+        "title": "SignalRManagementClient",
+        "description": "REST API for Azure SignalR Service"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/providers/Microsoft.SignalR/operations": {
+            "get": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Lists all of the available REST API operations of the Microsoft.SignalR provider.",
+                "operationId": "SignalR_ListOperations",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response describes the list of operations.",
+                        "schema": {
+                            "$ref": "#/definitions/OperationListResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "ListOperations": {
+                        "$ref": "./examples/ListOperations.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.SignalR/checkNameAvailability": {
+            "post": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Checks that the SignalR name is valid and is not already in use.",
+                "operationId": "SignalR_CheckNameAvailability",
+                "parameters": [
+                    {
+                        "name": "nameAvailabilityRequest",
+                        "in": "body",
+                        "description": "parameters supplied to the operation.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/NameAvailabilityRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response describes the name availability.",
+                        "schema": {
+                            "$ref": "#/definitions/CheckNameAvailabilityResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "CheckNameAvailability": {
+                        "$ref": "./examples/CheckNameAvailability.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.SignalR/SignalR": {
+            "get": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Handles requests to list all resources in a subscription.",
+                "operationId": "SignalR_ListBySubscription",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response describes the list of SignalR services in the subscription.",
+                        "schema": {
+                            "$ref": "#/definitions/SignalRResourceListResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "ListBySubscription": {
+                        "$ref": "./examples/ListBySubscription.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalR/SignalR": {
+            "get": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Handles requests to list all resources in a resource group.",
+                "operationId": "SignalR_ListByResourceGroup",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response describes the list of SignalR services in a resourceGroup.",
+                        "schema": {
+                            "$ref": "#/definitions/SignalRResourceListResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "ListByResourceGroup": {
+                        "$ref": "./examples/ListByResourceGroup.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalR/operationResults/{resourceName}/operationresult/{operationId}": {
+            "get": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Get the result of an async operation of a SignalR resource.",
+                "operationId": "SignalR_GetResourceAsyncOperationResult",
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "description": "the Id of the async operation.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response describes the corresponding SingalR service.",
+                        "schema": {
+                            "$ref": "#/definitions/SignalRResourceResponse"
+                        }
+                    },
+                    "202": {
+                        "description": "Request accepted. The operation is still ongoing. The response contains a Location header for further query."
+                    },
+                    "204": {
+                        "description": "Success. 204 returned when the async operation is a DELETE operation and the deletion is successful."
+                    },
+                    "404": {
+                        "description": "Not Found. The operation doesn't exist."
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "GetResourceAsyncOperationResult": {
+                        "$ref": "./examples/GetResourceAsyncOperationResult.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.SignalR/operationResults/{operationId}": {
+            "get": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Get the result of an async operation of a subscription event.",
+                "operationId": "SignalR_GetSubscriptionAsyncOperationResult",
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "description": "the Id of the async operation.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The operation is succussful."
+                    },
+                    "202": {
+                        "description": "Request accepted. The operation is still ongoing. The response contains a Location header for further query."
+                    },
+                    "404": {
+                        "description": "Not Found. The operation doesn't exist."
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "GetSubscriptionAsyncOperationResult": {
+                        "$ref": "./examples/GetSubscriptionAsyncOperationResult.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/moveresources": {
+            "post": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Asynchronously move SignalR services to another resourceGroup, either in the same subscription or to another subscription.",
+                "operationId": "SignalR_MoveResources",
+                "parameters": [
+                    {
+                        "name": "moveResourcesRequest",
+                        "in": "body",
+                        "description": "parameters describes the move operation.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MoveResourcesRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Request accepted. The response contains a Location header to query the operation result."
+                    },
+                    "204": {
+                        "description": "No content. The response indicates no response is eligible to move."
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "MoveResources": {
+                        "$ref": "./examples/MoveResources.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/validateMoveResources": {
+            "post": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Validate the resource can be moved or not",
+                "operationId": "SignalR_ValidateMoveResources",
+                "parameters": [
+                    {
+                        "name": "moveResourcesRequest",
+                        "in": "body",
+                        "description": "parameters describes the move operation.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MoveResourcesRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The resources can be moved."
+                    },
+                    "400": {
+                        "description": "Bad request. The resources cannot be moved."
+                    }
+                },
+                "x-ms-examples": {
+                    "ValidateMoveResources": {
+                        "$ref": "./examples/ValidateMoveResources.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalR/SignalR/{resourceName}/keys": {
+            "get": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Get the access keys of the SignalR resource.",
+                "operationId": "SignalR_GetKeys",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response describes SignalR service access keys.",
+                        "schema": {
+                            "$ref": "#/definitions/SignalRKeysResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "GetKeys": {
+                        "$ref": "./examples/GetKeys.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalR/SignalR/{resourceName}/keys/{keyType}/regenerate": {
+            "post": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Regenerate SignalR service access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
+                "operationId": "SignalR_RegenerateKey",
+                "parameters": [
+                    {
+                        "name": "keyType",
+                        "in": "path",
+                        "description": "the keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive).",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "Primary",
+                            "Secondary"
+                        ]
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created and an async operation is excuting in background to make the new key to take effect. The response contains new keys and a Location header to query the async operation result.",
+                        "schema": {
+                            "$ref": "#/definitions/SignalRKeysResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. The response indicates SignalR service doesn't exist."
+                    },
+                    "409": {
+                        "description": "Failed. The response describes the prerequisites for regeneration is not met."
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "RegenerateKey": {
+                        "$ref": "./examples/RegenerateKey.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalR/SignalR/{resourceName}": {
+            "get": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Get the SignalR service and its properties.",
+                "operationId": "SignalR_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response describe the corresponding SingalR service.",
+                        "schema": {
+                            "$ref": "#/definitions/SignalRResourceResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get": {
+                        "$ref": "./examples/Get.json"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Create a new SignalR service and update an exiting SignalR service.",
+                "operationId": "SignalR_Create",
+                "parameters": [
+                    {
+                        "name": "createSignalRResourceRequest",
+                        "in": "body",
+                        "description": "parameters for the create or update operation",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CreateSignalRResourceRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created. The response describes the new service and contains a Location header to query the operation result.",
+                        "schema": {
+                            "$ref": "#/definitions/SignalRResourceResponse"
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted. The response indicates the exiting SingalR service is now updating  and contains a Location header to query the operation result.."
+                    },
+                    "400": {
+                        "description": "Failed. The response describes the request parameter(s) are not valid or not all prerequisites are met."
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "Create": {
+                        "$ref": "./examples/Create.json"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Operation to delete a SignalR service.",
+                "operationId": "SignalR_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted. The response indicates the delete operation is performed in the background."
+                    },
+                    "204": {
+                        "description": "Success. The response indicates the resource is already deleted."
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "Delete": {
+                        "$ref": "./examples/Delete.json"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "SignalR"
+                ],
+                "description": "Operation to update an exiting SignalR service.",
+                "operationId": "SignalR_Update",
+                "parameters": [
+                    {
+                        "name": "patchSignalRResourceRequest",
+                        "in": "body",
+                        "description": "parameters for the update operation",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PatchSignalRResourceRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response describes a SingalR service which is not up-to-date.",
+                        "schema": {
+                            "$ref": "#/definitions/SignalRResourceResponse"
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted. The response indicates the exiting SingalR service is now updating  and contains a Location header to query the operation result.."
+                    },
+                    "400": {
+                        "description": "Failed. The response describes the request parameter(s) are not valid or not all prerequisites are met."
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "Update": {
+                        "$ref": "./examples/Update.json"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "OperationListResponse": {
+            "description": "Result of the request to list REST API operations. It contains a list of operations.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "List of operations supported by the resource provider.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Operation"
+                    }
+                }
+            }
+        },
+        "Operation": {
+            "description": "REST API operation.",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Operation name: {provider}/{resource}/{operation}",
+                    "type": "string"
+                },
+                "display": {
+                    "$ref": "#/definitions/OperationDisplay",
+                    "description": "The object that describes the operation."
+                },
+                "origin": {
+                    "description": "Optional. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.",
+                    "type": "string"
+                },
+                "properties": {
+                    "$ref": "#/definitions/OperationProperties",
+                    "description": "Extra properties for the operation.",
+                    "x-ms-client-flatten": false
+                }
+            }
+        },
+        "OperationDisplay": {
+            "description": "The object that describes a operation.",
+            "type": "object",
+            "properties": {
+                "provider": {
+                    "description": "Friendly name of the resource provider",
+                    "type": "string"
+                },
+                "resource": {
+                    "description": "Resource type on which the operation is performed.",
+                    "type": "string"
+                },
+                "operation": {
+                    "description": "The localized friendly name for the operation.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "The localized friendly description for the operation",
+                    "type": "string"
+                }
+            }
+        },
+        "OperationProperties": {
+            "description": "Extra Operation properties.",
+            "type": "object",
+            "properties": {
+                "serviceSpecification": {
+                    "$ref": "#/definitions/ServiceSpecification",
+                    "description": "The service specifications."
+                }
+            }
+        },
+        "ServiceSpecification": {
+            "description": "An object that describes a specification",
+            "type": "object",
+            "properties": {
+                "metricSpecifications": {
+                    "description": "Specifications ofr Metrics.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MetricSpecification"
+                    }
+                }
+            }
+        },
+        "MetricSpecification": {
+            "description": "Metrics Specification",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the metric.",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "Friendly display name of the metric.",
+                    "type": "string"
+                },
+                "displayDescription": {
+                    "description": "Friendly description of the metric.",
+                    "type": "string"
+                },
+                "unit": {
+                    "description": "the unit of the metric.",
+                    "type": "string"
+                },
+                "aggregationType": {
+                    "description": "the aggregation type of the metric.",
+                    "type": "string"
+                },
+                "fillGapWithZero": {
+                    "description": "fill gap with zero.",
+                    "type": "string"
+                },
+                "category": {
+                    "description": "the category of the metric.",
+                    "type": "string"
+                }
+            }
+        },
+        "NameAvailabilityRequest": {
+            "description": "Data POST-ed to the nameAvailability action",
+            "required": [
+                "leafDomain"
+            ],
+            "type": "object",
+            "properties": {
+                "type": {
+                    "description": "The resource type. Should be always \"Microsoft.SignalR/SignalR\".",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The SignalR service name to validate. e.g.\"my-signalR-name-here\"",
+                    "type": "string"
+                },
+                "leafDomain": {
+                    "description": "the leaf domain name.",
+                    "pattern": "^[a-z][a-z0-9-]{1,61}[a-z0-9]$",
+                    "type": "string"
+                }
+            }
+        },
+        "CheckNameAvailabilityResponse": {
+            "description": "Result of the request to check name availability. It contains a flag and possible reason of failure.",
+            "type": "object",
+            "properties": {
+                "nameAvailable": {
+                    "description": "indicates whether the name is available or not.",
+                    "type": "boolean"
+                },
+                "reason": {
+                    "description": "The reason of the availability. Required if name is not available.",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "The message of the operation.",
+                    "type": "string"
+                }
+            }
+        },
+        "SignalRResourceListResponse": {
+            "description": "Object that includes an array of SignalR services and a possible link for next set.",
+            "type": "object",
+            "properties": {
+                "values": {
+                    "description": "List of SignalR services",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SignalRResourceResponse"
+                    }
+                },
+                "nextLink": {
+                    "description": "Link for next set of SignalR services.",
+                    "type": "string"
+                }
+            }
+        },
+        "SignalRResourceResponse": {
+            "description": "a class represent a SignalR service.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The unique ResourceId of SignalR",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "location": {
+                    "description": "the location of the SignalR service.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name of the service",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "type": {
+                    "description": "resource type of service - e.g. \"Microsoft.SignalR/SignalR\"",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "tags": {
+                    "description": "Tags of the service.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "sku": {
+                    "$ref": "#/definitions/ResourceSku",
+                    "description": "SKU of the service."
+                },
+                "properties": {
+                    "$ref": "#/definitions/SignalRResponseProperties",
+                    "description": "The properties of the service.",
+                    "x-ms-client-flatten": true
+                }
+            }
+        },
+        "ResourceSku": {
+            "description": "The billing information of the resource.(e.g. basic vs. standard)",
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name of the SKU. This is typically a letter + number code, such as A0 or P3.  Required (if sku is specified)",
+                    "type": "string"
+                },
+                "tier": {
+                    "description": "The tier of this particular SKU. Optional.",
+                    "enum": [
+                        "Free",
+                        "Basic",
+                        "Premium"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "SignalRSkuTier",
+                        "modelAsString": true
+                    }
+                },
+                "size": {
+                    "description": "Optional, string. When the name field is the combination of tier and some other value, this would be the standalone code.",
+                    "type": "string"
+                },
+                "family": {
+                    "description": "Optional, string. If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+                    "type": "string"
+                },
+                "capacity": {
+                    "format": "int32",
+                    "description": "Optional, integer. If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not \r\npossible for the resource this may be omitted.",
+                    "type": "integer"
+                }
+            }
+        },
+        "SignalRResponseProperties": {
+            "description": "A class that describes the properties of the SignalR service.",
+            "type": "object",
+            "properties": {
+                "provisioningState": {
+                    "description": "Provisioning state of the resource.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Running status of the SignalR service.",
+                    "type": "string"
+                },
+                "isSuspended": {
+                    "description": "Whether the service is suspended or not.",
+                    "type": "boolean"
+                },
+                "externalIP": {
+                    "description": "The publicly accessible IP of the SignalR service.",
+                    "type": "string"
+                },
+                "fqdn": {
+                    "description": "FQDN of the SignalR service instance.",
+                    "type": "string"
+                },
+                "publicPort": {
+                    "format": "int32",
+                    "description": "The publicly accessibly port of the SignalR service which is designed for browser/client side usage.",
+                    "type": "integer"
+                },
+                "serverPort": {
+                    "format": "int32",
+                    "description": "The publicly accessibly port of the SignalR service which is designed for customer server side usage.",
+                    "type": "integer"
+                }
+            }
+        },
+        "MoveResourcesRequest": {
+            "description": "A class describes the parameters for resources move operation",
+            "type": "object",
+            "properties": {
+                "targetResourceGroup": {
+                    "description": "The target resourceGroup name.",
+                    "type": "string"
+                },
+                "resources": {
+                    "description": "An list of ResourceIds to move.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "SignalRKeysResponse": {
+            "description": "A class represents the access keys of SignalR service.",
+            "type": "object",
+            "properties": {
+                "primaryKey": {
+                    "description": "The primary access key.",
+                    "type": "string"
+                },
+                "secondaryKey": {
+                    "description": "The secondary access key.",
+                    "type": "string"
+                }
+            }
+        },
+        "CreateSignalRResourceRequest": {
+            "description": "Parameters for SignalR service create/update operation",
+            "required": [
+                "location",
+                "sku",
+                "properties"
+            ],
+            "type": "object",
+            "properties": {
+                "location": {
+                    "description": "The location of the SignalR service.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "A list of key value pairs that describe the resource.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "sku": {
+                    "$ref": "#/definitions/ResourceSku",
+                    "description": "The billing information of the resource.(e.g. basic vs. standard)"
+                },
+                "properties": {
+                    "$ref": "#/definitions/CreateSignalRResourceRequestProperties",
+                    "description": "Settings used to provision or configure the resource",
+                    "x-ms-client-flatten": false
+                }
+            }
+        },
+        "CreateSignalRResourceRequestProperties": {
+            "description": "Settings used to provision or configure the resource.",
+            "required": [
+                "domainLabel"
+            ],
+            "type": "object",
+            "properties": {
+                "domainLabel": {
+                    "description": "leaf domain name of SignalR service.",
+                    "pattern": "^[a-z][a-z0-9-]{1,61}[a-z0-9]$",
+                    "type": "string"
+                }
+            }
+        },
+        "PatchSignalRResourceRequest": {
+            "description": "Parameters for SignalR service update operation",
+            "type": "object",
+            "properties": {
+                "location": {
+                    "description": "The location of the SignalR service.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "A list of key value pairs that describe the resource.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "sku": {
+                    "$ref": "#/definitions/ResourceSku",
+                    "description": "The billing information of the resource.(e.g. basic vs. standard)"
+                },
+                "properties": {
+                    "$ref": "#/definitions/PatchSignalRResourceRequestProperties",
+                    "description": "Settings used to provision or configure the resource",
+                    "x-ms-client-flatten": false
+                }
+            }
+        },
+        "PatchSignalRResourceRequestProperties": {
+            "description": "Settings used to provision or configure the resource.",
+            "type": "object",
+            "properties": {}
+        }
+    },
+    "parameters": {
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "description": "Client Api Version.",
+            "required": true,
+            "type": "string"
+        },
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Gets subscription Id which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+        },
+        "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+            "required": true,
+            "type": "string"
+        },
+        "ResourceNameParameter": {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the SignalR resource.",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "flow": "implicit",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            },
+            "type": "oauth2",
+            "description": "Azure Active Directory OAuth2 Flow"
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ]
+}
