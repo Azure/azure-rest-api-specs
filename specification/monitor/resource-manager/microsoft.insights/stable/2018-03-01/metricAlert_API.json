@@ -791,11 +791,15 @@
     },
     "MetricAlertCriteria": {
       "type": "object",
+      "additionalProperties": {
+          "type": "object"
+      },
       "discriminator": "odata.type",
       "properties": {
         "odata.type": {
           "enum": [
-            "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria"
+            "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+            "Microsoft.Azure.Monitor.DefaultCriteria"
           ],
           "x-ms-enum": {
             "name": "Unit",
@@ -848,12 +852,32 @@
           "description": "Namespace of the metric."
         },
         "operator": {
-          "type": "string",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "LessThan",
+            "LessThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "Unit",
+            "modelAsString": true
+          },
           "description": "the criteria operator."
         },
         "timeAggregation": {
-          "type": "string",
-          "description": "the criteria time aggregation value."
+          "enum": [
+            "Average",
+            "Minimum",
+            "Maximum",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "name": "Unit",
+            "modelAsString": true
+          },
+          "description": "the criteria time aggregation types."
         },
         "threshold": {
           "type": "number",
