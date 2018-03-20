@@ -246,7 +246,6 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
 - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
-- Microsoft.Insights/stable/2015-05-01/linkedWorkbooks_API.json
 ```
 
 ### Tag: package-2017-10
@@ -379,7 +378,6 @@ input-file:
  - ./Microsoft.Insights/stable/2015-05-01/components_API.json
  - ./Microsoft.Insights/stable/2015-05-01/webTests_API.json
  - ./Microsoft.Insights/stable/2015-05-01/workbooks_API.json
- - ./Microsoft.Insights/stable/2015-05-01/linkedWorkbooks_API.json
 
 override-info:
   title: ApplicationInsightsManagementClient
