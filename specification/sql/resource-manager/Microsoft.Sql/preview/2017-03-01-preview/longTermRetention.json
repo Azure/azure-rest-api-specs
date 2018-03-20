@@ -168,20 +168,7 @@
             "type": "boolean"
           },
           {
-            "name": "databaseState",
-            "in": "query",
-            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "All",
-              "Live",
-              "Deleted"
-            ],
-            "x-ms-enum": {
-              "name": "databaseState",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/LongTermRetentionDatabaseStateParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -234,20 +221,7 @@
             "type": "boolean"
           },
           {
-            "name": "databaseState",
-            "in": "query",
-            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "All",
-              "Live",
-              "Deleted"
-            ],
-            "x-ms-enum": {
-              "name": "databaseState",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/LongTermRetentionDatabaseStateParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -306,20 +280,7 @@
             "type": "boolean"
           },
           {
-            "name": "databaseState",
-            "in": "query",
-            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "All",
-              "Live",
-              "Deleted"
-            ],
-            "x-ms-enum": {
-              "name": "databaseState",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/LongTermRetentionDatabaseStateParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -745,6 +706,23 @@
       "description": "The name of the virtual cluster.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "LongTermRetentionDatabaseStateParameter": {
+      "name": "databaseState",
+      "in": "query",
+      "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "All",
+        "Live",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "longTermRetentionDatabaseState",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     }
   },
