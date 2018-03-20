@@ -34,5 +34,5 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.Migrate/2018-02-02/migrate.json 
+- Microsoft.Migrate/stable/2018-02-02/migrate.json 
 ```
