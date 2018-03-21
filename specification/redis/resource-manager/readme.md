@@ -1,5 +1,5 @@
 # Redis
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Redis.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Redis.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Redis, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,13 +21,23 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10
+tag: package-2018-03
 ```
+
+### Tag: package-2018-03
+
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file:
+- Microsoft.Cache/stable/2018-03-01/redis.json
+```
+
 
 ### Tag: package-2017-10
 
@@ -57,7 +67,7 @@ These settings apply only when `--tag=package-2016-04` is specified on the comma
 input-file:
 - Microsoft.Cache/stable/2016-04-01/redis.json
 ```
- 
+
 ### Tag: package-2015-08
 
 These settings apply only when `--tag=package-2015-08` is specified on the command line.
@@ -82,10 +92,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -144,11 +155,22 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-03
   - tag: package-2017-10
   - tag: package-2017-02
   - tag: package-2016-04
   - tag: package-2015-08
 ```
+
+### Tag: package-2018-03 and go
+
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(go)
+output-folder: $(go-sdk-folder)/services/redis/mgmt/2018-03-01/redis
+```
+
 
 ### Tag: package-2017-10 and go
 

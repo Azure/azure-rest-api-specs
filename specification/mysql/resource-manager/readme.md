@@ -1,5 +1,5 @@
 # MySql
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Sql.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Sql.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for MySql, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,12 +21,12 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Sql API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04-preview
+tag: package-2017-12-01
 ```
 
 
@@ -38,6 +38,26 @@ These settings apply only when `--tag=package-2017-04-preview` is specified on t
 input-file:
 - Microsoft.DBforMySQL/preview/2017-04-30-preview/mysql.json
 ```
+
+
+### Tag: package-2017-12-01-preview
+
+These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-12-01-preview'
+input-file:
+- Microsoft.DBforMySQL/preview/2017-12-01-preview/mysql.json
+```
+
+
+### Tag: package-2017-12-01 
+
+These settings apply only when `--tag=package-2017-12-01` is specified on the command line. 
+
+``` yaml $(tag) == 'package-2017-12-01' 
+input-file: 
+- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json 
+``` 
 
 
 ---
@@ -54,6 +74,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -100,7 +121,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2017-04-preview
+  - tag: package-2017-12-01
 ```
 
 ### Tag: package-2017-04-preview and go
@@ -112,6 +133,23 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-04-30-preview/mysql
 ```
 
+### Tag: package-2017-12-01-preview and go
+
+These settings apply only when `--tag=package-2017-12-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-12-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-12-01-preview/mysql
+```
+
+### Tag: package-2017-12-01 and go 
+
+These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line. 
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`. 
+
+``` yaml $(tag) == 'package-2017-12-01' && $(go) 
+output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-12-01/mysql
+```
 
 ## Java
 
