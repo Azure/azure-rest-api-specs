@@ -2373,6 +2373,7 @@
     "DeploymentExtended": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The ID of the deployment."
         },
@@ -2388,6 +2389,7 @@
       "required": [
         "name"
       ],
+      "x-ms-azure-resource": true,
       "description": "Deployment information."
     },
     "DeploymentListResult": {
@@ -2594,6 +2596,7 @@
       "required": [
         "location"
       ],
+      "x-ms-azure-resource": true,
       "description": "Resource group information."
     },
     "ResourceGroupPatchable": {
@@ -2695,6 +2698,7 @@
     "TagValue": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The tag ID."
         },
@@ -2707,11 +2711,13 @@
           "description": "The tag value count."
         }
       },
+      "x-ms-azure-resource": true,
       "description": "Tag information."
     },
     "TagDetails": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The tag ID."
         },
