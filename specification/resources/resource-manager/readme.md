@@ -226,7 +226,7 @@ directive:
     from: resources.json
     where: $.definitions.ResourceGroup.properties
     reason: managedBy is a top level property
- - suppress: BodyTopLevelProperties
+  - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
@@ -234,7 +234,7 @@ directive:
     from: managedapplications.json
     where: $.definitions.Appliance.properties
     reason: managedBy is a top level property
- - suppress: BodyTopLevelProperties
+  - suppress: BodyTopLevelProperties
     from: managedapplications.json
     where: $.definitions.ApplianceDefinition.properties
     reason: managedBy is a top level property
@@ -242,7 +242,7 @@ directive:
     from: managedapplications.json
     where: $.definitions.AppliancePatchable.properties
     reason: managedBy is a top level property
- - suppress: BodyTopLevelProperties
+  - suppress: BodyTopLevelProperties
     from: managedapplications.json
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
