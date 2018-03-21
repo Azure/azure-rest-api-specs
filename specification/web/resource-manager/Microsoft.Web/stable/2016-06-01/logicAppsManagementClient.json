@@ -1,0 +1,1918 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "LogicAppsManagementClient",
+        "version": "2016-06-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "text/json"
+    ],
+    "produces": [
+        "application/json",
+        "text/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/connectionGateways": {
+            "get": {
+                "tags": [
+                    "Connection Gateways"
+                ],
+                "summary": "List all of the connection gateways",
+                "operationId": "ConnectionGateways_ListAll",
+                "description": "Gets a list of gateways under a subscription",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The gateway definitions",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ConnectionGatewayDefinition"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectionGateways": {
+            "get": {
+                "tags": [
+                    "Connection Gateways"
+                ],
+                "summary": "List all of the connection gateways",
+                "operationId": "ConnectionGateways_List",
+                "description": "Gets a list of gateways under a subscription and in a specific resource group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The gateway definitions",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ConnectionGatewayDefinition"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectionGateways/{connectionGatewayName}": {
+            "get": {
+                "tags": [
+                    "Connection Gateways"
+                ],
+                "summary": "Gets a specific gateway",
+                "operationId": "ConnectionGateways_Get",
+                "description": "Gets a specific gateway for under a subscription and in a specific resource group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionGatewayNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The gateway definition",
+                        "schema": {
+                            "$ref": "#/definitions/ConnectionGatewayDefinition"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Connection Gateways"
+                ],
+                "summary": "Updates a specific gateway",
+                "operationId": "ConnectionGateways_CreateOrUpdate",
+                "description": "Creates or updates a specific gateway for under a subscription and in a specific resource group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionGatewayNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionGatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The gateway definition",
+                        "schema": {
+                            "$ref": "#/definitions/ConnectionGatewayDefinition"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Connection Gateways"
+                ],
+                "summary": "Updates a specific gateway",
+                "operationId": "ConnectionGateways_Update",
+                "description": "Updates a specific gateway for under a subscription and in a specific resource group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionGatewayNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionGatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The gateway definition",
+                        "schema": {
+                            "$ref": "#/definitions/ConnectionGatewayDefinition"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Connection Gateways"
+                ],
+                "summary": "Deletes a specific gateway",
+                "operationId": "ConnectionGateways_Delete",
+                "description": "Deletes a specific gateway for under a subscription and in a specific resource group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionGatewayNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/connectionGatewayInstallations": {
+            "get": {
+                "tags": [
+                    "Connection Gateways"
+                ],
+                "summary": "Gets a list of installed gateways that the user is an admin of",
+                "operationId": "ConnectionGatewayInstallations_List",
+                "description": "Gets a list of installed gateways that the user is an admin of, in a specific subscription and at a certain location",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/locationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The gateway installations",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ConnectionGatewayInstallationDefinition"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/connectionGatewayInstallations/{gatewayId}": {
+            "get": {
+                "tags": [
+                    "Connection Gateways"
+                ],
+                "summary": "Gets an installed gateway that the user is an admin of",
+                "operationId": "ConnectionGatewayInstallations_Get",
+                "description": "Get a specific installed gateway that the user is an admin of, in a specific subscription and at a certain location",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/locationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/gatewayIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The gateway installation",
+                        "schema": {
+                            "$ref": "#/definitions/ConnectionGatewayInstallationDefinition"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customApis": {
+            "get": {
+                "tags": [
+                    "Custom APIs"
+                ],
+                "summary": "List of custom APIs",
+                "operationId": "CustomApis_ListAll",
+                "description": "Gets a list of all custom APIs for a subscription id",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/pageSizeParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/skipTokenParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of custom APIs",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CustomApiDefinition"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/customApis": {
+            "get": {
+                "tags": [
+                    "Custom APIs"
+                ],
+                "summary": "List of custom APIs",
+                "operationId": "CustomApis_List",
+                "description": "Gets a list of all custom APIs in a subscription for a specific resource group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/pageSizeParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/skipTokenParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of custom APIs",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CustomApiDefinition"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/customApis/{apiName}": {
+            "get": {
+                "tags": [
+                    "Custom APIs"
+                ],
+                "summary": "Get a custom API",
+                "operationId": "CustomApis_Get",
+                "description": "Gets a custom API by name for a specific subscription and resource group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/exportParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A custom API",
+                        "schema": {
+                            "$ref": "#/definitions/CustomApiDefinition"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Custom APIs"
+                ],
+                "summary": "Replace an existing custom API",
+                "operationId": "CustomApis_CreateOrUpdate",
+                "description": "Replace an existing custom API",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/customApiParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The replacing custom API",
+                        "schema": {
+                            "$ref": "#/definitions/CustomApiDefinition"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Custom APIs"
+                ],
+                "summary": "Update an existing custom API",
+                "operationId": "CustomApis_Update",
+                "description": "Update an existing custom API",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/customApiParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The updated custom API",
+                        "schema": {
+                            "$ref": "#/definitions/CustomApiDefinition"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Custom APIs"
+                ],
+                "summary": "Delete a custom API",
+                "operationId": "CustomApis_Delete",
+                "description": "Deletes a custom API from the resource group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/customApis/{apiName}/move": {
+            "post": {
+                "tags": [
+                    "Custom APIs"
+                ],
+                "summary": "Moves the Custom API",
+                "operationId": "CustomApis_Move",
+                "description": "Moves a specific custom API",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/customApiReferenceParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/listWsdlInterfaces": {
+            "post": {
+                "tags": [
+                    "Custom APIs"
+                ],
+                "summary": "Lists WSDL interfaces",
+                "operationId": "CustomApis_ListWsdlInterfaces",
+                "description": "This returns the list of interfaces in the WSDL",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/locationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/wsdlDefinitionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of interfaces",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/WsdlService"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/extractApiDefinitionFromWsdl": {
+            "post": {
+                "tags": [
+                    "Custom APIs"
+                ],
+                "summary": "Returns API definition from WSDL",
+                "operationId": "CustomApis_ExtractApiDefinitionFromWsdl",
+                "description": "Parses the specified WSDL and extracts the API definition",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/locationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/wsdlDefinitionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Swagger of the API extracted from the WSDL",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis": {
+            "get": {
+                "tags": [
+                    "Managed APIs"
+                ],
+                "summary": "List managed APIs",
+                "operationId": "ManagedApis_List",
+                "description": "Gets a list of managed APIs.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/locationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The list of managed API definitions",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ManagedApiDefinition"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis/{apiName}": {
+            "get": {
+                "tags": [
+                    "Managed APIs"
+                ],
+                "summary": "Get managed Api",
+                "operationId": "ManagedApis_Get",
+                "description": "Gets a managed API.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/locationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/exportParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A managed API definition",
+                        "schema": {
+                            "$ref": "#/definitions/ManagedApiDefinition"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections": {
+            "get": {
+                "tags": [
+                    "Connections"
+                ],
+                "summary": "Get all connections",
+                "operationId": "Connections_List",
+                "description": "Gets a list of connections",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/pageSizeParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/filterParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An collection of API connections",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApiConnectionDefinition"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}": {
+            "get": {
+                "tags": [
+                    "Connections"
+                ],
+                "summary": "Get a connection",
+                "operationId": "Connections_Get",
+                "description": "Get a specific connection",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An API connection",
+                        "schema": {
+                            "$ref": "#/definitions/ApiConnectionDefinition"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Connections"
+                ],
+                "summary": "Replace an existing connection",
+                "operationId": "Connections_CreateOrUpdate",
+                "description": "Creates or updates a connection",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiConnectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New API connection created",
+                        "schema": {
+                            "$ref": "#/definitions/ApiConnectionDefinition"
+                        }
+                    },
+                    "201": {
+                        "description": "Already existing API connection updated",
+                        "schema": {
+                            "$ref": "#/definitions/ApiConnectionDefinition"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Connections"
+                ],
+                "summary": "Update an existing connection",
+                "operationId": "Connections_Update",
+                "description": "Update a connection",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiConnectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "API connection updated",
+                        "schema": {
+                            "$ref": "#/definitions/ApiConnectionDefinition"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Connections"
+                ],
+                "operationId": "Connections_Delete",
+                "description": "Deletes a connection",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/listConsentLinks": {
+            "post": {
+                "tags": [
+                    "Connections"
+                ],
+                "operationId": "Connections_ListConsentLinks",
+                "description": "Lists consent links of a connection",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/listConsentLinkParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of the consent links",
+                        "schema": {
+                            "$ref": "#/definitions/ConsentLinkCollection"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/confirmConsentCode": {
+            "post": {
+                "tags": [
+                    "Connections"
+                ],
+                "operationId": "Connections_ConfirmConsentCode",
+                "description": "Confirms consent code of a connection",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/confirmConsentCodeParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ApiConnectionDefinition"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/listConnectionKeys": {
+            "post": {
+                "tags": [
+                    "Connections"
+                ],
+                "summary": "List connection keys",
+                "operationId": "Connections_ListConnectionKeys",
+                "description": "Lists connection keys for a specific connection",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/connectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/listConnectionKeysParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The connection keys",
+                        "schema": {
+                            "$ref": "#/definitions/ConnectionSecretsDefinition"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "locationParameter": {
+            "name": "location",
+            "description": "The location.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "wsdlDefinitionParameter": {
+            "name": "wsdlDefinition",
+            "description": "WSDL definition",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/WsdlDefinition"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "subscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "resourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "description": "The resource group",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "connectionGatewayNameParameter": {
+            "name": "connectionGatewayName",
+            "description": "The connection gateway name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "connectionGatewayParameter": {
+            "name": "connectionGateway",
+            "description": "The connection gateway",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ConnectionGatewayDefinition"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "gatewayIdParameter": {
+            "type": "string",
+            "name": "gatewayId",
+            "description": "Gateway ID",
+            "in": "path",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "apiNameParameter": {
+            "type": "string",
+            "name": "apiName",
+            "description": "API name",
+            "in": "path",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "customApiParameter": {
+            "name": "customApi",
+            "description": "The custom API",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/CustomApiDefinition"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "customApiReferenceParameter": {
+            "name": "customApiReference",
+            "description": "The custom API reference",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/CustomApiReference"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "exportParameter": {
+            "type": "string",
+            "name": "export",
+            "description": "flag showing whether to export API definition in format specified by Accept header",
+            "in": "query",
+            "required": false,
+            "x-ms-parameter-location": "method"
+        },
+        "pageSizeParameter": {
+            "name": "$top",
+            "description": "The number of items to be included in the result",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-parameter-location": "method"
+        },
+        "filterParameter": {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "skipTokenParameter": {
+            "type": "string",
+            "name": "skiptoken",
+            "description": "Skip Token",
+            "in": "query",
+            "required": false,
+            "x-ms-parameter-location": "method"
+        },
+        "apiConnectionParameter": {
+            "name": "connection",
+            "description": "The connection",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ApiConnectionDefinition"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "connectionNameParameter": {
+            "type": "string",
+            "name": "connectionName",
+            "description": "Connection name",
+            "in": "path",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "listConsentLinkParameter": {
+            "name": "listConsentLink",
+            "description": "The consent links",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ListConsentLinksDefinition"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "confirmConsentCodeParameter": {
+            "name": "confirmConsentCode",
+            "description": "The consent code confirmation",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ConfirmConsentCodeDefinition"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "listConnectionKeysParameter": {
+            "name": "listConnectionKeys",
+            "description": "The connection keys to list",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ListConnectionKeysDefinition"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "apiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "description": "API Version",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        }
+    },
+    "definitions": {
+        "ConnectionGatewayDefinition": {
+            "description": "The gateway definition",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ConnectionGatewayPropertiesDefinition"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceDefinition"
+                }
+            ]
+        },
+        "ConnectionGatewayPropertiesDefinition": {
+            "description": "The gateway properties",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "connectionGatewayInstallation": {
+                    "$ref": "#/definitions/ConnectionGatewayInstallationReference"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/GatewayPropertiesDefinition"
+                }
+            ]
+        },
+        "ConnectionGatewayInstallationReference": {
+            "description": "The gateway installation reference",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "location": {
+                    "description": "Resource reference location",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Resource reference name",
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceReference"
+                }
+            ]
+        },
+        "ResourceReference": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "description": "Resource reference id",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Resource reference type",
+                    "type": "string"
+                }
+            }
+        },
+        "GatewayPropertiesDefinition": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "contactInformation": {
+                    "description": "The gateway admin",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "displayName": {
+                    "description": "The gateway display name",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "The gateway description",
+                    "type": "string"
+                },
+                "machineName": {
+                    "description": "The machine name of the gateway",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The gateway status",
+                    "type": "object"
+                },
+                "backendUri": {
+                    "description": "The URI of the backend",
+                    "type": "string"
+                }
+            }
+        },
+        "ResourceDefinition": {
+            "description": "A resource",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "description": "Resource id",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "Resource name",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "type": {
+                    "description": "Resource type",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "location": {
+                    "description": "Resource location",
+                    "type": "string"
+                },
+                "etag": {
+                    "description": "Resource etag",
+                    "type": "string"
+                },
+                "tags": {
+                    "$ref": "#/definitions/TagsDictionary"
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "ConnectionGatewayInstallationDefinition": {
+            "description": "The gateway installation",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ConnectionGatewayInstallationPropertiesDefinition"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceDefinition"
+                }
+            ]
+        },
+        "ConnectionGatewayInstallationPropertiesDefinition": {
+            "description": "The gateway installation properties",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "connectionGateway": {
+                    "$ref": "#/definitions/ConnectionGatewayReference"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/GatewayPropertiesDefinition"
+                }
+            ]
+        },
+        "ConnectionGatewayReference": {
+            "description": "The gateway reference",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "description": "The resource reference name",
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceReference"
+                }
+            ]
+        },
+        "CustomApiDefinition": {
+            "type": "object",
+            "description": "A Custom API",
+            "additionalProperties": false,
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/CustomApiPropertiesDefinition"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceDefinition"
+                }
+            ]
+        },
+        "CustomApiPropertiesDefinition": {
+            "type": "object",
+            "description": "Custom API properties",
+            "additionalProperties": false,
+            "properties": {
+                "connectionParameters": {
+                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                },
+                "runtimeUrls": {
+                    "type": "array",
+                    "description": "Runtime URLs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "capabilities": {
+                    "type": "array",
+                    "description": "The custom API capabilities",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "swagger": {},
+                "brandColor": {
+                    "type": "string",
+                    "description": "Brand color"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The custom API desciption"
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "The display name"
+                },
+                "iconUri": {
+                    "type": "string",
+                    "description": "The icon URI"
+                },
+                "backendService": {
+                    "$ref": "#/definitions/ApiResourceBackendService"
+                },
+                "apiDefinitions": {
+                    "$ref": "#/definitions/ApiResourceDefinitions"
+                },
+                "apiType": {
+                    "$ref": "#/definitions/ApiType"
+                },
+                "wsdlDefinition": {
+                    "$ref": "#/definitions/WsdlDefinition"
+                }
+            }
+        },
+        "InsensitiveDictionaryOfJToken": {
+            "type": "object",
+            "description": "A dictionary of parameters",
+            "additionalProperties": false,
+            "allOf": [
+                {
+                    "type": "object",
+                    "additionalProperties": {}
+                }
+            ]
+        },
+        "ApiResourceBackendService": {
+            "type": "object",
+            "description": "The API backend service",
+            "additionalProperties": false,
+            "properties": {
+                "serviceUrl": {
+                    "type": "string",
+                    "description": "The service URL"
+                }
+            }
+        },
+        "ApiResourceDefinitions": {
+            "type": "object",
+            "description": "API Definitions",
+            "additionalProperties": false,
+            "properties": {
+                "originalSwaggerUrl": {
+                    "type": "string",
+                    "description": "The original swagger URL"
+                },
+                "modifiedSwaggerUrl": {
+                    "type": "string",
+                    "description": "The modified swagger URL"
+                }
+            }
+        },
+        "ApiType": {
+            "type": "integer",
+            "description": "The API type",
+            "x-enumNames": [
+                "NotSpecified",
+                "Rest",
+                "Soap"
+            ],
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "WsdlDefinition": {
+            "type": "object",
+            "description": "The WSDL definition",
+            "additionalProperties": false,
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "The WSDL URL"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "The WSDL content"
+                },
+                "service": {
+                    "$ref": "#/definitions/WsdlService"
+                },
+                "importMethod": {
+                    "$ref": "#/definitions/WsdlImportMethod"
+                }
+            }
+        },
+        "WsdlService": {
+            "type": "object",
+            "description": "The service with name and endpoint names",
+            "additionalProperties": false,
+            "required": [
+                "QualifiedName"
+            ],
+            "properties": {
+                "qualifiedName": {
+                    "description": "The service's qualified name",
+                    "type": "string"
+                },
+                "endpointQualifiedNames": {
+                    "type": "array",
+                    "description": "List of the endpoints' qualified names",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "WsdlImportMethod": {
+            "type": "integer",
+            "description": "The WSDL import method",
+            "x-enumNames": [
+                "NotSpecified",
+                "SoapToRest",
+                "SoapPassThrough"
+            ],
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "CustomApiReference": {
+            "type": "object",
+            "description": "The custom API reference",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ApiReference"
+                }
+            ]
+        },
+        "ApiReference": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "swagger": {},
+                "brandColor": {
+                    "type": "string",
+                    "description": "Brand color"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The custom API desciption"
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "The display name"
+                },
+                "iconUri": {
+                    "type": "string",
+                    "description": "The icon URI"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceReference"
+                }
+            ]
+        },
+        "ManagedApiDefinition": {
+            "type": "object",
+            "description": "A managed API definition",
+            "additionalProperties": false,
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ApiResourceProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceDefinition"
+                }
+            ]
+        },
+        "ApiResourceProperties": {
+            "type": "object",
+            "description": "API resource properties",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "connectionParameters": {
+                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/ApiResourceMetadata"
+                },
+                "runtimeUrls": {
+                    "type": "array",
+                    "description": "Runtime URLs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "generalInformation": {
+                    "$ref": "#/definitions/ApiResourceGeneralInformation"
+                },
+                "capabilities": {
+                    "type": "array",
+                    "description": "The managed API capabilities",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "swagger": {},
+                "backendService": {
+                    "$ref": "#/definitions/ApiResourceBackendService"
+                },
+                "policies": {
+                    "$ref": "#/definitions/ApiResourcePolicies"
+                },
+                "apiDefinitionUrl": {
+                    "type": "string",
+                    "description": "URL where the swagger can be downloaded from"
+                },
+                "apiDefinitions": {
+                    "$ref": "#/definitions/ApiResourceDefinitions"
+                }
+            }
+        },
+        "ApiResourceMetadata": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "source": {
+                    "type": "string",
+                    "description": "The source"
+                },
+                "brandColor": {
+                    "type": "string",
+                    "description": "Brand color"
+                },
+                "hideKey": {
+                    "type": "string",
+                    "description": "Hide key"
+                },
+                "tags": {
+                    "$ref": "#/definitions/TagsDictionary"
+                },
+                "apiType": {
+                    "$ref": "#/definitions/ApiType"
+                },
+                "wsdlService": {
+                    "$ref": "#/definitions/WsdlService"
+                },
+                "wsdlImportMethod": {
+                    "$ref": "#/definitions/WsdlImportMethod"
+                },
+                "connectionType": {
+                    "type": "string",
+                    "description": "The connection type"
+                }
+            }
+        },
+        "TagsDictionary": {
+            "type": "object",
+            "description": "Resource tags",
+            "additionalProperties": false,
+            "allOf": [
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "ApiResourceGeneralInformation": {
+            "type": "object",
+            "description": "General information about the API",
+            "additionalProperties": false,
+            "properties": {
+                "iconUrl": {
+                    "type": "string",
+                    "description": "The icon URL"
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "Display name"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The API description"
+                },
+                "termsOfUseUrl": {
+                    "type": "string",
+                    "description": "URL to the Terms of Use"
+                },
+                "releaseTag": {
+                    "type": "string",
+                    "description": "Release tag"
+                }
+            }
+        },
+        "ApiResourcePolicies": {
+            "type": "object",
+            "description": "Describes the API policies either as embedded content or as a link to uploaded content",
+            "additionalProperties": false,
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "description": "API level policies as XML"
+                },
+                "contentLink": {
+                    "type": "string",
+                    "description": "Link to the JSON of the policies"
+                }
+            }
+        },
+        "ApiConnectionDefinition": {
+            "description": "API connection",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ApiConnectionPropertiesDefinition"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceDefinition"
+                }
+            ]
+        },
+        "ApiConnectionPropertiesDefinition": {
+            "description": "API connection properties",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "displayName": {
+                    "description": "Display name",
+                    "type": "string"
+                },
+                "statuses": {
+                    "description": "Status of the connection",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConnectionStatusDefinition"
+                    }
+                },
+                "parameterValues": {
+                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                },
+                "customParameterValues": {
+                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                },
+                "nonSecretParameterValues": {
+                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                },
+                "createdTime": {
+                    "format": "date-time",
+                    "description": "Timestamp of the connection creation",
+                    "type": "string"
+                },
+                "changedTime": {
+                    "format": "date-time",
+                    "description": "Timestamp of last connection change",
+                    "type": "string"
+                },
+                "api": {
+                    "$ref": "#/definitions/ApiReference"
+                },
+                "testLinks": {
+                    "$ref": "#/definitions/ApiConnectionTestLink"
+                }
+            }
+        },
+        "ApiConnectionTestLink": {
+            "description": "API connection properties",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "requestUri": {
+                    "description": "Test link request URI",
+                    "type": "string"
+                },
+                "method": {
+                    "description": "HTTP Method",
+                    "type": "string"
+                }
+            }
+        },
+        "ListConsentLinksDefinition": {
+            "description": "Request for a list of consent links",
+            "type": "object",
+            "properties": {
+                "parameters": {
+                    "description": "Collection of resources",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConsentLinkParameterDefinition"
+                    }
+                }
+            }
+        },
+        "ConsentLinkParameterDefinition": {
+            "description": "Consent link definition",
+            "type": "object",
+            "properties": {
+                "parameterName": {
+                    "description": "Name of the parameter in the connection provider's oauthSettings",
+                    "type": "string"
+                },
+                "redirectUrl": {
+                    "description": "Name of the parameter in the connection provider's oauthSettings",
+                    "type": "string"
+                },
+                "objectId": {
+                    "description": "AAD OID (user or group) if the principal type is ActiveDirectory. MSA PUID if the principal type is MicrosoftAccount",
+                    "type": "string"
+                },
+                "tenantId": {
+                    "description": "The tenant id",
+                    "type": "string"
+                }
+            }
+        },
+        "ConsentLinkCollection": {
+            "description": "Collection of consent links",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Collection of resources",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConsentLinkDefinition"
+                    }
+                }
+            }
+        },
+        "ConsentLinkDefinition": {
+            "description": "A consent link",
+            "type": "object",
+            "properties": {
+                "link": {
+                    "description": "URI for the consent link",
+                    "type": "string"
+                },
+                "firstPartyLoginUri": {
+                    "description": "URI for first party login",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "Display Name of the parameter in the connection provider's oauthSettings",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status of the link",
+                    "enum": [
+                        "Unauthenticated",
+                        "Authenticated",
+                        "Error"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "LinkState",
+                        "modelAsString": false
+                    }
+                }
+            }
+        },
+        "ConfirmConsentCodeDefinition": {
+            "description": "Confirm consent code request",
+            "type": "object",
+            "properties": {
+                "tenantId": {
+                    "description": "Tenant Id",
+                    "type": "string"
+                },
+                "objectId": {
+                    "description": "AAD object ID. This is userId",
+                    "type": "string"
+                },
+                "code": {
+                    "description": "Code that was returned during consent flow",
+                    "type": "string"
+                }
+            }
+        },
+        "ListConnectionKeysDefinition": {
+            "description": "List connection keys",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceDefinition"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "properties": {
+                        "validityTimeSpan": {
+                            "description": "Time span for how long the keys will be valid",
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-client-flatten": true
+                }
+            }
+        },
+        "ConnectionSecretsDefinition": {
+            "description": "Connection secrets",
+            "type": "object",
+            "properties": {
+                "parameterValues": {
+                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                },
+                "connectionKey": {
+                    "description": "Connection Key",
+                    "type": "string"
+                }
+            }
+        },
+        "ConnectionStatusDefinition": {
+            "description": "Connection status",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceDefinition"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "properties": {
+                        "status": {
+                            "description": "The gateway status",
+                            "type": "string"
+                        },
+                        "target": {
+                            "description": "Target of the error",
+                            "type": "string"
+                        },
+                        "error": {
+                            "$ref": "#/definitions/ConnectionError"
+                        }
+                    },
+                    "x-ms-client-flatten": true
+                }
+            }
+        },
+        "ConnectionError": {
+            "description": "Connection error",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ResourceDefinition"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "properties": {
+                        "code": {
+                            "description": "Code of the status",
+                            "type": "string"
+                        },
+                        "message": {
+                            "description": "Description of the status",
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-client-flatten": true
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "flow": "implicit",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ]
+}
