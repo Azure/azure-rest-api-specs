@@ -213,54 +213,50 @@
             },
             "examples": {
               "application/json": {
-                "value": [
-                  {
-                    "location": "global",
-                    "tags": {
-                      "key1": "value1",
-                      "key2": "value2"
-                    },
-                    "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourcegroups/test/providers/microsoft.insights/metricalerts/storageTest",
-                    "name": "storageTest",
-                    "properties": {
-                      "description": "This is the description of the xstore multidim rule1",
-                      "severity": 3,
-                      "enabled": true,
-                      "scopes": [
-                        "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/testmultidim/blobServices/default"
-                      ],
-                      "evaluationFrequency": "PT1M",
-                      "windowSize": "PT15M",
-                      "criteria": {
-                        "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-                        "allOf": [
-                          {
-                            "name": "HowManyBytes",
-                            "metricName": "BlobCapacity",
-                            "dimensions": [
-                              {
-                                "name": "BlobType",
-                                "operator": "Include",
-                                "values": [
-                                  "BlockBlob",
-                                  "PageBlob"
-                                ]
-                              }
-                            ],
-                            "operator": "GreaterThanOrEqual",
-                            "threshold": 5.0,
-                            "timeAggregation": "Maximum"
-                          }
-                        ]
-                      },
-                      "actions": [
+                  "location": "global",
+                  "tags": {
+                    "key1": "value1",
+                    "key2": "value2"
+                  },
+                  "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourcegroups/test/providers/microsoft.insights/metricalerts/storageTest",
+                  "name": "storageTest",
+                  "properties": {
+                    "description": "This is the description of the xstore multidim rule1",
+                    "severity": 3,
+                    "enabled": true,
+                    "scopes": [
+                      "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/testmultidim/blobServices/default"
+                    ],
+                    "evaluationFrequency": "PT1M",
+                    "windowSize": "PT15M",
+                    "criteria": {
+                      "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+                      "allOf": [
                         {
-                          "actionGroupId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/microsoft.insights/actionGroups/testActionGroup"
+                          "name": "HowManyBytes",
+                          "metricName": "BlobCapacity",
+                          "dimensions": [
+                            {
+                              "name": "BlobType",
+                              "operator": "Include",
+                              "values": [
+                                "BlockBlob",
+                                "PageBlob"
+                              ]
+                            }
+                          ],
+                          "operator": "GreaterThanOrEqual",
+                          "threshold": 5.0,
+                          "timeAggregation": "Maximum"
                         }
                       ]
-                    }
+                    },
+                    "actions": [
+                      {
+                        "actionGroupId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/microsoft.insights/actionGroups/testActionGroup"
+                      }
+                    ]
                   }
-                ]
               }
             }
           },
@@ -316,11 +312,6 @@
                   ],
                   "evaluationFrequency": "Pt1m",
                   "windowSize": "Pt15m",
-                  "templateType": "CorrelatedEvents",
-                  "templateSpecificParameters": {
-                    "Param1": "Value1",
-                    "Param2": "Value2"
-                  },
                   "criteria": {
                     "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
                     "allOf": [
@@ -394,7 +385,7 @@
                 "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/metricalerts/chiricutin",
                 "name": "chiricutin",
                 "type": "Microsoft.Insights/metricalerts",
-                "location": "West US",
+                "location": "global",
                 "tags": {
                   "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
                 },
@@ -407,11 +398,6 @@
                   ],
                   "evaluationFrequency": "Pt1m",
                   "windowSize": "Pt15m",
-                  "templateType": "CorrelatedEvents",
-                  "templateSpecificParameters": {
-                    "Param1": "Value1",
-                    "Param2": "Value2"
-                  },
                   "criteria": {
                     "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
                     "allOf": [
@@ -528,7 +514,7 @@
       "get": {
         "tags": [ "MetricAlertsStatus" ],
         "description": "Retrieve an alert rule status.",
-        "operationId": "MetricAlertsStatus_listByName",
+        "operationId": "MetricAlertsStatus_ListByName",
         "parameters": [
           { "$ref": "#/parameters/SubscriptionIdParameter" },
           { "$ref": "#/parameters/ResourceGroupNameParameter" },
@@ -668,7 +654,7 @@
         },
         "criteria": {
           "$ref": "#/definitions/MetricAlertCriteria",
-          "description": "criteria"
+          "description": "definies the specific alert criteria information."
         },
         "actions": {
           "type": "array",
