@@ -37,7 +37,7 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}": {
             "get": {
                 "description": "Gets a list of Analytics Items defined within an Application Insights component.",
-                "operationId": "AnalyticsItems_List",
+                "operationId": "AnalyticsItem_List",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -151,7 +151,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                          "$ref": "#/definitions/ApplicationInsightsComponentAnalyticsItem"
+                            "$ref": "#/definitions/ApplicationInsightsComponentAnalyticsItem"
                         }
                     }
                 ],
@@ -204,13 +204,14 @@
                     "AnalyticsItemDelete": {
                         "$ref": "./examples/AnalyticsItemDelete.json"
                     }
-                }    
+                }
             }
         }
     },
     "definitions": {
         "ApplicationInsightsComponentAnalyticsItem": {
             "description": "Properties that define an Analytics item that is associated to an Application Insights component.",
+            "type": "object",
             "properties": {
                 "Id": {
                     "type": "string",
@@ -238,7 +239,7 @@
                     ],
                     "x-ms-enum": {
                         "name": "ItemScope",
-                        "modelAsString": false
+                        "modelAsString": true
                     }
                 },
                 "Type": {
@@ -246,17 +247,13 @@
                     "type": "string",
                     "enum": [
                         "Query",
-                        "query",
                         "Function",
-                        "function",
                         "Folder",
-                        "folder",
-                        "Recent",
-                        "recent"
+                        "Recent"
                     ],
                     "x-ms-enum": {
                         "name": "ItemType",
-                        "modelAsString": false
+                        "modelAsString": true
                     }
                 },
                 "TimeCreated": {
@@ -270,15 +267,19 @@
                     "readOnly": true
                 },
                 "Properties": {
-                    "properties": {
-                        "functionAlias": {
-                        "type": "string",
-                        "description": "A function alias, used when the type of the item is Function"
-                        }
-                    },
-                    "description": "A set of properties that can be defined in the context of a specific item type. Each type may have its own properties."
+                    "$ref": "#/definitions/ApplicationInsightsComponentAnalyticsItemProperties"
                 }
             }
+        },
+        "ApplicationInsightsComponentAnalyticsItemProperties": {
+            "type": "object",
+            "properties": {
+                "functionAlias": {
+                    "type": "string",
+                    "description": "A function alias, used when the type of the item is Function"
+                }
+            },
+            "description": "A set of properties that can be defined in the context of a specific item type. Each type may have its own properties."
         }
     },
     "parameters": {
@@ -323,7 +324,7 @@
             ],
             "x-ms-enum": {
                 "name": "ItemScopePath",
-                "modelAsString": false
+                "modelAsString": true
             },
             "description": "Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
             "x-ms-parameter-location": "method"
@@ -340,7 +341,7 @@
             ],
             "x-ms-enum": {
                 "name": "ItemScope",
-                "modelAsString": false
+                "modelAsString": true
             },
             "description": "Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
             "x-ms-parameter-location": "method"
@@ -360,7 +361,7 @@
             ],
             "x-ms-enum": {
                 "name": "ItemType",
-                "modelAsString": false
+                "modelAsString": true
             },
             "description": "Enum indicating the type of the Analytics item.",
             "x-ms-parameter-location": "method"
@@ -396,6 +397,6 @@
             "type": "boolean",
             "description": "Flag indicating whether or not to force save an item. This allows overriding an item if it already exists.",
             "x-ms-parameter-location": "method"
-        }        
-    }    
+        }
+    }
 }
