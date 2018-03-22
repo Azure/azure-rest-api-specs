@@ -19,6 +19,11 @@ To see additional help and options, run:
 
 ## Configuration
 
+## Suppression
+``` yaml 
+directive: 
+  - suppress: R2059
+```
 
 
 ### Basic Information 
@@ -26,9 +31,18 @@ These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11-preview
+tag: package-2018-03-preview
 ```
 
+
+### Tag: package-2018-03-preview
+
+These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-preview'
+input-file:
+- Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
+```
 
 ### Tag: package-2017-11-preview
 
@@ -40,17 +54,16 @@ input-file:
 ```
 
 ### Tag: package-all-subscription
-
+ 
 These settings apply only when `--tag=package-all-subscription` is specified on the command line.
-
+ 
 ``` yaml $(tag) == 'package-all-subscription'
 input-file:
-- Microsoft.Subscription/preview/2017-11-01-preview/subscriptionDefinitions.json
-- ../../resources/resource-manager/Microsoft.Resources/stable/2016-06-01/subscriptions.json
+- Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
-
 
 ---
 # Code Generation
@@ -123,7 +136,16 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2017-11-preview
+  - tag: package-2018-03-preview
+```
+
+### Tag: package-2018-03-preview and go
+
+These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-03-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/subscription/mgmt/2018-03-01-preview/subscription
 ```
 
 ### Tag: package-2017-11-preview and go
@@ -132,7 +154,7 @@ These settings apply only when `--tag=package-2017-11-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-11-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/subscription/mgmt/2017-11-01-preview/subscription
+output-folder: $(go-sdk-folder)/services/preview/subscription/mgmt/2017-11-01-preview/subscription
 ```
 
 
