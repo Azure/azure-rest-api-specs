@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2017-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-10-preview'
 input-file: 
-- Microsoft.IoTSpaces/2017-10-01-preview/iotspaces.json
+- Microsoft.IoTSpaces/preview/2017-10-01-preview/iotspaces.json
 ```
 
 ---
