@@ -38,7 +38,7 @@
       "required": [
         "@odata.type"
       ],
-      "description": "Base type for all Media Processor Presets."
+      "description": "Base type for all Presets, which define the recipe or instructions on how the input media files should be processed."
     },
     "Codec": {
       "discriminator": "@odata.type",
@@ -49,14 +49,14 @@
         },
         "label": {
           "type": "string",
-          "description": "Gets or sets the codec label."
+          "description": "Describes the optional label for the codec."
         }
       },
       "type": "object",
       "required": [
         "@odata.type"
       ],
-      "description": "A base class for all the codecs."
+      "description": "Describes the basic properties of all codecs."
     },
     "Audio": {
       "x-ms-discriminator-value": "#Microsoft.Media.Audio",
@@ -83,7 +83,7 @@
         }
       },
       "type": "object",
-      "description": "Default base class for all Audio codecs."
+      "description": "Defines the common properties for all audio codecs."
     },
     "AacAudio": {
       "x-ms-discriminator-value": "#Microsoft.Media.AacAudio",
@@ -105,24 +105,24 @@
             "values": [
               {
                 "value": "AacLc",
-                "description": "AAC Low complexity."
+                "description": "Specifies that the output audio is to be encoded into AAC-LC or AAC Low Complexity profile."
               },
               {
                 "value": "HeAacV1",
-                "description": "HE AAC V1."
+                "description": "Specifies that the output audio is to be encoded into HE-AAC v1 profile."
               },
               {
                 "value": "HeAacV2",
-                "description": "HE AAC v2."
+                "description": "Specifies that the output audio is to be encoded into HE-AAC v2 profile."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the audio profile."
+          "description": "Gets or sets the encoding profile to be used when encoding audio with AAC."
         }
       },
       "type": "object",
-      "description": "An object to represent AAC audio encoding settings."
+      "description": "Describes Advanced Audio Codec or AAC audio encoding settings."
     },
     "AudioAnalyzerPreset": {
       "x-ms-discriminator-value": "#Microsoft.Media.AudioAnalyzerPreset",
@@ -134,11 +134,11 @@
       "properties": {
         "audioLanguage": {
           "type": "string",
-          "description": "Gets or sets the audio language for the video. Typically in the format of \"language code-country/region\" (e.g: en-US)"
+          "description": "Specifies the language for the audio payload in the input. Typically in the format of \"language code-country/region\" (e.g: \"en-US\")."
         }
       },
       "type": "object",
-      "description": "An audio analyzer preset that analyzes and transcribes the audio."
+      "description": "The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription, on the input."
     },
     "Overlay": {
       "discriminator": "@odata.type",
@@ -149,43 +149,43 @@
         },
         "inputLabel": {
           "type": "string",
-          "description": "Gets or sets the label of the Input used for the Overlay.   The Input must specify exactly one file to use."
+          "description": "Gets or sets the label of the Input which is to be used as an Overlay. The Input must specify exactly one file."
         },
         "inputLoop": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether the overlay is looped to match the duration of the input media."
+          "description": "Gets or sets a value indicating whether the overlay media is looped to match the duration of the input video. The default is true. For example, you may have a 5 second animation that needs to be overlaid onto an hour-long video - you would set inputLoop to true in this case."
         },
         "start": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the duration in the video at which the overlay starts. This is relative to the clip start if one is specified in a job. Default is from the beginning of the video."
+          "description": "Gets or sets the start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. The default is zero, which means the overlay starts from the beginning of the input video."
         },
         "end": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the duration in the video at which the overlay ends.  This is relative to the clip start if specified in a job. Default is till the end of the video if InputLoop is  true. else the duration of the overlay."
+          "description": "Gets or sets the position in the input video at which the overlay ends. The value should be in ISO 8601 format. The default behavior is that overlay will be applied until the end of the input video if InputLoop is true. Else, if inputLoop is false, then overlay will last as long as the duration of the overlay media."
         },
         "fadeInDuration": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the duration for how long the fade in happens. Default is no fade in."
+          "description": "Gets or sets the duration over which the overlay fades in onto the input video. The value should be in ISO 8601 format. The default is to have no fade in"
         },
         "fadeOutDuration": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the duration for how long the fade out happens. Default is no fade out."
+          "description": "Gets or sets the duration over which the overlay fades out of the input video. The value should be in ISO 8601 format. The default is to have no fade out.\""
         },
         "audioGainLevel": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the gain level of audio in the overlay. Defaults to a value of 1.0."
+          "description": "Gets or sets the gain level of audio in the overlay. The value should be in the range [0, ..., 1.0]. Defaults to a value of 1.0."
         }
       },
       "type": "object",
       "required": [
         "@odata.type"
       ],
-      "description": "Base type for all overlays."
+      "description": "Base type for all overlays - image, audio or video."
     },
     "AudioOverlay": {
       "x-ms-discriminator-value": "#Microsoft.Media.AudioOverlay",
@@ -196,7 +196,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "An object to indicate audio overlay."
+      "description": "Describes the properties of an audio overlay."
     },
     "CopyVideo": {
       "x-ms-discriminator-value": "#Microsoft.Media.CopyVideo",
@@ -207,7 +207,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "video copy codec."
+      "description": "A special codec flag, which tells the encoder to simply copy the input video bitstream."
     },
     "Video": {
       "x-ms-discriminator-value": "#Microsoft.Media.Video",
@@ -217,14 +217,10 @@
         }
       ],
       "properties": {
-        "preserveResolutionAfterRotation": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether to disable resolution change rotation."
-        },
         "keyFrameInterval": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the distance between two key frames."
+          "description": "Describes the distance between one key frame and the next, thereby defining a GOP or group of pictures. The value should be a non-zero integer in the range [1, .., 30], specified in ISO 8601 format. The default is 2 seconds."
         },
         "stretchMode": {
           "type": "string",
@@ -238,61 +234,24 @@
             "values": [
               {
                 "value": "None",
-                "description": "Strictly respect the output resolution without considering the aspect ratio."
+                "description": "Strictly respect the output resolution without considering the pixel aspect ratio or display aspect ratio of the input video."
               },
               {
                 "value": "AutoSize",
-                "description": "Override the output resolution to keep the same aspect ratio between input and output without padding."
+                "description": "Override the output resolution, and change it to match the display aspect ratio of the input, without padding. For example, if the input is 1920x1080 and the encoding preset asks for 1280x1280, then the value in the preset is overridden, and the output will be at 1280x720, which maintains the input aspect ratio of 16:9."
               },
               {
                 "value": "AutoFit",
-                "description": "Pad the output (with either letterbox or pillar box) to keep the same aspect ratio between input and output."
+                "description": "Pad the output (with either letterbox or pillar box) to honor the output resolution, while ensuring that the active video region in the output has the same aspect ratio as the input. For example, if the input is 1920x1080 and the encoding preset asks for 1280x1280, then the output will be at 1280x1280, which contains an inner rectangle of 1280x720 at aspect ratio of 16:9, and pillar box regions 280 pixels wide at the left and right."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the Resolution Mode"
-        },
-        "syncMode": {
-          "type": "string",
-          "enum": [
-            "Auto",
-            "Passthrough",
-            "Cfr",
-            "Vfr",
-            "Drop"
-          ],
-          "x-ms-enum": {
-            "name": "VideoSyncMode",
-            "values": [
-              {
-                "value": "Auto",
-                "description": "Chooses between CFR and VFR depending on muxer capabilities. This is the default method"
-              },
-              {
-                "value": "Passthrough",
-                "description": "Each frame is passed with its timestamp from the de-muxer to the muxer Not expose this mode now as we do not see any useful scenarios out of it"
-              },
-              {
-                "value": "Cfr",
-                "description": "Frames will be duplicated and/or dropped to achieve exactly the requested constant frame rate"
-              },
-              {
-                "value": "Vfr",
-                "description": "Frames are passed through with their timestamp or dropped so as to prevent 2 frames from having the same timestamp"
-              },
-              {
-                "value": "Drop",
-                "description": "As pass through but destroys all timestamps, making the muxer generate fresh timestamps based on frame-rate"
-              }
-            ],
-            "modelAsExtensible": true
-          },
-          "description": "Gets or sets the Video Sync Mode"
+          "description": "Describes the resizing mode - how the input video will be resized to fit the desired output resolution(s). Default is AutoSize"
         }
       },
       "type": "object",
-      "description": "Base class for all video codecs."
+      "description": "Describes the basic properties for encoding a video."
     },
     "Image": {
       "x-ms-discriminator-value": "#Microsoft.Media.Image",
@@ -304,19 +263,70 @@
       "properties": {
         "start": {
           "type": "string",
-          "description": "Gets or sets the start position in the input from where to generate the thumbnails. Can be either absolute duration (e.g: PT05S) or relative value (e.g: 100%) Can also be a value like {Best} to select the best thumbnail."
+          "description": "Describes the position in the input video from where to start generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT05S), or a frame count (e.g: 10 for the 10th frame), or a relative value (e.g: 1%). Also supports a special value {Best}, which tells the encoder to select the best thumbnail from the first few seconds of the video."
         },
         "step": {
           "type": "string",
-          "description": "Gets or sets the step condition attribute for the thumbnails. Can be either absolute duration (e.g: PT05S) or relative value (e.g: 10%)"
+          "description": "Describes the intervals at which thumbnails are generated. The value can be in absolute timestamp (ISO 8601, e.g: PT05S for one image every 5 seconds), or a frame count (e.g: 30 for every 30 frames), or a relative value (e.g: 1%)."
         },
         "range": {
           "type": "string",
-          "description": "Gets or sets the Duration till which to generate the thumbnails. Can be either absolute duration (e.g: PT05S) or relative value (e.g: 100%)"
+          "description": "Describes the position in the input video at which to stop generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT5M30S to stop at 5 minutes and 30 seconds), or a frame count (e.g: 300 to stop at the 300th frame), or a relative value (e.g: 100%)."
         }
       },
       "type": "object",
-      "description": "Base class for all Image codecs."
+      "description": "Describes the basic properties for generating thumbnails from the input video"
+    },
+    "Format": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "filenamePattern": {
+          "type": "string",
+          "description": "Describes the pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - The base name of the input video {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. Any unsubstituted macros will be collapsed and removed from the filename."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base class for output."
+    },
+    "ImageFormat": {
+      "x-ms-discriminator-value": "#Microsoft.Media.ImageFormat",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Format"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Describes the properties for an output image file."
+    },
+    "JpgFormat": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JpgFormat",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageFormat"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Describes the settings for producing JPEG thumbnails."
+    },
+    "PngFormat": {
+      "x-ms-discriminator-value": "#Microsoft.Media.PngFormat",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageFormat"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Describes the settings to produce PNG thumbnail output."
     },
     "BmpImage": {
       "x-ms-discriminator-value": "#Microsoft.Media.BmpImage",
@@ -327,7 +337,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "This class represents a video encoder which outputs a sequence of BMP images."
+      "description": "Describes the basic properties for generating BMP thumbnails from the input video."
     },
     "Layer": {
       "discriminator": "@odata.type",
@@ -338,26 +348,22 @@
         },
         "width": {
           "type": "string",
-          "description": "Gets or sets width of video in pixels for this layer."
+          "description": "Describes the width of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in width as the input."
         },
         "height": {
           "type": "string",
-          "description": "Gets or sets height of video in pixels for this layer."
-        },
-        "condition": {
-          "type": "string",
-          "description": "Gets or sets the predicate to be evaluated before encoding this layer."
+          "description": "Describes the height of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in height as the input."
         },
         "label": {
           "type": "string",
-          "description": "Gets or sets the label for this layer."
+          "description": "Describes the alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file."
         }
       },
       "type": "object",
       "required": [
         "@odata.type"
       ],
-      "description": "Object to represent a video layer."
+      "description": "Describes the basic properties for an output video layer."
     },
     "BmpLayer": {
       "x-ms-discriminator-value": "#Microsoft.Media.BmpLayer",
@@ -370,140 +376,6 @@
       "type": "object",
       "description": "This represents a layer in the BmpImage class."
     },
-    "ClosedCaption": {
-      "x-ms-discriminator-value": "#Microsoft.Media.ClosedCaption",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Codec"
-        }
-      ],
-      "properties": {
-        "inputFile": {
-          "type": "string",
-          "description": "Gets or sets the source of the closed caption file It can be empty in the case the closed caption is from the ClosedCaptionStream selection in the source. If it present (side-car input), it has higher priority than the ClosedCaptionStream from the source."
-        },
-        "outputType": {
-          "type": "string",
-          "enum": [
-            "SideCar",
-            "Stream",
-            "Embedded"
-          ],
-          "x-ms-enum": {
-            "name": "ClosedCaptionType",
-            "values": [
-              {
-                "value": "SideCar",
-                "description": "The closed caption as a separate file"
-              },
-              {
-                "value": "Stream",
-                "description": "The closed caption as a separate stream inside media file"
-              },
-              {
-                "value": "Embedded",
-                "description": "The closed caption embedded within video elementary stream"
-              }
-            ],
-            "modelAsExtensible": true
-          },
-          "description": "Gets or sets the closed caption output type"
-        },
-        "format": {
-          "type": "string",
-          "enum": [
-            "Ttml",
-            "WebVtt"
-          ],
-          "x-ms-enum": {
-            "name": "ClosedCaptionFormat",
-            "values": [
-              {
-                "value": "Ttml",
-                "description": "TTML format."
-              },
-              {
-                "value": "WebVtt",
-                "description": "Web VTT format."
-              }
-            ],
-            "modelAsExtensible": true
-          },
-          "description": "Gets or sets the Closed Caption output format"
-        }
-      },
-      "type": "object",
-      "required": [
-        "outputType",
-        "format"
-      ],
-      "description": "An object to represent closed caption encoding"
-    },
-    "Format": {
-      "discriminator": "@odata.type",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types."
-        },
-        "filenamePattern": {
-          "type": "string",
-          "description": "Gets or sets the pattern of the filename to use excluding the extension. REVIEW: List \"macros\" that can be used and give examples."
-        }
-      },
-      "type": "object",
-      "required": [
-        "@odata.type"
-      ],
-      "description": "Base class for output."
-    },
-    "OutputFile": {
-      "properties": {
-        "trackLabels": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets the track labels."
-        }
-      },
-      "type": "object",
-      "description": "Represent an output file."
-    },
-    "MultiBitrateFormat": {
-      "x-ms-discriminator-value": "#Microsoft.Media.MultiBitrateFormat",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Format"
-        }
-      ],
-      "properties": {
-        "manifestFilename": {
-          "type": "string",
-          "description": "Gets or sets the pattern of the manifest file name to use excluding the extension. REVIEW: List \"macros\" that can be used and give examples."
-        },
-        "outputFiles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutputFile"
-          },
-          "description": "Gets the list of output files."
-        }
-      },
-      "type": "object",
-      "description": "GOP aligned multi bitrate output."
-    },
-    "CmafFormat": {
-      "x-ms-discriminator-value": "#Microsoft.Media.CmafFormat",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MultiBitrateFormat"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "A CMAF based output format."
-    },
     "CopyAudio": {
       "x-ms-discriminator-value": "#Microsoft.Media.CopyAudio",
       "allOf": [
@@ -513,49 +385,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "An object to represent an audio copy codec."
-    },
-    "DDPlusAudio": {
-      "x-ms-discriminator-value": "#Microsoft.Media.DDPlusAudio",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Audio"
-        }
-      ],
-      "properties": {
-        "lfEon": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether \"LFE\" is on."
-        },
-        "acMode": {
-          "type": "string",
-          "enum": [
-            "ACMOD20",
-            "ACMOD32"
-          ],
-          "x-ms-enum": {
-            "name": "DDPlusACMode",
-            "values": [
-              {
-                "value": "ACMOD20",
-                "description": "Mode 20."
-              },
-              {
-                "value": "ACMOD32",
-                "description": "Mode 32."
-              }
-            ],
-            "modelAsExtensible": true
-          },
-          "description": "Gets or sets the AC mode."
-        }
-      },
-      "type": "object",
-      "required": [
-        "lfEon",
-        "acMode"
-      ],
-      "description": "An object to represent EAC3 audio encoding settings."
+      "description": "A special codec flag, which tells the encoder to simply copy the input audio bitstream."
     },
     "Deinterlace": {
       "properties": {
@@ -575,16 +405,16 @@
               },
               {
                 "value": "TopFieldFirst",
-                "description": "Top field first."
+                "description": "Apply top field first processing of input video."
               },
               {
                 "value": "BottomFieldFirst",
-                "description": "bottom field first."
+                "description": "Apply bottom field first processing of input video."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the parity to use."
+          "description": "Describes the field parity for de-interlacing, defaults to Auto."
         },
         "mode": {
           "type": "string",
@@ -597,81 +427,48 @@
             "values": [
               {
                 "value": "Off",
-                "description": "Disable deinterlace no matter whether the input is interlaced or not."
+                "description": "Disable deinterlacing no matter whether the input is interlaced or not."
               },
               {
                 "value": "AutoPixelAdaptive",
-                "description": "Automatic pixel adaptive."
+                "description": "Apply automatic pixel adaptive de-interlacing on each frame in the input video."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the deinterlace Mode"
+          "description": "Describes the deinterlacing mode, defaults to AutoPixelAdaptive."
         }
       },
       "type": "object",
-      "description": "A class to define de-interlacing settings."
+      "description": "Describes the de-interlacing settings."
     },
     "Rectangle": {
       "properties": {
         "left": {
           "type": "string",
-          "description": "Gets or sets number of pixels from the left-margin. This can be absolute pixel value e.g 100 or relative to the size of the video e.g: 50%."
+          "description": "Describes the number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (e.g: 50%)."
         },
         "top": {
           "type": "string",
-          "description": "Gets or sets number of pixels from the top-margin. This can be absolute pixel value e.g 100 or relative to the size of the video e.g: 50%."
+          "description": "Describes the number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (e.g: 50%)."
         },
         "width": {
           "type": "string",
-          "description": "Gets or sets width of the region in pixels. This can be absolute pixel value e.g 100 or relative to the size of the video e.g: 50%."
+          "description": "Describes the width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (e.g: 50%)."
         },
         "height": {
           "type": "string",
-          "description": "Gets or sets height of the region in pixels. This can be absolute pixel value e.g 100 or relative to the size of the video e.g: 50%."
+          "description": "Describes the height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (e.g: 50%)."
         }
       },
       "type": "object",
-      "description": "A class to represent a rectangle."
-    },
-    "VideoOverlay": {
-      "x-ms-discriminator-value": "#Microsoft.Media.VideoOverlay",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Overlay"
-        }
-      ],
-      "properties": {
-        "position": {
-          "$ref": "#/definitions/Rectangle",
-          "description": "Gets or sets the area in the video where the overlay is applied."
-        },
-        "opacity": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the opacity of the overlay."
-        },
-        "preserveAspectRatio": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the aspect ratio of the overlay needs to be preserved or not.  Defaults to true."
-        },
-        "cropRectangle": {
-          "$ref": "#/definitions/Rectangle",
-          "description": "Gets or sets the optional rectangle to crop the video overlay."
-        }
-      },
-      "type": "object",
-      "description": "A video overlay."
+      "description": "Describes the properties of a rectangular window applied to the input media before processing it."
     },
     "Filters": {
       "properties": {
-        "pad": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether to pad the source to align jagged-edge audio and video."
-        },
         "deinterlace": {
           "$ref": "#/definitions/Deinterlace",
-          "description": "Gets or sets the default de-interlacing settings."
+          "description": "Describes the de-interlacing settings."
         },
         "rotation": {
           "type": "string",
@@ -713,82 +510,22 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the rotation if any to be applied to the video."
-        },
-        "adjustLoudness": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Auto",
-            "Manual"
-          ],
-          "x-ms-enum": {
-            "name": "LoudnessAdjustment",
-            "values": [
-              {
-                "value": "None",
-                "description": "Leave loudness at its default value"
-              },
-              {
-                "value": "Auto",
-                "description": "Automatically reduce the loudness to -23dB as prescribed by EBUR128"
-              },
-              {
-                "value": "Manual",
-                "description": "Reduce the loudness to user prescribed value"
-              }
-            ],
-            "modelAsExtensible": true
-          },
-          "description": "Gets or sets the loudness correction mode"
-        },
-        "loudnessInDB": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the Loudness specified in decibels (Applicable for the case of AdjustLoudness.Manual"
-        },
-        "flip": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Horizontal",
-            "Vertical"
-          ],
-          "x-ms-enum": {
-            "name": "Flip",
-            "values": [
-              {
-                "value": "None",
-                "description": "Do not flip the video."
-              },
-              {
-                "value": "Horizontal",
-                "description": "Flip the video horizontally."
-              },
-              {
-                "value": "Vertical",
-                "description": "Flip the video vertically"
-              }
-            ],
-            "modelAsExtensible": true
-          },
-          "description": "Gets or sets whether the video needs to be flipped."
+          "description": "Describes the rotation, if any, to be applied to the input video, before it is encoded."
         },
         "crop": {
           "$ref": "#/definitions/Rectangle",
-          "description": "Gets or sets the co-ordinates of the video to be cropped."
+          "description": "Describes the parameters for the rectangular window with which to crop the input video."
         },
-        "videoOverlay": {
-          "$ref": "#/definitions/VideoOverlay",
-          "description": "Gets or sets the details of the video overlay to apply if any."
-        },
-        "audioOverlay": {
-          "$ref": "#/definitions/AudioOverlay",
-          "description": "Gets or sets the details of the audio overlay to apply if any."
+        "overlays": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Overlay"
+          },
+          "description": "Describes the properties of overlays to be applied to the input video. These could be audio, image or video overlays."
         }
       },
       "type": "object",
-      "description": "A class to encapsulate all the filters for a source."
+      "description": "Describes all the filtering operations that are to be applied to the input video before encoding."
     },
     "VideoLayer": {
       "x-ms-discriminator-value": "#Microsoft.Media.VideoLayer",
@@ -801,34 +538,34 @@
         "bitrate": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the layer bitrate."
+          "description": "Describes the average bitrate (in bits per second) at which to encode the input video when generating this layer. This is a required field."
         },
         "maxBitrate": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the maximum rate the VBV buffer should be assumed to refill at."
+          "description": "Describes the maximum bitrate (in bits per second), at which the VBV buffer should be assumed to refill. If not specified, defaults to the same value as bitrate."
         },
         "bFrames": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of B-frames to be used when encoding this layer."
+          "description": "Describes the number of B-frames to be used when encoding this layer. If not specified, the encoder chooses an appropriate number based on the video Profile and Level."
         },
         "frameRate": {
           "type": "string",
-          "description": "Gets or sets the frame rate for encoding this layer."
+          "description": "Describes the frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (e.g. 30000/1001), or in the form of a number (e.g. 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the Profile and Level. If it is not specified, the encoder will use the same frame rate as the input video."
         },
         "slices": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of slice to be used when encoding this layer."
+          "description": "Describes the number of slices to be used when encoding this layer. If not specified, default is zero, which means that encoder will use a single slice for each frame."
         },
         "adaptiveBFrame": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether adaptive b-frames are used for this layer."
+          "description": "Determines whether or not adaptive B-frames are to be used when encoding this layer. If not specified, the encoder will turn it on whenever the video Profile permits its use."
         }
       },
       "type": "object",
-      "description": "A video layer."
+      "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer."
     },
     "H264Layer": {
       "x-ms-discriminator-value": "#Microsoft.Media.H264Layer",
@@ -845,7 +582,6 @@
             "Baseline",
             "Main",
             "High",
-            "High10",
             "High422",
             "High444"
           ],
@@ -854,50 +590,46 @@
             "values": [
               {
                 "value": "Auto",
-                "description": "The encoder auto decide the appropriate profile"
+                "description": "Tells the encoder to automatically determine the appropriate H264 Profile."
               },
               {
                 "value": "Baseline",
-                "description": "Baseline H264 video profile"
+                "description": "Baseline profile"
               },
               {
                 "value": "Main",
-                "description": "Main H264 video profile"
+                "description": "Main profile"
               },
               {
                 "value": "High",
-                "description": "High H264 video profile."
-              },
-              {
-                "value": "High10",
-                "description": "High10 H264 video profile."
+                "description": "High profile."
               },
               {
                 "value": "High422",
-                "description": "High 4 2 2 H264 video profile."
+                "description": "High 4:2:2 profile."
               },
               {
                 "value": "High444",
-                "description": "High 4 4 4 H264 video profile."
+                "description": "High 4:4:4 Predictive profile."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the video profile for this layer."
+          "description": "Describes which Profile of the H.264 standard should be used when encoding this layer. Default is Auto."
         },
         "level": {
           "type": "string",
-          "description": "Gets or sets the video level for this layer."
+          "description": "Describes which Level of the H.264 standard should be used when encoding this layer. The value can be Auto, or a number that matches the H264 Profile. If not specified, the default is Auto, which lets the encoder choose the Level that is appropriate for this layer."
         },
         "bufferWindow": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the VBV buffer Window length."
+          "description": "Describes the VBV buffer window length. The value should be in ISO 8601 format. The default is PT5S or 5 seconds."
         },
         "referenceFrames": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of reference frames to be used when encoding this layer."
+          "description": "Describes the number of reference frames to be used when encoding this layer. If not specified, the encoder determines an appropriate number based on the encoder complexity setting."
         },
         "entropyMode": {
           "type": "string",
@@ -919,11 +651,11 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the entropy mode to be used for this layer."
+          "description": "Describes the entropy mode to be used for this layer. If not specified, the encoder chooses the mode that is appropriate for the Profile and Level."
         }
       },
       "type": "object",
-      "description": "A H.264 video layer."
+      "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer with the H264 video codec."
     },
     "H264Video": {
       "x-ms-discriminator-value": "#Microsoft.Media.H264Video",
@@ -935,29 +667,7 @@
       "properties": {
         "sceneChangeDetection": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether to use scene change detection during encoding"
-        },
-        "rateControlMode": {
-          "type": "string",
-          "enum": [
-            "ABR",
-            "CBR"
-          ],
-          "x-ms-enum": {
-            "name": "H264RateControlMode",
-            "values": [
-              {
-                "value": "ABR",
-                "description": "Average bitrate to hit the target bitrate: defaulted mode."
-              },
-              {
-                "value": "CBR",
-                "description": "a CBR mode that tightens bitrate variations around target bitrate."
-              }
-            ],
-            "modelAsExtensible": true
-          },
-          "description": "Gets or sets the video rate control mode"
+          "description": "Determines whether or not the encoder should insert key frames at scene changes. If not specified, the default is false."
         },
         "complexity": {
           "type": "string",
@@ -971,42 +681,31 @@
             "values": [
               {
                 "value": "Speed",
-                "description": "the setting optimized for speed"
+                "description": "Tells the encoder to use settings that are optimized for how fast the encoding completes."
               },
               {
                 "value": "Balanced",
-                "description": "Balanced setting between speed and quality"
+                "description": "Tells the encoder to use settings that achieve a balance between speed and quality."
               },
               {
                 "value": "Quality",
-                "description": "the setting optimized for quality"
+                "description": "Tells the encoder to use settings that are optimized for to produce a better quality output, at the expense of a slower encode time."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the encoder complexity mode used for all layers"
+          "description": "Tells the encoder how to choose its low-level settings. The default is Balanced."
         },
         "layers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/H264Layer"
           },
-          "description": "Gets the layers for the video."
+          "description": "Describes a collection of output H264 layers to be produced by the encoder."
         }
       },
       "type": "object",
-      "description": "An object to represent H264 video encoding."
-    },
-    "ImageFormat": {
-      "x-ms-discriminator-value": "#Microsoft.Media.ImageFormat",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Format"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "Generates image file output."
+      "description": "Describes all the properties for encoding a video with the H264 codec."
     },
     "JpgImage": {
       "x-ms-discriminator-value": "#Microsoft.Media.JpgImage",
@@ -1021,11 +720,11 @@
           "items": {
             "$ref": "#/definitions/JpgLayer"
           },
-          "description": "Gets the list of layers."
+          "description": "Describes a collection of output JPEG layers to be produced by the encoder."
         }
       },
       "type": "object",
-      "description": "This class represents a video encoder which outputs a sequence of Jpg images."
+      "description": "Describes the properties for producing a series of JPEG images from the input video."
     },
     "JpgLayer": {
       "x-ms-discriminator-value": "#Microsoft.Media.JpgLayer",
@@ -1038,25 +737,46 @@
         "quality": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the compression quality of the JPEG output. Range is from 0-100 and the default is 70."
+          "description": "Describes the compression quality of the JPEG output. Range is from 0-100 and the default is 70."
         }
       },
       "type": "object",
-      "description": "This represents a layer in the JpgImage class."
+      "description": "Describes the settings to produce a JPEG image from the input video."
     },
-    "Mp4Format": {
-      "x-ms-discriminator-value": "#Microsoft.Media.Mp4Format",
+    "OutputFile": {
+      "properties": {
+        "trackLabels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Describes the list of track labels that would be muxed together to produce the file."
+        }
+      },
+      "type": "object",
+      "description": "Represents an output file produced."
+    },
+    "MultiBitrateFormat": {
+      "x-ms-discriminator-value": "#Microsoft.Media.MultiBitrateFormat",
       "allOf": [
         {
           "$ref": "#/definitions/Format"
         }
       ],
-      "properties": {},
+      "properties": {
+        "outputFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputFile"
+          },
+          "description": "Describes a list of output files to produce.  Each entry in the list is a set of labels to be muxed together ."
+        }
+      },
       "type": "object",
-      "description": "MP4 output."
+      "description": "Describes the properties for producing a collection of GOP aligned multi bitrate files."
     },
-    "MultiBitrateMp4Format": {
-      "x-ms-discriminator-value": "#Microsoft.Media.MultiBitrateMp4Format",
+    "Mp4Format": {
+      "x-ms-discriminator-value": "#Microsoft.Media.Mp4Format",
       "allOf": [
         {
           "$ref": "#/definitions/MultiBitrateFormat"
@@ -1064,7 +784,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "GOP aligned multi bitrate MP4 output."
+      "description": "Describes the properties for an output ISO MP4 file."
     },
     "PngImage": {
       "x-ms-discriminator-value": "#Microsoft.Media.PngImage",
@@ -1079,7 +799,7 @@
           "items": {
             "$ref": "#/definitions/PngLayer"
           },
-          "description": "Gets the list of image layers."
+          "description": "Describes a collection of output PNG layers to be produced by the encoder."
         }
       },
       "type": "object",
@@ -1094,7 +814,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "This represents a layer in the PngImage class."
+      "description": "Describes the settings to produce a PNG image from the input video."
     },
     "BuiltInStandardEncoderPreset": {
       "x-ms-discriminator-value": "#Microsoft.Media.BuiltInStandardEncoderPreset",
@@ -1108,21 +828,17 @@
           "type": "string",
           "enum": [
             "AdaptiveStreaming",
-            "ContentAdaptiveMultipleBitrateMP4",
             "AACGoodQualityAudio",
             "H264MultipleBitrate1080p",
-            "H264MultipleBitrate720p"
+            "H264MultipleBitrate720p",
+            "H264MultipleBitrateSD"
           ],
           "x-ms-enum": {
             "name": "EncoderNamedPreset",
             "values": [
               {
                 "value": "AdaptiveStreaming",
-                "description": "Auto-generate a bitrate ladder (bitrate-resolution pairs) based on the input resolution and bitrate. The auto-generated preset will never exceed the input resolution and bitrate. For example, if the input is 720p at 3Mbps, output will remain 720p at best, and will start at rates lower than 3Mbps. The output will will have video and audio in separate files, which is optimal for adaptive streaming."
-              },
-              {
-                "value": "ContentAdaptiveMultipleBitrateMP4",
-                "description": "Auto-generate a bitrate ladder (bitrate-resolution pairs) based on the input resolution and bitrate. The auto-generated preset will never exceed the input resolution and bitrate. For example, if the input is 720p at 3Mbps, output will remain 720p at best, and will start at rates lower than 3Mbps. The output contains MP4 files with audio and video interleaved, so that any one MP4 file can be used for delivery via progressive download, if desired."
+                "description": "Auto-generate a bitrate ladder (bitrate-resolution pairs) based on the input resolution and bitrate. The auto-generated preset will never exceed the input resolution and bitrate. For example, if the input is 720p at 3 Mbps, output will remain 720p at best, and will start at rates lower than 3 Mbps. The output will will have video and audio in separate files, which is optimal for adaptive streaming."
               },
               {
                 "value": "AACGoodQualityAudio",
@@ -1130,85 +846,27 @@
               },
               {
                 "value": "H264MultipleBitrate1080p",
-                "description": "Produces a set of 8 GOP-aligned MP4 files, ranging from 6000 kbps to 400 kbps, and stereo AAC audio."
+                "description": "Produces a set of 8 GOP-aligned MP4 files, ranging from 6000 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 1080p and goes down to 360p."
               },
               {
                 "value": "H264MultipleBitrate720p",
-                "description": "Produces a set of 6 GOP-aligned MP4 files, ranging from 3400 kbps to 400 kbps, and stereo AAC audio."
+                "description": "Produces a set of 6 GOP-aligned MP4 files, ranging from 3400 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 720p and goes down to 360p."
+              },
+              {
+                "value": "H264MultipleBitrateSD",
+                "description": "Produces a set of 5 GOP-aligned MP4 files, ranging from 1600kbps to 400 kbps, and stereo AAC audio. Resolution starts at 480p and goes down to 360p."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the built in preset to use."
+          "description": "Describes the built-in prese to be used for encoding videos."
         }
       },
       "type": "object",
       "required": [
         "presetName"
       ],
-      "description": "Preset to use Media Encoder Standard (MES) with a built in named preset."
-    },
-    "StreamSelection": {
-      "discriminator": "@odata.type",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types."
-        },
-        "fileIndex": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the file index where the stream is present."
-        },
-        "streamIndex": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the stream index."
-        },
-        "isAbsoluteStreamIndex": {
-          "type": "boolean",
-          "description": "Gets a value indicating whether the stream index is absolute or relative to the stream type."
-        },
-        "streamSelectionMode": {
-          "type": "string",
-          "enum": [
-            "SelectionNotSet",
-            "SelectHighestBitrateStream",
-            "SelectLowestBitrateStream",
-            "SelectAllStreams"
-          ],
-          "x-ms-enum": {
-            "name": "StreamSelectionMode",
-            "values": [
-              {
-                "value": "SelectionNotSet",
-                "description": "Preset does not set the stream selection"
-              },
-              {
-                "value": "SelectHighestBitrateStream",
-                "description": "Select the highest bitrate stream"
-              },
-              {
-                "value": "SelectLowestBitrateStream",
-                "description": "Select the lowest bitrate stream"
-              },
-              {
-                "value": "SelectAllStreams",
-                "description": "Select all the streams"
-              }
-            ],
-            "modelAsExtensible": true
-          },
-          "description": "Gets the stream selection mode."
-        }
-      },
-      "type": "object",
-      "required": [
-        "@odata.type",
-        "fileIndex",
-        "streamIndex"
-      ],
-      "description": "An object to represent stream selection."
+      "description": "Describes a built-in preset for encoding the input video with the Standard Encoder."
     },
     "StandardEncoderPreset": {
       "x-ms-discriminator-value": "#Microsoft.Media.StandardEncoderPreset",
@@ -1218,34 +876,27 @@
         }
       ],
       "properties": {
-        "streams": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StreamSelection"
-          },
-          "description": "Gets the Stream definitions for this source."
-        },
         "filters": {
           "$ref": "#/definitions/Filters",
-          "description": "Gets or sets the filters for the preset."
+          "description": "Describes the default set of filters to be applied to all the input media (except overlays). Describes operations like rotation, deinterlacing and overlays."
         },
         "codecs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Codec"
           },
-          "description": "Gets the list of codecs to use."
+          "description": "Describes the list of codecs to be used when encoding the input video."
         },
         "formats": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Format"
           },
-          "description": "Gets the list of outputs."
+          "description": "Describes the list of outputs to be produced by the encoder."
         }
       },
       "type": "object",
-      "description": "Preset for Media Encoder Standard."
+      "description": "Describes all the settings to be used when encoding the input video with the Standard Encoder."
     },
     "VideoAnalyzerPreset": {
       "x-ms-discriminator-value": "#Microsoft.Media.VideoAnalyzerPreset",
@@ -1263,59 +914,6 @@
       "type": "object",
       "description": "A video analyzer preset that analyzes both audio and video."
     },
-    "ClosedCaptionStream": {
-      "x-ms-discriminator-value": "#Microsoft.Media.ClosedCaptionStream",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StreamSelection"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "Object to represent closed caption stream selection."
-    },
-    "VideoStream": {
-      "x-ms-discriminator-value": "#Microsoft.Media.VideoStream",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StreamSelection"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "Object to represent video stream selection."
-    },
-    "AudioStream": {
-      "x-ms-discriminator-value": "#Microsoft.Media.AudioStream",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StreamSelection"
-        }
-      ],
-      "properties": {
-        "languageTag": {
-          "type": "string",
-          "description": "Gets or sets the Audio Language Tag."
-        },
-        "audioChannelMapping": {
-          "type": "string",
-          "description": "Gets or sets the Audio channel mapping string."
-        }
-      },
-      "type": "object",
-      "description": "Object to represent audio stream selection."
-    },
-    "StreamingEndpointOptimizedFormat": {
-      "x-ms-discriminator-value": "#Microsoft.Media.StreamingEndpointOptimizedFormat",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MultiBitrateMp4Format"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "A multi bitrate MP4 format that is optimized for use by streaming endpoint in Azure Media Services."
-    },
     "TransportStreamFormat": {
       "x-ms-discriminator-value": "#Microsoft.Media.TransportStreamFormat",
       "allOf": [
@@ -1325,7 +923,32 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "ISO/IEC 13818-1, MPEG-2 Transport Stream output."
+      "description": "Describes the properties for generating an ISO/IEC 13818-1, MPEG-2 Transport Stream output."
+    },
+    "VideoOverlay": {
+      "x-ms-discriminator-value": "#Microsoft.Media.VideoOverlay",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Overlay"
+        }
+      ],
+      "properties": {
+        "position": {
+          "$ref": "#/definitions/Rectangle",
+          "description": "Describes the area in the input video where the overlay is applied."
+        },
+        "opacity": {
+          "type": "number",
+          "format": "double",
+          "description": "Describes the opacity of the overlay. This is a value in the range [0 - 1.0]. Default is 1.0"
+        },
+        "cropRectangle": {
+          "$ref": "#/definitions/Rectangle",
+          "description": "Describes the an optional rectangular window used to crop the overlay image or video."
+        }
+      },
+      "type": "object",
+      "description": "Describes the properties of a video overlay."
     },
     "TransformOutput": {
       "properties": {
