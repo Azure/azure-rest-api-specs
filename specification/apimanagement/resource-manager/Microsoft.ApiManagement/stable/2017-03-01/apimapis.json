@@ -224,6 +224,9 @@
           },
           "ApiManagementCreateApi": {
             "$ref": "./examples/ApiManagementCreateApi.json"
+          },
+          "ApiManagementCreateApiRevision": {
+            "$ref": "./examples/ApiManagementCreateApiRevision.json"
           }
         },
         "consumes": [
@@ -432,6 +435,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|apiRevision | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+          },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
@@ -2518,7 +2528,7 @@
             "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -2929,7 +2939,7 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiRevisionContract": {
-      "properties": {        
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiRevisionContractProperties",
@@ -2953,7 +2963,7 @@
         "apiRevision": {
           "type":"string",
           "minLength": 1,
-          "maxLength": 100,          
+          "maxLength": 100,
           "readOnly": true,
           "description": "Revision number of API."
         },
@@ -3033,7 +3043,7 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiReleaseContract": {
-      "properties": {        
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiReleaseContractProperties",
@@ -3058,7 +3068,7 @@
           "type":"string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."        
+          "description": "The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
         },
         "updatedDateTime": {
           "type":"string",

@@ -128,7 +128,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscNodeConfiguration"
+              "$ref": "#/definitions/DscNodeConfiguration"
             }
           },
           "default": {
@@ -191,7 +191,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscNodeConfiguration"
+              "$ref": "#/definitions/DscNodeConfiguration"
             }
           },
           "default": {
@@ -247,7 +247,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscNodeConfigurationListResult"
+              "$ref": "#/definitions/DscNodeConfigurationListResult"
             }
           },
           "default": {
@@ -263,6 +263,47 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "DscNodeConfiguration": {
+      "properties": {
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets creation time."
+        },
+        "configuration": {
+          "$ref": "./definitions.json#/definitions/DscConfigurationAssociationProperty",
+          "description": "Gets or sets the configuration of the node."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Definition of the dsc node configuration."
+    },
+    "DscNodeConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DscNodeConfiguration"
+          },
+          "description": "Gets or sets a list of Dsc node configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job operation."
+    }
+  },
   "parameters": {}
 }
