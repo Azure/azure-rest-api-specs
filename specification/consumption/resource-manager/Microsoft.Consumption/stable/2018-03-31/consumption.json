@@ -1142,6 +1142,97 @@
           }
         }
       }
+    },
+    "/billingaccounts/{billingAccountId}/providers/microsoft.consumption/costallocationtags": {
+      "get": {
+        "tags": [
+          "CostAllocationTags"
+        ],
+        "operationId": "CostAllocationTags_List",
+        "description": "Lists all cost allocation tags for a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CostAllocationTags_List": {
+            "$ref": "./examples/CostAllocationTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostAllocationTags"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CostAllocationTags"
+        ],
+        "operationId": "CostAllocationTags_CreateOrUpdate",
+        "description": "The operation to create or update cost allocation tags assiciated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateCostAllocationTags": {
+            "$ref": "./examples/CreateOrUpdateCostAllocationTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CostAllocationTags"
+            },
+            "description": "Parameters supplied to the Create cost allocation tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostAllocationTags"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/CostAllocationTags"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2012,6 +2103,43 @@
         "contactEmails"
       ]
     },
+    "CostAllocationTags": {
+      "description": "A cost allocation tag resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CostAllocationTagProperties",
+          "title": "Cost allocation tag properties"
+        }
+      }
+    },
+    "CostAllocationTagProperties": {
+      "description": "The properties of the cost allocation tag.",
+      "properties": {
+        "costAllocationTags": {
+          "description": "Cost allocation tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CostAllocationTag"
+          }
+        }
+      }
+    },
+    "CostAllocationTag": {
+      "description": "The cost allocation tag.",
+      "properties": {
+        "keyName": {
+          "description": "Cost allocation tag key name.",
+          "type": "string"
+        }
+      }
+    },
     "ErrorDetails": {
       "description": "The details of the error.",
       "properties": {
@@ -2250,6 +2378,13 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "Azure Billing Account ID.",
       "required": true,
       "type": "string"
     },
