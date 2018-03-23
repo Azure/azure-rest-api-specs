@@ -106,6 +106,33 @@ directive:
       - $.definitions.VirtualMachineScaleSetUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
+
+  - where:
+      - $.definitions.VirtualMachineScaleSetVM
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineExtensionImage
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.RollingUpgradeStatusInfo
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineImage
+    suppress:
+      - TrackedResourcePatchOperation
+
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - TrackedResourceGetOperation
+      
 ```
 ### Tag: package-2018-04
 
