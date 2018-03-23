@@ -115,7 +115,7 @@ These settings apply only when `--tag=package-2017-06-01 --go` is specified on t
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-06-01' && $(go)
-output-folder: $(go-sdk-folder)/services/$(azurestack)/mgmt/2017-06-01/$(azurestack)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-06-01/$(namespace)
 ```
 
 ## Python
