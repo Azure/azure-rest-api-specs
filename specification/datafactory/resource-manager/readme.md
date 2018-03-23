@@ -53,6 +53,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -149,7 +150,7 @@ java:
 ``` yaml
 directive:
   - suppress: R2001  # AvoidNestedProperties
-    where: 
+    where:
       - $.definitions.IntegrationRuntimeResource.properties.properties
       - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
       - $.definitions.TriggerResource.properties.properties
@@ -164,11 +165,11 @@ directive:
       - $.properties.properties.TriggerResource.definitions
       - $.properties.properties.TriggerResource.definitions
     from: datafactory.json
-    reason: 
+    reason:
       - Flattening does not work well with polymorphic models.
       - TriggerResource.properties is an arbitary dictionary and cannot be flattened.
   - suppress: R2018  # XmsEnumValidation
-    where: 
+    where:
       - $.definitions.Expression.properties.type
       - $.definitions.SecureString.properties.type
       - $.definitions.SecureString.properties.type
@@ -182,19 +183,19 @@ directive:
     from: datafactory.json
     reason: Single-value enums are expressed to force the values to be used for de/serialization but should not be exposed or settable by the a client.
   - suppress: R3017  # GuidUsage
-    where: 
+    where:
       - $.definitions.FactoryIdentity.properties.principalId
     from: datafactory.json
-    reason: 
+    reason:
       - FactoryIdentity.properties.principalId should be a Guid, per MSI integration.
   - suppress: R3010  # TrackedResourceListByImmediateParent
-    where: 
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}"]
     from: datafactory.json
     reason:
       - Pipeline runs are listable in all but name. The operations PipelineRuns_QueryByFactory serves this purpose.
   - suppress: R1003  # ListInOperationName
-    where: 
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/monitoringData"].post.operationId
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/monitoringData"].post.operationId
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns"].post.operationId
