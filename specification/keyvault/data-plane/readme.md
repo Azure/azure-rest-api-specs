@@ -165,6 +165,7 @@ java:
   azure-arm: true
   namespace: com.microsoft.azure.keyvault
   license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
+  payload-flattening-threshold: 0
   output-folder: $(azure-libraries-for-java-folder)/azure-keyvault
+  override-client-name: KeyVaultClientBase
 ```
