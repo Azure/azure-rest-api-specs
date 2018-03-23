@@ -7,7 +7,16 @@
     "ruleName": "sdk-Rules-6571",
     "api-version": "2017-04-01",
     "subscriptionId": "subscriptionId",
-    "parameters": { }
+    "parameters": {
+      "properties": {
+        "filterType": "CorrelationFilter",
+        "correlationFilter": {
+          "properties": {
+            "topicHint": "Crop"
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -17,11 +26,8 @@
         "type": "Microsoft.ServiceBus/Namespaces/Topics/Subscriptions/Rules",
         "properties": {
           "action": { },
-          "filterType": "SqlFilter",
-          "sqlFilter": {
-            "sqlExpression": "1=1",
-            "compatibilityLevel": 20
-          }
+          "filterType": "CorrelationFilter",
+          "correlationFilter": { "properties": { "queueHint": "Crop" } }
         }
       }
     }

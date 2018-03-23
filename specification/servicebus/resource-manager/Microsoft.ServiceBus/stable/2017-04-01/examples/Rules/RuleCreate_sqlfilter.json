@@ -7,7 +7,14 @@
     "ruleName": "sdk-Rules-6571",
     "api-version": "2017-04-01",
     "subscriptionId": "subscriptionId",
-    "parameters": { }
+    "parameters": {
+      "properties": {
+        "filterType": "SqlFilter",
+        "sqlFilter": {
+          "sqlExpression": "myproperty=test"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -19,7 +26,7 @@
           "action": { },
           "filterType": "SqlFilter",
           "sqlFilter": {
-            "sqlExpression": "1=1",
+            "sqlExpression": "myproperty=test",
             "compatibilityLevel": 20
           }
         }
