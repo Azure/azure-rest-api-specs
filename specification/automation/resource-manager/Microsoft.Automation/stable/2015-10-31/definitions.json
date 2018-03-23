@@ -185,7 +185,7 @@
         },
         "day": {
           "type": "string",
-          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.",
+          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.",
           "enum": [
             "Monday",
             "Tuesday",
@@ -390,7 +390,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the automation account type."
@@ -525,7 +525,6 @@
       "description": "Properties of the certificate."
     },
     "Certificate": {
-      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -548,6 +547,11 @@
           "description": "Gets or sets the properties of the certificate."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the certificate."
     },
     "CertificateListResult": {
@@ -664,7 +668,6 @@
       "description": "Definition of the connection properties."
     },
     "Connection": {
-      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -687,6 +690,11 @@
           "description": "Gets or sets the properties of the connection."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the connection."
     },
     "ConnectionListResult": {
@@ -920,7 +928,11 @@
       "description": "Definition of the credential properties"
     },
     "Credential": {
-      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -1343,7 +1355,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the configuration type."
@@ -2311,7 +2323,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the module type."
@@ -2406,60 +2418,63 @@
       }
     },
     "Resource": {
+      "description": "The core properties of ARM resources",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Fully qualified resource Id for the resource"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
+          "description": "The type of the resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Azure Region where the resource lives"
         }
       },
-      "required": [
-        "location"
-      ],
-      "description": "The Resource definition.",
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "ProxyResource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
         }
-      },
-      "description": "The Resource definition.",
-      "x-ms-azure-resource": true
+      ]
     },
     "JobProvisioningStateProperty": {
       "properties": {
@@ -2913,7 +2928,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the runbook type."
@@ -3478,7 +3493,11 @@
       "description": "Definition of the varible properties"
     },
     "Variable": {
-      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -3674,7 +3693,11 @@
         }
       },
       "description": "Definition of the webhook type.",
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
     },
     "WebhookListResult": {
       "properties": {
@@ -3752,7 +3775,10 @@
       "required": true,
       "type": "string",
       "pattern": "^[-\\w\\._]+$",
-      "description": "The resource group name."
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "client",
+      "description": "Name of an Azure Resource group."
     }
   }
 }
