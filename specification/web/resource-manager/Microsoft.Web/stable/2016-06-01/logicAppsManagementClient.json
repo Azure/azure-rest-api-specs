@@ -22,9 +22,14 @@
                 "tags": [
                     "Connection Gateways"
                 ],
-                "summary": "List all of the connection gateways",
+                "summary": "Lists all of the connection gateways",
                 "operationId": "ConnectionGateways_ListAll",
                 "description": "Gets a list of gateways under a subscription",
+                "x-ms-examples": {
+                    "List all connection gateways": {
+                        "$ref": "./examples/connectionGatewayListAll.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -51,9 +56,14 @@
                 "tags": [
                     "Connection Gateways"
                 ],
-                "summary": "List all of the connection gateways",
+                "summary": "Lists all of the connection gateways",
                 "operationId": "ConnectionGateways_List",
                 "description": "Gets a list of gateways under a subscription and in a specific resource group",
+                "x-ms-examples": {
+                    "List all connection gateways": {
+                        "$ref": "./examples/connectionGatewayList.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -85,7 +95,12 @@
                 ],
                 "summary": "Gets a specific gateway",
                 "operationId": "ConnectionGateways_Get",
-                "description": "Gets a specific gateway for under a subscription and in a specific resource group",
+                "description": "Gets a specific gateway under a subscription and in a specific resource group",
+                "x-ms-examples": {
+                    "Get the connection gateway definition": {
+                        "$ref": "./examples/connectionGatewayGet.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -113,9 +128,14 @@
                 "tags": [
                     "Connection Gateways"
                 ],
-                "summary": "Updates a specific gateway",
+                "summary": "Replaces a specific gateway",
                 "operationId": "ConnectionGateways_CreateOrUpdate",
                 "description": "Creates or updates a specific gateway for under a subscription and in a specific resource group",
+                "x-ms-examples": {
+                    "Replace a connection gateway definition": {
+                        "$ref": "./examples/connectionGatewayCreateOrUpdate.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -127,7 +147,7 @@
                         "$ref": "#/parameters/connectionGatewayNameParameter"
                     },
                     {
-                        "$ref": "#/parameters/connectionGatewayParameter"
+                        "$ref": "#/parameters/connectionGatewayBodyParameter"
                     },
                     {
                         "$ref": "#/parameters/apiVersionParameter"
@@ -135,7 +155,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "The gateway definition",
+                        "description": "The updated gateway definition",
+                        "schema": {
+                            "$ref": "#/definitions/ConnectionGatewayDefinition"
+                        }
+                    },
+                    "201": {
+                        "description": "The newly created gateway definition",
                         "schema": {
                             "$ref": "#/definitions/ConnectionGatewayDefinition"
                         }
@@ -148,7 +174,12 @@
                 ],
                 "summary": "Updates a specific gateway",
                 "operationId": "ConnectionGateways_Update",
-                "description": "Updates a specific gateway for under a subscription and in a specific resource group",
+                "description": "Updates a connection gateway's tags",
+                "x-ms-examples": {
+                    "Update a connection gateway's tags": {
+                        "$ref": "./examples/connectionGatewayUpdate.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -160,7 +191,7 @@
                         "$ref": "#/parameters/connectionGatewayNameParameter"
                     },
                     {
-                        "$ref": "#/parameters/connectionGatewayParameter"
+                        "$ref": "#/parameters/connectionGatewayBodyParameter"
                     },
                     {
                         "$ref": "#/parameters/apiVersionParameter"
@@ -182,6 +213,11 @@
                 "summary": "Deletes a specific gateway",
                 "operationId": "ConnectionGateways_Delete",
                 "description": "Deletes a specific gateway for under a subscription and in a specific resource group",
+                "x-ms-examples": {
+                    "Delete a connection gateway definition": {
+                        "$ref": "./examples/connectionGatewayDelete.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -214,6 +250,11 @@
                 "summary": "Gets a list of installed gateways that the user is an admin of",
                 "operationId": "ConnectionGatewayInstallations_List",
                 "description": "Gets a list of installed gateways that the user is an admin of, in a specific subscription and at a certain location",
+                "x-ms-examples": {
+                    "List all installations in a region": {
+                        "$ref": "./examples/connectionGatewayInstallationsList.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -246,6 +287,11 @@
                 "summary": "Gets an installed gateway that the user is an admin of",
                 "operationId": "ConnectionGatewayInstallations_Get",
                 "description": "Get a specific installed gateway that the user is an admin of, in a specific subscription and at a certain location",
+                "x-ms-examples": {
+                    "Get a specific gateway installation": {
+                        "$ref": "./examples/connectionGatewayInstallationsGet.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -278,6 +324,11 @@
                 "summary": "List of custom APIs",
                 "operationId": "CustomApis_ListAll",
                 "description": "Gets a list of all custom APIs for a subscription id",
+                "x-ms-examples": {
+                    "List all custom APIs": {
+                        "$ref": "./examples/customApisListAll.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -313,6 +364,11 @@
                 "summary": "List of custom APIs",
                 "operationId": "CustomApis_List",
                 "description": "Gets a list of all custom APIs in a subscription for a specific resource group",
+                "x-ms-examples": {
+                    "List all custom APIs": {
+                        "$ref": "./examples/customApisList.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -351,6 +407,11 @@
                 "summary": "Get a custom API",
                 "operationId": "CustomApis_Get",
                 "description": "Gets a custom API by name for a specific subscription and resource group",
+                "x-ms-examples": {
+                    "Get a custom API": {
+                        "$ref": "./examples/customApisGet.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -381,9 +442,14 @@
                 "tags": [
                     "Custom APIs"
                 ],
-                "summary": "Replace an existing custom API",
+                "summary": "Replaces an existing custom API",
                 "operationId": "CustomApis_CreateOrUpdate",
-                "description": "Replace an existing custom API",
+                "description": "Creates or updates an existing custom API",
+                "x-ms-examples": {
+                    "Replace a custom API": {
+                        "$ref": "./examples/customApisCreateOrUpdate.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -416,7 +482,12 @@
                 ],
                 "summary": "Update an existing custom API",
                 "operationId": "CustomApis_Update",
-                "description": "Update an existing custom API",
+                "description": "Update an existing custom API's tags",
+                "x-ms-examples": {
+                    "Update a custom API's tags": {
+                        "$ref": "./examples/customApisUpdate.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -450,6 +521,11 @@
                 "summary": "Delete a custom API",
                 "operationId": "CustomApis_Delete",
                 "description": "Deletes a custom API from the resource group",
+                "x-ms-examples": {
+                    "Delete a custom API": {
+                        "$ref": "./examples/customApisDelete.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -479,9 +555,14 @@
                 "tags": [
                     "Custom APIs"
                 ],
-                "summary": "Moves the Custom API",
+                "summary": "Moves the custom API",
                 "operationId": "CustomApis_Move",
                 "description": "Moves a specific custom API",
+                "x-ms-examples": {
+                    "Move a custom API": {
+                        "$ref": "./examples/customApisMove.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -514,6 +595,11 @@
                 "summary": "Lists WSDL interfaces",
                 "operationId": "CustomApis_ListWsdlInterfaces",
                 "description": "This returns the list of interfaces in the WSDL",
+                "x-ms-examples": {
+                    "List the WSDL interfaces": {
+                        "$ref": "./examples/customApisListWsdlInterfaces.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -549,6 +635,11 @@
                 "summary": "Returns API definition from WSDL",
                 "operationId": "CustomApis_ExtractApiDefinitionFromWsdl",
                 "description": "Parses the specified WSDL and extracts the API definition",
+                "x-ms-examples": {
+                    "Extract definition from WSDL": {
+                        "$ref": "./examples/customApisExtractDefinitionFromWsdl.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -578,7 +669,12 @@
                 ],
                 "summary": "List managed APIs",
                 "operationId": "ManagedApis_List",
-                "description": "Gets a list of managed APIs.",
+                "description": "Gets a list of managed APIs",
+                "x-ms-examples": {
+                    "List all managed APIs": {
+                        "$ref": "./examples/managedApisList.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/locationParameter"
@@ -610,7 +706,12 @@
                 ],
                 "summary": "Get managed Api",
                 "operationId": "ManagedApis_Get",
-                "description": "Gets a managed API.",
+                "description": "Gets a managed API",
+                "x-ms-examples": {
+                    "Get a managed API": {
+                        "$ref": "./examples/managedApisGet.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -646,6 +747,11 @@
                 "summary": "Get all connections",
                 "operationId": "Connections_List",
                 "description": "Gets a list of connections",
+                "x-ms-examples": {
+                    "List all connections": {
+                        "$ref": "./examples/connectionsList.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -684,6 +790,11 @@
                 "summary": "Get a connection",
                 "operationId": "Connections_Get",
                 "description": "Get a specific connection",
+                "x-ms-examples": {
+                    "Get a connection": {
+                        "$ref": "./examples/connectionsGet.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -714,6 +825,11 @@
                 "summary": "Replace an existing connection",
                 "operationId": "Connections_CreateOrUpdate",
                 "description": "Creates or updates a connection",
+                "x-ms-examples": {
+                    "Replace a connection": {
+                        "$ref": "./examples/connectionsCreateOrUpdate.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -752,7 +868,12 @@
                 ],
                 "summary": "Update an existing connection",
                 "operationId": "Connections_Update",
-                "description": "Update a connection",
+                "description": "Updates a connection's tags",
+                "x-ms-examples": {
+                    "Update a connection's tags": {
+                        "$ref": "./examples/connectionsUpdate.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -783,8 +904,14 @@
                 "tags": [
                     "Connections"
                 ],
+                "summary": "Delete an existing connection",
                 "operationId": "Connections_Delete",
                 "description": "Deletes a connection",
+                "x-ms-examples": {
+                    "Delete a connection": {
+                        "$ref": "./examples/connectionsDelete.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -814,8 +941,14 @@
                 "tags": [
                     "Connections"
                 ],
+                "summary": "Lists consent links for a connection",
                 "operationId": "Connections_ListConsentLinks",
-                "description": "Lists consent links of a connection",
+                "description": "Lists the consent links of a connection",
+                "x-ms-examples": {
+                    "List consent links": {
+                        "$ref": "./examples/connectionsListConsentLinks.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -848,8 +981,14 @@
                 "tags": [
                     "Connections"
                 ],
+                "summary": "Confirms the consent code for a connection",
                 "operationId": "Connections_ConfirmConsentCode",
                 "description": "Confirms consent code of a connection",
+                "x-ms-examples": {
+                    "Confirm consent code": {
+                        "$ref": "./examples/connectionsConfirmConsentCode.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -885,6 +1024,11 @@
                 "summary": "List connection keys",
                 "operationId": "Connections_ListConnectionKeys",
                 "description": "Lists connection keys for a specific connection",
+                "x-ms-examples": {
+                    "List connection keys": {
+                        "$ref": "./examples/connectionsListConnectionKeys.json"
+                    }
+                },
                 "parameters": [
                     {
                         "$ref": "#/parameters/subscriptionIdParameter"
@@ -914,38 +1058,50 @@
         }
     },
     "parameters": {
-        "locationParameter": {
-            "name": "location",
-            "description": "The location.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "wsdlDefinitionParameter": {
-            "name": "wsdlDefinition",
-            "description": "WSDL definition",
+        "apiConnectionParameter": {
+            "name": "connection",
+            "description": "The connection",
             "in": "body",
             "required": true,
             "schema": {
-                "$ref": "#/definitions/WsdlDefinition"
+                "$ref": "#/definitions/ApiConnectionDefinition"
             },
             "x-ms-parameter-location": "method"
         },
-        "subscriptionIdParameter": {
-            "name": "subscriptionId",
+        "apiNameParameter": {
+            "type": "string",
+            "name": "apiName",
+            "description": "API name",
             "in": "path",
-            "description": "Subscription Id",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "apiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "description": "API Version",
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
         },
-        "resourceGroupNameParameter": {
-            "name": "resourceGroupName",
-            "description": "The resource group",
-            "in": "path",
+        "confirmConsentCodeParameter": {
+            "name": "confirmConsentCode",
+            "description": "The consent code confirmation",
+            "in": "body",
             "required": true,
-            "type": "string",
+            "schema": {
+                "$ref": "#/definitions/ConfirmConsentCodeDefinition"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "connectionGatewayBodyParameter": {
+            "name": "connectionGateway",
+            "description": "The connection gateway",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ConnectionGatewayDefinition"
+            },
             "x-ms-parameter-location": "method"
         },
         "connectionGatewayNameParameter": {
@@ -956,28 +1112,10 @@
             "type": "string",
             "x-ms-parameter-location": "method"
         },
-        "connectionGatewayParameter": {
-            "name": "connectionGateway",
-            "description": "The connection gateway",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/ConnectionGatewayDefinition"
-            },
-            "x-ms-parameter-location": "method"
-        },
-        "gatewayIdParameter": {
+        "connectionNameParameter": {
             "type": "string",
-            "name": "gatewayId",
-            "description": "Gateway ID",
-            "in": "path",
-            "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "apiNameParameter": {
-            "type": "string",
-            "name": "apiName",
-            "description": "API name",
+            "name": "connectionName",
+            "description": "Connection name",
             "in": "path",
             "required": true,
             "x-ms-parameter-location": "method"
@@ -1005,72 +1143,25 @@
         "exportParameter": {
             "type": "string",
             "name": "export",
-            "description": "flag showing whether to export API definition in format specified by Accept header",
+            "description": "Flag showing whether to export API definition in format specified by Accept header",
             "in": "query",
             "required": false,
-            "x-ms-parameter-location": "method"
-        },
-        "pageSizeParameter": {
-            "name": "$top",
-            "description": "The number of items to be included in the result",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
             "x-ms-parameter-location": "method"
         },
         "filterParameter": {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation",
             "in": "query",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
         },
-        "skipTokenParameter": {
+        "gatewayIdParameter": {
             "type": "string",
-            "name": "skiptoken",
-            "description": "Skip Token",
-            "in": "query",
-            "required": false,
-            "x-ms-parameter-location": "method"
-        },
-        "apiConnectionParameter": {
-            "name": "connection",
-            "description": "The connection",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/ApiConnectionDefinition"
-            },
-            "x-ms-parameter-location": "method"
-        },
-        "connectionNameParameter": {
-            "type": "string",
-            "name": "connectionName",
-            "description": "Connection name",
+            "name": "gatewayId",
+            "description": "Gateway ID",
             "in": "path",
             "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "listConsentLinkParameter": {
-            "name": "listConsentLink",
-            "description": "The consent links",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/ListConsentLinksDefinition"
-            },
-            "x-ms-parameter-location": "method"
-        },
-        "confirmConsentCodeParameter": {
-            "name": "confirmConsentCode",
-            "description": "The consent code confirmation",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/ConfirmConsentCodeDefinition"
-            },
             "x-ms-parameter-location": "method"
         },
         "listConnectionKeysParameter": {
@@ -1083,12 +1174,65 @@
             },
             "x-ms-parameter-location": "method"
         },
-        "apiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "description": "API Version",
+        "listConsentLinkParameter": {
+            "name": "listConsentLink",
+            "description": "The consent links",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ListConsentLinksDefinition"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "locationParameter": {
+            "name": "location",
+            "description": "The location",
+            "in": "path",
             "required": true,
             "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "pageSizeParameter": {
+            "name": "$top",
+            "description": "The number of items to be included in the result",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-parameter-location": "method"
+        },
+        "resourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "description": "The resource group",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "skipTokenParameter": {
+            "type": "string",
+            "name": "skiptoken",
+            "description": "Skip Token",
+            "in": "query",
+            "required": false,
+            "x-ms-parameter-location": "method"
+        },
+        "subscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "wsdlDefinitionParameter": {
+            "name": "wsdlDefinition",
+            "description": "WSDL definition",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/WsdlDefinition"
+            },
             "x-ms-parameter-location": "method"
         }
     },
@@ -1217,7 +1361,7 @@
                     "type": "string"
                 },
                 "etag": {
-                    "description": "Resource etag",
+                    "description": "Resource ETag",
                     "type": "string"
                 },
                 "tags": {
@@ -1274,7 +1418,7 @@
         },
         "CustomApiDefinition": {
             "type": "object",
-            "description": "A Custom API",
+            "description": "A custom API",
             "additionalProperties": false,
             "properties": {
                 "properties": {
@@ -1590,15 +1734,12 @@
         "TagsDictionary": {
             "type": "object",
             "description": "Resource tags",
-            "additionalProperties": false,
-            "allOf": [
-                {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            ]
+            "additionalProperties": {
+                "type": "string"
+            },
+            "example": {
+                "SampleTagName": "SampleTagValue"
+            }
         },
         "ApiResourceGeneralInformation": {
             "type": "object",
@@ -1733,11 +1874,11 @@
             "type": "object",
             "properties": {
                 "parameterName": {
-                    "description": "Name of the parameter in the connection provider's oauthSettings",
+                    "description": "Name of the parameter in the connection provider's OAuth settings",
                     "type": "string"
                 },
                 "redirectUrl": {
-                    "description": "Name of the parameter in the connection provider's oauthSettings",
+                    "description": "Name of the parameter in the connection provider's OAuth settings",
                     "type": "string"
                 },
                 "objectId": {
@@ -1776,7 +1917,7 @@
                     "type": "string"
                 },
                 "displayName": {
-                    "description": "Display Name of the parameter in the connection provider's oauthSettings",
+                    "description": "Display name of the parameter in the connection provider's OAuth settings",
                     "type": "string"
                 },
                 "status": {
@@ -1904,7 +2045,7 @@
             "flow": "implicit",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "scopes": {
-                "user_impersonation": "impersonate your user account"
+                "user_impersonation": "impersonate a user account"
             }
         }
     },
