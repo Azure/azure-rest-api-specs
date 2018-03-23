@@ -53,6 +53,7 @@ input-file:
 - Microsoft.Web/stable/2016-03-01/CommonDefinitions.json
 - Microsoft.Web/stable/2016-03-01/DeletedWebApps.json
 - Microsoft.Web/stable/2016-03-01/Diagnostics.json
+- Microsoft.Web/stable/2016-03-01/Global.json
 - Microsoft.Web/stable/2016-03-01/Provider.json
 - Microsoft.Web/stable/2016-03-01/Recommendations.json
 - Microsoft.Web/stable/2016-03-01/ResourceHealthMetadata.json
