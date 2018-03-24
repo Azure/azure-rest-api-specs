@@ -1435,6 +1435,27 @@
       ],
       "description": "The parameters supplied to the create or update configuration operation."
     },
+    "DscConfigurationUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscConfigurationCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets configuration create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the create or update configuration operation."
+    },
     "DscMetaConfiguration": {
       "properties": {
         "configurationModeFrequencyMins": {
@@ -3284,7 +3305,7 @@
           "type": "string",
           "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
         }
-      },      
+      },
       "description": "The parameters supplied to the create test job operation."
     },
     "TestJob": {

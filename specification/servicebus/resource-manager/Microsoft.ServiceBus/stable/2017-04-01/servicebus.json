@@ -2393,7 +2393,9 @@
         ],
         "operationId": "Rules_CreateOrUpdate",
         "x-ms-examples": {
-          "RulesCreateOrUpdate": { "$ref": "./examples/Rules/RuleUpdate.json" }
+          "RulesCreateOrUpdate": { "$ref": "./examples/Rules/RuleCreate.json" },
+          "RulesCreateSQLFilter": { "$ref": "./examples/Rules/RuleCreate_sqlfilter.json" },
+          "RulesCreateCorelationFilter": { "$ref": "./examples/Rules/RuleCreate_Corelationfilter.json" }
         },
         "description": "Creates a new rule and updates an existing rule",
         "parameters": [
@@ -3626,6 +3628,13 @@
     "CorrelationFilter": {
       "type": "object",
       "properties": {
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "dictionary object for custom filters"
+        },
         "correlationId": {
           "type": "string",
           "description": "Identifier of the correlation."

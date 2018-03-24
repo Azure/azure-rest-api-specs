@@ -146,7 +146,7 @@
           "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
         },
         "x-ms-examples": {
-          "Get a DSC node configuration": {
+          "Create node configuration": {
             "$ref": "./examples/createOrUpdateDscNodeConfiguration.json"
           }
         },
@@ -182,10 +182,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DscNodeConfiguration"
-            }
+            "description": "OK"
           },
           "201": {
             "description": "Created",
@@ -336,6 +333,19 @@
         "configuration": {
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
           "description": "Gets or sets the configuration of the node."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of node configuration."
+        },
+        "nodeCount":{
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of nodes with this nodeconfiguration assigned"
+        },
+        "incrementNodeConfigurationBuild": {
+          "type": "boolean",
+          "description": "If a new build version of NodeConfiguration is required."
         }
       }
     },
@@ -382,7 +392,7 @@
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
           "description": "Gets or sets the configuration of the node."
         },
-        "newNodeConfigurationBuildVersionRequired": {
+        "incrementNodeConfigurationBuild": {
           "type": "boolean",
           "description": "If a new build version of NodeConfiguration is required."
         }

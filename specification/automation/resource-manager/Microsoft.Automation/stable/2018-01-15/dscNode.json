@@ -16,7 +16,8 @@
     "application/json"
   ],
   "produces": [
-    "application/json"
+    "application/json",
+    "text/plain"
   ],
   "security": [
     {
@@ -266,7 +267,7 @@
             "description": "Parameters supplied to the update dsc node."
           },
           {
-            "name": "parameters",
+            "name": "dscNodeUpdateParameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -484,8 +485,8 @@
           "url": "http://aka.ms/azureautomationsdk/dscnodereportoperations"
         },
         "x-ms-examples": {
-          "List DSC reports by node id.": {
-            "$ref": "./examples/listDscNodeReportsByNode.json"
+          "Get content of node": {
+            "$ref": "./examples/getDscNodeReportContent.json"
           }
         },
         "parameters": [
@@ -901,10 +902,6 @@
             "name": "AgentRegistrationKeyName",
             "modelAsString": true
           }
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
         }
       },
       "required": [
@@ -918,9 +915,13 @@
           "type": "string",
           "description": "Gets or sets the id of the dsc node."
         },
-        "nodeConfiguration": {
-          "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node."
+        "properties": {
+          "properties": {
+          "nodeConfiguration": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
+            "description": "Gets or sets the configuration of the node."
+          }}
         }
       },
       "description": "The parameters supplied to the update dsc node operation."
