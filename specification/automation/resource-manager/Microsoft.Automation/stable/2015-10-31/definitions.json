@@ -2184,6 +2184,49 @@
       "x-ms-client-flatten": true,
       "description": "Definition of the job stream."
     },
+    "Key":{
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Automation key name.",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationKeyName",
+            "modelAsString": true
+          }
+        },
+        "permissions": {
+          "type": "string",
+          "description": "Automation key permissions.",
+          "enum": [
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationKeyPermissions",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the Automation Key used for registration."
+        }
+      },
+      "description": "Automation key which is used to register a DSC Node"
+    },
+    "KeyListResult":{
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Key"
+          },
+          "description": "Lists the automation keys."
+        }
+      }
+    },
     "LinkedWorkspace": {
       "properties": {
         "id": {
