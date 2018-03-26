@@ -17,7 +17,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-
+=======
 ### Basic Information
 These are the global settings for the Automation API.
 
@@ -121,6 +121,18 @@ input-file:
 - Microsoft.Automation/stable/2018-01-15/dscNode.json
 - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
 - Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
+```
+
+---
+## Suppression
+``` yaml
+directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: definitions.json
+    where: $.definitions.TestJob
+  - suppress: BodyTopLevelProperties
+    from: definitions.json
+    where: $.definitions.TestJob.properties
 ```
 
 ---
