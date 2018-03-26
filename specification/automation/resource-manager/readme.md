@@ -4,8 +4,6 @@
 
 This is the AutoRest configuration file for Automation.
 
-
-
 ---
 ## Getting Started
 To build the SDK for Automation, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
@@ -19,8 +17,6 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the Automation API.
 
@@ -30,7 +26,6 @@ description: Automation Client
 openapi-type: arm
 tag: package-2017-05-preview
 ```
-
 
 ### Tag: package-2015-10
 
@@ -93,8 +88,19 @@ input-file:
 ```
 
 ---
-# Code Generation
+## Suppression
+``` yaml
+directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: definitions.json
+    where: $.definitions.TestJob
+  - suppress: BodyTopLevelProperties
+    from: definitions.json
+    where: $.definitions.TestJob.properties
+```
 
+---
+# Code Generation
 
 ## Swagger to SDK
 
@@ -189,7 +195,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2017-05-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/automation/mgmt/2017-05-15-preview/automation
 ```
-
 
 ## Java
 
