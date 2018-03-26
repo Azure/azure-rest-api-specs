@@ -66,8 +66,7 @@
           "AddonDetails"
         ],
         "operationId": "SupportPlanTypes_Get",
-        "summary": "Returns whether or not the canonical support plan of type {type} is enabled for the subscription.",
-        "description": "",
+        "description": "Returns whether or not the canonical support plan of type {type} is enabled for the subscription.",
         "x-ms-examples": {
           "SupportPlanTypes_Get": {
             "$ref": "./examples/SupportPlanTypes_Get.json"
@@ -110,8 +109,7 @@
           "AddonDetails"
         ],
         "operationId": "SupportPlanTypes_CreateOrUpdate",
-        "summary": "Creates or updates the Canonical support plan of type {type} for the subscription.",
-        "description": "",
+        "description": "Creates or updates the Canonical support plan of type {type} for the subscription.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "SupportPlanTypes_CreateOrUpdate": {
@@ -158,8 +156,7 @@
       },
       "delete": {
         "operationId": "SupportPlanTypes_Delete",
-        "summary": "Cancels the Canonical support plan of type {type} for the subscription.",
-        "description": "",
+        "description": "Cancels the Canonical support plan of type {type} for the subscription.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "SupportPlanTypes_Delete": {
@@ -206,9 +203,8 @@
         "tags": [
           "AddonStatus"
         ],
-        "operationId": "AddonInformationForSubscriptionOperation",
-        "summary": "Returns the canonical support plan information for all types for the subscription.",
-        "description": "",
+        "operationId": "SupportPlanTypes_ListInfo",
+        "description": "Returns the canonical support plan information for all types for the subscription.",
         "x-ms-examples": {
           "CanonicalListSupportPlanInfo_Post": {
             "$ref": "./examples/CanonicalListSupportPlanInfo_Post.json"
@@ -371,7 +367,7 @@
     "ErrorDefinition": {
       "type": "object",
       "title": "Error",
-      "description": "Error description.",
+      "description": "Error description and code explaining why an operation failed.",
       "required": [
         "message",
         "code"
@@ -379,11 +375,11 @@
       "properties": {
         "message": {
           "type": "string",
-          "title": "Message"
+          "description": "Description of the error."
         },
         "code": {
           "type": "integer",
-          "title": "Code",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "minimum": 100,
           "maximum": 600
         }
