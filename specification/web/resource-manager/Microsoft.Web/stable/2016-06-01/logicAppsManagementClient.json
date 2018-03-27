@@ -9,12 +9,10 @@
         "https"
     ],
     "consumes": [
-        "application/json",
-        "text/json"
+        "application/json"
     ],
     "produces": [
-        "application/json",
-        "text/json"
+        "application/json"
     ],
     "paths": {
         "/subscriptions/{subscriptionId}/providers/Microsoft.Web/connectionGateways": {
@@ -234,10 +232,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "Successfully deleted the connection gateway"
                     },
                     "204": {
-                        "description": "No Content"
+                        "description": "No connection gateway to delete"
                     }
                 }
             }
@@ -424,9 +422,6 @@
                     },
                     {
                         "$ref": "#/parameters/apiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/exportParameter"
                     }
                 ],
                 "responses": {
@@ -542,10 +537,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "Successfully deleted the custom API"
                     },
                     "204": {
-                        "description": "No Content"
+                        "description": "No custom API to delete"
                     }
                 }
             }
@@ -582,7 +577,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "custom API succesfully moved"
                     }
                 }
             }
@@ -721,9 +716,6 @@
                     },
                     {
                         "$ref": "#/parameters/apiNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/exportParameter"
                     },
                     {
                         "$ref": "#/parameters/apiVersionParameter"
@@ -928,10 +920,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "Successfully deleted the connection"
                     },
                     "204": {
-                        "description": "No Content"
+                        "description": "No connection to delete"
                     }
                 }
             }
@@ -1008,49 +1000,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Confirmation of the consent code",
                         "schema": {
                             "$ref": "#/definitions/ApiConnectionDefinition"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/listConnectionKeys": {
-            "post": {
-                "tags": [
-                    "Connections"
-                ],
-                "summary": "List connection keys",
-                "operationId": "Connections_ListConnectionKeys",
-                "description": "Lists connection keys for a specific connection",
-                "x-ms-examples": {
-                    "List connection keys": {
-                        "$ref": "./examples/connectionsListConnectionKeys.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/connectionNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/listConnectionKeysParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The connection keys",
-                        "schema": {
-                            "$ref": "#/definitions/ConnectionSecretsDefinition"
                         }
                     }
                 }
@@ -1138,14 +1090,6 @@
             "schema": {
                 "$ref": "#/definitions/CustomApiReference"
             },
-            "x-ms-parameter-location": "method"
-        },
-        "exportParameter": {
-            "type": "string",
-            "name": "export",
-            "description": "Flag showing whether to export API definition in format specified by Accept header",
-            "in": "query",
-            "required": false,
             "x-ms-parameter-location": "method"
         },
         "filterParameter": {
@@ -1453,7 +1397,10 @@
                         "type": "string"
                     }
                 },
-                "swagger": {},
+                "swagger": {
+                    "type": "object",
+                    "description": "The JSON representation of the swagger"
+                },
                 "brandColor": {
                     "type": "string",
                     "description": "Brand color"
@@ -1611,7 +1558,10 @@
             "x-abstract": true,
             "additionalProperties": false,
             "properties": {
-                "swagger": {},
+                "swagger": {
+                    "type": "object",
+                    "description": "The JSON representation of the swagger"
+                },
                 "brandColor": {
                     "type": "string",
                     "description": "Brand color"
@@ -1681,7 +1631,10 @@
                         "type": "string"
                     }
                 },
-                "swagger": {},
+                "swagger": {
+                    "type": "object",
+                    "description": "The JSON representation of the swagger"
+                },
                 "backendService": {
                     "$ref": "#/definitions/ApiResourceBackendService"
                 },
@@ -1970,19 +1923,6 @@
                         }
                     },
                     "x-ms-client-flatten": true
-                }
-            }
-        },
-        "ConnectionSecretsDefinition": {
-            "description": "Connection secrets",
-            "type": "object",
-            "properties": {
-                "parameterValues": {
-                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
-                },
-                "connectionKey": {
-                    "description": "Connection Key",
-                    "type": "string"
                 }
             }
         },
