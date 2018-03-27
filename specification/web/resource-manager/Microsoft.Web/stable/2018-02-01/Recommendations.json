@@ -130,6 +130,12 @@
             "type": "string"
           },
           {
+            "name": "expiredOnly",
+            "in": "query",
+            "description": "Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.",
+            "type": "boolean"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Filter is specified by using OData syntax. Example: $filter=channels eq 'Api' or channel eq 'Notification' and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[PT1H|PT1M|P1D]",
@@ -452,16 +458,29 @@
                 "modelAsString": false
               }
             },
-            "tags": {
+            "categoryTags": {
               "description": "The list of category tags that this recommendation belongs to.",
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "readOnly": true
             },
             "actionName": {
               "description": "Name of action recommended by this object.",
               "type": "string"
+            },
+            "enabled": {
+              "format": "int32",
+              "description": "True if this recommendation is still valid (i.e. \"actionable\"). False if it is invalid.",
+              "type": "integer"
+            },
+            "states": {
+              "description": "The list of states of this recommendation. If it's null then it shoud be considered \"Active\".",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "startTime": {
               "format": "date-time",
@@ -547,7 +566,7 @@
         "properties": {
           "description": "RecommendationRule resource specific properties",
           "properties": {
-            "name": {
+            "recommendationName": {
               "description": "Unique name of the rule.",
               "type": "string"
             },
@@ -602,12 +621,13 @@
                 "modelAsString": false
               }
             },
-            "tags": {
-              "description": "An array of category tags that the rule contains.",
+            "categoryTags": {
+              "description": "The list of category tags that this recommendation belongs to.",
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "readOnly": true
             },
             "isDynamic": {
               "description": "True if this is associated with a dynamically added rule",

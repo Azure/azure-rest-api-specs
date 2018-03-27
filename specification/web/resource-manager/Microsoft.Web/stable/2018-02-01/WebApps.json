@@ -15353,7 +15353,7 @@
               "description": "Extra Info URL.",
               "type": "string"
             },
-            "type": {
+            "web_job_type": {
               "description": "Job type.",
               "enum": [
                 "Continuous",
@@ -16390,16 +16390,13 @@
         "properties": {
           "description": "ProcessInfo resource specific properties",
           "properties": {
-            "id": {
+            "identifier": {
               "format": "int32",
               "description": "ARM Identifier for deployment.",
               "type": "integer",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
+              "readOnly": true
             },
-            "name": {
+            "deployment_name": {
               "description": "Deployment name.",
               "type": "string"
             },
@@ -16690,10 +16687,11 @@
         "properties": {
           "description": "ProcessThreadInfo resource specific properties",
           "properties": {
-            "id": {
+            "identifier": {
               "format": "int32",
-              "description": "ARM Identifier for deployment.",
-              "type": "integer"
+              "description": "Site extension ID.",
+              "type": "integer",
+              "readOnly": true
             },
             "href": {
               "description": "HRef URI.",
@@ -17214,7 +17212,7 @@
               "type": "string",
               "readOnly": true
             },
-            "id": {
+            "snapshotId": {
               "format": "int32",
               "description": "The id of the snapshot",
               "type": "integer",
@@ -17258,15 +17256,14 @@
         "properties": {
           "description": "SiteExtensionInfo resource specific properties",
           "properties": {
-            "id": {
+            "extension_id": {
               "description": "Site extension ID.",
               "type": "string"
             },
             "title": {
-              "description": "Site extension title.",
               "type": "string"
             },
-            "type": {
+            "extension_type": {
               "description": "Site extension type.",
               "enum": [
                 "Gallery",
@@ -17390,7 +17387,7 @@
         "properties": {
           "description": "SiteInstance resource specific properties",
           "properties": {
-            "name": {
+            "siteInstanceName": {
               "description": "Name of instance.",
               "type": "string",
               "readOnly": true
@@ -17783,8 +17780,8 @@
         "properties": {
           "description": "SlotDifference resource specific properties",
           "properties": {
-            "type": {
-              "description": "Type of the difference: Information, Warning or Error.",
+            "level": {
+              "description": "Level of the difference: Information, Warning or Error.",
               "type": "string",
               "readOnly": true
             },
@@ -18090,18 +18087,13 @@
         "properties": {
           "description": "TriggeredJobRun resource specific properties",
           "properties": {
-            "id": {
+            "web_job_id": {
               "description": "Job ID.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
+              "type": "string"
             },
-            "name": {
+            "web_job_name": {
               "description": "Job name.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "status": {
               "description": "Job status.",
@@ -18191,7 +18183,7 @@
               "description": "Extra Info URL.",
               "type": "string"
             },
-            "type": {
+            "web_job_type": {
               "description": "Job type.",
               "enum": [
                 "Continuous",
@@ -18289,7 +18281,7 @@
               "description": "Extra Info URL.",
               "type": "string"
             },
-            "type": {
+            "web_job_type": {
               "description": "Job type.",
               "enum": [
                 "Continuous",
