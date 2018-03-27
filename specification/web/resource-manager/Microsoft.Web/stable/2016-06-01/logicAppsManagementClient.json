@@ -25,7 +25,7 @@
                 "description": "Gets a list of gateways under a subscription",
                 "x-ms-examples": {
                     "List all connection gateways": {
-                        "$ref": "./examples/connectionGatewayListAll.json"
+                        "$ref": "./examples/connectionGatewaysListAll.json"
                     }
                 },
                 "parameters": [
@@ -59,7 +59,7 @@
                 "description": "Gets a list of gateways under a subscription and in a specific resource group",
                 "x-ms-examples": {
                     "List all connection gateways": {
-                        "$ref": "./examples/connectionGatewayList.json"
+                        "$ref": "./examples/connectionGatewaysList.json"
                     }
                 },
                 "parameters": [
@@ -96,7 +96,7 @@
                 "description": "Gets a specific gateway under a subscription and in a specific resource group",
                 "x-ms-examples": {
                     "Get the connection gateway definition": {
-                        "$ref": "./examples/connectionGatewayGet.json"
+                        "$ref": "./examples/connectionGatewaysGet.json"
                     }
                 },
                 "parameters": [
@@ -131,7 +131,7 @@
                 "description": "Creates or updates a specific gateway for under a subscription and in a specific resource group",
                 "x-ms-examples": {
                     "Replace a connection gateway definition": {
-                        "$ref": "./examples/connectionGatewayCreateOrUpdate.json"
+                        "$ref": "./examples/connectionGatewaysCreateOrUpdate.json"
                     }
                 },
                 "parameters": [
@@ -175,7 +175,7 @@
                 "description": "Updates a connection gateway's tags",
                 "x-ms-examples": {
                     "Update a connection gateway's tags": {
-                        "$ref": "./examples/connectionGatewayUpdate.json"
+                        "$ref": "./examples/connectionGatewaysUpdate.json"
                     }
                 },
                 "parameters": [
@@ -213,7 +213,7 @@
                 "description": "Deletes a specific gateway for under a subscription and in a specific resource group",
                 "x-ms-examples": {
                     "Delete a connection gateway definition": {
-                        "$ref": "./examples/connectionGatewayDelete.json"
+                        "$ref": "./examples/connectionGatewaysDelete.json"
                     }
                 },
                 "parameters": [
@@ -632,7 +632,7 @@
                 "description": "Parses the specified WSDL and extracts the API definition",
                 "x-ms-examples": {
                     "Extract definition from WSDL": {
-                        "$ref": "./examples/customApisExtractDefinitionFromWsdl.json"
+                        "$ref": "./examples/customApisExtractApiDefinitionFromWsdl.json"
                     }
                 },
                 "parameters": [
@@ -1469,18 +1469,17 @@
             }
         },
         "ApiType": {
-            "type": "integer",
+            "type": "string",
             "description": "The API type",
-            "x-enumNames": [
+            "enum": [
                 "NotSpecified",
                 "Rest",
                 "Soap"
             ],
-            "enum": [
-                0,
-                1,
-                2
-            ]
+            "x-ms-enum": {
+                "name": "ApiType",
+                "modelAsString": true
+            }
         },
         "WsdlDefinition": {
             "type": "object",
@@ -1525,18 +1524,17 @@
             }
         },
         "WsdlImportMethod": {
-            "type": "integer",
+            "type": "string",
             "description": "The WSDL import method",
-            "x-enumNames": [
+            "enum": [
                 "NotSpecified",
                 "SoapToRest",
                 "SoapPassThrough"
             ],
-            "enum": [
-                0,
-                1,
-                2
-            ]
+            "x-ms-enum": {
+                "name": "WsdlImportMethod",
+                "modelAsString": true
+            }
         },
         "CustomApiReference": {
             "type": "object",
@@ -1883,7 +1881,7 @@
                     "type": "string",
                     "x-ms-enum": {
                         "name": "LinkState",
-                        "modelAsString": false
+                        "modelAsString": true
                     }
                 }
             }
