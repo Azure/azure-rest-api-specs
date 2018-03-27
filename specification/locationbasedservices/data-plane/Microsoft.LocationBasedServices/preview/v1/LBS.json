@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Azure Location Based Services",
+        "title": "Azure Maps",
         "version": "1.0",
-        "description": "Azure Location Based Services REST APIs"
+        "description": "Azure Maps REST APIs"
     },
     "host": "atlas.microsoft.com",
     "schemes": [
@@ -37,7 +37,7 @@
     "parameters": {
         "SubscriptionKey": {
             "name": "subscription-key",
-            "description": "Azure Location Based Services subscription key",
+            "description": "Azure Maps subscription key",
             "type": "string",
             "in": "query",
             "required": true,
@@ -45,7 +45,7 @@
         },
         "ApiVersion": {
             "name": "api-version",
-            "description": "Version number of Azure Location Based Services API.  Current version is 1.0",
+            "description": "Version number of Azure Maps API.  Current version is 1.0",
             "type": "string",
             "in": "query",
             "required": true,
@@ -66,7 +66,6 @@
             "description": "Alternatively, use alias \"o\". Options available for types of information returned in the result.",
             "required": false,
             "type": "string",
-            "x-ms-parameter-location": "method",
             "enum": [
                 "none",
                 "zoneInfo",
@@ -94,7 +93,8 @@
                         "description": "Include both zoneinfo and transitions in the result."
                     }
                 ]
-            }
+            },
+            "x-ms-parameter-location": "method"
         },
         "TimezoneTimeStamp": {
             "name": "timeStamp",
@@ -122,7 +122,7 @@
             "type": "integer",
             "x-ms-parameter-location": "method"
         },
-        "FormatJSONXML": {
+        "TextFormat": {
             "name": "format",
             "description": "Desired format of the response. Possible values are json \u0026 xml.",
             "type": "string",
@@ -131,18 +131,55 @@
             "enum": [
                 "json",
                 "xml"
-            ]
+            ],
+            "x-ms-parameter-location": "method"
         },
-        "FormatJPGPNG": {
+        "RasterTileFormat": {
             "name": "format",
-            "description": "Desired format of the response. Possible values are jpg \u0026 png.",
+            "description": "Desired format of the response. Possible value: png.",
             "type": "string",
             "in": "path",
             "required": true,
             "enum": [
-                "jpg",
                 "png"
-            ]
+            ],
+            "x-ms-enum": {
+                "name": "format",
+                "modelAsString": false,
+                "values": [
+                    {
+                        "value": "png",
+                        "description": "An image in the png format. Supports zoom levels 0 through 18."
+                    }
+                ]
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "TileFormat": {
+            "name": "format",
+            "description": "Desired format of the response. Possible values are png \u0026 pbf.",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "enum": [
+                "png",
+                "pbf"
+            ],
+            "x-ms-enum": {
+                "name": "format",
+                "modelAsString": false,
+                "values": [
+                    {
+                        "value": "png",
+                        "description": "An image in the png format. Supports zoom levels 0 through 18."
+                    },
+                    {
+                        "value": "pbf",
+                        "description": "Vector graphic in the pbf format. Supports zoom levels 0 through 20."
+                    }
+                ]
+            },
+            "x-ms-parameter-location": "method"
         },
         "xTileIndex": {
             "name": "x",
@@ -150,7 +187,8 @@
             "in": "query",
             "description": "X index for the desired tile, based on Spherical Mercator projection coordinate system (EPSG:3857) ",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "x-ms-parameter-location": "method"
         },
         "yTileIndex": {
             "name": "y",
@@ -158,15 +196,8 @@
             "in": "query",
             "description": "Y index for the desired tile, based on Spherical Mercator projection coordinate system (EPSG:3857)",
             "required": true,
-            "type": "integer"
-        },
-        "Text": {
-            "name": "text",
-            "in": "query",
-            "description": "Boolean to exclude textual data from response. Only images and country names will be in response.",
-            "required": false,
-            "type": "boolean",
-            "default": true
+            "type": "integer",
+            "x-ms-parameter-location": "method"
         },
         "Zoom": {
             "name": "zoom",
@@ -174,29 +205,60 @@
             "description": "Zoom level for desired tile.",
             "required": true,
             "type": "integer",
-            "minimum": 0,
-            "maximum": 18
+            "x-ms-parameter-location": "method"
+        },
+        "Text": {
+            "name": "text",
+            "in": "query",
+            "description": "Yes/no value to exclude textual data from response. Only images and country names will be in response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+                "yes",
+                "no"
+            ],
+            "default": "yes",
+            "x-ms-parameter-location": "method"
         },
         "Language": {
             "name": "language",
             "in": "query",
             "description": "Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-location": "method"
         },
-        "BiasLat": {
+        "OptionalBiasLat": {
             "name": "lat",
             "in": "query",
             "description": "Latitude where results should be biased.  E.g. 37.337",
             "required": false,
-            "type": "number"
+            "type": "number",
+            "x-ms-parameter-location": "method"
         },
-        "BiasLon": {
+        "OptionalBiasLon": {
             "name": "lon",
             "in": "query",
             "description": "Longitude where results should be biased.  E.g. -121.89",
             "required": false,
-            "type": "number"
+            "type": "number",
+            "x-ms-parameter-location": "method"
+        },
+        "RequiredBiasLat": {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude where results should be biased.  E.g. 37.337",
+            "required": true,
+            "type": "number",
+            "x-ms-parameter-location": "method"
+        },
+        "RequiredBiasLon": {
+            "name": "lon",
+            "in": "query",
+            "description": "Longitude where results should be biased.  E.g. -121.89",
+            "required": true,
+            "type": "number",
+            "x-ms-parameter-location": "method"
         },
         "Typeahead": {
             "name": "typeahead",
@@ -204,7 +266,8 @@
             "description": "Boolean.  If the typeahead flag is set, the query will be interpreted as a partial input and the search will enter predictive mode",
             "required": false,
             "type": "boolean",
-            "default": false
+            "default": false,
+            "x-ms-parameter-location": "method"
         },
         "Limit": {
             "name": "limit",
@@ -214,7 +277,8 @@
             "type": "integer",
             "default": 10,
             "minimum": 1,
-            "maximum": 100
+            "maximum": 100,
+            "x-ms-parameter-location": "method"
         },
         "CountrySet": {
             "name": "countrySet",
@@ -225,14 +289,92 @@
             "items": {
                 "type": "string"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "csv",
+            "x-ms-parameter-location": "method"
         },
         "Radius": {
             "name": "radius",
             "in": "query",
             "description": "The radius in meters to for the results to be constrained to the defined area",
             "required": false,
-            "type": "number"
+            "type": "number",
+            "x-ms-parameter-location": "method"
+        },
+        "Query": {
+            "name": "query",
+            "in": "query",
+            "description": "The applicable query string and/or coordinates",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "SearchResultIndexSet": {
+            "name": "idxSet",
+            "in": "query",
+            "description": "A comma separated list of indexes which should be utilized for the search. Item order does not matter. Available indexes are: Addr = Address range interpolation, Geo = Geographies, PAD = Point Addresses, POI = Points of interest, Str = Streets, Xstr = Cross Streets (intersections)",
+            "required": false,
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "Addr",
+                    "Geo",
+                    "PAD",
+                    "POI",
+                    "Str",
+                    "Xstr"
+                ],
+                "x-ms-enum": {
+                    "name": "idxSet",
+                    "modelAsString": false,
+                    "values": [
+                        {
+                            "value": "Addr",
+                            "description": "Address range interpolation"
+                        },
+                        {
+                            "value": "Geo",
+                            "description": "Geographies"
+                        },
+                        {
+                            "value": "PAD",
+                            "description": "Point Addresses"
+                        },
+                        {
+                            "value": "POI",
+                            "description": "Points of interest"
+                        },
+                        {
+                            "value": "Str",
+                            "description": "Streets"
+                        },
+                        {
+                            "value": "Xstr",
+                            "description": "Cross Streets (Intersections)"
+                        }
+                    ]
+                }
+            },
+            "collectionFormat": "csv",
+            "x-ms-parameter-location": "method"
+        },
+        "BoundingBoxTopLeft": {
+            "x-client-name": "BoundingBoxTopLeft",
+            "name": "topLeft",
+            "in": "query",
+            "description": "Top left position of the bounding box.  E.g. 37.553,-122.453",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "BoundingBoxBottomRight": {
+            "x-client-name": "BoundingBoxBottomRight",
+            "name": "btmRight",
+            "in": "query",
+            "description": "Bottom right position of the bounding box. E.g. 37.553,-122.453",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
         }
     },
     "responses": {
@@ -285,7 +427,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
                         "name": "mincoordinates",
@@ -347,7 +489,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     }
                 ],
                 "responses": {
@@ -392,7 +534,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
                         "$ref": "#/parameters/Text"
@@ -440,14 +582,10 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "zoom",
-                        "in": "query",
-                        "description": "Zoom level for desired tile.",
-                        "required": true,
-                        "type": "integer"
+                        "$ref": "#/parameters/Zoom"
                     },
                     {
                         "$ref": "#/parameters/xTileIndex"
@@ -486,11 +624,11 @@
         },
         "/map/static/{format}": {
             "get": {
-                "description": "Returns a raster map tile",
-                "operationId": "Render_GetMapTileStatic",
+                "description": "Returns a raster map image",
+                "operationId": "Render_GetMapStaticImage",
                 "x-ms-examples": {
-                    "GetMapStaticTile": {
-                        "$ref": "./examples/GetMapTileStatic.json"
+                    "GetMapStaticImage": {
+                        "$ref": "./examples/GetMapStaticImage.json"
                     }
                 },
                 "parameters": [
@@ -501,12 +639,12 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJPGPNG"
+                        "$ref": "#/parameters/RasterTileFormat"
                     },
                     {
                         "name": "layer",
                         "in": "query",
-                        "description": "Map layer requested. Possible values are basic, hybrid \u0026 labels. If layer is set to labels or hybrid, the format should be png.",
+                        "description": "Map layer requested. If layer is set to labels or hybrid, the format should be png.",
                         "required": false,
                         "default": "basic",
                         "type": "string",
@@ -540,15 +678,20 @@
                         "description": "Map style to be returned.  Currently, only style available is main.",
                         "required": false,
                         "default": "main",
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                            "main"
+                        ]
                     },
                     {
                         "name": "zoom",
                         "in": "query",
-                        "description": "Zoom level of the map desired.  Range is 0 to 20. Note: bbox may not be used in conjunction with center, height or width.",
+                        "description": "Zoom level of the map desired. Note: bbox may not be used in conjunction with center, height or width.",
                         "required": false,
                         "default": 12,
-                        "type": "integer"
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 20
                     },
                     {
                         "name": "center",
@@ -587,7 +730,6 @@
                 ],
                 "produces": [
                     "image/png",
-                    "image/jpg",
                     "application/json"
                 ],
                 "responses": {
@@ -632,16 +774,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "name": "format",
-                        "description": "Desired format of the response. Possible values are jpg, png \u0026 pbf.",
-                        "type": "string",
-                        "in": "path",
-                        "required": true,
-                        "enum": [
-                            "jpg",
-                            "png",
-                            "pbf"
-                        ]
+                        "$ref": "#/parameters/TileFormat"
                     },
                     {
                         "name": "layer",
@@ -688,17 +821,13 @@
                             "values": [
                                 {
                                     "value": "main",
-                                    "description": "Azure Location Based Services main style"
+                                    "description": "Azure Maps main style"
                                 }
                             ]
                         }
                     },
                     {
-                        "name": "zoom",
-                        "in": "query",
-                        "description": "Zoom level for desired tile.  0 to 18 for raster tiles, 0 through 20 for vector tiles",
-                        "required": true,
-                        "type": "integer"
+                        "$ref": "#/parameters/Zoom"
                     },
                     {
                         "$ref": "#/parameters/xTileIndex"
@@ -739,7 +868,6 @@
                 "produces": [
                     "image/png",
                     "image/pbf",
-                    "image/jpg",
                     "application/json"
                 ],
                 "responses": {
@@ -784,14 +912,10 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "query",
-                        "in": "query",
-                        "description": "The applicable query string and/or coordinates",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/Query"
                     },
                     {
                         "$ref": "#/parameters/Typeahead"
@@ -813,27 +937,19 @@
                         "$ref": "#/parameters/CountrySet"
                     },
                     {
-                        "$ref": "#/parameters/BiasLat"
+                        "$ref": "#/parameters/OptionalBiasLat"
                     },
                     {
-                        "$ref": "#/parameters/BiasLon"
+                        "$ref": "#/parameters/OptionalBiasLon"
                     },
                     {
                         "$ref": "#/parameters/Radius"
                     },
                     {
-                        "name": "topLeft",
-                        "in": "query",
-                        "description": "Top left position of the bounding box.  E.g. 37.553,-122.453",
-                        "required": false,
-                        "type": "string"
+                        "$ref": "#/parameters/BoundingBoxTopLeft"
                     },
                     {
-                        "name": "btmRight",
-                        "in": "query",
-                        "description": "Bottom right position of the bounding box. E.g. 37.553,-122.453",
-                        "required": false,
-                        "type": "string"
+                        "$ref": "#/parameters/BoundingBoxBottomRight"
                     },
                     {
                         "$ref": "#/parameters/Language"
@@ -866,11 +982,7 @@
                         "maximum": 4
                     },
                     {
-                        "name": "idxSet",
-                        "in": "query",
-                        "description": "A comma separated list of indexes which should be utilized for the search. Item order does not matter. Available indexes are: Addr = Address range interpolation, Geo = Geographies, PAD = Point Addresses, POI = Points of interest, Str = Streets, Xstr = Cross Streets (intersections)",
-                        "required": false,
-                        "type": "string"
+                        "$ref": "#/parameters/SearchResultIndexSet"
                     }
                 ],
                 "responses": {
@@ -915,14 +1027,10 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "query",
-                        "in": "query",
-                        "description": "The applicable query string and/or coordinates",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/Query"
                     },
                     {
                         "$ref": "#/parameters/Typeahead"
@@ -944,27 +1052,19 @@
                         "$ref": "#/parameters/CountrySet"
                     },
                     {
-                        "$ref": "#/parameters/BiasLat"
+                        "$ref": "#/parameters/OptionalBiasLat"
                     },
                     {
-                        "$ref": "#/parameters/BiasLon"
+                        "$ref": "#/parameters/OptionalBiasLon"
                     },
                     {
                         "$ref": "#/parameters/Radius"
                     },
                     {
-                        "name": "topLeft",
-                        "in": "query",
-                        "description": "Top left position of the bounding box.  E.g. 37.553,-122.453",
-                        "required": false,
-                        "type": "string"
+                        "$ref": "#/parameters/BoundingBoxTopLeft"
                     },
                     {
-                        "name": "btmRight",
-                        "in": "query",
-                        "description": "Bottom right position of the bounding box. E.g. 37.553,-122.453",
-                        "required": false,
-                        "type": "string"
+                        "$ref": "#/parameters/BoundingBoxBottomRight"
                     },
                     {
                         "$ref": "#/parameters/Language"
@@ -1019,14 +1119,10 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "query",
-                        "in": "query",
-                        "description": "The applicable query string and/or coordinates",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/Query"
                     },
                     {
                         "$ref": "#/parameters/Typeahead"
@@ -1054,27 +1150,19 @@
                         "$ref": "#/parameters/CountrySet"
                     },
                     {
-                        "$ref": "#/parameters/BiasLat"
+                        "$ref": "#/parameters/OptionalBiasLat"
                     },
                     {
-                        "$ref": "#/parameters/BiasLon"
+                        "$ref": "#/parameters/OptionalBiasLon"
                     },
                     {
                         "$ref": "#/parameters/Radius"
                     },
                     {
-                        "name": "topLeft",
-                        "in": "query",
-                        "description": "Top left position of the bounding box.  E.g. 37.553,-122.453",
-                        "required": false,
-                        "type": "string"
+                        "$ref": "#/parameters/BoundingBoxTopLeft"
                     },
                     {
-                        "name": "btmRight",
-                        "in": "query",
-                        "description": "Bottom right position of the bounding box. E.g. 37.553,-122.453",
-                        "required": false,
-                        "type": "string"
+                        "$ref": "#/parameters/BoundingBoxBottomRight"
                     },
                     {
                         "$ref": "#/parameters/Language"
@@ -1129,14 +1217,10 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "query",
-                        "in": "query",
-                        "description": "The applicable query string and/or coordinates",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/Query"
                     },
                     {
                         "$ref": "#/parameters/Typeahead"
@@ -1157,27 +1241,19 @@
                         "$ref": "#/parameters/CountrySet"
                     },
                     {
-                        "$ref": "#/parameters/BiasLat"
+                        "$ref": "#/parameters/OptionalBiasLat"
                     },
                     {
-                        "$ref": "#/parameters/BiasLon"
+                        "$ref": "#/parameters/OptionalBiasLon"
                     },
                     {
                         "$ref": "#/parameters/Radius"
                     },
                     {
-                        "name": "topLeft",
-                        "in": "query",
-                        "description": "Top left position of the bounding box.  E.g. 37.553,-122.453",
-                        "required": false,
-                        "type": "string"
+                        "$ref": "#/parameters/BoundingBoxTopLeft"
                     },
                     {
-                        "name": "btmRight",
-                        "in": "query",
-                        "description": "Bottom right position of the bounding box. E.g. 37.553,-122.453",
-                        "required": false,
-                        "type": "string"
+                        "$ref": "#/parameters/BoundingBoxBottomRight"
                     },
                     {
                         "$ref": "#/parameters/Language"
@@ -1232,14 +1308,10 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "query",
-                        "in": "query",
-                        "description": "The applicable query string and/or coordinates",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/Query"
                     },
                     {
                         "name": "spatialKeys",
@@ -1267,11 +1339,7 @@
                         "maximum": 360.0
                     },
                     {
-                        "name": "radius",
-                        "in": "query",
-                        "description": "The maximum distance in meters from the specified position for the reversegeocode to consider.  E.g. 10000 (10km)",
-                        "required": false,
-                        "type": "number"
+                        "$ref": "#/parameters/Radius"
                     },
                     {
                         "name": "number",
@@ -1338,14 +1406,10 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "query",
-                        "in": "query",
-                        "description": "The applicable query string and/or coordinates",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/Query"
                     },
                     {
                         "name": "spatialKeys",
@@ -1365,11 +1429,7 @@
                         "maximum": 360.0
                     },
                     {
-                        "name": "radius",
-                        "in": "query",
-                        "description": "The maximum distance in meters from the specified position for the reversegeocode to consider.  E.g. 10000 (10km)",
-                        "required": false,
-                        "type": "number"
+                        "$ref": "#/parameters/Radius"
                     },
                     {
                         "$ref": "#/parameters/Language"
@@ -1417,7 +1477,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
                         "name": "countryCode",
@@ -1556,7 +1616,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
                         "name": "query",
@@ -2055,14 +2115,10 @@
                         "$ref": "#/parameters/TimezoneTransitionsYears"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "query",
-                        "in": "query",
-                        "description": "The applicable query string and/or coordinates",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/Query"
                     }
                 ],
                 "responses": {
@@ -2122,14 +2178,10 @@
                         "$ref": "#/parameters/TimezoneTransitionsYears"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "query",
-                        "in": "query",
-                        "description": "The applicable query string and/or coordinates",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/Query"
                     }
                 ],
                 "responses": {
@@ -2174,7 +2226,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     }
                 ],
                 "responses": {
@@ -2219,7 +2271,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     }
                 ],
                 "responses": {
@@ -2264,7 +2316,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     }
                 ],
                 "responses": {
@@ -2309,14 +2361,10 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
-                        "name": "query",
-                        "in": "query",
-                        "description": "The applicable query string and/or coordinates",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/Query"
                     },
                     {
                         "name": "territory",
@@ -2368,14 +2416,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "name": "format",
-                        "description": "Desired format of the response",
-                        "type": "string",
-                        "in": "path",
-                        "required": true,
-                        "enum": [
-                            "png"
-                        ]
+                        "$ref": "#/parameters/RasterTileFormat"
                     },
                     {
                         "name": "style",
@@ -2424,7 +2465,7 @@
                     {
                         "name": "thickness",
                         "in": "query",
-                        "description": "The segment width multiplier.",
+                        "description": "The value of the width of the line representing traffic.  This value is a multiplier and the accepted values range from 1 - 20.  The default value is 10.",
                         "required": false,
                         "type": "integer",
                         "minimum": 1,
@@ -2478,7 +2519,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
                         "name": "style",
@@ -2593,15 +2634,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "name": "format",
-                        "description": "Desired format of the response",
-                        "type": "string",
-                        "in": "path",
-                        "required": true,
-                        "enum": [
-                            "png",
-                            "gif"
-                        ]
+                        "$ref": "#/parameters/RasterTileFormat"
                     },
                     {
                         "name": "style",
@@ -2681,7 +2714,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
                         "name": "style",
@@ -2825,7 +2858,7 @@
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/FormatJSONXML"
+                        "$ref": "#/parameters/TextFormat"
                     },
                     {
                         "name": "boundingbox",
@@ -3004,6 +3037,15 @@
                 "streetNumber": {
                     "description": "Street Number property",
                     "type": "string",
+                    "readOnly": true
+                },
+                "routeNumbers": {
+                    "description": "number of routes",
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "readOnly": true
+                    },
                     "readOnly": true
                 },
                 "streetName": {
@@ -3567,19 +3609,15 @@
                     "readOnly": true
                 },
                 "poi": {
-                    "description": "POI property",
                     "$ref": "#/definitions/Poi"
                 },
                 "address": {
-                    "description": "The address of the result",
                     "$ref": "#/definitions/Address"
                 },
                 "position": {
-                    "description": "Coordinates of the result",
                     "$ref": "#/definitions/Position"
                 },
                 "viewport": {
-                    "description": "The viewport that covers the result",
                     "$ref": "#/definitions/Viewport"
                 },
                 "boundingBox": {
@@ -3704,23 +3742,18 @@
                                 "readOnly": true
                             },
                             "poi": {
-                                "description": "POI property",
                                 "$ref": "#/definitions/Poi"
                             },
                             "address": {
-                                "description": "The address of the result",
                                 "$ref": "#/definitions/Address"
                             },
                             "position": {
-                                "description": "Coordinates of the result",
                                 "$ref": "#/definitions/Position"
                             },
                             "viewport": {
-                                "description": "The viewport that covers the result",
                                 "$ref": "#/definitions/Viewport"
                             },
                             "entryPoints": {
-                                "description": "Entry Points array",
                                 "$ref": "#/definitions/EntryPoints"
                             }
                         }
@@ -3830,27 +3863,21 @@
                     "readOnly": true
                 },
                 "poi": {
-                    "description": "POI property",
                     "$ref": "#/definitions/Poi"
                 },
                 "address": {
-                    "description": "The address of the result",
                     "$ref": "#/definitions/Address"
                 },
                 "position": {
-                    "description": "Coordinates of the result",
                     "$ref": "#/definitions/Position"
                 },
                 "viewport": {
-                    "description": "The viewport that covers the result",
                     "$ref": "#/definitions/Viewport"
                 },
                 "entryPoints": {
-                    "description": "Entry Points array",
                     "$ref": "#/definitions/EntryPoints"
                 },
                 "route": {
-                    "description": "Route object",
                     "$ref": "#/definitions/Route"
                 }
             }
@@ -3940,23 +3967,18 @@
                     "readOnly": true
                 },
                 "poi": {
-                    "description": "POI property",
                     "$ref": "#/definitions/Poi"
                 },
                 "address": {
-                    "description": "The address of the result",
                     "$ref": "#/definitions/Address"
                 },
                 "position": {
-                    "description": "Coordinates of the result",
                     "$ref": "#/definitions/Position"
                 },
                 "viewport": {
-                    "description": "The viewport that covers the result",
                     "$ref": "#/definitions/Viewport"
                 },
                 "entryPoints": {
-                    "description": "Entry Points array",
                     "$ref": "#/definitions/EntryPoints"
                 }
             }
@@ -4036,19 +4058,15 @@
                     "readOnly": true
                 },
                 "address": {
-                    "description": "The address of the result",
                     "$ref": "#/definitions/Address"
                 },
                 "position": {
-                    "description": "Coordinates of the result",
                     "$ref": "#/definitions/Position"
                 },
                 "viewport": {
-                    "description": "The viewport that covers the result",
                     "$ref": "#/definitions/Viewport"
                 },
                 "entryPoints": {
-                    "description": "Entry Points array",
                     "$ref": "#/definitions/EntryPoints"
                 }
             }
@@ -4119,7 +4137,6 @@
             "type": "object",
             "properties": {
                 "address": {
-                    "description": "The address of the result",
                     "$ref": "#/definitions/Address"
                 },
                 "position": {
@@ -4157,6 +4174,11 @@
                             "description": "NumResults property",
                             "type": "integer",
                             "readOnly": true
+                        },
+                        "limit": {
+                            "description": "Maximum number of responses that will be returned",
+                            "readOnly": true,
+                            "type": "integer"
                         },
                         "offset": {
                             "description": "Offset property",
@@ -4225,19 +4247,15 @@
                     "readOnly": true
                 },
                 "address": {
-                    "description": "The address of the result",
                     "$ref": "#/definitions/Address"
                 },
                 "position": {
-                    "description": "Coordinates of the result",
                     "$ref": "#/definitions/Position"
                 },
                 "viewport": {
-                    "description": "The viewport that covers the result",
                     "$ref": "#/definitions/Viewport"
                 },
                 "entryPoints": {
-                    "description": "Entry Points array",
                     "$ref": "#/definitions/EntryPoints"
                 },
                 "addressRanges": {
@@ -4370,23 +4388,18 @@
                     "readOnly": true
                 },
                 "poi": {
-                    "description": "POI property",
                     "$ref": "#/definitions/Poi"
                 },
                 "address": {
-                    "description": "The address of the result",
                     "$ref": "#/definitions/Address"
                 },
                 "position": {
-                    "description": "Coordinates of the result",
                     "$ref": "#/definitions/Position"
                 },
                 "viewport": {
-                    "description": "The viewport that covers the result",
                     "$ref": "#/definitions/Viewport"
                 },
                 "entryPoints": {
-                    "description": "Entry Points array",
                     "$ref": "#/definitions/EntryPoints"
                 }
             }
@@ -4476,23 +4489,18 @@
                     "readOnly": true
                 },
                 "poi": {
-                    "description": "POI property",
                     "$ref": "#/definitions/Poi"
                 },
                 "address": {
-                    "description": "The address of the result",
                     "$ref": "#/definitions/Address"
                 },
                 "position": {
-                    "description": "Coordinates of the result",
                     "$ref": "#/definitions/Position"
                 },
                 "viewport": {
-                    "description": "The viewport that covers the result",
                     "$ref": "#/definitions/Viewport"
                 },
                 "entryPoints": {
-                    "description": "Entry Points array",
                     "$ref": "#/definitions/EntryPoints"
                 },
                 "dist": {
@@ -5074,12 +5082,12 @@
                     "readOnly": true,
                     "properties": {
                         "@id": {
-                            "description": "@ID property",
+                            "description": "ID of the traffic incident",
                             "type": "string",
                             "readOnly": true
                         },
                         "poi": {
-                            "description": "POI array",
+                            "description": "A single traffic incident, or a cluster of traffic incidents",
                             "type": "array",
                             "readOnly": true,
                             "items": {
@@ -5171,26 +5179,32 @@
                     "readOnly": true
                 },
                 "r": {
+                    "description": "The road number(s) affected by the incident. Multiple road numbers will delimited by slashes",
                     "type": "string",
                     "readOnly": true
                 },
                 "dl": {
+                    "description": "Delay caused by the incident in seconds (except in road closures)",
                     "type": "integer",
                     "readOnly": true
                 },
                 "t": {
+                    "description": "To: the name of the intersection or location where the traffic due to the incident ends",
                     "type": "string",
                     "readOnly": true
                 },
                 "f": {
+                    "description": "From: the name of the intersection or location where the traffic due to the incident starts",
                     "type": "string",
                     "readOnly": true
                 },
                 "d": {
+                    "description": "Description of the incident in the language requested",
                     "type": "string",
                     "readOnly": true
                 },
                 "c": {
+                    "description": "Cause of the incident, where available, in the language requested",
                     "type": "string",
                     "readOnly": true
                 }
@@ -5237,57 +5251,6 @@
                             "type": "string",
                             "readOnly": true
                         }
-                    }
-                }
-            }
-        },
-        "FeatureCollectionGeoJson": {
-            "description": "A GeoJSON compliant FeatureCollection object",
-            "type": "object",
-            "properties": {
-                "type": {
-                    "description": "Type property. Value should always be equal to - FeatureCollection",
-                    "type": "string"
-                },
-                "features": {
-                    "description": "Contains a list of GeoJSON compliant Feature objects",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FeatureGeoJson"
-                    }
-                }
-            }
-        },
-        "FeatureGeoJson": {
-            "description": "A GeoJSON compliant Feature object",
-            "type": "object",
-            "properties": {
-                "type": {
-                    "description": "Type property. Value should always be equal to - Feature",
-                    "type": "string"
-                },
-                "geometry": {
-                    "$ref": "#/definitions/GeometryGeoJson"
-                },
-                "properties": {
-                    "description": "Properties can contain addition metadata about the Feature. Value can be any JSON object or a JSON null value.",
-                    "type": "object"
-                }
-            }
-        },
-        "GeometryGeoJson": {
-            "description": "A GeoJSON compliant Geometry object",
-            "type": "object",
-            "properties": {
-                "type": {
-                    "description": "Type property. This value must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection",
-                    "type": "string"
-                },
-                "coordinates": {
-                    "description": "Coordinates for the geometry object. Each Position object in Coordinates should be GeoJSON compliant i.e. longitude precedes latitute. Depending on the geometry this might be a 1d, 2d or a 3d array. Refer to RFC7946 for details.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/LineStringGeoJson"
                     }
                 }
             }
