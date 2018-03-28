@@ -1,0 +1,28 @@
+{
+    "parameters": {
+      "serverName": "targetserver",
+      "resourceGroupName": "TargetResourceGroup",
+      "api-version": "2017-12-01",
+      "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+      "parameters": {
+        "location": "brazilsouth",
+        "properties": {
+          "restorePointInTime": "2017-12-14T00:00:37.467Z",
+          "createMode": "PointInTimeRestore",
+          "sourceServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforPostgreSQL/servers/sourceserver"
+        },
+        "sku": {
+            "name": "B_Gen4_2",
+            "tier": "Basic",
+            "capacity": 2,
+            "family": "Gen4"
+        },
+        "tags": {
+          "ElasticServer": "1"
+        }
+      }
+    },
+    "responses": {
+      "202": {}
+    }
+  }
