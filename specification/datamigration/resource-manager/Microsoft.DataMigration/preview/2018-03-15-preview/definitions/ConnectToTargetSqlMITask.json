@@ -34,6 +34,11 @@
       "type": "object",
       "description": "Output for the task that validates connection to Azure SQL Database Managed Instance.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
         "targetServerVersion": {
           "type": "string",
           "description": "Target server version",
@@ -52,12 +57,7 @@
           },
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
-        }
-      ]
+      }
     }
   }
 }
