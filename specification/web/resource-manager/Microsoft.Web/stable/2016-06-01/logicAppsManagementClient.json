@@ -1270,7 +1270,11 @@
             "type": "object",
             "properties": {
                 "connectionGatewayInstallation": {
-                    "$ref": "#/definitions/ConnectionGatewayInstallationReference"
+                    "description": "Connection gateway installation",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ConnectionGatewayInstallationReference"
+                    }
                 }
             },
             "allOf": [
@@ -1534,42 +1538,42 @@
             "description": "OAuth settings for the conenction provider",
             "type": "object",
             "properties": {
-              "identityProvider": {
-                "description": "Identity provider",
-                "type": "string"
-              },
-              "clientId": {
-                "description": "Resource provider client id",
-                "type": "string"
-              },
-              "clientSecret": {
-                "description": "Client Secret needed for OAuth",
-                "type": "string"
-              },
-              "scopes": {
-                "description": "OAuth scopes",
-                "type": "array",
-                "items": {
-                  "type": "string"
+                "identityProvider": {
+                    "description": "Identity provider",
+                    "type": "string"
+                },
+                "clientId": {
+                    "description": "Resource provider client id",
+                    "type": "string"
+                },
+                "clientSecret": {
+                    "description": "Client Secret needed for OAuth",
+                    "type": "string"
+                },
+                "scopes": {
+                    "description": "OAuth scopes",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "redirectUrl": {
+                    "description": "Url",
+                    "type": "string"
+                },
+                "properties": {
+                    "type": "object",
+                    "description": "Read only properties for this oauth setting."
+                },
+                "customParameters": {
+                    "description": "OAuth parameters key is the name of parameter",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ApiOAuthSettingsParameter"
+                    }
                 }
-              },
-              "redirectUrl": {
-                "description": "Url",
-                "type": "string"
-              },
-              "properties": {
-                "type":"object",
-                "description": "Read only properties for this oauth setting."
-              },
-              "customParameters": {
-                "description": "OAuth parameters key is the name of parameter",
-                "type": "object",
-                "additionalProperties": {
-                  "$ref": "#/definitions/ApiOAuthSettingsParameter"
-                }
-              }
             }
-          },
+        },
         "ApiOAuthSettingsParameter": {
             "description": "OAuth settings for the API",
             "type": "object",
@@ -1587,17 +1591,6 @@
                     "description": "UI definitions per culture as caller can specify the culture"
                 }
             }
-        },
-        "InsensitiveDictionaryOfJToken": {
-            "type": "object",
-            "description": "A dictionary of parameters",
-            "additionalProperties": false,
-            "allOf": [
-                {
-                    "type": "object",
-                    "additionalProperties": {}
-                }
-            ]
         },
         "ApiResourceBackendService": {
             "type": "object",
@@ -1734,7 +1727,7 @@
                     "description": "The icon URI"
                 },
                 "name": {
-                    "type":"string",
+                    "type": "string",
                     "description": "The name of the API"
                 }
             },
@@ -1931,13 +1924,25 @@
                     }
                 },
                 "parameterValues": {
-                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                    "description": "Dictionary of parameter values",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "customParameterValues": {
-                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                    "description": "Dictionary of custom parameter values",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "nonSecretParameterValues": {
-                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                    "description": "Dictionary of nonsecret parameter values",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "createdTime": {
                     "format": "date-time",
