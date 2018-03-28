@@ -40,9 +40,15 @@
                     "200": {
                         "description": "The gateway definitions",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ConnectionGatewayDefinition"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "description": "Collection of connection gateways",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ConnectionGatewayDefinition"
+                                    }
+                                }
                             }
                         }
                     }
@@ -77,9 +83,15 @@
                     "200": {
                         "description": "The gateway definitions",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ConnectionGatewayDefinition"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "description": "Collection of connection gateways",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ConnectionGatewayDefinition"
+                                    }
+                                }
                             }
                         }
                     }
@@ -268,9 +280,15 @@
                     "200": {
                         "description": "The gateway installations",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ConnectionGatewayInstallationDefinition"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "description": "Collection of connection gateway installations",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ConnectionGatewayInstallationDefinition"
+                                    }
+                                }
                             }
                         }
                     }
@@ -345,12 +363,25 @@
                     "200": {
                         "description": "A list of custom APIs",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CustomApiDefinition"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "description": "Collection of custom APIs",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/CustomApiDefinition"
+                                    }
+                                },
+                                "nextLink": {
+                                    "description": "Link to next page of resources",
+                                    "type": "string"
+                                }
                             }
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -388,12 +419,25 @@
                     "200": {
                         "description": "A list of custom APIs",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CustomApiDefinition"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "description": "Collection of custom APIs",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/CustomApiDefinition"
+                                    }
+                                },
+                                "nextLink": {
+                                    "description": "Link to next page of resources",
+                                    "type": "string"
+                                }
                             }
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -613,9 +657,15 @@
                     "200": {
                         "description": "A list of interfaces",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/WsdlService"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "description": "Collection of WSDL interfaces",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/WsdlService"
+                                    }
+                                }
                             }
                         }
                     }
@@ -685,9 +735,15 @@
                     "200": {
                         "description": "The list of managed API definitions",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ManagedApiDefinition"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "description": "Collection of managed APIs",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ManagedApiDefinition"
+                                    }
+                                }
                             }
                         }
                     }
@@ -763,14 +819,27 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "An collection of API connections",
+                        "description": "A list of API connections",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ApiConnectionDefinition"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "description": "Collection of API connections",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ApiConnectionDefinition"
+                                    }
+                                },
+                                "nextLink": {
+                                    "description": "Link to next page of resources",
+                                    "type": "string"
+                                }
                             }
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
