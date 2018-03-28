@@ -1,0 +1,613 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2017-05-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}/output": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_GetOutput",
+        "description": "Retrieve the job output identified by job name.",
+        "produces": [
+          "text/plain"
+        ],
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/joboperations"
+        },
+        "x-ms-examples": {
+          "Get Job Output": {
+            "$ref": "./examples/job/getJobOutput.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "jobName",
+             "description": "The name of the job to be created.",
+             "type": "string",
+             "required": true,
+             "in": "path"
+          },          
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}/runbookContent": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_GetRunbookContent",
+        "description": "Retrieve the runbook content of the job identified by job name.",
+        "produces": [
+          "text/powershell"
+        ],
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/joboperations"
+        },
+        "x-ms-examples": {
+          "Get Job Runbook Content": {
+            "$ref": "./examples/job/getJobRunbookContent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "jobName",
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },          
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}/suspend": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Suspend",
+        "description": "Suspend the job identified by job name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/joboperations"
+        },
+        "x-ms-examples": {
+          "Suspend job": {
+            "$ref": "./examples/job/suspendJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "jobName",
+             "description": "The job name.",
+             "type": "string",
+             "required": true,
+             "in": "path"
+          },          
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}/stop": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Stop",
+        "description": "Stop the job identified by jobName.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/joboperations"
+        },
+        "x-ms-examples": {
+          "Stop job": {
+            "$ref": "./examples/job/stopJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "jobName",
+             "description": "The job name.",
+             "type": "string",
+             "required": true,
+             "in": "path"
+           },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Get",
+        "description": "Retrieve the job identified by job name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/joboperations"
+        },
+        "x-ms-examples": {
+          "Get job": {
+            "$ref": "./examples/job/getJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "jobName",
+             "description": "The job name.",
+             "type": "string",
+             "required": true,
+             "in": "path"
+          },          
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Create",
+        "description": "Create a job of the runbook.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/joboperations"
+        },
+        "x-ms-examples": {
+          "Create job": {
+            "$ref": "./examples/job/createJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "jobName",
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
+           },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobCreateParameters"
+            },
+            "description": "The parameters supplied to the create job operation."
+          },          
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_ListByAutomationAccount",
+        "description": "Retrieve a list of jobs.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/joboperations"
+        },
+        "x-ms-examples": {
+          "List jobs by automation account": {
+            "$ref": "./examples/job/listJobsByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/JobListResultV2"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}/resume": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Resume",
+        "description": "Resume the job identified by jobName.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/joboperations"
+        },
+        "x-ms-examples": {
+          "Resume job": {
+            "$ref": "./examples/job/resumeJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "jobName",
+             "description": "The job name.",
+             "type": "string",
+             "required": true,
+             "in": "path"
+           },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}/streams/{jobStreamId}": {
+      "get": {
+        "tags": [
+          "JobStream"
+        ],
+        "operationId": "JobStream_Get",
+        "description": "Retrieve the job stream identified by job stream id.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
+        },
+        "x-ms-examples": {
+          "Get job stream": {
+            "$ref": "./examples/job/getJobStream.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "jobName",
+             "description": "The job name.",
+             "type": "string",
+             "required": true,
+             "in": "path"
+           },
+          {
+            "name": "jobStreamId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The job stream id."
+          },          
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobStream"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}/streams": {
+      "get": {
+        "tags": [
+          "JobStream"
+        ],
+        "operationId": "JobStream_ListByJob",
+        "description": "Retrieve a list of jobs streams identified by job name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
+        },
+        "x-ms-examples": {
+          "List job streams by job name": {
+            "$ref": "./examples/job/listJobStreamsByJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "name": "jobName",
+             "description": "The job name.",
+             "type": "string",
+             "required": true,
+             "in": "path"
+           },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobStreamListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

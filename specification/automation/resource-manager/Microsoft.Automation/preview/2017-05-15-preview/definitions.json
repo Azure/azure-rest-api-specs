@@ -17,7 +17,7 @@
   "security": [
     {
       "azure_auth": [
-          "user_impersonation"
+        "user_impersonation"
       ]
     }
   ],
@@ -28,12 +28,136 @@
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-          "user_impersonation": "impersonate your user account"
+        "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {},
   "definitions": {
+    "Job": {
+      "description": "Definition of the job.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the job."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "jobCollectionItem": {
+      "description": "Job collection item properties.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Job properties.",
+          "$ref": "#/definitions/jobCollectionItemProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "jobCollectionItemProperties": {
+      "description": "Job collection item properties.",
+      "properties": {
+        "runbook": {
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/RunbookAssociationProperty",
+          "readOnly": true,
+          "description": "The runbook association."
+        },
+        "jobId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The id of the job."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The creation time of the job."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of the job.",
+          "enum": [
+            "New",
+            "Activating",
+            "Running",
+            "Completed",
+            "Failed",
+            "Stopped",
+            "Blocked",
+            "Suspended",
+            "Disconnected",
+            "Suspending",
+            "Stopping",
+            "Resuming",
+            "Removing"
+          ],
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The start time of the job."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The end time of the job."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The last modified time of the job."
+        },
+        "provisioningState": {
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobProvisioningStateProperty",
+          "description": "The current provisioning state of the job."
+        }
+      }
+    },
+    "JobListResultV2": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "./definitions.json#/definitions/jobCollectionItem",
+            "readOnly": true
+          },
+          "description": "List of jobs."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The  link to the next page."
+        }
+      },
+      "description": "The response model for the list job operation."
+    },
     "softwareUpdateConfigurationProperties": {
       "description": "Software update configuration properties.",
       "properties": {
@@ -854,15 +978,15 @@
     },
     "SourceControlSyncJobById": {
       "properties": {
-          "id": {
-            "type": "string",
-            "description": "Gets the id of the job."
-          },
-          "properties": {
-            "$ref": "#/definitions/SourceControlSyncJobByIdProperties",
-            "x-ms-client-flatten": true,
-            "description": "Gets the properties of the source control sync job."
-          }
+        "id": {
+          "type": "string",
+          "description": "Gets the id of the job."
+        },
+        "properties": {
+          "$ref": "#/definitions/SourceControlSyncJobByIdProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets the properties of the source control sync job."
+        }
       },
       "description": "Definition of the source control sync job."
     },
@@ -935,14 +1059,16 @@
       "description": "The name of the automation account.",
       "type": "string",
       "required": true,
-      "in": "path"
+      "in": "path",
+      "x-ms-parameter-location": "method"
     },
     "clientRequestId": {
       "name": "clientRequestId",
       "description": "Identifies this specific client request.",
       "type": "string",
       "required": false,
-      "in": "header"
+      "in": "header",
+      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -2830,7 +2830,8 @@
               "Int",
               "Float",
               "Bool",
-              "Array"
+              "Array",
+              "SecureString"
             ],
             "x-ms-enum": {
               "name": "ParameterType",
@@ -3074,6 +3075,10 @@
           "referenceName": {
             "type": "string",
             "description": "Reference LinkedService name."
+          },
+          "parameters": {
+            "$ref": "#/definitions/ParameterValueSpecification",
+            "description": "Arguments for LinkedService."
           }
         },
         "required": [

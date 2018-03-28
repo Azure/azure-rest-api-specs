@@ -48,7 +48,13 @@
             "$ref": "./examples/getRunbookDraftContent.json"
           }
         },
+        "produces": [
+          "text/powershell"
+        ],
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -65,19 +71,16 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
+          },          
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK",           
             "schema": {
-              "type": "file"
+              "type": "string"
             }
           },
           "default": {
@@ -92,17 +95,23 @@
         "tags": [
           "RunbookDraft"
         ],
-        "operationId": "RunbookDraft_CreateOrUpdate",
-        "description": "Updates the runbook draft with runbookStream as its content.",
+        "operationId": "RunbookDraft_ReplaceContent",
+        "description": "Replaces the runbook draft content.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
         },
         "x-ms-examples": {
           "Create or update runbook draft": {
-            "$ref": "./examples/createOrUpdateRunbookDraft.json"
+            "$ref": "./examples/replaceRunbookDraftContent.json"
           }
         },
+        "consumes": [
+          "text/powershell"
+        ],
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -125,24 +134,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "format": "file"
+              "type": "string"
             },
             "description": "The runbook draft content."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted and  the operation will complete asynchronously."
+          "200": {            
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
           },
-          "200": {
-            "description": "OK."
+          "202": {
+            "description": "Accepted and  the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -171,6 +185,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -186,10 +203,7 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
+          },          
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
@@ -227,6 +241,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -242,22 +259,25 @@
             "required": true,
             "type": "string",
             "description": "The parameters supplied to the publish runbook operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
+          },          
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted and  the operation will complete asynchronously."
-          },
-          "200": {
+          "200": {            
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Runbook"
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "Accepted and  the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -276,7 +296,7 @@
           "RunbookDraft"
         ],
         "operationId": "RunbookDraft_UndoEdit",
-        "description": "Retrieve the runbook identified by runbook name.",
+        "description": "Undo draft edit to last known published state identified by runbook name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
         },
@@ -286,6 +306,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -302,10 +325,7 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
+          },          
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
@@ -341,7 +361,13 @@
             "$ref": "./examples/getRunbookContent.json"
           }
         },
+        "produces": [
+          "text/powershell"
+        ],
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -358,19 +384,16 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
+          },          
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
+          "200": {            
             "description": "OK",
             "schema": {
-              "type": "file"
+              "type": "string"
             }
           },
           "default": {
@@ -397,7 +420,10 @@
             "$ref": "./examples/getRunbook.json"
           }
         },
-        "parameters": [
+        "parameters": [          
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -414,9 +440,6 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
@@ -447,11 +470,17 @@
           "url": "http://aka.ms/azureautomationsdk/runbookoperations"
         },
         "x-ms-examples": {
-          "Create or update runbook": {
+          "Create or update runbook and publish it": {
             "$ref": "./examples/createOrUpdateRunbook.json"
-          }
+          },
+          "Create runbook as draft": {
+            "$ref": "./examples/createRunbookAsDraft.json"
+          }          
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -477,20 +506,23 @@
               "$ref": "./definitions.json#/definitions/RunbookCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for runbook. Provide either content link for a published runbook or draft, not both."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
+          },     
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Runbook"
+            }
           },
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Runbook"
+            }
           },
           "400": {
             "description": "Bad Request. Cannot specify the content link for a published runbook and draft at the same time."
@@ -519,6 +551,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -543,9 +578,6 @@
               "$ref": "./definitions.json#/definitions/RunbookUpdateParameters"
             },
             "description": "The update parameters for runbook."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
@@ -582,6 +614,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -599,15 +634,15 @@
             "description": "The runbook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -635,6 +670,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -643,9 +681,6 @@
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
@@ -673,14 +708,22 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/streams/{jobStreamId}": {
       "get": {
         "tags": [
-          "TestJobStreams"
+          "TestJobStream"
         ],
         "operationId": "TestJobStreams_Get",
-        "description": "Retrieve a test job streams identified by runbook name and stream id.",
+        "description": "Retrieve a test job stream of the test job identified by runbook name and stream id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
         },
+        "x-ms-examples": {
+          "Get test job stream": {
+            "$ref": "./examples/getTestJobStream.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -706,9 +749,6 @@
             "description": "The job stream id."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -731,14 +771,22 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/streams": {
       "get": {
         "tags": [
-          "TestJobStreams"
+          "TestJobStream"
         ],
         "operationId": "TestJobStreams_ListByTestJob",
         "description": "Retrieve a list of test job streams identified by runbook name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
         },
+        "x-ms-examples": {
+          "List job streams by job name": {
+            "$ref": "./examples/listTestJobStreamsByJob.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -762,10 +810,7 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
+          },          
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
@@ -792,14 +837,22 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob": {
       "put": {
         "tags": [
-          "TestJobs"
+          "TestJob"
         ],
-        "operationId": "TestJobs_Create",
+        "operationId": "TestJob_Create",
         "description": "Create a test job of the runbook.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/testjoboperations"
         },
+        "x-ms-examples": {
+          "Create test job": {
+            "$ref": "./examples/createTestJob.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -827,9 +880,6 @@
             "description": "The parameters supplied to the create test job operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -850,14 +900,22 @@
       },
       "get": {
         "tags": [
-          "TestJobs"
+          "TestJob"
         ],
-        "operationId": "TestJobs_Get",
+        "operationId": "TestJob_Get",
         "description": "Retrieve the test job for the specified runbook.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/testjoboperations"
         },
+        "x-ms-examples": {
+          "Get test job": {
+            "$ref": "./examples/getTestJob.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -874,9 +932,6 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
@@ -901,14 +956,22 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/resume": {
       "post": {
         "tags": [
-          "TestJobs"
+          "TestJob"
         ],
-        "operationId": "TestJobs_Resume",
+        "operationId": "TestJob_Resume",
         "description": "Resume the test job.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/testjoboperations"
         },
+        "x-ms-examples": {
+          "Resume test job": {
+            "$ref": "./examples/resumeTestJob.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -925,9 +988,6 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
@@ -949,14 +1009,22 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/stop": {
       "post": {
         "tags": [
-          "TestJobs"
+          "TestJob"
         ],
-        "operationId": "TestJobs_Stop",
+        "operationId": "TestJob_Stop",
         "description": "Stop the test job.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/testjoboperations"
         },
+        "x-ms-examples": {
+          "Stop test job": {
+            "$ref": "./examples/stopTestJob.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -973,9 +1041,6 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
@@ -997,14 +1062,22 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/suspend": {
       "post": {
         "tags": [
-          "TestJobs"
+          "TestJob"
         ],
-        "operationId": "TestJobs_Suspend",
+        "operationId": "TestJob_Suspend",
         "description": "Suspend the test job.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/testjoboperations"
         },
+        "x-ms-examples": {
+          "Suspend test job": {
+            "$ref": "./examples/suspendTestJob.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
@@ -1021,9 +1094,6 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"

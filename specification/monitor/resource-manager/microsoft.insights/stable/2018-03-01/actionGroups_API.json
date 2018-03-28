@@ -465,6 +465,20 @@
                         "$ref": "#/definitions/VoiceReceiver"
                     },
                     "description": "The list of voice receivers that are part of this action group."
+                },
+                "logicAppReceivers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LogicAppReceiver"
+                    },
+                    "description": "The list of logic app receivers that are part of this action group."
+                },
+                "azureFunctionReceivers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AzureFunctionReceiver"
+                    },
+                    "description": "The list of azure function receivers that are part of this action group."
                 }
             },
             "required": [
@@ -623,7 +637,7 @@
             ]
         },
         "VoiceReceiver": {
-            "description": "An voice receiver.",
+            "description": "A voice receiver.",
             "properties": {
                 "name": {
                     "type": "string",
@@ -642,6 +656,55 @@
                 "name",
                 "countryCode",
                 "phoneNumber"
+            ]
+        },
+		"LogicAppReceiver": {
+            "description": "A logic app receiver.",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the logic app receiver. Names must be unique across all receivers within an action group."
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "The azure resource id of the logic app receiver."
+                },
+                "callbackUrl": {
+                    "type": "string",
+                    "description": "The callback url where http request sent to."
+                }
+            },
+            "required": [
+                "name",
+                "resourceId",
+                "callbackUrl"
+            ]
+        },
+        "AzureFunctionReceiver": {
+            "description": "An azure function receiver.",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the azure function receiver. Names must be unique across all receivers within an action group."
+                },
+                "functionAppResourceId": {
+                    "type": "string",
+                    "description": "The azure resource id of the function app."
+                },
+                "functionName": {
+                    "type": "string",
+                    "description": "The function name in the function app."
+                },
+                "httpTriggerUrl": {
+                    "type": "string",
+                    "description": "The http trigger url where http request sent to."
+                }
+            },
+            "required": [
+                "name",
+                "functionAppResourceId",
+                "functionName",
+                "httpTriggerUrl"
             ]
         },
         "ReceiverStatus": {

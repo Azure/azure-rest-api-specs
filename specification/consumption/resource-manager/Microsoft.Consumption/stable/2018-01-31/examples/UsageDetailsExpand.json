@@ -4,7 +4,7 @@
     "subscriptionId": "subid",
     "billingPeriodName": "201702",
     "$expand": "meterDetails,additionalProperties",
-    "$filter": "usageEnd le 2017-02-14T00:00:00Z",
+    "$filter": "properties/usageEnd ge '2018-01-14' AND properties/usageEnd le '2018-02-14'",
     "$top": 1
   },
   "responses": {
