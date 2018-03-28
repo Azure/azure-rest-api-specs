@@ -1450,7 +1450,7 @@
             "additionalProperties": false,
             "properties": {
                 "connectionParameters": {
-                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                    "$ref": "#/definitions/ConnectionParameter"
                 },
                 "runtimeUrls": {
                     "type": "array",
@@ -1497,6 +1497,52 @@
                 },
                 "wsdlDefinition": {
                     "$ref": "#/definitions/WsdlDefinition"
+                }
+            }
+        },
+        "ConnectionParameter": {
+            "description": "Connection provider parameters",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "description": "Type of the parameter",
+                    "enum": [
+                        "string",
+                        "securestring",
+                        "secureobject",
+                        "int",
+                        "bool",
+                        "object",
+                        "array",
+                        "oauthSetting",
+                        "connection"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "ConnectionParameterType",
+                        "modelAsString": false
+                    }
+                },
+                "oAuthSettings": {
+                    "$ref": "#/definitions/ApiOAuthSettings"
+                }
+            }
+        },
+        "ApiOAuthSettings": {
+            "description": "OAuth settings for the API",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Value",
+                    "type": "string"
+                },
+                "options": {
+                    "type": "object",
+                    "description": "Read only: Options available to this parameter"
+                },
+                "uiDefinition": {
+                    "type": "object",
+                    "description": "UI definitions per culture as caller can specify the culture"
                 }
             }
         },
@@ -1676,7 +1722,7 @@
                     "type": "string"
                 },
                 "connectionParameters": {
-                    "$ref": "#/definitions/InsensitiveDictionaryOfJToken"
+                    "$ref": "#/definitions/ConnectionParameter"
                 },
                 "metadata": {
                     "$ref": "#/definitions/ApiResourceMetadata"
