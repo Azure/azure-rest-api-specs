@@ -1697,7 +1697,7 @@
             "UDP"
           ],
           "x-ms-enum": {
-            "name": "Protocol",
+            "name": "IpFlowProtocol",
             "modelAsString": true
           },
           "description": "Protocol to be verified on."
@@ -2307,6 +2307,23 @@
         },
         "destination": {
           "$ref": "#/definitions/ConnectivityDestination"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Network protocol.",
+          "enum": [
+            "Tcp",
+            "Http",
+            "Https",
+            "Icmp"
+          ],
+          "x-ms-enum": {
+            "name": "Protocol",
+            "modelAsString": true
+          }
+        },
+        "protocolConfiguration": {
+          "$ref": "#/definitions/ProtocolConfiguration"
         }
       }
     },
@@ -2503,6 +2520,57 @@
       "additionalProperties": {
         "type": "string"
       }
+    },
+    "ProtocolConfiguration": {
+      "description": "Configuration of the protocol.",
+      "properties": {
+        "hTTPConfiguration": {
+          "$ref": "#/definitions/HTTPConfiguration"
+        }
+      }
+    },
+    "HTTPConfiguration": {
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "HTTP method.",
+          "enum": [
+            "Get"
+          ],
+          "x-ms-enum": {
+            "name": "HTTPMethod",
+            "modelAsString": true
+          }
+        },
+        "headers": {
+          "type": "array",
+          "description": "List of HTTP headers.",
+          "items": {
+            "$ref": "#/definitions/HTTPHeader"
+          }
+        },
+        "validStatusCodes": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "Valid status codes."
+        }
+      },
+      "description": "HTTP configuration of the connectivity check."
+    },
+    "HTTPHeader": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name in HTTP header."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value in HTTP header."
+        }
+      },
+      "description": "Describes the HTTP header."
     },
     "AzureReachabilityReportParameters": {
       "properties": {
@@ -2890,6 +2958,19 @@
     },
     "ConnectionMonitorQueryResult": {
       "properties": {
+        "sourceStatus": {
+          "type": "string",
+          "enum": [
+            "Uknown",
+            "Active",
+            "Incative"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorSourceStatus",
+            "modelAsString": true
+          },
+          "description": "Status of connection monitor source."
+        },
         "states": {
           "type": "array",
           "items": {
