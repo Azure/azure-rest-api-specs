@@ -15,6 +15,236 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "List Hosting Environment Detector Responses",
+        "description": "List Hosting Environment Detector Responses",
+        "operationId": "Diagnostics_ListHostingEnvironmentDetectorResponses",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DetectorResponseCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Hosting Environment Detector Response",
+        "description": "Get Hosting Environment Detector Response",
+        "operationId": "Diagnostics_GetHostingEnvironmentDetectorResponse",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "App Service Environment Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DetectorResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "List Site Detector Responses",
+        "description": "List Site Detector Responses",
+        "operationId": "Diagnostics_ListSiteDetectorResponses",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DetectorResponseCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get site detector response",
+        "description": "Get site detector response",
+        "operationId": "Diagnostics_GetSiteDetectorResponse",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DetectorResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics": {
       "get": {
         "tags": [
@@ -46,6 +276,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticCategoryCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -93,6 +329,12 @@
             "schema": {
               "$ref": "#/definitions/DiagnosticCategory"
             }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -135,6 +377,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticAnalysisCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -188,6 +436,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticAnalysis"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -260,6 +514,12 @@
             "schema": {
               "$ref": "#/definitions/DiagnosticAnalysis"
             }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -302,6 +562,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticDetectorCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -355,6 +621,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticDetectorCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -430,6 +702,141 @@
             "schema": {
               "$ref": "#/definitions/DiagnosticDetectorResponse"
             }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "List Site Detector Responses",
+        "description": "List Site Detector Responses",
+        "operationId": "Diagnostics_ListSiteDetectorResponsesSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DetectorResponseCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get site detector response",
+        "description": "Get site detector response",
+        "operationId": "Diagnostics_GetSiteDetectorResponseSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DetectorResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -472,6 +879,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticCategoryCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -526,6 +939,12 @@
             "schema": {
               "$ref": "#/definitions/DiagnosticCategory"
             }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -575,6 +994,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticAnalysisCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -635,6 +1060,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticAnalysis"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -714,6 +1145,12 @@
             "schema": {
               "$ref": "#/definitions/DiagnosticAnalysis"
             }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -763,6 +1200,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticDetectorCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -823,6 +1266,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticDetectorCollection"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -904,6 +1353,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiagnosticDetectorResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1018,6 +1473,51 @@
         }
       }
     },
+    "DataTableResponseColumn": {
+      "description": "Column definition",
+      "type": "object",
+      "properties": {
+        "columnName": {
+          "description": "Name of the column",
+          "type": "string"
+        },
+        "dataType": {
+          "description": "Data type which looks like 'String' or 'Int32'.",
+          "type": "string"
+        },
+        "columnType": {
+          "description": "Column Type",
+          "type": "string"
+        }
+      }
+    },
+    "DataTableResponseObject": {
+      "description": "Data Table which defines columns and raw row values",
+      "type": "object",
+      "properties": {
+        "tableName": {
+          "description": "Name of the table",
+          "type": "string"
+        },
+        "columns": {
+          "description": "List of columns with data types",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataTableResponseColumn"
+          }
+        },
+        "rows": {
+          "description": "Raw row values",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "DetectorAbnormalTimePeriod": {
       "description": "Class representing Abnormal Time Period detected.",
       "type": "object",
@@ -1117,6 +1617,78 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DetectorInfo": {
+      "description": "Definition of Detector",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description",
+          "type": "string",
+          "readOnly": true
+        },
+        "category": {
+          "description": "Support Category",
+          "type": "string",
+          "readOnly": true
+        },
+        "subCategory": {
+          "description": "Support Sub Category",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportTopicId": {
+          "description": "Support Topic Id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DetectorResponse": {
+      "description": "Class representing Response from Detector",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DetectorResponse resource specific properties",
+          "properties": {
+            "metadata": {
+              "$ref": "#/definitions/DetectorInfo",
+              "description": "metadata for the detector"
+            },
+            "dataset": {
+              "$ref": "#/definitions/DiagnosticData",
+              "description": "Data Set"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DetectorResponseCollection": {
+      "description": "Collection of detector responses",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectorResponse"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1229,6 +1801,20 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "DiagnosticData": {
+      "description": "Set of data with rendering instructions",
+      "type": "object",
+      "properties": {
+        "table": {
+          "$ref": "#/definitions/DataTableResponseObject",
+          "description": "Data in table form"
+        },
+        "renderingProperties": {
+          "$ref": "#/definitions/Rendering",
+          "description": "Properties that describe how the table should be rendered"
         }
       }
     },
@@ -1382,6 +1968,34 @@
           "items": {
             "$ref": "#/definitions/DiagnosticMetricSample"
           }
+        }
+      }
+    },
+    "Rendering": {
+      "description": "Instructions for rendering the data",
+      "type": "object",
+      "properties": {
+        "renderingType": {
+          "description": "Rendering Type",
+          "enum": [
+            "NoGraph",
+            "Table",
+            "TimeSeries",
+            "TimeSeriesPerInstance"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RenderingType",
+            "modelAsString": false
+          }
+        },
+        "title": {
+          "description": "Title of data",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description",
+          "type": "string"
         }
       }
     },
