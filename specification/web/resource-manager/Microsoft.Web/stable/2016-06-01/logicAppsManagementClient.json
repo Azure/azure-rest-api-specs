@@ -1071,7 +1071,7 @@
                     "200": {
                         "description": "Confirmation of the consent code",
                         "schema": {
-                            "$ref": "#/definitions/ApiConnectionDefinition"
+                            "$ref": "#/definitions/ConfirmConsentCodeDefinition"
                         }
                     }
                 }
@@ -1268,7 +1268,6 @@
         "ConnectionGatewayPropertiesDefinition": {
             "description": "The gateway properties",
             "type": "object",
-            "additionalProperties": false,
             "properties": {
                 "connectionGatewayInstallation": {
                     "$ref": "#/definitions/ConnectionGatewayInstallationReference"
@@ -1283,7 +1282,6 @@
         "ConnectionGatewayInstallationReference": {
             "description": "The gateway installation reference",
             "type": "object",
-            "additionalProperties": false,
             "properties": {
                 "location": {
                     "description": "Resource reference location",
@@ -1450,7 +1448,11 @@
             "additionalProperties": false,
             "properties": {
                 "connectionParameters": {
-                    "$ref": "#/definitions/ConnectionParameter"
+                    "description": "Connection parameters",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ConnectionParameter"
+                    }
                 },
                 "runtimeUrls": {
                     "type": "array",
@@ -1722,7 +1724,11 @@
                     "type": "string"
                 },
                 "connectionParameters": {
-                    "$ref": "#/definitions/ConnectionParameter"
+                    "description": "Connection parameters",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ConnectionParameter"
+                    }
                 },
                 "metadata": {
                     "$ref": "#/definitions/ApiResourceMetadata"
@@ -1903,7 +1909,11 @@
                     "$ref": "#/definitions/ApiReference"
                 },
                 "testLinks": {
-                    "$ref": "#/definitions/ApiConnectionTestLink"
+                    "description": "Links to test the API connection",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ApiConnectionTestLink"
+                    }
                 }
             }
         },
