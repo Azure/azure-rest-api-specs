@@ -1531,6 +1531,46 @@
             }
         },
         "ApiOAuthSettings": {
+            "description": "OAuth settings for the conenction provider",
+            "type": "object",
+            "properties": {
+              "identityProvider": {
+                "description": "Identity provider",
+                "type": "string"
+              },
+              "clientId": {
+                "description": "Resource provider client id",
+                "type": "string"
+              },
+              "clientSecret": {
+                "description": "Client Secret needed for OAuth",
+                "type": "string"
+              },
+              "scopes": {
+                "description": "OAuth scopes",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "redirectUrl": {
+                "description": "Url",
+                "type": "string"
+              },
+              "properties": {
+                "type":"object",
+                "description": "Read only properties for this oauth setting."
+              },
+              "customParameters": {
+                "description": "OAuth parameters key is the name of parameter",
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/definitions/ApiOAuthSettingsParameter"
+                }
+              }
+            }
+          },
+        "ApiOAuthSettingsParameter": {
             "description": "OAuth settings for the API",
             "type": "object",
             "properties": {
@@ -1692,6 +1732,10 @@
                 "iconUri": {
                     "type": "string",
                     "description": "The icon URI"
+                },
+                "name": {
+                    "type":"string",
+                    "description": "The name of the API"
                 }
             },
             "allOf": [
