@@ -103,6 +103,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.billing
   package-name: azure-mgmt-billing
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
