@@ -3326,7 +3326,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IssueAttachmentPutContract"
+              "$ref": "#/definitions/IssueAttachmentContract"
             },
             "description": "Create parameters."
           },
@@ -3531,11 +3531,13 @@
           "items": {
             "$ref": "#/definitions/ApiContract"
           },
-          "description": "Page values."
+          "description": "Page values.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged Api list representation."
@@ -3902,11 +3904,13 @@
           "items": {
             "$ref": "#/definitions/ApiReleaseContract"
           },
-          "description": "Page values."
+          "description": "Page values.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged Api Revision list representation."
@@ -3980,11 +3984,13 @@
           "items": {
             "$ref": "#/definitions/OperationContract"
           },
-          "description": "Page values."
+          "description": "Page values.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged Operation list representation."
@@ -4265,11 +4271,13 @@
           "items": {
             "$ref": "#/definitions/SchemaContract"
           },
-          "description": "Api Schema Contract value."
+          "description": "Api Schema Contract value.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "The response of the list schema operation."
@@ -4322,16 +4330,13 @@
           "items": {
             "$ref": "#/definitions/IssueContract"
           },
-          "description": "Issue values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
+          "description": "Issue values.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged Issue list representation."
@@ -4406,6 +4411,10 @@
         "userId": {
           "type": "string",
           "description": "A resource identifier for the user created the issue."
+        },
+        "apiId": {
+          "type": "string",
+          "description": "A resource identifier for the API the issue was created for."
         }
       },
       "required": [
@@ -4422,16 +4431,13 @@
           "items": {
             "$ref": "#/definitions/IssueCommentContract"
           },
-          "description": "Issue Comment values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
+          "description": "Issue Comment values.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged Issue Comment list representation."
@@ -4480,16 +4486,13 @@
           "items": {
             "$ref": "#/definitions/IssueAttachmentContract"
           },
-          "description": "Issue Attachment values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
+          "description": "Issue Attachment values.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged Issue Attachment list representation."
@@ -4513,52 +4516,7 @@
       "properties": {
         "title": {
           "type": "string",
-          "description": "Short description of the attachment."
-        },
-        "contentFormat": {
-          "type": "string",
-          "description": "Content format.",
-          "enum": [
-            "link"
-          ],
-          "x-ms-enum": {
-            "name": "AttachmentContentFormat",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "link",
-                "description": "The Content is a link."
-              }
-            ]
-          }
-        },
-        "content": {
-          "type": "string",
-          "description": "An HTTP link to the attachment."
-        }
-      },
-      "description": "Issue Attachment contract Properties."
-    },
-    "IssueAttachmentPutContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/IssueAttachmentContractProperties",
-          "description": "Properties of the Issue Attachment for the Put operation."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Issue Attachment Contract details."
-    },
-    "IssueAttachmentPutContractProperties": {
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "Short description of the attachment."
+          "description": "Filename by which the binary data will be saved."
         },
         "contentFormat": {
           "type":"string",
@@ -4567,10 +4525,6 @@
         "content": {
           "type": "string",
           "description": "An HTTP link or Base64-encoded binary data."
-        },
-        "fileName":{
-          "type": "string",
-          "description": "If contentFormat is not a 'link', filename by which the binary data will be saved."
         }
       },
       "required": [
@@ -4578,7 +4532,7 @@
         "contentFormat",
         "content"
       ],
-      "description": "Issue Attachment contract Properties for the Put operation."
+      "description": "Issue Attachment contract Properties."
     }
   },
   "parameters": {
