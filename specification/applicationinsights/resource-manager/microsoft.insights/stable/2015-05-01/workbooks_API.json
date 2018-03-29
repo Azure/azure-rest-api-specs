@@ -65,10 +65,7 @@
           "200": {
             "description": "A list containing 0 or more workbook definitions.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Workbook"
-              }
+              "$ref": "#/definitions/WorkbookListResult"
             }
           },
           "default": {
@@ -303,7 +300,7 @@
         }
       },    
       "put": {
-        "description": "Create a new workbook.",
+        "description": "Create a new workbook link.",
         "operationId": "Workbooks_CreateLink",
         "parameters": [          
           {
@@ -453,7 +450,19 @@
       },
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
-    },    
+    },
+    "WorkbookListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workbook"
+          },
+          "description": "An array of workbooks."
+        }
+      },
+      "description": "Workbook list result."
+    },
     "Workbook": {
       "description": "An Application Insights workbook definition.",
       "allOf": [
