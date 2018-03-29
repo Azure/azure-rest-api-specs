@@ -513,6 +513,7 @@
     "ContainerState": {
       "description": "The container instance state.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "state": {
           "type": "string",
@@ -541,6 +542,7 @@
     "Event": {
       "description": "A container group or container instance event.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "count": {
           "type": "integer",
@@ -986,6 +988,7 @@
     "Operation": {
       "description": "An operation for Azure Container Instance service.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "name": {
           "type": "string",
@@ -1025,11 +1028,7 @@
             "modelAsString": true
           }
         }
-      },
-      "required": [
-          "name",
-          "display"
-      ]
+      }
     },
     "UsageListResult": {
       "description": "The response containing the usage data",
