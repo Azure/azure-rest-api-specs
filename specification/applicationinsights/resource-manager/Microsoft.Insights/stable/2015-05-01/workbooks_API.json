@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/locations/{location}/providers/microsoft.insights/workbooks/category/{category}": {  
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks": {  
       "get": {
         "description": "Get all Workbooks defined within a specified resource group and category.",
         "operationId": "Workbooks_ListByResourceGroup",
@@ -45,7 +45,7 @@
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
-          {
+          {            
             "$ref": "#/parameters/LocationParameter"
           },          
           {
@@ -70,6 +70,12 @@
                 "$ref": "#/definitions/Workbook"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -79,41 +85,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/locations/{location}/providers/microsoft.insights/workbooks/{resourceName}": {  
-      "get": {
-        "description": "Get a single workbook by its resourceName.",
-        "operationId": "Workbooks_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationParameter"
-          },          
-          {
-            "$ref": "#/parameters/WorkbookResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A workbook definition.",
-            "schema": {
-                "$ref": "#/definitions/Workbook"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkbookGet": {
-            "$ref": "./examples/WorkbookGet.json"
-          }
-        }
-      },
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {  
       "delete": {
         "description": "Delete a workbook.",
         "operationId": "Workbooks_Delete",
@@ -137,6 +109,15 @@
         "responses": {
           "200": {
             "description": "The workbook has been successfully deleted."
+          },
+          "204": {
+            "description": "The resource doens't exisit."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -144,9 +125,7 @@
             "$ref": "./examples/WorkbookResponseOnly.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {  
+      },
       "put": {
         "description": "Create a new workbook.",
         "operationId": "Workbooks_Create",
@@ -178,6 +157,12 @@
             "description": "The newly created workbook.",
             "schema": {
                 "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -219,6 +204,12 @@
             "schema": {
                 "$ref": "#/definitions/Workbook"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -228,7 +219,46 @@
         }
       }
     },
-    "/providers/microsoft.insights/workbooks/category/{category}": {  
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/workbooks/{resourceName}": {  
+      "get": {
+        "description": "Get a single workbook by its resourceName.",
+        "operationId": "Workbooks_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A workbook definition.",
+            "schema": {
+                "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookGet": {
+            "$ref": "./examples/WorkbookGet.json"
+          }
+        }
+      }
+    },
+    "/providers/microsoft.insights/workbooks": {  
       "get": {
         "description": "Gets a list of workbooks.",
         "operationId": "Workbooks_ListBySourceId",
@@ -258,6 +288,12 @@
                 "$ref": "#/definitions/Workbook"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -265,12 +301,10 @@
             "$ref": "./examples/WorkbooksListLink.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/resourceName/{resourceName}/providers/microsoft.insights/workbooks": {  
+      },    
       "put": {
         "description": "Create a new workbook.",
-        "operationId": "Workbook_CreateLink",
+        "operationId": "Workbooks_CreateLink",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -291,6 +325,12 @@
         "responses": {
           "200": {
             "description": "The link has been created."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -301,7 +341,7 @@
       },
       "patch": {
         "description": "Updates a workbook that has already been added.",
-        "operationId": "Workbook_UpdateLink",
+        "operationId": "Workbooks_UpdateLink",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -325,6 +365,12 @@
             "schema": {
                 "$ref": "#/definitions/Workbook"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -335,7 +381,7 @@
       },
       "delete": {
         "description": "Delete a workbook.",
-        "operationId": "Workbook_DeleteLink",
+        "operationId": "Workbooks_DeleteLink",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -353,6 +399,15 @@
         "responses": {
           "200": {
             "description": "The workbook link has been successfully deleted."
+          },
+          "204": {
+            "description": "The resource doens't exisit."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -492,6 +547,43 @@
           "description": "Optional resourceId for a source resource."
         }
       }
+    },
+    "ErrorFieldContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      },
+      "description": "Error Body contract."
     }
   },
   "parameters": {
@@ -527,7 +619,7 @@
     },
     "LocationParameter": {
       "name": "location",
-      "in": "path",
+      "in": "query",
       "required": true,
       "type": "string",
       "description": "The name of location where workbook is stored.",
@@ -535,7 +627,7 @@
     },
     "CategoryParameter": {
       "name": "category",
-      "in": "path",
+      "in": "query",
       "required": true,
       "type": "string",
       "enum": [
