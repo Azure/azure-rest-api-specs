@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-15-preview"
+    "version": "2018-03-31-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -28,6 +28,16 @@
         "checkPermissionsGroup": {
           "$ref": "./Common.json#/definitions/ServerLevelPermissionsGroup",
           "description": "Permission group for validations"
+        },
+        "CollectLogins": {
+          "type": "boolean",
+          "description": "Flag for whether to collect logins from source server.",
+          "default": false
+        },
+        "CollectAgentJobs": {
+          "type": "boolean",
+          "description": "Flag for whether to collect agent jobs from source server.",
+          "default": false
         }
       },
       "required": [
@@ -45,7 +55,8 @@
         },
         "resultType": {
           "description": "Type of result - database level or task level",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
       "required": [ "resultType" ],
@@ -59,6 +70,22 @@
         "databases": {
           "type": "string",
           "description": "Source databases as a map from database name to database id",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "Logins": {
+          "type": "string",
+          "description": "Source logins as a map from login name to login id.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "AgentJobs": {
+          "type": "string",
+          "description": "Source agent jobs as a map from agent job name to id.",
           "additionalProperties": {
             "type": "string"
           },
@@ -121,6 +148,86 @@
         "databaseState": {
           "$ref": "./TasksCommon.json#/definitions/DatabaseState",
           "description": "State of the database",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectToSourceSqlServerTaskOutput"
+        }
+      ]
+    },
+    "ConnectToSourceSqlServerTaskOutputLoginLevel": {
+      "x-ms-discriminator-value": "LoginLevelOutput",
+      "type": "object",
+      "description": "Login level output for the task that validates connection to SQL Server and also validates source server requirements",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Login name.",
+          "readOnly": true
+        },
+        "loginType": {
+          "$ref": "./TasksCommon.json#/definitions/LoginType",
+          "description": "The type of login.",
+          "readOnly": true
+        },
+        "defaultDatabase": {
+          "type": "string",
+          "description": "The default database for the login.",
+          "readOnly": true
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "The state of the login.",
+          "readOnly": true
+        },
+        "migrationEligibility": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationEligibilityInfo",
+          "description": "Information about eligiblity of login for migration.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectToSourceSqlServerTaskOutput"
+        }
+      ]
+    },
+    "ConnectToSourceSqlServerTaskOutputAgentJobLevel": {
+      "x-ms-discriminator-value": "AgentJobLevelOutput",
+      "type": "object",
+      "description": "AgentJob level output for the task that validates connection to SQL Server and also validates source server requirements",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "AgentJob name",
+          "readOnly": true
+        },
+        "jobCategory": {
+          "type": "string",
+          "description": "The type of AgentJob.",
+          "readOnly": true
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "The state of the original AgentJob.",
+          "readOnly": true
+        },
+        "jobOwner": {
+          "type": "string",
+          "description": "The owner of the AgentJob",
+          "readOnly": true
+        },
+        "lastExecutedOn": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "UTC Date and time when the AgentJob was last executed."
+        },
+        "migrationEligibility": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationEligibilityInfo",
+          "description": "Information about eligiblity of agent job for migration.",
           "readOnly": true
         }
       },

@@ -22,13 +22,13 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information 
-These are the global settings for the Data Migration Service API.
+These are the global settings for the Database Migration Service API.
 
 ``` yaml
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-2018-03-15-preview
+tag: package-2018-03-31-preview
 ```
 
 ### Tag: package-2017-11-15-preview
@@ -71,7 +71,27 @@ input-file:
 - Microsoft.DataMigration/preview/2018-03-15-preview/definitions/MigrationValidation.json
 - Microsoft.DataMigration/preview/2018-03-15-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
 ```
+### Tag: package-2018-03-31-preview
 
+These settings apply only when `--tag=package-2018-03-31-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-31-preview'
+input-file:
+- Microsoft.DataMigration/preview/2018-03-31-preview/datamigration.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Common.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToTargetSqlMITask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrateSqlServerSqlMITask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Tasks.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/TasksCommon.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+```
 ---
 
 # Code Generation

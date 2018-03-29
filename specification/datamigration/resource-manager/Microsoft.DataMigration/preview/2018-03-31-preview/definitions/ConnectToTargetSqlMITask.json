@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-15-preview"
+    "version": "2018-03-31-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -47,6 +47,22 @@
         "targetServerBrandVersion": {
           "type": "string",
           "description": "Target server brand version",
+          "readOnly": true
+        },
+        "Logins": {
+          "type": "array",
+          "description": "List of logins on the target server.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "AgentJobs": {
+          "type": "array",
+          "description": "List of agent jobs on the target server.",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "validationErrors": {
