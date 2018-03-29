@@ -85,7 +85,7 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search.Service/Generated
 
 directive: 
-  # fixes an incorrect generation in AutoRest with a parameterized host and both client and operation groups that use it.
+  # TODO: remove this workaround once AutoRest fixes the incorrect code generation when using a parameterized host and both client and operation groups paths.
   - from: source-file-csharp
     where: $
     transform: >
