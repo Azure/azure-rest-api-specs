@@ -2038,9 +2038,11 @@
       "type": "object",
       "properties": {
         "usable": {
+          "description": "Usable capacity in TB.",
           "type": "string"
         },
         "maximum": {
+          "description": "Maximum capacity in TB.",
           "type": "string"
         }
       }
@@ -2054,6 +2056,7 @@
       "type": "object",
       "properties": {
         "meterId": {
+          "description": "Meter id of the Sku.",
           "type": "string"
         },
         "meterType": {
@@ -2073,12 +2076,15 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
+          "description": "The Sku."
         },
         "enabled": {
+          "description": "The sku is enabled or not.",
           "type": "boolean"
         },
         "properties": {
           "$ref": "#/definitions/SkuProperties",
+          "description": "Properties of the sku.",
           "x-ms-client-flatten": true
         }
       }
@@ -2094,6 +2100,7 @@
       "type": "object",
       "properties": {
         "destinationToServiceLocationMap": {
+          "description": "The map of destination location to service location.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DestinationToServiceLocationMap"
@@ -2101,20 +2108,24 @@
         },
         "capacity": {
           "$ref": "#/definitions/SkuCapacity",
+          "description": "Capacity of the Sku."
         },
         "costs": {
+          "description": "Cost of the Sku.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuCost"
           }
         },
         "apiVersions": {
+          "description": "Api versions that support this Sku.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "disabledReason": {
+          "description": "Reason why the Sku is disabled.",
           "type": "string"
         }
       }
