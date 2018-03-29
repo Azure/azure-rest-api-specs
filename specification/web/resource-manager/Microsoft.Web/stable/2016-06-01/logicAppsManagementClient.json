@@ -1256,7 +1256,38 @@
             "additionalProperties": false,
             "properties": {
                 "properties": {
-                    "$ref": "#/definitions/ConnectionGatewayPropertiesDefinition"
+                    "properties": {
+                        "connectionGatewayInstallation": {
+                            "$ref": "#/definitions/ConnectionGatewayReference"
+                        },
+                        "contactInformation": {
+                            "description": "The gateway admin",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "displayName": {
+                            "description": "The gateway display name",
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "The gateway description",
+                            "type": "string"
+                        },
+                        "machineName": {
+                            "description": "The machine name of the gateway",
+                            "type": "string"
+                        },
+                        "status": {
+                            "description": "The gateway status",
+                            "type": "object"
+                        },
+                        "backendUri": {
+                            "description": "The URI of the backend",
+                            "type": "string"
+                        }
+                    }
                 }
             },
             "allOf": [
@@ -1265,25 +1296,7 @@
                 }
             ]
         },
-        "ConnectionGatewayPropertiesDefinition": {
-            "description": "The gateway properties",
-            "type": "object",
-            "properties": {
-                "connectionGatewayInstallation": {
-                    "description": "Connection gateway installation",
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/ConnectionGatewayInstallationReference"
-                    }
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/GatewayPropertiesDefinition"
-                }
-            ]
-        },
-        "ConnectionGatewayInstallationReference": {
+        "ConnectionGatewayReference": {
             "description": "The gateway installation reference",
             "type": "object",
             "properties": {
@@ -1313,40 +1326,6 @@
                 },
                 "type": {
                     "description": "Resource reference type",
-                    "type": "string"
-                }
-            }
-        },
-        "GatewayPropertiesDefinition": {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false,
-            "properties": {
-                "contactInformation": {
-                    "description": "The gateway admin",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "displayName": {
-                    "description": "The gateway display name",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "The gateway description",
-                    "type": "string"
-                },
-                "machineName": {
-                    "description": "The machine name of the gateway",
-                    "type": "string"
-                },
-                "status": {
-                    "description": "The gateway status",
-                    "type": "object"
-                },
-                "backendUri": {
-                    "description": "The URI of the backend",
                     "type": "string"
                 }
             }
@@ -1391,43 +1370,43 @@
             "additionalProperties": false,
             "properties": {
                 "properties": {
-                    "$ref": "#/definitions/ConnectionGatewayInstallationPropertiesDefinition"
+                    "properties": {
+                        "connectionGateway": {
+                            "$ref": "#/definitions/ConnectionGatewayReference"
+                        },
+                        "contactInformation": {
+                            "description": "The gateway admin",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "displayName": {
+                            "description": "The gateway display name",
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "The gateway description",
+                            "type": "string"
+                        },
+                        "machineName": {
+                            "description": "The machine name of the gateway",
+                            "type": "string"
+                        },
+                        "status": {
+                            "description": "The gateway status",
+                            "type": "object"
+                        },
+                        "backendUri": {
+                            "description": "The URI of the backend",
+                            "type": "string"
+                        }
+                    }
                 }
             },
             "allOf": [
                 {
                     "$ref": "#/definitions/ResourceDefinition"
-                }
-            ]
-        },
-        "ConnectionGatewayInstallationPropertiesDefinition": {
-            "description": "The gateway installation properties",
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "connectionGateway": {
-                    "$ref": "#/definitions/ConnectionGatewayReference"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/GatewayPropertiesDefinition"
-                }
-            ]
-        },
-        "ConnectionGatewayReference": {
-            "description": "The gateway reference",
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "name": {
-                    "description": "The resource reference name",
-                    "type": "string"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/ResourceReference"
                 }
             ]
         },
@@ -1898,7 +1877,60 @@
             "additionalProperties": false,
             "properties": {
                 "properties": {
-                    "$ref": "#/definitions/ApiConnectionPropertiesDefinition"
+                    "properties": {
+                        "displayName": {
+                            "description": "Display name",
+                            "type": "string"
+                        },
+                        "statuses": {
+                            "description": "Status of the connection",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ConnectionStatusDefinition"
+                            }
+                        },
+                        "parameterValues": {
+                            "description": "Dictionary of parameter values",
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        },
+                        "customParameterValues": {
+                            "description": "Dictionary of custom parameter values",
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        },
+                        "nonSecretParameterValues": {
+                            "description": "Dictionary of nonsecret parameter values",
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        },
+                        "createdTime": {
+                            "format": "date-time",
+                            "description": "Timestamp of the connection creation",
+                            "type": "string"
+                        },
+                        "changedTime": {
+                            "format": "date-time",
+                            "description": "Timestamp of last connection change",
+                            "type": "string"
+                        },
+                        "api": {
+                            "$ref": "#/definitions/ApiReference"
+                        },
+                        "testLinks": {
+                            "description": "Links to test the API connection",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApiConnectionTestLink"
+                            }
+                        }
+                    }
                 }
             },
             "allOf": [
@@ -1906,65 +1938,6 @@
                     "$ref": "#/definitions/ResourceDefinition"
                 }
             ]
-        },
-        "ApiConnectionPropertiesDefinition": {
-            "description": "API connection properties",
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "displayName": {
-                    "description": "Display name",
-                    "type": "string"
-                },
-                "statuses": {
-                    "description": "Status of the connection",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ConnectionStatusDefinition"
-                    }
-                },
-                "parameterValues": {
-                    "description": "Dictionary of parameter values",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "customParameterValues": {
-                    "description": "Dictionary of custom parameter values",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "nonSecretParameterValues": {
-                    "description": "Dictionary of nonsecret parameter values",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "createdTime": {
-                    "format": "date-time",
-                    "description": "Timestamp of the connection creation",
-                    "type": "string"
-                },
-                "changedTime": {
-                    "format": "date-time",
-                    "description": "Timestamp of last connection change",
-                    "type": "string"
-                },
-                "api": {
-                    "$ref": "#/definitions/ApiReference"
-                },
-                "testLinks": {
-                    "description": "Links to test the API connection",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ApiConnectionTestLink"
-                    }
-                }
-            }
         },
         "ApiConnectionTestLink": {
             "description": "API connection properties",
