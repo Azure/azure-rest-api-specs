@@ -143,6 +143,16 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datafactory
 ```
 
+## Azure Resource Schema
+
+Workaround for ambiguous oneOf matches. Final fix requires always emitting the right `type`, which requires https://github.com/Azure/autorest/issues/2827 to happen first.
+``` yaml $(azureresourceschema)
+directive:
+- from: source-file-azureresourceschema
+  where: $
+  transform: return $.replace(/"oneOf":/g, '"anyOf":')
+```
+
 # Validation
 
 ## Suppression
