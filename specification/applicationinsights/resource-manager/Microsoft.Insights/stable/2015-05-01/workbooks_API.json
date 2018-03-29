@@ -371,14 +371,11 @@
         }
       },
       "delete": {
-        "description": "Delete a workbook.",
+        "description": "Delete a link between a source resource and workbook resource.",
         "operationId": "Workbooks_DeleteLink",
         "parameters": [
           {
-            "$ref": "#/parameters/WorkbookResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SourceIdParameter"
+            "$ref": "#/parameters/ResourceIdParameter"
           },
           {
             "$ref": "#/parameters/CategoryParameter"
@@ -403,7 +400,7 @@
         },
         "x-ms-examples": {
           "WorkbookList": {
-            "$ref": "./examples/WorkbookResponseOnly.json"
+            "$ref": "./examples/WorkbookDeleteLink.json"
           }
         }
       }
@@ -669,6 +666,14 @@
       "required": true,
       "type": "string",
       "description": "Azure Resource Id that will fetch all linked workbooks.",
+      "x-ms-parameter-location": "method"
+    },    
+    "ResourceIdParameter": {
+      "name": "resourceId",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Azure Resource Id or any target workbook resource id.",
       "x-ms-parameter-location": "method"
     },    
     "CanFetchWorkbookContentParameter": {
