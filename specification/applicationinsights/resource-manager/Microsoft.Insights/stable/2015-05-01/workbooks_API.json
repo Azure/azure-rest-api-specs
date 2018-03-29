@@ -119,7 +119,7 @@
         },
         "x-ms-examples": {
           "WorkbookList": {
-            "$ref": "./examples/WorkbookResponseOnly.json"
+            "$ref": "./examples/WorkbookDelete.json"
           }
         }
       },
@@ -304,19 +304,16 @@
         "operationId": "Workbooks_CreateLink",
         "parameters": [          
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkbookResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SourceIdParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "linkProperties",
+            "description": "Properties that need to be specified to create a workbook link.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkProperties"
+            }
           }
         ],
         "responses": {
@@ -341,19 +338,16 @@
         "operationId": "Workbooks_UpdateLink",
         "parameters": [          
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkbookResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SourceIdParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "linkProperties",
+            "description": "Properties that need to be specified to create a workbook link.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkProperties"
+            }
           }
         ],
         "responses": {
@@ -381,13 +375,13 @@
         "operationId": "Workbooks_DeleteLink",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -487,6 +481,23 @@
           "x-ms-client-flatten": true,
           "description": "Metadata describing a web test for an Azure resource.",
           "$ref": "#/definitions/WorkbookProperties"
+        }
+      }
+    },
+    "LinkProperties": {
+      "description": "Contains a sourceId and workbook resource id to link two resources.",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "description": "The source Azure resource id"
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The workbook Azure resource id"
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of workbook"
         }
       }
     },
