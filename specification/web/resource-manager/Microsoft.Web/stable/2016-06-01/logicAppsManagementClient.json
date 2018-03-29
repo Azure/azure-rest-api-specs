@@ -2074,27 +2074,17 @@
         "ConnectionStatusDefinition": {
             "description": "Connection status",
             "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/ResourceDefinition"
-                }
-            ],
             "properties": {
-                "properties": {
-                    "properties": {
-                        "status": {
-                            "description": "The gateway status",
-                            "type": "string"
-                        },
-                        "target": {
-                            "description": "Target of the error",
-                            "type": "string"
-                        },
-                        "error": {
-                            "$ref": "#/definitions/ConnectionError"
-                        }
-                    },
-                    "x-ms-client-flatten": true
+                "status": {
+                    "description": "The gateway status",
+                    "type": "string"
+                },
+                "target": {
+                    "description": "Target of the error",
+                    "type": "string"
+                },
+                "error": {
+                    "$ref": "#/definitions/ConnectionError"
                 }
             }
         },
