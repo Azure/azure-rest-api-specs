@@ -183,7 +183,7 @@
       "get": {
         "summary": "Gets a list of meters for a given location.",
         "description": "Gets a list of meters for a given location.",
-        "operationId": "ListBillingMeters",
+        "operationId": "BillingMeters_List",
         "parameters": [
           {
             "name": "billingLocation",
@@ -203,12 +203,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/BillingMeterCollection"
-            }
-          },
-          "default": {
-            "description": "Default error response",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -559,7 +553,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of resources.",
+          "description": "Collection of Billing Meters.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BillingMeter"
