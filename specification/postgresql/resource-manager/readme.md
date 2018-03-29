@@ -87,8 +87,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.DBforPostgreSQL
-  output-folder: $(csharp-sdks-folder)/DBforPostgreSQL/Management.DBforPostgreSQL/Generated
+  namespace: Microsoft.Azure.Management.PostgreSQL
+  output-folder: $(csharp-sdks-folder)/PostgreSQL/Management.PostgreSQL/Generated
   clear-output-folder: true
 ```
 
