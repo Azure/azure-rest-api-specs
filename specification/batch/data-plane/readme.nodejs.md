@@ -11,6 +11,6 @@ nodejs:
   output-folder: $(node-sdks-folder)/lib/services/batch
   payload-flattening-threshold: 1
   generate-license-txt: true
-  generate-package-json: true
+  generate-package-json: false
   generate-readme-md: false
 ```
