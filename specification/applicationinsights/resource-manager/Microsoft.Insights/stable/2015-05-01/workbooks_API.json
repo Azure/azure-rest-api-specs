@@ -118,7 +118,7 @@
           }
         },
         "x-ms-examples": {
-          "WorkbookList": {
+          "WorkbookDelete": {
             "$ref": "./examples/WorkbookDelete.json"
           }
         }
@@ -210,7 +210,7 @@
           }
         },
         "x-ms-examples": {
-          "WorkbookList": {
+          "WorkbookUpdate": {
             "$ref": "./examples/WorkbookUpdate.json"
           }
         }
@@ -255,11 +255,14 @@
         }
       }
     },
-    "/providers/microsoft.insights/workbooks": {  
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/workbooks/links": {  
       "get": {
         "description": "Gets a list of workbooks.",
         "operationId": "Workbooks_ListBySourceId",
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "#/parameters/SourceIdParameter"
           },
@@ -294,7 +297,7 @@
           }
         },
         "x-ms-examples": {
-          "WorkbooksList": {
+          "WorkbooksListLink": {
             "$ref": "./examples/WorkbooksListLink.json"
           }
         }
@@ -303,6 +306,9 @@
         "description": "Create a new workbook link.",
         "operationId": "Workbooks_CreateLink",
         "parameters": [          
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -338,6 +344,9 @@
         "operationId": "Workbooks_UpdateLink",
         "parameters": [          
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -365,7 +374,7 @@
           }
         },
         "x-ms-examples": {
-          "WorkbookAdd": {
+          "WorkbookUpdateLink": {
             "$ref": "./examples/LinkedWorkbookResponseOnly.json"
           }
         }
@@ -374,6 +383,9 @@
         "description": "Delete a link between a source resource and workbook resource.",
         "operationId": "Workbooks_DeleteLink",
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "#/parameters/ResourceIdParameter"
           },
@@ -399,12 +411,51 @@
           }
         },
         "x-ms-examples": {
-          "WorkbookList": {
+          "WorkbookDeleteLink": {
             "$ref": "./examples/WorkbookDeleteLink.json"
           }
         }
       }
-    }    
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/workbooks/{resourceName}/links": {  
+      "get": {
+        "description": "Gets a workbook link by a workbook resource name.",
+        "operationId": "Workbooks_ListBySourceId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CanFetchWorkbookContentParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A workbook definition.",
+            "schema": {
+                "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookGet": {
+            "$ref": "./examples/WorkbookGet.json"
+          }
+        }
+      }
+    } 
   },
   "definitions": {
     "Resource": {
