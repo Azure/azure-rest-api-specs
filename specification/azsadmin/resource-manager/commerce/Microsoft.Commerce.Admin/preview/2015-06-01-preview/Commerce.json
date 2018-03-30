@@ -5,19 +5,55 @@
         "title": "CommerceManagementClient",
         "description": "The Admin Commerce Management Client."
     },
-    "host": "management.local.azurestack.external",
+    "host": "adminmanagement.local.azurestack.external",
     "schemes": [
         "https"
     ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Commerce/subscriberUsageAggregates": {
+        "/providers/Microsoft.Commerce.Admin/operations": {
             "get": {
                 "x-ms-examples": {
-                    "Get the list of usage aggregates for all tenants.": {
-                        "$ref": "./examples/SubscriberUsageAggregates/ListOperation.json"
+                    "Returns the list of supported REST operations.": {
+                        "$ref": "./examples/Operations/List.json"
                     }
                 },
-                "description": "Gets a collection of SubscriberUsageAggregates, which are UsageAggregates from direct tenants.",
+                "description": "Returns the list of supported REST operations.",
+                "tags": [
+                    "Commerce"
+                ],
+                "operationId": "Operations_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OperationList"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Commerce.Admin/subscriberUsageAggregates": {
+            "get": {
+                "x-ms-examples": {
+                    "Gets a collection of SubscriberUsageAggregates, which are UsageAggregates from users.": {
+                        "$ref": "./examples/SubscriberUsageAggregates/List.json"
+                    }
+                },
+                "description": "Gets a collection of SubscriberUsageAggregates, which are UsageAggregates from users.",
                 "tags": [
                     "Commerce"
                 ],
@@ -53,12 +89,36 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
+                "x-ms-pageable" : {
+                    "nextLinkName" : "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Commerce.Admin/updateEncryption": {
+            "post": {
+                "x-ms-examples": {
+                    "Update the encryption.": {
+                        "$ref": "./examples/Commerce/UpdateEncryption.json"
+                    }
+                },
+                "description": "Update the encryption.",
+                "tags": [
+                    "Commerce"
                 ],
-                "consumes": [
-                    "application/json"
-                ]
+                "operationId": "UpdateEncryption",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
             }
         }
     },
@@ -89,7 +149,7 @@
                 },
                 "tags": {
                     "readOnly": true,
-                    "description": "List of key value pairs.",
+                    "description": "List of key-value pairs.",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -120,17 +180,17 @@
             "properties": {
                 "subscriptionId": {
                     "type": "string",
-                    "description": "Subscription id of tenant using plan."
+                    "description": "Subscription ID of tenant using plan."
                 },
                 "usageStartTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "UTC start time for the usage bucket to which this usage aggregate belongs."
+                    "description": "UTC start time for the usage category to which this usage aggregate belongs."
                 },
                 "usageEndTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "UTC end time for the usage bucket to which this usage aggregate belongs."
+                    "description": "UTC end time for the usage category to which this usage aggregate belongs."
                 },
                 "instanceData": {
                     "description": "Key-value pairs of instance details represented as a string.",
@@ -141,16 +201,16 @@
                     "type": "string"
                 },
                 "meterId": {
-                    "description": "Unique ID for the resource that was consumed (aka ResourceID).",
+                    "description": "Unique ID for the resource that was consumed, for example, the Resource ID.",
                     "type": "string"
                 }
             }
         },
         "UsageAggregatePage": {
-            "description": "Holds an array of usage aggregates and the continuation token.",
+            "description": "Pageable list of usage aggregates",
             "properties": {
                 "value": {
-                    "description": "Array of usage aggregates.",
+                    "description": "List of usage aggregates.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/UsageAggregate"
@@ -158,7 +218,57 @@
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Continuation token"
+                    "description": "URI to the next page."
+                }
+            }
+        },
+        "Operation": {
+            "description": "Describes the supported REST operation.",
+            "properties": {
+                "name": {
+                    "description": "The name of the operation performed on the object. The name should match the action name that appears in RBAC or the event service.",
+                    "type": "string"
+                },
+                "display": {
+                    "description": "Contains the localized display information for this particular operation or action.",
+                    "$ref": "#/definitions/Display"
+                }
+            }
+        },
+        "Display": {
+            "description": "Contains the localized display information for this particular operation / action.",
+            "properties": {
+                "provider": {
+                    "description": "The localized, friendly version of the resource provider name. The provider name is expected to include the name of the publisher or company responsible. The provider name format should use title case and begin with \"Microsoft\" for first-party services. For example, the provider name may be\"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+                    "type": "string"
+                },
+                "resource": {
+                    "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+                    "type": "string"
+                },
+                "operation": {
+                    "description": "The localized, friendly name for the operation. Use the name as it will be displayed to the user.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+                    "type": "string"
+                }
+            }
+        },
+        "OperationList": {
+            "description": "List of Operations",
+            "properties": {
+                "value": {
+                    "description": "Array of operations",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Operation"
+                    }
+                },
+                "nextLink" : {
+                    "description": "URI to the next page of operations.",
+                    "type": "string"
                 }
             }
         }
@@ -174,7 +284,7 @@
         "ApiVersionParameter": {
             "name": "api-version",
             "in": "query",
-            "description": "Client Api Version.",
+            "description": "Client API Version.",
             "required": true,
             "type": "string",
             "default": "2015-06-01-preview"
@@ -227,7 +337,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }
