@@ -1,5 +1,5 @@
 # ApiManagement
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for ApiManagement.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for ApiManagement.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for ApiManagement, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the ApiManagement API.
 
 ``` yaml
@@ -134,7 +134,7 @@ input-file:
 - Microsoft.ApiManagement/stable/2016-10-10/apimtenant.json
 - Microsoft.ApiManagement/stable/2016-10-10/apimusers.json
 ```
- 
+
 ### Tag: package-2016-07
 
 These settings apply only when `--tag=package-2016-07` is specified on the command line.
@@ -157,10 +157,14 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-node
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@~3.0"
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -169,11 +173,14 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ApiManagement  
+  namespace: Microsoft.Azure.Management.ApiManagement
   output-folder: $(csharp-sdks-folder)/ApiManagement/Management.ApiManagement/Generated
   clear-output-folder: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -190,9 +197,19 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-01
   - tag: package-2017-03
   - tag: package-2016-10
   - tag: package-2016-07
+```
+
+### Tag: package-2018-01 and go
+
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/apimanagement/mgmt/2018-01-01/apimanagement
 ```
 
 ### Tag: package-2017-03 and go

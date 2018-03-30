@@ -1,5 +1,5 @@
 # MonitorClient
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for MonitorClient.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for MonitorClient.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for MonitorClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the MonitorClient API.
 
 ``` yaml
@@ -29,6 +29,7 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 tag: package-2018-03
+
 ```
 ### Tag: package-2018-03
 
@@ -43,7 +44,7 @@ input-file:
 - microsoft.insights/stable/2016-03-01/logProfiles_API.json
 - microsoft.insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - microsoft.insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- microsoft.insights/stable/2017-04-01/actionGroups_API.json
+- microsoft.insights/stable/2018-03-01/actionGroups_API.json
 - microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
 - microsoft.insights/stable/2015-04-01/activityLogs_API.json
 - microsoft.insights/stable/2015-04-01/eventCategories_API.json
@@ -69,7 +70,7 @@ input-file:
 - microsoft.insights/stable/2016-03-01/logProfiles_API.json
 - microsoft.insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - microsoft.insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- microsoft.insights/stable/2017-04-01/actionGroups_API.json
+- microsoft.insights/stable/2018-03-01/actionGroups_API.json
 - microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
 - microsoft.insights/stable/2015-04-01/activityLogs_API.json
 - microsoft.insights/stable/2015-04-01/eventCategories_API.json
@@ -94,7 +95,7 @@ input-file:
 - microsoft.insights/stable/2016-03-01/logProfiles_API.json
 - microsoft.insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - microsoft.insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- microsoft.insights/stable/2017-04-01/actionGroups_API.json
+- microsoft.insights/stable/2018-03-01/actionGroups_API.json
 - microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
 - microsoft.insights/stable/2015-04-01/activityLogs_API.json
 - microsoft.insights/stable/2015-04-01/eventCategories_API.json
@@ -160,10 +161,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.

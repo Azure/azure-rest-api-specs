@@ -385,6 +385,10 @@
           "type": "object",
           "description": "The port of on-premises Dynamics server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0."
         },
+        "serviceUri": {
+           "type": "object",
+           "description": "The URL to the Microsoft Dynamics server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
+        },
         "organizationName": {
           "type": "object",
           "description": "The organization name of the Dynamics instance. The property is required for on-prem and required for online when there are more than one Dynamics instances associated with the user. Type: string (or Expression with resultType string)."
@@ -1308,6 +1312,14 @@
         "port": {
           "type": "object",
           "description": "The TCP port number that the MongoDB server uses to listen for client connections. The default value is 27017. Type: integer (or Expression with resultType integer), minimum: 0."
+        },
+        "enableSsl": {
+          "type": "object",
+          "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "allowSelfSignedServerCert": {
+          "type": "object",
+          "description": "Specifies whether to allow self-signed certificates from the server. The default value is false. Type: boolean (or Expression with resultType boolean)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -3714,6 +3726,58 @@
         }
       } 
     },
+    "SalesforceMarketingCloudLinkedService": { 
+      "x-ms-discriminator-value": "SalesforceMarketingCloud", 
+      "description": "Salesforce Marketing Cloud linked service.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/LinkedService" 
+        } 
+      ], 
+      "properties": { 
+        "typeProperties": { 
+          "description": "Salesforce Marketing Cloud linked service properties.", 
+          "x-ms-client-flatten": true, 
+          "$ref": "#/definitions/SalesforceMarketingCloudLinkedServiceTypeProperties" 
+        } 
+      }, 
+      "required": [ 
+        "typeProperties" 
+      ] 
+    }, 
+    "SalesforceMarketingCloudLinkedServiceTypeProperties": { 
+      "description": "Salesforce Marketing Cloud linked service properties.", 
+      "properties": {
+        "clientId": {
+          "description": "The client ID associated with the Salesforce Marketing Cloud application. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "clientSecret": {
+          "description": "The client secret associated with the Salesforce Marketing Cloud application. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "useEncryptedEndpoints": {
+          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "useHostVerification": {
+          "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "usePeerVerification": {
+          "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "encryptedCredential": { 
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+          "type": "object"
+        }
+      },
+      "required": [
+        "clientId"
+      ] 
+    },
     "HDInsightOnDemandLinkedService": {
       "x-ms-discriminator-value": "HDInsightOnDemand",
       "description": "HDInsight ondemand linked service.",
@@ -3996,6 +4060,63 @@
         "domain",
         "accessToken"
       ]
+    },
+    "ResponsysLinkedService": { 
+      "x-ms-discriminator-value": "Responsys", 
+      "description": "Responsys linked service.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/LinkedService" 
+        } 
+      ], 
+      "properties": { 
+        "typeProperties": { 
+          "description": "Responsys linked service properties.", 
+          "x-ms-client-flatten": true, 
+          "$ref": "#/definitions/ResponsysLinkedServiceTypeProperties" 
+        } 
+      }, 
+      "required": [ 
+        "typeProperties" 
+      ] 
+    }, 
+    "ResponsysLinkedServiceTypeProperties": { 
+      "description": "Responsys linked service properties.", 
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint of the Responsys server.",
+          "type": "object"
+        },
+        "clientId": {
+          "description": "The client ID associated with the Responsys application. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "clientSecret": {
+          "description": "The client secret associated with the Responsys application. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "useEncryptedEndpoints": {
+          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "useHostVerification": {
+          "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "usePeerVerification": {
+          "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "encryptedCredential": { 
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+          "type": "object"
+        }
+      },
+      "required": [
+        "endpoint",
+        "clientId"
+      ] 
     }
   }
 }

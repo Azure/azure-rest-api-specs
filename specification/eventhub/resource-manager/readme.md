@@ -1,5 +1,5 @@
 # EventHub
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for EventHub.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for EventHub.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for EventHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the EventHub API.
 
 ``` yaml
@@ -60,6 +60,16 @@ input-file:
 ```
 
 
+### Tag: package-2018-01-preview
+
+These settings apply only when `--tag=package-2018-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01-preview'
+input-file:
+- Microsoft.EventHub/preview/2018-01-01-preview/EventHubCluster.json
+```
+
+
 ---
 # Code Generation
 
@@ -74,10 +84,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -137,6 +148,7 @@ go:
 batch:
   - tag: package-2017-04
   - tag: package-2015-08
+  - tag: package-2018-01-preview
 ```
 
 ### Tag: package-2017-04 and go
@@ -146,6 +158,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-04' && $(go)
 output-folder: $(go-sdk-folder)/services/eventhub/mgmt/2017-04-01/eventhub
+```
+
+### Tag: package-2018-01-preview and go
+
+These settings apply only when `--tag=package-2018-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/eventhub/mgmt/2018-01-01-preview/eventhub
 ```
 
 ### Tag: package-2015-08 and go

@@ -3275,10 +3275,25 @@
         "errorMessage": {
           "type": "string",
           "readOnly": true,
-          "description": "The message describing the error that occurred while attempting to index the item."
+          "description": "The message describing the error that occurred while processing the item."
         }
       },
       "description": "Represents an item- or document-level indexing error."
+    },
+    "ItemWarning": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The key of the item which generated a warning."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The message describing the warning that occurred while processing the item."
+        }
+      },
+      "description": "Represents an item-level warning."
     },
     "IndexerExecutionResult": {
       "properties": {
@@ -3311,6 +3326,14 @@
             "$ref": "#/definitions/ItemError"
           },
           "description": "The item-level indexing errors."
+        },
+        "warnings": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ItemWarning"
+          },
+          "description": "The item-level indexing warnings."
         },
         "itemsProcessed": {
           "x-ms-client-name": "ItemCount",
@@ -4013,7 +4036,8 @@
       "required": true,
       "type": "string",
       "x-ms-skip-url-encoding": true,
-      "description": "The name of the Azure Search service."
+      "description": "The name of the Azure Search service.",
+      "x-ms-parameter-location": "client"
     },
     "SearchDnsSuffixParameter": {
       "name": "searchDnsSuffix",
@@ -4022,7 +4046,8 @@
       "type": "string",
       "default": "search.windows.net",
       "x-ms-skip-url-encoding": true,
-      "description": "The DNS suffix of the Azure Search service. The default is search.windows.net."
+      "description": "The DNS suffix of the Azure Search service. The default is search.windows.net.",
+      "x-ms-parameter-location": "client"
     }
   }
 }

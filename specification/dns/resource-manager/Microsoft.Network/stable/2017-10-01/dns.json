@@ -975,7 +975,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Zone"
+              "$ref": "#/definitions/ZoneUpdate"
             },
             "description": "Parameters supplied to the Update operation."
           },
@@ -1465,6 +1465,18 @@
       ],
       "description": "Describes a DNS zone."
     },
+    "ZoneUpdate": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Describes a request to update a DNS zone."
+    },
     "ZoneListResult": {
       "properties": {
         "value": {
@@ -1516,6 +1528,9 @@
           "description": "Resource tags."
         }
       },
+      "required": [
+        "location"
+      ],
       "description": "Common properties of an Azure Resource Manager resource"
     },
     "SubResource": {

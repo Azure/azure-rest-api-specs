@@ -1,5 +1,5 @@
 # ServiceMap
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for ServiceMap.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for ServiceMap.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for ServiceMap, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -18,10 +18,24 @@ To see additional help and options, run:
 ---
 
 ## Configuration
+Following are the settings for using this specification with [AutoRest](https://aka.ms/autorest) tool to validation and optionally generate SDK.
 
+### Azure Validator Suppressions
 
+Suppressed Rule | Reason
+----------------|--------
+R3023 OperationsAPIImplementation | Service map is sharing RP with Log Analytics, so this operaration won't reach ServiceMap's service endpoint. Hence this rule is not applicable.
 
-### Basic Information 
+```yaml
+model-validator: true 
+semantic-validator: true
+azure-validator: true
+directive:
+  suppress:
+    - R3023
+```
+
+### Basic Information
 These are the global settings for the ServiceMap API.
 
 ``` yaml
@@ -52,6 +66,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 ## Go

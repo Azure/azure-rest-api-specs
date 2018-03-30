@@ -874,7 +874,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/OperationIdParameter"
@@ -1193,7 +1193,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/OperationIdParameter"
@@ -1367,7 +1367,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/OperationIdParameter"
@@ -1483,7 +1483,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1534,7 +1534,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
@@ -1760,7 +1760,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1814,7 +1814,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/SchemaIdParameter"
@@ -1863,7 +1863,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/SchemaIdParameter"
@@ -1915,7 +1915,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/SchemaIdParameter"
@@ -1979,7 +1979,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/SchemaIdParameter"
@@ -2638,7 +2638,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "name": "format",
@@ -2834,7 +2834,19 @@
           "x-ms-client-name": "SoapApiType",
           "x-ms-enum": {
             "name": "SoapApiType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "http",
+                "description": "Imports a SOAP API having a RESTful front end.",
+                "name": "SoapToRest"
+              },
+              {
+                "value": "soap",
+                "description": "Imports the Soap API having a SOAP front end.",
+                "name": "SoapPassThrough"                
+              }
+            ]
           }
         }
       },

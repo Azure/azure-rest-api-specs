@@ -630,6 +630,52 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purge": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Purges data in an Log Analytics workspace by a set of user-defined filters.",
+        "x-ms-long-running-operation": true,
+        "operationId": "Workspaces_Purge",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePurgeParameter"
+          }         
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted request for purging an Log Analytics workspace.",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeResponse"
+            }
+          },
+          "200": {
+            "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeStatusResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePurge": {
+            "$ref": "./examples/WorkspacesPurge.json"
+          }
+        }
+      }
     }    
   },
   "definitions": {
@@ -1247,6 +1293,71 @@
         }
       }, 
       "description": "Common properties of proxy resource." 
+    },
+    "WorkspacePurgeBody": {
+      "description": "Describes the body of a purge request for an App Insights Workspace",
+      "required": [
+        "table",
+        "filters"
+      ],
+      "properties": {
+        "table": {
+          "type": "string",
+          "description": "Table from which to purge data."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The set of columns and filters (queries) to run over them to purge the resulting data.",
+          "items": {
+            "$ref": "#/definitions/WorkspacePurgeBodyFilters"
+          }
+        }
+      }
+    },
+    "WorkspacePurgeBodyFilters": {
+      "description": "User-defined filters to return data which will be purged from the table.",
+      "properties": {
+        "column": {
+          "description": "The column of the table over which the given query should run",
+          "type": "string"
+        },
+        "filter": {
+          "description": "A query to to run over the provided table and column to purge the corresponding data.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspacePurgeResponse": {
+      "description": "Response containing operationId for a specific purge action.",
+      "properties": {
+        "operationId": {
+          "description": "Id to use when querying for status for a particular purge operation.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "WorkspacePurgeStatusResponse": {
+      "description": "Response containing status for a specific purge operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the operation represented by the requested Id.",
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "PurgeState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "status"
+      ]
     }
   },
   "parameters": {
@@ -1274,6 +1385,32 @@
         "pattern": "^[-\\w\\._\\(\\)]+$",
         "minLength": 1,
         "maxLength": 90
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Log Analytics workspace name",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspacePurgeParameter": {
+      "name": "body",
+      "in": "body",
+      "description": "Describes the body of a request to purge data in a single table of an Log Analytics Workspace",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkspacePurgeBody"
+      },
+      "x-ms-parameter-location": "client"
+    },
+    "WorkspacePurgeIdParameter": {
+      "name": "purgeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "In a purge status request, this is the Id of the operation the status of which is returned.",
+      "x-ms-parameter-location": "client"
     }
   }
 }

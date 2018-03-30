@@ -17,7 +17,7 @@
   "security": [
     {
       "azure_auth": [
-          "user_impersonation"
+        "user_impersonation"
       ]
     }
   ],
@@ -28,19 +28,19 @@
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-          "user_impersonation": "impersonate your user account"
+        "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {},
   "definitions": {
     "Job": {
-      "description": "Definition of the job.", 
+      "description": "Definition of the job.",
       "x-ms-mutability": [
         "read",
         "create"
-      ],     
-      "properties": {        
+      ],
+      "properties": {
         "properties": {
           "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobProperties",
           "x-ms-client-flatten": true,
@@ -48,10 +48,10 @@
         }
       },
       "allOf": [
-      {
+        {
           "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProxyResource"
-      }
-      ]      
+        }
+      ]
     },
     "jobCollectionItem": {
       "description": "Job collection item properties.",
@@ -65,7 +65,7 @@
       },
       "allOf": [
         {
-            "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProxyResource"
+          "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ProxyResource"
         }
       ],
       "required": [
@@ -74,7 +74,7 @@
     },
     "jobCollectionItemProperties": {
       "description": "Job collection item properties.",
-      "properties": {       
+      "properties": {
         "runbook": {
           "$ref": "../../stable/2015-10-31/definitions.json#/definitions/RunbookAssociationProperty",
           "readOnly": true,
@@ -137,7 +137,7 @@
         "provisioningState": {
           "$ref": "../../stable/2015-10-31/definitions.json#/definitions/JobProvisioningStateProperty",
           "description": "The current provisioning state of the job."
-        }  
+        }
       }
     },
     "JobListResultV2": {
@@ -978,15 +978,15 @@
     },
     "SourceControlSyncJobById": {
       "properties": {
-          "id": {
-            "type": "string",
-            "description": "Gets the id of the job."
-          },
-          "properties": {
-            "$ref": "#/definitions/SourceControlSyncJobByIdProperties",
-            "x-ms-client-flatten": true,
-            "description": "Gets the properties of the source control sync job."
-          }
+        "id": {
+          "type": "string",
+          "description": "Gets the id of the job."
+        },
+        "properties": {
+          "$ref": "#/definitions/SourceControlSyncJobByIdProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets the properties of the source control sync job."
+        }
       },
       "description": "Definition of the source control sync job."
     },
@@ -1059,14 +1059,16 @@
       "description": "The name of the automation account.",
       "type": "string",
       "required": true,
-      "in": "path"
+      "in": "path",
+      "x-ms-parameter-location": "method"
     },
     "clientRequestId": {
       "name": "clientRequestId",
       "description": "Identifies this specific client request.",
       "type": "string",
       "required": false,
-      "in": "header"
+      "in": "header",
+      "x-ms-parameter-location": "method"
     }
   }
 }
