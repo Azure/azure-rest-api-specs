@@ -29,6 +29,7 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 tag: package-2018-03
+
 ```
 ### Tag: package-2018-03
 
