@@ -3,23 +3,57 @@
 These settings apply only when `--nodejs` is specified on the command line.
 Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-for-node clone>`.
 
-``` yaml $(nodejs)
+```yaml $(nodejs)
 nodejs:
   azure-arm: true
   package-name: azure-arm-resource
+  package-version: 3.1.1-preview
+  generate-license-txt: false
+  generate-package-json: false
+  generate-readme-md: false
+  output-folder: $(node-sdks-folder)/lib/services/resourceManagement
   batch:
   - tag: package-features
-    output-folder: $(node-sdks-folder)/lib/services/resourceManagement/lib/feature
   - tag: package-locks
-    output-folder: $(node-sdks-folder)/lib/services/resourceManagement/lib/lock
   - tag: package-policy
-    output-folder: $(node-sdks-folder)/lib/services/resourceManagement/lib/policy
   - tag: package-resources
-    output-folder: $(node-sdks-folder)/lib/services/resourceManagement/lib/resource
   - tag: package-subscriptions
-    output-folder: $(node-sdks-folder)/lib/services/resourceManagement/lib/subscription
   - tag: package-links
-    output-folder: $(node-sdks-folder)/lib/services/resourceManagement/lib/link
   - tag: package-management
-    output-folder: $(node-sdks-folder)/lib/services/resourceManagement/lib/link
+```
+
+```yaml $(nodejs) && $(tag) == 'package-features'
+nodejs:
+  source-code-folder-path: lib/feature
+```
+
+```yaml $(nodejs) && $(tag) == 'package-locks'
+nodejs:
+  source-code-folder-path: lib/lock
+```
+
+```yaml $(nodejs) && $(tag) == 'package-policy'
+nodejs:
+  source-code-folder-path: lib/policy
+```
+
+```yaml $(nodejs) && $(tag) == 'package-resources'
+nodejs:
+  source-code-folder-path: lib/resource
+```
+
+```yaml $(nodejs) && $(tag) == 'package-subscriptions'
+nodejs:
+  source-code-folder-path: lib/subscription
+```
+
+```yaml $(nodejs) && $(tag) == 'package-links'
+nodejs:
+  source-code-folder-path: lib/link
+```
+
+```yaml $(nodejs) && $(tag) == 'package-management'
+nodejs:
+  source-code-folder-path: lib/management
+  override-client-name: ManagementGroupsClient
 ```

@@ -7,6 +7,10 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-batch
-  output-folder: $(node-sdks-folder)/lib/services/batch/lib
+  package-version: 3.1.1
+  output-folder: $(node-sdks-folder)/lib/services/batch
   payload-flattening-threshold: 1
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: false
 ```
