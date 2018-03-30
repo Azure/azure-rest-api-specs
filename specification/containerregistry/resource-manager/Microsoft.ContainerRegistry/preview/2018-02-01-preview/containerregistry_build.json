@@ -1076,7 +1076,9 @@
             "Running",
             "Succeeded",
             "Failed",
-            "Canceled"
+            "Canceled",
+            "AbandonedAsSystemError",
+            "Timeout"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1233,7 +1235,9 @@
             "Running",
             "Succeeded",
             "Failed",
-            "Canceled"
+            "Canceled",
+            "AbandonedAsSystemError",
+            "Timeout"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1537,6 +1541,9 @@
         "timeout": {
           "format": "int32",
           "description": "Build timeout in seconds.",
+          "default": 3600,
+          "maximum": 28800,
+          "minimum": 300,
           "type": "integer"
         }
       }
@@ -1669,6 +1676,8 @@
         "timeout": {
           "format": "int32",
           "description": "Build timeout in seconds.",
+          "maximum": 28800,
+          "minimum": 300,
           "type": "integer"
         },
         "sourceRepository": {
@@ -2026,6 +2035,9 @@
         "timeout": {
           "format": "int32",
           "description": "Build timeout in seconds.",
+          "default": 3600,
+          "maximum": 28800,
+          "minimum": 300,
           "type": "integer"
         },
         "platform": {
