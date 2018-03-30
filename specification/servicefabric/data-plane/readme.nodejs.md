@@ -5,7 +5,12 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 
 ``` yaml $(nodejs)
 nodejs:
+  azure-arm: false
   package-name: azure-servicefabric
-  output-folder: $(node-sdks-folder)/lib/services/serviceFabric/lib
+  package-version: 2.0.0-preview
+  output-folder: $(node-sdks-folder)/lib/services/serviceFabric
   override-client-name: ServiceFabricClient
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: true
 ```

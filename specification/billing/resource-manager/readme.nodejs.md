@@ -7,6 +7,10 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-billing
-  output-folder: $(node-sdks-folder)/lib/services/billingManagement/lib
+  package-version: 2.0.0
+  output-folder: $(node-sdks-folder)/lib/services/billingManagement
   payload-flattening-threshold: 1
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme.md: true
 ```

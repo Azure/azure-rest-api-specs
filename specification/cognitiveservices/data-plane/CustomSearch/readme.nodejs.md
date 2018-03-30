@@ -6,6 +6,11 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-customsearch
-  output-folder: $(node-sdks-folder)/lib/services/customSearch/lib
+  package-version: 1.0.0-preview
+  output-folder: $(node-sdks-folder)/lib/services/customSearch
   override-client-name: CustomSearchAPIClient
+  azure-arm: false
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: false
 ```
