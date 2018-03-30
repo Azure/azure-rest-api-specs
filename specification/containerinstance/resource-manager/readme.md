@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2018-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-04'
 input-file:
-- Microsoft.ContainerInstance/preview/2018-04-01/containerInstance.json
+- Microsoft.ContainerInstance/stable/2018-04-01/containerInstance.json
 ```
 
 ### Tag: package-2018-02-preview

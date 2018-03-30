@@ -513,61 +513,70 @@
     "ContainerState": {
       "description": "The container instance state.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "state": {
           "type": "string",
+          "readOnly": true,
           "description": "The state of the container instance."
         },
         "startTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The date-time when the container instance state started."
         },
         "exitCode": {
           "type": "integer",
+          "readOnly": true,
           "description": "The container instance exit codes correspond to those from the `docker run` command."
         },
         "finishTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The date-time when the container instance state finished."
         },
         "detailStatus": {
           "description": "The human-readable status of the container instance state.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "Event": {
       "description": "A container group or container instance event.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "count": {
           "type": "integer",
+          "readOnly": true,
           "description": "The count of the event."
         },
         "firstTimestamp": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The date-time of the earliest logged event."
         },
         "lastTimestamp": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The date-time of the latest logged event."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The event name."
         },
         "message": {
           "type": "string",
+          "readOnly": true,
           "description": "The event message."
         },
         "type": {
           "type": "string",
+          "readOnly": true,
           "description": "The event type."
         }
       }
@@ -988,10 +997,10 @@
     "Operation": {
       "description": "An operation for Azure Container Instance service.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of the operation."
         },
         "display": {
@@ -1000,24 +1009,29 @@
           "properties": {
             "provider": {
               "description": "The name of the provider of the operation.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "resource": {
               "type": "string",
+              "readOnly": true,
               "description": "The name of the resource type of the operation."
             },
             "operation": {
               "description": "The friendly name of the operation.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "description": {
               "description": "The description of the operation.",
+              "readOnly": true,
               "type": "string"
             }
           }
         },
         "origin": {
           "type": "string",
+          "readOnly": true,
           "description": "The intended executor of the operation.",
           "enum": [
             "User",
@@ -1101,10 +1115,10 @@
     "Logs": {
       "description": "The logs.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "content": {
           "type": "string",
+          "readOnly": true,
           "description": "The content of the log."
         }
       }
@@ -1136,14 +1150,15 @@
     "ContainerExecResponse": {
       "description": "The information for the container exec command.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "webSocketUri": {
           "type": "string",
+          "readOnly": true,
           "description": "The uri for the exec websocket."
         },
         "password": {
           "type": "string",
+          "readOnly": true,
           "description": "The password to start the exec command."
         }
       }
