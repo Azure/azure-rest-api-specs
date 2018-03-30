@@ -3,15 +3,22 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
     "automationAccountName": "myAutomationAccount33",
-    "compilationJobId": "ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a",
-    "api-version": "2015-10-31"
+    "compilationJobName": "TestCompilationJob",
+    "api-version": "2018-01-15",
+    "parameters": {
+      "properties": {
+        "configuration": {
+          "name": "SetupServer"
+        }
+      }
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a",
-        "name": null,
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/TestCompilationJob",
+        "name": "TestCompilationJob",
         "type": "Microsoft.Automation/AutomationAccounts/compilationjobs",
         "properties": {
           "jobId": "ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a",
@@ -24,7 +31,7 @@
           "lastModifiedTime": "2017-03-28T23:14:26.903+00:00",
           "lastStatusModifiedTime": "2017-03-28T23:14:26.903+00:00",
           "exception": null,
-          "parameters": null,
+          "parameters": {},
           "configuration": {
             "name": "SetupServer"
           },
