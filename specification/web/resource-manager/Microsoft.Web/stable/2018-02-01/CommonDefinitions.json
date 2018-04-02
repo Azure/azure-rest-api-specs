@@ -730,6 +730,63 @@
         }
       }
     },
+    "DefaultErrorResponse": {
+      "description": "App Service error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error model.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "description": "Detailed errors.",
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              }
+            },
+            "innererror": {
+              "description": "More information to debug error.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
     "Dimension": {
       "description": "Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app, \nwhere instance name is dimension of the metric HTTP request",
       "type": "object",
@@ -781,71 +838,6 @@
         "message": {
           "description": "Any details of the error.",
           "type": "string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "App Service error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Error model.",
-          "required": [
-            "code",
-            "message"
-          ],
-          "type": "object",
-          "properties": {
-            "code": {
-              "description": "Standardized string to programmatically identify the error.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "Detailed error description and debugging information.",
-              "type": "string",
-              "readOnly": true
-            },
-            "target": {
-              "description": "Detailed error description and debugging information.",
-              "type": "string",
-              "readOnly": true
-            },
-            "details": {
-              "type": "array",
-              "items": {
-                "description": "Detailed errors.",
-                "required": [
-                  "code",
-                  "message"
-                ],
-                "properties": {
-                  "code": {
-                    "description": "Standardized string to programmatically identify the error.",
-                    "type": "string",
-                    "readOnly": true
-                  },
-                  "message": {
-                    "description": "Detailed error description and debugging information.",
-                    "type": "string",
-                    "readOnly": true
-                  },
-                  "target": {
-                    "description": "Detailed error description and debugging information.",
-                    "type": "string",
-                    "readOnly": true
-                  }
-                },
-                "readOnly": true
-              }
-            },
-            "innererror": {
-              "description": "More information to debug error.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "readOnly": true
         }
       }
     },
