@@ -34,6 +34,11 @@
       "type": "object",
       "description": "Output for the task that validates connection to SQL DB and target server requirements",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
         "databases": {
           "type": "string",
           "description": "Source databases as a map from database name to database id",
@@ -52,12 +57,7 @@
           "description": "Target server brand version",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
-        }
-      ]
+      }
     }
   }
 }

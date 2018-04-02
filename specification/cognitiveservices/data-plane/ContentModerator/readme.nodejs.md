@@ -6,6 +6,11 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-contentmoderator
-  output-folder: $(node-sdks-folder)/lib/services/contentModerator/lib
+  package-version: 1.0.0-preview
+  output-folder: $(node-sdks-folder)/lib/services/contentModerator
   override-client-name: ContentModeratorAPIClient
+  azure-arm: false
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: false
 ```

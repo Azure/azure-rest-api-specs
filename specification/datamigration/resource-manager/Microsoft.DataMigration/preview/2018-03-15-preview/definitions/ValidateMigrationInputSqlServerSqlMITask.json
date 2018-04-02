@@ -50,12 +50,12 @@
     "ValidateMigrationInputSqlServerSqlMITaskOutput": {
       "type": "object",
       "description": "Output for task that validates migration input for SQL to Azure SQL Managed Instance migrations",
-      "allOf": [
-        {
-          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
-        }
-      ],
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
         "name": {
           "type": "string",
           "description": "Name of database",
@@ -85,7 +85,7 @@
           },
           "readOnly": true
         },
-        "backupStorageAccountErrors" : {
+        "backupStorageAccountErrors": {
           "description": "Errors associated with the storage account provided.",
           "type": "array",
           "items": {
