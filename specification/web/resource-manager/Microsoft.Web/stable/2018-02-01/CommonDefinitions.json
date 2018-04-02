@@ -250,6 +250,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "hasLinuxWorkers": {
+          "description": "Flag that displays whether an ASE has linux workers or not",
+          "type": "boolean"
         }
       }
     },
@@ -338,6 +342,15 @@
             },
             "reserved": {
               "description": "If Linux app service plan <code>true</code>, <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "isXenon": {
+              "description": "If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
               "default": false,
               "type": "boolean",
               "x-ms-mutability": [
@@ -771,6 +784,71 @@
         }
       }
     },
+    "ErrorResponse": {
+      "description": "App Service error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error model.",
+          "required": [
+            "code",
+            "message"
+          ],
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "description": "Detailed errors.",
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              }
+            },
+            "innererror": {
+              "description": "More information to debug error.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
     "Experiments": {
       "description": "Routing rules in production experiments.",
       "type": "object",
@@ -1034,7 +1112,8 @@
         "type": {
           "description": "Type of managed service identity.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned"
           ],
           "x-ms-enum": {
             "name": "ManagedServiceIdentityType",
@@ -1050,6 +1129,14 @@
           "description": "Principal Id of managed service identity.",
           "type": "string",
           "readOnly": true
+        },
+        "identityIds": {
+          "description": "Array of UserAssigned managed service identities.",
+          "type": "array",
+          "items": {
+            "description": "Resource Id for UserAssigned managed service identity",
+            "type": "string"
+          }
         }
       }
     },
@@ -1737,6 +1824,15 @@
                 "read"
               ]
             },
+            "isXenon": {
+              "description": "Hyper-V sandbox.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
             "lastModifiedTimeUtc": {
               "format": "date-time",
               "description": "Last time the app was modified, in UTC. Read-only.",
@@ -1898,6 +1994,10 @@
         },
         "linuxFxVersion": {
           "description": "Linux App Framework and version",
+          "type": "string"
+        },
+        "xenonFxVersion": {
+          "description": "Xenon App Framework and version",
           "type": "string"
         },
         "requestTracingEnabled": {
@@ -2101,6 +2201,11 @@
         "managedServiceIdentityId": {
           "format": "int32",
           "description": "Managed Service Identity Id",
+          "type": "integer"
+        },
+        "xManagedServiceIdentityId": {
+          "format": "int32",
+          "description": "Explicit Managed Service Identity Id",
           "type": "integer"
         },
         "ipSecurityRestrictions": {
@@ -2406,6 +2511,10 @@
         "siteMode": {
           "description": "Shared or Dedicated.",
           "type": "string"
+        },
+        "isLinux": {
+          "description": "Is this a linux stamp capacity",
+          "type": "boolean"
         }
       }
     },
@@ -2471,6 +2580,10 @@
             "publishingPasswordHashSalt": {
               "format": "password",
               "description": "Password hash salt used for publishing.",
+              "type": "string"
+            },
+            "scmUri": {
+              "description": "Url of SCM site.",
               "type": "string"
             }
           },
