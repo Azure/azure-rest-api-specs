@@ -7,7 +7,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-iothub
-  package-version: 1.1.0-preview
+  package-version: 1.2.0-preview
   output-folder: $(node-sdks-folder)/lib/services/iothub
   payload-flattening-threshold: 1
   generate-license-txt: true
