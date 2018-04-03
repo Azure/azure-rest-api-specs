@@ -4,8 +4,7 @@
     "title": "AutomationManagement",
     "version": "2018-01-15",
     "x-ms-code-generation-settings": {
-      "useDateTimeOffset": true,
-      "syncMethods": "None"
+      "useDateTimeOffset": true
     }
   },
   "host": "management.azure.com",
@@ -602,17 +601,20 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the node report."
+          "description": "Gets or sets the end time of the node report.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the lastModifiedTime of the node report."
+          "description": "Gets or sets the lastModifiedTime of the node report.",
+          "x-nullable": false
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the node report."
+          "description": "Gets or sets the start time of the node report.",
+          "x-nullable": false
         },
         "type": {
           "type": "string",
@@ -739,7 +741,8 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start date of the resource."
+          "description": "Gets or sets the start date of the resource.",
+          "x-nullable": false
         }
       },
       "description": "Definition of the DSC Report Resource."
@@ -828,12 +831,14 @@
         "lastSeen": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last seen time of the node."
+          "description": "Gets or sets the last seen time of the node.",
+          "x-nullable": false
         },
         "registrationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the registration time of the node."
+          "description": "Gets or sets the registration time of the node.",
+          "x-nullable": false
         },
         "ip": {
           "type": "string",
