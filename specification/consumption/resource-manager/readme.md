@@ -1,5 +1,5 @@
 # Consumption
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Consumption.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Consumption.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Consumption, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,13 +21,12 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
 tag: package-2018-03
-azure-validator: true
 ```
 
 ### Tag: package-2017-11
@@ -99,11 +98,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -161,12 +162,12 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
    - tag: package-2017-04-preview
-   - tag: package-2017-11-30
-   - tag: package-2017-12-30-preview
-   - tag: package-2018-01-31
-   - tag: package-2018-03-31
+   - tag: package-2017-11
+   - tag: package-2017-12-preview
+   - tag: package-2018-01
+   - tag: package-2018-03
 ```
- 
+
 
 ### Tag: package-2017-04-preview and go
 

@@ -185,7 +185,7 @@
         },
         "day": {
           "type": "string",
-          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.",
+          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.",
           "enum": [
             "Monday",
             "Tuesday",
@@ -390,7 +390,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the automation account type."
@@ -525,29 +525,18 @@
       "description": "Properties of the certificate."
     },
     "Certificate": {
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the certificate."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "$ref": "#/definitions/CertificateProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the certificate."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the certificate."
     },
     "CertificateListResult": {
@@ -664,29 +653,18 @@
       "description": "Definition of the connection properties."
     },
     "Connection": {
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the connection."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "$ref": "#/definitions/ConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the connection."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the connection."
     },
     "ConnectionListResult": {
@@ -920,29 +898,18 @@
       "description": "Definition of the credential properties"
     },
     "Credential": {
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the credential."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "$ref": "#/definitions/CredentialProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the credential."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the credential."
     },
     "CredentialListResult": {
@@ -1343,7 +1310,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the configuration type."
@@ -1423,6 +1390,27 @@
       ],
       "description": "The parameters supplied to the create or update configuration operation."
     },
+    "DscConfigurationUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscConfigurationCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets configuration create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the create or update configuration operation."
+    },
     "DscMetaConfiguration": {
       "properties": {
         "configurationModeFrequencyMins": {
@@ -1458,57 +1446,6 @@
       },
       "description": "Definition of the DSC Meta Configuration."
     },
-    "DscNode": {
-      "properties": {
-        "lastSeen": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the last seen time of the node."
-        },
-        "registrationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the registration time of the node."
-        },
-        "ip": {
-          "type": "string",
-          "description": "Gets or sets the ip of the node."
-        },
-        "accountId": {
-          "type": "string",
-          "description": "Gets or sets the account id of the node."
-        },
-        "nodeConfiguration": {
-          "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the status of the node."
-        },
-        "nodeId": {
-          "type": "string",
-          "description": "Gets or sets the node id."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets or sets the etag of the resource."
-        },
-        "extensionHandler": {
-          "type": "array",
-          "description": "Gets or sets the list of extensionHandler properties for a Node.",
-          "items": {
-            "$ref": "#/definitions/DscNodeExtensionHandlerAssociationProperty"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Definition of the dsc node type."
-    },
     "DscNodeConfigurationCreateOrUpdateParameters": {
       "properties": {
         "source": {
@@ -1535,46 +1472,6 @@
       ],
       "description": "The parameters supplied to the create or update node configuration operation."
     },
-    "DscNodeConfiguration": {
-      "properties": {
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the last modified time."
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets creation time."
-        },
-        "configuration": {
-          "$ref": "#/definitions/DscConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Definition of the dsc node configuration."
-    },
-    "DscNodeConfigurationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DscNodeConfiguration"
-          },
-          "description": "Gets or sets a list of Dsc node configurations."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list job operation."
-    },
     "DscNodeConfigurationAssociationProperty": {
       "properties": {
         "name": {
@@ -1596,22 +1493,6 @@
         }
       },
       "description": "The dsc extensionHandler property associated with the node"
-    },
-    "DscNodeListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DscNode"
-          },
-          "description": "Gets or sets a list of dsc nodes."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list dsc nodes operation."
     },
     "DscNodeUpdateParameters": {
       "properties": {
@@ -2270,6 +2151,49 @@
       "x-ms-client-flatten": true,
       "description": "Definition of the job stream."
     },
+    "Key":{
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Automation key name.",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationKeyName",
+            "modelAsString": true
+          }
+        },
+        "permissions": {
+          "type": "string",
+          "description": "Automation key permissions.",
+          "enum": [
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationKeyPermissions",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the Automation Key used for registration."
+        }
+      },
+      "description": "Automation key which is used to register a DSC Node"
+    },
+    "KeyListResult":{
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Key"
+          },
+          "description": "Lists the automation keys."
+        }
+      }
+    },
     "LinkedWorkspace": {
       "properties": {
         "id": {
@@ -2418,7 +2342,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the module type."
@@ -2513,60 +2437,63 @@
       }
     },
     "Resource": {
+      "description": "The core properties of ARM resources",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Fully qualified resource Id for the resource"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
+          "description": "The type of the resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Azure Region where the resource lives"
         }
       },
-      "required": [
-        "location"
-      ],
-      "description": "The Resource definition.",
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "ProxyResource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
         }
-      },
-      "description": "The Resource definition.",
-      "x-ms-azure-resource": true
+      ]
     },
     "JobProvisioningStateProperty": {
       "properties": {
@@ -3020,7 +2947,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the runbook type."
@@ -3376,7 +3303,7 @@
           "type": "string",
           "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
         }
-      },      
+      },
       "description": "The parameters supplied to the create test job operation."
     },
     "TestJob": {
@@ -3585,29 +3512,18 @@
       "description": "Definition of the varible properties"
     },
     "Variable": {
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the variable."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "$ref": "#/definitions/VariableProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the variable."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the varible."
     },
     "VariableListResult": {
@@ -3759,21 +3675,6 @@
     },
     "Webhook": {
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the webhook."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the type of the resource."
-        },
         "properties": {
           "$ref": "#/definitions/WebhookProperties",
           "x-ms-client-flatten": true,
@@ -3781,7 +3682,11 @@
         }
       },
       "description": "Definition of the webhook type.",
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
     },
     "WebhookListResult": {
       "properties": {
@@ -3859,7 +3764,10 @@
       "required": true,
       "type": "string",
       "pattern": "^[-\\w\\._]+$",
-      "description": "The resource group name."
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure Resource group."
     }
   }
 }

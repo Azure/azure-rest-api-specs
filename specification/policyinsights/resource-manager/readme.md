@@ -27,7 +27,6 @@ These are the global settings for the PolicyInsights API.
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-azure-validator: true
 tag: package-2017-12
 ```
 

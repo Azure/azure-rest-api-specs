@@ -1,5 +1,5 @@
 # Resource
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Resource.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Resource.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Resource, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Resource API.
 
 ``` yaml
@@ -211,6 +211,43 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: UniqueResourcePaths
+    from: policySetDefinitions.json
+    where: $.paths
+    reason: policy set definition under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: policyDefinitions.json
+    where: $.paths
+    reason: policy definition under an extension resource with Microsoft.Management
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    where: $.definitions.ResourceGroup.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    where: $.definitions.GenericResource.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: managedapplications.json
+    where: $.definitions.Appliance.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: managedapplications.json
+    where: $.definitions.ApplianceDefinition.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: managedapplications.json
+    where: $.definitions.AppliancePatchable.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: managedapplications.json
+    where: $.definitions.GenericResource.properties
+    reason: managedBy is a top level property
+```
+
 ---
 # Code Generation
 
@@ -232,6 +269,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 

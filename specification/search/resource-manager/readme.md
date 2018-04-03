@@ -1,5 +1,5 @@
 # SearchManagementClient
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for SearchManagementClient.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for SearchManagementClient.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for SearchManagementClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the SearchManagementClient API.
 
 ``` yaml
@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2015-08` is specified on the comma
 input-file:
 - Microsoft.Search/stable/2015-08-19/search.json
 ```
- 
+
 ### Tag: package-2015-02
 
 These settings apply only when `--tag=package-2015-02` is specified on the command line.
@@ -63,10 +63,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.

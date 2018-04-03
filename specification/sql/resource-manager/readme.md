@@ -24,12 +24,119 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.
 openapi-type: arm
-tag: package-composite-v1
+tag: package-composite-v3
 ```
 
 ## Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-composite-v3
+
+These settings apply only when `--tag=package-composite-v3` is specified on the command line.
+
+This section contains the "composite-v3" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v3" clients such as .NET SDK Microsoft.Azure.Management.Sql version 1.14.0-preview.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+``` yaml $(tag) == 'package-composite-v3'
+input-file:
+- Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
+- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
+- Microsoft.Sql/stable/2014-04-01/dataMasking.json
+- Microsoft.Sql/stable/2014-04-01/firewallRules.json
+- Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
+- Microsoft.Sql/stable/2014-04-01/importExport.json
+- Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
+- Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
+- Microsoft.Sql/stable/2014-04-01/sql.core.json
+- Microsoft.Sql/stable/2014-04-01/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
+- Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
+- Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/operations.json
+- Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
+- Microsoft.Sql/preview/2015-05-01-preview/servers.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
+- Microsoft.Sql/preview/2017-10-01-preview/databases.json
+- Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
+```
+
+### Tag: package-composite-v2
+
+These settings apply only when `--tag=package-composite-v2` is specified on the command line.
+
+This section contains the "composite-v2" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v2" clients such as .NET SDK Microsoft.Azure.Management.Sql version 1.13.0-preview.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+``` yaml $(tag) == 'package-composite-v2'
+input-file:
+- Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/capabilities.json
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
+- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/databases.json
+- Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
+- Microsoft.Sql/stable/2014-04-01/dataMasking.json
+- Microsoft.Sql/stable/2014-04-01/elasticPools.json
+- Microsoft.Sql/stable/2014-04-01/firewallRules.json
+- Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
+- Microsoft.Sql/stable/2014-04-01/importExport.json
+- Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
+- Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
+- Microsoft.Sql/stable/2014-04-01/sql.core.json
+- Microsoft.Sql/stable/2014-04-01/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
+- Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
+- Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/operations.json
+- Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
+- Microsoft.Sql/preview/2015-05-01-preview/servers.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
+- Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
+```
 
 ### Tag: package-composite-v1
 
@@ -55,6 +162,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
@@ -200,6 +308,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/elasticPools.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
 - Microsoft.Sql/stable/2014-04-01/importExport.json
+- Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -246,6 +355,7 @@ These can be regenerated by running the following PowerShell script from this re
 ``` yaml $(tag) == 'package-pure-2017-03-preview'
 input-file:
  - ./Microsoft.Sql/preview/2017-03-01-preview/databases.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
@@ -317,6 +427,7 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/metrics.json
  - ./Microsoft.Sql/stable/2014-04-01/operations.json
  - ./Microsoft.Sql/stable/2014-04-01/queries.json
+ - ./Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
  - ./Microsoft.Sql/stable/2014-04-01/replicationLinks.json
  - ./Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
  - ./Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
@@ -344,6 +455,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 ### C#

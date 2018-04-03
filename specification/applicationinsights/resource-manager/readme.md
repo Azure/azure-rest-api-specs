@@ -1,5 +1,5 @@
 # ApplicationInsights
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for ApplicationInsights.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for ApplicationInsights.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for ApplicationInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the ApplicationInsights API.
 
 ``` yaml
@@ -29,14 +29,18 @@ title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
 tag: package-2015-05
-azure-validator: true
 ```
 
 ## Suppression
 ``` yaml
 directive:
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/purge"].post
+    reason: Original creation of the service did not comply with current ARM schema standards. The team is aware of it and any future updates should rectify the issue.
+    
   - suppress: TrackedResourceListByImmediateParent
-    where: 
+    where:
       - $.definitions
     reason:
       - we do have list operations available for our operations on individual instances of objects returned. False positives.
@@ -56,14 +60,14 @@ directive:
     #where:
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}"].put.operationId
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures"].put.operationId
-  
+
   - suppress: XmsResourceInPutResponse
     reason: This api was existing there from 2015, it will break existing client if we change the request/response format
     #where:
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}"].put
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures"].put 
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures"].put
 
-  - suppress: RequiredPropertiesMissingInResourceModel  
+  - suppress: RequiredPropertiesMissingInResourceModel
     reason: This api was existing there from 2015, it will break existing client if we change the response format
     #where:
     #  - $.definitions.ApplicationInsightsComponentExportConfiguration
@@ -126,7 +130,7 @@ directive:
     #  - $.definitions.WebTestProperties.properties.RetryEnabled
     #  - $.definitions.WebTestProperties.properties.Locations
     #  - $.definitions.WebTestProperties.properties.Configuration
-    #  - $.definitions.WebTestGeolocation.properties.Id 
+    #  - $.definitions.WebTestGeolocation.properties.Id
     #  - $.definitions.ApplicationInsightsComponentExportRequest.properties.RecordTypes
     #  - $.definitions.ApplicationInsightsComponentExportRequest.properties.DestinationType
     #  - $.definitions.ApplicationInsightsComponentExportRequest.properties.DestinationAddress
@@ -242,6 +246,17 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
 ```
+
+### Tag: package-2017-10
+
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- Microsoft.Insights/preview/2017-10-01/eaSubscriptionMigration_API.json
+- Microsoft.Insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
+```
+
 ---
 # Code Generation
 
@@ -256,6 +271,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -288,7 +304,7 @@ python:
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -350,7 +366,7 @@ java:
 These settings apply only when `--tag=schema-2015-05-01` is specified on the
 command line.
 
-This section contains the input swagger files that are used when generating 
+This section contains the input swagger files that are used when generating
 resource manager schemas for version 2015-05-01. Note that many of our
 pre-existing APIs are note currently compatible with ARM schemas, upon any
 updates applied to our services we will bring them up to compliance.
