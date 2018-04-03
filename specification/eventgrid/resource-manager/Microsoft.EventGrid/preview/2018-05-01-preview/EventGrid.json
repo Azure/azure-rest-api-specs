@@ -1607,23 +1607,6 @@
                 }
             }
         },
-        "DeadLetterDestination": {
-            "description": "Information about the dead letter destination for an event subscription",
-            "type": "object",
-            "properties": {
-                "endpointType": {
-                    "description": "Type of the endpoint for the dead letter destination",
-                    "enum": [
-                        "StorageBlob"
-                    ],
-                    "type": "string",
-                    "x-ms-enum": {
-                        "name": "DeadLetterEndPointType",
-                        "modelAsString": true
-                    }
-                }
-            }
-        },
         "WebHookEventSubscriptionDestinationProperties": {
             "description": "Information about the webhook destination properties for an event subscription.",
             "type": "object",
@@ -1638,6 +1621,37 @@
                     "readOnly": true
                 }
             }
+        },
+        "StorageBlobDeadLetterDestinationProperties": {
+            "description": "Properties of the storage blob based dead letter destination.",
+            "type": "object",
+            "properties": {
+                "resourceId": {
+                    "description": "The Azure Resource ID of the storage account that is the destination of the deadletter events",
+                    "type": "string"
+                },
+                "blobContainerName": {
+                    "description": "The name of the Storage blob container that is the destination of the deadletter events",
+                    "type": "string"
+                }
+            }
+        },
+        "StorageBlobDeadLetterDestination": {
+            "description": "Information about the storage blob based dead letter destination.",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DeadLetterDestination"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/StorageBlobDeadLetterDestinationProperties",
+                    "description": "The properties of the Storage Blob based deadletter destination",
+                    "x-ms-client-flatten": true
+                }
+            },
+            "x-ms-discriminator-value": "StorageBlob"
         },
         "WebHookEventSubscriptionDestination": {
             "description": "Information about the webhook destination for an event subscription",
@@ -1655,6 +1669,24 @@
                 }
             },
             "x-ms-discriminator-value": "WebHook"
+        },
+        "DeadLetterDestination": {
+            "description": "Information about the dead letter destination for an event subscription",
+            "type": "object",
+            "properties": {
+                "endpointType": {
+                    "description": "Type of the endpoint for the dead letter destination",
+                    "enum": [
+                        "StorageBlob"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "DeadLetterEndPointType",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "discriminator": "endpointType"
         },
         "EventHubEventSubscriptionDestinationProperties": {
             "description": "The properties for a event hub destination.",
