@@ -1681,9 +1681,13 @@
               "description": "metadata for the detector"
             },
             "dataset": {
-              "$ref": "#/definitions/DiagnosticData",
-              "description": "Data Set"
+              "type": "array",
+              "description": "Data Set",
+              "items": {
+                "$ref": "#/definitions/Solution"
+              }
             }
+            
           },
           "x-ms-client-flatten": true
         }
