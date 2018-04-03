@@ -101,8 +101,8 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.keyvault
-  package-name: azure-keyvault,
-  package-version: 1.0.0a2,
+  package-name: azure-keyvault
+  package-version: 1.0.0b1
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
