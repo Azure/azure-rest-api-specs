@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Location Based Services Resource Provider",
+    "title": "Azure Maps Resource Provider",
     "description": "Resource Provider",
     "version": "2017-01-01-preview",
     "x-ms-code-generation-settings": {
-      "name": "LocationBasedServicesManagementClient"
+      "name": "AzureMapsManagementClient"
     }
   },
   "host": "management.azure.com",
@@ -37,9 +37,9 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LocationBasedServices/accounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}": {
       "put": {
-        "description": "Create or update a Location Based Services Account. A Location Based Services Account holds the keys which allow access to the Location Based Services REST APIs.",
+        "description": "Create or update a Azure Maps Account. A Maps Account holds the keys which allow access to the Azure Maps REST APIs.",
         "operationId": "Accounts_CreateOrUpdate",
         "x-ms-examples": {
           "CreateAccount": {
@@ -60,12 +60,12 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "name": "LocationBasedServicesAccountCreateParameters",
+            "name": "AzureMapsAccountCreateParameters",
             "in": "body",
-            "description": "The new or updated parameters for the Location Based Services Account.",
+            "description": "The new or updated parameters for the Azure Maps Account.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccountCreateParameters"
+              "$ref": "#/definitions/AzureMapsAccountCreateParameters"
             }
           }
         ],
@@ -73,13 +73,13 @@
           "200": {
             "description": "The Account was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccount"
+              "$ref": "#/definitions/AzureMapsAccount"
             }
           },
           "201": {
             "description": "The Account was successfully created.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccount"
+              "$ref": "#/definitions/AzureMapsAccount"
             }
           },
           "default": {
@@ -91,7 +91,7 @@
         }
       },
       "patch": {
-        "description": "Updates a Location Based Services Account. Only a subset of the parameters may be updated after creation, such as Sku and Tags.",
+        "description": "Updates a Azure Maps Account. Only a subset of the parameters may be updated after creation, such as Sku and Tags.",
         "operationId": "Accounts_Update",
         "x-ms-examples": {
           "UpdateAccount": {
@@ -112,12 +112,12 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "name": "LocationBasedServicesAccountUpdateParameters",
+            "name": "AzureMapsAccountUpdateParameters",
             "in": "body",
-            "description": "The updated parameters for the Location Based Services Account.",
+            "description": "The updated parameters for the Azure Maps Account.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccountUpdateParameters"
+              "$ref": "#/definitions/AzureMapsAccountUpdateParameters"
             }
           }
         ],
@@ -125,7 +125,7 @@
           "200": {
             "description": "The Account was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccount"
+              "$ref": "#/definitions/AzureMapsAccount"
             }
           },
           "404": {
@@ -140,7 +140,7 @@
         }
       },
       "delete": {
-        "description": "Delete a Location Based Services Account",
+        "description": "Delete a Azure Maps Account",
         "operationId": "Accounts_Delete",
         "x-ms-examples": {
           "DeleteAccount": {
@@ -177,7 +177,7 @@
         }
       },
       "get": {
-        "description": "Get a Location Based Services Account",
+        "description": "Get a Azure Maps Account",
         "operationId": "Accounts_Get",
         "x-ms-examples": {
           "GetAccount": {
@@ -202,7 +202,7 @@
           "200": {
             "description": "The request was successful.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccount"
+              "$ref": "#/definitions/AzureMapsAccount"
             }
           },
           "404": {
@@ -217,9 +217,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LocationBasedServices/accounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts": {
       "get": {
-        "description": "Get all Location Based Services Accounts in a Resource Group",
+        "description": "Get all Azure Maps Accounts in a Resource Group",
         "operationId": "Accounts_ListByResourceGroup",
         "x-ms-examples": {
           "ListAccountsByResourceGroup": {
@@ -245,7 +245,7 @@
           "200": {
             "description": "The request was successful.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccounts"
+              "$ref": "#/definitions/AzureMapsAccounts"
             }
           },
           "default": {
@@ -257,9 +257,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.LocationBasedServices/accounts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/accounts": {
       "get": {
-        "description": "Get all Location Based Services Accounts in a Subscription",
+        "description": "Get all Azure Maps Accounts in a Subscription",
         "operationId": "Accounts_ListBySubscription",
         "x-ms-examples": {
           "ListAccountsBySubscription": {
@@ -282,7 +282,7 @@
           "200": {
             "description": "The request was successful.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccounts"
+              "$ref": "#/definitions/AzureMapsAccounts"
             }
           },
           "default": {
@@ -296,7 +296,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
       "post": {
-        "description": "Moves Location Based Services Accounts from one ResourceGroup (or Subscription) to another",
+        "description": "Moves Azure Maps Accounts from one ResourceGroup (or Subscription) to another",
         "operationId": "Accounts_Move",
         "x-ms-examples": {
           "MoveAccounts": {
@@ -313,17 +313,17 @@
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "The name of the resource group that contains Location Based Services Account to move.",
+            "description": "The name of the resource group that contains Azure Maps Account to move.",
             "required": true,
             "type": "string"
           },
           {
             "name": "moveRequest",
             "in": "body",
-            "description": "The details of the Location Based Services Account move.",
+            "description": "The details of the Azure Maps Account move.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccountsMoveRequest"
+              "$ref": "#/definitions/AzureMapsAccountsMoveRequest"
             }
           }
         ],
@@ -340,9 +340,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LocationBasedServices/accounts/{accountName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/listKeys": {
       "post": {
-        "description": "Get the keys to use with the Location Based Services APIs. A key is used to authenticate and authorize access to the Location Based Services REST APIs. Only one key is needed at a time; two are given to provide seamless key regeneration.",
+        "description": "Get the keys to use with the Azure Maps APIs. A key is used to authenticate and authorize access to the Azure Maps REST APIs. Only one key is needed at a time; two are given to provide seamless key regeneration.",
         "operationId": "Accounts_ListKeys",
         "x-ms-examples": {
           "ListKeys": {
@@ -367,7 +367,7 @@
           "200": {
             "description": "The request was successful.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccountKeys"
+              "$ref": "#/definitions/AzureMapsAccountKeys"
             }
           },
           "404": {
@@ -382,9 +382,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LocationBasedServices/accounts/{accountName}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/regenerateKey": {
       "post": {
-        "description": "Regenerate either the primary or secondary key for use with the Location Based Services APIs. The old key will stop working immediately.",
+        "description": "Regenerate either the primary or secondary key for use with the Azure Maps APIs. The old key will stop working immediately.",
         "operationId": "Accounts_RegenerateKeys",
         "x-ms-examples": {
           "RegenerateKey": {
@@ -410,7 +410,7 @@
             "required": true,
             "description": "Which key to regenerate:  primary or secondary.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesKeySpecification"
+              "$ref": "#/definitions/AzureMapsKeySpecification"
             }
           }
         ],
@@ -418,7 +418,7 @@
           "200": {
             "description": "The request was successful.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesAccountKeys"
+              "$ref": "#/definitions/AzureMapsAccountKeys"
             }
           },
           "404": {
@@ -433,9 +433,9 @@
         }
       }
     },
-    "/providers/Microsoft.LocationBasedServices/operations": {
+    "/providers/Microsoft.Maps/operations": {
       "get": {
-        "description": "List operations available for the Location Based Services Resource Provider",
+        "description": "List operations available for the Azure Maps Resource Provider",
         "operationId": "Accounts_ListOperations",
         "x-ms-examples": {
           "GetOperations": {
@@ -455,7 +455,7 @@
           "200": {
             "description": "The request was successful.",
             "schema": {
-              "$ref": "#/definitions/LocationBasedServicesOperations"
+              "$ref": "#/definitions/AzureMapsOperations"
             }
           },
           "default": {
@@ -494,7 +494,7 @@
     "AccountNameParameter": {
       "name": "accountName",
       "in": "path",
-      "description": "The name of the Location Based Services Account.",
+      "description": "The name of the Azure Maps Account.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -503,7 +503,7 @@
   "definitions": {
     "Error": {
       "type": "object",
-      "description": "This object is returned when an error occurs in the Location Based Service API",
+      "description": "This object is returned when an error occurs in the Azure Maps API",
       "properties": {
         "code": {
           "type": "string",
@@ -553,12 +553,12 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The fully qualified Location Based Services Account resource identifier."
+          "description": "The fully qualified Azure Maps Account resource identifier."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the Location Based Services Account, which is unique within a Resource Group."
+          "description": "The name of the Azure Maps Account, which is unique within a Resource Group."
         },
         "type": {
           "readOnly": true,
@@ -568,8 +568,8 @@
       },
       "x-ms-azure-resource": true
     },
-    "LocationBasedServicesAccount": {
-      "description": "An Azure resource which represents access to a suite of Location Based Services REST APIs.",
+    "AzureMapsAccount": {
+      "description": "An Azure resource which represents access to a suite of Azure Maps REST APIs.",
       "type": "object",
       "properties": {
         "location": {
@@ -597,8 +597,8 @@
         }
       ]
     },
-    "LocationBasedServicesAccountCreateParameters": {
-      "description": "Parameters used to create a new Location Based Services Account.",
+    "AzureMapsAccountCreateParameters": {
+      "description": "Parameters used to create a new Azure Maps Account.",
       "type": "object",
       "properties": {
         "location": {
@@ -622,8 +622,8 @@
         "sku"
       ]
     },
-    "LocationBasedServicesAccountUpdateParameters": {
-      "description": "Parameters used to update an existing Location Based Services Account.",
+    "AzureMapsAccountUpdateParameters": {
+      "description": "Parameters used to update an existing Azure Maps Account.",
       "type": "object",
       "properties": {
         "tags": {
@@ -639,22 +639,22 @@
         }
       }
     },
-    "LocationBasedServicesAccounts": {
-      "description": "A list of Location Based Services Accounts.",
+    "AzureMapsAccounts": {
+      "description": "A list of Azure Maps Accounts.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "A Location Based Services Account.",
+          "description": "A Azure Maps Account.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/LocationBasedServicesAccount"
+            "$ref": "#/definitions/AzureMapsAccount"
           }
         }
       }
     },
     "Sku": {
-      "description": "The SKU of the Location Based Services Account.",
+      "description": "The SKU of the Azure Maps Account.",
       "properties": {
         "name": {
           "description": "The name of the SKU, in standard format (such as S0).",
@@ -670,7 +670,7 @@
         "name"
       ]
     },
-    "LocationBasedServicesAccountsMoveRequest": {
+    "AzureMapsAccountsMoveRequest": {
       "description": "The description of what resources to move between resource groups.",
       "type": "object",
       "required": [
@@ -691,7 +691,7 @@
         }
       }
     },
-    "LocationBasedServicesKeySpecification": {
+    "AzureMapsKeySpecification": {
       "description": "Whether the operation refers to the primary or secondary key.",
       "type": "object",
       "required": [
@@ -712,33 +712,33 @@
         }
       }
     },
-    "LocationBasedServicesAccountKeys": {
-      "description": "The set of keys which can be used to access the Location Based Services REST APIs. Two keys are provided for key rotation without interruption.",
+    "AzureMapsAccountKeys": {
+      "description": "The set of keys which can be used to access the Azure Maps REST APIs. Two keys are provided for key rotation without interruption.",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "The full Azure resource identifier of the Location Based Services Account."
+          "description": "The full Azure resource identifier of the Azure Maps Account."
         },
         "primaryKey": {
           "type": "string",
           "readOnly": true,
-          "description": "The primary key for accessing the Location Based Services REST APIs."
+          "description": "The primary key for accessing the Azure Maps REST APIs."
         },
         "secondaryKey": {
           "type": "string",
           "readOnly": true,
-          "description": "The secondary key for accessing the Location Based Services REST APIs."
+          "description": "The secondary key for accessing the Azure Maps REST APIs."
         }
       }
     },
-    "LocationBasedServicesOperations": {
-      "description": "The set of operations available for Location Based Services.",
+    "AzureMapsOperations": {
+      "description": "The set of operations available for Azure Maps.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "An operation available for Location Based Services.",
+          "description": "An operation available for Azure Maps.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -756,7 +756,7 @@
                   "provider": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Service provider: Microsoft Location Based Services."
+                    "description": "Service provider: Microsoft Azure Maps."
                   },
                   "resource": {
                     "type": "string",
