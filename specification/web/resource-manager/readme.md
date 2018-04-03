@@ -58,6 +58,12 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/WebApps.json
 - Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+directive:
+  # suppress each RPC 3019 error
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
 ```
 
 
