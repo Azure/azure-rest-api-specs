@@ -1327,6 +1327,28 @@
       },
       "description": "Definition of source control sync job properties."
     },
+    "SourceControlSyncJobCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SourceControlSyncJobCreateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Sets the properties of the source control sync job."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create source control sync job operation."
+    },
+    "SourceControlSyncJobCreateProperties": {
+      "properties": {
+        "commitId": {
+          "type": "string",
+          "description": "Sets the commit id of the source control sync job."
+        }
+      },
+      "description": "Definition of create source control sync job properties."
+    },
     "SourceControlSyncJobListResult": {
       "properties": {
         "value": {
