@@ -2469,26 +2469,35 @@
       "description": "The classification details of the text.",
       "properties": {
         "Category1": {
-          "$ref": "#/definitions/Score"
+          "description": "The category1 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+          "properties": {
+            "Score": {
+              "description": "The category1 score.",
+              "type": "number"
+            }
+          }
         },
         "Category2": {
-          "$ref": "#/definitions/Score"
+          "description": "The category2 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+          "properties": {
+            "Score": {
+              "description": "The category2 score.",
+              "type": "number"
+            }
+          }
         },
         "Category3": {
-          "$ref": "#/definitions/Score"
+          "description": "The category3 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+          "properties": {
+            "Score": {
+              "description": "The category3 score.",
+              "type": "number"
+            }
+          }
         },
         "ReviewRecommended": {
           "description": "The review recommended flag.",
           "type": "boolean"
-        }
-      }
-    },
-    "Score": {
-      "description": "The classification score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
-      "properties": {
-        "Score": {
-          "description": "The category score.",
-          "type": "number"
         }
       }
     },
