@@ -1144,60 +1144,14 @@
           }
         }
       }
-    },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/CheckNameAvailability": {
-      "post": {
-        "tags": [
-          "MigrationConfigs"
-        ],
-        "operationId": "MigrationConfigs_CheckNameAvailability",
-        "description": "Check the give Post Migration name availability.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/namespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailability"
-            },
-            "description": "Parameters to check availability of the given post Migration name"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "check availability returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResult"
-            }
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs": {
+    },	
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations": {
       "get": {
         "tags": [
-          "MigrationConfigs"
+          "migrationConfigurations"
         ],
-        "operationId": "MigrationConfigs_List",
-        "description": "Gets all MigrationConfigs",
+        "operationId": "migrationConfigurations_List",
+        "description": "Gets all migrationConfigurations",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1214,7 +1168,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of MigrationConfigs for servicebus namespace",
+            "description": "Successfully retrieved the list of migrationConfigurations for servicebus namespace",
             "schema": {
               "$ref": "#/definitions/MigrationConfigListResult"
             }
@@ -1231,12 +1185,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/$default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/$default": {
       "put": {
         "tags": [
-          "MigrationConfigs"
+          "migrationConfigurations"
         ],
-        "operationId": "MigrationConfigs_CreateOrUpdate",
+        "operationId": "migrationConfigurations_CreateOrUpdate",
         "description": "Creates or updates a new Migration Config",
         "parameters": [
           {
@@ -1281,9 +1235,9 @@
       },
       "delete": {
         "tags": [
-          "MigrationConfigs"
+          "migrationConfigurations"
         ],
-        "operationId": "MigrationConfigs_Delete",
+        "operationId": "migrationConfigurations_Delete",
         "description": "Deletes an MigrationConfig",
         "parameters": [
           {
@@ -1313,9 +1267,9 @@
       },
       "get": {
         "tags": [
-          "MigrationConfigs"
+          "migrationConfigurations"
         ],
-        "operationId": "MigrationConfigs_Get",
+        "operationId": "migrationConfigurations_Get",
         "description": "Retrieves Migration Config",
         "parameters": [
           {
@@ -1347,10 +1301,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/$default/upgrade": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/$default/upgrade": {
       "post": {
         "tags": [
-          "MigrationConfigs"
+          "migrationConfigurations"
         ],
         "operationId": "MigrationConfig_upgrade",
         "description": "This operation disables the Migration",
@@ -1381,13 +1335,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/$default/abort": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/$default/revert": {
       "post": {
         "tags": [
-          "MigrationConfigs"
+          "migrationConfigurations"
         ],
-        "operationId": "MigrationConfigs_Abort",
-        "description": "Invokes MigrationConfig Abort",
+        "operationId": "migrationConfigurations_Revert",
+        "description": "Invokes MigrationConfig Revert",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1404,7 +1358,7 @@
         ],
         "responses": {
           "200": {
-            "description": "MigrationConfig Abort operation is successful."
+            "description": "MigrationConfig Revert operation is successful."
           },
           "default": {
             "description": "ServiceBus error response describing why the operation failed.",
@@ -4307,10 +4261,10 @@
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of MigrationConfigs"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of migrationConfigurations"
         }
       },
-      "description": "The result of the List MigrationConfigs operation."
+      "description": "The result of the List migrationConfigurations operation."
     }
   },
   "parameters": {
