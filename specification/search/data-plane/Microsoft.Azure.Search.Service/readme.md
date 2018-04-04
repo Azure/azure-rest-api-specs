@@ -83,4 +83,19 @@ csharp:
   namespace: Microsoft.Azure.Search
   clear-output-folder: true
   output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search.Service/Generated
+
+directive: 
+  # TODO: remove this workaround once AutoRest fixes the incorrect code generation when using a parameterized host and both client and operation groups paths.
+  - from: source-file-csharp
+    where: $
+    transform: >
+      if ( $.includes("class DataSourcesOperations") || $.includes("class IndexersOperations") || 
+        $.includes("class IndexesOperations") ||  $.includes("class SynonymMapsOperations") ) 
+        
+        return $.
+          replace(/this.SearchServiceName/g,"Client.SearchServiceName").
+          replace(/this.SearchDnsSuffix/g,"Client.SearchDnsSuffix").
+          replace(/\"Client.SearchServiceName\"/g,"\"this.Client.SearchServiceName\"").
+          replace(/\"Client.SearchDnsSuffix\"/g,"\"this.Client.SearchDnsSuffix\"");
+      return $;  
 ```
