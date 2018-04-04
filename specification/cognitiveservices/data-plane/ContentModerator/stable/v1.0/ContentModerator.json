@@ -2472,7 +2472,7 @@
           "$ref": "#/definitions/Score"
         },
         "Category2": {
-         "$ref": "#/definitions/Score"
+          "$ref": "#/definitions/Score"
         },
         "Category3": {
           "$ref": "#/definitions/Score"
@@ -2487,8 +2487,8 @@
       "description": "The classification score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
       "properties": {
         "Score": {
-           "description": "The category score.",
-           "type": "number"
+          "description": "The category score.",
+          "type": "number"
         }
       }
     },
@@ -2500,7 +2500,12 @@
           "items": {
             "$ref": "#/definitions/Email"
           }
-
+        },
+        "SSN": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SSN"
+          }
         },
         "IPA": {
           "type": "array",
@@ -2540,6 +2545,19 @@
         },
         "Index": {
           "description": "Index(Location) of the Email address in the input text content.",
+          "type": "integer"
+        }
+      }
+    },
+    "SSN": {
+      "description": "Detected SSN details.",
+      "properties": {
+        "Text": {
+          "description": "Detected SSN in the input text content.",
+          "type": "string"
+        },
+        "Index": {
+          "description": "Index(Location) of the SSN in the input text content.",
           "type": "integer"
         }
       }
@@ -3430,8 +3448,8 @@
       "in": "body",
       "required": true,
       "schema": {
-        "format": "binary",
-        "type": "string"
+        "type": "object",
+        "format": "file"
       },
       "x-ms-parameter-location": "method"
     },
