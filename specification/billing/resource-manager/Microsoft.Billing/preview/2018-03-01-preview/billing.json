@@ -16,18 +16,18 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Billing/billingAccounts": {
+    "/providers/Microsoft.Billing/enrollmentAccounts": {
       "get": {
         "tags": [
-          "BillingAccounts"
+          "EnrollmentAccounts"
         ],
         "x-ms-examples": {
-          "BillingAccountsList": {
-            "$ref": "./examples/BillingAccountsList.json"
+          "EnrollmentAccountsList": {
+            "$ref": "./examples/EnrollmentAccountsList.json"
           }
         },
-        "operationId": "BillingAccounts_List",
-        "description": "Lists the billing accounts the caller has access to.",
+        "operationId": "EnrollmentAccounts_List",
+        "description": "Lists the enrollment accounts the caller has access to.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -37,7 +37,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BillingAccountListResult"
+              "$ref": "#/definitions/EnrollmentAccountListResult"
             }
           },
           "default": {
@@ -46,26 +46,29 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{name}": {
+    "/providers/Microsoft.Billing/enrollmentAccounts/{name}": {
       "get": {
         "tags": [
-          "BillingAccounts"
+          "EnrollmentAccounts"
         ],
         "x-ms-examples": {
-          "BillingAccountsGet": {
-            "$ref": "./examples/BillingAccountsGet.json"
+          "EnrollmentAccountsGet": {
+            "$ref": "./examples/EnrollmentAccountsGet.json"
           }
         },
-        "operationId": "BillingAccounts_Get",
-        "description": "Gets a billing account by name.",
+        "operationId": "EnrollmentAccounts_Get",
+        "description": "Gets a enrollment account by name.",
         "parameters": [
           {
             "name": "name",
             "in": "path",
-            "description": "Billing Account name.",
+            "description": "Enrollment Account name.",
             "required": true,
             "type": "string"
           },
@@ -77,7 +80,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BillingAccountResult"
+              "$ref": "#/definitions/EnrollmentAccount"
             }
           },
           "default": {
@@ -384,8 +387,8 @@
     }
   },
   "definitions": {
-    "BillingAccountResult": {
-      "description": "A billing account resource.",
+    "EnrollmentAccount": {
+      "description": "An enrollment account resource.",
       "type": "object",
       "allOf": [
         {
@@ -394,29 +397,34 @@
       ],
       "properties": {
         "properties": {
-          "description": "A billing account.",
+          "description": "An enrollment account.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BillingAccountProperties"
+          "$ref": "#/definitions/EnrollmentAccountProperties"
         }
       }
     },
-    "BillingAccountListResult": {
-      "description": "Result of listing billing accounts.",
+    "EnrollmentAccountListResult": {
+      "description": "Result of listing enrollment accounts.",
       "properties": {
         "value": {
-          "description": "The list of billing accounts.",
+          "description": "The list of enrollment accounts.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/BillingAccountResult"
+            "$ref": "#/definitions/EnrollmentAccount"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "BillingAccountProperties": {
-      "description": "The properties of the billing account.",
+    "EnrollmentAccountProperties": {
+      "description": "The properties of the enrollment account.",
       "properties": {
-	    "principalName": {
+        "principalName": {
           "description": "The account owner's principal name.",
           "type": "string",
           "readOnly": true

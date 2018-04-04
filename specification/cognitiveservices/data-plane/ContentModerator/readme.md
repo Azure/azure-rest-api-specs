@@ -16,7 +16,7 @@ tag: release_1_0
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: 
+input-file:
   - stable/v1.0/ContentModerator.json
 ```
 
@@ -37,6 +37,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -45,7 +46,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.CognitiveServices.ContentModerator
-  output-folder: out/csharp
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/ContentModerator/ContentModerator/Generated
 ```
 
 ``` yaml

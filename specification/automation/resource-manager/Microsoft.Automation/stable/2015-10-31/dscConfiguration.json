@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -201,6 +204,68 @@
           },
           "201": {
             "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DscConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DscConfiguration"
+        ],
+        "operationId": "DscConfiguration_Update",
+        "description": "Create the configuration identified by configuration name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/configurationoperations"
+        },
+        "x-ms-examples": {
+          "Create or Update Configuration": {
+            "$ref": "./examples/updateDscConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The create or update parameters for configuration."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DscConfigurationUpdateParameters"
+            },
+            "description": "The create or update parameters for configuration."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "./definitions.json#/definitions/DscConfiguration"
             }

@@ -124,7 +124,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -219,8 +219,11 @@
           "ApiManagementCreateApiUsingWadlImport": {
             "$ref": "./examples/ApiManagementCreateApiUsingWadlImport.json"
           },
-          "ApiManagementCreateApiUsingWsdlImport": {
-            "$ref": "./examples/ApiManagementCreateApiUsingWsdlImport.json"
+          "ApiManagementCreateSoapToRestApiUsingWsdlImport": {
+            "$ref": "./examples/ApiManagementCreateSoapToRestApiUsingWsdlImport.json"
+          },
+          "ApiManagementCreateSoapPassThroughApiUsingWsdlImport": {
+            "$ref": "./examples/ApiManagementCreateSoapPassThroughApiUsingWsdlImport.json"
           },
           "ApiManagementCreateApi": {
             "$ref": "./examples/ApiManagementCreateApi.json"
@@ -403,7 +406,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions": {      
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions": {
       "get": {
         "tags": [
           "Revisions"
@@ -871,7 +874,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/OperationIdParameter"
@@ -1190,7 +1193,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/OperationIdParameter"
@@ -1315,7 +1318,7 @@
             "description": "The policy contents to apply."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1364,7 +1367,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/OperationIdParameter"
@@ -1480,7 +1483,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1531,7 +1534,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
@@ -1627,6 +1630,9 @@
         "x-ms-examples": {
           "ApiManagementCreateApiPolicy": {
             "$ref": "./examples/ApiManagementCreateApiPolicy.json"
+          },
+          "ApiManagementCreateApiPolicyNonXmlEncoded": {
+            "$ref": "./examples/ApiManagementCreateApiPolicyNonXmlEncoded.json"
           }
         },
         "consumes": [
@@ -1657,7 +1663,7 @@
             "description": "The policy contents to apply."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1757,7 +1763,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1811,7 +1817,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/SchemaIdParameter"
@@ -1860,7 +1866,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/SchemaIdParameter"
@@ -1912,7 +1918,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/SchemaIdParameter"
@@ -1976,7 +1982,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "#/parameters/SchemaIdParameter"
@@ -2059,6 +2065,559 @@
         },
         "x-ms-odata": "./apimtagresources.json#/definitions/TagResourceContract"
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/diagnostics": {
+      "get": {
+        "tags": [
+          "ApiDiagnostics"
+        ],
+        "operationId": "ApiDiagnostic_ListByService",
+        "description": "Lists all diagnostics of an API.",
+        "x-ms-examples": {
+          "ApiManagementListApiDiagnostics": {
+            "$ref": "./examples/ApiManagementListApiDiagnostics.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paged Result reponse of diagnostics for an API.",
+            "schema": {
+              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/diagnostics/{diagnosticId}": {
+      "head": {
+        "tags": [
+          "ApiDiagnostics"
+        ],
+        "operationId": "ApiDiagnostic_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiDiagnostic": {
+            "$ref": "./examples/ApiManagementHeadApiDiagnostic.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApiDiagnostics"
+        ],
+        "operationId": "ApiDiagnostic_Get",
+        "description": "Gets the details of the Diagnostic for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetApiDiagnostic": {
+            "$ref": "./examples/ApiManagementGetApiDiagnostic.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Diagnostic entity.",
+            "schema": {
+              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiDiagnostics"
+        ],
+        "operationId": "ApiDiagnostic_CreateOrUpdate",
+        "description": "Creates a new Diagnostic for an API or updates an existing one.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiDiagnostic": {
+            "$ref": "./examples/ApiManagementCreateApiDiagnostic.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Diagnostic was successfully created.",
+            "schema": {
+              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+            }
+          },
+          "200": {
+            "description": "Diagnostic was successfully updated.",
+            "schema": {
+              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApiDiagnostics"
+        ],
+        "operationId": "ApiDiagnostic_Update",
+        "description": "Updates the details of the Diagnostic for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementUpdateApiDiagnostic": {
+            "$ref": "./examples/ApiManagementUpdateApiDiagnostic.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+            },
+            "description": "Diagnostic Update parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Diagnostic was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiDiagnostics"
+        ],
+        "operationId": "ApiDiagnostic_Delete",
+        "description": "Deletes the specified Diagnostic from an API.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiDiagnostic": {
+            "$ref": "./examples/ApiManagementDeleteApiDiagnostic.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Diagnostic was successfully deleted."
+          },
+          "204": {
+            "description": "The Diagnostic was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/diagnostics/{diagnosticId}/loggers": {
+      "get": {
+        "tags": [
+          "ApiDiagnosticLoggers"
+        ],
+        "operationId": "ApiDiagnosticLogger_ListByService",
+        "description": "Lists all loggers assosiated with the specified Diagnostic of an API.",
+        "x-ms-examples": {
+          "ApiManagementListApiDiagnosticLoggers": {
+            "$ref": "./examples/ApiManagementListApiDiagnosticLoggers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| type        | eq                     |                                   |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paged Result reponse of loggers assigned to the specified Diagnostic.",
+            "schema": {
+              "$ref": "./apimloggers.json#/definitions/LoggerCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./apimloggers.json#/definitions/LoggerContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/diagnostics/{diagnosticId}/loggers/{loggerid}": {
+      "head": {
+        "tags": [
+          "ApiDiagnosticLoggers"
+        ],
+        "operationId": "ApiDiagnosticLogger_CheckEntityExists",
+        "description": "Checks that logger entity specified by identifier is associated with the diagnostics entity.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiDiagnosticLogger": {
+            "$ref": "./examples/ApiManagementHeadApiDiagnosticLogger.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity exists"
+          },
+          "404": {
+            "description": "Entity does not exists."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiDiagnosticLoggers"
+        ],
+        "operationId": "ApiDiagnosticLogger_CreateOrUpdate",
+        "description": "Attaches a logger to a dignostic for an API.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiDiagnosticLogger": {
+            "$ref": "./examples/ApiManagementCreateApiDiagnosticLogger.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Logger was successfully attached to Diagnostic.",
+            "schema": {
+              "$ref": "./apimloggers.json#/definitions/LoggerContract"
+            }
+          },
+          "200": {
+            "description": "Logger to Diagnostic link was successfully updated.",
+            "schema": {
+              "$ref": "./apimloggers.json#/definitions/LoggerContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiDiagnosticLoggers"
+        ],
+        "operationId": "ApiDiagnosticLogger_Delete",
+        "description": "Deletes the specified Logger from Diagnostic for an API.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiDiagnosticLogger": {
+            "$ref": "./examples/ApiManagementDeleteApiDiagnosticLogger.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
+          },
+          {
+            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Logger was successfully detached from Diagnostic."
+          },
+          "204": {
+            "description": "The Logger was successfully detached from Diagnostic."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -2082,7 +2641,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiIdParameter"
+            "$ref": "#/parameters/ApiIdRevParameter"
           },
           {
             "name": "format",
@@ -2105,7 +2664,7 @@
                 },
                 {
                   "value": "wsdl-link",
-                  "description": "Export the Api Definition in WSDL Schema to Storage Blob.",
+                  "description": "Export the Api Definition in WSDL Schema to Storage Blob. This is only supported for APIs of Type `soap`",
                   "name": "Wsdl"
                 },
                 {
@@ -2267,6 +2826,31 @@
               "description": "Name of endpoint(port) to import from WSDL"
             }
           }
+        },
+        "apiType": {
+          "type": "string",
+          "description": "Type of Api to create. \n * `http` creates a SOAP to REST API \n * `soap` creates a SOAP pass-through API .",
+          "enum": [
+            "http",
+            "soap"
+          ],
+          "x-ms-client-name": "SoapApiType",
+          "x-ms-enum": {
+            "name": "SoapApiType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "http",
+                "description": "Imports a SOAP API having a RESTful front end.",
+                "name": "SoapToRest"
+              },
+              {
+                "value": "soap",
+                "description": "Imports the Soap API having a SOAP front end.",
+                "name": "SoapPassThrough"                
+              }
+            ]
+          }
         }
       },
       "allOf": [
@@ -2312,7 +2896,7 @@
           "description": "Describes on which protocols the operations in this API can be invoked."
         },
         "apiVersionSet": {
-          "$ref": "#/definitions/ApiVersionSetContract"
+          "$ref": "#/definitions/ApiVersionSetContractDetails"
         }
       },
       "allOf": [
@@ -2518,11 +3102,11 @@
         },
         "apiVersionSet": {
           "description": "Version set details",
-          "$ref": "#/definitions/ApiVersionSetContract"
+          "$ref": "#/definitions/ApiVersionSetContractDetails"
         }
       }
     },
-    "ApiVersionSetContract": {
+    "ApiVersionSetContractDetails": {
       "description": "An API Version Set contains the common configuration for a set of API Versions relating ",
       "properties": {
         "id": {

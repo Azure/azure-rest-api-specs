@@ -7,7 +7,7 @@ This is the AutoRest configuration file for StreamAnalytics.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for StreamAnalytics, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the StreamAnalytics API.
 
 ``` yaml
@@ -59,10 +59,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -134,17 +135,17 @@ directive:
     where: $.definitions.Output
     from: outputs.json
     reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
-    
+
   - suppress: R2020  # Model definition 'XXX' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
     where: $.definitions.Transformation
     from: transformations.json
     reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
-    
+
   - suppress: R2020  # Model definition 'XXX' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
     where: $.definitions.Function
     from: functions.json
     reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
-    
+
   - suppress: R2020  # Model definition 'XXX' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
     where: $.definitions.SubscriptionQuota
     from: subscriptions.json
