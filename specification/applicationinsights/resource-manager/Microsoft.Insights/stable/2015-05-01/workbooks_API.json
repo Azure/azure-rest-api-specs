@@ -65,13 +65,13 @@
           "200": {
             "description": "A list containing 0 or more workbook definitions.",
             "schema": {
-              "$ref": "#/definitions/WorkbookListResult"
+              "$ref": "#/definitions/Workbooks"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
+              "$ref": "#/definitions/WorkbookError"
             }
           }
         },
@@ -85,7 +85,7 @@
     "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {  
       "delete": {
         "description": "Delete a workbook.",
-        "operationId": "Workbooks_Delete",
+        "operationId": "Workbook_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -104,16 +104,16 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "The workbook has been successfully deleted."
           },
           "204": {
-            "description": "The resource doens't exisit."
+            "description": "The resource doens't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
+              "$ref": "#/definitions/WorkbookError"
             }
           }
         },
@@ -125,7 +125,7 @@
       },
       "put": {
         "description": "Create a new workbook.",
-        "operationId": "Workbooks_Create",
+        "operationId": "Workbook_CreateOrUpdate",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -156,10 +156,16 @@
                 "$ref": "#/definitions/Workbook"
             }
           },
+          "201": {
+            "description": "The newly created workbook.",
+            "schema": {
+                "$ref": "#/definitions/Workbook"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
+              "$ref": "#/definitions/WorkbookError"
             }
           }
         },
@@ -171,7 +177,7 @@
       },
       "patch": {
         "description": "Updates a workbook that has already been added.",
-        "operationId": "Workbooks_Update",
+        "operationId": "Workbook_Update",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -205,7 +211,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
+              "$ref": "#/definitions/WorkbookError"
             }
           }
         },
@@ -219,7 +225,7 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/workbooks/{resourceName}": {  
       "get": {
         "description": "Get a single workbook by its resourceName.",
-        "operationId": "Workbooks_Get",
+        "operationId": "Workbook_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -244,7 +250,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
+              "$ref": "#/definitions/WorkbookError"
             }
           }
         },
@@ -255,10 +261,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/workbooks/links": {  
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/workbooks": {  
       "get": {
-        "description": "Gets a list of workbooks.",
-        "operationId": "Workbooks_List",
+        "description": "Gets a list of workbooks by sourceId.",
+        "operationId": "Workbook_List",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -292,170 +298,17 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
+              "$ref": "#/definitions/WorkbookError"
             }
           }
         },
         "x-ms-examples": {
           "WorkbooksListLink": {
-            "$ref": "./examples/WorkbooksListLink.json"
-          }
-        }
-      },    
-      "put": {
-        "description": "Create a new workbook link.",
-        "operationId": "Workbooks_CreateLink",
-        "parameters": [          
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "linkProperties",
-            "description": "Properties that need to be specified to create a workbook link.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The link has been created."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkbookAdd": {
-            "$ref": "./examples/LinkedWorkbookResponseOnly.json"
-          }
-        }
-      },
-      "patch": {
-        "description": "Updates a workbook that has already been added.",
-        "operationId": "Workbooks_UpdateLink",
-        "parameters": [          
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "linkProperties",
-            "description": "Properties that need to be specified to create a workbook link.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The workbook link updated.",
-            "schema": {
-                "$ref": "#/definitions/Workbook"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkbookUpdateLink": {
-            "$ref": "./examples/LinkedWorkbookResponseOnly.json"
-          }
-        }
-      },
-      "delete": {
-        "description": "Delete a link between a source resource and workbook resource.",
-        "operationId": "Workbooks_DeleteLink",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CategoryParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The workbook link has been successfully deleted."
-          },
-          "204": {
-            "description": "The resource doens't exisit."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkbookDeleteLink": {
-            "$ref": "./examples/WorkbookDeleteLink.json"
+            "$ref": "./examples/WorkbooksListBySourceId.json"
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/workbooks/{resourceName}/links": {  
-      "get": {
-        "description": "Gets a workbook link by a workbook resource name.",
-        "operationId": "Workbooks_ListBySourceId",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkbookResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CanFetchWorkbookContentParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A workbook definition.",
-            "schema": {
-                "$ref": "#/definitions/Workbook"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WorkbookErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkbookGet": {
-            "$ref": "./examples/WorkbookGet.json"
-          }
-        }
-      }
-    } 
+    }
   },
   "definitions": {
     "Resource": {
@@ -493,7 +346,7 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "WorkbookListResult": {
+    "Workbooks": {
       "properties": {
         "value": {
           "type": "array",
@@ -633,7 +486,7 @@
       },
       "description": "Error Field contract."
     },
-    "WorkbookErrorResponse": {
+    "WorkbookError": {
       "properties": {
         "code": {
           "type": "string",
