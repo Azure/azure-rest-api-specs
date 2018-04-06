@@ -28,7 +28,7 @@
                     },
                     {
                         "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
-                    },                    
+                    },
                     {
                         "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
                     },
@@ -93,7 +93,7 @@
                     },
                     "404": {
                         "description": "Not Found"
-                    }                    
+                    }
                 },
                 "produces": [
                     "application/json"
@@ -131,6 +131,12 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/DownloadedProductResource"
+                        }
+                    },
                     "202": {
                         "description": "Accepted",
                         "schema": {
@@ -139,7 +145,7 @@
                     },
                     "404": {
                         "description": "Not Found"
-                    }                    
+                    }
                 },
                 "x-ms-long-running-operation": true,
                 "produces": [
@@ -148,7 +154,7 @@
                 "consumes": [
                     "application/json"
                 ]
-            }            
+            }
         }
     },
     "definitions": {
