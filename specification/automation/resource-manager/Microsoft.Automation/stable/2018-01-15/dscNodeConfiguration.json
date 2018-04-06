@@ -4,8 +4,7 @@
     "title": "AutomationManagement",
     "version": "2018-01-15",
     "x-ms-code-generation-settings": {  
-      "useDateTimeOffset": true,
-      "syncMethods": "None"  
+      "useDateTimeOffset": true
     }
   },
   "host": "management.azure.com",
@@ -320,16 +319,19 @@
       "description": "Definition of the dsc node configuration."
     },
     "DscNodeConfigurationProperties": {
+      "description": "Properties for the DscNodeConfiguration",
       "properties": {
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets creation time."
+          "description": "Gets or sets creation time.",
+          "x-nullable": false
         },
         "configuration": {
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
