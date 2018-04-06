@@ -16,21 +16,24 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/fileShares/{fileShare}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/fileShares/{fileShare}": {
             "get": {
                 "x-ms-examples": {
-                    "Get a file share": {
-                        "$ref": "./examples/FileShare/FileShareGetOperation_example.json"
+                    "Returns the requested fabric file share.": {
+                        "$ref": "./examples/FileShare/Get.json"
                     }
                 },
                 "tags": [
                     "FileShares"
                 ],
-                "description": "Get a fabric file share.",
+                "description": "Returns the requested fabric file share.",
                 "operationId": "FileShares_Get",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -48,15 +51,18 @@
                         "schema": {
                             "$ref": "#/definitions/FileShare"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/fileShares": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/fileShares": {
             "get": {
                 "x-ms-examples": {
-                    "List all file shares": {
-                        "$ref": "./examples/FileShare/FileShareListOperation_example.json"
+                    "Returns a list of all fabric file shares at a certain location.": {
+                        "$ref": "./examples/FileShare/List.json"
                     }
                 },
                 "x-ms-pageable": {
@@ -65,11 +71,14 @@
                 "tags": [
                     "FileShares"
                 ],
-                "description": "Get a list of all fabric file shares at a certain location.",
+                "description": "Returns a list of all fabric file shares at a certain location.",
                 "operationId": "FileShares_List",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -87,6 +96,9 @@
                         "schema": {
                             "$ref": "#/definitions/FileShareList"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 },
                 "x-ms-odata": "#/definitions/FileShare"
@@ -95,7 +107,7 @@
     },
     "definitions": {
         "FileShare": {
-            "description": "Representation of a file share resource.",
+            "description": "Object that contains properties of the file share resource.",
             "type": "object",
             "properties": {
                 "properties": {
@@ -115,7 +127,7 @@
             "type": "object",
             "properties": {
                 "associatedVolume": {
-                    "description": "Associated volume Id.",
+                    "description": "Associated volume ID.",
                     "type": "string"
                 },
                 "uncPath": {
@@ -129,7 +141,7 @@
             "type": "object",
             "properties": {
                 "value": {
-                    "description": "List of fabric file shares for this page.",
+                    "description": "List of fabric file shares.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/FileShare"
@@ -153,7 +165,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }

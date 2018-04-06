@@ -16,21 +16,24 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems/{storageSubSystem}/storagePools/{storagePool}/volumes/{volume}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems/{storageSubSystem}/storagePools/{storagePool}/volumes/{volume}": {
       "get": {
         "x-ms-examples": {
-          "Get a volume": {
-            "$ref": "./examples/Volume/VolumeGetOperation_example.json"
+          "Return the requested a storage volume.": {
+            "$ref": "./examples/Volume/Get.json"
           }
         },
         "tags": [
           "Volumes"
         ],
-        "description": "Get a volume.",
+        "description": "Return the requested a storage volume.",
         "operationId": "Volumes_Get",
         "parameters": [
           {
             "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+              "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -54,25 +57,31 @@
             "schema": {
               "$ref": "#/definitions/Volume"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems/{storageSubSystem}/storagePools/{storagePool}/volumes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems/{storageSubSystem}/storagePools/{storagePool}/volumes": {
       "get": {
         "x-ms-examples": {
-          "List all volumes": {
-            "$ref": "./examples/Volume/VolumeListOperation_example.json"
+          "Returns a list of all storage volumes at a location.": {
+            "$ref": "./examples/Volume/List.json"
           }
         },
         "tags": [
           "Volumes"
         ],
-        "description": "Get a list of all volumes at a location.",
+        "description": "Returns a list of all storage volumes at a location.",
         "operationId": "Volumes_List",
         "parameters": [
           {
             "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+              "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -96,6 +105,9 @@
             "schema": {
               "$ref": "#/definitions/VolumeList"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         },
         "x-ms-pageable": {
@@ -147,11 +159,11 @@
       }
     },
     "VolumeList": {
-      "description": "Pageable list of volumes.",
+      "description": "Pageable list of storage volumes.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of volumes on this page.",
+          "description": "List of storage volumes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Volume"
@@ -167,7 +179,7 @@
   "parameters": {
     "VolumeParameter": {
       "name": "volume",
-      "description": "Name of the volume.",
+      "description": "Name of the storage volume.",
       "in": "path",
       "required": true,
       "type": "string",
@@ -179,7 +191,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }

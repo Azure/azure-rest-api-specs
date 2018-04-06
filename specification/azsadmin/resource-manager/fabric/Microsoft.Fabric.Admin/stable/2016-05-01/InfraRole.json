@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "InfraRole operation endpoints and objects.",
+        "description": "Infrastructure role operation endpoints and objects.",
         "title": "FabricAdminClient",
         "version": "2016-05-01"
     },
@@ -16,21 +16,24 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles/{infraRole}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles/{infraRole}": {
             "get": {
                 "x-ms-examples": {
-                    "Get a infra role": {
-                        "$ref": ".//examples/InfraRole/InfraRoleGetOperation_example.json"
+                    "Returns the requested infrastructure role description.": {
+                        "$ref": "./examples/InfraRole/Get.json"
                     }
                 },
                 "tags": [
                     "InfraRoles"
                 ],
-                "description": "Get an infra role description.",
+                "description": "Returns the requested infrastructure role description.",
                 "operationId": "InfraRoles_Get",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -48,25 +51,31 @@
                         "schema": {
                             "$ref": "#/definitions/InfraRole"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles": {
             "get": {
                 "x-ms-examples": {
-                    "List all infra roles": {
-                        "$ref": ".//examples/InfraRole/InfraRoleListOperation_example.json"
+                    "Returns a list of all infrastructure roles at a location.": {
+                        "$ref": "./examples/InfraRole/List.json"
                     }
                 },
                 "tags": [
                     "InfraRoles"
                 ],
-                "description": "Get a list of all infra roles at a location.",
+                "description": "Returns a list of all infrastructure roles at a location.",
                 "operationId": "InfraRoles_List",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -84,6 +93,9 @@
                         "schema": {
                             "$ref": "#/definitions/InfraRoleList"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 },
                 "x-ms-pageable": {
@@ -91,15 +103,55 @@
                 },
                 "x-ms-odata": "#/definitions/InfraRole"
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles/{infraRole}/Restart": {
+            "post": {
+                "x-ms-examples": {
+                    "Restarts the requestd infrastructure role.": {
+                        "$ref": "./examples/InfraRole/Restart.json"
+                    }
+                },
+                "tags": [
+                    "InfraRole"
+                ],
+                "description": "Restarts the requestd infrastructure role.",
+                "operationId": "InfraRoles_Restart",
+                "parameters": [
+                    {
+                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/InfraRoleParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "ACCEPTED"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
         }
     },
     "definitions": {
         "InfraRole": {
-            "description": "Get an infra role description.",
+            "description": "Infrastructure role description.",
             "type": "object",
             "properties": {
                 "properties": {
-                    "description": "Infra role properties.",
+                    "description": "Infrastructure role properties.",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/InfraRoleModel"
                 }
@@ -111,24 +163,32 @@
             ]
         },
         "InfraRoleModel": {
-            "description": "Infra role properties.",
+            "description": "Infrastructure role properties.",
             "type": "object",
             "properties": {
                 "instances": {
-                    "description": "List of infra role instances.",
+                    "description": "List of infrastructure role instances.",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
+                },
+                "displayName": {
+                    "description": "Display name for the infrastructure role.",
+                    "type": "string"
+                },
+                "restartable": {
+                    "description": "Value indicating whether the infrastructure role can be restarted.",
+                    "type": "boolean"
                 }
             }
         },
         "InfraRoleList": {
-            "description": "Pageable list of infra roles.",
+            "description": "Pageable list of infrastructure roles.",
             "type": "object",
             "properties": {
                 "value": {
-                    "description": "List of infra roles for this page.",
+                    "description": "List of infrastructure roles.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/InfraRole"
@@ -144,7 +204,7 @@
     "parameters": {
         "InfraRoleParameter": {
             "name": "infraRole",
-            "description": "Infra role name.",
+            "description": "Infrastructure role name.",
             "in": "path",
             "required": true,
             "type": "string",
@@ -156,7 +216,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }

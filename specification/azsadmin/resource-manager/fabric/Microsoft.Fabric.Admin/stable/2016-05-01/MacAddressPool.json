@@ -16,21 +16,24 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/macAddressPools/{macAddressPool}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/macAddressPools/{macAddressPool}": {
             "get": {
                 "x-ms-examples": {
-                    "Get a mac address pool": {
-                        "$ref": "./examples/MacAddressPool/MacAddressPoolGetOperation_example.json"
+                    "Returns the requested MAC address pool.": {
+                        "$ref": "./examples/MacAddressPool/Get.json"
                     }
                 },
                 "tags": [
                     "MacAddressPools"
                 ],
-                "description": "Get a MAC address pool.",
+                "description": "Returns the requested MAC address pool.",
                 "operationId": "MacAddressPools_Get",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -48,25 +51,31 @@
                         "schema": {
                             "$ref": "#/definitions/MacAddressPool"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/macAddressPools": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/macAddressPools": {
             "get": {
                 "x-ms-examples": {
-                    "List all mac address pools": {
-                        "$ref": "./examples/MacAddressPool/MacAddressPoolListOperation_example.json"
+                    "Returns all MAC address pools": {
+                        "$ref": "./examples/MacAddressPool/List.json"
                     }
                 },
                 "tags": [
                     "MacAddressPools"
                 ],
-                "description": "Get a list of all MAC address pools at a location.",
+                "description": "Returns a list of all MAC address pools at a location.",
                 "operationId": "MacAddressPools_List",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -84,6 +93,9 @@
                         "schema": {
                             "$ref": "#/definitions/MacAddressPoolList"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 },
                 "x-ms-pageable": {
@@ -95,7 +107,7 @@
     },
     "definitions": {
         "MacAddressPool": {
-            "description": "This resource represents a MAC address pool.  The default MAC address pools are used if you set the MAC address type for a virtual machine to 'Static'.  If the virtual machine setting is “Dynamic”, the hypervisor assigns the MAC address.",
+            "description": "This resource represents a MAC address pool.  The default MAC address pools are used if you set the MAC address type for a virtual machine to 'Static'.  If the virtual machine setting is 'Dynamic', the hypervisor assigns the MAC address.",
             "type": "object",
             "properties": {
                 "properties": {
@@ -115,7 +127,7 @@
             "type": "object",
             "properties": {
                 "metadata": {
-                    "description": "Metadata related to this MAC pool.",
+                    "description": "Metadata related to the MAC pool.",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -146,7 +158,7 @@
             "type": "object",
             "properties": {
                 "value": {
-                    "description": "The list of MAC address pools on this page.",
+                    "description": "List of MAC address pools.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/MacAddressPool"
@@ -174,7 +186,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }

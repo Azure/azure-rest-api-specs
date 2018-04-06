@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "InfraRole instance operation endpoints and objects.",
+        "description": "Infrastructure role instance operation endpoints and objects.",
         "title": "FabricAdminClient",
         "version": "2016-05-01"
     },
@@ -16,23 +16,26 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}/PowerOff": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}/PowerOff": {
             "post": {
                 "x-ms-examples": {
-                    "Power off an infra role instance": {
-                        "$ref": "./examples/InfraRoleInstance/InfraRoleInstancePowerOffOperation_example.json"
+                    "Power off an infrastructure role instance": {
+                        "$ref": "./examples/InfraRoleInstance/PowerOff.json"
                     }
                 },
                 "tags": [
                     "InfraRoleInstances"
                 ],
-                "description": "Power off an infra role instance.",
+                "description": "Power off an infrastructure role instance.",
                 "operationId": "InfraRoleInstances_PowerOff",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
@@ -44,44 +47,35 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "OK"
                     },
                     "202": {
-                        "description": "ACCEPTED",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
-                    },
-                    "500": {
-                        "description": "FAILURE",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "ACCEPTED"
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}/PowerOn": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}/PowerOn": {
             "post": {
                 "x-ms-examples": {
-                    "Power on an infra role instance": {
-                        "$ref": "./examples/InfraRoleInstance/InfraRoleInstancePowerOnOperation_example.json"
+                    "Power on an infrastructure role instance": {
+                        "$ref": "./examples/InfraRoleInstance/PowerOn.json"
                     }
                 },
                 "tags": [
                     "InfraRoleInstances"
                 ],
-                "description": "Power on an infra role instance.",
+                "description": "Power on an infrastructure role instance.",
                 "operationId": "InfraRoleInstances_PowerOn",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
@@ -93,44 +87,35 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "OK"
                     },
                     "202": {
-                        "description": "ACCEPTED",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
-                    },
-                    "500": {
-                        "description": "FAILURE",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "ACCEPTED"
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}/Shutdown": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}/Shutdown": {
             "post": {
                 "x-ms-examples": {
-                    "Shutdown an infra role instance": {
-                        "$ref": "./examples/InfraRoleInstance/InfraRoleInstanceShutdownOperation_example.json"
+                    "Shutdown an infrastructure role instance": {
+                        "$ref": "./examples/InfraRoleInstance/Shutdown.json"
                     }
                 },
                 "tags": [
                     "InfraRoleInstances"
                 ],
-                "description": "Shut down an infra role instance.",
+                "description": "Shut down an infrastructure role instance.",
                 "operationId": "InfraRoleInstances_Shutdown",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
@@ -142,44 +127,35 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "OK"
                     },
                     "202": {
-                        "description": "ACCEPTED",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
-                    },
-                    "500": {
-                        "description": "FAILURE",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "ACCEPTED"
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}/Reboot": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}/Reboot": {
             "post": {
                 "x-ms-examples": {
-                    "Reboot an infra role instance": {
-                        "$ref": "./examples/InfraRoleInstance/InfraRoleInstanceRebootOperation_example.json"
+                    "Reboot an infrastructure role instance": {
+                        "$ref": "./examples/InfraRoleInstance/Reboot.json"
                     }
                 },
                 "tags": [
                     "InfraRoleInstances"
                 ],
-                "description": "Reboot an infra role instance.",
+                "description": "Reboot an infrastructure role instance.",
                 "operationId": "InfraRoleInstances_Reboot",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
@@ -191,42 +167,33 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "OK"
                     },
                     "202": {
-                        "description": "ACCEPTED",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
-                    },
-                    "500": {
-                        "description": "FAILURE",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "ACCEPTED"
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances/{infraRoleInstance}": {
             "get": {
                 "x-ms-examples": {
-                    "Get an infra role instance": {
-                        "$ref": "./examples/InfraRoleInstance/InfraRoleInstanceGetOperation_example.json"
+                    "Return the requested infrastructure role instance.": {
+                        "$ref": "./examples/InfraRoleInstance/Get.json"
                     }
                 },
                 "tags": [
                     "InfraRoleInstances"
                 ],
-                "description": "Get an infra role instance.",
+                "description": "Return the requested infrastructure role instance.",
                 "operationId": "InfraRoleInstances_Get",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -244,25 +211,31 @@
                         "schema": {
                             "$ref": "#/definitions/InfraRoleInstance"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoleInstances": {
             "get": {
                 "x-ms-examples": {
-                    "List all infra role instances": {
-                        "$ref": "./examples/InfraRoleInstance/InfraRoleInstanceListOperation_example.json"
+                    "Returns a list of all infrastructure role instances at a location.": {
+                        "$ref": "./examples/InfraRoleInstance/List.json"
                     }
                 },
                 "tags": [
                     "InfraRoleInstances"
                 ],
-                "description": "Get a list of all infra role instances at a location.",
+                "description": "Returns a list of all infrastructure role instances at a location.",
                 "operationId": "InfraRoleInstances_List",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -280,6 +253,9 @@
                         "schema": {
                             "$ref": "#/definitions/InfraRoleInstanceList"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 },
                 "x-ms-pageable": {
@@ -295,7 +271,7 @@
             "type": "object",
             "properties": {
                 "properties": {
-                    "description": "All properties of an infra role instance.",
+                    "description": "All properties of an infrastructure role instance.",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/InfraRoleInstanceModel"
                 }
@@ -307,7 +283,7 @@
             ]
         },
         "InfraRoleInstanceModel": {
-            "description": "All properties of an infra role instance.",
+            "description": "All properties of an infrastructure role instance.",
             "type": "object",
             "properties": {
                 "scaleUnit": {
@@ -343,7 +319,7 @@
             "type": "object",
             "properties": {
                 "memoryGb": {
-                    "description": "The amount of memory, in GB, currently assigned to the virtual machine.  In Azure Stack V1, only static memory is used for infrastructure VMs.",
+                    "description": "The amount of memory, in GB, currently assigned to the virtual machine.",
                     "format": "float",
                     "type": "number"
                 },
@@ -355,11 +331,11 @@
             }
         },
         "InfraRoleInstanceList": {
-            "description": "Pageable list of infra role instances.",
+            "description": "Pageable list of infrastructure role instances.",
             "type": "object",
             "properties": {
                 "value": {
-                    "description": "List of infra role instances for this page.",
+                    "description": "List of infrastructure role instances.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/InfraRoleInstance"
@@ -375,7 +351,7 @@
     "parameters": {
         "InfraRoleInstanceParameter": {
             "name": "infraRoleInstance",
-            "description": "Name of an infra role instance.",
+            "description": "Name of an infrastructure role instance.",
             "in": "path",
             "required": true,
             "type": "string",
@@ -387,7 +363,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }

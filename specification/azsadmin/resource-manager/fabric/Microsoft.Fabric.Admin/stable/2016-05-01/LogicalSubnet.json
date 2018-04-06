@@ -16,21 +16,24 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}/logicalSubnets/{logicalSubnet}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}/logicalSubnets/{logicalSubnet}": {
       "get": {
         "x-ms-examples": {
-          "Get a logical subnet": {
-            "$ref": "./examples/LogicalSubnet/LogicalSubnetGetOperation_example.json"
+          "Returns the requested logical subnet.": {
+            "$ref": "./examples/LogicalSubnet/Get.json"
           }
         },
         "tags": [
           "LogicalSubnets"
         ],
-        "description": "Get a list of all volumes at a location.",
+        "description": "Returns the requested logical subnet.",
         "operationId": "LogicalSubnets_Get",
         "parameters": [
           {
             "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+              "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -51,25 +54,31 @@
             "schema": {
               "$ref": "#/definitions/LogicalSubnet"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}/logicalSubnets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}/logicalSubnets": {
       "get": {
         "x-ms-examples": {
-          "List all logical subnets": {
-            "$ref": "./examples/LogicalSubnet/LogicalSubnetListOperation_example.json"
+          "Returns a list of all logical subnets.": {
+            "$ref": "./examples/LogicalSubnet/List.json"
           }
         },
         "tags": [
           "LogicalSubnets"
         ],
-        "description": "Get a list of all logical subnets.",
+        "description": "Returns a list of all logical subnets.",
         "operationId": "LogicalSubnets_List",
         "parameters": [
           {
             "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+              "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -90,6 +99,9 @@
             "schema": {
               "$ref": "#/definitions/LogicalSubnetList"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         },
         "x-ms-pageable": {
@@ -101,7 +113,7 @@
   },
   "definitions": {
     "LogicalSubnet": {
-      "description": "This resource represents a Logical Subnet.  A Logical Subnet comprises of subnet/vlan pair.",
+      "description": "This resource represents a logical subnet.  A logical subnet is made of a subnet-vlan pair.",
       "type": "object",
       "properties": {
         "properties": {
@@ -121,18 +133,18 @@
       "type": "object",
       "properties": {
         "ipPools": {
-          "description": "All ip pools which belong to this subnet.",
+          "description": "All IP pools which belong to this subnet.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "isPublic": {
-          "description": "The visiblity status of the ip pool.  If is true the associated pools are public ip address pools.",
+          "description": "The visiblity status of the IP pool.  If is true the associated pools are public IP address pools.",
           "type": "boolean"
         },
         "metadata": {
-          "description": "Metadata related to this Logical Network.",
+          "description": "Metadata related to the logical network.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -145,7 +157,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of logical subnets on this page.",
+          "description": "List of logical subnets.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogicalSubnet"
@@ -181,7 +193,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
