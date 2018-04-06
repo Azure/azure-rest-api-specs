@@ -16,11 +16,51 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/PowerOff": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/Shutdown": {
             "post": {
                 "x-ms-examples": {
-                    "Power off a scale unit node": {
-                        "$ref": "./examples/ScaleUnitNode/ScaleUnitNodePowerOffOperation_example.json"
+                    "Shutdown a scale unit node.": {
+                        "$ref": "./examples/ScaleUnitNode/Shutdown.json"
+                    }
+                },
+                "tags": [
+                    "ScaleUnitNodes"
+                ],
+                "description": "Shutdown a scale unit node.",
+                "operationId": "ScaleUnitNodes_Shutdown",
+                "parameters": [
+                    {
+                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ScaleUnitNodeParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "ACCEPTED"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/PowerOff": {
+            "post": {
+                "x-ms-examples": {
+                    "Power off a scale unit node.": {
+                        "$ref": "./examples/ScaleUnitNode/PowerOff.json"
                     }
                 },
                 "tags": [
@@ -33,6 +73,9 @@
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
@@ -44,32 +87,20 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "OK"
                     },
                     "202": {
-                        "description": "ACCEPTED",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
-                    },
-                    "500": {
-                        "description": "FAILURE",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "ACCEPTED"
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/PowerOn": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/PowerOn": {
             "post": {
                 "x-ms-examples": {
-                    "Power on a scale unit node": {
-                        "$ref": "./examples/ScaleUnitNode/ScaleUnitNodePowerOnOperation_example.json"
+                    "Power on a scale unit node.": {
+                        "$ref": "./examples/ScaleUnitNode/PowerOn.json"
                     }
                 },
                 "tags": [
@@ -82,6 +113,9 @@
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
@@ -93,32 +127,20 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "OK"
                     },
                     "202": {
-                        "description": "ACCEPTED",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
-                    },
-                    "500": {
-                        "description": "FAILURE",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "ACCEPTED"
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/StartMaintenanceMode": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/StartMaintenanceMode": {
             "post": {
                 "x-ms-examples": {
-                    "Start maintenance mode on a scale unit node": {
-                        "$ref": "./examples/ScaleUnitNode/ScaleUnitNodeStartMaintenanceModeOperation_example.json"
+                    "Start maintenance mode on a scale unit node.": {
+                        "$ref": "./examples/ScaleUnitNode/StartMaintenanceMode.json"
                     }
                 },
                 "tags": [
@@ -131,6 +153,9 @@
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
@@ -142,32 +167,20 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "OK"
                     },
                     "202": {
-                        "description": "ACCEPTED",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
-                    },
-                    "500": {
-                        "description": "FAILURE",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "ACCEPTED"
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/StopMaintenanceMode": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/StopMaintenanceMode": {
             "post": {
                 "x-ms-examples": {
-                    "Stop maintenance mode on a scale unit node": {
-                        "$ref": "./examples/ScaleUnitNode/ScaleUnitNodeStopMaintenanceModeOperation_example.json"
+                    "Stop maintenance mode on a scale unit node.": {
+                        "$ref": "./examples/ScaleUnitNode/StopMaintenanceMode.json"
                     }
                 },
                 "tags": [
@@ -180,6 +193,9 @@
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
@@ -191,42 +207,76 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "OK"
                     },
                     "202": {
-                        "description": "ACCEPTED",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
-                    },
-                    "500": {
-                        "description": "FAILURE",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/OperationStatus"
-                        }
+                        "description": "ACCEPTED"
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}": {
-            "get": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/Repair": {
+            "post": {
                 "x-ms-examples": {
-                    "Get a scale unit node": {
-                        "$ref": "./examples/ScaleUnitNode/ScaleUnitNodeGetOperation_example.json"
+                    "Repairs a node of the cluster.": {
+                        "$ref": "./examples/ScaleUnitNode/Repair.json"
                     }
                 },
                 "tags": [
                     "ScaleUnitNodes"
                 ],
-                "description": "Get a specific scale unit node.",
+                "description": "Repairs a node of the cluster.",
+                "operationId": "ScaleUnitNodes_Repair",
+                "parameters": [
+                    {
+                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ScaleUnitNodeParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/BareMetalNodeParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "ACCEPTED"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}": {
+            "get": {
+                "x-ms-examples": {
+                    "Return the requested scale unit node.": {
+                        "$ref": "./examples/ScaleUnitNode/Get.json"
+                    }
+                },
+                "tags": [
+                    "ScaleUnitNodes"
+                ],
+                "description": "Return the requested scale unit node.",
                 "operationId": "ScaleUnitNodes_Get",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -244,25 +294,31 @@
                         "schema": {
                             "$ref": "#/definitions/ScaleUnitNode"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes": {
             "get": {
                 "x-ms-examples": {
                     "List all scale unit node": {
-                        "$ref": "./examples/ScaleUnitNode/ScaleUnitNodeListOperation_example.json"
+                        "$ref": "./examples/ScaleUnitNode/List.json"
                     }
                 },
                 "tags": [
                     "ScaleUnitNodes"
                 ],
-                "description": "Get a list of all scale unit nodes in a location.",
+                "description": "Returns a list of all scale unit nodes in a location.",
                 "operationId": "ScaleUnitNodes_List",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -280,6 +336,9 @@
                         "schema": {
                             "$ref": "#/definitions/ScaleUnitNodeList"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 },
                 "x-ms-pageable": {
@@ -290,6 +349,45 @@
         }
     },
     "definitions": {
+        "BareMetalNodeDescription": {
+            "description": "Description of a bare metal node used for ScaleOut operation on a cluster.",
+            "type" : "object",
+            "properties": {
+                "bmcIpv4Address": {
+                    "x-ms-client-name": "BMCIPv4Address",
+                    "description": "BMC address of the physical machine.",
+                    "type": "string"
+                },
+                "vendor": {
+                    "description": "Vendor of the physical machine.",
+                    "type": "string"
+                },
+                "model": {
+                    "description": "Model of the physical machine.",
+                    "type": "string"
+                },
+                "serialNumber": {
+                    "description": "Serial number of the physical machine.",
+                    "type": "string"
+                },
+                "biosVersion": {
+                    "description": "Bios version of the physical machine.",
+                    "type": "string"
+                },
+                "computerName": {
+                    "description": "Name of the computer.",
+                    "type": "string"
+                },
+                "clusterName": {
+                    "description": "Name of the cluster.",
+                    "type": "string"
+                },
+                "macAddress": {
+                    "description": "Name of the MAC address of the bare metal node.",
+                    "type": "string"
+                }
+            }
+        },
         "ScaleUnitNode": {
             "description": "The physical server in a cluster.",
             "type": "object",
@@ -338,7 +436,7 @@
                     }
                 },
                 "bmcAddress": {
-                    "description": "Bmc address of the physical machine.",
+                    "description": "BMC address of the physical machine.",
                     "type": "string"
                 },
                 "scaleUnitName": {
@@ -366,11 +464,7 @@
                     "type": "string"
                 },
                 "biosVersion": {
-                    "description": "Bios version of the physical machine.",
-                    "type": "string"
-                },
-                "macAddress": {
-                    "description": "MacAddress of the physical machine.",
+                    "description": "BIOS version of the physical machine.",
                     "type": "string"
                 },
                 "capacity": {
@@ -384,7 +478,7 @@
             "type": "object",
             "properties": {
                 "value": {
-                    "description": "The list of nodes in this page.",
+                    "description": "List of scale unit nodes.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ScaleUnitNode"
@@ -405,6 +499,16 @@
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
+        },
+        "BareMetalNodeParameter": {
+            "name": "bareMetalNode",
+            "description": "Description of a node.",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/BareMetalNodeDescription"
+            },
+            "x-ms-parameter-location": "method"
         }
     },
     "securityDefinitions": {
@@ -412,7 +516,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }

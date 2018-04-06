@@ -16,21 +16,24 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}": {
             "get": {
                 "x-ms-examples": {
-                    "Get a logical network": {
-                        "$ref": "./examples/LogicalNetwork/LogicalNetworkGetOperation_example.json"
+                    "Returns the requested logical network.": {
+                        "$ref": "./examples/LogicalNetwork/Get.json"
                     }
                 },
                 "tags": [
                     "LogicalNetworks"
                 ],
-                "description": "Get a logical network.",
+                "description": "Returns the requested logical network.",
                 "operationId": "LogicalNetworks_Get",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -48,15 +51,18 @@
                         "schema": {
                             "$ref": "#/definitions/LogicalNetwork"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks": {
             "get": {
                 "x-ms-examples": {
-                    "List all logical networks": {
-                        "$ref": "./examples/LogicalNetwork/LogicalNetworkListOperation_example.json"
+                    "Returns a list of all logical networks at a location.": {
+                        "$ref": "./examples/LogicalNetwork/List.json"
                     }
                 },
                 "x-ms-pageable": {
@@ -65,11 +71,14 @@
                 "tags": [
                     "LogicalNetworks"
                 ],
-                "description": "Get a list of all logical networks at a location.",
+                "description": "Returns a list of all logical networks at a location.",
                 "operationId": "LogicalNetworks_List",
                 "parameters": [
                     {
                         "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -87,6 +96,9 @@
                         "schema": {
                             "$ref": "#/definitions/LogicalNetworkList"
                         }
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
                     }
                 },
                 "x-ms-odata": "#/definitions/LogicalNetwork"
@@ -95,7 +107,7 @@
     },
     "definitions": {
         "LogicalNetwork": {
-            "description": "This resource represents a logical partition of physical network that is dedicated for a particular purpose.  A logical network comprises of a collection of logical subnets.",
+            "description": "This resource represents a logical partition of physical network that is dedicated for a particular purpose.  A logical network comprises a collection of logical subnets.",
             "type": "object",
             "properties": {
                 "properties": {
@@ -115,18 +127,18 @@
             "type": "object",
             "properties": {
                 "metadata": {
-                    "description": "Metadata related to this Logical Network.",
+                    "description": "Metadata related to the logical network.",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
                     }
                 },
                 "networkVirtualizationEnabled": {
-                    "description": "Is Network Virtualization is enabled on this Logical Network.",
+                    "description": "Flag to indicate that the network virtualization is enabled on the logical network.",
                     "type": "boolean"
                 },
                 "subnets": {
-                    "description": "List of subnets belonging to this Logical Network.",
+                    "description": "List of subnets belonging to the logical network.",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -139,7 +151,7 @@
             "type": "object",
             "properties": {
                 "value": {
-                    "description": "List of logical networks for this page.",
+                    "description": "List of logical networks.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/LogicalNetwork"
@@ -167,7 +179,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }

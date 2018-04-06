@@ -16,21 +16,24 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/edgeGateways/{edgeGateway}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/edgeGateways/{edgeGateway}": {
       "get": {
         "x-ms-examples": {
-          "Get an edge gateway": {
-            "$ref": "./examples/EdgeGateway/EdgeGatewayGetOperation_example.json"
+          "Returns the requested edge gateway.": {
+            "$ref": "./examples/EdgeGateway/Get.json"
           }
         },
         "tags": [
           "EdgeGateways"
         ],
-        "description": "Get an edge gateway by name.",
+        "description": "Returns the requested edge gateway.",
         "operationId": "EdgeGateways_Get",
         "parameters": [
           {
             "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -48,25 +51,31 @@
             "schema": {
               "$ref": "#/definitions/EdgeGateway"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/edgeGateways": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/edgeGateways": {
       "get": {
         "x-ms-examples": {
-          "List all edge gateways": {
-            "$ref": "./examples/EdgeGateway/EdgeGatewayListOperation_example.json"
+          "Returns the list of all edge gateways at a certain location.": {
+            "$ref": "./examples/EdgeGateway/List.json"
           }
         },
         "tags": [
           "EdgeGateways"
         ],
-        "description": "Get a list of all edge gateways at a certain location.",
+        "description": "Returns the list of all edge gateways at a certain location.",
         "operationId": "EdgeGateways_List",
         "parameters": [
           {
             "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "Fabric.json#/parameters/LocationParameter"
@@ -84,6 +93,9 @@
             "schema": {
               "$ref": "#/definitions/EdgeGatewayList"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         },
         "x-ms-pageable": {
@@ -99,7 +111,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Model which holds information related to edge gateways.",
+          "description": "Object which holds information related to edge gateways.",
           "$ref": "#/definitions/EdgeGatewayModel",
           "x-ms-client-flatten": true
         }
@@ -111,7 +123,7 @@
       ]
     },
     "EdgeGatewayModel": {
-      "description": "Model which holds information related to edge gateways.",
+      "description": "Object which holds information related to edge gateways.",
       "type": "object",
       "properties": {
         "state": {
@@ -140,7 +152,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of edge gateways.",
+          "description": "List of edge gateways.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EdgeGateway"
@@ -156,7 +168,7 @@
   "parameters": {
     "EdgeGatewayParameter": {
       "name": "edgeGateway",
-      "description": "name of the edge gateway.",
+      "description": "Name of the edge gateway.",
       "in": "path",
       "required": true,
       "type": "string",
@@ -168,7 +180,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
