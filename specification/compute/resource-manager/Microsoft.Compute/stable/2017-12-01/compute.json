@@ -6915,6 +6915,18 @@
             "name": "VirtualMachinePriorityTypes",
             "modelAsString": true
           }
+        },
+        "evictionPolicy": {
+          "type": "string",
+          "description": "Specifies the eviction policy for virtual machines in the low priority scale set. <br><br>Minimum api-version: 2017-10-30-preview",
+          "enum": [
+            "Deallocate",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineEvictionPolicyTypes",
+            "modelAsString": false
+          }
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
