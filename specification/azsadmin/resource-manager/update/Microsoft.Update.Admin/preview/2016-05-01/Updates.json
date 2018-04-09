@@ -1,0 +1,383 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Update operation endpoints and objects.",
+    "title": "UpdateAdminClient",
+    "version": "2016-05-01"
+  },
+  "host": "adminmanagement.local.azurestack.external",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Update.Admin/operations": {
+      "get": {
+          "x-ms-examples": {
+              "Returns a list of support REST operations.": {
+                  "$ref": "./examples/Operations/List.json"
+              }
+          },
+          "description": "Returns a list of support REST operations.",
+          "tags": [
+              "Update"
+          ],
+          "operationId": "Operations_List",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/ApiVersionParameter"
+              }
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                      "$ref": "#/definitions/OperationList"
+                  }
+              }
+          },
+          "x-ms-pageable": {
+              "nextLinkName": "nextLink"
+          },
+          "produces": [
+              "application/json"
+          ],
+          "consumes": [
+              "application/json"
+          ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/System.{location}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of updates at an update locations.": {
+            "$ref": "./examples/Updates/List.json"
+          }
+        },
+        "tags": [
+          "Updates"
+        ],
+        "description": "Get the list of update locations",
+        "operationId": "Updates_List",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/System.{location}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{update}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a specific update at an update location.": {
+            "$ref": "./examples/Updates/Get.json"
+          }
+        },
+        "tags": [
+          "Updates"
+        ],
+        "description": "Get a specific update at an update location.",
+        "operationId": "Updates_Get",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Updates.json#/parameters/UpdateParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/System.{location}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{update}/Apply": {
+      "post": {
+        "x-ms-examples": {
+          "Apply a specific update at an update location.": {
+            "$ref": "./examples/Updates/Apply.json"
+          }
+        },
+        "tags": [
+          "Updates"
+        ],
+        "description": "Apply a specific update at an update location.",
+        "operationId": "Updates_Apply",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Updates.json#/parameters/UpdateParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Update": {
+      "description": "Information pertaining to an update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of an update.",
+          "$ref": "#/definitions/UpdateModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Update.json#/definitions/Resource"
+        }
+      ]
+    },
+    "UpdateModel": {
+      "description": "Properties of an update.",
+      "properties": {
+        "dateAvailable": {
+          "description": "Date uploaded by provider.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "installedDate": {
+          "description": "Date update was installed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "description": "Description of the update.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Current state of the update.",
+          "$ref": "#/definitions/UpdateState"
+        },
+        "kbLink": {
+          "description": "Link to the KB article about the update.",
+          "type": "string"
+        },
+        "minVersionRequired": {
+          "description": "The minimum version required to install.",
+          "type": "string"
+        },
+        "packagePath": {
+          "description": "Path to the update package.",
+          "type": "string"
+        },
+        "packageSizeInMb": {
+          "description": "Size of update package.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "updateName": {
+          "description": "Name of the update.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the update.",
+          "type": "string"
+        },
+        "updateOemFile": {
+          "description": "OEM version of the update.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "Publisher of the update.",
+          "type": "string"
+        },
+        "packageType": {
+          "description": "Describes the components that will be updated.",
+          "$ref": "#/definitions/PackageType"
+        }
+      }
+    },
+    "UpdateList": {
+      "description": "List of updates.",
+      "properties": {
+        "nextLink": {
+          "description": "URI to the next page of updates.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of updates.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Update"
+          }
+        }
+      }
+    },
+    "PackageType": {
+      "description": "Describes the components that will be updated.",
+      "type": "string",
+      "enum": [
+        "Microsoft",
+        "Oem",
+        "Combined"
+      ],
+      "x-ms-enum": {
+        "name": "PackageType",
+        "modelAsString": true
+      }
+    },
+    "UpdateState": {
+      "description": "State of the update.",
+      "type": "string",
+      "enum": [
+        "HasPrerequisite",
+        "Obsolete",
+        "Ready",
+        "NotApplicableBecauseAnotherUpdateIsInProgress",
+        "Installed",
+        "Failed",
+        "Installing"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateState",
+        "modelAsString": true
+      }
+    },
+    "Operation": {
+      "description": "Describes the supported REST operation.",
+      "properties": {
+          "name": {
+              "description": "The name of the operation performed on the object. The name should match the action name that appears in RBAC or the event service.",
+              "type": "string"
+          },
+          "display": {
+              "description": "Contains the localized display information for this particular operation or action.",
+              "$ref": "#/definitions/Display"
+          }
+      }
+    },
+    "OperationList": {
+      "description": "List of Operations",
+      "properties": {
+          "value": {
+              "description": "Array of operations",
+              "type": "array",
+              "items": {
+                  "$ref": "#/definitions/Operation"
+              }
+          },
+          "nextLink": {
+              "description": "URI to the next page of operations.",
+              "type": "string"
+          }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action.",
+      "properties": {
+          "provider": {
+              "description": "The localized, friendly version of the resource provider name. The provider name is expected to include the name of the publisher or company responsible. The provider name format should use title case and begin with \"Microsoft\" for first-party services. For example, the provider name may be\"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+              "type": "string"
+          },
+          "resource": {
+              "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+              "type": "string"
+          },
+          "operation": {
+              "description": "The localized, friendly name for the operation. Use the name as it will be displayed to the user.",
+              "type": "string"
+          },
+          "description": {
+              "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+              "type": "string"
+          }
+      }
+    }
+  },
+  "parameters": {
+    "UpdateParameter": {
+      "name": "update",
+      "description": "Name of the update.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RunIdParameter": {
+      "name": "runId",
+      "description": "Update run identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
