@@ -1,11 +1,11 @@
 # Compute Admin
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Compute Admin.
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Compute Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -17,7 +17,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Compute API.
 
 ``` yaml
@@ -33,16 +33,16 @@ These settings apply only when `--tag=package-2015-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2015-12-01-preview'
 input-file:
-    - Microsoft.Compute.Admin/2015-12-01-preview/Compute.json
-    - Microsoft.Compute.Admin/2015-12-01-preview/PlatformImages.json
-    - Microsoft.Compute.Admin/2015-12-01-preview/Quotas.json
-    - Microsoft.Compute.Admin/2015-12-01-preview/VMExtensions.json
+    - Microsoft.Compute.Admin/preview/2015-12-01-preview/Compute.json
+    - Microsoft.Compute.Admin/preview/2015-12-01-preview/PlatformImages.json
+    - Microsoft.Compute.Admin/preview/2015-12-01-preview/Quotas.json
+    - Microsoft.Compute.Admin/preview/2015-12-01-preview/VMExtensions.json
 ```
 
 ---
 # Code Generation
 
-## C# 
+## C#
 
 ``` yaml $(csharp)
 csharp:
