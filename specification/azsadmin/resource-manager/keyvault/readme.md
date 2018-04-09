@@ -1,11 +1,11 @@
 # KeyVault Admin
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for KeyVault Admin.
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for KeyVault Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -17,7 +17,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for the KeyVault API.
 
 ``` yaml
@@ -33,14 +33,14 @@ These settings apply only when `--tag=package-2017-02-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-02-01-preview'
 input-file:
-    - Microsoft.KeyVault.Admin/2017-02-01-preview/KeyVault.json
-    - Microsoft.KeyVault.Admin/2017-02-01-preview/Quotas.json
+    - Microsoft.KeyVault.Admin/preview/2017-02-01-preview/KeyVault.json
+    - Microsoft.KeyVault.Admin/preview/2017-02-01-preview/Quotas.json
 ```
 
 ---
 # Code Generation
 
-## C# 
+## C#
 
 ``` yaml $(csharp)
 csharp:
