@@ -7163,7 +7163,39 @@
       ],
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
-	"PlatformImageReference": {
+    "UpgradeOperationHistoryStatus": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Code indicating the current status of the upgrade.",
+          "enum": [
+            "RollingForward",
+            "Cancelled",
+            "Completed",
+            "Faulted"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeState",
+            "modelAsString": false
+          }
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the upgrade."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the upgrade."
+        }
+      },
+      "description": "Information about the current running state of the overall upgrade."
+    },
+    "PlatformImageReference": {
       "properties": {
         "publisher": {
           "readOnly": true,
@@ -7193,14 +7225,14 @@
       },
       "description": "A reference that identifies a CRP-PIR image or a UserVMImage."
     },
-    "VirtualMachineScaleSetOSUpgradeHistory": {
+    "UpgradeOperationHistoricalStatusInfoProperties": {
       "properties": {
         "runningStatus": {
-          "$ref": "#/definitions/RollingUpgradeRunningStatus",
+          "$ref": "#/definitions/UpgradeOperationHistoryStatus",
           "readOnly": true,
           "description": "Information about the overall status of the upgrade operation."
         },
-        "progressInfo": {
+        "progress": {
           "$ref": "#/definitions/RollingUpgradeProgressInfo",
           "readOnly": true,
           "description": "Counts of the VM's in each state."
@@ -7218,7 +7250,11 @@
             "Unknown",
             "User",
             "Platform"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeOperationInvoker",
+            "modelAsString": false
+          }
         },
         "targetImageReference": {
           "$ref": "#/definitions/PlatformImageReference",
@@ -7228,21 +7264,43 @@
       },
       "description": "Describes each OS upgrade on the Virtual Machine Scale Set."
     },
+    "UpgradeOperationHistoricalStatusInfo": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfoProperties",
+          "readOnly": true,
+          "description": "Information about the properties of the upgrade operation."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        }
+      },
+        "description": "Virtual Machine Scale Set OS Upgrade History operation response."
+    },
     "VirtualMachineScaleSetListOSUpgradeHistory": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetOSUpgradeHistory"
+            "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfo"
           },
           "description": "The list of OS upgrades performed on the virtual machine scale set."
         },
         "nextLink": {
           "type": "string",
-          "description": "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
+          "description": "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
         }
       },
-      "description": "Virtual Machine Scale Set OS Upgrade History operation response."
+      "required": [
+        "value"
+      ],
+      "description": "List of Virtual Machine Scale Set OS Upgrade History operation response."
     },
     "VirtualMachineScaleSetVMProperties": {
       "properties": {
