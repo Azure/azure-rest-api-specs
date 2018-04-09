@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -127,12 +130,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -185,7 +190,7 @@
         },
         "day": {
           "type": "string",
-          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.",
+          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.",
           "enum": [
             "Monday",
             "Tuesday",
@@ -336,13 +341,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time."
+          "description": "Gets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -390,7 +397,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the automation account type."
@@ -498,7 +505,8 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the expiry time of the certificate."
+          "description": "Gets the expiry time of the certificate.",
+          "x-nullable": false
         },
         "isExportable": {
           "type": "boolean",
@@ -509,13 +517,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time."
+          "description": "Gets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -525,29 +535,18 @@
       "description": "Properties of the certificate."
     },
     "Certificate": {
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the certificate."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "$ref": "#/definitions/CertificateProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the certificate."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the certificate."
     },
     "CertificateListResult": {
@@ -648,13 +647,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time."
+          "description": "Gets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -664,29 +665,18 @@
       "description": "Definition of the connection properties."
     },
     "Connection": {
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the connection."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "$ref": "#/definitions/ConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the connection."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the connection."
     },
     "ConnectionListResult": {
@@ -799,12 +789,14 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -904,13 +896,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time."
+          "description": "Gets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -920,29 +914,18 @@
       "description": "Definition of the credential properties"
     },
     "Credential": {
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the credential."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "$ref": "#/definitions/CredentialProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the credential."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the credential."
     },
     "CredentialListResult": {
@@ -1127,7 +1110,8 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time of the job."
+          "description": "Gets the creation time of the job.",
+          "x-nullable": false
         },
         "provisioningState": {
           "$ref": "#/definitions/JobProvisioningStateProperty",
@@ -1168,13 +1152,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the start time of the job."
+          "description": "Gets the start time of the job.",
+          "x-nullable": false
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the end time of the job."
+          "description": "Gets the end time of the job.",
+          "x-nullable": false
         },
         "exception": {
           "type": "string",
@@ -1185,13 +1171,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time of the job."
+          "description": "Gets the last modified time of the job.",
+          "x-nullable": false
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last status modified time of the job."
+          "description": "Gets the last status modified time of the job.",
+          "x-nullable": false
         },
         "parameters": {
           "type": "object",
@@ -1314,12 +1302,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -1343,7 +1333,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the configuration type."
@@ -1421,6 +1411,27 @@
       "required": [
         "properties"
       ],
+      "description": "The parameters supplied to the create or update configuration operation."
+    },
+    "DscConfigurationUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscConfigurationCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets configuration create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
       "description": "The parameters supplied to the create or update configuration operation."
     },
     "DscMetaConfiguration": {
@@ -1524,17 +1535,20 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the node report."
+          "description": "Gets or sets the end time of the node report.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the lastModifiedTime of the node report."
+          "description": "Gets or sets the lastModifiedTime of the node report.",
+          "x-nullable": false
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the node report."
+          "description": "Gets or sets the start time of the node report.",
+          "x-nullable": false
         },
         "type": {
           "type": "string",
@@ -1706,7 +1720,8 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start date of the resource."
+          "description": "Gets or sets the start date of the resource.",
+          "x-nullable": false
         }
       },
       "description": "Definition of the DSC Report Resource."
@@ -1767,7 +1782,8 @@
         "registrationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the registration time of the worker machine."
+          "description": "Gets or sets the registration time of the worker machine.",
+          "x-nullable": false
         }
       },
       "description": "Definition of hybrid runbook worker."
@@ -2049,7 +2065,8 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the job."
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
         },
         "status": {
           "type": "string",
@@ -2081,12 +2098,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the job."
+          "description": "Gets or sets the start time of the job.",
+          "x-nullable": false
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the job."
+          "description": "Gets or sets the end time of the job.",
+          "x-nullable": false
         },
         "exception": {
           "type": "string",
@@ -2095,12 +2114,14 @@
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time of the job."
+          "description": "Gets or sets the last modified time of the job.",
+          "x-nullable": false
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last status modified time of the job."
+          "description": "Gets or sets the last status modified time of the job.",
+          "x-nullable": false
         },
         "parameters": {
           "type": "object",
@@ -2125,7 +2146,8 @@
         "time": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the job."
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
         },
         "streamType": {
           "type": "string",
@@ -2162,6 +2184,49 @@
       },
       "x-ms-client-flatten": true,
       "description": "Definition of the job stream."
+    },
+    "Key":{
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Automation key name.",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationKeyName",
+            "modelAsString": true
+          }
+        },
+        "permissions": {
+          "type": "string",
+          "description": "Automation key permissions.",
+          "enum": [
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationKeyPermissions",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the Automation Key used for registration."
+        }
+      },
+      "description": "Automation key which is used to register a DSC Node"
+    },
+    "KeyListResult":{
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Key"
+          },
+          "description": "Lists the automation keys."
+        }
+      }
     },
     "LinkedWorkspace": {
       "properties": {
@@ -2283,12 +2348,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -2311,7 +2378,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the module type."
@@ -2406,60 +2473,63 @@
       }
     },
     "Resource": {
+      "description": "The core properties of ARM resources",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Fully qualified resource Id for the resource"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
+          "description": "The type of the resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Azure Region where the resource lives"
         }
       },
-      "required": [
-        "location"
-      ],
-      "description": "The Resource definition.",
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "ProxyResource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
         }
-      },
-      "description": "The Resource definition.",
-      "x-ms-azure-resource": true
+      ]
     },
     "JobProvisioningStateProperty": {
       "properties": {
@@ -2525,12 +2595,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the runbook draft."
+          "description": "Gets or sets the creation time of the runbook draft.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time of the runbook draft."
+          "description": "Gets or sets the last modified time of the runbook draft.",
+          "x-nullable": false
         },
         "parameters": {
           "type": "object",
@@ -2885,12 +2957,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -2913,7 +2987,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the runbook type."
@@ -2967,12 +3041,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the schedule."
+          "description": "Gets or sets the start time of the schedule.",
+          "x-nullable": false
         },
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the schedule."
+          "description": "Gets or sets the end time of the schedule.",
+          "x-nullable": false
         },
         "interval": {
           "description": "Gets or sets the interval of the schedule."
@@ -3019,7 +3095,8 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the schedule."
+          "description": "Gets or sets the start time of the schedule.",
+          "x-nullable": false
         },
         "startTimeOffsetMinutes": {
           "readOnly": true,
@@ -3030,7 +3107,8 @@
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the schedule."
+          "description": "Gets or sets the end time of the schedule.",
+          "x-nullable": false
         },
         "expiryTimeOffsetMinutes": {
           "type": "number",
@@ -3045,7 +3123,8 @@
         "nextRun": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the next run time of the schedule."
+          "description": "Gets or sets the next run time of the schedule.",
+          "x-nullable": false
         },
         "nextRunOffsetMinutes": {
           "type": "number",
@@ -3081,12 +3160,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -3218,13 +3299,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the startTime of the statistic."
+          "description": "Gets the startTime of the statistic.",
+          "x-nullable": false
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the endTime of the statistic."
+          "description": "Gets the endTime of the statistic.",
+          "x-nullable": false
         },
         "id": {
           "type": "string",
@@ -3269,7 +3352,7 @@
           "type": "string",
           "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
         }
-      },      
+      },
       "description": "The parameters supplied to the create test job operation."
     },
     "TestJob": {
@@ -3281,7 +3364,8 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the test job."
+          "description": "Gets or sets the creation time of the test job.",
+          "x-nullable": false
         },
         "status": {
           "type": "string",
@@ -3298,12 +3382,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the test job."
+          "description": "Gets or sets the start time of the test job.",
+          "x-nullable": false
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the test job."
+          "description": "Gets or sets the end time of the test job.",
+          "x-nullable": false
         },
         "exception": {
           "type": "string",
@@ -3312,12 +3398,14 @@
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time of the test job."
+          "description": "Gets or sets the last modified time of the test job.",
+          "x-nullable": false
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last status modified time of the test job."
+          "description": "Gets or sets the last status modified time of the test job.",
+          "x-nullable": false
         },
         "parameters": {
           "type": "object",
@@ -3463,12 +3551,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -3478,29 +3568,18 @@
       "description": "Definition of the varible properties"
     },
     "Variable": {
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the variable."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "$ref": "#/definitions/VariableProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the variable."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "description": "Definition of the varible."
     },
     "VariableListResult": {
@@ -3559,7 +3638,8 @@
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the expiry time."
+          "description": "Gets or sets the expiry time.",
+          "x-nullable": false
         },
         "parameters": {
           "type": "object",
@@ -3611,12 +3691,14 @@
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the expiry time."
+          "description": "Gets or sets the expiry time.",
+          "x-nullable": false
         },
         "lastInvokedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last invoked time."
+          "description": "Gets or sets the last invoked time.",
+          "x-nullable": false
         },
         "parameters": {
           "type": "object",
@@ -3636,12 +3718,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -3652,21 +3736,6 @@
     },
     "Webhook": {
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the webhook."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the type of the resource."
-        },
         "properties": {
           "$ref": "#/definitions/WebhookProperties",
           "x-ms-client-flatten": true,
@@ -3674,7 +3743,11 @@
         }
       },
       "description": "Definition of the webhook type.",
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
     },
     "WebhookListResult": {
       "properties": {
@@ -3752,7 +3825,10 @@
       "required": true,
       "type": "string",
       "pattern": "^[-\\w\\._]+$",
-      "description": "The resource group name."
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure Resource group."
     }
   }
 }

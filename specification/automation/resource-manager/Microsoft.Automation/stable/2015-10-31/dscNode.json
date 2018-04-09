@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -571,12 +574,14 @@
         "lastSeen": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last seen time of the node."
+          "description": "Gets or sets the last seen time of the node.",
+          "x-nullable": false
         },
         "registrationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the registration time of the node."
+          "description": "Gets or sets the registration time of the node.",
+          "x-nullable": false
         },
         "ip": {
           "type": "string",
