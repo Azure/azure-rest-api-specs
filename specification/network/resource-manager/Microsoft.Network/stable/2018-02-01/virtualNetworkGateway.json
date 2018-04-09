@@ -711,6 +711,98 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_SetVpnclientIpsecParameters",
+        "description": "The Set VpnclientIpsecParameters operation sets the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "vpnclientIpsecParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnClientIPsecParameters"
+            },
+            "description": "Parameters supplied to the Begin Set vpnclient ipsec parameters of Virtual Network Gateway P2S client operation through Network resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. The operation sets the specificed vpnclient ipsec parameters for P2S client of the virtual network gateway.",
+            "schema": {
+              "$ref": "#/definitions/VpnClientIPsecParameters"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetVpnclientIpsecParameters",
+        "description": "The Get VpnclientIpsecParameters operation retrieves information about the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual network gateway name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the set vpnclient ipsec parameters for P2S client of VirtualNetworkGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/VpnClientIPsecParameters"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript": {
       "post": {
         "tags": [
@@ -1619,6 +1711,13 @@
           },
           "description": "VpnClientProtocols for Virtual network gateway."
         },
+		"vpnClientIpsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          },
+          "description": "VpnClientIpsecPolicies for virtual network gateway P2S client."
+        },		
         "radiusServerAddress": {
           "type": "string",
           "description": "The radius server address property of the VirtualNetworkGateway resource for vpn client connection."
@@ -2171,7 +2270,9 @@
             "DES3",
             "AES128",
             "AES192",
-            "AES256"
+            "AES256",
+            "GCMAES256",
+            "GCMAES128"
           ],
           "x-ms-enum": {
             "name": "IkeEncryption",
@@ -2185,7 +2286,9 @@
             "MD5",
             "SHA1",
             "SHA256",
-            "SHA384"
+            "SHA384",
+            "GCMAES256",
+            "GCMAES128"
           ],
           "x-ms-enum": {
             "name": "IkeIntegrity",
@@ -2212,7 +2315,7 @@
         },
         "pfsGroup": {
           "type": "string",
-          "description": "The DH Groups used in IKE Phase 2 for new child SA.",
+          "description": "The Pfs Groups used in IKE Phase 2 for new child SA.",
           "enum": [
             "None",
             "PFS1",
@@ -2220,7 +2323,9 @@
             "PFS2048",
             "ECP256",
             "ECP384",
-            "PFS24"
+            "PFS24",
+            "PFS14",
+            "PFSMM"		
           ],
           "x-ms-enum": {
             "name": "PfsGroup",
@@ -2240,6 +2345,136 @@
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection"
     },
+    "VpnClientIPsecParameters": {
+      "properties": {
+        "saLifeTimeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime in seconds for P2S client."
+        },
+        "saDataSizeKilobytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) payload size in KB for P2S client.."
+        },
+        "ipsecEncryption": {
+          "type": "string",
+          "description": "The IPSec encryption algorithm (IKE phase 1).",
+          "enum": [
+            "None",
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum": {
+            "name": "IpsecEncryption",
+            "modelAsString": true
+          }
+        },
+        "ipsecIntegrity": {
+          "type": "string",
+          "description": "The IPSec integrity algorithm (IKE phase 1).",
+          "enum": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum": {
+            "name": "IpsecIntegrity",
+            "modelAsString": true
+          }
+        },
+        "ikeEncryption": {
+          "type": "string",
+          "description": "The IKE encryption algorithm (IKE phase 2).",
+          "enum": [
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256",
+            "GCMAES256",
+            "GCMAES128"
+          ],
+          "x-ms-enum": {
+            "name": "IkeEncryption",
+            "modelAsString": true
+          }
+        },
+        "ikeIntegrity": {
+          "type": "string",
+          "description": "The IKE integrity algorithm (IKE phase 2).",
+          "enum": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "SHA384",
+            "GCMAES256",
+            "GCMAES128"
+          ],
+          "x-ms-enum": {
+            "name": "IkeIntegrity",
+            "modelAsString": true
+          }
+        },
+        "dhGroup": {
+          "type": "string",
+          "description": "The DH Groups used in IKE Phase 1 for initial SA.",
+          "enum": [
+            "None",
+            "DHGroup1",
+            "DHGroup2",
+            "DHGroup14",
+            "DHGroup2048",
+            "ECP256",
+            "ECP384",
+            "DHGroup24"
+          ],
+          "x-ms-enum": {
+            "name": "DhGroup",
+            "modelAsString": true
+          }
+        },
+        "pfsGroup": {
+          "type": "string",
+          "description": "The Pfs Groups used in IKE Phase 2 for new child SA.",
+          "enum": [
+            "None",
+            "PFS1",
+            "PFS2",
+            "PFS2048",
+            "ECP256",
+            "ECP384",
+            "PFS24",
+            "PFS14",
+            "PFSMM"
+          ],
+          "x-ms-enum": {
+            "name": "PfsGroup",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "saLifeTimeSeconds",
+        "saDataSizeKilobytes",
+        "ipsecEncryption",
+        "ipsecIntegrity",
+        "ikeEncryption",
+        "ikeIntegrity",
+        "dhGroup",
+        "pfsGroup"
+      ],
+      "description": "An IPSec parameters for a virtual network gateway P2S connection."
+    },	
     "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
