@@ -392,7 +392,38 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/messagingplan": {
+      "get": {
+        "tags": [
+          "MessagingPlan"
+        ],
+        "operationId": "MessagingPlan_Get",
+        "description": "Gets a description for the specified namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Messaging Plan successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/MessagingPlan"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules": {
       "get": {
         "tags": [
           "Namespaces"
@@ -1764,7 +1795,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions": {
+	"/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions": {
       "get": {
         "tags": [
           "Regions"
@@ -2463,7 +2494,7 @@
       },
       "description": "The result of the List Alias(Disaster Recovery configuration) operation."
     },
-    "MessagingRegions": {
+	"MessagingRegions": {
       "properties": {
         "properties": {
           "properties": {
@@ -2503,6 +2534,47 @@
         }
       },
       "description": "The response of the List MessagingRegions operation."
+    },
+	"MessagingPlanproperties": {
+      "properties": {
+        "sku": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Sku type"
+        },
+        "selectedEventHubUnit": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Selected event hub unit"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The exact time the messaging plan was updated."
+        },
+        "revision": {
+          "format": "int64",
+          "type": "integer",
+          "description": "revision number"
+        }
+      },
+      "description": "Messaging Region"
+    },
+    "MessagingPlan": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MessagingPlanproperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Messaging"
     }
   },
   "parameters": {
@@ -2578,7 +2650,7 @@
       "x-ms-parameter-location": "method",
       "description": "The consumer group name"
     },
-    "skuNameParameter": {
+	"skuNameParameter": {
       "name": "sku",
       "in": "path",
       "required": true,
