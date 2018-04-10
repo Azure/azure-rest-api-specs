@@ -116,12 +116,14 @@
                     "x-ms-enum": {
                         "modelAsString": true,
                         "name": "VirtualNetworkConfigurationStateStatusType"
-                    }
+                    },
+                    "readOnly": true
                 },
                 "lastUpdatedTime": {
                     "description": "Last updated time for the running state.",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "readOnly": true
                 },
                 "virtualNetworkInterfaceErrors": {
                     "description": "List of NIC errors associated with the resource.",
@@ -157,12 +159,14 @@
                     "x-ms-enum": {
                         "modelAsString": true,
                         "name": "VirtualNetworkConfigurationStatusType"
-                    }
+                    },
+                    "readOnly": true
                 },
                 "lastUpdatedTime": {
                     "description": "Last updated time for the configuration status.",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "readOnly": true
                 }
             }
         },
@@ -184,8 +188,7 @@
             }
         }
     },
-    "parameters": {
-    },
+    "parameters": {},
     "securityDefinitions": {
         "azure_auth": {
             "type": "oauth2",
