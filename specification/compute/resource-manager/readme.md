@@ -106,6 +106,23 @@ directive:
       - $.definitions.VirtualMachineScaleSetUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.AvailabilitySetUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineExtensionUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.ImageUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+
 
   - where:
       - $.definitions.VirtualMachineScaleSetVM
