@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.DataBox/Operations": {
+    "/providers/Microsoft.DataBox/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -43,6 +43,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestOperationsAPIGET11": {
+            "$ref": "./examples/TestOperationsAPI-GET-example-11.json"
+          }
         }
       }
     },
@@ -93,7 +98,7 @@
           "Service"
         ],
         "description": "This method provides the list of available skus for the given subscription and location.",
-        "operationId": "Service_AvailableSkus",
+        "operationId": "Service_ListAvailableSkus",
         "consumes": [
           "application/json"
         ],
@@ -1417,9 +1422,6 @@
     },
     "JobResourceUpdateParameter": {
       "description": "The JobResourceUpdateParameter.",
-      "required": [
-        "properties"
-      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -1854,17 +1856,21 @@
       "type": "object",
       "properties": {
         "connectorType": {
+          "description": "Name of the connector.",
           "type": "string"
         },
         "startTime": {
           "format": "date-time",
+          "description": "Time when the action was triggered.",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
+          "description": "Time when the action got completed.",
           "type": "string"
         },
         "status": {
+          "description": "Status of the service.",
           "type": "boolean"
         }
       }
@@ -1873,15 +1879,16 @@
       "description": "List of service health response.",
       "type": "object",
       "properties": {
-        "serviceVersion": {
-          "type": "string"
-        },
         "dependencies": {
           "description": "List of ServiceHealthResponse.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceHealthResponse"
           }
+        },
+        "serviceVersion": {
+          "description": "Version of the service.",
+          "type": "string"
         }
       }
     },
@@ -2012,11 +2019,11 @@
       }
     },
     "Sku": {
-      "description": "The sku type.",
+      "description": "The Sku.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "The sku name. Optional for job resource creation and update.",
+          "description": "The sku name.",
           "type": "string"
         },
         "displayName": {
@@ -2283,7 +2290,8 @@
       "in": "path",
       "description": "The location of the resource",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
