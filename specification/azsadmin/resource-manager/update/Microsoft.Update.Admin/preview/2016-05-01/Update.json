@@ -9,6 +9,12 @@
     "schemes": [
         "https"
     ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
     "paths": {
         "/providers/Microsoft.Update.Admin/operations": {
             "get": {
@@ -19,7 +25,7 @@
                 },
                 "description": "Get the list of support rest operations.",
                 "tags": [
-                    "Update"
+                    "Updates"
                 ],
                 "operationId": "Operations_List",
                 "parameters": [
@@ -142,9 +148,9 @@
             "type": "string",
             "default": "2016-05-01"
         },
-        "LocationParameter": {
-            "description": "Location of the Azure Stack instance.",
-            "name": "location",
+        "ResourceGroupParameter": {
+            "description": "Resource group name.",
+            "name": "resourceGroupName",
             "in": "path",
             "type": "string",
             "required": true,

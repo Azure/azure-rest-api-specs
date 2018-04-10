@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/System.{location}/providers/Microsoft.Update.Admin/updateLocations/": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/": {
       "get": {
         "x-ms-examples": {
           "Get the list of update locations.": {
@@ -33,7 +33,7 @@
             "$ref": "Update.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Update.json#/parameters/LocationParameter"
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "Update.json#/parameters/ApiVersionParameter"
@@ -52,7 +52,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/System.{location}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}": {
       "get": {
         "x-ms-examples": {
           "Get an update location based on name.": {
@@ -69,7 +69,7 @@
             "$ref": "Update.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Update.json#/parameters/LocationParameter"
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/UpdateLocationParameter"
