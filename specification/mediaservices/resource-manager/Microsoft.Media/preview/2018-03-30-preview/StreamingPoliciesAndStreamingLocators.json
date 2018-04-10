@@ -153,7 +153,7 @@
       "properties": {
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "The template for a customer service to deliver keys to end users.  Not needed if using the built in Key Delivery service."
+          "description": "The template for a customer service to deliver keys to end users.  Not needed when using Azure Media Services for issuing keys."
         },
         "playReadyCustomAttributes": {
           "type": "string",
@@ -167,7 +167,7 @@
       "properties": {
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "The template for a customer service to deliver keys to end users.  Not needed if using the built in Key Delivery service."
+          "description": "The template for a customer service to deliver keys to end users.  Not needed when using Azure Media Services for issuing keys."
         }
       },
       "type": "object",
@@ -177,7 +177,7 @@
       "properties": {
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "The template for a customer service to deliver keys to end users.  Not needed if using the built in Key Delivery service."
+          "description": "The template for a customer service to deliver keys to end users.  Not needed when using Azure Media Services for issuing keys."
         },
         "allowPersistentLicense": {
           "type": "boolean",
@@ -279,11 +279,11 @@
         },
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "The template for a customer service to deliver keys to end users.  Not needed if using the built in Key Delivery service."
+          "description": "LicenseAcquistionUrlTemplate is used to point to user speicified service to delivery content keys"
         }
       },
       "type": "object",
-      "description": "Represents configuration specific to Dynamic Envelope Encryption.  This form of encryption is also referred to as the AES-128 CBC Encryption System in ISO/IEC 23009-4."
+      "description": "Class for EnvelopeEncryption encryption scheme"
     },
     "CommonEncryptionCenc": {
       "properties": {
@@ -304,11 +304,11 @@
         },
         "drm": {
           "$ref": "#/definitions/CencDrmConfiguration",
-          "description": "Represents configuration specific to Dynamic Encryption using the scheme defined in ISO/IEC 23001-7 (also known as MPEG Common Encryption) using the 'cbcs' scheme."
+          "description": "Configuration of DRMs for CommonEncryptionCenc encryption scheme"
         }
       },
       "type": "object",
-      "description": "Represents configuration specific to Dynamic Encryption using the scheme defined in ISO/IEC 23001-7 (also known as MPEG Common Encryption) using the 'cenc' scheme."
+      "description": "Class for envelope encryption scheme"
     },
     "CommonEncryptionCbcs": {
       "properties": {
@@ -577,7 +577,7 @@
         },
         "streamingPolicyName": {
           "type": "string",
-          "description": "Streaming Policy name used by this Streaming Locator"
+          "description": "Streaming policy name used by this streaming locator. Either specify the name of streaming policy you created or use one of the predefined streaming polices. The predefined streaming policies available are: 'Predefined_DownloadOnly', 'Predefined_ClearStreamingOnly', 'Predefined_DownloadAndClearStreaming', 'Predefined_ClearKey', 'Predefined_SecureStreaming' and 'Predefined_SecureStreamingWithFairPlay'"
         },
         "defaultContentKeyPolicyName": {
           "type": "string",

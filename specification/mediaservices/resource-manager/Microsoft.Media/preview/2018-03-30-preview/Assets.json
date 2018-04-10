@@ -227,7 +227,7 @@
           }
         },
         "expiryTime": {
-          "description": "The SAS URL expiry time.",
+          "description": "The SAS URL expiration time.  This must be less than 24 hours from the current time.",
           "type": "string",
           "format": "date-time"
         }
@@ -519,7 +519,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/listContainerSas": {
       "post": {
         "summary": "List the Asset URLs",
-        "description": "Lists the Asset SAS URLs used for uploading and downloading Asset content",
+        "description": "Lists storage container URLs with shared access signatures (SAS) for uploading and downloading Asset content. The signatures are derived from the storage account keys.",
         "operationId": "Assets_ListContainerSas",
         "responses": {
           "200": {

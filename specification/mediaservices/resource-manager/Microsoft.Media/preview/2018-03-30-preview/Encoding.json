@@ -49,7 +49,7 @@
         },
         "label": {
           "type": "string",
-          "description": "Describes the optional label for the codec."
+          "description": "Describes an optional label for the codec. The label can be used to control muxing behavior."
         }
       },
       "type": "object",
@@ -69,17 +69,17 @@
         "channels": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets number of channels in the Audio."
+          "description": "Describes number of channels in the audio."
         },
         "samplingRate": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the sampling rate to use for encoding."
+          "description": "Describes the sampling rate to use for encoding in hertz."
         },
         "bitrate": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the bitrate of the encoded audio."
+          "description": "Describes the bitrate, in bits per second, of the output encoded audio."
         }
       },
       "type": "object",
@@ -105,7 +105,7 @@
             "values": [
               {
                 "value": "AacLc",
-                "description": "Specifies that the output audio is to be encoded into AAC-LC or AAC Low Complexity profile."
+                "description": "Specifies that the output audio is to be encoded into AAC Low Complexity profile (AAC-LC)."
               },
               {
                 "value": "HeAacV1",
@@ -118,11 +118,11 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Gets or sets the encoding profile to be used when encoding audio with AAC."
+          "description": "Describes the encoding profile to be used when encoding audio with AAC."
         }
       },
       "type": "object",
-      "description": "Describes Advanced Audio Codec or AAC audio encoding settings."
+      "description": "Describes Advanced Audio Codec (AAC) audio encoding settings."
     },
     "AudioAnalyzerPreset": {
       "x-ms-discriminator-value": "#Microsoft.Media.AudioAnalyzerPreset",
@@ -134,11 +134,11 @@
       "properties": {
         "audioLanguage": {
           "type": "string",
-          "description": "Specifies the language for the audio payload in the input. Typically in the format of \"language code-country/region\" (e.g: \"en-US\")."
+          "description": "Specifies the language for the audio payload in the input in BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of supported language are, 'en-US', 'en-GB', 'es-ES', 'es-MX', 'fr-FR', 'it-IT', 'ja-JP', 'pt-BR', 'zh-CN'."
         }
       },
       "type": "object",
-      "description": "The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription, on the input."
+      "description": "The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription. Currently, the preset supports processing of content with a single audio track."
     },
     "Overlay": {
       "discriminator": "@odata.type",
@@ -149,36 +149,32 @@
         },
         "inputLabel": {
           "type": "string",
-          "description": "Gets or sets the label of the Input which is to be used as an Overlay. The Input must specify exactly one file."
-        },
-        "inputLoop": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the overlay media is looped to match the duration of the input video. The default is true. For example, you may have a 5 second animation that needs to be overlaid onto an hour-long video - you would set inputLoop to true in this case."
+          "description": "Describes the label of the job input which is to be used as an overlay. The Input must specify exactly one file. You can specify an image file in JPG or PNG formats, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file. See https://aka.ms/mesformats for the complete list of supported audio and video file formats."
         },
         "start": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. The default is zero, which means the overlay starts from the beginning of the input video."
+          "description": "Describes the start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overaly at 5 seconds in to the input video. If not specified the overlay starts from the beginning of the input video."
         },
         "end": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the position in the input video at which the overlay ends. The value should be in ISO 8601 format. The default behavior is that overlay will be applied until the end of the input video if InputLoop is true. Else, if inputLoop is false, then overlay will last as long as the duration of the overlay media."
+          "description": "Describes the position in the input video at which the overlay ends. The value should be in ISO 8601 duration format. For example, PT30S to end the overlay at 30 seconds in to the input video. If not specified the overlay will be applied until the end of the input video if inputLoop is true. Else, if inputLoop is false, then overlay will last as long as the duration of the overlay media."
         },
         "fadeInDuration": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the duration over which the overlay fades in onto the input video. The value should be in ISO 8601 format. The default is to have no fade in"
+          "description": "Describes the duration over which the overlay fades in onto the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade in (same as PT0S)."
         },
         "fadeOutDuration": {
           "type": "string",
           "format": "duration",
-          "description": "Gets or sets the duration over which the overlay fades out of the input video. The value should be in ISO 8601 format. The default is to have no fade out.\""
+          "description": "Describes the duration over which the overlay fades out of the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade out (same as PT0S)."
         },
         "audioGainLevel": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the gain level of audio in the overlay. The value should be in the range [0, ..., 1.0]. Defaults to a value of 1.0."
+          "description": "Describes the gain level of audio in the overlay. The value should be in the range [0, 1.0]. The default is 1.0."
         }
       },
       "type": "object",
@@ -207,7 +203,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "A special codec flag, which tells the encoder to simply copy the input video bitstream."
+      "description": "A codec flag, which tells the encoder to copy the input video bitstream without re-encoding."
     },
     "Video": {
       "x-ms-discriminator-value": "#Microsoft.Media.Video",
@@ -220,7 +216,7 @@
         "keyFrameInterval": {
           "type": "string",
           "format": "duration",
-          "description": "Describes the distance between one key frame and the next, thereby defining a GOP or group of pictures. The value should be a non-zero integer in the range [1, .., 30], specified in ISO 8601 format. The default is 2 seconds."
+          "description": "Describes the distance between two key frames, thereby defining a group of pictures (GOP). The value should be a non-zero integer in the range [1, 30] seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S)."
         },
         "stretchMode": {
           "type": "string",
@@ -251,7 +247,7 @@
         }
       },
       "type": "object",
-      "description": "Describes the basic properties for encoding a video."
+      "description": "Describes the basic properties for encoding the input video."
     },
     "Image": {
       "x-ms-discriminator-value": "#Microsoft.Media.Image",
@@ -263,15 +259,15 @@
       "properties": {
         "start": {
           "type": "string",
-          "description": "Describes the position in the input video from where to start generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT05S), or a frame count (e.g: 10 for the 10th frame), or a relative value (e.g: 1%). Also supports a special value {Best}, which tells the encoder to select the best thumbnail from the first few seconds of the video."
+          "description": "Describes the position in the input video from where to start generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT05S), or a frame count (For example, 10 for the 10th frame), or a relative value (For example, 1%). Also supports a macro {Best}, which tells the encoder to select the best thumbnail from the first few seconds of the video."
         },
         "step": {
           "type": "string",
-          "description": "Describes the intervals at which thumbnails are generated. The value can be in absolute timestamp (ISO 8601, e.g: PT05S for one image every 5 seconds), or a frame count (e.g: 30 for every 30 frames), or a relative value (e.g: 1%)."
+          "description": "Describes the intervals at which thumbnails are generated. The value can be in absolute timestamp (ISO 8601, e.g: PT05S for one image every 5 seconds), or a frame count (For example, 30 for every 30 frames), or a relative value (For example, 1%)."
         },
         "range": {
           "type": "string",
-          "description": "Describes the position in the input video at which to stop generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT5M30S to stop at 5 minutes and 30 seconds), or a frame count (e.g: 300 to stop at the 300th frame), or a relative value (e.g: 100%)."
+          "description": "Describes the position in the input video at which to stop generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT5M30S to stop at 5 minutes and 30 seconds), or a frame count (For example, 300 to stop at the 300th frame), or a relative value (For example, 100%)."
         }
       },
       "type": "object",
@@ -326,55 +322,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "Describes the settings to produce PNG thumbnail output."
-    },
-    "BmpImage": {
-      "x-ms-discriminator-value": "#Microsoft.Media.BmpImage",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Image"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "Describes the basic properties for generating BMP thumbnails from the input video."
-    },
-    "Layer": {
-      "discriminator": "@odata.type",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types."
-        },
-        "width": {
-          "type": "string",
-          "description": "Describes the width of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in width as the input."
-        },
-        "height": {
-          "type": "string",
-          "description": "Describes the height of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in height as the input."
-        },
-        "label": {
-          "type": "string",
-          "description": "Describes the alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file."
-        }
-      },
-      "type": "object",
-      "required": [
-        "@odata.type"
-      ],
-      "description": "Describes the basic properties for an output video layer."
-    },
-    "BmpLayer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.BmpLayer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Layer"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "This represents a layer in the BmpImage class."
+      "description": "Describes the settings for producing PNG thumbnails."
     },
     "CopyAudio": {
       "x-ms-discriminator-value": "#Microsoft.Media.CopyAudio",
@@ -385,7 +333,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "A special codec flag, which tells the encoder to simply copy the input audio bitstream."
+      "description": "A codec flag, which tells the encoder to copy the input audio bitstream."
     },
     "Deinterlace": {
       "properties": {
@@ -427,7 +375,7 @@
             "values": [
               {
                 "value": "Off",
-                "description": "Disable deinterlacing no matter whether the input is interlaced or not."
+                "description": "Disables de-interlacing of the source video."
               },
               {
                 "value": "AutoPixelAdaptive",
@@ -436,7 +384,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the deinterlacing mode, defaults to AutoPixelAdaptive."
+          "description": "Describes the deinterlacing mode. Defaults to AutoPixelAdaptive."
         }
       },
       "type": "object",
@@ -446,19 +394,19 @@
       "properties": {
         "left": {
           "type": "string",
-          "description": "Describes the number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (e.g: 50%)."
+          "description": "Describes the number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
         },
         "top": {
           "type": "string",
-          "description": "Describes the number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (e.g: 50%)."
+          "description": "Describes the number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
         },
         "width": {
           "type": "string",
-          "description": "Describes the width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (e.g: 50%)."
+          "description": "Describes the width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
         },
         "height": {
           "type": "string",
-          "description": "Describes the height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (e.g: 50%)."
+          "description": "Describes the height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
         }
       },
       "type": "object",
@@ -489,28 +437,28 @@
               },
               {
                 "value": "None",
-                "description": "Do not rotate and keep the metadata intact."
+                "description": "Do not rotate the video.  If the output format supports it, any metadata about rotation is kept intact."
               },
               {
                 "value": "Rotate0",
-                "description": "Rotate zero degrees."
+                "description": "Do not rotate the video but remove any metadata about the rotation."
               },
               {
                 "value": "Rotate90",
-                "description": "Rotate 90 degrees."
+                "description": "Rotate 90 degrees clockwise."
               },
               {
                 "value": "Rotate180",
-                "description": "Rotate 180 degrees."
+                "description": "Rotate 180 degrees clockwise."
               },
               {
                 "value": "Rotate270",
-                "description": "Rotate 270 degrees."
+                "description": "Rotate 270 degrees clockwise."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the rotation, if any, to be applied to the input video, before it is encoded."
+          "description": "Describes the rotation, if any, to be applied to the input video, before it is encoded. Default is Auto"
         },
         "crop": {
           "$ref": "#/definitions/Rectangle",
@@ -525,7 +473,33 @@
         }
       },
       "type": "object",
-      "description": "Describes all the filtering operations that are to be applied to the input video before encoding."
+      "description": "Describes all the filtering operations, such as de-interlacing, rotation etc. that are to be applied to the input media before encoding."
+    },
+    "Layer": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "width": {
+          "type": "string",
+          "description": "Describes the width of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in width as the input."
+        },
+        "height": {
+          "type": "string",
+          "description": "Describes the height of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in height as the input."
+        },
+        "label": {
+          "type": "string",
+          "description": "Describes the alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "The encoder can be configured to produce video and/or images (thumbnails) at different resolutions, by specifying a layer for each desired resolution. A layer represents the properties for the video or image at a resolution."
     },
     "VideoLayer": {
       "x-ms-discriminator-value": "#Microsoft.Media.VideoLayer",
@@ -538,7 +512,7 @@
         "bitrate": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the average bitrate (in bits per second) at which to encode the input video when generating this layer. This is a required field."
+          "description": "Describes the average bitrate in bits per second at which to encode the input video when generating this layer. This is a required field."
         },
         "maxBitrate": {
           "type": "integer",
@@ -548,11 +522,11 @@
         "bFrames": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the number of B-frames to be used when encoding this layer. If not specified, the encoder chooses an appropriate number based on the video Profile and Level."
+          "description": "Describes the number of B-frames to be used when encoding this layer.  If not specified, the encoder chooses an appropriate number based on the video profile and level."
         },
         "frameRate": {
           "type": "string",
-          "description": "Describes the frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (e.g. 30000/1001), or in the form of a number (e.g. 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the Profile and Level. If it is not specified, the encoder will use the same frame rate as the input video."
+          "description": "Describes the frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the profile and level. If it is not specified, the encoder will use the same frame rate as the input video."
         },
         "slices": {
           "type": "integer",
@@ -561,7 +535,7 @@
         },
         "adaptiveBFrame": {
           "type": "boolean",
-          "description": "Determines whether or not adaptive B-frames are to be used when encoding this layer. If not specified, the encoder will turn it on whenever the video Profile permits its use."
+          "description": "Determines whether or not adaptive B-frames are to be used when encoding this layer. If not specified, the encoder will turn it on whenever the video profile permits its use."
         }
       },
       "type": "object",
@@ -590,7 +564,7 @@
             "values": [
               {
                 "value": "Auto",
-                "description": "Tells the encoder to automatically determine the appropriate H264 Profile."
+                "description": "Tells the encoder to automatically determine the appropriate H.264 profile."
               },
               {
                 "value": "Baseline",
@@ -610,21 +584,21 @@
               },
               {
                 "value": "High444",
-                "description": "High 4:4:4 Predictive profile."
+                "description": "High 4:4:4 predictive profile."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes which Profile of the H.264 standard should be used when encoding this layer. Default is Auto."
+          "description": "Describes which profile of the H.264 standard should be used when encoding this layer. Default is Auto."
         },
         "level": {
           "type": "string",
-          "description": "Describes which Level of the H.264 standard should be used when encoding this layer. The value can be Auto, or a number that matches the H264 Profile. If not specified, the default is Auto, which lets the encoder choose the Level that is appropriate for this layer."
+          "description": "Describes which level of the H.264 standard should be used when encoding this layer. The value can be Auto, or a number that matches the H.264 profile. If not specified, the default is Auto, which lets the encoder choose the Level that is appropriate for this layer."
         },
         "bufferWindow": {
           "type": "string",
           "format": "duration",
-          "description": "Describes the VBV buffer window length. The value should be in ISO 8601 format. The default is PT5S or 5 seconds."
+          "description": "Describes the VBV buffer window length. The value should be in ISO 8601 format. The value should be in the range [0.1-100] seoconds. The default is 5 seconds (for example, PT5S)."
         },
         "referenceFrames": {
           "type": "integer",
@@ -642,20 +616,20 @@
             "values": [
               {
                 "value": "Cabac",
-                "description": "CABAC (Context Adaptive Binary Arithmetic Coder) entropy encoding"
+                "description": "Context Adaptive Binary Arithmetic Coder (CABAC) entropy encoding."
               },
               {
                 "value": "Cavlc",
-                "description": "CAVLC (Context Adaptive Variable Length Coder) entropy encoding"
+                "description": "Context Adaptive Variable Length Coder (CAVLC) entropy encoding."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the entropy mode to be used for this layer. If not specified, the encoder chooses the mode that is appropriate for the Profile and Level."
+          "description": "Describes the entropy mode to be used for this layer. If not specified, the encoder chooses the mode that is appropriate for the profile and level."
         }
       },
       "type": "object",
-      "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer with the H264 video codec."
+      "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer with the H.264 video codec."
     },
     "H264Video": {
       "x-ms-discriminator-value": "#Microsoft.Media.H264Video",
@@ -667,7 +641,7 @@
       "properties": {
         "sceneChangeDetection": {
           "type": "boolean",
-          "description": "Determines whether or not the encoder should insert key frames at scene changes. If not specified, the default is false."
+          "description": "Determines whether or not the encoder should insert key frames at scene changes. If not specified, the default is false. This flag should be set to true only when the encoder is being configured to produce a single output video."
         },
         "complexity": {
           "type": "string",
@@ -681,7 +655,7 @@
             "values": [
               {
                 "value": "Speed",
-                "description": "Tells the encoder to use settings that are optimized for how fast the encoding completes."
+                "description": "Tells the encoder to use settings that are optimized for faster encoding. Quality is sacrified to decrease encoding time."
               },
               {
                 "value": "Balanced",
@@ -689,23 +663,23 @@
               },
               {
                 "value": "Quality",
-                "description": "Tells the encoder to use settings that are optimized for to produce a better quality output, at the expense of a slower encode time."
+                "description": "Tells the encoder to use settings that are optimized to produce higher quality output at the expense of slower overall encode time."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Tells the encoder how to choose its low-level settings. The default is Balanced."
+          "description": "Tells the encoder how to choose its encoding settings. The default value is Balanced."
         },
         "layers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/H264Layer"
           },
-          "description": "Describes a collection of output H264 layers to be produced by the encoder."
+          "description": "Describes a collection of output H.264 layers to be produced by the encoder."
         }
       },
       "type": "object",
-      "description": "Describes all the properties for encoding a video with the H264 codec."
+      "description": "Describes all the properties for encoding a video with the H.264 codec."
     },
     "JpgImage": {
       "x-ms-discriminator-value": "#Microsoft.Media.JpgImage",
@@ -720,7 +694,7 @@
           "items": {
             "$ref": "#/definitions/JpgLayer"
           },
-          "description": "Describes a collection of output JPEG layers to be produced by the encoder."
+          "description": "Describes a collection of output JPEG image layers to be produced by the encoder."
         }
       },
       "type": "object",
@@ -745,12 +719,12 @@
     },
     "OutputFile": {
       "properties": {
-        "trackLabels": {
+        "labels": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Describes the list of track labels that would be muxed together to produce the file."
+          "description": "Describes how the encoder should multiplex video and audio into output file, based on the array of labels. For example, if the encoder is producing two video layers with labels v1 and v2, and one audio layer with label a1, then an array like '[v1, v2, a1]' tells the encoder to produce an output file with two video tracks and one audio track."
         }
       },
       "type": "object",
@@ -773,7 +747,7 @@
         }
       },
       "type": "object",
-      "description": "Describes the properties for producing a collection of GOP aligned multi bitrate files."
+      "description": "Describes the properties for producing a collection of GOP aligned multi-bitrate files."
     },
     "Mp4Format": {
       "x-ms-discriminator-value": "#Microsoft.Media.Mp4Format",
@@ -799,11 +773,11 @@
           "items": {
             "$ref": "#/definitions/PngLayer"
           },
-          "description": "Describes a collection of output PNG layers to be produced by the encoder."
+          "description": "Describes a collection of output PNG image layers to be produced by the encoder."
         }
       },
       "type": "object",
-      "description": "This class represents a video encoder which outputs a sequence of Png images."
+      "description": "Describes the properties for producing a series of PNG images from the input video."
     },
     "PngLayer": {
       "x-ms-discriminator-value": "#Microsoft.Media.PngLayer",
@@ -838,7 +812,7 @@
             "values": [
               {
                 "value": "AdaptiveStreaming",
-                "description": "Auto-generate a bitrate ladder (bitrate-resolution pairs) based on the input resolution and bitrate. The auto-generated preset will never exceed the input resolution and bitrate. For example, if the input is 720p at 3 Mbps, output will remain 720p at best, and will start at rates lower than 3 Mbps. The output will will have video and audio in separate files, which is optimal for adaptive streaming."
+                "description": "Auto-generate a bitrate ladder based on the input resolution and bitrate. The auto-generated preset will never exceed the input resolution and bitrate. For example, if the input is 720p at 3 Mbps, output will remain 720p at best, and will start at rates lower than 3 Mbps. The output will will have video and audio in separate files, which is optimal for adaptive streaming."
               },
               {
                 "value": "AACGoodQualityAudio",
@@ -859,7 +833,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the built-in prese to be used for encoding videos."
+          "description": "Describes the built-in preset to be used for encoding videos."
         }
       },
       "type": "object",
@@ -878,7 +852,7 @@
       "properties": {
         "filters": {
           "$ref": "#/definitions/Filters",
-          "description": "Describes the default set of filters to be applied to all the input media (except overlays). Describes operations like rotation, deinterlacing and overlays."
+          "description": "Describes a set of one or more filtering operations that are applied to the input media before encoding."
         },
         "codecs": {
           "type": "array",
@@ -908,11 +882,11 @@
       "properties": {
         "audioInsightsOnly": {
           "type": "boolean",
-          "description": "Gets or sets whether to get insights for audio only."
+          "description": "Specifies whether to only extract audio insights when processing a video file."
         }
       },
       "type": "object",
-      "description": "A video analyzer preset that analyzes both audio and video."
+      "description": "A video analyzer preset that extracts insights (rich metadata) from both audio and video, and outputs a JSON format file."
     },
     "TransportStreamFormat": {
       "x-ms-discriminator-value": "#Microsoft.Media.TransportStreamFormat",
@@ -923,7 +897,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "Describes the properties for generating an ISO/IEC 13818-1, MPEG-2 Transport Stream output."
+      "description": "Describes the properties for generating an MPEG-2 Transport Stream (ISO/IEC 13818-1) output video file(s)."
     },
     "VideoOverlay": {
       "x-ms-discriminator-value": "#Microsoft.Media.VideoOverlay",
@@ -935,12 +909,12 @@
       "properties": {
         "position": {
           "$ref": "#/definitions/Rectangle",
-          "description": "Describes the area in the input video where the overlay is applied."
+          "description": "Describes the location in the input video where the overlay is applied."
         },
         "opacity": {
           "type": "number",
           "format": "double",
-          "description": "Describes the opacity of the overlay. This is a value in the range [0 - 1.0]. Default is 1.0"
+          "description": "Describes the opacity of the overlay. This is a value in the range [0 - 1.0]. Default is 1.0 which mean the overlay is opaque."
         },
         "cropRectangle": {
           "$ref": "#/definitions/Rectangle",
@@ -963,7 +937,7 @@
             "values": [
               {
                 "value": "StopProcessingJob",
-                "description": "Tells the service that if this TransformOutput fails, then any other incomplete TransformOutputs can stopped."
+                "description": "Tells the service that if this TransformOutput fails, then any other incomplete TransformOutputs can be stopped."
               },
               {
                 "value": "ContinueJob",
@@ -972,7 +946,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes what to do if the output fails with the rest of the other outputs. The default is stop the rest of the outputs."
+          "description": "A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The default is stop."
         },
         "relativePriority": {
           "type": "string",
@@ -986,49 +960,49 @@
             "values": [
               {
                 "value": "Low",
-                "description": "Used for less time sensitive Jobs."
+                "description": "Used for TransformOutputs that can be generated after Normal and High priority TransformOutputs."
               },
               {
                 "value": "Normal",
-                "description": "Normal priority."
+                "description": "Used for TransformOutputs that can be generated at Normal priority."
               },
               {
                 "value": "High",
-                "description": "Used for Jobs that should take precedence over other Jobs."
+                "description": "Used for TransformOutputs that should take precedence over others."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Sets the relative priority of the TransformOutputs within a Transform. This gives a hint to the system that one TransformOutput is higher priority than another in the same Transform. The default is normal."
+          "description": "Sets the relative priority of the TransformOutputs within a Transform. This sets the priority that the service uses for processing TransformOutputs. The default priority is Normal."
         },
         "preset": {
           "$ref": "#/definitions/Preset",
-          "description": "Preset that describes the Media Processor operation that will be used to generate the output."
+          "description": "Preset that describes the operations that will be used to modify, transcode, or extract insights from the source file to generate the output."
         }
       },
       "type": "object",
       "required": [
         "preset"
       ],
-      "description": "Describes an Output from the Transform"
+      "description": "Describes the properties of a TransformOutput, which are the rules to be applied while generating the desired output."
     },
     "TransformProperties": {
       "properties": {
         "created": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the Transform was created.",
+          "description": "The UTC date and time when the Transform was created, in 'YYYY-MM-DDThh:mm:ssZ' format.",
           "readOnly": true,
           "x-nullable": false
         },
         "description": {
           "type": "string",
-          "description": "Customer supplied description of the transform."
+          "description": "An optional verbose description of the Transform."
         },
         "lastModified": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the Transform was last updated.",
+          "description": "The UTC date and time when the Transform was last updated, in 'YYYY-MM-DDThh:mm:ssZ' format.",
           "readOnly": true,
           "x-nullable": false
         },
@@ -1037,7 +1011,7 @@
           "items": {
             "$ref": "#/definitions/TransformOutput"
           },
-          "description": "The outputs for the Transform."
+          "description": "An array of one or more TransformOutputs that the Transform should generate."
         }
       },
       "type": "object",
@@ -1045,19 +1019,6 @@
         "outputs"
       ],
       "description": "A Transform."
-    },
-    "AvailablePresets": {
-      "properties": {
-        "presets": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Lists the available presets"
-        }
-      },
-      "type": "object",
-      "description": "The response message for available presets."
     },
     "Transform": {
       "allOf": [
@@ -1073,7 +1034,7 @@
         }
       },
       "type": "object",
-      "description": "A Media Transform that can be applied to an input by creating Jobs."
+      "description": "A Transform encapsulates the rules or instructions for generating desired outputs from input media, such as by transcoding or by extracting insights. After the Transform is created, it can be applied to input media by creating Jobs."
     },
     "JobInput": {
       "discriminator": "@odata.type",
@@ -1084,7 +1045,7 @@
         },
         "label": {
           "type": "string",
-          "description": "Customer provided label of the JobInput."
+          "description": "A label that is assigned to a JobInput, that is used to satisfy a reference used in the Transform. For example, a Transform can be authored so as to take an image file with the label 'xyz' and apply it as an overlay onto the input video before it is encoded. When submitting a Job, exactly one of the JobInputs should be the image file, and it should have the label 'xyz'."
         }
       },
       "type": "object",
@@ -1106,11 +1067,11 @@
           "items": {
             "type": "string"
           },
-          "description": "List of files.  Required for JobInputAzureBlob. It optionally can be used for JobInputAsset to tell the service to only use the files specified from the Asset."
+          "description": "List of files. Required for JobInputHttp."
         }
       },
       "type": "object",
-      "description": "Represents Job Inputs that can have a start or end time specified to take a subset of the specified media."
+      "description": "Represents input files for a Job."
     },
     "JobInputs": {
       "x-ms-discriminator-value": "#Microsoft.Media.JobInputs",
@@ -1125,11 +1086,11 @@
           "items": {
             "$ref": "#/definitions/JobInput"
           },
-          "description": "List of Job inputs."
+          "description": "List of inputs to a Job."
         }
       },
       "type": "object",
-      "description": "Supports list of inputs to a Job."
+      "description": "Describes a list of of inputs to a Job."
     },
     "JobInputAsset": {
       "x-ms-discriminator-value": "#Microsoft.Media.JobInputAsset",
@@ -1141,7 +1102,7 @@
       "properties": {
         "assetName": {
           "type": "string",
-          "description": "The name of input Asset."
+          "description": "The name of the input Asset."
         }
       },
       "type": "object",
@@ -1160,11 +1121,11 @@
       "properties": {
         "baseUri": {
           "type": "string",
-          "description": "Base uri for http job input. It will be concatenated with provided file names.   If no base uri is given, then the provided file list is assumed to be fully qualified uris."
+          "description": "Base URI for HTTPS job input. It will be concatenated with provided file names.   If no base uri is given, then the provided file list is assumed to be fully qualified uris."
         }
       },
       "type": "object",
-      "description": "Represents http job input."
+      "description": "Represents HTTPS job input."
     },
     "JobOutput": {
       "discriminator": "@odata.type",
@@ -1175,7 +1136,7 @@
         },
         "error": {
           "$ref": "#/definitions/JobError",
-          "description": "If the JobOutput is in the error state, it contains the details of the error.",
+          "description": "If the JobOutput is in the Error state, it contains the details of the error.",
           "readOnly": true
         },
         "state": {
@@ -1194,15 +1155,15 @@
             "values": [
               {
                 "value": "Canceled",
-                "description": "The job was canceled.  This is a final state for the job."
+                "description": "The job was canceled. This is a final state for the job."
               },
               {
                 "value": "Canceling",
-                "description": "The job is in the process of being canceled.  This is a transient state for the job."
+                "description": "The job is in the process of being canceled. This is a transient state for the job."
               },
               {
                 "value": "Error",
-                "description": "The job has encountered an Error. This is a final state for the job."
+                "description": "The job has encountered an error. This is a final state for the job."
               },
               {
                 "value": "Finished",
@@ -1210,27 +1171,27 @@
               },
               {
                 "value": "Processing",
-                "description": "The job is processing.  This is a transient state for the job."
+                "description": "The job is processing. This is a transient state for the job."
               },
               {
                 "value": "Queued",
-                "description": "The job is queued. This is a transient state for the job."
+                "description": "The job is in a queued state, waiting for resources to become available. This is a transient state."
               },
               {
                 "value": "Scheduled",
-                "description": "The job is scheduled. This is a transient state for the job."
+                "description": "The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "State of the JobOutput.",
+          "description": "Describes the state of the JobOutput.",
           "readOnly": true,
           "x-nullable": false
         },
         "progress": {
           "type": "integer",
           "format": "int32",
-          "description": "If the JobOutput is in the processing state, it contains the percentage of the job completed from 0 to 100 percent.",
+          "description": "If the JobOutput is in a Processing state, this contains the job completion percentage.  The value is an estimate and not intended to be used to predict job completion times. To determine if the JobOutput is complete, use the State property.",
           "readOnly": true,
           "x-nullable": false
         }
@@ -1239,7 +1200,7 @@
       "required": [
         "@odata.type"
       ],
-      "description": "Base class for the output of a Job."
+      "description": "Describes all the properties of a JobOutput."
     },
     "JobError": {
       "properties": {
@@ -1277,7 +1238,7 @@
               },
               {
                 "value": "UploadNotAccessible",
-                "description": "While trying to upload the output files, the destination was not reachable, please should check the availability of the destination."
+                "description": "While trying to upload the output files, the destination was not reachable, please check the availability of the destination."
               },
               {
                 "value": "UploadTransientError",
@@ -1285,11 +1246,11 @@
               },
               {
                 "value": "ConfigurationUnsupported",
-                "description": "There was a problem with input files and the configuration combination, fix the configuration and retry with the same input, or change input to match the configuration."
+                "description": "There was a problem with the combination of input files and the configuration settings applied, fix the configuration settings and retry with the same input, or change input to match the configuration."
               },
               {
                 "value": "ContentMalformed",
-                "description": "There was a problem with the input content (i.e. zero byte files, or corrupt/non-decodable files), check the input files."
+                "description": "There was a problem with the input content (for example: zero byte files, or corrupt/non-decodable files), check the input files."
               },
               {
                 "value": "ContentUnsupported",
@@ -1298,7 +1259,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Code describing the error.",
+          "description": "Error code describing the error.",
           "readOnly": true,
           "x-nullable": false
         },
@@ -1342,7 +1303,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Category to help caller categorize the error.",
+          "description": "Helps with categorization of errors.",
           "readOnly": true,
           "x-nullable": false
         },
@@ -1361,12 +1322,12 @@
               },
               {
                 "value": "MayRetry",
-                "description": "Issue maybe resolved with wait and resubmit the same Job without further changes."
+                "description": "Issue may be resolved after waiting for a period of time and resubmitting the same Job."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Indication that the job may be retried. If retry is unsuccessful, please contact support.",
+          "description": "Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal.",
           "readOnly": true,
           "x-nullable": false
         },
@@ -1422,7 +1383,7 @@
         "created": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the Job was created.",
+          "description": "The UTC date and time when the Job was created, in 'YYYY-MM-DDThh:mm:ssZ' format.",
           "readOnly": true,
           "x-nullable": false
         },
@@ -1442,15 +1403,15 @@
             "values": [
               {
                 "value": "Canceled",
-                "description": "The job was canceled.  This is a final state for the job."
+                "description": "The job was canceled. This is a final state for the job."
               },
               {
                 "value": "Canceling",
-                "description": "The job is in the process of being canceled.  This is a transient state for the job."
+                "description": "The job is in the process of being canceled. This is a transient state for the job."
               },
               {
                 "value": "Error",
-                "description": "The job has encountered an Error. This is a final state for the job."
+                "description": "The job has encountered an error. This is a final state for the job."
               },
               {
                 "value": "Finished",
@@ -1458,15 +1419,15 @@
               },
               {
                 "value": "Processing",
-                "description": "The job is processing.  This is a transient state for the job."
+                "description": "The job is processing. This is a transient state for the job."
               },
               {
                 "value": "Queued",
-                "description": "The job is queued. This is a transient state for the job."
+                "description": "The job is in a queued state, waiting for resources to become available. This is a transient state."
               },
               {
                 "value": "Scheduled",
-                "description": "The job is scheduled. This is a transient state for the job."
+                "description": "The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states."
               }
             ],
             "modelAsExtensible": true
@@ -1477,7 +1438,7 @@
         },
         "description": {
           "type": "string",
-          "description": "The customer supplied description of the Job."
+          "description": "Optional customer supplied description of the Job."
         },
         "input": {
           "$ref": "#/definitions/JobInput",
@@ -1486,7 +1447,7 @@
         "lastModified": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the Job was last updated.",
+          "description": "The UTC date and time when the Job was last updated, in 'YYYY-MM-DDThh:mm:ssZ' format.",
           "readOnly": true,
           "x-nullable": false
         },
@@ -1509,20 +1470,20 @@
             "values": [
               {
                 "value": "Low",
-                "description": "Used for less time sensitive Jobs."
+                "description": "Used for TransformOutputs that can be generated after Normal and High priority TransformOutputs."
               },
               {
                 "value": "Normal",
-                "description": "Normal priority."
+                "description": "Used for TransformOutputs that can be generated at Normal priority."
               },
               {
                 "value": "High",
-                "description": "Used for Jobs that should take precedence over other Jobs."
+                "description": "Used for TransformOutputs that should take precedence over others."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "Priority with which the job should be processed.  Higher priority jobs are processed before lower priority jobs if there is resource contention. If not set, the default is normal."
+          "description": "Priority with which the job should be processed. Higher priority jobs are processed before lower priority jobs. If not set, the default is normal."
         }
       },
       "type": "object",
@@ -1546,7 +1507,7 @@
         }
       },
       "type": "object",
-      "description": "A Job resource type."
+      "description": "A Job resource type. The progress and state can be obtained by polling a Job or subscribing to events using EventGrid."
     },
     "ODataError": {
       "properties": {
