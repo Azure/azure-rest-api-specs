@@ -7190,40 +7190,10 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Start time of the upgrade."
+          "description": "End time of the upgrade."
         }
       },
       "description": "Information about the current running state of the overall upgrade."
-    },
-    "PlatformImageReference": {
-      "properties": {
-        "publisher": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Image publisher"
-        },
-        "offer": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Offer type"
-        },
-        "sku": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Sku type"
-        },
-        "version": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Version of the image"
-        },
-        "uri": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Specifies the virtual hard disk's uri."
-        }
-      },
-      "description": "A reference that identifies a CRP-PIR image or a UserVMImage."
     },
     "UpgradeOperationHistoricalStatusInfoProperties": {
       "properties": {
@@ -7245,7 +7215,7 @@
         "startedBy": {
           "readOnly": true,
           "type": "string",
-          "description": "Error Details for this upgrade if there are any.",
+          "description": "Invoker of the Upgrade Operation",
           "enum": [
             "Unknown",
             "User",
@@ -7257,9 +7227,9 @@
           }
         },
         "targetImageReference": {
-          "$ref": "#/definitions/PlatformImageReference",
+          "$ref": "#/definitions/ImageReference",
           "readOnly": true,
-          "description": "Error Details for this upgrade if there are any."
+          "description": "Image Reference details"
         }
       },
       "description": "Describes each OS upgrade on the Virtual Machine Scale Set."
@@ -7277,11 +7247,12 @@
           "description": "Resource type"
         },
         "location": {
+		  "readOnly": true,
           "type": "string",
           "description": "Resource location"
         }
       },
-        "description": "Virtual Machine Scale Set OS Upgrade History operation response."
+      "description": "Virtual Machine Scale Set OS Upgrade History operation response."
     },
     "VirtualMachineScaleSetListOSUpgradeHistory": {
       "properties": {
