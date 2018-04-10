@@ -612,10 +612,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted web app backup item.",
-            "schema": {
-              "$ref": "#/definitions/BackupItem"
-            }
+            "description": "Succesfully deleted web app backup item."
           },
           "404": {
             "description": "Web app backup item does not exist."
@@ -5973,52 +5970,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/recover": {
-      "post": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Recovers a web app to a previous snapshot.\r\nDEPRECATED - Please use RestoreSnapshot.",
-        "description": "Recovers a web app to a previous snapshot.\nDEPRECATED - Please use RestoreSnapshot.",
-        "operationId": "WebApps_Recover",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recoveryEntity",
-            "in": "body",
-            "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.",
-            "required": true,
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/SnapshotRecoveryRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Recovery operation started."
-          },
-          "200": {
-            "description": "Recovery operation started."
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/resetSlotConfig": {
       "post": {
         "tags": [
@@ -7009,10 +6960,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted web app backup item.",
-            "schema": {
-              "$ref": "#/definitions/BackupItem"
-            }
+            "description": "Succesfully deleted web app backup item."
           },
           "404": {
             "description": "Web app backup item does not exist."
@@ -12922,59 +12870,6 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/recover": {
-      "post": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Recovers a web app to a previous snapshot.\r\nDEPRECATED - Please use RestoreSnapshot.",
-        "description": "Recovers a web app to a previous snapshot.\nDEPRECATED - Please use RestoreSnapshot.",
-        "operationId": "WebApps_RecoverSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recoveryEntity",
-            "in": "body",
-            "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.",
-            "required": true,
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/SnapshotRecoveryRequest"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Recovery operation started."
-          },
-          "200": {
-            "description": "Recovery operation started."
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/resetSlotConfig": {
