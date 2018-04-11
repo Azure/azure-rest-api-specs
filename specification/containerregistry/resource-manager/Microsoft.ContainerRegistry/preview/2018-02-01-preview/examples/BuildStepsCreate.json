@@ -9,10 +9,11 @@
     "buildStepCreateParameters": {
       "properties": {
         "type": "Docker",
-        "imageName": "azurerest:testtag",
+        "imageNames": [ "azurerest:testtag" ],
         "dockerFilePath": "src/DockerFile",
         "contextPath": "src",
         "isPushEnabled": true,
+        "noCache": true,
         "buildArguments": [
           {
             "type": "DockerBuildArgument",
@@ -37,10 +38,11 @@
         "properties": {
           "type": "Docker",
           "branch": "master",
-          "imageName": "azurerest:testtag",
+          "imageNames": [ "azurerest:testtag" ],
           "dockerFilePath": "src/DockerFile",
           "contextPath": "src",
           "isPushEnabled": true,
+          "noCache": true,
           "buildArguments": [
             {
               "type": "DockerBuildArgument",

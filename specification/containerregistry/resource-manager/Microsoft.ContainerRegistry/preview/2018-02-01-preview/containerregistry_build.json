@@ -1126,12 +1126,16 @@
           }
         },
         "buildTask": {
-          "description": "All the properties of the build task with which the build was started.",
+          "description": "The build task with which the build was started.",
           "type": "string"
         },
-        "trigger": {
-          "description": "The trigger that caused the build.",
-          "type": "string"
+        "imageUpdateTrigger": {
+          "$ref": "#/definitions/ImageUpdateTrigger",
+          "description": "The image update trigger that caused the build."
+        },
+        "gitCommitTrigger": {
+          "$ref": "#/definitions/GitCommitTrigger",
+          "description": "The git commit trigger that caused the build."
         },
         "isArchiveEnabled": {
           "description": "The value that indicates whether archiving is enabled or not.",
@@ -1181,6 +1185,54 @@
         }
       }
     },
+    "ImageUpdateTrigger": {
+      "description": "The image update trigger that caused a build.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique ID of the trigger.",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "The timestamp when the image update happened.",
+          "type": "string"
+        },
+        "images": {
+          "description": "The list of image updates that caused the build.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        }
+      }
+    },
+    "GitCommitTrigger": {
+      "description": "The git commit trigger that caused a build.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique ID of the trigger.",
+          "type": "string"
+        },
+        "commitId": {
+          "description": "The unique ID that identifies a commit.",
+          "type": "string"
+        },
+        "repositoryUrl": {
+          "description": "The repository URL.",
+          "type": "string"
+        },
+        "branchName": {
+          "description": "The branch name in the repository.",
+          "type": "string"
+        },
+        "providerType": {
+          "description": "The source control provider type.",
+          "type": "string"
+        }
+      }
+    },
     "PlatformProperties": {
       "description": "The platform properties against which the build has to happen.",
       "required": [
@@ -1203,6 +1255,33 @@
         "cpu": {
           "format": "int32",
           "description": "The CPU configuration in terms of number of cores required for the build.",
+          "type": "integer"
+        }
+      }
+    },
+    "Image": {
+      "description": "The image update trigger that caused a build.",
+      "type": "object",
+      "properties": {
+        "registry": {
+          "description": "The registry from which the image is updated.",
+          "type": "string"
+        },
+        "repository": {
+          "description": "The repository name of the updated image.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "The tag name of the updated image.",
+          "type": "string"
+        },
+        "digest": {
+          "description": "The digest of the updated image manifest.",
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "description": "The size of the updated image.",
           "type": "integer"
         }
       }
@@ -1837,11 +1916,23 @@
           "type": "string"
         },
         "imageName": {
-          "description": "The full qualified name of the image including the repository and tag.",
+          "description": "TODO (bindu): Backward-compatibility, bring back ImageName to support old CLI build extension, need to remove it.",
           "type": "string"
         },
+        "imageNames": {
+          "description": "The fully qualified image names including the repository and tag.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
+          "description": "The value of this property indicates whether the image built should be pushed to the registry or not.",
+          "default": false,
+          "type": "boolean"
+        },
+        "noCache": {
+          "description": "The value of this property indicates whether the image cache is enabled or not.",
           "default": false,
           "type": "boolean"
         },
@@ -1871,6 +1962,7 @@
         "baseImageTrigger": {
           "description": "The type of the auto trigger for base image dependency updates.",
           "enum": [
+            "All",
             "Runtime",
             "None"
           ],
@@ -1939,11 +2031,23 @@
           "type": "string"
         },
         "imageName": {
-          "description": "The full qualified name of the image including the repository and tag.",
+          "description": "TODO (bindu): Backward-compatibility, bring back ImageName to support old CLI build extension, need to remove it.",
           "type": "string"
         },
+        "imageNames": {
+          "description": "The fully qualified image names including the repository and tag.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
+          "description": "The value of this property indicates whether the image built should be pushed to the registry or not.",
+          "default": false,
+          "type": "boolean"
+        },
+        "noCache": {
+          "description": "The value of this property indicates whether the image cache is enabled or not.",
           "default": false,
           "type": "boolean"
         },
@@ -1965,6 +2069,7 @@
         "baseImageTrigger": {
           "description": "The type of the auto trigger for base image dependency updates.",
           "enum": [
+            "All",
             "Runtime",
             "None"
           ],
@@ -2012,8 +2117,15 @@
         }
       ],
       "properties": {
+        "imageNames": {
+          "description": "The fully qualified image names including the repository and tag.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "imageName": {
-          "description": "The fully qualified image name with the tag that the build tags it.",
+          "description": "TODO (bindu): Backward-compatibility, bring back ImageName to support old CLI build extension, need to remove it.",
           "type": "string"
         },
         "sourceLocation": {
@@ -2028,7 +2140,12 @@
           }
         },
         "isPushEnabled": {
-          "description": "The value of this property indicate whether the image built should be pushed to the registry or not.",
+          "description": "The value of this property indicates whether the image built should be pushed to the registry or not.",
+          "default": false,
+          "type": "boolean"
+        },
+        "noCache": {
+          "description": "The value of this property indicates whether the image cache is enabled or not.",
           "default": false,
           "type": "boolean"
         },
