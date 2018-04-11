@@ -61,7 +61,7 @@ async function getLinterResult(swaggerPath) {
     if (!fs.existsSync(swaggerPath)) {
         return [];
     }
-    let cmd = linterCmd + swaggerPath;
+    let cmd = "npx autorest --reset && " + linterCmd + swaggerPath;
     console.log(`Executing: ${cmd}`);
     const { err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
         (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
