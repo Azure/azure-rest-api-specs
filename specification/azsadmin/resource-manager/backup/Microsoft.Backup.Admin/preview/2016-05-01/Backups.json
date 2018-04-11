@@ -103,7 +103,7 @@
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}/restore": {
             "post": {
                 "x-ms-examples": {
-                    "Get a backup from a location based on name.": {
+                    "Restore a backup.": {
                         "$ref": "./examples/Backups/Restore.json"
                     }
                 },
@@ -177,40 +177,49 @@
             "properties": {
                 "backupDataVersion": {
                     "description": "Version of the backup data.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "backupId": {
                     "description": "Unique GUID for the backup.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "roleStatus": {
                     "description": "Backup status for each role.",
-                    "$ref": "#/definitions/RoleOperationStatusList"
+                    "$ref": "#/definitions/RoleOperationStatusList",
+                    "readOnly": true
                 },
                 "status": {
                     "description": "Current status of the backup.",
-                    "$ref": "#/definitions/OperationStatus"
+                    "$ref": "#/definitions/OperationStatus",
+                    "readOnly": true
                 },
                 "createdDateTime": {
                     "description": "Creation time of the backup.",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "readOnly": true
                 },
                 "timeTakenToCreate": {
                     "description": "Duration to create the backup.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "deploymentID": {
                     "description": "Deployment Id of the stamp.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "stampVersion": {
                     "description": "Current version.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "oemVersion": {
                     "description": "OEM version.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 }
             }
         },

@@ -53,29 +53,29 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "readOnly": true,
                     "description": "URI of the resource.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "name": {
-                    "readOnly": true,
                     "description": "Name of the resource.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "type": {
-                    "readOnly": true,
                     "description": "Type of resource.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "location": {
-                    "readOnly": false,
                     "description": "Location of the resource.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": false
                 },
                 "tags": {
-                    "readOnly": false,
                     "description": "List of key value pairs.",
                     "type": "object",
+                    "readOnly": false,
                     "additionalProperties": {
                         "type": "string"
                     }
@@ -88,11 +88,13 @@
             "properties": {
                 "name": {
                     "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "display": {
                     "description": "Contains the localized display information for this particular operation / action.",
-                    "$ref": "#/definitions/Display"
+                    "$ref": "#/definitions/Display",
+                    "readOnly": true
                 }
             }
         },
@@ -101,19 +103,23 @@
             "properties": {
                 "provider": {
                     "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "resource": {
                     "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "operation": {
                     "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "description": {
                     "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 }
             }
         },
@@ -125,11 +131,13 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Operation"
-                    }
+                    },
+                    "readOnly": true
                 },
                 "nextLink": {
                     "description": "URI to the next page of operations.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 }
             }
         },
@@ -139,11 +147,13 @@
             "properties": {
                 "code": {
                     "description": "Operation result code.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "message": {
                     "description": "Description of the operation status.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 }
             }
         }
