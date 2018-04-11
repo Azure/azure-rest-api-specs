@@ -616,6 +616,22 @@
     },
     "DatabaseProperties": {
       "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioned state of the resource",
+          "enum": [
+            "Running",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
         "softDeletePeriodInDays": {
           "type": "integer",
           "description": "The number of days data should be kept before it stops being accessible to queries."
