@@ -1,0 +1,26 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "AzureEntityResource": {
+      "x-ms-client-name": "AzureEntityResource",
+      "description": "The resource model definition for a Azure Resource Manager resource with an etag.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./AzureResource.json#/definitions/AzureResource"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "AzureResource": {
+      "x-ms-client-name": "AzureResource",
+      "x-ms-azure-resource": true,
+      "description": "An Azure Resource Manager resource.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    }
+  }
+}
