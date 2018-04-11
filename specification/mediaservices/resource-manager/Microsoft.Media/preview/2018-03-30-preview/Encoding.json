@@ -49,7 +49,7 @@
         },
         "label": {
           "type": "string",
-          "description": "Describes an optional label for the codec. The label can be used to control muxing behavior."
+          "description": "An optional label for the codec. The label can be used to control muxing behavior."
         }
       },
       "type": "object",
@@ -69,17 +69,17 @@
         "channels": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes number of channels in the audio."
+          "description": "The number of channels in the audio."
         },
         "samplingRate": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the sampling rate to use for encoding in hertz."
+          "description": "The sampling rate to use for encoding in hertz."
         },
         "bitrate": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the bitrate, in bits per second, of the output encoded audio."
+          "description": "The bitrate, in bits per second, of the output encoded audio."
         }
       },
       "type": "object",
@@ -118,7 +118,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the encoding profile to be used when encoding audio with AAC."
+          "description": "The encoding profile to be used when encoding audio with AAC."
         }
       },
       "type": "object",
@@ -134,7 +134,7 @@
       "properties": {
         "audioLanguage": {
           "type": "string",
-          "description": "Specifies the language for the audio payload in the input in BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of supported language are, 'en-US', 'en-GB', 'es-ES', 'es-MX', 'fr-FR', 'it-IT', 'ja-JP', 'pt-BR', 'zh-CN'."
+          "description": "The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of supported languages are, 'en-US', 'en-GB', 'es-ES', 'es-MX', 'fr-FR', 'it-IT', 'ja-JP', 'pt-BR', 'zh-CN'."
         }
       },
       "type": "object",
@@ -149,32 +149,32 @@
         },
         "inputLabel": {
           "type": "string",
-          "description": "Describes the label of the job input which is to be used as an overlay. The Input must specify exactly one file. You can specify an image file in JPG or PNG formats, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file. See https://aka.ms/mesformats for the complete list of supported audio and video file formats."
+          "description": "The label of the job input which is to be used as an overlay. The Input must specify exactly one file. You can specify an image file in JPG or PNG formats, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file. See https://aka.ms/mesformats for the complete list of supported audio and video file formats."
         },
         "start": {
           "type": "string",
           "format": "duration",
-          "description": "Describes the start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overaly at 5 seconds in to the input video. If not specified the overlay starts from the beginning of the input video."
+          "description": "The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds in to the input video. If not specified the overlay starts from the beginning of the input video."
         },
         "end": {
           "type": "string",
           "format": "duration",
-          "description": "Describes the position in the input video at which the overlay ends. The value should be in ISO 8601 duration format. For example, PT30S to end the overlay at 30 seconds in to the input video. If not specified the overlay will be applied until the end of the input video if inputLoop is true. Else, if inputLoop is false, then overlay will last as long as the duration of the overlay media."
+          "description": "The position in the input video at which the overlay ends. The value should be in ISO 8601 duration format. For example, PT30S to end the overlay at 30 seconds in to the input video. If not specified the overlay will be applied until the end of the input video if inputLoop is true. Else, if inputLoop is false, then overlay will last as long as the duration of the overlay media."
         },
         "fadeInDuration": {
           "type": "string",
           "format": "duration",
-          "description": "Describes the duration over which the overlay fades in onto the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade in (same as PT0S)."
+          "description": "The duration over which the overlay fades in onto the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade in (same as PT0S)."
         },
         "fadeOutDuration": {
           "type": "string",
           "format": "duration",
-          "description": "Describes the duration over which the overlay fades out of the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade out (same as PT0S)."
+          "description": "The duration over which the overlay fades out of the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade out (same as PT0S)."
         },
         "audioGainLevel": {
           "type": "number",
           "format": "double",
-          "description": "Describes the gain level of audio in the overlay. The value should be in the range [0, 1.0]. The default is 1.0."
+          "description": "The gain level of audio in the overlay. The value should be in the range [0, 1.0]. The default is 1.0."
         }
       },
       "type": "object",
@@ -216,7 +216,7 @@
         "keyFrameInterval": {
           "type": "string",
           "format": "duration",
-          "description": "Describes the distance between two key frames, thereby defining a group of pictures (GOP). The value should be a non-zero integer in the range [1, 30] seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S)."
+          "description": "The distance between two key frames, thereby defining a group of pictures (GOP). The value should be a non-zero integer in the range [1, 30] seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S)."
         },
         "stretchMode": {
           "type": "string",
@@ -243,7 +243,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the resizing mode - how the input video will be resized to fit the desired output resolution(s). Default is AutoSize"
+          "description": "The resizing mode - how the input video will be resized to fit the desired output resolution(s). Default is AutoSize"
         }
       },
       "type": "object",
@@ -259,15 +259,15 @@
       "properties": {
         "start": {
           "type": "string",
-          "description": "Describes the position in the input video from where to start generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT05S), or a frame count (For example, 10 for the 10th frame), or a relative value (For example, 1%). Also supports a macro {Best}, which tells the encoder to select the best thumbnail from the first few seconds of the video."
+          "description": "The position in the input video from where to start generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT05S), or a frame count (For example, 10 for the 10th frame), or a relative value (For example, 1%). Also supports a macro {Best}, which tells the encoder to select the best thumbnail from the first few seconds of the video."
         },
         "step": {
           "type": "string",
-          "description": "Describes the intervals at which thumbnails are generated. The value can be in absolute timestamp (ISO 8601, e.g: PT05S for one image every 5 seconds), or a frame count (For example, 30 for every 30 frames), or a relative value (For example, 1%)."
+          "description": "The intervals at which thumbnails are generated. The value can be in absolute timestamp (ISO 8601, e.g: PT05S for one image every 5 seconds), or a frame count (For example, 30 for every 30 frames), or a relative value (For example, 1%)."
         },
         "range": {
           "type": "string",
-          "description": "Describes the position in the input video at which to stop generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT5M30S to stop at 5 minutes and 30 seconds), or a frame count (For example, 300 to stop at the 300th frame), or a relative value (For example, 100%)."
+          "description": "The position in the input video at which to stop generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT5M30S to stop at 5 minutes and 30 seconds), or a frame count (For example, 300 to stop at the 300th frame), or a relative value (For example, 100%)."
         }
       },
       "type": "object",
@@ -282,7 +282,7 @@
         },
         "filenamePattern": {
           "type": "string",
-          "description": "Describes the pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - The base name of the input video {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. Any unsubstituted macros will be collapsed and removed from the filename."
+          "description": "The pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - The base name of the input video {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. Any unsubstituted macros will be collapsed and removed from the filename."
         }
       },
       "type": "object",
@@ -362,7 +362,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the field parity for de-interlacing, defaults to Auto."
+          "description": "The field parity for de-interlacing, defaults to Auto."
         },
         "mode": {
           "type": "string",
@@ -384,7 +384,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the deinterlacing mode. Defaults to AutoPixelAdaptive."
+          "description": "The deinterlacing mode. Defaults to AutoPixelAdaptive."
         }
       },
       "type": "object",
@@ -394,19 +394,19 @@
       "properties": {
         "left": {
           "type": "string",
-          "description": "Describes the number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
+          "description": "The number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
         },
         "top": {
           "type": "string",
-          "description": "Describes the number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
+          "description": "The number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
         },
         "width": {
           "type": "string",
-          "description": "Describes the width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
+          "description": "The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
         },
         "height": {
           "type": "string",
-          "description": "Describes the height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
+          "description": "The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%)."
         }
       },
       "type": "object",
@@ -416,7 +416,7 @@
       "properties": {
         "deinterlace": {
           "$ref": "#/definitions/Deinterlace",
-          "description": "Describes the de-interlacing settings."
+          "description": "The de-interlacing settings."
         },
         "rotation": {
           "type": "string",
@@ -458,18 +458,18 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the rotation, if any, to be applied to the input video, before it is encoded. Default is Auto"
+          "description": "The rotation, if any, to be applied to the input video, before it is encoded. Default is Auto"
         },
         "crop": {
           "$ref": "#/definitions/Rectangle",
-          "description": "Describes the parameters for the rectangular window with which to crop the input video."
+          "description": "The parameters for the rectangular window with which to crop the input video."
         },
         "overlays": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Overlay"
           },
-          "description": "Describes the properties of overlays to be applied to the input video. These could be audio, image or video overlays."
+          "description": "The properties of overlays to be applied to the input video. These could be audio, image or video overlays."
         }
       },
       "type": "object",
@@ -484,15 +484,15 @@
         },
         "width": {
           "type": "string",
-          "description": "Describes the width of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in width as the input."
+          "description": "The width of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in width as the input."
         },
         "height": {
           "type": "string",
-          "description": "Describes the height of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in height as the input."
+          "description": "The height of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in height as the input."
         },
         "label": {
           "type": "string",
-          "description": "Describes the alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file."
+          "description": "The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file."
         }
       },
       "type": "object",
@@ -512,30 +512,30 @@
         "bitrate": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the average bitrate in bits per second at which to encode the input video when generating this layer. This is a required field."
+          "description": "The average bitrate in bits per second at which to encode the input video when generating this layer. This is a required field."
         },
         "maxBitrate": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the maximum bitrate (in bits per second), at which the VBV buffer should be assumed to refill. If not specified, defaults to the same value as bitrate."
+          "description": "The maximum bitrate (in bits per second), at which the VBV buffer should be assumed to refill. If not specified, defaults to the same value as bitrate."
         },
         "bFrames": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the number of B-frames to be used when encoding this layer.  If not specified, the encoder chooses an appropriate number based on the video profile and level."
+          "description": "The number of B-frames to be used when encoding this layer.  If not specified, the encoder chooses an appropriate number based on the video profile and level."
         },
         "frameRate": {
           "type": "string",
-          "description": "Describes the frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the profile and level. If it is not specified, the encoder will use the same frame rate as the input video."
+          "description": "The frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the profile and level. If it is not specified, the encoder will use the same frame rate as the input video."
         },
         "slices": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the number of slices to be used when encoding this layer. If not specified, default is zero, which means that encoder will use a single slice for each frame."
+          "description": "The number of slices to be used when encoding this layer. If not specified, default is zero, which means that encoder will use a single slice for each frame."
         },
         "adaptiveBFrame": {
           "type": "boolean",
-          "description": "Determines whether or not adaptive B-frames are to be used when encoding this layer. If not specified, the encoder will turn it on whenever the video profile permits its use."
+          "description": "Whether or not adaptive B-frames are to be used when encoding this layer. If not specified, the encoder will turn it on whenever the video profile permits its use."
         }
       },
       "type": "object",
@@ -589,21 +589,21 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes which profile of the H.264 standard should be used when encoding this layer. Default is Auto."
+          "description": "Which profile of the H.264 standard should be used when encoding this layer. Default is Auto."
         },
         "level": {
           "type": "string",
-          "description": "Describes which level of the H.264 standard should be used when encoding this layer. The value can be Auto, or a number that matches the H.264 profile. If not specified, the default is Auto, which lets the encoder choose the Level that is appropriate for this layer."
+          "description": "Which level of the H.264 standard should be used when encoding this layer. The value can be Auto, or a number that matches the H.264 profile. If not specified, the default is Auto, which lets the encoder choose the Level that is appropriate for this layer."
         },
         "bufferWindow": {
           "type": "string",
           "format": "duration",
-          "description": "Describes the VBV buffer window length. The value should be in ISO 8601 format. The value should be in the range [0.1-100] seoconds. The default is 5 seconds (for example, PT5S)."
+          "description": "The VBV buffer window length. The value should be in ISO 8601 format. The value should be in the range [0.1-100] seconds. The default is 5 seconds (for example, PT5S)."
         },
         "referenceFrames": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the number of reference frames to be used when encoding this layer. If not specified, the encoder determines an appropriate number based on the encoder complexity setting."
+          "description": "The number of reference frames to be used when encoding this layer. If not specified, the encoder determines an appropriate number based on the encoder complexity setting."
         },
         "entropyMode": {
           "type": "string",
@@ -625,7 +625,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the entropy mode to be used for this layer. If not specified, the encoder chooses the mode that is appropriate for the profile and level."
+          "description": "The entropy mode to be used for this layer. If not specified, the encoder chooses the mode that is appropriate for the profile and level."
         }
       },
       "type": "object",
@@ -641,7 +641,7 @@
       "properties": {
         "sceneChangeDetection": {
           "type": "boolean",
-          "description": "Determines whether or not the encoder should insert key frames at scene changes. If not specified, the default is false. This flag should be set to true only when the encoder is being configured to produce a single output video."
+          "description": "Whether or not the encoder should insert key frames at scene changes. If not specified, the default is false. This flag should be set to true only when the encoder is being configured to produce a single output video."
         },
         "complexity": {
           "type": "string",
@@ -655,7 +655,7 @@
             "values": [
               {
                 "value": "Speed",
-                "description": "Tells the encoder to use settings that are optimized for faster encoding. Quality is sacrified to decrease encoding time."
+                "description": "Tells the encoder to use settings that are optimized for faster encoding. Quality is sacrificed to decrease encoding time."
               },
               {
                 "value": "Balanced",
@@ -675,7 +675,7 @@
           "items": {
             "$ref": "#/definitions/H264Layer"
           },
-          "description": "Describes a collection of output H.264 layers to be produced by the encoder."
+          "description": "The collection of output H.264 layers to be produced by the encoder."
         }
       },
       "type": "object",
@@ -694,7 +694,7 @@
           "items": {
             "$ref": "#/definitions/JpgLayer"
           },
-          "description": "Describes a collection of output JPEG image layers to be produced by the encoder."
+          "description": "A collection of output JPEG image layers to be produced by the encoder."
         }
       },
       "type": "object",
@@ -711,7 +711,7 @@
         "quality": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the compression quality of the JPEG output. Range is from 0-100 and the default is 70."
+          "description": "The compression quality of the JPEG output. Range is from 0-100 and the default is 70."
         }
       },
       "type": "object",
@@ -724,7 +724,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Describes how the encoder should multiplex video and audio into output file, based on the array of labels. For example, if the encoder is producing two video layers with labels v1 and v2, and one audio layer with label a1, then an array like '[v1, v2, a1]' tells the encoder to produce an output file with two video tracks and one audio track."
+          "description": "The list of labels that describe how the encoder should multiplex video and audio into an output file. For example, if the encoder is producing two video layers with labels v1 and v2, and one audio layer with label a1, then an array like '[v1, a1]' tells the encoder to produce an output file with the video track represented by v1 and the audio track represented by a1."
         }
       },
       "type": "object",
@@ -743,11 +743,11 @@
           "items": {
             "$ref": "#/definitions/OutputFile"
           },
-          "description": "Describes a list of output files to produce.  Each entry in the list is a set of labels to be muxed together ."
+          "description": "The list of output files to produce.  Each entry in the list is a set of audio and video layer labels to be muxed together ."
         }
       },
       "type": "object",
-      "description": "Describes the properties for producing a collection of GOP aligned multi-bitrate files."
+      "description": "Describes the properties for producing a collection of GOP aligned multi-bitrate files. The default behavior is to produce one output file for each video layer which is muxed together with all the audios. The exact output files produced can be controlled by specifying the outputFiles collection."
     },
     "Mp4Format": {
       "x-ms-discriminator-value": "#Microsoft.Media.Mp4Format",
@@ -773,7 +773,7 @@
           "items": {
             "$ref": "#/definitions/PngLayer"
           },
-          "description": "Describes a collection of output PNG image layers to be produced by the encoder."
+          "description": "A collection of output PNG image layers to be produced by the encoder."
         }
       },
       "type": "object",
@@ -812,7 +812,7 @@
             "values": [
               {
                 "value": "AdaptiveStreaming",
-                "description": "Auto-generate a bitrate ladder based on the input resolution and bitrate. The auto-generated preset will never exceed the input resolution and bitrate. For example, if the input is 720p at 3 Mbps, output will remain 720p at best, and will start at rates lower than 3 Mbps. The output will will have video and audio in separate files, which is optimal for adaptive streaming."
+                "description": "Produces a set of GOP aligned MP4 files with H.264 video and stereo AAC audio. Auto-generates a bitrate ladder based on the input resolution and bitrate. The auto-generated preset will never exceed the input resolution and bitrate. For example, if the input is 720p at 3 Mbps, output will remain 720p at best, and will start at rates lower than 3 Mbps. The output will will have video and audio in separate MP4 files, which is optimal for adaptive streaming."
               },
               {
                 "value": "AACGoodQualityAudio",
@@ -833,7 +833,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "Describes the built-in preset to be used for encoding videos."
+          "description": "The built-in preset to be used for encoding videos."
         }
       },
       "type": "object",
@@ -852,21 +852,21 @@
       "properties": {
         "filters": {
           "$ref": "#/definitions/Filters",
-          "description": "Describes a set of one or more filtering operations that are applied to the input media before encoding."
+          "description": "One or more filtering operations that are applied to the input media before encoding."
         },
         "codecs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Codec"
           },
-          "description": "Describes the list of codecs to be used when encoding the input video."
+          "description": "The list of codecs to be used when encoding the input video."
         },
         "formats": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Format"
           },
-          "description": "Describes the list of outputs to be produced by the encoder."
+          "description": "The list of outputs to be produced by the encoder."
         }
       },
       "type": "object",
@@ -882,7 +882,7 @@
       "properties": {
         "audioInsightsOnly": {
           "type": "boolean",
-          "description": "Specifies whether to only extract audio insights when processing a video file."
+          "description": "Whether to only extract audio insights when processing a video file."
         }
       },
       "type": "object",
@@ -909,16 +909,16 @@
       "properties": {
         "position": {
           "$ref": "#/definitions/Rectangle",
-          "description": "Describes the location in the input video where the overlay is applied."
+          "description": "The location in the input video where the overlay is applied."
         },
         "opacity": {
           "type": "number",
           "format": "double",
-          "description": "Describes the opacity of the overlay. This is a value in the range [0 - 1.0]. Default is 1.0 which mean the overlay is opaque."
+          "description": "The opacity of the overlay. This is a value in the range [0 - 1.0]. Default is 1.0 which mean the overlay is opaque."
         },
         "cropRectangle": {
           "$ref": "#/definitions/Rectangle",
-          "description": "Describes the an optional rectangular window used to crop the overlay image or video."
+          "description": "An optional rectangular window used to crop the overlay image or video."
         }
       },
       "type": "object",
