@@ -106,6 +106,50 @@ directive:
       - $.definitions.VirtualMachineScaleSetUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.AvailabilitySetUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineExtensionUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.ImageUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+
+
+  - where:
+      - $.definitions.VirtualMachineScaleSetVM
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineExtensionImage
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.RollingUpgradeStatusInfo
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineImage
+    suppress:
+      - TrackedResourcePatchOperation
+
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - TrackedResourceGetOperation
+      
 ```
 ### Tag: package-2018-04
 
@@ -343,9 +387,9 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-disks-2018-04
-  - tag: package-2017-12
-  - tag: package-compute-2017-03
+  - tag: package-2018-04
+  #- tag: package-2017-12 broken
+  - tag: package-2017-03
   - tag: package-container-service-2017-01
   - tag: package-container-service-2016-09
   - tag: package-compute-2016-04-preview
@@ -355,12 +399,12 @@ batch:
   - tag: package-compute-2015-06
 ```
 
-### Tag: package-disks-2018-04 and go
+### Tag: package-2018-04 and go
 
-These settings apply only when `--tag=package-disks-2018-04 --go` is specified on the command line.
+These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag)=='package-disks-2018-04' && $(go)
+``` yaml $(tag)=='package-2018-04' && $(go)
 namespace: compute
 output-folder: $(go-sdk-folder)/services/compute/mgmt/2018-04-01/compute
 ```
@@ -375,12 +419,12 @@ namespace: compute
 output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-12-01/compute
 ```
 
-### Tag: package-compute-2017-03 and go
+### Tag: package-2017-03 and go
 
-These settings apply only when `--tag=package-compute-2017-03 --go` is specified on the command line.
+These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag)=='package-compute-2017-03' && $(go)
+``` yaml $(tag)=='package-2017-03' && $(go)
 namespace: compute
 output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-03-30/compute
 ```

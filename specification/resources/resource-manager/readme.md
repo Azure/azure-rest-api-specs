@@ -211,6 +211,43 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: UniqueResourcePaths
+    from: policySetDefinitions.json
+    where: $.paths
+    reason: policy set definition under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: policyDefinitions.json
+    where: $.paths
+    reason: policy definition under an extension resource with Microsoft.Management
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    where: $.definitions.ResourceGroup.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    where: $.definitions.GenericResource.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: managedapplications.json
+    where: $.definitions.Appliance.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: managedapplications.json
+    where: $.definitions.ApplianceDefinition.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: managedapplications.json
+    where: $.definitions.AppliancePatchable.properties
+    reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: managedapplications.json
+    where: $.definitions.GenericResource.properties
+    reason: managedBy is a top level property
+```
+
 ---
 # Code Generation
 
