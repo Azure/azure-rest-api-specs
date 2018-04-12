@@ -1,0 +1,794 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Insights API",
+    "version": "2018-04-16",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "description": "Azure Monitor client to create/update/delete Scheduled Query Rules"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules/{ruleName}": {
+      "put": {
+        "description": "Creates or updates an log search rule.\r\nRequest method: PUT\t\tRequest URI: https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/microsoft.insights/scheduledQueryRules/{logsearch-rule-name}?api-version={api-version}",
+        "tags": [
+          "scheduledQueryRules"
+        ],
+        "operationId": "createOrUpdateScheduledQueryRules",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogSearchRuleResource"
+            },
+            "description": "The parameters of the rule to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to update an Log Search rule",
+            "schema": {
+              "$ref": "#/definitions/LogSearchRuleResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
+                "name": "logalertfoo",
+                "type": "Microsoft.Insights/scheduledQueryRules",
+                "location": "West US",
+                "tags": {
+                  "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo": "Resource"
+                },
+                "properties": {
+                  "description": "log alert description",
+                  "Enabled": "true",
+                  "skuType": "L1",
+                  "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
+                  "provisioningState": "Succeeded",
+                  "source": {
+                    "query": "Type=HearBeat",
+                    "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus",
+                    "queryType": "ResultCount"
+                  },
+                  "schedule": {
+                    "frequencyInMinutes": 15,
+                    "timeWindowInMinutes": 15
+                  },
+                  "action": {
+                    "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
+                    "severity": "1",
+                    "status": "Inactive",
+                    "aznsAction": {
+                      "actionGroup": [],
+                      "emailSubject": "Email Header",
+                      "customWebhookPayload": "{}"
+                    },
+                    "trigger": {
+                      "thresholdOperator": "GreaterThan",
+                      "threshold": 3,
+                      "metricTrigger": {
+                        "thresholdOperator": "GreaterThan",
+                        "threshold": 5,
+                        "metricTriggerType": "Consecutive",
+                        "metricColumn": "ColumnName"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created alert rule",
+            "schema": {
+              "$ref": "#/definitions/LogSearchRuleResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
+                "name": "logalertfoo",
+                "type": "Microsoft.Insights/scheduledQueryRules",
+                "location": "West US",
+                "tags": {
+                  "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo": "Resource"
+                },
+                "properties": {
+                  "description": "log alert description",
+                  "Enabled": "true",
+                  "skuType": "L3",
+                  "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
+                  "provisioningState": "Succeeded",
+                  "source": {
+                    "query": "Type=HearBeat",
+                    "queryType": "ResultCount",
+                    "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
+                  },
+                  "schedule": {
+                    "frequencyInMinutes": 15,
+                    "timeWindowInMinutes": 15
+                  },
+                  "action": {
+                    "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
+                    "severity": "1",
+                    "status": "Inactive",
+                    "trigger": {
+                      "thresholdOperator": "GreaterThan",
+                      "threshold": 3
+                    },
+                    "aznsAction": {
+                      "actionGroup": [],
+                      "emailSubject": "Email Header",
+                      "customWebhookPayload": "{}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets an Log Search rule",
+        "tags": [
+          "scheduledQueryRules"
+        ],
+        "operationId": "getScheduledQueryRule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to get a Log Search rule",
+            "schema": {
+              "$ref": "#/definitions/LogSearchRuleResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
+                "name": "logalertfoo",
+                "type": "Microsoft.Insights/scheduledQueryRules",
+                "location": "West US",
+                "tags": {
+                  "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo": "Resource"
+                },
+                "properties": {
+                  "description": "log alert description",
+                  "Enabled": "true",
+                  "skuType": "L1",
+                  "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
+                  "provisioningState": "Succeeded",
+                  "source": {
+                    "query": "Type=HearBeat",
+                    "queryType": "ResultCount",
+                    "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
+                  },
+                  "schedule": {
+                    "frequencyInMinutes": 15,
+                    "timeWindowInMinutes": 15
+                  },
+                  "action": {
+                    "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
+                    "severity": "1",
+                    "status": "Inactive",
+                    "trigger": {
+                      "thresholdOperator": "GreaterThan",
+                      "threshold": 3
+                    },
+                    "aznsAction": {
+                      "actionGroup": [],
+                      "emailSubject": "Email Header",
+                      "customWebhookPayload": "{}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. Log Search Rule does not exists"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a Log Search rule",
+        "tags": [
+          "scheduledQueryRules"
+        ],
+        "operationId": "deleteScheduledQueryRules",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to delete a  Log Search rule"
+          },
+          "204": {
+            "description": "No Content. Resource not found"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules": {
+      "get": {
+        "tags": [
+          "scheduledQueryRules"
+        ],
+        "operationId": "getListScheduledQueryRules",
+        "description": "List the Log Search rules within a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for a list of alert rules",
+            "schema": {
+              "$ref": "#/definitions/LogSearchRuleResourceCollection"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
+                    "name": "logalertfoo",
+                    "type": "Microsoft.Insights/scheduledQueryRules",
+                    "location": "West US",
+                    "tags": {
+                      "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus": "Resource"
+                    },
+                    "properties": {
+                      "description": "log alert description",
+                      "Enabled": "false",
+                      "skuType": "L2",
+                      "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
+                      "provisioningState": "Succeeded",
+                      "source": {
+                        "query": "Type=HearBeat",
+                        "queryType": "Number",
+                        "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
+                      },
+                      "schedule": {
+                        "frequencyInMinutes": 15,
+                        "timeWindowInMinutes": 15
+                      },
+                      "action": {
+                        "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
+                        "severity": "1",
+                        "status": "Inactive",
+                        "trigger": {
+                          "thresholdOperator": "GreaterThan",
+                          "threshold": 2,
+                          "metricTrigger": {
+                            "thresholdOperator": "LessThan",
+                            "threshold": 2,
+                            "metricTriggerType": "Total",
+                            "metricColumn": "user_Id"
+                          }
+                        },
+                        "aznsAction": {
+                          "actionGroup": [],
+                          "emailSubject": "Email Header",
+                          "customWebhookPayload": "{}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
+                    "name": "logalertfoo",
+                    "type": "Microsoft.Insights/scheduledQueryRules",
+                    "location": "West US",
+                    "tags": {
+                      "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus": "Resource"
+                    },
+                    "properties": {
+                      "description": "log alert description",
+                      "Enabled": "true",
+                      "skuType": "L2",
+                      "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
+                      "provisioningState": "Succeeded",
+                      "source": {
+                        "query": "Type=HearBeat",
+                        "queryType": "ResultCount",
+                        "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
+                      },
+                      "schedule": {
+                        "frequencyInMinutes": 15,
+                        "timeWindowInMinutes": 15
+                      },
+                      "action": {
+                        "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
+                        "severity": "1",
+                        "status": "Inactive",
+                        "trigger": {
+                          "thresholdOperator": "GreaterThan",
+                          "threshold": 3
+                        },
+                        "aznsAction": {
+                          "actionGroup": [],
+                          "emailSubject": "Email Header",
+                          "customWebhookPayload": "{}"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/LogSearchRuleResource"
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "LogSearchRuleResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LogSearchRule",
+          "description": "The rule properties of the resource."
+        }
+      },
+      "description": "The Log Search Rule resource."
+    },
+    "LogSearchRuleResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSearchRuleResource"
+          },
+          "description": "The values for the Log Search Rule resources."
+        }
+      },
+      "description": "Represents a collection of Log Search rule resources."
+    },
+    "Source": {
+      "type": "object",
+      "description": "Specifies the log search query.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Log search query."
+        },
+        "authorizedResources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of  Resource referred into query"
+        },
+        "datasourceId": {
+          "type": "string",
+          "description": "The resource uri over which log search query is to be run."
+        },
+        "queryType": {
+          "$ref": "#/definitions/QueryType",
+          "description": "Set value to ResultCount if query should be returning search result count. Set it to Number if its a metric query."
+        }
+      },
+      "required": [
+        "query",
+        "datasourceId"
+      ]
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "Defines how often to run the search and the time interval.",
+      "properties": {
+        "frequencyInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "frequency (in minutes) at which rule condition should be evaluated."
+        },
+        "timeWindowInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time window for which data needs to be fetched for query (should be greater than or equal to frequencyInMinutes)."
+        }
+      },
+      "required": [
+        "frequencyInMinutes",
+        "timeWindowInMinutes"
+      ]
+    },
+    "TriggerCondition": {
+      "description": "The condition that results in the Log Search rule.",
+      "properties": {
+        "thresholdOperator": {
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "Evaluation operation for rule - 'GreaterThan' or 'LessThan."
+        },
+        "threshold": {
+          "description": "Result or count threshold based on which rule should be triggered.",
+          "format": "double",
+          "type": "number"
+        },
+        "metricTrigger": {
+          "$ref": "#/definitions/MetricTrigger",
+          "description": "Trigger condition for metric query rule"
+        }
+      },
+      "required": [
+        "thresholdOperator",
+        "threshold"
+      ],
+      "type": "object"
+    },
+    "AzNsActionGroup": {
+      "type": "object",
+      "properties": {
+        "actionGroup": {
+          "type": "array",
+          "description": "azns notification group reference.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailSubject": {
+          "type": "string",
+          "description": "Custom subject for Azns email"
+        },
+        "customWebhookPayload": {
+          "type": "string",
+          "description": "Custom webhook payload to be send to azns action group"
+        }
+      },
+      "description": "azns notification group"
+    },
+    "MetricTrigger": {
+      "type": "object",
+      "properties": {
+        "thresholdOperator": {
+          "$ref": "#/definitions/ConditionalOperator",
+          "description": "Evaluation operation for Metric -'GreaterThan' or 'LessThan' or 'Equal'."
+        },
+        "threshold": {
+          "format": "double",
+          "type": "number"
+        },
+        "metricTriggerType": {
+          "$ref": "#/definitions/MetricTriggerType",
+          "description": "Metric Trigger Type - 'Consecutive' or 'Total'"
+        },
+        "metricColumn": {
+          "type": "string",
+          "description": "Evaluation of metric on a particular column"
+        }
+      }
+    },
+    "ConditionalOperator": {
+      "type": "string",
+      "enum": [
+        "GreaterThan",
+        "LessThan",
+        "Equal"
+      ],
+      "x-ms-enum": {
+        "name": "ConditionalOperator",
+        "modelAsString": true
+      }
+    },
+    "MetricTriggerType": {
+      "type": "string",
+      "enum": [
+        "Consecutive",
+        "Total"
+      ],
+      "x-ms-enum": {
+        "name": "metricTriggerType",
+        "modelAsString": true
+      }
+    },
+    "AlertSeverity": {
+      "type": "string",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "x-ms-enum": {
+        "name": "AlertSeverity",
+        "modelAsString": true
+      }
+    },
+    "AlertStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "AlertStatus",
+        "modelAsString": true
+      }
+    },
+    "QueryType": {
+      "type": "string",
+      "enum": [
+        "ResultCount",
+        "Number"
+      ],
+      "x-ms-enum": {
+        "name": "QueryType",
+        "modelAsString": true
+      }
+    },
+    "LogSearchRule": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the Log Search rule."
+        },
+        "Enabled": {
+          "type": "string",
+          "description": "The flag which indicates whether the Log Search rule is enabled. Value should be true or false",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "Enabled",
+            "modelAsString": true
+          }
+        },
+        "skuType": {
+          "type": "string",
+          "enum": [
+            "L1",
+            "L2",
+            "L3"
+          ],
+          "x-ms-enum": {
+            "name": "skuType",
+            "modelAsString": true
+          },
+          "description": "SKU Type {L1, L2, L3}"
+        },
+        "lastUpdatedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the rule was updated in IS08601 format."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the scheduledquery rule"
+        },
+        "source": {
+          "$ref": "#/definitions/Source"
+        },
+        "schedule": {
+          "$ref": "#/definitions/Schedule"
+        },
+        "action": {
+          "$ref": "#/definitions/Action"
+        }
+      },
+      "required": [
+        "schedule",
+        "source",
+        "action"
+      ]
+    },
+    "Action": {
+      "type": "object",
+      "discriminator": "odata.type",
+      "properties": {
+        "odata.type": {
+          "type": "string",
+          "description": "Specifies the alerting action. This is can be either be AlertingAction or LogToMetricAction"
+        }
+      },
+      "required": [
+        "odata.type"
+      ]
+    },
+    "AlertingAction": {
+      "x-ms-discriminator-value": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "properties": {
+        "lastFiredTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date=time",
+          "description": "Last time the rule was fired in IS08601 format."
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "Severity of the alert"
+        },
+        "status": {
+          "$ref": "#/definitions/AlertStatus",
+          "readOnly": true,
+          "description": "Alert state"
+        },
+        "aznsAction": {
+          "$ref": "#/definitions/AzNsActionGroup",
+          "description": "azns notification group reference."
+        },
+        "throttleTillDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time untill alert should not be fired in ISO8601 format."
+        },
+        "trigger": {
+          "$ref": "#/definitions/TriggerCondition",
+          "description": "The trigger condition that results in the alert rule being."
+        }
+      },
+      "required": [
+        "aznsAction",
+        "trigger"
+      ]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "RuleNameParameter": {
+      "name": "ruleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
