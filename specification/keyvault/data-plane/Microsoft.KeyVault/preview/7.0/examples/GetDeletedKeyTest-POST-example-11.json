@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "key-name": "keys",
+    "api-version": "7.0-preview",
+    "parameters": {
+      "kty": "RSA",
+      "key_size": 2048,
+      "key_ops": [
+        "encrypt",
+        "decrypt",
+        "sign",
+        "verify",
+        "wrapKey",
+        "unwrapKey"
+      ],
+      "attributes": {},
+      "tags": {
+        "purpose": "unit test",
+        "test name ": "GetDeletedKeyTest"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "key": {
+          "kid": "https://kv-sdk-test.vault-int.azure-int.net/keys/GetDeletedKeyTest/70cd0755e48944cfa3b1463a388a7a7e",
+          "kty": "RSA",
+          "key_ops": [
+            "encrypt",
+            "decrypt",
+            "sign",
+            "verify",
+            "wrapKey",
+            "unwrapKey"
+          ],
+          "n": "smlX4hTrJj1vuU3JGLtSNJ-7UQVzJmRlZx8iBBO-SG-_BJoXGmU2FuK1hiLPL2InV_2s9KswD6tQqTdKtODVDIWzHWKgsCrbu7xst4Rsk3ATguDdrB6BBvCihL0goPNi61SqvGJUuK1Ki5gIQDXgCDIYVmhcL-RfBeaWzR-l4cUz-QL7tNzdE5CiRNQ3aTDU-ylE8DLhwrb78AFrKij02vHovDabrSrwthdsYQ0FJtuwocjfTnKtVCR2qHpzzdE2BLVjdp8V3gaTPJqfpshBVpV2_9HqAF8x-7aa_HBt0WvNx9MaoJNZnB-Thkn4lNRp7VfVg9ki1CUjcU3s_6yCbw",
+          "e": "AQAB"
+        },
+        "attributes": {
+          "enabled": true,
+          "created": 1493938194,
+          "updated": 1493938194,
+          "recoverylevel": "Recoverable+Purgeable"
+        },
+        "tags": {
+          "purpose": "unit test",
+          "test name ": "GetDeletedKeyTest"
+        }
+      }
+    }
+  }
+}

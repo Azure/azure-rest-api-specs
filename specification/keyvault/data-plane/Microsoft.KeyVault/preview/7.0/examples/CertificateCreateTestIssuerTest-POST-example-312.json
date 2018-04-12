@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "certificate-name": "testIssuerCert01",
+    "api-version": "7.0-preview",
+    "parameters": {
+      "policy": {
+        "key_props": {
+          "exportable": true,
+          "kty": "RSA",
+          "key_size": 2048,
+          "reuse_key": false
+        },
+        "secret_props": {
+          "contentType": "application/x-pkcs12"
+        },
+        "x509_props": {
+          "subject": "CN=*.microsoft.com",
+          "sans": {
+            "dns_names": [
+              "onedrive.microsoft.com",
+              "xbox.microsoft.com"
+            ]
+          },
+          "validity_months": 24
+        },
+        "issuer": {
+          "name": "issuer01"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "id": "https://testvault1021.vault.azure.net/certificates/testIssuerCert01/pending",
+        "issuer": {
+          "name": "issuer01"
+        },
+        "csr": "MIIC4zCCAcsCAQAwGjEYMBYGA1UEAwwPKi5taWNyb3NvZnQuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2LgIhoNIaK7aAGCu7Ufpt9Z2DKbTzjw1cnc5J3U8xSJGHIgva5Wr80DAvsRwG7jt53+iRksYJgW/gIF0ncN8kEX14A8YLsRKBZ5JXyHOVyUl05qXXA9IP2kra3s1RC650lwrwUhCs2c3QFoDwmzhac+Rcaypua6+jdGoY50OZNpgF5JsBXckSLqU2oeH5tCUN//x0kkL5ki5nHDPdOYFoa1MWPKCm43xahB4T6bPlKy1UabeMGGQRN2QY9gRn5RJ2NDDXmBpYGJ+eo7SorFfWvz0NbmNG1O/fCOsEoSsrRVLeSAFRhiWOkrTZ6N5gapqEETQxh4Y45IJVdvwY/JWPQIDAQABoIGDMIGABgkqhkiG9w0BCQ4xczBxMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwNQYDVR0RBC4wLIIWb25lZHJpdmUubWljcm9zb2Z0LmNvbYISeGJveC5taWNyb3NvZnQuY29tMAkGA1UdEwQCMAAwDQYJKoZIhvcNAQELBQADggEBACqcD+hG2LC4deX02IY0nMDfFkZZqabBfJXMRTEP2aOCNn+zoCHYjRkNDORT0eYefR8PyYGfx4cmCTRlZBHtHp5N47e1XD+2+MUOUmm8Hh72plWZZAswXy5xaVi/G41Vr+rim1noMg4bRBuKAAjNo+tZNa0Ty02UKx9VzyVJZwLe08tIPSkNcaWr+QIZX21GfQPS6qUPpXtih1CFt3AGpqRBH5Nt/QzXwXQMJzycBBJqidjKOj+ouSKDMUCDF9TVm5Wln8d5cVBIEbM8ovRtLHhs/wiIwoX88B7yju4QI/QjyD8cGPfSHhVt70VZOeXD8LE8z3T6BJE2Kym1E1O2brs=",
+        "cancellation_requested": false,
+        "status": "inProgress",
+        "status_details": "Pending certificate created. Certificate request is in progress. This may take some time based on the issuer provider. Please check again later.",
+        "request_id": "c1ca41f4fdea4df9a90906a0e9ed1ef0"
+      }
+    }
+  }
+}
