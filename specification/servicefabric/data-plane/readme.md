@@ -26,7 +26,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.1'
+tag: '6.2'
 ```
 
 
@@ -69,6 +69,15 @@ input-file:
 - Microsoft.ServiceFabric/stable/6.1/servicefabric.json
 ```
 
+### Tag: 6.2
+
+These settings apply only when `--tag=6.2` is specified on the command line.
+
+``` yaml $(tag) == '6.2'
+input-file:
+- Microsoft.ServiceFabric/stable/6.2/servicefabric.json
+```
+
 ---
 # Code Generation
 
@@ -100,7 +109,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.servicefabric
   package-name: azure-servicefabric
-  package-version: 6.1.2.9
+  package-version: 6.2.0.0
   add-credentials: true
   clear-output-folder: true
 ```
@@ -135,6 +144,7 @@ batch:
   - tag: "5.6"
   - tag: "6.0"
   - tag: "6.1"
+  - tag: "6.2"
 ```
 
 ### Tag: 1.0.0 and go
@@ -169,6 +179,13 @@ These settings apply only when `--tag=6.1 --go` is specified on the command line
 output-folder: $(go-sdk-folder)/services/servicefabric/6.1/servicefabric
 ```
 
+### Tag: 6.2 and go
+
+These settings apply only when `--tag=6.2 --go` is specified on the command line.
+
+``` yaml $(tag) == '6.2' && $(go)
+output-folder: $(go-sdk-folder)/services/servicefabric/6.2/servicefabric
+```
 
 ## Java
 

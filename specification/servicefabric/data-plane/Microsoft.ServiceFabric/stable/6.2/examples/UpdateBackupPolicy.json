@@ -1,0 +1,31 @@
+{
+  "operationId": "UpdateBackupPolicy",
+  "description": "This example shows how to update the schedule of a backup policy to take backup twice everyday at 9 AM and 5 PM UTC with Azure blob store as the backup location.",
+  "parameters": {
+    "api-version": "6.2-preview",
+    "backupPolicyName": "DailyAzureBackupPolicy",
+    "BackupPolicyDescription": {
+      "Name": "DailyAzureBackupPolicy",
+      "AutoRestoreOnDataLoss": false,
+      "MaxIncrementalBackups": 3,
+      "Schedule": {
+        "ScheduleKind": "TimeBased",
+        "ScheduleFrequencyType": "Daily",
+        "RunTimes": [
+          "9:00:00",
+          "17:00:00"
+        ]
+      },
+      "Storage": {
+        "StorageKind": "AzureBlobStore",
+        "FriendlyName": "Azure_storagesample",
+        "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==",
+        "ContainerName": "BackupContainer"
+      }
+    }  
+  },
+  "responses": {
+    "200": {
+    }
+  }
+}
