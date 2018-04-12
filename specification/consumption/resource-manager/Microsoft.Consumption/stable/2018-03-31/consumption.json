@@ -1275,7 +1275,7 @@
         "tags": [
           "Balances"
         ],
-        "operationId": "BalancesByBillingAccount",
+        "operationId": "GetBalancesByBillingAccount",
         "description": "Gets the balances for a scope by billingAccountId. Balances are available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -2659,8 +2659,15 @@
           },
         "priceHidden": {
           "description": "Price is hidden or not.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "string",
+		  "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "priceHidden",
+            "modelAsString": true
+          }
         },
         "newPurchasesDetails": {
           "description": "List of new purchases.",
