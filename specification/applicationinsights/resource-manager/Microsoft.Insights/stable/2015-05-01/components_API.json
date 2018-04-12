@@ -248,6 +248,7 @@
       "post": {
         "description": "Purges data in an Application Insights component by a set of user-defined filters.",
         "operationId": "Components_Purge",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -271,37 +272,7 @@
             "schema": {
               "$ref": "#/definitions/ComponentPurgeResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ComponentPurge": {
-            "$ref": "./examples/ComponentsPurge.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/operations/{purgeId}": {
-      "get": {
-        "description": "Gets the status of a previously submitted purge using the id returned from the original purge request.",
-        "operationId": "Components_GetPurgeStatus",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ComponentPurgeIdParameter"
-          }         
-        ],
-        "responses": {
           "200": {
             "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
             "schema": {
@@ -310,8 +281,8 @@
           }
         },
         "x-ms-examples": {
-          "ComponentPurgeStatus": {
-            "$ref": "./examples/ComponentsPurgeStatus.json"
+          "ComponentPurge": {
+            "$ref": "./examples/ComponentsPurge.json"
           }
         }
       }
@@ -534,9 +505,12 @@
           "description": "The column of the table over which the given query should run",
           "type": "string"
         },
-        "filter": {
-          "description": "A query to to run over the provided table and column to purge the corresponding data.",
+        "operator": {
+          "description": "A query operator to evaluate over the provided column and value(s).",
           "type": "string"
+        },
+        "value": {
+          "description": "the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
         }
       }
     },
