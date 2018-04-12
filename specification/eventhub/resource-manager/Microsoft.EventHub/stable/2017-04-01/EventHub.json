@@ -392,6 +392,46 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/messagingplan": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_GetMessagingPlan",
+        "x-ms-examples": {
+          "GetNamespaceMessagingPlan": { "$ref": "./examples/NameSpaces/EHNameSpaceGetMessagningPlan.json" }
+        },
+        "description": "Gets messaging plan for specified namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Messaging Plan successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/MessagingPlan"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules": {
       "get": {
         "tags": [
@@ -1770,6 +1810,10 @@
           "Regions"
         ],
         "operationId": "Regions_ListBySku",
+        "x-ms-examples": {
+          "RegionsListBySkuBasic": { "$ref": "./examples/EHRegionsListBySkuBasic.json" },
+          "RegionsListBySkuStandard": { "$ref": "./examples/EHRegionsListBySkuStandard.json" }
+        },
         "description": "Gets the available Regions for a given sku",
         "parameters": [
           {
@@ -2503,6 +2547,45 @@
         }
       },
       "description": "The response of the List MessagingRegions operation."
+    },
+    "MessagingPlan": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "sku": {
+              "format": "int32",
+              "readOnly": true,
+              "type": "integer",
+              "description": "Sku type"
+            },
+            "selectedEventHubUnit": {
+              "format": "int32",
+              "readOnly": true,
+              "type": "integer",
+              "description": "Selected event hub unit"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true,
+              "description": "The exact time the messaging plan was updated."
+            },
+            "revision": {
+              "format": "int64",
+              "readOnly": true,
+              "type": "integer",
+              "description": "revision number"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Messaging Plan for the namespace"
     }
   },
   "parameters": {
