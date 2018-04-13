@@ -1,11 +1,11 @@
-{
+﻿{
     "swagger": "2.0",
     "info": {
-        "version": "1.1",
+        "version": "2.0",
         "title": "PredictionEndpoint"
     },
     "host": "southcentralus.api.cognitive.microsoft.com",
-    "basePath": "/customvision/v1.1/Prediction",
+    "basePath": "/customvision/v2.0/Prediction",
     "schemes": [
         "https"
     ],
@@ -74,13 +74,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ImagePredictionResultModel"
+                            "$ref": "#/definitions/ImagePrediction"
                         }
                     }
                 },
                 "x-ms-examples": {
-                    "Successful Prediction with Url request": {
-                        "$ref": "./examples/SuccessfulPredictionWithUrl.json"
+                    "Successful PredictImageUrl request": {
+                        "$ref": "./examples/PredictImageUrl.json"
                     }
                 }
             }
@@ -143,13 +143,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ImagePredictionResultModel"
+                            "$ref": "#/definitions/ImagePrediction"
                         }
                     }
                 },
                 "x-ms-examples": {
-                    "Successful Prediction with Image request": {
-                        "$ref": "./examples/SuccessfulPredictionWithImage.json"
+                    "Successful PredictImage request": {
+                        "$ref": "./examples/PredictImage.json"
                     }
                 }
             }
@@ -218,13 +218,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ImagePredictionResultModel"
+                            "$ref": "#/definitions/ImagePrediction"
                         }
                     }
                 },
                 "x-ms-examples": {
-                    "Successful Prediction with Url request": {
-                        "$ref": "./examples/SuccessfulPredictionWithUrl.json"
+                    "Successful PredictImageUrlWithNoStore request": {
+                        "$ref": "./examples/PredictImageUrlWithNoStore.json"
                     }
                 }
             }
@@ -287,13 +287,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ImagePredictionResultModel"
+                            "$ref": "#/definitions/ImagePrediction"
                         }
                     }
                 },
                 "x-ms-examples": {
-                    "Successful Prediction with Image request": {
-                        "$ref": "./examples/SuccessfulPredictionWithImage.json"
+                    "Successful PredictImageWithNoStore request": {
+                        "$ref": "./examples/PredictImageWithNoStore.json"
                     }
                 }
             }
@@ -303,45 +303,44 @@
         "ImageUrl": {
             "type": "object",
             "properties": {
-                "Url": {
+                "url": {
                     "type": "string",
                     "x-nullable": true
                 }
             },
             "x-nullable": true
         },
-        "ImagePredictionResultModel": {
-            "description": "result of an image prediction request",
+        "ImagePrediction": {
             "type": "object",
             "properties": {
-                "Id": {
+                "id": {
                     "format": "uuid",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
-                "Project": {
+                "project": {
                     "format": "uuid",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
-                "Iteration": {
+                "iteration": {
                     "format": "uuid",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
-                "Created": {
+                "created": {
                     "format": "date-time",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
-                "Predictions": {
+                "predictions": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ImageTagPredictionModel"
+                        "$ref": "#/definitions/Prediction"
                     },
                     "readOnly": true,
                     "x-nullable": true
@@ -349,24 +348,54 @@
             },
             "x-nullable": true
         },
-        "ImageTagPredictionModel": {
+        "Prediction": {
             "type": "object",
             "properties": {
-                "TagId": {
+                "probability": {
+                    "format": "float",
+                    "type": "number",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "tagId": {
                     "format": "uuid",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
-                "Tag": {
+                "tagName": {
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
-                "Probability": {
+                "boundingBox": {
+                    "$ref": "#/definitions/BoundingBox",
+                    "readOnly": true
+                }
+            },
+            "x-nullable": true
+        },
+        "BoundingBox": {
+            "type": "object",
+            "properties": {
+                "left": {
                     "format": "float",
                     "type": "number",
-                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "top": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                },
+                "width": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                },
+                "height": {
+                    "format": "float",
+                    "type": "number",
                     "x-nullable": false
                 }
             },

@@ -17,17 +17,21 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: stable/v1.1/Prediction.json
+input-file: stable/v2.0/Prediction.json
+```
+
+# Validation
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3017  # GuidUsage
+    reason:
+      - Existing service and previous versions use Guid as ids.
 ```
 
 # Code Generation
-
-## Suppression
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: Live service and portal doesn't use came case properties
-```
 
 ## Swagger to SDK
 
