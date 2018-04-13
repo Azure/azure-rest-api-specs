@@ -78,9 +78,6 @@
                         "schema": {
                             "$ref": "#/definitions/Location"
                         }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
                     }
                 },
                 "produces": [
@@ -92,7 +89,90 @@
                 "x-ms-pageable": {
                     "nextLinkName": null
                 }
-            }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Get the list of usage aggregates for all tenants.": {
+                        "$ref": "./examples/Location/put.json"
+                    }
+                },
+                "description": "Updates the specified location.",
+                "tags": [
+                    "Locations"
+                ],
+                "operationId": "Locations_Update",
+                "parameters": [
+                    {
+                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Subscriptions.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/NewLocationParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Get the list of usage aggregates for all tenants.": {
+                        "$ref": "./examples/Location/delete.json"
+                    }
+                },
+                "description": "Deletes the specified location.",
+                "tags": [
+                    "Locations"
+                ],
+                "operationId": "Locations_Delete",
+                "parameters": [
+                    {
+                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Subscriptions.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }                   
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }                        
         }
     },
     "definitions": {
