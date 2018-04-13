@@ -24,7 +24,16 @@ These are the global settings for SearchIndexClient.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2016-09-preview
+tag: package-2017-11
+```
+
+### Tag: package-2017-11
+
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- preview/2017-11-11/searchindex.json
 ```
 
 ### Tag: package-2016-09-preview

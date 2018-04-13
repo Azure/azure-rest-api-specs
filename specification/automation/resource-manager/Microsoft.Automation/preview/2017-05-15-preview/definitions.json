@@ -77,7 +77,8 @@
           "type": "array",
           "items": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-nullable": false
           },
           "description": "Days of the month that the job should execute on. Must be between 1 and 31."
         },
@@ -127,7 +128,8 @@
         "jobId": {
           "type": "string",
           "format": "uuid",
-          "description": "Gets or sets the id of the job."
+          "description": "Gets or sets the id of the job.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
@@ -165,13 +167,13 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the end time of the job."
         },
         "exception": {
@@ -181,13 +183,13 @@
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the last modified time of the job."
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the last status modified time of the job."
         },
         "parameters": {
@@ -334,7 +336,8 @@
           "type": "string",
           "format": "uuid",
           "readOnly": true,
-          "description": "The id of the job."
+          "description": "The id of the job.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
@@ -370,21 +373,21 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "The start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "The end time of the job."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "The last modified time of the job."
         },
@@ -621,7 +624,7 @@
         "nextRun": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "ext run time of the update."
         }
       }
@@ -890,7 +893,7 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "End time of the software update configuration run.",
           "readOnly": true
         },
@@ -995,7 +998,7 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "End time of the software update configuration machine run.",
           "readOnly": true
         },
@@ -1309,14 +1312,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the end time of the job."
         },
@@ -1408,14 +1411,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the end time of the job."
         },
@@ -1470,18 +1473,20 @@
           "readOnly": true,
           "type": "number",
           "format": "double",
-          "description": "Gets the start time's offset in minutes."
+          "description": "Gets the start time's offset in minutes.",
+          "x-nullable": false
         },
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the end time of the schedule."
         },
         "expiryTimeOffsetMinutes": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the expiry time's offset in minutes."
+          "description": "Gets or sets the expiry time's offset in minutes.",
+          "x-nullable": false
         },
         "isEnabled": {
           "type": "boolean",
@@ -1491,13 +1496,14 @@
         "nextRun": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the next run time of the schedule."
         },
         "nextRunOffsetMinutes": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the next run time's offset in minutes."
+          "description": "Gets or sets the next run time's offset in minutes.",
+          "x-nullable": false
         },
         "interval": {
           "type": "integer",
