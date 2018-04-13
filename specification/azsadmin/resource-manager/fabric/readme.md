@@ -66,46 +66,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.AzureStack.Management.Fabric.Admin
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/Fabric/Fabric.Admin/Generated
+  output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-```
-
-### Tag: package-2016-05-01 and python
-
-These settings apply only when `--tag=package-2016-05-01 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-05-01' && $(python)
-namespace: azure.mgmt.fabric.admin.v2016_05_01
-```
-
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: fabric
-```
-
-### Tag: package-2016-05-01 and go
-
-These settings apply only when `--tag=package-2016-05-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2016-05-01' && $(go)
-output-folder: $(go-sdk-folder)/services/azsadmin/mgmt/2016-05-01/fabric
 ```
