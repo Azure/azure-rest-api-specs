@@ -2092,7 +2092,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeepCreatedOrigin"
-          }
+          },
+          "readOnly": true
         },
         "resourceState": {
           "description": "Resource status of the endpoint.",
@@ -2494,11 +2495,7 @@
             "Block",
             "Allow"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "GeoFilterActions",
-            "modelAsString": false
-          }
+          "type": "string"
         },
         "countryCodes": {
           "description": "Two letter country codes defining user country access in a geo filter, e.g. AU, MX, US.",
