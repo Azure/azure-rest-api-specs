@@ -1143,19 +1143,19 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/costAllocationTags": {
+    "/providers/Microsoft.CostManagement/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/costTags": {
       "get": {
         "tags": [
-          "CostAllocationTags"
+          "CostTags"
         ],
-        "operationId": "CostAllocationTags_Get",
-        "description": "Get cost allocation tags for a billing account.",
+        "operationId": "CostTags_Get",
+        "description": "Get cost tags for a billing account.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "CostAllocationTags_Get": {
-            "$ref": "./examples/CostAllocationTags.json"
+          "CostTags_Get": {
+            "$ref": "./examples/CostTags.json"
           }
         },
         "parameters": [
@@ -1170,7 +1170,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationTags"
+              "$ref": "#/definitions/CostTags"
             }
           },
           "default": {
@@ -1183,16 +1183,16 @@
       },
       "put": {
         "tags": [
-          "CostAllocationTags"
+          "CostTags"
         ],
-        "operationId": "CostAllocationTags_CreateOrUpdate",
-        "description": "The operation to create or update cost allocation tags assiciated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "operationId": "CostTags_CreateOrUpdate",
+        "description": "The operation to create or update cost tags assiciated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "CreateOrUpdateCostAllocationTags": {
-            "$ref": "./examples/CreateOrUpdateCostAllocationTags.json"
+          "CreateOrUpdateCostTags": {
+            "$ref": "./examples/CreateOrUpdateCostTags.json"
           }
         },
         "parameters": [
@@ -1207,22 +1207,61 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CostAllocationTags"
+              "$ref": "#/definitions/CostTags"
             },
-            "description": "Parameters supplied to the Create cost allocation tags operation."
+            "description": "Parameters supplied to the Create cost tags operation."
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationTags"
+              "$ref": "#/definitions/CostTags"
             }
           },
           "201": {
             "description": "Created.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationTags"
+              "$ref": "#/definitions/CostTags"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/tags": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_Get",
+        "description": "Get all available tag keys for a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Tags_Get": {
+            "$ref": "./examples/Tags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Tags"
             }
           },
           "default": {
@@ -1868,6 +1907,43 @@
         }
       }
     },
+    "Tags": {
+      "description": "A resource listing all tags.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TagProperties",
+          "title": "Tag properties"
+        }
+      }
+    },
+    "TagProperties": {
+      "description": "The properties of the tag.",
+      "properties": {
+        "tags": {
+          "description": "A list of Tag.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "description": "The tag resource.",
+      "properties": {
+        "key": {
+          "description": "Tag key.",
+          "type": "string"
+        }
+      }
+    },
     "BudgetsListResult": {
       "description": "Result of listing budgets. It contains a list of available budgets in the scope provided.",
       "properties": {
@@ -2103,8 +2179,8 @@
         "contactEmails"
       ]
     },
-    "CostAllocationTags": {
-      "description": "A cost allocation tag resource.",
+    "CostTags": {
+      "description": "A cost tag resource.",
       "type": "object",
       "allOf": [
         {
@@ -2114,28 +2190,28 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CostAllocationTagProperties",
-          "title": "Cost allocation tag properties"
+          "$ref": "#/definitions/CostTagProperties",
+          "title": "Cost tag properties"
         }
       }
     },
-    "CostAllocationTagProperties": {
-      "description": "The properties of the cost allocation tag.",
+    "CostTagProperties": {
+      "description": "The properties of the cost tag.",
       "properties": {
-        "costAllocationTags": {
-          "description": "Cost allocation tags.",
+        "costTags": {
+          "description": "Cost tags.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CostAllocationTag"
+            "$ref": "#/definitions/CostTag"
           }
         }
       }
     },
-    "CostAllocationTag": {
-      "description": "The cost allocation tag.",
+    "CostTag": {
+      "description": "The cost tag.",
       "properties": {
         "key": {
-          "description": "Cost allocation tag key.",
+          "description": "Cost tag key.",
           "type": "string"
         }
       }
