@@ -110,34 +110,62 @@
             "description": "Properties for an delegated provider.",
             "type": "object",
             "properties": {
-                "subscriptionId": {
-                    "type": "string",
-                    "description": "Subscription ID of tenant using plan."
-                },
-                "usageStartTime": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "UTC start time for the usage bucket to which this usage aggregate belongs."
-                },
-                "usageEndTime": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "UTC end time for the usage bucket to which this usage aggregate belongs."
-                },
-                "instanceData": {
-                    "description": "Key-value pairs of instance details represented as a string.",
+                "delegatedOfferId": {
+                    "description": "The delegated offer identifier.",
                     "type": "string"
                 },
-                "quantity": {
-                    "description": "The amount of the resource consumption that occurred in this time frame.",
+                "displayName": {
+                    "description": "Display name of offer.",
                     "type": "string"
                 },
-                "meterId": {
-                    "description": "Unique ID for the resource that was consumed (aka ResourceID).",
+                "description": {
+                    "description": "Description of offer.",
                     "type": "string"
+                },
+                "externalReferenceId": {
+                    "description": "External reference identifier.",
+                    "type": "string"
+                },
+                "accessibilityState": {
+                    "description": "Offer accessibility state.",
+                    "$ref": "#/definitions/AccessibilityState"
+                },
+                "subscriptionCount": {
+                    "description": "Current subscription count.",
+                    "type": "integer"
                 }
             }
         },
+        "AccessibilityState": {
+            "type": "string",
+            "description": "Represents the state of the offer",
+            "enum": [
+                "Private",
+                "Public",
+                "Decommissioned"
+            ],
+            "x-ms-enum": {
+                "name": "AccessibilityState",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "description": "The offer or plan is private. Only an Admin can see and manage it.",
+                        "name": "Private",
+                        "value": "Private"
+                    },
+                    {
+                        "description": "The offer or plan is public. Users can see and self-subscribe to it.",
+                        "name": "Public",
+                        "value": "Public"
+                    },
+                    {
+                        "description": "The offer or plan is decommissioned. Current subscriptions can still consume it but new subscriptions cannot.",
+                        "name": "Decommissioned",
+                        "value": "Decommissioned"
+                    }
+                ]
+            }
+        },        
         "DelegatedProviderOfferList": {
             "description": "List of delegated provider offers.",
             "properties": {
@@ -156,14 +184,6 @@
         }
     },
     "parameters": {
-        "DelegatedProviderOfferParameter": {
-            "description": "The delegated offer name",
-            "name": "delegatedProviderOffer",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        }
     },
     "securityDefinitions": {
         "azure_auth": {
