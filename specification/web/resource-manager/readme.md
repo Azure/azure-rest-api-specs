@@ -289,6 +289,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-02
   - tag: package-2016-09
   - tag: package-2015-08-preview
 ```
