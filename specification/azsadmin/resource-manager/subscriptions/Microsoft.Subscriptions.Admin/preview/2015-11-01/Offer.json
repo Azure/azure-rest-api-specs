@@ -9,6 +9,12 @@
     "schemes": [
         "https"
     ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/offers": {
             "get": {
@@ -38,12 +44,6 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
                 }
@@ -80,12 +80,6 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
                 }
@@ -124,13 +118,7 @@
                             "$ref": "#/definitions/Offer"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             },
             "put": {
                 "x-ms-examples": {
@@ -173,13 +161,7 @@
                             "$ref": "#/definitions/Offer"
                         }                        
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
            },
             "delete": {
                 "x-ms-examples": {
@@ -213,13 +195,7 @@
                     "204": {
                         "description": "No Content"
                     }                   
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/Metrics": {
@@ -255,13 +231,7 @@
                             "$ref": "Subscriptions.json#/definitions/MetricList"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/MetricDefinitions": {
@@ -297,13 +267,7 @@
                             "$ref": "Subscriptions.json#/definitions/MetricDefinitionList"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/link": {
@@ -342,13 +306,7 @@
                       "$ref": "#/definitions/Offer"
                     }
                   }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/unlink": {
@@ -387,13 +345,7 @@
                       "$ref": "#/definitions/Offer"
                     }
                   }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         }
     },

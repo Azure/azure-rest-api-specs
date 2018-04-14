@@ -9,11 +9,17 @@
     "schemes": [
         "https"
     ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations": {
             "get": {
                 "x-ms-examples": {
-                    "Get the list of usage aggregates for all tenants.": {
+                    "Get a list of all AzureStack location.": {
                         "$ref": "./examples/Location/List.json"
                     }
                 },
@@ -38,12 +44,6 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": null
                 }
@@ -52,7 +52,7 @@
         "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}": {
             "get": {
                 "x-ms-examples": {
-                    "Get the list of usage aggregates for all tenants.": {
+                    "Get the specified location.": {
                         "$ref": "./examples/Location/Get.json"
                     }
                 },
@@ -80,27 +80,21 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": null
                 }
             },
             "put": {
                 "x-ms-examples": {
-                    "Get the list of usage aggregates for all tenants.": {
-                        "$ref": "./examples/Location/put.json"
+                    "Updates the specified location.": {
+                        "$ref": "./examples/Location/Put.json"
                     }
                 },
                 "description": "Updates the specified location.",
                 "tags": [
                     "Locations"
                 ],
-                "operationId": "Locations_Update",
+                "operationId": "Locations_CreateOrUpdate",
                 "parameters": [
                     {
                         "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
@@ -123,20 +117,14 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": null
                 }
             },
             "delete": {
                 "x-ms-examples": {
-                    "Get the list of usage aggregates for all tenants.": {
-                        "$ref": "./examples/Location/delete.json"
+                    "Deletes the specified location.": {
+                        "$ref": "./examples/Location/Delete.json"
                     }
                 },
                 "description": "Deletes the specified location.",
@@ -162,17 +150,8 @@
                     "204": {
                         "description": "No Content"
                     }                   
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "x-ms-pageable": {
-                    "nextLinkName": null
                 }
-            }                        
+            }
         }
     },
     "definitions": {

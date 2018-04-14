@@ -9,6 +9,12 @@
     "schemes": [
         "https"
     ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/delegatedProviders/{delegatedProviderSubscriptionId}/offers": {
             "get": {
@@ -41,12 +47,6 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
                 }
@@ -85,13 +85,7 @@
                             "$ref": "#/definitions/DelegatedProviderOffer"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         }
     },
@@ -145,10 +139,10 @@
             }
         },
         "DelegatedProviderOfferList": {
-            "description": "Holds an array of usage aggregates and the continuation token.",
+            "description": "List of delegated provider offers.",
             "properties": {
                 "value": {
-                    "description": "Array of usage aggregates.",
+                    "description": "Array of delegated provider offers.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/DelegatedProviderOffer"

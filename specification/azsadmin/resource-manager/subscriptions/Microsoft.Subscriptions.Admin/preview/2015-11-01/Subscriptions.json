@@ -9,6 +9,12 @@
     "schemes": [
         "https"
     ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/providers/Microsoft.Subscriptions.Admin/operations": {
             "get": {
@@ -34,13 +40,7 @@
                             "$ref": "#/definitions/OperationList"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/updateEncryption": {
@@ -67,13 +67,7 @@
                     "200": {
                         "description": "OK"
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/restoreData": {
@@ -103,13 +97,7 @@
                             "$ref": "#/definitions/SubscriptionList"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions": {
@@ -143,12 +131,6 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": null
                 },
@@ -186,12 +168,6 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": null
                 }
@@ -227,13 +203,7 @@
                             "$ref": "#/definitions/Subscription"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             },
             "put": {
                 "x-ms-examples": {
@@ -273,13 +243,7 @@
                             "$ref": "#/definitions/Subscription"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             },
             "delete": {
                 "x-ms-examples": {
@@ -310,13 +274,7 @@
                     "204": {
                         "description": "No Content"
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         }
     },
@@ -758,10 +716,10 @@
             }
         },
         "MetricList": {
-            "description": "Holds an array of usage aggregates and the continuation token.",
+            "description": "List of metrics.",
             "properties": {
                 "value": {
-                    "description": "Array of usage aggregates.",
+                    "description": "List of metrics.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Metric"
@@ -774,10 +732,10 @@
             }
         },
         "MetricDefinitionList": {
-            "description": "Holds an array of usage aggregates and the continuation token.",
+            "description": "List of metric definitions.",
             "properties": {
                 "value": {
-                    "description": "Array of usage aggregates.",
+                    "description": "Array of metric definitions.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/MetricDefinition"

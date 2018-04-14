@@ -9,6 +9,12 @@
     "schemes": [
         "https"
     ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/directoryTenants": {
             "get": {
@@ -41,12 +47,6 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
                 }
@@ -85,13 +85,7 @@
                             "$ref": "#/definitions/DirectoryTenant"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             },
             "delete": {
                 "x-ms-examples": {
@@ -125,13 +119,7 @@
                     "204": {
                         "description": "No Content"
                     }                   
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             },
             "put": {
                 "x-ms-examples": {
@@ -174,13 +162,7 @@
                             "$ref": "#/definitions/DirectoryTenant"
                         }                        
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         }
    },
