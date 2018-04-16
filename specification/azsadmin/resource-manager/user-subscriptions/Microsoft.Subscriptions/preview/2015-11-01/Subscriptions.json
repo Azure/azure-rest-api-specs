@@ -9,6 +9,12 @@
     "schemes": [
         "https"
     ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/subscriptions": {
             "get": {
@@ -35,12 +41,6 @@
                         }
                     }
                 },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
                 "x-ms-pageable": {
                     "nextLinkName": null
                 }
@@ -49,7 +49,7 @@
         "/subscriptions/{subscriptionId}": {
             "get": {
                 "x-ms-examples": {
-                    "Get the list of subscriptions.": {
+                    "Get the specified subscription.": {
                         "$ref": "./examples/Subscriptions/Get.json"
                     }
               },
@@ -118,13 +118,7 @@
                             "$ref": "#/definitions/Subscription"
                         }
                       }
-                    },
-                    "produces": [
-                        "application/json"
-                    ],
-                    "consumes": [
-                        "application/json"
-                    ]
+                    }
                 },
                 "delete": {
                     "x-ms-examples": {
@@ -189,13 +183,7 @@
                                 "$ref": "#/definitions/OperationList"
                             }
                         }
-                    },
-                    "produces": [
-                        "application/json"
-                    ],
-                    "consumes": [
-                        "application/json"
-                    ]
+                    }
                 }
             }
         },
@@ -353,13 +341,6 @@
             }            
         },
         "parameters": {
-            "SubscriptionIdParameter": {
-                "name": "subscriptionId",
-                "in": "path",
-                "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.",
-                "required": true,
-                "type": "string"
-            },
             "ApiVersionParameter": {
                 "name": "api-version",
                 "in": "query",
@@ -367,30 +348,6 @@
                 "required": true,
                 "type": "string",
                 "default": "2015-11-01"
-            },
-            "ResourceGroupParameter": {
-                "description": "The resource group the resource is located under.",
-                "name": "resourceGroup",
-                "in": "path",
-                "type": "string",
-                "required": true,
-                "x-ms-parameter-location": "method"
-            },
-            "LocationParameter": {
-                "description": "The AzureStack location.",
-                "name": "location",
-                "in": "path",
-                "type": "string",
-                "required": true,
-                "x-ms-parameter-location": "method"
-            },
-            "SubscriptionParameter": {
-                "description": "Subscription parameter.",
-                "name": "subscription",
-                "in": "path",
-                "type": "string",
-                "required": true,
-                "x-ms-parameter-location": "method"
             },
             "NewSubscriptionParameter": {
                 "description": "Subscription parameter.",
