@@ -152,6 +152,56 @@
             "$ref": "./examples/ServerAdvisorUpdate.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "ServerAdvisors"
+        ],
+        "description": "Creates or updates a server advisor.",
+        "operationId": "ServerAdvisors_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Server Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested advisor resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Advisor"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified server advisor.",
+            "schema": {
+              "$ref": "#/definitions/Advisor"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update server advisor": {
+            "$ref": "./examples/ServerAdvisorCreateOrUpdate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors": {
