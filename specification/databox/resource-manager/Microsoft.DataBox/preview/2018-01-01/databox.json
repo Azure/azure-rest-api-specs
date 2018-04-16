@@ -45,8 +45,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "TestOperationsAPIGET11": {
-            "$ref": "./examples/TestOperationsAPI-GET-example-11.json"
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
           }
         }
       }
@@ -89,6 +89,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobsList": {
+            "$ref": "./examples/JobsList.json"
+          }
         }
       }
     },
@@ -135,48 +140,10 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/regionAvailability": {
-      "post": {
-        "tags": [
-          "Service"
-        ],
-        "description": "This method returns the list of supported service regions and regions for destination storage accounts",
-        "operationId": "Service_RegionAvailability",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "regionAvailabilityInput",
-            "in": "body",
-            "description": "Country Code and Device Type. ",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegionAvailabilityInput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The supported regions. ",
-            "schema": {
-              "$ref": "#/definitions/RegionAvailabilityResponse"
-            }
+        },
+        "x-ms-examples": {
+          "ServiceListAvailableSkus": {
+            "$ref": "./examples/ServiceListAvailableSkus.json"
           }
         }
       }
@@ -211,6 +178,11 @@
             "schema": {
               "$ref": "#/definitions/ServiceHealthResponseList"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGetServiceHealth": {
+            "$ref": "./examples/ServiceGetServiceHealth.json"
           }
         }
       }
@@ -254,6 +226,11 @@
             "schema": {
               "$ref": "#/definitions/AddressValidationOutput"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceValidateAddress": {
+            "$ref": "./examples/ServiceValidateAddress.json"
           }
         }
       }
@@ -299,6 +276,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobsListByResourceGroup": {
+            "$ref": "./examples/JobsListByResourceGroup.json"
+          }
         }
       }
     },
@@ -342,6 +324,11 @@
             "schema": {
               "$ref": "#/definitions/JobResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "JobsGet": {
+            "$ref": "./examples/JobsGet.json"
           }
         }
       },
@@ -391,7 +378,12 @@
             "description": "Accepted request for create Job."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobsCreate": {
+            "$ref": "./examples/JobsCreate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -425,6 +417,11 @@
           },
           "204": {
             "description": "Job deleted."
+          }
+        },
+        "x-ms-examples": {
+          "JobsDelete": {
+            "$ref": "./examples/JobsDelete.json"
           }
         }
       },
@@ -480,7 +477,12 @@
             "description": "Accepted request for job updated."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobsUpdate": {
+            "$ref": "./examples/JobsUpdate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/bookShipmentPickUp": {
@@ -526,6 +528,11 @@
               "$ref": "#/definitions/ShipmentPickUpResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "JobsBookShipmentPickUp": {
+            "$ref": "./examples/JobsBookShipmentPickUp.json"
+          }
         }
       }
     },
@@ -569,6 +576,11 @@
           "204": {
             "description": "Job cancelled."
           }
+        },
+        "x-ms-examples": {
+          "JobsCancel": {
+            "$ref": "./examples/JobsCancel.json"
+          }
         }
       }
     },
@@ -606,6 +618,11 @@
               "$ref": "#/definitions/GetCopyLogsUriOutput"
             }
           }
+        },
+        "x-ms-examples": {
+          "JobsGetCopyLogsUri": {
+            "$ref": "./examples/JobsGetCopyLogsUri.json"
+          }
         }
       }
     },
@@ -642,6 +659,11 @@
             "schema": {
               "$ref": "#/definitions/ShippingLabelDetails"
             }
+          }
+        },
+        "x-ms-examples": {
+          "JobsDownloadShippingLabelUri": {
+            "$ref": "./examples/JobsDownloadShippingLabelUri.json"
           }
         }
       }
@@ -683,6 +705,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ListSecretsListByJobs": {
+            "$ref": "./examples/ListSecretsListByJobs.json"
+          }
         }
       }
     },
@@ -725,6 +752,11 @@
         "responses": {
           "204": {
             "description": "Accepted issue report."
+          }
+        },
+        "x-ms-examples": {
+          "JobsReportIssue": {
+            "$ref": "./examples/JobsReportIssue.json"
           }
         }
       }
@@ -1713,84 +1745,6 @@
         }
       }
     },
-    "RegionAvailabilityInput": {
-      "description": "Inputs to get list of supported storage regions and service regions for job creation.",
-      "required": [
-        "countryCode",
-        "deviceType"
-      ],
-      "type": "object",
-      "properties": {
-        "countryCode": {
-          "description": "Country for which the supported regions are requested.",
-          "enum": [
-            "US",
-            "NL",
-            "IE",
-            "AT",
-            "IT",
-            "BE",
-            "LV",
-            "BG",
-            "LT",
-            "HR",
-            "LU",
-            "CY",
-            "MT",
-            "CZ",
-            "DK",
-            "PL",
-            "EE",
-            "PT",
-            "FI",
-            "RO",
-            "FR",
-            "SK",
-            "DE",
-            "SI",
-            "GR",
-            "ES",
-            "HU",
-            "SE",
-            "GB"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CountryCode",
-            "modelAsString": false
-          }
-        },
-        "deviceType": {
-          "description": "Device type for which the supported regions have to be fetched.",
-          "enum": [
-            "Pod",
-            "Disk",
-            "Cabinet"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeviceType",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "RegionAvailabilityResponse": {
-      "description": "List of service regions and storage regions",
-      "required": [
-        "supportedRegions"
-      ],
-      "type": "object",
-      "properties": {
-        "supportedRegions": {
-          "description": "List of supported region.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SupportedRegions"
-          }
-        }
-      }
-    },
     "ReportIssueDetails": {
       "description": "Details of the reported issue.",
       "type": "object",
@@ -2030,8 +1984,8 @@
           "description": "The display name of the sku.",
           "type": "string"
         },
-        "tier": {
-          "description": "The sku tier. This is based on the SKU name.",
+        "family": {
+          "description": "The sku family.",
           "type": "string"
         }
       }
@@ -2134,54 +2088,6 @@
         "disabledReason": {
           "description": "Reason why the Sku is disabled.",
           "type": "string"
-        }
-      }
-    },
-    "SupportedRegions": {
-      "description": "Storage region and service region mapping",
-      "required": [
-        "storageRegion",
-        "serviceRegion"
-      ],
-      "type": "object",
-      "properties": {
-        "storageRegion": {
-          "description": "Storage Region",
-          "enum": [
-            "westus",
-            "centralus",
-            "eastus",
-            "northcentralus",
-            "southcentralus",
-            "eastus2",
-            "westus2",
-            "westcentralus",
-            "westeurope",
-            "northeurope",
-            "ukwest",
-            "uksouth",
-            "germanycentral",
-            "germanynortheast"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageRegion",
-            "modelAsString": false
-          }
-        },
-        "serviceRegion": {
-          "description": "Service Region",
-          "enum": [
-            "westus",
-            "westeurope",
-            "eastus2euap",
-            "centraluseuap"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServiceRegion",
-            "modelAsString": false
-          }
         }
       }
     },
