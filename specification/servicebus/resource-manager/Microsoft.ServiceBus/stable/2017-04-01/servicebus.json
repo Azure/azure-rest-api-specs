@@ -1144,7 +1144,7 @@
           }
         }
       }
-    },	
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations": {
       "get": {
         "tags": [
@@ -1185,7 +1185,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/$default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}": {
       "put": {
         "tags": [
           "migrationConfigurations"
@@ -1198,6 +1198,9 @@
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/configNameParameter"
           },
           {
             "name": "parameters",
@@ -1238,13 +1241,16 @@
           "migrationConfigurations"
         ],
         "operationId": "migrationConfigurations_Delete",
-        "description": "Deletes an MigrationConfig",
+        "description": "Deletes a MigrationConfiguration",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/configNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1279,6 +1285,9 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
+            "$ref": "#/parameters/configNameParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1301,12 +1310,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/$default/upgrade": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/upgrade": {
       "post": {
         "tags": [
           "migrationConfigurations"
         ],
-        "operationId": "MigrationConfig_upgrade",
+        "operationId": "migrationConfigurations_DisableMigration",
         "description": "This operation disables the Migration",
         "parameters": [
           {
@@ -1314,6 +1323,9 @@
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/configNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1335,7 +1347,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/$default/revert": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/revert": {
       "post": {
         "tags": [
           "migrationConfigurations"
@@ -1348,6 +1360,9 @@
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/configNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4211,7 +4226,7 @@
       },
       "description": "The result of the List Alias(Disaster Recovery configuration) operation."
     },
-	"MigrationConfigProperties": {
+    "MigrationConfigProperties": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -4219,16 +4234,7 @@
             "provisioningState": {
               "readOnly": true,
               "type": "string",
-              "description": "Provisioning state of Migration Config - possible values 'Accepted' or 'Succeeded' or 'Failed'",
-              "enum": [
-                "Accepted",
-                "Succeeded",
-                "Failed"
-              ],
-              "x-ms-enum": {
-                "name": "ProvisioningStateMC",
-                "modelAsString": false
-              }
+              "description": "Provisioning state of Migration Configuration "
             },
             "primaryNamespaceName": {
               "type": "string",
@@ -4239,7 +4245,11 @@
               "description": "Name to access connection strings of the Primary Namespace after migration"
             }
           },
-          "description": "Properties required to the Create Or Update MigrationConfig"
+          "required": [
+            "primaryNamespaceName",
+            "postMigrationName"
+          ],
+          "description": "Properties required to the Create Migration Configuration"
         }
       },
       "allOf": [
@@ -4369,6 +4379,20 @@
       "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The Disaster Recovery configuration name"
+    },
+    "configNameParameter": {
+      "name": "configName",
+      "in": "path",
+      "description": "The configuration name. Should always be \"$default\".",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "$default"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationConfigurationName",
+        "modelAsString": true
+      }
     }
   }
 }
