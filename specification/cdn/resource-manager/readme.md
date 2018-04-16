@@ -8,7 +8,7 @@ This is the AutoRest configuration file for Cdn.
 
 ---
 ## Getting Started 
-To build the SDK for Cdn, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Cdn, dummy dummy dummy simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
