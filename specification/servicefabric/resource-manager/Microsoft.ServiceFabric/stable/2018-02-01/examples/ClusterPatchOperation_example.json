@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2017-07-01-preview",
+    "api-version": "2018-02-01",
     "parameters": {
       "type": "Microsoft.ServiceFabric/clusters",
       "location": "eastus",
@@ -13,7 +13,6 @@
         "a": "b"
       },
       "properties": {
-        "clusterState": "Default",
         "nodeTypes": [
           {
             "name": "nt1vm",
@@ -49,8 +48,7 @@
           }
         ],
         "reliabilityLevel": "Bronze",
-        "upgradeMode": "Default",
-        "addonFeatures": []
+        "upgradeMode": "Default"
       }
     }
   },
@@ -58,7 +56,7 @@
     "202": {
       "headers": {
         "Retry-After": "10",
-        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2017-07-01-privatepreview"
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2018-02-01"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/clusters",
@@ -72,10 +70,19 @@
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
-          "clusterCodeVersion": "6.0.219.9494",
+          "clusterCodeVersion": "6.1.480.9494",
           "clusterState": "WaitingForNodes",
           "managementEndpoint": "http://myCluster.eastus.cloudapp.azure.com:19080",
           "clusterEndpoint": "https://eastus.servicefabric.azure.com",
+          "certificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
+            "x509StoreName": "My"
+          },
           "clientCertificateThumbprints": [],
           "clientCertificateCommonNames": [],
           "fabricSettings": [
@@ -90,17 +97,16 @@
             }
           ],
           "upgradeDescription": {
-            "overrideUserUpgradePolicy": false,
             "forceRestart": false,
-            "upgradeReplicaSetCheckTimeout": "10675199.02:48:05.4775807",
-            "healthCheckWaitDuration": "00:05:00",
-            "healthCheckStableDuration": "00:05:00",
-            "healthCheckRetryTimeout": "00:45:00",
-            "upgradeTimeout": "12:00:00",
-            "upgradeDomainTimeout": "02:00:00",
+            "upgradeReplicaSetCheckTimeout": "00:10:00",
+            "healthCheckWaitDuration": "00:00:30",
+            "healthCheckStableDuration": "00:00:30",
+            "healthCheckRetryTimeout": "00:05:00",
+            "upgradeTimeout": "01:00:00",
+            "upgradeDomainTimeout": "00:15:00",
             "healthPolicy": {
-              "maxPercentUnhealthyNodes": 100,
-              "maxPercentUnhealthyApplications": 100
+              "maxPercentUnhealthyNodes": 0,
+              "maxPercentUnhealthyApplications": 0
             },
             "deltaHealthPolicy": {
               "maxPercentDeltaUnhealthyNodes": 0,
@@ -153,12 +159,11 @@
           "upgradeMode": "Automatic",
           "availableClusterVersions": [
             {
-              "codeVersion": "6.0.219.9494",
-              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "codeVersion": "6.1.480.9494",
+              "supportExpiryUtc": "2018-06-15T23:59:59.9999999",
               "environment": "Windows"
             }
-          ],
-          "addonFeatures": []
+          ]
         }
       }
     }

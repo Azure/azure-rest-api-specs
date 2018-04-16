@@ -1,14 +1,14 @@
-# ServiceFabricClient
-
+# ServiceFabric
+    
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for ServiceFabricClient.
+This is the AutoRest configuration file for Service Fabric.
 
 
 
 ---
 ## Getting Started
-To build the SDK for ServiceFabricClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for ServiceFabricManagementClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -21,22 +21,53 @@ To see additional help and options, run:
 
 
 
-### Basic Information
-These are the global settings for the ServiceFabricClient API.
+### Basic Information 
+These are the global settings for the ServiceFabricManagementClient API.
 
 ``` yaml
+title: ServiceFabricManagementClient
+description: Service Fabric Management Client
 openapi-type: arm
-tag: package-2017-07
+tag: package-2018-02
+
+directive:
+  - suppress: ListInOperationName
+    reason: Modifying the operation names would break the backwards compatibility of the API.
+  - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code.
+  - suppress: SummaryAndDescriptionMustNotBeSame
+    reason: There are a lot of APIs with missing summary content. While it is being worked on disabling this to ensure that we catch and fix other violations.
+  - suppress: TrackedResourceListByImmediateParent
+    reason: Proxy resources are not properly evaluated by the validation toolset.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Modifying the operation names would break the backwards compatibility of the API.
+  - suppress: EnumInsteadOfBoolean
+    reason: The boolean properties are actually boolean value in the Service Fabric's application model.
+  - suppress: TrackedResourceGetOperation
+    reason: Proxy resources are not properly evaluated by the validation toolset.
+  - suppress: TrackedResourcePatchOperation
+    reason: Proxy resources are not properly evaluated by the validation toolset.
+  - suppress: TrackedResourceListByResourceGroup
+    reason: Proxy resources are not properly evaluated by the validation toolset.
+  - suppress: TrackedResourceListBySubscription
+    reason: Proxy resources are not properly evaluated by the validation toolset.
+  - suppress: DescriptionAndTitleMissing
+    reason: There are a lot of APIs with missing titles. While it is being worked on disabling this to ensure that we catch and fix other violations.
+  - suppress: Example Validations
+    reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
+  - suppress: Example Validations
+    reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
+
 ```
 
+### Tag: package-2018-02
 
-### Tag: package-2016-09
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
 
-These settings apply only when `--tag=package-2016-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-09'
+``` yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
+- Microsoft.ServiceFabric/stable/2018-02-01/cluster.json
+- Microsoft.ServiceFabric/preview/2017-07-01-preview/application.json
 ```
 
 ### Tag: package-2017-07
@@ -46,6 +77,15 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
 - Microsoft.ServiceFabric/preview/2017-07-01-preview/servicefabric.json
+```
+
+### Tag: package-2016-09
+
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09'
+input-file:
+- Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
 ```
 
 
@@ -77,6 +117,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ServiceFabric
+  payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/ServiceFabric/Management.ServiceFabric/Generated
   clear-output-folder: true
 ```
@@ -125,17 +166,18 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2016-09
+  - tag: package-2018-02
   - tag: package-2017-07
+  - tag: package-2016-09
 ```
 
-### Tag: package-2016-09 and go
+### Tag: package-2018-02 and go
 
-These settings apply only when `--tag=package-2016-09 --go` is specified on the command line.
+These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2016-09' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/mgmt/2016-09-01/servicefabric
+``` yaml $(tag) == 'package-2018-02' && $(go)
+output-folder: $(go-sdk-folder)/services/servicefabric/mgmt/2018-02-01/servicefabric
 ```
 
 ### Tag: package-2017-07 and go
@@ -145,6 +187,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-07' && $(go)
 output-folder: $(go-sdk-folder)/services/servicefabric/mgmt/2017-07-01-preview/servicefabric
+```
+
+### Tag: package-2016-09 and go
+
+These settings apply only when `--tag=package-2016-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-09' && $(go)
+output-folder: $(go-sdk-folder)/services/servicefabric/mgmt/2016-09-01/servicefabric
 ```
 
 
