@@ -389,7 +389,12 @@
               "EmailChannel",
               "KikChannel",
               "TelegramChannel",
-              "SlackChannel"
+              "SlackChannel",
+              "MsTeamsChannel",
+              "SkypeChannel",
+              "WebChatChannel",
+              "DirectLineChannel",
+              "SmsChannel"
             ],
             "description": "The name of the Bot resource."
           },
@@ -469,7 +474,12 @@
               "EmailChannel",
               "KikChannel",
               "TelegramChannel",
-              "SlackChannel"
+              "SlackChannel",
+              "MsTeamsChannel",
+              "SkypeChannel",
+              "WebChatChannel",
+              "DirectLineChannel",
+              "SmsChannel"
             ],
             "description": "The name of the Bot resource."
           },
@@ -627,6 +637,78 @@
           },
           "default": {
             "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels/{channelName}/list": {
+      "post": {
+        "tags": [
+          "Channel"
+        ],
+        "description": "Lists a Channel registration for a Bot Service including secrets",
+        "operationId": "Channel_List",
+        "x-ms-examples": {
+          "List Channel": {
+            "$ref": "./examples/ListChannel.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+            "description": "The name of the Bot resource."
+          },
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "FacebookChannel",
+              "EmailChannel",
+              "KikChannel",
+              "TelegramChannel",
+              "SlackChannel",
+              "MsTeamsChannel",
+              "SkypeChannel",
+              "WebChatChannel",
+              "DirectLineChannel",
+              "SmsChannel"
+            ],
+            "description": "The name of the Bot resource."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is retrieved successfully, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/BotChannel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1027,7 +1109,7 @@
         "verifyToken": {
           "type": "string",
           "readOnly": true,
-          "description": "Verify token"
+          "description": "Verify token. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "pageId": {
           "type": "string",
@@ -1039,11 +1121,11 @@
         },
         "appSecret": {
           "type": "string",
-          "description": "Facebook application secret"
+          "description": "Facebook application secret. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "accessToken": {
           "type": "string",
-          "description": "Facebook application access token"
+          "description": "Facebook application access token. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "callbackUrl": {
           "type": "string",
@@ -1086,7 +1168,7 @@
         },
         "password": {
           "type": "string",
-          "description": "The password for the email address"
+          "description": "The password for the email address. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "isEnabled": {
           "type": "boolean",
@@ -1229,7 +1311,7 @@
         },
         "apiKey": {
           "type": "string",
-          "description": "Kik API key"
+          "description": "Kik API key. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "isValidated": {
           "type": "boolean",
@@ -1328,7 +1410,7 @@
       "properties": {
         "accessToken": {
           "type": "string",
-          "description": "The Telegram access token"
+          "description": "The Telegram access token. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "isValidated": {
           "type": "boolean",
@@ -1368,11 +1450,11 @@
         },
         "accountSID": {
           "type": "string",
-          "description": "The Sms account SID"
+          "description": "The Sms account SID. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "authToken": {
           "type": "string",
-          "description": "The Sms auth token"
+          "description": "The Sms auth token. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "isValidated": {
           "type": "boolean",
@@ -1414,11 +1496,11 @@
         },
         "clientSecret": {
           "type": "string",
-          "description": "The Slack client secret"
+          "description": "The Slack client secret. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "verificationToken": {
           "type": "string",
-          "description": "The Slack verification token"
+          "description": "The Slack verification token. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "landingPageUrl": {
           "type": "string",
@@ -1490,7 +1572,7 @@
         },
         "key": {
           "type": "string",
-          "description": "Primary key",
+          "description": "Primary key. Value only returned through POST to the action Channel List API, otherwise empty.",
           "x-ms-mutability": [
             "read"
           ],
@@ -1498,7 +1580,7 @@
         },
         "key2": {
           "type": "string",
-          "description": "Secondary key",
+          "description": "Secondary key. Value only returned through POST to the action Channel List API, otherwise empty.",
           "x-ms-mutability": [
             "read"
           ],
@@ -1539,7 +1621,7 @@
             "read"
           ],
           "type": "string",
-          "description": "Primary key",
+          "description": "Primary key. Value only returned through POST to the action Channel List API, otherwise empty.",
           "readOnly": true
         },
         "key2": {
@@ -1547,7 +1629,7 @@
             "read"
           ],
           "type": "string",
-          "description": "Secondary key",
+          "description": "Secondary key. Value only returned through POST to the action Channel List API, otherwise empty.",
           "readOnly": true
         },
         "isEnabled": {
