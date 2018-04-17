@@ -380,23 +380,7 @@
             "description": "The name of the Bot resource."
           },
           {
-            "name": "channelName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "FacebookChannel",
-              "EmailChannel",
-              "KikChannel",
-              "TelegramChannel",
-              "SlackChannel",
-              "MsTeamsChannel",
-              "SkypeChannel",
-              "WebChatChannel",
-              "DirectLineChannel",
-              "SmsChannel"
-            ],
-            "description": "The name of the Bot resource."
+            "$ref": "#/parameters/channelNameParameter"
           },
           {
             "name": "parameters",
@@ -465,23 +449,7 @@
             "description": "The name of the Bot resource."
           },
           {
-            "name": "channelName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "FacebookChannel",
-              "EmailChannel",
-              "KikChannel",
-              "TelegramChannel",
-              "SlackChannel",
-              "MsTeamsChannel",
-              "SkypeChannel",
-              "WebChatChannel",
-              "DirectLineChannel",
-              "SmsChannel"
-            ],
-            "description": "The name of the Bot resource."
+            "$ref": "#/parameters/channelNameParameter"
           },
           {
             "name": "parameters",
@@ -675,23 +643,7 @@
             "description": "The name of the Bot resource."
           },
           {
-            "name": "channelName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "FacebookChannel",
-              "EmailChannel",
-              "KikChannel",
-              "TelegramChannel",
-              "SlackChannel",
-              "MsTeamsChannel",
-              "SkypeChannel",
-              "WebChatChannel",
-              "DirectLineChannel",
-              "SmsChannel"
-            ],
-            "description": "The name of the Bot resource."
+            "$ref": "#/parameters/channelNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -942,18 +894,6 @@
         "modelAsString": true
       }
     },
-    "ChannelName": {
-      "type": "string",
-      "description": "Indicates the name of a supported channel",
-      "enum": [
-        "FacebookChannel",
-        "EmailChannel"
-      ],
-      "x-ms-enum": {
-        "name": "ChannelName",
-        "modelAsString": true
-      }
-    },
     "Bot": {
       "type": "object",
       "description": "Bot resource definition",
@@ -1092,6 +1032,7 @@
     "FacebookChannel": {
       "type": "object",
       "description": "Facebook channel definition",
+      "x-ms-discriminator-value": "FacebookChannel",
       "allOf": [
         {
           "$ref": "#/definitions/Channel"
@@ -1163,6 +1104,7 @@
     "EmailChannel": {
       "type": "object",
       "description": "Email channel definition",
+      "x-ms-discriminator-value": "EmailChannel",
       "allOf": [
         {
           "$ref": "#/definitions/Channel"
@@ -1199,6 +1141,7 @@
     },
     "MsTeamsChannel": {
       "type": "object",
+      "x-ms-discriminator-value": "MsTeamsChannel",
       "description": "Microsoft Teams channel definition",
       "allOf": [
         {
@@ -1247,6 +1190,7 @@
     "SkypeChannel": {
       "type": "object",
       "description": "Skype channel definition",
+      "x-ms-discriminator-value": "SkypeChannel",
       "allOf": [
         {
           "$ref": "#/definitions/Channel"
@@ -1305,6 +1249,7 @@
     },
     "KikChannel": {
       "type": "object",
+      "x-ms-discriminator-value": "KikChannel",
       "description": "Kik channel definition",
       "allOf": [
         {
@@ -1346,6 +1291,7 @@
     },
     "WebChatChannel": {
       "type": "object",
+      "x-ms-discriminator-value": "WebChatChannel",
       "description": "Web Chat channel definition",
       "allOf": [
         {
@@ -1381,6 +1327,7 @@
     },
     "DirectLineChannel": {
       "type": "object",
+      "x-ms-discriminator-value": "DirectLineChannel",
       "description": "Direct Line channel definition",
       "allOf": [
         {
@@ -1409,6 +1356,7 @@
     "TelegramChannel": {
       "type": "object",
       "description": "Telegram channel definition",
+      "x-ms-discriminator-value": "TelegramChannel",
       "allOf": [
         {
           "$ref": "#/definitions/Channel"
@@ -1445,6 +1393,7 @@
     "SmsChannel": {
       "type": "object",
       "description": "Sms channel definition",
+      "x-ms-discriminator-value": "SmsChannel",
       "allOf": [
         {
           "$ref": "#/definitions/Channel"
@@ -1491,6 +1440,7 @@
     "SlackChannel": {
       "type": "object",
       "description": "Slack channel definition",
+      "x-ms-discriminator-value": "SlackChannel",
       "allOf": [
         {
           "$ref": "#/definitions/Channel"
@@ -1798,6 +1748,61 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. Current version is 2017-12-01"
+    },
+    "channelNameParameter": {
+      "name": "channelName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "FacebookChannel",
+        "EmailChannel",
+        "KikChannel",
+        "TelegramChannel",
+        "SlackChannel",
+        "MsTeamsChannel",
+        "SkypeChannel",
+        "WebChatChannel",
+        "DirectLineChannel",
+        "SmsChannel"
+      ],
+      "x-ms-enum": {
+        "name": "channelName",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "FacebookChannel"  
+          },
+          {
+            "value": "EmailChannel"  
+          },
+          {
+            "value": "KikChannel"  
+          },
+          {
+            "value": "TelegramChannel"  
+          },
+          {
+            "value": "SlackChannel"  
+          },
+          {
+            "value": "MsTeamsChannel"  
+          },
+          {
+            "value": "SkypeChannel"  
+          },
+          {
+            "value": "WebChatChannel"  
+          },
+          {
+            "value": "DirectLineChannel"  
+          },
+          {
+            "value": "SmsChannel"  
+          }
+        ]
+      },
+      "description": "The name of the Channel resource."
     }
   }
 }
