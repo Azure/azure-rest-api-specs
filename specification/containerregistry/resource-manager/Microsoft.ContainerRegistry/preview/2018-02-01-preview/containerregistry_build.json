@@ -69,7 +69,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -122,7 +122,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -184,7 +184,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -234,7 +234,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -283,7 +283,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -329,7 +329,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -380,7 +380,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -441,7 +441,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -488,7 +488,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -550,7 +550,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -599,7 +599,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -658,7 +658,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -707,7 +707,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -765,7 +765,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -812,7 +812,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -871,7 +871,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -917,7 +917,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -971,7 +971,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1014,7 +1014,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1871,34 +1871,29 @@
       },
       "x-ms-azure-resource": true
     },
-    "Error": {
+    "ErrorResponse": {
       "description": "Azure container registry build API error object.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ErrorBody",
+        "error": {
+          "$ref": "#/definitions/Error",
           "description": "Azure container registry build API error body."
         }
       }
     },
-    "ErrorBody": {
+    "Error": {
       "description": "Azure container registry build API error body.",
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
-        "properties": {
-          "description": "Azure container registry build API error body.",
-          "required": [
-            "code",
-            "message"
-          ],
-          "properties": {
-            "code": {
-              "description": "error code.",
-              "type": "string"
-            },
-            "message": {
-              "description": "error message.",
-              "type": "string"
-            }
-          }
+        "code": {
+          "description": "error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "error message.",
+          "type": "string"
         }
       }
     },
