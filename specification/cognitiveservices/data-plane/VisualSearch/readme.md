@@ -1,4 +1,4 @@
-# Cognitive Services Visual Search SDK
+# Bing Visual Search SDK
 
 > see https://aka.ms/autorest
 
