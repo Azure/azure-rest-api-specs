@@ -16,7 +16,7 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/tableservices/default": {
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/tableservices/{serviceType}": {
             "get": {
                 "x-ms-examples": {
                     "Returns the table servie.": {
@@ -39,6 +39,9 @@
                         "$ref": "storage.json#/parameters/FarmIdParameter"
                     },
                     {
+                        "$ref": "storage.json#/parameters/ServiceTypeParameter"
+                    },
+                    {
                         "$ref": "storage.json#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -55,7 +58,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/tableservices/default/metricdefinitions": {
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/tableservices/{serviceType}/metricdefinitions": {
             "get": {
                 "x-ms-examples": {
                     "Returns a list of metric definitions for table service.": {
@@ -78,6 +81,9 @@
                         "$ref": "storage.json#/parameters/FarmIdParameter"
                     },
                     {
+                        "$ref": "storage.json#/parameters/ServiceTypeParameter"
+                    },
+                    {
                         "$ref": "storage.json#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -97,7 +103,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/tableservices/default/metrics": {
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/tableservices/{serviceType}/metrics": {
             "get": {
                 "x-ms-examples": {
                     "Returns a list of metrics for table service.": {
@@ -118,6 +124,9 @@
                     },
                     {
                         "$ref": "storage.json#/parameters/FarmIdParameter"
+                    },
+                    {
+                        "$ref": "storage.json#/parameters/ServiceTypeParameter"
                     },
                     {
                         "$ref": "storage.json#/parameters/ApiVersionParameter"

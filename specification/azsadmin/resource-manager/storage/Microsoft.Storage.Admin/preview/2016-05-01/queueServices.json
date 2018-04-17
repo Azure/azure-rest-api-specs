@@ -16,7 +16,7 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/queueservices/default": {
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/queueservices/{serviceType}": {
             "get": {
                 "x-ms-examples": {
                     "Returns the queue service.": {
@@ -39,6 +39,9 @@
                         "$ref": "storage.json#/parameters/FarmIdParameter"
                     },
                     {
+                        "$ref": "storage.json#/parameters/ServiceTypeParameter"
+                    },
+                    {
                         "$ref": "storage.json#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -55,7 +58,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/queueservices/default/metricdefinitions": {
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/queueservices/{serviceType}/metricdefinitions": {
             "get": {
                 "x-ms-examples": {
                     "Returns a list of metric definitions for queue service.": {
@@ -78,6 +81,9 @@
                         "$ref": "storage.json#/parameters/FarmIdParameter"
                     },
                     {
+                        "$ref": "storage.json#/parameters/ServiceTypeParameter"
+                    },
+                    {
                         "$ref": "storage.json#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -97,7 +103,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/queueservices/default/metrics": {
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/queueservices/{serviceType}/metrics": {
             "get": {
                 "x-ms-examples": {
                     "Returns a list of metrics for the queue service.": {
@@ -118,6 +124,9 @@
                     },
                     {
                         "$ref": "storage.json#/parameters/FarmIdParameter"
+                    },
+                    {
+                        "$ref": "storage.json#/parameters/ServiceTypeParameter"
                     },
                     {
                         "$ref": "storage.json#/parameters/ApiVersionParameter"
