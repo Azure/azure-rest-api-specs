@@ -2810,7 +2810,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory": {
       "get": {
         "tags": [
           "VirtualMachineScaleSets"
@@ -4366,7 +4366,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated."
     },
     "AvailabilitySetListResult": {
       "properties": {
@@ -5913,7 +5913,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "description": "Describes a Virtual Machine."
+      "description": "Describes a Virtual Machine Update."
     },
     "VirtualMachineListResult": {
       "properties": {
@@ -6186,7 +6186,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "description": "The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist."
+      "description": "The source user image virtual hard disk. Only tags may be updated."
     },
     "ImageListResult": {
       "properties": {
@@ -6960,7 +6960,7 @@
         },
         "evictionPolicy": {
           "type": "string",
-          "description": "Specifies the eviction policy for virtual machines in the low priority scale set. <br><br>Minimum api-version: 2017-10-30-preview",
+          "description": "Specifies the eviction policy for virtual machines in a low priority scale set. <br><br>Minimum api-version: 2017-10-30-preview",
           "enum": [
             "Deallocate",
             "Delete"
@@ -7418,7 +7418,7 @@
           "description": "Resource type"
         },
         "location": {
-		  "readOnly": true,
+          "readOnly": true,
           "type": "string",
           "description": "Resource location"
         }
