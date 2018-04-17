@@ -1142,6 +1142,136 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.CostManagement/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/costTags": {
+      "get": {
+        "tags": [
+          "CostTags"
+        ],
+        "operationId": "CostTags_Get",
+        "description": "Get cost tags for a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CostTags_Get": {
+            "$ref": "./examples/CostTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostTags"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CostTags"
+        ],
+        "operationId": "CostTags_CreateOrUpdate",
+        "description": "The operation to create or update cost tags assiciated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateCostTags": {
+            "$ref": "./examples/CreateOrUpdateCostTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CostTags"
+            },
+            "description": "Parameters supplied to the Create cost tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostTags"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/CostTags"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/tags": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_Get",
+        "description": "Get all available tag keys for a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Tags_Get": {
+            "$ref": "./examples/Tags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1777,6 +1907,43 @@
         }
       }
     },
+    "Tags": {
+      "description": "A resource listing all tags.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TagProperties",
+          "title": "Tag properties"
+        }
+      }
+    },
+    "TagProperties": {
+      "description": "The properties of the tag.",
+      "properties": {
+        "tags": {
+          "description": "A list of Tag.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "description": "The tag resource.",
+      "properties": {
+        "key": {
+          "description": "Tag key.",
+          "type": "string"
+        }
+      }
+    },
     "BudgetsListResult": {
       "description": "Result of listing budgets. It contains a list of available budgets in the scope provided.",
       "properties": {
@@ -2011,6 +2178,43 @@
         "threshold",
         "contactEmails"
       ]
+    },
+    "CostTags": {
+      "description": "A cost tag resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CostTagProperties",
+          "title": "Cost tag properties"
+        }
+      }
+    },
+    "CostTagProperties": {
+      "description": "The properties of the cost tag.",
+      "properties": {
+        "costTags": {
+          "description": "Cost tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CostTag"
+          }
+        }
+      }
+    },
+    "CostTag": {
+      "description": "The cost tag.",
+      "properties": {
+        "key": {
+          "description": "Cost tag key.",
+          "type": "string"
+        }
+      }
     },
     "ErrorDetails": {
       "description": "The details of the error.",
@@ -2253,6 +2457,14 @@
       "required": true,
       "type": "string"
     },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "Azure Billing Account ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
@@ -2296,6 +2508,7 @@
     "grainParameter": {
       "name": "grain",
       "description": "Can be daily or monthly",
+      "x-ms-parameter-location": "method",
       "in": "query",
       "required": true,
       "type": "string",

@@ -290,6 +290,9 @@
           },
           "ApiManagementServiceGetServiceHavingMsi": {
             "$ref": "./examples/ApiManagementServiceGetServiceHavingMsi.json"
+          },
+          "ApiManagementServiceGetMultiRegionInternalVnet": {
+            "$ref": "./examples/ApiManagementServiceGetMultiRegionInternalVnet.json"
           }
         },
         "parameters": [
@@ -785,7 +788,15 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Static IP addresses of the location's virtual machines."
+          "description": "Public Static Load Balanced IP addresses of the API Management service in the additional location. Available only for Basic, Standard and Premium SKU."
+        },
+        "privateIPAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Private Static Load Balanced IP addresses of the API Management service which is deployed in an Internal Virtual Network in a particular additional location. Available only for Basic, Standard and Premium SKU."
         },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
@@ -935,7 +946,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Public Static Load Balanced IP addresses of the API Management service. Available only for Basic, Standard and Premium SKU."
+          "description": "Public Static Load Balanced IP addresses of the API Management service in Primary region. Available only for Basic, Standard and Premium SKU."
         },
         "privateIPAddresses": {
           "type": "array",
@@ -943,7 +954,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Private Static Load Balanced IP addresses of the API Management service which is deployed in an Internal Virtual Network. Available only for Basic, Standard and Premium SKU."
+          "description": "Private Static Load Balanced IP addresses of the API Management service in Primary region which is deployed in an Internal Virtual Network. Available only for Basic, Standard and Premium SKU."
         },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
