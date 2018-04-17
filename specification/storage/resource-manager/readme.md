@@ -170,6 +170,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2017-06
   - tag: package-2016-12
@@ -177,6 +178,15 @@ batch:
   - tag: package-2016-01
   - tag: package-2015-06
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2018-02 and go
+
+These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(go)
+output-folder: $(go-sdk-folder)/services/storage/mgmt/2018-02-01/storage
 ```
 
 ### Tag: package-2017-10 and go
@@ -262,11 +272,23 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2017-06
   - tag: package-2016-12
   - tag: package-2016-01
   - tag: package-2015-06
+```
+
+### Tag: package-2018-02 and python
+
+These settings apply only when `--tag=package-2018-02 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(python)
+python:
+  namespace: azure.mgmt.storage.v2018_02_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2018_02_01
 ```
 
 ### Tag: package-2017-10 and python
