@@ -275,6 +275,65 @@
         "typeProperties"
       ]
     },
+    "BlobEventsTrigger":
+    {
+      "description": "Trigger that runs everytime a Blob event occurs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiplePipelineTrigger"
+        }
+      ],
+      "properties": {
+        "typeProperties":
+        {
+          "description": "Blob Events Trigger properties",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "blobPath": {
+              "description": "path to container, folder, blob, or file extension for which events can trigger the pipeline.",
+              "type": "string"
+            },
+            "events": {
+              "description": "the type of events for which we want to trigger the pipeline.",
+              "$ref": "#/definitions/BlobEventTypes"
+            },
+            "scope": {
+              "description": "the resource id of the Storage Account.",
+              "type": "string"
+            },
+            "maxConcurrency": {
+              "description": "the max number of parallel events to handle when it is triggered.",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "blobPath",
+            "events",
+            "scope",
+            "maxConcurrency"
+          ]
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "BlobEventTypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "blobCreated",
+          "blobDeleted"
+        ],
+        "x-ms-enum": {
+          "name": "BlobEventTypes",
+          "modelAsString": true
+        }
+      },
+      "description": "blob event types"
+    },
     "TumblingWindowTrigger": {
       "description": "Trigger that schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).",
       "type": "object",
