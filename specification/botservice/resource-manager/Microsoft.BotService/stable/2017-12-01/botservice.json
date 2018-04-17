@@ -644,7 +644,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels/{channelName}/list": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels/{channelName}/listChannelWithKeys": {
       "post": {
         "tags": [
           "Channel"
@@ -1111,9 +1111,12 @@
           "readOnly": true,
           "description": "Verify token. Value only returned through POST to the action Channel List API, otherwise empty."
         },
-        "pageId": {
-          "type": "string",
-          "description": "Page id"
+        "pages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FacebookPage"
+          },
+          "description": "The list of Facebook pages"
         },
         "appId": {
           "type": "string",
@@ -1122,10 +1125,6 @@
         "appSecret": {
           "type": "string",
           "description": "Facebook application secret. Value only returned through POST to the action Channel List API, otherwise empty."
-        },
-        "accessToken": {
-          "type": "string",
-          "description": "Facebook application access token. Value only returned through POST to the action Channel List API, otherwise empty."
         },
         "callbackUrl": {
           "type": "string",
@@ -1139,10 +1138,26 @@
       },
       "description": "The parameters to provide for the Facebook channel.",
       "required": [
-        "pageId",
         "appId",
         "appSecret",
         "isEnabled"
+      ]
+    },
+    "FacebookPage": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Page id"
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "Facebook application access token. Value only returned through POST to the action Channel List API, otherwise empty."
+        }
+      },
+      "description": "A Facebook page for Facebook channel registration",
+      "required": [
+        "id",
+        "accessToken"
       ]
     },
     "EmailChannel": {
