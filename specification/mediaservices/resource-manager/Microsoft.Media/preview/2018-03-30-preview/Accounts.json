@@ -78,6 +78,17 @@
         "name"
       ]
     },
+    "Location": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
     "EntityNameAvailabilityCheckOutput": {
       "properties": {
         "nameAvailable": {
@@ -613,11 +624,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/checkNameAvailability": {
       "post": {
         "summary": "Check Name Availability",
         "description": "Checks whether the Media Service resource name is available.",
-        "operationId": "Providers_CheckNameAvailability",
+        "operationId": "Locations_CheckNameAvailability",
         "responses": {
           "200": {
             "description": "OK",
@@ -635,6 +646,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
