@@ -209,7 +209,7 @@
 
         "parameters": [
           {
-            "$ref": "#/parameters/language"
+            "$ref": "#/parameters/textLanguage"
           },
           {
             "$ref": "#/parameters/autocorrect"
@@ -2472,8 +2472,8 @@
           "description": "The category1 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
           "properties": {
             "Score": {
-                "description": "The category1 score.",
-                "type": "number"
+              "description": "The category1 score.",
+              "type": "number"
             }
           }
         },
@@ -2481,8 +2481,8 @@
           "description": "The category2 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
           "properties": {
             "Score": {
-                "description": "The category2 score.",
-                "type": "number"
+              "description": "The category2 score.",
+              "type": "number"
             }
           }
         },
@@ -2490,8 +2490,8 @@
           "description": "The category3 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
           "properties": {
             "Score": {
-                "description": "The category3 score.",
-                "type": "number"
+              "description": "The category3 score.",
+              "type": "number"
             }
           }
         },
@@ -2501,7 +2501,7 @@
         }
       }
     },
-   
+
     "PII": {
       "description": "Personal Identifier Information details.",
       "properties": {
@@ -2511,6 +2511,12 @@
             "$ref": "#/definitions/Email"
           }
 
+        },
+        "SSN": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SSN"
+          }
         },
         "IPA": {
           "type": "array",
@@ -2550,6 +2556,19 @@
         },
         "Index": {
           "description": "Index(Location) of the Email address in the input text content.",
+          "type": "integer"
+        }
+      }
+    },
+    "SSN": {
+      "description": "Detected SSN details.",
+      "properties": {
+        "Text": {
+          "description": "Detected SSN in the input text content.",
+          "type": "string"
+        },
+        "Index": {
+          "description": "Index(Location) of the SSN in the input text content.",
           "type": "integer"
         }
       }
@@ -3303,7 +3322,13 @@
       "required": false,
       "type": "integer",
       "x-ms-parameter-location": "method"
-
+    },
+    "textLanguage": {
+      "name": "language",
+      "in": "query",
+      "description": "Language of the text.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "CallBackEndpoint": {
       "name": "CallBackEndpoint",
@@ -3440,8 +3465,8 @@
       "in": "body",
       "required": true,
       "schema": {
-        "format": "binary",
-        "type": "string"
+        "type": "object",
+        "format": "file"
       },
       "x-ms-parameter-location": "method"
     },

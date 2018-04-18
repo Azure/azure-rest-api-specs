@@ -7,5 +7,10 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-datalake-store
-  output-folder: $(node-sdks-folder)/lib/services/datalake.Store/lib/account
+  package-version: 3.0.0-preview
+  output-folder: $(node-sdks-folder)/lib/services/datalake.Store
+  source-code-folder-path: lib/account
+  generate-license-txt: false
+  generate-package-json: false
+  generate-readme-md: false
 ```

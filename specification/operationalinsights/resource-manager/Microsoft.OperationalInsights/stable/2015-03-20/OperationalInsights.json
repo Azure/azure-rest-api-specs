@@ -1321,9 +1321,12 @@
           "description": "The column of the table over which the given query should run",
           "type": "string"
         },
-        "filter": {
-          "description": "A query to to run over the provided table and column to purge the corresponding data.",
+        "operator": {
+          "description": "A query operator to evaluate over the provided column and value(s).",
           "type": "string"
+        },
+        "value": {
+          "description": "the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
         }
       }
     },
