@@ -1,0 +1,214 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "query": "burger",
+    "maxDetourTime": 1000,
+    "limit": 2,
+    "subscription-key": "{subscription-key}",
+    "Route": {
+      "type": "LineString",
+      "coordinates": [
+        [ -122.143035, 47.653536 ],
+        [ -122.187164, 47.617556 ],
+        [ -122.114981, 47.570599 ],
+        [ -122.132756, 47.654009 ]
+      ]
+    }
+  },
+
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "query": "burger",
+          "queryType": "NON_NEAR",
+          "queryTime": 409,
+          "numResults": 13,
+          "offset": 0,
+          "totalResults": 13,
+          "fuzzyLevel": 1
+        },
+        "results": [
+          {
+            "type": "POI",
+            "id": "US/POI/p0/3492825",
+            "score": 4.89,
+            "dist": 3479.404482853342,
+            "info": "search:decarta:ta:840539000647577-US",
+            "poi": {
+              "name": "Mugshots Burger N' Brew",
+              "phone": "+(1)-(425)-7468852",
+              "url": "www.mugshotsburgernbrew.com/",
+              "categories": [
+                "cocktail bar",
+                "nightlife"
+              ],
+              "classifications": [
+                {
+                  "code": "NIGHTLIFE",
+                  "names": [
+                    {
+                      "nameLocale": "en-US",
+                      "name": "nightlife"
+                    },
+                    {
+                      "nameLocale": "en-US",
+                      "name": "cocktail bar"
+                    }
+                  ]
+                }
+              ]
+            },
+            "address": {
+              "streetNumber": "1428",
+              "streetName": "156th Ave NE",
+              "municipalitySubdivision": "Bellevue, Crossroads",
+              "municipality": "Bellevue, Eastgate",
+              "countrySecondarySubdivision": "King",
+              "countryTertiarySubdivision": "Seattle East",
+              "countrySubdivision": "WA",
+              "postalCode": "98007",
+              "extendedPostalCode": "980074421",
+              "countryCode": "US",
+              "country": "United States Of America",
+              "countryCodeISO3": "USA",
+              "freeformAddress": "1428 156th Ave NE, Bellevue, WA 98007",
+              "countrySubdivisionName": "Washington"
+            },
+            "position": {
+              "lat": 47.62272,
+              "lon": -122.13239
+            },
+            "viewport": {
+              "topLeftPoint": {
+                "lat": 47.62362,
+                "lon": -122.13372
+              },
+              "btmRightPoint": {
+                "lat": 47.62182,
+                "lon": -122.13106
+              }
+            },
+            "entryPoints": [
+              {
+                "type": "main",
+                "position": {
+                  "lat": 47.62303,
+                  "lon": -122.13235
+                }
+              }
+            ],
+            "detourTime": -549
+          },
+          {
+            "type": "POI",
+            "id": "US/POI/p1/205585",
+            "score": 4.927,
+            "dist": 2296.770006012297,
+            "info": "search:decarta:ta:840539000615501-US",
+            "poi": {
+              "name": "Wendy's Old Fashioned Hamburgers",
+              "phone": "+(1)-(425)-8850988",
+              "url": "https://wendys.com",
+              "categories": [
+                "fast food",
+                "restaurant"
+              ],
+              "classifications": [
+                {
+                  "code": "RESTAURANT",
+                  "names": [
+                    {
+                      "nameLocale": "en-US",
+                      "name": "restaurant"
+                    },
+                    {
+                      "nameLocale": "en-US",
+                      "name": "fast food"
+                    }
+                  ]
+                }
+              ]
+            },
+            "address": {
+              "streetNumber": "15945",
+              "streetName": "Redmond Way",
+              "municipalitySubdivision": "Redmond",
+              "municipality": "Adelaide, Ames Lake, Avondale, Earlmount, Redmond",
+              "countrySecondarySubdivision": "King",
+              "countryTertiarySubdivision": "Seattle East",
+              "countrySubdivision": "WA",
+              "postalCode": "98052",
+              "extendedPostalCode": "980523836",
+              "countryCode": "US",
+              "country": "United States Of America",
+              "countryCodeISO3": "USA",
+              "freeformAddress": "15945 Redmond Way, Redmond, WA 98052",
+              "countrySubdivisionName": "Washington"
+            },
+            "position": {
+              "lat": 47.6744,
+              "lon": -122.12786
+            },
+            "viewport": {
+              "topLeftPoint": {
+                "lat": 47.6753,
+                "lon": -122.1292
+              },
+              "btmRightPoint": {
+                "lat": 47.6735,
+                "lon": -122.12652
+              }
+            },
+            "entryPoints": [
+              {
+                "type": "main",
+                "position": {
+                  "lat": 47.67474,
+                  "lon": -122.12798
+                }
+              }
+            ],
+            "detourTime": -484
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "statuscode": "400",
+        "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "statuscode": "401",
+        "message": "Unauthorized: Access is denied due to invalid credentials."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statuscode": "403",
+        "message": "Permission, capacity, or authentication issues."
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "statuscode": "404",
+        "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "statuscode": "500",
+        "message": "An error occurred while processing the request. Please try again later."
+      }
+    }
+  }
+}

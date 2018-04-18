@@ -1,0 +1,103 @@
+{
+
+  "parameters": {
+
+    "format": "json",
+    "api-version": "1.0",
+    "query": "Asia%252FBahrain",
+    "options": "all",
+    "subscription-key": "{subscription-key}",
+    "Accept-Language": "en"
+
+  },
+
+  "responses": {
+
+    "200": {
+      "body": {
+        "version": "2018c",
+        "referenceUtcTimestamp": "2018-01-31T00:03:15.1349348Z",
+        "timeZones": [
+          {
+            "Id": "Asia/Qatar",
+            "Aliases": [
+              "Asia/Bahrain"
+            ],
+            "Countries": [
+              {
+                "Name": "Qatar",
+                "Code": "QA"
+              },
+              {
+                "Name": "Bahrain",
+                "Code": "BH"
+              }
+            ],
+            "Names": {
+              "ISO6391LanguageCode": "en",
+              "Generic": "Arabian Time",
+              "Standard": "Arabian Standard Time",
+              "Daylight": "Arabian Daylight Time"
+            },
+            "ReferenceTime": {
+              "Tag": "+03",
+              "StandardOffset": "03:00:00",
+              "DaylightSavings": "00:00:00",
+              "WallTime": "2018-01-31T03:03:15.1349348+03:00",
+              "PosixTzValidYear": 2018,
+              "PosixTz": "<+03>-3"
+            },
+            "RepresentativePoint": {
+              "Latitude": 25.283333333333335,
+              "Longitude": 51.533333333333331
+            },
+            "TimeTransitions": [
+              {
+                "Tag": "+03",
+                "StandardOffset": "03:00:00",
+                "DaylightSavings": "00:00:00",
+                "UtcStart": "1972-05-31T20:00:00Z",
+                "UtcEnd": "9999-12-31T23:59:59.9999999Z"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "statuscode": "400",
+        "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "statuscode": "401",
+        "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statuscode": "403",
+        "message": "Permission, capacity, or authentication issues."
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "statuscode": "404",
+        "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "statuscode": "500",
+        "message": "An error occurred while processing the request. Please try again later."
+      }
+    }
+  }
+}
