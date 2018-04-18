@@ -1,6 +1,6 @@
 {
   "operationId": "GetDeployedApplicationInfoList",
-  "description": "This example shows how to get information about one application deployed on a specified node by a provided application ID. Note that the applications IDs, unlike application names, do not start with 'fabric:/'. This query is asking to include the health state of the deployed application.",
+  "description": "This example shows how to get information about an application deployed on a specified node by using an application identifier. If the application is found it's information is returned with 200 status code. An empty response with status code 204 is returned, if the specified application is not deployed on the node.",
   "parameters": {
     "api-version": "6.1",
     "nodeName": "_Node_0",
@@ -9,8 +9,7 @@
   },
   "responses": {
     "200": {
-      "headers": {
-      },
+      "headers": {},
       "body": {
         "Id": "samples~CalculatorApp",
         "Name": "fabric:/samples/CalculatorApp",
@@ -21,6 +20,10 @@
         "TempDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_1\\CalculatorApp_App0\\temp",
         "HealthState": "Ok"
       }
+    },
+    "204": {
+      "headers": {},
+      "body": ""
     }
   }
 }

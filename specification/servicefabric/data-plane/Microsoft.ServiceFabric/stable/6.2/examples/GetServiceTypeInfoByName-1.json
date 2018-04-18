@@ -1,6 +1,6 @@
 {
   "operationId": "GetServiceTypeInfoByName",
-  "description": "This example shows how to get information about a specific service type.",
+  "description": "This example shows how to get information about a specific service type. A 204 response is returned if the specificed service type is not found in the cluster.",
   "parameters": {
     "api-version": "6.0",
     "applicationTypeName": "Application2Type",
@@ -30,6 +30,10 @@
         "ServiceManifestName": "Actor1Pkg",
         "IsServiceGroup": false
       }
+    },
+    "204": {
+      "headers": {},
+      "body": ""
     }
   }
 }

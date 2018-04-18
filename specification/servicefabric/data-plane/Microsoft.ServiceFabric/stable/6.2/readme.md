@@ -31,8 +31,6 @@ R3017 GuidUsage | The IDs of the service partition in Service Fabric are GUIDs.
 R3018 EnumInsteadOfBoolean | The boolean properties are actually boolean value in the Service Fabric's application model.
 R3023 OperationsAPIImplementation | Service Fabric client API is not an ARM based API and hence this rule is not applicable.
 R2022 XmsExamplesRequired  | There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
-OV108 Example Validations | There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
-OV109 Example Validations | There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
 
 ```yaml
 model-validator: true 
@@ -55,6 +53,4 @@ directive:
     - R3018
     - R3023
     - R2022
-    - OAV108
-    - OAV109
 ```

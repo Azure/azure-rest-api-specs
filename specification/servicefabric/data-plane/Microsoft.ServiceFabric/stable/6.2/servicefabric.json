@@ -3,7 +3,7 @@
   "info": {
     "title": "Service Fabric Client APIs",
     "description": "Service Fabric REST Client APIs allows management of Service Fabric clusters, applications and services.",
-    "version": "6.2.0"
+    "version": "6.2.0.9"
   },
   "host": "localhost:19080",
   "schemes": [
@@ -1307,9 +1307,6 @@
               "$ref": "#/definitions/ServiceTypeInfoList"
             }
           },
-          "404": {
-            "description": "An 404 response is returned if the specified application type is not found in the cluster."
-          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -1357,13 +1354,7 @@
             }
           },
           "204": {
-            "description": "A 204 response is returned if the specified service type is not found in the cluster.",
-            "schema": {
-              "$ref": "#/definitions/ServiceTypeInfo"
-            }
-          },
-          "404": {
-            "description": "An 404 response is returned if the specified application type is not found in the cluster."
+            "description": "A 204 response is returned if the specified service type is not found in the cluster."
           },
           "default": {
             "description": "The detailed error response.",
@@ -6294,7 +6285,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "A 202 status code indicates the operation request was accepted and service backup will be suspended."
           },
           "default": {
@@ -6331,7 +6322,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "A 202 status code indicates the operation request was accepted and service backup will be resumed."
           },
           "default": {
@@ -6543,7 +6534,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "A 202 status code indicates the operation request was accepted and partition backup will be suspended."
           },
           "default": {
@@ -6580,7 +6571,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "A 202 status code indicates the operation request was accepted and partition backup will be resumed."
           },
           "default": {
@@ -7153,11 +7144,8 @@
           }
         ],
         "x-ms-examples": {
-          "Successful property batch": {
+          "Property batch operation": {
             "$ref": "examples/SubmitPropertyBatch-1.json"
-          },
-          "Failed property batch": {
-            "$ref": "examples/SubmitPropertyBatch-2.json"
           }
         },
         "tags": [
@@ -9533,7 +9521,6 @@
         },
         "HostProcessId": {
           "type": "string",
-          "format": "int64",
           "description": "Host process ID of the process that is hosting the replica. This will be zero if the replica is down. In hyper-v containers this host process ID will be from different kernel."
         }
       }
@@ -9656,6 +9643,20 @@
           "description": "The current configuration number of this Epoch. The configuration number is an increasing value that is updated whenever the configuration of this replica set changes."
         },
         "DataLossVersion": {
+          "type": "string",
+          "description": "The current dataloss number of this Epoch. The data loss number property is an increasing value which is updated whenever data loss is suspected, as when loss of a quorum of replicas in the replica set that includes the Primary replica."
+        }
+      }
+    },
+    "BackupEpoch": {
+      "type": "object",
+      "description": "An Epoch is a configuration number for the partition as a whole. When the configuration of the replica set changes, for example when the Primary replica changes, the operations that are replicated from the new Primary replica are said to be a new Epoch from the ones which were sent by the old Primary replica.\n",
+      "properties": {
+        "ConfigurationNumber": {
+          "type": "string",
+          "description": "The current configuration number of this Epoch. The configuration number is an increasing value that is updated whenever the configuration of this replica set changes."
+        },
+        "DataLossNumber": {
           "type": "string",
           "description": "The current dataloss number of this Epoch. The data loss number property is an increasing value which is updated whenever data loss is suspected, as when loss of a quorum of replicas in the replica set that includes the Primary replica."
         }
@@ -12151,7 +12152,7 @@
               "description": "An internal ID used by Service Fabric to uniquely identify a partition. This is a randomly generated GUID when the service was created. The partition ID is unique and does not change for the lifetime of the service. If the same service was deleted and recreated the IDs of its partitions would be different."
             },
             "ReplicaId": {
-              "$ref": "#/definitions/ReplicaId",
+              "$ref": "#/definitions/ReplicaId_Integer",
               "description": "Id of a stateful service replica. ReplicaId is used by Service Fabric to uniquely identify a replica of a partition. It is unique within a partition and does not change for the lifetime of the replica. If a replica gets dropped and another replica gets created on the same node for the same partition, it will get a different value for the id. Sometimes the id of a stateless service instance is also referred as a replica id."
             }
           },
@@ -12298,6 +12299,11 @@
     },
     "ReplicaId": {
       "type": "string",
+      "description": "Id of a stateful service replica. ReplicaId is used by Service Fabric to uniquely identify a replica of a partition. It is unique within a partition and does not change for the lifetime of the replica. If a replica gets dropped and another replica gets created on the same node for the same partition, it will get a different value for the id. Sometimes the id of a stateless service instance is also referred as a replica id."
+    },
+    "ReplicaId_Integer": {
+      "type": "integer",
+      "format": "int64",
       "description": "Id of a stateful service replica. ReplicaId is used by Service Fabric to uniquely identify a replica of a partition. It is unique within a partition and does not change for the lifetime of the replica. If a replica gets dropped and another replica gets created on the same node for the same partition, it will get a different value for the id. Sometimes the id of a stateless service instance is also referred as a replica id."
     },
     "ReplicaOrInstanceId": {
@@ -13135,6 +13141,10 @@
         "PlacementConstraints": {
           "type": "string",
           "description": "The placement constraint to be used when instantiating this service in a Service Fabric cluster."
+        },
+        "LoadMetrics": {
+          "$ref": "#/definitions/ServiceLoadMetricsList",
+          "description": "The service load metrics is given as an array of ServiceLoadMetricDescription objects."
         },
         "ServicePlacementPolicies": {
           "$ref": "#/definitions/ServicePlacementPolicyDescriptionList",
@@ -15762,11 +15772,11 @@
         },
         "LowKey": {
           "type": "string",
-          "description": "String indicating the lower bound of the partition key range that\nshould be split between the partition ‘Count’\n"
+          "description": "String indicating the lower bound of the partition key range that\nshould be split between the partitions.\n"
         },
         "HighKey": {
           "type": "string",
-          "description": "String indicating the upper bound of the partition key range that\nshould be split between the partition ‘Count’\n"
+          "description": "String indicating the upper bound of the partition key range that\nshould be split between the partitions.\n"
         }
       }
     },
@@ -16662,8 +16672,7 @@
           "description": "The remote location within image store. This path is relative to the image store root."
         },
         "FileCount": {
-          "type": "integer",
-          "format": "int64",
+          "type": "string",
           "description": "The number of files from within the image store folder."
         }
       }
@@ -17518,7 +17527,6 @@
       "properties": {
         "Data": {
           "type": "string",
-          "format": "int64",
           "description": "The data of the property value."
         }
       }
@@ -17688,7 +17696,6 @@
         },
         "SequenceNumber": {
           "type": "string",
-          "format": "int64",
           "description": "The version of the property. Every time a property is modified, its sequence number is increased."
         }
       }
@@ -17813,7 +17820,6 @@
       "properties": {
         "SequenceNumber": {
           "type": "string",
-          "format": "int64",
           "description": "The expected sequence number."
         }
       },
@@ -18389,12 +18395,11 @@
           "description": "Timestamp when operation succeeded or failed."
         },
         "RestoredEpoch": {
-          "$ref": "#/definitions/Epoch",
+          "$ref": "#/definitions/BackupEpoch",
           "description": "Describes the epoch at which the partition is restored."
         },
         "RestoredLsn": {
           "type": "string",
-          "format": "int64",
           "description": "Restored LSN."
         },
         "FailureError": {
@@ -18490,12 +18495,11 @@
           "description": "Describes the type of backup, whether its full or incremental.\n"
         },
         "EpochOfLastBackupRecord": {
-          "$ref": "#/definitions/Epoch",
+          "$ref": "#/definitions/BackupEpoch",
           "description": "Epoch of the last record in this backup."
         },
         "LsnOfLastBackupRecord": {
           "type": "string",
-          "format": "int64",
           "description": "LSN of the last record in this backup."
         },
         "CreationTimeUtc": {
@@ -18680,7 +18684,7 @@
         },
         "RunTimes": {
           "$ref": "#/definitions/TimeList",
-          "description": "Represents the list of exact time during the day in ISO8601 format. Like '19:00:00' will represent '7PM' during the day. Date specified along with time will be ignored."
+          "description": "Represents the list of exact time during the day in ISO8601 format. Like '19:00:00' will represent '7PM' during the day. Date specified along with time will be ignored.In the examples, date is also specified with time but the date will always be ignored."
         }
       }
     },
@@ -18717,7 +18721,7 @@
         "type": "string",
         "format": "date-time"
       },
-      "description": "Represents the list of exact time during the day in ISO8601 format. Like '19:00:00' will represent '7PM' during the day. Date specified along with time will be ignored."
+      "description": "Represents the list of exact time during the day in ISO8601 format. Like '19:00:00' will represent '7PM' during the day. Date specified along with time will be ignored.In the examples, date is also specified with time but the date will always be ignored."
     },
     "DayOfWeekList": {
       "type": "array",
@@ -18796,12 +18800,11 @@
           "description": "Location, relative to the backup store, of the newly created backup."
         },
         "EpochOfLastBackupRecord": {
-          "$ref": "#/definitions/Epoch",
+          "$ref": "#/definitions/BackupEpoch",
           "description": "Specifies the epoch of the last record included in backup."
         },
         "LsnOfLastBackupRecord": {
           "type": "string",
-          "format": "int64",
           "description": "The LSN of last record included in backup."
         },
         "FailureError": {
@@ -19258,7 +19261,6 @@
         },
         "Version": {
           "type": "string",
-          "format": "int64",
           "description": "The version of the repair task.\nWhen creating a new repair task, the version must be set to zero.  When updating a repair task,\nthe version is used for optimistic concurrency checks.  If the version is\nset to zero, the update will not check for write conflicts.  If the version is set to a non-zero value, then the\nupdate will only succeed if the actual current version of the repair task matches this value.\n"
         },
         "Description": {
@@ -19428,7 +19430,6 @@
         },
         "Version": {
           "type": "string",
-          "format": "int64",
           "description": "The current version number of the repair task. If non-zero, then the request will only succeed if this value matches the actual current version of the repair task. If zero, then no version check is performed."
         }
       },
@@ -19446,7 +19447,6 @@
         },
         "Version": {
           "type": "string",
-          "format": "int64",
           "description": "The current version number of the repair task. If non-zero, then the request will only succeed if this value matches the actual current version of the repair task. If zero, then no version check is performed."
         },
         "RequestAbort": {
@@ -19468,7 +19468,6 @@
         },
         "Version": {
           "type": "string",
-          "format": "int64",
           "description": "The current version number of the repair task. If non-zero, then the request will only succeed if this value matches the actual current version of the repair task. If zero, then no version check is performed."
         }
       },
@@ -19591,7 +19590,6 @@
         },
         "Version": {
           "type": "string",
-          "format": "int64",
           "description": "The current version number of the repair task. If non-zero, then the request will only succeed if this value matches the actual current value of the repair task. If zero, then no version check is performed."
         },
         "PerformPreparingHealthCheck": {
@@ -19613,7 +19611,6 @@
       "properties": {
         "Version": {
           "type": "string",
-          "format": "int64",
           "description": "The new version of the repair task."
         }
       },
@@ -19738,12 +19735,10 @@
       "properties": {
         "StartPosition": {
           "type": "string",
-          "format": "int64",
           "description": "The start position of the portion of the file. It's represented by the number of bytes."
         },
         "EndPosition": {
           "type": "string",
-          "format": "int64",
           "description": "The end position of the portion of the file. It's represented by the number of bytes."
         }
       }
@@ -19768,7 +19763,6 @@
         },
         "FileSize": {
           "type": "string",
-          "format": "int64",
           "description": "The size in bytes of the uploading file."
         },
         "ExpectedRanges": {
@@ -24631,4 +24625,3 @@
     }
   }
 }
-

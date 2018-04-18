@@ -1,6 +1,6 @@
 {
   "operationId": "SubmitPropertyBatch",
-  "description": "This example shows how to submit a property batch. This batch ensures that a property exists, checks that the property has the expected sequence number, and edits the property only if the previous conditions succeed. It then performs a get operation to get the property's current info. All the operations succeed, so the batch is committed in a transactional manner.",
+  "description": "This example shows how to submit a property batch. This batch ensures that a property exists, checks that the property has the expected sequence number, and edits the property only if the previous conditions succeed. It then performs a get operation to get the property's current info. \r\n If all of the operations succeed, the batch is committed in a transactional manner and a success response is returned with 200 status code. \r\n If the batch fails then a failed response is returned with 409 status code. The failed response below shows batch failure because the property does not have expected sequence number.",
   "parameters": {
     "api-version": "6.0",
     "nameId": "samples/apps",
@@ -52,6 +52,15 @@
             }
           }
         }
+      }
+    },
+    "409": {
+      "headers": {
+      },
+      "body": {
+        "Kind": "Failed",
+        "ErrorMessage": "FABRIC_E_PROPERTY_CHECK_FAILED",
+        "OperationIndex": 1
       }
     }
   }
