@@ -112,23 +112,6 @@ These settings apply only when `--tag=6.2` is specified on the command line.
 input-file:
 - Microsoft.ServiceFabric/stable/6.2/servicefabric.json
 
-directive:
-  suppress:
-    - R1001
-    - R1003
-    - R1005
-    - R1006
-    - R1011
-    - R2007
-    - R2054 
-    - R2064
-    - R2066
-    - R3012
-    - R3016
-    - R3017
-    - R3018
-    - R3023
-    - R2022
 ```
 
 ---
