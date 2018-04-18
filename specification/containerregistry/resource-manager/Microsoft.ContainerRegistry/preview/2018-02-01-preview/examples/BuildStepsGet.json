@@ -13,7 +13,9 @@
         "properties": {
           "type": "Docker",
           "branch": "master",
-          "imageNames": [ "azurerest:testtag" ],
+          "imageNames": [
+            "azurerest:testtag"
+          ],
           "dockerFilePath": "DockerFile",
           "isPushEnabled": true,
           "baseImageTrigger": "Runtime",
@@ -21,13 +23,15 @@
           "baseImageDependencies": [
             {
               "type": "RunTime",
-              "repositoryName": "testimage",
+              "registry": "registry.hub.docker.com",
+              "repository": "testimage",
               "tag": "latest",
               "digest": "sha256:77af4d6b9913e693e8d0b4b294fa62ade6054e6b2f1ffb617ac955dd63"
             },
             {
               "type": "BuildTime",
-              "repositoryName": "testimage1",
+              "registry": "registry.hub.docker.com",
+              "repository": "testimage1",
               "tag": "testtag",
               "digest": "sha256:77af4d6b9913e693e8d0b4b294fa62ade6054e6b2f1ffb617ac955dd63"
             }
