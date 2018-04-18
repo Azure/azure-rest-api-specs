@@ -5,7 +5,6 @@
 This is the AutoRest configuration file for ServiceFabricClient.
 
 
-
 ---
 ## Getting Started
 To build the SDK for ServiceFabricClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
