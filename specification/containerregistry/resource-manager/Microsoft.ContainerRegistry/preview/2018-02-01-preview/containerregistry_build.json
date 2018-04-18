@@ -1164,19 +1164,15 @@
       }
     },
     "ImageDescriptor": {
-      "description": "Properties that describes a Docker image.",
-      "required": [
-        "repositoryName",
-        "digest"
-      ],
+      "description": "Properties for a registry image.",
       "type": "object",
       "properties": {
         "registry": {
-          "description": "The registry that contains the repository.",
+          "description": "The registry login server.",
           "type": "string"
         },
-        "repositoryName": {
-          "description": "Name of the repository.",
+        "repository": {
+          "description": "The repository name.",
           "type": "string"
         },
         "tag": {
@@ -1184,7 +1180,7 @@
           "type": "string"
         },
         "digest": {
-          "description": "The image digest. Example: SHA256 based digest.",
+          "description": "The sha256-based digest of the image manifest.",
           "type": "string"
         }
       }
@@ -1206,7 +1202,7 @@
           "description": "The list of image updates that caused the build.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Image"
+            "$ref": "#/definitions/ImageDescriptor"
           }
         }
       }
@@ -1259,33 +1255,6 @@
         "cpu": {
           "format": "int32",
           "description": "The CPU configuration in terms of number of cores required for the build.",
-          "type": "integer"
-        }
-      }
-    },
-    "Image": {
-      "description": "The image update trigger that caused a build.",
-      "type": "object",
-      "properties": {
-        "registry": {
-          "description": "The registry from which the image is updated.",
-          "type": "string"
-        },
-        "repository": {
-          "description": "The repository name of the updated image.",
-          "type": "string"
-        },
-        "tag": {
-          "description": "The tag name of the updated image.",
-          "type": "string"
-        },
-        "digest": {
-          "description": "The digest of the updated image manifest.",
-          "type": "string"
-        },
-        "size": {
-          "format": "int64",
-          "description": "The size of the updated image.",
           "type": "integer"
         }
       }
@@ -1409,7 +1378,7 @@
       }
     },
     "BuildStepProperties": {
-      "description": "Base properties for any  build step.",
+      "description": "Base properties for any build step.",
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1972,10 +1941,6 @@
     },
     "BaseImageDependency": {
       "description": "Properties that describe a base image dependency.",
-      "required": [
-        "repositoryName",
-        "digest"
-      ],
       "type": "object",
       "properties": {
         "type": {
@@ -1991,11 +1956,11 @@
           }
         },
         "registry": {
-          "description": "The registry that contains the repository.",
+          "description": "The registry login server.",
           "type": "string"
         },
-        "repositoryName": {
-          "description": "Name of the repository.",
+        "repository": {
+          "description": "The repository name.",
           "type": "string"
         },
         "tag": {
@@ -2003,7 +1968,7 @@
           "type": "string"
         },
         "digest": {
-          "description": "The image digest. Example: SHA256 based digest.",
+          "description": "The sha256-based digest of the image manifest.",
           "type": "string"
         }
       }
