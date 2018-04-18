@@ -29,6 +29,42 @@ openapi-type: data-plane
 tag: '6.2'
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: OperationIdNounVerb
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
+  - suppress: ListInOperationName
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
+  - suppress: GetInOperationName
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.    
+  - suppress: PutInOperationName
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
+  - suppress: HttpsSupportedScheme
+    reason: Service Fabric clusters are owned by the users and they can be configured to have a secure or un-secure client connection endpoint.    
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    reason: Service Fabric platform has already established pattern for paged responses based on ContinuationToken parameter.
+  - suppress: SecurityDefinitionsStructure
+    reason: Service Fabric clusters support various security mechanism for the REST endpoint, this includes certificate, Kerberos, AD, AAD and others. The documentation for the REST API includes information on how to authenticate to the cluster endpoint secured with different mechanisms.
+  - suppress: LROStatusCodesReturnTypeSchema
+    reason: Service Fabric platform uses query based mechanism for some of the long running operations.
+  - suppress: PostOperationIdContainsUrlVerb
+    reason: The URL scheme for Service Fabric does not follow Azure Service rules. Service Fabric supports various functions on different entities that are modeled using POST.
+  - suppress: APIVersionPattern
+    reason: The URL scheme for Service Fabric does not follow Azure Service rules. Service Fabric supports various functions on different entities that are modeled using POST.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The property names for Service Fabric follow the naming scheme of existing property names in our client SDK and concepts. 
+  - suppress: GuidUsage
+    reason: The IDs of the service partition in Service Fabric are GUIDs.
+  - suppress: EnumInsteadOfBoolean
+    reason:  The boolean properties are actually boolean value in the Service Fabric's application model.
+  - suppress: OperationsAPIImplementation
+    reason: Service Fabric client API is not an ARM based API and hence this rule is not applicable.
+  - suppress: XmsExamplesRequired
+    reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
+
+```
 
 ### Tag: 1.0.0
 
