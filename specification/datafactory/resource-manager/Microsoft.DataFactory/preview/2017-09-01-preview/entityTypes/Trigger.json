@@ -293,7 +293,7 @@
           "x-ms-client-flatten": true,
           "properties": {
             "frequency": {
-              "$ref": "#/definitions/TumblingWindowFrequency", 
+              "$ref": "#/definitions/TumblingWindowFrequency",
               "description": "The frequency of the time windows."
             },
             "interval": {
@@ -324,6 +324,13 @@
             "retryPolicy": {
               "$ref": "#/definitions/RetryPolicy",
               "description": "Retry policy that will be applied for failed pipeline runs."
+            },
+            "dependsOn": {
+              "type": "array",
+              "description": "Tumbling Window depends on condition.",
+              "items": {
+                "$ref": "#/definitions/TumblingWindowDependency"
+              }
             }
           },
           "required": [
@@ -365,6 +372,24 @@
           "maximum": 86400
         }
       }
+    },
+    "TumblingWindowDependency": {
+      "description": "Tumbling Window dependency information.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Reference type \"TriggerReference\" for Tumbling Window.",
+          "type": "string"
+        },
+        "referenceName": {
+          "description": "Trigger reference name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
     }
   }
 }
