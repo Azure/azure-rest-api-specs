@@ -31,15 +31,15 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
-### Tag: package-composite-v3
+### Tag: package-composite-v4
 
-These settings apply only when `--tag=package-composite-v3` is specified on the command line.
+These settings apply only when `--tag=package-composite-v4` is specified on the command line.
 
-This section contains the "composite-v3" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v3" clients such as .NET SDK Microsoft.Azure.Management.Sql version 1.14.0-preview.
+This section contains the "composite-v4" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v4" clients such as .NET SDK Microsoft.Azure.Management.Sql version 1.15.0-preview.
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
-``` yaml $(tag) == 'package-composite-v3'
+``` yaml $(tag) == 'package-composite-v4'
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
@@ -81,6 +81,59 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/databases.json
 - Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
+```
+
+### Tag: package-composite-v3
+
+These settings apply only when `--tag=package-composite-v3` is specified on the command line.
+
+This section contains the "composite-v3" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v3" clients such as .NET SDK Microsoft.Azure.Management.Sql version 1.14.0-preview.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+``` yaml $(tag) == 'package-composite-v3'
+input-file:
+- Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
+- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
+- Microsoft.Sql/stable/2014-04-01/dataMasking.json
+- Microsoft.Sql/stable/2014-04-01/firewallRules.json
+- Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
+- Microsoft.Sql/stable/2014-04-01/importExport.json
+- Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
+- Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
+- Microsoft.Sql/stable/2014-04-01/sql.core.json
+- Microsoft.Sql/stable/2014-04-01/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
+- Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
+- Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/operations.json
+- Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
+- Microsoft.Sql/preview/2015-05-01-preview/servers.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
+- Microsoft.Sql/preview/2017-10-01-preview/databases.json
+- Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
 
 # Needed when there is more than one input file
 override-info:
