@@ -65,6 +65,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to update an Log Search rule",
             "schema": {
@@ -191,6 +197,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to get a Log Search rule",
             "schema": {
@@ -237,9 +249,6 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "Not Found. Log Search Rule does not exists"
           }
         },
         "x-ms-examples": {
@@ -583,6 +592,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LogSearchRule",
           "description": "The rule properties of the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Log Search Rule"
         }
       },
       "description": "The Log Search Rule resource."
@@ -736,7 +749,7 @@
         "name": "metricTriggerType",
         "modelAsString": true
       },
-      "description":  "Metric Trigger Evaluation Type"
+      "description": "Metric Trigger Evaluation Type"
     },
     "AlertSeverity": {
       "type": "string",
@@ -751,7 +764,7 @@
         "name": "AlertSeverity",
         "modelAsString": true
       },
-      "description" :  "Severity Level of Alert"
+      "description": "Severity Level of Alert"
     },
     "QueryType": {
       "type": "string",
@@ -762,10 +775,10 @@
         "name": "QueryType",
         "modelAsString": true
       },
-      "description" :  "Output of query to be used"
+      "description": "Output of query to be used"
     },
     "LogSearchRule": {
-      "description" :  "Log Search Rule Definition",
+      "description": "Log Search Rule Definition",
       "properties": {
         "description": {
           "type": "string",
@@ -782,19 +795,6 @@
             "name": "Enabled",
             "modelAsString": true
           }
-        },
-        "skuType": {
-          "type": "string",
-          "enum": [
-            "L1",
-            "L2",
-            "L3"
-          ],
-          "x-ms-enum": {
-            "name": "skuType",
-            "modelAsString": true
-          },
-          "description": "SKU Type {L1, L2, L3}"
         },
         "lastUpdatedTime": {
           "readOnly": true,
@@ -850,7 +850,7 @@
       ]
     },
     "AlertingAction": {
-      "description" :  "Specifiy action need to be taken when rule type is Alert",
+      "description": "Specifiy action need to be taken when rule type is Alert",
       "x-ms-discriminator-value": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
       "type": "object",
       "allOf": [
@@ -881,6 +881,38 @@
         "aznsAction",
         "trigger"
       ]
+    },
+    "Sku": {
+      "description": "SKU of rule",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU (L1, L2, L3)",
+          "type": "string",
+          "enum": [
+            "L1",
+            "L2",
+            "L3"
+          ],
+          "x-ms-enum": {
+            "name": "sku",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {

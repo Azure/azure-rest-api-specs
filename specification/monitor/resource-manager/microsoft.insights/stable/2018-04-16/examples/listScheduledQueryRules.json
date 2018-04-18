@@ -20,7 +20,6 @@
             "properties": {
               "description": "log alert description",
               "Enabled": "false",
-              "skuType": "L2",
               "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
               "provisioningState": "Succeeded",
               "source": {
@@ -52,6 +51,9 @@
                   "customWebhookPayload": "{}"
                 }
               }
+            },
+            "sku": {
+              "name": "L3"
             }
           },
           {
@@ -65,7 +67,6 @@
             "properties": {
               "description": "log alert description",
               "Enabled": "true",
-              "skuType": "L2",
               "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
               "provisioningState": "Succeeded",
               "source": {
@@ -74,8 +75,8 @@
                 "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
               },
               "schedule": {
-                "frequencyInMinutes": 15,
-                "timeWindowInMinutes": 15
+                "frequencyInMinutes": 10,
+                "timeWindowInMinutes": 30
               },
               "action": {
                 "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
@@ -91,6 +92,9 @@
                   "customWebhookPayload": "{}"
                 }
               }
+            },
+            "sku": {
+              "name": "L2"
             }
           }
         ]
