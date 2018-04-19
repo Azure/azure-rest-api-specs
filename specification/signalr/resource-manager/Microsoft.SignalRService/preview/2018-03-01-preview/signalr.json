@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2018-03-01-preview",
-    "title": "SignalRManagementClient",
+    "title": "SignalrManagementClient",
     "description": "REST API for Azure SignalR Service"
   },
   "host": "management.azure.com",
@@ -19,10 +19,10 @@
     "/providers/Microsoft.SignalRService/operations": {
       "get": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.SignalRService provider.",
-        "operationId": "Signalr_ListOperations",
+        "operationId": "Operations_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -49,7 +49,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/checkNameAvailability": {
       "post": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Checks that the SignalR name is valid and is not already in use.",
         "operationId": "Signalr_CheckNameAvailability",
@@ -88,7 +88,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/SignalR": {
       "get": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Handles requests to list all resources in a subscription.",
         "operationId": "Signalr_ListBySubscription",
@@ -104,7 +104,7 @@
           "200": {
             "description": "Success. The response describes the list of SignalR services in the subscription.",
             "schema": {
-              "$ref": "#/definitions/SignalRResourceList"
+              "$ref": "#/definitions/SignalrResourceList"
             }
           }
         },
@@ -121,7 +121,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR": {
       "get": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Handles requests to list all resources in a resource group.",
         "operationId": "Signalr_ListByResourceGroup",
@@ -140,7 +140,7 @@
           "200": {
             "description": "Success. The response describes the list of SignalR services in a resourceGroup.",
             "schema": {
-              "$ref": "#/definitions/SignalRResourceList"
+              "$ref": "#/definitions/SignalrResourceList"
             }
           }
         },
@@ -157,7 +157,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/listKeys": {
       "post": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Get the access keys of the SignalR resource.",
         "operationId": "Signalr_ListKeys",
@@ -172,14 +172,14 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/SignalrServiceName"
           }
         ],
         "responses": {
           "200": {
             "description": "Success. The response describes SignalR service access keys.",
             "schema": {
-              "$ref": "#/definitions/SignalRKeys"
+              "$ref": "#/definitions/SignalrKeys"
             }
           }
         },
@@ -193,7 +193,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/regenerateKey": {
       "post": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Regenerate SignalR service access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "Signalr_RegenerateKey",
@@ -217,14 +217,14 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/SignalrServiceName"
           }
         ],
         "responses": {
           "201": {
             "description": "Created and an async operation is excuting in background to make the new key to take effect. The response contains new keys and a Location header to query the async operation result.",
             "schema": {
-              "$ref": "#/definitions/SignalRKeys"
+              "$ref": "#/definitions/SignalrKeys"
             }
           }
         },
@@ -239,7 +239,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}": {
       "get": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Get the SignalR service and its properties.",
         "operationId": "Signalr_Get",
@@ -254,14 +254,14 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/SignalrServiceName"
           }
         ],
         "responses": {
           "200": {
             "description": "Success. The response describe the corresponding SingalR service.",
             "schema": {
-              "$ref": "#/definitions/SignalRResource"
+              "$ref": "#/definitions/SignalrResource"
             }
           }
         },
@@ -273,7 +273,7 @@
       },
       "put": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Create a new SignalR service and update an exiting SignalR service.",
         "operationId": "Signalr_CreateOrUpdate",
@@ -284,7 +284,7 @@
             "description": "Parameters for the create or update operation",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/SignalRCreateParameters"
+              "$ref": "#/definitions/SignalrCreateParameters"
             }
           },
           {
@@ -297,14 +297,14 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/SignalrServiceName"
           }
         ],
         "responses": {
           "201": {
             "description": "Created. The response describes the new service and contains a Location header to query the operation result.",
             "schema": {
-              "$ref": "#/definitions/SignalRResource"
+              "$ref": "#/definitions/SignalrResource"
             }
           },
           "202": {
@@ -320,7 +320,7 @@
       },
       "delete": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Operation to delete a SignalR service.",
         "operationId": "Signalr_Delete",
@@ -335,7 +335,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/SignalrServiceName"
           }
         ],
         "responses": {
@@ -355,7 +355,7 @@
       },
       "patch": {
         "tags": [
-          "SignalR"
+          "Signalr"
         ],
         "description": "Operation to update an exiting SignalR service.",
         "operationId": "Signalr_Update",
@@ -366,7 +366,7 @@
             "description": "Parameters for the update operation",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/SignalRUpdateParameters"
+              "$ref": "#/definitions/SignalrUpdateParameters"
             }
           },
           {
@@ -379,14 +379,14 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/SignalrServiceName"
           }
         ],
         "responses": {
           "200": {
             "description": "Success. The response describes a SingalR service which is not up-to-date.",
             "schema": {
-              "$ref": "#/definitions/SignalRResource"
+              "$ref": "#/definitions/SignalrResource"
             }
           },
           "202": {
@@ -558,7 +558,7 @@
         }
       }
     },
-    "SignalRResourceList": {
+    "SignalrResourceList": {
       "description": "Object that includes an array of SignalR services and a possible link for next set.",
       "type": "object",
       "properties": {
@@ -566,7 +566,7 @@
           "description": "List of SignalR services",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SignalRResource"
+            "$ref": "#/definitions/SignalrResource"
           }
         },
         "nextLink": {
@@ -575,10 +575,9 @@
         }
       }
     },
-    "SignalRResource": {
+    "SignalrResource": {
       "description": "A class represent a SignalR service resource.",
       "type": "object",
-      "x-ms-client-name": "SignalrResourceList",
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
@@ -587,11 +586,10 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/ResourceSku",
-          "x-ms-client-name": "signalrsku",
           "description": "SKU of the service."
         },
         "properties": {
-          "$ref": "#/definitions/SignalRProperties",
+          "$ref": "#/definitions/SignalrProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
         },
@@ -685,7 +683,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SignalRSkuTier",
+            "name": "SignalrSkuTier",
             "modelAsString": true
           }
         },
@@ -704,21 +702,23 @@
         }
       }
     },
-    "SignalRProperties": {
+    "SignalrProperties": {
       "description": "A class that describes the properties of the SignalR service that should contain more read-only properties than AzSignalR.Models.SignalRCreateOrUpdateProperties",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SignalRCreateOrUpdateProperties"
+          "$ref": "#/definitions/SignalrCreateOrUpdateProperties"
         }
       ],
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of the resource.",
           "enum": [
+            "Unknown",
             "Succeeded",
             "Failed",
             "Canceled",
+            "Running",
             "Creating",
             "Updating",
             "Deleting",
@@ -755,17 +755,12 @@
         }
       }
     },
-    "SignalRCreateOrUpdateProperties": {
+    "SignalrCreateOrUpdateProperties": {
       "description": "Settings used to provision or configure the resource.",
       "type": "object",
-      "properties": {
-        "hostNamePrefix": {
-          "description": "Prefix for the hostName of the SignalR service. Retained for future use.\r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.service.signalr.net.",
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
-    "SignalRKeys": {
+    "SignalrKeys": {
       "description": "A class represents the access keys of SignalR service.",
       "type": "object",
       "properties": {
@@ -797,7 +792,7 @@
         }
       }
     },
-    "SignalRCreateParameters": {
+    "SignalrCreateParameters": {
       "description": "Parameters for SignalR service create/update operation.\r\n\r\nKeep the same schema as AzSignalR.Models.SignalRResource",
       "required": [
         "location"
@@ -805,7 +800,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SignalRUpdateParameters"
+          "$ref": "#/definitions/SignalrUpdateParameters"
         }
       ],
       "properties": {
@@ -815,7 +810,7 @@
         }
       }
     },
-    "SignalRUpdateParameters": {
+    "SignalrUpdateParameters": {
       "description": "Parameters for SignalR service update operation",
       "type": "object",
       "properties": {
@@ -831,7 +826,7 @@
           "description": "The billing information of the resource.(e.g. basic vs. standard)"
         },
         "properties": {
-          "$ref": "#/definitions/SignalRCreateOrUpdateProperties",
+          "$ref": "#/definitions/SignalrCreateOrUpdateProperties",
           "description": "Settings used to provision or configure the resource",
           "x-ms-client-flatten": false
         }
@@ -861,7 +856,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SignalRServiceName": {
+    "SignalrServiceName": {
       "name": "resourceName",
       "in": "path",
       "description": "The name of the SignalR resource.",
