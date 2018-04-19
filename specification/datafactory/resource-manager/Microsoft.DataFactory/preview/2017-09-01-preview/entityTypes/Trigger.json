@@ -327,7 +327,7 @@
             },
             "dependsOn": {
               "type": "array",
-              "description": "Tumbling Window depends on condition.",
+              "description": "Tumbling window triggers that this trigger depends on.",
               "items": {
                 "$ref": "#/definitions/TumblingWindowDependency"
               }
@@ -373,16 +373,19 @@
         }
       }
     },
-    "TumblingWindowDependency": {
-      "description": "Tumbling Window dependency information.",
+    "TumblingWindowTriggerReference": {
+      "description": "Tumbling window trigger reference type.",
       "type": "object",
       "properties": {
         "type": {
-          "description": "Reference type \"TriggerReference\" for Tumbling Window.",
-          "type": "string"
+          "description": "Tumbling window trigger reference type.",
+          "type": "string",
+          "enum": [
+            "TumblingWindowTriggerReference"
+          ]
         },
         "referenceName": {
-          "description": "Trigger reference name.",
+          "description": "Reference TumblingWindowTrigger name.",
           "type": "string"
         }
       },
