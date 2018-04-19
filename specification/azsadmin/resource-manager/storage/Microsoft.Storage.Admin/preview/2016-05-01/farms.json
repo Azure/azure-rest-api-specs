@@ -47,7 +47,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/FarmCreationProperties"
+                            "$ref": "farms.json#/definitions/FarmCreationProperties"
                         }
                     }
                 ],
@@ -55,7 +55,7 @@
                     "200": {
                         "description": "OK -- The new storage farm has been created.",
                         "schema": {
-                            "$ref": "#/definitions/Farm"
+                            "$ref": "farms.json#/definitions/Farm"
                         }
                     }
                 }
@@ -89,7 +89,7 @@
                     "200": {
                         "description": "OK -- The farm has been returned.",
                         "schema": {
-                            "$ref": "#/definitions/Farm"
+                            "$ref": "farms.json#/definitions/Farm"
                         }
                     },
                     "404": {
@@ -127,7 +127,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Farm"
+                            "$ref": "farms.json#/definitions/Farm"
                         }
                     }
                 ],
@@ -135,7 +135,7 @@
                     "200": {
                         "description": "OK -- The properties and settings of storage farm have been updated.",
                         "schema": {
-                            "$ref": "#/definitions/Farm"
+                            "$ref": "farms.json#/definitions/Farm"
                         }
                     }
                 }
@@ -252,7 +252,7 @@
                     "200": {
                         "description": "OK -- The list of storage farms has been returned.",
                         "schema": {
-                            "$ref": "#/definitions/FarmList"
+                            "$ref": "farms.json#/definitions/FarmList"
                         }
                     }
                 },
@@ -350,7 +350,7 @@
                     "description": "List of storage farms.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Farm"
+                        "$ref": "farms.json#/definitions/Farm"
                     }
                 },
                 "nextLink": {
@@ -367,7 +367,7 @@
                 "properties": {
                     "description": "Storage farm properties.",
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/SettingAccessString"
+                    "$ref": "farms.json#/definitions/SettingAccessString"
                 }
             },
             "allOf": [
@@ -383,7 +383,7 @@
                 "properties": {
                     "description": "Storage farm properties.",
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/FarmProperties",
+                    "$ref": "farms.json#/definitions/FarmProperties",
                     "readOnly": true
                 }
             },
@@ -664,7 +664,7 @@
                 "settings": {
                     "description": "The properties of storage farm.",
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/FarmSettings",
+                    "$ref": "farms.json#/definitions/FarmSettings",
                     "readOnly": true
                 }
             }
