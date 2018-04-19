@@ -42,7 +42,13 @@
                         "$ref": "storage.json#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/FarmParameters"
+                        "description": "Parameters used to create a farm",
+                        "name": "farmObject",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/FarmCreationProperties"
+                        }
                     }
                 ],
                 "responses": {
@@ -116,7 +122,13 @@
                         "$ref": "storage.json#/parameters/FarmIdParameter"
                     },
                     {
-                        "$ref": "#/parameters/FarmObject"
+                        "description": "Farm to update.",
+                        "name": "farmObject",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Farm"
+                        }
                     }
                 ],
                 "responses": {
@@ -668,26 +680,7 @@
             }
         }
     },
-    "parameters": {
-        "FarmParameters": {
-            "name": "farmObject",
-            "description": "Parameters used to create a farm",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/FarmCreationProperties"
-            }
-        },
-        "FarmObject": {
-            "name": "farmObject",
-            "description": "Farm to update.",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/Farm"
-            }
-        }
-    },
+    "parameters": {},
     "securityDefinitions": {
         "azure_auth": {
             "type": "oauth2",
