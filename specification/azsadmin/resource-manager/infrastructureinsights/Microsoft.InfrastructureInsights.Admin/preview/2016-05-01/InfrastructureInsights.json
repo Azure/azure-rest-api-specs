@@ -81,38 +81,55 @@
             }
         },
         "Resource": {
-            "description": "Base Resource Object",
-            "type": "object",
+            "description": "The core properties of ARM resources",
             "properties": {
                 "id": {
-                    "description": "URI of the resource.",
+                    "readOnly": true,
                     "type": "string",
-                    "readOnly": true
+                    "description": "Fully qualified resource Id for the resource"
                 },
                 "name": {
-                    "description": "Name of the resource.",
+                    "readOnly": true,
                     "type": "string",
-                    "readOnly": true
+                    "description": "The name of the resource"
                 },
                 "type": {
-                    "description": "Type of resource.",
+                    "readOnly": true,
                     "type": "string",
-                    "readOnly": true
-                },
-                "location": {
-                    "description": "Location of the resource.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "tags": {
-                    "description": "List of key-value pairs.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
+                    "description": "The type of the resource."
                 }
             },
             "x-ms-azure-resource": true
+        },
+        "TrackedResource": {
+            "description": "The resource model definition for a ARM tracked top level resource",
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "x-ms-mutability": [
+                        "read",
+                        "create",
+                        "update"
+                    ],
+                    "description": "Resource tags."
+                },
+                "location": {
+                    "type": "string",
+                    "x-ms-mutability": [
+                        "read",
+                        "create"
+                    ],
+                    "description": "The Azure Region where the resource lives"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
         },
         "AlertSummary": {
             "description": "Summary of the alerts.",
