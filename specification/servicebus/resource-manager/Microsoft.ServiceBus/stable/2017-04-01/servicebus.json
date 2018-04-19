@@ -1151,6 +1151,9 @@
           "migrationConfigurations"
         ],
         "operationId": "migrationConfigurations_List",
+        "x-ms-examples": {
+          "MigrationConfigurationsList": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationList.json" }
+        },
         "description": "Gets all migrationConfigurations",
         "parameters": [
           {
@@ -1190,8 +1193,11 @@
         "tags": [
           "migrationConfigurations"
         ],
-        "operationId": "migrationConfigurations_CreateOrUpdate",
-        "description": "Creates or updates a new Migration Config",
+        "operationId": "migrationConfigurations_StartMigration",
+        "x-ms-examples": {
+          "MigrationConfigurationsStartMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationStartMigration.json" }
+        },
+        "description": "Initiate Migration from Standard to Premium",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1209,7 +1215,7 @@
             "schema": {
               "$ref": "#/definitions/MigrationConfigProperties"
             },
-            "description": "Parameters required to Migration Config"
+            "description": "Parameters required to create Migration Configuration"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1241,6 +1247,9 @@
           "migrationConfigurations"
         ],
         "operationId": "migrationConfigurations_Delete",
+        "x-ms-examples": {
+          "MigrationConfigurationsDelete": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationDelete.json" }
+        },
         "description": "Deletes a MigrationConfiguration",
         "parameters": [
           {
@@ -1276,6 +1285,9 @@
           "migrationConfigurations"
         ],
         "operationId": "migrationConfigurations_Get",
+        "x-ms-examples": {
+          "MigrationConfigurationsGet": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationGet.json" }
+        },
         "description": "Retrieves Migration Config",
         "parameters": [
           {
@@ -1315,8 +1327,11 @@
         "tags": [
           "migrationConfigurations"
         ],
-        "operationId": "migrationConfigurations_DisableMigration",
-        "description": "This operation disables the Migration",
+        "operationId": "migrationConfigurations_CompleteMigration",
+        "x-ms-examples": {
+          "MigrationConfigurationsCompleteMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCompleteMigration.json" }
+        },
+        "description": "This operation Completes Migration",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1353,7 +1368,10 @@
           "migrationConfigurations"
         ],
         "operationId": "migrationConfigurations_Revert",
-        "description": "Invokes MigrationConfig Revert",
+        "x-ms-examples": {
+          "MigrationConfigurationsRevert": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationRevert.json" }
+        },
+        "description": "This operation reverts Migration",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -4236,7 +4254,7 @@
               "type": "string",
               "description": "Provisioning state of Migration Configuration "
             },
-            "primaryNamespaceName": {
+            "targetNamespace": {
               "type": "string",
               "description": "Existing premium Namespace name which has no entities, will be used for migration"
             },
@@ -4246,7 +4264,7 @@
             }
           },
           "required": [
-            "primaryNamespaceName",
+            "targetNamespace",
             "postMigrationName"
           ],
           "description": "Properties required to the Create Migration Configuration"
@@ -4392,7 +4410,8 @@
       "x-ms-enum": {
         "name": "MigrationConfigurationName",
         "modelAsString": true
-      }
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }
