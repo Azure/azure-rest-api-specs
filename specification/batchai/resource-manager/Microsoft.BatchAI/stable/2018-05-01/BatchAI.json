@@ -1592,7 +1592,7 @@
           ],
           "x-ms-enum": {
             "name": "UsageUnit",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "currentValue": {
@@ -1628,6 +1628,7 @@
           "description": "The list of compute resource usages."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
         }
@@ -1674,6 +1675,7 @@
           "description": "The collection of File Servers."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The continuation token."
         }
@@ -1858,7 +1860,7 @@
           ],
           "x-ms-enum": {
             "name": "FileServerProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -1944,12 +1946,11 @@
       "enum": [
         "requeue",
         "terminate",
-        "waitforjobcompletion",
-        "unknown"
+        "waitforjobcompletion"
       ],
       "x-ms-enum": {
         "name": "DeallocationOption",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "ScaleSettings": {
@@ -2306,7 +2307,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "provisioningStateTransitionTime": {
@@ -2326,7 +2327,7 @@
           ],
           "x-ms-enum": {
             "name": "AllocationState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "allocationStateTransitionTime": {
@@ -2382,6 +2383,7 @@
           "description": "The collection of returned Clusters."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The continuation token."
         }
@@ -2390,7 +2392,7 @@
     },
     "JobBaseProperties": {
       "properties": {
-        "priority": {
+        "schedulingPriority": {
           "type": "string",
           "default": "normal",
           "enum": [
@@ -2402,8 +2404,8 @@
             "name": "JobPriority",
             "modelAsString": true
           },
-          "title": "Priority associated with the job.",
-          "description": "Priority associated with the job."
+          "title": "Scheduling priority associated with the job.",
+          "description": "Scheduling priority  associated with the job."
         },
         "cluster": {
           "title": "Specifies the Id of the cluster on which this job will run.",
@@ -2680,7 +2682,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "provisioningStateTransitionTime": {
@@ -2703,7 +2705,7 @@
           ],
           "x-ms-enum": {
             "name": "ExecutionState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "executionStateTransitionTime": {
@@ -2774,6 +2776,7 @@
           "description": "The collection of jobs."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The continuation token."
         }
@@ -2813,6 +2816,7 @@
           "description": "The collection of returned remote login details."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The continuation token."
         }
@@ -2873,6 +2877,7 @@
           "description": "The collection of returned job directories and files."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The continuation token."
         }
@@ -3639,6 +3644,7 @@
           "title": "The list of operations supported by the resource provider."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "title": "The URL to get the next set of operation list results if there are any."
         }
@@ -3654,6 +3660,7 @@
           "description": "The collection of workspaces."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The continuation token."
         }
@@ -3681,6 +3688,12 @@
     },
     "WorkspaceProperties": {
       "properties": {
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Time when the Workspace was created."
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
@@ -3694,7 +3707,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "provisioningStateTransitionTime": {
@@ -3732,6 +3745,7 @@
           "description": "The collection of experiments."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The continuation token."
         }
@@ -3745,6 +3759,12 @@
     },
     "ExperimentProperties": {
       "properties": {
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Time when the Experiment was created."
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
@@ -3758,7 +3778,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "provisioningStateTransitionTime": {
