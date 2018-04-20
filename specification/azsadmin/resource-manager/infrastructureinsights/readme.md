@@ -33,11 +33,11 @@ These settings apply only when `--tag=package-2016-05-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2016-05-01'
 input-file:
-    - Microsoft.InfrastructureInsights.Admin/stable/2016-05-01/InfrastructureInsights.json
-    - Microsoft.InfrastructureInsights.Admin/stable/2016-05-01/Alert.json
-    - Microsoft.InfrastructureInsights.Admin/stable/2016-05-01/RegionHealth.json
-    - Microsoft.InfrastructureInsights.Admin/stable/2016-05-01/ResourceHealth.json
-    - Microsoft.InfrastructureInsights.Admin/stable/2016-05-01/ServiceHealth.json
+    - Microsoft.InfrastructureInsights.Admin/preview/2016-05-01/InfrastructureInsights.json
+    - Microsoft.InfrastructureInsights.Admin/preview/2016-05-01/Alert.json
+    - Microsoft.InfrastructureInsights.Admin/preview/2016-05-01/RegionHealth.json
+    - Microsoft.InfrastructureInsights.Admin/preview/2016-05-01/ResourceHealth.json
+    - Microsoft.InfrastructureInsights.Admin/preview/2016-05-01/ServiceHealth.json
 ```
 
 ---
