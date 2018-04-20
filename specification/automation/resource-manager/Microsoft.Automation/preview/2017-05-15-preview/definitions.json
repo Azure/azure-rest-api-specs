@@ -699,7 +699,8 @@
             "ServicePack",
             "Definition",
             "Tools",
-            "Updates"
+            "Updates",
+            "NotSelected"
           ],
           "x-ms-enum": {
             "name": "WindowsUpdateClasses",
@@ -709,6 +710,13 @@
         "excludedKbNumbers": {
           "type": "array",
           "description": "KB numbers excluded from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedKbNumbers": {
+          "type": "array",
+          "description": "KB numbers included from the software update configuration.",
           "items": {
             "type": "string"
           }
@@ -726,7 +734,8 @@
             "Unclassified",
             "Critical",
             "Security",
-            "Other"
+            "Other",
+            "NotSelected"
           ],
           "x-ms-enum": {
             "name": "LinuxUpdateClasses",
@@ -736,6 +745,13 @@
         "excludedPackageNameMasks": {
           "type": "array",
           "description": "packages excluded from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedPackageNameMasks": {
+          "type": "array",
+          "description": "packages included from the software update configuration.",
           "items": {
             "type": "string"
           }
