@@ -1145,12 +1145,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs": {
       "get": {
         "tags": [
-          "migrationConfigurations"
+          "MigrationConfigs"
         ],
-        "operationId": "migrationConfigurations_List",
+        "operationId": "MigrationConfigs_List",
         "x-ms-examples": {
           "MigrationConfigurationsList": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationList.json" }
         },
@@ -1188,12 +1188,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/{configName}": {
       "put": {
         "tags": [
-          "migrationConfigurations"
+          "MigrationConfigs"
         ],
-        "operationId": "migrationConfigurations_StartMigration",
+        "operationId": "MigrationConfigs_StartMigration",
         "x-ms-examples": {
           "MigrationConfigurationsStartMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationStartMigration.json" }
         },
@@ -1245,9 +1245,9 @@
       },
       "delete": {
         "tags": [
-          "migrationConfigurations"
+          "MigrationConfigs"
         ],
-        "operationId": "migrationConfigurations_Delete",
+        "operationId": "MigrationConfigs_Delete",
         "x-ms-examples": {
           "MigrationConfigurationsDelete": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationDelete.json" }
         },
@@ -1283,9 +1283,9 @@
       },
       "get": {
         "tags": [
-          "migrationConfigurations"
+          "MigrationConfigs"
         ],
-        "operationId": "migrationConfigurations_Get",
+        "operationId": "MigrationConfigs_Get",
         "x-ms-examples": {
           "MigrationConfigurationsGet": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationGet.json" }
         },
@@ -1323,12 +1323,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/upgrade": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/{configName}/upgrade": {
       "post": {
         "tags": [
-          "migrationConfigurations"
+          "MigrationConfigs"
         ],
-        "operationId": "migrationConfigurations_CompleteMigration",
+        "operationId": "MigrationConfigs_CompleteMigration",
         "x-ms-examples": {
           "MigrationConfigurationsCompleteMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCompleteMigration.json" }
         },
@@ -1363,12 +1363,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/revert": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/{configName}/revert": {
       "post": {
         "tags": [
-          "migrationConfigurations"
+          "MigrationConfigs"
         ],
-        "operationId": "migrationConfigurations_Revert",
+        "operationId": "MigrationConfigs_Revert",
         "x-ms-examples": {
           "MigrationConfigurationsRevert": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationRevert.json" }
         },
@@ -4257,11 +4257,11 @@
             },
             "targetNamespace": {
               "type": "string",
-              "description": "Existing premium Namespace name which has no entities, will be used for migration"
+              "description": "Existing premium Namespace ARM Id name which has no entities, will be used for migration"
             },
             "postMigrationName": {
               "type": "string",
-              "description": "Name to access connection strings of the Primary Namespace after migration"
+              "description": "Name to access Standard Namespace after migration"
             }
           },
           "required": [
