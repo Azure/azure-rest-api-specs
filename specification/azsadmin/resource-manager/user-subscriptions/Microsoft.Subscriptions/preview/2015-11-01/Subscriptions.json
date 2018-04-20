@@ -60,11 +60,7 @@
               "description": "Gets details about particular subscription.",
               "parameters": [
                 {
-                  "name": "subscriptionId",
-                  "in": "path",
-                  "required": true,
-                  "type": "string",
-                  "description": "Id of the subscription."
+                    "$ref": "#/parameters/SubscriptionIdParameter"
                 },
                 {
                   "$ref": "#/parameters/ApiVersionParameter"
@@ -92,11 +88,7 @@
                 "operationId": "Subscriptions_CreateOrUpdate",
                 "parameters": [
                     {
-                        "name": "subscriptionId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "Id of the subscription."
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/NewSubscriptionParameter"
@@ -133,11 +125,7 @@
                     "operationId": "Subscriptions_Delete",
                     "parameters": [
                         {
-                            "name": "subscriptionId",
-                            "in": "path",
-                            "required": true,
-                            "type": "string",
-                            "description": "Id of the subscription."
+                            "$ref": "#/parameters/SubscriptionIdParameter"
                         },
                         {
                             "$ref": "#/parameters/ApiVersionParameter"
@@ -349,6 +337,14 @@
                 "type": "string",
                 "default": "2015-11-01"
             },
+            "SubscriptionIdParameter": {
+                "name": "subscriptionId",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "Id of the subscription.",
+                "x-ms-parameter-location": "method"
+            },            
             "NewSubscriptionParameter": {
                 "description": "Subscription parameter.",
                 "name": "newSubscription",

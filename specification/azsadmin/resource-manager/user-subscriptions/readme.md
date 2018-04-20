@@ -33,14 +33,14 @@ directive:
   - suppress: XmsResourceInPutResponse
     reason: Subscription is not modelled as ARM resource in azure for legacy reasons. In Azure stack as well, Subscription is not modelled as ARM resource for azure consistency
     where:
-      - $.paths[\"/subscriptions/{subscriptionId}\"].put
+      - $.paths["/subscriptions/{subscriptionId}"].put
 
   - suppress: SubscriptionIdParameterInOperations
     reason: Subscription is the main resource in the API spec and it should not be masked in global parameters.
     where:
-      - $.paths[\"/subscriptions/{subscriptionId}\"].get.parameters[0]
-      - $.paths[\"/subscriptions/{subscriptionId}\"].put.parameters[0]
-      - $.paths[\"/subscriptions/{subscriptionId}\"].delete.parameters[0]
+      - $.paths["/subscriptions/{subscriptionId}"].get.parameters[0]
+      - $.paths["/subscriptions/{subscriptionId}"].put.parameters[0]
+      - $.paths["/subscriptions/{subscriptionId}"].delete.parameters[0]
 
   - suppress: BodyTopLevelProperties
     reason: Subscription is not modelled as ARM resource in azure for legacy reasons. In Azure stack as well, Subscription is not modelled as ARM resource for azure consistency.
@@ -75,7 +75,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.AzureStack.Management.Subscriptions
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/Subscriptions/Subscriptions/Generated
+  output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
 ```
 
