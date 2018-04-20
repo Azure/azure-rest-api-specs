@@ -21,20 +21,20 @@
         "tags": [
           "Builds"
         ],
-        "summary": "Gets all the builds for a registry.",
+        "description": "Gets all the builds for a registry.",
         "operationId": "Builds_List",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -67,10 +67,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-odata": "#/definitions/BuildFilter",
@@ -89,20 +86,20 @@
         "tags": [
           "Builds"
         ],
-        "summary": "Gets the detailed information for a given build.",
+        "description": "Gets the detailed information for a given build.",
         "operationId": "Builds_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "buildId",
@@ -120,10 +117,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-examples": {
@@ -136,20 +130,20 @@
         "tags": [
           "Builds"
         ],
-        "summary": "Patch the build properties.",
+        "description": "Patch the build properties.",
         "operationId": "Builds_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "buildId",
@@ -182,10 +176,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -201,20 +192,20 @@
         "tags": [
           "Builds"
         ],
-        "summary": "Gets a link to download the build logs.",
+        "description": "Gets a link to download the build logs.",
         "operationId": "Builds_GetLogLink",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "buildId",
@@ -232,10 +223,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-examples": {
@@ -250,20 +238,20 @@
         "tags": [
           "Builds"
         ],
-        "summary": "Cancel an existing build.",
+        "description": "Cancel an existing build.",
         "operationId": "Builds_Cancel",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "buildId",
@@ -281,10 +269,7 @@
             "description": "The request was successfully accepted; the operation will complete asynchronously."
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -300,23 +285,23 @@
         "tags": [
           "BuildSteps"
         ],
-        "summary": "List all the build steps for a given build task.",
+        "description": "List all the build steps for a given build task.",
         "operationId": "BuildSteps_List",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           }
         ],
         "responses": {
@@ -327,10 +312,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-pageable": {
@@ -348,26 +330,26 @@
         "tags": [
           "BuildSteps"
         ],
-        "summary": "Gets the build step for a build task.",
+        "description": "Gets the build step for a build task.",
         "operationId": "BuildSteps_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           },
           {
-            "$ref": "#/parameters/stepNameParameter"
+            "$ref": "#/parameters/StepNameParameter"
           }
         ],
         "responses": {
@@ -378,10 +360,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-examples": {
@@ -394,26 +373,26 @@
         "tags": [
           "BuildSteps"
         ],
-        "summary": "Creates a build step for a build task.",
+        "description": "Creates a build step for a build task.",
         "operationId": "BuildSteps_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           },
           {
-            "$ref": "#/parameters/stepNameParameter"
+            "$ref": "#/parameters/StepNameParameter"
           },
           {
             "name": "buildStepCreateParameters",
@@ -439,10 +418,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -456,26 +432,26 @@
         "tags": [
           "BuildSteps"
         ],
-        "summary": "Deletes a build step from the build task.",
+        "description": "Deletes a build step from the build task.",
         "operationId": "BuildSteps_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           },
           {
-            "$ref": "#/parameters/stepNameParameter"
+            "$ref": "#/parameters/StepNameParameter"
           }
         ],
         "responses": {
@@ -486,10 +462,7 @@
             "description": "The request was successfully accepted; the operation will complete asynchronously."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-long-running-operation": true,
@@ -503,26 +476,26 @@
         "tags": [
           "BuildSteps"
         ],
-        "summary": "Updates a build step in a build task.",
+        "description": "Updates a build step in a build task.",
         "operationId": "BuildSteps_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           },
           {
-            "$ref": "#/parameters/stepNameParameter"
+            "$ref": "#/parameters/StepNameParameter"
           },
           {
             "name": "buildStepUpdateParameters",
@@ -548,10 +521,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -567,26 +537,26 @@
         "tags": [
           "BuildSteps"
         ],
-        "summary": "List the build arguments for a step including the secret arguments.",
+        "description": "List the build arguments for a step including the secret arguments.",
         "operationId": "BuildSteps_ListBuildArguments",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           },
           {
-            "$ref": "#/parameters/stepNameParameter"
+            "$ref": "#/parameters/StepNameParameter"
           }
         ],
         "responses": {
@@ -597,10 +567,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry/step doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-pageable": {
@@ -618,20 +585,20 @@
         "tags": [
           "BuildTasks"
         ],
-        "summary": "Lists all the build tasks for a specified container registry.",
+        "description": "Lists all the build tasks for a specified container registry.",
         "operationId": "BuildTasks_List",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -656,10 +623,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-odata": "#/definitions/BuildTaskFilter",
@@ -678,23 +642,23 @@
         "tags": [
           "BuildTasks"
         ],
-        "summary": "Get the properties of a specified build task.",
+        "description": "Get the properties of a specified build task.",
         "operationId": "BuildTasks_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           }
         ],
         "responses": {
@@ -705,10 +669,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-examples": {
@@ -721,23 +682,23 @@
         "tags": [
           "BuildTasks"
         ],
-        "summary": "Creates a build task for a container registry with the specified parameters.",
+        "description": "Creates a build task for a container registry with the specified parameters.",
         "operationId": "BuildTasks_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           },
           {
             "name": "buildTaskCreateParameters",
@@ -763,10 +724,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -780,23 +738,23 @@
         "tags": [
           "BuildTasks"
         ],
-        "summary": "Deletes a specified build task.",
+        "description": "Deletes a specified build task.",
         "operationId": "BuildTasks_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           }
         ],
         "responses": {
@@ -810,10 +768,7 @@
             "description": "No Content - the specified resource was not found."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-long-running-operation": true,
@@ -827,23 +782,23 @@
         "tags": [
           "BuildTasks"
         ],
-        "summary": "Updates a build task with the specified parameters.",
+        "description": "Updates a build task with the specified parameters.",
         "operationId": "BuildTasks_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           },
           {
             "name": "buildTaskUpdateParameters",
@@ -869,10 +824,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -888,23 +840,23 @@
         "tags": [
           "BuildTasks"
         ],
-        "summary": "Get the source control properties for a build task.",
+        "description": "Get the source control properties for a build task.",
         "operationId": "BuildTasks_ListSourceRepositoryProperties",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/buildTaskNameParameter"
+            "$ref": "#/parameters/BuildTaskNameParameter"
           }
         ],
         "responses": {
@@ -915,10 +867,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-examples": {
@@ -933,20 +882,20 @@
         "tags": [
           "Registries"
         ],
-        "summary": "Creates a new build based on the request parameters and add it to the build queue.",
+        "description": "Creates a new build based on the request parameters and add it to the build queue.",
         "operationId": "Registries_QueueBuild",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "buildRequest",
@@ -969,10 +918,7 @@
             "description": "The request was successfully accepted; the operation will complete asynchronously."
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -988,20 +934,20 @@
         "tags": [
           "Registries"
         ],
-        "summary": "Get the upload location for the user to be able to upload the source.",
+        "description": "Get the upload location for the user to be able to upload the source.",
         "operationId": "Registries_GetBuildSourceUploadUrl",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/registryNameParameter"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1012,10 +958,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-examples": {
@@ -1372,8 +1315,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BuildStepProperties",
-          "description": "The properties of a build step.",
-          "x-ms-client-flatten": true
+          "description": "The properties of a build step."
         }
       }
     },
@@ -1419,8 +1361,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BuildStepPropertiesUpdateParameters",
-          "description": "The properties for updating a build step.",
-          "x-ms-client-flatten": true
+          "description": "The properties for updating a build step."
         },
         "tags": {
           "description": "The ARM resource tags.",
@@ -1451,6 +1392,7 @@
       "discriminator": "type"
     },
     "BuildArgumentList": {
+      "description": "The list of build arguments for a build step.",
       "type": "object",
       "properties": {
         "value": {
@@ -2121,14 +2063,14 @@
     }
   },
   "parameters": {
-    "subscriptionIdParameter": {
+    "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "description": "The Microsoft Azure subscription ID.",
       "required": true,
       "type": "string"
     },
-    "resourceGroupNameParameter": {
+    "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "description": "The name of the resource group to which the container registry belongs.",
@@ -2136,7 +2078,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "registryNameParameter": {
+    "RegistryNameParameter": {
       "name": "registryName",
       "in": "path",
       "description": "The name of the container registry.",
@@ -2147,14 +2089,14 @@
       "pattern": "^[a-zA-Z0-9]*$",
       "x-ms-parameter-location": "method"
     },
-    "apiVersionParameter": {
+    "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "description": "The client API version.",
       "required": true,
       "type": "string"
     },
-    "buildTaskNameParameter": {
+    "BuildTaskNameParameter": {
       "name": "buildTaskName",
       "in": "path",
       "description": "The name of the container registry build task.",
@@ -2165,7 +2107,7 @@
       "pattern": "^[a-zA-Z0-9]*$",
       "x-ms-parameter-location": "method"
     },
-    "stepNameParameter": {
+    "StepNameParameter": {
       "name": "stepName",
       "in": "path",
       "description": "The name of a build step for a container registry build task.",
