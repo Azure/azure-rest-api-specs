@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Service health operation endpoints and objects.",
+        "description": "Resource provider health operation endpoints and objects.",
         "title": "InfrastructureInsightsManagementClient",
         "version": "2016-05-01"
     },
@@ -10,21 +10,24 @@
         "https"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths": {
             "get": {
                 "x-ms-examples": {
-                    "List all services health": {
-                        "$ref": "./examples/ServiceHealth/ServiceHealthListOperation_example.json"
+                    "Returns the list of all resource provider health states.": {
+                        "$ref": "./examples/ServiceHealth/List.json"
                     }
                 },
                 "tags": [
                     "ServiceHealths"
                 ],
-                "description": "Get a list of all services health",
+                "description": "Returns the list of all resource provider health states.",
                 "operationId": "ServiceHealths_List",
                 "parameters": [
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
@@ -56,21 +59,24 @@
                 ]
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceHealth}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceHealth}": {
             "get": {
                 "x-ms-examples": {
-                    "Get a services health": {
-                        "$ref": "./examples/ServiceHealth/ServiceHealthGetOperation_example.json"
+                    "Returns the requested service health object.": {
+                        "$ref": "./examples/ServiceHealth/Get.json"
                     }
                 },
                 "tags": [
                     "ServiceHealths"
                 ],
-                "description": "Get a services health",
+                "description": "Returns the requested service health object.",
                 "operationId": "ServiceHealths_Get",
                 "parameters": [
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
@@ -101,25 +107,26 @@
     },
     "definitions": {
         "ServiceHealth": {
-            "description": "Holds information about a services health.",
+            "description": "Holds information about the health of a service.",
+            "type": "object",
             "properties": {
                 "properties": {
-                    "description": "Holds information about a services health.",
+                    "description": "Holds information about the health of a service.",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ServiceHealthModel"
                 }
             },
             "allOf": [
                 {
-                    "$ref": "InfrastructureInsights.json#/definitions/Resource"
+                    "$ref": "InfrastructureInsights.json#/definitions/TrackedResource"
                 }
             ]
         },
         "ServiceHealthModel": {
-            "description": "Holds information about a services health.",
+            "description": "Holds information about the health of a service.",
             "properties": {
                 "displayName": {
-                    "description": "Name of the alert.",
+                    "description": "Name of the service.",
                     "type": "string"
                 },
                 "serviceLocation": {
@@ -127,7 +134,7 @@
                     "type": "string"
                 },
                 "infraURI": {
-                    "description": "The route prefix to the alert.",
+                    "description": "The route prefix to the service.",
                     "type": "string"
                 }
             },
@@ -138,10 +145,10 @@
             ]
         },
         "ServiceHealthList": {
-            "description": "Pageable list of service health instances.",
+            "description": "Pageable list of service health objects.",
             "properties": {
                 "value": {
-                    "description": "Array of service health instances.",
+                    "description": "List of service health objects.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ServiceHealth"
@@ -169,7 +176,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }

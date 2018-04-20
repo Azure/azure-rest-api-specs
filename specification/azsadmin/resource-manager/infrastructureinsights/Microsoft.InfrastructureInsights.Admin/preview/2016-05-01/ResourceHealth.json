@@ -10,21 +10,24 @@
         "https"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths": {
             "get": {
                 "x-ms-examples": {
-                    "Get a list of resource health items": {
-                        "$ref": "./examples/ResourceHealth/ResourceHealthListOperation_example.json"
+                    "Returns a list of each resource's health under a service.": {
+                        "$ref": "./examples/ResourceHealth/List.json"
                     }
                 },
                 "tags": [
                     "Resources"
                 ],
-                "description": "Get a list of resources?.",
+                "description": "Returns a list of each resource's health under a service.",
                 "operationId": "ResourceHealths_List",
                 "parameters": [
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
@@ -59,21 +62,24 @@
                 ]
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths/{resourceRegistrationId}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths/{resourceRegistrationId}": {
             "get": {
                 "x-ms-examples": {
-                    "Get health information about a resource": {
-                        "$ref": "./examples/ResourceHealth/ResourceHealthGetOperation_example.json"
+                    "Returns the requested health information about a resource.": {
+                        "$ref": "./examples/ResourceHealth/Get.json"
                     }
                 },
                 "tags": [
                     "Resources"
                 ],
-                "description": "Get health information about a resources.",
+                "description": "Returns the requested health information about a resource.",
                 "operationId": "ResourceHealths_Get",
                 "parameters": [
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
@@ -120,7 +126,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "InfrastructureInsights.json#/definitions/Resource"
+                    "$ref": "InfrastructureInsights.json#/definitions/TrackedResource"
                 }
             ]
         },
@@ -128,31 +134,31 @@
             "description": "Health information related to a resource.",
             "properties": {
                 "resourceLocation": {
-                    "description": "Gets or sets the resource location.",
+                    "description": "Resource location.",
                     "type": "string"
                 },
                 "resourceName": {
-                    "description": "Gets or sets the resource name.",
+                    "description": "Resource name.",
                     "type": "string"
                 },
                 "resourceDisplayName": {
-                    "description": "Gets or sets the resource display name.",
+                    "description": "Resource display name.",
                     "type": "string"
                 },
                 "resourceType": {
-                    "description": "Gets or sets the resource type.",
+                    "description": "Resource type.",
                     "type": "string"
                 },
                 "resourceURI": {
-                    "description": "Gets or sets the resource uri.",
+                    "description": "Gets or sets the resource URI.",
                     "type": "string"
                 },
                 "rpRegistrationId": {
-                    "description": "Gets or sets the resource provider registration id.",
+                    "description": "Gets or sets the resource provider registration ID.",
                     "type": "string"
                 },
                 "usageMetrics": {
-                    "description": "Gets or sets the usage metrics.",
+                    "description": "Usage metrics.",
                     "type": "array",
                     "items": {
                         "$ref": "InfrastructureInsights.json#/definitions/UsageMetrics"
@@ -166,10 +172,10 @@
             ]
         },
         "ResourceHealthList": {
-            "description": "Pageable list of resource healths.",
+            "description": "Pageable list of resource health objects.",
             "properties": {
                 "value": {
-                    "description": "Array of of resource healths",
+                    "description": "List of resource health objects.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ResourceHealth"
@@ -187,7 +193,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }

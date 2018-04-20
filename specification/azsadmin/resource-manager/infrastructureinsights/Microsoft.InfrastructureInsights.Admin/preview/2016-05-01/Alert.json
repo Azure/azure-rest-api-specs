@@ -10,21 +10,24 @@
         "https"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts": {
             "get": {
                 "x-ms-examples": {
-                    "List all alerts": {
-                        "$ref": "./examples/Alert/AlertListOperation_example.json"
+                    "Returns the list of all alerts in a given region.": {
+                        "$ref": "./examples/Alert/List.json"
                     }
                 },
                 "tags": [
                     "Alerts"
                 ],
-                "description": "Returns the list of all alerts in a given location.",
+                "description": "Returns the list of all alerts in a given region.",
                 "operationId": "Alerts_List",
                 "parameters": [
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
@@ -56,21 +59,24 @@
                 ]
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}": {
             "get": {
                 "x-ms-examples": {
-                    "Get an alert": {
-                        "$ref": "./examples/Alert/AlertGetOperation_example.json"
+                    "Returns the requested an alert.": {
+                        "$ref": "./examples/Alert/Get.json"
                     }
                 },
                 "tags": [
                     "Alerts"
                 ],
-                "description": "Get an alert.",
+                "description": "Returns the requested an alert.",
                 "operationId": "Alerts_Get",
                 "parameters": [
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
@@ -99,18 +105,21 @@
             },
             "put": {
                 "x-ms-examples": {
-                    "Close an alert": {
-                        "$ref": "./examples/Alert/AlertCloseOperation_example.json"
+                    "Closes the given alert.": {
+                        "$ref": "./examples/Alert/Close.json"
                     }
                 },
                 "tags": [
                     "Alerts"
                 ],
-                "description": "Close an alert.",
+                "description": "Closes the given alert.",
                 "operationId": "Alerts_Close",
                 "parameters": [
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
                     },
                     {
                         "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
@@ -147,56 +156,57 @@
     },
     "definitions": {
         "Alert": {
-            "description": "This class models an alert resource.",
+            "description": "This object represents an alert resource.",
+            "type": "object",
             "properties": {
                 "properties": {
-                    "description": "Holds all information related to Alerts",
+                    "description": "Contains information related to alerts.",
                     "$ref": "#/definitions/AlertModel",
                     "x-ms-client-flatten": true
                 }
             },
             "allOf": [
                 {
-                    "$ref": "InfrastructureInsights.json#/definitions/Resource"
+                    "$ref": "InfrastructureInsights.json#/definitions/TrackedResource"
                 }
             ]
         },
         "AlertModel": {
-            "description": "Holds Alert data",
+            "description": "Contains alert data.",
             "properties": {
                 "closedTimestamp": {
-                    "description": "Gets or sets the closed timestamp of the alert.",
+                    "description": "Timestamp when the alert was closed.",
                     "type": "string"
                 },
                 "createdTimestamp": {
-                    "description": "Gets or sets the created timestamp of the alert.",
+                    "description": "Timestamp when the alert was created.",
                     "type": "string"
                 },
                 "description": {
-                    "description": "Gets or sets the description of the alert.",
+                    "description": "Description of the alert.",
                     "type": "array",
                     "items": {
                         "$ref": "InfrastructureInsights.json#/definitions/Dictionary"
                     }
                 },
                 "faultId": {
-                    "description": "Gets or sets the fault id of the alert.",
+                    "description": "Gets or sets the fault ID of the alert.",
                     "type": "string"
                 },
                 "alertId": {
-                    "description": "Gets or sets the id of the alert.",
+                    "description": "Gets or sets the ID of the alert.",
                     "type": "string"
                 },
                 "faultTypeId": {
-                    "description": "Gets or sets the fault type id of the alert.",
+                    "description": "Gets or sets the fault type ID of the alert.",
                     "type": "string"
                 },
                 "lastUpdatedTimestamp": {
-                    "description": "Gets or sets last updated timestamp of the alert.",
+                    "description": "Timestamp when the alert was last updated.",
                     "type": "string"
                 },
                 "alertProperties": {
-                    "description": "Gets or sets properties of the alert.",
+                    "description": "Properties of the alert.",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -210,52 +220,52 @@
                     }
                 },
                 "resourceRegistrationId": {
-                    "description": "Gets or sets the registration id of the atomic component the alert belongs to.  This is null if not associated with a resource.",
+                    "description": "Gets or sets the registration ID of the resource associated with the alert. If the alert is not associated with a resource, the resource registration ID is null.",
                     "type": "string"
                 },
                 "resourceProviderRegistrationId": {
-                    "description": "Gets or sets the registration id of the service the alert belongs to.",
+                    "description": "Gets or sets the registration ID of the service the alert belongs to.",
                     "type": "string"
                 },
                 "severity": {
-                    "description": "Gets or sets the severity of the alert.",
+                    "description": "Severity of the alert.",
                     "type": "string"
                 },
                 "state": {
-                    "description": "Gets or sets the state of the alert.",
+                    "description": "State of the alert.",
                     "type": "string"
                 },
                 "title": {
-                    "description": "Gets or sets the ResourceId for the impacted item.",
+                    "description": "Gets or sets the Resource ID for the impacted item.",
                     "type": "string"
                 },
                 "impactedResourceId": {
-                    "description": "Gets or sets the ResourceId for the impacted item.",
+                    "description": "Gets or sets the Resource ID for the impacted item.",
                     "type": "string"
                 },
                 "impactedResourceDisplayName": {
-                    "description": "Gets or sets the display name for the impacted item.",
+                    "description": "Display name for the impacted item.",
                     "type": "string"
                 },
                 "closedByUserAlias": {
-                    "description": "Gets or sets the user alias who closed the alert.",
+                    "description": "User alias who closed the alert.",
                     "type": "string"
                 }
             }
         },
         "AlertList": {
-            "description": "A pageable list of Alerts",
+            "description": "A pageable list of alerts",
             "properties": {
                 "value": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Alert"
                     },
-                    "description": "Holds all alerts in this page."
+                    "description": "List of alerts."
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Points to the next page."
+                    "description": "URI to the next page."
                 }
             }
         }
@@ -269,47 +279,6 @@
             "in": "path",
             "x-ms-parameter-location": "method"
         },
-        "RetentionPeriodInDaysBodyParameter": {
-            "name": "retentionPeriodInDays",
-            "description": "How long alerts should exist before deletion.",
-            "schema": {
-                "type": "integer",
-                "format": "int32"
-            },
-            "required": true,
-            "in": "body",
-            "x-ms-parameter-location": "method"
-        },
-        "ResourceProviderRegistrationIdBodyParameter": {
-            "description": "A resource provider registration id.",
-            "name": "resourceProviderRegistrationId",
-            "schema": {
-                "type": "string"
-            },
-            "required": true,
-            "in": "body",
-            "x-ms-parameter-location": "method"
-        },
-        "ResourceRegistrationIdBodyParameter": {
-            "description": "A resource provider id.",
-            "name": "resourceRegistrationId",
-            "schema": {
-                "type": "string"
-            },
-            "required": true,
-            "in": "body",
-            "x-ms-parameter-location": "method"
-        },
-        "HeartbeatMachineNameBodyParameter": {
-            "description": "Name of a heartbeat machine.",
-            "name": "heartbeatMachineName",
-            "schema": {
-                "type": "string"
-            },
-            "required": true,
-            "in": "body",
-            "x-ms-parameter-location": "method"
-        },
         "UserParameter": {
             "description": "The username used to perform the operation.",
             "name": "user",
@@ -319,7 +288,7 @@
             "x-ms-parameter-location": "method"
         },
         "AlertParameter": {
-            "description": "Updated Alert Parameter.",
+            "description": "Updated alert parameter.",
             "name": "alert",
             "schema": {
                 "$ref": "#/definitions/Alert"
@@ -334,7 +303,7 @@
             "type": "oauth2",
             "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
             "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
+            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
             "scopes": {
                 "user_impersonation": "impersonate your user account"
             }
