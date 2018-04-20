@@ -185,7 +185,7 @@ These settings apply only when `--tag=package-2017-06-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-06-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/containerregistry/mgmt/2017-06-01-preview/containerregistry
+output-folder: $(go-sdk-folder)/services/preview/containerregistry/mgmt/2017-06-01-preview/containerregistry
 ```
 
 ### Tag: package-2017-03 and go
@@ -203,7 +203,7 @@ These settings apply only when `--tag=package-2016-06-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-06-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/containerregistry/mgmt/2016-06-27-preview/containerregistry
+output-folder: $(go-sdk-folder)/services/preview/containerregistry/mgmt/2016-06-27-preview/containerregistry
 ```
 
 
