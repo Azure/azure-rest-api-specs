@@ -61,17 +61,15 @@
           "type": "string",
           "description": "The name of the asset blob container."
         },
-        "storageAccountId": {
+        "storageAccountName": {
           "type": "string",
-          "description": "The ARM resource ID of the Azure Storage account containing the Asset."
+          "description": "The name of the storage account."
         },
         "storageEncryptionFormat": {
           "type": "string",
           "enum": [
             "None",
-            "MediaStorageClientEncryption",
-            "StaticCommonEncryption",
-            "StaticEnvelopeEncryption"
+            "MediaStorageClientEncryption"
           ],
           "x-ms-enum": {
             "name": "AssetStorageEncryptionFormat",
@@ -83,23 +81,13 @@
               {
                 "value": "MediaStorageClientEncryption",
                 "description": "The Asset is encrypted with Media Services client-side encryption."
-              },
-              {
-                "value": "StaticCommonEncryption",
-                "description": "The Asset is encrypted with static Common Encryption."
-              },
-              {
-                "value": "StaticEnvelopeEncryption",
-                "description": "The Asset is encrypted with static envelope encryption."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "The Asset encryption format. One of None, MediaStorageEncryption, StaticCommonEncryption or StaticEnvelopeEncryption."
-        },
-        "storageEncryptionKey": {
-          "type": "string",
-          "description": "The Base64 encoded key for the Asset storage encryption."
+          "description": "The Asset encryption format. One of None or MediaStorageEncryption.",
+          "readOnly": true,
+          "x-nullable": false
         }
       },
       "type": "object",
