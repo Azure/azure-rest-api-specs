@@ -1145,7 +1145,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations": {
       "get": {
         "tags": [
           "MigrationConfigs"
@@ -1188,16 +1188,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/{configName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}": {
       "put": {
         "tags": [
           "MigrationConfigs"
         ],
-        "operationId": "MigrationConfigs_StartMigration",
+        "operationId": "MigrationConfigs_CreateAndStartMigration",
         "x-ms-examples": {
-          "MigrationConfigurationsStartMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationStartMigration.json" }
+          "MigrationConfigurationsStartMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCreateAndStartMigration.json" }
         },
-        "description": "Initiate Migration from Standard to Premium",
+        "description": "Creates Migration configuration and starts migration of enties from Standard to Premium namespace",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1241,7 +1241,7 @@
             }
           }
         },
-		"x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1323,7 +1323,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/{configName}/upgrade": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/upgrade": {
       "post": {
         "tags": [
           "MigrationConfigs"
@@ -1332,7 +1332,7 @@
         "x-ms-examples": {
           "MigrationConfigurationsCompleteMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCompleteMigration.json" }
         },
-        "description": "This operation Completes Migration",
+        "description": "This operation Completes Migration of entities by pointing the connection strings to Premium namespace and any enties created after the operation will be under Premium Namespace. CompleteMigration operation will fail when entity migration is in-progress.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1363,7 +1363,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigs/{configName}/revert": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/revert": {
       "post": {
         "tags": [
           "MigrationConfigs"
