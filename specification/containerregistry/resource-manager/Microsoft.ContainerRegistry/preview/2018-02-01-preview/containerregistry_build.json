@@ -1020,7 +1020,7 @@
             "Succeeded",
             "Failed",
             "Canceled",
-            "AbandonedAsSystemError",
+            "Error",
             "Timeout"
           ],
           "type": "string",
@@ -1231,7 +1231,7 @@
             "Succeeded",
             "Failed",
             "Canceled",
-            "AbandonedAsSystemError",
+            "Error",
             "Timeout"
           ],
           "type": "string",
@@ -1785,32 +1785,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ErrorResponse": {
-      "description": "Azure container registry build API error object.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Azure container registry build API error body."
-        }
-      }
-    },
-    "Error": {
-      "description": "Azure container registry build API error body.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "error message.",
-          "type": "string"
-        }
-      }
     },
     "DockerBuildStep": {
       "description": "The Docker build step.",

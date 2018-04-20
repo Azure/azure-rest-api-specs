@@ -27,7 +27,17 @@ These are the global settings for the ContainerRegistry API.
 ``` yaml
 openapi-type: arm
 tag: package-2017-10
-``` 
+```
+
+### Tag: package-2018-02-preview
+
+These settings apply only when `--tag=package-2018-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-preview'
+input-file:
+- Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
+- Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
+```
 
 ### Tag: package-2017-10
 
@@ -36,7 +46,6 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
 - Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
-- Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2017-06-preview
