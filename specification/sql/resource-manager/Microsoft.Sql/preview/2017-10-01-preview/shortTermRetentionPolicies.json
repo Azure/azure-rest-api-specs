@@ -205,48 +205,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies": {
-      "get": {
-        "tags": [
-          "ShortTermRetentionPolicies"
-        ],
-        "description": "Gets a database's short term retention policy.",
-        "operationId": "ShortTermRetentionPolicies_ListByDatabase",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the policy.",
-            "schema": {
-              "$ref": "#/definitions/ShortTermRetentionPolicy"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidRestorableDroppedDatabaseDeletionDate - The restorable dropped database deletion date given is invalid\n\n * 400 InvalidRestorableDroppedDatabaseId - Invalid restorable dropped database identifier\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
-          }
-        },
-        "x-ms-examples": {
-          "Get the short term retention policy for the database.": {
-            "$ref": "./examples/GetShortTermRetentionPolicy.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
