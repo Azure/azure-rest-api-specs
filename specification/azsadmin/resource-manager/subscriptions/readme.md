@@ -27,6 +27,39 @@ openapi-type: arm
 tag: package-2015-11-01
 ```
 
+
+## Suppression
+``` yaml
+directive:
+  - suppress: XmsResourceInPutResponse
+    reason: Subscription and Location are not modelled as ARM resources in azure for legacy reasons. In Azure stack as well, Subscription and Location are not modelled as ARM resource for azure consistency
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{subscription}"].put
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{targetSubscriptionId}/acquiredPlans/{planAcquisitionId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}"].put
+
+  - suppress: SubscriptionIdParameterInOperations
+    reason: Subscription is the main resource in the API spec and it should not be masked in global parameters.
+    where:
+      - $.paths[\"/subscriptions/{subscriptionId}\"].get.parameters[0]
+      - $.paths[\"/subscriptions/{subscriptionId}\"].put.parameters[0]
+      - $.paths[\"/subscriptions/{subscriptionId}\"].delete.parameters[0]
+
+  - suppress: BodyTopLevelProperties
+    reason: Subscription is not modelled as ARM resource in azure for legacy reasons. In Azure stack as well, Subscription is not modelled as ARM resource for azure consistency.
+    where:
+      - $.definitions.Subscription.properties
+      - $.definitions.PlanAcquisition.properties
+      - $.definitions.Location.properties
+
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: Subscription is not modelled as ARM resource in azure for legacy reasons. In Azure stack as well, Subscription is not modelled as ARM resource for azure consistency.
+    where:
+      - $.definitions.Subscription
+      - $.definitions.PlanAcquisition
+      - $.definitions.Location
+```
+
 ### Tag: package-2015-11-01
 
 These settings apply only when `--tag=package-2015-11-01` is specified on the command line.
