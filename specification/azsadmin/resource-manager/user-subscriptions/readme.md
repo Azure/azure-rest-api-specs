@@ -27,6 +27,33 @@ openapi-type: arm
 tag: package-2015-11-01
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: XmsResourceInPutResponse
+    reason: Subscription is not modelled as ARM resource in azure for legacy reasons. In Azure stack as well, Subscription is not modelled as ARM resource for azure consistency
+    where:
+      - $.paths[\"/subscriptions/{subscriptionId}\"].put
+
+  - suppress: SubscriptionIdParameterInOperations
+    reason: Subscription is the main resource in the API spec and it should not be masked in global parameters.
+    where:
+      - $.paths[\"/subscriptions/{subscriptionId}\"].get.parameters[0]
+      - $.paths[\"/subscriptions/{subscriptionId}\"].put.parameters[0]
+      - $.paths[\"/subscriptions/{subscriptionId}\"].delete.parameters[0]
+
+  - suppress: BodyTopLevelProperties
+    reason: Subscription is not modelled as ARM resource in azure for legacy reasons. In Azure stack as well, Subscription is not modelled as ARM resource for azure consistency.
+    where:
+      - $.definitions.Subscription.properties
+
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: Subscription is not modelled as ARM resource in azure for legacy reasons. In Azure stack as well, Subscription is not modelled as ARM resource for azure consistency.
+    where:
+      - $.definitions.Subscription
+
+```
+
 ### Tag: package-2015-11-01
 
 These settings apply only when `--tag=package-2015-11-01` is specified on the command line.
