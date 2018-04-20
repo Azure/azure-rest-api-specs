@@ -60,11 +60,8 @@ let potentialNewWarningErrorSummary = `| {warning_error_code} | {warning_error_i
 `;
 
 let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reachout to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";;
-
 let armContactMessage = "These errors are reported by the ARM team's validation tools, reachout to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
-
 let sdkFileSummaries = '', armFileSummaries = '';
-let pullRequestFiles = null;
 
 let data = fs.readFileSync(logFilepath, 'utf8');
 let jsonData = JSON.parse(data);
