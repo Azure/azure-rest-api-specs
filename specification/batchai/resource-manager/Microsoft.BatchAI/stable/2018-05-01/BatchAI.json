@@ -72,7 +72,7 @@
         "tags": [
           "Usage"
         ],
-        "operationId": "Usage_List",
+        "operationId": "Usages_List",
         "description": "Gets the current usage information as well as limits for Batch AI resources for given subscription.",
         "parameters": [
           {
@@ -1572,10 +1572,12 @@
     "UsageName": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the resource."
         },
         "localizedValue": {
+          "readOnly": true,
           "type": "string",
           "description": "The localized name of the resource."
         }
@@ -1585,6 +1587,7 @@
     "Usage": {
       "properties": {
         "unit": {
+          "readOnly": true,
           "type": "string",
           "description": "An enum describing the unit of usage measurement.",
           "enum": [
@@ -1596,31 +1599,29 @@
           }
         },
         "currentValue": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The current usage of the resource."
         },
         "limit": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "The maximum permitted usage of the resource."
         },
         "name": {
+          "readOnly": true,
           "$ref": "#/definitions/UsageName",
           "description": "The name of the type of usage."
         }
       },
-      "required": [
-        "unit",
-        "currentValue",
-        "limit",
-        "name"
-      ],
       "description": "Describes Batch AI Resource Usage."
     },
     "ListUsagesResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Usage"
@@ -1633,9 +1634,6 @@
           "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
         }
       },
-      "required": [
-        "value"
-      ],
       "description": "The List Usages operation response."
     },
     "FileServerBaseProperties": {
@@ -2055,38 +2053,36 @@
     "NodeStateCounts": {
       "properties": {
         "idleNodeCount": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "title": "Number of compute nodes in idle state."
         },
         "runningNodeCount": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "title": "Number of compute nodes which are running jobs."
         },
         "preparingNodeCount": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "title": "Number of compute nodes which are being prepared."
         },
         "unusableNodeCount": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "title": "Number of compute nodes which are unusable."
         },
         "leavingNodeCount": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "title": "Number of compute nodes which are leaving the cluster."
         }
       },
-      "required": [
-        "idleNodeCount",
-        "runningNodeCount",
-        "preparingNodeCount",
-        "unusableNodeCount",
-        "leavingNodeCount"
-      ],
       "description": "Counts of various compute node states on the cluster."
     },
     "UserAccountSettings": {
@@ -2165,7 +2161,8 @@
       "properties": {
         "commandLine": {
           "type": "string",
-          "title": "Command Line to start Setup process."
+          "title": "Command line to be executed on each cluster's node after it being allocated or rebooted.",
+          "description": "Command line to be executed on each cluster's node after it being allocated or rebooted. The command is executed in a bash subshell as a root."
         },
         "environmentVariables": {
           "type": "array",
@@ -2181,12 +2178,6 @@
           },
           "title": "Collection of environment variables with secret values to be set for setup task.",
           "description": "Server will never report values of these variables back."
-        },
-        "runElevated": {
-          "type": "boolean",
-          "title": "Specifies whether to run the setup task under root account. The default value is false.",
-          "description": "Note. Non-elevated tasks are run under an account added into sudoer list and can perform sudo when required.",
-          "default": false
         },
         "stdOutErrPathPrefix": {
           "type": "string",
@@ -2337,6 +2328,7 @@
           "title": "The time at which the cluster entered its current allocation state."
         },
         "errors": {
+          "readOnly": true,
           "title": "Contains details of various errors on the cluster including resize and node setup task",
           "description": "This element contains all the errors encountered by various compute nodes during node setup.",
           "type": "array",
@@ -2376,6 +2368,7 @@
     "ClusterListResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Cluster"
@@ -2559,6 +2552,7 @@
           "$ref": "#/definitions/MountVolumes"
         },
         "jobOutputDirectoryPathSegment": {
+          "readOnly": true,
           "type": "string",
           "title": "A segment of job's output directories path created by BatchAI.",
           "description": "Batch AI creates job's output directories under an unique path to avoid conflicts between jobs. This value contains a path segment generated by Batch AI to make the path unique and can be used to find the output directory on the node or mounted filesystem."
@@ -2693,6 +2687,7 @@
           "description": "The time at which the job entered its current provisioning state."
         },
         "executionState": {
+          "readOnly": true,
           "type": "string",
           "title": "The current state of the job.",
           "description": "The current state of the job. Possible values are: queued - The job is queued and able to run. A job enters this state when it is created, or when it is awaiting a retry after a failed run. running - The job is running on a compute cluster. This includes job-level preparation such as downloading resource files or set up container specified on the job - it does not necessarily mean that the job command line has started executing. terminating - The job is terminated by the user, the terminate operation is in progress. succeeded - The job has completed running succesfully and exited with exit code 0. failed - The job has finished unsuccessfully (failed with a non-zero exit code) and has exhausted its retry limit. A job is also marked as failed if an error occurred launching the job.",
@@ -2718,24 +2713,28 @@
         "executionInfo": {
           "properties": {
             "startTime": {
+              "readOnly": true,
               "type": "string",
               "format": "date-time",
               "title": "The time at which the job started running.",
               "description": "'Running' corresponds to the running state. If the job has been restarted or retried, this is the most recent time at which the job started running. This property is present only for job that are in the running or completed state."
             },
             "endTime": {
+              "readOnly": true,
               "type": "string",
               "format": "date-time",
               "title": "The time at which the job completed.",
               "description": "This property is only returned if the job is in completed state."
             },
             "exitCode": {
+              "readOnly": true,
               "type": "integer",
               "format": "int32",
               "title": "The exit code of the job.",
               "description": "This property is only returned if the job is in completed state."
             },
             "errors": {
+              "readOnly": true,
               "title": "Contains details of various errors encountered by the service during job execution",
               "type": "array",
               "items": {
@@ -2743,9 +2742,6 @@
               }
             }
           },
-          "required": [
-            "startTime"
-          ],
           "description": "Contains information about the execution of a job in the Azure Batch service."
         }
       },
@@ -2769,6 +2765,7 @@
     "JobListResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Job"
@@ -2786,29 +2783,28 @@
     "RemoteLoginInformation": {
       "properties": {
         "nodeId": {
+          "readOnly": true,
           "type": "string",
           "description": "Id of the compute node"
         },
         "ipAddress": {
+          "readOnly": true,
           "type": "string",
           "description": "ip address"
         },
         "port": {
+          "readOnly": true,
           "type": "number",
           "format": "int32",
           "title": "port number"
         }
       },
-      "description": "Contains remote login details to SSH/RDP to a compute node in cluster.",
-      "required": [
-        "nodeId",
-        "ipAddress",
-        "port"
-      ]
+      "description": "Contains remote login details to SSH/RDP to a compute node in cluster."
     },
     "RemoteLoginInformationListResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/RemoteLoginInformation"
@@ -2826,12 +2822,14 @@
     "FileProperties": {
       "properties": {
         "lastModified": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "title": "The time at which the file was last modified.",
           "description": "The time at which the file was last modified."
         },
         "contentLength": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "title": "The file size.",
@@ -2843,14 +2841,25 @@
     "File": {
       "properties": {
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "Name of the file."
         },
-        "isDirectory": {
-          "type": "boolean",
-          "description": "Indicates if the file is a directory."
+        "fileType": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "file",
+            "directory"
+          ],
+          "x-ms-enum": {
+            "name": "FileType",
+            "modelAsString": true
+          },
+          "description": "Contains information about file type."
         },
         "downloadUrl": {
+          "readOnly": true,
           "type": "string",
           "title": "Will contain an URL to download the corresponding file. The downloadUrl is not returned for directories."
         },
@@ -2860,11 +2869,7 @@
           "description": "The properties associated with the file. The properties are not returned for directories."
         }
       },
-      "description": "Properties of the file or directory.",
-      "required": [
-        "name",
-        "isDirectory"
-      ]
+      "description": "Properties of the file or directory."
     },
     "FileListResult": {
       "properties": {
@@ -3538,6 +3543,7 @@
       "x-ms-external": true,
       "properties": {
         "error": {
+          "readOnly": true,
           "$ref": "#/definitions/CloudErrorBody",
           "description": "An error response from the Batch AI service."
         }
@@ -3548,18 +3554,22 @@
       "x-ms-external": true,
       "properties": {
         "code": {
+          "readOnly": true,
           "type": "string",
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
+          "readOnly": true,
           "type": "string",
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
         "target": {
+          "readOnly": true,
           "type": "string",
           "description": "The target of the particular error. For example, the name of the property in error."
         },
         "details": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
@@ -3572,14 +3582,17 @@
     "BatchAIError": {
       "properties": {
         "code": {
+          "readOnly": true,
           "type": "string",
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
+          "readOnly": true,
           "type": "string",
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
         "details": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NameValuePair"
@@ -3595,6 +3608,7 @@
       "type": "object",
       "properties": {
         "name": {
+          "readOnly": true,
           "title": "The operation name.",
           "description": "This is of the format {provider}/{resource}/{operation}",
           "type": "string"
@@ -3603,25 +3617,30 @@
           "description": "The object that describes the operation.",
           "properties": {
             "provider": {
+              "readOnly": true,
               "title": "Friendly name of the resource provider.",
               "type": "string"
             },
             "operation": {
+              "readOnly": true,
               "title": "The operation type.",
               "description": "For example: read, write, delete, or listKeys/action",
               "type": "string"
             },
             "resource": {
+              "readOnly": true,
               "title": "The resource type on which the operation is performed.",
               "type": "string"
             },
             "description": {
+              "readOnly": true,
               "title": "The friendly name of the operation",
               "type": "string"
             }
           }
         },
         "origin": {
+          "readOnly": true,
           "title": "The intended executor of the operation.",
           "type": "string"
         },
@@ -3637,6 +3656,7 @@
       "description": "Contains the list of all operations supported by BatchAI resource provider",
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
@@ -3653,6 +3673,7 @@
     "WorkspaceListResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Workspace"
@@ -3738,6 +3759,7 @@
     "ExperimentListResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Experiment"
