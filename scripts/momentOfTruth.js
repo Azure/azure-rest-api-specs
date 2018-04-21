@@ -19,7 +19,7 @@ let pullRequestNumber = utils.getPullRequestNumber();
 let linterCmd = `npx autorest@2.0.4152 --validation --azure-validator --message-format=json `;
 let gitCheckoutCmd = `git checkout ${targetBranch}`;
 let gitLogCmd = `git log -3`;
-var filename = `${pullRequestNumber}_${utils.getTimeStamp()}.json`;
+var filename = `${pullRequestNumber}.json`;
 var logFilepath = path.join(getLogDir(), filename);
 var finalResult = {};
 finalResult["pullRequest"] = pullRequestNumber;
@@ -141,7 +141,6 @@ async function runScript() {
         await runTools(configFile, 'before');
     }
     writeContent(JSON.stringify(finalResult, null, 2));
-    await uploadToAzureStorage(finalResult);
 }
 
 // magic starts here
