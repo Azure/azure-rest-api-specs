@@ -238,6 +238,9 @@
           "items": {
             "$ref": "#/definitions/CompositeEntityModel"
           }
+        },
+        "sentiment": {
+          "$ref": "#/definitions/Sentiment"
         }
       }
     },
@@ -384,6 +387,20 @@
         "message": {
           "type": "string",
           "description": "Cause of the error."
+        }
+      }
+    },
+    "Sentiment": {
+      "description": "Sentiment of the input utterance.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "The polarity of the sentiment, can be positive, neutral or negative."
+        },
+        "score": {
+          "type": "number",
+          "description": "Score of the sentiment, ranges from 0 (most negative) to 1 (most negative)."
         }
       }
     }
