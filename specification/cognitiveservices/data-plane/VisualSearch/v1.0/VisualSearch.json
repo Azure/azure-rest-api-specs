@@ -1190,6 +1190,11 @@
           "description": "A JSON object containing information about the image. The image and imageInsightsToken fields are mutually exclusive – the body of the request must include only one of them.",
           "$ref": "#/definitions/ImageInfo",
           "readOnly": true
+        },
+        "filters": {
+          "description": "A key-value object consisting of filters that may be specified to limit the results returned by the API.",
+          "$ref": "#/definitions/Filters",
+          "readOnly": true
         }
       }
     },
@@ -1243,6 +1248,17 @@
           "description": "The right coordinate of the region to be cropped. The coordinate is a fractional value of the original image's height and is measured from the top, left corner of the image. Specify the coordinate as a value from 0.0 through 1.0.",
           "type": "number",
           "format": "float"
+        }
+      }
+    },
+    "Filters": {
+      "description": "A key-value object consisting of filters that may be specified to limit the results returned by the API. Current available filters: site.",
+      "type": "object",
+      "properties": {
+        "site": {
+          "description": "The URL of the site to return similar images and similar products from. (e.g., \"www.bing.com\", \"bing.com\")",
+          "readOnly": true,
+          "type": "string"
         }
       }
     }
