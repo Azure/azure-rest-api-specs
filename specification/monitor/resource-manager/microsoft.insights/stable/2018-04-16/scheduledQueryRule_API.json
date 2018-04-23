@@ -75,100 +75,12 @@
             "description": "Successful request to update an Log Search rule",
             "schema": {
               "$ref": "#/definitions/LogSearchRuleResource"
-            },
-            "examples": {
-              "application/json": {
-                "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
-                "name": "logalertfoo",
-                "type": "Microsoft.Insights/scheduledQueryRules",
-                "location": "West US",
-                "tags": {
-                  "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo": "Resource"
-                },
-                "properties": {
-                  "description": "log alert description",
-                  "Enabled": "true",
-                  "skuType": "L1",
-                  "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
-                  "provisioningState": "Succeeded",
-                  "source": {
-                    "query": "Type=HearBeat",
-                    "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus",
-                    "queryType": "ResultCount"
-                  },
-                  "schedule": {
-                    "frequencyInMinutes": 15,
-                    "timeWindowInMinutes": 15
-                  },
-                  "action": {
-                    "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
-                    "severity": "1",
-                    "status": "Inactive",
-                    "aznsAction": {
-                      "actionGroup": [],
-                      "emailSubject": "Email Header",
-                      "customWebhookPayload": "{}"
-                    },
-                    "trigger": {
-                      "thresholdOperator": "GreaterThan",
-                      "threshold": 3,
-                      "metricTrigger": {
-                        "thresholdOperator": "GreaterThan",
-                        "threshold": 5,
-                        "metricTriggerType": "Consecutive",
-                        "metricColumn": "ColumnName"
-                      }
-                    }
-                  }
-                }
-              }
             }
           },
           "201": {
             "description": "Created alert rule",
             "schema": {
               "$ref": "#/definitions/LogSearchRuleResource"
-            },
-            "examples": {
-              "application/json": {
-                "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
-                "name": "logalertfoo",
-                "type": "Microsoft.Insights/scheduledQueryRules",
-                "location": "West US",
-                "tags": {
-                  "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo": "Resource"
-                },
-                "properties": {
-                  "description": "log alert description",
-                  "Enabled": "true",
-                  "skuType": "L3",
-                  "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
-                  "provisioningState": "Succeeded",
-                  "source": {
-                    "query": "Type=HearBeat",
-                    "queryType": "ResultCount",
-                    "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
-                  },
-                  "schedule": {
-                    "frequencyInMinutes": 15,
-                    "timeWindowInMinutes": 15
-                  },
-                  "action": {
-                    "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
-                    "severity": "1",
-                    "status": "Inactive",
-                    "trigger": {
-                      "thresholdOperator": "GreaterThan",
-                      "threshold": 3
-                    },
-                    "aznsAction": {
-                      "actionGroup": [],
-                      "emailSubject": "Email Header",
-                      "customWebhookPayload": "{}"
-                    }
-                  }
-                }
-              }
             }
           }
         },
@@ -207,47 +119,6 @@
             "description": "Successful request to get a Log Search rule",
             "schema": {
               "$ref": "#/definitions/LogSearchRuleResource"
-            },
-            "examples": {
-              "application/json": {
-                "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
-                "name": "logalertfoo",
-                "type": "Microsoft.Insights/scheduledQueryRules",
-                "location": "West US",
-                "tags": {
-                  "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo": "Resource"
-                },
-                "properties": {
-                  "description": "log alert description",
-                  "Enabled": "true",
-                  "skuType": "L1",
-                  "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
-                  "provisioningState": "Succeeded",
-                  "source": {
-                    "query": "Type=HearBeat",
-                    "queryType": "ResultCount",
-                    "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
-                  },
-                  "schedule": {
-                    "frequencyInMinutes": 15,
-                    "timeWindowInMinutes": 15
-                  },
-                  "action": {
-                    "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
-                    "severity": "1",
-                    "status": "Inactive",
-                    "trigger": {
-                      "thresholdOperator": "GreaterThan",
-                      "threshold": 3
-                    },
-                    "aznsAction": {
-                      "actionGroup": [],
-                      "emailSubject": "Email Header",
-                      "customWebhookPayload": "{}"
-                    }
-                  }
-                }
-              }
             }
           }
         },
@@ -311,96 +182,6 @@
             "description": "Successful request for a list of alert rules",
             "schema": {
               "$ref": "#/definitions/LogSearchRuleResourceCollection"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
-                    "name": "logalertfoo",
-                    "type": "Microsoft.Insights/scheduledQueryRules",
-                    "location": "West US",
-                    "tags": {
-                      "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus": "Resource"
-                    },
-                    "properties": {
-                      "description": "log alert description",
-                      "Enabled": "false",
-                      "skuType": "L2",
-                      "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
-                      "provisioningState": "Succeeded",
-                      "source": {
-                        "query": "Type=HearBeat",
-                        "queryType": "Number",
-                        "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
-                      },
-                      "schedule": {
-                        "frequencyInMinutes": 15,
-                        "timeWindowInMinutes": 15
-                      },
-                      "action": {
-                        "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
-                        "severity": "1",
-                        "status": "Inactive",
-                        "trigger": {
-                          "thresholdOperator": "GreaterThan",
-                          "threshold": 2,
-                          "metricTrigger": {
-                            "thresholdOperator": "LessThan",
-                            "threshold": 2,
-                            "metricTriggerType": "Total",
-                            "metricColumn": "user_Id"
-                          }
-                        },
-                        "aznsAction": {
-                          "actionGroup": [],
-                          "emailSubject": "Email Header",
-                          "customWebhookPayload": "{}"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
-                    "name": "logalertfoo",
-                    "type": "Microsoft.Insights/scheduledQueryRules",
-                    "location": "West US",
-                    "tags": {
-                      "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus": "Resource"
-                    },
-                    "properties": {
-                      "description": "log alert description",
-                      "Enabled": "true",
-                      "skuType": "L2",
-                      "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
-                      "provisioningState": "Succeeded",
-                      "source": {
-                        "query": "Type=HearBeat",
-                        "queryType": "ResultCount",
-                        "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
-                      },
-                      "schedule": {
-                        "frequencyInMinutes": 15,
-                        "timeWindowInMinutes": 15
-                      },
-                      "action": {
-                        "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
-                        "severity": "1",
-                        "status": "Inactive",
-                        "trigger": {
-                          "thresholdOperator": "GreaterThan",
-                          "threshold": 3
-                        },
-                        "aznsAction": {
-                          "actionGroup": [],
-                          "emailSubject": "Email Header",
-                          "customWebhookPayload": "{}"
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
             }
           }
         },
@@ -439,96 +220,6 @@
             "description": "Successful request for a list of alert rules",
             "schema": {
               "$ref": "#/definitions/LogSearchRuleResourceCollection"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
-                    "name": "logalertfoo",
-                    "type": "Microsoft.Insights/scheduledQueryRules",
-                    "location": "West US",
-                    "tags": {
-                      "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus": "Resource"
-                    },
-                    "properties": {
-                      "description": "log alert description",
-                      "Enabled": "false",
-                      "skuType": "L2",
-                      "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
-                      "provisioningState": "Succeeded",
-                      "source": {
-                        "query": "Type=HearBeat",
-                        "queryType": "Number",
-                        "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
-                      },
-                      "schedule": {
-                        "frequencyInMinutes": 15,
-                        "timeWindowInMinutes": 15
-                      },
-                      "action": {
-                        "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
-                        "severity": "1",
-                        "status": "Inactive",
-                        "trigger": {
-                          "thresholdOperator": "GreaterThan",
-                          "threshold": 2,
-                          "metricTrigger": {
-                            "thresholdOperator": "LessThan",
-                            "threshold": 2,
-                            "metricTriggerType": "Total",
-                            "metricColumn": "user_Id"
-                          }
-                        },
-                        "aznsAction": {
-                          "actionGroup": [],
-                          "emailSubject": "Email Header",
-                          "customWebhookPayload": "{}"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
-                    "name": "logalertfoo",
-                    "type": "Microsoft.Insights/scheduledQueryRules",
-                    "location": "West US",
-                    "tags": {
-                      "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus": "Resource"
-                    },
-                    "properties": {
-                      "description": "log alert description",
-                      "Enabled": "true",
-                      "skuType": "L2",
-                      "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
-                      "provisioningState": "Succeeded",
-                      "source": {
-                        "query": "Type=HearBeat",
-                        "queryType": "ResultCount",
-                        "datasourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/workspaces/servicedeskeus"
-                      },
-                      "schedule": {
-                        "frequencyInMinutes": 15,
-                        "timeWindowInMinutes": 15
-                      },
-                      "action": {
-                        "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
-                        "severity": "1",
-                        "status": "Inactive",
-                        "trigger": {
-                          "thresholdOperator": "GreaterThan",
-                          "threshold": 3
-                        },
-                        "aznsAction": {
-                          "actionGroup": [],
-                          "emailSubject": "Email Header",
-                          "customWebhookPayload": "{}"
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
             }
           }
         },
@@ -592,10 +283,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LogSearchRule",
           "description": "The rule properties of the resource."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Sku of the Log Search Rule"
         }
       },
       "description": "The Log Search Rule resource."
@@ -784,7 +471,7 @@
           "type": "string",
           "description": "The description of the Log Search rule."
         },
-        "Enabled": {
+        "enabled": {
           "type": "string",
           "description": "The flag which indicates whether the Log Search rule is enabled. Value should be true or false",
           "enum": [
@@ -792,7 +479,7 @@
             "false"
           ],
           "x-ms-enum": {
-            "name": "Enabled",
+            "name": "enabled",
             "modelAsString": true
           }
         },
@@ -867,10 +554,10 @@
           "$ref": "#/definitions/AzNsActionGroup",
           "description": "azns notification group reference."
         },
-        "throttleTillDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time untill alert should not be fired in ISO8601 format."
+        "throttlingInMin": {
+          "type": "integer",
+          "format": "int32",
+          "description": "time (in minutes) for which Alerts should be throttled"
         },
         "trigger": {
           "$ref": "#/definitions/TriggerCondition",
@@ -879,28 +566,11 @@
       },
       "required": [
         "aznsAction",
-        "trigger"
+        "trigger",
+        "severity"
       ]
     },
-    "Sku": {
-      "description": "SKU of rule",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU (L1, L2, L3)",
-          "type": "string",
-          "enum": [
-            "L1",
-            "L2",
-            "L3"
-          ],
-          "x-ms-enum": {
-            "name": "sku",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ErrorResponse": {
+     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
