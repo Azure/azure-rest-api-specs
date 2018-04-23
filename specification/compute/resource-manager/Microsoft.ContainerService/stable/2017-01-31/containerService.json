@@ -543,8 +543,7 @@
         },
         "storageUri": {
           "readOnly": true,
-          "type": "string",
-          "description": "The URI of the storage account where diagnostics are stored."
+          "type": "string"
         }
       },
       "description": "Profile for diagnostics on the container service VMs.",
@@ -576,8 +575,7 @@
           "description": "the list of container services."
         },
         "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of container service results."
+          "type": "string"
         }
       },
       "description": "The response from the List Container Services operation."
@@ -586,12 +584,10 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "type": "string",
-          "description": "the current deployment or provisioning state, which only appears in the response."
+          "type": "string"
         },
         "orchestratorProfile": {
-          "$ref": "#/definitions/ContainerServiceOrchestratorProfile",
-          "description": "Properties of the orchestrator."
+          "$ref": "#/definitions/ContainerServiceOrchestratorProfile"
         },
         "customProfile": {
           "$ref": "#/definitions/ContainerServiceCustomProfile",
