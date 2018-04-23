@@ -34,6 +34,11 @@ tag: package-2015-05
 ## Suppression
 ``` yaml
 directive:
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/purge"].post
+    reason: Original creation of the service did not comply with current ARM schema standards. The team is aware of it and any future updates should rectify the issue.
+    
   - suppress: TrackedResourceListByImmediateParent
     where:
       - $.definitions
@@ -218,6 +223,15 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.ProactiveDetection
     #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.AnalyticsIntegration
     #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.MultipleStepWebTest
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Id
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Name
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Content
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Version
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Scope
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Type
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.TimeCreated
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.TimeModified
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Properties
 
   - suppress: R2066
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
@@ -240,7 +254,20 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/favorites_API.json
 - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
+- microsoft.insights/stable/2015-05-01/analyticsItems_API.json
+- Microsoft.Insights/stable/2015-05-01/workbooks_API.json
 ```
+
+### Tag: package-2017-10
+
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- Microsoft.Insights/preview/2017-10-01/eaSubscriptionMigration_API.json
+- Microsoft.Insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
+```
+
 ---
 # Code Generation
 
@@ -360,6 +387,7 @@ input-file:
  - ./Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
  - ./Microsoft.Insights/stable/2015-05-01/components_API.json
  - ./Microsoft.Insights/stable/2015-05-01/webTests_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/workbooks_API.json
 
 override-info:
   title: ApplicationInsightsManagementClient

@@ -1094,6 +1094,35 @@
           }
         }
       }
+    },
+    "/servicestats": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "operationId": "GetServiceStatistics",
+        "x-ms-examples": {
+          "SearchServiceGetServiceStatistics": { "$ref": "./examples/SearchServiceGetServiceStatistics.json" }
+        },
+        "description": "Gets service level statistics for an Azure Search service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ServiceStatistics"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3275,10 +3304,25 @@
         "errorMessage": {
           "type": "string",
           "readOnly": true,
-          "description": "The message describing the error that occurred while attempting to index the item."
+          "description": "The message describing the error that occurred while processing the item."
         }
       },
       "description": "Represents an item- or document-level indexing error."
+    },
+    "ItemWarning": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The key of the item which generated a warning."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The message describing the warning that occurred while processing the item."
+        }
+      },
+      "description": "Represents an item-level warning."
     },
     "IndexerExecutionResult": {
       "properties": {
@@ -3311,6 +3355,14 @@
             "$ref": "#/definitions/ItemError"
           },
           "description": "The item-level indexing errors."
+        },
+        "warnings": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ItemWarning"
+          },
+          "description": "The item-level indexing warnings."
         },
         "itemsProcessed": {
           "x-ms-client-name": "ItemCount",
@@ -3957,6 +4009,94 @@
         }
       },
       "description": "Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps."
+    },
+    "ServiceStatistics": {
+      "properties": {
+        "counters": {
+          "$ref": "#/definitions/ServiceCounters",
+          "description": "Service level resource counters."
+        },
+        "limits": {
+          "$ref": "#/definitions/ServiceLimits",
+          "description": "Service level general limits."
+        }
+      },
+      "description": "Response from a get service statistics request. If successful, it includes service level counters and limits."
+    },
+    "ServiceCounters": {
+      "properties": {
+        "documentCount": {
+          "x-ms-client-name": "documentCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of documents across all indexes in the service."
+        },
+        "indexesCount": {
+          "x-ms-client-name": "indexCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of indexes."
+        },
+        "indexersCount": {
+          "x-ms-client-name": "indexerCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of indexers."
+        },
+        "dataSourcesCount": {
+          "x-ms-client-name": "dataSourceCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of data sources."
+        },
+        "storageSize": {
+          "x-ms-client-name": "storageSizeCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total size of used storage in bytes."
+        },
+        "synonymMaps": {
+          "x-ms-client-name": "synonymMapCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of synonym maps."
+        }
+      },
+      "description": "Represents service-level resource counters and quotas."
+    },
+    "ServiceLimits": {
+      "properties": {
+        "maxFieldsPerIndex": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The maximum allowed fields per index."
+        },
+        "maxFieldNestingDepthPerIndex": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3."
+        },
+        "maxComplexCollectionFieldsPerIndex": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The maximum number of fields of type Collection(Edm.ComplexType) allowed in an index."
+        }
+      },
+      "description": "Represents various service level limits."
+    },
+    "ResourceCounter": {
+      "properties": {
+        "usage": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": false,
+          "description": "The resource usage amount."
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true,
+          "description": "The resource amount quota."
+        }
+      },
+      "description": "Represents a resource's usage and quota."
     }
   },
   "parameters": {
