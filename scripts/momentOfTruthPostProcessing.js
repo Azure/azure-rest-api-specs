@@ -136,7 +136,7 @@ function getLink(jsonRef, prNumber){
     let fileName = jsonRef.substr(jsonRef.indexOf("specification"), (jsonRef.indexOf(".json") + 5) - jsonRef.indexOf("specification"));
     let md5 = crypto.createHash('md5').update(fileName).digest("hex");
 
-    let link = "https://github.com/Azure/azure-rest-api-specs/pull/" 
+    let link = "https://github.com/" + process.env.TRAVIS_REPO_SLUG + "/pull/"
                         + prNumber 
                         + "/files?diff=unified#diff-" 
                         + md5 + "R" + line;
@@ -261,8 +261,10 @@ function postProcessing() {
         armFileSummaries = armFileSummaries.concat(fileSummaryCopy);
     }
 
-    postSummariesToGithub("SDK Related Validation Errors/Warnings", sdkFileSummaries, "Azure", "azure-rest-api-specs", pullRequestNumber, sdkContactMessage);
-    postSummariesToGithub("ARM Related Validation Errors/Warnings", armFileSummaries, "Azure", "azure-rest-api-specs", pullRequestNumber, armContactMessage);
+    let slug = process.env.TRAVIS_REPO_SLUG;
+    slug = slug.split("/")[1];
+    postSummariesToGithub("SDK Related Validation Errors/Warnings", sdkFileSummaries, "Azure", slug, pullRequestNumber, sdkContactMessage);
+    postSummariesToGithub("ARM Related Validation Errors/Warnings", armFileSummaries, "Azure", slug, pullRequestNumber, armContactMessage);
 }
 
 postProcessing();

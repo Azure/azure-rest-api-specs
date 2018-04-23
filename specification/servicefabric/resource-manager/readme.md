@@ -144,7 +144,7 @@ These settings apply only when `--tag=package-2017-07 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-07' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/mgmt/2017-07-01-preview/servicefabric
+output-folder: $(go-sdk-folder)/services/preview/servicefabric/mgmt/2017-07-01-preview/servicefabric
 ```
 
 

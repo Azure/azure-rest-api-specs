@@ -143,7 +143,7 @@ These settings apply only when `--tag=package-2018-03-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/billing/mgmt/2018-03-01-preview/billing
+output-folder: $(go-sdk-folder)/services/preview/billing/mgmt/2018-03-01-preview/billing
 ```
 
 ### Tag: package-2017-04-preview and go
@@ -152,7 +152,7 @@ These settings apply only when `--tag=package-2017-04-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/billing/mgmt/2017-04-24-preview/billing
+output-folder: $(go-sdk-folder)/services/preview/billing/mgmt/2017-04-24-preview/billing
 ```
 
 ### Tag: package-2017-02-preview and go
@@ -161,7 +161,7 @@ These settings apply only when `--tag=package-2017-02-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-02-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/billing/mgmt/2017-02-27-preview/billing
+output-folder: $(go-sdk-folder)/services/preview/billing/mgmt/2017-02-27-preview/billing
 ```
 
 
