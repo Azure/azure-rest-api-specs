@@ -9,8 +9,8 @@ The underlying APIs are available to users who would like to write their own RES
 
 **Request**
 
-This api returns the latest terms for a given Subscription, Publisher, Product and Name. 
-      
+This api returns the latest terms for a given Subscription, Publisher, Product and Name.
+
 **Reply**
 
 200 OK. Agreement Terms in response body.
@@ -19,17 +19,17 @@ This api returns the latest terms for a given Subscription, Publisher, Product a
 
 **Request**
 
-This api sends the license information retrieved by the first API along with Accepted flag which confirms that the terms are accepted(true) or not accepted(false). 
+This api sends the license information retrieved by the first API along with Accepted flag which confirms that the terms are accepted(true) or not accepted(false).
 
 **Reply**
 
-1. 200 OK. The request was successfully processed and the terms were accepted or acceptance revoked as per the request body. 
+1. 200 OK. The request was successfully processed and the terms were accepted or acceptance revoked as per the request body.
 2. 400 Bad/Malformed request. E.g. Signature doesn’t match, please retrieve terms again and request acceptance.
 3. 403 Forbidden. E.g. The caller does not have permission to accept terms for given subscription. (only a reader).
 4. 404 E.g. The Publisher/Offer/Plan tuple is not a valid virtual machine.
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Marketplace Agreements, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -43,7 +43,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Marketplace Agreements API.
 
 ``` yaml
@@ -75,10 +75,11 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.

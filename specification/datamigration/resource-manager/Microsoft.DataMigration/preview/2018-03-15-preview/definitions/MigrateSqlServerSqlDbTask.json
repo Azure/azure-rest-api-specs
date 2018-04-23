@@ -46,16 +46,16 @@
       "type": "object",
       "description": "Output for the task that migrates on-prem SQL Server databases to Azure SQL Database",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
         "resultType": {
           "description": "Result type",
           "type": "string"
         }
       },
-      "allOf": [
-        {
-          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
-        }
-      ],
       "required": [ "resultType" ],
       "discriminator": "resultType"
     },

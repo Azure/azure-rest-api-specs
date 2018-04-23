@@ -7,7 +7,7 @@ This is the AutoRest configuration file for PolicyInsights.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for PolicyInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -27,7 +27,6 @@ These are the global settings for the PolicyInsights API.
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-azure-validator: true
 tag: package-2017-12
 ```
 
@@ -64,8 +63,8 @@ These settings apply only when `--tag=package-2017-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-12'
 input-file:
-- Microsoft.PolicyInsights/PolicyEvents/preview/2017-12-12-preview/policyEvents.json
-- Microsoft.PolicyInsights/PolicyStates/preview/2017-12-12-preview/policyStates.json
+- Microsoft.PolicyInsights/preview/2017-12-12-preview/policyEvents.json
+- Microsoft.PolicyInsights/preview/2017-12-12-preview/policyStates.json
 ```
 
 
@@ -75,8 +74,8 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.PolicyInsights/PolicyEvents/preview/2017-10-17-preview/policyEvents.json
-- Microsoft.PolicyInsights/PolicyStates/preview/2017-10-17-preview/policyStates.json
+- Microsoft.PolicyInsights/preview/2017-10-17-preview/policyEvents.json
+- Microsoft.PolicyInsights/preview/2017-10-17-preview/policyStates.json
 ```
 
 
@@ -86,8 +85,8 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-- Microsoft.PolicyInsights/PolicyEvents/preview/2017-08-09-preview/policyEvents.json
-- Microsoft.PolicyInsights/PolicyStates/preview/2017-08-09-preview/policyStates.json
+- Microsoft.PolicyInsights/preview/2017-08-09-preview/policyEvents.json
+- Microsoft.PolicyInsights/preview/2017-08-09-preview/policyStates.json
 ```
 
 
@@ -176,7 +175,7 @@ These settings apply only when `--tag=package-2017-12 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-12' && $(go)
-output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2017-12-12-preview/policyinsights
+output-folder: $(go-sdk-folder)/services/preview/policyinsights/mgmt/2017-12-12-preview/policyinsights
 ```
 
 ### Tag: package-2017-10 and go
@@ -185,7 +184,7 @@ These settings apply only when `--tag=package-2017-10 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-10' && $(go)
-output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2017-10-17-preview/policyinsights
+output-folder: $(go-sdk-folder)/services/preview/policyinsights/mgmt/2017-10-17-preview/policyinsights
 ```
 
 ### Tag: package-2017-08 and go
@@ -194,7 +193,7 @@ These settings apply only when `--tag=package-2017-08 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2017-08-09-preview/policyinsights
+output-folder: $(go-sdk-folder)/services/preview/policyinsights/mgmt/2017-08-09-preview/policyinsights
 ```
 
 

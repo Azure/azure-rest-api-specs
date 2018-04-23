@@ -89,6 +89,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}": {
+      "head": {
+        "tags": [
+          "Policy"
+        ],
+        "operationId": "Policy_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the Global policy definition in the Api Management service.",
+        "x-ms-examples": {
+          "ApiManagementHeadPolicy": {
+            "$ref": "./examples/ApiManagementHeadPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Policy"
@@ -417,7 +463,9 @@
           "description": "Format of the policyContent.",
           "enum": [
             "xml",
-            "xml-link"
+            "xml-link",
+            "rawxml",
+            "rawxml-link"
           ],
           "x-ms-enum": {
             "name": "PolicyContentFormat",
@@ -430,6 +478,14 @@
               {
                 "value": "xml-link",
                 "description": "The policy XML document is hosted on a http endpoint accessible from the API Management service."
+              },
+              {
+                "value": "rawxml",
+                "description": "The contents are inline and Content type is a non XML encoded policy document."
+              },
+              {
+                "value": "rawxml-link",
+                "description": "The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service."
               }
             ]
           },

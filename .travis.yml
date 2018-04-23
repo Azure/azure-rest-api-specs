@@ -5,6 +5,7 @@ services:
   - docker
 env:
   matrix:
+    - MODE=branchStrategy
     - MODE=syntax
     - MODE=python
     - MODE=node
@@ -30,6 +31,7 @@ matrix:
     - env: MODE=azurebot PR_ONLY=true
     - env: MODE=liveValidation PR_ONLY=true
     - env: MODE=java
+    - env: MODE=ruby
     - env: MODE=go
     - env: MODE=node
 before_install:
@@ -52,7 +54,7 @@ script:
     fi
   - >-
     if [[ $MODE == 'node' ]]; then
-      $DOCKER_CMD Azure/azure-sdk-for-node -v
+      travis_wait 30 $DOCKER_CMD Azure/azure-sdk-for-node -v
     fi
   - >-
     if [[ $MODE == 'ruby' ]]; then
@@ -65,6 +67,11 @@ script:
   - >-
     if [[ $MODE == 'java' ]]; then
       $DOCKER_CMD Azure/azure-libraries-for-java -v
+    fi
+  - >-
+    if [[ $MODE == 'branchStrategy' ]]; then
+      # Check to ensure CI is not executing for a PR against the master branch in the private repository
+      ! [[ $TRAVIS_PULL_REQUEST != 'false' && $TRAVIS_REPO_SLUG == 'Azure/azure-rest-api-specs-pr' && $TRAVIS_BRANCH == 'master' ]]
     fi
   - >-
     if [[ $MODE == 'syntax' ]]; then
@@ -89,6 +96,7 @@ script:
   - >-
     if [[ $MODE == 'azurebot' ]]; then
       node scripts/momentOfTruth.js
+      node scripts/momentOfTruthPostProcessing.js
     fi
   - >-
     if [[ $MODE == 'liveValidation' ]]; then

@@ -31,6 +31,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -38,7 +39,7 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  namespace: Microsoft.Azure.CognitiveServices.SpellCheck
+  namespace: Microsoft.Azure.CognitiveServices.Language.SpellCheck
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/SpellCheck/BingSpellCheck/Generated/
   sync-methods: none
 ```

@@ -26,7 +26,35 @@ These are the global settings for the DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10
+tag: package-2018-03-preview
+```
+
+### Tag: package-2018-03-preview
+
+These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-preview'
+input-file:
+- Microsoft.Network/preview/2018-03-01-preview/dns.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+  - where:
+      - $.definitions.RecordSetProperties.properties.TTL
+      - $.definitions.RecordSetProperties.properties.ARecords
+      - $.definitions.RecordSetProperties.properties.AAAARecords
+      - $.definitions.RecordSetProperties.properties.MXRecords
+      - $.definitions.RecordSetProperties.properties.NSRecords
+      - $.definitions.RecordSetProperties.properties.PTRRecords
+      - $.definitions.RecordSetProperties.properties.SRVRecords
+      - $.definitions.RecordSetProperties.properties.TXTRecords
+      - $.definitions.RecordSetProperties.properties.CNAMERecord
+      - $.definitions.RecordSetProperties.properties.SOARecord
+      - $.definitions.RecordSetUpdateParameters.properties.RecordSet
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
 ```
 
 ### Tag: package-2017-10
@@ -36,6 +64,25 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
 - Microsoft.Network/stable/2017-10-01/dns.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+  - where:
+      - $.definitions.RecordSetProperties.properties.TTL
+      - $.definitions.RecordSetProperties.properties.ARecords
+      - $.definitions.RecordSetProperties.properties.AAAARecords
+      - $.definitions.RecordSetProperties.properties.MXRecords
+      - $.definitions.RecordSetProperties.properties.NSRecords
+      - $.definitions.RecordSetProperties.properties.PTRRecords
+      - $.definitions.RecordSetProperties.properties.SRVRecords
+      - $.definitions.RecordSetProperties.properties.TXTRecords
+      - $.definitions.RecordSetProperties.properties.CNAMERecord
+      - $.definitions.RecordSetProperties.properties.SOARecord
+      - $.definitions.RecordSetUpdateParameters.properties.RecordSet
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
 ```
 
 ### Tag: package-2017-09
@@ -80,6 +127,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -141,10 +189,20 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-03-preview
   - tag: package-2017-10
   - tag: package-2017-09
   - tag: package-2016-04
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2018-03-preview and go
+
+These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-03-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/dns/mgmt/2018-03-01-preview/dns
 ```
 
 ### Tag: package-2017-10 and go
@@ -180,7 +238,7 @@ These settings apply only when `--tag=package-2015-05-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/dns/mgmt/2015-05-04-preview/dns
+output-folder: $(go-sdk-folder)/services/preview/dns/mgmt/2015-05-04-preview/dns
 ```
 
 

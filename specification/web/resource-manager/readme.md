@@ -1,19 +1,19 @@
 # Web
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Web.
 
 
 The App service RP comprises of services where each service has its own tag.
-Hence, each sub-service has its own swagger spec. 
+Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Web, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -27,7 +27,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Web API.
 
 ``` yaml
@@ -35,6 +35,35 @@ title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
 tag: package-2016-09
+```
+
+### Tag: package-2018-02
+
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02'
+input-file:
+- Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2018-02-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2018-02-01/Domains.json
+- Microsoft.DomainRegistration/stable/2018-02-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2018-02-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2018-02-01/Certificates.json
+- Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
+- Microsoft.Web/stable/2018-02-01/DeletedWebApps.json
+- Microsoft.Web/stable/2018-02-01/Diagnostics.json
+- Microsoft.Web/stable/2018-02-01/Provider.json
+- Microsoft.Web/stable/2018-02-01/Recommendations.json
+- Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2018-02-01/WebApps.json
+- Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+directive:
+  # suppress each RPC 3019 error
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
 ```
 
 
@@ -55,6 +84,7 @@ input-file:
 - Microsoft.Web/stable/2016-03-01/Diagnostics.json
 - Microsoft.Web/stable/2016-03-01/Provider.json
 - Microsoft.Web/stable/2016-03-01/Recommendations.json
+- Microsoft.Web/stable/2016-03-01/ResourceHealthMetadata.json
 - Microsoft.Web/stable/2016-03-01/ResourceProvider.json
 - Microsoft.Web/stable/2016-08-01/WebApps.json
 - Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
@@ -170,7 +200,7 @@ directive:
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
 ```
- 
+
 ### Tag: package-2015-08-preview
 
 These settings apply only when `--tag=package-2015-08-preview` is specified on the command line.
@@ -196,10 +226,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -277,7 +308,7 @@ These settings apply only when `--tag=package-2015-08-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/web/mgmt/2015-08-preview/web
+output-folder: $(go-sdk-folder)/services/preview/web/mgmt/2015-08-preview/web
 ```
 
 
