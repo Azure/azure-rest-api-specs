@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Visual Search API",
-    "description": "The Image Visual Search API lets you send an image to Bing and get back a list of relevant tags. Each tag contains potential actions a user might be interested in. This section provides technical details about the request format and headers that you use to request actions and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the Web for Images](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/search-the-web).",
+    "description": "The Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
     "version": "1.0"
   },
   "parameters": {
@@ -45,7 +45,7 @@
   "paths": {
     "/images/visualsearch": {
       "post": {
-        "summary": "The Image Visual Search API lets you send an image to Bing and get back a list of relevant tags. Each tag contains potential actions a user might be interested in. This section provides technical details about the request format and headers that you use to request actions and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the Web for Images](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/search-the-web).",
+        "summary": "The Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
         "operationId": "Images_VisualSearch",
         "tags": [
           "ImageVisualSearch"
@@ -73,7 +73,7 @@
             "name": "Accept-Language",
             "x-ms-client-name": "AcceptLanguage",
             "in": "header",
-            "description": "A comma-delimited list of one or more languages to use for user interface strings. The list is in decreasing order of preference. For additional information, including expected format, see [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). This header and the [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#setlang) query parameter are mutually exclusive; do not specify both. If you set this header, you must also specify the [cc](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#cc) query parameter. To determine the market to return results for, Bing uses the first supported language it finds from the list and combines it with the cc parameter value. If the list does not include a supported language, Bing finds the closest language and market that supports the request or it uses an aggregated or default market for the results. To determine the market that Bing used, see the BingAPIs-Market header. Use this header and the cc query parameter only if you specify multiple languages. Otherwise, use the [mkt](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#mkt) and [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#setlang) query parameters. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Any links to Bing.com properties in the response objects apply the specified language.",
+            "description": "A comma-delimited list of one or more languages to use for user interface strings. The list is in decreasing order of preference. For additional information, including expected format, see [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). This header and the [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-visual-search-api-v7-reference#setlang) query parameter are mutually exclusive; do not specify both. If you set this header, you must also specify the [cc](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-visual-search-api-v7-reference#cc) query parameter. To determine the market to return results for, Bing uses the first supported language it finds from the list and combines it with the cc parameter value. If the list does not include a supported language, Bing finds the closest language and market that supports the request or it uses an aggregated or default market for the results. To determine the market that Bing used, see the BingAPIs-Market header. Use this header and the cc query parameter only if you specify multiple languages. Otherwise, use the [mkt](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-visual-search-api-v7-reference#mkt) and [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-visual-search-api-v7-reference#setlang) query parameters. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Any links to Bing.com properties in the response objects apply the specified language.",
             "required": false,
             "type": "string"
           },
@@ -81,7 +81,7 @@
             "name": "Content-Type",
             "x-ms-client-name": "ContentType",
             "in": "header",
-            "description": "Optional request header. If you set the [modules](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#modulesrequested) query parameter to RecognizedEntities, you may specify the binary of an image in the body of a POST request. If you specify the image in the body of a POST request, you must specify this header and set its value to multipart/form-data. The maximum image size is 1 MB.",
+            "description": "Must be set to multipart/form-data and include a boundary parameter (for example, multipart/form-data; boundary=<boundary string>). For more details, see [Content form types]( https://docs.microsoft.com/en-us/azure/cognitive-services/bing-visual-search/overview#content-form-types).",
             "required": false,
             "type": "string"
           },
@@ -97,7 +97,7 @@
             "name": "X-MSEdge-ClientID",
             "x-ms-client-name": "ClientId",
             "in": "header",
-            "description": "Bing uses this header to provide users with consistent behavior across Bing API calls. Bing often flights new features and improvements, and it uses the client ID as a key for assigning traffic on different flights. If you do not use the same client ID for a user across multiple requests, then Bing may assign the user to multiple conflicting flights. Being assigned to multiple conflicting flights can lead to an inconsistent user experience. For example, if the second request has a different flight assignment than the first, the experience may be unexpected. Also, Bing can use the client ID to tailor web results to that client ID’s search history, providing a richer experience for the user. Bing also uses this header to help improve result rankings by analyzing the activity generated by a client ID. The relevance improvements help with better quality of results delivered by Bing APIs and in turn enables higher click-through rates for the API consumer. IMPORTANT: Although optional, you should consider this header required. Persisting the client ID across multiple requests for the same end user and device combination enables 1) the API consumer to receive a consistent user experience, and 2) higher click-through rates via better quality of results from the Bing APIs. Each user that uses your application on the device must have a unique, Bing generated client ID. If you do not include this header in the request, Bing generates an ID and returns it in the X-MSEdge-ClientID response header. The only time that you should NOT include this header in a request is the first time the user uses your app on that device. Use the client ID for each Bing API request that your app makes for this user on the device. Persist the client ID. To persist the ID in a browser app, use a persistent HTTP cookie to ensure the ID is used across all sessions. Do not use a session cookie. For other apps such as mobile apps, use the device's persistent storage to persist the ID. The next time the user uses your app on that device, get the client ID that you persisted. Bing responses may or may not include this header. If the response includes this header, capture the client ID and use it for all subsequent Bing requests for the user on that device. If you include the X-MSEdge-ClientID, you must not include cookies in the request.",
+            "description": "Bing uses this header to provide users with consistent behavior across Bing API calls. Bing often flights new features and improvements, and it uses the client ID as a key for assigning traffic on different flights. If you do not use the same client ID for a user across multiple requests, then Bing may assign the user to multiple conflicting flights. Being assigned to multiple conflicting flights can lead to an inconsistent user experience. For example, if the second request has a different flight assignment than the first, the experience may be unexpected. Also, Bing can use the client ID to tailor web results to that client ID’s search history, providing a richer experience for the user. Bing also uses this header to help improve result rankings by analyzing the activity generated by a client ID. The relevance improvements help with better quality of results delivered by Bing APIs and in turn enables higher click-through rates for the API consumer. IMPORTANT: Although optional, you should consider this header required. Persisting the client ID across multiple requests for the same end user and device combination enables 1) the API consumer to receive a consistent user experience, and 2) higher click-through rates via better quality of results from the Bing APIs. Each user that uses your application on the device must have a unique, Bing generated client ID. If you do not include this header in the request, Bing generates an ID and returns it in the X-MSEdge-ClientID response header. The only time that you should NOT include this header in a request is the first time the user uses your app on that device. Use the client ID for each Bing API request that your app makes for this user on the device. Persist the client ID. To persist the ID in a browser app, use a persistent HTTP cookie to ensure the ID is used across all sessions. Do not use a session cookie. For other apps such as mobile apps, use the device's persistent storage to persist the ID. The next time the user uses your app on that device, get the client ID that you persisted. Bing responses may or may not include this header. If the response includes this header, capture the client ID and use it for all subsequent Bing requests for the user on that device. ATTENTION: You must ensure that this Client ID is not linkable to any authenticatable user account information. If you include the X-MSEdge-ClientID, you must not include cookies in the request.",
             "required": false,
             "type": "string"
           },
@@ -129,7 +129,7 @@
             "name": "image",
             "x-ms-client-name": "Image",
             "in": "formData",
-            "description": "The uploaded image file. The size of the image is limited to 1 MB and the file name must be \"image\". The image and imageInsightsToken fields are mutually exclusive – the body of the request must include only one of them.",
+            "description": "Required if you upload an image instead of passing an image insights token. The Content-Disposition's filename parameter must be set to \"image\" and the contents of the form data must be the image binary. The image and imageInsightsToken fields are mutually exclusive – the body of the request must include only one of them.",
             "required": false,
             "type": "file"
           }
@@ -149,7 +149,7 @@
           }
         },
         "x-ms-examples": {
-          "Successful image visual search": {
+          "Successful visual search": {
             "$ref": "./examples/SuccessfulVisualSearchRequest.json"
           }
         }
@@ -166,7 +166,7 @@
       "type": "object",
       "properties": {
         "tags": {
-          "description": "Includes a list of image knowledge tags",
+          "description": "A list of visual search tags",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -190,12 +190,12 @@
       "type": "object",
       "properties": {
         "readLink": {
-          "description": "The URL that returns this resource.",
+          "description": "The URL that returns this resource. To use the URL, append query parameters as appropriate and include the Ocp-Apim-Subscription-Key header.",
           "readOnly": true,
           "type": "string"
         },
         "webSearchUrl": {
-          "description": "The URL To Bing's search result for this item.",
+          "description": "The URL to Bing's search result for this item.",
           "readOnly": true,
           "type": "string"
         }
@@ -210,12 +210,12 @@
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "Display name for this tag, for default tag, there is no display name",
+          "description": "Display name for this tag. For the default tag, the display name is empty.",
           "readOnly": true,
           "type": "string"
         },
         "boundingBox": {
-          "description": "The bounding box for this tag, for default tag, there is no bounding box",
+          "description": "The bounding box for this tag. For the default tag, there is no bounding box.",
           "$ref": "#/definitions/ImageTagRegion",
           "readOnly": true
         },
@@ -244,7 +244,7 @@
           "readOnly": true
         },
         "imageInsightsToken": {
-          "description": "The token that you use in a subsequent call to the Image Search API to get additional information about the image. For information about using this token, see the insightsToken query parameter.",
+          "description": "The token that you use in a subsequent call to the Visual Search API to get additional information about the image. For information about using this token, see the imageInsightsToken request parameter.",
           "readOnly": true,
           "type": "string"
         },
@@ -264,7 +264,7 @@
           "type": "string"
         },
         "visualWords": {
-          "description": "Visual representation of the image. Used for getting more sizes",
+          "description": "A string consisting of small patches of the image containing information related to image features. Used for getting more sizes.",
           "readOnly": true,
           "type": "string"
         }
@@ -337,7 +337,7 @@
           "type": "string"
         },
         "alternateName": {
-          "description": "An alias for the item",
+          "description": "An alias for the item.",
           "readOnly": true,
           "type": "string"
         },
@@ -357,7 +357,7 @@
       "type": "object",
       "properties": {
         "result": {
-          "description": "The result produced in the action",
+          "description": "The result produced in the action.",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -370,12 +370,12 @@
           "type": "string"
         },
         "isTopAction": {
-          "description": "A boolean representing whether this result is the top action",
+          "description": "A Boolean representing whether this result is the top action",
           "readOnly": true,
           "type": "boolean"
         },
         "serviceUrl": {
-          "description": "Url inside Thing_x gets you a url to fulfill action directly,however ServiceUrl Gives you more data to determine how to take action.e.g. ServiceUrl might return json and an image url in it.",
+          "description": "The URL inside a Thing provides you with the link to fulfill the action directly, while the serviceUrl provides additional data in order to determine how to take the appropriate action. For example, the serviceUrl might return JSON along with an image URL.",
           "readOnly": true,
           "type": "string"
         }
@@ -407,7 +407,7 @@
       "type": "object",
       "properties": {
         "actionType": {
-          "description": "A string representing the type of action",
+          "description": "A string representing the type of action.",
           "readOnly": true,
           "type": "string"
         }
@@ -423,7 +423,7 @@
       "type": "object",
       "properties": {
         "contentUrl": {
-          "description": "Original URL to retrieve the source (file) for the media object (e.g the source URL for the image).",
+          "description": "Original URL to retrieve the source (file) for the media object (e.g., the source URL for the image).",
           "readOnly": true,
           "type": "string"
         },
@@ -433,12 +433,12 @@
           "type": "string"
         },
         "contentSize": {
-          "description": "Size of the media object content (use format \"value unit\" e.g \"1024 B\").",
+          "description": "Size of the media object content. Use format \"value unit\" (e.g., \"1024 B\").",
           "readOnly": true,
           "type": "string"
         },
         "encodingFormat": {
-          "description": "Encoding format (e.g mp3, mp4, jpeg, etc).",
+          "description": "Encoding format (e.g., mp3, mp4, jpeg, etc).",
           "readOnly": true,
           "type": "string"
         },
@@ -791,7 +791,7 @@
           }
         },
         "availability": {
-          "description": "The item's availability. The following are the possible values: Discontinued, InStock, InStoreOnly, LimitedAvailability, OnlineOnly, OutOfStock, PreOrder, SoldOut",
+          "description": "The item's availability. The following are the possible values: Discontinued, InStock, InStoreOnly, LimitedAvailability, OnlineOnly, OutOfStock, PreOrder, SoldOut.",
           "readOnly": true,
           "type": "string",
           "enum": [
@@ -862,7 +862,7 @@
       "type": "object"
     },
     "NormalizedQuadrilateral": {
-      "description": "Defines a region of an image. The region is a convex quadrilateral defined by coordinates of its top left, top right, bottom left and bottom right points. The coordinates are fractional values of the original image's width and height in the range 0.0 through 1.0.",
+      "description": "Defines a region of an image. The region is a convex quadrilateral defined by coordinates of its top left, top right, bottom left, and bottom right points. The coordinates are fractional values of the original image's width and height in the range 0.0 through 1.0.",
       "allOf": [
         {
           "$ref": "#/definitions/StructuredValue"
@@ -903,7 +903,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "Information about the entity",
+          "description": "Information about the entity.",
           "$ref": "#/definitions/Thing",
           "readOnly": true
         }
@@ -918,7 +918,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "A list of images",
+          "description": "A list of images.",
           "$ref": "#/definitions/ImagesModule",
           "readOnly": true
         }
@@ -933,7 +933,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "A list of recipes related to the image",
+          "description": "A list of recipes related to the image.",
           "$ref": "#/definitions/RecipesModule",
           "readOnly": true
         }
@@ -948,7 +948,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "A list of queries related to the image",
+          "description": "A list of queries related to the image.",
           "$ref": "#/definitions/RelatedSearchesModule",
           "readOnly": true
         }
@@ -963,7 +963,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "A list of merchants that offer items related to the image",
+          "description": "A list of merchants that offer items related to the image.",
           "$ref": "#/definitions/AggregateOffer",
           "readOnly": true
         }
@@ -1005,7 +1005,7 @@
           "type": "string"
         },
         "webSearchUrl": {
-          "description": "The URL that takes the user to the Bing search results page for the query.Only related search results include this field.",
+          "description": "The URL that takes the user to the Bing search results page for the query. Only related search results include this field.",
           "readOnly": true,
           "type": "string"
         },
