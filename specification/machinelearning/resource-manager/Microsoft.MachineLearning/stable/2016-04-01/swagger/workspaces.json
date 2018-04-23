@@ -1,0 +1,699 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Machine Learning Workspaces Management Client",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources. They support CRUD operations for Azure Machine Learning Workspaces.",
+    "version": "2016-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.MachineLearning/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Machine Learning Studio REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets the properties of the specified machine learning workspace.",
+        "operationId": "Workspaces_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceGet": {
+            "$ref": "../examples/GetWorkspace.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Creates or updates a workspace with the specified parameters.",
+        "operationId": "Workspaces_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for creating or updating a machine learning workspace.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceCreate": {
+            "$ref": "../examples/CreateWorkspace.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the resource already exists and was updated.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Deletes a machine learning workspace.",
+        "operationId": "Workspaces_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceDelere": {
+            "$ref": "../examples/DeleteWorkspace.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "The machine learning workspace does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Updates a machine learning workspace with the specified parameters.",
+        "operationId": "Workspaces_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for updating a machine learning workspace.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceUpdate": {
+            "$ref": "../examples/UpdateWorkspace.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }, 
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/workspaces/{workspaceName}/resyncStorageKeys": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Resync storage keys associated with this workspace.",
+        "operationId": "Workspaces_ResyncStorageKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResyncStorageKeys": {
+            "$ref": "../examples/ResyncStorageKeys.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/workspaces/{workspaceName}/listWorkspaceKeys": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "List the authorization keys associated with this workspace.",
+        "operationId": "Workspaces_ListWorkspaceKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ListWorkspaceKeys": {
+            "$ref": "../examples/ListWorkspaceKeys.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceKeysResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Lists all the available machine learning workspaces under the specified resource group.",
+        "operationId": "Workspaces_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceListResourceGroup": {
+            "$ref": "../examples/ListWorkspaceResourceGroup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Lists all the available machine learning workspaces under the specified subscription.",
+        "operationId": "Workspaces_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "WorkspaceGetBySubscription": {
+            "$ref": "../examples/ListWorkspaces.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "The error response send when an operation fails.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "error message"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "An object that represents a machine learning workspace.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The properties of the machine learning workspace.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkspaceProperties": {
+      "type": "object",
+      "description": "The properties of a machine learning workspace.",
+      "required": [
+        "userStorageAccountId"
+      ],
+      "properties": {
+        "userStorageAccountId": {
+          "description": "The fully qualified arm id of the storage account associated with this workspace.",
+          "type": "string"
+        },
+        "ownerEmail": {
+          "description": "The email id of the owner for this workspace.",
+          "type": "string"
+        },
+        "workspaceType": {
+          "type": "string",
+          "enum": [
+            "Production",
+            "Free",
+            "Anonymous",
+            "PaidStandard",
+            "PaidPremium"
+          ],
+          "x-ms-enum": {
+            "name": "WorkspaceType",
+            "modelAsString": false
+          },
+          "readOnly": true,
+          "description": "The type of this workspace."
+        },
+        "workspaceState": {
+          "type": "string",
+          "enum": [
+            "Deleted",
+            "Enabled",
+            "Disabled",
+            "Migrated",
+            "Updated",
+            "Registered",
+            "Unregistered"
+          ],
+          "x-ms-enum": {
+            "name": "WorkspaceState",
+            "modelAsString": false
+          },
+          "readOnly": true,
+          "description": "The current state of workspace resource."
+        },
+        "workspaceId": {
+          "description": "The immutable id associated with this workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationTime": {
+          "description": "The creation time for this workspace resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "studioEndpoint": {
+          "description": "The regional endpoint for the machine learning studio service which hosts this workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "keyVaultIdentifierId": {
+          "description": "The key vault identifier used for encrypted workspaces.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceUpdateParameters": {
+      "description": "The parameters for updating a machine learning workspace.",
+      "properties": {
+        "tags": {
+          "description": "The resource tags for the machine learning workspace.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",
+          "description": "The properties that the machine learning workspace will be updated with.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkspacePropertiesUpdateParameters": {
+      "description": "The parameters for updating the properties of a machine learning workspace.",
+      "properties": {
+        "workspaceState": {
+          "type": "string",
+          "enum": [
+            "Deleted",
+            "Enabled",
+            "Disabled",
+            "Migrated",
+            "Updated",
+            "Registered",
+            "Unregistered"
+          ],
+          "x-ms-enum": {
+            "name": "WorkspaceState",
+            "modelAsString": false
+          },
+          "description": "The current state of workspace resource."
+        },
+        "keyVaultIdentifierId": {
+          "description": "The key vault identifier used for encrypted workspaces.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceKeysResponse": {
+      "type": "object",
+      "description": "Workspace authorization keys for a workspace.",
+      "properties": {
+        "primaryToken": {
+          "type": "string",
+          "description": "Primary authorization key for this workspace."
+        },
+        "secondaryToken": {
+          "type": "string",
+          "description": "Secondary authorization key for this workspace."
+        }
+      }
+    },
+    "WorkspaceListResult": {
+      "description": "The result of a request to list machine learning workspace keys.",
+      "properties": {
+        "value": {
+          "description": "The list of machine learning workspaces. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning workspaces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of machine learning workspaces.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Azure Machine Learning Studio REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display name of operation",
+          "properties": {
+            "provider": {
+              "description": "The resource provider name: Microsoft.MachineLearning",
+              "type": "string"
+            },
+            "resource": {
+              "description": "The resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "The operation that users can perform.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description for the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "An array of operations supported by the resource provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of AML Studio operations supported by the AML Studio resource provider."
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the resource. This cannot be changed after the resource is created.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Microsoft Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The client API version.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group to which the machine learning workspace belongs.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the machine learning workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

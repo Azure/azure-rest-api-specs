@@ -6,6 +6,20 @@
 
 This repository is the canonical source for REST API specifications for Microsoft Azure.
 
+## News
+
+While you're away for the holiday season, we're going to be making a few improvements to the Azure REST API Specs repository:
+
+  - We will stop merging PRs until the new year starting on **6:00 p.m. December 20th, 2017**.
+  - Starting on **December 21st, 2017**, we will be restoring `master` as the default branch for this repository.
+    - All open PRs will automatically be updated to target `master` instead of `current`.
+    - We will stop accepting contributions to the `current` branch.
+  - On **December 21st, 2017**, we will merge a refactoring of this repository where we introduce `preview` and `stable` directories to differentiate Swaggers and services that are ready for General Availability and those that are not yet.
+  - Beginning **December 21st, 2017**, the `master` branch in the private repository will become a read-only copy of the `master` branch in the public repository.
+
+For more information about this project, please see our wiki:
+[December 2017 Refactoring](https://github.com/Azure/azure-rest-api-specs/wiki/December-2017-Refactoring)
+
 ## Basics
 If you're a spec author looking for information about all of of the repositories and steps in the pipeline, go to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
 
@@ -16,101 +30,69 @@ If you're a spec author looking for information about all of of the repositories
 ## Directory Structure
 
 The structure of the directory should strictly follow these rules:
-- If the Rest end point is for management plane(going through ARM end point) then the top level folder must be the "arm-<service_name>". Else top folder name must be "<service_name>".
-- The second level must be the API versions
-- The third level must be the format of the specification (ex. swagger)
-- The fourth level must be the specifications
+
+1. **Profile**: The profile holder contains the profiles' definition MD files. these files will contain information and references to the snapshots of the RPs' Resource types or Dataplane API versions that represent a specific profile.
+
+1. **Specification**: This folder the is root folder for all Specs (Management and Dataplane) related docs.
+
+1. **{RP-Name} Folders** - each RP will have a separate folder
+
+1. **'resource-manager' and 'data-plane' Folders**: the RPs can put specs in one of two categories: `resource-manager` (for ARM resources) and `data-plane` (for everything else) . The autorest configuration file (`readme.md`) for the RP should be inside this folder
+
+1. **'preview' and 'stable' Folders**: Varying levels of stability exist in our repository. Each API Version folder should be categorized as either still accepting breaking changes, or no longer accepting breaking changes. This is not a direct analog for whether or not an API Version has the "-preview" suffix or not. SDKs that are generated from 'preview' folder items should indicate to their customers in the most idiomatic way that breaking changes may still be coming.
+
+1. **API versions**: this folder will be the direct child of the category folder. there will be one such folder per resource type or dataplane service version. This folder will contain the OpenAPI validation Specs (Swaggers previously) and the examples folder.
+
+1. **Examples**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples.
+
+1. **Notes**:
+    - folder names should be singular (ie, 'profile' not 'profiles' ) -- this removes ambiguity for some non-english speakers.
+    - generic folder names should be lower-case
+    - proper-name/product name/namespace folders can be PascalCased (ie, "KeyVault")
+    - files are whatever case you think is good for your soul.
+
 
 The structure should appear like so:
 ```bash
 .
-├── arm-authorization
-│   └── 2015-01-01
-│       └── swagger
-│           └── authorization.json
-├── arm-compute
-│   └── 2015-06-15
-│       └── swagger
-│           └── service.json
-├── arm-features
-│   └── 2014-08-01-preview
-│       └── swagger
-│           └── features.json
-├── arm-network
-│   └── 2015-05-01-preview
-│       └── swagger
-│           └── service.json
-├── arm-resources
-│   └── 2014-04-01-preview
-│       └── swagger
-│           └── service.json
-├── arm-storage
-│   └── 2015-05-01-preview
-│       └── swagger
-│           └── service.json
-├── arm-subscriptions
-│   └── 2014-04-01-preview
-│       └── swagger
-│           └── service.json
-├── arm-web
-├── documentation
-└── readme.md
+\---specification
+|    +---automation
+|    |   \---resource-manager
+|    |       \---Microsoft.Automation
+|    |           \---stable
+|    |               \---2015-10-31
+|    |                   \---examples
+|    +---batch
+|    |   +---data-plane
+|    |   |   \---Microsoft.Batch
+|    |   |       +---stable
+|    |   |       |   +---2015-12-01.2.2
+|    |   |       |   +---2016-02-01.3.0
+|    |   |       |   +---2016-07-01.3.1
+|    |   |       |   +---2017-01-01.4.0
+|    |   |       |       \---examples
+|    |   |       \---preview
+|    |   |           \---2017-05-01.5.0
+|    |   \---resource-manager
+|    |       \---Microsoft.Batch
+|    |           +---stable
+|    |           |   +---2015-12-01
+|    |           |   +---2017-01-01
+|    |           |       \---examples
+|    |           \---2017-05-01
+|    |               \---examples
+|    +---billing
+|        \---resource-manager
+|            \---Microsoft.Billing
+|                \---stable
+|                |   +---2017-02-27-preview
+|                |       \---examples
+|                +---preview
+|                    \---2017-04-24-preview
+|                        \---examples
+\--- readme.md
 ```
 
-## New Directory structure (effective July 10th 2017)
-
-Re-organization is being done to support upcoming profiles work and Data Plane swagger specs. The new structure will appear like below
- 
-```bash
-.
-
-Specification
-└──
-   ├──automation
-   |   └── resource-manager
-   |       └── Microsoft.Automation
-   |           └── 2015-10-31
-   |               └── examples
-   ├──batch
-   |   └── data-plane
-   |   |   └── Microsoft.Batch
-   |   |       └── 2015-12-01.2.2
-   |   |       └── 2016-02-01.3.0
-   |   |       └── 2016-07-01.3.1
-   |   |       └── 2017-01-01.4.0
-   |   |       |   └── examples
-   |   |       └── 2017-05-01.5.0
-   |   └── resource-manager
-   |       └── Microsoft.Batch
-   |           └──2015-12-01
-   |           └──2017-01-01
-   |           |   └──examples
-   |           └──2017-05-01
-   |               └──examples
-   └── billing
-   |   └── resource-manager
-   |       └── Microsoft.Billing
-   |           └── 2017-02-27-preview
-   |           |   └── examples
-   |           └── 2017-04-24-preview
-   |               └── examples
-   └── readme.md
-```
-### Changing the representation of composite swagger metadata
-
-Currently composite swagger metadata is captured in a .json file. The problem with the current representation is that it does not provide a way to track what versions of swagger specs were used in earlier releases. With the upcoming changes, we will be able to keep track of multiple versions of composition. The metadata will be captured in readme.md file under resource-manager folder. There won’t be a need for .json file. New structure in readme.md file looks like below. 
-Tag: package-2017-03
-These settings apply only when --tag=package-2017-03 is specified on the command line.
-input-file:
-- Microsoft.Compute/2017-03-30/compute.json
-- Microsoft.Compute/2017-03-30/disk.json
-- Microsoft.Compute/2017-03-30/runCommands.json
-- Microsoft.ContainerService/2017-01-31/containerService.json
-
-Please take a look at this [readme.md](https://github.com/Azure/azure-rest-api-specs/tree/reorg/specification/compute/resource-manager) (Acessible by Azure github org members only) to understand how the complete structure looks like.
-
-
-## Specs Format
 Currently, the specifications are expected to be in Swagger JSON format
 
 ## Next steps

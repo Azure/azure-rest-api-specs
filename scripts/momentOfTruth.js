@@ -8,29 +8,23 @@ const exec = require('child_process').exec,
     path = require('path'),
     util = require('util'),
     utils = require('../test/util/utils'),
-    _ = require('underscore'),
     fs = require('fs'),
     request = require('request');
 
 // let blobService = azure.createBlobService();
-let swaggersToProcess = utils.getFilesChangedInPR();
+let configsToProcess = utils.getConfigFilesChangedInPR();
 let targetBranch = utils.getTargetBranch();
 let sourceBranch = utils.getSourceBranch();
 let pullRequestNumber = utils.getPullRequestNumber();
-let linterCmd = `autorest --message-format=json --azure-validator=true --input-file=`;
+let linterCmd = `npx autorest@2.0.4152 --validation --azure-validator --message-format=json `;
 let gitCheckoutCmd = `git checkout ${targetBranch}`;
 let gitLogCmd = `git log -3`;
-var filename = `${pullRequestNumber}_${utils.getTimeStamp()}.json`;
+var filename = `${pullRequestNumber}.json`;
 var logFilepath = path.join(getLogDir(), filename);
 var finalResult = {};
 finalResult["pullRequest"] = pullRequestNumber;
-finalResult["repositoryUrl"] = getRepository();
+finalResult["repositoryUrl"] = utils.getRepoUrl();
 finalResult["files"] = {};
-
-// Retrieves Git Repository Url
-function getRepository() {
-    return "https://github.com/" + utils.getRepoName();
-}
 
 // Creates and returns path to the logging directory
 function getLogDir() {
@@ -50,7 +44,6 @@ function createLogFile() {
     if (!fs.existsSync(logFilepath)) {
         fs.writeFileSync(logFilepath, '');
     }
-    return;
 }
 
 //appends the content to the log file
@@ -58,76 +51,64 @@ function writeContent(content) {
     fs.writeFileSync(logFilepath, content);
 }
 
-//executes promises sequentially by chaining them.
-function executePromisesSequentially(promiseFactories) {
-    let result = Promise.resolve();
-    promiseFactories.forEach(function (promiseFactory) {
-        result = result.then(promiseFactory);
-    });
-    return result;
-};
-
 // Executes linter on given swagger path and returns structured JSON of linter output
-function getLinterResult(swaggerPath) {
+async function getLinterResult(swaggerPath) {
     if (swaggerPath === null || swaggerPath === undefined || typeof swaggerPath.valueOf() !== 'string' || !swaggerPath.trim().length) {
         throw new Error('swaggerPath is a required parameter of type "string" and it cannot be an empty string.');
     }
 
-    return new Promise((result) => {
-        let jsonResult = [];
-        if (!fs.existsSync(swaggerPath)) {
-            result([]);
-            return;
+    let jsonResult = [];
+    if (!fs.existsSync(swaggerPath)) {
+        return [];
+    }
+    let cmd = "npx autorest --reset && " + linterCmd + swaggerPath;
+    console.log(`Executing: ${cmd}`);
+    const { err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
+        (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
+
+    let resultString = stdout + stderr;
+    if (resultString.indexOf('{') !== -1) {
+        resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
+        //console.log('>>>>>> Trimmed Result...');
+        //console.log(resultString);
+        try {
+            jsonResult = JSON.parse(resultString);
+            //console.log('>>>>>> Parsed Result...');
+            //console.dir(resultObject, {depth: null, colors: true});
+            return jsonResult;
+        } catch (e) {
+            console.log(`An error occurred while executing JSON.parse() on the linter output for ${swaggerPath}:`);
+            console.dir(resultString);
+            console.dir(e, { depth: null, colors: true });
         }
-        let cmd = linterCmd + swaggerPath;
-        console.log(`Executing: ${cmd}`);
-        exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 }, (err, stdout, stderr) => {
-            let resultString = stderr;
-            if (resultString.indexOf('{') !== -1) {
-                resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
-                //console.log('>>>>>> Trimmed Result...');
-                //console.log(resultString);
-                try {
-                    jsonResult = JSON.parse(resultString);
-                    //console.log('>>>>>> Parsed Result...');
-                    //console.dir(resultObject, {depth: null, colors: true});
-                    result(jsonResult);
-                } catch (e) {
-                    console.log(`An error occurred while executing JSON.parse() on the linter output for ${swaggerPath}:`);
-                    console.dir(resultString);
-                    console.dir(e, { depth: null, colors: true });
-                    result([]);
-                }
-            }
-        });
-    });
+    }
+    return [];
 };
 
 // Uploads the result file to Azure Blob Storage
-function uploadToAzureStorage(json) {
-    console.log(logFilepath);
-    request({
+async function uploadToAzureStorage(json) {
+    console.log(`Uploading data...`);
+
+    const { error, response, body } = await new Promise(res => request({
         url: "http://az-bot.azurewebsites.net/process",
         method: "POST",
         json: true,
         body: json
-    }, function (error, response, body) {
-        console.log(body);
-    });
+    }, (error, response, body) => res({ error: error, response: response, body: body })));
+
+    console.log(body);
 }
 
 // Run linter tool
-function runTools(swagger, beforeOrAfter) {
+async function runTools(swagger, beforeOrAfter) {
     console.log(`Processing "${swagger}":`);
-    return getLinterResult(swagger).then(function (linterErrors) {
-        console.log(linterErrors);
-        updateResult(swagger, linterErrors, beforeOrAfter);
-        return;
-    });
+    const linterErrors = await getLinterResult(swagger);
+    console.log(linterErrors);
+    await updateResult(swagger, linterErrors, beforeOrAfter);
 };
 
 // Updates final result json to be written to the output file
-function updateResult(spec, errors, beforeOrAfter) {
+async function updateResult(spec, errors, beforeOrAfter) {
     if (!finalResult['files'][spec]) {
         finalResult['files'][spec] = {};
     }
@@ -135,39 +116,36 @@ function updateResult(spec, errors, beforeOrAfter) {
         finalResult['files'][spec][beforeOrAfter] = {};
     }
     finalResult['files'][spec][beforeOrAfter] = errors;
-    return;
 }
 
 //main function
-function runScript() {
-    // Useful when debugging a test for a particular swagger. 
+async function runScript() {
+    // Useful when debugging a test for a particular swagger.
     // Just update the regex. That will return an array of filtered items.
-    // swaggersToProcess = ['/Users/vishrut/git-repos/rest-repo-reorg/azure-rest-api-specs/arm-storage/2016-12-01/swagger/storage.json',
-    //                     '/Users/vishrut/git-repos/rest-repo-reorg/azure-rest-api-specs/arm-web/2016-09-01/swagger/AppServicePlans.json'];
-    swaggersToProcess = swaggersToProcess.filter(function (swaggerFile) {
-        return swaggerFile.indexOf('.json') != -1;
+    // configsToProcess = ['/Users/vishrut/git-repos/azure-rest-api-specs/specification/storage/resource-manager/readme.md',
+    //                    '/Users/vishrut/git-repos/azure-rest-api-specs/specification/web/resource-manager/readme.md'];
+    configsToProcess = configsToProcess.filter(function (configFile) {
+        return configFile.indexOf('.md') != -1;
     });
-    console.log(swaggersToProcess);
+    console.log(configsToProcess);
     createLogFile();
     console.log(`The results will be logged here: "${logFilepath}".`)
 
-    let afterPRPromiseFactories = _(swaggersToProcess).map(function (swagger) {
-        return function () { return runTools(swagger, 'after'); };
-    });
+    for (const configFile of configsToProcess) {
+        await runTools(configFile, 'after');
+    }
 
-    let beforePromiseFactories = _(swaggersToProcess).map(function (swagger) {
-        return function () { return runTools(swagger, 'before'); };
-    });
+    utils.checkoutTargetBranch();
 
-    executePromisesSequentially(afterPRPromiseFactories).then(() => {
-        execSync(`${gitCheckoutCmd}`, { encoding: 'utf8' });
-        execSync(`${gitLogCmd}`, { encoding: 'utf8' });
-        executePromisesSequentially(beforePromiseFactories).then(() => {
-            writeContent(JSON.stringify(finalResult, null, 2));
-            return uploadToAzureStorage(finalResult);
-        })
-    });
+    for (const configFile of configsToProcess) {
+        await runTools(configFile, 'before');
+    }
+    writeContent(JSON.stringify(finalResult, null, 2));
 }
 
 // magic starts here
-runScript();
+runScript().then(success => {
+    process.exit(0);
+}).catch(err => {
+    process.exit(1);
+})

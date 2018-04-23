@@ -63,7 +63,7 @@ As JSON files, specs can be modified in any text editor that you choose. We have
 ### Tools for validating Swagger
 There are some tools that can help you make sure your spec conforms to guidelines. The more of these issues that are caught before the PR is sent, the quicker the turnaround to merging the PR will be. 
 
-- _**Recommended**_ Please take a look at the [validation tools for swagger checklist] (https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md#validation-tools-for-swagger-checklist) section. 
+- _**Recommended**_ Please take a look at the [validation tools for swagger checklist](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md#validation-tools-for-swagger-checklist) section. 
 - The [OpenAPI Initiative Swagger editor](http://editor.swagger.io/#/) will help find basic issues in a Swagger file. However, we apply a higher bar than this validator - just because this site doesn't show errors doesn't mean the spec is ready to merge. 
 - Similarly, this online [schema validator](https://json-schema-validator.herokuapp.com/) can help find basic errors. Again, we apply a higher bar than this validator - just because this site doesn't show errors doesn't mean the spec is ready to merge. 
   * In the upper left box, paste the [swagger schema from here](https://github.com/swagger-api/swagger-spec/blob/master/schemas/v2.0/schema.json)

@@ -67,8 +67,8 @@ _This will keep the spec cleaner and easy to manage._
         "operationId": "StorageAccounts_CreateOrUpdate",
         "description": "Creates or updates a storage account.",
         "x-ms-examples": {
-          "Create a storage account": { "$ref": "../examples/createStorageAccount.json" },
-          "Update a storage account": { "$ref": "../examples/updateStorageAccount.json" }
+          "Create a storage account": { "$ref": "./examples/createStorageAccount.json" },
+          "Update a storage account": { "$ref": "./examples/updateStorageAccount.json" }
         },
         "parameters": [ ... ],
         "responses": { ... }

@@ -1,0 +1,286 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorClient",
+    "version": "2016-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/microsoft.insights/metricDefinitions": {
+      "get": {
+        "tags": [
+          "MetricDefinitions"
+        ],
+        "operationId": "MetricDefinitions_List",
+        "description": "Lists the metric definitions for the resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "Reduces the set of data collected by retrieving particular metric definitions from all the definitions available for the resource.<br>For example, to get just the definition for the 'CPU percentage' counter: $filter=name.value eq '\\Processor(_Total)\\% Processor Time'.<br>Multiple metrics can be retrieved by joining together *'name eq <value>'* clauses separated by *or* logical operators.<br>**NOTE**: No other syntax is allowed.",
+            "required": false
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric definitions",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionCollection"
+            },
+            "examples": {
+              "application/json": {
+                "value":[
+                  {
+                    "resourceId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
+                    "name": {
+                      "value":"RunsStarted",
+                      "localizedValue":"Runs Started"
+                    },
+                    "unit":"Count",
+                    "primaryAggregationType":"Total",
+                    "metricAvailabilities":[
+                      {
+                        "timeGrain":"PT1M",
+                        "retention":"P30D"
+                      },
+                      {
+                        "timeGrain":"PT1H",
+                        "retention":"P30D"
+                      }
+                    ],
+                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsStarted"
+                  },
+                  {
+                    "resourceId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
+                    "name": {
+                      "value":"RunsCompleted",
+                      "localizedValue":"Runs Completed"
+                    },
+                    "unit":"Count",
+                    "primaryAggregationType":"Total",
+                    "metricAvailabilities": [
+                      {
+                        "timeGrain":"PT1M",
+                        "retention":"P30D"
+                      },
+                      {
+                        "timeGrain":"PT1H",
+                        "retention":"P30D"
+                      }
+                    ],
+                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsCompleted"
+                  },
+                  {
+                    "resourceId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
+                    "name": {
+                      "value":"RunsSucceeded",
+                      "localizedValue":"Runs Succeeded"
+                    },
+                    "unit":"Count",
+                    "primaryAggregationType":"Total",
+                    "metricAvailabilities": [
+                      {
+                        "timeGrain":"PT1M",
+                        "retention":"P30D"
+                      },
+                      {
+                        "timeGrain":"PT1H",
+                        "retention":"P30D"
+                      }
+                    ],
+                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsSucceeded"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/MetricDefinition",
+        "x-ms-examples": {
+          "Get Metric Definitions without filter": { "$ref": "./examples/GetMetricDefinitions.json" },
+          "Get Metric Definitions with filter": { "$ref": "./examples/GetMetricDefinitionsFiltered.json" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LocalizableString": {
+      "required": [ "value" ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "the invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "the locale specific value."
+        }
+      },
+      "description": "The localizable string class."
+    },
+    "MetricAvailability": {
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "format": "duration",
+          "description": "the time grain specifies the aggregation interval for the metric. Expressed as a duration 'PT1M', 'P1D', etc."
+        },
+        "retention": {
+          "type": "string",
+          "format": "duration",
+          "description": "the retention period for the metric at the specified timegrain.  Expressed as a duration 'PT1M', 'P1D', etc."
+        }
+      },
+      "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain."
+    },
+    "Unit": {
+      "type": "string",
+      "description": "the unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Percent",
+        "MilliSeconds"
+      ],
+      "x-ms-enum": {
+        "name": "Unit",
+        "modelAsString": false
+      }
+    },
+    "MetricDefinition": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "the resource identifier of the resource that emitted the metric."
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "the name and the display name of the metric, i.e. it is a localizable string."
+        },
+        "unit": {
+          "$ref": "#/definitions/Unit",
+          "description": "the unit of the metric."
+        },
+        "primaryAggregationType": {
+          "type": "string",
+          "description": "the primary aggregation type value defining how to use the values for display.",
+          "enum": [
+            "None",
+            "Average",
+            "Count",
+            "Minimum",
+            "Maximum",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "name": "AggregationType",
+            "modelAsString": false
+          }
+        },
+        "metricAvailabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "description": "the collection of what aggregation intervals are available to be queried."
+        },
+        "id": {
+          "type": "string",
+          "description": "the resource identifier of the metric definition."
+        }
+      },
+      "description": "Metric definition class specifies the metadata for a metric."
+    },
+    "MetricDefinitionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDefinition"
+          },
+          "description": "the values for the metric definitions."
+        }
+      },
+      "required": ["value"],
+      "description": "Represents collection of metric definitions."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}
