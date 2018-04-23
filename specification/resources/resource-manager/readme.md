@@ -366,7 +366,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-policy-2017-06' && $(go)
 namespace: policy
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-06-01-preview/policy
+output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2017-06-01-preview/policy
 ```
 
 ### Tag: package-policy-2016-12 and go
@@ -396,7 +396,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-policy-2015-10' && $(go)
 namespace: policy
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-10-01-preview/policy
+output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2015-10-01-preview/policy
 ```
 
 ### Tag: package-resources-2018-02 and go
@@ -496,7 +496,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2016-09' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2016-09-01-preview/managedapplications
+output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2016-09-01-preview/managedapplications
 ```
 
 ## Python

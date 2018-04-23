@@ -98,6 +98,6 @@ go:
 These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-' && $(go)
-output-folder: $(go-sdk-folder)/services/botservice/mgmt/2017-12-01/botservices
+``` yaml $(tag) == 'package-2017-12-01' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/botservice/mgmt/2017-12-01/botservices
 ```
