@@ -3,9 +3,8 @@
   "info": {
     "title": "AutomationManagement",
     "version": "2018-01-15",
-    "x-ms-code-generation-settings": {
-      "useDateTimeOffset": true,
-      "syncMethods": "None"
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
     }
   },
   "host": "management.azure.com",
@@ -373,13 +372,15 @@
           "type": "string",
           "format": "uuid",
           "readOnly": true,
-          "description": "Gets the id of the job."
+          "description": "Gets the id of the job.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time of the job."
+          "description": "Gets the creation time of the job.",
+          "x-nullable": false
         },
         "provisioningState": {
           "$ref": "#/definitions/JobProvisioningStateProperty",
@@ -420,13 +421,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the start time of the job."
+          "description": "Gets the start time of the job.",
+          "x-nullable": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the end time of the job."
+          "description": "Gets the end time of the job.",
+          "x-nullable": true
         },
         "exception": {
           "type": "string",
@@ -437,13 +440,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time of the job."
+          "description": "Gets the last modified time of the job.",
+          "x-nullable": false
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last status modified time of the job."
+          "description": "Gets the last status modified time of the job.",
+          "x-nullable": true
         },
         "parameters": {
           "type": "object",
@@ -547,7 +552,8 @@
         "time": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the job."
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
         },
         "streamType": {
           "type": "string",

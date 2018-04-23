@@ -4,8 +4,7 @@
     "title": "AutomationManagement",
     "version": "2018-01-15",
     "x-ms-code-generation-settings": {  
-      "useDateTimeOffset": true,
-      "syncMethods": "None"  
+      "useDateTimeOffset": true
     }
   },
   "host": "management.azure.com",
@@ -169,7 +168,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParametersProperties"
+              "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for configuration."
           },
@@ -320,16 +319,19 @@
       "description": "Definition of the dsc node configuration."
     },
     "DscNodeConfigurationProperties": {
+      "description": "Properties for the DscNodeConfiguration",
       "properties": {
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets creation time."
+          "description": "Gets or sets creation time.",
+          "x-nullable": false
         },
         "configuration": {
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
@@ -378,6 +380,26 @@
         }
       },
       "description": "The dsc extensionHandler property associated with the node"
+    },
+    "DscNodeConfigurationCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParametersProperties",
+          "x-ms-client-flatten": true,
+          "description": "Node configuration properties"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the node configuration."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      }
     },
     "DscNodeConfigurationCreateOrUpdateParametersProperties": {
       "properties": {

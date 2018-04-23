@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -127,12 +130,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -216,7 +221,8 @@
           "type": "array",
           "items": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-nullable": false
           },
           "description": "Days of the month that the job should execute on. Must be between 1 and 31."
         },
@@ -336,13 +342,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time."
+          "description": "Gets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -461,7 +469,8 @@
         },
         "isExportable": {
           "type": "boolean",
-          "description": "Gets or sets the is exportable flag of the certificate."
+          "description": "Gets or sets the is exportable flag of the certificate.",
+          "x-nullable": false
         }
       },
       "required": [
@@ -498,24 +507,28 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the expiry time of the certificate."
+          "description": "Gets the expiry time of the certificate.",
+          "x-nullable": false
         },
         "isExportable": {
           "type": "boolean",
           "readOnly": true,
-          "description": "Gets the is exportable flag of the certificate."
+          "description": "Gets the is exportable flag of the certificate.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time."
+          "description": "Gets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -637,13 +650,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time."
+          "description": "Gets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -777,12 +792,14 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -882,13 +899,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time."
+          "description": "Gets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time."
+          "description": "Gets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -1088,13 +1107,15 @@
           "type": "string",
           "format": "uuid",
           "readOnly": true,
-          "description": "Gets the id of the job."
+          "description": "Gets the id of the job.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the creation time of the job."
+          "description": "Gets the creation time of the job.",
+          "x-nullable": false
         },
         "provisioningState": {
           "$ref": "#/definitions/JobProvisioningStateProperty",
@@ -1135,13 +1156,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the start time of the job."
+          "description": "Gets the start time of the job.",
+          "x-nullable": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the end time of the job."
+          "description": "Gets the end time of the job.",
+          "x-nullable": true
         },
         "exception": {
           "type": "string",
@@ -1152,13 +1175,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last modified time of the job."
+          "description": "Gets the last modified time of the job.",
+          "x-nullable": false
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the last status modified time of the job."
+          "description": "Gets the last status modified time of the job.",
+          "x-nullable": true
         },
         "parameters": {
           "type": "object",
@@ -1281,12 +1306,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -1454,7 +1481,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the type of the parameter."
+          "description": "Name of the node configuration."
         },
         "configuration": {
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
@@ -1512,17 +1539,20 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the node report."
+          "description": "Gets or sets the end time of the node report.",
+          "x-nullable": true
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the lastModifiedTime of the node report."
+          "description": "Gets or sets the lastModifiedTime of the node report.",
+          "x-nullable": false
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the node report."
+          "description": "Gets or sets the start time of the node report.",
+          "x-nullable": true
         },
         "type": {
           "type": "string",
@@ -1694,7 +1724,8 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start date of the resource."
+          "description": "Gets or sets the start date of the resource.",
+          "x-nullable": false
         }
       },
       "description": "Definition of the DSC Report Resource."
@@ -1755,7 +1786,8 @@
         "registrationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the registration time of the worker machine."
+          "description": "Gets or sets the registration time of the worker machine.",
+          "x-nullable": false
         }
       },
       "description": "Definition of hybrid runbook worker."
@@ -2032,12 +2064,14 @@
         "jobId": {
           "type": "string",
           "format": "uuid",
-          "description": "Gets or sets the id of the job."
+          "description": "Gets or sets the id of the job.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the job."
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
         },
         "status": {
           "type": "string",
@@ -2069,12 +2103,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the job."
+          "description": "Gets or sets the start time of the job.",
+          "x-nullable": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the job."
+          "description": "Gets or sets the end time of the job.",
+          "x-nullable": true
         },
         "exception": {
           "type": "string",
@@ -2083,12 +2119,14 @@
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time of the job."
+          "description": "Gets or sets the last modified time of the job.",
+          "x-nullable": true
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last status modified time of the job."
+          "description": "Gets or sets the last status modified time of the job.",
+          "x-nullable": true
         },
         "parameters": {
           "type": "object",
@@ -2113,7 +2151,8 @@
         "time": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the job."
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
         },
         "streamType": {
           "type": "string",
@@ -2314,12 +2353,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -2559,12 +2600,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the runbook draft."
+          "description": "Gets or sets the creation time of the runbook draft.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time of the runbook draft."
+          "description": "Gets or sets the last modified time of the runbook draft.",
+          "x-nullable": false
         },
         "parameters": {
           "type": "object",
@@ -2919,12 +2962,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -3001,12 +3046,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the schedule."
+          "description": "Gets or sets the start time of the schedule.",
+          "x-nullable": false
         },
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the schedule."
+          "description": "Gets or sets the end time of the schedule.",
+          "x-nullable": true
         },
         "interval": {
           "description": "Gets or sets the interval of the schedule."
@@ -3053,23 +3100,27 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the schedule."
+          "description": "Gets or sets the start time of the schedule.",
+          "x-nullable": false
         },
         "startTimeOffsetMinutes": {
           "readOnly": true,
           "type": "number",
           "format": "double",
-          "description": "Gets the start time's offset in minutes."
+          "description": "Gets the start time's offset in minutes.",
+          "x-nullable": false
         },
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the schedule."
+          "description": "Gets or sets the end time of the schedule.",
+          "x-nullable": true
         },
         "expiryTimeOffsetMinutes": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the expiry time's offset in minutes."
+          "description": "Gets or sets the expiry time's offset in minutes.",
+          "x-nullable": false
         },
         "isEnabled": {
           "type": "boolean",
@@ -3079,12 +3130,14 @@
         "nextRun": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the next run time of the schedule."
+          "description": "Gets or sets the next run time of the schedule.",
+          "x-nullable": true
         },
         "nextRunOffsetMinutes": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the next run time's offset in minutes."
+          "description": "Gets or sets the next run time's offset in minutes.",
+          "x-nullable": false
         },
         "interval": {
           "description": "Gets or sets the interval of the schedule."
@@ -3115,12 +3168,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -3252,13 +3307,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the startTime of the statistic."
+          "description": "Gets the startTime of the statistic.",
+          "x-nullable": false
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Gets the endTime of the statistic."
+          "description": "Gets the endTime of the statistic.",
+          "x-nullable": true
         },
         "id": {
           "type": "string",
@@ -3315,7 +3372,8 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the test job."
+          "description": "Gets or sets the creation time of the test job.",
+          "x-nullable": false
         },
         "status": {
           "type": "string",
@@ -3332,12 +3390,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the test job."
+          "description": "Gets or sets the start time of the test job.",
+          "x-nullable": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the test job."
+          "description": "Gets or sets the end time of the test job.",
+          "x-nullable": true
         },
         "exception": {
           "type": "string",
@@ -3346,12 +3406,14 @@
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time of the test job."
+          "description": "Gets or sets the last modified time of the test job.",
+          "x-nullable": false
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last status modified time of the test job."
+          "description": "Gets or sets the last status modified time of the test job.",
+          "x-nullable": true
         },
         "parameters": {
           "type": "object",
@@ -3492,17 +3554,20 @@
         },
         "isEncrypted": {
           "type": "boolean",
-          "description": "Gets or sets the encrypted flag of the variable."
+          "description": "Gets or sets the encrypted flag of the variable.",
+          "x-nullable": true
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",
@@ -3582,7 +3647,8 @@
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the expiry time."
+          "description": "Gets or sets the expiry time.",
+          "x-nullable": false
         },
         "parameters": {
           "type": "object",
@@ -3634,12 +3700,14 @@
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the expiry time."
+          "description": "Gets or sets the expiry time.",
+          "x-nullable": false
         },
         "lastInvokedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last invoked time."
+          "description": "Gets or sets the last invoked time.",
+          "x-nullable": true
         },
         "parameters": {
           "type": "object",
@@ -3659,12 +3727,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
         },
         "description": {
           "type": "string",

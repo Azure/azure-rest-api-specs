@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2017-05-15-preview"
+    "version": "2017-05-15-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -74,7 +77,8 @@
           "type": "array",
           "items": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-nullable": false
           },
           "description": "Days of the month that the job should execute on. Must be between 1 and 31."
         },
@@ -124,11 +128,13 @@
         "jobId": {
           "type": "string",
           "format": "uuid",
-          "description": "Gets or sets the id of the job."
+          "description": "Gets or sets the id of the job.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "Gets or sets the creation time of the job."
         },
         "status": {
@@ -161,11 +167,13 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "description": "Gets or sets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "description": "Gets or sets the end time of the job."
         },
         "exception": {
@@ -175,11 +183,13 @@
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "description": "Gets or sets the last modified time of the job."
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "description": "Gets or sets the last status modified time of the job."
         },
         "parameters": {
@@ -190,8 +200,9 @@
           "description": "Gets or sets the parameters of the job."
         },
         "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningStateProperty",
-          "description": "The provisioning state of a resource."
+          "type": "string",
+          "description": "The provisioning state of a resource.",
+          "readOnly": true
         }
       },
       "description": "Definition of job properties."
@@ -238,6 +249,7 @@
         "time": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "Gets or sets the creation time of the job."
         },
         "streamType": {
@@ -325,11 +337,13 @@
           "type": "string",
           "format": "uuid",
           "readOnly": true,
-          "description": "The id of the job."
+          "description": "The id of the job.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true,
           "description": "The creation time of the job."
         },
@@ -360,24 +374,28 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "readOnly": true,
           "description": "The start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "readOnly": true,
           "description": "The end time of the job."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "readOnly": true,
           "description": "The last modified time of the job."
         },
         "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningStateProperty",
-          "description": "The current provisioning state of the job."
+          "type": "string",
+          "description": "The provisioning state of a resource.",
+          "readOnly": true
         }
       }
     },
@@ -443,6 +461,7 @@
           "type": "string",
           "description": "Creation time of theresource, which only appears in the response.",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true
         },
         "createdBy": {
@@ -454,6 +473,7 @@
           "type": "string",
           "description": "Last time resource was modified, which only appears in the response.",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -581,18 +601,21 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "the start time of the update."
         },
         "creationTime": {
           "type": "string",
           "description": "Creation time of the software update configuration, which only appears in the response.",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true
         },
         "lastModifiedTime": {
           "type": "string",
           "description": "Last time software update configuration was modified, which only appears in the response.",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true
         },
         "provisioningState": {
@@ -603,6 +626,7 @@
         "nextRun": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "description": "ext run time of the update."
         }
       }
@@ -864,12 +888,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "Etart time of the software update configuration run.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "description": "End time of the software update configuration run.",
           "readOnly": true
         },
@@ -887,6 +913,7 @@
           "type": "string",
           "description": "Creation time of theresource, which only appears in the response.",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true
         },
         "createdBy": {
@@ -898,6 +925,7 @@
           "type": "string",
           "description": "Last time resource was modified, which only appears in the response.",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -965,12 +993,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "Start time of the software update configuration machine run.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "description": "End time of the software update configuration machine run.",
           "readOnly": true
         },
@@ -987,6 +1017,7 @@
           "type": "string",
           "description": "Creation time of theresource, which only appears in the response.",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true
         },
         "createdBy": {
@@ -998,6 +1029,7 @@
           "type": "string",
           "description": "Last time resource was modified, which only appears in the response.",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -1135,11 +1167,13 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "Gets or sets the creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "Gets or sets the last modified time."
         }
       },
@@ -1260,6 +1294,7 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true,
           "description": "Gets the creation time of the job."
         },
@@ -1279,12 +1314,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the end time of the job."
         },
@@ -1294,6 +1331,28 @@
         }
       },
       "description": "Definition of source control sync job properties."
+    },
+    "SourceControlSyncJobCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SourceControlSyncJobCreateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Sets the properties of the source control sync job."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create source control sync job operation."
+    },
+    "SourceControlSyncJobCreateProperties": {
+      "properties": {
+        "commitId": {
+          "type": "string",
+          "description": "Sets the commit id of the source control sync job."
+        }
+      },
+      "description": "Definition of create source control sync job properties."
     },
     "SourceControlSyncJobListResult": {
       "properties": {
@@ -1334,6 +1393,7 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "readOnly": true,
           "description": "Gets the creation time of the job."
         },
@@ -1353,12 +1413,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the end time of the job."
         },
@@ -1406,23 +1468,27 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "Gets or sets the start time of the schedule."
         },
         "startTimeOffsetMinutes": {
           "readOnly": true,
           "type": "number",
           "format": "double",
-          "description": "Gets the start time's offset in minutes."
+          "description": "Gets the start time's offset in minutes.",
+          "x-nullable": false
         },
         "expiryTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "description": "Gets or sets the end time of the schedule."
         },
         "expiryTimeOffsetMinutes": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the expiry time's offset in minutes."
+          "description": "Gets or sets the expiry time's offset in minutes.",
+          "x-nullable": false
         },
         "isEnabled": {
           "type": "boolean",
@@ -1432,12 +1498,14 @@
         "nextRun": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": true,
           "description": "Gets or sets the next run time of the schedule."
         },
         "nextRunOffsetMinutes": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the next run time's offset in minutes."
+          "description": "Gets or sets the next run time's offset in minutes.",
+          "x-nullable": false
         },
         "interval": {
           "type": "integer",
@@ -1469,11 +1537,13 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "Gets or sets the creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
+          "x-nullable": false,
           "description": "Gets or sets the last modified time."
         },
         "description": {
