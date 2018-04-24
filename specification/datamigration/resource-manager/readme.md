@@ -28,7 +28,7 @@ These are the global settings for the Database Migration Service API.
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-2018-03-31-preview
+tag: package-2018-04-19
 ```
 
 ### Tag: package-2017-11-15-preview
