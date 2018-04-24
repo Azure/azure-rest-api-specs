@@ -433,6 +433,10 @@ directive:
     from: networkwatcher.json
     where: $.definitions.NetworkWatcher
     reason: Network watcher has reference on resource in network.json which contain 'name, 'id' and 'type'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: networkwatcher.json
+    where: $.definitions.ProtocolConfiguration.properties.HTTPConfiguration
+    reason: The Connectivity check API has HTTPConfiguration property names with leading capital letters
 ```
 
 ### Tag: package-2018-01 and go
