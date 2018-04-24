@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview"
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -368,28 +368,6 @@
         "name": "ErrorType",
         "modelAsString": true
       }
-    },
-    "MigrateSqlServerSqlMIDatabaseInput": {
-      "type": "object",
-      "description": "Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the database"
-        },
-        "restoreDatabaseName": {
-          "type": "string",
-          "description": "Name of the database at destination"
-        },
-        "backupFileShare": {
-          "$ref": "#/definitions/FileShare",
-          "description": "Backup file share information for backing up this database."
-        }
-      },
-      "required": [
-        "name",
-        "restoreDatabaseName"
-      ]
     },
     "MigrateSqlServerSqlServerDatabaseInput": {
       "type": "object",

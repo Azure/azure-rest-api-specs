@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview"
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -117,30 +117,6 @@
         }
       ]
     },
-    "ConnectToTargetSqlMITaskProperties": {
-      "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI",
-      "type": "object",
-      "description": "Properties for the task that validates connection to Azure SQL Database Managed Instance",
-      "properties": {
-        "input": {
-          "description": "Task input",
-          "$ref": "./ConnectToTargetSqlMITask.json#/definitions/ConnectToTargetSqlMITaskInput"
-        },
-        "output": {
-          "description": "Task output. This is ignored if submitted.",
-          "type": "array",
-          "items": {
-            "$ref": "./ConnectToTargetSqlMITask.json#/definitions/ConnectToTargetSqlMITaskOutput"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProjectTaskProperties"
-        }
-      ]
-    },
     "ConnectToTargetSqlDbTaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.SqlDb",
       "type": "object",
@@ -189,30 +165,6 @@
         }
       ]
     },
-    "MigrateSqlServerSqlMITaskProperties": {
-      "x-ms-discriminator-value": "Migrate.SqlServer.AzureSqlDbMI",
-      "type": "object",
-      "description": "Properties for task that migrates SQL Server databases to Azure SQL Database Managed Instance",
-      "properties": {
-        "input": {
-          "description": "Task input",
-          "$ref": "./MigrateSqlServerSqlMITask.json#/definitions/MigrateSqlServerSqlMITaskInput"
-        },
-        "output": {
-          "description": "Task output. This is ignored if submitted.",
-          "type": "array",
-          "items": {
-            "$ref": "./MigrateSqlServerSqlMITask.json#/definitions/MigrateSqlServerSqlMITaskOutput"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProjectTaskProperties"
-        }
-      ]
-    },
     "MigrateSqlServerSqlDbTaskProperties": {
       "x-ms-discriminator-value": "Migrate.SqlServer.SqlDb",
       "type": "object",
@@ -227,30 +179,6 @@
           "type": "array",
           "items": {
             "$ref": "./MigrateSqlServerSqlDbTask.json#/definitions/MigrateSqlServerSqlDbTaskOutput"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProjectTaskProperties"
-        }
-      ]
-    },
-    "ValidateMigrationInputSqlServerSqlMITaskProperties": {
-      "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
-      "type": "object",
-      "description": "Properties for task that validates migration input for SQL to Azure SQL Database Managed Instance",
-      "properties": {
-        "input": {
-          "description": "Task input",
-          "$ref": "./ValidateMigrationInputSqlServerSqlMITask.json#/definitions/ValidateMigrationInputSqlServerSqlMITaskInput"
-        },
-        "output": {
-          "description": "Task output. This is ignored if submitted.",
-          "type": "array",
-          "items": {
-            "$ref": "./ValidateMigrationInputSqlServerSqlMITask.json#/definitions/ValidateMigrationInputSqlServerSqlMITaskOutput"
           },
           "readOnly": true
         }

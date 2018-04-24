@@ -1,8 +1,8 @@
-# Data Migration Service
+# Azure Database Migration Service
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Database Migration Service.
+This is the AutoRest configuration file for Azure Database Migration Service.
 
 The Data Migration RP comprises of APIs that enable a customer to manage the service instances that help migrate databases from a source to target.
 
@@ -91,6 +91,25 @@ input-file:
 - Microsoft.DataMigration/preview/2018-03-31-preview/definitions/TasksCommon.json
 - Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrationValidation.json
 - Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+```
+
+### Tag: package-2018-04-19
+
+These settings apply only when `--tag=package-2018-04-19` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04-19'
+input-file:
+- Microsoft.DataMigration/stable/2018-04-19/datamigration.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/Common.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/Projects.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/Services.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/Tasks.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/TasksCommon.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/MigrationValidation.json
 ```
 ---
 

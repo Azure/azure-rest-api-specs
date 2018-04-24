@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview",
-    "description": "The Data Migration Service helps people migrate their data from on-premise database servers to Azure, or from older database software to newer software. The service manages one or more workers that are joined to a customer's virtual network, which is assumed to provide connectivity to their databases. To avoid frequent updates to the resource provider, data migration tasks are implemented by the resource provider in a generic way as task resources, each of which has a task type (which identifies the type of work to run), input, and output. The client is responsible for providing appropriate task type and inputs, which will be passed through unexamined to the machines that implement the functionality, and for understanding the output, which is passed back unexamined to the client.",
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-04-19",
+    "description": "The Database Migration Service helps people migrate their data from on-premise database servers to Azure, or from older database software to newer software. The service manages one or more workers that are joined to a customer's virtual network, which is assumed to provide connectivity to their databases. To avoid frequent updates to the resource provider, database migration tasks are implemented by the resource provider in a generic way as task resources, each of which has a task type (which identifies the type of work to run), input, and output. The client is responsible for providing appropriate task type and inputs, which will be passed through unexamined to the machines that implement the functionality, and for understanding the output, which is passed back unexamined to the client.",
     "x-ms-code-generation-settings": {
       "name": "DataMigrationServiceClient",
       "useDateTimeOffset": true
@@ -94,7 +94,7 @@
       ],
       "put": {
         "summary": "Create or update DMS Instance",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. The PUT method creates a new service or updates an existing one. When a service is updated, existing child resources (i.e. tasks) are unaffected. Services currently support a single kind, \"vm\", which refers to a VM-based service, although other kinds may be added in the future. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request (\"ServiceIsBusy\"). The provider will reply when successful with 200 OK or 201 Created. Long-running operations use the provisioningState property.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. The PUT method creates a new service or updates an existing one. When a service is updated, existing child resources (i.e. tasks) are unaffected. Services currently support a single kind, \"vm\", which refers to a VM-based service, although other kinds may be added in the future. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request (\"ServiceIsBusy\"). The provider will reply when successful with 200 OK or 201 Created. Long-running operations use the provisioningState property.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -136,7 +136,7 @@
       },
       "get": {
         "summary": "Get DMS Service Instance",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. The GET method retrieves information about a service instance.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. The GET method retrieves information about a service instance.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -163,7 +163,7 @@
       },
       "delete": {
         "summary": "Delete DMS Service Instance",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. The DELETE method deletes a service. Any running tasks will be canceled.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. The DELETE method deletes a service. Any running tasks will be canceled.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -199,7 +199,7 @@
       },
       "patch": {
         "summary": "Create or update DMS Service Instance",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. The PATCH method updates an existing service. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request (\"ServiceIsBusy\").",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. The PATCH method updates an existing service. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request (\"ServiceIsBusy\").",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -237,7 +237,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/checkStatus": {
       "post": {
         "summary": "Check service health status",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. This action performs a health check and returns the status of the service and virtual machine size.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. This action performs a health check and returns the status of the service and virtual machine size.",
         "tags": [
           "Service resource",
           "Custom operation",
@@ -280,7 +280,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/start": {
       "post": {
         "summary": "Start service",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. This action starts the service and the service can be used for data migration.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. This action starts the service and the service can be used for data migration.",
         "tags": [
           "Service resource",
           "Custom operation",
@@ -324,7 +324,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/stop": {
       "post": {
         "summary": "Stop service",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. This action stops the service and the service cannot be used for data migration. The service owner won't be billed when the service is stopped.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. This action stops the service and the service cannot be used for data migration. The service owner won't be billed when the service is stopped.",
         "tags": [
           "Service resource",
           "Custom operation",
@@ -368,7 +368,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/skus": {
       "get": {
         "summary": "Get compatible SKUs",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. The skus action returns the list of SKUs that a service resource can be updated to.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. The skus action returns the list of SKUs that a service resource can be updated to.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -414,7 +414,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks": {
       "get": {
         "summary": "Get tasks in a service",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. This method returns a list of tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. This method returns a list of tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -511,7 +511,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services": {
       "get": {
         "summary": "Get services in resource group",
-        "description": "The Services resource is the top-level resource that represents the Data Migration Service. This method returns a list of service resources in a resource group.",
+        "description": "The Services resource is the top-level resource that represents the Database Migration Service. This method returns a list of service resources in a resource group.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -554,7 +554,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataMigration/services": {
       "get": {
         "summary": "Get services in subscription",
-        "description": "The services resource is the top-level resource that represents the Data Migration Service. This method returns a list of service resources in a subscription.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. This method returns a list of service resources in a subscription.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -1039,7 +1039,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataMigration/locations/{location}/usages": {
       "get": {
         "summary": "Get resource quotas and usage information",
-        "description": "This method returns region-specific quotas and resource usage information for the Data Migration Service.",
+        "description": "This method returns region-specific quotas and resource usage information for the Database Migration Service.",
         "tags": [
           "Standard operation",
           "GET"
@@ -1081,7 +1081,7 @@
     "/providers/Microsoft.DataMigration/operations": {
       "get": {
         "summary": "Get available resource provider actions (operations)",
-        "description": "Lists all available actions exposed by the Data Migration Service resource provider.",
+        "description": "Lists all available actions exposed by the Database Migration Service resource provider.",
         "tags": [
           "Standard operation",
           "GET"
