@@ -44,7 +44,7 @@ Differences in v3 (compared to v2):
  - Decoupled database and recommended elastic pool APIs
    - `-2014-04-01/recommendedElasticPools.json`
    - `+2014-04-01/recommendedElasticPoolsDecoupled.json`
- - Updated to new Sku-based API for database and elastic pools
+ - Updated to new Sku-based API for databases and elastic pools
    - `-2014-04-01/capabilities.json`
    - `-2014-04-01/databases.json`
    - `-2014-04-01/elasticPools.json`
@@ -114,7 +114,7 @@ Differences in v2 (compared to v1):
 
 - Updated to LTRv2
   - `-201 4-04-01/backupLongTermRetentionPolicies.json`
-   - `-2014-04-01/backupLongTermRetentionVaults.json`
+  - `-2014-04-01/backupLongTermRetentionVaults.json`
   - `+2017-03-01-preview/longTermRetention.json`
 
 ``` yaml $(tag) == 'package-composite-v2'
