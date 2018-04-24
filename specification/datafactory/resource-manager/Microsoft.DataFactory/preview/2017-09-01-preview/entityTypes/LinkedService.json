@@ -615,24 +615,8 @@
     "MySqlLinkedServiceTypeProperties": {
       "description": "MySQL linked service properties.",
       "properties": {
-        "server": {
-          "type": "object",
-          "description": "Server name for connection. Type: string (or Expression with resultType string)."
-        },
-        "database": {
-          "type": "object",
-          "description": "Database name for connection. Type: string (or Expression with resultType string)."
-        },
-        "schema": {
-          "type": "object",
-          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
-        },
-        "username": {
-          "type": "object",
-          "description": "Username for authentication. Type: string (or Expression with resultType string)."
-        },
-        "password": {
-          "description": "Password for authentication.",
+        "connectionString": {
+          "description": "The connection string.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
@@ -641,8 +625,7 @@
         }
       },
       "required": [
-        "server",
-        "database"
+        "connectionString"
       ]
     },
     "PostgreSqlLinkedService": {
@@ -668,24 +651,8 @@
     "PostgreSqlLinkedServiceTypeProperties": {
       "description": "PostgreSQL linked service properties.",
       "properties": {
-        "server": {
-          "type": "object",
-          "description": "Server name for connection. Type: string (or Expression with resultType string)."
-        },
-        "database": {
-          "type": "object",
-          "description": "Database name for connection. Type: string (or Expression with resultType string)."
-        },
-        "schema": {
-          "type": "object",
-          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
-        },
-        "username": {
-          "type": "object",
-          "description": "Username for authentication. Type: string (or Expression with resultType string)."
-        },
-        "password": {
-          "description": "Password for authentication.",
+        "connectionString": {
+          "description": "The connection string.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
@@ -694,8 +661,7 @@
         }
       },
       "required": [
-        "server",
-        "database"
+        "connectionString"
       ]
     },
     "SybaseLinkedService": {
@@ -794,10 +760,6 @@
           "type": "object",
           "description": "Database name for connection. Type: string (or Expression with resultType string)."
         },
-        "schema": {
-          "type": "object",
-          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
-        },
         "authenticationType": {
           "description": "AuthenticationType to be used for connection.",
           "type": "string",
@@ -853,10 +815,6 @@
         "server": {
           "type": "object",
           "description": "Server name for connection. Type: string (or Expression with resultType string)."
-        },
-        "schema": {
-          "type": "object",
-          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
           "description": "AuthenticationType to be used for connection.",
