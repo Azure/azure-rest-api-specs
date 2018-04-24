@@ -147,6 +147,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to delete a  Log Search rule"
           },
@@ -178,6 +184,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request for a list of alert rules",
             "schema": {
@@ -216,6 +228,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request for a list of alert rules",
             "schema": {
@@ -376,7 +394,7 @@
       "properties": {
         "actionGroup": {
           "type": "array",
-          "description": "azns notification group reference.",
+          "description": "Azure Group reference.",
           "items": {
             "type": "string"
           }
