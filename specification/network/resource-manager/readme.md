@@ -436,7 +436,7 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: networkwatcher.json
     where: $.definitions.ProtocolConfiguration.properties.HTTPConfiguration
-    reason: The Connectivity check API has HTTPConfiguration property names with leading capital letters
+    reason: Accidentally shipped with wrong casing – however fixing the casing is introducing a breaking change which is worse than living with the naming violation
 ```
 
 ### Tag: package-2018-01 and go
