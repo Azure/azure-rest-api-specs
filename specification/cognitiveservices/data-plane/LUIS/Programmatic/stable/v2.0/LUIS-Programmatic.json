@@ -2556,41 +2556,126 @@
         }
       }
     },
-    "/apps/{appId}/querylogs": {
+    "/api/v2.0/apps/{appId}/querylogs": {
       "get": {
-        "description": "Gets the query logs of the past month for the application.",
-        "operationId": "Apps_DownloadQueryLogs",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A CSV file containing the query logs for the past month.",
-            "schema": {
-              "type": "object",
-              "format": "file",
-              "description": "The query logs of an application for the past month in CSV format."
-            }
+          "description": "Gets the query logs of the past month for the application.",
+          "operationId": "Apps_DownloadApplicationQueryLogs",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/AppIdInPath"
+              },
+              {
+                  "$ref": "#/parameters/IncludeResponseInPath"
+              }
+          ],
+          "responses": {
+              "200": {
+                "description": "A CSV file containing the query logs for the past month.",
+                "schema": {
+                  "type": "object",
+                  "format": "file",
+                  "description": "The query logs of an application for the past month in CSV format."
+                }
+              },
+              "default": {
+                "description": "Error Response.",
+                "schema": {
+                  "$ref": "#/definitions/ErrorResponse"
+                }
+              }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "produces": [
+              "application/octet-stream"
+          ],
+          "x-ms-examples": {
+              "Successful Download Application Query logs request": {
+                "$ref": "./examples/apps/SuccessfulDownloadApplicationQueryLogsRequest.json"
+              }
           }
-        },
-        "produces": [
-          "application/octet-stream"
-        ],
-        "x-ms-examples": {
-          "Successful Download Application Query logs request": {
-            "$ref": "./examples/apps/SuccessfulDownloadApplicationQueryLogsRequest.json"
-          }
-        }
       }
-    },
+  },
+  "/api/v2.0/apps/{appId}/querylogsasync": {
+      "get": {
+          "description": "Gets the status of an asynchronous download query logs operation, and returns the logs if the operation completed.",
+          "operationId": "Apps_DownloadApplicationQueryLogsAsync",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/AppIdInPath"
+              }
+          ],
+          "responses": {
+              "200": {
+                  "description": "A CSV file containing the query logs for the past month.",
+                  "schema": {
+                    "type": "object",
+                    "format": "file",
+                    "description": "The query logs of an application for the past month in CSV format."
+                  }
+              },
+              "102": {
+                  "description": "status description",
+                  "schema": {
+                      "type": "string"
+                  }
+              },
+              "201": {
+                  "description": "status description",
+                  "schema": {
+                      "type": "string"
+                  }
+              },
+              "default": {
+                  "description": "Error Response.",
+                  "schema": {
+                    "$ref": "#/definitions/ErrorResponse"
+                  }
+              }
+          },
+          "produces": [
+              "application/octet-stream"
+          ],
+          "x-ms-examples": {
+              "Successful Download Application Query logs request": {
+                "$ref": "./examples/apps/SuccessfulDownloadApplicationQueryLogsRequest.json"
+              }
+          }
+      }
+      },
+      "post": {
+          "description": "Start getting the status of an asynchronous download query logs operation, and returns the logs if the operation completed.",
+          "operationId": "Apps_DownloadApplicationQueryLogsAsync",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/AppIdInPath"
+              },
+              {
+                  "$ref": "#/parameters/IncludeResponseInPath"
+              }
+          ],
+          "responses": {
+              "202": {
+                  "description": "status description",
+                  "schema": {
+                      "type": "string"
+                  }
+              },
+              "default": {
+                "description": "Error Response.",
+                "schema": {
+                  "$ref": "#/definitions/ErrorResponse"
+                }
+              }
+          },
+          "produces": [
+              "application/json"
+          ],
+          "x-ms-examples": {
+              "Successful Start Download Application Query logs request": {
+                "$ref": "./examples/apps/SuccessfulStartDownloadApplicationQueryLogsRequest.json"
+              }
+          }
+      }
+  },
     "/apps/{appId}": {
       "get": {
         "description": "Gets the application info.",
@@ -9581,6 +9666,14 @@
       "format": "uuid",
       "description": "The application ID.",
       "x-ms-parameter-location": "method"
+    },
+    "includeResponseInPath": {
+      "name": "includeResponse",
+      "in": "query",
+      "description": "A flag to determine whether to include the response",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"      
     },
     "VersionIdInPath": {
       "name": "versionId",
