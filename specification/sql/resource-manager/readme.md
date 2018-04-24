@@ -39,6 +39,19 @@ This section contains the "composite-v3" set of APIs, which is composed from a s
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
+
+Differences in v3 (compared to v2):
+ - Decoupled database and recommended elastic pool APIs
+   - `-2014-04-01/recommendedElasticPools.json`
+   - `+2014-04-01/recommendedElasticPoolsDecoupled.json`
+ - Updated to new Sku-based API for database and elastic pools
+   - `-2014-04-01/capabilities.json`
+   - `-2014-04-01/databases.json`
+   - `-2014-04-01/elasticPools.json`
+   - `+2017-10-01-preview/capabilities.json`
+   - `+2017-10-01-preview/databases.json`
+   - `+2017-10-01-preview/elasticPools.json`
+
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups.json
@@ -96,6 +109,13 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 This section contains the "composite-v2" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v2" clients such as .NET SDK Microsoft.Azure.Management.Sql version 1.13.0-preview.
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+Differences in v2 (compared to v1):
+
+- Updated to LTRv2
+  - `-201 4-04-01/backupLongTermRetentionPolicies.json`
+   - `-2014-04-01/backupLongTermRetentionVaults.json`
+  - `+2017-03-01-preview/longTermRetention.json`
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
@@ -182,6 +202,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/servers.json
