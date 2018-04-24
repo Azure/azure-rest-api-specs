@@ -119,7 +119,7 @@
           },
           {
             "name": "knowledgeRequest",
-            "x-ms-client-name": "KnowledgeRequest",
+            "x-ms-client-name": "VisualSearchRequest",
             "in": "formData",
             "description": "The form data is a JSON object that identifies the image using an insights token or URL to the image. The object may also include an optional crop area that identifies an area of interest in the image. The insights token and URL are mutually exclusive – do not specify both. You may specify knowledgeRequest form data and image form data in the same request only if knowledgeRequest form data specifies the cropArea field only (it must not include an insights token or URL).",
             "required": false,
@@ -1182,7 +1182,7 @@
         }
       }
     },
-    "KnowledgeRequest": {
+    "VisualSearchRequest": {
       "description": "A JSON object that contains information about the image to get insights of. Specify this object only in a knowledgeRequest form data.",
       "type": "object",
       "properties": {
@@ -1191,9 +1191,9 @@
           "$ref": "#/definitions/ImageInfo",
           "readOnly": true
         },
-        "filters": {
-          "description": "A key-value object consisting of filters that may be specified to limit the results returned by the API.",
-          "$ref": "#/definitions/Filters",
+        "knowledgeRequest": {
+          "description": "A JSON object containing information about the request, such as filters, or a description.",
+          "$ref": "#/definitions/KnowledgeRequest",
           "readOnly": true
         }
       }
@@ -1248,6 +1248,17 @@
           "description": "The right coordinate of the region to be cropped. The coordinate is a fractional value of the original image's width and is measured from the left edge of the image. Specify the coordinate as a value from 0.0 through 1.0.",
           "type": "number",
           "format": "float"
+        }
+      }
+    },
+    "KnowledgeRequest": {
+      "description": "A JSON object containing information about the request, such as filters for the resulting actions.",
+      "type": "object",
+      "properties": {
+        "filters": {
+          "description": "A key-value object consisting of filters that may be specified to limit the results returned by the API.",
+          "$ref": "#/definitions/Filters",
+          "readOnly": true
         }
       }
     },
