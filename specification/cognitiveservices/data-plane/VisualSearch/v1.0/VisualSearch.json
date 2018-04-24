@@ -2,13 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Visual Search API",
-    "description": "The Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
+    "description": "Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
     "version": "1.0"
   },
   "parameters": {
     "x-bingapis-sdk": {
       "name": "X-BingApis-SDK",
-      "description": "Activate swagger compliance",
+      "description": "Activate swagger compliance.",
       "x-ms-parameter-location": "method",
       "required": true,
       "type": "string",
@@ -45,7 +45,7 @@
   "paths": {
     "/images/visualsearch": {
       "post": {
-        "summary": "The Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
+        "summary": "Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
         "operationId": "Images_VisualSearch",
         "tags": [
           "ImageVisualSearch"
@@ -89,7 +89,7 @@
             "name": "User-Agent",
             "x-ms-client-name": "UserAgent",
             "in": "header",
-            "description": "The user agent originating the request. Bing uses the user agent to provide mobile users with an optimized experience. Although optional, you are encouraged to always specify this header. The user-agent should be the same string that any commonly used browser sends. For information about user agents, see [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). The following are examples of user-agent strings. Windows Phone: Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 822). Android: Mozilla / 5.0 (Linux; U; Android 2.3.5; en - us; SCH - I500 Build / GINGERBREAD) AppleWebKit / 533.1 (KHTML; like Gecko) Version / 4.0 Mobile Safari / 533.1. iPhone: Mozilla / 5.0 (iPhone; CPU iPhone OS 6_1 like Mac OS X) AppleWebKit / 536.26 (KHTML; like Gecko) Mobile / 10B142 iPhone4; 1 BingWeb / 3.03.1428.20120423. PC: Mozilla / 5.0 (Windows NT 6.3; WOW64; Trident / 7.0; Touch; rv:11.0) like Gecko. iPad: Mozilla / 5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit / 537.51.1 (KHTML, like Gecko) Version / 7.0 Mobile / 11A465 Safari / 9537.53",
+            "description": "The user agent originating the request. Bing uses the user agent to provide mobile users with an optimized experience. Although optional, you are encouraged to always specify this header. The user-agent should be the same string that any commonly used browser sends. For information about user agents, see [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). The following are examples of user-agent strings. Windows Phone: Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 822). Android: Mozilla / 5.0 (Linux; U; Android 2.3.5; en - us; SCH - I500 Build / GINGERBREAD) AppleWebKit / 533.1 (KHTML; like Gecko) Version / 4.0 Mobile Safari / 533.1. iPhone: Mozilla / 5.0 (iPhone; CPU iPhone OS 6_1 like Mac OS X) AppleWebKit / 536.26 (KHTML; like Gecko) Mobile / 10B142 iPhone4; 1 BingWeb / 3.03.1428.20120423. PC: Mozilla / 5.0 (Windows NT 6.3; WOW64; Trident / 7.0; Touch; rv:11.0) like Gecko. iPad: Mozilla / 5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit / 537.51.1 (KHTML, like Gecko) Version / 7.0 Mobile / 11A465 Safari / 9537.53.",
             "required": false,
             "type": "string"
           },
@@ -121,7 +121,7 @@
             "name": "knowledgeRequest",
             "x-ms-client-name": "KnowledgeRequest",
             "in": "formData",
-            "description": "A JSON object containing information about the image. The image and imageInsightsToken fields are mutually exclusive – the body of the request must include only one of them.",
+            "description": "The form data is a JSON object that identifies the image using an insights token or URL to the image. The object may also include an optional crop area that identifies an area of interest in the image. The insights token and URL are mutually exclusive – do not specify both. You may specify knowledgeRequest form data and image form data in the same request only if knowledgeRequest form data specifies the cropArea field only (it must not include an insights token or URL).",
             "required": false,
             "type": "string"
           },
@@ -129,7 +129,7 @@
             "name": "image",
             "x-ms-client-name": "Image",
             "in": "formData",
-            "description": "Required if you upload an image instead of passing an image insights token. The Content-Disposition's filename parameter must be set to \"image\" and the contents of the form data must be the image binary. The image and imageInsightsToken fields are mutually exclusive – the body of the request must include only one of them.",
+            "description": "The form data is an image binary. The Content-Disposition header's filename parameter must be set to \"image\". You must specify an image binary if you do not use knowledgeRequest form data to specify the image; you may not use both forms to specify an image. You may specify knowledgeRequest form data and image form data in the same request only if knowledgeRequest form data specifies the cropArea field only  (it must not include an insights token or URL).",
             "required": false,
             "type": "file"
           }
@@ -166,7 +166,7 @@
       "type": "object",
       "properties": {
         "tags": {
-          "description": "A list of visual search tags",
+          "description": "A list of visual search tags.",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -181,7 +181,7 @@
       }
     },
     "Response": {
-      "description": "Defines a response. All schemas that could be returned at the root of a response should inherit from this",
+      "description": "Defines a response. All schemas that return at the root of the response must inherit from this object.",
       "allOf": [
         {
           "$ref": "#/definitions/Identifiable"
@@ -220,7 +220,7 @@
           "readOnly": true
         },
         "actions": {
-          "description": "Actions within this tag. The order of the items denotes the default ranking order of these actions.",
+          "description": "Actions within this tag. The order of the items denotes the default ranking order of these actions, with the first action being the most likely user intent.",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -230,7 +230,7 @@
       }
     },
     "ImageObject": {
-      "description": "Defines an image",
+      "description": "Defines an image.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaObject"
@@ -239,22 +239,22 @@
       "type": "object",
       "properties": {
         "thumbnail": {
-          "description": "The URL to a thumbnail of the image",
+          "description": "The URL to a thumbnail of the image.",
           "$ref": "#/definitions/ImageObject",
           "readOnly": true
         },
         "imageInsightsToken": {
-          "description": "The token that you use in a subsequent call to the Visual Search API to get additional information about the image. For information about using this token, see the imageInsightsToken request parameter.",
+          "description": "The token that you use in a subsequent call to Visual Search API to get additional information about the image. For information about using this token, see the imageInsightsToken field inside the knowledgeRequest request parameter.",
           "readOnly": true,
           "type": "string"
         },
         "insightsMetadata": {
-          "description": "A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInisghtsToken to get the list of websites.",
+          "description": "A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInisghtsToken in a subsequent Visual Search API call to get the list of shopping websites.",
           "$ref": "#/definitions/ImagesImageMetadata",
           "readOnly": true
         },
         "imageId": {
-          "description": "Unique Id for the image",
+          "description": "Unique Id for the image.",
           "readOnly": true,
           "type": "string"
         },
@@ -264,7 +264,7 @@
           "type": "string"
         },
         "visualWords": {
-          "description": "A string consisting of small patches of the image containing information related to image features. Used for getting more sizes.",
+          "description": "For interal use only.",
           "readOnly": true,
           "type": "string"
         }
@@ -365,17 +365,17 @@
           }
         },
         "displayName": {
-          "description": "A display name for the action",
+          "description": "A display name for the action.",
           "readOnly": true,
           "type": "string"
         },
         "isTopAction": {
-          "description": "A Boolean representing whether this result is the top action",
+          "description": "A Boolean representing whether this result is the top action.",
           "readOnly": true,
           "type": "boolean"
         },
         "serviceUrl": {
-          "description": "The URL inside a Thing provides you with the link to fulfill the action directly, while the serviceUrl provides additional data in order to determine how to take the appropriate action. For example, the serviceUrl might return JSON along with an image URL.",
+          "description": "Use this URL to get additional data to determine how to take the appropriate action. For example, the serviceUrl might return JSON along with an image URL.",
           "readOnly": true,
           "type": "string"
         }
@@ -467,7 +467,7 @@
       "type": "object",
       "properties": {
         "shoppingSourcesCount": {
-          "description": "The number of websites that offer goods of the products seen in the image.",
+          "description": "The number of websites that sell the products seen in the image.",
           "readOnly": true,
           "type": "integer",
           "format": "int32"
@@ -486,7 +486,7 @@
       }
     },
     "ResponseBase": {
-      "description": "Response base",
+      "description": "Response base.",
       "discriminator": "_type",
       "type": "object",
       "properties": {
@@ -591,7 +591,7 @@
           "type": "string"
         },
         "text": {
-          "description": "Text content of this creative work",
+          "description": "Text content of this creative work.",
           "readOnly": true,
           "type": "string"
         }
@@ -607,7 +607,7 @@
       "type": "object",
       "properties": {
         "seller": {
-          "description": "Seller for this offer",
+          "description": "Seller for this offer.",
           "$ref": "#/definitions/Organization",
           "readOnly": true
         },
@@ -881,15 +881,15 @@
           "$ref": "#/definitions/Point2D"
         },
         "topRight": {
-          "description": "The top right corner coordinate",
+          "description": "The top right corner coordinate.",
           "$ref": "#/definitions/Point2D"
         },
         "bottomRight": {
-          "description": "The bottom right corner coordinate",
+          "description": "The bottom right corner coordinate.",
           "$ref": "#/definitions/Point2D"
         },
         "bottomLeft": {
-          "description": "The bottom left corner coordinate",
+          "description": "The bottom left corner coordinate.",
           "$ref": "#/definitions/Point2D"
         }
       }
@@ -1000,12 +1000,12 @@
           "type": "string"
         },
         "displayText": {
-          "description": "The display version of the query term. This version of the query term may contain special characters that highlight the search term found in the query string. The string contains the highlighting characters only if the query enabled hit highlighting",
+          "description": "The display version of the query term.",
           "readOnly": true,
           "type": "string"
         },
         "webSearchUrl": {
-          "description": "The URL that takes the user to the Bing search results page for the query. Only related search results include this field.",
+          "description": "The URL that takes the user to the Bing search results page for the query.",
           "readOnly": true,
           "type": "string"
         },
@@ -1104,12 +1104,12 @@
       ],
       "properties": {
         "x": {
-          "description": "The x-coordinate of the point",
+          "description": "The x-coordinate of the point.",
           "type": "number",
           "format": "float"
         },
         "y": {
-          "description": "The y-coordinate of the point",
+          "description": "The y-coordinate of the point.",
           "type": "number",
           "format": "float"
         }
@@ -1183,11 +1183,11 @@
       }
     },
     "KnowledgeRequest": {
-      "description": "A JSON object containing information about the image. The image and imageInsightsToken fields are mutually exclusive – the body of the request must include only one of them.",
+      "description": "A JSON object that contains information about the image to get insights of. Specify this object only in a knowledgeRequest form data.",
       "type": "object",
       "properties": {
         "imageInfo": {
-          "description": "A JSON object containing information about the image. The image and imageInsightsToken fields are mutually exclusive – the body of the request must include only one of them.",
+          "description": "A JSON object that identities the image to get insights of.",
           "$ref": "#/definitions/ImageInfo",
           "readOnly": true
         },
@@ -1199,21 +1199,21 @@
       }
     },
     "ImageInfo": {
-      "description": "A JSON object containing information about the image. The image and imageInsightsToken fields are mutually exclusive – the body of the request must include only one of them.",
+      "description": "A JSON object that identities the image to get insights of . It also includes the optional crop area that you use to identify the region of interest in the image.",
       "type": "object",
       "properties": {
         "imageInsightsToken": {
-          "description": "An image insights token. To get the insights token, call one of the Image Search APIs (for example, /images/search). In the search results, the [Image](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image) object's [imageInsightsToken](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image-imageinsightstoken) field contains the token. The image and imageInsightsToken fields are mutually exclusive – do not specify both.",
+          "description": "An image insights token. To get the insights token, call one of the Image Search APIs (for example, /images/search). In the search results, the [Image](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image) object's [imageInsightsToken](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image-imageinsightstoken) field contains the token. The imageInsightsToken and url fields mutually exclusive; do not specify both. Do not specify an insights token if the request includes the image form data.",
           "readOnly": true,
           "type": "string"
         },
         "url": {
-          "description": "The URL of the input image. The URL should match the image specified by the imageInsightsToken fields if both are present. The image and URL fields are mutually exclusive – do not specify both.",
+          "description": "The URL of the input image. The imageInsightsToken and url fields are mutually exclusive; do not specify both. Do not specify the URL if the request includes the image form data.",
           "readOnly": true,
           "type": "string"
         },
         "cropArea": {
-          "description": "A JSON object consisting of coordinates specifying the four corners of a cropped rectangle within the input image.",
+          "description": "A JSON object consisting of coordinates specifying the four corners of a cropped rectangle within the input image. Use the crop area to identify the region of interest in the image. You can apply the crop area to the images specified using the imageInsightsToken or url fields, or an image binary specified in an image form data.",
           "$ref": "#/definitions/CropArea",
           "readOnly": true
         }
@@ -1230,22 +1230,22 @@
       ],
       "properties": {
         "top": {
-          "description": "The top coordinate of the region to be cropped. The coordinate is a fractional value of the original image's height and is measured from the top, left corner of the image. Specify the coordinate as a value from 0.0 through 1.0.",
+          "description": "The top coordinate of the region to be cropped. The coordinate is a fractional value of the original image's height and is measured from the top edge of the image. Specify the coordinate as a value from 0.0 through 1.0.",
           "type": "number",
           "format": "float"
         },
         "bottom": {
-          "description": "The bottom coordinate of the region to be cropped. The coordinate is a fractional value of the original image's height and is measured from the top, left corner of the image. Specify the coordinate as a value from 0.0 through 1.0.",
+          "description": "The bottom coordinate of the region to be cropped. The coordinate is a fractional value of the original image's height and is measured from the top edge of the image. Specify the coordinate as a value from 0.0 through 1.0.",
           "type": "number",
           "format": "float"
         },
         "left": {
-          "description": "The left coordinate of the region to be cropped. The coordinate is a fractional value of the original image's height and is measured from the top, left corner of the image. Specify the coordinate as a value from 0.0 through 1.0.",
+          "description": "The left coordinate of the region to be cropped. The coordinate is a fractional value of the original image's width and is measured from the left edge of the image. Specify the coordinate as a value from 0.0 through 1.0.",
           "type": "number",
           "format": "float"
         },
         "right": {
-          "description": "The right coordinate of the region to be cropped. The coordinate is a fractional value of the original image's height and is measured from the top, left corner of the image. Specify the coordinate as a value from 0.0 through 1.0.",
+          "description": "The right coordinate of the region to be cropped. The coordinate is a fractional value of the original image's width and is measured from the left edge of the image. Specify the coordinate as a value from 0.0 through 1.0.",
           "type": "number",
           "format": "float"
         }
@@ -1256,7 +1256,7 @@
       "type": "object",
       "properties": {
         "site": {
-          "description": "The URL of the site to return similar images and similar products from. (e.g., \"www.bing.com\", \"bing.com\")",
+          "description": "The URL of the site to return similar images and similar products from. (e.g., \"www.bing.com\", \"bing.com\").",
           "readOnly": true,
           "type": "string"
         }
