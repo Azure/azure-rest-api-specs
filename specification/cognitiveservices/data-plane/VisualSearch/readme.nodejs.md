@@ -5,10 +5,10 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 
 ``` yaml $(nodejs)
 nodejs:
-  package-name: azure-cognitiveservices-entitysearch
-  package-version: 1.1.0
-  output-folder: $(node-sdks-folder)/lib/services/entitySearch
-  override-client-name: EntitySearchAPIClient
+  package-name: azure-cognitiveservices-visualsearch
+  package-version: 1.0.0
+  output-folder: $(node-sdks-folder)/lib/services/visualSearch
+  override-client-name: VisualSearchAPIClient
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true
