@@ -2,7 +2,7 @@
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Data Migration Service.
+This is the AutoRest configuration file for Database Migration Service.
 
 The Data Migration RP comprises of APIs that enable a customer to manage the service instances that help migrate databases from a source to target.
 
@@ -22,13 +22,13 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information 
-These are the global settings for the Data Migration Service API.
+These are the global settings for the Database Migration Service API.
 
 ``` yaml
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-2017-11-15-preview
+tag: package-2018-03-31-preview
 ```
 
 ### Tag: package-2017-11-15-preview
@@ -49,6 +49,49 @@ input-file:
 - Microsoft.DataMigration/preview/2017-11-15-preview/definitions/TasksCommon.json
 - Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrationValidation.json
 ```
+
+### Tag: package-2018-03-15-preview
+
+These settings apply only when `--tag=package-2018-03-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-15-preview'
+input-file:
+- Microsoft.DataMigration/preview/2018-03-15-preview/datamigration.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/Common.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/ConnectToTargetSqlMITask.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/MigrateSqlServerSqlMITask.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/Tasks.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/TasksCommon.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/preview/2018-03-15-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+```
+### Tag: package-2018-03-31-preview
+
+These settings apply only when `--tag=package-2018-03-31-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-31-preview'
+input-file:
+- Microsoft.DataMigration/preview/2018-03-31-preview/datamigration.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Common.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToTargetSqlMITask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrateSqlServerSqlMITask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Tasks.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/TasksCommon.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+```
 ---
 
 # Code Generation
@@ -61,6 +104,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
 ```
 
@@ -81,14 +125,29 @@ csharp:
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
+python-mode: create
 python:
   azure-arm: true
-  output-folder: $(output-folder)Generated/Python
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.datamigration
+  package-name: azure-mgmt-datamigration
+  package-version: 0.1.0
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-datamigration/azure/mgmt/datamigration
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-datamigration
 ```
 
 ## Go
@@ -107,6 +166,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-11-15-preview
+  - tag: package-2018-03-31-preview
 ```
 
 
@@ -116,9 +176,17 @@ These settings apply only when `--tag=package-2017-11-15-preview --go` is specif
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-11-15-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/datamigration/mgmt/2017-11-15-preview/datamigration
+output-folder: $(go-sdk-folder)/services/preview/datamigration/mgmt/2017-11-15-preview/datamigration
 ```
 
+### Tag: package-2018-03-31-preview and go
+
+These settings apply only when `--tag=package-2018-03-31-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-03-31-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-03-31-preview/$(namespace)
+```
 
 ## Java
 

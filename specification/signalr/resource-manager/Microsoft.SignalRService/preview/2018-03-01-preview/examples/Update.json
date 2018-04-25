@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "parameters": {
+      "tags": {
+        "key1": "value1"
+      },
+      "sku": {
+        "name": "Basic_DS2",
+        "tier": "Basic",
+        "capacity": 1
+      },
+      "properties": {
+        "hostNamePrefix": null
+      }
+    },
+    "api-version": "2018-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "mySignalRService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Basic_DS2",
+          "tier": "Basic",
+          "size": "DS2",
+          "capacity": 1
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "externalIP": "10.0.0.1",
+          "hostName": "myservice.service.signalr.net",
+          "publicPort": 5001,
+          "serverPort": 5002,
+          "hostNamePrefix": null
+        },
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+        "name": "mySignalRService",
+        "type": "Microsoft.SignalRService/SignalR"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+      }
+    }
+  }
+}

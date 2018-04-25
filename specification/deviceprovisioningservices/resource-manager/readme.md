@@ -24,7 +24,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11
+tag: package-2018-01
 ```
 
 ### Tag: package-2017-08
@@ -43,6 +43,15 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
 - Microsoft.Devices/stable/2017-11-15/iotdps.json
+```
+
+### Tag: package-2018-01
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.Devices/stable/2018-01-22/iotdps.json
 ```
 
 ---
@@ -120,6 +129,17 @@ go:
 batch:
   - tag: package-2017-11
   - tag: package-2017-08
+  - tag: package-2018-01
+```
+
+
+### Tag: package-2018-01 and go
+
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-11' && $(go)
+output-folder: $(go-sdk-folder)/services/provisioningservices/mgmt/2018-01-22/iothub
 ```
 
 ### Tag: package-2017-11 and go
@@ -137,7 +157,7 @@ These settings apply only when `--tag=package-2017-11 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/provisioningservices/mgmt/2017-08-21-preview/iothub
+output-folder: $(go-sdk-folder)/services/preview/provisioningservices/preview/mgmt/2017-08-21-preview/iothub
 ```
 
 ## Java

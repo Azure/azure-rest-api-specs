@@ -459,7 +459,41 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/skus": {
+      "get": {
+        "tags": [
+          "Skus",
+          "CognitiveServicesAccounts"
+        ],
+        "operationId": "ResourceSkus_List",
+        "description": "Gets the list of Microsoft.CognitiveServices SKUs available for your Subscription.",
+        "x-ms-examples": {
+          "Regenerate Keys": {
+            "$ref": "./examples/GetSkus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkusResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
       "get": {
         "tags": [
           "CognitiveServicesAccounts"
@@ -512,9 +546,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/usages": {
+      "get": {
+        "tags": [
+          "CognitiveServicesAccounts"
+        ],
+        "description": "Get usages for the requested Cognitive Services account",
+        "x-ms-examples": {
+          "Get Usages": {
+            "$ref": "./examples/GetUsages.json"
+          }
+        },
+        "operationId": "Accounts_GetUsages",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+            "description": "The name of Cognitive Services account."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/usageFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The usages for Cognitive Services account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CognitiveServices/operations": {
       "get": {
-        "tags": [ "Operations" ],
+        "tags": [
+          "Operations"
+        ],
         "description": "Lists all the available Cognitive Services account operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
@@ -543,7 +635,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/checkSkuAvailability": {
       "post": {
-        "tags": [ "CognitiveServicesAccounts" ],
+        "tags": [
+          "CognitiveServicesAccounts"
+        ],
         "operationId": "CheckSkuAvailability_List",
         "description": "Check available SKUs.",
         "x-ms-examples": {
@@ -622,24 +716,21 @@
       "type": "string",
       "description": "Required. Indicates the type of cognitive service account.",
       "enum": [
-        "Academic",
-        "Bing.Autosuggest",
         "Bing.Autosuggest.v7",
         "Bing.CustomSearch",
-        "Bing.Search",
         "Bing.Search.v7",
         "Bing.Speech",
-        "Bing.SpellCheck",
         "Bing.SpellCheck.v7",
         "ComputerVision",
         "ContentModerator",
         "CustomSpeech",
+        "CustomVision.Prediction",
+        "CustomVision.Training",
         "Emotion",
         "Face",
         "LUIS",
-        "Recommendations",
+        "QnAMaker",
         "SpeakerRecognition",
-        "Speech",
         "SpeechTranslation",
         "TextAnalytics",
         "TextTranslation",
@@ -869,6 +960,102 @@
       },
       "description": "Cognitive Services resource type and SKU."
     },
+    "UsagesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "The list of usages for Cognitive Service account."
+        }
+      },
+      "description": "The response to a list usage request."
+    },
+    "Usage": {
+      "properties": {
+        "unit": {
+          "description": "The unit of the metric.",
+          "$ref": "#/definitions/UnitType"
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "readOnly": true,
+          "description": "The name information for the metric."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The quota period used to summarize the usage values."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "Maximum value for this metric."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "Current value for this metric."
+        },
+        "nextResetTime": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Next reset time for current quota."
+        },
+        "status": {
+          "type": "string",
+          "description": "Cognitive Services account quota usage status.",
+          "enum": [
+            "Included",
+            "Blocked",
+            "InOverage",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaUsageStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The usage data for a usage request."
+    },
+    "MetricName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The friendly name of the metric."
+        }
+      },
+      "description": "A metric name."
+    },
+    "UnitType": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "Percent",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Milliseconds"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UnitType"
+      }
+    },
     "Error": {
       "properties": {
         "error": {
@@ -1021,6 +1208,130 @@
           "description": "Additional error message."
         }
       }
+    },
+    "ResourceSkuRestrictions": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of restrictions.",
+          "enum": [
+            "Location",
+            "Zone"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsType",
+            "modelAsString": false
+          }
+        },
+        "values": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "readOnly": true,
+          "description": "The information about the restriction where the SKU cannot be used."
+        },
+        "reasonCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reason for restriction.",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsReasonCode",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes restrictions of a SKU."
+    },
+    "ResourceSku": {
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of SKU."
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the tier of Cognitive Services account."
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Kind of resources that are supported in this SKU."
+        },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of locations that the SKU is available."
+        },
+        "restrictions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuRestrictions"
+          },
+          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
+        }
+      },
+      "description": "Describes an available Cognitive Services SKU."
+    },
+    "ResourceSkuRestrictionInfo": {
+      "properties": {
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Locations where the SKU is restricted"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is restricted."
+        }
+      }
+    },
+    "ResourceSkusResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          },
+          "description": "The list of skus available for the subscription."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Skus."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The Get Skus operation response."
     }
   },
   "parameters": {
@@ -1044,6 +1355,14 @@
       "description": "Resource location.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "usageFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
       "x-ms-parameter-location": "method"
     }
   }

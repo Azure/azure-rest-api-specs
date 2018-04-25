@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "version": "2018-01-10",
@@ -3242,6 +3242,81 @@
             "$ref": "./examples/ReplicationProtectionContainerMappings_Purge.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "ReplicationProtectionContainerMappings"
+        ],
+        "summary": "Update protection container mapping.",
+        "description": "The operation to update protection container mapping.",
+        "operationId": "ReplicationProtectionContainerMappings_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "Protection container mapping name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateInput",
+            "in": "body",
+            "description": "Mapping update input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateProtectionContainerMappingInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainerMapping"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update protection container mapping.": {
+            "$ref": "./examples/ReplicationProtectionContainerMappings_Update.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}/remove": {
@@ -6006,6 +6081,34 @@
       "properties": {},
       "x-ms-discriminator-value": "A2A"
     },
+    "A2AContainerMappingInput": {
+      "description": "A2A container mapping input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationProviderSpecificContainerMappingInput"
+        }
+      ],
+      "properties": {
+        "agentAutoUpdateStatus": {
+          "description": "A value indicating whether the auto update is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentAutoUpdateStatus",
+            "modelAsString": false
+          }
+        },
+        "automationAccountArmId": {
+          "description": "The automation account arm id.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
     "A2AEnableProtectionInput": {
       "description": "A2A enable protection input.",
       "type": "object",
@@ -6326,6 +6429,42 @@
         }
       }
     },
+    "A2AProtectionContainerMappingDetails": {
+      "description": "A2A provider specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionContainerMappingProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "agentAutoUpdateStatus": {
+          "description": "A value indicating whether the auto update is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentAutoUpdateStatus",
+            "modelAsString": false
+          }
+        },
+        "automationAccountArmId": {
+          "description": "The automation account arm id.",
+          "type": "string"
+        },
+        "scheduleName": {
+          "description": "The schedule arm name.",
+          "type": "string"
+        },
+        "jobScheduleName": {
+          "description": "The job schedule arm name.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
     "A2ARecoveryPointDetails": {
       "description": "A2A provider specific recovery point details.",
       "type": "object",
@@ -6591,6 +6730,34 @@
         },
         "recoveryBootDiagStorageAccountId": {
           "description": "The boot diagnostic storage account.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
+    "A2AUpdateContainerMappingInput": {
+      "description": "A2A update protection container mapping.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationProviderSpecificUpdateContainerMappingInput"
+        }
+      ],
+      "properties": {
+        "agentAutoUpdateStatus": {
+          "description": "A value indicating whether the auto update is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentAutoUpdateStatus",
+            "modelAsString": false
+          }
+        },
+        "automationAccountArmId": {
+          "description": "The automation account arm id.",
           "type": "string"
         }
       },
@@ -8068,7 +8235,8 @@
             "TestFailover",
             "Configuration",
             "FabricInfrastructure",
-            "VersionExpiry"
+            "VersionExpiry",
+            "AgentAutoUpdate"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -9093,16 +9261,43 @@
           }
         },
         "hasPhysicalDisk": {
-          "description": "A value indicating whether the VM has a physical disk attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a physical disk attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": false
+          }
         },
         "hasFibreChannelAdapter": {
-          "description": "A value indicating whether the VM has a fibre channel adapter attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a fibre channel adapter attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": false
+          }
         },
         "hasSharedVhd": {
-          "description": "A value indicating whether the VM has a shared VHD attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a shared VHD attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": false
+          }
         }
       },
       "x-ms-discriminator-value": "HyperVVirtualMachine"
@@ -11730,7 +11925,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "ProtectionContainerProperties": {
       "description": "Protection profile custom data details.",
@@ -13002,7 +13198,8 @@
           "description": "The class type.",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "ReplicationProviderSpecificSettings": {
       "description": "Replication provider specific settings.",
@@ -13012,6 +13209,17 @@
           "description": "Gets the Instance type.",
           "type": "string",
           "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "ReplicationProviderSpecificUpdateContainerMappingInput": {
+      "description": "Provider specific input for update pairing operations.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -13710,6 +13918,26 @@
         }
       }
     },
+    "UpdateProtectionContainerMappingInput": {
+      "description": "Container pairing update input.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateProtectionContainerMappingInputProperties",
+          "description": "Update protection container mapping input properties."
+        }
+      }
+    },
+    "UpdateProtectionContainerMappingInputProperties": {
+      "description": "Container pairing update input.",
+      "type": "object",
+      "properties": {
+        "providerSpecificInput": {
+          "$ref": "#/definitions/ReplicationProviderSpecificUpdateContainerMappingInput",
+          "description": "Provider specific input for updating protection container mapping."
+        }
+      }
+    },
     "UpdateRecoveryPlanInput": {
       "description": "Update recovery plan input class.",
       "type": "object",
@@ -13877,6 +14105,10 @@
         "fabricsHealth": {
           "$ref": "#/definitions/ResourceHealthSummary",
           "description": "The list of the health detail of the fabrics in the vault."
+        },
+        "containersHealth": {
+          "$ref": "#/definitions/ResourceHealthSummary",
+          "description": "The list of the health detail of the containers in the vault."
         }
       }
     },
@@ -13967,7 +14199,7 @@
       }
     },
     "VersionDetails": {
-      "description": "Version related deatils.",
+      "description": "Version related details.",
       "type": "object",
       "properties": {
         "version": {
@@ -14126,16 +14358,43 @@
           }
         },
         "hasPhysicalDisk": {
-          "description": "A value indicating whether the VM has a physical disk attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a physical disk attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": false
+          }
         },
         "hasFibreChannelAdapter": {
-          "description": "A value indicating whether the VM has a fibre channel adapter attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a fibre channel adapter attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": false
+          }
         },
         "hasSharedVhd": {
-          "description": "A value indicating whether the VM has a shared VHD attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a shared VHD attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": false
+          }
         }
       },
       "x-ms-discriminator-value": "VmmVirtualMachine"
@@ -14576,14 +14835,16 @@
       "in": "path",
       "description": "The name of the resource group where the recovery services vault is present.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "ResourceName": {
       "name": "resourceName",
       "in": "path",
       "description": "The name of the recovery services vault.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "ApiVersion": {
       "name": "api-version",

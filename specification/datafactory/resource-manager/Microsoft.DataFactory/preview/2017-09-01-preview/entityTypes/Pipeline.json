@@ -1061,7 +1061,37 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
         }
       } 
-    }, 
+    },
+    "SalesforceMarketingCloudSource": { 
+      "description": "A copy activity Salesforce Marketing Cloud source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    },
+    "ResponsysSource": { 
+      "description": "A copy activity Responsys source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    } ,
     "AmazonRedshiftSource": {
       "description": "A copy activity source for Amazon Redshift Source.",
       "type": "object",
@@ -2004,12 +2034,47 @@
           "type": "string"
         },
         "environmentPath": {
-          "description": "The environment path to execution the SSIS package.",
+          "description": "The environment path to execute the SSIS package.",
           "type": "string"
         },
         "connectVia": {
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        },
+        "projectParameters": {
+          "description": "The project level parameters to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISExecutionParameter"
+          }
+        },
+        "packageParameters": {
+          "description": "The package level parameters to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISExecutionParameter"
+          }
+        },
+        "projectConnectionManagers": {
+          "description": "The project level connection managers to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISConnectionManager"
+          }
+        },
+        "packageConnectionManagers": {
+          "description": "The package level connection managers to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISConnectionManager"
+          }
+        },
+        "propertyOverrides": {
+          "description": "The property overrides to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISPropertyOverride"
+          }
         }
       },
       "required": [
@@ -2028,6 +2093,43 @@
       },
       "required": [
         "packagePath"
+      ]
+    },
+    "SSISConnectionManager": {
+      "description": "SSIS Connection Manager.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/SSISExecutionParameter"
+      }
+    },
+    "SSISExecutionParameter": {
+      "description": "SSIS execution parameter.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "SSIS package execution parameter value. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SSISPropertyOverride": {
+      "description": "SSIS property override.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "SSIS package property override value. Type: string (or Expression with resultType string)."
+        },
+        "isSensitive": {
+          "type": "boolean",
+          "description": "Whether SSIS package property override value is sensitive data. Value will be encrypted in SSISDB if it is true"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "CustomActivity": {
@@ -2727,6 +2829,45 @@
       "required": [
         "condition",
         "items"
+      ]
+    },
+    "DatabricksNotebookActivity": {
+      "description": "DatabricksNotebook activity.",
+      "x-ms-discriminator-value": "DatabricksNotebook",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Databricks Notebook activity properties.",
+          "$ref": "#/definitions/DatabricksNotebookActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DatabricksNotebookActivityTypeProperties": {
+      "description": "Databricks Notebook activity properties.",
+      "properties": {
+        "notebookPath": {
+          "type": "object",
+          "description": "The absolute path of the notebook to be run in the Databricks Workspace. This path must begin with a slash. Type: string (or Expression with resultType string)."
+        },
+        "baseParameters": {
+          "description": "Base parameters to be used for each run of this job.If the notebook takes a parameter that is not specified, the default value from the notebook will be used.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        }
+      },
+      "required": [
+        "notebookPath"
       ]
     }
   }

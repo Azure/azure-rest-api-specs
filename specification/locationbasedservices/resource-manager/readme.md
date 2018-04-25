@@ -48,6 +48,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
 ```
 
@@ -65,6 +66,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/LocationBasedServices/Management.LocationBasedServices/Generated
   clear-output-folder: true
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -90,7 +95,7 @@ These settings apply only when `--tag=package-2017-01 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-01' && $(go)
-output-folder: $(go-sdk-folder)/services/location/mgmt/2017-01-01-preview/location
+output-folder: $(go-sdk-folder)/services/preview/location/mgmt/2017-01-01-preview/location
 ```
 
 

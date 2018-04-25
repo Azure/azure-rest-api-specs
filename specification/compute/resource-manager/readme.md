@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2017-12
+tag: package-2018-04
 
 directive:
   - where:
@@ -106,6 +106,71 @@ directive:
       - $.definitions.VirtualMachineScaleSetUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.AvailabilitySetUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineExtensionUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.ImageUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+
+
+  - where:
+      - $.definitions.VirtualMachineScaleSetVM
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineExtensionImage
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.RollingUpgradeStatusInfo
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineImage
+    suppress:
+      - TrackedResourcePatchOperation
+
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - TrackedResourceGetOperation
+      
+```
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04'
+input-file:
+- Microsoft.Compute/stable/2017-12-01/compute.json
+- Microsoft.Compute/stable/2017-12-01/runCommands.json
+- Microsoft.Compute/stable/2017-09-01/skus.json
+- Microsoft.Compute/stable/2018-04-01/disk.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-disks-2018-04
+
+These settings apply only when `--tag=package-disks-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-disks-2018-04'
+input-file:
+- Microsoft.Compute/stable/2018-04-01/disk.json
 ```
 
 ### Tag: package-2017-12
@@ -287,6 +352,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-compute
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -321,8 +387,9 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2017-12
-  - tag: package-compute-2017-03
+  - tag: package-2018-04
+  #- tag: package-2017-12 broken
+  - tag: package-2017-03
   - tag: package-container-service-2017-01
   - tag: package-container-service-2016-09
   - tag: package-compute-2016-04-preview
@@ -330,6 +397,16 @@ batch:
   - tag: package-container-service-2016-03
   - tag: package-container-service-2015-11-preview
   - tag: package-compute-2015-06
+```
+
+### Tag: package-2018-04 and go
+
+These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-04' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/compute/mgmt/2018-04-01/compute
 ```
 
 ### Tag: package-2017-12 and go
@@ -342,12 +419,12 @@ namespace: compute
 output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-12-01/compute
 ```
 
-### Tag: package-compute-2017-03 and go
+### Tag: package-2017-03 and go
 
-These settings apply only when `--tag=package-compute-2017-03 --go` is specified on the command line.
+These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag)=='package-compute-2017-03' && $(go)
+``` yaml $(tag)=='package-2017-03' && $(go)
 namespace: compute
 output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-03-30/compute
 ```
@@ -379,7 +456,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-compute-2016-04-preview' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2016-04-30-preview/compute
+output-folder: $(go-sdk-folder)/services/preview/compute/mgmt/2016-04-30-preview/compute
 ```
 
 ### Tag: package-compute-2016-03 and go
@@ -409,7 +486,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-container-service-2015-11-preview' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2015-11-01-preview/containerservice
+output-folder: $(go-sdk-folder)/services/preview/containerservice/mgmt/2015-11-01-preview/containerservice
 ```
 
 ### Tag: package-compute-2015-06 and go
@@ -443,12 +520,24 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-disks-2018-04
   - tag: package-compute-only-2017-12
   - tag: package-skus-2017-09
   - tag: package-compute-2017-03
   - tag: package-compute-2016-04-preview
   - tag: package-compute-2016-03
   - tag: package-compute-2015-06
+```
+
+### Tag: package-disks-2018-04 and python
+
+These settings apply only when `--tag=package-disks-2018-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-disks-2018-04' && $(python)
+python:
+  namespace: azure.mgmt.compute.v2018_04_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2018_04_01
 ```
 
 ### Tag: package-compute-only-2017-12 and python

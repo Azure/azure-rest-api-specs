@@ -74,10 +74,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -154,7 +155,7 @@ These settings apply only when `--tag=package-2017-09-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-09-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/eventgrid/mgmt/2017-09-15-preview/eventgrid
+output-folder: $(go-sdk-folder)/services/preview/eventgrid/mgmt/2017-09-15-preview/eventgrid
 ```
 
 ### Tag: package-2017-06-preview and go
@@ -163,7 +164,7 @@ These settings apply only when `--tag=package-2017-06-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-06-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/eventgrid/mgmt/2017-06-15-preview/eventgrid
+output-folder: $(go-sdk-folder)/services/preview/eventgrid/mgmt/2017-06-15-preview/eventgrid
 ```
 
 

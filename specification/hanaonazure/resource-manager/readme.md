@@ -42,16 +42,6 @@ input-file:
 - Microsoft.HanaOnAzure/preview/2017-11-03-preview/hanaonazure.json
 ```
 
-### Tag: package-2017-06
-
-These settings apply only when `--tag=package-2017-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-06'
-input-file:
-- Microsoft.HanaOnAzure/preview/2017-06-15-preview/hanaonazure.json
-```
-
-
 # Code Generation
 
 
@@ -110,7 +100,6 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2017-06
   - tag: package-2017-11
 ```
 
@@ -120,18 +109,8 @@ These settings apply only when `--tag=package-2017-11 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-11' && $(go)
-output-folder: $(go-sdk-folder)/services/hanaonazure/mgmt/2017-11-03-preview/hanaonazure
+output-folder: $(go-sdk-folder)/services/preview/hanaonazure/mgmt/2017-11-03-preview/hanaonazure
 ```
-
-### Tag: package-2017-06
-
-These settings apply only when `--tag=package-2017-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-06' && $(go)
-output-folder: $(go-sdk-folder)/services/hanaonazure/mgmt/2017-06-15-preview/hanaonazure
-```
-
 
 ## Java
 

@@ -1,19 +1,19 @@
 # VisualStudio
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for VisualStudio.
 
 
 The App service RP comprises of services where each service has its own tag.
-Hence, each sub-service has its own swagger spec. 
+Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for VisualStudio, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -27,7 +27,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the VisualStudio API.
 
 ``` yaml
@@ -58,6 +58,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -85,7 +86,7 @@ These settings apply only when `--tag=package-2014-04-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2014-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/visualstudio/mgmt/2014-04-01-preview/visualstudio
+output-folder: $(go-sdk-folder)/services/preview/visualstudio/mgmt/2014-04-01-preview/visualstudio
 ```
 
 
