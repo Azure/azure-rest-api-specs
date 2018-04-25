@@ -352,6 +352,7 @@
                     "ImageApi"
                 ],
                 "summary": "Gets the number of untagged images",
+                "description": "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the latest\r\niteration is used.",
                 "operationId": "GetUntaggedImageCount",
                 "consumes": [],
                 "produces": [
@@ -406,6 +407,7 @@
                     "ImageApi"
                 ],
                 "summary": "Get images by id for a given project iteration",
+                "description": "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the latest\r\niteration is used.",
                 "operationId": "GetImagesByIds",
                 "consumes": [],
                 "produces": [
@@ -587,6 +589,7 @@
                     "ImageApi"
                 ],
                 "summary": "Add the provided batch of images to the set of training images",
+                "description": "This API accepts a batch of files, and optionally tags, to create images. There is a limit of 64 images and 20 tags.",
                 "operationId": "CreateImagesFromFiles",
                 "consumes": [
                     "application/json",
@@ -645,6 +648,7 @@
                     "ImageApi"
                 ],
                 "summary": "Add the provided images urls to the set of training images",
+                "description": "This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.",
                 "operationId": "CreateImagesFromUrls",
                 "consumes": [
                     "application/json",
@@ -703,6 +707,7 @@
                     "ImageApi"
                 ],
                 "summary": "Add the specified predicted images to the set of training images",
+                "description": "This API creates a batch of images from predicted images specified. There is a limit of 64 images and 20 tags.",
                 "operationId": "CreateImagesFromPredictions",
                 "consumes": [
                     "application/json",
@@ -878,6 +883,7 @@
                     "ImageApi"
                 ],
                 "summary": "Create a set of image regions",
+                "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.",
                 "operationId": "CreateImageRegions",
                 "consumes": [
                     "application/json",
@@ -982,6 +988,7 @@
                     "ImageRegionProposalApi"
                 ],
                 "summary": "Get region proposals for an image. Returns empty array if no proposals are found.",
+                "description": "This API will get region proposals for an image along with confidences for the region. It returns an empty array if no proposals are found.",
                 "operationId": "GetImageRegionProposals",
                 "consumes": [],
                 "produces": [
@@ -2506,11 +2513,6 @@
                     "readOnly": true,
                     "x-nullable": false
                 },
-                "tagName": {
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
                 "created": {
                     "format": "date-time",
                     "type": "string",
@@ -2838,6 +2840,7 @@
             "x-nullable": true
         },
         "ImageRegionCreateBatch": {
+            "description": "Batch of image region information to create.",
             "type": "object",
             "properties": {
                 "regions": {
@@ -2927,11 +2930,6 @@
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
-                },
-                "tagName": {
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
                 },
                 "created": {
                     "format": "date-time",
