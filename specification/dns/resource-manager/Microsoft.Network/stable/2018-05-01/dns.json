@@ -1071,7 +1071,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnsResourceReferenceRequest": {
       "post": {
-        "operationId": "DnsResourceReference_GetByResourceIds",
+        "operationId": "DnsResourceReference_GetByTargetResources",
         "description": "Returns the DNS zone records specified by the referencing targetResourceIds.",
         "parameters": [
           {
@@ -1103,9 +1103,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1334,10 +1331,8 @@
           "description": "provisioning State of the record set.",
           "readOnly": true
         },
-        "targetResourceId": {
-          "type": "string",
-          "description": "ARM resource Id of the target. When specified, this makes the record set a reference (ALIAS) to the ARM resource explicitly identified",
-          "readOnly": false
+        "targetResource":{
+          "$ref": "#/definitions/SubResource"
         },
         "ARecords": {
           "type": "array",
@@ -1622,13 +1617,8 @@
           },
           "description": "A list of dns Records "
         },
-        "id":{
+        "targetResource":{
           "$ref": "#/definitions/SubResource"
-        },
-        "resourceId": {
-          "readOnly": true,
-          "type": "string",
-          "description":"Target Azure Resource Id"
         }
       },
       "description": "Represents a single Azure resource and its referencing DNS records."
