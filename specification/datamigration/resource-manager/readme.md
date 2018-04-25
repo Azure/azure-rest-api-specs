@@ -31,23 +31,45 @@ openapi-type: arm
 tag: package-2018-04-19
 ```
 
-### Tag: package-2017-11-15-preview
+### Tag: package-2018-04-19
 
-These settings apply only when `--tag=package-2017-11-15-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-04-19` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-11-15-preview'
+``` yaml $(tag) == 'package-2018-04-19'
 input-file:
-- Microsoft.DataMigration/preview/2017-11-15-preview/datamigration.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Common.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/ConnectToSourceSqlServerTask.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/ConnectToTargetSqlDbTask.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/GetUserTablesSqlTask.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrateSqlServerSqlDbTask.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Projects.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Services.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Tasks.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/TasksCommon.json
-- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/stable/2018-04-19/datamigration.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/Common.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/Projects.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/Services.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/Tasks.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/TasksCommon.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/MigrationValidation.json
+```
+
+### Tag: package-2018-03-31-preview
+
+These settings apply only when `--tag=package-2018-03-31-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-31-preview'
+input-file:
+- Microsoft.DataMigration/preview/2018-03-31-preview/datamigration.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Common.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToTargetSqlMITask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrateSqlServerSqlMITask.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Tasks.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/TasksCommon.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
 ```
 
 ### Tag: package-2018-03-15-preview
@@ -71,46 +93,26 @@ input-file:
 - Microsoft.DataMigration/preview/2018-03-15-preview/definitions/MigrationValidation.json
 - Microsoft.DataMigration/preview/2018-03-15-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
 ```
-### Tag: package-2018-03-31-preview
 
-These settings apply only when `--tag=package-2018-03-31-preview` is specified on the command line.
+### Tag: package-2017-11-15-preview
 
-``` yaml $(tag) == 'package-2018-03-31-preview'
+These settings apply only when `--tag=package-2017-11-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-15-preview'
 input-file:
-- Microsoft.DataMigration/preview/2018-03-31-preview/datamigration.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Common.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToSourceSqlServerTask.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToTargetSqlDbTask.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ConnectToTargetSqlMITask.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/GetUserTablesSqlTask.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrateSqlServerSqlDbTask.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrateSqlServerSqlMITask.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Projects.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Services.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Tasks.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/TasksCommon.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/MigrationValidation.json
-- Microsoft.DataMigration/preview/2018-03-31-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/datamigration.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Common.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Tasks.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/TasksCommon.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrationValidation.json
 ```
 
-### Tag: package-2018-04-19
-
-These settings apply only when `--tag=package-2018-04-19` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-04-19'
-input-file:
-- Microsoft.DataMigration/stable/2018-04-19/datamigration.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/Common.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToSourceSqlServerTask.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToTargetSqlDbTask.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/GetUserTablesSqlTask.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateSqlServerSqlDbTask.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/Projects.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/Services.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/Tasks.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/TasksCommon.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/MigrationValidation.json
-```
 ---
 
 # Code Generation

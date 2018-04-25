@@ -32,10 +32,12 @@
       "description": "Indicates whether a proposed resource name is available",
       "properties": {
         "nameAvailable": {
+          "readOnly": true,
           "type": "boolean",
           "description": "If true, the name is valid and available. If false, 'reason' describes why not."
         },
         "reason": {
+          "readOnly": true,
           "type": "string",
           "description": "The reason why the name is not available, if nameAvailable is false",
           "enum": [
@@ -48,6 +50,7 @@
           }
         },
         "message": {
+          "readOnly": true,
           "type": "string",
           "description": "The localized reason why the name is not available, if nameAvailable is false"
         }
@@ -72,14 +75,17 @@
       "description": "Error information in OData format.",
       "properties": {
         "code": {
+          "readOnly": true,
           "type": "string",
           "description": "The machine-readable description of the error, such as 'InvalidRequest' or 'InternalServerError'"
         },
         "message": {
+          "readOnly": true,
           "type": "string",
           "description": "The human-readable description of the error"
         },
         "details": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ODataError"
@@ -148,22 +154,27 @@
       "description": "Exception object for all custom exceptions",
       "properties": {
         "message": {
+          "readOnly": true,
           "type": "string",
           "description": "Error message"
         },
         "filePath": {
+          "readOnly": true,
           "type": "string",
           "description": "The path to the file where exception occurred"
         },
         "lineNumber": {
+          "readOnly": true,
           "type": "string",
           "description": "The line number where exception occurred"
         },
         "hResult": {
+          "readOnly": true,
           "type": "integer",
           "description": "Coded numerical value that is assigned to a specific exception"
         },
         "stackTrace": {
+          "readOnly": true,
           "type": "string",
           "description": "Stack trace"
         }
