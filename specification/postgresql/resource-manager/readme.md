@@ -69,14 +69,14 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.rdbms.postgres
+  namespace: azure.mgmt.rdbms.postgresql
   package-name: azure-mgmt-rdbms
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms/azure/mgmt/rdbms/postgres
+  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
