@@ -30,16 +30,16 @@
           "description": "Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             }
           ],
           "responses": {
@@ -66,7 +66,7 @@
           "description": "Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. ",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -84,10 +84,10 @@
               "description": "Properties of the blob container to create."
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             }
           ],
           "responses": {
@@ -112,7 +112,7 @@
           "description": "Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist. ",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -130,10 +130,10 @@
               "description": "Properties to update for the blob container."
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             }
           ],
           "responses": {
@@ -159,7 +159,7 @@
           "description": "Gets properties of a specified container. ",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -168,10 +168,10 @@
               "$ref": "#/parameters/ContainerName"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             }
           ],
           "responses": {
@@ -196,7 +196,7 @@
           "description": "Deletes specified container under its account.",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -205,10 +205,10 @@
               "$ref": "#/parameters/ContainerName"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             }
           ],
           "responses": {
@@ -235,7 +235,7 @@
           "description": "Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request.",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -244,10 +244,10 @@
               "$ref": "#/parameters/ContainerName"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
               "name": "LegalHold",
@@ -283,7 +283,7 @@
           "description": "Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request.",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -292,10 +292,10 @@
               "$ref": "#/parameters/ContainerName"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
               "name": "LegalHold",
@@ -331,7 +331,7 @@
           "description": "Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation.",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -343,10 +343,10 @@
               "$ref": "#/parameters/ImmutabilityPolicyName"            
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
               "name": "parameters",
@@ -392,7 +392,7 @@
           "description": "Gets the existing immutability policy along with the corresponding ETag in response headers and body.",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -404,10 +404,10 @@
               "$ref": "#/parameters/ImmutabilityPolicyName"            
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
               "name": "If-Match",
@@ -445,7 +445,7 @@
           "description": "Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container.",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -457,10 +457,10 @@
               "$ref": "#/parameters/ImmutabilityPolicyName"            
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
               "name": "If-Match",
@@ -500,7 +500,7 @@
           "description": "Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation.",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -509,10 +509,10 @@
               "$ref": "#/parameters/ContainerName"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
               "name": "If-Match",
@@ -552,7 +552,7 @@
           "description": "Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation.",
           "parameters": [
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "#/parameters/AccountName"
@@ -561,10 +561,10 @@
               "$ref": "#/parameters/ContainerName"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common/Parameters.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
               "name": "parameters",
@@ -705,7 +705,7 @@
         },
         "allOf": [
           {
-            "$ref": "../../../../../common/AzureEntityResource.json#/definitions/AzureEntityResource"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
           }
         ],
         "description": "Properties of the blob container, including Id, resource name, resource type, Etag."
@@ -768,7 +768,7 @@
         },
         "allOf": [
           {
-            "$ref": "../../../../../common/AzureEntityResource.json#/definitions/AzureEntityResource"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
           }
         ],
         "required": [
@@ -901,7 +901,7 @@
         },
         "allOf": [
           {
-            "$ref": "../../../../../common/AzureEntityResource.json#/definitions/AzureEntityResource"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
           }
         ],
         "description": "The blob container properties be listed out."
