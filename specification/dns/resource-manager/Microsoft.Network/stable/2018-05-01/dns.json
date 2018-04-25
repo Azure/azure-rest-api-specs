@@ -1072,7 +1072,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnsResourceReferenceRequest": {
       "post": {
         "operationId": "DnsResourceReference_GetByTargetResources",
-        "description": "Returns the DNS zone records specified by the referencing targetResourceIds.",
+        "description": "Returns the DNS records specified by the referencing targetResourceIds.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1087,7 +1087,7 @@
             "schema": {
               "$ref": "#/definitions/DnsResourceReferenceRequest"
             },
-            "description": "properties for alias target references."
+            "description": "Properties for dns resource reference request."
           }          
         ],
         "responses": {
@@ -1582,7 +1582,7 @@
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "A list of references to azure resources"
+          "description": "A list of references to azure resources for which referencing dns records need to be queried."
         }
       },
       "description": "Represents the properties of the Dns Resource Reference Request."
@@ -1592,7 +1592,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DnsResourceReferenceResultProperties",
-          "description": "The properties of the Resource Reference Request."
+          "description": "The result of dns resource reference request. Returns a list of dns resource references for each of the azure resource in the request."
         }
       }
     },
@@ -1603,10 +1603,10 @@
           "items": {
             "$ref": "#/definitions/DnsResourceReference"
           },
-          "description": "A list of references to azure resources"
+          "description": "The result of dns resource reference request. A list of dns resource references for each of the azure resource in the request"
         }
       },
-      "description": "Represents the properties of the Alias request."
+      "description": "The result of dns resource reference request. Returns a list of dns resource references for each of the azure resource in the request."
     },
     "DnsResourceReference": {
       "properties": {
