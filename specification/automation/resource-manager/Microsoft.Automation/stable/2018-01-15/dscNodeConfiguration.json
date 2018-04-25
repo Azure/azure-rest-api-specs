@@ -121,6 +121,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK"
+          },
+          "201": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DscNodeConfiguration"
@@ -413,6 +416,7 @@
       "description": "The dsc extensionHandler property associated with the node"
     },
     "DscNodeConfigurationCreateOrUpdateParameters": {
+      "description": "The parameters supplied to the create or update node configuration operation.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParametersProperties",
@@ -438,10 +442,6 @@
           "$ref": "#/definitions/ContentSource",
           "description": "Gets or sets the source."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the type of the parameter."
-        },
         "configuration": {
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
           "description": "Gets or sets the configuration of the node."
@@ -453,10 +453,9 @@
       },
       "required": [
         "source",
-        "name",
         "configuration"
       ],
-      "description": "The parameters supplied to the create or update node configuration operation."
+      "description": "The parameter properties supplied to the create or update node configuration operation."
     },
     "DscConfigurationAssociationProperty": {
       "properties": {
