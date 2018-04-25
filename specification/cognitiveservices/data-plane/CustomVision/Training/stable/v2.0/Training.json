@@ -352,7 +352,7 @@
                     "ImageApi"
                 ],
                 "summary": "Gets the number of untagged images",
-                "description": "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the latest\r\niteration is used.",
+                "description": "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used.",
                 "operationId": "GetUntaggedImageCount",
                 "consumes": [],
                 "produces": [
@@ -407,7 +407,7 @@
                     "ImageApi"
                 ],
                 "summary": "Get images by id for a given project iteration",
-                "description": "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the latest\r\niteration is used.",
+                "description": "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the\r\ncurrent workspace is used.",
                 "operationId": "GetImagesByIds",
                 "consumes": [],
                 "produces": [
@@ -2513,6 +2513,11 @@
                     "readOnly": true,
                     "x-nullable": false
                 },
+                "tagName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
                 "created": {
                     "format": "date-time",
                     "type": "string",
@@ -2930,6 +2935,11 @@
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
+                },
+                "tagName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
                 },
                 "created": {
                     "format": "date-time",
