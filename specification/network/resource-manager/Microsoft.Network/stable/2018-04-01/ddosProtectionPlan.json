@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2018-02-01"
+    "version": "2018-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -258,7 +258,35 @@
   },
   "definitions": {
     "DdosProtectionPlan": {
+      "description": "A DDoS protection plan in a resource group.",
+      "x-ms-azure-resource": true,
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DdosProtectionPlanPropertiesFormat",
@@ -269,13 +297,7 @@
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/Resource"
-        }
-      ],
-      "description": "A DDoS protection plan in a resource group."
+      }
     },
     "DdosProtectionPlanPropertiesFormat": {
       "properties": {
