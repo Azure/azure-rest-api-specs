@@ -258,14 +258,25 @@
       "x-ms-azure-resource": true
     },
     "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
+      "description": "Resource properties.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
         }
-      ],
-      "properties": {}
+      },
+      "x-ms-azure-resource": true
     },
     "ServerSecurityAlertPolicy": {
       "description": "A server security alert policy.",
@@ -390,14 +401,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "DatabaseNameParameter": {
-      "name": "databaseName",
-      "in": "path",
-      "description": "The name of the database.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "SecurityAlertPolicyNameParameter": {
       "name": "securityAlertPolicyName",
       "in": "path",
@@ -407,30 +410,6 @@
       "enum": [
         "default"
       ],
-      "x-ms-parameter-location": "method"
-    },
-    "SqlVirtualMachineInstanceNameParameter": {
-      "name": "sqlVirtualMachineInstanceName",
-      "in": "path",
-      "description": "The name of the SqlVirtualMachineInstance.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlVirtualMachineContainerNameParameter": {
-      "name": "sqlVirtualMachineContainerName",
-      "in": "path",
-      "description": "The name of the SqlVirtualMachineContainer.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "VirtualClusterNameParameter": {
-      "name": "virtualClusterName",
-      "in": "path",
-      "description": "The name of the virtual cluster.",
-      "required": true,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
