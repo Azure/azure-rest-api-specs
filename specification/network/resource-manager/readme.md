@@ -422,6 +422,23 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/network/mgmt/2018-02-01/network
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkwatcher.json
+    where: $.definitions.PacketCaptureResult
+    reason: Packet capture is a non tracked child resource. It has 'name' and 'id' but does not have a 'type'
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkwatcher.json
+    where: $.definitions.NetworkWatcher
+    reason: Network watcher has reference on resource in network.json which contain 'name, 'id' and 'type'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: networkwatcher.json
+    where: $.definitions.ProtocolConfiguration.properties.HTTPConfiguration
+    reason: Accidentally shipped with wrong casing – however fixing the casing is introducing a breaking change which is worse than living with the naming violation
+```
+
 ### Tag: package-2018-01 and go
 
 These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
