@@ -54,6 +54,7 @@ input-file:
 - microsoft.insights/preview/2017-11-01-preview/baseline_API.json
 - microsoft.insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - microsoft.insights/stable/2018-03-01/metricAlert_API.json
+- microsoft.insights/stable/2018-04-16/scheduledQueryRule_API.json
 ```
 
 
@@ -206,7 +207,7 @@ These settings apply only when `--tag=package-2017-09 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-09' && $(go)
-output-folder: $(go-sdk-folder)/services/monitor/mgmt/2018-03-01/insights
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2018-03-01/insights
 ```
 
 ### Tag: package-2017-08 and go
@@ -215,7 +216,7 @@ These settings apply only when `--tag=package-2017-08 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/monitor/mgmt/2017-05-01-preview/insights
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2017-05-01-preview/insights
 ```
 
 

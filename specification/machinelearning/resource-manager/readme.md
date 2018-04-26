@@ -153,7 +153,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-webservices-2016-05-preview' && $(go)
 namespace: webservices
-output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2016-05-01-preview/webservices
+output-folder: $(go-sdk-folder)/services/preview/machinelearning/mgmt/2016-05-01-preview/webservices
 ```
 
 ### Tag: package-commitmentPlans-2016-05-preview and go
@@ -163,7 +163,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-commitmentPlans-2016-05-preview' && $(go)
 namespace: commitmentplans
-output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2016-05-01-preview/commitmentplans
+output-folder: $(go-sdk-folder)/services/preview/machinelearning/mgmt/2016-05-01-preview/commitmentplans
 ```
 
 
