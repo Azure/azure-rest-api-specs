@@ -98,7 +98,7 @@ python:
   add-credentials: true
   namespace: azure.eventgrid
   package-name: azure-eventgrid
-  package-version: 0.1.0
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
