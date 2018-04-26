@@ -200,8 +200,9 @@
           "description": "Gets or sets the parameters of the job."
         },
         "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningStateProperty",
-          "description": "The provisioning state of a resource."
+          "type": "string",
+          "description": "The provisioning state of a resource.",
+          "readOnly": true
         }
       },
       "description": "Definition of job properties."
@@ -392,8 +393,9 @@
           "description": "The last modified time of the job."
         },
         "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningStateProperty",
-          "description": "The current provisioning state of the job."
+          "type": "string",
+          "description": "The provisioning state of a resource.",
+          "readOnly": true
         }
       }
     },
@@ -712,6 +714,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "includedKbNumbers": {
+          "type": "array",
+          "description": "KB numbers included from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -736,6 +745,13 @@
         "excludedPackageNameMasks": {
           "type": "array",
           "description": "packages excluded from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedPackageNameMasks": {
+          "type": "array",
+          "description": "packages included from the software update configuration.",
           "items": {
             "type": "string"
           }
