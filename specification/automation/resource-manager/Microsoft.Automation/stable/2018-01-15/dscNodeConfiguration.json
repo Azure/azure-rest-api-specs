@@ -168,7 +168,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParametersProperties"
+              "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for configuration."
           },
@@ -380,6 +380,26 @@
         }
       },
       "description": "The dsc extensionHandler property associated with the node"
+    },
+    "DscNodeConfigurationCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParametersProperties",
+          "x-ms-client-flatten": true,
+          "description": "Node configuration properties"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the node configuration."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      }
     },
     "DscNodeConfigurationCreateOrUpdateParametersProperties": {
       "properties": {

@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-10
+tag: package-2018-03-preview
 ```
 
 
@@ -37,6 +37,20 @@ These settings apply only when `--tag=package-2015-10` is specified on the comma
 ``` yaml $(tag) == 'package-2015-10'
 input-file:
 - Microsoft.Media/stable/2015-10-01/media.json
+```
+
+### Tag: package-2018-03-preview
+
+These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-preview'
+input-file:
+- Microsoft.Media/preview/2018-03-30-preview/Accounts.json
+- Microsoft.Media/preview/2018-03-30-preview/Assets.json
+- Microsoft.Media/preview/2018-03-30-preview/ContentKeyPolicies.json
+- Microsoft.Media/preview/2018-03-30-preview/Encoding.json
+- Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
+- Microsoft.Media/preview/2018-03-30-preview/streamingservice.json
 ```
 
 ---
@@ -117,6 +131,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2015-10
+  - tag: package-2018-03-preview
 ```
 
 ### Tag: package-2015-10 and go
@@ -126,6 +141,14 @@ Please also specify the `--go-sdk-folder=<path to the root directory of your azu
 
 ``` yaml $(tag) == 'package-2015-10' && $(go)
 output-folder: $(go-sdk-folder)/services/mediaservices/mgmt/2015-10-01/media
+```
+### Tag: package-2018-03-preview and go
+
+These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
+Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-03-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-03-30-preview/media
 ```
 
 
