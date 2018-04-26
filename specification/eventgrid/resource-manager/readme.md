@@ -107,6 +107,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.eventgrid
   package-name: azure-mgmt-eventgrid
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
