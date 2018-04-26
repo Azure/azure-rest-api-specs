@@ -11,8 +11,8 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 clear-output-folder: true
 payload-flattening-threshold: 2
+namespace: Microsoft.Azure.Management.Storage
 output-folder: $(csharp-sdks-folder)/Storage/Management.Storage/Generated
-namespace: Microsoft.Azure.Management.Storage  
 ```
 
 ## Batch settings

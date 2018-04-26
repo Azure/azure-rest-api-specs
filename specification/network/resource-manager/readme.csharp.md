@@ -13,7 +13,6 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml !$(MultiApi)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-payload-flattening-threshold: 1
 clear-output-folder: true
 namespace: Microsoft.Azure.Management.Network
 output-folder: $(csharp-sdks-folder)/Network/Management.Network/Generated

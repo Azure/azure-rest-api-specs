@@ -12,10 +12,10 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ``` yaml !$(MultiApi)
 azure-arm: true
-namespace: Microsoft.Azure.Management.Subscription
 license-header: MICROSOFT_MIT_NO_VERSION
-output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
 clear-output-folder: true
+namespace: Microsoft.Azure.Management.Subscription
+output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
 ```
 
 ## Batch settings

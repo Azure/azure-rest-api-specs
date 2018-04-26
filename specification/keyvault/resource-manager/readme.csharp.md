@@ -9,7 +9,6 @@ This is the AutoRest configuration file for DNS.
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 clear-output-folder: true
-payload-flattening-threshold: 2
 namespace: Microsoft.Azure.Management.KeyVault
 output-folder: $(csharp-sdks-folder)/KeyVault/Management/Management.KeyVault/Generated
 ```

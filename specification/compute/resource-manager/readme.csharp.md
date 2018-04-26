@@ -14,7 +14,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 payload-flattening-threshold: 1
 clear-output-folder: true
-namespace: Microsoft.Azure.Management.Compute.$(ApiVersionName)
+namespace: Microsoft.Azure.Management.Compute
 output-folder: $(csharp-sdks-folder)/Compute/Management.Compute/Generated
 ```
 

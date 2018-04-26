@@ -11,9 +11,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml !$(MultiApi)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
+clear-output-folder: true
 namespace: Microsoft.Azure.Management.WebSites
 output-folder: $(csharp-sdks-folder)/WebSites/Management.WebSites/Generated
-clear-output-folder: true
 ```
 
 ## Batch settings
