@@ -2861,7 +2861,7 @@
         "tags": [
           "IntegrationAccounts"
         ],
-        "operationId": "IntegrationAccounts_GetCallbackUrl",
+        "operationId": "IntegrationAccounts_ListCallbackUrl",
         "description": "Gets the integration account callback URL.",
         "x-ms-examples": {
           "Get IntegrationAccount callback URL": {
@@ -9369,6 +9369,7 @@
     },
     "BatchConfigurationCollection": {
       "type": "object",
+      "description": "A collection of batch configurations.",
       "properties": {
         "value": {
           "type": "array",
@@ -9380,13 +9381,15 @@
     },
     "BatchConfiguration": {
       "type": "object",
+      "description": "The batch configuration resource definition.",
       "additionalProperties": false,
       "required": [
         "properties"
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BatchConfigurationProperties"
+          "$ref": "#/definitions/BatchConfigurationProperties",
+          "description": "The batch configuration properties."
         }
       },
       "allOf": [
@@ -9397,6 +9400,7 @@
     },
     "BatchConfigurationProperties": {
       "type": "object",
+      "description": "The batch configuration properties definition.",
       "additionalProperties": false,
       "required": [
         "batchGroupName",
@@ -9404,10 +9408,12 @@
       ],
       "properties": {
         "batchGroupName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the batch group."
         },
         "releaseCriteria": {
-          "$ref": "#/definitions/BatchReleaseCriteria"
+          "$ref": "#/definitions/BatchReleaseCriteria",
+          "description": "The batch release criteria."
         }
       },
       "allOf": [
@@ -9419,17 +9425,21 @@
     "BatchReleaseCriteria": {
       "type": "object",
       "additionalProperties": false,
+      "description": "The batch release criteria.",
       "properties": {
         "messageCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The message count."
         },
         "batchSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The batch size in bytes."
         },
         "recurrence": {
-          "$ref": "#/definitions/WorkflowTriggerRecurrence"
+          "$ref": "#/definitions/WorkflowTriggerRecurrence",
+          "description": "The recurrence."
         }
       }
     }
