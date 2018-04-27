@@ -2184,8 +2184,8 @@
         "tags": [
           "CostTags"
         ],
-        "operationId": "CostTags_CreateOrUpdate",
         "description": "The operation to create or update cost tags assiciated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "operationId": "CostTags_CreateOrUpdate",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -2740,15 +2740,8 @@
           },
         "priceHidden": {
           "description": "Price is hidden or not.",
-          "type": "string",
-		  "enum": [
-            "True",
-            "False"
-          ],
-          "x-ms-enum": {
-            "name": "priceHidden",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "readOnly": true
         },
         "newPurchasesDetails": {
           "description": "List of new purchases.",
@@ -2763,7 +2756,8 @@
 				},
 				"value": {
 				  "description": "the value of new purchase.",
-				  "type": "object",
+				  "type": "number",
+			      "format": "decimal",
 				  "readOnly": true
 				}
 			}
@@ -2783,7 +2777,8 @@
 				},
 				"value": {
 				  "description": "the value of new adjustment.",
-				  "type": "object",
+				  "type": "number",
+				  "format": "decimal",
 				  "readOnly": true
 				}
 			}
