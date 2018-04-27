@@ -5798,7 +5798,7 @@
           "description": "The occurrence."
         }
       },
-      "description": "The recurrence schedule occurence."
+      "description": "The recurrence schedule occurrence."
     },
     "WorkflowTriggerRecurrence": {
       "type": "object",
@@ -6970,7 +6970,7 @@
           "description": "The X12 protocol settings."
         }
       },
-      "description": "The X12 oneway agreement."
+      "description": "The X12 one-way agreement."
     },
     "X12ProtocolSettings": {
       "type": "object",
@@ -8385,7 +8385,7 @@
           "description": "The application password."
         }
       },
-      "description": "The Edifact enevlope override settings."
+      "description": "The Edifact envelope override settings."
     },
     "EdifactMessageIdentifier": {
       "type": "object",
@@ -8505,7 +8505,7 @@
         },
         "messageRelease": {
           "type": "string",
-          "description": "The message releaseversion."
+          "description": "The message release."
         },
         "dataElementSeparator": {
           "type": "integer",
@@ -8808,7 +8808,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates Logic service is not able to process the incoming request. The error property contains the error details.",
+      "description": "Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.",
       "type": "object",
       "properties": {
         "error": {
@@ -8833,25 +8833,30 @@
     },
     "ListKeyVaultKeysDefinition": {
       "type": "object",
+      "description": "The list key vault keys definition.",
       "additionalProperties": false,
       "required": [
         "keyVault"
       ],
       "properties": {
         "keyVault": {
-          "$ref": "#/definitions/KeyVaultReference"
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "The key vault reference."
         },
         "skipToken": {
-          "type": "string"
+          "type": "string",
+          "description": "The skip token."
         }
       }
     },
     "KeyVaultReference": {
       "type": "object",
+      "description": "The key vault reference.",
       "additionalProperties": false,
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The key vault name."
         }
       },
       "allOf": [
@@ -8862,37 +8867,42 @@
     },
     "KeyVaultKeyCollection": {
       "type": "object",
+      "description": "Collection of key vault keys.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/KeyVaultKey"
-          }
-        },
-        "skipToken": {
-          "type": "string"
+            "$ref": "#/definitions/ListKeyVaultKeysDefinition"
+          },
+          "description": "The key vault keys."
         }
       }
     },
     "KeyVaultKey": {
       "type": "object",
+      "description": "The key vault key.",
       "properties": {
         "kid": {
-          "type": "string"
+          "type": "string",
+          "description": "The key id."
         },
         "attributes": {
           "type": "object",
+          "description": "The key attributes.",
           "properties": {
             "enabled": {
-              "type": "string"
+              "type": "string",
+              "description": "Whether the key is enabled or not."
             },
             "created": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "description": "When the key was created."
             },
             "updated": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "description": "When the key was updated."
             }
           }
         }
@@ -9078,19 +9088,22 @@
     },
     "AzureResourceErrorInfo": {
       "type": "object",
+      "description": "The azure resource error info.",
       "additionalProperties": false,
       "required": [
         "message"
       ],
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "The error message."
         },
         "details": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureResourceErrorInfo"
-          }
+          },
+          "description": "The error details."
         }
       },
       "allOf": [
@@ -9101,25 +9114,30 @@
     },
     "ErrorInfo": {
       "type": "object",
+      "description": "The error info.",
       "additionalProperties": false,
       "required": [
         "code"
       ],
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "The error code."
         }
       }
     },
     "WorkflowRunActionRepetitionDefinition": {
       "type": "object",
+      "description": "The workflow run action repetition definition.",
       "additionalProperties": false,
       "required": [
         "properties"
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/WorkflowRunActionRepetitionProperties"
+          "$ref": "#/definitions/WorkflowRunActionRepetitionProperties",
+          "description": "The workflow run action repetition properties definition.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -9130,10 +9148,12 @@
     },
     "WorkflowRunActionRepetitionProperties": {
       "type": "object",
+      "description": "The workflow run action repetition properties definition.",
       "additionalProperties": false,
       "properties": {
         "repetitionIndexes": {
           "type": "array",
+          "description": "The repetition indexes.",
           "items": {
             "$ref": "#/definitions/RepetitionIndex"
           }
@@ -9147,22 +9167,26 @@
     },
     "RepetitionIndex": {
       "type": "object",
+      "description": "The workflow run action repetition index.",
       "additionalProperties": false,
       "required": [
         "itemIndex"
       ],
       "properties": {
         "scopeName": {
-          "type": "string"
+          "type": "string",
+          "description": "The scope."
         },
         "itemIndex": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The index."
         }
       }
     },
     "OperationResult": {
       "type": "object",
+      "description": "The operation result definition.",
       "additionalProperties": false,
       "properties": {
         "trackingId": {
@@ -9216,34 +9240,42 @@
     "OperationResultProperties": {
       "type": "object",
       "x-abstract": true,
+      "description": "The run operation result properties.",
       "additionalProperties": false,
       "properties": {
         "startTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The start time of the workflow scope repetition."
         },
         "endTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The end time of the workflow scope repetition."
         },
         "correlation": {
-          "$ref": "#/definitions/RunActionCorrelation"
+          "$ref": "#/definitions/RunActionCorrelation",
+          "description": "The correlation properties."
         },
         "status": {
-          "$ref": "#/definitions/WorkflowStatus"
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "The status of the workflow scope repetition."
         },
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "The workflow scope repetition code."
         },
         "error": {}
       }
     },
     "RunActionCorrelation": {
       "type": "object",
+      "description": "The workflow run action correlation properties.",
       "additionalProperties": false,
       "properties": {
         "actionTrackingId": {
-          "type": "string"
+          "type": "string",
+          "description": "The action tracking identifier."
         }
       },
       "allOf": [
@@ -9254,13 +9286,16 @@
     },
     "RunCorrelation": {
       "type": "object",
+      "description": "The correlation properties.",
       "additionalProperties": false,
       "properties": {
         "clientTrackingId": {
-          "type": "string"
+          "type": "string",
+          "description": "The client tracking identifier."
         },
         "clientKeywords": {
           "type": "array",
+          "description": "The client keywords.",
           "items": {
             "type": "string"
           }
@@ -9269,19 +9304,21 @@
     },
     "JsonSchema": {
       "type": "object",
+      "description": "The JSON schema.",
       "properties": {
         "title": {
           "type": "string",
-          "description": "string"
+          "description": "The JSON title."
         },
         "content": {
           "type": "string",
-          "description": "string"
+          "description": "The JSON content."
         }
       }
     },
     "AssemblyCollection": {
       "type": "object",
+      "description": "A collection of assembly definitions.",
       "properties": {
         "value": {
           "type": "array",
@@ -9293,13 +9330,15 @@
     },
     "AssemblyDefinition": {
       "type": "object",
+      "description": "The assembly definition.",
       "additionalProperties": false,
       "required": [
         "properties"
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AssemblyProperties"
+          "$ref": "#/definitions/AssemblyProperties",
+          "description": "Tthe assembly properties."
         }
       },
       "allOf": [
@@ -9310,22 +9349,27 @@
     },
     "AssemblyProperties": {
       "type": "object",
+      "description": "The assembly properties definition.",
       "additionalProperties": false,
       "required": [
         "assemblyName"
       ],
       "properties": {
         "assemblyName": {
-          "type": "string"
+          "type": "string",
+          "description": "The assembly name."
         },
         "assemblyVersion": {
-          "type": "string"
+          "type": "string",
+          "description": "The assembly version."
         },
         "assemblyCulture": {
-          "type": "string"
+          "type": "string",
+          "description": "The assembly culture."
         },
         "assemblyPublicKeyToken": {
-          "type": "string"
+          "type": "string",
+          "description": "The assembly public key token."
         }
       },
       "allOf": [
@@ -9337,13 +9381,16 @@
     "ArtifactContentPropertiesDefinition": {
       "type": "object",
       "additionalProperties": false,
+      "description": "The artifact content properties definition.",
       "properties": {
         "content": {},
         "contentType": {
-          "type": "string"
+          "type": "string",
+          "description": "The content type."
         },
         "contentLink": {
-          "$ref": "#/definitions/ContentLink"
+          "$ref": "#/definitions/ContentLink",
+          "description": "The content link."
         }
       },
       "allOf": [
@@ -9355,14 +9402,17 @@
     "ArtifactProperties": {
       "type": "object",
       "additionalProperties": false,
+      "description": "The artifact properties definition.",
       "properties": {
         "createdTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The artifact creation time."
         },
         "changedTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The artifact changed time."
         },
         "metadata": {}
       }
