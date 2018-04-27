@@ -29,12 +29,12 @@
           "$ref": "./Common.json#/definitions/ServerLevelPermissionsGroup",
           "description": "Permission group for validations"
         },
-        "CollectLogins": {
+        "collectLogins": {
           "type": "boolean",
           "description": "Flag for whether to collect logins from source server.",
           "default": false
         },
-        "CollectAgentJobs": {
+        "collectAgentJobs": {
           "type": "boolean",
           "description": "Flag for whether to collect agent jobs from source server.",
           "default": false
@@ -55,8 +55,7 @@
         },
         "resultType": {
           "description": "Type of result - database level or task level",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "required": [ "resultType" ],
@@ -75,7 +74,7 @@
           },
           "readOnly": true
         },
-        "Logins": {
+        "logins": {
           "type": "string",
           "description": "Source logins as a map from login name to login id.",
           "additionalProperties": {
@@ -83,7 +82,7 @@
           },
           "readOnly": true
         },
-        "AgentJobs": {
+        "agentJobs": {
           "type": "string",
           "description": "Source agent jobs as a map from agent job name to id.",
           "additionalProperties": {
