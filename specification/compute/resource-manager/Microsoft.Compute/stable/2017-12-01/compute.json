@@ -7334,6 +7334,28 @@
       ],
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
+    "RollbackStatusInfo": {
+      "properties":{
+        "successfullyRolledbackInstanceCount" : {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances which have been successfully rolled back."
+        },
+        "failedRolledbackInstanceCount" : {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances which failed to rollback."
+        },
+        "rollbackError" : {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "Error Details if OS rollback failed."
+        }
+      },
+      "description": "Information about rollback on failed VM instances after a OS Upgrade operation"
+    },
     "UpgradeOperationHistoryStatus": {
       "properties": {
         "code": {
@@ -7401,6 +7423,11 @@
           "$ref": "#/definitions/ImageReference",
           "readOnly": true,
           "description": "Image Reference details"
+        },
+        "rollbackInfo": {
+          "$ref": "#/definitions/RollbackStatusInfo",
+          "readOnly": true,
+          "description": "Information about OS rollback if performed"
         }
       },
       "description": "Describes each OS upgrade on the Virtual Machine Scale Set."
