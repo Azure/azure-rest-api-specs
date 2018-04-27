@@ -359,7 +359,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/regionParameter"
+            "$ref": "#/parameters/regionParameterForOnlineOffline"
           }
         ],
         "responses": {
@@ -394,7 +394,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/regionParameter"
+            "$ref": "#/parameters/regionParameterForOnlineOffline"
           }
         ],
         "responses": {
@@ -2336,6 +2336,14 @@
     "regionParameter": {
       "name": "region",
       "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB region, with spaces between words and each word capitalized."
+    },
+    "regionParameterForOnlineOffline": {
+      "name": "region",
+      "in": "query",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
