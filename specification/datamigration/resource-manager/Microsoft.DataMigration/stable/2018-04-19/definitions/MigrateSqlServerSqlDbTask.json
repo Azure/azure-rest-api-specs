@@ -62,6 +62,7 @@
     "MigrateSqlServerSqlDbTaskOutputMigrationLevel": {
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "type": "object",
+      "description": "Migration level result for Sql server to Azure Sql DB migration.",
       "properties": {
         "startedOn": {
           "type": "string",
@@ -155,6 +156,7 @@
     },
     "MigrateSqlServerSqlDbTaskOutputDatabaseLevel": {
       "type": "object",
+      "description": "Database level result for Sql Server to Azure Sql DB migration.",
       "x-ms-discriminator-value": "DatabaseLevelOutput",
       "properties": {
         "databaseName": {
@@ -247,6 +249,7 @@
     },
     "MigrateSqlServerSqlDbTaskOutputTableLevel": {
       "type": "object",
+      "description": "Table level result for Sql Server to Azure Sql DB migration.",
       "x-ms-discriminator-value": "TableLevelOutput",
       "properties": {
         "objectName": {
@@ -308,6 +311,7 @@
     "MigrateSqlServerSqlDbTaskOutputError": {
       "type": "object",
       "x-ms-discriminator-value": "ErrorOutput",
+      "description": "Task errors for Sql Server to Azure Sql DB migration.",
       "properties": {
         "id": {
           "type": "string",
@@ -371,6 +375,7 @@
     "MigrateSqlServerSqlDbTaskOutputValidationResult": {
       "x-ms-discriminator-value": "MigrationValidationOutput",
       "type": "object",
+      "description": "Validation result for Sql Server to Azure Sql DB migration.",
       "$ref": "./MigrationValidation.json#/definitions/MigrationValidationResult",
       "allOf": [
         {
@@ -381,6 +386,7 @@
     "MigrateSqlServerSqlDbTaskOutputDatabaseLevelValidationResult": {
       "x-ms-discriminator-value": "MigrationDatabaseLevelValidationOutput",
       "type": "object",
+      "description": "Database validation result for Sql Server to Azure Sql DB migration.",
       "$ref": "./MigrationValidation.json#/definitions/MigrationValidationDatabaseLevelResult",
       "allOf": [
         {
