@@ -1,0 +1,1386 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataLakeAnalyticsSparkResourcePoolManagementClient",
+    "description": "Creates an Azure Data Lake Analytics Spark resource pool client.",
+    "version": "2018-02-01-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true,
+      "internalConstructors": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.{adlaJobDnsSuffix}",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "The Azure Data Lake Analytics account to execute spark resource pool operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/adlaJobDnsSuffixInPath"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/activityTypes/spark/resourcePools": {
+      "get": {
+        "tags": [
+          "SparkResourcePools"
+        ],
+        "operationId": "SparkResourcePools_List",
+        "description": "Lists the jobs, if any, associated with the specified Data Lake Analytics account. The response includes a link to the next page of results, if any.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of jobs.",
+            "schema": {
+              "$ref": "#/definitions/JobInfoListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/JobInformationBasic"
+      }
+    },
+    "/activityTypes/spark/resourcePools/{jobIdentity}": {
+      "put": {
+        "tags": [
+          "SparkResourcePools"
+        ],
+        "operationId": "SparkResourcePools_Create",
+        "description": "Submits a job to the specified Data Lake Analytics account.",
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateJobParameters"
+            },
+            "description": "The parameters to submit a job."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully submitted the job.",
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SparkResourcePools"
+        ],
+        "operationId": "SparkResourcePools_Get",
+        "description": "Gets the job information for the specified job ID.",
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "JobInfo ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of the specified job.",
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SparkResourcePools"
+        ],
+        "operationId": "SparkResourcePools_Update",
+        "description": "Updates the job information for the specified job ID",
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateJobParameters"
+            },
+            "description": "The parameters to update a spark resource pool."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the details of the specified job.",
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            }
+          },
+          "201": {
+            "description": "Successfully initiated an update of the specified job."
+          },
+          "202": {
+            "description": "Successfully initiated an update of the specified job."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "SparkResourcePools"
+        ],
+        "operationId": "SparkResourcePools_Remove",
+        "description": "Cancels the running job specified by the job ID.",
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully cancelled the job."
+          },
+          "202": {
+            "description": "Successfully initiated the cancellation of the specified job."
+          },
+          "204": {
+            "description": "The specified job was not found."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "JobInformation": {
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobInformationBasic"
+        }
+      ],
+      "properties": {
+        "errorMessage": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorDetails"
+          },
+          "description": "The error message details for the job, if the job failed."
+        },
+        "stateAuditRecords": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobStateAuditRecord"
+          },
+          "description": "The job state audit records, indicating when various operations have been performed on this job."
+        },
+        "properties": {
+          "$ref": "#/definitions/SparkResourcePoolProperties",
+          "description": "The job specific properties."
+        }
+      },
+      "description": "The extended Data Lake Analytics job information properties returned when retrieving a specific job."
+    },
+    "JobInformationBasic": {
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "jobId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The job's unique identifier (a GUID)."
+        },
+        "name": {
+          "type": "string",
+          "description": "The friendly name of the job."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Spark"
+          ],
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": false
+          },
+          "description": "The job type of the current job Spark (for internal use only))."
+        },
+        "submitter": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The user or account that submitted the job."
+        },
+        "degreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "default": 1,
+          "description": "The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0."
+        },
+        "submitTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the job was submitted to the service."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the job."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The completion time of the job."
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Compiling",
+            "Ended",
+            "New",
+            "Queued",
+            "Running",
+            "Scheduling",
+            "Starting",
+            "Paused",
+            "WaitingForCapacity"
+          ],
+          "x-ms-enum": {
+            "name": "JobState",
+            "modelAsString": false
+          },
+          "description": "The job state. When the job is in the Ended state, refer to Result and ErrorMessage for details."
+        },
+        "result": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "None",
+            "Succeeded",
+            "Cancelled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "JobResult",
+            "modelAsString": false
+          },
+          "description": "The result of job execution or the current result of the running job."
+        },
+        "logFolder": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The log folder path to use in the following format: adl://<accountName>.azuredatalakestore.net/system/jobservice/jobs/Usql/2016/03/13/17/18/5fe51957-93bc-4de0-8ddc-c5a4753b068b/logs/."
+        },
+        "logFilePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
+        },
+        "related": {
+          "$ref": "#/definitions/JobRelationshipProperties",
+          "description": "The recurring job relationship information properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The key-value pairs used to add additional metadata to the job information."
+        }
+      },
+      "description": "The common Data Lake Analytics job information properties."
+    },
+    "JobStatistics": {
+      "properties": {
+        "lastUpdateTimeUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time for the statistics."
+        },
+        "finalizingTimeUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The job finalizing start time."
+        },
+        "stages": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobStatisticsVertexStage"
+          },
+          "description": "The list of stages for the job."
+        }
+      },
+      "description": "The Data Lake Analytics job execution statistics."
+    },
+    "JobStatisticsVertexStage": {
+      "properties": {
+        "dataRead": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of data read, in bytes."
+        },
+        "dataReadCrossPod": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of data read across multiple pods, in bytes."
+        },
+        "dataReadIntraPod": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of data read in one pod, in bytes."
+        },
+        "dataToRead": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of data remaining to be read, in bytes."
+        },
+        "dataWritten": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of data written, in bytes."
+        },
+        "duplicateDiscardCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of duplicates that were discarded."
+        },
+        "failedCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failures that occured in this stage."
+        },
+        "maxVertexDataRead": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum amount of data read in a single vertex, in bytes."
+        },
+        "minVertexDataRead": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum amount of data read in a single vertex, in bytes."
+        },
+        "readFailureCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of read failures in this stage."
+        },
+        "revocationCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of vertices that were revoked during this stage."
+        },
+        "runningCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of currently running vertices in this stage."
+        },
+        "scheduledCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of currently scheduled vertices in this stage."
+        },
+        "stageName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of this stage in job execution."
+        },
+        "succeededCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of vertices that succeeded in this stage."
+        },
+        "tempDataWritten": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of temporary data written, in bytes."
+        },
+        "totalCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The total vertex count for this stage."
+        },
+        "totalFailedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "duration",
+          "description": "The amount of time that failed vertices took up in this stage."
+        },
+        "totalProgress": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The current progress of this stage, as a percentage."
+        },
+        "totalSucceededTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "duration",
+          "description": "The amount of time all successful vertices took in this stage."
+        },
+        "totalPeakMemUsage": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The sum of the peak memory usage of all the vertices in the stage, in bytes."
+        },
+        "totalExecutionTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "duration",
+          "description": "The sum of the total execution time of all the vertices in the stage."
+        },
+        "maxDataReadVertex": {
+          "$ref": "#/definitions/JobStatisticsVertex",
+          "description": "the vertex with the maximum amount of data read."
+        },
+        "maxExecutionTimeVertex": {
+          "$ref": "#/definitions/JobStatisticsVertex",
+          "description": "the vertex with the maximum execution time."
+        },
+        "maxPeakMemUsageVertex": {
+          "$ref": "#/definitions/JobStatisticsVertex",
+          "description": "the vertex with the maximum peak memory usage."
+        },
+        "estimatedVertexCpuCoreCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The estimated vertex CPU core count."
+        },
+        "estimatedVertexPeakCpuCoreCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The estimated vertex peak CPU core count."
+        },
+        "estimatedVertexMemSize": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The estimated vertex memory size, in bytes."
+        },
+        "allocatedContainerCpuCoreCount": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "The statistics information for the allocated container CPU core count."
+        },
+        "allocatedContainerMemSize": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "The statistics information for the allocated container memory size."
+        },
+        "usedVertexCpuCoreCount": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "The statistics information for the used vertex CPU core count."
+        },
+        "usedVertexPeakMemSize": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "The statistics information for the used vertex peak memory size."
+        }
+      },
+      "description": "The Data Lake Analytics job statistics vertex stage information."
+    },
+    "JobStatisticsVertex": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the vertex."
+        },
+        "vertexId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The id of the vertex."
+        },
+        "executionTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "duration",
+          "description": "The amount of execution time of the vertex."
+        },
+        "dataRead": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of data read of the vertex, in bytes."
+        },
+        "peakMemUsage": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of peak memory usage of the vertex, in bytes."
+        }
+      },
+      "description": "The detailed information for a vertex."
+    },
+    "ResourceUsageStatistics": {
+      "properties": {
+        "average": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The average value."
+        },
+        "minimum": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum value."
+        },
+        "maximum": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum value."
+        }
+      },
+      "description": "The statistics information for resource usage."
+    },
+    "JobDataPath": {
+      "properties": {
+        "jobId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The ID of the job this data is for."
+        },
+        "command": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The command that this job data relates to."
+        },
+        "paths": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of paths to all of the job data."
+        }
+      },
+      "description": "A Data Lake Analytics job data path item."
+    },
+    "Diagnostics": {
+      "properties": {
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Warning",
+            "Error",
+            "Info",
+            "SevereWarning",
+            "Deprecated",
+            "UserWarning"
+          ],
+          "x-ms-enum": {
+            "name": "SeverityTypes",
+            "modelAsString": false
+          },
+          "description": "The severity of the error."
+        },
+        "lineNumber": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The line number the error occured on."
+        },
+        "columnNumber": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The column where the error occured."
+        },
+        "start": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The starting index of the error."
+        },
+        "end": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The ending index of the error."
+        }
+      },
+      "description": "Error diagnostic information for failed jobs."
+    },
+    "JobRelationshipProperties": {
+      "required": [
+        "recurrenceId"
+      ],
+      "properties": {
+        "pipelineId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The job relationship pipeline identifier (a GUID)."
+        },
+        "pipelineName": {
+          "type": "string",
+          "maxLength": 260,
+          "description": "The friendly name of the job relationship pipeline, which does not need to be unique."
+        },
+        "pipelineUri": {
+          "type": "string",
+          "description": "The pipeline uri, unique, links to the originating service for this pipeline."
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The run identifier (a GUID), unique identifier of the iteration of this pipeline."
+        },
+        "recurrenceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The recurrence identifier (a GUID), unique per activity/script, regardless of iterations. This is something to link different occurrences of the same job together."
+        },
+        "recurrenceName": {
+          "type": "string",
+          "maxLength": 260,
+          "description": "The recurrence name, user friendly name for the correlation between jobs."
+        }
+      },
+      "description": "Job relationship information properties including pipeline information, correlation information, etc."
+    },
+    "JobErrorDetails": {
+      "properties": {
+        "errorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The specific identifier for the type of error encountered in the job."
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Warning",
+            "Error",
+            "Info",
+            "SevereWarning",
+            "Deprecated",
+            "UserWarning"
+          ],
+          "x-ms-enum": {
+            "name": "SeverityTypes",
+            "modelAsString": false
+          },
+          "description": "The severity level of the failure."
+        },
+        "source": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ultimate source of the failure (usually either SYSTEM or USER)."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The user friendly error message for the failure."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message description."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The details of the error message."
+        },
+        "lineNumber": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The specific line number in the job where the error occured."
+        },
+        "startOffset": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The start offset in the job where the error was found"
+        },
+        "endOffset": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The end offset in the job where the error was found."
+        },
+        "resolution": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The recommended resolution for the failure, if any."
+        },
+        "filePath": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The path to any supplemental error files, if any."
+        },
+        "helpLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link to MSDN or Azure help for this type of error, if any."
+        },
+        "internalDiagnostics": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty."
+        },
+        "innerError": {
+          "readOnly": true,
+          "$ref": "#/definitions/JobInnerError",
+          "description": "The inner error of this specific job error message, if any."
+        }
+      },
+      "description": "The Data Lake Analytics job error details."
+    },
+    "JobInnerError": {
+      "properties": {
+        "errorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The specific identifier for the type of error encountered in the job."
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Warning",
+            "Error",
+            "Info",
+            "SevereWarning",
+            "Deprecated",
+            "UserWarning"
+          ],
+          "x-ms-enum": {
+            "name": "SeverityTypes",
+            "modelAsString": false
+          },
+          "description": "The severity level of the failure."
+        },
+        "source": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ultimate source of the failure (usually either SYSTEM or USER)."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The user friendly error message for the failure."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message description."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The details of the error message."
+        },
+        "diagnosticCode": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The diagnostic error code."
+        },
+        "component": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The component that failed."
+        },
+        "resolution": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The recommended resolution for the failure, if any."
+        },
+        "helpLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link to MSDN or Azure help for this type of error, if any."
+        },
+        "internalDiagnostics": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty."
+        },
+        "innerError": {
+          "readOnly": true,
+          "$ref": "#/definitions/JobInnerError",
+          "description": "The inner error of this specific job error message, if any."
+        }
+      },
+      "description": "The Data Lake Analytics job error details."
+    },
+    "JobStateAuditRecord": {
+      "properties": {
+        "newState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The new state the job is in."
+        },
+        "timeStamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time stamp that the state change took place."
+        },
+        "requestedByUser": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The user who requests the change."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The details of the audit log."
+        }
+      },
+      "description": "The Data Lake Analytics job state audit records for tracking the lifecycle of a job."
+    },
+    "JobInfoListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobInformationBasic"
+          },
+          "description": "The list of JobInfo items."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "List of JobInfo items."
+    },
+    "JobPipelineInformation": {
+      "properties": {
+        "pipelineId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The job relationship pipeline identifier (a GUID)."
+        },
+        "pipelineName": {
+          "readOnly": true,
+          "type": "string",
+          "maxLength": 260,
+          "description": "The friendly name of the job relationship pipeline, which does not need to be unique."
+        },
+        "pipelineUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The pipeline uri, unique, links to the originating service for this pipeline."
+        },
+        "numJobsFailed": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of jobs in this pipeline that have failed."
+        },
+        "numJobsCanceled": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of jobs in this pipeline that have been canceled."
+        },
+        "numJobsSucceeded": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of jobs in this pipeline that have succeeded."
+        },
+        "auHoursFailed": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The number of job execution hours that resulted in failed jobs."
+        },
+        "auHoursCanceled": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The number of job execution hours that resulted in canceled jobs."
+        },
+        "auHoursSucceeded": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The number of job execution hours that resulted in successful jobs."
+        },
+        "lastSubmitTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time a job in this pipeline was submitted."
+        },
+        "runs": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobPipelineRunInformation"
+          },
+          "description": "The list of recurrence identifiers representing each run of this pipeline."
+        },
+        "recurrences": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "The list of recurrence identifiers representing each run of this pipeline."
+        }
+      },
+      "description": "Job Pipeline Information, showing the relationship of jobs and recurrences of those jobs in a pipeline."
+    },
+    "JobPipelineRunInformation": {
+      "properties": {
+        "runId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The run identifier of an instance of pipeline executions (a GUID)."
+        },
+        "lastSubmitTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time this instance was last submitted."
+        }
+      },
+      "description": "Run info for a specific job pipeline."
+    },
+    "JobPipelineInformationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobPipelineInformation"
+          },
+          "description": "The list of job pipeline information items."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "List of job pipeline information items."
+    },
+    "JobRecurrenceInformation": {
+      "properties": {
+        "recurrenceId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The recurrence identifier (a GUID), unique per activity/script, regardless of iterations. This is something to link different occurrences of the same job together."
+        },
+        "recurrenceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The recurrence name, user friendly name for the correlation between jobs."
+        },
+        "numJobsFailed": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of jobs in this recurrence that have failed."
+        },
+        "numJobsCanceled": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of jobs in this recurrence that have been canceled."
+        },
+        "numJobsSucceeded": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of jobs in this recurrence that have succeeded."
+        },
+        "auHoursFailed": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The number of job execution hours that resulted in failed jobs."
+        },
+        "auHoursCanceled": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The number of job execution hours that resulted in canceled jobs."
+        },
+        "auHoursSucceeded": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The number of job execution hours that resulted in successful jobs."
+        },
+        "lastSubmitTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time a job in this recurrence was submitted."
+        }
+      },
+      "description": "Recurrence job information for a specific recurrence."
+    },
+    "JobRecurrenceInformationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobRecurrenceInformation"
+          },
+          "description": "The list of job recurrence information items."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "List of job recurrence information items."
+    },
+    "BaseJobParameters": {
+      "required": [
+        "type",
+        "properties"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Spark"
+          ],
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": false
+          },
+          "description": "The job type of the current job Spark (for internal use only))."
+        },
+        "properties": {
+          "$ref": "#/definitions/SparkResourcePoolProperties",
+          "description": "The spark resource pool specific properties."
+        }
+      },
+      "description": "Data Lake Analytics Job Parameters base class for build and submit."
+    },
+    "CreateJobParameters": {
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseJobParameters"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The friendly name of the job to submit."
+        },
+        "degreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "default": 1,
+          "description": "The degree of parallelism to use for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority value to use for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0."
+        },
+        "logFilePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
+        },
+        "related": {
+          "$ref": "#/definitions/JobRelationshipProperties",
+          "description": "The recurring job relationship information properties."
+        }
+      },
+      "description": "The parameters used to submit a new Data Lake Analytics job."
+    },
+    "SparkResourcePoolProperties": {
+      "description": "Spark specific resource pool information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for the spark resource pool"
+        },
+        "resourcePoolVersion": {
+          "type": "string",
+          "description": "Version of the template used while deploying the resource pool"
+        },
+        "sparkVersion": {
+          "type": "string",
+          "description": "Spark version to be deployed on the instances of the resource pool"
+        },
+        "userStorageAccount": {
+          "type": "string",
+          "description": "Account name of the storage account (ADLS) where logs and history will be stored"
+        },
+        "sparkResourceCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SparkResourcePoolItemProperties"
+          },
+          "description": "Definition of spark master and spark workers"
+        }
+      }
+    },
+    "SparkResourcePoolItemProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for the spark master or spark workers"
+        },
+        "targetInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of instances of spark master or spark worker"
+        },
+        "perInstanceCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cores in each started instance of spark master or spark workers"
+        },
+        "perInstanceMemoryInGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Allocated memory in GB for each started instance of spark master or spark workers"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "Guid represting the spark master or worker"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Base version for resource pool template"
+        },
+        "trackingUrl": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Url which can be used by clients to track the resource pool"
+        },
+        "runningInstanceCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of instances running"
+        },
+        "outstandingInstanceCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of instances yet to be launched"
+        },
+        "failedInstanceCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of instances that failed to launch"
+        }
+      },
+      "description": "Data Lake Analytics Spark Resource Pool creation request"
+    },
+    "UpdateJobParameters": {
+      "properties": {
+        "degreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The key-value pairs used to add additional metadata to the job information."
+        },
+        "properties": {
+          "$ref": "#/definitions/SparkResourcePoolProperties",
+          "description": "The spark resource pool specific properties."
+        }
+      },
+      "description": "The parameters that can be used to update existing Data Lake Analytics spark resource pool"
+    }
+  },
+  "parameters": {
+    "adlaJobDnsSuffixInPath": {
+      "name": "adlaJobDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "azuredatalakeanalytics.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "The DNS suffix used as the base for all Azure Data Lake Analytics Job service requests.",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
