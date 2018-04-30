@@ -359,7 +359,12 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/regionParameterForOnlineOffline"
+            "name": "regionParameterForOffline",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionForOnlineOffline"
+            }
           }
         ],
         "responses": {
@@ -394,7 +399,12 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/regionParameterForOnlineOffline"
+            "name": "regionParameterForOnline",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionForOnlineOffline"
+            }
           }
         ],
         "responses": {
@@ -1367,6 +1377,17 @@
         }
       }
     },
+    "RegionForOnlineOffline": {
+      "type": "object",
+      "description": "Cosmos DB region to online or offline."
+      "properties": {
+        "region": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Cosmos DB region, with spaces between words and each word capitalized."
+        }
+      }
+    },
     "Location": {
       "description": "A region in which the Azure Cosmos DB database account is deployed.",
       "type": "object",
@@ -2336,14 +2357,6 @@
     "regionParameter": {
       "name": "region",
       "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Cosmos DB region, with spaces between words and each word capitalized."
-    },
-    "regionParameterForOnlineOffline": {
-      "name": "region",
-      "in": "body",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
