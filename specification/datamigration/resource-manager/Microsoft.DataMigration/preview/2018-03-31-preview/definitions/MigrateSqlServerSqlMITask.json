@@ -80,6 +80,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputMigrationLevel": {
       "type": "object",
+      "description": "Migration level result for Sql server to Sql MI migration.",
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "properties": {
         "startedOn": {
@@ -188,6 +189,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputDatabaseLevel": {
       "type": "object",
+      "description": "Database level result for Sql Server to Sql MI migration.",
       "x-ms-discriminator-value": "DatabaseLevelOutput",
       "properties": {
         "databaseName": {
@@ -245,6 +247,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputAgentJobLevel": {
       "type": "object",
+      "description": "Task errors at job level for Sql Server to Sql MI migration.",
       "x-ms-discriminator-value": "AgentJobLevelOutput",
       "properties": {
         "name": {
@@ -296,6 +299,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputLoginLevel": {
       "type": "object",
+      "description": "Task errors at login level for Sql Server to Sql MI migration.",
       "x-ms-discriminator-value": "LoginLevelOutput",
       "properties": {
         "loginName": {
@@ -347,6 +351,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputError": {
       "type": "object",
+      "description": "Task errors for Sql Server to Sql MI migration.",
       "x-ms-discriminator-value": "ErrorOutput",
       "properties": {
         "id": {
