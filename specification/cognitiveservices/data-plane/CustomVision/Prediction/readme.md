@@ -48,7 +48,7 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
-  sync-methods: All
+  sync-methods: all
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction
