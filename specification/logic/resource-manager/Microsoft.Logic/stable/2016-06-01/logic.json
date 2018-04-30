@@ -1917,10 +1917,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WorkflowRunActionRepetitionDefinition"
-              }
+              "$ref": "#/definitions/WorkflowRunActionRepetitionDefinitionCollection"
             }
           }
         }
@@ -2043,7 +2040,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/WorkflowRunProperties"
+              "$ref": "#/definitions/WorkflowRun"
             }
           }
         }
@@ -2938,13 +2935,20 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "parameters",
-            "description": "The callback URL parameters.",
+            "name": "listKeyVaultKeys",
+            "description": "The key vault parameters.",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ListKeyVaultKeysDefinition"
             }
+          },
+          {
+            "name": "skipToken",
+            "description": "The skip token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -9140,6 +9144,18 @@
         }
       }
     },
+    "WorkflowRunActionRepetitionDefinitionCollection": {
+      "type": "object",
+      "description": "A collection of workflow run action repetitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowRunActionRepetitionDefinition"
+          }
+        }
+      }
+    },
     "WorkflowRunActionRepetitionDefinition": {
       "type": "object",
       "description": "The workflow run action repetition definition.",
@@ -9478,6 +9494,16 @@
         "releaseCriteria": {
           "$ref": "#/definitions/BatchReleaseCriteria",
           "description": "The batch release criteria."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The changed time."
         }
       },
       "allOf": [
