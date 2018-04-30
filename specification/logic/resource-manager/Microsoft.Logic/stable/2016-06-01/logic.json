@@ -5121,6 +5121,10 @@
         "sig": {
           "type": "string",
           "description": "The SAS signature."
+        },
+        "se": {
+          "type":"string",
+          "description": "The SAS timestamp."
         }
       },
       "description": "Gets the workflow trigger callback URL query parameters."
@@ -9054,12 +9058,28 @@
     },
     "ExpressionTraces": {
       "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/Expression"
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressionRoot"
+          }
         }
       }
+    },
+    "ExpressionRoot": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path."
+        }
+      },
+      "allOf": [ 
+        {
+          "$ref": "#/definitions/Expression"
+        }
+      ]
     },
     "Expression": {
       "type": "object",
