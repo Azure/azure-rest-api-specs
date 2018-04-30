@@ -1726,10 +1726,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WorkflowRunActionRepetitionDefinition"
-              }
+              "$ref": "#/definitions/WorkflowRunActionRepetitionDefinitionCollection"
             }
           }
         }
@@ -5277,6 +5274,12 @@
     "WorkflowRunProperties": {
       "type": "object",
       "properties": {
+        "waitEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the wait end time."
+        },
         "startTime": {
           "type": "string",
           "format": "date-time",
@@ -5817,12 +5820,10 @@
         },
         "startTime": {
           "type": "string",
-          "format": "date-time",
           "description": "The start time."
         },
         "endTime": {
           "type": "string",
-          "format": "date-time",
           "description": "The end time."
         },
         "timeZone": {
@@ -8878,6 +8879,10 @@
             "$ref": "#/definitions/ListKeyVaultKeysDefinition"
           },
           "description": "The key vault keys."
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "The skip token."
         }
       }
     },
