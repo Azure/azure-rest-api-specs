@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2018-03-01-preview",
+    "billingAccountId": "{billingAccountId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/billingProfiles/BillingProfileId1",
+            "name": "BillingProfileId1",
+            "type": "Microsoft.Billing/billingProfiles",
+            "properties": {
+              "billingProfileName": "BillingProfileName1",
+              "startDate": "2017-02-01",
+              "endDate": "2019-02-01",
+              "status": "Active",
+              "useCredits": true,
+              "poNumber": "12345"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/billingProfiles/BillingProfileName2",
+            "name": "BillingProfileName2",
+            "type": "Microsoft.Billing/billingProfiles",
+            "properties": {
+              "billingProfileName": "BillingProfileName2",
+              "startDate": "2017-02-01",
+              "endDate": "2019-02-01",
+              "status": "Active",
+              "useCredits": false,
+              "poNumber": "123456"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
