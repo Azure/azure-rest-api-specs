@@ -1380,15 +1380,16 @@
       }
     },
     "RegionForOnlineOffline": {
-      "type": "object",
-      "description": "Cosmos DB region to online or offline.",
       "properties": {
         "region": {
           "type": "string",
-          "readOnly": true,
           "description": "Cosmos DB region, with spaces between words and each word capitalized."
         }
-      }
+      },
+      "required": [
+        "region"
+      ],
+      "description": "Cosmos DB region to online or offline."
     },
     "Location": {
       "description": "A region in which the Azure Cosmos DB database account is deployed.",
