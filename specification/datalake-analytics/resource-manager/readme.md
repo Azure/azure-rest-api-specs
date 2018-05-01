@@ -146,7 +146,7 @@ These settings apply only when `--tag=package-2015-10-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/datalake/analytics/mgmt/2015-10-01-preview/account
+output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/mgmt/2015-10-01-preview/account
 ```
 
 

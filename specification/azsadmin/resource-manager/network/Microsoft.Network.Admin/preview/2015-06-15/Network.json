@@ -82,15 +82,21 @@
             },
             "x-ms-azure-resource": true
         },
-        "ResourceTenant": {
-            "description": "Base Resource Tenant Object",
+        "ProvisionedResource": {
+            "description": "Objects which have a provisioning state.",
             "type": "object",
             "properties": {
                 "provisioningState": {
                     "description": "The provisioning state.",
                     "type": "string",
                     "readOnly": true
-                },
+                }
+            }
+        },
+        "TenantResource": {
+            "description": "These resources are utilized by a single tenant.",
+            "type": "object",
+            "properties": {
                 "subscriptionId": {
                     "description": "The subscription ID.",
                     "type": "string",
