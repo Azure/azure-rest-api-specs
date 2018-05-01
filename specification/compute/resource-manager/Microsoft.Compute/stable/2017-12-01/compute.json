@@ -5952,6 +5952,15 @@
       },
       "description": "Describes a virtual machine scale set sku."
     },
+    "AutoOSUpgradePolicy": {
+      "properties": {
+        "disableAutoRollback": {
+          "type": "boolean",
+          "description": "whether OS image rollback feature should be disabled."
+        }
+      },
+      "description": "The configuration parameters used for performing automatic OS upgrade."
+    },
     "UpgradePolicy": {
       "properties": {
         "mode": {
@@ -5974,6 +5983,10 @@
         "automaticOSUpgrade": {
           "type": "boolean",
           "description": "Whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the image becomes available."
+        },
+        "autoOSUpgradePolicy":{
+          "$ref": "#/definitions/AutoOSUpgradePolicy",
+          "description": "Configuration parameters used for performing automatic OS Upgrade."
         }
       },
       "description": "Describes an upgrade policy - automatic, manual, or rolling."
