@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2018-03-01-preview",
+    "projectId": "ProjectId1",
+    "parameters": {
+      "properties": {
+        "projectName": "ProjectName1",
+        "offers": [
+          {
+            "assetLink": "AssetLink1"
+          },
+          {
+            "assetLink": "AssetLink2"
+          }
+        ],
+        "costCenter": "1376"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId1",
+        "name": "ProjectId1",
+        "type": "Microsoft.Billing/billingAccounts",
+        "properties": {
+          "projectName": "ProjectName1",
+          "startDate": "2017-02-01",
+          "endDate": "2019-02-01",
+          "status": "Active",
+          "offerAssets": [
+            {
+              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/offerAssets/assetId1",
+              "name": "assetId1",
+              "type": "Microsoft.Billing/offerAssets",
+              "properties": {
+                "assetLink": "AssetLink1",
+                "billingProfileName": "Profile1",
+                "offerName": "MS-AZR-0148P"
+              }
+            },
+            {
+              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/offerAssets/assetId2",
+              "name": "assetId2",
+              "type": "Microsoft.Billing/offerAssets",
+              "properties": {
+                "assetLink": "AssetLink2",
+                "billingProfileName": "Profile2",
+                "offerName": "MS-AZR-0017P"
+              }
+            }
+          ],
+          "costCenter": "1376"
+        }
+      }
+    }
+  }
+}

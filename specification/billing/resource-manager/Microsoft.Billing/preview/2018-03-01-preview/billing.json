@@ -384,9 +384,837 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Billing/entities": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "x-ms-examples": {
+          "EntitiesList": {
+            "$ref": "./examples/EntitiesList.json"
+          }
+        },
+        "operationId": "Entities_List",
+        "description": "Lists all billing entities for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingEntityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts": {
+      "get": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "BillingAccountsList": {
+            "$ref": "./examples/BillingAccountsList.json"
+          }
+        },
+        "operationId": "BillingAccounts_List",
+        "description": "Lists all billing accounts for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/offerAssets": {
+      "get": {
+        "tags": [
+          "OfferAssets"
+        ],
+        "x-ms-examples": {
+          "OfferAssetsList": {
+            "$ref": "./examples/OfferAssetsList.json"
+          }
+        },
+        "operationId": "OfferAssets_List",
+        "description": "Lists all offers for a billing account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OfferAssetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/billingProfiles": {
+      "get": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "BillingProfilesListByCustomerId": {
+            "$ref": "./examples/BillingProfilesListByCustomerId.json"
+          }
+        },
+        "operationId": "BillingProfiles_ListByCustomerId",
+        "description": "Lists all billing profiles for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingProfiles": {
+      "get": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "BillingProfilesList": {
+            "$ref": "./examples/BillingProfilesList.json"
+          }
+        },
+        "operationId": "BillingProfiles_List",
+        "description": "Lists all billing profiles for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingProfiles/{billingProfileId}": {
+      "get": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "BillingProfiles": {
+            "$ref": "./examples/BillingProfile.json"
+          }
+        },
+        "operationId": "BillingProfiles_Get",
+        "description": "Get the billing profile by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "operationId": "BillingProfiles_Update",
+        "description": "The operation to update a billing profile.",
+        "x-ms-examples": {
+          "UpdateBillingProfile": {
+            "$ref": "./examples/UpdateBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            },
+            "description": "Parameters supplied to the update billing profile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "x-ms-examples": {
+          "ProjectsListByCustomerId": {
+            "$ref": "./examples/ProjectsListByCustomerId.json"
+          }
+        },
+        "operationId": "Projects_ListByCustomerId",
+        "description": "Lists all billing accounts for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "operationId": "Projects_Create",
+        "description": "The operation to create a project.",
+        "x-ms-examples": {
+          "CreateProject": {
+            "$ref": "./examples/CreateProject.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            },
+            "description": "Parameters supplied to the Create Project operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "x-ms-examples": {
+          "ProjectsList": {
+            "$ref": "./examples/ProjectsList.json"
+          }
+        },
+        "operationId": "Projects_List",
+        "description": "Lists all billing accounts for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/projects/{projectId}": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "x-ms-examples": {
+          "Project": {
+            "$ref": "./examples/Project.json"
+          }
+        },
+        "operationId": "Projects_Get",
+        "description": "Get the project by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/projectIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "operationId": "Projects_Update",
+        "description": "The operation to create or update a project.",
+        "x-ms-examples": {
+          "UpdateProject": {
+            "$ref": "./examples/UpdateProject.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/projectIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            },
+            "description": "Parameters supplied to the Create Project operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "BillingEntityListResult": {
+      "description": "Result of listing billing entities.",
+      "properties": {
+        "value": {
+          "description": "The list of billing entities.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingEntity"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingEntity": {
+      "description": "A billing entity resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing entity.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingEntityProperties"
+        }
+      }
+    },
+    "BillingEntityProperties": {
+      "description": "The properties of the billing entity.",
+      "properties": {
+        "entityId": {
+          "description": "Id of the billing entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "entityType": {
+          "description": "Type of the billing entity.",
+          "type": "string",
+          "enum": [
+            "BillingAccount",
+            "Project",
+            "BillingProfile"
+          ],
+          "x-ms-enum": {
+            "name": "EntityType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "country": {
+          "description": "Country for the billing entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startDate": {
+          "description": "The billing entity start date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endDate": {
+          "description": "The billing entity end date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The billing account status.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive",
+            "Deleted",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OfferAssetListResult": {
+      "description": "Result of listing offer assets.",
+      "properties": {
+        "value": {
+          "description": "The list of offer assets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OfferAsset"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OfferAsset": {
+      "description": "The offer asset resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The offer asset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OfferAssetProperties"
+        }
+      }
+    },
+    "OfferAssetProperties": {
+      "description": "The properties of the offer asset.",
+      "properties": {
+        "assetLink": {
+          "description": "The asset link.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerName": {
+          "description": "The name of the offer",
+          "type": "string",
+          "readOnly": true
+        }     
+      }
+    },
+    "BillingAccountListResult": {
+      "description": "Result of listing billing accounts.",
+      "properties": {
+        "value": {
+          "description": "The list of billing accounts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingAccount"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingAccount": {
+      "description": "A billing account resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingAccountProperties"
+        }
+      }
+    },
+    "BillingAccountProperties": {
+      "description": "The properties of the billing account.",
+      "properties": {
+        "commerceRootName": {
+          "description": "The commerce root or billing account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "description": "Country for the billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startDate": {
+          "description": "The billing entity start date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endDate": {
+          "description": "The billing account end date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The billing account status.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive",
+            "Deleted",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "BillingProfileListResult": {
+      "description": "Result of listing billing profiles.",
+      "properties": {
+        "value": {
+          "description": "The list of billing profiles.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingProfile"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingProfile": {
+      "description": "A billing profile resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing profile.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingProfileProperties"
+        }
+      }
+    },
+    "BillingProfileProperties": {
+      "description": "The properties of the billing profile.",
+      "properties": {
+        "billingProfileName": {
+          "description": "The billing profile name.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "The project start date. <Not rationalized>",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The billing profile end date.<Not rationalized>",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The billing profile status.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive",
+            "Deleted",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "useCredits": {
+        "description": "A flag to specify whether to use credits to automatically pay for your monthly invoice or not.",
+        "type": "boolean"
+      },
+      "poNumber": {
+        "description": "The PO number for billing profile.",
+        "type": "string"
+      }
+    },
+    "ProjectListResult": {
+      "description": "Result of listing projects.",
+      "properties": {
+        "value": {
+          "description": "The list of projects.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Project": {
+      "description": "A project resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The project.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProjectProperties"
+        }
+      }
+    },
+    "ProjectProperties": {
+      "description": "The properties of a project.",
+      "properties": {
+        "projectName": {
+          "description": "The name of the project.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "The project start date. <Not rationalized>",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The billing account end date. <Not rationalized>",
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "description": "The project status.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive",
+            "Deleted",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "offerAssets": {
+          "description": "The offers attached to the project.",
+          "type": "array",
+          "items": {
+            "type": "OfferAssetProperties"
+          }
+        },
+        "costCenter": {
+          "description": "The cost center for the project.",
+          "type": "string"
+        }
+      }
+    },
     "EnrollmentAccount": {
       "description": "An enrollment account resource.",
       "type": "object",
@@ -684,6 +1512,30 @@
       "description": "Azure Subscription ID.",
       "required": true,
       "type": "string"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "billing Account Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "projectIdParameter": {
+      "name": "projectId",
+      "in": "path",
+      "description": "Project Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "Billing Profile Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "security": [
