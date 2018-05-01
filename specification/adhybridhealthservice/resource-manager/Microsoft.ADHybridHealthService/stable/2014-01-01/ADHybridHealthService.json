@@ -701,11 +701,11 @@
         "tags": [ "Adds" ],
         "description": "Gets the service related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "addsservices_listMetricMetadataForGroup": {
+          "addsservices_getMetricMetadataForGroup": {
             "$ref": "./examples/MetricSets.json"
           }
         },
-        "operationId": "addsservices_listMetricMetadataForGroup",
+        "operationId": "addsservices_getMetricMetadataForGroup",
         "parameters": [
           {
             "name": "serviceName",
@@ -1024,6 +1024,9 @@
               "$ref": "#/definitions/OperationListResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1547,6 +1550,9 @@
               "$ref": "#/definitions/MergedExportErrors"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1662,6 +1668,9 @@
               "$ref": "#/definitions/AlertFeedbacks"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1858,11 +1867,11 @@
         "tags": [ "Metrics" ],
         "description": "Gets the service related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "services_listMetricMetadataForGroup": {
+          "services_getMetricMetadataForGroup": {
             "$ref": "./examples/MetricSets.json"
           }
         },
-        "operationId": "services_listMetricMetadataForGroup",
+        "operationId": "services_getMetricMetadataForGroup",
         "parameters": [
           {
             "name": "serviceName",
@@ -1989,6 +1998,9 @@
               "$ref": "#/definitions/Items"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2028,6 +2040,9 @@
               "$ref": "#/definitions/ErrorReportUsersEntries"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2318,6 +2333,9 @@
               "$ref": "#/definitions/Connectors"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2365,6 +2383,9 @@
               "$ref": "#/definitions/Credential"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2440,9 +2461,12 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/DataFreshnessDetail"
+              "$ref": "#/definitions/DataFreshness"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2525,6 +2549,9 @@
               "$ref": "#/definitions/GlobalConfiguration"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2533,11 +2560,11 @@
         "tags": [ "Metrics" ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "servicemembers_listMetrics": {
+          "servicemembers_getMetrics": {
             "$ref": "./examples/Server_MetricSets.json"
           }
         },
-        "operationId": "servicemembers_listMetrics",
+        "operationId": "servicemembers_getMetrics",
         "parameters": [
           {
             "name": "serviceName",
@@ -3514,6 +3541,23 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "DataFreshness":{
+      "description": "The list of dimensions.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFreshnessDetail"
           }
         }
       }
