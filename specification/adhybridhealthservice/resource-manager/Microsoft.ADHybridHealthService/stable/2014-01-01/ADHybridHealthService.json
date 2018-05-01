@@ -15,9 +15,9 @@
         "tags": ["Adds"],
         "description":
           "Gets the details of Active Directory Domain Service, for a tenant, that are onboarded to Azure Active Directory Connect Health.",
-        "operationId": "addsservices_GetServices",
+        "operationId": "addsservices_list",
         "x-ms-examples": {
-          "addsservice-GetServices": {
+          "addsservices_list": {
             "$ref": "./examples/Services.json"
           }
         },
@@ -64,15 +64,18 @@
               "$ref": "#/definitions/Services"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
         "tags": ["Adds"],
         "description": "Onboards a service for a given tenant in Azure Active Directory Connect Health.",
-        "operationId": "addsservices_Postaddsservices",
+        "operationId": "addsservices_add",
         "x-ms-examples": {
-          "addsservice-PostService": {
-            "$ref": "./examples/Services.json"
+          "addsservices_add": {
+            "$ref": "./examples/AddService.json"
           }
         },
         "parameters": [
@@ -105,11 +108,11 @@
         "description":
           "Gets the details of an Active Directory Domain Service for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "addsservice-GetService": {
+          "addsservices_get": {
             "$ref": "./examples/Service.json"
           }
         },
-        "operationId": "addsservices_GetService",
+        "operationId": "addsservices_get",
         "parameters": [
           {
             "name": "serviceName",
@@ -136,11 +139,11 @@
         "description":
           "Deletes an Active Directory Domain Service which is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "addsservice-DeleteService": {
+          "addsservices_delete": {
             "$ref": "./examples/DeleteService.json"
           }
         },
-        "operationId": "addsservices_DeleteService",
+        "operationId": "addsservices_delete",
         "parameters": [
           {
             "name": "serviceName",
@@ -168,14 +171,14 @@
         }
       },
       "patch": {
-        "tags": ["Services"],
+        "tags": [ "Services" ],
         "description": "Updates an Active Directory Domain Service properties of an onboarded service.",
         "x-ms-examples": {
-          "addsservice-UpdateService": {
+          "addsservices_update": {
             "$ref": "./examples/UpdateService.json"
           }
         },
-        "operationId": "addsservices_UpdateService",
+        "operationId": "addsservices_update",
         "parameters": [
           {
             "name": "serviceName",
@@ -209,14 +212,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/alerts": {
       "get": {
-        "tags": ["Adds"],
+        "tags": [ "Adds" ],
         "description": "Gets the alerts for a given Active Directory Domain Service.",
-        "operationId": "alerts_GetAddsServicesAlerts",
         "x-ms-examples": {
-          "addsservice-GetAddsServicesAlerts": {
+          "alerts_listAlerts": {
             "$ref": "./examples/Alerts.json"
           }
         },
+        "operationId": "alerts_listAddsAlerts",
         "parameters": [
           {
             "name": "serviceName",
@@ -266,19 +269,22 @@
               "$ref": "#/definitions/Alerts"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/configuration": {
       "get": {
-        "tags": ["Adds"],
+        "tags": [ "Adds" ],
         "description": "Gets the service configurations.",
-        "operationId": "addsservices_GetConfiguration",
         "x-ms-examples": {
-          "addsservice-Configuration": {
-            "$ref": "./examples/Tenant.json"
+          "configuration_listAddsConfigurations": {
+            "$ref": "./examples/AddsConfiguration.json"
           }
         },
+        "operationId": "configuration_listAddsConfigurations",
         "parameters": [
           {
             "name": "serviceName",
@@ -299,13 +305,15 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Tenant"
+              "$ref": "#/definitions/AddsConfiguration"
             }
           },
           "400": {
-            "description":
-              "Bad Request. This is the response code when the tenant is not onboarded to Azure Active Directory Connect Health.Exception will not be thrown."
+            "description": "Bad Request. This is the response code when the tenant is not onboarded to Azure Active Directory Connect Health.Exception will not be thrown."
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -314,11 +322,11 @@
         "tags": [ "Adds" ],
         "description": "Gets the dimensions for a given dimension type in a server.",
         "x-ms-examples": {
-          "addsservices_GetDimensions": {
+          "dimensions_listAddsDimensions": {
             "$ref": "./examples/Dimensions.json"
           }
         },
-        "operationId": "addsservices_GetDimensions",
+        "operationId": "dimensions_listAddsDimensions",
         "parameters": [
           {
             "name": "serviceName",
@@ -342,26 +350,25 @@
           "200": {
             "description": " ",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/Dimensions"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/addsservicemembers": {
       "get": {
-        "tags": ["Adds"],
-        "description":
-          "Gets the details of the Active Directory Domain servers, for a given Active Directory Domain Service, that are onboarded to Azure Active Directory Connect Health.",
+        "tags": [ "Adds" ],
+        "description": "Gets the details of the Active Directory Domain servers, for a given Active Directory Domain Service, that are onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "addsservice-GetServiceMembers": {
+          "addsservicemembers_list": {
             "$ref": "./examples/AddsServiceMembers.json"
           }
         },
-        "operationId": "addsservicemembers_GetServiceMembers",
+        "operationId": "addsservicemembers_list",
         "parameters": [
           {
             "name": "serviceName",
@@ -388,20 +395,22 @@
               "$ref": "#/definitions/AddsServiceMembers"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/addomainservicemembers": {
       "get": {
-        "tags": ["Adds"],
-        "description":
-          "Gets the details of the servers, for a given Active Directory Domain Service, that are onboarded to Azure Active Directory Connect Health.",
+        "tags": [ "Adds" ],
+        "description": "Gets the details of the servers, for a given Active Directory Domain Service, that are onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "addsservice-GetServiceMembersV2": {
+          "addomainservicemembers_list": {
             "$ref": "./examples/AddomainServiceMembers.json"
           }
         },
-        "operationId": "addomainservicemembers_GetServiceMembersV2",
+        "operationId": "addomainservicemembers_list",
         "parameters": [
           {
             "name": "serviceName",
@@ -448,8 +457,7 @@
           {
             "name": "takeCount",
             "in": "query",
-            "description":
-              "The take count , which specifies the number of elements that can be returned from a sequence.",
+            "description": "The take count , which specifies the number of elements that can be returned from a sequence.",
             "required": false,
             "type": "integer"
           },
@@ -464,20 +472,22 @@
               "$ref": "#/definitions/AddsServiceMembers"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/forestsummary": {
       "get": {
-        "tags": ["Adds"],
-        "description":
-          "Gets the forest summary for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
+        "tags": [ "Adds" ],
+        "description": "Gets the forest summary for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "addsservice-GetForestSummary": {
+          "addsservices_getforestSummary": {
             "$ref": "./examples/ForestSummary.json"
           }
         },
-        "operationId": "forestsummary_GetForestSummary",
+        "operationId": "addsservices_getforestSummary",
         "parameters": [
           {
             "name": "serviceName",
@@ -502,14 +512,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metrics/{metricName}/groups/{groupName}/average": {
       "get": {
-        "tags": ["Adds"],
+        "tags": [ "Adds" ],
         "description": "Gets the average of the metric values for a given metric and group combination.",
         "x-ms-examples": {
-          "addsservice-GetAddsServiceMetricsAverage": {
+          "addsservices_listMetricsAverage": {
             "$ref": "./examples/Metrics.json"
           }
         },
-        "operationId": "metrics_GetAddsServiceMetricsAverage",
+        "operationId": "addsservices_listMetricsAverage",
         "parameters": [
           {
             "name": "serviceName",
@@ -540,23 +550,25 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Items"
+              "$ref": "#/definitions/Metrics"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metrics/{metricName}/groups/{groupName}/sum":
-    {
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metrics/{metricName}/groups/{groupName}/sum":{
       "get": {
-        "tags": ["Adds"],
+        "tags": [ "Adds" ],
         "description": "Gets the sum of the metric values for a given metric and group combination.",
         "x-ms-examples": {
-          "addsservice-GetAddsServiceMetricsSum": {
+          "addsservices_listMetricsSum": {
             "$ref": "./examples/Metrics.json"
           }
         },
-        "operationId": "addsservices_GetAddsServiceMetricsSum",
+        "operationId": "addsservices_listMetricsSum",
         "parameters": [
           {
             "name": "serviceName",
@@ -587,22 +599,25 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Items"
+              "$ref": "#/definitions/Metrics"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metricmetadata": {
       "get": {
-        "tags": ["Adds"],
+        "tags": [ "Adds" ],
         "description": "Gets the service related metrics information.",
         "x-ms-examples": {
-          "addsservice-GetMetricMetadata": {
+          "addsservices_listMetricMetadata": {
             "$ref": "./examples/MetricMetadataList.json"
           }
         },
-        "operationId": "metricmetadata_GetMetricMetadata",
+        "operationId": "addsservices_listMetricMetadata",
         "parameters": [
           {
             "name": "$filter",
@@ -636,19 +651,22 @@
               "$ref": "#/definitions/MetricMetadataList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metricmetadata/{metricName}": {
       "get": {
-        "tags": ["Adds"],
-        "description": "Gets the service related metrics information.",
+        "tags": [ "Adds" ],
+        "description": "Gets the service related metric information.",
         "x-ms-examples": {
-          "addsservice-GetAddsServiceSingleMetricMetadata": {
+          "addsservices_getMetricMetadata": {
             "$ref": "./examples/MetricMetadata.json"
           }
         },
-        "operationId": "metricmetadata_GetAddsServiceSingleMetricMetadata",
+        "operationId": "addsservices_getMetricMetadata",
         "parameters": [
           {
             "name": "serviceName",
@@ -680,14 +698,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metricmetadata/{metricName}/groups/{groupName}": {
       "get": {
-        "tags": ["Adds"],
+        "tags": [ "Adds" ],
         "description": "Gets the service related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "addsservice-GetMetricsForService": {
+          "addsservices_listMetricMetadataForGroup": {
             "$ref": "./examples/MetricSets.json"
           }
         },
-        "operationId": "metricmetadata_GetMetricsForService",
+        "operationId": "addsservices_listMetricMetadataForGroup",
         "parameters": [
           {
             "name": "serviceName",
@@ -749,15 +767,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/replicationstatus": {
       "get": {
-        "tags": ["Adds"],
-        "description":
-          "Gets Replication status for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
+        "tags": [ "Adds" ],
+        "description": "Gets Replication status for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "operations-GetReplicationSummaryv2": {
+          "addsservices_getReplicationStatus": {
             "$ref": "./examples/ReplicationStatus.json"
           }
         },
-        "operationId": "replicationstatus_GetReplicationStatus",
+        "operationId": "addsservices_getReplicationStatus",
         "parameters": [
           {
             "name": "serviceName",
@@ -782,15 +799,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/replicationsummary": {
       "get": {
-        "tags": ["Adds"],
-        "description":
-          "Gets complete domain controller list along with replication details for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
+        "tags": [ "Adds" ],
+        "description": "Gets complete domain controller list along with replication details for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "operations-GetReplicationSummaryv2": {
+          "addsservices_getReplicationSummary": {
             "$ref": "./examples/ReplicationSummary.json"
           }
         },
-        "operationId": "replicationsummary_GetReplicationSummaryv2",
+        "operationId": "addsservices_getReplicationSummary",
         "parameters": [
           {
             "name": "serviceName",
@@ -837,8 +853,7 @@
           {
             "name": "takeCount",
             "in": "query",
-            "description":
-              "The take count , which specifies the number of elements that can be returned from a sequence.",
+            "description": "The take count , which specifies the number of elements that can be returned from a sequence.",
             "required": false,
             "type": "integer"
           },
@@ -858,15 +873,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers/{serviceMemberId}/alerts": {
       "get": {
-        "tags": ["Adds"],
-        "description":
-          "Gets the details of an alert for a given Active Directory Domain Controller service and server combination.",
-        "operationId": "alerts_GetAddsServiceMemberAlerts",
+        "tags": [ "Adds" ],
+        "description": "Gets the details of an alert for a given Active Directory Domain Controller service and server combination.",
         "x-ms-examples": {
-          "addsservice-GetAddsServicesAlerts": {
+          "addsservices_listServerAlerts": {
             "$ref": "./examples/Alerts.json"
           }
         },
+        "operationId": "addsservices_listServerAlerts",
         "parameters": [
           {
             "name": "serviceMemberId",
@@ -924,20 +938,22 @@
               "$ref": "#/definitions/Alerts"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/premiumCheck": {
       "get": {
-        "tags": ["Services"],
-        "description":
-          "Gets the details of Active Directory Domain Services for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
+        "tags": [ "Services" ],
+        "description": "Gets the details of Active Directory Domain Services for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "addsservice-GetServicesPremiumCheck": {
+          "addsservices_listPremiumServices": {
             "$ref": "./examples/Services.json"
           }
         },
-        "operationId": "addsservices_GetServicesPremiumCheck",
+        "operationId": "addsservices_listPremiumServices",
         "parameters": [
           {
             "name": "$filter",
@@ -949,24 +965,21 @@
           {
             "name": "serviceType",
             "in": "query",
-            "description":
-              "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
+            "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
             "required": false,
             "type": "string"
           },
           {
             "name": "skipCount",
             "in": "query",
-            "description":
-              "The skip count, which specifies the number of elements that can be bypassed from a sequence and then return the remaining elements.",
+            "description": "The skip count, which specifies the number of elements that can be bypassed from a sequence and then return the remaining elements.",
             "required": false,
             "type": "integer"
           },
           {
             "name": "takeCount",
             "in": "query",
-            "description":
-              "The take count , which specifies the number of elements that can be returned from a sequence.",
+            "description": "The take count , which specifies the number of elements that can be returned from a sequence.",
             "required": false,
             "type": "integer"
           },
@@ -981,6 +994,9 @@
               "$ref": "#/definitions/Services"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -990,11 +1006,11 @@
           "operations"
         ],
         "x-ms-examples": {
-          "operations-GetOperations": {
+          "operations_list": {
             "$ref": "./examples/OperationList.json"
           }
         },
-        "operationId": "operations_List",
+        "operationId": "operations_list",
         "description": "Lists the available Azure Data Factory API operations.",
         "parameters": [
           {
@@ -1013,14 +1029,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/configuration": {
       "post": {
-        "tags": ["Configuration"],
+        "tags": [ "Configuration" ],
         "description": "Onboards a tenant in Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "configuration-PostTenant": {
+          "configuration_add": {
             "$ref": "./examples/Tenant.json"
           }
         },
-        "operationId": "configuration_PostTenantConfiguration",
+        "operationId": "configuration_add",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1034,8 +1050,7 @@
             }
           },
           "403": {
-            "description":
-              "The tenant is not authorized to onboard to Azure Active Directory Connect Health because it does not meet the onboarding criteria."
+            "description": "The tenant is not authorized to onboard to Azure Active Directory Connect Health because it does not meet the onboarding criteria."
           }
         }
       },
@@ -1043,11 +1058,11 @@
         "tags": ["Configuration"],
         "description": "Gets the details of a tenant onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "configuration-GetTenant": {
+          "configuration_get": {
             "$ref": "./examples/Tenant.json"
           }
         },
-        "operationId": "configuration_GetTenant",
+        "operationId": "configuration_get",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1067,14 +1082,14 @@
         }
       },
       "patch": {
-        "tags": ["Configuration"],
+        "tags": [ "Configuration" ],
         "description": "Updates tenant properties for tenants onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "configuration-PatchTenant": {
+          "configuration_update": {
             "$ref": "./examples/PatchTenant.json"
           }
         },
-        "operationId": "configuration_PatchTenant",
+        "operationId": "configuration_update",
         "parameters": [
           {
             "name": "tenant",
@@ -1097,23 +1112,21 @@
             }
           },
           "404": {
-            "description":
-              "Not Found. This is the response code when the tenant is not onboarded to Azure Active Directory Connect Health.Exception will not be thrown."
+            "description": "Not Found. This is the response code when the tenant is not onboarded to Azure Active Directory Connect Health.Exception will not be thrown."
           }
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/services": {
       "get": {
-        "tags": ["Services"],
-        "description":
-          "Gets the details of services, for a tenant, that are onboarded to Azure Active Directory Connect Health.",
+        "tags": [ "Services" ],
+        "description": "Gets the details of services, for a tenant, that are onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "service-GetServices": {
+          "services_list": {
             "$ref": "./examples/Services.json"
           }
         },
-        "operationId": "services_GetServices",
+        "operationId": "services_list",
         "parameters": [
           {
             "name": "$filter",
@@ -1125,24 +1138,21 @@
           {
             "name": "serviceType",
             "in": "query",
-            "description":
-              "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
+            "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
             "required": false,
             "type": "string"
           },
           {
             "name": "skipCount",
             "in": "query",
-            "description":
-              "The skip count, which specifies the number of elements that can be bypassed from a sequence and then return the remaining elements.",
+            "description": "The skip count, which specifies the number of elements that can be bypassed from a sequence and then return the remaining elements.",
             "required": false,
             "type": "integer"
           },
           {
             "name": "takeCount",
             "in": "query",
-            "description":
-              "The take count , which specifies the number of elements that can be returned from a sequence.",
+            "description": "The take count , which specifies the number of elements that can be returned from a sequence.",
             "required": false,
             "type": "integer"
           },
@@ -1157,17 +1167,20 @@
               "$ref": "#/definitions/Services"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
         "tags": ["Services"],
         "description": "Onboards a service for a given tenant in Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "services_PostServices": {
-            "$ref": "./examples/PostService.json"
+          "services_add": {
+            "$ref": "./examples/AddService.json"
           }
         },
-        "operationId": "services_PostServices",
+        "operationId": "services_add",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1194,15 +1207,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/premiumCheck": {
       "get": {
-        "tags": ["Services"],
-        "description":
-          "Gets the details of services for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
+        "tags": [ "Services" ],
+        "description": "Gets the details of services for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "premiumCheck-GetServicesPremiumCheck": {
+          "services_listPremium": {
             "$ref": "./examples/Services.json"
           }
         },
-        "operationId": "premiumCheck_GetServicesPremiumCheck",
+        "operationId": "services_listPremium",
         "parameters": [
           {
             "name": "$filter",
@@ -1214,24 +1226,21 @@
           {
             "name": "serviceType",
             "in": "query",
-            "description":
-              "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
+            "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
             "required": false,
             "type": "string"
           },
           {
             "name": "skipCount",
             "in": "query",
-            "description":
-              "The skip count, which specifies the number of elements that can be bypassed from a sequence and then return the remaining elements.",
+            "description": "The skip count, which specifies the number of elements that can be bypassed from a sequence and then return the remaining elements.",
             "required": false,
             "type": "integer"
           },
           {
             "name": "takeCount",
             "in": "query",
-            "description":
-              "The take count , which specifies the number of elements that can be returned from a sequence.",
+            "description": "The take count , which specifies the number of elements that can be returned from a sequence.",
             "required": false,
             "type": "integer"
           },
@@ -1246,6 +1255,9 @@
               "$ref": "#/definitions/Services"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1255,11 +1267,11 @@
         "description":
           "Gets the details of a service for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "service-GetService": {
+          "services_get": {
             "$ref": "./examples/Service.json"
           }
         },
-        "operationId": "services_GetService",
+        "operationId": "services_get",
         "parameters": [
           {
             "name": "serviceName",
@@ -1285,11 +1297,11 @@
         "tags": ["Services"],
         "description": "Deletes a service which is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "services-DeleteService": {
+          "services_delete": {
             "$ref": "./examples/DeleteService.json"
           }
         },
-        "operationId": "services_DeleteService",
+        "operationId": "services_delete",
         "parameters": [
           {
             "name": "serviceName",
@@ -1320,11 +1332,11 @@
         "tags": ["Services"],
         "description": "Updates the service properties of an onboarded service.",
         "x-ms-examples": {
-          "service-UpdateService": {
+          "services_update": {
             "$ref": "./examples/UpdateService.json"
           }
         },
-        "operationId": "services_UpdateService",
+        "operationId": "services_update",
         "parameters": [
           {
             "name": "serviceName",
@@ -1358,14 +1370,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/alerts": {
       "get": {
-        "tags": ["Alerts"],
+        "tags": [ "Alerts" ],
         "description": "Gets the alerts for a given service.",
         "x-ms-examples": {
-          "alerts_GetAlerts": {
+          "services_listAlerts": {
             "$ref": "./examples/Alerts.json"
           }
         },
-        "operationId": "alerts_GetAlerts",
+        "operationId": "services_listAlerts",
         "parameters": [
           {
             "name": "serviceName",
@@ -1415,19 +1427,22 @@
               "$ref": "#/definitions/Alerts"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/checkServiceFeatureAvailibility/{featureName}": {
       "get": {
-        "tags": ["Services"],
+        "tags": [ "Services" ],
         "description": "Checks if the service has all the pre-requisites met to use a feature.",
         "x-ms-examples": {
-          "services_CheckServiceFeatureAvailibility": {
+          "services_getFeatureAvailibility": {
             "$ref": "./examples/CheckFeatureAvailibility.json"
           }
         },
-        "operationId": "services_CheckServiceFeatureAvailibility",
+        "operationId": "services_getFeatureAvailibility",
         "parameters": [
           {
             "name": "serviceName",
@@ -1459,14 +1474,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/exporterrors/counts": {
       "get": {
-        "tags": ["Services"],
+        "tags": [ "Services" ],
         "description": "Gets the count of latest AAD export errors.",
         "x-ms-examples": {
-          "services_GetLatestAadExportErrorCount": {
+          "services_listExportErrors": {
             "$ref": "./examples/ErrorCounts.json"
           }
         },
-        "operationId": "services_GetLatestAadExportErrorCount",
+        "operationId": "services_listExportErrors",
         "parameters": [
           {
             "name": "serviceName",
@@ -1491,14 +1506,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/exporterrors/listV2": {
       "get": {
-        "tags": ["Services"],
+        "tags": [ "Services" ],
         "description": " Gets the categorized export errors.",
         "x-ms-examples": {
-          "services_CheckServiceFeatureAvailibility": {
+          "services_listExportErrorsV2": {
             "$ref": "./examples/MergedExportErrors.json"
           }
         },
-        "operationId": "services_GetLatestAadExportErrorsV2",
+        "operationId": "services_listExportErrorsV2",
         "parameters": [
           {
             "name": "serviceName",
@@ -1537,14 +1552,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/exportstatus": {
       "get": {
-        "tags": ["Services"],
+        "tags": [ "Services" ],
         "description": "Gets the export status.",
         "x-ms-examples": {
-          "services_GetExportStatus": {
+          "services_listExportStatus": {
             "$ref": "./examples/ExportStatus.json"
           }
         },
-        "operationId": "services_GetExportStatus",
+        "operationId": "services_listExportStatus",
         "parameters": [
           {
             "name": "serviceName",
@@ -1564,19 +1579,22 @@
               "$ref": "#/definitions/ExportStatuses"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/feedbacktype/alerts/feedback": {
       "post": {
-        "tags": ["Feedback"],
+        "tags": [ "Feedback" ],
         "description": "Adds an alert feedback submitted by customer.",
         "x-ms-examples": {
-          "services_AddAlertFeedback": {
-            "$ref": "./examples/PostAlertFeedback.json"
+          "services_addAlertFeedback": {
+            "$ref": "./examples/AddAlertFeedback.json"
           }
         },
-        "operationId": "Feedback_AddAlertFeedback",
+        "operationId": "services_addAlertFeedback",
         "parameters": [
           {
             "name": "serviceName",
@@ -1610,14 +1628,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/feedbacktype/alerts/{shortName}/alertfeedback": {
       "get": {
-        "tags": ["Feedback"],
+        "tags": [ "Feedback" ],
         "description": "Gets a list of all alert feedback for a given tenant and alert type.",
         "x-ms-examples": {
-          "services_GetPeralertfeedback": {
+          "services_listAlertFeedback": {
             "$ref": "./examples/GetAlertFeedback.json"
           }
         },
-        "operationId": "services_GetPeralertfeedback",
+        "operationId": "services_listAlertFeedback",
         "parameters": [
           {
             "name": "serviceName",
@@ -1650,14 +1668,14 @@
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metrics/{metricName}/groups/{groupName}/average":
     {
       "get": {
-        "tags": ["Metrics"],
+        "tags": [ "Metrics" ],
         "description": "Gets the average of the metric values for a given metric and group combination.",
         "x-ms-examples": {
-          "services_GetMetricsAverage": {
+          "services_listMetricsAverage": {
             "$ref": "./examples/Metrics.json"
           }
         },
-        "operationId": "services_GetMetricsAverage",
+        "operationId": "services_listMetricsAverage",
         "parameters": [
           {
             "name": "serviceName",
@@ -1688,22 +1706,25 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Items"
+              "$ref": "#/definitions/Metrics"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metrics/{metricName}/groups/{groupName}/sum": {
       "get": {
-        "tags": ["Metrics"],
+        "tags": [ "Metrics" ],
         "description": "Gets the sum of the metric values for a given metric and group combination.",
         "x-ms-examples": {
-          "services-GetAddsServiceMetricsSum": {
+          "services_listMetricsSum": {
             "$ref": "./examples/Metrics.json"
           }
         },
-        "operationId": "services_GetMetricsSum",
+        "operationId": "services_listMetricsSum",
         "parameters": [
           {
             "name": "serviceName",
@@ -1734,22 +1755,25 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Items"
+              "$ref": "#/definitions/Metrics"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metricmetadata": {
       "get": {
-        "tags": ["Metrics"],
+        "tags": [ "Metrics" ],
         "description": "Gets the service related metrics information.",
         "x-ms-examples": {
-          "services-GetMetricMetadata": {
+          "services_listMetricMetadata": {
             "$ref": "./examples/MetricMetadataList.json"
           }
         },
-        "operationId": "services_GetMetricMetadata",
+        "operationId": "services_listMetricMetadata",
         "parameters": [
           {
             "name": "$filter",
@@ -1783,19 +1807,22 @@
               "$ref": "#/definitions/MetricMetadataList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metricmetadata/{metricName}": {
       "get": {
-        "tags": ["Metrics"],
+        "tags": [ "Metrics" ],
         "description": "Gets the service related metrics information.",
         "x-ms-examples": {
-          "services_GetSingleMetricMetadata": {
+          "services_getMetricMetadata": {
             "$ref": "./examples/MetricMetadata.json"
           }
         },
-        "operationId": "services_GetSingleMetricMetadata",
+        "operationId": "services_getMetricMetadata",
         "parameters": [
           {
             "name": "serviceName",
@@ -1828,14 +1855,14 @@
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metricmetadata/{metricName}/groups/{groupName}":
     {
       "get": {
-        "tags": ["Metrics"],
+        "tags": [ "Metrics" ],
         "description": "Gets the service related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "services-GetMetricsForService": {
+          "services_listMetricMetadataForGroup": {
             "$ref": "./examples/MetricSets.json"
           }
         },
-        "operationId": "services_GetMetricsForService",
+        "operationId": "services_listMetricMetadataForGroup",
         "parameters": [
           {
             "name": "serviceName",
@@ -1897,14 +1924,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/monitoringconfiguration": {
       "patch": {
-        "tags": ["ServiceMembers"],
+        "tags": [ "ServiceMembers" ],
         "description": "Updates the service level monitoring configuration.",
         "x-ms-examples": {
-          "services_UpdateServiceMonitoringConfiguration": {
+          "services_updateMonitoringConfiguration": {
             "$ref": "./examples/PatchMonitoringConfiguration.json"
           }
         },
-        "operationId": "services_UpdateServiceMonitoringConfiguration",
+        "operationId": "services_updateMonitoringConfiguration",
         "parameters": [
           {
             "name": "serviceName",
@@ -1935,14 +1962,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/monitoringconfigurations": {
       "get": {
-        "tags": ["ServiceMembers"],
+        "tags": [ "ServiceMembers" ],
         "description": "Gets the service level monitoring configurations.",
         "x-ms-examples": {
-          "services-GetServiceMonitoringConfigurations": {
+          "services_listMonitoringConfigurations": {
             "$ref": "./examples/MonitoringConfigurations.json"
           }
         },
-        "operationId": "services_GetServiceMonitoringConfigurations",
+        "operationId": "services_listMonitoringConfigurations",
         "parameters": [
           {
             "name": "serviceName",
@@ -1967,14 +1994,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/badpassword/details/user": {
       "get": {
-        "tags": ["Reports"],
+        "tags": [ "Reports" ],
         "description": "Gets the bad password login attempt report for an user",
         "x-ms-examples": {
-          "services-GetBadPwdUserReport": {
+          "services_listUserBadPasswordReport": {
             "$ref": "./examples/BadPasswordDetails.json"
           }
         },
-        "operationId": "services-GetBadPwdUserReport",
+        "operationId": "services_listUserBadPasswordReport",
         "parameters": [
           {
             "name": "serviceName",
@@ -2006,15 +2033,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers": {
       "get": {
-        "tags": ["ServiceMembers"],
-        "description":
-          "Gets the details of the servers, for a given service, that are onboarded to Azure Active Directory Connect Health Service.",
+        "tags": [ "ServiceMembers" ],
+        "description": "Gets the details of the servers, for a given service, that are onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "services_GetServiceMembers": {
+          "servicemembers_list": {
             "$ref": "./examples/ServiceMembers.json"
           }
         },
-        "operationId": "services_GetServiceMembers",
+        "operationId": "servicemembers_list",
         "parameters": [
           {
             "name": "serviceName",
@@ -2055,17 +2081,20 @@
               "$ref": "#/definitions/ServiceMembers"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
-        "tags": ["ServiceMembers"],
+        "tags": [ "ServiceMembers" ],
         "description": "Onboards  a server, for a given service, to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "services_AddServiceMembers": {
-            "$ref": "./examples/PostServiceMembers.json"
+          "servicemembers_add": {
+            "$ref": "./examples/AddServiceMembers.json"
           }
         },
-        "operationId": "services_AddServiceMembers",
+        "operationId": "servicemembers_add",
         "parameters": [
           {
             "name": "serviceName",
@@ -2099,15 +2128,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}": {
       "get": {
-        "tags": ["ServiceMembers"],
-        "description":
-          "Gets the details of a server, for a given service, that are onboarded to Azure Active Directory Connect Health Service.",
+        "tags": [ "ServiceMembers" ],
+        "description": "Gets the details of a server, for a given service, that are onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "services_GetServiceMember": {
+          "servimembers_get": {
             "$ref": "./examples/ServiceMember.json"
           }
         },
-        "operationId": "services_GetServiceMember",
+        "operationId": "servimembers_get",
         "parameters": [
           {
             "name": "serviceName",
@@ -2138,14 +2166,14 @@
         }
       },
       "delete": {
-        "tags": ["ServiceMembers"],
+        "tags": [ "ServiceMembers" ],
         "description": "Deletes a server that has been onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "services_DeleteServiceMember": {
+          "servimembers_delete": {
             "$ref": "./examples/DeleteServer.json"
           }
         },
-        "operationId": "services_DeleteServiceMember",
+        "operationId": "servimembers_delete",
         "parameters": [
           {
             "name": "serviceName",
@@ -2165,8 +2193,7 @@
           {
             "name": "confirm",
             "in": "query",
-            "description":
-              "Indicates if the server will be permanently deleted or disabled. True indicates that the server will be permanently deleted and False indicates that the server will be marked disabled and then deleted after 30 days, if it is not re-registered.",
+            "description": "Indicates if the server will be permanently deleted or disabled. True indicates that the server will be permanently deleted and False indicates that the server will be marked disabled and then deleted after 30 days, if it is not re-registered.",
             "required": false,
             "type": "boolean"
           },
@@ -2183,14 +2210,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/alerts": {
       "get": {
-        "tags": ["Alerts"],
+        "tags": [ "Alerts" ],
         "description": "Gets the details of an alert for a given service and server combination.",
         "x-ms-examples": {
-          "services_GetServiceMemberAlerts": {
+          "servicemembers_listAlerts": {
             "$ref": "./examples/Server_Alerts.json"
           }
         },
-        "operationId": "services_GetServiceMemberAlerts",
+        "operationId": "servicemembers_listAlerts",
         "parameters": [
           {
             "name": "serviceMemberId",
@@ -2248,19 +2275,22 @@
               "$ref": "#/definitions/Alerts"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/service/{serviceName}/servicemembers/{serviceMemberId}/connectors": {
       "get": {
-        "tags": ["ServiceMembers"],
+        "tags": [ "ServiceMembers" ],
         "description": "Gets the connector details for a service.",
         "x-ms-examples": {
-          "services_GetConnectors": {
+          "servicemembers_listConnectors": {
             "$ref": "./examples/Connectors.json"
           }
         },
-        "operationId": "services_GetConnectors",
+        "operationId": "servicemembers_listConnectors",
         "parameters": [
           {
             "name": "serviceName",
@@ -2293,15 +2323,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/credentials": {
       "get": {
-        "tags": ["ServiceMembers"],
-        "description":
-          "Gets the credentials of the server which is needed by the agent to connect to Azure Active Directory Connect Health Service.",
+        "tags": [ "ServiceMembers" ],
+        "description": "Gets the credentials of the server which is needed by the agent to connect to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "services_GetServiceMemberCredentials": {
+          "servicemembers_listCredentials": {
             "$ref": "./examples/Credentials.json"
           }
         },
-        "operationId": "services_GetServiceMemberCredentials",
+        "operationId": "servicemembers_listCredentials",
         "parameters": [
           {
             "name": "serviceName",
@@ -2344,11 +2373,11 @@
         "tags": [ "ServiceMembers" ],
         "description": "Deletes the data uploaded by the server to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "services_DeleteServiceMemberData": {
+          "servicemembers_deleteData": {
             "$ref": "./examples/DeleteServer.json"
           }
         },
-        "operationId": "services_DeleteServiceMemberData",
+        "operationId": "servicemembers_deleteData",
         "parameters": [
           {
             "name": "serviceName",
@@ -2379,15 +2408,14 @@
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/datafreshness":
     {
       "get": {
-        "tags": ["ServiceMembers"],
-        "description":
-          "Gets the last time when the server uploaded data to Azure Active Directory Connect Health Service.",
+        "tags": [ "ServiceMembers" ],
+        "description": "Gets the last time when the server uploaded data to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "services_GetServiceMemberDataFreshness": {
+          "servicemembers_listDataFreshness": {
             "$ref": "./examples/Datafreshness.json"
           }
         },
-        "operationId": "services_GetServiceMemberDataFreshness",
+        "operationId": "servicemembers_listDataFreshness",
         "parameters": [
           {
             "name": "serviceName",
@@ -2420,14 +2448,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/exportstatus": {
       "get": {
-        "tags": ["ServiceMembers"],
+        "tags": [ "ServiceMembers" ],
         "description": "Gets the export status.",
         "x-ms-examples": {
-          "services_GetServiceMemberExportStatus": {
+          "servicemembers_listExportStatus": {
             "$ref": "./examples/Server_ExportStatus.json"
           }
         },
-        "operationId": "services_GetServiceMemberExportStatus",
+        "operationId": "servicemembers_listExportStatus",
         "parameters": [
           {
             "name": "serviceName",
@@ -2455,19 +2483,22 @@
               "$ref": "#/definitions/ExportStatuses"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/globalconfiguration": {
       "get": {
-        "tags": ["ServiceMembers"],
+        "tags": [ "ServiceMembers" ],
         "description": "Gets the global configuration.",
         "x-ms-examples": {
-          "services_GetGlobalConfiguration": {
+          "servicemembers_listGlobalConfiguration": {
             "$ref": "./examples/GlobalConfiguration.json"
           }
         },
-        "operationId": "services_GetGlobalConfiguration",
+        "operationId": "servicemembers_listGlobalConfiguration",
         "parameters": [
           {
             "name": "serviceName",
@@ -2499,14 +2530,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/metrics/{metricName}/groups/{groupName}": {
       "get": {
-        "tags": ["Metrics"],
+        "tags": [ "Metrics" ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "services_GetMetricsForServiceMember": {
+          "servicemembers_listMetrics": {
             "$ref": "./examples/Server_MetricSets.json"
           }
         },
-        "operationId": "services_GetMetricsForServiceMember",
+        "operationId": "servicemembers_listMetrics",
         "parameters": [
           {
             "name": "serviceName",
@@ -2576,14 +2607,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/serviceconfiguration": {
       "get": {
-        "tags": ["ServiceMembers"],
+        "tags": [ "ServiceMembers" ],
         "description": "Gets the service configuration.",
         "x-ms-examples": {
-          "services_GetServiceConfiguration": {
+          "servicemembers_getServiceConfiguration": {
             "$ref": "./examples/ServiceConfiguration.json"
           }
         },
-        "operationId": "services_GetServiceConfiguration",
+        "operationId": "servicemembers_getServiceConfiguration",
         "parameters": [
           {
             "name": "serviceName",
@@ -2615,14 +2646,14 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/TenantWhitelisting/{featureName}": {
       "get": {
-        "tags": ["Services"],
+        "tags": [ "Services" ],
         "description": "Checks if the tenant, to which a service is registered, is whitelisted to use a feature.",
         "x-ms-examples": {
-          "services_CheckTenantWhitelistingForFeature": {
+          "services_getTenantWhitelisting": {
             "$ref": "./examples/TenantWhitelisting.json"
           }
         },
-        "operationId": "services_CheckTenantWhitelistingForFeature",
+        "operationId": "services_getTenantWhitelisting",
         "parameters": [
           {
             "name": "serviceName",
@@ -2654,6 +2685,23 @@
     }
   },
   "definitions": {
+    "AddsConfiguration": {
+      "description": "The list of key value properties.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        }
+      }
+    },
     "AdditionalInformation": {
       "description": "The addtional information for a property.",
       "type": "object",
@@ -2719,7 +2767,12 @@
       "description": "The list of  ADDS service members.",
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AddsServiceMember"
@@ -2796,7 +2849,11 @@
             "ResolvedManually",
             "ResolvedByTimer",
             "ResolvedByStateChange"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          }
         },
         "shortName": {
           "description": "The alert short name.",
@@ -2927,6 +2984,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "description": "The value returned by the operation.",
           "items": {
             "$ref": "#/definitions/AlertFeedback"
           }
@@ -2937,7 +2995,12 @@
       "description": "The list of alerts for a service.",
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Alert"
@@ -3296,6 +3359,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Connector"
@@ -3347,6 +3411,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectorConnectionError"
@@ -3424,6 +3489,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectorObjectError"
@@ -3464,6 +3530,80 @@
           "description": "The date time , in UTC, when data was last uploaded by the server.",
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "Dimension": {
+      "description": "The connector object error.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The health status for the domain controller.",
+          "type": "string",
+          "enum": [
+            "Healthy",
+            "Warning",
+            "Error",
+            "NotMonitored",
+            "Missing"
+          ],
+          "x-ms-enum": {
+            "name": "HealthStatus",
+            "modelAsString": true
+          }
+        },
+        "simpleProperties": {
+          "description": "List of service specific configuration properties.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/Items"
+          }
+        },
+        "activeAlerts": {
+          "description": "The count of alerts that are currently active for the service.",
+          "type": "integer"
+        },
+        "additionalInformation": {
+          "description": "The additional information related to the service.",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "description": "The date or time , in UTC, when the service properties were last updated.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "displayName": {
+          "description": "The display name of the service.",
+          "type": "string"
+        },
+        "resolvedAlerts": {
+          "description": "The total count of alerts that has been resolved for the service.",
+          "type": "integer"
+        },
+        "signature": {
+          "description": "The signature of the service.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
+          "type": "string"
+        }
+      }
+    },
+    "Dimensions": {
+      "description": "The list of dimensions.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
         }
       }
     },
@@ -3508,6 +3648,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorCount"
@@ -3703,6 +3844,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExportError"
@@ -3742,6 +3884,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorReportUsersEntry"
@@ -3778,7 +3921,12 @@
       "description": "The list of export statuses.",
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExportStatus"
@@ -3821,8 +3969,7 @@
           "type": "integer"
         },
         "moniteredDcCount": {
-          "description":
-            "The number of domain controllers that are monitored by Azure Active Directory Connect Health.",
+          "description": "The number of domain controllers that are monitored by Azure Active Directory Connect Health.",
           "type": "integer"
         },
         "totalDcCount": {
@@ -3908,6 +4055,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Hotfix"
@@ -3920,6 +4068,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImportError"
@@ -4108,6 +4257,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
@@ -4211,6 +4361,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExportError"
@@ -4233,6 +4384,23 @@
         "invisibleForUi": {
           "description": "indicates if the metric group is displayed in Azure Active Directory Connect Health UI.",
           "type": "boolean"
+        }
+      }
+    },
+    "Metrics": {
+      "description": "The list of metric items.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
         }
       }
     },
@@ -4272,8 +4440,7 @@
           "type": "integer"
         },
         "kind": {
-          "description":
-            "Indicates whether the dashboard to represent the metric is a line, bar,pie, area or donut chart.",
+          "description": "Indicates whether the dashboard to represent the metric is a line, bar,pie, area or donut chart.",
           "type": "string"
         },
         "isDefault": {
@@ -4294,7 +4461,12 @@
       "description": "The list of metric metadata.",
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricMetadata"
@@ -4303,8 +4475,7 @@
       }
     },
     "MetricSet": {
-      "description":
-        " The set of metric values. Example of a MetricSet are Values of token requests for a Server1 or RelyingParty1.",
+      "description": " The set of metric values. Example of a MetricSet are Values of token requests for a Server1 or RelyingParty1.",
       "type": "object",
       "properties": {
         "setName": {
@@ -4367,6 +4538,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ModuleConfiguration"
@@ -4715,6 +4887,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReplicationSummary"
@@ -4819,6 +4992,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RunProfile"
@@ -4919,14 +5093,12 @@
           "type": "string"
         },
         "createdDate": {
-          "description":
-            "The date and time, in UTC, when the service was onboarded to Azure Active Directory Connect Health.",
+          "description": "The date and time, in UTC, when the service was onboarded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
         "customNotificationEmails": {
-          "description":
-            "The list of additional emails that are configured to recieve notifications about the service.",
+          "description": "The list of additional emails that are configured to recieve notifications about the service.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4955,16 +5127,14 @@
           "format": "date-time"
         },
         "monitoringConfigurationsComputed": {
-          "description":
-            "The monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Items"
           }
         },
         "monitoringConfigurationsCustomized": {
-          "description":
-            "The customized monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The customized monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Items"
@@ -5017,8 +5187,7 @@
           "type": "string"
         },
         "type": {
-          "description":
-            "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
+          "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
           "type": "string"
         }
       }
@@ -5027,7 +5196,12 @@
       "description": "The list of services for a given onboarded tenant.",
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Service"
@@ -5085,8 +5259,7 @@
           "type": "string"
         },
         "createdDate": {
-          "description":
-            "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -5151,16 +5324,14 @@
           "type": "string"
         },
         "monitoringConfigurationsComputed": {
-          "description":
-            "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Items"
           }
         },
         "monitoringConfigurationsCustomized": {
-          "description":
-            "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Items"
@@ -5219,7 +5390,12 @@
       "description": "The list of servers that are onboarded for a given service.",
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
         "value": {
+          "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceMember"
@@ -5270,8 +5446,7 @@
         },
         "agentAutoUpdate": {
           "type": "boolean",
-          "description":
-            "Indicates if the tenant is configured to automatically receive updates for Azure Active Directory Connect Health client side features."
+          "description": "Indicates if the tenant is configured to automatically receive updates for Azure Active Directory Connect Health client side features."
         },
         "alertSuppressionTimeInMins": {
           "type": "string",
@@ -5294,8 +5469,7 @@
         "devOpsTtl": {
           "type": "string",
           "format": "date-time",
-          "description":
-            "The date and time, in UTC, till when the tenant data can be seen by Microsoft through Azure portal."
+          "description": "The date and time, in UTC, till when the tenant data can be seen by Microsoft through Azure portal."
         },
         "disabled": {
           "type": "boolean",
@@ -5319,14 +5493,12 @@
         "lastDisabled": {
           "type": "string",
           "format": "date-time",
-          "description":
-            "The date and time, in UTC, when the tenant was last disabled in Azure Active Directory Connect Health."
+          "description": "The date and time, in UTC, when the tenant was last disabled in Azure Active Directory Connect Health."
         },
         "lastVerified": {
           "type": "string",
           "format": "date-time",
-          "description":
-            "The date and time, in UTC, when the tenant onboarding status in Azure Active Directory Connect Health was last verified."
+          "description": "The date and time, in UTC, when the tenant onboarding status in Azure Active Directory Connect Health was last verified."
         },
         "onboarded": {
           "type": "boolean",
@@ -5334,13 +5506,11 @@
         },
         "pksCertificate": {
           "type": "object",
-          "description":
-            "The certificate associated with the tenant to onboard data to Azure Active Directory Connect Health."
+          "description": "The certificate associated with the tenant to onboard data to Azure Active Directory Connect Health."
         },
         "privatePreviewTenant": {
           "type": "boolean",
-          "description":
-            "Indicates if the tenant has signed up for private preview of Azure Active Directory Connect Health features."
+          "description": "Indicates if the tenant has signed up for private preview of Azure Active Directory Connect Health features."
         },
         "tenantInQuarantine": {
           "type": "boolean",
@@ -5361,8 +5531,7 @@
           "type": "boolean"
         },
         "onboardingDisplayUrl": {
-          "description":
-            "The display url, to help tenant navigate or onboard to Azure Active Directory Connect Health blade, based on tenant onboarding status.",
+          "description": "The display url, to help tenant navigate or onboard to Azure Active Directory Connect Health blade, based on tenant onboarding status.",
           "type": "string"
         }
       }
