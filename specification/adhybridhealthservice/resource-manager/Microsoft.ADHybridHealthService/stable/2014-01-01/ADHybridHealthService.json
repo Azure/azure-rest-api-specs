@@ -2333,6 +2333,9 @@
               "$ref": "#/definitions/Connectors"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2380,6 +2383,9 @@
               "$ref": "#/definitions/Credential"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2455,9 +2461,12 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/DataFreshnessDetail"
+              "$ref": "#/definitions/DataFreshness"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2540,6 +2549,9 @@
               "$ref": "#/definitions/GlobalConfiguration"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2548,11 +2560,11 @@
         "tags": [ "Metrics" ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "servicemembers_listMetrics": {
+          "servicemembers_getMetrics": {
             "$ref": "./examples/Server_MetricSets.json"
           }
         },
-        "operationId": "servicemembers_listMetrics",
+        "operationId": "servicemembers_getMetrics",
         "parameters": [
           {
             "name": "serviceName",
@@ -3529,6 +3541,23 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "DataFreshness": {
+      "description": "The list of dimensions.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFreshnessDetail"
           }
         }
       }
