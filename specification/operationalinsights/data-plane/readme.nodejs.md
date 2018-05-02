@@ -6,9 +6,9 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   add-credentials: true
-  package-name: azure-appinsights
+  package-name: azure-operationalinsights
   package-version: 0.9.0-preview
-  output-folder: $(node-sdks-folder)/lib/services/appinsights-client
+  output-folder: $(node-sdks-folder)/lib/services/operationalinsights-client
   payload-flattening-threshold: 1
   generate-license-txt: true
   generate-package-json: true
