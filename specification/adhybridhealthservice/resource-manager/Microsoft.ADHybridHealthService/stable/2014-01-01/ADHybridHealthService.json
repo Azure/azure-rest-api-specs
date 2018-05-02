@@ -2333,9 +2333,6 @@
               "$ref": "#/definitions/Connectors"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -2383,9 +2380,6 @@
               "$ref": "#/definitions/Credential"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -2432,8 +2426,7 @@
         "tags": [ "ServiceMembers" ],
         "description": "Gets the last time when the server uploaded data to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "servicemembers_list
-          ": {
+          "servicemembers_listDataFreshness": {
             "$ref": "./examples/Datafreshness.json"
           }
         },
@@ -2547,9 +2540,6 @@
               "$ref": "#/definitions/GlobalConfiguration"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -2558,11 +2548,11 @@
         "tags": [ "Metrics" ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "servicemembers_getMetrics": {
+          "servicemembers_listMetrics": {
             "$ref": "./examples/Server_MetricSets.json"
           }
         },
-        "operationId": "servicemembers_getMetrics",
+        "operationId": "servicemembers_listMetrics",
         "parameters": [
           {
             "name": "serviceName",
