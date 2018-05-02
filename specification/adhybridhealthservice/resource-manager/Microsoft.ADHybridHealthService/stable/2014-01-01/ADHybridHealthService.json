@@ -2461,12 +2461,9 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/DataFreshness"
+              "$ref": "#/definitions/DataFreshnessDetails"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -3545,35 +3542,16 @@
         }
       }
     },
-    "DataFreshness": {
-      "description": "The list of dimensions.",
+    "DataFreshnessDetails": {
+      "description": "The list of data and their upload timestamp.",
       "type": "object",
       "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of operations.",
-          "type": "string"
-        },
         "value": {
           "description": "The value returned by the operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataFreshnessDetail"
+            "$ref": "#/definitions/Item"
           }
-        }
-      }
-    },
-    "DataFreshnessDetail": {
-      "description": "The data freshness details for the server.",
-      "type": "object",
-      "properties": {
-        "serviceId": {
-          "description": "The service Id to whom the server is onboarded to.",
-          "type": "string"
-        },
-        "lastDataUploadTime": {
-          "description": "The date time , in UTC, when data was last uploaded by the server.",
-          "type": "string",
-          "format": "date-time"
         }
       }
     },
