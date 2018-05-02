@@ -437,15 +437,25 @@
             "name": "nextPartitionKey",
             "in": "query",
             "description": "The next partition key to query for.",
-            "required": false,
-            "type": "string"
+            "required": true,
+            "enum": [ "" ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "nextPartitionKey",
+              "modelAsString": "true"
+            }
           },
           {
             "name": "nextRowKey",
             "in": "query",
             "description": "The next row key to query for.",
-            "required": false,
-            "type": "string"
+            "required": true,
+            "enum": [ "" ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "nextRowKey",
+              "modelAsString": "true"
+            }
           },
           {
             "name": "takeCount",
@@ -834,14 +844,24 @@
             "in": "query",
             "description": "The next partition key to query for.",
             "required": true,
-            "type": "string"
+            "enum": [ "" ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "nextPartitionKey",
+              "modelAsString": "true"
+            }
           },
           {
             "name": "nextRowKey",
             "in": "query",
             "description": "The next row key to query for.",
-            "required": false,
-            "type": "string"
+            "required": true,
+            "enum": [ "" ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "nextRowKey",
+              "modelAsString": "true"
+            }
           },
           {
             "name": "takeCount",
