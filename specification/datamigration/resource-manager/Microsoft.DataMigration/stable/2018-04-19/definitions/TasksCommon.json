@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-15-preview"
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -23,71 +23,88 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the database"
+          "description": "Unique identifier for the database",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Name of the database"
+          "description": "Name of the database",
+          "readOnly": true
         },
         "compatibilityLevel": {
           "$ref": "#/definitions/DatabaseCompatLevel",
-          "description": "SQL Server compatibility level of database"
+          "description": "SQL Server compatibility level of database",
+          "readOnly": true
         },
         "collation": {
           "type": "string",
-          "description": "Collation name of the database"
+          "description": "Collation name of the database",
+          "readOnly": true
         },
         "serverName": {
           "type": "string",
-          "description": "Name of the server"
+          "description": "Name of the server",
+          "readOnly": true
         },
         "fqdn": {
           "type": "string",
-          "description": "Fully qualified name"
+          "description": "Fully qualified name",
+          "readOnly": true
         },
         "installId": {
           "type": "string",
-          "description": "Install id of the database"
+          "description": "Install id of the database",
+          "readOnly": true
         },
         "serverVersion": {
           "type": "string",
-          "description": "Version of the server"
+          "description": "Version of the server",
+          "readOnly": true
         },
         "serverEdition": {
           "type": "string",
-          "description": "Edition of the server"
+          "description": "Edition of the server",
+          "readOnly": true
         },
         "serverLevel": {
           "type": "string",
-          "description": "Product level of the server (RTM, SP, CTP)."
+          "description": "Product level of the server (RTM, SP, CTP).",
+          "readOnly": true
         },
         "serverDefaultDataPath": {
           "type": "string",
-          "description": "Default path of the data files"
+          "description": "Default path of the data files",
+          "readOnly": true
         },
         "serverDefaultLogPath": {
           "type": "string",
-          "description": "Default path of the log files"
+          "description": "Default path of the log files",
+          "readOnly": true
         },
         "serverDefaultBackupPath": {
           "type": "string",
-          "description": "Default path of the backup folder"
+          "description": "Default path of the backup folder",
+          "readOnly": true
         },
         "serverCoreCount": {
           "type": "integer",
-          "description": "Number of cores on the server"
+          "description": "Number of cores on the server",
+          "readOnly": true
         },
         "serverVisibleOnlineCoreCount": {
           "type": "integer",
-          "description": "Number of cores on the server that have VISIBLE ONLINE status"
+          "description": "Number of cores on the server that have VISIBLE ONLINE status",
+          "readOnly": true
         },
         "databaseState": {
           "$ref": "#/definitions/DatabaseState",
-          "description": "State of the database"
+          "description": "State of the database",
+          "readOnly": true
         },
         "serverId": {
           "type": "string",
-          "description": "The unique Server Id"
+          "description": "The unique Server Id",
+          "readOnly": true
         }
       }
     },
@@ -370,28 +387,6 @@
         "modelAsString": true
       }
     },
-    "MigrateSqlServerSqlMIDatabaseInput": {
-      "type": "object",
-      "description": "Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the database"
-        },
-        "restoreDatabaseName": {
-          "type": "string",
-          "description": "Name of the database at destination"
-        },
-        "backupFileShare": {
-          "$ref": "#/definitions/FileShare",
-          "description": "Backup file share information for backing up this database."
-        }
-      },
-      "required": [
-        "name",
-        "restoreDatabaseName"
-      ]
-    },
     "MigrateSqlServerSqlServerDatabaseInput": {
       "type": "object",
       "description": "Database specific information for SQL to SQL migration task inputs",
@@ -542,6 +537,83 @@
       "required": [
         "path"
       ]
+    },
+    "StartMigrationScenarioServerRoleResult": {
+      "type": "object",
+      "description": "Migration results from a server role.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of server role.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "LoginType": {
+      "type": "string",
+      "description": "Enum mapping of SMO LoginType.",
+      "enum": [
+        "WindowsUser",
+        "WindowsGroup",
+        "SqlLogin",
+        "Certificate",
+        "AsymmetricKey",
+        "ExternalUser",
+        "ExternalGroup"
+      ],
+      "x-ms-enum": {
+        "name": "LoginType"
+      }
+    },
+    "LoginMigrationStage": {
+      "type": "string",
+      "description": "Enum of the different stage of login migration.",
+      "enum": [
+        "None",
+        "Initialize",
+        "LoginMigration",
+        "EstablishUserMapping",
+        "AssignRoleMembership",
+        "AssignRoleOwnership",
+        "EstablishServerPermissions",
+        "EstablishObjectPermissions",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "LoginMigrationStage"
+      }
+    },
+    "MigrationEligibilityInfo": {
+      "type": "object",
+      "description": "Information about migration eligibility of a server object",
+      "properties": {
+        "isEligibileForMigration": {
+          "type": "boolean",
+          "description": "Whether object is eligible for migration or not.",
+          "readOnly": true
+        },
+        "validationMessages": {
+          "description": "Information about eligibility failure for the server object.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
     }
   }
 }
