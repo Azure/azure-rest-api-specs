@@ -2527,9 +2527,12 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/GlobalConfiguration"
+              "$ref": "#/definitions/GlobalConfigurations"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -3523,19 +3526,19 @@
         }
       }
     },
-    "Credentials":{
-    "description": "The list of agent credentials.",
-    "type": "object",
-    "properties": {
-      "value": {
-        "description": "The value returned by the operation.",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/Credential"
+    "Credentials": {
+      "description": "The list of agent credentials.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Credential"
+          }
         }
       }
-    }
-  },
+    },
     "DataFreshnessDetail": {
       "description": "The data freshness details for the server.",
       "type": "object",
@@ -4032,6 +4035,19 @@
         },
         "featureSet": {
           "description": "The list of additional feature sets."
+        }
+      }
+    },
+    "GlobalConfigurations": {
+      "description": "The list of global configurations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GlobalConfiguration"
+          }
         }
       }
     },
