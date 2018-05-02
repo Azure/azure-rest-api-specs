@@ -381,8 +381,8 @@
 				"tags": ["Namespaces"],
 				"operationId": "Namespaces_ListAuthorizationRules",
 				"x-ms-examples": {
-					"NameSpaceAutorizationRuleListAll": {
-						"$ref": "./examples/NameSpaces/NHNameSpaceAutorizationRuleListAll.json"
+					"NameSpaceAuthorizationRuleListAll": {
+						"$ref": "./examples/NameSpaces/NHNameSpaceAuthorizationRuleListAll.json"
 					}
 				},
 				"description": "Gets the authorization rules for a namespace.",
@@ -476,8 +476,8 @@
 				"tags": ["Namespaces"],
 				"operationId": "Namespaces_DeleteAuthorizationRule",
 				"x-ms-examples": {
-					"NameSpaceAutorizationRuleDelete": {
-						"$ref": "./examples/NameSpaces/NHNameSpaceAutorizationRuleDelete.json"
+					"NameSpaceAuthorizationRuleDelete": {
+						"$ref": "./examples/NameSpaces/NHNameSpaceAuthorizationRuleDelete.json"
 					}
 				},
 				"description": "Deletes a namespace authorization rule.",
@@ -518,8 +518,8 @@
 				"tags": ["Namespaces"],
 				"operationId": "Namespaces_GetAuthorizationRule",
 				"x-ms-examples": {
-					"NameSpaceAutorizationRuleGet": {
-						"$ref": "./examples/NameSpaces/NHNameSpaceAutorizationRuleGet.json"
+					"NameSpaceAuthorizationRuleGet": {
+						"$ref": "./examples/NameSpaces/NHNameSpaceAuthorizationRuleGet.json"
 					}
 				},
 				"description": "Gets an authorization rule for a namespace by rule name.",
@@ -660,7 +660,7 @@
 				"operationId": "notificationhubs_ListByNamespace",
 				"x-ms-examples": {
 					"notificationhubListByNameSpace": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubListByNameSpace.json"
+						"$ref": "./examples/notificationhubs/NotificationHubListByNameSpace.json"
 					}
 				},
 				"description": "Gets the notificationhubs within a namespace.",
@@ -689,7 +689,7 @@
 					"200": {
 						"description": "notificationhubs successfully returned.",
 						"schema": {
-							"$ref": "#/definitions/NHnotificationhubListResult"
+							"$ref": "#/definitions/NHListResult"
 						}
 					},
 					"default": {
@@ -710,7 +710,7 @@
 				"operationId": "notificationhubs_CreateOrUpdate",
 				"x-ms-examples": {
 					"notificationhubCreate": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubCreate.json"
+						"$ref": "./examples/notificationhubs/NotificationHubCreate.json"
 					}
 				},
 				"description": "Creates or updates a Notification Hubs notificationhub. This operation is idempotent.",
@@ -731,7 +731,7 @@
 					"in": "body",
 					"required": true,
 					"schema": {
-						"$ref": "#/definitions/NHnotificationhub"
+						"$ref": "#/definitions/NH"
 					},
 					"description": "Parameters supplied to create or update a notificationhub resource."
 				},
@@ -745,7 +745,7 @@
 					"200": {
 						"description": "notificationhub successfully created.",
 						"schema": {
-							"$ref": "#/definitions/NHnotificationhub"
+							"$ref": "#/definitions/NH"
 						}
 					},
 					"default": {
@@ -761,7 +761,7 @@
 				"operationId": "notificationhubs_Delete",
 				"x-ms-examples": {
 					"notificationhubDelete": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubDelete.json"
+						"$ref": "./examples/notificationhubs/NotificationHubDelete.json"
 					}
 				},
 				"description": "Deletes a notificationhub from the specified namespace in a resource group.",
@@ -803,7 +803,7 @@
 				"operationId": "notificationhubs_Get",
 				"x-ms-examples": {
 					"notificationhubGet": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubGet.json"
+						"$ref": "./examples/notificationhubs/NotificationHubGet.json"
 					}
 				},
 				"description": "Returns a description for the specified notificationhub.",
@@ -829,7 +829,7 @@
 					"200": {
 						"description": "notificationhub description successfully returned.",
 						"schema": {
-							"$ref": "#/definitions/NHnotificationhub"
+							"$ref": "#/definitions/NH"
 						}
 					},
 					"default": {
@@ -846,8 +846,8 @@
 				"tags": ["notificationhubs"],
 				"operationId": "notificationhubs_ListAuthorizationRules",
 				"x-ms-examples": {
-					"notificationhubAutorizationRuleListAll": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubAutorizationRuleListAll.json"
+					"notificationhubAuthorizationRuleListAll": {
+						"$ref": "./examples/notificationhubs/NotificationHubAuthorizationRuleListAll.json"
 					}
 				},
 				"description": "Gets all authorization rules for a notificationhub.",
@@ -894,7 +894,7 @@
 				"operationId": "notificationhubs_CreateOrUpdateAuthorizationRule",
 				"x-ms-examples": {
 					"notificationhubAuthorizationRuleCreate": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubAuthorizationRuleCreate.json"
+						"$ref": "./examples/notificationhubs/NotificationHubAuthorizationRuleCreate.json"
 					}
 				},
 				"description": "Creates an authorization rule for a notificationhub.",
@@ -944,8 +944,8 @@
 				"tags": ["notificationhubs"],
 				"operationId": "notificationhubs_DeleteAuthorizationRule",
 				"x-ms-examples": {
-					"notificationhubAutorizationRuleDelete": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubAutorizationRuleDelete.json"
+					"notificationhubAuthorizationRuleDelete": {
+						"$ref": "./examples/notificationhubs/NotificationHubAuthorizationRuleDelete.json"
 					}
 				},
 				"description": "Deletes a notificationhub authorization rule.",
@@ -989,8 +989,8 @@
 				"tags": ["notificationhubs"],
 				"operationId": "notificationhubs_GetAuthorizationRule",
 				"x-ms-examples": {
-					"notificationhubAutorizationRuleGet": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubAutorizationRuleGet.json"
+					"notificationhubAuthorizationRuleGet": {
+						"$ref": "./examples/notificationhubs/NotificationHubAuthorizationRuleGet.json"
 					}
 				},
 				"description": "Gets an authorization rule for a notificationhub by rule name.",
@@ -1037,7 +1037,7 @@
 				"operationId": "notificationhubs_ListKeys",
 				"x-ms-examples": {
 					"notificationhubAuthorizationRuleListKey": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubAuthorizationRuleListKey.json"
+						"$ref": "./examples/notificationhubs/NotificationHubAuthorizationRuleListKey.json"
 					}
 				},
 				"description": "Primary and secondary connection strings to the notificationhub.",
@@ -1084,7 +1084,7 @@
 				"operationId": "notificationhubs_RegenerateKeys",
 				"x-ms-examples": {
 					"notificationhubAuthorizationRuleRegenrateKey": {
-						"$ref": "./examples/notificationhubs/NHnotificationhubAuthorizationRuleRegenrateKey.json"
+						"$ref": "./examples/notificationhubs/NotificationHubAuthorizationRuleRegenrateKey.json"
 					}
 				},
 				"description": "Regenerates the primary or secondary connection strings to the notificationhub.",
@@ -1133,1446 +1133,1446 @@
 					}
 				}
 			}
+		}
+	},
+	"definitions": {
+		"TrackedResource": {
+			"properties": {
+				"location": {
+					"type": "string",
+					"x-ms-mutability": ["read",
+					"create"],
+					"description": "The Geo-location where the resource lives"
+				},
+				"tags": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					},
+					"x-ms-mutability": ["read",
+					"create",
+					"update"],
+					"description": "Resource tags"
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"required": ["location"],
+			"description": "The Resource definition."
 		},
-		"definitions": {
-			"TrackedResource": {
-				"properties": {
-					"location": {
-						"type": "string",
-						"x-ms-mutability": ["read",
-						"create"],
-						"description": "The Geo-location where the resource lives"
+		"Resource": {
+			"properties": {
+				"id": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Resource Id"
+				},
+				"name": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Resource name"
+				},
+				"type": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Resource type"
+				}
+			},
+			"x-ms-azure-resource": true,
+			"description": "The Resource definition for other than namespace."
+		},
+		"ResourceNamespacePatch": {
+			"properties": {
+				"location": {
+					"type": "string",
+					"description": "Resource location"
+				},
+				"tags": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
 					},
-					"tags": {
-						"type": "object",
-						"additionalProperties": {
-							"type": "string"
-						},
-						"x-ms-mutability": ["read",
-						"create",
-						"update"],
-						"description": "Resource tags"
+					"description": "Resource tags"
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"description": "The Resource definition."
+		},
+		"NHNamespaceListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/NHNamespace"
+					},
+					"description": "Result of the List Namespace operation."
+				},
+				"nextLink": {
+					"type": "string",
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces."
+				}
+			},
+			"description": "The response of the List Namespace operation."
+		},
+		"NHNamespace": {
+			"properties": {
+				"sku": {
+					"$ref": "#/definitions/NHSku",
+					"description": "Porperties of Sku"
+				},
+				"properties": {
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/NHNamespaceProperties",
+					"description": "Properties of the namespace."
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/TrackedResource"
+			}],
+			"description": "Description of a namespace resource."
+		},
+		"NHNamespaceUpdateParameters": {
+			"properties": {
+				"sku": {
+					"$ref": "#/definitions/NHSku",
+					"description": "Porperties of Sku"
+				},
+				"properties": {
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/NHNamespaceProperties",
+					"description": "Properties of the namespace."
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/ResourceNamespacePatch"
+			}],
+			"description": "Description of a namespace resource."
+		},
+		"NHNamespaceProperties": {
+			"properties": {
+				"provisioningState": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Provisioning state of the namespace."
+				},
+				"createdAt": {
+					"readOnly": true,
+					"format": "date-time",
+					"type": "string",
+					"description": "The time the namespace was created."
+				},
+				"updatedAt": {
+					"readOnly": true,
+					"format": "date-time",
+					"type": "string",
+					"description": "The time the namespace was updated."
+				},
+				"notificationHubsEndpoint": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Endpoint you can use to perform Notification Hubs operations."
+				},
+				"metricId": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Identifier for Azure Insights metrics"
+				}
+			},
+			"description": "Properties of the namespace."
+		},
+		"NHSku": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": "Name of this SKU.",
+					"enum": ["Basic",
+					"Standard",
+					"Premium"],
+					"x-ms-enum": {
+						"name": "SkuName",
+						"modelAsString": false
 					}
 				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"required": ["location"],
-				"description": "The Resource definition."
-			},
-			"Resource": {
-				"properties": {
-					"id": {
-						"type": "string",
-						"readOnly": true,
-						"description": "Resource Id"
-					},
-					"name": {
-						"type": "string",
-						"readOnly": true,
-						"description": "Resource name"
-					},
-					"type": {
-						"type": "string",
-						"readOnly": true,
-						"description": "Resource type"
+				"tier": {
+					"type": "string",
+					"description": "The billing tier of this particular SKU.",
+					"enum": ["Basic",
+					"Standard",
+					"Premium"],
+					"x-ms-enum": {
+						"name": "SkuTier",
+						"modelAsString": false
 					}
 				},
-				"x-ms-azure-resource": true,
-				"description": "The Resource definition for other than namespace."
+				"capacity": {
+					"format": "int32",
+					"type": "integer",
+					"description": "The specified messaging units for the tier. For Premium tier, capacity are 1,2 and 4."
+				}
 			},
-			"ResourceNamespacePatch": {
-				"properties": {
-					"location": {
-						"type": "string",
-						"description": "Resource location"
+			"required": ["name"],
+			"description": "SKU of the namespace."
+		},
+		"NHAuthorizationRuleListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/NHAuthorizationRule"
 					},
-					"tags": {
-						"type": "object",
-						"additionalProperties": {
-							"type": "string"
-						},
-						"description": "Resource tags"
-					}
+					"description": "Result of the List Authorization Rules operation."
 				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"description": "The Resource definition."
+				"nextLink": {
+					"type": "string",
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of Authorization Rules."
+				}
 			},
-			"NHNamespaceListResult": {
+			"description": "The response to the List Namespace operation."
+		},
+		"NHAuthorizationRule": {
+			"properties": {
 				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/NHNamespace"
-						},
-						"description": "Result of the List Namespace operation."
-					},
-					"nextLink": {
-						"type": "string",
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces."
-					}
-				},
-				"description": "The response of the List Namespace operation."
-			},
-			"NHNamespace": {
-				"properties": {
-					"sku": {
-						"$ref": "#/definitions/NHSku",
-						"description": "Porperties of Sku"
-					},
+					"x-ms-client-flatten": true,
 					"properties": {
-						"x-ms-client-flatten": true,
-						"$ref": "#/definitions/NHNamespaceProperties",
-						"description": "Properties of the namespace."
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/TrackedResource"
-				}],
-				"description": "Description of a namespace resource."
+						"rights": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"enum": ["Manage",
+								"Send",
+								"Listen"],
+								"x-ms-enum": {
+									"name": "AccessRights",
+									"modelAsString": false
+								}
+							},
+							"description": "The rights associated with the rule."
+						}
+					},
+					"required": ["rights"],
+					"description": "AuthorizationRule properties."
+				}
 			},
-			"NHNamespaceUpdateParameters": {
-				"properties": {
-					"sku": {
-						"$ref": "#/definitions/NHSku",
-						"description": "Porperties of Sku"
-					},
-					"properties": {
-						"x-ms-client-flatten": true,
-						"$ref": "#/definitions/NHNamespaceProperties",
-						"description": "Properties of the namespace."
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/ResourceNamespacePatch"
-				}],
-				"description": "Description of a namespace resource."
-			},
-			"NHNamespaceProperties": {
-				"properties": {
-					"provisioningState": {
-						"readOnly": true,
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"description": "Description of a namespace authorization rule."
+		},
+		"AuthorizationRuleProperties": {
+			"properties": {
+				"rights": {
+					"type": "array",
+					"items": {
 						"type": "string",
-						"description": "Provisioning state of the namespace."
-					},
-					"createdAt": {
-						"readOnly": true,
-						"format": "date-time",
-						"type": "string",
-						"description": "The time the namespace was created."
-					},
-					"updatedAt": {
-						"readOnly": true,
-						"format": "date-time",
-						"type": "string",
-						"description": "The time the namespace was updated."
-					},
-					"NotificationHubsEndpoint": {
-						"readOnly": true,
-						"type": "string",
-						"description": "Endpoint you can use to perform Notification Hubs operations."
-					},
-					"metricId": {
-						"readOnly": true,
-						"type": "string",
-						"description": "Identifier for Azure Insights metrics"
-					}
-				},
-				"description": "Properties of the namespace."
-			},
-			"NHSku": {
-				"type": "object",
-				"properties": {
-					"name": {
-						"type": "string",
-						"description": "Name of this SKU.",
-						"enum": ["Basic",
-						"Standard",
-						"Premium"],
+						"enum": ["Manage",
+						"Send",
+						"Listen"],
 						"x-ms-enum": {
-							"name": "SkuName",
+							"name": "AccessRights",
 							"modelAsString": false
 						}
 					},
-					"tier": {
-						"type": "string",
-						"description": "The billing tier of this particular SKU.",
-						"enum": ["Basic",
-						"Standard",
-						"Premium"],
-						"x-ms-enum": {
-							"name": "SkuTier",
-							"modelAsString": false
-						}
-					},
-					"capacity": {
-						"format": "int32",
-						"type": "integer",
-						"description": "The specified messaging units for the tier. For Premium tier, capacity are 1,2 and 4."
+					"description": "The rights associated with the rule."
+				}
+			},
+			"required": ["rights"],
+			"description": "AuthorizationRule properties."
+		},
+		"AccessKeys": {
+			"properties": {
+				"primaryConnectionString": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Primary connection string of the created namespace authorization rule."
+				},
+				"secondaryConnectionString": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Secondary connection string of the created namespace authorization rule."
+				},
+				"aliasPrimaryConnectionString": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Primary connection string of the alias if GEO DR is enabled"
+				},
+				"aliasSecondaryConnectionString": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Secondary  connection string of the alias if GEO DR is enabled"
+				},
+				"primaryKey": {
+					"readOnly": true,
+					"type": "string",
+					"description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+				},
+				"secondaryKey": {
+					"readOnly": true,
+					"type": "string",
+					"description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+				},
+				"keyName": {
+					"readOnly": true,
+					"type": "string",
+					"description": "A string that describes the authorization rule."
+				}
+			},
+			"description": "Namespace/NotificationHubs Connection String"
+		},
+		"RegenerateAccessKeyParameters": {
+			"properties": {
+				"keyType": {
+					"type": "string",
+					"description": "The access key to regenerate.",
+					"enum": ["PrimaryKey",
+					"SecondaryKey"],
+					"x-ms-enum": {
+						"name": "KeyType",
+						"modelAsString": false
 					}
 				},
-				"required": ["name"],
-				"description": "SKU of the namespace."
+				"key": {
+					"type": "string",
+					"description": "Optional, if the key value provided, is reset for KeyType value or autogenerate Key value set for keyType"
+				}
 			},
-			"NHAuthorizationRuleListResult": {
-				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/NHAuthorizationRule"
-						},
-						"description": "Result of the List Authorization Rules operation."
+			"required": ["keyType"],
+			"description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key neeeds to be reset."
+		},
+		"NHListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/NH"
 					},
-					"nextLink": {
-						"type": "string",
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of Authorization Rules."
+					"description": "Result of the List notificationhubs operation."
+				},
+				"nextLink": {
+					"type": "string",
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of notificationhubs."
+				}
+			},
+			"description": "The response to the List notificationhubs operation."
+		},
+		"NH": {
+			"properties": {
+				"properties": {
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/NHProperties",
+					"description": "notificationhub Properties"
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"description": "Description of notificationhub Resource."
+		},
+		"NHProperties": {
+			"properties": {
+				"countDetails": {
+					"readOnly": true,
+					"$ref": "#/definitions/MessageCountDetails",
+					"description": "Message Count Details."
+				},
+				"createdAt": {
+					"readOnly": true,
+					"type": "string",
+					"format": "date-time",
+					"description": "The exact time the message was created."
+				},
+				"updatedAt": {
+					"readOnly": true,
+					"type": "string",
+					"format": "date-time",
+					"description": "The exact time the message was updated."
+				},
+				"accessedAt": {
+					"readOnly": true,
+					"type": "string",
+					"format": "date-time",
+					"description": "Last time a message was sent, or the last time there was a receive request to this notificationhub."
+				},
+				"sizeInBytes": {
+					"readOnly": true,
+					"format": "int64",
+					"type": "integer",
+					"description": "The size of the notificationhub, in bytes."
+				},
+				"messageCount": {
+					"readOnly": true,
+					"format": "int64",
+					"type": "integer",
+					"description": "The number of messages in the notificationhub."
+				},
+				"lockDuration": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8601 timespan duration of a peek-lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
+				},
+				"maxSizeInMegabytes": {
+					"format": "int32",
+					"type": "integer",
+					"description": "The maximum size of the notificationhub in megabytes, which is the size of memory allocated for the notificationhub. Default is 1024."
+				},
+				"requiresDuplicateDetection": {
+					"type": "boolean",
+					"description": "A value indicating if this notificationhub requires duplicate detection."
+				},
+				"requiresSession": {
+					"type": "boolean",
+					"description": "A value that indicates whether the notificationhub supports the concept of sessions."
+				},
+				"defaultMessageTimeToLive": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8601 default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Notification Hubs. This is the default value used when TimeToLive is not set on a message itself."
+				},
+				"deadLetteringOnMessageExpiration": {
+					"type": "boolean",
+					"description": "A value that indicates whether this notificationhub has dead letter support when a message expires."
+				},
+				"duplicateDetectionHistoryTimeWindow": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8601 timeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
+				},
+				"maxDeliveryCount": {
+					"format": "int32",
+					"type": "integer",
+					"description": "The maximum delivery count. A message is automatically deadlettered after this number of deliveries. default value is 10."
+				},
+				"status": {
+					"$ref": "#/definitions/EntityStatus",
+					"description": "Enumerates the possible values for the status of a messaging entity."
+				},
+				"enableBatchedOperations": {
+					"type": "boolean",
+					"description": "Value that indicates whether server-side batched operations are enabled."
+				},
+				"autoDeleteOnIdle": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8061 timeSpan idle interval after which the notificationhub is automatically deleted. The minimum duration is 5 minutes."
+				},
+				"enablePartitioning": {
+					"type": "boolean",
+					"description": "A value that indicates whether the notificationhub is to be partitioned across multiple message brokers."
+				},
+				"enableExpress": {
+					"type": "boolean",
+					"description": "A value that indicates whether Express Entities are enabled. An express notificationhub holds a message in memory temporarily before writing it to persistent storage."
+				},
+				"forwardTo": {
+					"type": "string",
+					"description": "notificationhub/Topic name to forward the messages"
+				},
+				"forwardDeadLetteredMessagesTo": {
+					"type": "string",
+					"description": "notificationhub/Topic name to forward the Dead Letter message"
+				}
+			},
+			"description": "The notificationhub Properties definition."
+		},
+		"MessageCountDetails": {
+			"type": "object",
+			"properties": {
+				"activeMessageCount": {
+					"readOnly": true,
+					"format": "int64",
+					"type": "integer",
+					"description": "Number of active messages in the notificationhub, topic, or subscription."
+				},
+				"deadLetterMessageCount": {
+					"readOnly": true,
+					"format": "int64",
+					"type": "integer",
+					"description": "Number of messages that are dead lettered."
+				},
+				"scheduledMessageCount": {
+					"readOnly": true,
+					"format": "int64",
+					"type": "integer",
+					"description": "Number of scheduled messages."
+				},
+				"transferMessageCount": {
+					"readOnly": true,
+					"format": "int64",
+					"type": "integer",
+					"description": "Number of messages transferred to another notificationhub, topic, or subscription."
+				},
+				"transferDeadLetterMessageCount": {
+					"readOnly": true,
+					"format": "int64",
+					"type": "integer",
+					"description": "Number of messages transferred into dead letters."
+				}
+			},
+			"description": "Message Count Details."
+		},
+		"NHTopicListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/NHTopic"
+					},
+					"description": "Result of the List Topics operation."
+				},
+				"nextLink": {
+					"type": "string",
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of topics."
+				}
+			},
+			"description": "The response to the List Topics operation."
+		},
+		"NHTopic": {
+			"properties": {
+				"properties": {
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/NHTopicProperties",
+					"description": "Properties of topic resource."
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"description": "Description of topic resource."
+		},
+		"NHTopicProperties": {
+			"properties": {
+				"sizeInBytes": {
+					"readOnly": true,
+					"format": "int64",
+					"type": "integer",
+					"description": "Size of the topic, in bytes."
+				},
+				"createdAt": {
+					"readOnly": true,
+					"format": "date-time",
+					"type": "string",
+					"description": "Exact time the message was created."
+				},
+				"updatedAt": {
+					"readOnly": true,
+					"format": "date-time",
+					"type": "string",
+					"description": "The exact time the message was updated."
+				},
+				"accessedAt": {
+					"readOnly": true,
+					"format": "date-time",
+					"type": "string",
+					"description": "Last time the message was sent, or a request was received, for this topic."
+				},
+				"subscriptionCount": {
+					"readOnly": true,
+					"format": "int32",
+					"type": "integer",
+					"description": "Number of subscriptions."
+				},
+				"countDetails": {
+					"readOnly": true,
+					"$ref": "#/definitions/MessageCountDetails",
+					"description": "Message count deatils"
+				},
+				"defaultMessageTimeToLive": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8601 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Notification Hubs. This is the default value used when TimeToLive is not set on a message itself."
+				},
+				"maxSizeInMegabytes": {
+					"format": "int32",
+					"type": "integer",
+					"description": "Maximum size of the topic in megabytes, which is the size of the memory allocated for the topic. Default is 1024."
+				},
+				"requiresDuplicateDetection": {
+					"type": "boolean",
+					"description": "Value indicating if this topic requires duplicate detection."
+				},
+				"duplicateDetectionHistoryTimeWindow": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO8601 timespan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
+				},
+				"enableBatchedOperations": {
+					"type": "boolean",
+					"description": "Value that indicates whether server-side batched operations are enabled."
+				},
+				"status": {
+					"$ref": "#/definitions/EntityStatus",
+					"description": "Enumerates the possible values for the status of a messaging entity."
+				},
+				"supportOrdering": {
+					"type": "boolean",
+					"description": "Value that indicates whether the topic supports ordering."
+				},
+				"autoDeleteOnIdle": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8601 timespan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+				},
+				"enablePartitioning": {
+					"type": "boolean",
+					"description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
+				},
+				"enableExpress": {
+					"type": "boolean",
+					"description": "Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage."
+				}
+			},
+			"description": "The Tpoic Properties definition."
+		},
+		"NHSubscriptionListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/NHSubscription"
+					},
+					"description": "Result of the List Subscriptions operation."
+				},
+				"nextLink": {
+					"type": "string",
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of subscriptions."
+				}
+			},
+			"description": "The response to the List Subscriptions operation."
+		},
+		"NHSubscription": {
+			"properties": {
+				"properties": {
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/NHSubscriptionProperties",
+					"description": "Properties of subscriptions resource."
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"description": "Description of subscription resource."
+		},
+		"NHSubscriptionProperties": {
+			"properties": {
+				"messageCount": {
+					"readOnly": true,
+					"format": "int64",
+					"type": "integer",
+					"description": "Number of messages."
+				},
+				"createdAt": {
+					"readOnly": true,
+					"type": "string",
+					"format": "date-time",
+					"description": "Exact time the message was created."
+				},
+				"accessedAt": {
+					"readOnly": true,
+					"format": "date-time",
+					"type": "string",
+					"description": "Last time there was a receive request to this subscription."
+				},
+				"updatedAt": {
+					"readOnly": true,
+					"format": "date-time",
+					"type": "string",
+					"description": "The exact time the message was updated."
+				},
+				"countDetails": {
+					"readOnly": true,
+					"$ref": "#/definitions/MessageCountDetails",
+					"description": "Message count details"
+				},
+				"lockDuration": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8061 lock duration timespan for the subscription. The default value is 1 minute."
+				},
+				"requiresSession": {
+					"type": "boolean",
+					"description": "Value indicating if a subscription supports the concept of sessions."
+				},
+				"defaultMessageTimeToLive": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8061 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Notification Hubs. This is the default value used when TimeToLive is not set on a message itself."
+				},
+				"deadLetteringOnFilterEvaluationExceptions": {
+					"type": "boolean",
+					"description": "Value that indicates whether a subscription has dead letter support on filter evaluation exceptions."
+				},
+				"deadLetteringOnMessageExpiration": {
+					"type": "boolean",
+					"description": "Value that indicates whether a subscription has dead letter support when a message expires."
+				},
+				"duplicateDetectionHistoryTimeWindow": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8601 timeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
+				},
+				"maxDeliveryCount": {
+					"format": "int32",
+					"type": "integer",
+					"description": "Number of maximum deliveries."
+				},
+				"status": {
+					"$ref": "#/definitions/EntityStatus",
+					"description": "Enumerates the possible values for the status of a messaging entity."
+				},
+				"enableBatchedOperations": {
+					"type": "boolean",
+					"description": "Value that indicates whether server-side batched operations are enabled."
+				},
+				"autoDeleteOnIdle": {
+					"format": "duration",
+					"type": "string",
+					"description": "ISO 8061 timeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+				},
+				"forwardTo": {
+					"type": "string",
+					"description": "notificationhub/Topic name to forward the messages"
+				},
+				"forwardDeadLetteredMessagesTo": {
+					"type": "string",
+					"description": "notificationhub/Topic name to forward the Dead Letter message"
+				}
+			},
+			"description": "Description of Subscription Resource."
+		},
+		"EntityStatus": {
+			"type": "string",
+			"enum": ["Active",
+			"Disabled",
+			"Restoring",
+			"SendDisabled",
+			"ReceiveDisabled",
+			"Creating",
+			"Deleting",
+			"Renaming",
+			"Unknown"],
+			"x-ms-enum": {
+				"name": "EntityStatus",
+				"modelAsString": false
+			},
+			"description": "Entity status."
+		},
+		"UnavailableReason": {
+			"type": "string",
+			"enum": ["None",
+			"InvalidName",
+			"SubscriptionIsDisabled",
+			"NameInUse",
+			"NameInLockdown",
+			"TooManyNamespaceInCurrentSubscription"],
+			"x-ms-enum": {
+				"name": "UnavailableReason",
+				"modelAsString": false
+			},
+			"description": "Specifies the reason for the unavailability of the service."
+		},
+		"CheckNameAvailability": {
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": "The Name to check the namespce name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number."
+				}
+			},
+			"required": ["name"],
+			"description": "Description of a Check Name availability request properties."
+		},
+		"CheckNameAvailabilityResult": {
+			"properties": {
+				"message": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The detailed info regarding the reason associated with the namespace."
+				},
+				"nameAvailable": {
+					"type": "boolean",
+					"description": "Value indicating namespace is availability, true if the namespace is available; otherwise, false."
+				},
+				"reason": {
+					"$ref": "#/definitions/UnavailableReason",
+					"description": "The reason for unavailability of a namespace."
+				}
+			},
+			"description": "Description of a Check Name availability request properties."
+		},
+		"OperationListResult": {
+			"description": "Result of the request to list NotificationHubs operations. It contains a list of operations and a URL link to get the next set of results.",
+			"properties": {
+				"value": {
+					"readOnly": true,
+					"type": "array",
+					"description": "List of NotificationHubs operations supported by the Microsoft.NotificationHubs resource provider.",
+					"items": {
+						"$ref": "#/definitions/Operation"
 					}
 				},
-				"description": "The response to the List Namespace operation."
-			},
-			"NHAuthorizationRule": {
-				"properties": {
+				"nextLink": {
+					"readOnly": true,
+					"type": "string",
+					"description": "URL to get the next set of operation list results if there are any."
+				}
+			}
+		},
+		"Operation": {
+			"description": "A NotificationHubs REST API operation",
+			"type": "object",
+			"properties": {
+				"name": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Operation name: {provider}/{resource}/{operation}"
+				},
+				"display": {
+					"description": "The object that represents the operation.",
 					"properties": {
-						"x-ms-client-flatten": true,
-						"properties": {
-							"rights": {
-								"type": "array",
-								"items": {
-									"type": "string",
-									"enum": ["Manage",
-									"Send",
-									"Listen"],
-									"x-ms-enum": {
-										"name": "AccessRights",
-										"modelAsString": false
-									}
-								},
-								"description": "The rights associated with the rule."
-							}
-						},
-						"required": ["rights"],
-						"description": "AuthorizationRule properties."
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"description": "Description of a namespace authorization rule."
-			},
-			"AuthorizationRuleProperties": {
-				"properties": {
-					"rights": {
-						"type": "array",
-						"items": {
+						"provider": {
+							"readOnly": true,
 							"type": "string",
-							"enum": ["Manage",
-							"Send",
-							"Listen"],
+							"description": "Service provider: Microsoft.NotificationHubs"
+						},
+						"resource": {
+							"readOnly": true,
+							"type": "string",
+							"description": "Resource on which the operation is performed: Invoice, etc."
+						},
+						"operation": {
+							"readOnly": true,
+							"type": "string",
+							"description": "Operation type: Read, write, delete, etc."
+						}
+					}
+				}
+			}
+		},
+		"ErrorResponse": {
+			"description": "Error reponse indicates NotificationHubs service is not able to process the incoming request. The reason is provided in the error message.",
+			"type": "object",
+			"properties": {
+				"code": {
+					"description": "Error code.",
+					"type": "string"
+				},
+				"message": {
+					"description": "Error message indicating why the operation failed.",
+					"type": "string"
+				}
+			}
+		},
+		"Rule": {
+			"properties": {
+				"properties": {
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/Ruleproperties",
+					"description": "Properties of Rule resource"
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"description": "Description of Rule Resource."
+		},
+		"Ruleproperties": {
+			"properties": {
+				"action": {
+					"$ref": "#/definitions/Action",
+					"description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression."
+				},
+				"filterType": {
+					"$ref": "#/definitions/FilterType",
+					"description": "Filter type that is evaluated against a BrokeredMessage."
+				},
+				"sqlFilter": {
+					"$ref": "#/definitions/SqlFilter",
+					"description": "Properties of sqlFilter"
+				},
+				"correlationFilter": {
+					"$ref": "#/definitions/CorrelationFilter",
+					"description": "Properties of correlationFilter"
+				}
+			},
+			"description": "Description of Rule Resource."
+		},
+		"RuleListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Rule"
+					},
+					"description": "Result of the List Rules operation."
+				},
+				"nextLink": {
+					"type": "string",
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of rules"
+				}
+			},
+			"description": "The response of the List rule operation."
+		},
+		"FilterType": {
+			"type": "string",
+			"enum": ["SqlFilter",
+			"CorrelationFilter"],
+			"x-ms-enum": {
+				"name": "FilterType",
+				"modelAsString": false
+			},
+			"description": "Rule filter types"
+		},
+		"SqlFilter": {
+			"type": "object",
+			"properties": {
+				"sqlExpression": {
+					"type": "string",
+					"description": "The SQL expression. e.g. MyProperty='ABC'"
+				},
+				"compatibilityLevel": {
+					"readOnly": true,
+					"format": "int32",
+					"type": "integer",
+					"default": 20,
+					"description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
+				},
+				"requiresPreprocessing": {
+					"type": "boolean",
+					"default": true,
+					"description": "Value that indicates whether the rule action requires preprocessing."
+				}
+			},
+			"description": "Represents a filter which is a composition of an expression and an action that is executed in the pub/sub pipeline."
+		},
+		"CorrelationFilter": {
+			"type": "object",
+			"properties": {
+				"properties": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					},
+					"description": "dictionary object for custom filters"
+				},
+				"correlationId": {
+					"type": "string",
+					"description": "Identifier of the correlation."
+				},
+				"messageId": {
+					"type": "string",
+					"description": "Identifier of the message."
+				},
+				"to": {
+					"type": "string",
+					"description": "Address to send to."
+				},
+				"replyTo": {
+					"type": "string",
+					"description": "Address of the notificationhub to reply to."
+				},
+				"label": {
+					"type": "string",
+					"description": "Application specific label."
+				},
+				"sessionId": {
+					"type": "string",
+					"description": "Session identifier."
+				},
+				"replyToSessionId": {
+					"type": "string",
+					"description": "Session identifier to reply to."
+				},
+				"contentType": {
+					"type": "string",
+					"description": "Content type of the message."
+				},
+				"requiresPreprocessing": {
+					"type": "boolean",
+					"default": true,
+					"description": "Value that indicates whether the rule action requires preprocessing."
+				}
+			},
+			"description": "Represents the correlation filter expression."
+		},
+		"Action": {
+			"type": "object",
+			"properties": {
+				"sqlExpression": {
+					"type": "string",
+					"description": "SQL expression. e.g. MyProperty='ABC'"
+				},
+				"compatibilityLevel": {
+					"format": "int32",
+					"type": "integer",
+					"description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
+				},
+				"requiresPreprocessing": {
+					"type": "boolean",
+					"default": true,
+					"description": "Value that indicates whether the rule action requires preprocessing."
+				}
+			},
+			"description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression."
+		},
+		"SqlRuleAction": {
+			"type": "object",
+			"properties": {
+				"sqlExpression": {
+					"type": "string",
+					"description": "SQL expression. e.g. MyProperty='ABC'"
+				},
+				"compatibilityLevel": {
+					"format": "int32",
+					"type": "integer",
+					"description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
+				},
+				"requiresPreprocessing": {
+					"type": "boolean",
+					"default": true,
+					"description": "Value that indicates whether the rule action requires preprocessing."
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Action"
+			}],
+			"description": "Represents set of actions written in SQL language-based syntax that is performed against a NotificationHubs.Messaging.BrokeredMessage "
+		},
+		"PremiumMessagingRegions": {
+			"properties": {
+				"properties": {
+					"properties": {
+						"code": {
+							"readOnly": true,
+							"type": "string",
+							"description": "Region code"
+						},
+						"fullName": {
+							"readOnly": true,
+							"type": "string",
+							"description": "Full name of the region"
+						}
+					}
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/ResourceNamespacePatch"
+			}],
+			"description": "Premium Messaging Region"
+		},
+		"PremiumMessagingRegionsListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PremiumMessagingRegions"
+					},
+					"description": "Result of the List PremiumMessagingRegions type."
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of PremiumMessagingRegions."
+				}
+			},
+			"description": "The response of the List PremiumMessagingRegions operation."
+		},
+		"Eventhub": {
+			"properties": {
+				"properties": {
+					"x-ms-client-flatten": true,
+					"properties": {
+						"partitionIds": {
+							"readOnly": true,
+							"type": "array",
+							"items": {
+								"type": "string"
+							},
+							"description": "Current number of shards on the Event Hub."
+						},
+						"createdAt": {
+							"readOnly": true,
+							"format": "date-time",
+							"type": "string",
+							"description": "Exact time the Event Hub was created."
+						},
+						"updatedAt": {
+							"readOnly": true,
+							"format": "date-time",
+							"type": "string",
+							"description": "The exact time the message was updated."
+						},
+						"messageRetentionInDays": {
+							"format": "int64",
+							"type": "integer",
+							"maximum": 7,
+							"minimum": 1,
+							"description": "Number of days to retain the events for this Event Hub, value should be 1 to 7 days"
+						},
+						"partitionCount": {
+							"format": "int64",
+							"type": "integer",
+							"maximum": 32,
+							"minimum": 1,
+							"description": "Number of partitions created for the Event Hub, allowed values are from 1 to 32 partitions."
+						},
+						"status": {
+							"type": "string",
+							"description": "Enumerates the possible values for the status of the Event Hub.",
+							"enum": ["Active",
+							"Disabled",
+							"Restoring",
+							"SendDisabled",
+							"ReceiveDisabled",
+							"Creating",
+							"Deleting",
+							"Renaming",
+							"Unknown"],
 							"x-ms-enum": {
-								"name": "AccessRights",
+								"name": "EntityStatus",
 								"modelAsString": false
 							}
 						},
-						"description": "The rights associated with the rule."
-					}
-				},
-				"required": ["rights"],
-				"description": "AuthorizationRule properties."
-			},
-			"AccessKeys": {
-				"properties": {
-					"primaryConnectionString": {
-						"readOnly": true,
-						"type": "string",
-						"description": "Primary connection string of the created namespace authorization rule."
-					},
-					"secondaryConnectionString": {
-						"readOnly": true,
-						"type": "string",
-						"description": "Secondary connection string of the created namespace authorization rule."
-					},
-					"aliasPrimaryConnectionString": {
-						"readOnly": true,
-						"type": "string",
-						"description": "Primary connection string of the alias if GEO DR is enabled"
-					},
-					"aliasSecondaryConnectionString": {
-						"readOnly": true,
-						"type": "string",
-						"description": "Secondary  connection string of the alias if GEO DR is enabled"
-					},
-					"primaryKey": {
-						"readOnly": true,
-						"type": "string",
-						"description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
-					},
-					"secondaryKey": {
-						"readOnly": true,
-						"type": "string",
-						"description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
-					},
-					"keyName": {
-						"readOnly": true,
-						"type": "string",
-						"description": "A string that describes the authorization rule."
-					}
-				},
-				"description": "Namespace/NotificationHubs Connection String"
-			},
-			"RegenerateAccessKeyParameters": {
-				"properties": {
-					"keyType": {
-						"type": "string",
-						"description": "The access key to regenerate.",
-						"enum": ["PrimaryKey",
-						"SecondaryKey"],
-						"x-ms-enum": {
-							"name": "KeyType",
-							"modelAsString": false
+						"captureDescription": {
+							"$ref": "#/definitions/CaptureDescription",
+							"description": "Properties of capture description"
 						}
 					},
-					"key": {
-						"type": "string",
-						"description": "Optional, if the key value provided, is reset for KeyType value or autogenerate Key value set for keyType"
-					}
-				},
-				"required": ["keyType"],
-				"description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key neeeds to be reset."
-			},
-			"NHnotificationhubListResult": {
-				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/NHnotificationhub"
-						},
-						"description": "Result of the List notificationhubs operation."
-					},
-					"nextLink": {
-						"type": "string",
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of notificationhubs."
-					}
-				},
-				"description": "The response to the List notificationhubs operation."
-			},
-			"NHnotificationhub": {
-				"properties": {
-					"properties": {
-						"x-ms-client-flatten": true,
-						"$ref": "#/definitions/NHnotificationhubProperties",
-						"description": "notificationhub Properties"
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"description": "Description of notificationhub Resource."
-			},
-			"NHnotificationhubProperties": {
-				"properties": {
-					"countDetails": {
-						"readOnly": true,
-						"$ref": "#/definitions/MessageCountDetails",
-						"description": "Message Count Details."
-					},
-					"createdAt": {
-						"readOnly": true,
-						"type": "string",
-						"format": "date-time",
-						"description": "The exact time the message was created."
-					},
-					"updatedAt": {
-						"readOnly": true,
-						"type": "string",
-						"format": "date-time",
-						"description": "The exact time the message was updated."
-					},
-					"accessedAt": {
-						"readOnly": true,
-						"type": "string",
-						"format": "date-time",
-						"description": "Last time a message was sent, or the last time there was a receive request to this notificationhub."
-					},
-					"sizeInBytes": {
-						"readOnly": true,
-						"format": "int64",
-						"type": "integer",
-						"description": "The size of the notificationhub, in bytes."
-					},
-					"messageCount": {
-						"readOnly": true,
-						"format": "int64",
-						"type": "integer",
-						"description": "The number of messages in the notificationhub."
-					},
-					"lockDuration": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8601 timespan duration of a peek-lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
-					},
-					"maxSizeInMegabytes": {
-						"format": "int32",
-						"type": "integer",
-						"description": "The maximum size of the notificationhub in megabytes, which is the size of memory allocated for the notificationhub. Default is 1024."
-					},
-					"requiresDuplicateDetection": {
-						"type": "boolean",
-						"description": "A value indicating if this notificationhub requires duplicate detection."
-					},
-					"requiresSession": {
-						"type": "boolean",
-						"description": "A value that indicates whether the notificationhub supports the concept of sessions."
-					},
-					"defaultMessageTimeToLive": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8601 default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Notification Hubs. This is the default value used when TimeToLive is not set on a message itself."
-					},
-					"deadLetteringOnMessageExpiration": {
-						"type": "boolean",
-						"description": "A value that indicates whether this notificationhub has dead letter support when a message expires."
-					},
-					"duplicateDetectionHistoryTimeWindow": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8601 timeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
-					},
-					"maxDeliveryCount": {
-						"format": "int32",
-						"type": "integer",
-						"description": "The maximum delivery count. A message is automatically deadlettered after this number of deliveries. default value is 10."
-					},
-					"status": {
-						"$ref": "#/definitions/EntityStatus",
-						"description": "Enumerates the possible values for the status of a messaging entity."
-					},
-					"enableBatchedOperations": {
-						"type": "boolean",
-						"description": "Value that indicates whether server-side batched operations are enabled."
-					},
-					"autoDeleteOnIdle": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8061 timeSpan idle interval after which the notificationhub is automatically deleted. The minimum duration is 5 minutes."
-					},
-					"enablePartitioning": {
-						"type": "boolean",
-						"description": "A value that indicates whether the notificationhub is to be partitioned across multiple message brokers."
-					},
-					"enableExpress": {
-						"type": "boolean",
-						"description": "A value that indicates whether Express Entities are enabled. An express notificationhub holds a message in memory temporarily before writing it to persistent storage."
-					},
-					"forwardTo": {
-						"type": "string",
-						"description": "notificationhub/Topic name to forward the messages"
-					},
-					"forwardDeadLetteredMessagesTo": {
-						"type": "string",
-						"description": "notificationhub/Topic name to forward the Dead Letter message"
-					}
-				},
-				"description": "The notificationhub Properties definition."
-			},
-			"MessageCountDetails": {
-				"type": "object",
-				"properties": {
-					"activeMessageCount": {
-						"readOnly": true,
-						"format": "int64",
-						"type": "integer",
-						"description": "Number of active messages in the notificationhub, topic, or subscription."
-					},
-					"deadLetterMessageCount": {
-						"readOnly": true,
-						"format": "int64",
-						"type": "integer",
-						"description": "Number of messages that are dead lettered."
-					},
-					"scheduledMessageCount": {
-						"readOnly": true,
-						"format": "int64",
-						"type": "integer",
-						"description": "Number of scheduled messages."
-					},
-					"transferMessageCount": {
-						"readOnly": true,
-						"format": "int64",
-						"type": "integer",
-						"description": "Number of messages transferred to another notificationhub, topic, or subscription."
-					},
-					"transferDeadLetterMessageCount": {
-						"readOnly": true,
-						"format": "int64",
-						"type": "integer",
-						"description": "Number of messages transferred into dead letters."
-					}
-				},
-				"description": "Message Count Details."
-			},
-			"NHTopicListResult": {
-				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/NHTopic"
-						},
-						"description": "Result of the List Topics operation."
-					},
-					"nextLink": {
-						"type": "string",
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of topics."
-					}
-				},
-				"description": "The response to the List Topics operation."
-			},
-			"NHTopic": {
-				"properties": {
-					"properties": {
-						"x-ms-client-flatten": true,
-						"$ref": "#/definitions/NHTopicProperties",
-						"description": "Properties of topic resource."
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"description": "Description of topic resource."
-			},
-			"NHTopicProperties": {
-				"properties": {
-					"sizeInBytes": {
-						"readOnly": true,
-						"format": "int64",
-						"type": "integer",
-						"description": "Size of the topic, in bytes."
-					},
-					"createdAt": {
-						"readOnly": true,
-						"format": "date-time",
-						"type": "string",
-						"description": "Exact time the message was created."
-					},
-					"updatedAt": {
-						"readOnly": true,
-						"format": "date-time",
-						"type": "string",
-						"description": "The exact time the message was updated."
-					},
-					"accessedAt": {
-						"readOnly": true,
-						"format": "date-time",
-						"type": "string",
-						"description": "Last time the message was sent, or a request was received, for this topic."
-					},
-					"subscriptionCount": {
-						"readOnly": true,
-						"format": "int32",
-						"type": "integer",
-						"description": "Number of subscriptions."
-					},
-					"countDetails": {
-						"readOnly": true,
-						"$ref": "#/definitions/MessageCountDetails",
-						"description": "Message count deatils"
-					},
-					"defaultMessageTimeToLive": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8601 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Notification Hubs. This is the default value used when TimeToLive is not set on a message itself."
-					},
-					"maxSizeInMegabytes": {
-						"format": "int32",
-						"type": "integer",
-						"description": "Maximum size of the topic in megabytes, which is the size of the memory allocated for the topic. Default is 1024."
-					},
-					"requiresDuplicateDetection": {
-						"type": "boolean",
-						"description": "Value indicating if this topic requires duplicate detection."
-					},
-					"duplicateDetectionHistoryTimeWindow": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO8601 timespan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
-					},
-					"enableBatchedOperations": {
-						"type": "boolean",
-						"description": "Value that indicates whether server-side batched operations are enabled."
-					},
-					"status": {
-						"$ref": "#/definitions/EntityStatus",
-						"description": "Enumerates the possible values for the status of a messaging entity."
-					},
-					"supportOrdering": {
-						"type": "boolean",
-						"description": "Value that indicates whether the topic supports ordering."
-					},
-					"autoDeleteOnIdle": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8601 timespan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
-					},
-					"enablePartitioning": {
-						"type": "boolean",
-						"description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
-					},
-					"enableExpress": {
-						"type": "boolean",
-						"description": "Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage."
-					}
-				},
-				"description": "The Tpoic Properties definition."
-			},
-			"NHSubscriptionListResult": {
-				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/NHSubscription"
-						},
-						"description": "Result of the List Subscriptions operation."
-					},
-					"nextLink": {
-						"type": "string",
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of subscriptions."
-					}
-				},
-				"description": "The response to the List Subscriptions operation."
-			},
-			"NHSubscription": {
-				"properties": {
-					"properties": {
-						"x-ms-client-flatten": true,
-						"$ref": "#/definitions/NHSubscriptionProperties",
-						"description": "Properties of subscriptions resource."
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"description": "Description of subscription resource."
-			},
-			"NHSubscriptionProperties": {
-				"properties": {
-					"messageCount": {
-						"readOnly": true,
-						"format": "int64",
-						"type": "integer",
-						"description": "Number of messages."
-					},
-					"createdAt": {
-						"readOnly": true,
-						"type": "string",
-						"format": "date-time",
-						"description": "Exact time the message was created."
-					},
-					"accessedAt": {
-						"readOnly": true,
-						"format": "date-time",
-						"type": "string",
-						"description": "Last time there was a receive request to this subscription."
-					},
-					"updatedAt": {
-						"readOnly": true,
-						"format": "date-time",
-						"type": "string",
-						"description": "The exact time the message was updated."
-					},
-					"countDetails": {
-						"readOnly": true,
-						"$ref": "#/definitions/MessageCountDetails",
-						"description": "Message count details"
-					},
-					"lockDuration": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8061 lock duration timespan for the subscription. The default value is 1 minute."
-					},
-					"requiresSession": {
-						"type": "boolean",
-						"description": "Value indicating if a subscription supports the concept of sessions."
-					},
-					"defaultMessageTimeToLive": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8061 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Notification Hubs. This is the default value used when TimeToLive is not set on a message itself."
-					},
-					"deadLetteringOnFilterEvaluationExceptions": {
-						"type": "boolean",
-						"description": "Value that indicates whether a subscription has dead letter support on filter evaluation exceptions."
-					},
-					"deadLetteringOnMessageExpiration": {
-						"type": "boolean",
-						"description": "Value that indicates whether a subscription has dead letter support when a message expires."
-					},
-					"duplicateDetectionHistoryTimeWindow": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8601 timeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
-					},
-					"maxDeliveryCount": {
-						"format": "int32",
-						"type": "integer",
-						"description": "Number of maximum deliveries."
-					},
-					"status": {
-						"$ref": "#/definitions/EntityStatus",
-						"description": "Enumerates the possible values for the status of a messaging entity."
-					},
-					"enableBatchedOperations": {
-						"type": "boolean",
-						"description": "Value that indicates whether server-side batched operations are enabled."
-					},
-					"autoDeleteOnIdle": {
-						"format": "duration",
-						"type": "string",
-						"description": "ISO 8061 timeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
-					},
-					"forwardTo": {
-						"type": "string",
-						"description": "notificationhub/Topic name to forward the messages"
-					},
-					"forwardDeadLetteredMessagesTo": {
-						"type": "string",
-						"description": "notificationhub/Topic name to forward the Dead Letter message"
-					}
-				},
-				"description": "Description of Subscription Resource."
-			},
-			"EntityStatus": {
-				"type": "string",
-				"enum": ["Active",
-				"Disabled",
-				"Restoring",
-				"SendDisabled",
-				"ReceiveDisabled",
-				"Creating",
-				"Deleting",
-				"Renaming",
-				"Unknown"],
-				"x-ms-enum": {
-					"name": "EntityStatus",
-					"modelAsString": false
-				},
-				"description": "Entity status."
-			},
-			"UnavailableReason": {
-				"type": "string",
-				"enum": ["None",
-				"InvalidName",
-				"SubscriptionIsDisabled",
-				"NameInUse",
-				"NameInLockdown",
-				"TooManyNamespaceInCurrentSubscription"],
-				"x-ms-enum": {
-					"name": "UnavailableReason",
-					"modelAsString": false
-				},
-				"description": "Specifies the reason for the unavailability of the service."
-			},
-			"CheckNameAvailability": {
-				"properties": {
-					"name": {
-						"type": "string",
-						"description": "The Name to check the namespce name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number."
-					}
-				},
-				"required": ["name"],
-				"description": "Description of a Check Name availability request properties."
-			},
-			"CheckNameAvailabilityResult": {
-				"properties": {
-					"message": {
-						"readOnly": true,
-						"type": "string",
-						"description": "The detailed info regarding the reason associated with the namespace."
-					},
-					"nameAvailable": {
-						"type": "boolean",
-						"description": "Value indicating namespace is availability, true if the namespace is available; otherwise, false."
-					},
-					"reason": {
-						"$ref": "#/definitions/UnavailableReason",
-						"description": "The reason for unavailability of a namespace."
-					}
-				},
-				"description": "Description of a Check Name availability request properties."
-			},
-			"OperationListResult": {
-				"description": "Result of the request to list NotificationHubs operations. It contains a list of operations and a URL link to get the next set of results.",
-				"properties": {
-					"value": {
-						"readOnly": true,
-						"type": "array",
-						"description": "List of NotificationHubs operations supported by the Microsoft.NotificationHubs resource provider.",
-						"items": {
-							"$ref": "#/definitions/Operation"
-						}
-					},
-					"nextLink": {
-						"readOnly": true,
-						"type": "string",
-						"description": "URL to get the next set of operation list results if there are any."
-					}
+					"description": "Properties supplied to the Create Or Update Event Hub operation."
 				}
 			},
-			"Operation": {
-				"description": "A NotificationHubs REST API operation",
-				"type": "object",
-				"properties": {
-					"name": {
-						"readOnly": true,
-						"type": "string",
-						"description": "Operation name: {provider}/{resource}/{operation}"
-					},
-					"display": {
-						"description": "The object that represents the operation.",
-						"properties": {
-							"provider": {
-								"readOnly": true,
-								"type": "string",
-								"description": "Service provider: Microsoft.NotificationHubs"
-							},
-							"resource": {
-								"readOnly": true,
-								"type": "string",
-								"description": "Resource on which the operation is performed: Invoice, etc."
-							},
-							"operation": {
-								"readOnly": true,
-								"type": "string",
-								"description": "Operation type: Read, write, delete, etc."
-							}
-						}
-					}
-				}
-			},
-			"ErrorResponse": {
-				"description": "Error reponse indicates NotificationHubs service is not able to process the incoming request. The reason is provided in the error message.",
-				"type": "object",
-				"properties": {
-					"code": {
-						"description": "Error code.",
-						"type": "string"
-					},
-					"message": {
-						"description": "Error message indicating why the operation failed.",
-						"type": "string"
-					}
-				}
-			},
-			"Rule": {
-				"properties": {
-					"properties": {
-						"x-ms-client-flatten": true,
-						"$ref": "#/definitions/Ruleproperties",
-						"description": "Properties of Rule resource"
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"description": "Description of Rule Resource."
-			},
-			"Ruleproperties": {
-				"properties": {
-					"action": {
-						"$ref": "#/definitions/Action",
-						"description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression."
-					},
-					"filterType": {
-						"$ref": "#/definitions/FilterType",
-						"description": "Filter type that is evaluated against a BrokeredMessage."
-					},
-					"sqlFilter": {
-						"$ref": "#/definitions/SqlFilter",
-						"description": "Properties of sqlFilter"
-					},
-					"correlationFilter": {
-						"$ref": "#/definitions/CorrelationFilter",
-						"description": "Properties of correlationFilter"
-					}
-				},
-				"description": "Description of Rule Resource."
-			},
-			"RuleListResult": {
-				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/Rule"
-						},
-						"description": "Result of the List Rules operation."
-					},
-					"nextLink": {
-						"type": "string",
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of rules"
-					}
-				},
-				"description": "The response of the List rule operation."
-			},
-			"FilterType": {
-				"type": "string",
-				"enum": ["SqlFilter",
-				"CorrelationFilter"],
-				"x-ms-enum": {
-					"name": "FilterType",
-					"modelAsString": false
-				},
-				"description": "Rule filter types"
-			},
-			"SqlFilter": {
-				"type": "object",
-				"properties": {
-					"sqlExpression": {
-						"type": "string",
-						"description": "The SQL expression. e.g. MyProperty='ABC'"
-					},
-					"compatibilityLevel": {
-						"readOnly": true,
-						"format": "int32",
-						"type": "integer",
-						"default": 20,
-						"description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
-					},
-					"requiresPreprocessing": {
-						"type": "boolean",
-						"default": true,
-						"description": "Value that indicates whether the rule action requires preprocessing."
-					}
-				},
-				"description": "Represents a filter which is a composition of an expression and an action that is executed in the pub/sub pipeline."
-			},
-			"CorrelationFilter": {
-				"type": "object",
-				"properties": {
-					"properties": {
-						"type": "object",
-						"additionalProperties": {
-							"type": "string"
-						},
-						"description": "dictionary object for custom filters"
-					},
-					"correlationId": {
-						"type": "string",
-						"description": "Identifier of the correlation."
-					},
-					"messageId": {
-						"type": "string",
-						"description": "Identifier of the message."
-					},
-					"to": {
-						"type": "string",
-						"description": "Address to send to."
-					},
-					"replyTo": {
-						"type": "string",
-						"description": "Address of the notificationhub to reply to."
-					},
-					"label": {
-						"type": "string",
-						"description": "Application specific label."
-					},
-					"sessionId": {
-						"type": "string",
-						"description": "Session identifier."
-					},
-					"replyToSessionId": {
-						"type": "string",
-						"description": "Session identifier to reply to."
-					},
-					"contentType": {
-						"type": "string",
-						"description": "Content type of the message."
-					},
-					"requiresPreprocessing": {
-						"type": "boolean",
-						"default": true,
-						"description": "Value that indicates whether the rule action requires preprocessing."
-					}
-				},
-				"description": "Represents the correlation filter expression."
-			},
-			"Action": {
-				"type": "object",
-				"properties": {
-					"sqlExpression": {
-						"type": "string",
-						"description": "SQL expression. e.g. MyProperty='ABC'"
-					},
-					"compatibilityLevel": {
-						"format": "int32",
-						"type": "integer",
-						"description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
-					},
-					"requiresPreprocessing": {
-						"type": "boolean",
-						"default": true,
-						"description": "Value that indicates whether the rule action requires preprocessing."
-					}
-				},
-				"description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression."
-			},
-			"SqlRuleAction": {
-				"type": "object",
-				"properties": {
-					"sqlExpression": {
-						"type": "string",
-						"description": "SQL expression. e.g. MyProperty='ABC'"
-					},
-					"compatibilityLevel": {
-						"format": "int32",
-						"type": "integer",
-						"description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
-					},
-					"requiresPreprocessing": {
-						"type": "boolean",
-						"default": true,
-						"description": "Value that indicates whether the rule action requires preprocessing."
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/Action"
-				}],
-				"description": "Represents set of actions written in SQL language-based syntax that is performed against a NotificationHubs.Messaging.BrokeredMessage "
-			},
-			"PremiumMessagingRegions": {
-				"properties": {
-					"properties": {
-						"properties": {
-							"code": {
-								"readOnly": true,
-								"type": "string",
-								"description": "Region code"
-							},
-							"fullName": {
-								"readOnly": true,
-								"type": "string",
-								"description": "Full name of the region"
-							}
-						}
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/ResourceNamespacePatch"
-				}],
-				"description": "Premium Messaging Region"
-			},
-			"PremiumMessagingRegionsListResult": {
-				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/PremiumMessagingRegions"
-						},
-						"description": "Result of the List PremiumMessagingRegions type."
-					},
-					"nextLink": {
-						"type": "string",
-						"readOnly": true,
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of PremiumMessagingRegions."
-					}
-				},
-				"description": "The response of the List PremiumMessagingRegions operation."
-			},
-			"Eventhub": {
-				"properties": {
-					"properties": {
-						"x-ms-client-flatten": true,
-						"properties": {
-							"partitionIds": {
-								"readOnly": true,
-								"type": "array",
-								"items": {
-									"type": "string"
-								},
-								"description": "Current number of shards on the Event Hub."
-							},
-							"createdAt": {
-								"readOnly": true,
-								"format": "date-time",
-								"type": "string",
-								"description": "Exact time the Event Hub was created."
-							},
-							"updatedAt": {
-								"readOnly": true,
-								"format": "date-time",
-								"type": "string",
-								"description": "The exact time the message was updated."
-							},
-							"messageRetentionInDays": {
-								"format": "int64",
-								"type": "integer",
-								"maximum": 7,
-								"minimum": 1,
-								"description": "Number of days to retain the events for this Event Hub, value should be 1 to 7 days"
-							},
-							"partitionCount": {
-								"format": "int64",
-								"type": "integer",
-								"maximum": 32,
-								"minimum": 1,
-								"description": "Number of partitions created for the Event Hub, allowed values are from 1 to 32 partitions."
-							},
-							"status": {
-								"type": "string",
-								"description": "Enumerates the possible values for the status of the Event Hub.",
-								"enum": ["Active",
-								"Disabled",
-								"Restoring",
-								"SendDisabled",
-								"ReceiveDisabled",
-								"Creating",
-								"Deleting",
-								"Renaming",
-								"Unknown"],
-								"x-ms-enum": {
-									"name": "EntityStatus",
-									"modelAsString": false
-								}
-							},
-							"captureDescription": {
-								"$ref": "#/definitions/CaptureDescription",
-								"description": "Properties of capture description"
-							}
-						},
-						"description": "Properties supplied to the Create Or Update Event Hub operation."
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"description": "Single item in List or Get Event Hub operation"
-			},
-			"EventHubListResult": {
-				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/Eventhub"
-						},
-						"description": "Result of the List EventHubs operation."
-					},
-					"nextLink": {
-						"type": "string",
-						"readOnly": true,
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of EventHubs."
-					}
-				},
-				"description": "The result of the List EventHubs operation."
-			},
-			"CaptureDescription": {
-				"properties": {
-					"enabled": {
-						"type": "boolean",
-						"description": "A value that indicates whether capture description is enabled. "
-					},
-					"encoding": {
-						"type": "string",
-						"description": "Enumerates the possible values for the encoding format of capture description.",
-						"enum": ["Avro",
-						"AvroDeflate"],
-						"x-ms-enum": {
-							"name": "EncodingCaptureDescription",
-							"modelAsString": false
-						}
-					},
-					"intervalInSeconds": {
-						"format": "int32",
-						"type": "integer",
-						"maximum": 900,
-						"minimum": 60,
-						"description": "The time window allows you to set the frequency with which the capture to Azure Blobs will happen, value should between 60 to 900 seconds"
-					},
-					"sizeLimitInBytes": {
-						"format": "int32",
-						"type": "integer",
-						"maximum": 524288000,
-						"minimum": 10485760,
-						"description": "The size window defines the amount of data built up in your Event Hub before an capture operation, value should be between 10485760 and 524288000 bytes"
-					},
-					"destination": {
-						"$ref": "#/definitions/Destination",
-						"description": "Properties of Destination where capture will be stored. (Storage Account, Blob Names)"
-					}
-				},
-				"description": "Properties to configure capture description for eventhub"
-			},
-			"Destination": {
-				"properties": {
-					"name": {
-						"type": "string",
-						"description": "Name for capture destination"
-					},
-					"properties": {
-						"x-ms-client-flatten": true,
-						"properties": {
-							"storageAccountResourceId": {
-								"type": "string",
-								"description": "Resource id of the storage account to be used to create the blobs"
-							},
-							"blobContainer": {
-								"type": "string",
-								"description": "Blob container Name"
-							},
-							"archiveNameFormat": {
-								"type": "string",
-								"description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
-							}
-						},
-						"description": "Properties describing the storage account, blob container and acrchive name format for capture destination"
-					}
-				},
-				"description": "Capture storage details for capture description"
-			},
-			"ArmDisasterRecovery": {
-				"properties": {
-					"properties": {
-						"x-ms-client-flatten": true,
-						"properties": {
-							"provisioningState": {
-								"readOnly": true,
-								"type": "string",
-								"description": "Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'",
-								"enum": ["Accepted",
-								"Succeeded",
-								"Failed"],
-								"x-ms-enum": {
-									"name": "ProvisioningStateDR",
-									"modelAsString": false
-								}
-							},
-							"partnerNamespace": {
-								"type": "string",
-								"description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
-							},
-							"alternateName": {
-								"type": "string",
-								"description": "Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
-							},
-							"role": {
-								"readOnly": true,
-								"type": "string",
-								"description": "role of namespace in GEO DR - possible values 'Primary' or 'PrimaryNotReplicating' or 'Secondary'",
-								"enum": ["Primary",
-								"PrimaryNotReplicating",
-								"Secondary"],
-								"x-ms-enum": {
-									"name": "RoleDisasterRecovery",
-									"modelAsString": false
-								}
-							}
-						},
-						"description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"description": "Single item in List or Get Alias(Disaster Recovery configuration) operation"
-			},
-			"ArmDisasterRecoveryListResult": {
-				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/ArmDisasterRecovery"
-						},
-						"description": "List of Alias(Disaster Recovery configurations)"
-					},
-					"nextLink": {
-						"type": "string",
-						"readOnly": true,
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of Alias(Disaster Recovery configuration)"
-					}
-				},
-				"description": "The result of the List Alias(Disaster Recovery configuration) operation."
-			},
-			"MigrationConfigProperties": {
-				"properties": {
-					"properties": {
-						"x-ms-client-flatten": true,
-						"properties": {
-							"provisioningState": {
-								"readOnly": true,
-								"type": "string",
-								"description": "Provisioning state of Migration Configuration "
-							},
-							"targetNamespace": {
-								"type": "string",
-								"description": "Existing premium Namespace ARM Id name which has no entities, will be used for migration"
-							},
-							"postMigrationName": {
-								"type": "string",
-								"description": "Name to access Standard Namespace after migration"
-							}
-						},
-						"required": ["targetNamespace",
-						"postMigrationName"],
-						"description": "Properties required to the Create Migration Configuration"
-					}
-				},
-				"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}],
-				"description": "Single item in List or Get Migration Config operation"
-			},
-			"MigrationConfigListResult": {
-				"properties": {
-					"value": {
-						"type": "array",
-						"items": {
-							"$ref": "#/definitions/MigrationConfigProperties"
-						},
-						"description": "List of Migration Configs"
-					},
-					"nextLink": {
-						"type": "string",
-						"readOnly": true,
-						"description": "Link to the next set of results. Not empty if Value contains incomplete list of migrationConfigurations"
-					}
-				},
-				"description": "The result of the List migrationConfigurations operation."
-			}
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"description": "Single item in List or Get Event Hub operation"
 		},
-		"parameters": {
-			"SubscriptionIdParameter": {
-				"name": "subscriptionId",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"description": "Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-			},
-			"ApiVersionParameter": {
-				"name": "api-version",
-				"in": "query",
-				"required": true,
-				"type": "string",
-				"description": "Client API version."
-			},
-			"resourceGroupNameParameter": {
-				"name": "resourceGroupName",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 90,
-				"x-ms-parameter-location": "method",
-				"description": "Name of the Resource group within the Azure subscription."
-			},
-			"namespaceNameParameter": {
-				"name": "namespaceName",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"minLength": 6,
-				"maxLength": 50,
-				"x-ms-parameter-location": "method",
-				"description": "The namespace name"
-			},
-			"authorizationRuleNameParameter": {
-				"name": "authorizationRuleName",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 50,
-				"x-ms-parameter-location": "method",
-				"description": "The authorizationrule name."
-			},
-			"notificationhubNameParameter": {
-				"name": "notificationhubName",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"minLength": 1,
-				"x-ms-parameter-location": "method",
-				"description": "The notificationhub name."
-			},
-			"topicNameParameter": {
-				"name": "topicName",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"minLength": 1,
-				"x-ms-parameter-location": "method",
-				"description": "The topic name."
-			},
-			"subscriptionNameParameter": {
-				"name": "subscriptionName",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 50,
-				"x-ms-parameter-location": "method",
-				"description": "The subscription name."
-			},
-			"ruleNameParameter": {
-				"name": "ruleName",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 50,
-				"x-ms-parameter-location": "method",
-				"description": "The rule name."
-			},
-			"skuNameParameter": {
-				"name": "sku",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 50,
-				"x-ms-parameter-location": "method",
-				"description": "The sku type."
-			},
-			"aliasNameParameter": {
-				"name": "alias",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 50,
-				"x-ms-parameter-location": "method",
-				"description": "The Disaster Recovery configuration name"
-			},
-			"configNameParameter": {
-				"name": "configName",
-				"in": "path",
-				"description": "The configuration name. Should always be \"$default\".",
-				"required": true,
-				"type": "string",
-				"enum": ["$default"],
-				"x-ms-enum": {
-					"name": "MigrationConfigurationName",
-					"modelAsString": true
+		"EventHubListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Eventhub"
+					},
+					"description": "Result of the List EventHubs operation."
 				},
-				"x-ms-parameter-location": "method"
+				"nextLink": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of EventHubs."
+				}
 			},
-			"SkipParameter": {
-				"name": "$skip",
-				"description": "Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.",
-				"in": "query",
-				"required": false,
-				"type": "integer",
-				"minimum": 0,
-				"maximum": 1000,
-				"x-ms-parameter-location": "method"
+			"description": "The result of the List EventHubs operation."
+		},
+		"CaptureDescription": {
+			"properties": {
+				"enabled": {
+					"type": "boolean",
+					"description": "A value that indicates whether capture description is enabled. "
+				},
+				"encoding": {
+					"type": "string",
+					"description": "Enumerates the possible values for the encoding format of capture description.",
+					"enum": ["Avro",
+					"AvroDeflate"],
+					"x-ms-enum": {
+						"name": "EncodingCaptureDescription",
+						"modelAsString": false
+					}
+				},
+				"intervalInSeconds": {
+					"format": "int32",
+					"type": "integer",
+					"maximum": 900,
+					"minimum": 60,
+					"description": "The time window allows you to set the frequency with which the capture to Azure Blobs will happen, value should between 60 to 900 seconds"
+				},
+				"sizeLimitInBytes": {
+					"format": "int32",
+					"type": "integer",
+					"maximum": 524288000,
+					"minimum": 10485760,
+					"description": "The size window defines the amount of data built up in your Event Hub before an capture operation, value should be between 10485760 and 524288000 bytes"
+				},
+				"destination": {
+					"$ref": "#/definitions/Destination",
+					"description": "Properties of Destination where capture will be stored. (Storage Account, Blob Names)"
+				}
 			},
-			"TopParameter": {
-				"name": "$top",
-				"description": "May be used to limit the number of results to the most recent N usageDetails.",
-				"in": "query",
-				"required": false,
-				"type": "integer",
-				"minimum": 1,
-				"maximum": 1000,
-				"x-ms-parameter-location": "method"
-			}
+			"description": "Properties to configure capture description for eventhub"
+		},
+		"Destination": {
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": "Name for capture destination"
+				},
+				"properties": {
+					"x-ms-client-flatten": true,
+					"properties": {
+						"storageAccountResourceId": {
+							"type": "string",
+							"description": "Resource id of the storage account to be used to create the blobs"
+						},
+						"blobContainer": {
+							"type": "string",
+							"description": "Blob container Name"
+						},
+						"archiveNameFormat": {
+							"type": "string",
+							"description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
+						}
+					},
+					"description": "Properties describing the storage account, blob container and acrchive name format for capture destination"
+				}
+			},
+			"description": "Capture storage details for capture description"
+		},
+		"ArmDisasterRecovery": {
+			"properties": {
+				"properties": {
+					"x-ms-client-flatten": true,
+					"properties": {
+						"provisioningState": {
+							"readOnly": true,
+							"type": "string",
+							"description": "Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'",
+							"enum": ["Accepted",
+							"Succeeded",
+							"Failed"],
+							"x-ms-enum": {
+								"name": "ProvisioningStateDR",
+								"modelAsString": false
+							}
+						},
+						"partnerNamespace": {
+							"type": "string",
+							"description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
+						},
+						"alternateName": {
+							"type": "string",
+							"description": "Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
+						},
+						"role": {
+							"readOnly": true,
+							"type": "string",
+							"description": "role of namespace in GEO DR - possible values 'Primary' or 'PrimaryNotReplicating' or 'Secondary'",
+							"enum": ["Primary",
+							"PrimaryNotReplicating",
+							"Secondary"],
+							"x-ms-enum": {
+								"name": "RoleDisasterRecovery",
+								"modelAsString": false
+							}
+						}
+					},
+					"description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"description": "Single item in List or Get Alias(Disaster Recovery configuration) operation"
+		},
+		"ArmDisasterRecoveryListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ArmDisasterRecovery"
+					},
+					"description": "List of Alias(Disaster Recovery configurations)"
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of Alias(Disaster Recovery configuration)"
+				}
+			},
+			"description": "The result of the List Alias(Disaster Recovery configuration) operation."
+		},
+		"MigrationConfigProperties": {
+			"properties": {
+				"properties": {
+					"x-ms-client-flatten": true,
+					"properties": {
+						"provisioningState": {
+							"readOnly": true,
+							"type": "string",
+							"description": "Provisioning state of Migration Configuration "
+						},
+						"targetNamespace": {
+							"type": "string",
+							"description": "Existing premium Namespace ARM Id name which has no entities, will be used for migration"
+						},
+						"postMigrationName": {
+							"type": "string",
+							"description": "Name to access Standard Namespace after migration"
+						}
+					},
+					"required": ["targetNamespace",
+					"postMigrationName"],
+					"description": "Properties required to the Create Migration Configuration"
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
+			"description": "Single item in List or Get Migration Config operation"
+		},
+		"MigrationConfigListResult": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/MigrationConfigProperties"
+					},
+					"description": "List of Migration Configs"
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Link to the next set of results. Not empty if Value contains incomplete list of migrationConfigurations"
+				}
+			},
+			"description": "The result of the List migrationConfigurations operation."
+		}
+	},
+	"parameters": {
+		"SubscriptionIdParameter": {
+			"name": "subscriptionId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+		},
+		"ApiVersionParameter": {
+			"name": "api-version",
+			"in": "query",
+			"required": true,
+			"type": "string",
+			"description": "Client API version."
+		},
+		"resourceGroupNameParameter": {
+			"name": "resourceGroupName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 90,
+			"x-ms-parameter-location": "method",
+			"description": "Name of the Resource group within the Azure subscription."
+		},
+		"namespaceNameParameter": {
+			"name": "namespaceName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 6,
+			"maxLength": 50,
+			"x-ms-parameter-location": "method",
+			"description": "The namespace name"
+		},
+		"authorizationRuleNameParameter": {
+			"name": "authorizationRuleName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 50,
+			"x-ms-parameter-location": "method",
+			"description": "The authorizationrule name."
+		},
+		"notificationhubNameParameter": {
+			"name": "notificationhubName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 1,
+			"x-ms-parameter-location": "method",
+			"description": "The notificationhub name."
+		},
+		"topicNameParameter": {
+			"name": "topicName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 1,
+			"x-ms-parameter-location": "method",
+			"description": "The topic name."
+		},
+		"subscriptionNameParameter": {
+			"name": "subscriptionName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 50,
+			"x-ms-parameter-location": "method",
+			"description": "The subscription name."
+		},
+		"ruleNameParameter": {
+			"name": "ruleName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 50,
+			"x-ms-parameter-location": "method",
+			"description": "The rule name."
+		},
+		"skuNameParameter": {
+			"name": "sku",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 50,
+			"x-ms-parameter-location": "method",
+			"description": "The sku type."
+		},
+		"aliasNameParameter": {
+			"name": "alias",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 50,
+			"x-ms-parameter-location": "method",
+			"description": "The Disaster Recovery configuration name"
+		},
+		"configNameParameter": {
+			"name": "configName",
+			"in": "path",
+			"description": "The configuration name. Should always be \"$default\".",
+			"required": true,
+			"type": "string",
+			"enum": ["$default"],
+			"x-ms-enum": {
+				"name": "MigrationConfigurationName",
+				"modelAsString": true
+			},
+			"x-ms-parameter-location": "method"
+		},
+		"SkipParameter": {
+			"name": "$skip",
+			"description": "Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.",
+			"in": "query",
+			"required": false,
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1000,
+			"x-ms-parameter-location": "method"
+		},
+		"TopParameter": {
+			"name": "$top",
+			"description": "May be used to limit the number of results to the most recent N usageDetails.",
+			"in": "query",
+			"required": false,
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 1000,
+			"x-ms-parameter-location": "method"
 		}
 	}
 }
