@@ -53,6 +53,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-node
 ```
 
 ## C#
@@ -72,6 +74,29 @@ directive:
   - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
     where-operation: Query_Post
     transform: $.operationId = "Query"
+```
+
+``` yaml $(python)
+python-mode: create
+python:
+  add-credentials: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.operationalinsights
+  package-name: azure-operationalinsights
+  package-version: 0.1.0
+  clear-output-folder: true
+  basic-setup-py: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-operationalinsights/azure/operationalinsights
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-operationalinsights
 ```
 
 ## Go
