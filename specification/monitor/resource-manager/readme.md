@@ -54,6 +54,7 @@ input-file:
 - microsoft.insights/preview/2017-11-01-preview/baseline_API.json
 - microsoft.insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - microsoft.insights/stable/2018-03-01/metricAlert_API.json
+- microsoft.insights/stable/2018-04-16/scheduledQueryRule_API.json
 ```
 
 
