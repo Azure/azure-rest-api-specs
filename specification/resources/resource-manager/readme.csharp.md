@@ -23,6 +23,7 @@ batch:
 #  - package-managedapplications: true
 ```
 
+
 ## Batch settings
 These settings are for batch mode only: (ie, add `--MultiApi` to the command line )
 
@@ -31,6 +32,34 @@ namespace: Microsoft.Azure.Management.ResourceManager.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 
 batch:
-   - tag: package-resources-2016-02
+   - tag: package-2016-02-AzStk
      ApiVersionName: Api2016_02_01
+   - tag: package-2018-02-AzStk
+     ApiVersionName: Api2018_02_01
+```
+
+## Tag: Packages for Azure Stack
+
+### Tag: package-2016-02-AzStk
+
+These settings apply only when `--tag=package-2016-02-AzStk` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-02-AzStk'
+input-file:
+- Microsoft.Resources\stable\2016-02-01\resources.json
+- Microsoft.Resources\stable\2016-09-01\links.json
+- Microsoft.Resources\stable\2016-06-01\subscriptions.json
+override-info:
+    title: ResourceManagementClient
+```
+
+### Tag: package-2018-02-AzStk
+
+These settings apply only when `--tag=package-2018-02-AzStk` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-AzStk'
+input-file:
+- Microsoft.Resources\stable\2018-02-01\resources.json
+# override-info:
+#     title: ResourceManagementClient
 ```
