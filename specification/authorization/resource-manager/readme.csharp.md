@@ -25,7 +25,7 @@ namespace: Microsoft.Azure.Management.Authorization.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 
 batch:
-- tag: package-2015-07-AzStack
+- tag: package-2015-07-AzStk
   ApiVersionName: Api2015_07_01
 - tag: package-2017-10-AzStk
   ApiVersionName: Api2017_10_01
