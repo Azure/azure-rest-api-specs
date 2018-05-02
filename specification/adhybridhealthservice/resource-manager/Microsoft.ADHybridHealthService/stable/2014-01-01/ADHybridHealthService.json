@@ -701,11 +701,11 @@
         "tags": [ "Adds" ],
         "description": "Gets the service related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "addsservices_listMetricMetadataForGroup": {
+          "addsservices_getMetricMetadataForGroup": {
             "$ref": "./examples/MetricSets.json"
           }
         },
-        "operationId": "addsservices_listMetricMetadataForGroup",
+        "operationId": "addsservices_getMetricMetadataForGroup",
         "parameters": [
           {
             "name": "serviceName",
@@ -1024,6 +1024,9 @@
               "$ref": "#/definitions/OperationListResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
