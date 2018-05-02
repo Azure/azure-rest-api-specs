@@ -1,0 +1,562 @@
+{
+  "title": "Post Query",
+  "description": "A simple query that returns query results.",
+  "parameters": {
+    "subscriptionId": "d462d7fa-ab95-4c73-88da-3853bd19b2fe",
+    "resourceGroupName": "demo-rg",
+    "applicationName": "DEMO_APP",
+    "apiVersion": "2015-05-01",
+    "body": {
+      "timespan": "PT12H",
+      "query": "requests | take 5"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5",
+        "x-ms-correlation-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5"
+      },
+      "body": {
+        "Tables": [
+          {
+            "TableName": "Table_0",
+            "Columns": [
+              {
+                "ColumnName": "timestamp",
+                "DataType": "DateTime",
+                "ColumnType": "datetime"
+              },
+              {
+                "ColumnName": "id",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "source",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "name",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "url",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "success",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "resultCode",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "duration",
+                "DataType": "Double",
+                "ColumnType": "real"
+              },
+              {
+                "ColumnName": "performanceBucket",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "itemType",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "customDimensions",
+                "DataType": "String",
+                "ColumnType": "dynamic"
+              },
+              {
+                "ColumnName": "customMeasurements",
+                "DataType": "String",
+                "ColumnType": "dynamic"
+              },
+              {
+                "ColumnName": "operation_Name",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "operation_Id",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "operation_ParentId",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "operation_SyntheticSource",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "session_Id",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "user_Id",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "user_AuthenticatedId",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "user_AccountId",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "application_Version",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "client_Type",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "client_Model",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "client_OS",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "client_IP",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "client_City",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "client_StateOrProvince",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "client_CountryOrRegion",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "client_Browser",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "cloud_RoleName",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "cloud_RoleInstance",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "appId",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "appName",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "iKey",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "sdkVersion",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "itemId",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "itemCount",
+                "DataType": "Int32",
+                "ColumnType": "int"
+              }
+            ],
+            "Rows": [
+              [
+                "2018-05-07T11:20:43.208Z",
+                "|9e83eb9a7c7a4aa5aeb3fba6f3a35b65.0.3de057bf_",
+                null,
+                "GET Reports/Index",
+                "http://aiconnect2.cloudapp.net/FabrikamProd/Reports",
+                "True",
+                "200",
+                "6.7402",
+                "<250ms",
+                "request",
+                "{\"_MS.ProcessedByMetricExtractors\":\"(Name:'Requests', Ver:'1.0')\"}",
+                null,
+                "GET Reports/Index",
+                "9e83eb9a7c7a4aa5aeb3fba6f3a35b65",
+                "9e83eb9a7c7a4aa5aeb3fba6f3a35b65",
+                "Application Insights Availability Monitoring",
+                "9e83eb9a7c7a4aa5aeb3fba6f3a35b65",
+                "us-ca-sjc-azr_9e83eb9a7c7a4aa5aeb3fba6f3a35b65",
+                null,
+                null,
+                "",
+                "PC",
+                null,
+                null,
+                "0.0.0.0",
+                "San Jose",
+                "California",
+                "United States",
+                null,
+                "",
+                "AIConnect2",
+                "cf58dcfd-0683-487c-bc84-048789bca8e5",
+                "fabrikamprod",
+                "5a2e4e0c-e136-4a15-9824-90ba859b0a89",
+                "web:2.6.0-15431",
+                "bc548b80-51e8-11e8-bfb3-d32ea72f5e5f",
+                "1"
+              ],
+              [
+                "2018-05-07T11:20:52.052Z",
+                "|ecad145bb2f444b385fb2eb1b70b3121.0.b7bd30c5_",
+                null,
+                "GET Customers/Details",
+                "http://fabrikamfiberapp.azurewebsites.net/Customers/Details/8469",
+                "False",
+                "500",
+                "335.3618",
+                "250ms-500ms",
+                "request",
+                "{\"_MS.ProcessedByMetricExtractors\":\"(Name:'Requests', Ver:'1.0')\"}",
+                null,
+                "GET Customers/Details",
+                "ecad145bb2f444b385fb2eb1b70b3121",
+                "ecad145bb2f444b385fb2eb1b70b3121",
+                "Application Insights Availability Monitoring",
+                "ecad145bb2f444b385fb2eb1b70b3121",
+                "emea-au-syd-edge_ecad145bb2f444b385fb2eb1b70b3121",
+                null,
+                null,
+                "AutoGen_49c3aea0-4641-4675-93b5-55f7a62d22d3",
+                "PC",
+                null,
+                null,
+                "0.0.0.0",
+                "Sydney",
+                "New South Wales",
+                "Australia",
+                null,
+                "fabrikamfiberapp",
+                "RD00155D5076DF",
+                "cf58dcfd-0683-487c-bc84-048789bca8e5",
+                "fabrikamprod",
+                "5a2e4e0c-e136-4a15-9824-90ba859b0a89",
+                "web:2.6.0-15431",
+                "c596b159-51e8-11e8-b752-058527daec51",
+                "1"
+              ],
+              [
+                "2018-05-07T11:20:52.177Z",
+                "|15c55de1e92d49c5a7168d798b8fc3a4.0.b7bd30c6_",
+                null,
+                "GET Home/Index",
+                "http://fabrikamfiberapp.azurewebsites.net/",
+                "True",
+                "200",
+                "695.9726",
+                "500ms-1sec",
+                "request",
+                "{\"_MS.ProcessedByMetricExtractors\":\"(Name:'Requests', Ver:'1.0')\"}",
+                null,
+                "GET Home/Index",
+                "15c55de1e92d49c5a7168d798b8fc3a4",
+                "15c55de1e92d49c5a7168d798b8fc3a4",
+                "Application Insights Availability Monitoring",
+                "15c55de1e92d49c5a7168d798b8fc3a4",
+                "us-va-ash-azr_15c55de1e92d49c5a7168d798b8fc3a4",
+                null,
+                null,
+                "AutoGen_49c3aea0-4641-4675-93b5-55f7a62d22d3",
+                "PC",
+                null,
+                null,
+                "0.0.0.0",
+                "Washington",
+                "Virginia",
+                "United States",
+                null,
+                "fabrikamfiberapp",
+                "RD00155D5076DF",
+                "cf58dcfd-0683-487c-bc84-048789bca8e5",
+                "fabrikamprod",
+                "5a2e4e0c-e136-4a15-9824-90ba859b0a89",
+                "web:2.6.0-15431",
+                "c596b15a-51e8-11e8-b752-058527daec51",
+                "1"
+              ],
+              [
+                "2018-05-07T11:21:07.134Z",
+                "|c9a54a32335f47baaaf157b37791208a.0.3de057c1_",
+                null,
+                "GET Employees/Create",
+                "http://aiconnect2.cloudapp.net/FabrikamProd/Employees/Create",
+                "False",
+                "404",
+                "4.3193",
+                "<250ms",
+                "request",
+                "{\"_MS.ProcessedByMetricExtractors\":\"(Name:'Requests', Ver:'1.0')\"}",
+                null,
+                "GET Employees/Create",
+                "c9a54a32335f47baaaf157b37791208a",
+                "c9a54a32335f47baaaf157b37791208a",
+                "Application Insights Availability Monitoring",
+                "c9a54a32335f47baaaf157b37791208a",
+                "us-tx-sn1-azr_c9a54a32335f47baaaf157b37791208a",
+                null,
+                null,
+                "",
+                "PC",
+                null,
+                null,
+                "0.0.0.0",
+                "San Antonio",
+                "Texas",
+                "United States",
+                null,
+                "",
+                "AIConnect2",
+                "cf58dcfd-0683-487c-bc84-048789bca8e5",
+                "fabrikamprod",
+                "5a2e4e0c-e136-4a15-9824-90ba859b0a89",
+                "web:2.6.0-15431",
+                "bca51c81-51e8-11e8-bef8-f55159f429f7",
+                "1"
+              ],
+              [
+                "2018-05-07T11:21:09.293Z",
+                "|18a127dd94f94f17baebb5db12cc81ae.21.3de057d4_",
+                null,
+                "GET /FabrikamProd/Content/fonts/segoewp-light-webfont.eot",
+                "http://aiconnect2.cloudapp.net/FabrikamProd/Content/fonts/segoewp-light-webfont.eot",
+                "True",
+                "200",
+                "0.5556",
+                "<250ms",
+                "request",
+                "{\"_MS.ProcessedByMetricExtractors\":\"(Name:'Requests', Ver:'1.0')\"}",
+                null,
+                "GET /FabrikamProd/Content/fonts/segoewp-light-webfont.eot",
+                "18a127dd94f94f17baebb5db12cc81ae",
+                "18a127dd94f94f17baebb5db12cc81ae",
+                "Application Insights Availability Monitoring",
+                "18a127dd94f94f17baebb5db12cc81ae",
+                "us-va-ash-azr_18a127dd94f94f17baebb5db12cc81ae",
+                null,
+                null,
+                "",
+                "PC",
+                null,
+                null,
+                "0.0.0.0",
+                "Boydton",
+                "Virginia",
+                "United States",
+                null,
+                "",
+                "AIConnect2",
+                "cf58dcfd-0683-487c-bc84-048789bca8e5",
+                "fabrikamprod",
+                "5a2e4e0c-e136-4a15-9824-90ba859b0a89",
+                "web:2.6.0-15431",
+                "be39c640-51e8-11e8-b5f6-2bbc5902b3a9",
+                "1"
+              ]
+            ]
+          },
+          {
+            "TableName": "Table_1",
+            "Columns": [
+              {
+                "ColumnName": "Value",
+                "DataType": "String",
+                "ColumnType": "string"
+              }
+            ],
+            "Rows": [
+              [
+                "{\"Visualization\":null,\"Title\":null,\"XColumn\":null,\"Series\":null,\"YColumns\":null,\"XTitle\":null,\"YTitle\":null,\"XAxis\":null,\"YAxis\":null,\"Legend\":null,\"YSplit\":null,\"Accumulate\":false,\"IsQuerySorted\":false,\"Kind\":null}"
+              ]
+            ]
+          },
+          {
+            "TableName": "Table_2",
+            "Columns": [
+              {
+                "ColumnName": "Timestamp",
+                "DataType": "DateTime",
+                "ColumnType": "datetime"
+              },
+              {
+                "ColumnName": "Severity",
+                "DataType": "Int32",
+                "ColumnType": "int"
+              },
+              {
+                "ColumnName": "SeverityName",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "StatusCode",
+                "DataType": "Int32",
+                "ColumnType": "int"
+              },
+              {
+                "ColumnName": "StatusDescription",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "Count",
+                "DataType": "Int32",
+                "ColumnType": "int"
+              },
+              {
+                "ColumnName": "RequestId",
+                "DataType": "Guid",
+                "ColumnType": "guid"
+              },
+              {
+                "ColumnName": "ActivityId",
+                "DataType": "Guid",
+                "ColumnType": "guid"
+              },
+              {
+                "ColumnName": "SubActivityId",
+                "DataType": "Guid",
+                "ColumnType": "guid"
+              },
+              {
+                "ColumnName": "ClientActivityId",
+                "DataType": "String",
+                "ColumnType": "string"
+              }
+            ],
+            "Rows": [
+              [
+                "2018-05-09T04:59:47.549329Z",
+                "4",
+                "Info",
+                "0",
+                "Query completed successfully",
+                "1",
+                "0692652d-47b6-443c-aa25-95b495374b65",
+                "0692652d-47b6-443c-aa25-95b495374b65",
+                "d35acebb-1158-462a-9830-4d63e62a01df",
+                "54188b93-d9a0-4eef-a3f9-b1694bb40096"
+              ],
+              [
+                "2018-05-09T04:59:47.549329Z",
+                "6",
+                "Stats",
+                "0",
+                "{\"ExecutionTime\":0.0625441,\"resource_usage\":{\"cache\":{\"memory\":{\"hits\":102,\"misses\":0,\"total\":102},\"disk\":{\"hits\":0,\"misses\":0,\"total\":0}},\"cpu\":{\"user\":\"00:00:00\",\"kernel\":\"00:00:00\",\"total cpu\":\"00:00:00\"},\"memory\":{\"peak_per_node\":67109408}},\"dataset_statistics\":[{\"table_row_count\":5,\"table_size\":3376}]}",
+                "1",
+                "0692652d-47b6-443c-aa25-95b495374b65",
+                "0692652d-47b6-443c-aa25-95b495374b65",
+                "d35acebb-1158-462a-9830-4d63e62a01df",
+                "54188b93-d9a0-4eef-a3f9-b1694bb40096"
+              ]
+            ]
+          },
+          {
+            "TableName": "Table_3",
+            "Columns": [
+              {
+                "ColumnName": "Ordinal",
+                "DataType": "Int64",
+                "ColumnType": "long"
+              },
+              {
+                "ColumnName": "Kind",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "Name",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "Id",
+                "DataType": "String",
+                "ColumnType": "string"
+              },
+              {
+                "ColumnName": "PrettyName",
+                "DataType": "String",
+                "ColumnType": "string"
+              }
+            ],
+            "Rows": [
+              [
+                "0",
+                "QueryResult",
+                "PrimaryResult",
+                "9ce0100b-c47e-49be-98e9-7bc4863755ba",
+                ""
+              ],
+              [
+                "1",
+                "",
+                "@ExtendedProperties",
+                "1a4152ee-ddee-4863-8ef3-12b1ec2bc0d3",
+                ""
+              ],
+              [
+                "2",
+                "QueryStatus",
+                "QueryStatus",
+                "00000000-0000-0000-0000-000000000000",
+                ""
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

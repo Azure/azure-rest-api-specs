@@ -37,7 +37,26 @@ These settings apply only when `--tag=v1` is specified on the command line.
 
 ``` yaml $(tag) == 'v1'
 input-file:
-- microsoft.insights/v1/AppInsights.json
+- microsoft.insights/preview/v1/AppInsights.json
+directive:
+  - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
+    remove-operation: Query_Get
+  - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
+    where-operation: Query_Post
+    transform: $.operationId = "Query"
+```
+
+
+### Tag: 2015-05-01
+These settings apply only when `--tag=20150501` is specified on the command line.
+
+``` yaml $(tag) == '20150501'
+input-file:
+- microsoft.insights/preview/2015-05-01/swagger.json
+directive:
+  - suppress:
+    - R3016 
+    reason: Previous service version used camelcase; changed in newer version.
 ```
 
 # Code Generation
@@ -51,12 +70,35 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.ApplicationInsights
-  output-folder: $(csharp-sdks-folder)/ApplicationInsights/Data.ApplicationInsights/Generated
+  output-folder: $(csharp-sdks-folder)/ApplicationInsights/DataPlane/ApplicationInsights/Generated
   clear-output-folder: true
   payload-flattening-threshold: 3
 directive:
-  - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
+  - reason: Don't expose the GET endpoint since its behavior is more limited than POST
     remove-operation: GetQuery
+```
+
+``` yaml $(python)
+python-mode: create
+python:
+  add-credentials: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.applicationinsights
+  package-name: azure-applicationinsights
+  package-version: 0.1.0
+  clear-output-folder: true
+  basic-setup-py: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-applicationinsights/azure/applicationinsights
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-applicationinsights
 ```
 
 
@@ -85,4 +127,3 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'v1' && $(go)
 output-folder: $(go-sdk-folder)/services/appinsights/v1/insights
 ```
-
