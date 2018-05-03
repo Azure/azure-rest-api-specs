@@ -172,7 +172,7 @@ These settings apply only when `--tag=package-2018-03 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-03' && $(go)
-output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-03/trafficmanager
+output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-03-01/trafficmanager
 ```
 
 ### Tag: package-2017-09-preview and go
