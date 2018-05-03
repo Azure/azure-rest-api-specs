@@ -108,6 +108,7 @@ batch:
       - ../specification/datamigration/resource-manager/Microsoft.DataMigration/2017-11-15-preview/datamigration.json
       - ../specification/datamigration/resource-manager/Microsoft.DataMigration/2018-03-15-preview/datamigration.json
       - ../specification/datamigration/resource-manager/Microsoft.DataMigration/2018-03-31-preview/datamigration.json
+      - ../specification/datamigration/resource-manager/Microsoft.DataMigration/2018-04-19/datamigration.json
       - ../specification/devtestlabs/resource-manager/Microsoft.DevTestLab/2015-05-21-preview/DTL.json
       - ../specification/devtestlabs/resource-manager/Microsoft.DevTestLab/2016-05-15/DTL.json
       - ../specification/dns/resource-manager/Microsoft.Network/2015-05-04-preview/dns.json

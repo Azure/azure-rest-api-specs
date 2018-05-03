@@ -168,7 +168,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParametersProperties"
+              "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for configuration."
           },
@@ -211,6 +211,12 @@
         "x-ms-examples": {
           "List DSC node configurations by Automation Account": {
             "$ref": "./examples/listDscNodeConfigurations.json"
+          },
+          "List Paged DSC node configurations by Automation Account with no filter": {
+            "$ref": "./examples/listPagedDscNodeConfigurationsWithNoFilter.json"
+          },
+          "List Paged DSC node configurations by Automation Account with name filter": {
+            "$ref": "./examples/listPagedDscNodeConfigurationsWithNameFilter.json"
           }
         },
         "parameters": [
@@ -232,6 +238,27 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The number of rows to skip."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The the number of rows to take."
+          },
+          {
+            "name": "$inlinecount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Return total rows."
           }
         ],
         "responses": {
@@ -364,6 +391,10 @@
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the next link."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets or sets the total rows in query."
         }
       },
       "description": "The response model for the list job operation."
@@ -380,6 +411,26 @@
         }
       },
       "description": "The dsc extensionHandler property associated with the node"
+    },
+    "DscNodeConfigurationCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParametersProperties",
+          "x-ms-client-flatten": true,
+          "description": "Node configuration properties"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the node configuration."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      }
     },
     "DscNodeConfigurationCreateOrUpdateParametersProperties": {
       "properties": {

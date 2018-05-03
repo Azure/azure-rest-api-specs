@@ -25,7 +25,16 @@ These are the global settings for the TrafficManager API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-09-preview
+tag: package-2018-03
+```
+
+### Tag: package-2018-03
+
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file:
+- Microsoft.Network/stable/2018-03-01/trafficmanager.json
 ```
 
 ### Tag: package-2017-09-preview
@@ -150,10 +159,20 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-03
   - tag: package-2017-09-preview
   - tag: package-2017-05
   - tag: package-2017-03
   - tag: package-2015-11
+```
+
+### Tag: package-2018-03 and go
+
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(go)
+output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-03/trafficmanager
 ```
 
 ### Tag: package-2017-09-preview and go

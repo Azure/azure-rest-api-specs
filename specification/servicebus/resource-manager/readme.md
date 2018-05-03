@@ -101,6 +101,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.servicebus
   package-name: azure-mgmt-servicebus
+  package-version: 0.5.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

@@ -2810,6 +2810,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_GetOSUpgradeHistory",
+        "description": "Gets list of OS upgrades on a VM scale set instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetListOSUpgradeHistory"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff": {
       "post": {
         "tags": [
@@ -4324,7 +4366,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated."
     },
     "AvailabilitySetListResult": {
       "properties": {
@@ -5111,7 +5153,7 @@
     },
     "CreateOption": {
       "type": "string",
-      "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.",
+      "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.",
       "enum": [
         "FromImage",
         "Empty",
@@ -5188,7 +5230,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -5234,7 +5276,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -5871,7 +5913,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "description": "Describes a Virtual Machine."
+      "description": "Describes a Virtual Machine Update."
     },
     "VirtualMachineListResult": {
       "properties": {
@@ -6144,7 +6186,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "description": "The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist."
+      "description": "The source user image virtual hard disk. Only tags may be updated."
     },
     "ImageListResult": {
       "properties": {
@@ -6286,7 +6328,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "osType": {
           "type": "string",
@@ -6915,6 +6957,18 @@
             "name": "VirtualMachinePriorityTypes",
             "modelAsString": true
           }
+        },
+        "evictionPolicy": {
+          "type": "string",
+          "description": "Specifies the eviction policy for virtual machines in a low priority scale set. <br><br>Minimum api-version: 2017-10-30-preview",
+          "enum": [
+            "Deallocate",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineEvictionPolicyTypes",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -7279,6 +7333,143 @@
         "value"
       ],
       "description": "The Virtual Machine Scale Set List Skus operation response."
+    },
+    "RollbackStatusInfo": {
+      "properties":{
+        "successfullyRolledbackInstanceCount" : {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances which have been successfully rolled back."
+        },
+        "failedRolledbackInstanceCount" : {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances which failed to rollback."
+        },
+        "rollbackError" : {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "Error Details if OS rollback failed."
+        }
+      },
+      "description": "Information about rollback on failed VM instances after a OS Upgrade operation"
+    },
+    "UpgradeOperationHistoryStatus": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Code indicating the current status of the upgrade.",
+          "enum": [
+            "RollingForward",
+            "Cancelled",
+            "Completed",
+            "Faulted"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeState",
+            "modelAsString": false
+          }
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the upgrade."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the upgrade."
+        }
+      },
+      "description": "Information about the current running state of the overall upgrade."
+    },
+    "UpgradeOperationHistoricalStatusInfoProperties": {
+      "properties": {
+        "runningStatus": {
+          "$ref": "#/definitions/UpgradeOperationHistoryStatus",
+          "readOnly": true,
+          "description": "Information about the overall status of the upgrade operation."
+        },
+        "progress": {
+          "$ref": "#/definitions/RollingUpgradeProgressInfo",
+          "readOnly": true,
+          "description": "Counts of the VM's in each state."
+        },
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "Error Details for this upgrade if there are any."
+        },
+        "startedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Invoker of the Upgrade Operation",
+          "enum": [
+            "Unknown",
+            "User",
+            "Platform"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeOperationInvoker",
+            "modelAsString": false
+          }
+        },
+        "targetImageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "readOnly": true,
+          "description": "Image Reference details"
+        },
+        "rollbackInfo": {
+          "$ref": "#/definitions/RollbackStatusInfo",
+          "readOnly": true,
+          "description": "Information about OS rollback if performed"
+        }
+      },
+      "description": "Describes each OS upgrade on the Virtual Machine Scale Set."
+    },
+    "UpgradeOperationHistoricalStatusInfo": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfoProperties",
+          "readOnly": true,
+          "description": "Information about the properties of the upgrade operation."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource location"
+        }
+      },
+      "description": "Virtual Machine Scale Set OS Upgrade History operation response."
+    },
+    "VirtualMachineScaleSetListOSUpgradeHistory": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfo"
+          },
+          "description": "The list of OS upgrades performed on the virtual machine scale set."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "List of Virtual Machine Scale Set OS Upgrade History operation response."
     },
     "VirtualMachineScaleSetVMProperties": {
       "properties": {

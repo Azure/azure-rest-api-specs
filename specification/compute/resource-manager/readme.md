@@ -106,6 +106,23 @@ directive:
       - $.definitions.VirtualMachineScaleSetUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.AvailabilitySetUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineExtensionUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.ImageUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+
 
   - where:
       - $.definitions.VirtualMachineScaleSetVM
@@ -439,7 +456,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-compute-2016-04-preview' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2016-04-30-preview/compute
+output-folder: $(go-sdk-folder)/services/preview/compute/mgmt/2016-04-30-preview/compute
 ```
 
 ### Tag: package-compute-2016-03 and go
@@ -469,7 +486,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-container-service-2015-11-preview' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2015-11-01-preview/containerservice
+output-folder: $(go-sdk-folder)/services/preview/containerservice/mgmt/2015-11-01-preview/containerservice
 ```
 
 ### Tag: package-compute-2015-06 and go
