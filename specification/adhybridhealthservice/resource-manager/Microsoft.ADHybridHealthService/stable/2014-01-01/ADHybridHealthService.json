@@ -84,7 +84,7 @@
             "description": "The service object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           }
         ],
@@ -92,7 +92,7 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           }
         }
@@ -124,7 +124,7 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           }
         }
@@ -186,7 +186,7 @@
             "description": "The service object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           },
           {
@@ -197,7 +197,7 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           }
         }
@@ -878,7 +878,7 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/ReplicationSummary"
+              "$ref": "#/definitions/ReplicationSummaryList"
             }
           }
         }
@@ -890,7 +890,7 @@
         "description": "Gets the details of an alert for a given Active Directory Domain Controller service and server combination.",
         "x-ms-examples": {
           "addsServices_listServerAlerts": {
-            "$ref": "./examples/Alerts.json"
+            "$ref": "./examples/Server_Alerts.json"
           }
         },
         "operationId": "addsServices_listServerAlerts",
@@ -1206,7 +1206,7 @@
             "description": "The service object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           }
         ],
@@ -1214,7 +1214,7 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           }
         }
@@ -1302,7 +1302,7 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           }
         }
@@ -1364,7 +1364,7 @@
             "description": "The service object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           },
           {
@@ -1375,7 +1375,7 @@
           "200": {
             "description": " ",
             "schema": {
-              "$ref": "#/definitions/Service"
+              "$ref": "#/definitions/ServiceProperties"
             }
           }
         }
@@ -2726,6 +2726,14 @@
           "items": {
             "$ref": "#/definitions/Item"
           }
+        },
+        "totalCount": {
+          "description": "The total count of configuration.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
         }
       }
     },
@@ -2804,6 +2812,14 @@
           "items": {
             "$ref": "#/definitions/AddsServiceMember"
           }
+        },
+        "totalCount": {
+          "description": "The total count of service members.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
         }
       }
     },
@@ -2931,7 +2947,7 @@
           "type": "string",
           "format": "date-time"
         },
-        "monitoringRoleType": {
+        "monitorRoleType": {
           "description": "The monitoring role type for which the alert was raised.",
           "type": "string"
         },
@@ -3022,16 +3038,20 @@
       "description": "The list of alerts for a service.",
       "type": "object",
       "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of operations.",
-          "type": "string"
-        },
         "value": {
           "description": "The value returned by the operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Alert"
           }
+        },
+        "totalCount": {
+          "description": "The total count of alert elements.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
         }
       }
     },
@@ -3642,6 +3662,14 @@
           "items": {
             "$ref": "#/definitions/Dimension"
           }
+        },
+        "totalCount": {
+          "description": "The total count of dimensions.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
         }
       }
     },
@@ -4006,7 +4034,7 @@
           "description": "The site count.",
           "type": "integer"
         },
-        "moniteredDcCount": {
+        "monitoredDcCount": {
           "description": "The number of domain controllers that are monitored by Azure Active Directory Connect Health.",
           "type": "integer"
         },
@@ -4453,6 +4481,14 @@
           "items": {
             "$ref": "#/definitions/Item"
           }
+        },
+        "totalCount": {
+          "description": "The total count of metrics.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
         }
       }
     },
@@ -4460,7 +4496,7 @@
       "description": "The metric meta data",
       "type": "object",
       "properties": {
-        "metricsPRocessorClassName": {
+        "metricsProcessorClassName": {
           "description": "The name of the class which retrieve and process the metric.",
           "type": "string"
         },
@@ -4523,6 +4559,14 @@
           "items": {
             "$ref": "#/definitions/MetricMetadata"
           }
+        },
+        "totalCount": {
+          "description": "The total count of service elements.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
         }
       }
     },
@@ -4702,6 +4746,10 @@
           "items": {
             "$ref": "#/definitions/Operation"
           }
+        },
+        "totalCount": {
+          "description": "The total count of opertaions.",
+          "type": "integer"
         },
         "continuationToken": {
           "description": "The continuation token to get next set of operations.",
@@ -5052,31 +5100,6 @@
         }
       }
     },
-    "Service": {
-      "description": "The details of the service for a given onboarded tenant.",
-      "type": "object",
-      "properties": {
-        "continuationToken": {
-          "description": "The page-continuation token to use with a paged version of this API.",
-          "type": "string"
-        },
-        "totalCount": {
-          "description": "The total number of services onboarded for a given tenant.",
-          "type": "integer"
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of the operation.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The service properties.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceProperties"
-          }
-        }
-      }
-    },
     "ServiceConfiguration": {
       "description": "The service configuration",
       "type": "object",
@@ -5256,8 +5279,16 @@
           "description": "The value returned by the operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Service"
+            "$ref": "#/definitions/ServiceProperties"
           }
+        },
+        "totalCount": {
+          "description": "The total count of service elements.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
         }
       }
     },
@@ -5501,8 +5532,7 @@
           "description": "Indicates if the tenant is configured to automatically receive updates for Azure Active Directory Connect Health client side features."
         },
         "alertSuppressionTimeInMins": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
           "description": "The time in minutues after which an alert will be autosupressed."
         },
         "consentedToMicrosoftDevOps": {
@@ -5528,7 +5558,7 @@
           "description": "Indicates if the tenant is disabled in Azure Active Directory Connect Health."
         },
         "disabledReason": {
-          "type": "string",
+          "type": "integer",
           "description": "The reason due to which the tenant was disabled in Azure Active Directory Connect Health."
         },
         "globalAdminsEmail": {
@@ -5551,6 +5581,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The date and time, in UTC, when the tenant onboarding status in Azure Active Directory Connect Health was last verified."
+        },
+        "onboardingAllowed": {
+          "type": "boolean",
+          "description": "Indicates if the tenant is allowed to  onboard to Azure Active Directory Connect Health."
         },
         "onboarded": {
           "type": "boolean",
