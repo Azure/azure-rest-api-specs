@@ -216,9 +216,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.cognitiveservices.textanalytics
+  namespace: com.microsoft.azure.cognitiveservices.language.textanalytics
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/textanalytics
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/language/textanalytics
 ```
