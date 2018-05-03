@@ -287,31 +287,26 @@
       "properties": {
         "typeProperties":
         {
-          "description": "Blob Events Trigger properties",
+          "description": "Blob Events Trigger properties.",
           "x-ms-client-flatten": true,
           "properties": {
             "blobPath": {
-              "description": "path to container, folder, blob, or file extension for which events can trigger the pipeline.",
+              "description": "Expression to determine if trigger should fire. For example, @startswith('/records/blobs/december/') will only fire the trigger for blobs in the december folder under the records container.",
               "type": "string"
             },
             "events": {
-              "description": "the type of events for which we want to trigger the pipeline.",
+              "description": "The type of events that cause this trigger to fire.",
               "$ref": "#/definitions/BlobEventTypes"
             },
             "scope": {
-              "description": "the resource id of the Storage Account.",
+              "description": "The ARM resource ID of the Storage Account.",
               "type": "string"
-            },
-            "maxConcurrency": {
-              "description": "the max number of parallel events to handle when it is triggered.",
-              "type": "integer"
             }
           },
           "required": [
             "blobPath",
             "events",
-            "scope",
-            "maxConcurrency"
+            "scope"
           ]
         }
       },
@@ -324,15 +319,15 @@
       "items": {
         "type": "string",
         "enum": [
-          "blobCreated",
-          "blobDeleted"
+          "Microsoft.Storage.BlobCreated",
+          "Microsoft.Storage.BlobDeleted"
         ],
         "x-ms-enum": {
           "name": "BlobEventTypes",
           "modelAsString": true
         }
       },
-      "description": "blob event types"
+      "description": "Blob event types."
     },
     "TumblingWindowTrigger": {
       "description": "Trigger that schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).",
