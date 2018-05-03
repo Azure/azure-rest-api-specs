@@ -24,7 +24,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11
+tag: package-2018-01
 ```
 
 ### Tag: package-2018-01

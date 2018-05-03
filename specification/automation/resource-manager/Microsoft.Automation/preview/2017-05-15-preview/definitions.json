@@ -396,6 +396,10 @@
           "type": "string",
           "description": "The provisioning state of a resource.",
           "readOnly": true
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Specifies the runOn group name where the job was executed."
         }
       }
     },
@@ -714,6 +718,17 @@
           "items": {
             "type": "string"
           }
+        },
+        "includedKbNumbers": {
+          "type": "array",
+          "description": "KB numbers included from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rebootSetting": {
+          "description": "Reboot setting for the software update configuration.",
+          "type": "string"
         }
       }
     },
@@ -741,6 +756,17 @@
           "items": {
             "type": "string"
           }
+        },
+        "includedPackageNameMasks": {
+          "type": "array",
+          "description": "packages included from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rebootSetting": {
+          "description": "Reboot setting for the software update configuration.",
+          "type": "string"
         }
       }
     },

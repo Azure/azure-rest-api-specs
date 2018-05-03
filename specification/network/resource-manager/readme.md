@@ -28,7 +28,38 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-02
+tag: package-2018-04
+```
+
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04'
+
+input-file:
+- Microsoft.Network/stable/2018-04-01/applicationGateway.json
+- Microsoft.Network/stable/2018-04-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2018-04-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-04-01/ddosProtectionPlan.json
+- Microsoft.Network/stable/2018-04-01/endpointService.json
+- Microsoft.Network/stable/2018-04-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-04-01/expressRouteCrossConnection.json
+- Microsoft.Network/stable/2018-04-01/loadBalancer.json
+- Microsoft.Network/stable/2018-04-01/network.json
+- Microsoft.Network/stable/2018-04-01/networkInterface.json
+- Microsoft.Network/stable/2018-04-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2018-04-01/networkWatcher.json
+- Microsoft.Network/stable/2018-04-01/operation.json
+- Microsoft.Network/stable/2018-04-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-04-01/routeFilter.json
+- Microsoft.Network/stable/2018-04-01/routeTable.json
+- Microsoft.Network/stable/2018-04-01/serviceCommunity.json
+- Microsoft.Network/stable/2018-04-01/usage.json
+- Microsoft.Network/stable/2018-04-01/virtualNetwork.json
+- Microsoft.Network/stable/2018-04-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-04-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2018-04-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2018-02
@@ -397,6 +428,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-04
   - tag: package-2018-02
   - tag: package-2018-01
   - tag: package-2017-11
@@ -413,6 +445,15 @@ batch:
   - tag: package-2015-05-preview
 ```
 
+### Tag: package-2018-04 and go
+
+These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2018-04-01/network
+```
+
 ### Tag: package-2018-02 and go
 
 These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
@@ -420,6 +461,23 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-02' && $(go)
 output-folder: $(go-sdk-folder)/services/network/mgmt/2018-02-01/network
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkwatcher.json
+    where: $.definitions.PacketCaptureResult
+    reason: Packet capture is a non tracked child resource. It has 'name' and 'id' but does not have a 'type'
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkwatcher.json
+    where: $.definitions.NetworkWatcher
+    reason: Network watcher has reference on resource in network.json which contain 'name, 'id' and 'type'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: networkwatcher.json
+    where: $.definitions.ProtocolConfiguration.properties.HTTPConfiguration
+    reason: Accidentally shipped with wrong casing – however fixing the casing is introducing a breaking change which is worse than living with the naming violation
 ```
 
 ### Tag: package-2018-01 and go

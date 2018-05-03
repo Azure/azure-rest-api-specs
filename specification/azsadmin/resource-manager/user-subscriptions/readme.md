@@ -21,8 +21,8 @@ To see additional help and options, run:
 These are the global settings for the Subscriptions API.
 
 ``` yaml
-title: SubscriptionsManagementClient
-description: Subscriptions Management Client
+title: SubscriptionClient
+description: Subscription Management Client
 openapi-type: arm
 tag: package-2015-11-01
 ```
@@ -73,7 +73,7 @@ input-file:
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.AzureStack.Management.Subscriptions
+  namespace: Microsoft.AzureStack.Management.Subscription
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true

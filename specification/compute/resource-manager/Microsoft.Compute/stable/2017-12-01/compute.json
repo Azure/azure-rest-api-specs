@@ -5153,7 +5153,7 @@
     },
     "CreateOption": {
       "type": "string",
-      "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.",
+      "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.",
       "enum": [
         "FromImage",
         "Empty",
@@ -5230,7 +5230,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -5276,7 +5276,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -6328,7 +6328,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "osType": {
           "type": "string",
@@ -7334,6 +7334,28 @@
       ],
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
+    "RollbackStatusInfo": {
+      "properties":{
+        "successfullyRolledbackInstanceCount" : {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances which have been successfully rolled back."
+        },
+        "failedRolledbackInstanceCount" : {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances which failed to rollback."
+        },
+        "rollbackError" : {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "Error Details if OS rollback failed."
+        }
+      },
+      "description": "Information about rollback on failed VM instances after a OS Upgrade operation"
+    },
     "UpgradeOperationHistoryStatus": {
       "properties": {
         "code": {
@@ -7401,6 +7423,11 @@
           "$ref": "#/definitions/ImageReference",
           "readOnly": true,
           "description": "Image Reference details"
+        },
+        "rollbackInfo": {
+          "$ref": "#/definitions/RollbackStatusInfo",
+          "readOnly": true,
+          "description": "Information about OS rollback if performed"
         }
       },
       "description": "Describes each OS upgrade on the Virtual Machine Scale Set."

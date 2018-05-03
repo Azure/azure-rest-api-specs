@@ -26,7 +26,7 @@ These are the global settings for the Databricks API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-01-preview
+tag: package-2018-04-01
 ```
 
 
