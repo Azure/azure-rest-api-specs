@@ -332,7 +332,7 @@
           },
           "description": "List of  Resource referred into query"
         },
-        "datasourceId": {
+        "dataSourceId": {
           "type": "string",
           "description": "The resource uri over which log search query is to be run."
         },
@@ -343,7 +343,7 @@
       },
       "required": [
         "query",
-        "datasourceId"
+        "dataSourceId"
       ]
     },
     "Schedule": {
@@ -394,21 +394,21 @@
       "properties": {
         "actionGroup": {
           "type": "array",
-          "description": "Azure Group reference.",
+          "description": "Azure Action Group reference.",
           "items": {
             "type": "string"
           }
         },
         "emailSubject": {
           "type": "string",
-          "description": "Custom subject for Azns email"
+          "description": "Custom subject override for all email ids in Azure action group"
         },
         "customWebhookPayload": {
           "type": "string",
-          "description": "Custom webhook payload to be send to azns action group"
+          "description": "Custom payload to be sent for all webook URI in Azure action group"
         }
       },
-      "description": "azns notification group"
+      "description": "Azure action group"
     },
     "MetricTrigger": {
       "type": "object",
@@ -570,12 +570,12 @@
         },
         "aznsAction": {
           "$ref": "#/definitions/AzNsActionGroup",
-          "description": "azns notification group reference."
+          "description": "Azure action group reference."
         },
         "throttlingInMin": {
           "type": "integer",
           "format": "int32",
-          "description": "time (in minutes) for which Alerts should be throttled"
+          "description": "time (in minutes) for which Alerts should be throttled or suppressed."
         },
         "trigger": {
           "$ref": "#/definitions/TriggerCondition",
