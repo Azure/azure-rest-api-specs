@@ -639,7 +639,12 @@
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/checkNotificationHubAvailability": {
 			"post": {
 				"tags": ["NotificationHubs"],
-				"operationId": "Hubs_CheckNotificationHubAvailability",
+				"x-ms-examples": {
+					"notificationhubCreate": {
+						"$ref": "./examples/notificationhubs/NotificationHubCheckNameAvailability.json"
+					}
+				},
+				"operationId": "NotificationHubs_CheckNotificationHubAvailability",
 				"description": "Checks the availability of the given notificationHub in a namespace.",
 				"parameters": [{
 					"name": "resourceGroupName",
