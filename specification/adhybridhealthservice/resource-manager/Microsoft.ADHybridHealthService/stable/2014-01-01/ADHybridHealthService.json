@@ -208,7 +208,7 @@
         "tags": [ "Adds" ],
         "description": "Gets the alerts for a given Active Directory Domain Service.",
         "x-ms-examples": {
-          "alerts_listAlerts": {
+          "alerts_listAddsAlerts": {
             "$ref": "./examples/Alerts.json"
           }
         },
@@ -1061,9 +1061,6 @@
             "schema": {
               "$ref": "#/definitions/Tenant"
             }
-          },
-          "403": {
-            "description": "The tenant is not authorized to onboard to Azure Active Directory Connect Health because it does not meet the onboarding criteria."
           }
         }
       },
@@ -1087,12 +1084,6 @@
             "schema": {
               "$ref": "#/definitions/Tenant"
             }
-          },
-          "400": {
-            "description": "Bad Request. This is the response code when the tenant is not onboarded to Azure Active Directory Connect Health.Exception will not be thrown."
-          },
-          "403": {
-            "description": "The tenant is not authorized to call to Azure Active Directory Connect Health because it does not meet the onboarding criteria."
           }
         }
       },
@@ -1125,12 +1116,6 @@
             "schema": {
               "$ref": "#/definitions/Tenant"
             }
-          },
-          "400": {
-            "description": "Bad Request. This is the response code when the tenant is not onboarded to Azure Active Directory Connect Health.Exception will not be thrown."
-          },
-          "403": {
-            "description": "The tenant is not authorized to call to Azure Active Directory Connect Health because it does not meet the onboarding criteria."
           }
         }
       }
@@ -1959,7 +1944,7 @@
           {
             "name": "configurationSetting",
             "in": "body",
-            "description": "The mnitoring configuration to update",
+            "description": "The monitoring configuration to update",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Item"
@@ -2224,7 +2209,7 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": " "
           }
         }
@@ -2830,9 +2815,9 @@
         },
         "dimensions": {
           "description": "The server specific configuration related dimensions.",
-          "type": "object",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "disabled": {
@@ -2855,9 +2840,9 @@
         },
         "installedQfe": {
           "description": "The list of installed QFEs for the server.",
-          "type": "object",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Hotfixes"
+            "$ref": "#/definitions/Hotfix"
           }
         },
         "lastDisabled": {
@@ -2890,16 +2875,16 @@
         },
         "monitoringConfigurationsComputed": {
           "description": "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
-          "type": "object",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "monitoringConfigurationsCustomized": {
           "description": "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
-          "type": "object",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "osName": {
@@ -2912,16 +2897,16 @@
         },
         "properties": {
           "description": "Server specific properties.",
-          "type": "object",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "recommendedQfes": {
           "description": "The list of recommended hotfixes for the server.",
-          "type": "object",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Hotfixes"
+            "$ref": "#/definitions/Hotfix"
           }
         },
         "resolvedAlerts": {
@@ -3106,16 +3091,16 @@
         },
         "activeAlertProperties": {
           "description": "The active alert properties.",
-          "type": "object",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "resolvedAlertProperties": {
-          "description": "The active alert properties.",
-          "type": "object",
+          "description": "The resolved alert properties.",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "tenantId": {
@@ -3539,7 +3524,7 @@
           "description": "The run profiles of the connector.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RunProfiles"
+            "$ref": "#/definitions/RunProfile"
           }
         },
         "classesIncluded": {
@@ -3771,7 +3756,7 @@
           "description": "List of service specific configuration properties.",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "activeAlerts": {
@@ -4092,7 +4077,7 @@
           "type": "string",
           "format": "date-time"
         },
-        "uniqueIdAddresses": {
+        "uniqueIpAddresses": {
           "description": "The list of unique IP addresses.",
           "type": "string"
         },
@@ -4583,6 +4568,20 @@
           "description": "The server Id.",
           "type": "string",
           "format": "uuid"
+        },
+        "mergedEntityId": {
+          "description": "The merged entity Id.",
+          "type": "string",
+          "format": "uuid"
+        },
+        "createdDate": {
+          "description": "The date and time, in UTC, when the error was created.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "exportErrorStatus": {
+          "description": "The export error status.",
+          "type": "integer"
         }
       }
     },
@@ -5483,7 +5482,7 @@
           "description": "The server specific configuration related dimensions.",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "disabled": {
@@ -5508,7 +5507,7 @@
           "description": "The list of installed QFEs for the server.",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/Hotfixes"
+            "$ref": "#/definitions/Hotfix"
           }
         },
         "lastDisabled": {
@@ -5543,14 +5542,14 @@
           "description": "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "monitoringConfigurationsCustomized": {
           "description": "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "osName": {
@@ -5565,14 +5564,14 @@
           "description": "Server specific properties.",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
         },
         "recommendedQfes": {
           "description": "The list of recommended hotfixes for the server.",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/Hotfixes"
+            "$ref": "#/definitions/Hotfix"
           }
         },
         "resolvedAlerts": {
