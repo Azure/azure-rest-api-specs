@@ -1188,13 +1188,11 @@
       "properties": {
         "imageInfo": {
           "description": "A JSON object that identities the image to get insights of.",
-          "$ref": "#/definitions/ImageInfo",
-          "readOnly": true
+          "$ref": "#/definitions/ImageInfo"
         },
         "knowledgeRequest": {
           "description": "A JSON object containing information about the request, such as filters, or a description.",
-          "$ref": "#/definitions/KnowledgeRequest",
-          "readOnly": true
+          "$ref": "#/definitions/KnowledgeRequest"
         }
       }
     },
@@ -1204,18 +1202,15 @@
       "properties": {
         "imageInsightsToken": {
           "description": "An image insights token. To get the insights token, call one of the Image Search APIs (for example, /images/search). In the search results, the [Image](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image) object's [imageInsightsToken](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image-imageinsightstoken) field contains the token. The imageInsightsToken and url fields mutually exclusive; do not specify both. Do not specify an insights token if the request includes the image form data.",
-          "readOnly": true,
           "type": "string"
         },
         "url": {
           "description": "The URL of the input image. The imageInsightsToken and url fields are mutually exclusive; do not specify both. Do not specify the URL if the request includes the image form data.",
-          "readOnly": true,
           "type": "string"
         },
         "cropArea": {
           "description": "A JSON object consisting of coordinates specifying the four corners of a cropped rectangle within the input image. Use the crop area to identify the region of interest in the image. You can apply the crop area to the images specified using the imageInsightsToken or url fields, or an image binary specified in an image form data.",
-          "$ref": "#/definitions/CropArea",
-          "readOnly": true
+          "$ref": "#/definitions/CropArea"
         }
       }
     },
@@ -1257,8 +1252,7 @@
       "properties": {
         "filters": {
           "description": "A key-value object consisting of filters that may be specified to limit the results returned by the API.",
-          "$ref": "#/definitions/Filters",
-          "readOnly": true
+          "$ref": "#/definitions/Filters"
         }
       }
     },
@@ -1268,7 +1262,6 @@
       "properties": {
         "site": {
           "description": "The URL of the site to return similar images and similar products from. (e.g., \"www.bing.com\", \"bing.com\").",
-          "readOnly": true,
           "type": "string"
         }
       }
