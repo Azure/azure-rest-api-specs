@@ -802,11 +802,11 @@
         "tags": [ "Adds" ],
         "description": "Gets complete domain controller list along with replication details for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "addsServices_getReplicationSummary": {
+          "addsServices_listReplicationSummary": {
             "$ref": "./examples/ReplicationSummary.json"
           }
         },
-        "operationId": "addsServices_getReplicationSummary",
+        "operationId": "addsServices_listReplicationSummary",
         "parameters": [
           {
             "name": "serviceName",
@@ -878,6 +878,9 @@
               "$ref": "#/definitions/ReplicationSummaryList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
