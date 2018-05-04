@@ -67,6 +67,32 @@ input-file:
 - Microsoft.RecoveryServices/stable/2016-06-01/registeredIdentities.json
 ```
 
+### Tag: package-2016-08
+
+These settings apply only when `--tag=package-2016-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-08'
+input-file:
+- Microsoft.RecoveryServices/stable/2016-08-10/operations.json
+```
+
+### Tag: package-2016-12
+
+These settings apply only when `--tag=package-2016-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-12'
+input-file:
+- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
+```
+
+### Tag: package-2017-07-only
+
+These settings apply only when `--tag=package-2017-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-07-only'
+input-file:
+- Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+```
 
 ---
 # Code Generation

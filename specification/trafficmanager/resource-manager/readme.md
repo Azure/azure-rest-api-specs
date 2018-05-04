@@ -51,6 +51,15 @@ override-info:
   title: TrafficManagerManagementClient
 ```
 
+### Tag: package-2017-09-preview-only
+
+These settings apply only when `--tag=package-2017-09-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09-preview-only'
+input-file:
+- Microsoft.Network/preview/2017-09-01-preview/trafficmanageranalytics.json
+```
+
 
 ### Tag: package-2017-05
 
