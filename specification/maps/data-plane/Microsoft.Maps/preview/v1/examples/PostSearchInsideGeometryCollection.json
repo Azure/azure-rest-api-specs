@@ -1,0 +1,214 @@
+{
+	"parameters": {
+
+		"format": "json",
+		"api-version": "1.0",
+		"query": "burger",
+		"limit": 2,
+		"subscription-key": "{subscription-key}",
+		"searchInsideGeometryRequestBody": {
+			"geometry": {
+				"type": "GeometryCollection",
+				"geometries": [{
+						"type": "Polygon",
+						"coordinates": [
+							[
+								[-122.43576049804686, 37.7524152343544],
+								[-122.43301391601562, 37.70660472542312],
+								[-122.36434936523438, 37.712059855877314],
+								[-122.43576049804686, 37.7524152343544]
+							]
+						]
+					}
+				]
+			}
+		}
+	},
+
+	"responses": {
+
+		"200": {
+			"body": {
+				"summary": {
+					"query": "burger",
+					"queryType": "NON_NEAR",
+					"queryTime": 61,
+					"numResults": 2,
+					"offset": 0,
+					"totalResults": 3,
+					"fuzzyLevel": 1
+				},
+				"results": [{
+						"type": "POI",
+						"id": "US/POI/p0/7608257",
+						"score": 4,
+						"info": "search:ta:840061003419653-US",
+						"poi": {
+							"name": "Burger Joint",
+							"phone": "+(1)-(415)-3494331",
+							"categories": [
+								"fast food",
+								"restaurant"
+							],
+							"classifications": [{
+									"code": "RESTAURANT",
+									"names": [{
+											"nameLocale": "en-US",
+											"name": "fast food"
+										}, {
+											"nameLocale": "en-US",
+											"name": "restaurant"
+										}
+									]
+								}
+							]
+						},
+						"address": {
+							"streetNumber": "167",
+							"streetName": "Leland Ave",
+							"municipalitySubdivision": "Visitacion Valley, San Francisco",
+							"municipality": "San Francisco",
+							"countrySecondarySubdivision": "San Francisco",
+							"countryTertiarySubdivision": "San Francisco",
+							"countrySubdivision": "CA",
+							"postalCode": "94134",
+							"extendedPostalCode": "941342844",
+							"countryCode": "US",
+							"country": "United States Of America",
+							"countryCodeISO3": "USA",
+							"freeformAddress": "167 Leland Ave, San Francisco, CA 94134",
+							"countrySubdivisionName": "California"
+						},
+						"position": {
+							"lat": 37.71223,
+							"lon": -122.40702
+						},
+						"viewport": {
+							"topLeftPoint": {
+								"lat": 37.71313,
+								"lon": -122.40816
+							},
+							"btmRightPoint": {
+								"lat": 37.71133,
+								"lon": -122.40588
+							}
+						},
+						"entryPoints": [{
+								"type": "main",
+								"position": {
+									"lat": 37.71241,
+									"lon": -122.40693
+								}
+							}
+						]
+					}, {
+						"type": "POI",
+						"id": "US/POI/p1/9012040",
+						"score": 4,
+						"info": "search:ta:840069006230207-US",
+						"poi": {
+							"name": "Barneys Gourmet Hamburger",
+							"phone": "+(1)-(415)-2827770",
+							"url": "www.barneyshamburgers.com",
+							"categories": [
+								"nightlife"
+							],
+							"classifications": [{
+									"code": "NIGHTLIFE",
+									"names": [{
+											"nameLocale": "en-US",
+											"name": "nightlife"
+										}
+									]
+								}
+							]
+						},
+						"address": {
+							"streetNumber": "4138",
+							"streetName": "24th St",
+							"municipalitySubdivision": "San Francisco, Noe Valley",
+							"municipality": "San Francisco",
+							"countrySecondarySubdivision": "San Francisco",
+							"countryTertiarySubdivision": "San Francisco",
+							"countrySubdivision": "CA",
+							"postalCode": "94114",
+							"extendedPostalCode": "941143614",
+							"countryCode": "US",
+							"country": "United States Of America",
+							"countryCodeISO3": "USA",
+							"freeformAddress": "4138 24th St, San Francisco, CA 94114",
+							"countrySubdivisionName": "California"
+						},
+						"position": {
+							"lat": 37.75129,
+							"lon": -122.43499
+						},
+						"viewport": {
+							"topLeftPoint": {
+								"lat": 37.75219,
+								"lon": -122.43613
+							},
+							"btmRightPoint": {
+								"lat": 37.75039,
+								"lon": -122.43385
+							}
+						},
+						"entryPoints": [{
+								"type": "main",
+								"position": {
+									"lat": 37.75124,
+									"lon": -122.43499
+								}
+							}
+						]
+					}
+				]
+			}
+		},
+		"400": {
+			"headers": {},
+			"body": {
+			  "error": {
+				"code": "400 BadRequest",
+				"message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+			  }
+			}
+		  },
+		  "401": {
+			"headers": {},
+			"body": {
+			  "error": {
+				"code": "401 Unauthorized",
+				"message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+			  }
+			}
+		  },
+		  "403": {
+			"headers": {},
+			"body": {
+			  "error": {
+				"code": "403 Forbidden",
+				"message": "Permission, capacity, or authentication issues."
+			  }
+			}
+		  },
+		  "404": {
+			"headers": {},
+			"body": {
+			  "error": {
+				"code": "404 NotFound",
+				"message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+			  }
+			}
+		  },
+		  "500": {
+			"headers": {},
+			"body": {
+			  "error": {
+				"code": "500 InternalServerError",
+				"message": "An error occurred while processing the request. Please try again later."
+			  }
+			}
+		  }
+	}
+}

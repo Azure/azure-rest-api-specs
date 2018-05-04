@@ -1,12 +1,12 @@
-# LocationBasedServices
+# Maps
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for LocationBasedServices.
+This is the AutoRest configuration file for Maps.
 
 ---
 ## Getting Started 
-To build the SDK for LocationBasedServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -20,11 +20,11 @@ To see additional help and options, run:
 
 
 ### Basic Information 
-These are the global settings for the LocationBasedServices API.
+These are the global settings for the Maps API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-01
+tag: package-2018-05
 ```
 
 
@@ -34,7 +34,16 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.LocationBasedServices/preview/2017-01-01-preview/locationbasedservices.json
+- Microsoft.Maps/stable/2017-01-01-preview/maps-management.json
+```
+
+### Tag: package-2018-05
+
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05'
+input-file:
+- Microsoft.Maps/stable/2018-05-01/maps-management.json
 ```
 
 ---
@@ -62,8 +71,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.LocationBasedServices
-  output-folder: $(csharp-sdks-folder)/LocationBasedServices/Management.LocationBasedServices/Generated
+  namespace: Microsoft.Azure.Management.Maps
+  output-folder: $(csharp-sdks-folder)/Maps/Management.Maps/Generated
   clear-output-folder: true
 ```
 
@@ -79,14 +88,24 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
-  namespace: location
+  namespace: maps
 ```
 
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-05
   - tag: package-2017-01
+```
+
+### Tag: package-2018-05 and go
+
+These settings apply only when `--tag=package-2018-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-05' && $(go)
+output-folder: $(go-sdk-folder)/services/maps/mgmt/2018-05-01/maps
 ```
 
 ### Tag: package-2017-01 and go
@@ -95,7 +114,7 @@ These settings apply only when `--tag=package-2017-01 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-01' && $(go)
-output-folder: $(go-sdk-folder)/services/location/mgmt/2017-01-01-preview/location
+output-folder: $(go-sdk-folder)/services/maps/mgmt/2017-01-01-preview/maps
 ```
 
 
@@ -108,8 +127,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   azure-arm: true
   fluent: true
-  namespace: com.microsoft.azure.management.location
+  namespace: com.microsoft.azure.management.maps
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-location
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-maps
 ```
