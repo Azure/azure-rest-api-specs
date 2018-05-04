@@ -895,7 +895,7 @@
           {
             "name": "serviceMemberId",
             "in": "path",
-            "description": "The server Id for which the laert details needs to be queried.",
+            "description": "The server Id for which the alert details needs to be queried.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -5188,6 +5188,10 @@
         "operationType": {
           "description": "The run step operation types.",
           "type": "integer"
+        },
+        "timeout": {
+          "description": "The operation timeout.",
+          "type": "integer"
         }
       }
     },
@@ -5235,16 +5239,7 @@
         },
         "serviceType": {
           "description": "The service type of the server.",
-          "type": "string",
-          "enum": [
-            "Undefined",
-            "AadConnectSync",
-            "DirSync"
-          ],
-          "x-ms-enum": {
-            "name": "ServiceType",
-            "modelAsString": true
-          }
+          "type": "integer"
         },
         "serviceAccount": {
           "description": "The service account.",
@@ -5463,17 +5458,7 @@
         },
         "disabledReason": {
           "description": "The reason for disabling the server.",
-          "type": "string",
-          "enum": [
-            "None",
-            "GdprStopCollection",
-            "DeletedFromPortal",
-            "DisabledDueToInactivity"
-          ],
-          "x-ms-enum": {
-            "name": "ServerDisabledReason",
-            "modelAsString": false
-          }
+          "type": "integer"                   
         },
         "installedQfes": {
           "description": "The list of installed QFEs for the server.",
