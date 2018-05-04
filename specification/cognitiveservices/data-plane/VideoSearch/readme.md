@@ -111,4 +111,7 @@ java:
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/search/bingvideosearch
+  with-optional-parameters: true
+  prefix-model-type: Bing
+  with-single-async-method: true
 ```
