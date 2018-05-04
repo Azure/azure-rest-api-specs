@@ -665,7 +665,7 @@
 					"in": "body",
 					"required": true,
 					"schema": {
-						"$ref": "#/definitions/CheckNameAvailabilityRequestParameters"
+						"$ref": "#/definitions/CheckAvailabilityParameters"
 					},
 					"description": "The notificationHub name."
 				},
@@ -679,7 +679,7 @@
 					"200": {
 						"description": "Checks if the NotificationHub name is a valid availabile name",
 						"schema": {
-							"$ref": "#/definitions/CheckNameAvailabilityResponse"
+							"$ref": "#/definitions/CheckAvailabilityResult"
 						}
 					}
 				}
@@ -1320,37 +1320,6 @@
 				"message": {
 					"description": "Error message indicating why the operation failed.",
 					"type": "string"
-				}
-			}
-		},
-		"CheckNameAvailabilityRequestParameters": {
-			"properties": {
-				"Name": {
-					"type": "string",
-					"description": "Resource name"
-				},
-				"Type": {
-					"readOnly": true,
-					"type": "string",
-					"description": "Resource type"
-				}
-			},
-			"required": ["Name"],
-			"description": "Parameters supplied to the Check Name Availability for Namespace and NotificationHubs."
-		},
-		"CheckNameAvailabilityResponse": {
-			"properties": {
-				"NameAvailable": {
-					"type": "boolean",
-					"description": "Checks if the namespace name is available"
-				},
-				"Reason": {
-					"type": "string",
-					"description": "States the reason due to which the namespace name is not available"
-				},
-				"Message": {
-					"type": "string",
-					"description": "The messsage returned when checking for namespace name availability"
 				}
 			}
 		},
