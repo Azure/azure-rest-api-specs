@@ -2,7 +2,9 @@
   "parameters": {
     "serviceName": "sampleServiceName",
     "isGroupbySite": false,
-    "takeCount": "1", 
+    "takeCount": "1",
+    "nextPartitionKey": " ",
+    "nextRowKey": " ",
     "api-version": "2014-01-01"
   },
   "responses": {
@@ -12,7 +14,9 @@
             {
               "domainName": "sampleDomainName",
               "siteName": "Default-First-Site-Name",
-              "addsRoles": [ ],
+              "addsRoles": [
+                "sampleRole"
+              ],
               "gcReachable": true,
               "isAdvertising": true,
               "pdcReachable": true,
@@ -21,31 +25,59 @@
                 "GC"
               ],
               "lastReboot": "2018-04-28T23:17:00.511864Z",
-              "lastDisabled": null,
+              "lastDisabled": "2018-04-28T23:17:00.511864Z",
               "lastUpdated": "2018-04-30T18:00:41.6956022Z",
               "activeAlerts": 0,
               "resolvedAlerts": 0,
               "createdDate": "0001-01-01T00:00:00",
               "disabled": false,
-              "dimensions": null,
-              "additionalInformation": null,
+              "dimensions": [
+                {
+                  "key": "key1",
+                  "value": "value1"
+                }
+              ],
+              "additionalInformation": "SampleAdditionalInformation",
               "tenantId": "00000000-0000-0000-0000-000000000000",
               "serviceId": "serviceIdGuid",
               "serviceMemberId": "ServiceMemberIdGuid",
               "machineId": "machineIdGuid",
               "machineName": "sampleMachineName",
-              "role": null,
+              "role": "SampleRole",
               "status": "Healthy",
-              "properties": null,
-              "installedQfes": null,
-              "recommendedQfes": null,
-              "monitoringConfigurationsComputed": null,
-              "monitoringConfigurationsCustomized": null,
+              "properties": [
+                {
+                  "key": "key1",
+                  "value": "value1"
+                }
+              ],
+              "installedQfes": {
+                "kbName": "KB3019978",
+                "link": "SampleLink",
+                "installedDate": "2016-11-06T04:00:00Z"
+              },
+              "recommendedQfes": {
+                "kbName": "KB3019978",
+                "link": "SampleLink",
+                "installedDate": "2016-11-06T04:00:00Z"
+              },
+              "monitoringConfigurationsComputed": [
+                {
+                  "key": "key1",
+                  "value": "value1"
+                }
+              ],
+              "monitoringConfigurationsCustomized": [
+                {
+                  "key": "key1",
+                  "value": "value1"
+                }
+              ],
               "osVersion": "osVersion",
               "osName": "osName",
               "disabledReason": 0,
-              "serverReportedMonitoringLevel": null,
-              "lastServerReportedMonitoringLevelChange": null
+              "serverReportedMonitoringLevel": "Off",
+              "lastServerReportedMonitoringLevelChange": "2018-04-30T18:00:41.6956022Z"
             }
           ],
           "nextLink": null,
