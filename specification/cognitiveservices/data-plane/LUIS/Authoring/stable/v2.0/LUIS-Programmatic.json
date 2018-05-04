@@ -210,7 +210,7 @@
     "/apps/{appId}/versions/{versionId}/features": {
       "get": {
         "description": "Gets all the extraction features for the specified application version.",
-        "operationId": "Features_List",
+        "operationId": "Features_ListFeatures",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -628,7 +628,7 @@
       },
       "get": {
         "description": "Returns examples to be reviewed.",
-        "operationId": "Examples_List",
+        "operationId": "Examples_ListExamples",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -1419,8 +1419,7 @@
             "name": "deleteUtterances",
             "in": "query",
             "type": "boolean",
-            "description": "Also delete the intent's utterances (true). Or move the utterances to the None intent (false - the default value).",
-            "default": false
+            "description": "Also delete the intent's utterances (true). Or move the utterances to the None intent (false - the default value)."
           }
         ],
         "responses": {
@@ -2362,7 +2361,7 @@
       },
       "get": {
         "description": "Lists all of the user applications.",
-        "operationId": "Apps_List",
+        "operationId": "Apps_ListApps",
         "parameters": [
           {
             "$ref": "#/parameters/SkipInPath"
@@ -2398,7 +2397,7 @@
     "/apps/import": {
       "post": {
         "description": "Imports an application to LUIS, the application's structure should be included in in the request body.",
-        "operationId": "Apps_Import",
+        "operationId": "Apps_ImportApps",
         "parameters": [
           {
             "name": "appName",
@@ -2625,7 +2624,7 @@
       },
       "put": {
         "description": "Updates the name or description of the application.",
-        "operationId": "Apps_Update",
+        "operationId": "Apps_UpdateApps",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -2794,7 +2793,7 @@
     "/apps/{appId}/versions": {
       "get": {
         "description": "Gets the application versions info.",
-        "operationId": "Versions_List",
+        "operationId": "Versions_ListVersions",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -2870,7 +2869,7 @@
       },
       "put": {
         "description": "Updates the name or description of the application version.",
-        "operationId": "Versions_Update",
+        "operationId": "Versions_UpdateVersions",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -3059,7 +3058,7 @@
     "/apps/{appId}/versions/import": {
       "post": {
         "description": "Imports a new version into a LUIS application.",
-        "operationId": "Versions_Import",
+        "operationId": "Versions_ImportVersions",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -3234,7 +3233,7 @@
     "/apps/{appId}/permissions": {
       "get": {
         "description": "Gets the list of user emails that have permissions to access your application.",
-        "operationId": "Permissions_List",
+        "operationId": "Permissions_ListPermissions",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -3351,7 +3350,7 @@
       },
       "put": {
         "description": "Replaces the current users access list with the one sent in the body. If an empty list is sent, all access to other users will be removed.",
-        "operationId": "Permissions_Update",
+        "operationId": "Permissions_UpdatePermissions",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -4389,8 +4388,7 @@
       "properties": {
         "public": {
           "description": "Setting your application as public allows other people to use your application's endpoint using their own keys.",
-          "type": "boolean",
-          "x-nullable": false
+          "type": "boolean"
         }
       },
       "example": {
@@ -4444,7 +4442,6 @@
         },
         "isExchangeable": {
           "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
-          "default": true,
           "type": "boolean"
         }
       },
@@ -4556,7 +4553,6 @@
         },
         "isActive": {
           "description": "Indicates if the Pattern feature is enabled.",
-          "default": true,
           "type": "boolean"
         }
       },
@@ -4984,12 +4980,10 @@
         },
         "isActive": {
           "description": "Indicates if the Phraselist is enabled.",
-          "default": true,
           "type": "boolean"
         },
         "isExchangeable": {
           "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
-          "default": true,
           "type": "boolean"
         }
       },
@@ -5022,7 +5016,6 @@
         },
         "isStaging": {
           "description": "Indicates if the staging slot should be used, instead of the Production one.",
-          "default": false,
           "type": "boolean"
         },
         "region": {
@@ -6177,7 +6170,6 @@
         "public": {
           "description": "Setting your application as public allows other people to use your application's endpoint using their own keys.",
           "type": "boolean",
-          "x-nullable": false,
           "x-ms-client-name": "isPublic"
         }
       },
