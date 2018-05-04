@@ -205,7 +205,7 @@
     "/persongroups/{personGroupId}/persons": {
       "post": {
         "description": "Create a new person in a specified person group.",
-        "operationId": "PersonGroupPerson_Create",
+        "operationId": "PersonGroupPerson_CreatePerson",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -249,7 +249,7 @@
       },
       "get": {
         "description": "List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
-        "operationId": "PersonGroupPerson_List",
+        "operationId": "PersonGroupPerson_ListPerson",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -360,7 +360,7 @@
       },
       "patch": {
         "description": "Update name or userData of a person.",
-        "operationId": "PersonGroupPerson_Update",
+        "operationId": "PersonGroupPerson_UpdatePerson",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -517,7 +517,7 @@
     "/persongroups/{personGroupId}": {
       "put": {
         "description": "Create a new person group with specified personGroupId, name and user-provided userData.",
-        "operationId": "PersonGroup_Create",
+        "operationId": "PersonGroup_CreatePersonGroup",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -611,7 +611,7 @@
       },
       "patch": {
         "description": "Update an existing person group's display name and userData. The properties which does not appear in request body will not be updated.",
-        "operationId": "PersonGroup_Update",
+        "operationId": "PersonGroup_UpdatePersonGroup",
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
@@ -684,7 +684,7 @@
     "/persongroups": {
       "get": {
         "description": "List person groups and their information.",
-        "operationId": "PersonGroup_List",
+        "operationId": "PersonGroup_ListPersonGroup",
         "parameters": [
           {
             "name": "start",
@@ -762,7 +762,7 @@
     "/facelists/{faceListId}": {
       "put": {
         "description": "Create an empty face list. Up to 64 face lists are allowed to exist in one subscription.",
-        "operationId": "FaceList_Create",
+        "operationId": "FaceList_CreateFaceList",
         "parameters": [
           {
             "$ref": "#/parameters/faceListId"
@@ -834,7 +834,7 @@
       },
       "patch": {
         "description": "Update information of a face list.",
-        "operationId": "FaceList_Update",
+        "operationId": "FaceList_UpdateFaceList",
         "parameters": [
           {
             "$ref": "#/parameters/faceListId"
