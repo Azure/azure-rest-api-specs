@@ -2741,8 +2741,12 @@
           "description": "The list of properties which are included in the aditional information.",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/Items"
+            "$ref": "#/definitions/Item"
           }
+        },
+        "hasProperties": {
+          "description": "Indicates if properties are present or not.",
+          "type": "boolean"
         }
       }
     },
@@ -2826,17 +2830,7 @@
         },
         "disabledReason": {
           "description": "The reason for disabling the server.",
-          "type": "string",
-          "enum": [
-            "None",
-            "GdprStopCollection",
-            "DeletedFromPortal",
-            "DisabledDueToInactivity"
-          ],
-          "x-ms-enum": {
-            "name": "ServerDisabledReason",
-            "modelAsString": false
-          }
+          "type": "integer"
         },
         "installedQfes": {
           "description": "The list of installed QFEs for the server.",
@@ -3242,7 +3236,7 @@
           "description": "The source of authority.",
           "type": "string"
         },
-        "timeOccured": {
+        "timeOccurred": {
           "description": " The time of the error.",
           "type": "string",
           "format": "date-time"
@@ -3465,6 +3459,10 @@
       "description": "The connect details.",
       "type": "object",
       "properties": {
+        "connectorId": {
+          "description": "The connector Id.",
+          "type": "string"
+        },
         "id": {
           "description": "The connector Id.",
           "type": "string"
@@ -5187,24 +5185,9 @@
           "description": "The Id of the partition that a current run setp operation is executing.",
           "type": "string"
         },
-        "runStepOperationType": {
+        "operationType": {
           "description": "The run step operation types.",
-          "type": "string",
-          "enum": [
-            "Undefined",
-            "FullImport",
-            "DeltaImport",
-            "FullSynchornization",
-            "DeltaSynchronization",
-            "ApplyRules",
-            "Export",
-            "FullExport",
-            "FullImportReevaluateRules"
-          ],
-          "x-ms-enum": {
-            "name": "RunStepOperationType",
-            "modelAsString": true
-          }
+          "type": "integer"
         }
       }
     },
@@ -5439,31 +5422,6 @@
       }
     },
     "ServiceMember": {
-      "description": "The details of the server for a given onboarded service.",
-      "type": "object",
-      "properties": {
-        "continuationToken": {
-          "description": "The page-continuation token to use with a paged version of this API.",
-          "type": "string"
-        },
-        "totalCount": {
-          "description": "The total number of servers onboarded for a given service.",
-          "type": "integer"
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of the operation.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The server properties.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceMemberProperties"
-          }
-        }
-      }
-    },
-    "ServiceMemberProperties": {
       "description": "The server properties for a given service.",
       "type": "object",
       "properties": {
