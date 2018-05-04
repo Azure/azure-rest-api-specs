@@ -148,6 +148,73 @@ input-file:
 - microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
 ```
 
+### Tag: package-2015-04-01-only
+
+These settings apply only when `--tag=package-2015-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-04-01-only'
+input-file:
+- microsoft.insights/stable/2015-04-01/activityLogs_API.json
+- microsoft.insights/stable/2015-04-01/autoscale_API.json
+- microsoft.insights/stable/2015-04-01/eventCategories_API.json
+- microsoft.insights/stable/2015-04-01/operations_API.json
+- microsoft.insights/stable/2015-04-01/tenantActivityLogs_API.json
+```
+
+### Tag: package-2016-03-01-only
+
+These settings apply only when `--tag=package-2016-03-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-01-only'
+input-file:
+- microsoft.insights/stable/2016-03-01/alertRules_API.json
+- microsoft.insights/stable/2016-03-01/alertRulesIncidents_API.json
+- microsoft.insights/stable/2016-03-01/logProfiles_API.json
+- microsoft.insights/stable/2016-03-01/metricDefinitions_API.json
+```
+
+### Tag: package-2016-09-01-only
+
+These settings apply only when `--tag=package-2016-09-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09-01-only'
+input-file:
+- microsoft.insights/stable/2016-09-01/metrics_API.json
+- microsoft.insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
+```
+
+### Tag: package-2017-04-01-only
+
+These settings apply only when `--tag=package-2017-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-04-01-only'
+input-file:
+- microsoft.insights/stable/2017-04-01/actionGroups_API.json
+- microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
+```
+
+### Tag: package-2017-05-01-preview-only
+
+These settings apply only when `--tag=package-2017-05-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-05-01-preview-only'
+input-file:
+- microsoft.insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- microsoft.insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- microsoft.insights/preview/2017-05-01-preview/metricDefinitions_API.json
+- microsoft.insights/preview/2017-05-01-preview/metrics_API.json
+```
+
+### Tag: package-2017-11-01-preview-only
+
+These settings apply only when `--tag=package-2017-11-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-01-preview-only'
+input-file:
+- microsoft.insights/preview/2017-11-01-preview/baseline_API.json
+- microsoft.insights/preview/2017-11-01-preview/calculateBaseline_API.json
+```
+
 ---
 # Code Generation
 

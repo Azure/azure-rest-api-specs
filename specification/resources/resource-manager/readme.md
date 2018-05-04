@@ -94,6 +94,19 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-pure-policy-2017-06
+These settings apply only when `--tag=package-pure-policy-2017-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-pure-policy-2017-06'
+input-file:
+- Microsoft.Authorization/preview/2017-06-01-preview/policyAssignments.json
+- Microsoft.Authorization/preview/2017-06-01-preview/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2016-12
 These settings apply only when `--tag=package-policy-2016-12` is specified on the command line.
 
