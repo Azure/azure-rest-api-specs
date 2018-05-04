@@ -1467,7 +1467,7 @@
           "200": {
             "description": " ",
             "schema": {
-              "type": "boolean"
+              "$ref": "#/definitions/Result"
             }
           }
         }
@@ -2692,7 +2692,7 @@
           "200": {
             "description": " ",
             "schema": {
-              "type": "boolean"
+              "$ref": "#/definitions/Result"
             }
           }
         }
@@ -2838,7 +2838,7 @@
             "modelAsString": false
           }
         },
-        "installedQfe": {
+        "installedQfes": {
           "description": "The list of installed QFEs for the server.",
           "type": "array",
           "items": {
@@ -4224,7 +4224,7 @@
           "description": "Indicates if password sync is enabled or not.",
           "type": "boolean"
         },
-        "numSavedPwdEvents": {
+        "numSavedPwdEvent": {
           "description": "The number of saved password events.",
           "type": "integer"
         },
@@ -4492,6 +4492,10 @@
       "description": "The merged export error.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "The error Id.",
+          "type": "string"
+        },
         "incomingObjectDisplayName": {
           "description": "The incoming object display name.",
           "type": "string"
@@ -5123,6 +5127,16 @@
         }
       }
     },
+    "Result": {
+      "description": "The result for an operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "type": "boolean"
+        }
+      }
+    },
     "RuleErrorInfo": {
       "description": "The error details in legacy rule processing.",
       "type": "object",
@@ -5503,7 +5517,7 @@
             "modelAsString": false
           }
         },
-        "installedQfe": {
+        "installedQfes": {
           "description": "The list of installed QFEs for the server.",
           "type": "object",
           "items": {
