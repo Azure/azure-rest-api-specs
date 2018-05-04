@@ -10,18 +10,18 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.locationbasedservices
-  package-name: azure-mgmt-locationbasedservices
+  namespace: azure.mgmt.maps
+  package-name: azure-mgmt-maps
   package-version: 0.1.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-locationbasedservices/azure/mgmt/locationbasedservices
+  output-folder: $(python-sdks-folder)/azure-mgmt-maps/azure/mgmt/maps
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-locationbasedservices
+  output-folder: $(python-sdks-folder)/azure-mgmt-maps
 ```
