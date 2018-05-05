@@ -9,19 +9,35 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ## Common C# settings
 
-``` yaml !$(MultiApi)
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-payload-flattening-threshold: 1
-clear-output-folder: true
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION  
+  clear-output-folder: true
+```
+
+``` yaml $(csharp) && !$(multiApi)
 namespace: Microsoft.Azure.Management.Compute
 output-folder: $(csharp-sdks-folder)/Compute/Management.Compute/Generated
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
 ## Batch settings
 These settings are for batch mode only: (ie, add `--MultiApi` to the command line )
 
-``` yaml $(MultiApi)
+``` yaml $(multiApi)
 namespace: Microsoft.Azure.Management.Compute.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 

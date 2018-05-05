@@ -5,10 +5,14 @@
 This is the AutoRest configuration file for DNS.
 
 ## Common settings
-``` yaml !$(MultiApi)
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-clear-output-folder: true
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION  
+  clear-output-folder: true
+```
+
+``` yaml $(csharp) && !$(multiApi)
 namespace: Microsoft.Azure.Management.KeyVault
 output-folder: $(csharp-sdks-folder)/KeyVault/Management/Management.KeyVault/Generated
 ```
@@ -16,7 +20,7 @@ output-folder: $(csharp-sdks-folder)/KeyVault/Management/Management.KeyVault/Gen
 ## Batch settings
 These settings are for batch mode only: (ie, add `--MultiApi` to the command line )
 
-``` yaml $(MultiApi)
+``` yaml $(multiApi)
 namespace: Microsoft.Azure.Management.KeyVault.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 
