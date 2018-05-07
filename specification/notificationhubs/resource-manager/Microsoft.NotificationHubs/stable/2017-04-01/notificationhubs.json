@@ -640,7 +640,7 @@
 			"post": {
 				"tags": ["NotificationHubs"],
 				"x-ms-examples": {
-					"notificationhubCreate": {
+					"notificationHubCheckNameAvailability": {
 						"$ref": "./examples/NotificationHubs/NotificationHubCheckNameAvailability.json"
 					}
 				},
@@ -1392,6 +1392,11 @@
 					"type": "string",
 					"description": "Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe"
 				},
+				"metricId": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Identifier for Azure Insights metrics"
+				},
 				"status": {
 					"externalDocs": {
 						"url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
@@ -1403,6 +1408,11 @@
 					"type": "string",
 					"format": "date-time",
 					"description": "The time the namespace was created."
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": "The time the namespace was updated."
 				},
 				"serviceBusEndpoint": {
 					"externalDocs": {
@@ -1498,6 +1508,46 @@
 						}
 					},
 					"description": "The rights associated with the rule."
+				},
+				"primaryKey": {
+					"readOnly": true,
+					"type": "string",
+					"description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+				},
+				"secondaryKey": {
+					"readOnly": true,
+					"type": "string",
+					"description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+				},
+				"keyName": {
+					"readOnly": true,
+					"type": "string",
+					"description": "A string that describes the authorization rule."
+				},
+				"claimType": {
+					"readOnly": true,
+					"type": "string",
+					"description": "A string that describes the claim type"
+				}
+				"claimValue": {
+					"readOnly": true,
+					"type": "string",
+					"description": "A string that describes the claim value"
+				}
+				"modifiedTime": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The last modified time for this rule"
+				}
+				"createdTime": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The created time for this rule"
+				},
+				"revision": {
+					"readOnly": true,
+					"type": "integer",
+					"description": "The revision number for the rule"
 				}
 			},
 			"description": "SharedAccessAuthorizationRule properties."
@@ -1510,9 +1560,6 @@
 				}
 			},
 			"required": ["properties"],
-			"allOf": [{
-				"$ref": "#/definitions/Resource"
-			}],
 			"description": "Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules."
 		},
 		"SharedAccessAuthorizationRuleResource": {
