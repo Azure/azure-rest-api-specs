@@ -451,6 +451,42 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}": {
+      "get": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "BillingAccounts": {
+            "$ref": "./examples/BillingAccount.json"
+          }
+        },
+        "operationId": "BillingAccounts_Get",
+        "description": "Get the billing account by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/offerAssets": {
       "get": {
         "tags": [
@@ -602,7 +638,7 @@
           "BillingProfiles"
         ],
         "x-ms-examples": {
-          "BillingProfiles": {
+          "BillingProfile": {
             "$ref": "./examples/BillingProfile.json"
           }
         },
@@ -1419,6 +1455,13 @@
             "modelAsString": true
           },
           "readOnly": true
+        },
+        "projects": {
+          "description": "The project associated to the billing account.",
+          "type": "array",
+          "items": {
+            "type": "ProjectProperties"
+          }
         }
       }
     },
