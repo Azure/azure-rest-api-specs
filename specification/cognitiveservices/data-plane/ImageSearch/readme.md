@@ -115,9 +115,11 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.cognitiveservices.imagesearch
+  namespace: com.microsoft.azure.cognitiveservices.search.imagesearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/imagesearch
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/search/bingimagesearch
+  with-optional-parameters: true
+  prefix-model-type: Bing
+  with-single-async-method: true
 ```
