@@ -486,7 +486,45 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- current usage acount and limit retrieved and returned successfully.",
+            "description": "OK -- current usage count and limit retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsageListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "LocationUsage"
+        ],
+        "operationId": "Usage_ListByLocation",
+        "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
+        "x-ms-examples": {
+          "UsageList": { "$ref": "./examples/StorageAccountListLocationUsage.json"}
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the Azure Storage resource."
+          }         
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- current usage count and limit retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/UsageListResult"
             }
