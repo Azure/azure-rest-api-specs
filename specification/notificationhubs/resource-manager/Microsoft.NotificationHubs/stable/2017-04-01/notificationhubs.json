@@ -1437,6 +1437,10 @@
 					"type": "boolean",
 					"description": "Whether or not the namespace is set as Critical."
 				},
+				"dataCenter": {
+					"type": "string",
+					"description": "Data center for the namespace"
+				},
 				"namespaceType": {
 					"type": "string",
 					"description": "The namespace type.",
@@ -1488,6 +1492,11 @@
 					"description": "Properties of the Namespace."
 				}
 			},
+			"kind": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Namespace type.  This should be NotificationHub"
+				},
 			"allOf": [{
 				"$ref": "#/definitions/Resource"
 			}],
