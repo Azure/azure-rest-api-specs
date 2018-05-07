@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2017-07-01-preview"
+    "api-version": "2018-02-01"
   },
   "responses": {
     "200": {
@@ -18,18 +18,22 @@
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
-          "clusterCodeVersion": "6.0.219.9494",
+          "clusterCodeVersion": "6.1.480.9494",
           "clusterState": "WaitingForNodes",
           "managementEndpoint": "https://myCluster.eastus.cloudapp.azure.com:19080",
           "clusterEndpoint": "https://eastus.servicefabric.azure.com",
-          "certificate": {
-            "thumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
-            "thumbprintSecondary": "361A93445450CC8F2FF747F74500E8044942DAFD",
+          "certificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
             "x509StoreName": "My"
           },
           "clientCertificateThumbprints": [
             {
-              "isAdmin": false,
+              "isAdmin": true,
               "certificateThumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A"
             }
           ],
@@ -52,21 +56,25 @@
             }
           ],
           "upgradeDescription": {
-            "overrideUserUpgradePolicy": false,
-            "forceRestart": true,
+            "forceRestart": false,
             "upgradeReplicaSetCheckTimeout": "00:10:00",
             "healthCheckWaitDuration": "00:00:30",
             "healthCheckStableDuration": "00:00:30",
             "healthCheckRetryTimeout": "00:05:00",
-            "upgradeTimeout": "00:15:00",
+            "upgradeTimeout": "01:00:00",
             "upgradeDomainTimeout": "00:15:00",
             "healthPolicy": {
-              "maxPercentUnhealthyNodes": 100,
-              "maxPercentUnhealthyApplications": 100,
+              "maxPercentUnhealthyNodes": 0,
+              "maxPercentUnhealthyApplications": 0,
               "applicationHealthPolicies": {
-                "myAppHealthPolicy": {
+                "fabric:/myApp1": {
                   "defaultServiceTypeHealthPolicy": {
-                    "maxPercentUnhealthyServices": 100
+                    "maxPercentUnhealthyServices": 0
+                  },
+                  "serviceTypeHealthPolicies": {
+                    "myServiceType1": {
+                      "maxPercentUnhealthyServices": 100
+                    }
                   }
                 }
               }
@@ -76,13 +84,13 @@
               "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
               "maxPercentDeltaUnhealthyApplications": 0,
               "applicationDeltaHealthPolicies": {
-                "myAppDeltaHealthPolicy": {
+                "fabric:/myApp1": {
                   "defaultServiceTypeDeltaHealthPolicy": {
-                    "maxPercentDeltaUnhealthyServices": 100
+                    "maxPercentDeltaUnhealthyServices": 0
                   },
-                  "serivceTypeDeltaHealthPolicies": {
-                    "mySvcTypeDeltaHealthPolicy": {
-                      "maxPercentDeltaUnhealthyServices": 100
+                  "serviceTypeDeltaHealthPolicies": {
+                    "myServiceType1": {
+                      "maxPercentDeltaUnhealthyServices": 0
                     }
                   }
                 }
@@ -121,22 +129,28 @@
             "clientApplication": "d151ad89-4bce-4ae8-b3d1-1dc79679fa75"
           },
           "reliabilityLevel": "Silver",
-          "reverseProxyCertificate": {
-            "thumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
-            "thumbprintSecondary": "361A93445450CC8F2FF747F74500E8044942DAFD",
+          "reverseProxyCertificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
             "x509StoreName": "My"
           },
           "upgradeMode": "Manual",
           "availableClusterVersions": [
             {
-              "codeVersion": "6.0.219.9494",
-              "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+              "codeVersion": "6.1.480.9494",
+              "supportExpiryUtc": "2018-06-15T23:59:59.9999999",
               "environment": "Windows"
             }
           ],
-          "addonFeatures": [
+          "addOnFeatures": [
             "RepairManager",
-            "DnsService"
+            "DnsService",
+            "BackupRestoreService",
+            "ResourceMonitorService"
           ]
         }
       }
