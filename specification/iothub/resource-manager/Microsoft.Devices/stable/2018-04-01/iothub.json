@@ -208,6 +208,8 @@
           {
             "name": "resourceName",
             "in": "path",
+
+
             "required": true,
             "type": "string",
             "description": "Name of iot hub to update."
@@ -1664,16 +1666,6 @@
         }
       }
     },
-    "CertificateBodyDescription": {
-      "description": "The JSON-serialized X509 Certificate.",
-      "type": "object",
-      "properties": {
-        "certificate": {
-          "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
-          "type": "string"
-        }
-      }
-    },
     "CertificateListDescription": {
       "description": "The JSON-serialized array of Certificate objects.",
       "type": "object",
@@ -1687,6 +1679,16 @@
         }
       }
     },
+    "CertificateBodyDescription": {
+       "description": "The JSON-serialized X509 Certificate.",
+       "type": "object",
+       "properties": {
+         "certificate": {
+           "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
+           "type": "string"
+         }
+       }
+     },
     "CertificateDescription": {
       "description": "The X509 Certificate.",
       "type": "object",
@@ -1830,6 +1832,10 @@
           "type": "string",
           "format": "date-time-rfc1123",
           "readOnly": true
+        },
+        "certificate": {
+          "description": "The certificate content",
+          "type": "string"
         }
       }
     },
@@ -1872,6 +1878,11 @@
         },
         "verificationCode": {
           "description": "The certificate's verification code that will be used for proof of possession.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certificate": {
+          "description": "The certificate content",
           "type": "string",
           "readOnly": true
         }
@@ -2386,6 +2397,7 @@
         "source": {
           "description": "The source that the routing rule is to be applied to, such as DeviceMessages.",
           "enum": [
+            "Invalid",
             "DeviceMessages",
             "TwinChangeEvents",
             "DeviceLifecycleEvents",
