@@ -866,6 +866,42 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/projects/{projectId}/assets": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "x-ms-examples": {
+          "AssetsListByCustomerAndProjectId": {
+            "$ref": "./examples/AssetsListByCustomerAndProjectId.json"
+          }
+        },
+        "operationId": "Projects_GetAssets",
+        "description": "Get the assets by project id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/projectIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/subscriptions": {
       "get": {
         "tags": [
