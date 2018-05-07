@@ -1492,15 +1492,15 @@
 					"description": "Properties of the Namespace."
 				}
 			},
-			"kind": {
-					"readOnly": true,
-					"type": "string",
-					"description": "Namespace type.  This should be NotificationHub"
-				},
 			"allOf": [{
 				"$ref": "#/definitions/Resource"
 			}],
-			"description": "Description of a Namespace resource."
+			"description": "Description of a Namespace resource.",
+			"kind": {
+				"readOnly": true,
+				"type": "string",
+				"description": "Namespace type.  This should be NotificationHub"
+			}
 		},
 		"SharedAccessAuthorizationRuleProperties": {
 			"properties": {
@@ -1991,7 +1991,6 @@
 					"description": "The sku of the created namespace"
 				}
 			},
-			"required": ["location"],
 			"x-ms-azure-resource": true
 		},
 		"SubResource": {
