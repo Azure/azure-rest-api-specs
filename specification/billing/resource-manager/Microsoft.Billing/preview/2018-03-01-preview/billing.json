@@ -973,6 +973,84 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/assets": {
+      "put": {
+        "tags": [
+          "Assets"
+        ],
+        "operationId": "Assets_Create",
+        "description": "The operation to create an asset.",
+        "x-ms-examples": {
+          "CreateAsset": {
+            "$ref": "./examples/CreateAsset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            },
+            "description": "Parameters supplied to the Create Asset operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/assets/{assetId}": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "x-ms-examples": {
+          "Asset": {
+            "$ref": "./examples/Asset.json"
+          }
+        },
+        "operationId": "Assets_Get",
+        "description": "Get the asset by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/assetIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1351,6 +1429,33 @@
         }
       }
     },
+
+    "Asset": {
+      "description": "An asset resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The asset.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssetProperties"
+        }
+      }
+    },
+    "AssetProperties": {
+      "description": "The properties of an asset.",
+      "properties": {
+        "summary": {
+          "description": "The asset summary.",
+          "type": "string"
+        }
+      }
+    },
+
     "SubscriptionListResult": {
       "description": "Result of listing subscriptions.",
       "properties": {
@@ -1749,6 +1854,14 @@
       "name": "billingProfileId",
       "in": "path",
       "description": "Billing Profile Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "assetIdParameter": {
+      "name": "assetId",
+      "in": "path",
+      "description": "Asset Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
