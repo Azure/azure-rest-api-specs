@@ -726,6 +726,9 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -766,9 +769,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
           }
         ],
         "responses": {
@@ -827,7 +827,7 @@
           "Projects"
         ],
         "operationId": "Projects_Update",
-        "description": "The operation to create or update a project.",
+        "description": "The operation to update a project.",
         "x-ms-examples": {
           "UpdateProject": {
             "$ref": "./examples/UpdateProject.json"
@@ -974,7 +974,41 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/assets": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/assets": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "x-ms-examples": {
+          "AssetsListByCustomerId": {
+            "$ref": "./examples/AssetsListByCustomerId.json"
+          }
+        },
+        "operationId": "Assets_ListByCustomerId",
+        "description": "Lists all assets for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Assets"
@@ -991,6 +1025,9 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -1005,6 +1042,39 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/assets": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "x-ms-examples": {
+          "AssetsList": {
+            "$ref": "./examples/AssetsList.json"
+          }
+        },
+        "operationId": "Assets_List",
+        "description": "Lists all assets for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitionsAssetListResult"
             }
           },
           "default": {
@@ -1034,6 +1104,49 @@
           },
           {
             "$ref": "#/parameters/assetIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Assets"
+        ],
+        "operationId": "Assets_Update",
+        "description": "The operation to update an asset.",
+        "x-ms-examples": {
+          "UpdateAsset": {
+            "$ref": "./examples/UpdateAsset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/assetIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            },
+            "description": "Parameters supplied to the Create Asset operation."
           }
         ],
         "responses": {
@@ -1429,7 +1542,24 @@
         }
       }
     },
-
+    "AssetListResult": {
+      "description": "Result of listing assets.",
+      "properties": {
+        "value": {
+          "description": "The list of assets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Asset"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Asset": {
       "description": "An asset resource.",
       "type": "object",
@@ -1449,13 +1579,26 @@
     "AssetProperties": {
       "description": "The properties of an asset.",
       "properties": {
-        "summary": {
-          "description": "The asset summary.",
+        "parentAssetId": {
+          "description": "The id of the parent asset.",
           "type": "string"
+        },
+        "projectId": {
+          "description": "The id of the project.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "The start date. <Not rationalized>",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The end date. <Not rationalized>",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
-
     "SubscriptionListResult": {
       "description": "Result of listing subscriptions.",
       "properties": {
