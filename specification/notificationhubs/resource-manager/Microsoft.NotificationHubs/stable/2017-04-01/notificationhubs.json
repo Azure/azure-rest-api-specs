@@ -1477,6 +1477,10 @@
 					},
 					"description": "Resource tags"
 				},
+				"kind": {
+					"$ref": "#/definitions/Kind",
+					"description": "The kind of namespace"
+				},
 				"sku": {
 					"$ref": "#/definitions/Sku",
 					"description": "The sku of the created namespace"
@@ -1495,12 +1499,7 @@
 			"allOf": [{
 				"$ref": "#/definitions/Resource"
 			}],
-			"description": "Description of a Namespace resource.",
-			"kind": {
-				"readOnly": true,
-				"type": "string",
-				"description": "Namespace type.  This should be NotificationHub"
-			}
+			"description": "Description of a Namespace resource."
 		},
 		"SharedAccessAuthorizationRuleProperties": {
 			"properties": {
@@ -1880,8 +1879,7 @@
 					"description": "Properties of the NotificationHub."
 				}
 			},
-			"required": ["location",
-			"properties"],
+			"required": ["properties"],
 			"allOf": [{
 				"$ref": "#/definitions/Resource"
 			}],
@@ -2001,6 +1999,14 @@
 				}
 			},
 			"x-ms-azure-resource": true
+		},
+		"Kind": {
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": "Namespace Kind"
+				}
+			}
 		},
 		"Sku": {
 			"properties": {
