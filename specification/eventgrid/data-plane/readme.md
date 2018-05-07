@@ -50,6 +50,7 @@ input-file:
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
+- Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
 ```
 
 ---
