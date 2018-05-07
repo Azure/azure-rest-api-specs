@@ -116,9 +116,11 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.cognitiveservices.customsearch
+  namespace: com.microsoft.azure.cognitiveservices.search.customsearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/customsearch
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/search/bingcustomsearch
+  with-optional-parameters: true
+  prefix-model-type: Bing
+  with-single-async-method: true
 ```

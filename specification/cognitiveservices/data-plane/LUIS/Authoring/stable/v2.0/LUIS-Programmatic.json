@@ -2725,8 +2725,7 @@
           "201": {
             "description": "The version ID of the created task.",
             "schema": {
-              "type": "string",
-              "example": "0.2"
+              "type": "string"
             }
           },
           "default": {
@@ -3462,8 +3461,7 @@
           "201": {
             "description": "The ID of the newly created list.",
             "schema": {
-              "type": "integer",
-              "example": 90440
+              "type": "integer"
             }
           },
           "default": {
@@ -4196,6 +4194,3161 @@
           }
         }
       }
+    },
+    "/apps/{appId}/versions/{versionId}/regexentities": {
+      "get": {
+        "summary": "Gets information about the regex entity models.",
+        "operationId": "Model_GetRegexEntityInfos",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of regex entity model infos.",
+            "schema": {
+              "$ref": "#/definitions/RegexEntityExtractorList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Regex Entity Models request": {
+            "$ref": "./examples/model/SuccessfulGetApplicationVersionRegexEntityInfosRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Adds a regex entity model to the application version.",
+        "operationId": "Model_CreateRegexEntityModel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "regexEntityExtractorCreateObj",
+            "in": "body",
+            "description": "A model object containing the name and regex pattern for the new regex entity extractor.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegexModelCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created model.",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Regex Entity Model request": {
+            "$ref": "./examples/model/SuccessfulCreateRegexEntityExtractorRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patternanyentities": {
+      "get": {
+        "summary": "Get information about the Pattern.Any entity models.",
+        "operationId": "Model_GetPatternAnyEntityInfos",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of Pattern.Any entity model infos.",
+            "schema": {
+              "$ref": "#/definitions/PatternAnyEntityExtractorList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Regex Entity Model request": {
+            "$ref": "./examples/model/SuccessfulGetApplicationVersionPatternAnyEntityInfosRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Adds a pattern.any entity extractor to the application.",
+        "operationId": "Model_CreatePatternAnyEntityModel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "extractorCreateObject",
+            "in": "body",
+            "description": "A model object containing the name and explicit list for the new Pattern.Any entity extractor.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatternAnyModelCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created Pattern.Any entity model.",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Regex Entity Model request": {
+            "$ref": "./examples/model/SuccessfulCreatePatternAnyEntityExtractorRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/entities/{entityId}/roles": {
+      "get": {
+        "summary": "Get All Entity Roles for a given entity",
+        "operationId": "Model_GetEntityRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity Id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the entity roles",
+            "schema": {
+              "$ref": "#/definitions/EntityRoleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Entity Roles request": {
+            "$ref": "./examples/model/SuccessfulGetEntityRolesRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an entity role for an entity in the application.",
+        "operationId": "Model_CreateEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity model ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleCreateObject",
+            "in": "body",
+            "description": "An entity role object containing the name of role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created entity role",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Entity Role request": {
+            "$ref": "./examples/model/SuccessfulCreateEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/prebuilts/{entityId}/roles": {
+      "get": {
+        "summary": "Get All Entity Roles for a given entity",
+        "operationId": "Model_GetPrebuiltEntityRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity Id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the entity roles",
+            "schema": {
+              "$ref": "#/definitions/EntityRoleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Prebuilt Entity Roles request": {
+            "$ref": "./examples/model/SuccessfulGetPrebuiltEntityRolesRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an entity role for an entity in the application.",
+        "operationId": "Model_CreatePrebuiltEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity model ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleCreateObject",
+            "in": "body",
+            "description": "An entity role object containing the name of role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created entity role",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Prebuilt Entity Role request": {
+            "$ref": "./examples/model/SuccessfulCreatePrebuiltEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/closedlists/{entityId}/roles": {
+      "get": {
+        "summary": "Get All Entity Roles for a given entity",
+        "operationId": "Model_GetClosedListEntityRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity Id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the entity roles",
+            "schema": {
+              "$ref": "#/definitions/EntityRoleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Closed List Entity Roles request": {
+            "$ref": "./examples/model/SuccessfulGetClosedListEntityRolesRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an entity role for an entity in the application.",
+        "operationId": "Model_CreateClosedListEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity model ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleCreateObject",
+            "in": "body",
+            "description": "An entity role object containing the name of role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created entity role",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Closed List Entity Role request": {
+            "$ref": "./examples/model/SuccessfulCreateClosedListEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/regexentities/{entityId}/roles": {
+      "get": {
+        "summary": "Get All Entity Roles for a given entity",
+        "operationId": "Model_GetRegexEntityRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity Id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the entity roles",
+            "schema": {
+              "$ref": "#/definitions/EntityRoleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Regex Entity Roles request": {
+            "$ref": "./examples/model/SuccessfulGetRegexEntityRolesRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an entity role for an entity in the application.",
+        "operationId": "Model_CreateRegexEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity model ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleCreateObject",
+            "in": "body",
+            "description": "An entity role object containing the name of role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created entity role",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Regex Entity Role request": {
+            "$ref": "./examples/model/SuccessfulCreateRegexEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/roles": {
+      "get": {
+        "summary": "Get All Entity Roles for a given entity",
+        "operationId": "Model_GetCompositeEntityRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/CEntityIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the entity roles",
+            "schema": {
+              "$ref": "#/definitions/EntityRoleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Composite Entity Roles request": {
+            "$ref": "./examples/model/SuccessfulGetCompositeEntityRolesRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an entity role for an entity in the application.",
+        "operationId": "Model_CreateCompositeEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "name": "entityRoleCreateObject",
+            "in": "body",
+            "description": "An entity role object containing the name of role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created entity role",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Composite Entity Role request": {
+            "$ref": "./examples/model/SuccessfulCreateCompositeEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/roles": {
+      "get": {
+        "summary": "Get All Entity Roles for a given entity",
+        "operationId": "Model_GetPatternAnyEntityRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity Id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the entity roles",
+            "schema": {
+              "$ref": "#/definitions/EntityRoleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Pattern.Any Entity Roles request": {
+            "$ref": "./examples/model/SuccessfulGetPatternAnyEntityRolesRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an entity role for an entity in the application.",
+        "operationId": "Model_CreatePatternAnyEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity model ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleCreateObject",
+            "in": "body",
+            "description": "An entity role object containing the name of role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created entity role",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Pattern.Any Entity Role request": {
+            "$ref": "./examples/model/SuccessfulCreatePatternAnyEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/roles": {
+      "get": {
+        "summary": "Get All Entity Roles for a given entity",
+        "operationId": "Model_GetHierarchicalEntityRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/HEntityIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the entity roles",
+            "schema": {
+              "$ref": "#/definitions/EntityRoleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Hierarchical Entity Roles request": {
+            "$ref": "./examples/model/SuccessfulGetHierarchicalEntityRolesRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an entity role for an entity in the application.",
+        "operationId": "Model_CreateHierarchicalEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "name": "entityRoleCreateObject",
+            "in": "body",
+            "description": "An entity role object containing the name of role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created entity role",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Hierarchical Entity Role request": {
+            "$ref": "./examples/model/SuccessfulCreateHierarchicalEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/customprebuiltentities/{entityId}/roles": {
+      "get": {
+        "summary": "Get All Entity Roles for a given entity",
+        "operationId": "Model_GetCustomPrebuiltEntityRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity Id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the entity roles",
+            "schema": {
+              "$ref": "#/definitions/EntityRoleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Custom Prebuilt Entity Roles request": {
+            "$ref": "./examples/model/SuccessfulGetCustomPrebuiltEntityRolesRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an entity role for an entity in the application.",
+        "operationId": "Model_CreateCustomPrebuiltEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity model ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleCreateObject",
+            "in": "body",
+            "description": "An entity role object containing the name of role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created entity role",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Custom Prebuilt Entity Role request": {
+            "$ref": "./examples/model/SuccessfulCreateCustomPrebuiltEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/explicitlist": {
+      "get": {
+        "summary": "Get the explicit list of the pattern.any entity.",
+        "operationId": "Model_GetExplicitList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The Pattern.Any entity id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the explict list items",
+            "schema": {
+              "$ref": "#/definitions/ExplicitListItemList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Explicit List request": {
+            "$ref": "./examples/model/SuccessfulGetPatternAnyExplicitListRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new item to the explicit list for the Pattern.Any entity.",
+        "operationId": "Model_AddExplicitListItem",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The Pattern.Any entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "item",
+            "in": "body",
+            "description": "The new explicit list item.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExplicitListItemCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created explicit list item.",
+            "schema": {
+              "$ref": "#/definitions/ExplicitListItemIDResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Create Custom Prebuilt Entity Role request": {
+            "$ref": "./examples/model/SuccessfulCreatePatternAnyExplicitListRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/regexentities/{regexEntityId}": {
+      "get": {
+        "summary": "Gets information of a regex entity model.",
+        "operationId": "Model_GetRegexEntityEntityInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "regexEntityId",
+            "in": "path",
+            "description": "The regex entity model ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A regex entity model info.",
+            "schema": {
+              "$ref": "#/definitions/RegexEntityExtractor"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Regex Entity request": {
+            "$ref": "./examples/model/SuccessfulGetRegexEntityInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the regex entity model .",
+        "operationId": "Model_UpdateRegexEntityModel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "regexEntityId",
+            "in": "path",
+            "description": "The regex entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "regexEntityUpdateObject",
+            "in": "body",
+            "description": "An object containing the new entity name and regex pattern.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegexModelUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the regex entity extractor.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Regex Entity request": {
+            "$ref": "./examples/model/SuccessfulUpdateRegexEntityModelRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a regex entity model from the application.",
+        "operationId": "Model_DeleteRegexEntityModel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "regexEntityId",
+            "in": "path",
+            "description": "The regex entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Regex Entity request": {
+            "$ref": "./examples/model/SuccessfulDeleteRegexEntityRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}": {
+      "get": {
+        "summary": "Gets information about the application version's Pattern.Any model.",
+        "operationId": "Model_GetPatternAnyEntityInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A regex entity model info.",
+            "schema": {
+              "$ref": "#/definitions/PatternAnyEntityExtractor"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Pattern.Any Entity request": {
+            "$ref": "./examples/model/SuccessfulGetPatternAnyEntityInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the name and explicit list of a Pattern.Any entity model.",
+        "operationId": "Model_UpdatePatternAnyEntityModel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The Pattern.Any entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "patternAnyUpdateObject",
+            "in": "body",
+            "description": "An object containing the explicit list of the Pattern.Any entity.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatternAnyModelUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the Pattern.Any entity extractor.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Pattern.Any Entity request": {
+            "$ref": "./examples/model/SuccessfulUpdatePatternAnyEntityRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a Pattern.Any entity extractor from the application.",
+        "operationId": "Model_DeletePatternAnyEntityModel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The Pattern.Any entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Pattern.Any Entity request": {
+            "$ref": "./examples/model/SuccessfulDeletePatternAnyEntityRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/entities/{entityId}/roles/{roleId}": {
+      "get": {
+        "summary": "Get one entity role for a given entity",
+        "operationId": "Model_GetEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An entity role",
+            "schema": {
+              "$ref": "#/definitions/EntityRole"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulGetEntityRoleInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an entity role for a given entity",
+        "operationId": "Model_UpdateEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleUpdateObject",
+            "in": "body",
+            "description": "The new entity role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the entity role.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulUpdateEntityRoleRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an entity role.",
+        "operationId": "Model_DeleteEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulDeleteEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/prebuilts/{entityId}/roles/{roleId}": {
+      "get": {
+        "summary": "Get one entity role for a given entity",
+        "operationId": "Model_GetPrebuiltEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An entity role",
+            "schema": {
+              "$ref": "#/definitions/EntityRole"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Prebuilt Entity Role request": {
+            "$ref": "./examples/model/SuccessfulGetPrebuiltEntityRoleInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an entity role for a given entity",
+        "operationId": "Model_UpdatePrebuiltEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleUpdateObject",
+            "in": "body",
+            "description": "The new entity role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the entity role.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Prebuilt Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulUpdatePrebuiltEntityRoleRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an entity role.",
+        "operationId": "Model_DeletePrebuiltEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Prebuilt Entity Role request": {
+            "$ref": "./examples/model/SuccessfulDeletePrebuiltEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/closedlists/{entityId}/roles/{roleId}": {
+      "get": {
+        "summary": "Get one entity role for a given entity",
+        "operationId": "Model_GetClosedListEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An entity role",
+            "schema": {
+              "$ref": "#/definitions/EntityRole"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Closed List Entity Role request": {
+            "$ref": "./examples/model/SuccessfulGetClosedListEntityRoleInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an entity role for a given entity",
+        "operationId": "Model_UpdateClosedListEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleUpdateObject",
+            "in": "body",
+            "description": "The new entity role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the entity role.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Closed List Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulUpdateClosedListEntityRoleRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an entity role.",
+        "operationId": "Model_DeleteClosedListEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Prebuilt Entity Role request": {
+            "$ref": "./examples/model/SuccessfulDeletePrebuiltEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/regexentities/{entityId}/roles/{roleId}": {
+      "get": {
+        "summary": "Get one entity role for a given entity",
+        "operationId": "Model_GetRegexEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An entity role",
+            "schema": {
+              "$ref": "#/definitions/EntityRole"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Regex Entity Role request": {
+            "$ref": "./examples/model/SuccessfulGetRegexEntityRoleInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an entity role for a given entity",
+        "operationId": "Model_UpdateRegexEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleUpdateObject",
+            "in": "body",
+            "description": "The new entity role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the entity role.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Regex Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulUpdateRegexEntityRoleRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an entity role.",
+        "operationId": "Model_DeleteRegexEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Regex Entity Role request": {
+            "$ref": "./examples/model/SuccessfulDeleteRegexEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/roles/{roleId}": {
+      "get": {
+        "summary": "Get one entity role for a given entity",
+        "operationId": "Model_GetCompositeEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An entity role",
+            "schema": {
+              "$ref": "#/definitions/EntityRole"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Composite Entity Role request": {
+            "$ref": "./examples/model/SuccessfulGetCompositeEntityRoleInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an entity role for a given entity",
+        "operationId": "Model_UpdateCompositeEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleUpdateObject",
+            "in": "body",
+            "description": "The new entity role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the entity role.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Composite Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulUpdateCompositeEntityRoleRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an entity role.",
+        "operationId": "Model_DeleteCompositeEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Composite Entity Role request": {
+            "$ref": "./examples/model/SuccessfulDeleteCompositeEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/roles/{roleId}": {
+      "get": {
+        "summary": "Get one entity role for a given entity",
+        "operationId": "Model_GetPatternAnyEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An entity role",
+            "schema": {
+              "$ref": "#/definitions/EntityRole"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Pattern.Any Entity Role request": {
+            "$ref": "./examples/model/SuccessfulGetPatternAnyEntityRoleInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an entity role for a given entity",
+        "operationId": "Model_UpdatePatternAnyEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleUpdateObject",
+            "in": "body",
+            "description": "The new entity role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the entity role.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Pattern.Any Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulUpdatePatternAnyEntityRoleRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an entity role.",
+        "operationId": "Model_DeletePatternAnyEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Pattern.Any Entity Role request": {
+            "$ref": "./examples/model/SuccessfulDeletePatternAnyEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/roles/{roleId}": {
+      "get": {
+        "summary": "Get one entity role for a given entity",
+        "operationId": "Model_GetHierarchicalEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An entity role",
+            "schema": {
+              "$ref": "#/definitions/EntityRole"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Hierarchical Entity Role request": {
+            "$ref": "./examples/model/SuccessfulGetHierarchicalEntityRoleInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an entity role for a given entity",
+        "operationId": "Model_UpdateHierarchicalEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleUpdateObject",
+            "in": "body",
+            "description": "The new entity role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the entity role.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Hierarchical Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulUpdateHierarchicalEntityRoleRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an entity role.",
+        "operationId": "Model_DeleteHierarchicalEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Hierarchical Entity Role request": {
+            "$ref": "./examples/model/SuccessfulDeleteHierarchicalEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/customprebuiltentities/{entityId}/roles/{roleId}": {
+      "get": {
+        "summary": "Get one entity role for a given entity",
+        "operationId": "Model_GetCustomEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An entity role",
+            "schema": {
+              "$ref": "#/definitions/EntityRole"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Custom Prebuilt Domain Entity Role request": {
+            "$ref": "./examples/model/SuccessfulGetCustomPrebuiltEntityRoleInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an entity role for a given entity",
+        "operationId": "Model_UpdateCustomPrebuiltEntityRole",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityRoleUpdateObject",
+            "in": "body",
+            "description": "The new entity role.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityRoleUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the entity role.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Custom Prebuilt Entity Extractor Role request": {
+            "$ref": "./examples/model/SuccessfulUpdateCustomPrebuiltEntityRoleRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an entity role.",
+        "operationId": "Model_DeleteCustomEntityRole",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The entity role Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Custom Prebuilt Entity Role request": {
+            "$ref": "./examples/model/SuccessfulDeleteCustomPrebuiltEntityRoleRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/explicitlist/{itemId}": {
+      "get": {
+        "summary": "Get the explicit list of the pattern.any entity.",
+        "operationId": "Model_GetExplicitListItem",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The Pattern.Any entity Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The explicit list item Id.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An explicit list item info.",
+            "schema": {
+              "$ref": "#/definitions/ExplicitListItem"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Pattern.Any Explicit List Item request": {
+            "$ref": "./examples/model/SuccessfulGetPatternAnyExplicitListItemRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates an explicit list item for a Pattern.Any entity.",
+        "operationId": "Model_UpdateExplicitListItem",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The Pattern.Any entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The explicit list item ID.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "item",
+            "in": "body",
+            "description": "The new explicit list item.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExplicitListItemUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the explicit list item.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Pattern.Any Entity Explicit List Item request": {
+            "$ref": "./examples/model/SuccessfulUpdatePatternAnyEntityExplicitListItemRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete the explicit list item from the Pattern.any explicit list.",
+        "operationId": "Model_DeleteExplicitListItem",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "The pattern.any entity id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The explicit list item which will be deleted.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Pattern.Any Explicit List Item request": {
+            "$ref": "./examples/model/SuccessfulDeletePatternAnyExplicitListItemRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patternrule": {
+      "post": {
+        "summary": "Adds one pattern to the specified application.",
+        "operationId": "Pattern_AddPattern",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "pattern",
+            "in": "body",
+            "description": "The input pattern.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatternRuleCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The created pattern",
+            "schema": {
+              "$ref": "#/definitions/PatternRuleInfo"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Add Pattern request": {
+            "$ref": "./examples/patterns/SuccessfulAddPatternRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patternrules": {
+      "get": {
+        "summary": "Returns an application version's patterns.",
+        "operationId": "Pattern_GetPatterns",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved patterns",
+            "schema": {
+              "$ref": "#/definitions/PatternRuleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Application Version Patterns request": {
+            "$ref": "./examples/patterns/SuccessfulGetPatternsRequest.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates patterns",
+        "operationId": "Pattern_UpdatePatterns",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "patterns",
+            "in": "body",
+            "description": "An array represents the patterns.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PatternRuleUpdateObject"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated patterns",
+            "schema": {
+              "$ref": "#/definitions/PatternRuleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Batch Update Patterns request": {
+            "$ref": "./examples/patterns/SuccessfulUpdatePatternsRequest.json"
+          }
+        }
+      },
+      "post": {
+        "summary": "Adds a batch of patterns to the specified application.",
+        "operationId": "Pattern_BatchAddPatterns",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "patterns",
+            "in": "body",
+            "description": "A JSON array containing patterns.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PatternRuleCreateObject"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The created patterns",
+            "schema": {
+              "$ref": "#/definitions/PatternRuleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Batch Add Patterns request": {
+            "$ref": "./examples/patterns/SuccessfulBatchAddLabelsRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the patterns with the specified IDs.",
+        "operationId": "Pattern_DeletePatterns",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "patternIds",
+            "in": "body",
+            "description": "The patterns IDs.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Batch Delete Patterns request": {
+            "$ref": "./examples/patterns/SuccessfulDeletePatternsRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patternrules/{patternId}": {
+      "put": {
+        "summary": "Updates a pattern",
+        "operationId": "Pattern_UpdatePattern",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "patternId",
+            "in": "path",
+            "description": "The pattern ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "pattern",
+            "in": "body",
+            "description": "An object representing a pattern.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatternRuleUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated pattern",
+            "schema": {
+              "$ref": "#/definitions/PatternRuleInfo"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Pattern request": {
+            "$ref": "./examples/patterns/SuccessfulUpdatePatternRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the pattern with the specified ID.",
+        "operationId": "Pattern_DeletePattern",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "patternId",
+            "in": "path",
+            "description": "The pattern ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Pattern request": {
+            "$ref": "./examples/patterns/SuccessfulDeletePatternRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/intents/{intentId}/patternrules": {
+      "get": {
+        "summary": "Returns patterns to be retrieved for the specific intent.",
+        "operationId": "Pattern_GetIntentPatterns",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved patterns",
+            "schema": {
+              "$ref": "#/definitions/PatternRuleList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Intent Patterns request": {
+            "$ref": "./examples/patterns/SuccessfulGetIntentPatternsRequest.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4254,14 +7407,6 @@
           "description": "The name for the new application.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "MyFirstDummyApp",
-        "description": "This is my first dummy application.",
-        "culture": "en-us",
-        "usageScenario": "IoT",
-        "domain": "Comics",
-        "initialVersionId": "1.0"
       }
     },
     "PrebuiltDomainCreateBaseObject": {
@@ -4272,9 +7417,6 @@
           "description": "The domain name.",
           "type": "string"
         }
-      },
-      "example": {
-        "domainName": "Camera"
       }
     },
     "PrebuiltDomainCreateObject": {
@@ -4289,10 +7431,6 @@
           "description": "The culture of the new domain.",
           "type": "string"
         }
-      },
-      "example": {
-        "domainName": "Web",
-        "culture": "en-US"
       }
     },
     "PrebuiltDomainModelCreateObject": {
@@ -4307,10 +7445,6 @@
           "description": "The intent name or entity name.",
           "type": "string"
         }
-      },
-      "example": {
-        "domainName": "Camera",
-        "modelName": "AppName"
       }
     },
     "HierarchicalEntityModel": {
@@ -4328,12 +7462,6 @@
           "description": "Entity name.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "Reservation",
-        "children": [
-          "Location::To"
-        ]
       }
     },
     "CompositeEntityModel": {
@@ -4351,13 +7479,6 @@
           "description": "Entity name.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "Reservation",
-        "children": [
-          "Class",
-          "Location"
-        ]
       }
     },
     "JSONEntity": {
@@ -4392,9 +7513,6 @@
           "type": "boolean",
           "x-nullable": false
         }
-      },
-      "example": {
-        "public": true
       }
     },
     "ExampleLabelObject": {
@@ -4417,17 +7535,6 @@
           "description": "The idenfitied intent representing the utterance.",
           "type": "string"
         }
-      },
-      "example": {
-        "text": "whats the weather in buenos aires?",
-        "intentName": "WeatherInPlace",
-        "entityLabels": [
-          {
-            "entityName": "Place",
-            "startCharIndex": 21,
-            "endCharIndex": 34
-          }
-        ]
       }
     },
     "PhraselistCreateObject": {
@@ -4447,11 +7554,6 @@
           "default": true,
           "type": "boolean"
         }
-      },
-      "example": {
-        "name": "DaysOfWeek",
-        "phrases": "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
-        "isExchangeable": false
       }
     },
     "SubClosedList": {
@@ -4469,13 +7571,6 @@
           },
           "type": "array"
         }
-      },
-      "example": {
-        "canonicalForm": "BankName",
-        "list": [
-          "HSBC",
-          "CitiBank"
-        ]
       }
     },
     "SubClosedListResponse": {
@@ -4490,8 +7585,7 @@
         "id": {
           "description": "The sublist ID",
           "type": "integer",
-          "x-nullable": false,
-          "example": "123456"
+          "x-nullable": false
         }
       }
     },
@@ -4507,10 +7601,6 @@
           "description": "The application's new description.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "MyFirstRenamedDummyAp",
-        "description": "This is my first modified dummy description."
       }
     },
     "PrebuiltExtractorNames": {
@@ -4518,11 +7608,7 @@
       "type": "array",
       "items": {
         "type": "string"
-      },
-      "example": [
-        "number",
-        "ordinal"
-      ]
+      }
     },
     "JSONRegexFeature": {
       "description": "Exported Model - A Pattern feature.",
@@ -4559,10 +7645,6 @@
           "default": true,
           "type": "boolean"
         }
-      },
-      "example": {
-        "name": "ModifiedEmailPattern",
-        "pattern": "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"
       }
     },
     "ClosedList": {
@@ -4580,6 +7662,12 @@
             "$ref": "#/definitions/SubClosedList"
           },
           "type": "array"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       }
     },
@@ -4595,17 +7683,6 @@
           },
           "type": "array"
         }
-      },
-      "example": {
-        "subLists": [
-          {
-            "canonicalForm": "Ohio",
-            "list": [
-              "Ohio",
-              "OH"
-            ]
-          }
-        ]
       }
     },
     "JSONModelFeature": {
@@ -4638,9 +7715,6 @@
           "description": "Name of the new entity extractor.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "DayOfWeek"
       }
     },
     "PatternCreateObject": {
@@ -4655,10 +7729,6 @@
           "description": "Name of the feature.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "EmailPattern",
-        "pattern": "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"
       }
     },
     "WordListObject": {
@@ -4676,15 +7746,6 @@
           },
           "type": "array"
         }
-      },
-      "example": {
-        "canonicalForm": "California",
-        "list": [
-          "California",
-          "CA",
-          "Calif.",
-          "Cal."
-        ]
       }
     },
     "WordListBaseUpdateObject": {
@@ -4702,15 +7763,6 @@
           },
           "type": "array"
         }
-      },
-      "example": {
-        "canonicalForm": "California",
-        "list": [
-          "California",
-          "CA",
-          "Calif.",
-          "Cal."
-        ]
       }
     },
     "JSONUtterance": {
@@ -4743,9 +7795,6 @@
           "description": "The entity's new name.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "New Name"
       }
     },
     "ClosedListModelUpdateObject": {
@@ -4764,41 +7813,6 @@
           "description": "The new name of the closed list feature.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "States",
-        "subLists": [
-          {
-            "canonicalForm": "new york",
-            "list": [
-              "ny",
-              "new york"
-            ]
-          },
-          {
-            "canonicalForm": "washington",
-            "list": [
-              "washington",
-              "wa"
-            ]
-          },
-          {
-            "canonicalForm": "california",
-            "list": [
-              "california",
-              "ca",
-              "calif.",
-              "cal."
-            ]
-          },
-          {
-            "canonicalForm": "Texas",
-            "list": [
-              "Texas",
-              "TX"
-            ]
-          }
-        ]
       }
     },
     "ClosedListModelCreateObject": {
@@ -4817,34 +7831,6 @@
           "description": "Name of the closed list feature.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "States",
-        "subLists": [
-          {
-            "canonicalForm": "New York",
-            "list": [
-              "NY",
-              "New York"
-            ]
-          },
-          {
-            "canonicalForm": "Washington",
-            "list": [
-              "Washington",
-              "WA"
-            ]
-          },
-          {
-            "canonicalForm": "California",
-            "list": [
-              "California",
-              "CA",
-              "Calif.",
-              "Cal."
-            ]
-          }
-        ]
       }
     },
     "ExampleLabelObjectArray": {
@@ -4853,36 +7839,7 @@
         "type": "object",
         "$ref": "#/definitions/ExampleLabelObject"
       },
-      "type": "array",
-      "example": [
-        {
-          "text": "Book me a flight from Cairo to Redmond next Thursday",
-          "intentName": "BookFlight",
-          "entityLabels": [
-            {
-              "entityName": "Location::From",
-              "startCharIndex": 22,
-              "endCharIndex": 26
-            },
-            {
-              "entityName": "Location::To",
-              "startCharIndex": 31,
-              "endCharIndex": 37
-            }
-          ]
-        },
-        {
-          "text": "What's the weather like in Seattle?",
-          "intentName": "GetWeather",
-          "entityLabels": [
-            {
-              "entityName": "Location",
-              "startCharIndex": 27,
-              "endCharIndex": 33
-            }
-          ]
-        }
-      ]
+      "type": "array"
     },
     "VersionInfo": {
       "description": "Object model of an application version.",
@@ -4965,9 +7922,6 @@
           "description": "The new version for the cloned model.",
           "type": "string"
         }
-      },
-      "example": {
-        "version": "1.0"
       }
     },
     "PhraselistUpdateObject": {
@@ -4992,10 +7946,17 @@
           "default": true,
           "type": "boolean"
         }
-      },
-      "example": {
-        "name": "DaysOfWeek",
-        "phrases": "monday,tuesday,wednesday,thursday,friday,saturday,sunday"
+      }
+    },
+    "PrebuiltDomainObject": {
+      "type": "object",
+      "properties": {
+        "domain_name": {
+          "type": "string"
+        },
+        "model_name": {
+          "type": "string"
+        }
       }
     },
     "HierarchicalModel": {
@@ -5009,6 +7970,16 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "inherits": {
+          "type": "object",
+          "$ref": "#/definitions/PrebuiltDomainObject"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5029,11 +8000,6 @@
           "description": "The target region that the application is published to.",
           "type": "string"
         }
-      },
-      "example": {
-        "versionId": "0.1",
-        "isStaging": false,
-        "region": "westus"
       }
     },
     "LuisApp": {
@@ -5073,13 +8039,6 @@
           },
           "type": "array"
         },
-        "bing_entities": {
-          "description": "List of prebuilt intents.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
         "closedLists": {
           "description": "List of closed lists.",
           "items": {
@@ -5093,6 +8052,30 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/HierarchicalModel"
+          },
+          "type": "array"
+        },
+        "patternAnyEntities": {
+          "description": "List of Pattern.Any entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PatternAny"
+          },
+          "type": "array"
+        },
+        "regex_entities": {
+          "description": "List of regular expression entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/RegexEntity"
+          },
+          "type": "array"
+        },
+        "prebuiltEntities": {
+          "description": "List of prebuilt entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PrebuiltEntity"
           },
           "type": "array"
         },
@@ -5112,6 +8095,14 @@
           },
           "type": "array"
         },
+        "patterns": {
+          "description": "List of patterns.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PatternRule"
+          },
+          "type": "array"
+        },
         "utterances": {
           "description": "List of sample utterances.",
           "items": {
@@ -5120,276 +8111,21 @@
           },
           "type": "array"
         }
-      },
-      "example": {
-        "luis_schema_version": "2.1.0",
-        "versionId": "0.1",
-        "name": "LuisBot",
-        "desc": "",
-        "culture": "en-us",
-        "intents": [
-          {
-            "name": "dateintent"
-          },
-          {
-            "name": "Help"
-          },
-          {
-            "name": "None"
-          },
-          {
-            "name": "SearchHotels"
-          },
-          {
-            "name": "ShowHotelsReviews"
-          }
-        ],
-        "entities": [
-          {
-            "name": "AirportCode"
-          },
-          {
-            "name": "Hotel"
-          }
-        ],
-        "composites": [],
-        "closedLists": [],
-        "bing_entities": [
-          "datetimeV2",
-          "geography"
-        ],
-        "model_features": [
-          {
-            "name": "Near",
-            "mode": true,
-            "words": "near,around,close,nearby",
-            "activated": true
-          },
-          {
-            "name": "Show",
-            "mode": true,
-            "words": "show,find,look,search",
-            "activated": true
-          }
-        ],
-        "regex_features": [
-          {
-            "name": "AirportCodeRegex",
-            "pattern": "[a-z]{3}",
-            "activated": true
-          }
-        ],
-        "utterances": [
-          {
-            "text": "i need help",
-            "intent": "Help",
-            "entities": []
-          },
-          {
-            "text": "help me",
-            "intent": "Help",
-            "entities": []
-          },
-          {
-            "text": "tomorrow",
-            "intent": "dateintent",
-            "entities": []
-          },
-          {
-            "text": "search for hotels in seattle",
-            "intent": "SearchHotels",
-            "entities": []
-          },
-          {
-            "text": "what can i do?",
-            "intent": "Help",
-            "entities": []
-          },
-          {
-            "text": "next monday",
-            "intent": "dateintent",
-            "entities": []
-          },
-          {
-            "text": "next year",
-            "intent": "dateintent",
-            "entities": []
-          },
-          {
-            "text": "look for hotels in miami",
-            "intent": "SearchHotels",
-            "entities": []
-          },
-          {
-            "text": "show me hotels in california",
-            "intent": "SearchHotels",
-            "entities": []
-          },
-          {
-            "text": "show me the reviews of the amazing bot resort",
-            "intent": "ShowHotelsReviews",
-            "entities": [
-              {
-                "entity": "Hotel",
-                "startPos": 23,
-                "endPos": 44
-              }
-            ]
-          },
-          {
-            "text": "can i see the reviews of extended bot hotel?",
-            "intent": "ShowHotelsReviews",
-            "entities": [
-              {
-                "entity": "Hotel",
-                "startPos": 25,
-                "endPos": 42
-              }
-            ]
-          },
-          {
-            "text": "find reviews of hotelxya",
-            "intent": "ShowHotelsReviews",
-            "entities": [
-              {
-                "entity": "Hotel",
-                "startPos": 16,
-                "endPos": 23
-              }
-            ]
-          },
-          {
-            "text": "show me reviews of the amazing hotel",
-            "intent": "ShowHotelsReviews",
-            "entities": [
-              {
-                "entity": "Hotel",
-                "startPos": 19,
-                "endPos": 35
-              }
-            ]
-          },
-          {
-            "text": "what are the available options?",
-            "intent": "Help",
-            "entities": []
-          },
-          {
-            "text": "best hotels in seattle",
-            "intent": "SearchHotels",
-            "entities": []
-          },
-          {
-            "text": "hotels in los angeles",
-            "intent": "SearchHotels",
-            "entities": []
-          },
-          {
-            "text": "can you show me hotels from los angeles?",
-            "intent": "SearchHotels",
-            "entities": []
-          },
-          {
-            "text": "can you show me the reviews of the amazing resort & hotel",
-            "intent": "ShowHotelsReviews",
-            "entities": [
-              {
-                "entity": "Hotel",
-                "startPos": 31,
-                "endPos": 56
-              }
-            ]
-          },
-          {
-            "text": "what are the reviews of the hotel bot framework?",
-            "intent": "ShowHotelsReviews",
-            "entities": [
-              {
-                "entity": "Hotel",
-                "startPos": 24,
-                "endPos": 46
-              }
-            ]
-          },
-          {
-            "text": "find hotels near eze",
-            "intent": "SearchHotels",
-            "entities": [
-              {
-                "entity": "AirportCode",
-                "startPos": 17,
-                "endPos": 19
-              }
-            ]
-          },
-          {
-            "text": "where can i stay near nnn?",
-            "intent": "SearchHotels",
-            "entities": [
-              {
-                "entity": "AirportCode",
-                "startPos": 22,
-                "endPos": 24
-              }
-            ]
-          },
-          {
-            "text": "show hotels near att airport",
-            "intent": "SearchHotels",
-            "entities": [
-              {
-                "entity": "AirportCode",
-                "startPos": 17,
-                "endPos": 19
-              }
-            ]
-          },
-          {
-            "text": "find hotels near agl",
-            "intent": "SearchHotels",
-            "entities": [
-              {
-                "entity": "AirportCode",
-                "startPos": 17,
-                "endPos": 19
-              }
-            ]
-          },
-          {
-            "text": "find hotels around eze airport",
-            "intent": "SearchHotels",
-            "entities": [
-              {
-                "entity": "AirportCode",
-                "startPos": 19,
-                "endPos": 21
-              }
-            ]
-          },
-          {
-            "text": "01/7",
-            "intent": "dateintent",
-            "entities": []
-          }
-        ]
       }
     },
     "GuidResponse": {
       "description": "The ID (GUID) returned by an operation.",
       "type": "string",
-      "format": "uuid",
-      "example": "363187f1-c573-46b3-bc4c-ae01d686e68e"
+      "format": "uuid"
     },
     "VersionResponse": {
       "description": "The new version ID returned by when importing a model version.",
-      "type": "string",
-      "example": "0.1"
+      "type": "string"
     },
     "FeatureIDResponse": {
       "description": "The ID of the created feature.",
       "type": "integer",
-      "x-nullable": false,
-      "example": 398102
+      "x-nullable": false
     },
     "LabeledUtterances": {
       "description": "A list of predictions and label pairs for every example in the application.",
@@ -5685,6 +8421,26 @@
         },
         {
           "$ref": "#/definitions/EntityExtractor"
+        },
+        {
+          "$ref": "#/definitions/RegexEntityExtractor"
+        },
+        {
+          "$ref": "#/definitions/PatternAnyEntityExtractor"
+        }
+      ]
+    },
+    "EntityModelInfo": {
+      "description": "An Entity Extractor model info.",
+      "type": "object",
+      "properties": {
+        "roles": {
+          "$ref": "#/definitions/EntityRoleList"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModelInfo"
         }
       ]
     },
@@ -5698,7 +8454,9 @@
         "Composite Entity Extractor",
         "Closed List Entity Extractor",
         "Prebuilt Entity Extractor",
-        "Intent Classifier"
+        "Intent Classifier",
+        "Pattern.Any Entity Extractor",
+        "Regex Entity Extractor"
       ]
     },
     "HierarchicalEntityExtractor": {
@@ -5708,6 +8466,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -5734,6 +8495,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -5760,6 +8524,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -5786,6 +8553,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/EntityModelInfo"
         }
       ]
     },
@@ -5880,6 +8650,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -5991,13 +8764,11 @@
       "properties": {
         "UtteranceText": {
           "description": "The sample's utterance.",
-          "type": "string",
-          "example": "book me a flight from cairo to redmond next thursday"
+          "type": "string"
         },
         "ExampleId": {
           "description": "The newly created sample ID.",
-          "type": "integer",
-          "example": -6830368
+          "type": "integer"
         }
       }
     },
@@ -6225,7 +8996,7 @@
       }
     },
     "TrainingStatus": {
-      "description": "The Trainning status.",
+      "description": "The Training status.",
       "type": "string",
       "enum": [
         "Queued",
@@ -6422,12 +9193,336 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/GuidResponse"
-      },
-      "example": [
-        "2639049a-e41d-4285-a3c6-8a17ed299473",
-        "200d6173-ecfa-4967-bf95-3c319902dc52",
-        "f80aa9ba-64c8-4a36-8cc5-92010d0aadf1"
-      ]
+      }
+    },
+    "EntityRoleCreateObject": {
+      "description": "Object model for creating an entity role.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The entity role name.",
+          "type": "string"
+        }
+      }
+    },
+    "RegexModelCreateObject": {
+      "description": "Model object for creating a regex entity model.",
+      "type": "object",
+      "properties": {
+        "regexPattern": {
+          "description": "The regex entity pattern.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The model name.",
+          "type": "string"
+        }
+      }
+    },
+    "PatternAnyModelCreateObject": {
+      "description": "Model object for creating a Pattern.Any entity model.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The model name.",
+          "type": "string"
+        },
+        "explicitList": {
+          "description": "The Pattern.Any explicit list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExplicitListItemCreateObject": {
+      "description": "Object model for creating an explicit list item.",
+      "type": "object",
+      "properties": {
+        "explicitListItem": {
+          "description": "The explicit list item.",
+          "type": "string"
+        }
+      }
+    },
+    "RegexModelUpdateObject": {
+      "description": "Model object for updating a regex entity model.",
+      "type": "object",
+      "properties": {
+        "regexPattern": {
+          "description": "The regex entity pattern.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The model name.",
+          "type": "string"
+        }
+      }
+    },
+    "PatternAnyModelUpdateObject": {
+      "description": "Model object for updating a Pattern.Any entity model.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The model name.",
+          "type": "string"
+        },
+        "explicitList": {
+          "description": "The Pattern.Any explicit list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntityRoleUpdateObject": {
+      "description": "Object model for updating an entity role.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The entity role name.",
+          "type": "string"
+        }
+      }
+    },
+    "ExplicitListItemUpdateObject": {
+      "description": "Model object for updating an explicit list item.",
+      "type": "object",
+      "properties": {
+        "explicitListItem": {
+          "description": "The explicit list item.",
+          "type": "string"
+        }
+      }
+    },
+    "PatternRuleCreateObject": {
+      "description": "Object model for creating a pattern",
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "description": "The pattern text.",
+          "type": "string"
+        },
+        "intent": {
+          "description": "The intent's name which the pattern belongs to.",
+          "type": "string"
+        }
+      }
+    },
+    "PatternRuleUpdateObject": {
+      "description": "Object model for updating a pattern.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "The pattern ID.",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "The pattern text.",
+          "type": "string"
+        },
+        "intent": {
+          "description": "The intent's name which the pattern belongs to.",
+          "type": "string"
+        }
+      }
+    },
+    "RegexEntityExtractor": {
+      "description": "Regex Entity Extractor.",
+      "type": "object",
+      "x-ms-discriminator-value": "Regex Entity Extractor",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/EntityModelInfo"
+        }
+      ],
+      "properties": {
+        "regexPattern": {
+          "description": "The Regex entity pattern.",
+          "type": "string"
+        }
+      }
+    },
+    "RegexEntityExtractorList": {
+      "description": "List of Regex Entity Extractors.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RegexEntityExtractor"
+      }
+    },
+    "PatternAnyEntityExtractor": {
+      "description": "Pattern.Any Entity Extractor.",
+      "type": "object",
+      "x-ms-discriminator-value": "Pattern.Any Entity Extractor",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/EntityModelInfo"
+        }
+      ],
+      "properties": {
+        "explicitList": {
+          "$ref": "#/definitions/ExplicitListItemList"
+        }
+      }
+    },
+    "PatternAnyEntityExtractorList": {
+      "description": "List of Pattern.Any Entity Extractors.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PatternAnyEntityExtractor"
+      }
+    },
+    "EntityRole": {
+      "description": "Entity extractor role",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "The entity role ID.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The entity role name.",
+          "type": "string"
+        }
+      }
+    },
+    "EntityRoleList": {
+      "description": "List of Pattern.Any Entity Extractors.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EntityRole"
+      }
+    },
+    "ExplicitListItem": {
+      "description": "Explicit list item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "description": "The explicit list item ID.",
+          "type": "integer"
+        },
+        "explicitListItem": {
+          "description": "The explicit list item value.",
+          "type": "string"
+        }
+      }
+    },
+    "ExplicitListItemList": {
+      "description": "List of explicit list items",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExplicitListItem"
+      }
+    },
+    "ExplicitListItemIDResponse": {
+      "description": "The ID of the created explicit list item.",
+      "type": "integer",
+      "x-nullable": false
+    },
+    "PatternRuleInfo": {
+      "description": "Pattern rule",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "The pattern ID.",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "The pattern text.",
+          "type": "string"
+        },
+        "intent": {
+          "description": "The intent's name where the pattern belongs to.",
+          "type": "string"
+        }
+      }
+    },
+    "PatternRuleList": {
+      "description": "List of patterns",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PatternRuleInfo"
+      }
+    },
+    "PatternAny": {
+      "description": "Pattern.Any Entity Extractor.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "explicitList": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "RegexEntity": {
+      "description": "Regular Expression Entity Extractor.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "regexPattern": {
+          "type": "string"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "PrebuiltEntity": {
+      "description": "Prebuilt Entity Extractor.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "PatternRule": {
+      "description": "Pattern",
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "description": "The pattern text.",
+          "type": "string"
+        },
+        "intent": {
+          "description": "The intent's name where the pattern belongs to.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {

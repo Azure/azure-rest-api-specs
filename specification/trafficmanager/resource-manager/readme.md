@@ -51,6 +51,15 @@ override-info:
   title: TrafficManagerManagementClient
 ```
 
+### Tag: package-2017-09-preview-only
+
+These settings apply only when `--tag=package-2017-09-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09-preview-only'
+input-file:
+- Microsoft.Network/preview/2017-09-01-preview/trafficmanageranalytics.json
+```
+
 
 ### Tag: package-2017-05
 
@@ -172,7 +181,7 @@ These settings apply only when `--tag=package-2018-03 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-03' && $(go)
-output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-03/trafficmanager
+output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-03-01/trafficmanager
 ```
 
 ### Tag: package-2017-09-preview and go
@@ -181,7 +190,7 @@ These settings apply only when `--tag=package-2017-09-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-09-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2017-09-01-preview/trafficmanager
+output-folder: $(go-sdk-folder)/services/preview/trafficmanager/mgmt/2017-09-01-preview/trafficmanager
 ```
 
 ### Tag: package-2017-05 and go

@@ -101,3 +101,20 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'release_1_0' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/cognitiveservices/v1.0/$(namespace)
 ```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  namespace: com.microsoft.azure.cognitiveservices.search.visualsearch
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/search/bingvisualsearch
+  with-optional-parameters: true
+  prefix-model-type: Bing
+  with-single-async-method: true
+```
