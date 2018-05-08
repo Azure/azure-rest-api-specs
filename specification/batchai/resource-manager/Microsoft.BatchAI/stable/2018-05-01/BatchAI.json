@@ -2398,7 +2398,7 @@
             "modelAsString": true
           },
           "title": "Scheduling priority associated with the job.",
-          "description": "Scheduling priority  associated with the job."
+          "description": "Scheduling priority associated with the job."
         },
         "cluster": {
           "title": "Specifies the Id of the cluster on which this job will run.",
@@ -3774,8 +3774,18 @@
       },
       "description": "Values returned by the List operation."
     },
+    "ExperimentBaseProperties": {
+      "properties": {
+      },
+      "description": "The properties of an Experiment."
+    },
     "ExperimentCreateParameters": {
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentBaseProperties",
+          "description": "The properties of an Experiment.",
+          "x-ms-client-flatten": true
+        }
       },
       "description": "Parameters supplied to the Create operation."
     },
