@@ -1474,8 +1474,8 @@
           },
           "readOnly": true
         },
-        "assets": {
-          "description": "The assets attached to the project.",
+        "ratingAssets": {
+          "description": "The rating assets attached to the project.",
           "type": "array",
           "items": {
             "type": "AssetProperties"
@@ -1562,24 +1562,11 @@
         },
         "billingProfileDetails": {
           "description": "Information about the billing profile associated with this asset.",
-          "$ref": "#/definitions/BillingProfileDetails"
+          "$ref": "#/definitions/BillingProfile"
         },
         "productInfo": {
           "description": "Information about the product/offer.",
           "$ref": "#/definitions/ProductInfo"
-        }
-      }
-    },
-    "BillingProfileDetails": {
-      "description": "Details about the billing profile.",
-      "properties": {
-        "id": {
-          "description": "Billing profile id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Billing profile name.",
-          "type": "string"
         }
       }
     },
@@ -1588,6 +1575,10 @@
       "properties": {
         "productId": {
           "description": "The product id.",
+          "type": "string"
+        },
+        "productName": {
+          "description": "The product name.",
           "type": "string"
         },
         "skuId": {
