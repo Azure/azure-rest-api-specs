@@ -6,12 +6,22 @@
 		"version": "2017-04-01"
 	},
 	"host": "management.azure.com",
-	"schemes": ["https"],
-	"consumes": ["application/json"],
-	"produces": ["application/json"],
-	"security": [{
-		"azure_auth": ["user_impersonation"]
-	}],
+	"schemes": [
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
 	"securityDefinitions": {
 		"azure_auth": {
 			"type": "oauth2",
@@ -26,7 +36,9 @@
 	"paths": {
 		"/providers/Microsoft.NotificationHubs/operations": {
 			"get": {
-				"tags": ["Operations"],
+				"tags": [
+					"Operations"
+				],
 				"operationId": "Operations_List",
 				"x-ms-examples": {
 					"OperationsList": {
@@ -34,9 +46,11 @@
 					}
 				},
 				"description": "Lists all of the available NotificationHubs REST API operations.",
-				"parameters": [{
-					"$ref": "#/parameters/ApiVersionParameter"
-				}],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK. The request has succeeded.",
@@ -58,7 +72,9 @@
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/checkNamespaceAvailability": {
 			"post": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceCheckNameAvailability": {
 						"$ref": "./examples/Namespaces/NHNameSpaceCheckNameAvailability.json"
@@ -66,21 +82,23 @@
 				},
 				"operationId": "Namespaces_CheckAvailability",
 				"description": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
-				"parameters": [{
-					"name": "parameters",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/CheckAvailabilityParameters"
+				"parameters": [
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/CheckAvailabilityParameters"
+						},
+						"description": "The namespace name."
 					},
-					"description": "The namespace name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Checks if the Namespace name is a valid availabile name",
@@ -93,7 +111,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}": {
 			"put": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceCreate": {
 						"$ref": "./examples/Namespaces/NHNameSpaceCreate.json"
@@ -104,35 +124,37 @@
 				"externalDocs": {
 					"url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj856303.aspx"
 				},
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "parameters",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
 					},
-					"description": "Parameters supplied to create a Namespace Resource."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
+						},
+						"description": "Parameters supplied to create a Namespace Resource."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Namespace is Create/Update",
@@ -149,7 +171,9 @@
 				}
 			},
 			"patch": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceUpdate": {
 						"$ref": "./examples/Namespaces/NHNameSpaceUpdate.json"
@@ -157,35 +181,37 @@
 				},
 				"operationId": "Namespaces_Patch",
 				"description": "Patches the existing namespace",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "parameters",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/NamespacePatchParameters"
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
 					},
-					"description": "Parameters supplied to patch a Namespace Resource."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/NamespacePatchParameters"
+						},
+						"description": "Parameters supplied to patch a Namespace Resource."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Namespace is Updated",
@@ -196,7 +222,9 @@
 				}
 			},
 			"delete": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceDelete": {
 						"$ref": "./examples/Namespaces/NHNameSpaceDelete.json"
@@ -207,26 +235,28 @@
 				"externalDocs": {
 					"url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj856296.aspx"
 				},
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Namespace is deleted"
@@ -241,7 +271,9 @@
 				"x-ms-long-running-operation": true
 			},
 			"get": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceGet": {
 						"$ref": "./examples/Namespaces/NHNameSpaceGet.json"
@@ -249,26 +281,28 @@
 				},
 				"operationId": "Namespaces_Get",
 				"description": "Returns the description for the specified namespace.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Get Namespace",
@@ -281,7 +315,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
 			"put": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceAuthorizationRuleCreate": {
 						"$ref": "./examples/Namespaces/NHNameSpaceAuthorizationRuleCreate.json"
@@ -289,42 +325,44 @@
 				},
 				"operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
 				"description": "Creates an authorization rule for a namespace",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "Aauthorization Rule Name."
-				},
-				{
-					"name": "parameters",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
 					},
-					"description": "The shared access authorization rule."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "Aauthorization Rule Name."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+						},
+						"description": "The shared access authorization rule."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Namespace Authorization Rule is Created/Updated",
@@ -335,7 +373,9 @@
 				}
 			},
 			"delete": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceAuthorizationRuleDelete": {
 						"$ref": "./examples/Namespaces/NHNameSpaceAuthorizationRuleDelete.json"
@@ -343,33 +383,35 @@
 				},
 				"operationId": "Namespaces_DeleteAuthorizationRule",
 				"description": "Deletes a namespace authorization rule",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "Authorization Rule Name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "Authorization Rule Name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Namespace AuthorizationRule is deleted"
@@ -380,7 +422,9 @@
 				}
 			},
 			"get": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceAuthorizationRuleGet": {
 						"$ref": "./examples/Namespaces/NHNameSpaceAuthorizationRuleGet.json"
@@ -388,33 +432,35 @@
 				},
 				"operationId": "Namespaces_GetAuthorizationRule",
 				"description": "Gets an authorization rule for a namespace by name.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name"
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "Authorization rule name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name"
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "Authorization rule name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Get the Namespace AuthorizationRule",
@@ -427,7 +473,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces": {
 			"get": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceListByResourceGroup": {
 						"$ref": "./examples/Namespaces/NHNameSpaceListByResourceGroup.json"
@@ -435,19 +483,21 @@
 				},
 				"operationId": "Namespaces_List",
 				"description": "Lists the available namespaces within a resourceGroup.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription"
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Lists all Namespaces with the ResourceGroup",
@@ -463,7 +513,9 @@
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/namespaces": {
 			"get": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceList": {
 						"$ref": "./examples/Namespaces/NHNameSpaceList.json"
@@ -471,12 +523,14 @@
 				},
 				"operationId": "Namespaces_ListAll",
 				"description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
-				"parameters": [{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Gets all the Namespaces within the subscription irrespective of the ResourceGroup",
@@ -492,7 +546,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules": {
 			"get": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceAuthorizationRuleListAll": {
 						"$ref": "./examples/Namespaces/NHNameSpaceAuthorizationRuleListAll.json"
@@ -500,26 +556,28 @@
 				},
 				"operationId": "Namespaces_ListAuthorizationRules",
 				"description": "Gets the authorization rules for a namespace.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name"
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Get the List of AuthorizationRules of a Namespace",
@@ -535,7 +593,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys": {
 			"post": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceAuthorizationRuleListKey": {
 						"$ref": "./examples/Namespaces/NHNameSpaceAuthorizationRuleListKey.json"
@@ -543,33 +603,35 @@
 				},
 				"operationId": "Namespaces_ListKeys",
 				"description": "Gets the Primary and Secondary ConnectionStrings to the namespace ",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The connection string of the namespace for the specified authorizationRule."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The connection string of the namespace for the specified authorizationRule."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Gets the Namespace AuthorizationRule's Primary keys and Secondary keys along with the ConnectionStrings",
@@ -582,7 +644,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys": {
 			"post": {
-				"tags": ["Namespaces"],
+				"tags": [
+					"Namespaces"
+				],
 				"x-ms-examples": {
 					"NameSpaceAuthorizationRuleRegenrateKey": {
 						"$ref": "./examples/Namespaces/NHNameSpaceAuthorizationRuleRegenrateKey.json"
@@ -590,42 +654,44 @@
 				},
 				"operationId": "Namespaces_RegenerateKeys",
 				"description": "Regenerates the Primary/Secondary Keys to the Namespace Authorization Rule",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The connection string of the namespace for the specified authorizationRule."
-				},
-				{
-					"name": "parameters",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/PolicykeyResource"
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
 					},
-					"description": "Parameters supplied to regenerate the Namespace Authorization Rule Key."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The connection string of the namespace for the specified authorizationRule."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/PolicykeyResource"
+						},
+						"description": "Parameters supplied to regenerate the Namespace Authorization Rule Key."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Regenerate the Primary/Secondary Key and returns the Keys and the connection string",
@@ -638,7 +704,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/checkNotificationHubAvailability": {
 			"post": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationHubCheckNameAvailability": {
 						"$ref": "./examples/NotificationHubs/NotificationHubCheckNameAvailability.json"
@@ -646,35 +714,37 @@
 				},
 				"operationId": "NotificationHubs_CheckNotificationHubAvailability",
 				"description": "Checks the availability of the given notificationHub in a namespace.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "parameters",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/CheckAvailabilityParameters"
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
 					},
-					"description": "The notificationHub name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/CheckAvailabilityParameters"
+						},
+						"description": "The notificationHub name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Checks if the NotificationHub name is a valid availabile name",
@@ -687,7 +757,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}": {
 			"put": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubCreate": {
 						"$ref": "./examples/NotificationHubs/NotificationHubCreate.json"
@@ -695,42 +767,44 @@
 				},
 				"operationId": "NotificationHubs_CreateOrUpdate",
 				"description": "Creates/Update a NotificationHub in a namespace.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"name": "parameters",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/NotificationHubCreateOrUpdateParameters"
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
 					},
-					"description": "Parameters supplied to the create/update a NotificationHub Resource."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/NotificationHubCreateOrUpdateParameters"
+						},
+						"description": "Parameters supplied to the create/update a NotificationHub Resource."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "NotificationHub is Created/Updated",
@@ -747,7 +821,9 @@
 				}
 			},
 			"delete": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubDelete": {
 						"$ref": "./examples/NotificationHubs/NotificationHubDelete.json"
@@ -755,33 +831,35 @@
 				},
 				"operationId": "NotificationHubs_Delete",
 				"description": "Deletes a notification hub associated with a namespace.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Namespace is deleted"
@@ -789,7 +867,9 @@
 				}
 			},
 			"get": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubGet": {
 						"$ref": "./examples/NotificationHubs/NotificationHubGet.json"
@@ -797,33 +877,35 @@
 				},
 				"operationId": "NotificationHubs_Get",
 				"description": "Lists the notification hubs associated with a namespace.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Get the NotificationHub",
@@ -836,7 +918,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}": {
 			"put": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubAuthorizationRuleCreate": {
 						"$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleCreate.json"
@@ -844,49 +928,51 @@
 				},
 				"operationId": "NotificationHubs_CreateOrUpdateAuthorizationRule",
 				"description": "Creates/Updates an authorization rule for a NotificationHub",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "Authorization Rule Name."
-				},
-				{
-					"name": "parameters",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
 					},
-					"description": "The shared access authorization rule."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "Authorization Rule Name."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+						},
+						"description": "The shared access authorization rule."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "NotificationHub AuthorizationRule is Created/Updated",
@@ -897,7 +983,9 @@
 				}
 			},
 			"delete": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubAuthorizationRuleDelete": {
 						"$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleDelete.json"
@@ -905,40 +993,42 @@
 				},
 				"operationId": "NotificationHubs_DeleteAuthorizationRule",
 				"description": "Deletes a notificationHub authorization rule",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "Authorization Rule Name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "Authorization Rule Name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "NotificationHub AuthorizationRule is deleted"
@@ -949,7 +1039,9 @@
 				}
 			},
 			"get": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubAuthorizationRuleGet": {
 						"$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleGet.json"
@@ -957,40 +1049,42 @@
 				},
 				"operationId": "NotificationHubs_GetAuthorizationRule",
 				"description": "Gets an authorization rule for a NotificationHub by name.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name"
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "authorization rule name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name"
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "authorization rule name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Get NotificationHub AuthorizationRule",
@@ -1003,7 +1097,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs": {
 			"get": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubListByNameSpace": {
 						"$ref": "./examples/NotificationHubs/NotificationHubListByNameSpace.json"
@@ -1011,26 +1107,28 @@
 				},
 				"operationId": "NotificationHubs_List",
 				"description": "Lists the notification hubs associated with a namespace.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Get all NotificationHubs within a Namespace",
@@ -1046,7 +1144,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules": {
 			"get": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubAuthorizationRuleListAll": {
 						"$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleListAll.json"
@@ -1054,33 +1154,35 @@
 				},
 				"operationId": "NotificationHubs_ListAuthorizationRules",
 				"description": "Gets the authorization rules for a NotificationHub.",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name"
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name"
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Get all NotificationHub AuthorizationRules",
@@ -1096,7 +1198,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}/listKeys": {
 			"post": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubAuthorizationRuleListKey": {
 						"$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleListKey.json"
@@ -1104,40 +1208,42 @@
 				},
 				"operationId": "NotificationHubs_ListKeys",
 				"description": "Gets the Primary and Secondary ConnectionStrings to the NotificationHub ",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The connection string of the NotificationHub for the specified authorizationRule."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The connection string of the NotificationHub for the specified authorizationRule."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Gets the Namespace AuthorizationRule's Primary keys and Secondary keys along with the ConnectionStrings",
@@ -1150,7 +1256,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys": {
 			"post": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationhubAuthorizationRuleRegenrateKey": {
 						"$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleRegenrateKey.json"
@@ -1158,49 +1266,51 @@
 				},
 				"operationId": "NotificationHubs_RegenerateKeys",
 				"description": "Regenerates the Primary/Secondary Keys to the NotificationHub Authorization Rule",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"name": "authorizationRuleName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The connection string of the NotificationHub for the specified authorizationRule."
-				},
-				{
-					"name": "parameters",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/PolicykeyResource"
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
 					},
-					"description": "Parameters supplied to regenerate the NotificationHub Authorization Rule Key."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"name": "authorizationRuleName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The connection string of the NotificationHub for the specified authorizationRule."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/PolicykeyResource"
+						},
+						"description": "Parameters supplied to regenerate the NotificationHub Authorization Rule Key."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Regenerate the Primary/Secondary Key and returns the Keys and the connection string",
@@ -1213,7 +1323,9 @@
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/pnsCredentials": {
 			"post": {
-				"tags": ["NotificationHubs"],
+				"tags": [
+					"NotificationHubs"
+				],
 				"x-ms-examples": {
 					"notificationHubPnsCredentials": {
 						"$ref": "./examples/NotificationHubs/NotificationHubPnsCredentials.json"
@@ -1221,33 +1333,35 @@
 				},
 				"operationId": "NotificationHubs_GetPnsCredentials",
 				"description": "Lists the PNS Credentials associated with a notification hub .",
-				"parameters": [{
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
-				},
-				{
-					"name": "namespaceName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The namespace name."
-				},
-				{
-					"name": "notificationHubName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The notification hub name."
-				},
-				{
-					"$ref": "#/parameters/ApiVersionParameter"
-				},
-				{
-					"$ref": "#/parameters/SubscriptionIdParameter"
-				}],
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "namespaceName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The namespace name."
+					},
+					{
+						"name": "notificationHubName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The notification hub name."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Gets all the NotificationHub PNS credentials",
@@ -1359,8 +1473,10 @@
 					"description": "True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false."
 				}
 			},
-			"required": ["name",
-			"location"],
+			"required": [
+				"name",
+				"location"
+			],
 			"description": "Parameters supplied to the Check Name Availability for Namespace and NotificationHubs."
 		},
 		"CheckAvailabilityResult": {
@@ -1370,9 +1486,11 @@
 					"description": "True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false."
 				}
 			},
-			"allOf": [{
-				"$ref": "#/definitions/Resource"
-			}],
+			"allOf": [
+				{
+					"$ref": "#/definitions/Resource"
+				}
+			],
 			"description": "Description of a CheckAvailibility resource."
 		},
 		"NamespaceProperties": {
@@ -1444,8 +1562,10 @@
 				"namespaceType": {
 					"type": "string",
 					"description": "The namespace type.",
-					"enum": ["Messaging",
-					"NotificationHub"],
+					"enum": [
+						"Messaging",
+						"NotificationHub"
+					],
 					"x-ms-enum": {
 						"name": "NamespaceType",
 						"modelAsString": false
@@ -1462,10 +1582,14 @@
 					"description": "Properties of the Namespace."
 				}
 			},
-			"required": ["location"],
-			"allOf": [{
-				"$ref": "#/definitions/Resource"
-			}],
+			"required": [
+				"location"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/Resource"
+				}
+			],
 			"description": "Parameters supplied to the CreateOrUpdate Namespace operation."
 		},
 		"NamespacePatchParameters": {
@@ -1492,9 +1616,11 @@
 					"description": "Properties of the Namespace."
 				}
 			},
-			"allOf": [{
-				"$ref": "#/definitions/Resource"
-			}],
+			"allOf": [
+				{
+					"$ref": "#/definitions/Resource"
+				}
+			],
 			"description": "Description of a Namespace resource."
 		},
 		"SharedAccessAuthorizationRuleProperties": {
@@ -1503,9 +1629,11 @@
 					"type": "array",
 					"items": {
 						"type": "string",
-						"enum": ["Manage",
-						"Send",
-						"Listen"],
+						"enum": [
+							"Manage",
+							"Send",
+							"Listen"
+						],
 						"x-ms-enum": {
 							"name": "AccessRights",
 							"modelAsString": false
@@ -1563,7 +1691,9 @@
 					"description": "Properties of the Namespace AuthorizationRules."
 				}
 			},
-			"required": ["properties"],
+			"required": [
+				"properties"
+			],
 			"description": "Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules."
 		},
 		"SharedAccessAuthorizationRuleResource": {
@@ -1574,9 +1704,11 @@
 					"description": "Pproperties of the Namespace AuthorizationRule."
 				}
 			},
-			"allOf": [{
-				"$ref": "#/definitions/Resource"
-			}],
+			"allOf": [
+				{
+					"$ref": "#/definitions/Resource"
+				}
+			],
 			"description": "Description of a Namespace AuthorizationRules."
 		},
 		"NamespaceListResult": {
@@ -1875,10 +2007,14 @@
 					"description": "Properties of the NotificationHub."
 				}
 			},
-			"required": ["properties"],
-			"allOf": [{
-				"$ref": "#/definitions/Resource"
-			}],
+			"required": [
+				"properties"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/Resource"
+				}
+			],
 			"description": "Parameters supplied to the CreateOrUpdate NotificationHub operation."
 		},
 		"NotificationHubResource": {
@@ -1889,9 +2025,11 @@
 					"description": "Properties of the NotificationHub."
 				}
 			},
-			"allOf": [{
-				"$ref": "#/definitions/Resource"
-			}],
+			"allOf": [
+				{
+					"$ref": "#/definitions/Resource"
+				}
+			],
 			"description": "Description of a NotificationHub Resource."
 		},
 		"PnsCredentialsResource": {
@@ -1902,9 +2040,11 @@
 					"description": "NotificationHub PNS Credentials."
 				}
 			},
-			"allOf": [{
-				"$ref": "#/definitions/Resource"
-			}],
+			"allOf": [
+				{
+					"$ref": "#/definitions/Resource"
+				}
+			],
 			"description": "Description of a NotificationHub PNS Credentials."
 		},
 		"PnsCredentialsProperties": {
@@ -2001,9 +2141,11 @@
 				"name": {
 					"type": "string",
 					"description": "Name of the notification hub sku",
-					"enum": ["Free",
-					"Basic",
-					"Standard"],
+					"enum": [
+						"Free",
+						"Basic",
+						"Standard"
+					],
 					"x-ms-enum": {
 						"name": "SkuName",
 						"modelAsString": true
@@ -2026,7 +2168,9 @@
 					"description": "The capacity of the resource"
 				}
 			},
-			"required": ["name"],
+			"required": [
+				"name"
+			],
 			"description": "The Sku description for a namespace"
 		}
 	},
