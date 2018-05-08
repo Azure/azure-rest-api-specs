@@ -2,12 +2,12 @@
   "parameters": {
     "api-version": "2018-03-01-preview",
     "projectId": "ProjectId1",
-    "$expand": "properties/offerAssets"
+    "$expand": "properties/assets"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/projects/ProjectId1",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId1",
         "name": "ProjectId1",
         "type": "Microsoft.Billing/projects",
         "properties": {
@@ -15,25 +15,47 @@
           "startDate": "2017-02-01",
           "endDate": "2019-02-01",
           "status": "Active",
-          "offerAssets": [
+          "assets": [
             {
-              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/offerAssets/assetId1",
-              "name": "assetId1",
-              "type": "Microsoft.Billing/offerAssets",
+              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets/AssetId1",
+              "name": "AssetId1",
+              "type": "Microsoft.Billing/assets",
               "properties": {
-                "assetLink": "AssetLink1",
-                "billingProfileName": "Profile1",
-                "offerName": "MS-AZR-0148P"
+                "parentAssetId": "Asset1",
+                "owningProjectId": "ProjectId1",
+                "type": "Direct",
+                "startDate": "2017-02-01",
+                "endDate": "2019-02-01",
+                "billingProfileDetails": {
+                  "id": "BillingProfile1",
+                  "name": "BillingProfileName1"
+                },
+                "productInfo": {
+                  "productId": "Product1",
+                  "skuId": "SKU12345",
+                  "availabilityId": "AvailabilityId1"
+                }
               }
             },
             {
-              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/offerAssets/assetId2",
-              "name": "assetId2",
-              "type": "Microsoft.Billing/offerAssets",
+              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets/AssetId2",
+              "name": "AssetId2",
+              "type": "Microsoft.Billing/assets",
               "properties": {
-                "assetLink": "AssetLink2",
-                "billingProfileName": "Profile2",
-                "offerName": "MS-AZR-0017P"
+                "parentAssetId": "Asset2",
+                "owningProjectId": "ProjectId1",
+                "type": "Direct",
+                "startDate": "2017-02-01",
+                "endDate": "2019-02-01",
+                "billingProfileDetails": {
+                  "id": "BillingProfile2",
+                  "name": "BillingProfileName2"
+                },
+                "productInfo": {
+                  "productId": "Product2",
+                  "skuId": "SKU12345678",
+                  "availabilityId": "AvailabilityId2"
+                }
               }
             }
           ],

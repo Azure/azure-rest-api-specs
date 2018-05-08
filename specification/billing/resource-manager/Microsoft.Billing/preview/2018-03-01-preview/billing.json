@@ -487,54 +487,18 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/offerAssets": {
-      "get": {
-        "tags": [
-          "OfferAssets"
-        ],
-        "x-ms-examples": {
-          "OfferAssetsList": {
-            "$ref": "./examples/OfferAssetsList.json"
-          }
-        },
-        "operationId": "OfferAssets_List",
-        "description": "Lists all offers for a billing account.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OfferAssetListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/billingProfiles": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles": {
       "get": {
         "tags": [
           "BillingProfiles"
         ],
         "x-ms-examples": {
-          "BillingProfilesListByCustomerId": {
-            "$ref": "./examples/BillingProfilesListByCustomerId.json"
+          "BillingProfilesListByBillingAccountId": {
+            "$ref": "./examples/BillingProfilesListByBillingAccountId.json"
           }
         },
-        "operationId": "BillingProfiles_ListByCustomerId",
-        "description": "Lists all billing profiles for a user which he has access to.",
+        "operationId": "BillingProfiles_ListByBillingAccountId",
+        "description": "Lists all billing profiles for a user which that user has access to.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -711,17 +675,17 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/projects": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects": {
       "get": {
         "tags": [
           "Projects"
         ],
         "x-ms-examples": {
-          "ProjectsListByCustomerId": {
-            "$ref": "./examples/ProjectsListByCustomerId.json"
+          "ProjectsListByBillingAccountId": {
+            "$ref": "./examples/ProjectsListByBillingAccountId.json"
           }
         },
-        "operationId": "Projects_ListByCustomerId",
+        "operationId": "Projects_ListByBillingAccountId",
         "description": "Lists all projects for a user which he has access to.",
         "parameters": [
           {
@@ -901,25 +865,25 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Billing/projects/{projectId}/assets": {
+    },    
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets": {
       "get": {
         "tags": [
-          "Projects"
+          "Assets"
         ],
         "x-ms-examples": {
-          "AssetsListByCustomerAndProjectId": {
-            "$ref": "./examples/AssetsListByCustomerAndProjectId.json"
+          "AssetsListByBillingAccountId": {
+            "$ref": "./examples/AssetsListByBillingAccountId.json"
           }
         },
-        "operationId": "Projects_GetAssets",
-        "description": "Get the assets by project id.",
+        "operationId": "Assets_ListByBillingAccountId",
+        "description": "Lists all assets for specified billing account id.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/projectIdParameter"
+            "$ref": "#/parameters/billingAccountIdParameter"
           }
         ],
         "responses": {
@@ -938,17 +902,125 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/subscriptions": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets/{assetId}": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "x-ms-examples": {
+          "AssetByIdAndBillingAccount": {
+            "$ref": "./examples/AssetByIdAndBillingAccount.json"
+          }
+        },
+        "operationId": "Assets_GetByIdAndBillingAccount",
+        "description": "Get the asset by id and billing account id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/assetIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/assets": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "x-ms-examples": {
+          "AssetsList": {
+            "$ref": "./examples/AssetsList.json"
+          }
+        },
+        "operationId": "Assets_List",
+        "description": "Lists all assets for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitionsAssetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/assets/{assetId}": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "x-ms-examples": {
+          "Asset": {
+            "$ref": "./examples/Asset.json"
+          }
+        },
+        "operationId": "Assets_Get",
+        "description": "Get the asset by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/assetIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/subscriptions": {
       "get": {
         "tags": [
           "Subscriptions"
         ],
         "x-ms-examples": {
-          "SubscriptionsListByCustomerId": {
-            "$ref": "./examples/SubscriptionsListByCustomerId.json"
+          "SubscriptionsListByBillingAccountId": {
+            "$ref": "./examples/SubscriptionsListByBillingAccountId.json"
           }
         },
-        "operationId": "Subscriptions_ListByCustomerId",
+        "operationId": "Subscriptions_ListByBillingAccountId",
         "description": "Lists all subscriptions for a user which he has access to.",
         "parameters": [
           {
@@ -1035,197 +1107,6 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Subscription"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Micrososft.Billing/assets": {
-      "get": {
-        "tags": [
-          "Assets"
-        ],
-        "x-ms-examples": {
-          "AssetsListByCustomerId": {
-            "$ref": "./examples/AssetsListByCustomerId.json"
-          }
-        },
-        "operationId": "Assets_ListByCustomerId",
-        "description": "Lists all assets for a user which he has access to.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AssetListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Assets"
-        ],
-        "operationId": "Assets_Create",
-        "description": "The operation to create an asset.",
-        "x-ms-examples": {
-          "CreateAsset": {
-            "$ref": "./examples/CreateAsset.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Asset"
-            },
-            "description": "Parameters supplied to the Create Asset operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Asset"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/assets": {
-      "get": {
-        "tags": [
-          "Assets"
-        ],
-        "x-ms-examples": {
-          "AssetsList": {
-            "$ref": "./examples/AssetsList.json"
-          }
-        },
-        "operationId": "Assets_List",
-        "description": "Lists all assets for a user which he has access to.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitionsAssetListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/assets/{assetId}": {
-      "get": {
-        "tags": [
-          "Assets"
-        ],
-        "x-ms-examples": {
-          "Asset": {
-            "$ref": "./examples/Asset.json"
-          }
-        },
-        "operationId": "Assets_Get",
-        "description": "Get the asset by id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/assetIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Asset"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Assets"
-        ],
-        "operationId": "Assets_Update",
-        "description": "The operation to update an asset.",
-        "x-ms-examples": {
-          "UpdateAsset": {
-            "$ref": "./examples/UpdateAsset.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/assetIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Asset"
-            },
-            "description": "Parameters supplied to the Create Asset operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Asset"
             }
           },
           "default": {
@@ -1327,59 +1208,6 @@
           },
           "readOnly": true
         }
-      }
-    },
-    "OfferAssetListResult": {
-      "description": "Result of listing offer assets.",
-      "properties": {
-        "value": {
-          "description": "The list of offer assets.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OfferAsset"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "OfferAsset": {
-      "description": "The offer asset resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "The offer asset properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OfferAssetProperties"
-        }
-      }
-    },
-    "OfferAssetProperties": {
-      "description": "The properties of the offer asset.",
-      "properties": {
-        "assetLink": {
-          "description": "The asset link.",
-          "type": "string"
-        },
-        "billingProfileName": {
-          "description": "The billing profile name",
-          "type": "string",
-          "readOnly": true
-        },
-        "offerName": {
-          "description": "The name of the offer",
-          "type": "string",
-          "readOnly": true
-        }     
       }
     },
     "BillingAccountListResult": {
@@ -1608,11 +1436,11 @@
           },
           "readOnly": true
         },
-        "offerAssets": {
-          "description": "The offers attached to the project.",
+        "assets": {
+          "description": "The assets attached to the project.",
           "type": "array",
           "items": {
-            "type": "OfferAssetProperties"
+            "type": "AssetProperties"
           }
         },
         "costCenter": {
@@ -1662,19 +1490,70 @@
           "description": "The id of the parent asset.",
           "type": "string"
         },
-        "projectId": {
+        "owningProjectId": {
           "description": "The id of the project.",
           "type": "string"
         },
+        "type": {
+          "description": "The type of the asset.",
+          "type": "string",
+          "enum": [
+            "Direct",
+            "Delegated"
+          ],
+          "x-ms-enum": {
+            "name": "AssetType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "startDate": {
-          "description": "The start date. <Not rationalized>",
+          "description": "The start date.",
           "type": "string",
           "format": "date-time"
         },
         "endDate": {
-          "description": "The end date. <Not rationalized>",
+          "description": "The end date.",
           "type": "string",
           "format": "date-time"
+        },
+        "billingProfileDetails": {
+          "description": "Information about the billing profile associated with this asset.",
+          "$ref": "#/definitions/BillingProfileDetails"
+        },
+        "productInfo": {
+          "description": "Information about the product/offer.",
+          "$ref": "#/definitions/ProductInfo"
+        }
+      }
+    },
+    "BillingProfileDetails": {
+      "description": "Details about the billing profile.",
+      "properties": {
+        "id": {
+          "description": "Billing profile id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Billing profile name.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductInfo": {
+      "description": "Details about the product/offer.",
+      "properties": {
+        "productId": {
+          "description": "The product id.",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The sku id.",
+          "type": "string"
+        },
+        "availabilityId": {
+          "description": "The availability id used by purchase.",
+          "type": "string"
         }
       }
     },
@@ -1745,10 +1624,10 @@
           },
           "readOnly": true
         },
-        "offerAsset": {
-          "description": "The offer attached to the project.",
-          "type": "object",          
-          "$ref": "#/definitions/OfferAsset",
+        "asset": {
+          "description": "The asset attached.",
+          "type": "object",
+          "$ref": "#/definitions/Asset",
           "readOnly": true
         },
         "currency": {
