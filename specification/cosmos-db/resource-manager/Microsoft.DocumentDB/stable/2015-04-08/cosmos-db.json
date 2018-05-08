@@ -374,6 +374,12 @@
           },
           "202": {
             "description": "Accepted. The offline region operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -415,6 +421,12 @@
           },
           "202": {
             "description": "Accepted. The online region operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1342,6 +1354,19 @@
         }
       },
       "description": "The List operation response, that contains the database accounts and their properties."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
     },
     "FailoverPolicies": {
       "properties": {
