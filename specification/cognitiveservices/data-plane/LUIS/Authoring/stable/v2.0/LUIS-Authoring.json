@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "LUIS Programmatic API",
+    "title": "LUIS Authoring API",
     "version": "v2.0 preview"
   },
   "x-ms-parameterized-host": {
@@ -1315,6 +1315,56 @@
         }
       }
     },
+    "/apps/{appId}/versions/{versionId}/models/{modelId}/examples": {
+     "get": {
+       "description": "Gets the utterances for the given model in the given app version.",
+       "operationId": "Model_Examples",
+       "parameters": [
+         {
+           "$ref": "#/parameters/AppIdInPath"
+         },
+         {
+           "$ref": "#/parameters/VersionIdInPath"
+         },
+         {
+            "name": "modelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID (GUID) of the model.",
+            "x-ms-parameter-location": "method"
+           },
+         {
+           "$ref": "#/parameters/SkipInPath"
+         },
+         {
+           "$ref": "#/parameters/TakeInPath"
+         }
+       ],
+       "responses": {
+         "200": {
+           "description": "A list of examples for the model.",
+           "schema": {
+             "$ref": "#/definitions/ExamplesPerModelResponseObject"
+           }
+         },
+         "default": {
+           "description": "Error Response.",
+           "schema": {
+             "$ref": "#/definitions/ErrorResponse"
+           }
+         }
+       },
+       "produces": [
+         "application/json"
+       ],
+       "x-ms-examples": {
+         "Successful Get Examples Per Model Request": {
+           "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
+         }
+       }
+     }
+   },
     "/apps/{appId}/versions/{versionId}/intents/{intentId}": {
       "get": {
         "description": "Gets information about the intent model.",
@@ -3178,6 +3228,82 @@
         "x-ms-examples": {
           "Successful Update Application Settings request": {
             "$ref": "./examples/apps/SuccessfulUpdateApplicationSettingsRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/publishsettings": {
+      "get": {
+        "description": "Get the application publish settings.",
+        "operationId": "Apps_GetPublishSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application publish settings.",
+            "schema": {
+              "$ref": "#/definitions/PublishSettings"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Publish Settings request": {
+            "$ref": "./examples/apps/SuccessfulGetPublishSettingsRequest.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the application publish settings.",
+        "operationId": "Apps_UpdatePublishSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "publishSettingUpdateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublishSettingUpdateObject"
+            },
+            "description": "An object containing the new publish application settings."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated application settings.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Update Publish Settings request": {
+            "$ref": "./examples/apps/SuccessfulUpdatePublishSettingsRequest.json"
           }
         }
       }
@@ -7515,6 +7641,27 @@
         }
       }
     },
+    "PublishSettingUpdateObject": {
+      "description": "Object model for updating an application's publish settings.",
+      "type": "object",
+      "properties": {
+        "sentimentAnalysis": {
+          "description": "Setting sentiment analysis as true returns the Sentiment of the input utterance along with the resopnse",
+          "type": "boolean",
+          "x-nullable": false
+        },
+        "speech": {
+          "description": "Setting speech as public enables speech priming in your app",
+          "type": "boolean",
+          "x-nullable": false
+        },
+        "spellChecker": {
+          "description": "Setting spell checker as public enables spell checking the input utterance.",
+          "type": "boolean",
+          "x-nullable": false
+        }
+      }
+    },
     "ExampleLabelObject": {
       "description": "A labeled example.",
       "type": "object",
@@ -8335,7 +8482,7 @@
     },
     "EndpointKeys": {
       "type": "array",
-      "description": "An a array of GUIDs, comprised of Azure Endpoint Keys and the Programmatic API key.",
+      "description": "An a array of GUIDs, comprised of Azure Endpoint Keys and the Authoring API key.",
       "items": {
         "type": "string",
         "format": "uuid"
@@ -8957,6 +9104,41 @@
         "public"
       ]
     },
+    "PublishSettings": {
+      "description": "The application publish settings.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The application ID.",
+          "type": "string",
+          "format": "uuid"
+        },
+        "sentimentAnalysis": {
+          "description": "Setting sentiment analysis as true returns the Sentiment of the input utterance along with the resopnse",
+          "type": "boolean",
+          "x-nullable": false,
+          "x-ms-client-name": "IsSentimentAnalysisEnabled"
+        },
+        "speech": {
+          "description": "Setting speech as public enables speech priming in your app",
+          "type": "boolean",
+          "x-nullable": false,
+          "x-ms-client-name": "IsSpeechEnabled"
+        },
+        "spellChecker": {
+          "description": "Setting spell checker as public enables spell checking the input utterance.",
+          "type": "boolean",
+          "x-nullable": false,
+          "x-ms-client-name": "IsSpellCheckerEnabled"
+        }
+      },
+      "required": [
+        "id",
+        "sentimentAnalysis",
+        "speech",
+        "spellChecker"
+      ]
+    },
     "AvailablePrebuiltEntityModel": {
       "description": "Available Prebuilt entity model for using in an application.",
       "type": "object",
@@ -9454,6 +9636,27 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/PatternRuleInfo"
+      }
+    },
+    "ExamplesPerModelResponseObject":{
+      "description": "A list of examples per model.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LabelTextObject"
+      }
+    },
+    "LabelTextObject":{
+      "description": "An object containing the example's text.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The ID of the Label."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text of the label."
+        }
       }
     },
     "PatternAny": {
