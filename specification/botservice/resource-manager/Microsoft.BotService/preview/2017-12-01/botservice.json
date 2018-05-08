@@ -796,6 +796,360 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/listServiceProviders": {
+      "post": {
+        "tags": [
+          "BotToken"
+        ],
+        "description": "Lists the available Service Providers for creating Connection Settings",
+        "operationId": "BotToken_ListServiceProviders",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+            "description": "The name of the Bot resource."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is retrieved successfully, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/ServiceProvider"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/tokens/{tokenName}": {
+      "put": {
+        "tags": [
+          "BotToken"
+        ],
+        "description": "Creates a Token registration for a Bot Service",
+        "operationId": "BotToken_Create",
+        "x-ms-examples": {
+          "Create Connection Setting": {
+            "$ref": "./examples/PutToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+            "description": "The name of the Bot resource."
+          },
+          {
+            "$ref": "#/parameters/tokenNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionSetting"
+            },
+            "description": "The parameters to provide for creating the Connection Setting."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created successfully or already existed, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSetting"
+            }
+          },
+          "201": {
+            "description": "If resource is created successfully, the service should return 201 (Created). Execution to continue asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BotToken"
+        ],
+        "description": "Updates a Token registration for a Bot Service",
+        "operationId": "BotToken_Update",
+        "x-ms-examples": {
+          "Update Connection Setting": {
+            "$ref": "./examples/UpdateToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+            "description": "The name of the Bot resource."
+          },
+          {
+            "$ref": "#/parameters/tokenNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionSetting"
+            },
+            "description": "The parameters to provide for updating the Connection Setting."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created successfully or already existed, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSetting"
+            }
+          },
+          "201": {
+            "description": "If resource is created successfully, the service should return 201 (Created). Execution to continue asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BotToken"
+        ],
+        "x-ms-examples": {
+          "Update Connection Setting": {
+            "$ref": "./examples/GetToken.json"
+          }
+        },
+        "description": "Get a Token registration for a Bot Service",
+        "operationId": "BotToken_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+            "description": "The name of the Bot resource."
+          },
+          {
+            "name": "tokenName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+            "description": "The name of the Bot Token resource."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BotToken"
+        ],
+        "description": "Deletes a Token registration for a Bot Service",
+        "operationId": "BotToken_Delete",
+        "x-ms-examples": {
+          "Update Connection Setting": {
+            "$ref": "./examples/DeleteToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+            "description": "The name of the Bot resource."
+          },
+          {
+            "$ref": "#/parameters/tokenNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "204": {
+            "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/tokens": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Returns all the Connection Settings registered to a particular BotService resource",
+        "operationId": "Tokens_ListByBotService",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+            "description": "The name of the Bot resource."
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSettingResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -1618,6 +1972,166 @@
         "siteName"
       ]
     },
+    "ConnectionItemName": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Connection Item name that has been added in the API",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectionSettingParameter": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key for the Connection Setting Parameter.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "Value associated with the Connection Setting Parameter.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectionSettingProperties": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id associated with the Connection Setting."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client Secret associated with the Connection Setting"
+        },
+        "scopes": {
+          "type": "string",
+          "description": "Scopes associated with the Connection Setting"
+        },
+        "id": {
+          "type": "string",
+          "description": "Id associated with the Connection Setting"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name associated with the Connection Setting"
+        },
+        "serviceProviderId": {
+          "type": "string",
+          "description": "Service Provider Id associated with the Connection Setting"
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Service Provider Parameters associated with the Connection Setting",
+          "items": {
+            "$ref": "#/definitions/ConnectionSettingParameter"
+          }
+        }
+      }
+    },
+    "ConnectionSetting": {
+      "type": "object",
+      "description": "Bot channel resource definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+        "$ref": "#/definitions/ConnectionSettingProperties",
+          "description": "The set of properties specific to bot channel resource"
+        }
+      }
+    },
+    "ConnectionSettingResponseList": {
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of bot service channel resources.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionSetting"
+          },
+          "description": "Gets the list of bot service connection settings and their properties."
+        }
+      },
+      "description": "The list of bot service connection settings response."
+    },
+    "ServiceProviderParameter": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Service Provider",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the Service Provider",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name of the Service Provider",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Service Provider",
+          "readOnly": true
+        },
+        "helpUrl": {
+          "type": "string",
+          "description": "Help Url for the  Service Provider",
+          "readOnly": true
+        },
+        "default": {
+          "type": "string",
+          "description": "Default Name for the Service Provider",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceProvider": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id for Service Provider",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Diplay Name of the Service Provider",
+          "readOnly": true
+        },
+        "serviceProviderName": {
+          "type": "string",
+          "description": "Diplay Name of the Service Provider",
+          "readOnly": true
+        },
+        "devPortalUrl": {
+          "type": "string",
+          "description": "Diplay Name of the Service Provider",
+          "readOnly": true
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "Diplay Name of the Service Provider",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "The list of parameters for the Service Provider",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceProviderParameter"
+          }
+        }
+      }
+    },
     "Error": {
       "properties": {
         "error": {
@@ -1748,6 +2262,14 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. Current version is 2017-12-01"
+    },
+    "tokenNameParameter": {
+      "name": "tokenName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Bot Service Token resource"
     },
     "channelNameParameter": {
       "name": "channelName",
