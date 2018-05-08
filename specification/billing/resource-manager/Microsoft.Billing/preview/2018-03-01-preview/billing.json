@@ -1284,12 +1284,50 @@
           },
           "readOnly": true
         },
+        "supportPlan": {
+          "description": "The support plan.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportCoverage": {
+          "description": "The support coverage start and end date.",
+          "$ref": "#/definitions/SupportCoverage"
+        },
+        "cloudType": {
+          "description": "The cloud type.",
+          "type": "string",
+          "enum": [
+            "Commercial"
+          ],
+          "x-ms-enum": {
+            "name": "CloudType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "projects": {
           "description": "The project associated to the billing account.",
           "type": "array",
           "items": {
             "type": "ProjectProperties"
           }
+        }
+      }
+    },
+    "SupportCoverage": {
+      "description": "Details about the product/offer.",
+      "properties": {
+        "startDate": {
+          "description": "The support plan start date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endDate": {
+          "description": "The support plan end date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
