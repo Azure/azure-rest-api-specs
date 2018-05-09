@@ -54,6 +54,7 @@ input-file:
 - microsoft.insights/preview/2017-11-01-preview/baseline_API.json
 - microsoft.insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - microsoft.insights/stable/2018-03-01/metricAlert_API.json
+- microsoft.insights/stable/2018-04-16/scheduledQueryRule_API.json
 ```
 
 
@@ -147,6 +148,73 @@ input-file:
 - microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
 ```
 
+### Tag: package-2015-04-01-only
+
+These settings apply only when `--tag=package-2015-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-04-01-only'
+input-file:
+- microsoft.insights/stable/2015-04-01/activityLogs_API.json
+- microsoft.insights/stable/2015-04-01/autoscale_API.json
+- microsoft.insights/stable/2015-04-01/eventCategories_API.json
+- microsoft.insights/stable/2015-04-01/operations_API.json
+- microsoft.insights/stable/2015-04-01/tenantActivityLogs_API.json
+```
+
+### Tag: package-2016-03-01-only
+
+These settings apply only when `--tag=package-2016-03-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-01-only'
+input-file:
+- microsoft.insights/stable/2016-03-01/alertRules_API.json
+- microsoft.insights/stable/2016-03-01/alertRulesIncidents_API.json
+- microsoft.insights/stable/2016-03-01/logProfiles_API.json
+- microsoft.insights/stable/2016-03-01/metricDefinitions_API.json
+```
+
+### Tag: package-2016-09-01-only
+
+These settings apply only when `--tag=package-2016-09-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09-01-only'
+input-file:
+- microsoft.insights/stable/2016-09-01/metrics_API.json
+- microsoft.insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
+```
+
+### Tag: package-2017-04-01-only
+
+These settings apply only when `--tag=package-2017-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-04-01-only'
+input-file:
+- microsoft.insights/stable/2017-04-01/actionGroups_API.json
+- microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
+```
+
+### Tag: package-2017-05-01-preview-only
+
+These settings apply only when `--tag=package-2017-05-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-05-01-preview-only'
+input-file:
+- microsoft.insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- microsoft.insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- microsoft.insights/preview/2017-05-01-preview/metricDefinitions_API.json
+- microsoft.insights/preview/2017-05-01-preview/metrics_API.json
+```
+
+### Tag: package-2017-11-01-preview-only
+
+These settings apply only when `--tag=package-2017-11-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-01-preview-only'
+input-file:
+- microsoft.insights/preview/2017-11-01-preview/baseline_API.json
+- microsoft.insights/preview/2017-11-01-preview/calculateBaseline_API.json
+```
+
 ---
 # Code Generation
 
@@ -198,6 +266,7 @@ go:
 batch:
   - tag: package-2017-08
   - tag: package-2017-09
+  - tag: package-2018-03
 ```
 
 ### Tag: package-2017-09 and go
@@ -218,6 +287,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2017-05-01-preview/insights
 ```
 
+### Tag: package-2018-03 and go
+
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2018-03-01/insights
+```
 
 ## Python
 

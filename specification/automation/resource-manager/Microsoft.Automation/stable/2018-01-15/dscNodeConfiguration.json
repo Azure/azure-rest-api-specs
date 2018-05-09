@@ -211,6 +211,12 @@
         "x-ms-examples": {
           "List DSC node configurations by Automation Account": {
             "$ref": "./examples/listDscNodeConfigurations.json"
+          },
+          "List Paged DSC node configurations by Automation Account with no filter": {
+            "$ref": "./examples/listPagedDscNodeConfigurationsWithNoFilter.json"
+          },
+          "List Paged DSC node configurations by Automation Account with name filter": {
+            "$ref": "./examples/listPagedDscNodeConfigurationsWithNameFilter.json"
           }
         },
         "parameters": [
@@ -232,6 +238,27 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The number of rows to skip."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The the number of rows to take."
+          },
+          {
+            "name": "$inlinecount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Return total rows."
           }
         ],
         "responses": {
@@ -364,6 +391,10 @@
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the next link."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets or sets the total rows in query."
         }
       },
       "description": "The response model for the list job operation."

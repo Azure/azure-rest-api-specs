@@ -48,6 +48,42 @@ input-file:
 - Microsoft.Authorization/stable/2015-07-01/authorization.json
 ```
 
+### Tag: package-2015-06-01-preview
+
+These settings apply only when `--tag=package-2015-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-06-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+```
+
+### Tag: package-2015-07-01-preview
+
+These settings apply only when `--tag=package-2015-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-07-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2015-07-01/authorization.json
+```
+
+### Tag: package-2017-10-01-preview-only
+
+These settings apply only when `--tag=package-2017-10-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
+```
+
+### Tag: package-2018-01-01-preview-only
+
+These settings apply only when `--tag=package-2018-01-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+```
+
 ### Tag: package-2017-10-01-preview
 
 These settings apply only when `--tag=package-2017-10-01-preview` is specified on the command line.
