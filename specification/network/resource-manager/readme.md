@@ -410,6 +410,41 @@ input-file:
 - Microsoft.Network/preview/2015-05-01-preview/network.json
 ```
 
+## Suppression  
+``` yaml
+directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: TrackedResourceListByImmediateParent
+    reason: Another list APIs naming approach is used over the specs
+  - suppress: EnumInsteadOfBoolean
+    reason: Booleans are used by networking APIs
+  - suppress: GetInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability"].get.operationId
+    reason: Customized verb is used for API
+  - suppress: GetInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability"].get.operationId
+    reason: Customized verb is used for API
+  - suppress: PutInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey"].put.operationId
+    reason: Customized verb is used for API
+  - suppress: PostOperationIdContainsUrlVerb
+    from: networkWatcher.json
+    reason: Customized verbs are used for API
+  - suppress: PostOperationIdContainsUrlVerb
+    from: expressRouteCircuit.json
+    reason: Customized verbs are used for API
+  - suppress: PostOperationIdContainsUrlVerb
+    from: expressRouteCrossConnection.json
+    reason: Customized verbs are used for API
+  - suppress: OperationIdNounVerb
+    from: vmssPublicIpAddress.json
+    reason: VMSS specs have custom naming
+  - suppress: OperationIdNounVerb
+    from: vmssNetworkInterface.json
+    reason: VMSS specs have custom naming
+```
+
 ---
 # Code Generation
 
