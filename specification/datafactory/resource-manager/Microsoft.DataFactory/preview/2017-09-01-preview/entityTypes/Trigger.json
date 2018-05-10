@@ -290,8 +290,12 @@
           "description": "Blob Events Trigger properties.",
           "x-ms-client-flatten": true,
           "properties": {
-            "blobPath": {
-              "description": "Expression to determine if trigger should fire. For example, @startswith('/records/blobs/december/') will only fire the trigger for blobs in the december folder under the records container.",
+            "blobPathBeginsWith": {
+              "description": "The blob path must begin with the pattern provided for trigger to fire. For example, '/records/blobs/december/' will only fire the trigger for blobs in the december folder under the records container. At least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.",
+              "type": "string"
+            },
+            "blobPathEndsWith": {
+              "description": "The blob path must end with the pattern provided for trigger to fire. For example, 'december/boxes.csv' will only fire the trigger for blobs named boxes in a december folder. At least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.",
               "type": "string"
             },
             "events": {
@@ -304,7 +308,6 @@
             }
           },
           "required": [
-            "blobPath",
             "events",
             "scope"
           ]
