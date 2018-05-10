@@ -67,9 +67,6 @@
           },
           {
             "$ref": "#/parameters/timespanParam"
-          },
-          {
-            "$ref": "#/parameters/workspacesParam"
           }
         ],
         "responses": {
@@ -105,9 +102,6 @@
           },
           {
             "$ref": "#/parameters/queryBody"
-          },
-          {
-            "$ref": "#/parameters/workspacesParam"
           }
         ],
         "responses": {
@@ -135,15 +129,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
-    },
-    "workspacesParam": {
-      "name": "workspaces",
-      "description": "Comma separated workspace IDs to include in cross-workspace queries.",
-      "in": "query",
-      "collectionFormat": "csv",
-      "required": false,
-      "default": "",
-      "type": "string"
     },
     "queryParam": {
       "name": "query",
@@ -180,7 +165,8 @@
     },
     "timespanParam": {
       "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
-      "type": "string"
+      "type": "string",
+      "format": "duration"
     },
     "workspacesParam": {
       "description": "Workspace IDs to include in cross-workspace queries.",
