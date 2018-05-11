@@ -33,6 +33,7 @@ These settings apply only when `--tag=package-2016-05-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2016-05-01'
 input-file:
+    - "Microsoft.Update.Admin/preview/2016-05-01/Update.json"
     - "Microsoft.Update.Admin/preview/2016-05-01/Updates.json"
     - "Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json"
     - "Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json"
