@@ -43,11 +43,7 @@
                       "$ref":"#/parameters/ServerNameParameter"
                   },
                   {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database for which the transparent data encryption applies."
+                      "$ref":"#/parameters/DatabaseNameParameter"
                   }
               ],
               "responses":{
@@ -69,7 +65,7 @@
                   "ImportExport"
               ],
               "operationId":"Extensions_ListByDatabase",
-              "description":"Gets database extensions.",
+              "description":"Gets an empty list. This API is deprecated.",
               "parameters":[
                   {
                       "$ref":"#/parameters/ApiVersionParameter"
@@ -84,11 +80,7 @@
                       "$ref":"#/parameters/ServerNameParameter"
                   },
                   {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database to import into"
+                      "$ref":"#/parameters/DatabaseNameParameter"
                   }
               ],
               "responses":{
@@ -110,7 +102,7 @@
                 "ImportExport"
             ],
             "operationId": "Extensions_Get",
-            "description": "Gets a database extension.",
+            "description": "Gets an empty object. This API is deprecated.",
             "parameters": [
                 {
                     "$ref": "#/parameters/ApiVersionParameter"
@@ -125,18 +117,14 @@
                     "$ref": "#/parameters/ServerNameParameter"
                 },
                 {
-                    "name": "databaseName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The name of the database to import into"
+                    "$ref": "#/parameters/DatabaseNameParameter"
                 },
                 {
                     "name": "extensionName",
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "The name of the extension"
+                    "description": "The name of the object to get."
                 }
             ],
             "responses": {
@@ -207,6 +195,14 @@
           "type":"string",
           "description":"The name of the server.",
           "x-ms-parameter-location":"method"
+      },
+      "DatabaseNameParameter": {
+        "name": "databaseName",
+        "in": "path",
+        "description": "The name of the database.",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
       "DatabaseExpandParameter":{
           "name":"$expand",
