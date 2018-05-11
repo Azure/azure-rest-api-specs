@@ -403,6 +403,16 @@
     },
     "ErrorResponse": {
       "properties": {
+        "error" : {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Properties of the Error Response."
+        }
+      },
+      "description": "Error Response."
+    },
+    "ErrorResponseBody": {
+      "properties": {
         "code": {
           "type": "string",
           "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
