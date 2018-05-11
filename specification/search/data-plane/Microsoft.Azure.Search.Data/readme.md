@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2017-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-11-preview'
 input-file:
-- preview/2017-11-11-Preview/searchindex.json
+- preview/2017-11-11-preview/searchindex.json
 ```
 ### Tag: package-2017-11
 
