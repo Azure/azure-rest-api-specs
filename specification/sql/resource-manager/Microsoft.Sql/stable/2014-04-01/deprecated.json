@@ -103,7 +103,51 @@
                   "nextLinkName":null
               }
           }
-      }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}": {
+        "get": {
+            "tags": [
+                "ImportExport"
+            ],
+            "operationId": "Extensions_Get",
+            "description": "Gets a database extension.",
+            "parameters": [
+                {
+                    "$ref": "#/parameters/ApiVersionParameter"
+                },
+                {
+                    "$ref": "#/parameters/SubscriptionIdParameter"
+                },
+                {
+                    "$ref": "#/parameters/ResourceGroupParameter"
+                },
+                {
+                    "$ref": "#/parameters/ServerNameParameter"
+                },
+                {
+                    "name": "databaseName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the database to import into"
+                },
+                {
+                    "name": "extensionName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the extension"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    }
+                }
+            }
+        }
+    }
   },
   "definitions":{
       "TransparentDataEncryptionListResult":{
