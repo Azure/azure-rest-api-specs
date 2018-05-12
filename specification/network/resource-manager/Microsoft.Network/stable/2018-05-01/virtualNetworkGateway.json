@@ -849,7 +849,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting VirtualNetworkPeering resource.",
+            "description": "Request successful. The operation returns the resulting VirtualNetworkConnection resource.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGatewayConnection"
             }
@@ -944,7 +944,7 @@
           "200": {
             "description": "Update successful. The operation returns the resulting VirtualNetworkGatewayConnection resource.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntity"
+              "$ref": "#/definitions/VirtualNetworkGatewayConnection"
             }
           }
         },
@@ -2113,13 +2113,20 @@
     },
     "ConnectionSharedKey": {
       "properties": {
-        "value": {
-          "type": "string",
-          "description": "The virtual network connection shared key value."
-        }
+	    "properties": {
+          "value": {
+            "type": "string",
+            "description": "The virtual network connection shared key value."
+          }
+		}
       },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "required": [
-        "value"
+        "properties"
       ],
       "description": "Response for GetConnectionSharedKey API service call"
     },
