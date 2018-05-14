@@ -28,6 +28,17 @@ openapi-type: arm
 tag: package-2018-03
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    reason: We do have a operations api as "/providers/Microsoft.Network/operations"
+    from: trafficmanager.json
+    where:
+      - $.paths["/providers/Microsoft.Network/operations"]
+
+```
+
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
