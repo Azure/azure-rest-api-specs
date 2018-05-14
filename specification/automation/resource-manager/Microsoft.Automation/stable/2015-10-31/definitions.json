@@ -1315,6 +1315,11 @@
           "description": "Gets or sets the last modified time.",
           "x-nullable": false
         },
+        "nodeConfigurationCount": {
+          "type": "integer",
+          "description": "Gets the number of compiled node configurations.",
+          "x-nullable": false
+        },
         "description": {
           "type": "string",
           "description": "Gets or sets the description."
@@ -1354,6 +1359,10 @@
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the next link."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets the total number of configurations matching filter criteria."
         }
       },
       "description": "The response model for the list configuration operation."
@@ -1472,32 +1481,6 @@
         }
       },
       "description": "Definition of the DSC Meta Configuration."
-    },
-    "DscNodeConfigurationCreateOrUpdateParameters": {
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/ContentSource",
-          "description": "Gets or sets the source."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the node configuration."
-        },
-        "configuration": {
-          "$ref": "#/definitions/DscConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node."
-        },
-        "newNodeConfigurationBuildVersionRequired": {
-          "type": "boolean",
-          "description": "If a new build version of NodeConfiguration is required."
-        }
-      },
-      "required": [
-        "source",
-        "name",
-        "configuration"
-      ],
-      "description": "The parameters supplied to the create or update node configuration operation."
     },
     "DscNodeConfigurationAssociationProperty": {
       "properties": {
@@ -1787,6 +1770,12 @@
           "type": "string",
           "format": "date-time",
           "description": "Gets or sets the registration time of the worker machine.",
+          "x-nullable": false
+        },
+        "lastSeenDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Heartbeat from the Worker",
           "x-nullable": false
         }
       },
@@ -3735,6 +3724,10 @@
           "format": "date-time",
           "description": "Gets or sets the last modified time.",
           "x-nullable": false
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Details of the user who last modified the Webhook"
         },
         "description": {
           "type": "string",

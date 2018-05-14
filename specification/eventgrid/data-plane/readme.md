@@ -50,6 +50,7 @@ input-file:
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
+- Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
 ```
 
 ---
@@ -98,7 +99,7 @@ python:
   add-credentials: true
   namespace: azure.eventgrid
   package-name: azure-eventgrid
-  package-version: 0.1.0
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

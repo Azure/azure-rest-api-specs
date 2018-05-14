@@ -66,6 +66,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputMigrationLevel": {
       "type": "object",
+      "description": "Migration level result for Sql server to Sql MI migration.",
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "properties": {
         "startedOn": {
@@ -140,6 +141,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputDatabaseLevel": {
       "type": "object",
+      "description": "Database level result for Sql Server to Sql MI migration.",
       "x-ms-discriminator-value": "DatabaseLevelOutput",
       "properties": {
         "databaseName": {
@@ -191,6 +193,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputError": {
       "type": "object",
+      "description": "Task errors for Sql Server to Sql MI migration.",
       "x-ms-discriminator-value": "ErrorOutput",
       "properties": {
         "id": {

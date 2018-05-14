@@ -13479,7 +13479,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved source control for web app.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "201": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
+            "description": "Create or update source control for web app still in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
@@ -13535,12 +13547,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
@@ -14969,7 +14987,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved source control for web app.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "201": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
+            "description": "Create or update source control for web app still in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
@@ -15018,7 +15048,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
@@ -15029,7 +15059,13 @@
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
-          "default": {
+          "202": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+	  "default": {
             "description": "App Service error response.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
