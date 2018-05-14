@@ -201,10 +201,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -352,10 +349,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -522,10 +516,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -673,10 +664,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -1060,33 +1048,13 @@
     },
     "AccessUri": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessUriOutput",
-          "description": "Operation output data (raw JSON)"
-        }
-      },
-      "description": "A disk access SAS uri."
-    },
-    "AccessUriOutput": {
-      "properties": {
-        "output": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessUriRaw",
-          "description": "Operation output data (raw JSON)"
-        }
-      },
-      "description": "Azure properties, including output."
-    },
-    "AccessUriRaw": {
-      "properties": {
         "accessSAS": {
           "readOnly": true,
           "type": "string",
           "description": "A SAS uri for accessing a disk."
         }
       },
-      "description": "This object gets 'bubbled up' through flattening."
+      "description": "A disk access SAS uri."
     },
     "Snapshot": {
       "properties": {
@@ -1142,96 +1110,6 @@
         "value"
       ],
       "description": "The List Snapshots operation response."
-    },
-    "ApiErrorBase": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error base."
-    },
-    "InnerError": {
-      "properties": {
-        "exceptiontype": {
-          "type": "string",
-          "description": "The exception type."
-        },
-        "errordetail": {
-          "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      },
-      "description": "Inner error details."
-    },
-    "ApiError": {
-      "properties": {
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiErrorBase"
-          },
-          "description": "The Api error details"
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        },
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error."
-    },
-    "OperationStatusResponse": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation ID"
-        },
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation status"
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the operation"
-        },
-        "endTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the operation"
-        },
-        "error": {
-          "readOnly": true,
-          "$ref": "#/definitions/ApiError",
-          "description": "Api error"
-        }
-      },
-      "description": "Operation status response"
     }
   },
   "parameters": {

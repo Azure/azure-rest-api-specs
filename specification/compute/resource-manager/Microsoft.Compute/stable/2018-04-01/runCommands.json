@@ -163,7 +163,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RunCommandResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InstanceViewStatus"
+              }
             }
           },
           "202": {
@@ -346,102 +349,42 @@
           "$ref": "#/definitions/RunCommandResultProperties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationStatusResponse"
-        }
-      ],
       "description": "Run command operation response."
     },
-    "ApiErrorBase": {
+    "InstanceViewStatus": {
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code."
+          "description": "The status code."
         },
-        "target": {
+        "level": {
           "type": "string",
-          "description": "The target of the particular error."
+          "description": "The level code.",
+          "enum": [
+            "Info",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "StatusLevelTypes",
+            "modelAsString": false
+          }
         },
-        "message": {
+        "displayStatus": {
           "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error base."
-    },
-    "InnerError": {
-      "properties": {
-        "exceptiontype": {
-          "type": "string",
-          "description": "The exception type."
-        },
-        "errordetail": {
-          "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      },
-      "description": "Inner error details."
-    },
-    "ApiError": {
-      "properties": {
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiErrorBase"
-          },
-          "description": "The Api error details"
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        },
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
+          "description": "The short localizable label for the status."
         },
         "message": {
           "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error."
-    },
-    "OperationStatusResponse": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation ID"
+          "description": "The detailed status message, including for alerts and error messages."
         },
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation status"
-        },
-        "startTime": {
-          "readOnly": true,
+        "time": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time of the operation"
-        },
-        "endTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the operation"
-        },
-        "error": {
-          "readOnly": true,
-          "$ref": "#/definitions/ApiError",
-          "description": "Api error"
+          "description": "The time of the status."
         }
       },
-      "description": "Operation status response"
+      "description": "Instance view status."
     }
   },
   "parameters": {
