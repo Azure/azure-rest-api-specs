@@ -4,31 +4,154 @@
     "resourceGroupName": "rg1",
     "api-version": "2018-06-01-preview",
     "subscriptionId": "subid",
-    "diagnosticId": "default",
+    "diagnosticId": "applicationinsights",
     "parameters": {
       "properties": {
-        "enabled": true
+        "alwaysLog": "allErrors",
+        "loggerId": "/loggers/azuremonitor",
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 50
+        },
+        "frontend": {
+          "request": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          },
+          "response": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          }
+        },
+        "backend": {
+          "request": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          },
+          "response": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          }
+        }
       }
     }
   },
   "responses": {
     "201": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/default",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/applicationinsights",
         "type": "Microsoft.ApiManagement/service/diagnostics",
-        "name": "default",
+        "name": "applicationinsights",
         "properties": {
-          "enabled": true
+          "alwaysLog": "allErrors",
+          "loggerId": "/loggers/azuremonitor",
+          "sampling": {
+            "samplingType": "fixed",
+            "percentage": 50
+          },
+          "frontend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          },
+          "backend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          }
         }
       }
     },
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/default",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/applicationinsights",
         "type": "Microsoft.ApiManagement/service/diagnostics",
-        "name": "default",
+        "name": "applicationinsights",
         "properties": {
-          "enabled": true
+          "alwaysLog": "allErrors",
+          "loggerId": "/loggers/applicationinsights",
+          "sampling": {
+            "samplingType": "fixed",
+            "percentage": 50
+          },
+          "frontend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          },
+          "backend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          }
         }
       }
     }

@@ -348,214 +348,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}/loggers": {
-      "get": {
-        "tags": [
-          "DiagnosticLoggers"
-        ],
-        "operationId": "DiagnosticLogger_ListByService",
-        "description": "Lists all loggers assosiated with the specified Diagnostic of the API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementListDiagnosticLoggers": {
-            "$ref": "./examples/ApiManagementListDiagnosticLoggers.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/DiagnosticIdParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| type        | eq                     |                                   |"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Paged Result reponse of loggers assigned to the specified Diagnostic.",
-            "schema": {
-              "$ref": "./apimloggers.json#/definitions/LoggerCollection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "./apimloggers.json#/definitions/LoggerContract"
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}/loggers/{loggerid}": {
-      "head": {
-        "tags": [
-          "DiagnosticLoggers"
-        ],
-        "operationId": "DiagnosticLogger_CheckEntityExists",
-        "description": "Checks that logger entity specified by identifier is associated with the diagnostics entity.",
-        "x-ms-examples": {
-          "ApiManagementHeadDiagnosticLogger": {
-            "$ref": "./examples/ApiManagementHeadDiagnosticLogger.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DiagnosticIdParameter"
-          },
-          {
-            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The logger is associated with the diagnostic entity."
-          },
-          "404": {
-            "description": "The logger is not associated with the diagnostic entity."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "DiagnosticLoggers"
-        ],
-        "operationId": "DiagnosticLogger_CreateOrUpdate",
-        "description": "Attaches a logger to a dignostic.",
-        "x-ms-examples": {
-          "ApiManagementCreateDiagnosticLogger": {
-            "$ref": "./examples/ApiManagementCreateDiagnosticLogger.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DiagnosticIdParameter"
-          },
-          {
-            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Logger was successfully attached to Diagnostic.",
-            "schema": {
-              "$ref": "./apimloggers.json#/definitions/LoggerContract"
-            }
-          },
-          "200": {
-            "description": "Logger to Diagnostic link was successfully updated.",
-            "schema": {
-              "$ref": "./apimloggers.json#/definitions/LoggerContract"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "DiagnosticLoggers"
-        ],
-        "operationId": "DiagnosticLogger_Delete",
-        "description": "Deletes the specified Logger from Diagnostic.",
-        "x-ms-examples": {
-          "ApiManagementDeleteDiagnosticLogger": {
-            "$ref": "./examples/ApiManagementDeleteDiagnosticLogger.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DiagnosticIdParameter"
-          },
-          {
-            "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Logger was successfully detached from Diagnostic."
-          },
-          "204": {
-            "description": "The Logger was successfully detached from Diagnostic."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -590,15 +382,113 @@
       ],
       "description": "Diagnostic details."
     },
+    "SamplingSettings": {
+      "properties": {
+        "samplingType": {
+          "type": "string",
+          "description": "Sampling type.",
+          "enum": [
+            "fixed"
+          ],
+          "x-ms-enum": {
+            "name": "SamplingType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "fixed",
+                "description": "Fixed-rate sampling."
+              }
+            ]
+          }
+        },
+        "percentage": {
+          "type": "number",
+          "format": "double",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Rate of sampling for fixed-rate sampling."
+        }
+      },
+      "description": "Sampling settings for Diagnostic."
+    },
+    "PipelineDiagnosticSettings": {
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/HttpMessageDiagnostic",
+          "description": "Diagnostic settings for request."
+        },
+        "response": {
+          "$ref": "#/definitions/HttpMessageDiagnostic",
+          "description": "Diagnostic settings for response."
+        }
+      },
+      "description": "Diagnostic settings for incoming/outcoming HTTP messages to the Gateway."
+    },
+    "HttpMessageDiagnostic": {
+      "properties": {
+        "headers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Array of HTTP Headers to log."
+        },
+        "body": {
+          "$ref": "#/definitions/BodyDiagnosticSettings",
+          "description": "Body logging settings."
+        }
+      },
+      "description": "Http message diagnostic settings."
+    },
+    "BodyDiagnosticSettings": {
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 8192,
+          "description": "Number of request body bytes to log."
+        }
+      },
+      "description": "Body logging settings."
+    },
     "DiagnosticContractProperties": {
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates whether a diagnostic should receive data or not."
+        "alwaysLog": {
+          "type": "string",
+          "enum": [
+            "allErrors"
+          ],
+          "x-ms-enum": {
+            "name": "AlwaysLog",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "allErrors",
+                "description": "Always log all erroneous request regardless of sampling settings."
+              }
+            ]
+          },
+          "description": "Specifies for what type of messages sampling settings should not apply."
+        },
+        "loggerId": {
+          "type": "string",
+          "description": "Resource Id of a target logger."
+        },
+        "sampling": {
+          "$ref": "#/definitions/SamplingSettings",
+          "description": "Sampling settings for Diagnostic."
+        },
+        "frontend": {
+          "$ref": "#/definitions/PipelineDiagnosticSettings",
+          "description": "Diagnostic settings for incoming/outcoming HTTP messages to the Gateway."
+        },
+        "backend": {
+          "$ref": "#/definitions/PipelineDiagnosticSettings",
+          "description": "Diagnostic settings for incoming/outcoming HTTP messages to the Backend"
         }
       },
       "required": [
-        "enabled"
+        "loggerId"
       ],
       "description": "Diagnostic Entity Properties"
     }
