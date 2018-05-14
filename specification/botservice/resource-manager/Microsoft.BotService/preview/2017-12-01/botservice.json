@@ -800,7 +800,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/listServiceProviders": {
       "post": {
         "tags": [
-          "BotConnections"
+          "ListServiceProviders"
         ],
         "description": "Lists the available Service Providers for creating Connection Settings",
         "operationId": "BotConnections_ListServiceProviders",
@@ -838,7 +838,7 @@
           "200": {
             "description": "If resource is retrieved successfully, the service should return 200 (OK).",
             "schema": {
-              "$ref": "#/definitions/ServiceProvider"
+              "$ref": "#/definitions/ServiceProviderResponseList"
             }
           },
           "default": {
@@ -850,7 +850,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/Connections/{ConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/Connections/{connectionName}": {
       "put": {
         "tags": [
           "BotConnections"
@@ -1019,7 +1019,7 @@
             "description": "The name of the Bot resource."
           },
           {
-            "name": "ConnectionName",
+            "name": "connectionName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1114,7 +1114,7 @@
         "operationId": "Connections_ListByBotService",
         "x-ms-examples": {
           "List Connection Settings": {
-            "$ref": "./examples/ListAuthConnections.json"
+            "$ref": "./examples/ListTokensByBotService.json"
           }
         },
         "parameters": [
@@ -2061,7 +2061,7 @@
     "ConnectionSettingResponseList": {
       "properties": {
         "nextLink": {
-          "description": "The link used to get the next page of bot service channel resources.",
+          "description": "The link used to get the next page of bot service connection setting resources.",
           "type": "string"
         },
         "value": {
@@ -2074,6 +2074,23 @@
         }
       },
       "description": "The list of bot service connection settings response."
+    },
+    "ServiceProviderResponseList": {
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of bot service service providers.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceProvider"
+          },
+          "description": "Gets the list of bot service service providers and their properties."
+        }
+      },
+      "description": "The list of bot service service providers response."
     },
     "ServiceProviderParameter": {
       "properties": {
@@ -2110,7 +2127,7 @@
       },
       "description": "Extra Parameters specific to each Service Provider"
     },
-    "ServiceProvider": {
+    "ServiceProviderProperties": {
       "properties": {
         "id": {
           "type": "string",
@@ -2122,7 +2139,7 @@
           "description": "Diplay Name of the Service Provider",
           "readOnly": true
         },
-        "serviceProviderName": {
+        "serviceProviderName": {  
           "type": "string",
           "description": "Diplay Name of the Service Provider",
           "readOnly": true
@@ -2146,6 +2163,16 @@
         }
       },
       "description": "The Object used to describe a Service Provider supported by Bot Service"
+    },
+    "ServiceProvider": {
+      "type": "object",
+      "description": "Service Provider Definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceProviderProperties",
+          "description": "The Properties of a Service Provider Object"
+        }
+      }
     },
     "Error": {
       "properties": {
@@ -2279,12 +2306,12 @@
       "description": "Version of the API to be used with the client request. Current version is 2017-12-01"
     },
     "connectionNameParameter": {
-      "name": "tokenName",
+      "name": "connectionName",
       "x-ms-parameter-location": "method",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Bot Service Token resource"
+      "description": "The name of the Bot Service Connection Setting resource"
     },
     "channelNameParameter": {
       "name": "channelName",
