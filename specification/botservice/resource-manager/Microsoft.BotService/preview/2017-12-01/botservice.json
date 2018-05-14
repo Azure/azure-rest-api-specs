@@ -800,10 +800,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/listServiceProviders": {
       "post": {
         "tags": [
-          "BotToken"
+          "BotConnections"
         ],
         "description": "Lists the available Service Providers for creating Connection Settings",
-        "operationId": "BotToken_ListServiceProviders",
+        "operationId": "BotConnections_ListServiceProviders",
+        "x-ms-examples": {
+          "List Auth Service Providers": {
+            "$ref": "./examples/ListServiceProviders.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -845,13 +850,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/tokens/{tokenName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/Connections/{ConnectionName}": {
       "put": {
         "tags": [
-          "BotToken"
+          "BotConnections"
         ],
-        "description": "Creates a Token registration for a Bot Service",
-        "operationId": "BotToken_Create",
+        "description": "Register a new Auth Connection for a Bot Service",
+        "operationId": "BotConnection_Create",
         "x-ms-examples": {
           "Create Connection Setting": {
             "$ref": "./examples/PutToken.json"
@@ -876,7 +881,7 @@
             "description": "The name of the Bot resource."
           },
           {
-            "$ref": "#/parameters/tokenNameParameter"
+            "$ref": "#/parameters/connectionNameParameter"
           },
           {
             "name": "parameters",
@@ -917,10 +922,10 @@
       },
       "patch": {
         "tags": [
-          "BotToken"
+          "BotConnections"
         ],
-        "description": "Updates a Token registration for a Bot Service",
-        "operationId": "BotToken_Update",
+        "description": "Updates a Connection Setting registration for a Bot Service",
+        "operationId": "BotConnections_Update",
         "x-ms-examples": {
           "Update Connection Setting": {
             "$ref": "./examples/UpdateToken.json"
@@ -945,7 +950,7 @@
             "description": "The name of the Bot resource."
           },
           {
-            "$ref": "#/parameters/tokenNameParameter"
+            "$ref": "#/parameters/connectionNameParameter"
           },
           {
             "name": "parameters",
@@ -986,15 +991,15 @@
       },
       "get": {
         "tags": [
-          "BotToken"
+          "BotConnection"
         ],
         "x-ms-examples": {
           "Update Connection Setting": {
             "$ref": "./examples/GetToken.json"
           }
         },
-        "description": "Get a Token registration for a Bot Service",
-        "operationId": "BotToken_Get",
+        "description": "Get a Connection Setting registration for a Bot Service",
+        "operationId": "BotConnection_Get",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1014,14 +1019,14 @@
             "description": "The name of the Bot resource."
           },
           {
-            "name": "tokenName",
+            "name": "ConnectionName",
             "in": "path",
             "required": true,
             "type": "string",
             "maxLength": 64,
             "minLength": 2,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of the Bot Token resource."
+            "description": "The name of the Bot Connection Setting resource."
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1047,9 +1052,9 @@
       },
       "delete": {
         "tags": [
-          "BotToken"
+          "BotConnections"
         ],
-        "description": "Deletes a Token registration for a Bot Service",
+        "description": "Deletes a Connection Setting registration for a Bot Service",
         "operationId": "BotToken_Delete",
         "x-ms-examples": {
           "Update Connection Setting": {
@@ -1075,7 +1080,7 @@
             "description": "The name of the Bot resource."
           },
           {
-            "$ref": "#/parameters/tokenNameParameter"
+            "$ref": "#/parameters/connectionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1100,13 +1105,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/tokens": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/connections": {
       "get": {
         "tags": [
-          "Tokens"
+          "Connections"
         ],
         "description": "Returns all the Connection Settings registered to a particular BotService resource",
-        "operationId": "Tokens_ListByBotService",
+        "operationId": "Connections_ListByBotService",
+        "x-ms-examples": {
+          "List Connection Settings": {
+            "$ref": "./examples/ListAuthConnections.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1979,7 +1989,8 @@
           "description": "Connection Item name that has been added in the API",
           "readOnly": true
         }
-      }
+      },
+      "description": "The display name of a connection Item Setting registered with the Bot"
     },
     "ConnectionSettingParameter": {
       "properties": {
@@ -1993,7 +2004,8 @@
           "description": "Value associated with the Connection Setting Parameter.",
           "readOnly": true
         }
-      }
+      },
+      "description": "Extra Parameter in a Connection Setting Properties to indicate service provider specific properties"
     },
     "ConnectionSettingProperties": {
       "properties": {
@@ -2028,7 +2040,8 @@
             "$ref": "#/definitions/ConnectionSettingParameter"
           }
         }
-      }
+      },
+      "description": "Properties for a Connection Setting Item"
     },
     "ConnectionSetting": {
       "type": "object",
@@ -2094,7 +2107,8 @@
           "description": "Default Name for the Service Provider",
           "readOnly": true
         }
-      }
+      },
+      "description": "Extra Parameters specific to each Service Provider"
     },
     "ServiceProvider": {
       "properties": {
@@ -2130,7 +2144,8 @@
             "$ref": "#/definitions/ServiceProviderParameter"
           }
         }
-      }
+      },
+      "description": "The Object used to describe a Service Provider supported by Bot Service"
     },
     "Error": {
       "properties": {
@@ -2263,7 +2278,7 @@
       "type": "string",
       "description": "Version of the API to be used with the client request. Current version is 2017-12-01"
     },
-    "tokenNameParameter": {
+    "connectionNameParameter": {
       "name": "tokenName",
       "x-ms-parameter-location": "method",
       "in": "path",
