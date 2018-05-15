@@ -103,6 +103,40 @@
         }
       }
     },
+    "/apps/{appId}/metrics": {
+      "post": {
+        "operationId": "GetMetrics",
+        "summary": "Retrieve metric data",
+        "description": "Gets metric values for multiple metrics",
+        "x-ms-examples": {
+          "postMetric": {
+            "$ref": "examples/metric-post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/metricsPostBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metricsResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
     "/apps/{appId}/metrics/metadata": {
       "get": {
         "operationId": "GetMetricsMetadata",
@@ -285,7 +319,7 @@
     },
     "/apps/{appId}/query": {
       "post": {
-        "operationId": "Query",
+        "operationId": "Query_Post",
         "summary": "Execute an Analytics query",
         "description": "Executes an Analytics query for data. [Here](https://dev.applicationinsights.io/documentation/Using-the-API/Query) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
@@ -299,6 +333,72 @@
           },
           {
             "$ref": "#/parameters/queryBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "Query_Get",
+        "summary": "Execute an Analytics query",
+        "description": "Executes an Analytics query for data",
+        "x-ms-examples": {
+          "queryGet": {
+            "$ref": "examples/query-get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/queryParam"
+          },
+          {
+            "$ref": "#/parameters/queryTimespan"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/query/schema": {
+      "get": {
+        "operationId": "GetQuerySchema",
+        "summary": "Get Analytics query metadata",
+        "description": "Gets Analytics query schema describing the data model",
+        "x-ms-examples": {
+          "querySchema": {
+            "$ref": "examples/query-schema.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
           }
         ],
         "responses": {
