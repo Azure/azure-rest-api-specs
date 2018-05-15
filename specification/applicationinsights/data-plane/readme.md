@@ -60,9 +60,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/ApplicationInsights/DataPlane/ApplicationInsights/Generated
   clear-output-folder: true
   payload-flattening-threshold: 3
-directive:
-  - reason: Don't expose the GET endpoint since its behavior is more limited than POST
-    remove-operation: GetQuery
 ```
 
 ``` yaml $(python)
