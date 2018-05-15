@@ -161,6 +161,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
     autorest_options:
       use: "@microsoft.azure/autorest.python@~3.0"
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - rake arm:regen_all_profiles['azure_mgmt_api_management']
 ```
 
 
