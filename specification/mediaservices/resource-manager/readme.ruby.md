@@ -5,7 +5,7 @@ These settings apply only when `--ruby` is specified on the command line.
 ``` yaml $(ruby)
 ruby:
   package-name: azure_mgmt_media_services
-  package-version: "0.16.0"
+  package-version: "0.16.1"
   azure-arm: true
 ```
 
