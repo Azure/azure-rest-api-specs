@@ -123,7 +123,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
-| [R2022](#R2022) | [XmsExamplesRequired](#R2022) | ARM and Data plane OpenAPI(swagger) specs |
+| [D5001](#D5001) | [XmsExamplesRequired](#D5001) | ARM and Data plane OpenAPI(swagger) specs |
 
 ## Rule Descriptions
 
@@ -1176,8 +1176,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="R2022" />R2022 XmsExamplesRequired
-**Category** : SDK Error
+### <a name="D5001" />D5001 XmsExamplesRequired
+**Category** : Documentation Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
