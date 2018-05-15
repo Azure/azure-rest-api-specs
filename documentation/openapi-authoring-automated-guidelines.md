@@ -128,7 +128,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 ## Rule Descriptions
 
 ### <a name="R3012" />R3012 APIVersionPattern 
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to**: ARM OpenAPI(swagger) specs
 
@@ -165,7 +165,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="R3014" />R3014 BodyPropertiesNamesCamelCase
 ### <a name="R3016" />R3016 DefinitionsPropertiesNamesCamelCase
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
@@ -204,7 +204,7 @@ For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3025" />R3025 TrackedResourceGetOperation
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -225,7 +225,7 @@ If the resource pointed by the rule is not a tracked resource, this warning may 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3026" />R3026 TrackedResourcePatchOperation
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -246,7 +246,7 @@ If the resource pointed by the rule is not a tracked resource, this warning may 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3027" />R3027 TrackedResourceListByResourceGroup
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -267,7 +267,7 @@ If the resource pointed by the rule is not a tracked resource or the operation t
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3028" />R3028 TrackedResourceListBySubscription
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -288,7 +288,7 @@ If the resource pointed by the rule is not a tracked resource or the operation t
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3010" />R3010 TrackedResourceListByImmediateParent
-**Category** : Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -309,7 +309,7 @@ If the resource pointed by the rule is not a tracked resource this warning may b
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3018" />R3018 EnumInsteadOfBoolean
-**Category** : Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -640,7 +640,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3017" />R3017 GuidUsage
-**Category** : Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -683,7 +683,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2004" />R2004 NonApplicationJsonType
-**Category** : RPC Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -700,7 +700,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2059" />R2059 UniqueResourcePaths
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -863,7 +863,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3008" />R3008 CollectionObjectPropertiesNaming
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -878,7 +878,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2027" />R2027 DefaultMustBeInEnum
-**Category** : Error
+**Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -990,7 +990,7 @@ PrimaryCertificate_Activate
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3023" />R3023 OperationsAPIImplementation
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1103,7 +1103,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2020" />R2020 RequiredPropertiesMissingInResourceModel
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1324,7 +1324,7 @@ public class FooCreationSettings {
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3019" />R3019 ArmResourcePropertiesBag
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1379,7 +1379,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3006" />R3006 BodyTopLevelProperties
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1431,7 +1431,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2057" />R2057 InvalidSkuModel
-**Category** : Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1540,7 +1540,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2044" />R2044 InvalidVerbUsed
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1555,7 +1555,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3007" />R3007 PutGetPatchResponseSchema
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1585,7 +1585,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2062" />R2062 XmsResourceInPutResponse
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1630,7 +1630,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2016" />R2016 PatchBodyParametersSchema
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1748,7 +1748,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3011" />R3011 DescriptionMustNotBeNodeName
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
