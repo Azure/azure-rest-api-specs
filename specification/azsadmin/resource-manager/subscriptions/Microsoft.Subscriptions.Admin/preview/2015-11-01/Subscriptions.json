@@ -114,7 +114,7 @@
                 "tags": [
                     "Subscriptions"
                 ],
-                "operationId": "MoveSubscriptions",
+                "operationId": "Subscriptions_MoveSubscriptions",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -128,10 +128,10 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "NOCONTENT"
+                        "description": "No Content -- The subscriptions were successfully moved to the target delegated provider offer."
                     },
                     "202": {
-                        "description": "ACCEPTED"
+                        "description": "Accepted -- Move subscriptions request accepted; operation will complete asynchronously."
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -151,7 +151,7 @@
                 "tags": [
                     "Subscriptions"
                 ],
-                "operationId": "ValidateMoveSubscriptions",
+                "operationId": "Subscriptions_ValidateMoveSubscriptions",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -165,10 +165,10 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "NOCONTENT"
+                        "description": "No Content -- The subscriptions can be moved to the target delegated provider offer."
                     },
                     "202": {
-                        "description": "ACCEPTED"
+                        "description": "Accepted -- Validate move subscriptions request accepted; operation will complete asynchronously."
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -492,11 +492,13 @@
             "properties": {
                 "targetDelegatedProviderOffer": {
                     "description": "The delegated provider offer identifier (from the Admin context) that the subscriptions to be moved to.",
-                    "type": "string"
+                    "type": "string",
+                    "required": false
                 },
                 "resources": {
                     "description": "A collection of subscriptions to move to the target delegated provider offer.",
                     "type": "array",
+                    "required": true,
                     "items": {
                         "type": "string"
                     }
