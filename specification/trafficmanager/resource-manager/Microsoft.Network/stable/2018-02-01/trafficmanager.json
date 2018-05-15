@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "TrafficManagerManagementClient",
-    "version": "2018-03-01"
+    "version": "2018-02-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -229,9 +229,6 @@
           },
           "Endpoint-PUT-External-WithLocation": {
             "$ref": "./examples/Endpoint-PUT-External-WithLocation.json"
-          },
-          "Endpoint-PUT-External-WithCustomHeaders": {
-            "$ref": "./examples/Endpoint-PUT-External-WithCustomHeaders.json"
           }
         }
       },
@@ -543,9 +540,6 @@
           },
           "Profile-PUT-WithEndpoints": {
             "$ref": "./examples/Profile-PUT-WithEndpoints.json"
-          },
-          "Profile-PUT-WithCustomHeaders": {
-            "$ref": "./examples/Profile-PUT-WithCustomHeaders.json"
           }
         }
       },
@@ -690,102 +684,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}": {
-      "get": {
-        "tags": [
-          "HeatMaps"
-        ],
-        "operationId": "HeatMap_Get",
-        "description": "Gets latest heatmap for Traffic Manager profile.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group containing the Traffic Manager endpoint."
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile."
-          },
-          {
-            "name": "heatMapType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default"
-            ],
-            "description": "The type of HeatMap for the Traffic Manager profile."
-          },
-          {
-            "name": "topLeft",
-            "in": "query",
-            "required": false,
-            "allowEmptyValue": true,
-            "description": "The top left latitude,longitude pair of the rectangular viewport to query for.",
-            "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "collectionFormat": "csv",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "botRight",
-            "in": "query",
-            "required": false,
-            "allowEmptyValue": true,
-            "description": "The bottom right latitude,longitude pair of the rectangular viewport to query for.",
-            "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "collectionFormat": "csv",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Traffic Manager heatmap.",
-            "schema": {
-              "$ref": "#/definitions/HeatMapModel"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HeatMap-GET": {
-            "$ref": "./examples/HeatMap-GET.json"
-          },
-          "HeatMap-GET-With-TopLeft-BotRight": {
-            "$ref": "./examples/HeatMap-GET-With-TopLeft-BotRight.json"
-          },
-          "HeatMap-GET-With-Null-Values": {
-            "$ref": "./examples/HeatMap-GET-With-Null-Values.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -808,7 +706,7 @@
         },
         "target": {
           "type": "string",
-          "description": "The fully-qualified DNS name or IP address of the endpoint. Traffic Manager returns this value in DNS responses to direct traffic to this endpoint."
+          "description": "The fully-qualified DNS name of the endpoint. Traffic Manager returns this value in DNS responses to direct traffic to this endpoint."
         },
         "endpointStatus": {
           "type": "string",
@@ -863,132 +761,9 @@
             "type": "string"
           },
           "description": "The list of countries/regions mapped to this endpoint when using the ‘Geographic’ traffic routing method. Please consult Traffic Manager Geographic documentation for a full list of accepted values."
-        },
-        "customHeaders": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Header name."
-              },
-              "value": {
-                "type": "string",
-                "description": "Header value."
-              }
-            },
-            "description": "Custom header name and value."
-          },
-          "description": "List of custom headers."
         }
       },
       "description": "Class representing a Traffic Manager endpoint properties."
-    },
-    "HeatMapModel": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/HeatMapProperties",
-          "description": "The properties of the Traffic Manager HeatMap."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Class representing a Traffic Manager HeatMap."
-    },
-    "QueryExperience": {
-      "properties": {
-          "endpointId": {
-            "type": "integer",
-            "description": "The id of the endpoint from the 'endpoints' array which these queries were routed to."
-          },
-          "queryCount": {
-            "type": "integer",
-            "description": "The number of queries originating from this location."
-          },
-          "latency": {
-            "type": "number",
-            "format": "double",
-            "description": "The latency experienced by queries originating from this location."
-          }
-      },
-      "required": [
-        "endpointId",
-        "queryCount"
-      ],
-      "description": "Class representing a Traffic Manager HeatMap query experience properties."
-    },
-    "TrafficFlow": {
-      "properties": {
-          "sourceIp": {
-              "type": "string",
-              "description": "The IP address that this query experience originated from."
-          },
-          "latitude": {
-            "type": "number",
-            "format": "double",
-            "description": "The approximate latitude that these queries originated from."
-          },
-          "longitude": {
-            "type": "number",
-            "format": "double",
-            "description": "The approximate longitude that these queries originated from."
-          },
-          "queryExperiences": {
-            "type": "array",
-            "description": "The query experiences produced in this HeatMap calculation.",
-            "items": {
-              "$ref": "#/definitions/QueryExperience"
-            }
-          }
-      },
-      "description": "Class representing a Traffic Manager HeatMap traffic flow properties."
-    },
-    "HeatMapProperties": {
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The beginning of the time window for this HeatMap, inclusive."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The ending of the time window for this HeatMap, exclusive."
-        },
-        "endpoints": {
-          "type": "array",
-          "description": "The endpoints used in this HeatMap calculation.",
-          "items": {
-            "$ref": "#/definitions/HeatMapEndpoint"
-          }
-        },
-        "trafficFlows": {
-          "type": "array",
-          "description": "The traffic flows produced in this HeatMap calculation.",
-          "items": {
-            "$ref": "#/definitions/TrafficFlow"
-          }
-        }
-      },
-      "description": "Class representing a Traffic Manager HeatMap properties."
-    },
-    "HeatMapEndpoint": {
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The ARM Resource ID of this Traffic Manager endpoint."
-        },
-        "endpointId": {
-          "type": "integer",
-          "description": "A number uniquely identifying this endpoint in query experiences."
-        }
-      },
-      "description": "Class which is a sparse representation of a Traffic Manager endpoint."
     },
     "Endpoint": {
       "properties": {
@@ -1090,42 +865,6 @@
           "type": "integer",
           "format": "int64",
           "description": "The number of consecutive failed health check that Traffic Manager tolerates before declaring an endpoint in this profile Degraded after the next failed health check."
-        },
-        "customHeaders": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Header name."
-              },
-              "value": {
-                "type": "string",
-                "description": "Header value."
-              }
-            },
-            "description": "Custom header name and value."
-          },
-          "description": "List of custom headers."
-        },
-        "expectedStatusCodeRanges": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "min": {
-                "type": "integer",
-                "description": "Min status code."
-              },
-              "max": {
-                "type": "integer",
-                "description": "Max status code."
-              }
-            },
-            "description": "Min and max value of a status code range."
-          },
-          "description": "List of expected status code ranges."
         }
       },
       "description": "Class containing endpoint monitoring settings in a Traffic Manager profile."
@@ -1288,14 +1027,17 @@
       "description": "The core properties of ARM resources",
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the resource"
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Network/trafficmanagerProfiles."
         }
