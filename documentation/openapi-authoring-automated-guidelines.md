@@ -9,9 +9,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 ## Index
 * [Error vs. Warning](#error-vs-warning)
 * [Automated Rules](#automated-rules)
-  * [RPC Violations](#rpc-violations)
-    * [RPC Errors](#rpc-errors)
-    * [RPC Warnings](#rpc-warnings)
+  * [ARM Violations](#arm-violations)
+    * [ARM Errors](#arm-errors)
+    * [ARM Warnings](#arm-warnings)
   * [SDK Violations](#sdk-violations)
     * [SDK Errors](#sdk-errors)
     * [SDK Warnings](#sdk-warnings)
@@ -26,9 +26,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 ## Automated Rules
 
-### RPC Violations
+### ARM Violations
 
-#### RPC Errors
+#### ARM Errors
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
@@ -51,7 +51,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3011](#R3011)	| [DescriptionMustNotBeNodeName](#R3011) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2020](#R2020) | [RequiredPropertiesMissingInResourceModel](#R2020) | ARM OpenAPI(swagger) specs |
 
-#### RPC Warnings
+#### ARM Warnings
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
