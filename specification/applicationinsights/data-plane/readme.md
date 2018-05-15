@@ -46,19 +46,6 @@ directive:
     transform: $.operationId = "Query"
 ```
 
-
-### Tag: 2015-05-01
-These settings apply only when `--tag=20150501` is specified on the command line.
-
-``` yaml $(tag) == '20150501'
-input-file:
-- microsoft.insights/preview/2015-05-01/swagger.json
-directive:
-  - suppress:
-    - R3016 
-    reason: Previous service version used camelcase; changed in newer version.
-```
-
 # Code Generation
 
 ## C# 
