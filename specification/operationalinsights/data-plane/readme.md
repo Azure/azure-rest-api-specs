@@ -44,8 +44,6 @@ directive:
   - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
     where-operation: Query_Post
     transform: $.operationId = "Query"
-  - reason: Remove parameter only used in removed operation.
-    remove-parameter: workspacesParam
 ```
 
 ---
