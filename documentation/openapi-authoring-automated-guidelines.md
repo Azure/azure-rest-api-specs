@@ -15,6 +15,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
   * [SDK Violations](#sdk-violations)
     * [SDK Errors](#sdk-errors)
     * [SDK Warnings](#sdk-warnings)
+  * [Documentation](#documentation)
+    * [Documentation Errors](#documentation-errors)
 * [Rule Descriptions](#rule-descriptions)
 
 ## Error vs Warning
@@ -86,7 +88,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2054](#R2054)	| [SecurityDefinitionsStructure](#R2054) | ARM OpenAPI(swagger) specs |
 | [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2022](#R2022) | [XmsExamplesRequired](#R2022) | ARM and Data plane OpenAPI(swagger) specs |
 | [R3013](#R3013)	| [DeleteMustNotHaveRequestBody](#R3013) | ARM and Data plane OpenAPI(swagger) specs |
 
 #### SDK Warnings
@@ -115,6 +116,14 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2063](#R2063) | [OperationIdNounConflictingModelNames](#R2063) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2064](#R2064) | [LROStatusCodesReturnTypeSchema](#R2064) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2023](#R2023) | [SummaryAndDescriptionMustNotBeSame](#R2023) | ARM and Data plane OpenAPI(swagger) specs |
+
+### Documentation
+
+#### Documentation Errors
+
+| Id | Rule Name | Applies to |
+| --- | --- | --- |
+| [R2022](#R2022) | [XmsExamplesRequired](#R2022) | ARM and Data plane OpenAPI(swagger) specs |
 
 ## Rule Descriptions
 
