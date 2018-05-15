@@ -489,16 +489,17 @@
         "MoveSubscriptionsDefinition": {
             "description": "The move subscriptions action definition",
             "type": "object",
+            "required": [
+                "resources"
+            ],
             "properties": {
                 "targetDelegatedProviderOffer": {
                     "description": "The delegated provider offer identifier (from the Admin context) that the subscriptions to be moved to.",
-                    "type": "string",
-                    "required": false
+                    "type": "string"
                 },
                 "resources": {
                     "description": "A collection of subscriptions to move to the target delegated provider offer.",
                     "type": "array",
-                    "required": true,
                     "items": {
                         "type": "string"
                     }
