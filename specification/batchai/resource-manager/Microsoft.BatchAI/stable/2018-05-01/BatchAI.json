@@ -574,15 +574,6 @@
             "$ref": "#/parameters/ExperimentNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExperimentCreateParameters"
-            },
-            "description": "The parameters to provide for the experiment creation."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -3773,21 +3764,6 @@
         }
       },
       "description": "Values returned by the List operation."
-    },
-    "ExperimentBaseProperties": {
-      "properties": {
-      },
-      "description": "The properties of an Experiment."
-    },
-    "ExperimentCreateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExperimentBaseProperties",
-          "description": "The properties of an Experiment.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Parameters supplied to the Create operation."
     },
     "ExperimentProperties": {
       "properties": {
