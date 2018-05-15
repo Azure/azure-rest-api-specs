@@ -13,12 +13,23 @@ ruby:
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-disks-2018-04
   - tag: package-compute-only-2017-12
   - tag: package-skus-2017-09
   - tag: package-compute-2017-03
   - tag: package-compute-2016-04-preview
   - tag: package-compute-2016-03
   - tag: package-compute-2015-06
+```
+
+### Tag: package-disks-2018-04 and ruby
+
+These settings apply only when `--tag=package-disks-2018-04 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-disks-2018-04' && $(ruby)
+namespace: "Azure::Compute::Mgmt::V2018_04_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_compute/lib
 ```
 
 ### Tag: package-compute-only-2017-12 and ruby
