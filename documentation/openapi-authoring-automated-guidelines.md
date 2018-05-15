@@ -161,7 +161,7 @@ The date MAY optionally be followed by one of:
 * 2016-07-04-publicpreview - Use "-preview" to indicate a public preview
 * 2016-07-04-rc0 - Just use "rc", not "rc" + number
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3014" />R3014 BodyPropertiesNamesCamelCase
 ### <a name="R3016" />R3016 DefinitionsPropertiesNamesCamelCase
