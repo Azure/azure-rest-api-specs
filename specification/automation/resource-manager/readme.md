@@ -86,6 +86,7 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJobStreams.json
 - Microsoft.Automation/preview/2017-05-15-preview/job.json
 ```
 
@@ -116,6 +117,7 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJobStreams.json
 - Microsoft.Automation/preview/2017-05-15-preview/job.json
 - Microsoft.Automation/stable/2018-01-15/definitions.json
 - Microsoft.Automation/stable/2018-01-15/dscNode.json
@@ -148,6 +150,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_automation']
 ```
 
 

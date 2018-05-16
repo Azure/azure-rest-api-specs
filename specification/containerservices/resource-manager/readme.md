@@ -67,6 +67,51 @@ input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
 ```
 
+### Tag: package-2017-08-only
+
+These settings apply only when `--tag=package-2017-08-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-08-only'
+input-file:
+- Microsoft.ContainerService/stable/2017-08-31/managedClusters.json
+```
+
+### Tag: package-2017-09-only
+
+These settings apply only when `--tag=package-2017-09-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09-only'
+input-file:
+- Microsoft.ContainerService/stable/2017-09-30/location.json
+```
+
+### Tag: package-2017-01-only
+
+These settings apply only when `--tag=package-2017-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2016-09-only
+
+These settings apply only when `--tag=package-2016-09-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09-only'
+input-file:
+- Microsoft.ContainerService/stable/2016-09-30/containerService.json
+```
+
+### Tag: package-2016-03-only
+
+These settings apply only when `--tag=package-2016-03-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-only'
+input-file:
+- Microsoft.ContainerService/stable/2016-03-30/containerService.json
+```
+
 ---
 
 # Code Generation
@@ -83,6 +128,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
 ```
 
 
