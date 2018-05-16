@@ -469,7 +469,7 @@
         "tags": [
           "Usage"
         ],
-        "operationId": "Usage_List",
+        "operationId": "Usages_List",
         "description": "Gets the current usage count and the limit for the resources under the subscription.",
         "x-ms-examples": {
           "UsageList": {
@@ -502,7 +502,7 @@
         "tags": [
           "LocationUsage"
         ],
-        "operationId": "Usage_ListByLocation",
+        "operationId": "Usages_ListByLocation",
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "x-ms-examples": {
           "UsageList": { "$ref": "./examples/StorageAccountListLocationUsage.json"}
@@ -637,7 +637,7 @@
         }
       }
     },    
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}": {
       "get": {
         "tags": [
           "ManagementPolicies"
@@ -665,6 +665,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementPolicyName"            
           }
         ],
         "responses": {
@@ -703,6 +706,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementPolicyName"            
           },
           {
             "name": "properties",
@@ -750,6 +756,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementPolicyName"            
           }
         ],
         "responses": {
@@ -2101,6 +2110,21 @@
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ManagementPolicyName": {
+      "name": "managementPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Storage Account Management Policy. It should always be 'default'",
+      "enum":[
+        "default"
+      ],
+      "x-ms-enum": {
+          "name": "ManagementPolicyName",
+          "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     }
   },
