@@ -941,11 +941,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog": {
       "post": {
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "TrafficAnalytics"
         ],
         "operationId": "NetworkWatchers_SetFlowLogConfiguration",
         "x-ms-long-running-operation": true,
-        "description": "Configures flow log on a specified resource.",
+        "description": "Configures flow log  and traffic analytics (optional) on a specified resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -979,7 +980,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request for setting flow log configuration.",
+            "description": "Successful request for setting flow log  and traffic analytics (optional) configuration.",
             "schema": {
               "$ref": "#/definitions/FlowLogInformation"
             }
@@ -999,11 +1000,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus": {
       "post": {
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "TrafficAnalytics"
         ],
         "operationId": "NetworkWatchers_GetFlowLogStatus",
         "x-ms-long-running-operation": true,
-        "description": "Queries status of flow log on a specified resource.",
+        "description": "Queries status of flow log and traffic analytics (optional) on a specified resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1026,7 +1028,7 @@
             "schema": {
               "$ref": "#/definitions/FlowLogStatusParameters"
             },
-            "description": "Parameters that define a resource to query flow log status."
+            "description": "Parameters that define a resource to query flow log and traffic analytics (optional)  status."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1037,7 +1039,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request for query flow log status.",
+            "description": "Successful request for query flow log and traffic analytics (optional) status.",
             "schema": {
               "$ref": "#/definitions/FlowLogInformation"
             }
@@ -2328,13 +2330,13 @@
       }
     },
     "FlowLogStatusParameters": {
-      "description": "Parameters that define a resource to query flow log status.",
+      "description": "Parameters that define a resource to query flow log and traffic analytics (optional) status.",
       "required": [
         "targetResourceId"
       ],
       "properties": {
         "targetResourceId": {
-          "description": "The target resource where getting the flow logging status.",
+          "description": "The target resource where getting the flow log and traffic analytics (optional) status.",
           "type": "string"
         }
       }
@@ -2355,19 +2357,60 @@
       }
     },
     "FlowLogInformation": {
-      "description": "Information on the configuration of flow log.",
+      "description": "Information on the configuration of flow log and traffic analytics (optional) .",
       "required": [
         "targetResourceId",
         "properties"
       ],
       "properties": {
         "targetResourceId": {
-          "description": "The ID of the resource to configure for flow logging.",
+          "description": "The ID of the resource to configure for flow log and traffic analytics (optional) .",
           "type": "string"
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FlowLogProperties"
+        },
+        "flowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsProperties"
+        }
+      }
+    },
+     "TrafficAnalyticsProperties": {
+      "description": "Parameters that define the configuration of traffic analytics.",
+      "required": [
+        "networkWatcherFlowAnalyticsConfiguration"
+      ],
+      "properties": {
+        "networkWatcherFlowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsConfigurationProperties"
+        }
+      }
+    },
+    "TrafficAnalyticsConfigurationProperties": {
+      "description": "Parameters that define the configuration of traffic analytics.",
+      "required": [
+        "enabled",
+        "workspaceId",
+        "workspaceRegion",
+        "workspaceResourceId"
+      ],
+      "properties": {
+        "enabled": {
+          "description": "Flag to enable/disable traffic analytics.",
+          "type": "boolean"
+        },
+        "workspaceId": {
+          "description": "The resource guid of the attached workspace",
+          "type": "string"
+        },
+        "workspaceRegion": {
+          "description": "The location of the attached workspace",
+          "type": "string"
+        },
+        "workspaceResourceId": {
+          "description": "Resource Id of the attached workspace ",
+         "type": "string"
         }
       }
     },
