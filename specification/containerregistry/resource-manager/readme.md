@@ -29,6 +29,16 @@ openapi-type: arm
 tag: package-2017-10
 ```
 
+### Tag: package-2018-02-preview
+
+These settings apply only when `--tag=package-2018-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-preview'
+input-file:
+- Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
+- Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
+```
+
 ### Tag: package-2017-10
 
 These settings apply only when `--tag=package-2017-10` is specified on the command line.
@@ -83,6 +93,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_registry']
 ```
 
 
@@ -122,8 +135,20 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-02-preview
   - tag: package-2017-10
   - tag: package-2017-03
+```
+
+### Tag: package-2018-02-preview and python
+
+These settings apply only when `--tag=package-2018-02-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-02-preview' && $(python)
+python:
+  namespace: azure.mgmt.containerregistry.v2018_02_01_preview
+  output-folder: $(python-sdks-folder)/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2018_02_01_preview
 ```
 
 ### Tag: package-2017-10 and python
@@ -164,10 +189,20 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-02-preview
   - tag: package-2017-10
   - tag: package-2017-06-preview
   - tag: package-2017-03
   - tag: package-2016-06-preview
+```
+
+### Tag: package-2018-02-preview and go
+
+These settings apply only when `--tag=package-2018-02-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-02-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/containerregistry/mgmt/2018-02-01/containerregistry
 ```
 
 ### Tag: package-2017-10 and go

@@ -25,7 +25,27 @@ These are the global settings for the TrafficManager API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-09-preview
+tag: package-2018-03
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    reason: We do have a operations api as "/providers/Microsoft.Network/operations"
+    from: trafficmanager.json
+    where:
+      - $.paths["/providers/Microsoft.Network/operations"]
+
+```
+
+### Tag: package-2018-03
+
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file:
+- Microsoft.Network/stable/2018-03-01/trafficmanager.json
 ```
 
 ### Tag: package-2017-09-preview
@@ -40,6 +60,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: TrafficManagerManagementClient
+```
+
+### Tag: package-2017-09-preview-only
+
+These settings apply only when `--tag=package-2017-09-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09-preview-only'
+input-file:
+- Microsoft.Network/preview/2017-09-01-preview/trafficmanageranalytics.json
 ```
 
 
@@ -87,6 +116,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_traffic_manager']
 ```
 
 
@@ -150,10 +182,20 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-03
   - tag: package-2017-09-preview
   - tag: package-2017-05
   - tag: package-2017-03
   - tag: package-2015-11
+```
+
+### Tag: package-2018-03 and go
+
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(go)
+output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-03-01/trafficmanager
 ```
 
 ### Tag: package-2017-09-preview and go

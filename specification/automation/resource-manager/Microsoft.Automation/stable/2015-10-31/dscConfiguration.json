@@ -3,7 +3,7 @@
   "info": {
     "title": "AutomationManagement",
     "version": "2015-10-31",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -348,6 +348,12 @@
         "x-ms-examples": {
           "Get DSC Configuration": {
             "$ref": "./examples/getAllDscConfigurations.json"
+          },
+          "List Paged DSC Configurations with no filter": {
+            "$ref": "./examples/getPagedDscConfigurationsWithNoFilter.json"
+          },
+          "List Paged DSC Configurations with name filter": {
+            "$ref": "./examples/getPagedlDscConfigurationsWithNameFilter.json"
           }
         },
         "parameters": [
@@ -366,6 +372,34 @@
           },
           {
             "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The number of rows to skip."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The the number of rows to take."
+          },
+          {
+            "name": "$inlinecount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Return total rows."
           }
         ],
         "responses": {
@@ -384,7 +418,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "./definitions.json#/definitions/DscConfiguration"
       }
     }
   },
