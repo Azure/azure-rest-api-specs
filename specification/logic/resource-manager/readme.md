@@ -27,6 +27,17 @@ These are the global settings for the Logic API.
 ``` yaml
 openapi-type: arm
 tag: package-2016-06
+
+directive:
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/listExpressionTraces"].post.responses["200"].schema
+    suppress:
+      - CollectionObjectPropertiesNaming
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/listExpressionTraces"].post.responses["200"].schema
+    suppress:
+      - CollectionObjectPropertiesNaming
+
 ```
 
 
@@ -73,6 +84,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_logic']
 ```
 
 
