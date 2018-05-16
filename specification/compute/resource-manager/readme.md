@@ -152,6 +152,15 @@ directive:
       
 ```
 
+### Tag: package-gallery-2018-06
+
+These settings apply only when `--tag=package-gallery-2018-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-gallery-2018-06'
+input-file:
+- Microsoft.Compute/preview/2018-06-01/gallery.json
+```
+
 ### Tag: package-2018-06
 
 These settings apply only when `--tag=package-2018-06` is specified on the command line.

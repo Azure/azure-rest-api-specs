@@ -82,7 +82,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a simple gallery.": {
+            "$ref": "./examples/CreateASimpleGallery.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -789,6 +794,11 @@
           "$ref": "#/definitions/GalleryImageVersionProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "Specifies information about the gallery image version that you want to create or update."
     },
     "GalleryImageVersionProperties": {
@@ -1092,6 +1102,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "The name of the resource group."
     },
     "ApiVersionParameter": {
