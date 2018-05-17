@@ -430,6 +430,18 @@
             "$ref": "#/parameters/SkipTokenParameter"
           },
           {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchParameter"
+          },
+          {
             "$ref": "#/parameters/EntityFilterParameter"
           },
           {
@@ -463,7 +475,8 @@
           "GetEntities": {
             "$ref": "./examples/GetEntities.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/startTenantBackfill": {
@@ -488,7 +501,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/TenantBackfillOperationResults"
+              "$ref": "#/definitions/TenantBackfillStatusResult"
             }
           },
           "default": {
@@ -502,7 +515,8 @@
           "StartTenantBackfill": {
             "$ref": "./examples/StartTenantBackfillRequest.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/tenantBackfillStatus": {
@@ -939,22 +953,6 @@
         }
       }
     },
-    "TenantBackfillOperationResults": {
-      "description": "The results of an asynchronous operation.",
-      "properties": {
-        "properties": {
-          "title": "Properties",
-          "x-ms-client-flatten": true,
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "title": "Provisioning State",
-              "$ref": "#/definitions/ProvisioningState"
-            }
-          }
-        }
-      }
-    },
     "EntityListResult": {
       "description": "Describes the result of the request to view entities.",
       "properties": {
@@ -978,12 +976,14 @@
         "id": {
           "type": "string",
           "description": "The fully qualified ID for the entity.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource. For example, /providers/Microsoft.Management/managementGroups",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "name": {
           "type": "string",
@@ -993,6 +993,7 @@
         "properties": {
           "title": "Properties",
           "x-ms-client-flatten": true,
+          "x-nullable": true,
           "$ref": "#/definitions/EntityInfoProperties"
         }
       }
@@ -1003,20 +1004,49 @@
       "properties": {
         "tenantId": {
           "type": "string",
-          "description": "The AAD Tenant ID associated with the entity. For example, 00000000-0000-0000-0000-000000000000"
+          "description": "The AAD Tenant ID associated with the entity. For example, 00000000-0000-0000-0000-000000000000",
+          "x-nullable": true
         },
         "displayName": {
           "type": "string",
-          "description": "The friendly name of the management group."
+          "description": "The friendly name of the management group.",
+          "x-nullable": true
         },
         "parent": {
           "title": "Parent",
-          "$ref": "#/definitions/EntityParentGroupInfo"
+          "$ref": "#/definitions/EntityParentGroupInfo",
+          "x-nullable": true
         },
         "permissions": {
           "title": "Permissions",
           "x-nullable": true,
           "$ref": "#/definitions/Permissions"
+        },
+        "inheritedPermissions": {
+          "title": "Inherited Permissions",
+          "x-nullable": true,
+          "$ref": "#/definitions/Permissions"
+        },
+        "numberOfDescendants": {
+          "title": "Number of Descendants",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "parentDisplayNameChain": {
+          "type": "array",
+          "description": "The parent display name chain from the root group to the immediate parent",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "parentNameChain": {
+          "type": "array",
+          "description": "The parent name chain from the root group to the immediate parent",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1365,9 +1395,30 @@
       "name": "$filter",
       "in": "query",
       "required": false,
-      "description": "A filter which allows the get entities call to focus on a particular group (i.e. \"$filter=name eq 'groupName'\")",
+      "description": "The filter parameter allows you to filter on the the name or display name fields. You can check for equality on the name field (e.g. name eq '{entityName}')  and you can check for substrings on either the name or display name fields(e.g. contains(name, '{substringToSearch}'), contains(displayName, '{substringToSearch')). Note that the '{entityName}' and '{substringToSearch}' fields are checked case insensitively.",
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "SelectParameter": {
+      "name": "$select",
+      "in": "query",
+      "required": false,
+      "description": "This parameter specifies the fields to include in the response. Can include any combination of Name,DisplayName,Type,ParentDisplayNameChain,ParentChain, e.g. '$select=Name,DisplayName,Type,ParentDisplayNameChain,ParentNameChain'. When specified the $select parameter can override select in $skipToken.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SearchParameter": {
+      "name": "$search",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "AllowedParents",
+        "AllowedChildren",
+        "ParentAndFirstLevelChildren"
+      ],
+      "x-ms-parameter-location": "method",
+      "description": "The $search parameter is used in conjunction with the $filter parameter to return three different outputs depending on the parameter passed in. \nWith $search=AllowedParents the API will return the entity info of all groups that the requested entity will be able to reparent to as determined by the user's permissions.\nWith $search=AllowedChildren the API will return the entity info of all entities that can be added as children of the requested entity.\nWith $search=ParentAndFirstLevelChildren the API will return the parent and  first level of children that the user has either direct access to or indirect access via one of their descendants."
     },
     "GroupNameParameter": {
       "name": "groupName",
@@ -1399,6 +1450,22 @@
       },
       "x-ms-parameter-location": "client"
     },
+    "SkipParameter": {
+      "name": "$skip",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "description": "Number of entities to skip over when retrieving results. Passing this in will override $skipToken.",
+      "x-ms-parameter-location": "client"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "description": "Number of elements to return when retrieving results. Passing this in will override $skipToken.",
+      "x-ms-parameter-location": "client"
+    },
     "SkipTokenParameter": {
       "name": "$skiptoken",
       "in": "query",
@@ -1416,15 +1483,18 @@
       "x-ms-parameter-location": "method"
     },
     "EntityViewParameter": {
-      "name": "view",
+      "name": "$view",
       "in": "query",
       "required": false,
       "type": "string",
       "enum": [
-        "groups"
+        "FullHierarchy",
+        "GroupsOnly",
+        "SubscriptionsOnly",
+        "Audit"
       ],
       "x-ms-parameter-location": "method",
-      "description": "The view parameter allows clients to request that the list of entities only return groups and not subscriptions."
+      "description": "The view parameter allows clients to filter the type of data that is returned by the getEntities call."
     }
   }
 }
