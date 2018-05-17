@@ -73,7 +73,7 @@
                 "all"
             ],
             "x-ms-enum": {
-                "name": "options",
+                "name": "TimezoneOptions",
                 "modelAsString": false,
                 "values": [
                     {
@@ -163,7 +163,7 @@
                 "png"
             ],
             "x-ms-enum": {
-                "name": "format",
+                "name": "RasterTileFormat",
                 "modelAsString": false,
                 "values": [
                     {
@@ -185,7 +185,7 @@
                 "pbf"
             ],
             "x-ms-enum": {
-                "name": "format",
+                "name": "TileFormat",
                 "modelAsString": false,
                 "values": [
                     {
@@ -359,7 +359,7 @@
             "type": "string",
             "x-ms-parameter-location": "method"
         },
-        "SearchResultIndexSet": {
+        "SearchIndexSet": {
             "name": "idxSet",
             "in": "query",
             "description": "A comma separated list of indexes which should be utilized for the search. Item order does not matter. Available indexes are: Addr = Address range interpolation, Geo = Geographies, PAD = Point Addresses, POI = Points of interest, Str = Streets, Xstr = Cross Streets (intersections)",
@@ -376,7 +376,7 @@
                     "Xstr"
                 ],
                 "x-ms-enum": {
-                    "name": "idxSet",
+                    "name": "SearchIndexSet",
                     "modelAsString": false,
                     "values": [
                         {
@@ -448,7 +448,7 @@
                 "otherHazmatHarmfulToWater"
             ],
             "x-ms-enum": {
-                "name": "vehicleLoadType",
+                "name": "VehicleLoadType",
                 "modelAsString": false,
                 "values": [
                     {
@@ -517,7 +517,7 @@
                 "thrilling"
             ],
             "x-ms-enum": {
-                "name": "routeType",
+                "name": "RouteType",
                 "modelAsString": false,
                 "values": [
                     {
@@ -553,7 +553,7 @@
                 "high"
             ],
             "x-ms-enum": {
-                "name": "windingness",
+                "name": "Windingness",
                 "modelAsString": false
             },
             "x-ms-parameter-location": "method"
@@ -571,7 +571,7 @@
                 "high"
             ],
             "x-ms-enum": {
-                "name": "hilliness",
+                "name": "Hilliness",
                 "modelAsString": false
             },
             "x-ms-parameter-location": "method"
@@ -594,7 +594,7 @@
                 "pedestrian"
             ],
             "x-ms-enum": {
-                "name": "travelMode",
+                "name": "TravelMode",
                 "modelAsString": false
             },
             "x-ms-parameter-location": "method"
@@ -614,7 +614,7 @@
                 "alreadyUsedRoads"
             ],
             "x-ms-enum": {
-                "name": "avoid",
+                "name": "Avoid",
                 "modelAsString": false
             },
             "x-ms-parameter-location": "method"
@@ -631,7 +631,7 @@
             ],
             "default": "combustion",
             "x-ms-enum": {
-                "name": "vehicleEngineType",
+                "name": "VehicleEngineType",
                 "modelAsString": false
             },
             "x-ms-parameter-location": "method"
@@ -845,7 +845,7 @@
                 "tunnel"
             ],
             "x-ms-enum": {
-                "name": "sectionType",
+                "name": "SectionType",
                 "modelAsString": false
             },
             "x-ms-parameter-location": "method"
@@ -871,7 +871,7 @@
                 "none"
             ],
             "x-ms-enum": {
-                "name": "routeRepresentation",
+                "name": "RouteRepresentation",
                 "modelAsString": false,
                 "values": [
                     {
@@ -898,7 +898,7 @@
                 "all"
             ],
             "x-ms-enum": {
-                "name": "computeTravelTimeFor",
+                "name": "ComputeTravelTimeFor",
                 "modelAsString": false,
                 "values": [
                     {
@@ -939,6 +939,62 @@
             "type": "boolean",
             "default": true,
             "x-ms-parameter-location": "method"
+        },
+        "AlternativeRouteType": {
+            "name": "alternativeType",
+            "in": "query",
+            "description": "Controls the optimality, with respect to the given planning criteria, of the calculated alternatives compared to the reference route.",
+            "required": false,
+            "type": "string",
+            "default": "anyRoute",
+            "enum": [
+                "anyRoute",
+                "betterRoute"
+            ],
+            "x-ms-enum": {
+                "name": "AlternativeRouteType",
+                "modelAsString": false,
+                "values": [
+                    {
+                        "value": "anyRoute",
+                        "description": "Allow any alternative route to be returned irrespective of how it compares to the reference route in terms of optimality."
+                    },
+                    {
+                        "value": "betterRoute",
+                        "description": "Return an alternative route only if it is better than the reference route according to the given planning criteria."
+                    }
+                ]
+            }
+        },
+        "RouteInstructionsType": {
+            "name": "instructionsType",
+            "in": "query",
+            "description": "If specified, guidance instructions will be returned. Note that the instructionsType parameter cannot be used in conjunction with routeRepresentation=none",
+            "required": false,
+            "type": "string",
+            "enum": [
+                "coded",
+                "text",
+                "tagged"
+            ],
+            "x-ms-enum": {
+                "name": "RouteInstructionsType",
+                "modelAsString": false,
+                "values": [
+                    {
+                        "value": "coded",
+                        "description": "Returns raw instruction data without human-readable messages."
+                    },
+                    {
+                        "value": "text",
+                        "description": "Returns raw instructions data with human-readable messages in plain text."
+                    },
+                    {
+                        "value": "tagged",
+                        "description": "Returns raw instruction data with tagged human-readable messages to permit formatting."
+                    }
+                ]
+            }
         }
     },
     "responses": {
@@ -1012,7 +1068,7 @@
                             "labels"
                         ],
                         "x-ms-enum": {
-                            "name": "layer",
+                            "name": "StaticMapLayer",
                             "modelAsString": false,
                             "values": [
                                 {
@@ -1149,7 +1205,7 @@
                         ],
                         "type": "string",
                         "x-ms-enum": {
-                            "name": "layer",
+                            "name": "MapTileLayer",
                             "modelAsString": false,
                             "values": [
                                 {
@@ -1213,7 +1269,7 @@
                             512
                         ],
                         "x-ms-enum": {
-                            "name": "tileSize",
+                            "name": "MapTileSize",
                             "modelAsString": false,
                             "values": [
                                 {
@@ -1476,7 +1532,7 @@
         "/search/fuzzy/{format}": {
             "get": {
                 "description": "**Free Form Search**\u003cbr\u003e\u003cbr\u003eThe basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical \u0027single line search\u0027. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.\u003cbr\u003e\u003cbr\u003eWe strongly advise you to use the \u0027countrySet\u0027 parameter to specify only the countries for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.\u003cbr\u003e\u003cbr\u003e E.g.: `countrySet`=US,FR \u003cbr\u003e\u003cbr\u003ePlease see [Search Coverage](https://docs.microsoft.com/en-us/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries.\u003cbr\u003e\u003cbr\u003eMost Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
-                "operationId": "Search_GetSearchFuzzy",
+                "operationId": "SearchService_GetSearchFuzzy",
                 "x-ms-examples": {
                     "Search City Seattle": {
                         "$ref": "./examples/GetSearchFuzzy.json"
@@ -1561,7 +1617,7 @@
                         "maximum": 4
                     },
                     {
-                        "$ref": "#/parameters/SearchResultIndexSet"
+                        "$ref": "#/parameters/SearchIndexSet"
                     }
                 ],
                 "responses": {
@@ -1592,7 +1648,7 @@
         "/search/poi/{format}": {
             "get": {
                 "description": "**Get POI by Name**\u003cbr\u003e\u003cbr\u003eIf your search use case only requires POI results, you may use the POI endpoint for searching. This endpoint will only return POI results.",
-                "operationId": "Search_GetSearchPOI",
+                "operationId": "SearchService_GetSearchPOI",
                 "x-ms-examples": {
                     "Search for juice bars within 5 miles of Seattle Downtown and limit the response to 5 results": {
                         "$ref": "./examples/GetSearchPOI.json"
@@ -1680,7 +1736,7 @@
         "/search/nearby/{format}": {
             "get": {
                 "description": "**Nearby Search**\u003cbr\u003e\u003cbr\u003eIf you have a use case for only retrieving POI results around a specific location, the nearby search method may be the right choice. This endpoint will only return POI results, and does not take in a search query parameter.",
-                "operationId": "Search_GetSearchNearby",
+                "operationId": "SearchService_GetSearchNearby",
                 "x-ms-examples": {
                     "Search for any points of interest (POI) within 5 miles of Manhattan NY and return the top 10 results": {
                         "$ref": "./examples/GetSearchNearby.json"
@@ -1759,8 +1815,8 @@
         },
         "/search/poi/category/{format}": {
             "get": {
-                "description": "**Get POI by Category**\u003cbr\u003e\u003cbr\u003eIf your search use case only requires POI results filtered by category, you may use the category endpoint. This endpoint will only return POI results which are categorized as specified.\u003cbr\u003e\u003cbr\u003eList of available categories can be found [here](https://docs.microsoft.com/en-us/rest/api/location-based-services/search/getsearchpoicategory).",
-                "operationId": "Search_GetSearchPOICategory",
+                "description": "**Get POI by Category**\u003cbr\u003e\u003cbr\u003eIf your search use case only requires POI results filtered by category, you may use the category endpoint. This endpoint will only return POI results which are categorized as specified.\u003cbr\u003e\u003cbr\u003eList of available categories can be found [here](https://docs.microsoft.com/en-us/azure/azure-maps/search-categories).",
+                "operationId": "SearchService_GetSearchPOICategory",
                 "x-ms-examples": {
                     "Search for atm\u0027s within 2 miles of Times Square NY and return the top 3 results": {
                         "$ref": "./examples/GetSearchPOICategory.json"
@@ -1854,7 +1910,7 @@
         "/search/address/{format}": {
             "get": {
                 "description": "**Address Geocoding**\u003cbr\u003e\u003cbr\u003eIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocode endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
-                "operationId": "Search_GetSearchAddress",
+                "operationId": "SearchService_GetSearchAddress",
                 "x-ms-examples": {
                     "Search detail address 15127 NE 24th Street, Redmond, WA 98052": {
                         "$ref": "./examples/GetSearchAddress.json"
@@ -1941,7 +1997,7 @@
         "/search/address/reverse/{format}": {
             "get": {
                 "description": "**Reverse Geocode to an Address**\u003cbr\u003e\u003cbr\u003eThere may be times when you need to translate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located. This endpoint will return address information for a given coordinate.",
-                "operationId": "Search_GetSearchAddressReverse",
+                "operationId": "SearchService_GetSearchAddressReverse",
                 "x-ms-examples": {
                     "GetSearchAddressReverse": {
                         "$ref": "./examples/GetSearchAddressReverse.json"
@@ -2031,7 +2087,7 @@
         "/search/address/reverse/crossStreet/{format}": {
             "get": {
                 "description": "**Reverse Geocode to a Cross Street**\u003cbr\u003e\u003cbr\u003eThere may be times when you need to translate a coordinate (example: 37.786505, -122.3862) into a human understandable cross street. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located.\u003cbr\u003e\u003cbr\u003eThis endpoint will return cross street information for a given coordinate.",
-                "operationId": "Search_GetSearchAddressReverseCrossStreet",
+                "operationId": "SearchService_GetSearchAddressReverseCrossStreet",
                 "x-ms-examples": {
                     "GetSearchAddressReverseCrossStreet": {
                         "$ref": "./examples/GetSearchAddressReverseCrossStreet.json"
@@ -2094,7 +2150,7 @@
         "/search/address/structured/{format}": {
             "get": {
                 "description": "**Structured Address Geocoding**\u003cbr\u003e\u003cbr\u003eAzure Address Geocoding can also be accessed for structured address look up exclusively. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
-                "operationId": "Search_GetSearchAddressStructured",
+                "operationId": "SearchService_GetSearchAddressStructured",
                 "x-ms-examples": {
                     "GetSearchAddressStructured": {
                         "$ref": "./examples/GetSearchAddressStructured.json"
@@ -2227,80 +2283,9 @@
             }
         },
         "/search/geometry/{format}": {
-            "get": {
-                "description": "The Search Geometry endpoint allows you to perform a free form search inside a single geometry or many of them. The search results that fall inside the geometry/geometries will be returned.\u003cbr\u003e\u003cbr\u003eTo send the geometry you will use a `GET` request where the `geometry` parameter is represented as a `GeoJSON` type. The geographical features to be searched can be modeled as Polygon and/or Circle geometries represented using any one of the following `GeoJSON` types:\u003cul\u003e\u003cli\u003e**GeoJSON FeatureCollection** \u003cbr\u003eThe `geometry` can be represented as a `GeoJSON FeatureCollection` object. This is the recommended option if the geometry contains both Polygons and Circles. The `FeatureCollection` can contain a max of 50 `GeoJSON Feature` objects. Each `Feature` object should represent either a Polygon or a Circle with the following conditions:\u003cul style=\"list-style-type:none\"\u003e\u003cli\u003eA `Feature` object for the Polygon geometry can have a max of 50 coordinates and it\u0027s properties must be empty.\u003c/li\u003e\u003cli\u003eA `Feature` object for the Circle geometry is composed of a _center_ represented using a `GeoJSON Point` type and a _radius_ value (in meters) which must be specified in the object\u0027s properties along with the _subType_ property whose value should be \u0027Circle\u0027.\u003c/li\u003e\u003c/ul\u003e\u003cbr\u003e Please see the Examples section below for a sample `FeatureCollection` representation.\u003cbr\u003e\u003cbr\u003e\u003c/li\u003e\u003cli\u003e**GeoJSON GeometryCollection**\u003cbr\u003eThe `geometry` can be represented as a `GeoJSON GeometryCollection` object. This is the recommended option if the geometry contains a list of Polygons only. The `GeometryCollection` can contain a max of 50 `GeoJSON Polygon` objects. Each `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `GeometryCollection` representation.\u003cbr\u003e\u003cbr\u003e\u003c/li\u003e\u003cli\u003e**GeoJSON Polygon**\u003cbr\u003eThe `geometry` can be represented as a `GeoJSON Polygon` object. This is the recommended option if the geometry contains a single Polygon. The `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `Polygon` representation.\u003cbr\u003e\u003cbr\u003e\u003c/li\u003e\u003c/ul\u003e.\u003cbr\u003e\u003cbr\u003e",
-                "operationId": "Search_GetSearchInsideGeometry",
-                "x-ms-examples": {
-                    "Search for pizza places inside a geometry represented as a GeoJSON FeatureCollection type": {
-                        "$ref": "./examples/GetSearchInsideFeatureCollection.json"
-                    },
-                    "Search for burger joints inside a geometry represented as a GeoJSON GeometryCollection type": {
-                        "$ref": "./examples/GetSearchInsideGeometryCollection.json"
-                    },
-                    "Search for subs joints inside a geometry represented as a GeoJSON Polygon type": {
-                        "$ref": "./examples/GetSearchInsideGeometry.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionKey"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/Query"
-                    },
-                    {
-                        "$ref": "#/parameters/TextFormat"
-                    },
-                    {
-                        "name": "geometry",
-                        "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) to search in and should be a GeoJSON compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
-                        "required": true,
-                        "type": "string",
-                        "in": "query"
-                    },
-                    {
-                        "$ref": "#/parameters/Limit"
-                    },
-                    {
-                        "$ref": "#/parameters/Language"
-                    },
-                    {
-                        "$ref": "#/parameters/ExtendedPostalCodesForWith6Values"
-                    },
-                    {
-                        "$ref": "#/parameters/SearchResultIndexSet"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/SearchGeometryResponse"
-                        }
-                    },
-                    "400": {
-                        "$ref": "#/responses/400"
-                    },
-                    "401": {
-                        "$ref": "#/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/responses/404"
-                    },
-                    "500": {
-                        "$ref": "#/responses/500"
-                    }
-                }
-            },
             "post": {
                 "description": "The Search Geometry endpoint allows you to perform a free form search inside a single geometry or many of them. The search results that fall inside the geometry/geometries will be returned.\u003cbr\u003e\u003cbr\u003eTo send the geometry you will use a `POST` request where the request body will contain the `geometry` object represented as a `GeoJSON` type and the `Content-Type` header will be set to `application/json`. The geographical features to be searched can be modeled as Polygon and/or Circle geometries represented using any one of the following `GeoJSON` types:\u003cul\u003e\u003cli\u003e**GeoJSON FeatureCollection** \u003cbr\u003eThe `geometry` can be represented as a `GeoJSON FeatureCollection` object. This is the recommended option if the geometry contains both Polygons and Circles. The `FeatureCollection` can contain a max of 50 `GeoJSON Feature` objects. Each `Feature` object should represent either a Polygon or a Circle with the following conditions:\u003cul style=\"list-style-type:none\"\u003e\u003cli\u003eA `Feature` object for the Polygon geometry can have a max of 50 coordinates and it\u0027s properties must be empty.\u003c/li\u003e\u003cli\u003eA `Feature` object for the Circle geometry is composed of a _center_ represented using a `GeoJSON Point` type and a _radius_ value (in meters) which must be specified in the object\u0027s properties along with the _subType_ property whose value should be \u0027Circle\u0027.\u003c/li\u003e\u003c/ul\u003e\u003cbr\u003e Please see the Examples section below for a sample `FeatureCollection` representation.\u003cbr\u003e\u003cbr\u003e\u003c/li\u003e\u003cli\u003e**GeoJSON GeometryCollection**\u003cbr\u003eThe `geometry` can be represented as a `GeoJSON GeometryCollection` object. This is the recommended option if the geometry contains a list of Polygons only. The `GeometryCollection` can contain a max of 50 `GeoJSON Polygon` objects. Each `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `GeometryCollection` representation.\u003cbr\u003e\u003cbr\u003e\u003c/li\u003e\u003cli\u003e**GeoJSON Polygon**\u003cbr\u003eThe `geometry` can be represented as a `GeoJSON Polygon` object. This is the recommended option if the geometry contains a single Polygon. The `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `Polygon` representation.\u003cbr\u003e\u003cbr\u003e\u003c/li\u003e\u003c/ul\u003e.\u003cbr\u003e\u003cbr\u003e",
-                "operationId": "Search_PostSearchInsideGeometry",
+                "operationId": "SearchService_PostSearchInsideGeometry",
                 "x-ms-examples": {
                     "Search for pizza places inside a geometry represented as a GeoJSON FeatureCollection type": {
                         "$ref": "./examples/PostSearchInsideFeatureCollection.json"
@@ -2335,7 +2320,7 @@
                         "$ref": "#/parameters/ExtendedPostalCodesForWith6Values"
                     },
                     {
-                        "$ref": "#/parameters/SearchResultIndexSet"
+                        "$ref": "#/parameters/SearchIndexSet"
                     },
                     {
                         "name": "searchInsideGeometryRequestBody",
@@ -2373,79 +2358,9 @@
             }
         },
         "/search/alongRoute/{format}": {
-            "get": {
-                "description": "The Search Along Route endpoint allows you to perform a fuzzy search for POIs along a specified route. This search is constrained by specifying the `maxDetourTime` limiting measure.\u003cbr\u003e\u003cbr\u003eTo send the route-points you will use a `GET` request where the `route` parameter is represented as a `GeoJSON LineString` type. Each route-point in `route` is represented as a `GeoJSON Position` type i.e. an array where the _longitude_ value is followed by the _latitude_ value and the _altitude_ value is ignored. The `route` should contain at least 2 route-points.\u003cbr\u003e\u003cbr\u003eIt is possible that original route will be altered, some of it\u0027s points may be skipped. If the route that passes through the found point is faster than the original one, the `detourTime` value in the response is negative.",
-                "operationId": "Search_GetSearchAlongRoute",
-                "x-ms-examples": {
-                    "Search for burger joints along a route": {
-                        "$ref": "./examples/GetSearchAlongRoute.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionKey"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/Query"
-                    },
-                    {
-                        "$ref": "#/parameters/TextFormat"
-                    },
-                    {
-                        "name": "route",
-                        "description": "This represents the route to search along and should be a valid `GeoJSON LineString` type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
-                        "required": true,
-                        "type": "string",
-                        "in": "query"
-                    },
-                    {
-                        "name": "maxDetourTime",
-                        "description": "Maximum detour time of the point of interest in seconds. Max value is 3600 seconds",
-                        "required": true,
-                        "type": "integer",
-                        "in": "query",
-                        "maximum": 3600
-                    },
-                    {
-                        "name": "limit",
-                        "description": "Maximum number of responses that will be returned. Default value is 10. Max value is 20",
-                        "required": false,
-                        "type": "integer",
-                        "in": "query",
-                        "default": 10,
-                        "maximum": 20
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/SearchAlongRouteResponse"
-                        }
-                    },
-                    "400": {
-                        "$ref": "#/responses/400"
-                    },
-                    "401": {
-                        "$ref": "#/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/responses/404"
-                    },
-                    "500": {
-                        "$ref": "#/responses/500"
-                    }
-                }
-            },
             "post": {
                 "description": "The Search Along Route endpoint allows you to perform a fuzzy search for POIs along a specified route. This search is constrained by specifying the `maxDetourTime` limiting measure.\u003cbr\u003e\u003cbr\u003eTo send the route-points you will use a `POST` request where the request body will contain the `route` object represented as a `GeoJSON LineString` type and the `Content-Type` header will be set to `application/json`. Each route-point in `route` is represented as a `GeoJSON Position` type i.e. an array where the _longitude_ value is followed by the _latitude_ value and the _altitude_ value is ignored. The `route` should contain at least 2 route-points.\u003cbr\u003e\u003cbr\u003eIt is possible that original route will be altered, some of it\u0027s points may be skipped. If the route that passes through the found point is faster than the original one, the `detourTime` value in the response is negative.",
-                "operationId": "Search_PostSearchAlongRoute",
+                "operationId": "SearchService_PostSearchAlongRoute",
                 "x-ms-examples": {
                     "Search for burger joints along a route": {
                         "$ref": "./examples/PostSearchAlongRoute.json"
@@ -2518,8 +2433,8 @@
         },
         "/route/directions/{format}": {
             "get": {
-                "description": "Returns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/en-us/rest/api/maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
-                "operationId": "Route_GetRouteDirections",
+                "description": "Returns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/en-us/azure/azure-maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
+                "operationId": "RouteService_GetRouteDirections",
                 "x-ms-examples": {
                     "GetRouteDirections": {
                         "$ref": "./examples/GetRouteDirections.json"
@@ -2553,30 +2468,7 @@
                         "default": 0
                     },
                     {
-                        "name": "alternativeType",
-                        "in": "query",
-                        "description": "Controls the optimality, with respect to the given planning criteria. Controls the optimality, with respect to the given planning criteria, of the calculated alternatives compared to the reference route.",
-                        "required": false,
-                        "type": "string",
-                        "default": "anyRoute",
-                        "enum": [
-                            "anyRoute",
-                            "betterRoute"
-                        ],
-                        "x-ms-enum": {
-                            "name": "alternativeType",
-                            "modelAsString": false,
-                            "values": [
-                                {
-                                    "value": "anyRoute",
-                                    "description": "Allow any alternative route to be returned irrespective of how it compares to the reference route in terms of optimality."
-                                },
-                                {
-                                    "value": "betterRoute",
-                                    "description": "Return an alternative route only if it is better than the reference route according to the given planning criteria."
-                                }
-                            ]
-                        }
+                        "$ref": "#/parameters/AlternativeRouteType"
                     },
                     {
                         "name": "minDeviationDistance",
@@ -2601,34 +2493,7 @@
                         "default": 0
                     },
                     {
-                        "name": "instructionsType",
-                        "in": "query",
-                        "description": "If specified, guidance instructions will be returned. Note that the instructionsType parameter cannot be used in conjunction with routeRepresentation=none",
-                        "required": false,
-                        "type": "string",
-                        "enum": [
-                            "coded",
-                            "text",
-                            "tagged"
-                        ],
-                        "x-ms-enum": {
-                            "name": "instructionsType",
-                            "modelAsString": false,
-                            "values": [
-                                {
-                                    "value": "coded",
-                                    "description": "Returns raw instruction data without human-readable messages."
-                                },
-                                {
-                                    "value": "text",
-                                    "description": "Returns raw instructions data with human-readable messages in plain text."
-                                },
-                                {
-                                    "value": "tagged",
-                                    "description": "Returns raw instruction data with tagged human-readable messages to permit formatting."
-                                }
-                            ]
-                        }
+                        "$ref": "#/parameters/RouteInstructionsType"
                     },
                     {
                         "name": "language",
@@ -2757,12 +2622,211 @@
                         "$ref": "#/responses/500"
                     }
                 }
+            },
+            "post": {
+                "description": "Returns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/en-us/rest/api/maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
+                "operationId": "RouteService_PostRouteDirections",
+                "x-ms-examples": {
+                    "PostRouteDirections": {
+                        "$ref": "./examples/PostRouteDirections.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionKey"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/TextFormat"
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "The Coordinates through which the route is calculated. Needs two coordinates at least. Delimited by colon. First one is the origin and the last is the destination of the route. Optional coordinates in between act as WayPoints in the route.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "maxAlternatives",
+                        "in": "query",
+                        "description": "Number of desired alternative routes to be calculated. Default: 0, minimum: 0 and maximum: 5",
+                        "required": false,
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 5,
+                        "default": 0
+                    },
+                    {
+                        "$ref": "#/parameters/AlternativeRouteType"
+                    },
+                    {
+                        "name": "minDeviationDistance",
+                        "in": "query",
+                        "description": "All alternative routes returned will follow the reference route (see section POST Requests) from the origin point of the calculateRoute request for at least this number of meters. Can only be used when reconstructing a route. The minDeviationDistance parameter cannot be used in conjunction with arriveAt",
+                        "required": false,
+                        "type": "integer",
+                        "default": 0
+                    },
+                    {
+                        "name": "minDeviationTime",
+                        "in": "query",
+                        "description": "All alternative routes returned will follow the reference route (see section POST Requests) from the origin point of the calculateRoute request for at least this number of seconds. Can only be used when reconstructing a route. The minDeviationTime parameter cannot be used in conjunction with arriveAt",
+                        "required": false,
+                        "type": "integer",
+                        "default": 0
+                    },
+                    {
+                        "$ref": "#/parameters/RouteInstructionsType"
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "The language parameter determines the language of the guidance messages. It does not affect proper nouns (the names of streets, plazas, etc.) It has no effect when instructionsType=coded. Allowed values are (a subset of) the IETF language tags described",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ComputeBestOrder"
+                    },
+                    {
+                        "$ref": "#/parameters/RouteRepresentation"
+                    },
+                    {
+                        "$ref": "#/parameters/ComputeTravelTimeFor"
+                    },
+                    {
+                        "$ref": "#/parameters/VehicleHeading"
+                    },
+                    {
+                        "$ref": "#/parameters/Report"
+                    },
+                    {
+                        "$ref": "#/parameters/SectionType"
+                    },
+                    {
+                        "$ref": "#/parameters/ArriveAt"
+                    },
+                    {
+                        "$ref": "#/parameters/DepartAt"
+                    },
+                    {
+                        "$ref": "#/parameters/VehicleAxleWeight"
+                    },
+                    {
+                        "$ref": "#/parameters/VehicleLength"
+                    },
+                    {
+                        "$ref": "#/parameters/VehicleHeight"
+                    },
+                    {
+                        "$ref": "#/parameters/VehicleWidth"
+                    },
+                    {
+                        "$ref": "#/parameters/VehicleMaxSpeed"
+                    },
+                    {
+                        "$ref": "#/parameters/VehicleWeight"
+                    },
+                    {
+                        "$ref": "#/parameters/Windingness"
+                    },
+                    {
+                        "$ref": "#/parameters/Hilliness"
+                    },
+                    {
+                        "$ref": "#/parameters/TravelMode"
+                    },
+                    {
+                        "$ref": "#/parameters/Avoid"
+                    },
+                    {
+                        "$ref": "#/parameters/Traffic"
+                    },
+                    {
+                        "$ref": "#/parameters/RouteType"
+                    },
+                    {
+                        "$ref": "#/parameters/VehicleLoadType"
+                    },
+                    {
+                        "$ref": "#/parameters/VehicleEngineType"
+                    },
+                    {
+                        "$ref": "#/parameters/ConstantSpeedConsumptionInLitersPerHundredkm"
+                    },
+                    {
+                        "$ref": "#/parameters/CurrentFuelInLiters"
+                    },
+                    {
+                        "$ref": "#/parameters/AuxiliaryPowerInLitersPerHour"
+                    },
+                    {
+                        "$ref": "#/parameters/FuelEnergyDensityInMJoulesPerLiter"
+                    },
+                    {
+                        "$ref": "#/parameters/AccelerationEfficiency"
+                    },
+                    {
+                        "$ref": "#/parameters/DecelerationEfficiency"
+                    },
+                    {
+                        "$ref": "#/parameters/UphillEfficiency"
+                    },
+                    {
+                        "$ref": "#/parameters/DownhillEfficiency"
+                    },
+                    {
+                        "$ref": "#/parameters/ConstantSpeedConsumptionInkWhPerHundredkm"
+                    },
+                    {
+                        "$ref": "#/parameters/CurrentChargeInkWh"
+                    },
+                    {
+                        "$ref": "#/parameters/MaxChargeInkWh"
+                    },
+                    {
+                        "$ref": "#/parameters/AuxiliaryPowerInkW"
+                    },
+                    {
+                        "name": "coordinateList",
+                        "description": "The Coordinates through which the route is calculated. Needs two coordinates at least. First one is the origin and the last is the destination of the route. Optional coordinates in between act as WayPoints in the route.",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/GeoJSONFeatureCollection"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/RouteDirectionsResult"
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
             }
         },
         "/timezone/byId/{format}": {
             "get": {
                 "description": "__Time Zone by Id__\n\nThis API returns current, historical, and future time zone information for the specified IANA time zone ID.",
-                "operationId": "Timezone_GetTimezoneByID",
+                "operationId": "TimezoneService_GetTimezoneByID",
                 "x-ms-examples": {
                     "GetTimezoneByID": {
                         "$ref": "./examples/GetTimezoneByID.json"
@@ -2828,7 +2892,7 @@
         "/timezone/byCoordinates/{format}": {
             "get": {
                 "description": "__Time Zone by Coordinates__\n\nThis API returns current, historical, and future time zone information for a specified latitude-longitude pair.",
-                "operationId": "Timezone_GetTimezoneByCoordinates",
+                "operationId": "TimezoneService_GetTimezoneByCoordinates",
                 "x-ms-examples": {
                     "GetTimezoneByCoordinates": {
                         "$ref": "./examples/GetTimezoneByCoordinates.json"
@@ -2894,7 +2958,7 @@
         "/timezone/enumWindows/{format}": {
             "get": {
                 "description": "__Enumerate Windows Time Zones__\n\nThis API returns a full list of Windows Time Zone IDs.",
-                "operationId": "Timezone_GetTimezoneEnumWindows",
+                "operationId": "TimezoneService_GetTimezoneEnumWindows",
                 "x-ms-examples": {
                     "GetTimezoneEnumWindows": {
                         "$ref": "./examples/GetTimezoneEnumWindows.json"
@@ -2942,7 +3006,7 @@
         "/timezone/enumIana/{format}": {
             "get": {
                 "description": "__Enumerate IANA Time Zones__\n\nThis API returns a full list of IANA time zone IDs. Updates to the IANA service will be reflected in the system within one day.",
-                "operationId": "Timezone_GetTimezoneEnumIANA",
+                "operationId": "TimezoneService_GetTimezoneEnumIANA",
                 "x-ms-examples": {
                     "GetTimezoneEnumIANA": {
                         "$ref": "./examples/GetTimezoneEnumIANA.json"
@@ -2990,7 +3054,7 @@
         "/timezone/ianaVersion/{format}": {
             "get": {
                 "description": "__Time Zone IANA Version__\n\nThis API returns the current IANA version number.",
-                "operationId": "Timezone_GetTimezoneIANAVersion",
+                "operationId": "TimezoneService_GetTimezoneIANAVersion",
                 "x-ms-examples": {
                     "GetTimezoneIANAVersion": {
                         "$ref": "./examples/GetTimezoneIANAVersion.json"
@@ -3038,7 +3102,7 @@
         "/timezone/windowsToIana/{format}": {
             "get": {
                 "description": "__Windows to IANA Time Zone__\n\nThis API returns a corresponding IANA ID, given a valid Windows Time Zone ID. Multiple IANA IDs may be returned for a single Windows ID. It is possible to narrow these results by adding an optional territory parameter.",
-                "operationId": "Timezone_GetTimezoneWindowsToIANA",
+                "operationId": "TimezoneService_GetTimezoneWindowsToIANA",
                 "x-ms-examples": {
                     "GetTimezoneWindowsToIANA": {
                         "$ref": "./examples/GetTimezoneWindowsToIANA.json"
@@ -3096,7 +3160,7 @@
         "/traffic/flow/tile/{format}": {
             "get": {
                 "description": "__Traffic Flow Tile__ \u003cbr/\u003e\u003cbr/\u003eThe Azure Flow Tile API serves 256 x 256 pixel tiles showing traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
-                "operationId": "Traffic_GetTrafficFlowTile",
+                "operationId": "TrafficService_GetTrafficFlowTile",
                 "x-ms-examples": {
                     "GetTrafficFlowTile": {
                         "$ref": "./examples/GetTrafficFlowTile.json"
@@ -3199,7 +3263,7 @@
         "/traffic/flow/segment/{format}": {
             "get": {
                 "description": "__Traffic Flow Segment__\u003cbr/\u003e\u003cbr/\u003eThis service provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the Render Service to support clickable flow data visualizations. With this API, the client side can connect any place in the map with flow data on the closest road and present it to the user.",
-                "operationId": "Traffic_GetTrafficFlowSegment",
+                "operationId": "TrafficService_GetTrafficFlowSegment",
                 "x-ms-examples": {
                     "GetTrafficFlowSegment": {
                         "$ref": "./examples/GetTrafficFlowSegment.json"
@@ -3253,7 +3317,7 @@
                             "MPH"
                         ],
                         "x-ms-enum": {
-                            "name": "unit",
+                            "name": "SpeedUnit",
                             "modelAsString": false,
                             "values": [
                                 {
@@ -3314,7 +3378,7 @@
         "/traffic/incident/tile/{format}": {
             "get": {
                 "description": "__Traffic Incident Tile__ \u003cbr/\u003e\u003cbr/\u003eThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API\u0027s. The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute, and is valid for two minutes before it times out. It is used in rendering [traffic tiles](https://docs.microsoft.com/en-us/rest/api/location-based-services/traffic/gettrafficincidenttile). It can be obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/location-based-services/traffic/gettrafficincidentviewport).",
-                "operationId": "Traffic_GetTrafficIncidentTile",
+                "operationId": "TrafficService_GetTrafficIncidentTile",
                 "x-ms-examples": {
                     "GetTrafficIncidentTile": {
                         "$ref": "./examples/GetTrafficIncidentTile.json"
@@ -3412,7 +3476,7 @@
         "/traffic/incident/detail/{format}": {
             "get": {
                 "description": "__Traffic Incident Detail__ \u003cbr/\u003e\u003cbr/\u003eThe Azure Traffic Incident Tile API serves 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
-                "operationId": "Traffic_GetTrafficIncidentDetail",
+                "operationId": "TrafficService_GetTrafficIncidentDetail",
                 "x-ms-examples": {
                     "GetTrafficIncidentDetail": {
                         "$ref": "./examples/GetTrafficIncidentDetail.json"
@@ -3515,7 +3579,7 @@
                             "shifted"
                         ],
                         "x-ms-enum": {
-                            "name": "geometries",
+                            "name": "IncidentGeometryType",
                             "modelAsString": false,
                             "values": [
                                 {
@@ -3574,7 +3638,7 @@
         "/traffic/incident/viewport/{format}": {
             "get": {
                 "description": "__Traffic Incident Viewport__ \u003cbr/\u003e\u003cbr/\u003eThis API returns legal and technical information for the viewport described in the request. It should be called by client applications whenever the viewport changes (for instance, through zooming, panning, going to a location, or displaying a route). The request should contain the bounding box and zoom level of the viewport whose information is needed. The return will contain map version information, as well as the current Traffic Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to retrieve last traffic information for further processing.",
-                "operationId": "Traffic_GetTrafficIncidentViewport",
+                "operationId": "TrafficService_GetTrafficIncidentViewport",
                 "x-ms-examples": {
                     "GetTrafficIncidentViewport": {
                         "$ref": "./examples/GetTrafficIncidentViewport.json"
@@ -5378,11 +5442,13 @@
                     "$ref": "#/definitions/EntryPoints"
                 },
                 "dist": {
+                    "description": "Distance in meters",
                     "type": "number",
                     "format": "double",
                     "readOnly": true
                 },
                 "detourTime": {
+                    "description": "Detour time in seconds",
                     "type": "number",
                     "readOnly": true
                 }
@@ -5638,7 +5704,7 @@
                         "4"
                     ],
                     "x-ms-enum": {
-                        "name": "magnitudeOfDelay",
+                        "name": "MagnitudeOfDelay",
                         "modelAsString": false,
                         "values": [
                             {
@@ -5773,7 +5839,7 @@
                         "LOCATION_WAYPOINT"
                     ],
                     "x-ms-enum": {
-                        "name": "instructionType",
+                        "name": "GuidanceInstructionType",
                         "modelAsString": false
                     }
                 },
@@ -5801,7 +5867,7 @@
                         "RIGHT"
                     ],
                     "x-ms-enum": {
-                        "name": "drivingSide",
+                        "name": "DrivingSide",
                         "modelAsString": false
                     }
                 },
@@ -5845,7 +5911,7 @@
                         "WAYPOINT_REACHED"
                     ],
                     "x-ms-enum": {
-                        "name": "maneuver",
+                        "name": "GuidanceManeuver",
                         "modelAsString": false,
                         "values": [
                             {
@@ -6630,6 +6696,7 @@
         "Geometry": {
             "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
             "type": "object",
+            "x-ms-external": true,
             "discriminator": "type",
             "properties": {
                 "type": {
@@ -6639,25 +6706,7 @@
                         "FeatureCollection",
                         "GeometryCollection",
                         "Polygon"
-                    ],
-                    "x-ms-enum": {
-                        "name": "options",
-                        "modelAsString": false,
-                        "values": [
-                            {
-                                "value": "FeatureCollection",
-                                "description": "`GeoJSON Point` geometry."
-                            },
-                            {
-                                "value": "GeometryCollection",
-                                "description": "`GeoJSON MultiPoint` geometry."
-                            },
-                            {
-                                "value": "Polygon",
-                                "description": "`GeoJSON LineString` geometry."
-                            }
-                        ]
-                    }
+                    ]
                 }
             },
             "required": [
@@ -6677,7 +6726,7 @@
                 "GeometryCollection"
             ],
             "x-ms-enum": {
-                "name": "options",
+                "name": "GeoJSONGeometryType",
                 "modelAsString": false,
                 "values": [
                     {
@@ -6709,6 +6758,46 @@
                         "description": "`GeoJSON GeometryCollection` geometry."
                     }
                 ]
+            }
+        },
+        "GeoJSONFeatureCollection": {
+            "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Geometry"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "features": {
+                            "description": "Contains a list of valid `GeoJSON Feature` objects.",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/GeoJSONFeature"
+                            }
+                        }
+                    },
+                    "required": [
+                        "features"
+                    ]
+                }
+            ]
+        },
+        "GeoJSONFeature": {
+            "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "description": "Specifies the `type` for the object. Value should always be equal to \"Feature\".",
+                    "type": "string"
+                },
+                "geometry": {
+                    "$ref": "#/definitions/GeoJSONGeometry"
+                },
+                "properties": {
+                    "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value",
+                    "type": "object"
+                }
             }
         },
         "GeoJSONGeometry": {
