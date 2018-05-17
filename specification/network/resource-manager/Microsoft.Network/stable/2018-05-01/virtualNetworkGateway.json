@@ -847,7 +847,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting VirtualNetworkPeering resource.",
+            "description": "Request successful. The operation returns the resulting VirtualNetworkConnection resource.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGatewayConnection"
             }
@@ -942,7 +942,7 @@
           "200": {
             "description": "Update successful. The operation returns the resulting VirtualNetworkGatewayConnection resource.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntity"
+              "$ref": "#/definitions/VirtualNetworkGatewayConnection"
             }
           }
         },
@@ -2128,6 +2128,11 @@
           "description": "The virtual network connection shared key value."
         }
       },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "required": [
         "value"
       ],
