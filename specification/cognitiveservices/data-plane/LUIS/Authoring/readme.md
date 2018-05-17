@@ -111,10 +111,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.cognitiveservices.language.luis.authroing
+  namespace: com.microsoft.azure.cognitiveservices.language.luis.authoring
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/language/luis/authroing
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/language/luis/authoring
   with-optional-parameters: true
   with-single-async-method: true
 ```

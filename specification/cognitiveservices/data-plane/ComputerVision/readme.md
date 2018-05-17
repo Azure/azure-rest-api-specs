@@ -116,4 +116,5 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/vision/computervision
   with-optional-parameters: true
   with-single-async-method: true
+  with-default-group-name: ComputerVision
 ```
