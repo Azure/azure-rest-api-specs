@@ -51,8 +51,6 @@ Differences in v3 (compared to v2):
    - `+2017-10-01-preview/capabilities.json`
    - `+2017-10-01-preview/databases.json`
    - `+2017-10-01-preview/elasticPools.json`
- - New SQL database agent APIs
-   - `+2017-03-01/jobs.json`
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
@@ -87,12 +85,12 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
-- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
@@ -159,13 +157,13 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
-- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -223,12 +221,12 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
-- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -287,12 +285,12 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
+- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
-- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 
 # Needed when there is more than one input file
 override-info:
@@ -418,13 +416,13 @@ input-file:
  - ./Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/jobs.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
- - ./Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 
 # Needed when there is more than one input file
 override-info:
