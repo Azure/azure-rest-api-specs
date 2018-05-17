@@ -97,6 +97,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(java)
 java:
+  override-client-name: LuisRuntimeAPI
   azure-arm: true
   namespace: com.microsoft.azure.cognitiveservices.language.luis.runtime
   license-header: MICROSOFT_MIT_NO_CODEGEN
