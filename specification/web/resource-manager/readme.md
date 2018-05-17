@@ -211,6 +211,61 @@ input-file:
 - Microsoft.Web/preview/2015-08-01-preview/logicAppsManagementClient.json
 ```
 
+### Tag: package-2015-08-certificate-registration
+
+These settings apply only when `--tag=package-2015-08-certificate-registration` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-08-certificate-registration'
+input-file:
+- Microsoft.CertificateRegistration/stable/2015-08-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2015-08-01/CertificateRegistrationProvider.json
+```
+
+### Tag: package-2015-04-domain-registration
+
+These settings apply only when `--tag=package-2015-04-domain-registration` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-04-domain-registration'
+input-file:
+- Microsoft.DomainRegistration/stable/2015-04-01/Domains.json
+- Microsoft.DomainRegistration/stable/2015-04-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2015-04-01/DomainRegistrationProvider.json
+```
+
+### Tag: package-2016-09-01-web
+
+These settings apply only when `--tag=package-2016-09-01-web` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09-01-web'
+input-file:
+- Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2016-09-01/AppServicePlans.json
+```
+
+### Tag: package-2016-08-01-web
+
+These settings apply only when `--tag=package-2016-08-01-web` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-08-01-web'
+input-file:
+- Microsoft.Web/stable/2016-08-01/WebApps.json
+```
+
+### Tag: package-2016-03-01-web
+
+These settings apply only when `--tag=package-2016-03-01-web` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-01-web'
+input-file:
+- Microsoft.Web/stable/2016-03-01/Certificates.json
+- Microsoft.Web/stable/2016-03-01/CommonDefinitions.json
+- Microsoft.Web/stable/2016-03-01/DeletedWebApps.json
+- Microsoft.Web/stable/2016-03-01/Diagnostics.json
+- Microsoft.Web/stable/2016-03-01/Provider.json
+- Microsoft.Web/stable/2016-03-01/Recommendations.json
+- Microsoft.Web/stable/2016-03-01/ResourceHealthMetadata.json
+- Microsoft.Web/stable/2016-03-01/ResourceProvider.json
+```
 
 ---
 # Code Generation
@@ -227,6 +282,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_web']
 ```
 
 
@@ -289,8 +347,18 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-02
   - tag: package-2016-09
   - tag: package-2015-08-preview
+```
+
+### Tag: package-2018-02 and go
+
+These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(go)
+output-folder: $(go-sdk-folder)/services/web/mgmt/2018-02-01/web
 ```
 
 ### Tag: package-2016-09 and go
@@ -308,7 +376,7 @@ These settings apply only when `--tag=package-2015-08-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/web/mgmt/2015-08-preview/web
+output-folder: $(go-sdk-folder)/services/preview/web/mgmt/2015-08-preview/web
 ```
 
 
