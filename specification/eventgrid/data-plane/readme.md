@@ -50,6 +50,7 @@ input-file:
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
+- Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
 ```
 
 ---
@@ -66,6 +67,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - rake arm:regen_all_profiles['azure_event_grid']
 ```
 
 ## C#

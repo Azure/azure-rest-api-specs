@@ -28,6 +28,17 @@ openapi-type: arm
 tag: package-2018-03
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    reason: We do have a operations api as "/providers/Microsoft.Network/operations"
+    from: trafficmanager.json
+    where:
+      - $.paths["/providers/Microsoft.Network/operations"]
+
+```
+
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
@@ -37,6 +48,39 @@ input-file:
 - Microsoft.Network/stable/2018-03-01/trafficmanager.json
 ```
 
+### Tag: package-2018-02
+
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02'
+input-file:
+- Microsoft.Network/stable/2018-02-01/trafficmanager.json
+- Microsoft.Network/preview/2017-09-01-preview/trafficmanageranalytics.json
+
+# Needed when there is more than one input file
+override-info:
+  title: TrafficManagerManagementClient
+
+directive:
+  - suppress: R3023
+    reason: it's implemented in the main network spec
+    approved-by: "@fearthecowboy"
+  
+  - where: $.paths["/providers/Microsoft.Network/checkTrafficManagerNameAvailability"].post.operationId
+    suppress: R2066
+    reason: the name does include it.
+    approved-by: "@fearthecowboy"
+
+  - suppress: R3018
+    reason: Existing API; can't change.
+    approved-by: "@fearthecowboy"
+
+  - where: $.definitions.TrafficManagerUserMetricsKeyModel.properties
+    suppress: R3006
+    reason: Existing API; can't change without breaking API. Will consider in future API version
+    approved-by: "@fearthecowboy"
+    
+```
 ### Tag: package-2017-09-preview
 
 These settings apply only when `--tag=package-2017-09-preview` is specified on the command line.
@@ -105,6 +149,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - rake arm:regen_all_profiles['azure_mgmt_traffic_manager']
 ```
 
 
@@ -169,6 +216,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2018-03
+  - tag: package-2018-02
   - tag: package-2017-09-preview
   - tag: package-2017-05
   - tag: package-2017-03
@@ -182,6 +230,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-03' && $(go)
 output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-03-01/trafficmanager
+```
+
+### Tag: package-2018-02 and go
+
+These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(go)
+output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-02-01/trafficmanager
 ```
 
 ### Tag: package-2017-09-preview and go

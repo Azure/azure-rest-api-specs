@@ -1676,6 +1676,77 @@
         "x-ms-odata": "#/definitions/USqlTableStatistics"
       }
     },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/partitions/{partitionName}/previewrows": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_PreviewTablePartition",
+        "description": "Retrieves a preview set of rows in given partition.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the partition."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the partition."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table containing the partition."
+          },
+          {
+            "name": "partitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table partition."
+          },
+          {
+            "name": "maxRows",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum number of preview rows to be retrieved.Rows returned may be less than or equal to this number depending on row sizes and number of rows in the partition."
+          },
+          {
+            "name": "maxColumns",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum number of columns to be retrieved."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved preview rows for the specified partition.",
+            "schema": {
+              "$ref": "#/definitions/USqlTablePreview"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a preview set of rows in given partition": {
+            "$ref": "./examples/Catalog_PreviewTablePartition.json"
+          }
+        }
+      }
+    },
     "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/partitions/{partitionName}": {
       "get": {
         "tags": [
@@ -1727,6 +1798,70 @@
         "x-ms-examples": {
           "Retrieves the specified table partition from the Data Lake Analytics catalog": {
             "$ref": "./examples/Catalog_GetTablePartition.json"
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/previewrows": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_PreviewTable",
+        "description": "Retrieves a preview set of rows in given table.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the table."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table."
+          },
+          {
+            "name": "maxRows",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum number of preview rows to be retrieved. Rows returned may be less than or equal to this number depending on row sizes and number of rows in the table."
+          },
+          {
+            "name": "maxColumns",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum number of columns to be retrieved."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved preview rows for the specified table.",
+            "schema": {
+              "$ref": "#/definitions/USqlTablePreview"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a preview set of rows in given table": {
+            "$ref": "./examples/Catalog_PreviewTable.json"
           }
         }
       }
@@ -3656,6 +3791,42 @@
         }
       },
       "description": "A Data Lake Analytics catalog type field information item."
+    },
+    "USqlTablePreview": {
+      "properties": {
+        "totalRowCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the total number of rows in the table or partition."
+        },
+        "totalColumnCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the total number of columns in the table or partition."
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": "the rows of the table or partition preview, where each row is an array of string representations the row's values. Note: Byte arrays will appear as base-64 encoded values, SqlMap and SqlArray objects will appear as escaped JSON objects, and DateTime objects will appear as ISO formatted UTC date-times."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "true if the amount of data in the response is less than expected due to the preview operation's size limitations. This can occur if the requested rows or row counts are too large."
+        },
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlTableColumn"
+          },
+          "description": "the schema of the table or partition."
+        }
+      },
+      "description": "A Data Lake Analytics catalog table or partition preview rows item."
     },
     "USqlTable": {
       "allOf": [

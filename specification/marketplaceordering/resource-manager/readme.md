@@ -76,6 +76,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - rake arm:regen_all_profiles['azure_mgmt_marketplace_ordering']
 ```
 
 
