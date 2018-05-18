@@ -4,7 +4,7 @@
   "info": {
     "version": "2018-03-01-preview",
     "title": "Management Groups API",
-    "description": "The Azure Management Groups API enables consolidation of multiple \nsubscriptions/resources into an organizational hierarchy and centrally \nmanage access control, policies, alerting and reporting for those resources.\n"
+    "description": "The Azure Management Groups API enables consolidation of multiple subscriptions/resources into an organizational hierarchy and centrally manage access control, policies, alerting and reporting for those resources."
   },
   "schemes": [
     "https"
@@ -36,15 +36,15 @@
   "tags": [
     {
       "name": "ManagementGroups",
-      "description": "A Management Group is a customer defined scope (grouping mechanism) that \nprovides access control (authorization), policy management and reporting. \nManagement Groups are organized in a strictly tree-based hierarchy.\n"
+      "description": "A Management Group is a customer defined scope (grouping mechanism) that provides access control (authorization), policy management and reporting. Management Groups are organized in a strictly tree-based hierarchy."
     },
     {
       "name": "Operations",
-      "description": "Management operations supported by the Microsoft.Management resource provider.\n"
+      "description": "Management operations supported by the Microsoft.Management resource provider."
     },
     {
       "name": "Entities",
-      "description": "A list of entities that belong to the Management Groups.\n"
+      "description": "A list of entities that belong to the Management Groups."
     }
   ],
   "paths": {
@@ -54,7 +54,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_List",
-        "description": "List management groups for the authenticated user.\n",
+        "description": "List management groups for the authenticated user.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -96,7 +96,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_Get",
-        "description": "Get the details of the management group.\n",
+        "description": "Get the details of the management group.",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -148,7 +148,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_CreateOrUpdate",
-        "description": "Create or update a management group.\nIf a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.\n",
+        "description": "Create or update a management group. If a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -195,7 +195,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_Update",
-        "description": "Update a management group.\n",
+        "description": "Update a management group.",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -235,7 +235,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_Delete",
-        "description": "Delete management group.\nIf a management group contains child resources, the request will fail.\n",
+        "description": "Delete management group. If a management group contains child resources, the request will fail.",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -278,7 +278,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroupSubscriptions_Create",
-        "description": "Associates existing subscription with the management group.\n",
+        "description": "Associates existing subscription with the management group.",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -315,7 +315,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroupSubscriptions_Delete",
-        "description": "De-associates subscription from the management group.\n",
+        "description": "De-associates subscription from the management group.",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -421,7 +421,7 @@
           "Entities"
         ],
         "operationId": "Entities_List",
-        "description": "List all entities (Management Groups, Subscriptions, etc.) for the authenticated user.\n",
+        "description": "List all entities (Management Groups, Subscriptions, etc.) for the authenticated user.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -494,12 +494,6 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TenantBackfillStatusResult"
-            }
-          },
-          "202": {
-            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/TenantBackfillStatusResult"
             }
@@ -1371,7 +1365,7 @@
       "schema": {
         "$ref": "#/definitions/CreateManagementGroupRequest"
       },
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "PatchGroupRequestParameter": {
       "name": "patchGroupRequest",
@@ -1381,7 +1375,7 @@
       "schema": {
         "$ref": "#/definitions/PatchManagementGroupRequest"
       },
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
       "name": "$filter",
@@ -1418,7 +1412,7 @@
         "ParentAndFirstLevelChildren"
       ],
       "x-ms-parameter-location": "method",
-      "description": "The $search parameter is used in conjunction with the $filter parameter to return three different outputs depending on the parameter passed in. \nWith $search=AllowedParents the API will return the entity info of all groups that the requested entity will be able to reparent to as determined by the user's permissions.\nWith $search=AllowedChildren the API will return the entity info of all entities that can be added as children of the requested entity.\nWith $search=ParentAndFirstLevelChildren the API will return the parent and  first level of children that the user has either direct access to or indirect access via one of their descendants."
+      "description": "The $search parameter is used in conjunction with the $filter parameter to return three different outputs depending on the parameter passed in. With $search=AllowedParents the API will return the entity info of all groups that the requested entity will be able to reparent to as determined by the user's permissions. With $search=AllowedChildren the API will return the entity info of all entities that can be added as children of the requested entity. With $search=ParentAndFirstLevelChildren the API will return the parent and  first level of children that the user has either direct access to or indirect access via one of their descendants."
     },
     "GroupNameParameter": {
       "name": "groupName",
@@ -1438,7 +1432,7 @@
         "delete"
       ],
       "description": "The id of the operation result.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "CheckNameAvailabilityParameter": {
       "name": "checkNameAvailabilityRequest",
@@ -1448,7 +1442,7 @@
       "schema": {
         "$ref": "#/definitions/CheckNameAvailabilityRequest"
       },
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "SkipParameter": {
       "name": "$skip",
@@ -1456,7 +1450,7 @@
       "required": false,
       "type": "integer",
       "description": "Number of entities to skip over when retrieving results. Passing this in will override $skipToken.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "TopParameter": {
       "name": "$top",
@@ -1464,15 +1458,15 @@
       "required": false,
       "type": "integer",
       "description": "Number of elements to return when retrieving results. Passing this in will override $skipToken.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "SkipTokenParameter": {
       "name": "$skiptoken",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "Page continuation token is only used if a previous operation returned a partial result. \nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.\n",
-      "x-ms-parameter-location": "client"
+      "description": "Page continuation token is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.",
+      "x-ms-parameter-location": "method"
     },
     "CacheControlHeader": {
       "name": "Cache-Control",
