@@ -163,7 +163,7 @@ swagger-to-sdk:
       use: "@microsoft.azure/autorest.python@~3.0"
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_api_management']
+      - rake arm:regen_all_profiles['azure_mgmt_api_management']
 ```
 
 
