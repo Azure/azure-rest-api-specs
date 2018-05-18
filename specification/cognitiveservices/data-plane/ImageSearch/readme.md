@@ -34,7 +34,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_imagesearch']
+      - rake arm:regen_all_profiles['azure_cognitiveservices_imagesearch']
 ```
 
 
