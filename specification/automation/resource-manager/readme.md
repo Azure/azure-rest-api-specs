@@ -122,6 +122,7 @@ input-file:
 - Microsoft.Automation/stable/2018-01-15/dscNode.json
 - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
 - Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2015-10-31/watcher.json
 ```
 
 ---
