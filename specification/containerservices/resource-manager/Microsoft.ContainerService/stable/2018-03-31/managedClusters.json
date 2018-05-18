@@ -745,6 +745,12 @@
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
           "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
         },
+        "maxPods": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of pods that can run on a node.",
+          "default": 30
+        },
         "osType": {
           "$ref": "#/definitions/OSType",
           "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
@@ -792,6 +798,43 @@
         "ssh"
       ],
       "description": "Profile for Linux VMs in the container service cluster."
+    },
+    "ContainerServiceNetworkProfile": {
+      "properties": {
+        "networkPlugin": {
+          "type": "string",
+          "enum": [
+            "azure",
+            "kubenet"
+          ],
+          "description": "Network plugin used for building Kubernetes network."
+        },
+        "networkPolicy": {
+          "type": "string",
+          "enum": [
+            "calico",
+            "cilium"
+          ],
+          "description": "Network policy used for building Kubernetes network."
+        },
+        "podCidr": {
+          "type": "string",
+          "description": "A CIDR notation IP range from which to assign pod IPs when kubenet is used."
+        },
+        "serviceCidr": {
+          "type": "string",
+          "description": "A CIDR notation IP range from which to assign service cluster IPs."
+        },
+        "dnsServiceIP": {
+          "type": "string",
+          "description": "Containers DNS server IP address."
+        },
+        "dockerBridgeCidr": {
+          "type": "string",
+          "description": "A CIDR notation IP for Docker bridge."
+        }
+      },
+      "description": "Profile of network configuration."
     },
     "ContainerServiceSshConfiguration": {
       "properties": {
@@ -917,6 +960,10 @@
         "servicePrincipalProfile": {
           "$ref": "#/definitions/ContainerServiceServicePrincipalProfile",
           "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/ContainerServiceNetworkProfile",
+          "description": "Profile of network configuration."
         }
       },
       "description": "Properties of the managed cluster."
