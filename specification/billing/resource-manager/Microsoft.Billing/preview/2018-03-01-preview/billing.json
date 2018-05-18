@@ -385,39 +385,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/entities": {
-      "get": {
-        "tags": [
-          "Entities"
-        ],
-        "x-ms-examples": {
-          "EntitiesList": {
-            "$ref": "./examples/EntitiesList.json"
-          }
-        },
-        "operationId": "Entities_List",
-        "description": "Lists all billing entities for a user which he has access to.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingEntityListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts": {
       "get": {
         "tags": [

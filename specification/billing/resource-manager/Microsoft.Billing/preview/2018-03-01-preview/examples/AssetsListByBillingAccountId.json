@@ -2,7 +2,8 @@
   "parameters": {
     "api-version": "2018-03-01-preview",
     "billingAccountId": "{billingAccountId}",    
-    "$filter": "type eq 'Direct'"
+    "$filter": "type eq 'Direct'",
+    "$expand": "billingProfileDetails,productInfo"
   },
   "responses": {
     "200": {
@@ -18,21 +19,15 @@
               "type": "Direct",
               "startDate": "2017-02-01",
               "endDate": "2019-02-01",
+              "billingProfileId": "BillingProfileId1",
               "billingProfileDetails": {
-                "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
-                "name": "BillingProfileId1",
-                "type": "Microsoft.Billing/billingProfiles",
-                "properties": {
-                  "billingProfileName": "BillingProfileName1",
-                  "startDate": "2017-02-01",
-                  "endDate": "2019-02-01",
-                  "status": "Active",
-                  "useCredits": true,
-                  "poNumber": "12345"
-                }
+                "billingProfileName": "BillingProfileName1",
+                "startDate": "2017-02-01",
+                "useCredits": true,
+                "poNumber": "12345"
               },
+              "productId": "Product1",
               "productInfo": {
-                "productId": "Product1",
                 "productName": "ProductName1",
                 "skuId": "SKU12345",
                 "availabilityId": "AvailabilityId1"
@@ -49,23 +44,17 @@
               "type": "Direct",
               "startDate": "2017-02-01",
               "endDate": "2019-02-01",
+              "billingProfileId": "BillingProfileId2",
               "billingProfileDetails": {
-                "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId2",
-                "name": "BillingProfileId2",
-                "type": "Microsoft.Billing/billingProfiles",
-                "properties": {
-                  "billingProfileName": "BillingProfileName2",
-                  "startDate": "2017-02-01",
-                  "endDate": "2019-02-01",
-                  "status": "Active",
-                  "useCredits": true,
-                  "poNumber": "12345"
-                }
+                "billingProfileName": "BillingProfileName2",
+                "startDate": "2017-02-01",
+                "useCredits": true,
+                "poNumber": "12345"
               },
+              "productId": "Product2",
               "productInfo": {
-                "productId": "Product2",
                 "productName": "ProductName2",
-                "skuId": "SKU12345678",
+                "skuId": "SKU12345",
                 "availabilityId": "AvailabilityId2"
               }
             }

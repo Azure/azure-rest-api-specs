@@ -2,8 +2,8 @@
   "parameters": {
     "api-version": "2018-03-01-preview",
     "billingAccountId": "{billingAccountId}",
-    "$expand": "properties/assets",
-    "$filter": "canCreateSubscription eq 'true'"
+    "$expand": "assetDetails",
+    "$filter": "properties/canCreateSubscription eq 'true'"
   },
   "responses": {
     "200": {
@@ -16,73 +16,32 @@
             "properties": {
               "projectName": "ProjectName1",
               "startDate": "2017-02-01",
-              "endDate": "2019-02-01",
-              "status": "Active",
-              "ratingAssets": [
+              "assetIds": [
+                "DelegatedAssetId1",
+                "DelegatedAssetId2"
+              ],
+              "assetDetails": [
                 {
-                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets/AssetId1",
-                  "name": "AssetId1",
-                  "type": "Microsoft.Billing/assets",
-                  "properties": {
-                    "parentAssetId": "Asset1",
-                    "owningProjectId": "12345",
-                    "type": "Direct",
-                    "startDate": "2017-02-01",
-                    "endDate": "2019-02-01",
-                    "billingProfileDetails": {
-                      "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
-                      "name": "BillingProfileId1",
-                      "type": "Microsoft.Billing/billingProfiles",
-                      "properties": {
-                        "billingProfileName": "BillingProfileName1",
-                        "startDate": "2017-02-01",
-                        "endDate": "2019-02-01",
-                        "status": "Active",
-                        "useCredits": true,
-                        "poNumber": "12345"
-                      }
-                    },
-                    "productInfo": {
-                      "productId": "Product1",
-                      "productName": "ProductName1",
-                      "skuId": "SKU12345",
-                      "availabilityId": "AvailabilityId1"
-                    }
-                  }
+                  "parentAssetId": "Asset1",
+                  "owningProjectId": "ProjectId1",
+                  "type": "Direct",
+                  "startDate": "2017-02-01",
+                  "endDate": "2019-02-01",
+                  "billingProfileId": "BillingProfileId1",
+                  "productId": "Product1"
                 },
                 {
-                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets/AssetId2",
-                  "name": "AssetId2",
-                  "type": "Microsoft.Billing/assets",
-                  "properties": {
-                    "parentAssetId": "null",
-                    "owningProjectId": "12345678",
-                    "type": "Direct",
-                    "startDate": "2017-02-01",
-                    "endDate": "2019-02-01",
-                    "billingProfileDetails": {
-                      "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId2",
-                      "name": "BillingProfileId2",
-                      "type": "Microsoft.Billing/billingProfiles",
-                      "properties": {
-                        "billingProfileName": "BillingProfileName2",
-                        "startDate": "2017-02-01",
-                        "endDate": "2019-02-01",
-                        "status": "Active",
-                        "useCredits": true,
-                        "poNumber": "12345"
-                      }
-                    },
-                    "productInfo": {
-                      "productId": "Product2",
-                      "productName": "ProductName2",
-                      "skuId": "SKU12345678",
-                      "availabilityId": "AvailabilityId2"
-                    }
-                  }
+                  "parentAssetId": "Asset2",
+                  "owningProjectId": "ProjectId1",
+                  "type": "Direct",
+                  "startDate": "2017-02-01",
+                  "endDate": "2019-02-01",
+                  "billingProfileId": "BillingProfileId2",
+                  "productId": "Product2"
                 }
               ],
-              "costCenter": "1376"
+              "costCenter": "1376",
+              "canCreateSubscription": true
             }
           },
           {
@@ -92,73 +51,32 @@
             "properties": {
               "projectName": "ProjectName2",
               "startDate": "2017-02-01",
-              "endDate": "2019-02-01",
-              "status": "Active",
-              "ratingAssets": [
+              "assetIds": [
+                "DelegatedAssetId3",
+                "DelegatedAssetId4"
+              ],
+              "assetDetails": [
                 {
-                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets/AssetId1",
-                  "name": "AssetId1",
-                  "type": "Microsoft.Billing/assets",
-                  "properties": {
-                    "parentAssetId": "Asset1",
-                    "owningProjectId": "12345",
-                    "type": "Direct",
-                    "startDate": "2017-02-01",
-                    "endDate": "2019-02-01",
-                    "billingProfileDetails": {
-                      "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId3",
-                      "name": "BillingProfileId3",
-                      "type": "Microsoft.Billing/billingProfiles",
-                      "properties": {
-                        "billingProfileName": "BillingProfileName3",
-                        "startDate": "2017-02-01",
-                        "endDate": "2019-02-01",
-                        "status": "Active",
-                        "useCredits": true,
-                        "poNumber": "12345"
-                      }
-                    },
-                    "productInfo": {
-                      "productId": "Product1",
-                      "productName": "ProductName1",
-                      "skuId": "SKU12345",
-                      "availabilityId": "AvailabilityId1"
-                    }
-                  }
+                  "parentAssetId": "Asset3",
+                  "owningProjectId": "ProjectId2",
+                  "type": "Direct",
+                  "startDate": "2017-02-01",
+                  "endDate": "2019-02-01",
+                  "billingProfileId": "BillingProfileId3",
+                  "productId": "Product1"
                 },
                 {
-                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets/AssetId2",
-                  "name": "AssetId2",
-                  "type": "Microsoft.Billing/assets",
-                  "properties": {
-                    "parentAssetId": "Asset2",
-                    "owningProjectId": "12345678",
-                    "type": "Direct",
-                    "startDate": "2017-02-01",
-                    "endDate": "2019-02-01",
-                    "billingProfileDetails": {
-                      "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId4",
-                      "name": "BillingProfileId4",
-                      "type": "Microsoft.Billing/billingProfiles",
-                      "properties": {
-                        "billingProfileName": "BillingProfileName4",
-                        "startDate": "2017-02-01",
-                        "endDate": "2019-02-01",
-                        "status": "Active",
-                        "useCredits": true,
-                        "poNumber": "12345"
-                      }
-                    },
-                    "productInfo": {
-                      "productId": "Product2",
-                      "productName": "ProductName2",
-                      "skuId": "SKU12345678",
-                      "availabilityId": "AvailabilityId2"
-                    }
-                  }
+                  "parentAssetId": "Asset4",
+                  "owningProjectId": "ProjectId2",
+                  "type": "Direct",
+                  "startDate": "2017-02-01",
+                  "endDate": "2019-02-01",
+                  "billingProfileId": "BillingProfileId4",
+                  "productId": "Product2"
                 }
               ],
-              "costCenter": "1376"
+              "costCenter": "1376",
+              "canCreateSubscription": true
             }
           }
         ]

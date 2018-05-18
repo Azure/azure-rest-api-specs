@@ -2,7 +2,7 @@
   "parameters": {
     "api-version": "2018-03-01-preview",
     "billingAccountId": "2000100",
-    "$expand": "properties/projects"
+    "$expand": "projectDetails, billingProfileDetails"
   },
   "responses": {
     "200": {
@@ -22,18 +22,36 @@
             "endDate": "2019-02-01"
           },
           "cloudType": "Commercial",
-          "projects": [
+          "projectIds": [
+            "ProjectId1",
+            "ProjectId2"
+          ],
+          "projectDetails": [
             {
-              "id": "/providers/Microsoft.Billing/billingAccounts/2000100/projects/ProjectId1",
-              "name": "ProjectId1",
-              "type": "Microsoft.Billing/projects",
-              "properties": {
-                "projectName": "ProjectName1",
-                "startDate": "2017-02-01",
-                "endDate": "2019-02-01",
-                "status": "Active",                
-                "costCenter": "1376"
-              }
+              "projectName": "ProjectName1",
+              "startDate": "2017-02-01"
+            },
+            {
+              "projectName": "ProjectName2",
+              "startDate": "2017-02-01"
+            }
+          ],
+          "billingProfileIds": [
+            "BillingProfileId1",
+            "BillingProfileId2"
+          ],
+          "billingProfiles": [
+            {
+              "billingProfileName": "BillingProfileName1",
+              "startDate": "2017-02-01",              
+              "useCredits": true,
+              "poNumber": "12345"
+            },
+            {
+              "billingProfileName": "BillingProfileName2",
+              "startDate": "2017-02-01",              
+              "useCredits": true,
+              "poNumber": "56789"
             }
           ]
         }
