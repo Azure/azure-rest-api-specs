@@ -51,6 +51,7 @@ input-file:
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
 - Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
+- Microsoft.Media/stable/2018-01-01/MediaServices.json
 ```
 
 ---
