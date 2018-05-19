@@ -4,9 +4,16 @@
         "searchDnsSuffix": "search.windows.net",
         "indexName": "myindex",
         "api-version": "2017-11-11-Preview",
-        "autocompleteMode": "oneTerm",
-        "search": "washington medic",
-        "suggesterName": "sg"
+        "autocompleteRequest": {
+          "autocompleteMode": "oneTerm",
+          "search": "washington medic",
+          "suggesterName": "sg",
+          "highlightPostTag": "</em>",
+          "highlightPreTag": "<em>",
+          "minimumCoverage": 80,
+          "searchFields": ["title", "description"],
+          "top": "10"          
+        }
     },
     "responses": {
         "200": {
