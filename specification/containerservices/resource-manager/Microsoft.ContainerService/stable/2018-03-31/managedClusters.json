@@ -807,6 +807,7 @@
             "azure",
             "kubenet"
           ],
+          "default": "kubenet",
           "x-ms-enum": {
             "name": "NetworkPlugin",
             "modelAsString": true
@@ -833,15 +834,19 @@
         "serviceCidr": {
           "type": "string",
           "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
+          "default": "10.0.0.0/16",
           "description": "A CIDR notation IP range from which to assign service cluster IPs. It must not overlap with any Subnet IP ranges."
         },
         "dnsServiceIP": {
           "type": "string",
+          "pattern": "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+          "default": "10.0.0.10",
           "description": "An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr."
         },
         "dockerBridgeCidr": {
           "type": "string",
           "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
+          "default": "172.17.0.1/16",
           "description": "A CIDR notation IP range assigned to the Docker bridge network. It must not overlap with any Subnet IP ranges or the Kubernetes service address range."
         }
       },
