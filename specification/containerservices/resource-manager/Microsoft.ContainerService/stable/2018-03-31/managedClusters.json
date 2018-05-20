@@ -980,6 +980,12 @@
         "networkProfile": {
           "$ref": "#/definitions/ContainerServiceNetworkProfile",
           "description": "Profile of network configuration."
+        },
+        "addonProfiles": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ManagedClusterAddonProfile"
+          },
+          "description": "Profile of managed cluster add-on."
         }
       },
       "description": "Properties of the managed cluster."
@@ -1085,6 +1091,24 @@
         "agentPoolProfiles"
       ],
       "description": "Control plane and agent pool upgrade profiles."
+    },
+    "ManagedClusterAddonProfile": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the add-on is enabled or not."
+        },
+        "config": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs for configuring an add-on."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "A Kubernetes add-on profile for a managed cluster."
     },
     "ManagedClusterUpgradeProfile": {
       "properties": {
