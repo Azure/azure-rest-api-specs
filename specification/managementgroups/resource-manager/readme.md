@@ -24,7 +24,14 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-2018-03
+```
+### Tag: package-2018-03
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file:
+  - Microsoft.Management/preview/2018-03-01-preview/management.json
 ```
 
 ### Tag: package-2018-01
@@ -123,9 +130,19 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-03
   - tag: package-2018-01
   - tag: package-2017-11
   - tag: package-2017-08
+```
+
+### Tag: package-2018-03 and go
+
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-03' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2018-03-01-preview/management
 ```
 
 ### Tag: package-2018-01 and go
