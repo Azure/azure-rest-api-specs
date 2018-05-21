@@ -6,20 +6,22 @@
     "galleryName": "myGalleryName",
     "gallery": {
       "location": "West US",
-      "properties": {}
+      "properties": {
+        "description": "This is the gallery description."
+      }
     }
   },
   "responses": {
     "201": {
       "body": {
         "properties": {
+          "description": "This is the gallery description.",
           "identifier": {
-            "uniqueName": "{SUBSCRIPTION-ID}-MYGALLERYNAME"
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
           },
           "provisioningState": "Creating"
         },
         "location": "West US",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
         "name": "myGalleryName"
       }
     }
