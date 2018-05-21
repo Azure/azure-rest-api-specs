@@ -77,7 +77,8 @@
           "type": "array",
           "items": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-nullable": false
           },
           "description": "Days of the month that the job should execute on. Must be between 1 and 31."
         },
@@ -127,7 +128,8 @@
         "jobId": {
           "type": "string",
           "format": "uuid",
-          "description": "Gets or sets the id of the job."
+          "description": "Gets or sets the id of the job.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
@@ -165,13 +167,13 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the end time of the job."
         },
         "exception": {
@@ -181,13 +183,13 @@
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the last modified time of the job."
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the last status modified time of the job."
         },
         "parameters": {
@@ -198,8 +200,9 @@
           "description": "Gets or sets the parameters of the job."
         },
         "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningStateProperty",
-          "description": "The provisioning state of a resource."
+          "type": "string",
+          "description": "The provisioning state of a resource.",
+          "readOnly": true
         }
       },
       "description": "Definition of job properties."
@@ -334,7 +337,8 @@
           "type": "string",
           "format": "uuid",
           "readOnly": true,
-          "description": "The id of the job."
+          "description": "The id of the job.",
+          "x-nullable": false
         },
         "creationTime": {
           "type": "string",
@@ -370,27 +374,32 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "The start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "The end time of the job."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "The last modified time of the job."
         },
         "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningStateProperty",
-          "description": "The current provisioning state of the job."
+          "type": "string",
+          "description": "The provisioning state of a resource.",
+          "readOnly": true
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Specifies the runOn group name where the job was executed."
         }
       }
     },
@@ -621,7 +630,7 @@
         "nextRun": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "ext run time of the update."
         }
       }
@@ -709,6 +718,17 @@
           "items": {
             "type": "string"
           }
+        },
+        "includedKbNumbers": {
+          "type": "array",
+          "description": "KB numbers included from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rebootSetting": {
+          "description": "Reboot setting for the software update configuration.",
+          "type": "string"
         }
       }
     },
@@ -736,6 +756,17 @@
           "items": {
             "type": "string"
           }
+        },
+        "includedPackageNameMasks": {
+          "type": "array",
+          "description": "packages included from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rebootSetting": {
+          "description": "Reboot setting for the software update configuration.",
+          "type": "string"
         }
       }
     },
@@ -890,7 +921,7 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "End time of the software update configuration run.",
           "readOnly": true
         },
@@ -995,7 +1026,7 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "End time of the software update configuration machine run.",
           "readOnly": true
         },
@@ -1282,7 +1313,7 @@
     },
     "SourceControlSyncJobProperties": {
       "properties": {
-        "sourceControlSyncJobId": {
+        "syncJobId": {
           "type": "string",
           "description": "Gets the source control sync job id."
         },
@@ -1309,20 +1340,28 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the end time of the job."
         },
-        "startedBy": {
+        "startType": {
           "type": "string",
-          "description": "Gets the user who started the sync job."
+          "description": "Gets the type of start for the sync job.",
+          "enum": [
+            "AutoSync",
+            "ManualSync"
+          ],
+          "x-ms-enum": {
+            "name": "startType",
+            "modelAsString": true
+          }
         }
       },
       "description": "Definition of source control sync job properties."
@@ -1381,7 +1420,7 @@
     },
     "SourceControlSyncJobByIdProperties": {
       "properties": {
-        "sourceControlSyncJobId": {
+        "syncJobId": {
           "type": "string",
           "description": "Gets the source control sync job id."
         },
@@ -1408,42 +1447,155 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "readOnly": true,
           "description": "Gets the end time of the job."
         },
-        "startedBy": {
+        "startType": {
           "type": "string",
-          "description": "Gets the user who started the sync job."
+          "description": "Gets the type of start for the sync job.",
+          "enum": [
+            "AutoSync",
+            "ManualSync"
+          ],
+          "x-ms-enum": {
+            "name": "startType",
+            "modelAsString": true
+          }
         },
-        "errors": {
-          "description": "Error details of the source control sync job.",
-          "$ref": "#/definitions/SourceControlSyncJobByIdErrors"
+        "exception": {
+          "type": "string",
+          "description": "Gets the exceptions that occured while running the sync job."
         }
       },
       "description": "Definition of source control sync job properties."
     },
-    "SourceControlSyncJobByIdErrors": {
-      "type": "object",
+    "SourceControlSyncJobStreamsListBySyncJob": {
       "properties": {
-        "code": {
-          "type": "string",
-          "description": "Gets the error code for the job."
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceControlSyncJobStream"
+          },
+          "description": "Gets a list of source control sync job streams."
         },
-        "message": {
+        "nextLink": {
           "type": "string",
-          "description": "Gets the error message for the job."
+          "readOnly": true,
+          "description": "Gets or sets the next link."
         }
       },
-      "description": "Error details of the source control sync job."
+      "description": "The response model for the list source control sync job streams operation."
     },
+    "SourceControlSyncJobStream": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource id."
+        },
+        "properties": {
+          "$ref": "#/definitions/SourceControlSyncJobStreamProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets the properties of the source control sync job stream."
+        }
+      },
+      "description": "Definition of the source control sync job stream."
+    },
+    "SourceControlSyncJobStreamProperties": {
+      "properties": {
+        "syncJobStreamId": {
+          "type": "string",
+          "description": "Gets the sync job stream id."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Gets the summary of the sync job stream."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "Gets the time of the sync job stream."
+        },
+        "streamType": {
+          "type": "string",
+          "description": "Gets the type of the sync job stream.",
+          "enum": [
+            "Error",
+            "Output"
+          ],
+          "x-ms-enum": {
+            "name": "streamType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Definition of source control sync job stream properties."
+    },
+    "SourceControlSyncJobStreamById": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource id."
+        },
+        "properties": {
+          "$ref": "#/definitions/SourceControlSyncJobStreamByIdProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets the properties of the source control sync job stream."
+        }
+      },
+      "description": "Definition of the source control sync job stream by id."
+    },
+   "SourceControlSyncJobStreamByIdProperties": {
+      "properties": {
+        "syncJobStreamId": {
+          "type": "string",
+          "description": "Gets the sync job stream id."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Gets the summary of the sync job stream."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "Gets the time of the sync job stream."
+        },
+        "streamType": {
+          "type": "string",
+          "description": "Gets the type of the sync job stream.",
+          "enum": [
+            "Error",
+            "Output"
+          ],
+          "x-ms-enum": {
+            "name": "streamType",
+            "modelAsString": true
+          }
+        },
+        "streamText": {
+          "type": "string",
+          "description": "Gets the text of the sync job stream."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets the value of the sync job stream."
+        }
+      },
+      "description": "Definition of source control sync job stream by id properties."
+   },
     "ErrorResponse": {
       "type": "object",
       "properties": {
@@ -1470,18 +1622,20 @@
           "readOnly": true,
           "type": "number",
           "format": "double",
-          "description": "Gets the start time's offset in minutes."
+          "description": "Gets the start time's offset in minutes.",
+          "x-nullable": false
         },
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the end time of the schedule."
         },
         "expiryTimeOffsetMinutes": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the expiry time's offset in minutes."
+          "description": "Gets or sets the expiry time's offset in minutes.",
+          "x-nullable": false
         },
         "isEnabled": {
           "type": "boolean",
@@ -1491,13 +1645,14 @@
         "nextRun": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "Gets or sets the next run time of the schedule."
         },
         "nextRunOffsetMinutes": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the next run time's offset in minutes."
+          "description": "Gets or sets the next run time's offset in minutes.",
+          "x-nullable": false
         },
         "interval": {
           "type": "integer",

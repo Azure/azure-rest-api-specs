@@ -24,7 +24,25 @@ These are the global settings for SearchServiceClient.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2016-09-preview
+tag: package-2017-11-preview
+```
+
+### Tag: package-2017-11-preview
+
+These settings apply only when `--tag=package-2017-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-preview'
+input-file:
+- preview/2017-11-11-preview/searchservice.json
+```
+
+### Tag: package-2017-11
+
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- preview/2017-11-11/searchservice.json
 ```
 
 ### Tag: package-2016-09-preview

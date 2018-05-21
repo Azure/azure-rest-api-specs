@@ -64,6 +64,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_server_management']
 ```
 
 
@@ -135,7 +138,7 @@ These settings apply only when `--tag=package-2016-07-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-07-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/servermanagement/mgmt/2016-07-01-preview/servermanagement
+output-folder: $(go-sdk-folder)/services/preview/servermanagement/mgmt/2016-07-01-preview/servermanagement
 ```
 
 ### Tag: package-2015-07-preview and go
@@ -144,7 +147,7 @@ These settings apply only when `--tag=package-2015-07-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-07-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/servermanagement/mgmt/2015-07-01-preview/servermanagement
+output-folder: $(go-sdk-folder)/services/preview/servermanagement/mgmt/2015-07-01-preview/servermanagement
 ```
 
 
