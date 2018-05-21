@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2018-06
+tag: package-2018-04-01
 
 directive:
   - where:
@@ -159,17 +159,21 @@ These settings apply only when `--tag=package-gallery-2018-06` is specified on t
 ``` yaml $(tag) == 'package-gallery-2018-06'
 input-file:
 - Microsoft.Compute/preview/2018-06-01/gallery.json
+- Microsoft.Compute/stable/2018-04-01/compute.json
+- Microsoft.Compute/stable/2018-04-01/runCommands.json
+- Microsoft.Compute/stable/2017-09-01/skus.json
+- Microsoft.Compute/stable/2018-04-01/disk.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
-### Tag: package-2018-06
+### Tag: package-2018-04-01
 
-These settings apply only when `--tag=package-2018-06` is specified on the command line.
+These settings apply only when `--tag=package-2018-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06'
+``` yaml $(tag) == 'package-2018-04-01'
 input-file:
-- Microsoft.Compute/preview/2018-06-01/gallery.json
-- Microsoft.Compute/stable/2017-12-01/compute.json
-- Microsoft.Compute/stable/2017-12-01/runCommands.json
+- Microsoft.Compute/stable/2018-04-01/compute.json
+- Microsoft.Compute/stable/2018-04-01/runCommands.json
 - Microsoft.Compute/stable/2017-09-01/skus.json
 - Microsoft.Compute/stable/2018-04-01/disk.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
@@ -547,7 +551,6 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
-  - tag: package-gallery-2018-06
   - tag: package-disks-2018-04
   - tag: package-compute-only-2017-12
   - tag: package-skus-2017-09
@@ -555,17 +558,6 @@ batch:
   - tag: package-compute-2016-04-preview
   - tag: package-compute-2016-03
   - tag: package-compute-2015-06
-```
-
-### Tag: package-gallery-2018-06 and python
-
-These settings apply only when `--tag=package-gallery-2018-06 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-gallery-2018-06' && $(python)
-python:
-  namespace: azure.mgmt.compute.v2018_06_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2018_06_01
 ```
 
 ### Tag: package-disks-2018-04 and python
@@ -660,4 +652,3 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-compute
 ```
-
