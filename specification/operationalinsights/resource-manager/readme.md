@@ -1,5 +1,5 @@
 # OperationalInsights
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for OperationalInsights.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for OperationalInsights.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for OperationalInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the OperationalInsights API.
 
 ``` yaml
@@ -40,7 +40,7 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 input-file:
 - Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
 ```
- 
+
 ### Tag: package-2015-03
 
 These settings apply only when `--tag=package-2015-03` is specified on the command line.
@@ -62,6 +62,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_operational_insights']
 ```
 
 
@@ -72,7 +76,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ```yaml $(csharp)
 csharp:
-  # last generated using AutoRest.1.0.0-Nightly20170126 
+  # last generated using AutoRest.1.0.0-Nightly20170126
   azure-arm: true
   namespace: Microsoft.Azure.Management.OperationalInsights
   payload-flattening-threshold: 1
@@ -145,8 +149,24 @@ These settings apply only when `--tag=package-2015-11-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-11-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/operationalinsights/mgmt/2015-11-01-preview/operationalinsights
+output-folder: $(go-sdk-folder)/services/preview/operationalinsights/mgmt/2015-11-01-preview/operationalinsights
 ```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.operationalinsights
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-operationalinsights
+```
+
 
 ## Suppression
 

@@ -148,30 +148,6 @@
             }
           },
           {
-            "name": "skipDnsRegistration",
-            "in": "query",
-            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\n only used for app creation.",
-            "type": "boolean"
-          },
-          {
-            "name": "skipCustomDomainVerification",
-            "in": "query",
-            "description": "If true, custom (non *.azurewebsites.net) domains associated with web app are not verified.",
-            "type": "boolean"
-          },
-          {
-            "name": "forceDnsRegistration",
-            "in": "query",
-            "description": "If true, web app hostname is force registered with DNS.",
-            "type": "boolean"
-          },
-          {
-            "name": "ttlInSeconds",
-            "in": "query",
-            "description": "Time to live in seconds for web app's default domain name.",
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -225,12 +201,6 @@
             "type": "boolean"
           },
           {
-            "name": "skipDnsRegistration",
-            "in": "query",
-            "description": "If true, DNS registration is skipped.",
-            "type": "boolean"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -275,30 +245,6 @@
             "schema": {
               "$ref": "#/definitions/SitePatchResource"
             }
-          },
-          {
-            "name": "skipDnsRegistration",
-            "in": "query",
-            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\n only used for app creation.",
-            "type": "boolean"
-          },
-          {
-            "name": "skipCustomDomainVerification",
-            "in": "query",
-            "description": "If true, custom (non *.azurewebsites.net) domains associated with web app are not verified.",
-            "type": "boolean"
-          },
-          {
-            "name": "forceDnsRegistration",
-            "in": "query",
-            "description": "If true, web app hostname is force registered with DNS.",
-            "type": "boolean"
-          },
-          {
-            "name": "ttlInSeconds",
-            "in": "query",
-            "description": "Time to live in seconds for web app's default domain name.",
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -12374,10 +12320,23 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
+          },
+          "201": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+
           }
         }
       },
@@ -12424,12 +12383,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
@@ -13768,10 +13733,23 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
+          },
+          "201": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+
           }
         }
       },
@@ -13811,12 +13789,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"

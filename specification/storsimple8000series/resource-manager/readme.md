@@ -1,5 +1,5 @@
 # StorSimple
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for StorSimple.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for StorSimple.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for StorSimple, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the StorSimple API.
 
 ``` yaml
@@ -40,7 +40,7 @@ input-file:
 directive:
   - suppress:
     - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
-    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation) 
+    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation)
 ```
 
 ---
@@ -55,10 +55,14 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_stor_simple8000_series']
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -98,4 +102,20 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-06' && $(go)
 output-folder: $(go-sdk-folder)/services/storsimple8000series/mgmt/2017-06-01/storsimple
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.storsimple8000series
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storsimple8000series
 ```

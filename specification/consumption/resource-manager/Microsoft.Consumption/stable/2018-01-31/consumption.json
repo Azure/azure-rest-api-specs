@@ -394,7 +394,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -476,7 +476,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -525,7 +525,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -577,7 +577,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -619,7 +619,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -664,7 +664,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -762,9 +762,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       },
       "delete": {
@@ -905,9 +902,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       },
       "delete": {
@@ -987,8 +981,8 @@
         "tags": [
           "PriceSheet"
         ],
-        "operationId": "PriceSheet_List",
-        "description": "Lists the price sheet for a scope by subscriptionId. Price sheets are available via this API only for May 1, 2014 or later.",
+        "operationId": "PriceSheet_Get",
+        "description": "Gets the price sheet for a scope by subscriptionId. Price sheet is available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1013,6 +1007,15 @@
             "type": "string"
           },
           {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the top N results.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -1023,7 +1026,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PriceSheetListResult"
+              "$ref": "#/definitions/PriceSheetResult"
             }
           },
           "default": {
@@ -1040,8 +1043,8 @@
         "tags": [
           "PriceSheet"
         ],
-        "operationId": "PriceSheet_ListByBillingPeriod",
-        "description": "Lists the price sheet for a scope by subscriptionId and billing period. Price sheets are available via this API only for May 1, 2014 or later.",
+        "operationId": "PriceSheet_GetByBillingPeriod",
+        "description": "Get the price sheet for a scope by subscriptionId and billing period. Price sheet is available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1069,6 +1072,15 @@
             "type": "string"
           },
           {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the top N results.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -1082,7 +1094,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PriceSheetListResult"
+              "$ref": "#/definitions/PriceSheetResult"
             }
           },
           "default": {
@@ -1484,6 +1496,11 @@
           "items": {
             "$ref": "#/definitions/ReservationSummaries"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1569,6 +1586,11 @@
           "items": {
             "$ref": "#/definitions/ReservationDetails"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1631,6 +1653,11 @@
           "items": {
             "$ref": "#/definitions/Budget"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1696,7 +1723,7 @@
           "description": "The current amount of cost which is being tracked for a budget.",
           "$ref": "#/definitions/CurrentSpend",
           "readOnly": true
-        },       
+        },
         "notifications": {
           "type": "object",
           "description": "Dictionary of notifications associated with the budget. Budget can have up to five notifications.",
@@ -1762,7 +1789,7 @@
           "minItems": 0,
           "maxItems": 10
         }
-      } 
+      }
     },
     "CurrentSpend": {
       "description": "The current amount of cost which is being tracked for a budget.",
@@ -1966,25 +1993,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "PriceSheetListResult": {
-      "description": "price sheet result. It contains the pricesheet associated with billing period",	
-      "properties": {
-        "value": {
-          "description": "Price sheet",
-          "type": "object",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/PriceSheetModel"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-	  "PriceSheetModel": {
+    "PriceSheetResult": {
       "description": "An pricesheet resource.",
       "type": "object",
       "allOf": [
@@ -1995,14 +2004,32 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PriceSheetProperties",
+          "$ref": "#/definitions/PriceSheetModel",
           "title": "Price sheet properties"
         }
       }
-    },	
+    },
+    "PriceSheetModel": {
+      "description": "price sheet result. It contains the pricesheet associated with billing period",
+      "properties": {
+        "pricesheets": {
+          "description": "Price sheet",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PriceSheetProperties"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "PriceSheetProperties": {
       "description": "The properties of the price sheet.",
-      "properties": {  
+      "properties": {
         "billingPeriodId": {
           "description": "The id of the billing period resource that the usage belongs to.",
           "type": "string",
@@ -2026,7 +2053,7 @@
         "includedQuantity": {
           "description": "Included quality for an offer",
           "type": "number",
-          "format": "decimal",          
+          "format": "decimal",
           "readOnly": true
         },
         "partNumber": {
@@ -2037,13 +2064,13 @@
         "unitPrice": {
           "description": "Unit Price",
           "type": "number",
-          "format": "decimal",          
+          "format": "decimal",
           "readOnly": true
         },
         "currencyCode": {
           "description": "Currency Code",
           "type": "string",
-          "readOnly": true	
+          "readOnly": true
 		    }
 	    }
     }
@@ -2068,14 +2095,16 @@
       "in": "path",
       "description": "Azure Resource Group Name.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "budgetNameParameter": {
       "name": "budgetName",
       "in": "path",
       "description": "Budget Name.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "billingPeriodNameParameter": {
       "name": "billingPeriodName",

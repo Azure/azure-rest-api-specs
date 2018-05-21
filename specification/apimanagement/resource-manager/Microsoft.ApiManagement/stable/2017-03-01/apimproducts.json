@@ -428,7 +428,50 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}": {
-      "put": {
+      "head": {
+        "tags": [
+          "ProductApis"
+        ],
+        "operationId": "ProductApi_CheckEntityExists",
+        "description": "Checks that API entity specified by identifier is associated with the Product entity.",
+        "x-ms-examples": {
+          "ApiManagementHeadProductApi": {
+            "$ref": "./examples/ApiManagementHeadProductApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "put": {
         "tags": [
           "ProductApis"
         ],
@@ -587,7 +630,50 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}": {
-      "put": {
+      "head": {
+        "tags": [
+          "ProductGroups"
+        ],
+        "operationId": "ProductGroup_CheckEntityExists",
+        "description": "Checks that Group entity specified by identifier is associated with the Product entity.",
+        "x-ms-examples": {
+          "ApiManagementHeadProductGroup": {
+            "$ref": "./examples/ApiManagementHeadProductGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "./apimgroups.json#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "put": {
         "tags": [
           "ProductGroups"
         ],
@@ -808,6 +894,11 @@
             "$ref": "./examples/ApiManagementGetProductPolicy.json"
           }
         },
+        "produces": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -860,6 +951,11 @@
             "$ref": "./examples/ApiManagementCreateProductPolicy.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"

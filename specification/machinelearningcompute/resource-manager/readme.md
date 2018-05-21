@@ -1,5 +1,5 @@
 # MachineLearningCompute
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Machine Learning Compute.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Machine Learning Compute.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for EventHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Machine Learning Compute API.
 
 ``` yaml
@@ -62,11 +62,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -131,5 +133,30 @@ These settings apply only when `--tag=package-2017-08-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2017-08-01-preview/compute
+output-folder: $(go-sdk-folder)/services/preview/machinelearning/mgmt/2017-08-01-preview/compute
+```
+
+### Tag: package-2017-06-preview and go
+
+These settings apply only when `--tag=package-package-2017-06-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-06-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/machinelearning/mgmt/2017-06-01-preview/compute
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.machinelearning.compute
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/compute
 ```

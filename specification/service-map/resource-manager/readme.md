@@ -1,5 +1,5 @@
 # ServiceMap
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for ServiceMap.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for ServiceMap.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for ServiceMap, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -18,10 +18,24 @@ To see additional help and options, run:
 ---
 
 ## Configuration
+Following are the settings for using this specification with [AutoRest](https://aka.ms/autorest) tool to validation and optionally generate SDK.
 
+### Azure Validator Suppressions
 
+Suppressed Rule | Reason
+----------------|--------
+R3023 OperationsAPIImplementation | Service map is sharing RP with Log Analytics, so this operaration won't reach ServiceMap's service endpoint. Hence this rule is not applicable.
 
-### Basic Information 
+```yaml
+model-validator: true 
+semantic-validator: true
+azure-validator: true
+directive:
+  suppress:
+    - R3023
+```
+
+### Basic Information
 These are the global settings for the ServiceMap API.
 
 ``` yaml
@@ -52,6 +66,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 ## Go
@@ -78,5 +93,21 @@ These settings apply only when `--tag=package-2015-11-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-11-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/operationalinsights/mgmt/2015-11-01-preview/servicemap
+output-folder: $(go-sdk-folder)/services/preview/operationalinsights/mgmt/2015-11-01-preview/servicemap
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.operationalinsights.servicemap
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-operationalinsights/servicemap
 ```

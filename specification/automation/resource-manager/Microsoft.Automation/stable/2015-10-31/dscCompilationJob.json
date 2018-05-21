@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -107,6 +110,11 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dsccompilationjoboperations"
         },
+        "x-ms-examples": {
+          "Get a DSC Compilation job": {
+            "$ref": "./examples/getCompilationJob.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
@@ -159,6 +167,11 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/compilationjoboperations"
         },
+        "x-ms-examples": {
+          "List DSC Compilation job in Automation Account": {
+            "$ref": "./examples/listCompilationJobsByAutomationAccount.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
@@ -203,6 +216,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams/": {
+      "get": {
+        "tags": [
+          "DscCompilationJob"
+        ],
+        "operationId": "DscCompilationJobStream_ListByJob",
+        "description": "Retrieve all the job streams for the compilation Job.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
+        },
+        "x-ms-examples": {
+          "List DSC Compilation job streams": {
+            "$ref": "./examples/compilationJobStreamList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The job id."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/JobStreamListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams/{jobStreamId}": {
       "get": {
         "tags": [
@@ -212,6 +282,11 @@
         "description": "Retrieve the job stream identified by job stream id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
+        },
+        "x-ms-examples": {
+          "Get a DSC Compilation job stream by job stream id": {
+            "$ref": "./examples/compilationJobStreamByJobStreamId.json"
+          }
         },
         "parameters": [
           {

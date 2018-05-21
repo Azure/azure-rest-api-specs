@@ -213,12 +213,13 @@
       "description": "The Http request info."
     },
     "EventData": {
-      "required": [ "level", "eventTimestamp", "submissionTimestamp" ],
       "properties": {
         "authorization": {
+          "readOnly": true,
           "$ref": "#/definitions/SenderAuthorization"
         },
         "claims": {
+          "readOnly": true,
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -226,38 +227,47 @@
           "description": "key value pairs to identify ARM permissions."
         },
         "caller": {
+          "readOnly": true,
           "type": "string",
           "description": "the email address of the user who has performed the operation, the UPN claim or SPN claim based on availability."
         },
         "description": {
+          "readOnly": true,
           "type": "string",
           "description": "the description of the event."
         },
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "the Id of this event as required by ARM for RBAC. It contains the EventDataID and a timestamp information."
         },
         "eventDataId": {
+          "readOnly": true,
           "type": "string",
           "description": "the event data Id. This is a unique identifier for an event."
         },
         "correlationId": {
+          "readOnly": true,
           "type": "string",
           "description": "the correlation Id, usually a GUID in the string format. The correlation Id is shared among the events that belong to the same uber operation."
         },
         "eventName": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the event name. This value should not be confused with OperationName. For practical purposes, OperationName might be more appealing to end users."
         },
         "category": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the event category."
         },
         "httpRequest": {
+          "readOnly": true,
           "$ref": "#/definitions/HttpRequestInfo",
           "description": "the HTTP request info. Usually includes the 'clientRequestId', 'clientIpAddress' (IP address of the user who initiated the event) and 'method' (HTTP method e.g. PUT)."
         },
         "level": {
+          "readOnly": true,
           "type": "string",
           "description": "the event level",
           "enum": [
@@ -273,6 +283,7 @@
           }
         },
         "resourceGroupName": {
+          "readOnly": true,
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790546.aspx"
           },
@@ -280,6 +291,7 @@
           "description": "the resource group name of the impacted resource."
         },
         "resourceProviderName": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790572.aspx"
@@ -287,6 +299,7 @@
           "description": "the resource provider name of the impacted resource."
         },
         "resourceId": {
+          "readOnly": true,
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
           },
@@ -294,6 +307,7 @@
           "description": "the resource uri that uniquely identifies the resource that caused this event."
         },
         "resourceType": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
@@ -301,14 +315,17 @@
           "description": "the resource type"
         },
         "operationId": {
+          "readOnly": true,
           "type": "string",
           "description": "It is usually a GUID shared among the events corresponding to single operation. This value should not be confused with EventName."
         },
         "operationName": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the operation name."
         },
         "properties": {
+          "readOnly": true,
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -316,28 +333,34 @@
           "description": "the set of <Key, Value> pairs (usually a Dictionary<String, String>) that includes details about the event."
         },
         "status": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "a string describing the status of the operation. Some typical values are: Started, In progress, Succeeded, Failed, Resolved."
         },
         "subStatus": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the event sub status. Most of the time, when included, this captures the HTTP status code of the REST call. Common values are: OK (HTTP Status Code: 200), Created (HTTP Status Code: 201), Accepted (HTTP Status Code: 202), No Content (HTTP Status Code: 204), Bad Request(HTTP Status Code: 400), Not Found (HTTP Status Code: 404), Conflict (HTTP Status Code: 409), Internal Server Error (HTTP Status Code: 500), Service Unavailable (HTTP Status Code:503), Gateway Timeout (HTTP Status Code: 504)"
         },
         "eventTimestamp": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "the timestamp of when the event was generated by the Azure service processing the request corresponding the event. It in ISO 8601 format."
         },
         "submissionTimestamp": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "the timestamp of when the event became available for querying via this API. It is in ISO 8601 format. This value should not be confused eventTimestamp. As there might be a delay between the occurrence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
         },
         "subscriptionId": {
+          "readOnly": true,
           "type": "string",
           "description": "the Azure subscription Id usually a GUID."
         },
         "tenantId": {
+          "readOnly": true,
           "type": "string",
           "description": "the Azure tenant Id"
         }

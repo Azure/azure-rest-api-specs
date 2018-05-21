@@ -1,5 +1,5 @@
 # ServerManagement
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for ServerManagement.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for ServerManagement.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for ServerManagement, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the ServerManagement API.
 
 ``` yaml
@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2016-07-preview` is specified on t
 input-file:
 - Microsoft.ServerManagement/preview/2016-07-01-preview/servermanagement.json
 ```
- 
+
 ### Tag: package-2015-07-preview
 
 These settings apply only when `--tag=package-2015-07-preview` is specified on the command line.
@@ -61,11 +61,16 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_server_management']
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -133,7 +138,7 @@ These settings apply only when `--tag=package-2016-07-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-07-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/servermanagement/mgmt/2016-07-01-preview/servermanagement
+output-folder: $(go-sdk-folder)/services/preview/servermanagement/mgmt/2016-07-01-preview/servermanagement
 ```
 
 ### Tag: package-2015-07-preview and go
@@ -142,5 +147,21 @@ These settings apply only when `--tag=package-2015-07-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-07-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/servermanagement/mgmt/2015-07-01-preview/servermanagement
+output-folder: $(go-sdk-folder)/services/preview/servermanagement/mgmt/2015-07-01-preview/servermanagement
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.servermanagement
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servermanagement
 ```

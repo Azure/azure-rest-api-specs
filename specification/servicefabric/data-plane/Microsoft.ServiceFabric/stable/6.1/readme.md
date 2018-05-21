@@ -55,6 +55,6 @@ directive:
     - R3018
     - R3023
     - R2022
-    - OAV108 
-    - OAV109 
+    - OAV108
+    - OAV109
 ```

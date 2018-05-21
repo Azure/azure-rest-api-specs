@@ -37,902 +37,451 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/computePolicies/{computePolicyName}": {
-      "put": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/accounts": {
+      "get": {
         "tags": [
-          "ComputePolicies"
+          "Accounts"
         ],
-        "operationId": "ComputePolicies_CreateOrUpdate",
-        "description": "Creates or updates the specified compute policy. During update, the compute policy with the specified name will be replaced with this new compute policy. An account supports, at most, 50 policies",        
-        "x-ms-examples": {
-          "Creates or updates the specified compute policy": { "$ref": "./examples/Adla_ComputePolicies_CreateOrUpdate.json" }
-        },
+        "operationId": "Accounts_List",
+        "description": "Gets the first page of Data Lake Analytics accounts, if any, within the current subscription. This includes a link to the next page, if any.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the Data Lake Analytics account to add or replace the compute policy."
+            "description": "OData filter. Optional."
           },
           {
-            "name": "computePolicyName",
-            "in": "path",
-            "required": true,
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the compute policy to create or update."
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Azure Data Lake Analytics accounts.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsAccountListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the first page of Data Lake Analytics accounts, if any, within the current subscription. This includes a link to the next page, if any.": {
+            "$ref": "./examples/Accounts_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DataLakeAnalyticsAccountBasic"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_ListByResourceGroup",
+        "description": "Gets the first page of Data Lake Analytics accounts, if any, within a specific resource group. This includes a link to the next page, if any.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of accounts in the specified resource group.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsAccountListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the first page of Data Lake Analytics accounts, if any, within a specific resource group. This includes a link to the next page, if any.": {
+            "$ref": "./examples/Accounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DataLakeAnalyticsAccountBasic"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}": {
+      "put": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Create",
+        "description": "Creates the specified Data Lake Analytics account. This supplies the user with computation services for Data Lake Analytics workloads.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateComputePolicyParameters"
+              "$ref": "#/definitions/CreateDataLakeAnalyticsAccountParameters"
             },
-            "description": "Parameters supplied to create or update the compute policy. The max degree of parallelism per job property, min priority per job property, or both must be present."
+            "description": "Parameters supplied to create a new Data Lake Analytics account."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully created or updated the specified compute policy",
+            "description": "Successfully created the specified account.",
             "schema": {
-              "$ref": "#/definitions/ComputePolicy"
+              "$ref": "#/definitions/DataLakeAnalyticsAccount"
             }
+          },
+          "201": {
+            "description": "Successfully initiated creation of the specified account.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsAccount"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates the specified Data Lake Analytics account. This supplies the user with computation services for Data Lake Analytics workloads.": {
+            "$ref": "./examples/Accounts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Get",
+        "description": "Gets details of the specified Data Lake Analytics account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the details of the specified account.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsAccount"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets details of the specified Data Lake Analytics account.": {
+            "$ref": "./examples/Accounts_Get.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "ComputePolicies"
+          "Accounts"
         ],
-        "operationId": "ComputePolicies_Update",
-        "description": "Updates the specified compute policy.",
-        "x-ms-examples": {
-          "Updates the specified compute policy": { "$ref": "./examples/Adla_ComputePolicies_Update.json" }
-        },
+        "operationId": "Accounts_Update",
+        "description": "Updates the Data Lake Analytics account object specified by the accountName with the contents of the account object.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account to which to update the compute policy."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "computePolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the compute policy to update."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/UpdateComputePolicyParameters"
+              "$ref": "#/definitions/UpdateDataLakeAnalyticsAccountParameters"
             },
-            "description": "Parameters supplied to update the compute policy."
+            "description": "Parameters supplied to the update Data Lake Analytics account operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated the specified compute policy",
+            "description": "Successfully updated the specified account.",
             "schema": {
-              "$ref": "#/definitions/ComputePolicy"
+              "$ref": "#/definitions/DataLakeAnalyticsAccount"
+            }
+          },
+          "201": {
+            "description": "Successfully initiated an update of the specified account.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsAccount"
+            }
+          },
+          "202": {
+            "description": "Successfully initiated an update of the specified account.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsAccount"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Updates the Data Lake Analytics account object specified by the accountName with the contents of the account object.": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
-          "ComputePolicies"
+          "Accounts"
         ],
-        "operationId": "ComputePolicies_Delete",
-        "description": "Deletes the specified compute policy from the specified Data Lake Analytics account",
-        "x-ms-examples": {
-          "Deletes the specified compute policy from the adla account": { "$ref": "./examples/Adla_ComputePolicies_Delete.json" }
-        },
+        "operationId": "Accounts_Delete",
+        "description": "Begins the delete process for the Data Lake Analytics account object specified by the account name.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to delete the compute policy."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "computePolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the compute policy to delete."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted the specified compute policy"
+            "description": "Successfully deleted the specified account."
+          },
+          "202": {
+            "description": "Successfully initiated the deletion of the specified account."
           },
           "204": {
-            "description": "The specified compute policy does not exist or was already deleted."
+            "description": "The specified account was not found."
           }
-        }
-      },
-      "get": {
-        "tags": [
-          "ComputePolicies"
-        ],
-        "operationId": "ComputePolicies_Get",
-        "description": "Gets the specified Data Lake Analytics compute policy.",
-        "x-ms-examples": {
-          "Gets the specified compute policy": { "$ref": "./examples/Adla_ComputePolicies_Get.json" }
         },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to get the compute policy."
-          },
-          {
-            "name": "computePolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the compute policy to retrieve."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+        "x-ms-examples": {
+          "Begins the delete process for the Data Lake Analytics account object specified by the account name.": {
+            "$ref": "./examples/Accounts_Delete.json"
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the specified compute policy.",
-            "schema": {
-              "$ref": "#/definitions/ComputePolicy"
-            }
-          }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/computePolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/dataLakeStoreAccounts": {
       "get": {
         "tags": [
-          "ComputePolicies"
+          "DataLakeStoreAccounts"
         ],
-        "operationId": "ComputePolicies_ListByAccount",
-        "description": "Lists the Data Lake Analytics compute policies within the specified Data Lake Analytics account. An account supports, at most, 50 policies",
-        "x-ms-examples": {
-          "Lists the compute policies within the adla account": { "$ref": "./examples/Adla_ComputePolicies_ListByAccount.json" }
-        },
+        "operationId": "DataLakeStoreAccounts_ListByAccount",
+        "description": "Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.",
         "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to get the compute policies."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully listed the compute policies.",
-            "schema": {
-              "$ref": "#/definitions/ComputePolicyListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/firewallRules/{firewallRuleName}": {
-      "put": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_CreateOrUpdate",
-        "description": "Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule.",
-        "x-ms-examples": {
-          "Creates or updates the specified firewall rule": { "$ref": "./examples/Adla_FirewallRules_CreateOrUpdate.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account to add or replace the firewall rule."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the firewall rule to create or update."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateOrUpdateFirewallRuleParameters"
-            },
-            "description": "Parameters supplied to create or update the firewall rule."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully created or updated the specified firewall rule",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_Update",
-        "description": "Updates the specified firewall rule.",
-        "x-ms-examples": {
-          "Updates the specified firewall rule": { "$ref": "./examples/Adla_FirewallRules_Update.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account to which to update the firewall rule."
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the firewall rule to update."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
+            "name": "$filter",
+            "in": "query",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/UpdateFirewallRuleParameters"
-            },
-            "description": "Parameters supplied to update the firewall rule."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the specified firewall rule",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_Delete",
-        "description": "Deletes the specified firewall rule from the specified Data Lake Analytics account",
-        "x-ms-examples": {
-          "Deletes the specified firewall rule": { "$ref": "./examples/Adla_FirewallRules_Delete.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
             "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "description": "OData filter. Optional."
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to delete the firewall rule."
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the firewall rule to delete."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the specified firewall rule"
-          },
-          "204": {
-            "description": "The specified firewall rule does not exist or was already deleted."
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_Get",
-        "description": "Gets the specified Data Lake Analytics firewall rule.",
-        "x-ms-examples": {
-          "Gets the specified Data Lake Analytics firewall rule": { "$ref": "./examples/Adla_FirewallRules_Get.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to get the firewall rule."
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the firewall rule to retrieve."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the specified firewall rule.",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/firewallRules": {
-      "get": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_ListByAccount",
-        "description": "Lists the Data Lake Analytics firewall rules within the specified Data Lake Analytics account.",
-        "x-ms-examples": {
-          "Lists the Data Lake Analytics firewall rules": { "$ref": "./examples/Adla_FirewallRules_ListByAccount.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to get the firewall rules."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully listed the firewall rules.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsFirewallRuleListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}": {
-      "put": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_Add",
-        "description": "Updates the specified Data Lake Analytics account to add an Azure Storage account.",
-        "x-ms-examples": {
-          "Adds an Azure Storage account": { "$ref": "./examples/Adla_StorageAccounts_Add.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account to which to add the Azure Storage account."
-          },
-          {
-            "name": "storageAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure Storage account to add"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AddStorageAccountParameters"
-            },
-            "description": "The parameters containing the access key and optional suffix for the Azure Storage Account."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully added the specified Azure Storage account information to the specified Azure Data Lake Analytics account."
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_Update",
-        "description": "Updates the Data Lake Analytics account to replace Azure Storage blob account details, such as the access key and/or suffix.",
-        "x-ms-examples": {
-          "Replaces Azure Storage blob account details": { "$ref": "./examples/Adla_StorageAccounts_Update.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account to modify storage accounts in"
-          },
-          {
-            "name": "storageAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Azure Storage account to modify"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
+            "name": "$top",
+            "in": "query",
             "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Data Lake Store accounts.",
             "schema": {
-              "$ref": "#/definitions/UpdateStorageAccountParameters"
-            },
-            "description": "The parameters containing the access key and suffix to update the storage account with, if any. Passing nothing results in no change."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully update the specified Azure Storage account information for the specified Azure Data Lake Analytics account."
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_Delete",
-        "description": "Updates the specified Data Lake Analytics account to remove an Azure Storage account.",
-        "x-ms-examples": {
-          "Removes an Azure Storage account": { "$ref": "./examples/Adla_StorageAccounts_Delete.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to remove the Azure Storage account."
-          },
-          {
-            "name": "storageAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure Storage account to remove"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the specified Azure Storage account information from the Azure Data Lake Analytics account."
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_Get",
-        "description": "Gets the specified Azure Storage account linked to the given Data Lake Analytics account.",
-        "x-ms-examples": {
-          "Gets the specified Azure Storage account": { "$ref": "./examples/Adla_StorageAccounts_Get.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to retrieve Azure storage account details."
-          },
-          {
-            "name": "storageAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure Storage account for which to retrieve the details."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the specified Azure Storage account information.",
-            "schema": {
-              "$ref": "#/definitions/StorageAccountInfo"
+              "$ref": "#/definitions/DataLakeStoreAccountInformationListResult"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers/{containerName}": {
-      "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_GetStorageContainer",
-        "description": "Gets the specified Azure Storage container associated with the given Data Lake Analytics and Azure Storage accounts.",
-        "x-ms-examples": {
-          "Gets the specified Azure Storage container": { "$ref": "./examples/Adla_StorageAccounts_GetStorageContainer.json" }
         },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account for which to retrieve blob container."
-          },
-          {
-            "name": "storageAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure storage account from which to retrieve the blob container."
-          },
-          {
-            "name": "containerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure storage container to retrieve"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the specified Azure Storage container information.",
-            "schema": {
-              "$ref": "#/definitions/StorageContainer"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers": {
-      "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_ListStorageContainers",
-        "description": "Lists the Azure Storage containers, if any, associated with the specified Data Lake Analytics and Azure Storage account combination. The response includes a link to the next page of results, if any.",
         "x-ms-examples": {
-          "Lists the Azure Storage containers": { "$ref": "./examples/Adla_StorageAccounts_ListStorageContainers.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account for which to list Azure Storage blob containers."
-          },
-          {
-            "name": "storageAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure storage account from which to list blob containers."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of Azure Storage containers under the specified Azure Data Lake Analytics account.",
-            "schema": {
-              "$ref": "#/definitions/ListStorageContainersResult"
-            }
+          "Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account": {
+            "$ref": "./examples/DataLakeStoreAccounts_ListByAccount.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "#/definitions/DataLakeStoreAccountInformation"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers/{containerName}/listSasTokens": {
-      "post": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_ListSasTokens",
-        "description": "Gets the SAS token associated with the specified Data Lake Analytics and Azure Storage account and container combination.",
-        "x-ms-examples": {
-          "Gets the SAS token": { "$ref": "./examples/Adla_StorageAccounts_ListSasTokens.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which an Azure Storage account's SAS token is being requested."
-          },
-          {
-            "name": "storageAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure storage account for which the SAS token is being requested."
-          },
-          {
-            "name": "containerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure storage container for which the SAS token is being requested."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of Storage Account SAS tokens for the specified Azure Storage account container.",
-            "schema": {
-              "$ref": "#/definitions/ListSasTokensResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts/{dataLakeStoreAccountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/dataLakeStoreAccounts/{dataLakeStoreAccountName}": {
       "put": {
         "tags": [
           "DataLakeStoreAccounts"
         ],
         "operationId": "DataLakeStoreAccounts_Add",
         "description": "Updates the specified Data Lake Analytics account to include the additional Data Lake Store account.",
-        "x-ms-examples": {
-          "Adds a Data Lake Store account": { "$ref": "./examples/Adla_DataLakeStoreAccounts_Add.json" }
-        },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account to which to add the Data Lake Store account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "dataLakeStoreAccountName",
@@ -951,58 +500,16 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully added the specified Azure Data Lake Store account information."
           }
-        }
-      },
-      "delete": {
-        "tags": [
-          "DataLakeStoreAccounts"
-        ],
-        "operationId": "DataLakeStoreAccounts_Delete",
-        "description": "Updates the Data Lake Analytics account specified to remove the specified Data Lake Store account.",
-        "x-ms-examples": {
-          "Removes the specified Data Lake Store account": { "$ref": "./examples/Adla_DataLakeStoreAccounts_Delete.json" }
         },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to remove the Data Lake Store account."
-          },
-          {
-            "name": "dataLakeStoreAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to remove"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully removed the specified Azure Data Lake Store account information from the specified Azure Data Lake Analytics account."
+        "x-ms-examples": {
+          "Adds a Data Lake Store account": {
+            "$ref": "./examples/DataLakeStoreAccounts_Add.json"
           }
         }
       },
@@ -1012,23 +519,15 @@
         ],
         "operationId": "DataLakeStoreAccounts_Get",
         "description": "Gets the specified Data Lake Store account details in the specified Data Lake Analytics account.",
-        "x-ms-examples": {
-          "Gets the specified Data Lake Store account details": { "$ref": "./examples/Adla_DataLakeStoreAccounts_Get.json" }
-        },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account from which to retrieve the Data Lake Store account details."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "dataLakeStoreAccountName",
@@ -1039,45 +538,77 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved the specified Azure Data Lake Store account information.",
             "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccountInfo"
+              "$ref": "#/definitions/DataLakeStoreAccountInformation"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Data Lake Store account details": {
+            "$ref": "./examples/DataLakeStoreAccounts_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataLakeStoreAccounts"
+        ],
+        "operationId": "DataLakeStoreAccounts_Delete",
+        "description": "Updates the Data Lake Analytics account specified to remove the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "dataLakeStoreAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to remove"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed the specified Azure Data Lake Store account information from the specified Azure Data Lake Analytics account."
+          }
+        },
+        "x-ms-examples": {
+          "Removes the specified Data Lake Store account": {
+            "$ref": "./examples/DataLakeStoreAccounts_Delete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts": {
       "get": {
         "tags": [
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_ListByAccount",
         "description": "Gets the first page of Azure Storage accounts, if any, linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.",
-        "x-ms-examples": {
-          "Gets the first page of Azure Storage accounts linked to the specified Data Lake Analytics account": { "$ref": "./examples/Adla_StorageAccounts_ListByAccount.json" }
-        },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account for which to list Azure Storage accounts."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "$filter",
@@ -1127,480 +658,860 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved the list of Azure Storage accounts.",
             "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccountListStorageAccountsResult"
+              "$ref": "#/definitions/StorageAccountInformationListResult"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/StorageAccountInfo"
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts": {
-      "get": {
-        "tags": [
-          "DataLakeStoreAccounts"
-        ],
-        "operationId": "DataLakeStoreAccounts_ListByAccount",
-        "description": "Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.",
         "x-ms-examples": {
-          "Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account": { "$ref": "./examples/Adla_DataLakeStoreAccounts_ListByAccount.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account for which to list Data Lake Store accounts."
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter. Optional."
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of items to return. Optional."
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$select",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
-          },
-          {
-            "name": "$count",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of Azure Data Lake Store accounts.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccountListDataLakeStoreResult"
-            }
+          "Gets the first page of Azure Storage accounts linked to the specified Data Lake Analytics account": {
+            "$ref": "./examples/StorageAccounts_ListByAccount.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/DataLakeStoreAccountInfo"
+        "x-ms-odata": "#/definitions/StorageAccountInformation"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts": {
-      "get": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_ListByResourceGroup",
-        "description": "Gets the first page of Data Lake Analytics accounts, if any, within a specific resource group. This includes a link to the next page, if any.",
-        "x-ms-examples": {
-          "Gets the first page of Data Lake Analytics accounts within a specific resource group": { "$ref": "./examples/Adla_Account_ListByResourceGroup.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter. Optional."
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of items to return. Optional."
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$select",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
-          },
-          {
-            "name": "$count",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of accounts in the specified resource group.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccountListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/DataLakeAnalyticsAccountBasic"
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/accounts": {
-      "get": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_List",
-        "description": "Gets the first page of Data Lake Analytics accounts, if any, within the current subscription. This includes a link to the next page, if any.",
-        "x-ms-examples": {
-          "Gets the first page of Data Lake Analytics accounts within the current subscription": { "$ref": "./examples/Adla_Account_List.json" }
-        },
-        "parameters": [
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter. Optional."
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of items to return. Optional."
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$select",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
-          },
-          {
-            "name": "$count",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of Azure Data Lake Analytics accounts.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccountListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/DataLakeAnalyticsAccountBasic"
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}": {
       "put": {
         "tags": [
-          "Account"
+          "StorageAccounts"
         ],
-        "operationId": "Account_Create",
-        "description": "Creates the specified Data Lake Analytics account. This supplies the user with computation services for Data Lake Analytics workloads",
-        "x-ms-examples": {
-          "Creates the specified Data Lake Analytics account": { "$ref": "./examples/Adla_Account_Create.json" }
-        },
+        "operationId": "StorageAccounts_Add",
+        "description": "Updates the specified Data Lake Analytics account to add an Azure Storage account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account.the account will be associated with."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "storageAccountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Data Lake Analytics account to create."
+            "description": "The name of the Azure Storage account to add"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccount"
+              "$ref": "#/definitions/AddStorageAccountParameters"
             },
-            "description": "Parameters supplied to the create Data Lake Analytics account operation."
+            "description": "The parameters containing the access key and optional suffix for the Azure Storage Account."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully created the specified account.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccount"
-            }
+            "description": "Successfully added the specified Azure Storage account information to the specified Azure Data Lake Analytics account."
+          }
+        },
+        "x-ms-examples": {
+          "Adds an Azure Storage account": {
+            "$ref": "./examples/StorageAccounts_Add.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_Get",
+        "description": "Gets the specified Azure Storage account linked to the given Data Lake Analytics account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          "201": {
-            "description": "Successfully initiated creation of the specified account.",
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "storageAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure Storage account for which to retrieve the details."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified Azure Storage account information.",
             "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccount"
+              "$ref": "#/definitions/StorageAccountInformation"
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Gets the specified Azure Storage account": {
+            "$ref": "./examples/StorageAccounts_Get.json"
+          }
+        }
       },
       "patch": {
         "tags": [
-          "Account"
+          "StorageAccounts"
         ],
-        "operationId": "Account_Update",
-        "description": "Updates the Data Lake Analytics account object specified by the accountName with the contents of the account object.",
-        "x-ms-examples": {
-          "Updates the Data Lake Analytics account object": { "$ref": "./examples/Adla_Account_Update.json" }
-        },
+        "operationId": "StorageAccounts_Update",
+        "description": "Updates the Data Lake Analytics account to replace Azure Storage blob account details, such as the access key and/or suffix.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "storageAccountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Data Lake Analytics account to update."
+            "description": "The Azure Storage account to modify"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccountUpdateParameters"
+              "$ref": "#/definitions/UpdateStorageAccountParameters"
             },
-            "description": "Parameters supplied to the update Data Lake Analytics account operation."
+            "description": "The parameters containing the access key and suffix to update the storage account with, if any. Passing nothing results in no change."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated the specified account.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccount"
-            }
-          },
-          "201": {
-            "description": "Successfully initiated an update of the specified account.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccount"
-            }
-          },
-          "202": {
-            "description": "Successfully initiated an update of the specified account.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccount"
-            }
+            "description": "Successfully update the specified Azure Storage account information for the specified Azure Data Lake Analytics account."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Replaces Azure Storage blob account details": {
+            "$ref": "./examples/StorageAccounts_Update.json"
+          }
+        }
       },
       "delete": {
         "tags": [
-          "Account"
+          "StorageAccounts"
         ],
-        "operationId": "Account_Delete",
-        "description": "Begins the delete process for the Data Lake Analytics account object specified by the account name.",
-        "x-ms-examples": {
-          "Begins the delete process for the Data Lake Analytics account object specified by the account name": { "$ref": "./examples/Adla_Account_Delete.json" }
-        },
+        "operationId": "StorageAccounts_Delete",
+        "description": "Updates the specified Data Lake Analytics account to remove an Azure Storage account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "storageAccountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Data Lake Analytics account to delete"
+            "description": "The name of the Azure Storage account to remove"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted the specified account."
-          },
-          "202": {
-            "description": "Successfully initiated the deletion of the specified account."
-          },
-          "204": {
-            "description": "The specified account was not found."
+            "description": "Successfully deleted the specified Azure Storage account information from the Azure Data Lake Analytics account."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Removes an Azure Storage account": {
+            "$ref": "./examples/StorageAccounts_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}/containers": {
+      "get": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_ListStorageContainers",
+        "description": "Lists the Azure Storage containers, if any, associated with the specified Data Lake Analytics and Azure Storage account combination. The response includes a link to the next page of results, if any.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "storageAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure storage account from which to list blob containers."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Azure Storage containers under the specified Azure Data Lake Analytics account.",
+            "schema": {
+              "$ref": "#/definitions/StorageContainerListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Azure Storage containers": {
+            "$ref": "./examples/StorageAccounts_ListStorageContainers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}/containers/{containerName}": {
+      "get": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_GetStorageContainer",
+        "description": "Gets the specified Azure Storage container associated with the given Data Lake Analytics and Azure Storage accounts.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "storageAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure storage account from which to retrieve the blob container."
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure storage container to retrieve"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified Azure Storage container information.",
+            "schema": {
+              "$ref": "#/definitions/StorageContainer"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Azure Storage container": {
+            "$ref": "./examples/StorageAccounts_GetStorageContainer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}/containers/{containerName}/listSasTokens": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_ListSasTokens",
+        "description": "Gets the SAS token associated with the specified Data Lake Analytics and Azure Storage account and container combination.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "storageAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure storage account for which the SAS token is being requested."
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure storage container for which the SAS token is being requested."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Storage Account SAS tokens for the specified Azure Storage account container.",
+            "schema": {
+              "$ref": "#/definitions/SasTokenInformationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the SAS token": {
+            "$ref": "./examples/StorageAccounts_ListSasTokens.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/computePolicies": {
+      "get": {
+        "tags": [
+          "ComputePolicies"
+        ],
+        "operationId": "ComputePolicies_ListByAccount",
+        "description": "Lists the Data Lake Analytics compute policies within the specified Data Lake Analytics account. An account supports, at most, 50 policies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the compute policies.",
+            "schema": {
+              "$ref": "#/definitions/ComputePolicyListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the compute policies within the adla account": {
+            "$ref": "./examples/ComputePolicies_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/computePolicies/{computePolicyName}": {
+      "put": {
+        "tags": [
+          "ComputePolicies"
+        ],
+        "operationId": "ComputePolicies_CreateOrUpdate",
+        "description": "Creates or updates the specified compute policy. During update, the compute policy with the specified name will be replaced with this new compute policy. An account supports, at most, 50 policies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "computePolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the compute policy to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateComputePolicyParameters"
+            },
+            "description": "Parameters supplied to create or update the compute policy. The max degree of parallelism per job property, min priority per job property, or both must be present."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the specified compute policy",
+            "schema": {
+              "$ref": "#/definitions/ComputePolicy"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the specified compute policy": {
+            "$ref": "./examples/ComputePolicies_CreateOrUpdate.json"
+          }
+        }
       },
       "get": {
         "tags": [
-          "Account"
+          "ComputePolicies"
         ],
-        "operationId": "Account_Get",
-        "description": "Gets details of the specified Data Lake Analytics account.",
-        "x-ms-examples": {
-          "Gets details of the specified Data Lake Analytics account": { "$ref": "./examples/Adla_Account_Get.json" }
-        },
+        "operationId": "ComputePolicies_Get",
+        "description": "Gets the specified Data Lake Analytics compute policy.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "computePolicyName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Data Lake Analytics account to retrieve."
+            "description": "The name of the compute policy to retrieve."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the details of the specified account.",
+            "description": "Successfully retrieved the specified compute policy.",
             "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccount"
+              "$ref": "#/definitions/ComputePolicy"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified compute policy": {
+            "$ref": "./examples/ComputePolicies_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ComputePolicies"
+        ],
+        "operationId": "ComputePolicies_Update",
+        "description": "Updates the specified compute policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "computePolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the compute policy to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateComputePolicyParameters"
+            },
+            "description": "Parameters supplied to update the compute policy."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified compute policy",
+            "schema": {
+              "$ref": "#/definitions/ComputePolicy"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the specified compute policy": {
+            "$ref": "./examples/ComputePolicies_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ComputePolicies"
+        ],
+        "operationId": "ComputePolicies_Delete",
+        "description": "Deletes the specified compute policy from the specified Data Lake Analytics account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "computePolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the compute policy to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified compute policy"
+          },
+          "204": {
+            "description": "The specified compute policy does not exist or was already deleted."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the specified compute policy from the adla account": {
+            "$ref": "./examples/ComputePolicies_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/firewallRules": {
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_ListByAccount",
+        "description": "Lists the Data Lake Analytics firewall rules within the specified Data Lake Analytics account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the firewall rules.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Data Lake Analytics firewall rules": {
+            "$ref": "./examples/FirewallRules_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "description": "Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateFirewallRuleParameters"
+            },
+            "description": "Parameters supplied to create or update the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the specified firewall rule",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the specified firewall rule": {
+            "$ref": "./examples/FirewallRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Get",
+        "description": "Gets the specified Data Lake Analytics firewall rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified firewall rule.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Data Lake Analytics firewall rule": {
+            "$ref": "./examples/FirewallRules_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Update",
+        "description": "Updates the specified firewall rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateFirewallRuleParameters"
+            },
+            "description": "Parameters supplied to update the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified firewall rule",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the specified firewall rule": {
+            "$ref": "./examples/FirewallRules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Delete",
+        "description": "Deletes the specified firewall rule from the specified Data Lake Analytics account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified firewall rule"
+          },
+          "204": {
+            "description": "The specified firewall rule does not exist or was already deleted."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the specified firewall rule": {
+            "$ref": "./examples/FirewallRules_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataLakeAnalytics/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Data Lake Analytics REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the available operations for Data Lake Analytics.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all of the available Data Lake Analytics REST API operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/capability": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_GetCapability",
+        "description": "Gets subscription-level properties and limits for Data Lake Analytics specified by resource location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource location without whitespace."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the subscription-level properties and limits for Data Lake Analytics specified by resource location.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityInformation"
+            }
+          },
+          "404": {
+            "description": "Subscription not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets subscription-level properties and limits for Data Lake Analytics specified by resource location": {
+            "$ref": "./examples/Locations_GetCapability.json"
           }
         }
       }
@@ -1608,14 +1519,14 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/checkNameAvailability": {
       "post": {
         "tags": [
-          "Account"
+          "Accounts"
         ],
-        "operationId": "Account_CheckNameAvailability",
+        "operationId": "Accounts_CheckNameAvailability",
         "description": "Checks whether the specified account name is available or taken.",
-        "x-ms-examples": {
-          "Checks whether the specified account name is available or taken": { "$ref": "./examples/Adla_Account_CheckNameAvailability.json" }
-        },
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
           {
             "name": "location",
             "in": "path",
@@ -1634,9 +1545,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1646,733 +1554,275 @@
               "$ref": "#/definitions/NameAvailabilityInformation"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/capability": {
-      "get": {
-        "tags": [
-          "Locations"
-        ],
-        "operationId": "Locations_GetCapability",
-        "description": "Gets subscription-level properties and limits for Data Lake Analytics specified by resource location.",
-        "x-ms-examples": {
-          "Gets subscription-level properties and limits for Data Lake Analytics specified by resource location": { "$ref": "./examples/Adla_Locations_GetCapability.json" }
         },
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource location without whitespace."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the subscription-level properties and limits for Data Lake Analytics specified by resource location.",
-            "schema": {
-              "$ref": "#/definitions/CapabilityInformation"
-            }
-          },
-          "404": {
-            "description": "Subscription not found."
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.DataLakeAnalytics/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Lists all of the available Data Lake Analytics REST API operations.",
         "x-ms-examples": {
-          "Lists all of the available Data Lake Analytics REST API operations": { "$ref": "./examples/Adla_Operations_List.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully listed the available operations for Data Lake Analytics.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
+          "Checks whether the specified account name is available or taken": {
+            "$ref": "./examples/Accounts_CheckNameAvailability.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "CreateOrUpdateComputePolicyProperties": {
-      "required": [
-        "objectId",
-        "objectType"
-      ],
+    "Resource": {
       "properties": {
-        "objectId": {
+        "id": {
+          "readOnly": true,
           "type": "string",
-          "format": "uuid",
-          "description": "The AAD object identifier for the entity to create a policy for."
+          "description": "The resource identifer."
         },
-        "objectType": {
-          "type": "string",
-          "enum": [
-            "User",
-            "Group",
-            "ServicePrincipal"
-          ],
-          "x-ms-enum": {
-            "name": "AADObjectType",
-            "modelAsString": true
-          },
-          "description": "The type of AAD object the object identifier refers to."
-        },
-        "maxDegreeOfParallelismPerJob": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The maximum degree of parallelism per job this user can use to submit jobs. This property, the min priority per job property, or both must be passed."
-        },
-        "minPriorityPerJob": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The minimum priority per job this user can use to submit jobs. This property, the max degree of parallelism per job property, or both must be passed."
-        }
-      },
-      "description": "The compute policy properties to use when creating a new compute policy."
-    },
-    "CreateOrUpdateComputePolicyParameters": {
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreateOrUpdateComputePolicyProperties",
-          "description": "The compute policy properties to use when creating a new compute policy."
-        }
-      },
-      "description": "The parameters used to create a new compute policy."
-    },
-    "CreateComputePolicyWithAccountParameters": {
-      "required": [
-        "name",
-        "properties"
-      ],
-      "properties": {
         "name": {
+          "readOnly": true,
           "type": "string",
-          "description": "The unique name of the compute policy to create."
+          "description": "The resource name."
         },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreateOrUpdateComputePolicyProperties",
-          "description": "The compute policy properties to use when creating a new compute policy."
-        }
-      },
-      "description": "The parameters used to create a new compute policy while creating a new Data Lake Analytics account."
-    },
-    "UpdateComputePolicyProperties": {
-      "properties": {
-        "objectId": {
+        "type": {
+          "readOnly": true,
           "type": "string",
-          "format": "uuid",
-          "description": "The AAD object identifier for the entity to create a policy for."
+          "description": "The resource type."
         },
-        "objectType": {
+        "location": {
+          "readOnly": true,
           "type": "string",
-          "enum": [
-            "User",
-            "Group",
-            "ServicePrincipal"
-          ],
-          "x-ms-enum": {
-            "name": "AADObjectType",
-            "modelAsString": true
+          "description": "The resource location."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "description": "The type of AAD object the object identifier refers to."
-        },
-        "maxDegreeOfParallelismPerJob": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The maximum degree of parallelism per job this user can use to submit jobs. This property, the min priority per job property, or both must be passed."
-        },
-        "minPriorityPerJob": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The minimum priority per job this user can use to submit jobs. This property, the max degree of parallelism per job property, or both must be passed."
+          "description": "The resource tags."
         }
       },
-      "description": "The compute policy properties to use when updating a compute policy."
+      "x-ms-azure-resource": true,
+      "description": "The resource model definition."
     },
-    "UpdateComputePolicyParameters": {
+    "SubResource": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateComputePolicyProperties",
-          "description": "The compute policy properties to use when updating a compute policy."
-        }
-      },
-      "description": "The parameters used to update a compute policy."
-    },
-    "UpdateComputePolicyWithAccountParameters": {
-      "required": [
-        "name"
-      ],
-      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
         "name": {
+          "readOnly": true,
           "type": "string",
-          "description": "The unique name of the compute policy to update."
+          "description": "The resource name."
         },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateComputePolicyProperties",
-          "description": "The compute policy properties to use when updating a compute policy."
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
         }
       },
-      "description": "The parameters used to update a compute policy while updating a Data Lake Analytics account."
+      "x-ms-azure-resource": true,
+      "description": "The resource model definition for a nested resource."
     },
-    "ComputePolicyProperties": {
-      "properties": {
-        "objectId": {
-          "readOnly": true,
-          "type": "string",
-          "format": "uuid",
-          "description": "The AAD object identifier for the entity to create a policy for."
-        },
-        "objectType": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "User",
-            "Group",
-            "ServicePrincipal"
-          ],
-          "x-ms-enum": {
-            "name": "AADObjectType",
-            "modelAsString": true
-          },
-          "description": "The type of AAD object the object identifier refers to."
-        },
-        "maxDegreeOfParallelismPerJob": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The maximum degree of parallelism per job this user can use to submit jobs."
-        },
-        "minPriorityPerJob": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The minimum priority per job this user can use to submit jobs."
-        }
-      },
-      "description": "The compute policy properties."
-    },
-    "ComputePolicy": {
+    "DataLakeAnalyticsAccount": {
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
+          "readOnly": true,
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ComputePolicyProperties",
-          "description": "The compute policy properties."
+          "$ref": "#/definitions/DataLakeAnalyticsAccountProperties",
+          "description": "The properties defined by Data Lake Analytics all properties are specific to each resource provider."
         }
       },
-      "description": "Data Lake Analytics compute policy information."
+      "description": "A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account."
     },
-    "ComputePolicyListResult": {
+    "DataLakeAnalyticsAccountBasic": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "value": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataLakeAnalyticsAccountPropertiesBasic",
+          "description": "The properties defined by Data Lake Analytics all properties are specific to each resource provider."
+        }
+      },
+      "description": "A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account."
+    },
+    "DataLakeAnalyticsAccountProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataLakeAnalyticsAccountPropertiesBasic"
+        }
+      ],
+      "properties": {
+        "defaultDataLakeStoreAccount": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The default Data Lake Store account associated with this account."
+        },
+        "dataLakeStoreAccounts": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeStoreAccountInformation"
+          },
+          "description": "The list of Data Lake Store accounts associated with this account."
+        },
+        "storageAccounts": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccountInformation"
+          },
+          "description": "The list of Azure Blob Storage accounts associated with this account."
+        },
+        "computePolicies": {
           "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComputePolicy"
           },
-          "description": "The results of the list operation."
+          "description": "The list of compute policies associated with this account."
         },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The link (url) to the next page of results."
-        }
-      },
-      "description": "The list of compute policies in the account."
-    },
-    "CreateOrUpdateFirewallRuleProperties": {
-      "required": [
-        "startIpAddress",
-        "endIpAddress"
-      ],
-      "properties": {
-        "startIpAddress": {
-          "type": "string",
-          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        },
-        "endIpAddress": {
-          "type": "string",
-          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        }
-      },
-      "description": "The firewall rule properties to use when creating a new firewall rule."
-    },
-    "CreateOrUpdateFirewallRuleParameters": {
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
-          "description": "The firewall rule properties to use when creating a new firewall rule."
-        }
-      },
-      "description": "The parameters used to create a new firewall rule."
-    },
-    "CreateFirewallRuleWithAccountParameters": {
-      "required": [
-        "name",
-        "properties"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The unique name of the firewall rule to create."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
-          "description": "The firewall rule properties to use when creating a new firewall rule."
-        }
-      },
-      "description": "The parameters used to create a new firewall rule while creating a new Data Lake Analytics account."
-    },
-    "UpdateFirewallRuleProperties": {
-      "properties": {
-        "startIpAddress": {
-          "type": "string",
-          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        },
-        "endIpAddress": {
-          "type": "string",
-          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        }
-      },
-      "description": "The firewall rule properties to use when updating a firewall rule."
-    },
-    "UpdateFirewallRuleParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateFirewallRuleProperties",
-          "description": "The firewall rule properties to use when updating a firewall rule."
-        }
-      },
-      "description": "The parameters used to update a firewall rule."
-    },
-    "UpdateFirewallRuleWithAccountParameters": {
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The unique name of the firewall rule to update."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateFirewallRuleProperties",
-          "description": "The firewall rule properties to use when updating a firewall rule."
-        }
-      },
-      "description": "The parameters used to update a firewall rule while updating a Data Lake Analytics account."
-    },
-    "FirewallRuleProperties": {
-      "properties": {
-        "startIpAddress": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        },
-        "endIpAddress": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        }
-      },
-      "description": "The firewall rule properties."
-    },
-    "FirewallRule": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FirewallRuleProperties",
-          "description": "The firewall rule properties."
-        }
-      },
-      "description": "Data Lake Analytics firewall rule information."
-    },
-    "DataLakeAnalyticsFirewallRuleListResult": {
-      "properties": {
-        "value": {
+        "firewallRules": {
           "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
-          "description": "The results of the list operation."
+          "description": "The list of firewall rules associated with this account."
         },
-        "nextLink": {
+        "firewallState": {
           "readOnly": true,
           "type": "string",
-          "description": "The link (url) to the next page of results."
-        }
-      },
-      "description": "Data Lake Analytics firewall rule list information."
-    },
-    "AddStorageAccountProperties": {
-      "required": [
-        "accessKey"
-      ],
-      "properties": {
-        "accessKey": {
-          "type": "string",
-          "description": "The access key associated with this Azure Storage account that will be used to connect to it."
-        },
-        "suffix": {
-          "type": "string",
-          "description": "The optional suffix for the storage account."
-        }
-      },
-      "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
-    },
-    "AddStorageAccountParameters": {
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AddStorageAccountProperties",
-          "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
-        }
-      },
-      "description": "The parameters used to add a new Azure Storage account."
-    },
-    "AddStorageAccountWithAccountParameters": {
-      "required": [
-        "name",
-        "properties"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The unique name of the Azure Storage account to add."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AddStorageAccountProperties",
-          "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
-        }
-      },
-      "description": "The parameters used to add a new Azure Storage account while creating a new Data Lake Analytics account."
-    },
-    "UpdateStorageAccountProperties": {
-      "properties": {
-        "accessKey": {
-          "type": "string",
-          "description": "The updated access key associated with this Azure Storage account that will be used to connect to it."
-        },
-        "suffix": {
-          "type": "string",
-          "description": "The optional suffix for the storage account."
-        }
-      },
-      "description": "The Azure Storage account properties to use when updating an Azure Storage account."
-    },
-    "UpdateStorageAccountParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateStorageAccountProperties",
-          "description": "The Azure Storage account properties to use when updating an Azure Storage account."
-        }
-      },
-      "description": "The parameters used to update an Azure Storage account."
-    },
-    "UpdateStorageAccountWithAccountParameters": {
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The unique name of the Azure Storage account to update."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateStorageAccountProperties",
-          "description": "The Azure Storage account properties to use when updating an Azure Storage account."
-        }
-      },
-      "description": "The parameters used to update an Azure Storage account while updating a Data Lake Analytics account."
-    },
-    "StorageAccountProperties": {
-      "properties": {
-        "suffix": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The optional suffix for the storage account."
-        }
-      },
-      "description": "The Azure Storage account properties."
-    },
-    "StorageAccountInfo": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageAccountProperties",
-          "description": "The Azure Storage account properties."
-        }
-      },
-      "description": "Azure Storage account information."
-    },
-    "DataLakeAnalyticsAccountListStorageAccountsResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageAccountInfo"
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
           },
-          "description": "The results of the list operation."
+          "description": "The current state of the IP address firewall for this account."
         },
-        "nextLink": {
+        "firewallAllowAzureIps": {
           "readOnly": true,
           "type": "string",
-          "description": "The link (url) to the next page of results."
-        }
-      },
-      "description": "Azure Storage Account list information."
-    },
-    "StorageContainerProperties": {
-      "properties": {
-        "lastModifiedTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The last modified time of the blob container."
-        }
-      },
-      "description": "Azure Storage blob container properties information."
-    },
-    "StorageContainer": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unique identifier of the blob container."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the blob container."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the blob container."
-        },
-        "properties": {
-          "readOnly": true,
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageContainerProperties",
-          "description": "The properties of the blob container."
-        }
-      },
-      "description": "Azure Storage blob container information."
-    },
-    "ListStorageContainersResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageContainer"
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
           },
-          "description": "The results of the list operation."
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
         },
-        "nextLink": {
+        "newTier": {
           "readOnly": true,
           "type": "string",
-          "description": "The link (url) to the next page of results."
-        }
-      },
-      "description": "The list of blob containers associated with the storage account attached to the Data Lake Analytics account."
-    },
-    "SasTokenInfo": {
-      "properties": {
-        "accessToken": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The access token for the associated Azure Storage Container."
-        }
-      },
-      "description": "SAS token information."
-    },
-    "ListSasTokensResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SasTokenInfo"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The link (url) to the next page of results."
-        }
-      },
-      "description": "The SAS response that contains the storage account, container and associated SAS token for connection use."
-    },
-    "AddDataLakeStoreProperties": {
-      "properties": {
-        "suffix": {
-          "type": "string",
-          "description": "The optional suffix for the Data Lake Store account."
-        }
-      },
-      "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
-    },
-    "AddDataLakeStoreParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AddDataLakeStoreProperties",
-          "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
-        }
-      },
-      "description": "The parameters used to add a new Data Lake Store account."
-    },
-    "AddDataLakeStoreWithAccountParameters": {
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The unique name of the Data Lake Store account to add."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AddDataLakeStoreProperties",
-          "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
-        }
-      },
-      "description": "The parameters used to add a new Data Lake Store account while creating a new Data Lake Analytics account."
-    },
-    "UpdateDataLakeStoreProperties": {
-      "properties": {
-        "suffix": {
-          "type": "string",
-          "description": "The optional suffix for the Data Lake Store account."
-        }
-      },
-      "description": "The Data Lake Store account properties to use when updating a Data Lake Store account."
-    },
-    "UpdateDataLakeStoreWithAccountParameters": {
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The unique name of the Data Lake Store account to update."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateDataLakeStoreProperties",
-          "description": "The Data Lake Store account properties to use when updating a Data Lake Store account."
-        }
-      },
-      "description": "The parameters used to update a Data Lake Store account while updating a Data Lake Analytics account."
-    },
-    "DataLakeStoreAccountInfoProperties": {
-      "properties": {
-        "suffix": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The optional suffix for the Data Lake Store account."
-        }
-      },
-      "description": "The Data Lake Store account properties."
-    },
-    "DataLakeStoreAccountInfo": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
-          "description": "The Data Lake Store account properties."
-        }
-      },
-      "description": "Data Lake Store account information."
-    },
-    "DataLakeAnalyticsAccountListDataLakeStoreResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataLakeStoreAccountInfo"
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
           },
-          "description": "The results of the list operation."
+          "description": "The commitment tier for the next month."
         },
-        "nextLink": {
+        "currentTier": {
           "readOnly": true,
           "type": "string",
-          "description": "The link (url) to the next page of results."
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier in use for the current month."
+        },
+        "maxJobCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 3,
+          "description": "The maximum supported jobs running under the account at the same time."
+        },
+        "systemMaxJobCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The system defined maximum supported jobs running under the account at the same time, which restricts the maximum number of running jobs the user can set for the account."
+        },
+        "maxDegreeOfParallelism": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 30,
+          "description": "The maximum supported degree of parallelism for this account."
+        },
+        "systemMaxDegreeOfParallelism": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account."
+        },
+        "maxDegreeOfParallelismPerJob": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The maximum supported degree of parallelism per job for this account."
+        },
+        "minPriorityPerJob": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The minimum supported priority per job for this account."
+        },
+        "queryStoreRetention": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 180,
+          "default": 30,
+          "description": "The number of days that job metadata is retained."
         }
       },
-      "description": "Data Lake Account list information."
+      "description": "The account specific properties that are associated with an underlying Data Lake Analytics account. Returned only when retrieving a specific account."
     },
     "DataLakeAnalyticsAccountPropertiesBasic": {
       "properties": {
+        "accountId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier associated with this Data Lake Analytics account."
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -2424,330 +1874,9 @@
           "readOnly": true,
           "type": "string",
           "description": "The full CName endpoint for this account."
-        },
-        "accountId": {
-          "readOnly": true,
-          "type": "string",
-          "format": "uuid",
-          "description": "The unique identifier associated with this Data Lake Analytics account."
         }
       },
       "description": "The basic account specific properties that are associated with an underlying Data Lake Analytics account."
-    },
-    "DataLakeAnalyticsAccountBasic": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataLakeAnalyticsAccountPropertiesBasic",
-          "description": "The properties defined by Data Lake Analytics all properties are specific to each resource provider."
-        }
-      },
-      "description": "A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account."
-    },
-    "DataLakeAnalyticsAccountProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataLakeAnalyticsAccountPropertiesBasic"
-        }
-      ],
-      "required": [
-        "defaultDataLakeStoreAccount",
-        "dataLakeStoreAccounts"
-      ],
-      "properties": {
-        "defaultDataLakeStoreAccount": {
-          "type": "string",
-          "description": "The default data lake storage account associated with this Data Lake Analytics account."
-        },
-        "maxDegreeOfParallelism": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "default": 30,
-          "description": "The maximum supported degree of parallelism for this account."
-        },
-        "queryStoreRetention": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 180,
-          "default": 30,
-          "description": "The number of days that job metadata is retained."
-        },
-        "maxJobCount": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "default": 3,
-          "description": "The maximum supported jobs running under the account at the same time."
-        },
-        "systemMaxDegreeOfParallelism": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account."
-        },
-        "systemMaxJobCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The system defined maximum supported jobs running under the account at the same time, which restricts the maximum number of running jobs the user can set for the account."
-        },
-        "dataLakeStoreAccounts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AddDataLakeStoreWithAccountParameters"
-          },
-          "description": "The list of Data Lake Store accounts associated with this account."
-        },
-        "storageAccounts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AddStorageAccountWithAccountParameters"
-          },
-          "description": "The list of Azure Blob storage accounts associated with this account."
-        },
-        "newTier": {
-          "type": "string",
-          "enum": [
-            "Consumption",
-            "Commitment_100AUHours",
-            "Commitment_500AUHours",
-            "Commitment_1000AUHours",
-            "Commitment_5000AUHours",
-            "Commitment_10000AUHours",
-            "Commitment_50000AUHours",
-            "Commitment_100000AUHours",
-            "Commitment_500000AUHours"
-          ],
-          "x-ms-enum": {
-            "name": "TierType",
-            "modelAsString": false
-          },
-          "description": "The commitment tier for the next month."
-        },
-        "currentTier": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "Consumption",
-            "Commitment_100AUHours",
-            "Commitment_500AUHours",
-            "Commitment_1000AUHours",
-            "Commitment_5000AUHours",
-            "Commitment_10000AUHours",
-            "Commitment_50000AUHours",
-            "Commitment_100000AUHours",
-            "Commitment_500000AUHours"
-          ],
-          "x-ms-enum": {
-            "name": "TierType",
-            "modelAsString": false
-          },
-          "description": "The commitment tier in use for the current month."
-        },
-        "firewallState": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallState",
-            "modelAsString": false
-          },
-          "description": "The current state of the IP address firewall for this Data Lake Analytics account."
-        },
-        "firewallAllowAzureIps": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallAllowAzureIpsState",
-            "modelAsString": false
-          },
-          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
-        },
-        "firewallRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CreateFirewallRuleWithAccountParameters"
-          },
-          "description": "The list of firewall rules associated with this Data Lake Analytics account."
-        },
-        "maxDegreeOfParallelismPerJob": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The maximum supported degree of parallelism per job for this account."
-        },
-        "minPriorityPerJob": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The minimum supported priority per job for this account."
-        },
-        "computePolicies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CreateComputePolicyWithAccountParameters"
-          },
-          "description": "The list of compute policies associated with this account."
-        }
-      },
-      "description": "The account specific properties that are associated with an underlying Data Lake Analytics account. Returned only when retrieving a specific account."
-    },
-    "DataLakeAnalyticsAccount": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataLakeAnalyticsAccountProperties",
-          "description": "The properties defined by Data Lake Analytics all properties are specific to each resource provider."
-        }
-      },
-      "description": "A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account."
-    },
-    "UpdateDataLakeAnalyticsAccountProperties": {
-      "properties": {
-        "maxDegreeOfParallelism": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The maximum supported degree of parallelism for this account."
-        },
-        "queryStoreRetention": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 180,
-          "description": "The number of days that job metadata is retained."
-        },
-        "maxJobCount": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The maximum supported jobs running under the account at the same time."
-        },
-        "dataLakeStoreAccounts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UpdateDataLakeStoreWithAccountParameters"
-          },
-          "description": "The list of Data Lake Store accounts associated with this account."
-        },
-        "storageAccounts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UpdateStorageAccountWithAccountParameters"
-          },
-          "description": "The list of Azure Blob storage accounts associated with this account."
-        },
-        "newTier": {
-          "type": "string",
-          "enum": [
-            "Consumption",
-            "Commitment_100AUHours",
-            "Commitment_500AUHours",
-            "Commitment_1000AUHours",
-            "Commitment_5000AUHours",
-            "Commitment_10000AUHours",
-            "Commitment_50000AUHours",
-            "Commitment_100000AUHours",
-            "Commitment_500000AUHours"
-          ],
-          "x-ms-enum": {
-            "name": "TierType",
-            "modelAsString": false
-          },
-          "description": "The commitment tier to use for next month."
-        },
-        "firewallState": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallState",
-            "modelAsString": false
-          },
-          "description": "The current state of the IP address firewall for this Data Lake Analytics account."
-        },
-        "firewallAllowAzureIps": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallAllowAzureIpsState",
-            "modelAsString": false
-          },
-          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
-        },
-        "firewallRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UpdateFirewallRuleWithAccountParameters"
-          },
-          "description": "The list of firewall rules associated with this Data Lake Analytics account."
-        },
-        "maxDegreeOfParallelismPerJob": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The maximum supported degree of parallelism per job for this account."
-        },
-        "minPriorityPerJob": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The minimum supported priority per job for this account."
-        },
-        "computePolicies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UpdateComputePolicyWithAccountParameters"
-          },
-          "description": "The list of compute policies associated with this account."
-        }
-      },
-      "description": "The properties to update that are associated with an underlying Data Lake Analytics account."
-    },
-    "DataLakeAnalyticsAccountUpdateParameters": {
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateDataLakeAnalyticsAccountProperties",
-          "description": "The properties that can be updated in an existing Data Lake Analytics account."
-        }
-      },
-      "description": "The parameters that can be used to update an existing Data Lake Analytics account."
     },
     "DataLakeAnalyticsAccountListResult": {
       "properties": {
@@ -2765,47 +1894,362 @@
           "description": "The link (url) to the next page of results."
         }
       },
-      "description": "DataLakeAnalytics Account list information."
+      "description": "Data Lake Analytics account list information."
     },
-    "NameAvailabilityInformation": {
-      "properties": {
-        "nameAvailable": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "The Boolean value of true or false to indicate whether the Data Lake Analytics account name is available or not."
-        },
-        "reason": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The reason why the Data Lake Analytics account name is not available, if nameAvailable is false."
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The message describing why the Data Lake Analytics account name is not available, if nameAvailable is false."
+    "DataLakeStoreAccountInformation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
         }
-      },
-      "description": "Data Lake Analytics account name availability result information."
-    },
-    "CheckNameAvailabilityParameters": {
-      "required": [
-        "name",
-        "type"
       ],
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The Data Lake Analytics name to check availability for."
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.DataLakeAnalytics/accounts"
-          ],
-          "description": "The resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeAnalytics/accounts"
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataLakeStoreAccountInformationProperties",
+          "description": "The Data Lake Store account properties."
         }
       },
-      "description": "Data Lake Analytics account name availability check parameters."
+      "description": "Data Lake Store account information."
+    },
+    "DataLakeStoreAccountInformationProperties": {
+      "properties": {
+        "suffix": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The optional suffix for the Data Lake Store account."
+        }
+      },
+      "description": "The Data Lake Store account properties."
+    },
+    "DataLakeStoreAccountInformationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeStoreAccountInformation"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Store account list information."
+    },
+    "StorageAccountInformation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageAccountInformationProperties",
+          "description": "The Azure Storage account properties."
+        }
+      },
+      "description": "Azure Storage account information."
+    },
+    "StorageAccountInformationProperties": {
+      "properties": {
+        "suffix": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The optional suffix for the storage account."
+        }
+      },
+      "description": "The Azure Storage account properties."
+    },
+    "StorageAccountInformationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccountInformation"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Azure Storage account list information."
+    },
+    "StorageContainer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageContainerProperties",
+          "description": "The properties of the blob container."
+        }
+      },
+      "description": "Azure Storage blob container information."
+    },
+    "StorageContainerProperties": {
+      "properties": {
+        "lastModifiedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified time of the blob container."
+        }
+      },
+      "description": "Azure Storage blob container properties information."
+    },
+    "StorageContainerListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageContainer"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "The list of blob containers associated with the storage account attached to the Data Lake Analytics account."
+    },
+    "SasTokenInformation": {
+      "properties": {
+        "accessToken": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The access token for the associated Azure Storage Container."
+        }
+      },
+      "description": "SAS token information."
+    },
+    "SasTokenInformationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SasTokenInformation"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "The SAS response that contains the storage account, container and associated SAS token for connection use."
+    },
+    "ComputePolicy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ComputePolicyProperties",
+          "description": "The compute policy properties."
+        }
+      },
+      "description": "Data Lake Analytics compute policy information."
+    },
+    "ComputePolicyProperties": {
+      "properties": {
+        "objectId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The AAD object identifier for the entity to create a policy for."
+        },
+        "objectType": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "AADObjectType",
+            "modelAsString": true
+          },
+          "description": "The type of AAD object the object identifier refers to."
+        },
+        "maxDegreeOfParallelismPerJob": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The maximum degree of parallelism per job this user can use to submit jobs."
+        },
+        "minPriorityPerJob": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The minimum priority per job this user can use to submit jobs."
+        }
+      },
+      "description": "The compute policy properties."
+    },
+    "ComputePolicyListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputePolicy"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "The list of compute policies in the account."
+    },
+    "FirewallRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "description": "The firewall rule properties."
+        }
+      },
+      "description": "Data Lake Analytics firewall rule information."
+    },
+    "FirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "The firewall rule properties."
+    },
+    "FirewallRuleListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Analytics firewall rule list information."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "display": {
+          "readOnly": true,
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The display information for the operation."
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          },
+          "description": "The intended executor of the operation."
+        }
+      },
+      "description": "An available operation for Data Lake Analytics."
+    },
+    "OperationDisplay": {
+      "properties": {
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource provider of the operation."
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the operation."
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A friendly name of the operation."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A friendly description of the operation."
+        }
+      },
+      "description": "The display information for a particular operation."
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "The list of available operations for Data Lake Analytics."
     },
     "CapabilityInformation": {
       "properties": {
@@ -2851,132 +2295,680 @@
       },
       "description": "Subscription-level properties and limits for Data Lake Analytics."
     },
-    "OperationDisplay": {
+    "NameAvailabilityInformation": {
       "properties": {
-        "provider": {
+        "nameAvailable": {
           "readOnly": true,
-          "type": "string",
-          "description": "The resource provider of the operation."
+          "type": "boolean",
+          "description": "The Boolean value of true or false to indicate whether the Data Lake Analytics account name is available or not."
         },
-        "resource": {
+        "reason": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource type of the operation."
+          "description": "The reason why the Data Lake Analytics account name is not available, if nameAvailable is false."
         },
-        "operation": {
+        "message": {
           "readOnly": true,
           "type": "string",
-          "description": "A friendly name of the operation."
-        },
-        "description": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A friendly description of the operation."
+          "description": "The message describing why the Data Lake Analytics account name is not available, if nameAvailable is false."
         }
       },
-      "description": "The display information for a particular operation."
+      "description": "Data Lake Analytics account name availability result information."
     },
-    "Operation": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the operation."
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "The display information for the operation."
-        },
-        "origin": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "user",
-            "system",
-            "user,system"
-          ],
-          "x-ms-enum": {
-            "name": "OperationOrigin",
-            "modelAsString": true
-          },
-          "description": "The intended executor of the operation."
-        }
-      },
-      "description": "An available operation for Data Lake Analytics."
-    },
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "The results of the list operation."
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The link (url) to the next page of results."
-        }
-      },
-      "description": "The list of available operations for Data Lake Analytics."
-    },
-    "Resource": {
+    "CreateDataLakeAnalyticsAccountParameters": {
       "required": [
-        "location"
+        "location",
+        "properties"
       ],
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "The resource location."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "description": "The resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateDataLakeAnalyticsAccountProperties",
+          "description": "The Data Lake Analytics account properties to use for creating."
         }
       },
-      "x-ms-azure-resource": true,
-      "description": "The Resource model definition."
+      "description": "The parameters to use for creating a Data Lake Analytics account."
     },
-    "SubResource": {
+    "CreateDataLakeAnalyticsAccountProperties": {
+      "required": [
+        "defaultDataLakeStoreAccount",
+        "dataLakeStoreAccounts"
+      ],
       "properties": {
-        "id": {
-          "readOnly": true,
+        "defaultDataLakeStoreAccount": {
           "type": "string",
-          "description": "Resource Id"
+          "description": "The default Data Lake Store account associated with this account."
         },
-        "name": {
-          "readOnly": true,
+        "dataLakeStoreAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddDataLakeStoreWithAccountParameters"
+          },
+          "description": "The list of Data Lake Store accounts associated with this account."
+        },
+        "storageAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddStorageAccountWithAccountParameters"
+          },
+          "description": "The list of Azure Blob Storage accounts associated with this account."
+        },
+        "computePolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateComputePolicyWithAccountParameters"
+          },
+          "description": "The list of compute policies associated with this account."
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateFirewallRuleWithAccountParameters"
+          },
+          "description": "The list of firewall rules associated with this account."
+        },
+        "firewallState": {
           "type": "string",
-          "description": "Resource name"
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          },
+          "description": "The current state of the IP address firewall for this account."
+        },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier for the next month."
+        },
+        "maxJobCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 3,
+          "description": "The maximum supported jobs running under the account at the same time."
+        },
+        "maxDegreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 30,
+          "description": "The maximum supported degree of parallelism for this account."
+        },
+        "maxDegreeOfParallelismPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The maximum supported degree of parallelism per job for this account."
+        },
+        "minPriorityPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The minimum supported priority per job for this account."
+        },
+        "queryStoreRetention": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 180,
+          "default": 30,
+          "description": "The number of days that job metadata is retained."
+        }
+      }
+    },
+    "UpdateDataLakeAnalyticsAccountParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateDataLakeAnalyticsAccountProperties",
+          "description": "The properties that can be updated in an existing Data Lake Analytics account."
+        }
+      },
+      "description": "The parameters that can be used to update an existing Data Lake Analytics account."
+    },
+    "UpdateDataLakeAnalyticsAccountProperties": {
+      "properties": {
+        "dataLakeStoreAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateDataLakeStoreWithAccountParameters"
+          },
+          "description": "The list of Data Lake Store accounts associated with this account."
+        },
+        "storageAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateStorageAccountWithAccountParameters"
+          },
+          "description": "The list of Azure Blob storage accounts associated with this account."
+        },
+        "computePolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateComputePolicyWithAccountParameters"
+          },
+          "description": "The list of compute policies associated with this account."
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateFirewallRuleWithAccountParameters"
+          },
+          "description": "The list of firewall rules associated with this account."
+        },
+        "firewallState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          },
+          "description": "The current state of the IP address firewall for this account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled."
+        },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier to use for next month."
+        },
+        "maxJobCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The maximum supported jobs running under the account at the same time."
+        },
+        "maxDegreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The maximum supported degree of parallelism for this account."
+        },
+        "maxDegreeOfParallelismPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The maximum supported degree of parallelism per job for this account."
+        },
+        "minPriorityPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The minimum supported priority per job for this account."
+        },
+        "queryStoreRetention": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 180,
+          "description": "The number of days that job metadata is retained."
+        }
+      },
+      "description": "The properties to update that are associated with an underlying Data Lake Analytics account."
+    },
+    "AddDataLakeStoreParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddDataLakeStoreProperties",
+          "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
+        }
+      },
+      "description": "The parameters used to add a new Data Lake Store account."
+    },
+    "AddDataLakeStoreWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Data Lake Store account to add."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddDataLakeStoreProperties",
+          "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
+        }
+      },
+      "description": "The parameters used to add a new Data Lake Store account while creating a new Data Lake Analytics account."
+    },
+    "AddDataLakeStoreProperties": {
+      "properties": {
+        "suffix": {
+          "type": "string",
+          "description": "The optional suffix for the Data Lake Store account."
+        }
+      },
+      "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
+    },
+    "UpdateDataLakeStoreWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Data Lake Store account to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateDataLakeStoreProperties",
+          "description": "The Data Lake Store account properties to use when updating a Data Lake Store account."
+        }
+      },
+      "description": "The parameters used to update a Data Lake Store account while updating a Data Lake Analytics account."
+    },
+    "UpdateDataLakeStoreProperties": {
+      "properties": {
+        "suffix": {
+          "type": "string",
+          "description": "The optional suffix for the Data Lake Store account."
+        }
+      },
+      "description": "The Data Lake Store account properties to use when updating a Data Lake Store account."
+    },
+    "AddStorageAccountParameters": {
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddStorageAccountProperties",
+          "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
+        }
+      },
+      "description": "The parameters used to add a new Azure Storage account."
+    },
+    "AddStorageAccountWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Azure Storage account to add."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddStorageAccountProperties",
+          "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
+        }
+      },
+      "description": "The parameters used to add a new Azure Storage account while creating a new Data Lake Analytics account."
+    },
+    "AddStorageAccountProperties": {
+      "required": [
+        "accessKey"
+      ],
+      "properties": {
+        "accessKey": {
+          "type": "string",
+          "description": "The access key associated with this Azure Storage account that will be used to connect to it."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "The optional suffix for the storage account."
+        }
+      },
+      "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
+    },
+    "UpdateStorageAccountParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateStorageAccountProperties",
+          "description": "The Azure Storage account properties to use when updating an Azure Storage account."
+        }
+      },
+      "description": "The parameters used to update an Azure Storage account."
+    },
+    "UpdateStorageAccountWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Azure Storage account to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateStorageAccountProperties",
+          "description": "The Azure Storage account properties to use when updating an Azure Storage account."
+        }
+      },
+      "description": "The parameters used to update an Azure Storage account while updating a Data Lake Analytics account."
+    },
+    "UpdateStorageAccountProperties": {
+      "properties": {
+        "accessKey": {
+          "type": "string",
+          "description": "The updated access key associated with this Azure Storage account that will be used to connect to it."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "The optional suffix for the storage account."
+        }
+      },
+      "description": "The Azure Storage account properties to use when updating an Azure Storage account."
+    },
+    "CreateOrUpdateComputePolicyParameters": {
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateComputePolicyProperties",
+          "description": "The compute policy properties to use when creating a new compute policy."
+        }
+      },
+      "description": "The parameters used to create a new compute policy."
+    },
+    "CreateComputePolicyWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the compute policy to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateComputePolicyProperties",
+          "description": "The compute policy properties to use when creating a new compute policy."
+        }
+      },
+      "description": "The parameters used to create a new compute policy while creating a new Data Lake Analytics account."
+    },
+    "CreateOrUpdateComputePolicyProperties": {
+      "required": [
+        "objectId",
+        "objectType"
+      ],
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The AAD object identifier for the entity to create a policy for."
+        },
+        "objectType": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "AADObjectType",
+            "modelAsString": true
+          },
+          "description": "The type of AAD object the object identifier refers to."
+        },
+        "maxDegreeOfParallelismPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The maximum degree of parallelism per job this user can use to submit jobs. This property, the min priority per job property, or both must be passed."
+        },
+        "minPriorityPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The minimum priority per job this user can use to submit jobs. This property, the max degree of parallelism per job property, or both must be passed."
+        }
+      },
+      "description": "The compute policy properties to use when creating a new compute policy."
+    },
+    "UpdateComputePolicyParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateComputePolicyProperties",
+          "description": "The compute policy properties to use when updating a compute policy."
+        }
+      },
+      "description": "The parameters used to update a compute policy."
+    },
+    "UpdateComputePolicyWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the compute policy to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateComputePolicyProperties",
+          "description": "The compute policy properties to use when updating a compute policy."
+        }
+      },
+      "description": "The parameters used to update a compute policy while updating a Data Lake Analytics account."
+    },
+    "UpdateComputePolicyProperties": {
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The AAD object identifier for the entity to create a policy for."
+        },
+        "objectType": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "AADObjectType",
+            "modelAsString": true
+          },
+          "description": "The type of AAD object the object identifier refers to."
+        },
+        "maxDegreeOfParallelismPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The maximum degree of parallelism per job this user can use to submit jobs. This property, the min priority per job property, or both must be passed."
+        },
+        "minPriorityPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The minimum priority per job this user can use to submit jobs. This property, the max degree of parallelism per job property, or both must be passed."
+        }
+      },
+      "description": "The compute policy properties to use when updating a compute policy."
+    },
+    "CreateOrUpdateFirewallRuleParameters": {
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when creating a new firewall rule."
+        }
+      },
+      "description": "The parameters used to create a new firewall rule."
+    },
+    "CreateFirewallRuleWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the firewall rule to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when creating a new firewall rule."
+        }
+      },
+      "description": "The parameters used to create a new firewall rule while creating a new Data Lake Analytics account."
+    },
+    "CreateOrUpdateFirewallRuleProperties": {
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ],
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "The firewall rule properties to use when creating a new firewall rule."
+    },
+    "UpdateFirewallRuleParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when updating a firewall rule."
+        }
+      },
+      "description": "The parameters used to update a firewall rule."
+    },
+    "UpdateFirewallRuleWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the firewall rule to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when updating a firewall rule."
+        }
+      },
+      "description": "The parameters used to update a firewall rule while updating a Data Lake Analytics account."
+    },
+    "UpdateFirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "The firewall rule properties to use when updating a firewall rule."
+    },
+    "CheckNameAvailabilityParameters": {
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Data Lake Analytics name to check availability for."
         },
         "type": {
-          "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "enum": [
+            "Microsoft.DataLakeAnalytics/accounts"
+          ],
+          "description": "The resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeAnalytics/accounts"
         }
       },
-      "x-ms-azure-resource": true,
-      "description": "The Resource model definition for a nested resource."
+      "description": "Data Lake Analytics account name availability check parameters."
     }
   },
   "parameters": {
@@ -2993,6 +2985,22 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Azure resource group."
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Data Lake Analytics account."
     }
   }
 }

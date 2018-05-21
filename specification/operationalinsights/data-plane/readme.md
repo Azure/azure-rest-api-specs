@@ -38,6 +38,12 @@ These settings apply only when `--tag=v1` is specified on the command line.
 ``` yaml $(tag) == 'v1'
 input-file:
 - Microsoft.OperationalInsights/stable/v1/OperationalInsights.json
+directive:
+  - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
+    remove-operation: Query_Get
+  - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
+    where-operation: Query_Post
+    transform: $.operationId = "Query"
 ```
 
 ---
@@ -53,6 +59,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-node
 ```
 
 ## C#
@@ -66,12 +74,29 @@ csharp:
   output-folder: $(csharp-sdks-folder)/OperationalInsights/DataPlane/OperationalInsights/Generated
   clear-output-folder: true
   payload-flattening-threshold: 3
-directive:
-  - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
-    remove-operation: Query_Get
-  - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
-    where-operation: Query_Post
-    transform: $.operationId = "Query"
+```
+
+``` yaml $(python)
+python-mode: create
+python:
+  add-credentials: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.operationalinsights
+  package-name: azure-operationalinsights
+  package-version: 0.1.0
+  clear-output-folder: true
+  basic-setup-py: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-operationalinsights/azure/operationalinsights
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-operationalinsights
 ```
 
 ## Go
@@ -99,4 +124,20 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='v1' && $(go)
 output-folder: $(go-sdk-folder)/services/operationalinsights/v1/operationalinsights
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.operationalinsights
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-operationalinsights
 ```

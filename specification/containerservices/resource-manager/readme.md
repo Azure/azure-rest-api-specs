@@ -67,6 +67,51 @@ input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
 ```
 
+### Tag: package-2017-08-only
+
+These settings apply only when `--tag=package-2017-08-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-08-only'
+input-file:
+- Microsoft.ContainerService/stable/2017-08-31/managedClusters.json
+```
+
+### Tag: package-2017-09-only
+
+These settings apply only when `--tag=package-2017-09-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09-only'
+input-file:
+- Microsoft.ContainerService/stable/2017-09-30/location.json
+```
+
+### Tag: package-2017-01-only
+
+These settings apply only when `--tag=package-2017-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2016-09-only
+
+These settings apply only when `--tag=package-2016-09-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09-only'
+input-file:
+- Microsoft.ContainerService/stable/2016-09-30/containerService.json
+```
+
+### Tag: package-2016-03-only
+
+These settings apply only when `--tag=package-2016-03-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-only'
+input-file:
+- Microsoft.ContainerService/stable/2016-03-30/containerService.json
+```
+
 ---
 
 # Code Generation
@@ -80,7 +125,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
 ```
 
 
@@ -159,4 +209,22 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-containerservice
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.containerservice
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice
+  title: ContainerServiceManagementClient
+  description: "Container Service Client"
 ```

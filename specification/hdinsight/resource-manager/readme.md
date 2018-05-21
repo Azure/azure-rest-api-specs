@@ -1,5 +1,5 @@
 # HDInsight
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for HDInsight.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for HDInsight.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for HDInsight, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the HDInsight API.
 
 ``` yaml
@@ -61,8 +61,14 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-node
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -88,10 +94,10 @@ These settings apply only when `--tag=package-2015-03-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/hdinsight/mgmt/2015-03-01-preview/hdinsight
+output-folder: $(go-sdk-folder)/services/preview/hdinsight/mgmt/2015-03-01-preview/hdinsight
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -102,4 +108,20 @@ csharp:
   namespace: Microsoft.Azure.Management.HDInsight
   output-folder: $(csharp-sdks-folder)/HDInsight/Management.HDInsight/Generated
   clear-output-folder: true
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.hdinsight
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsight
 ```

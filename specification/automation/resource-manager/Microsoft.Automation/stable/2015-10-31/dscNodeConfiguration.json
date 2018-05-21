@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -128,7 +131,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscNodeConfiguration"
+              "$ref": "#/definitions/DscNodeConfiguration"
             }
           },
           "default": {
@@ -147,6 +150,11 @@
         "description": "Create the node configuration identified by node configuration name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
+        },
+        "x-ms-examples": {
+          "Get a DSC node configuration": {
+            "$ref": "./examples/createOrUpdateDscNodeConfiguration.json"
+          }
         },
         "parameters": [
           {
@@ -171,7 +179,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscNodeConfigurationCreateOrUpdateParameters"
+              "$ref": "#/definitions/DscNodeConfigurationCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for configuration."
           },
@@ -186,13 +194,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscNodeConfiguration"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/DscNodeConfiguration"
+              "$ref": "#/definitions/DscNodeConfiguration"
             }
           },
           "default": {
@@ -248,7 +250,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscNodeConfigurationListResult"
+              "$ref": "#/definitions/DscNodeConfigurationListResult"
             }
           },
           "default": {
@@ -264,6 +266,121 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "DscNodeConfiguration": {
+      "properties": {
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets creation time.",
+          "x-nullable": false
+        },
+        "configuration": {
+          "$ref": "./definitions.json#/definitions/DscConfigurationAssociationProperty",
+          "description": "Gets or sets the configuration of the node."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Definition of the dsc node configuration."
+    },
+    "ContentSource": {
+      "properties": {
+        "hash": {
+          "$ref": "#/definitions/ContentHash",
+          "description": "Gets or sets the hash."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the content source type.",
+          "enum": [
+            "embeddedContent",
+            "uri"
+          ],
+          "x-ms-enum": {
+            "name": "ContentSourceType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the value of the content. This is based on the content source type."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the content."
+        }
+      },
+      "description": "Definition of the content source."
+    },
+    "ContentHash": {
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Gets or sets the content hash algorithm used to hash the content."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets expected hash value of the content."
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "description": "Definition of the runbook property type."
+    },
+    "DscNodeConfigurationCreateOrUpdateParameters": {
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ContentSource",
+          "description": "Gets or sets the source."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the node configuration."
+        },
+        "configuration": {
+          "$ref": "./definitions.json#/definitions/DscConfigurationAssociationProperty",
+          "description": "Gets or sets the configuration of the node."
+        },
+        "incrementNodeConfigurationBuild": {
+          "type": "boolean",
+          "description": "If a new build version of NodeConfiguration is required."
+        }
+      },
+      "required": [
+        "source",
+        "name",
+        "configuration"
+      ],
+      "description": "The parameters supplied to the create or update node configuration operation."
+    },
+    "DscNodeConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DscNodeConfiguration"
+          },
+          "description": "Gets or sets a list of Dsc node configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job operation."
+    }
+  },
   "parameters": {}
 }

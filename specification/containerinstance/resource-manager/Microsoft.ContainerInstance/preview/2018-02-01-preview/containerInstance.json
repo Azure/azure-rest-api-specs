@@ -179,7 +179,8 @@
               "$ref": "#/definitions/ContainerGroup"
             }
           }
-        }
+        }, 
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ContainerGroups_Update",
@@ -206,6 +207,7 @@
           {
             "name": "Resource",
             "description": "The container group resource with just the tags to be updated.",
+            "required": true,
             "in": "body",
             "schema": {
               "$ref": "#/definitions/Resource"
@@ -356,6 +358,56 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Logs"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/exec": {
+      "post": {
+        "operationId": "StartContainer_LaunchExec",
+        "x-ms-examples": {
+          "ContainerExecStart": {
+            "$ref": "./examples/ContainerExecStart.json"
+          }
+        },
+        "summary": "Starts the exec command for a specific container instance.",
+        "description": "Starts the exec command for a specified container instance in a specified resource group and container group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "The name of the container instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name":"containerExecRequest",
+            "in":"body",
+            "description":"The request for the exec command.",
+            "required":true,
+            "schema":{
+                "$ref":"#/definitions/ContainerExecRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerExecResponse"
             }
           }
         }
@@ -829,7 +881,7 @@
           "type": "string",
           "description": "The IP exposed to the public internet."
         },
-        "dnsnamelabel": {
+        "dnsNameLabel": {
           "type": "string",
           "description": "The Dns name label for the IP."
         },
@@ -1057,6 +1109,44 @@
         }
       }
     },
+    "ContainerExecRequest": {
+      "description": "The start container exec request.",
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "The command to be executed."
+        },
+        "terminalSize": {
+          "type": "object",
+          "description": "The size of the terminal.",
+          "properties": {
+            "rows":{
+              "type": "integer",
+              "description": "The row size of the terminal"
+            },
+            "cols": {
+              "type": "integer",
+              "description": "The column size of the terminal"
+            }
+          }
+        }
+      }
+    },
+    "ContainerExecResponse": {
+      "description": "The information for the container exec command.",
+      "type": "object",
+      "properties": {
+        "webSocketUri": {
+          "type": "string",
+          "description": "The uri for the exec websocket."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password to start the exec command."
+        }
+      }
+    },
     "Resource": {
       "type": "object",
       "description": "The Resource model definition.",
@@ -1130,6 +1220,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the container group.",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The operation Id.",
       "x-ms-parameter-location": "method"
     }
   }

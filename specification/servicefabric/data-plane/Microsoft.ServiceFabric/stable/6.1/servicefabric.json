@@ -3,7 +3,7 @@
   "info": {
     "title": "Service Fabric Client APIs",
     "description": "Service Fabric REST Client APIs allows management of Service Fabric clusters, applications and services.",
-    "version": "6.1.0.9"
+    "version": "6.1.2"
   },
   "host": "localhost:19080",
   "schemes": [
@@ -736,7 +736,7 @@
     "/Nodes": {
       "get": {
         "summary": "Gets the list of nodes in the Service Fabric cluster.",
-        "description": "The Nodes endpoint returns information about the nodes in the Service Fabric Cluster. The response include the name, status, id, health, uptime and other details about the node.",
+        "description": "Gets the list of nodes in the Service Fabric cluster. The response include the name, status, id, health, uptime and other details about the node.",
         "operationId": "GetNodeInfoList",
         "x-ms-examples": {
           "Get information about all nodes.": {
@@ -778,7 +778,7 @@
     },
     "/Nodes/{nodeName}": {
       "get": {
-        "summary": "Gets the list of nodes in the Service Fabric cluster.",
+        "summary": "Gets the information about a specific node in the Service Fabric cluster.",
         "description": "Gets the information about a specific node in the Service Fabric Cluster.The response include the name, status, id, health, uptime and other details about the node.",
         "operationId": "GetNodeInfo",
         "parameters": [

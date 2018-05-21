@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2017-05-15-preview",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -50,14 +53,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "sourceControlName",
@@ -76,10 +75,10 @@
             "description": "The parameters supplied to the create or update source control operation."
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -98,7 +97,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -119,14 +118,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "sourceControlName",
@@ -145,10 +140,10 @@
             "description": "The parameters supplied to the update source control operation."
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -161,7 +156,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -182,14 +177,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "sourceControlName",
@@ -199,10 +190,10 @@
             "description": "The name of source control."
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -212,7 +203,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -233,14 +224,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "sourceControlName",
@@ -250,10 +237,10 @@
             "description": "The name of source control."
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -266,7 +253,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -289,14 +276,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "$filter",
@@ -306,10 +289,10 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -322,7 +305,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../stable/2015-10-31/definitions.json#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         },
