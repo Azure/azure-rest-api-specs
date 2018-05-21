@@ -169,6 +169,7 @@ batch:
    - tag: package-2017-12-preview
    - tag: package-2018-01
    - tag: package-2018-03
+   - tag: package-2018-05
 ```
 
 
