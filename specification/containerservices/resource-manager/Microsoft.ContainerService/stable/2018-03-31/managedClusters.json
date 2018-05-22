@@ -949,6 +949,10 @@
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response."
         },
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "Version of Kubernetes specified when creating the managed cluster."
+        },
         "dnsPrefix": {
           "type": "string",
           "description": "DNS prefix specified when creating the managed cluster."
@@ -957,10 +961,6 @@
           "readOnly": true,
           "type": "string",
           "description": "FDQN for the master pool."
-        },
-        "kubernetesVersion": {
-          "type": "string",
-          "description": "Version of Kubernetes specified when creating the managed cluster."
         },
         "agentPoolProfiles": {
           "type": "array",
@@ -977,6 +977,12 @@
           "$ref": "#/definitions/ContainerServiceServicePrincipalProfile",
           "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified."
         },
+        "addonProfiles": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ManagedClusterAddonProfile"
+          },
+          "description": "Profile of managed cluster add-on."
+        },
         "enableRBAC": {
           "type": "boolean",
           "description": "Whether to enable Kubernetes Role-Based Access Control."
@@ -985,11 +991,9 @@
           "$ref": "#/definitions/ContainerServiceNetworkProfile",
           "description": "Profile of network configuration."
         },
-        "addonProfiles": {
-          "additionalProperties": {
-            "$ref": "#/definitions/ManagedClusterAddonProfile"
-          },
-          "description": "Profile of managed cluster add-on."
+        "aadProfile": {
+          "$ref": "#/definitions/ManagedClusterAADProfile",
+          "description": "Profile of Azure Active Directory configuration."
         }
       },
       "description": "Properties of the managed cluster."
@@ -1095,6 +1099,32 @@
         "agentPoolProfiles"
       ],
       "description": "Control plane and agent pool upgrade profiles."
+    },
+    "ManagedClusterAADProfile": {
+      "properties": {
+        "clientAppID": {
+          "type": "string",
+          "description": "The client AAD application ID."
+        },
+        "serverAppID": {
+          "type": "string",
+          "description": "The server AAD application ID."
+        },
+        "serverAppSecret": {
+          "type": "string",
+          "description": "The server AAD application secret."
+        },
+        "tenantID": {
+          "type": "string",
+          "description": "The AAD tenant ID to use for authentication. If not specified, will use the tenant of the deployment subscription."
+        }
+      },
+      "required": [
+        "clientAppID",
+        "serverAppID",
+        "serverAppSecret"
+      ],
+      "description": "AADProfile specifies attributes for Azure Active Directory integration."
     },
     "ManagedClusterAddonProfile": {
       "properties": {
