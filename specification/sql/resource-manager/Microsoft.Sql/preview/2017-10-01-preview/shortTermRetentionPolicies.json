@@ -19,10 +19,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}": {
       "get": {
         "tags": [
-          "ShortTermRetentionPolicies"
+          "BackupShortTermRetentionPolicies"
         ],
         "description": "Gets a database's short term retention policy.",
-        "operationId": "ShortTermRetentionPolicies_Get",
+        "operationId": "BackupShortTermRetentionPolicies_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -58,7 +58,7 @@
           "200": {
             "description": "Successfully retrieved the policy.",
             "schema": {
-              "$ref": "#/definitions/ShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           "default": {
@@ -73,10 +73,10 @@
       },
       "put": {
         "tags": [
-          "ShortTermRetentionPolicies"
+          "BackupShortTermRetentionPolicies"
         ],
         "description": "Updates a database's short term retention policy.",
-        "operationId": "ShortTermRetentionPolicies_CreateOrUpdate",
+        "operationId": "BackupShortTermRetentionPolicies_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -107,7 +107,7 @@
             "description": "The short term retention policy info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           {
@@ -121,7 +121,7 @@
           "200": {
             "description": "Successfully updated the policy.",
             "schema": {
-              "$ref": "#/definitions/ShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           "default": {
@@ -140,10 +140,10 @@
       },
       "patch": {
         "tags": [
-          "ShortTermRetentionPolicies"
+          "BackupShortTermRetentionPolicies"
         ],
         "description": "Updates a database's short term retention policy.",
-        "operationId": "ShortTermRetentionPolicies_Update",
+        "operationId": "BackupShortTermRetentionPolicies_Update",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -174,7 +174,7 @@
             "description": "The short term retention policy info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           {
@@ -188,7 +188,7 @@
           "200": {
             "description": "Successfully updated the policy.",
             "schema": {
-              "$ref": "#/definitions/ShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           "default": {
@@ -208,7 +208,7 @@
     }
   },
   "definitions": {
-    "ShortTermRetentionPolicyProperties": {
+    "BackupShortTermRetentionPolicyProperties": {
       "description": "Properties of a short term retention policy",
       "type": "object",
       "properties": {
@@ -251,8 +251,8 @@
       ],
       "properties": {}
     },
-    "ShortTermRetentionPolicy": {
-      "description": "A short term retention policy resource.",
+    "BackupShortTermRetentionPolicy": {
+      "description": "A short term retention policy.",
       "type": "object",
       "allOf": [
         {
@@ -261,7 +261,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ShortTermRetentionPolicyProperties",
+          "$ref": "#/definitions/BackupShortTermRetentionPolicyProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
