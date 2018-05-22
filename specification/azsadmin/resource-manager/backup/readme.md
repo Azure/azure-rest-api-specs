@@ -49,26 +49,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.AzureStack.Management.Backup.Admin
   payload-flattening-threshold: 1
-  output-folder: Generated
+  output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-```
-
-### Tag: package-2016-05-01 and python
-
-These settings apply only when `--tag=package-2016-05-01 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-05-01' && $(python)
-namespace: azure.mgmt.backup.admin.v2015_06_01_preview
 ```
