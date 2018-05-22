@@ -1,0 +1,310 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Information protection",
+        "description": "API spec for information protection policies",
+        "version": "2017-08-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "security": [{
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/{scope}/providers/Microsoft.Security/informationProtectionPolicies/{informationProtectionPolicyName}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get an information protection policy for a management group": {
+                        "$ref": "./examples/InformationProtectionPolicies/GetInformationProtectionPolicy_example.json"
+                    }
+                },
+                "tags": ["InformationProtectionPolicies"],
+                "description": "Details of the information protection policy",
+                "operationId": "InformationProtectionPolicies_Get",
+                "parameters":
+                [{
+                        "$ref": "#/parameters/ApiVersion"
+                    }, {
+                        "$ref": "#/parameters/Scope"
+                    }, {
+                        "$ref": "#/parameters/InformationProtectionPolicyName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/InformationProtectionPolicy"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Update an information protection policy for a management group": {
+                        "$ref": "./examples/InformationProtectionPolicies/CreateOrUpdateInformationProtectionPolicy_example.json"
+                    }
+                },
+                "tags": ["InformationProtectionPolicies"],
+                "description": "Details of the information protection policy",
+                "operationId": "InformationProtectionPolicies_CreateOrUpdate",
+                "parameters": [{
+                        "$ref": "#/parameters/ApiVersion"
+                    }, {
+                        "$ref": "#/parameters/Scope"
+                    }, {
+                        "$ref": "#/parameters/InformationProtectionPolicyName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/InformationProtectionPolicy"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/{scope}/providers/Microsoft.Security/informationProtectionPolicies": {
+            "get": {
+                "x-ms-examples": {
+                    "Get information protection policies": {
+                        "$ref": "./examples/InformationProtectionPolicies/ListInformationProtectionPolicies_example.json"
+                    }
+                },
+                "tags": ["InformationProtectionPolicies"],
+                "description": "Information protection policies of a specific management group.",
+                "operationId": "InformationProtection_List",
+                "parameters": [{
+                        "$ref": "#/parameters/ApiVersion"
+                    }, {
+                        "$ref": "#/parameters/Scope"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/InformationProtectionPolicyList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ErrorResponse": {
+            "type": "object",
+            "description": "Error response structure.",
+            "properties": {
+                "error": {
+                    "x-ms-client-flatten": true,
+                    "description": "Error data",
+                    "$ref": "#/definitions/ErrorResponseProperties"
+                }
+            }
+        },
+        "ErrorResponseProperties": {
+            "type": "object",
+            "description": "Error details.",
+            "properties": {
+                "code": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Short constant description of the error"
+                },
+                "message": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Detailed description of the error and resolution suggestions"
+                }
+            }
+        },
+        "Resource": {
+            "type": "object",
+            "description": "Describes an Azure resource.",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "InformationProtectionPolicyList": {
+            "type": "object",
+            "readOnly": true,
+            "description": "Information protection policies response",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "List of information protection policies",
+                    "items": {
+                        "$ref": "#/definitions/InformationProtectionPolicy"
+                    }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
+                }
+            }
+        },
+        "InformationProtectionPolicy": {
+            "type": "object",
+            "description": "Information protection policy",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Information protection policy data",
+                    "$ref": "#/definitions/InformationProtectionPolicyProperties"
+                }
+            },
+            "allOf": [{
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
+        },
+        "InformationProtectionPolicyProperties": {
+            "type": "object",
+            "description": "describes properties of an information protection policy",
+            "properties": {
+                "lastModifiedUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Describes the last UTC time the policy was modified"
+                },
+                "sensitivityLabels": {
+                    "type": "array",
+                    "description": "List of sensitivity labels",
+                    "items": {
+                        "$ref": "#/definitions/SensitivityLabel"
+                    }
+                },
+                "sensitivityInformationTypes": {
+                    "type": "array",
+                    "description": "List of sensitivity information types",
+                    "items": {
+                        "$ref": "#/definitions/SensitivityInformationType"
+                    }
+                }
+            }
+        },
+        "SensitivityLabel": {
+            "type": "object",
+            "description": "The sensitivity label.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The id of the sensitivty label."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the sensitivity label."
+                },
+                "order": {
+                    "type": "number",
+                    "description": "The order of the sensitivity label."
+                }
+            }
+        },
+        "SensitivityInformationType": {
+            "type": "object",
+            "description": "The information type.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The id of the information type."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the information type."
+                },
+                "order": {
+                    "type": "number",
+                    "description": "The order of the information type."
+                },
+                "recommendedLabelId": {
+                    "type": "string",
+                    "description": "The recommended label id to be associated with this information type"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "ApiVersion": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": ["2017-08-01-preview"],
+            "description": "API version for the operation"
+        },
+        "Scope": {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope of the query, can be subscription (/subscriptions/0b06d9ea-afe6-4779-bd59-30e5c2d9d13f) or management group (/providers/Microsoft.Management/managementGroups/mgName).",
+            "x-ms-parameter-location": "method"
+        },
+        "InformationProtectionPolicyName": {
+            "name": "informationProtectionPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the information protection policy",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}
