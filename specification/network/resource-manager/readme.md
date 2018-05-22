@@ -62,14 +62,26 @@ input-file:
 - Microsoft.Network/stable/2018-05-01/vmssPublicIpAddress.json
 ```
 
-### Tag: package-2018-05-expressroutecrossconnection-only
+### Tag: package-2018-05-expressroute-only
 
-These settings apply only when `--tag=package-2018-05-expressroutecrossconnection-only` is specified on the command line.
+These settings apply only when `--tag=package-2018-05-expressroute-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-05-expressroutecrossconnection-only'
+``` yaml $(tag) == 'package-2018-05-expressroute-only'
 
 input-file:
+- Microsoft.Network/stable/2018-05-01/expressRouteCircuit.json
 - Microsoft.Network/stable/2018-05-01/expressRouteCrossConnection.json
+```
+
+### Tag: package-2018-04-expressroute-only
+
+These settings apply only when `--tag=package-2018-04-expressroute-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04-expressroute-only'
+
+input-file:
+- Microsoft.Network/stable/2018-04-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-04-01/expressRouteCrossConnection.json
 ```
 
 ### Tag: package-2018-04
@@ -1060,23 +1072,36 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 ```
 
-
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-05-expressroutecrossconnection-only
+  - tag: package-2018-04-expressroute-only
+  - tag: package-2018-05-expressroute-only
 ```
 
-### Tag: package-2018-05-expressroutecrossconnection-only and java
+### Tag: package-2018-05-expressroute-only and java
 
-These settings apply only when `--tag=package-2018-05-expressroutecrossconnection-only --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-05-expressroute-only --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-05-expressroutecrossconnection-only' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-05-expressroute-only' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2018_05_01
   output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-04-expressroute-only and java
+
+These settings apply only when `--tag=package-2018-04-expressroute-only --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-04-expressroute-only' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
 regenerate-manager: true
 generate-interface: true
 ```
