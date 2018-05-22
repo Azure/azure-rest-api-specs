@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-12-01' 
 input-file: 
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json 
+- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
 ``` 
 
 
@@ -145,7 +145,7 @@ These settings apply only when `--tag=package-2017-04-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-04-30-preview/postgresql
+output-folder: $(go-sdk-folder)/services/preview/postgresql/mgmt/2017-04-30-preview/postgresql
 ```
 
 ### Tag: package-2017-12-01-preview and go
@@ -154,7 +154,7 @@ These settings apply only when `--tag=package-2017-12-01-preview --go` is specif
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-12-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-12-01-preview/postgresql
+output-folder: $(go-sdk-folder)/services/preview/postgresql/mgmt/2017-12-01-preview/postgresql
 ```
 
 ### Tag: package-2017-12-01 and go 

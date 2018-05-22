@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2018-04
+tag: package-2018-04-01
 
 directive:
   - where:
@@ -151,6 +151,19 @@ directive:
       - TrackedResourceGetOperation
       
 ```
+### Tag: package-2018-04-01
+
+These settings apply only when `--tag=package-2018-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04-01'
+input-file:
+- Microsoft.Compute/stable/2018-04-01/compute.json
+- Microsoft.Compute/stable/2018-04-01/runCommands.json
+- Microsoft.Compute/stable/2017-09-01/skus.json
+- Microsoft.Compute/stable/2018-04-01/disk.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
 ### Tag: package-2018-04
 
 These settings apply only when `--tag=package-2018-04` is specified on the command line.
@@ -353,6 +366,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_compute']
 ```
 
 
@@ -456,7 +472,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-compute-2016-04-preview' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2016-04-30-preview/compute
+output-folder: $(go-sdk-folder)/services/preview/compute/mgmt/2016-04-30-preview/compute
 ```
 
 ### Tag: package-compute-2016-03 and go
@@ -486,7 +502,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-container-service-2015-11-preview' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2015-11-01-preview/containerservice
+output-folder: $(go-sdk-folder)/services/preview/containerservice/mgmt/2015-11-01-preview/containerservice
 ```
 
 ### Tag: package-compute-2015-06 and go
