@@ -151,15 +151,15 @@ directive:
   - where:
       - $.definitions.Gallery
     suppress:
-      - TrackedResourceGetOperation
+      - TrackedResourcePatchOperation
   - where:
       - $.definitions.GalleryImage
     suppress:
-      - TrackedResourceGetOperation
+      - TrackedResourcePatchOperation
   - where:
       - $.definitions.GalleryImageVersion
     suppress:
-      - TrackedResourceGetOperation
+      - TrackedResourcePatchOperation
       
 ```
 
