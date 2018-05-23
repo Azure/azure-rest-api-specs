@@ -249,6 +249,55 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Update",
+        "description": "Updates properties of a Workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdateParameters"
+            },
+            "description": "Additional parameters for workspace update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Workspace entity.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resize a cluster": {
+            "$ref": "./examples/PatchWorkspace.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Workspace"
@@ -1602,26 +1651,12 @@
     },
     "FileServerCreateParameters": {
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The region in which to create the File Server."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The user specified tags associated with the File Server."
-        },
         "properties": {
           "$ref": "#/definitions/FileServerBaseProperties",
           "description": "The properties of the File Server.",
           "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "location"
-      ],
       "description": "Parameters supplied to the Create operation."
     },
     "FileServerProperties": {
@@ -1691,7 +1726,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Contains information about the File Server."
@@ -2015,37 +2050,16 @@
     },
     "ClusterCreateParameters": {
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The region in which to create the cluster."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The user specified tags associated with the Cluster."
-        },
         "properties": {
           "$ref": "#/definitions/ClusterBaseProperties",
           "description": "The properties of the Cluster.",
           "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "location"
-      ],
       "description": "Parameters supplied to the Create operation."
     },
     "ClusterUpdateParameters": {
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The user specified tags associated with the Cluster."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterUpdateProperties",
@@ -2177,7 +2191,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Contains information about a Cluster."
@@ -2890,6 +2904,10 @@
         "imageSourceRegistry": {
           "title": "Registry to download the container from.",
           "$ref": "#/definitions/ImageSourceRegistry"
+        },
+        "shmSize": {
+          "type": "string",
+          "title": "Size of /dev/shm. Please refer to docker documentation for supported argument formats."
         }
       },
       "description": "Settings for the container to be downloaded.",
@@ -3523,6 +3541,18 @@
         "location"
       ],
       "description": "Parameters supplied to the Create operation."
+    },
+    "WorkspaceUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user specified tags associated with the Workspace."
+        }
+      },
+      "description": "Parameters supplied to the Update operation."
     },
     "WorkspaceProperties": {
       "properties": {
