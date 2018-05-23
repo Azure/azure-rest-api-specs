@@ -144,9 +144,20 @@ directive:
       - $.definitions.VirtualMachineImage
     suppress:
       - TrackedResourcePatchOperation
-
   - where:
       - $.definitions.VirtualMachineImageResource
+    suppress:
+      - TrackedResourceGetOperation
+  - where:
+      - $.definitions.Gallery
+    suppress:
+      - TrackedResourceGetOperation
+  - where:
+      - $.definitions.GalleryImage
+    suppress:
+      - TrackedResourceGetOperation
+  - where:
+      - $.definitions.GalleryImageVersion
     suppress:
       - TrackedResourceGetOperation
       
