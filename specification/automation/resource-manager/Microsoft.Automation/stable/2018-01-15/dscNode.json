@@ -310,6 +310,27 @@
         "x-ms-examples": {
           "List DSC nodes by Automation Account": {
             "$ref": "./examples/listAllDscNodesByAutomationAccount.json"
+          },
+          "List Paged DSC nodes by Automation Account with no filters": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithNoFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account with name filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithNameFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account with node status filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithStatusFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account with Node Configuration Custom filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithNodeConfigurationCustomFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account where Node Configurations are not assigned filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithNodeConfigurationNotAssignedFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account with version filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithVersionFilter.json"
+          },
+          "List Paged DSC nodes with filters separated by 'and'": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithCompositeFilter.json"
           }
         },
         "parameters": [
@@ -325,6 +346,27 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The number of rows to skip."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The the number of rows to take."
+          },
+          {
+            "name": "$inlinecount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Return total rows."
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -849,6 +891,7 @@
           "description": "Gets or sets the account id of the node."
         },
         "nodeConfiguration": {
+          "x-nullable": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
           "description": "Gets or sets the configuration of the node."
@@ -864,6 +907,10 @@
         "etag": {
           "type": "string",
           "description": "Gets or sets the etag of the resource."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets the total number of records matching filter criteria."
         },
         "extensionHandler": {
           "type": "array",
@@ -945,6 +992,10 @@
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the next link."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets the total number of nodes matching filter criteria."
         }
       },
       "description": "The response model for the list dsc nodes operation."

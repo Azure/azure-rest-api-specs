@@ -92,6 +92,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_instance']
 ```
 
 
@@ -155,10 +158,20 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-04
   - tag: package-2018-02-preview
   - tag: package-2017-12-preview
   - tag: package-2017-10-preview
   - tag: package-2017-08-preview
+```
+
+### Tag: package-2018-04 and go
+
+These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(go)
+output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-04-01/containerinstance
 ```
 
 ### Tag: package-2018-02-preview and go
@@ -167,7 +180,7 @@ These settings apply only when `--tag=package-2018-02-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-02-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-02-01-preview/containerinstance
+output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2018-02-01-preview/containerinstance
 ```
 
 ### Tag: package-2017-12-preview and go
@@ -176,7 +189,7 @@ These settings apply only when `--tag=package-2017-12-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-12-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2017-12-01-preview/containerinstance
+output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-12-01-preview/containerinstance
 ```
 
 ### Tag: package-2017-10-preview and go
@@ -185,7 +198,7 @@ These settings apply only when `--tag=package-2017-10-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2017-10-01-preview/containerinstance
+output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-10-01-preview/containerinstance
 ```
 
 ### Tag: package-2017-08-preview and go
@@ -194,7 +207,7 @@ These settings apply only when `--tag=package-2017-08-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2017-08-01-preview/containerinstance
+output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-08-01-preview/containerinstance
 ```
 
 

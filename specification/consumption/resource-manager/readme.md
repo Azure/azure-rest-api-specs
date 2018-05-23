@@ -101,6 +101,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_consumption']
 ```
 
 
@@ -175,7 +178,7 @@ These settings apply only when `--tag=package-2017-04-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-04-24-preview/consumption
+output-folder: $(go-sdk-folder)/services/preview/consumption/mgmt/2017-04-24-preview/consumption
 ```
 
 ### Tag: package-2017-11 and go
@@ -191,7 +194,7 @@ These settings apply only when `--tag=package-2017-12-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-12-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-12-30-preview/consumption
+output-folder: $(go-sdk-folder)/services/preview/consumption/mgmt/2017-12-30-preview/consumption
 ```
 
 ### Tag: package-2018-01 and go
