@@ -18,7 +18,8 @@
           }
         }
       }
-    }
+    },
+    "$expand": "ReplicationStatus"
   },
   "responses": {
     "200": {
@@ -43,6 +44,23 @@
                 "lun": 1,
                 "sizedInGB": 10,
                 "hostCaching": "None"
+              }
+            ]
+          },
+          "replicationStatus": {
+            "aggregatedState": "Completed",
+            "summary": [
+              {
+                "region": "West US",
+                "state": "Completed",
+                "details": "",
+                "progress": 100
+              },
+              {
+                "region": "East US",
+                "state": "Completed",
+                "details": "",
+                "progress": 100
               }
             ]
           },
