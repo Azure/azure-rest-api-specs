@@ -333,36 +333,6 @@
         }
       }
     },
-    "Sku": {
-      "description": "An ARM Resource SKU.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
-          "type": "string"
-        },
-        "tier": {
-          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
-          "type": "string"
-        },
-        "size": {
-          "description": "Size of the particular SKU",
-          "type": "string"
-        },
-        "family": {
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "description": "Capacity of the particular SKU.",
-          "type": "integer"
-        }
-      }
-    },
     "ManagedInstanceProperties": {
       "description": "The properties of a managed instance.",
       "type": "object",
@@ -413,57 +383,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ManagedInstance": {
       "description": "An Azure SQL managed instance.",
       "required": [
@@ -472,7 +391,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -485,7 +404,7 @@
           ]
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku",
           "description": "Managed instance sku"
         },
         "properties": {
@@ -500,7 +419,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku",
           "description": "Managed instance sku"
         },
         "properties": {
