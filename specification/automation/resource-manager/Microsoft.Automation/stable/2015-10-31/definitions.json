@@ -1801,6 +1801,18 @@
         "credential": {
           "$ref": "#/definitions/RunAsCredentialAssociationProperty",
           "description": "Sets the credential of a worker group."
+        },
+        "groupType": {
+          "type": "string",
+          "description": "Type of the HybridWorkerGroup.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeEnum",
+            "modelAsString": true
+          }
         }
       },
       "description": "Definition of hybrid runbook worker group."
