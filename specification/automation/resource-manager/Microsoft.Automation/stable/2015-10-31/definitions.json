@@ -3855,22 +3855,26 @@
       },
       "status": {
         "type": "string",
+        "readOnly": true,
         "description": "Gets the current status of the watcher."
       },
       "creationTime": {
         "type": "string",
+        "readOnly": true,
         "format": "date-time",
         "description": "Gets or sets the creation time.",
         "x-nullable": false
       },
       "lastModifiedTime": {
         "type": "string",
+        "readOnly": true,
         "format": "date-time",
         "description": "Gets or sets the last modified time.",
         "x-nullable": false
       },
       "lastModifiedBy": {
         "type": "string",
+        "readOnly": true,
         "description": "Details of the user who last modified the watcher."
       },
       "description": {
@@ -3937,53 +3941,6 @@
       }
     },
     "description": "The properties of the update watcher operation."
-  },
-  "WatcherCreateOrUpdateProperties": {
-    "properties": {
-      "executionFrequencyInSeconds": {
-        "type": "integer",
-        "format": "int64",
-        "description": "Gets or sets the frequency at which the watcher is invoked."
-      },
-      "scriptName": {
-        "type": "string",
-        "description": "Gets or sets the name of the script the watcher is attached to, i.e. the name of an existing runbook."
-      },
-      "scriptParameters": {
-        "type": "object",
-        "additionalProperties": {
-          "type": "string"
-        },
-        "description": "Gets or sets the parameters of the script."
-      },
-      "scriptRunOn": {
-        "type": "string",
-        "description": "Gets or sets the name of the hybrid worker group the webhook job will run on."
-      },
-      "description": {
-        "type": "string",
-        "description": "Gets or sets the watcher's description."
-      }
-    },
-    "description": "The properties of the create watcher operation."
-  },
-  "WatcherCreateOrUpdateParameters": {
-    "properties": {
-      "name": {
-        "type": "string",
-        "description": "Gets or sets the name of the watcher."
-      },
-      "properties": {
-        "$ref": "#/definitions/WatcherCreateOrUpdateProperties",
-        "x-ms-client-flatten": true,
-        "description": "Gets or sets the properties of the watcher."
-      }
-    },
-    "required": [
-      "name",
-      "properties"
-    ],
-    "description": "The parameters supplied to the create or update watcher operation."
     }
   },
   "parameters": {
