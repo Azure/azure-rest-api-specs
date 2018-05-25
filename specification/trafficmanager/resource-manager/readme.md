@@ -34,9 +34,7 @@ directive:
   - suppress: OperationsAPIImplementation
     reason: We do have a operations api as "/providers/Microsoft.Network/operations"
     from: trafficmanager.json
-    where:
-      - $.paths["/providers/Microsoft.Network/operations"]
-
+    where: $.paths
 ```
 
 ### Tag: package-2018-03
