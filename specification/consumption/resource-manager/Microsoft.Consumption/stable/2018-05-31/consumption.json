@@ -267,9 +267,17 @@
           "readOnly": true
         },
         "grain": {
-          "description": "The granularity of forecast. i.e. Daily, Monthly",
+          "description": "The granularity of forecast.",
           "type": "string",
-          "readOnly": true
+          "enum": [
+            "Daily",
+            "Monthly",
+            "Yearly"
+          ],
+          "x-ms-enum": {
+            "name": "Grain",
+            "modelAsString": true
+          }
         },
         "charge": {
           "description": "The amount of charge",
@@ -285,7 +293,14 @@
         "chargeType": {
           "description": "The type of the charge. Could be actual or forecast",
           "type": "string",
-          "readOnly": true
+          "enum": [
+            "Actual",
+            "Forecast"
+          ],
+          "x-ms-enum": {
+            "name": "ChargeType",
+            "modelAsString": true
+          }
         },
         "confidenceLevels": {
           "description": "The details about the forecast confidence levels. This is populated only when chargeType is Forecast.",
@@ -302,7 +317,14 @@
               "bound": {
                 "description": "The boundary of the percentage, values could be 'Upper' or 'Lower'",
                 "type": "string",
-                "readOnly": true
+                "enum": [
+                  "Upper",
+                  "Lower"
+                ],
+                "x-ms-enum": {
+                  "name": "Bound",
+                  "modelAsString": true
+                }
               },
               "value": {
                 "description": "The amount of forecast within the percentage level",
