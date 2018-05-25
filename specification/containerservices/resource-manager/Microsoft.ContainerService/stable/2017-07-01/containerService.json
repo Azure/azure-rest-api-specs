@@ -678,14 +678,14 @@
           "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
         },
         "osType": {
-          "type": "string",
-          "default": "Linux",
+          "$ref": "#/definitions/OSType",
           "enum": [
             "Linux",
             "Windows"
           ],
           "x-ms-enum": {
-            "name": "OSType"
+            "name": "ContainerServiceOSTypes",
+            "modelAsString": true
           },
           "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
         }
