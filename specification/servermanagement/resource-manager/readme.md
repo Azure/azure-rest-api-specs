@@ -103,12 +103,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup
+  output-folder: $(python-sdks-folder)/azure-mgmt-servermanagement/azure/mgmt/servermanagement
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup
+  output-folder: $(python-sdks-folder)/azure-mgmt-servermanagement
 ```
 
 
