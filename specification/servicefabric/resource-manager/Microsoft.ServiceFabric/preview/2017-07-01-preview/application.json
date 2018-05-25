@@ -1026,41 +1026,9 @@
       },
       "description": "List of application capacity metric description."
     },
-    "ApplicationParameter": {
-      "type": "object",
-      "description": "Describes an application parameter override to be applied when creating or upgrading an application.",
-      "required": [
-        "Key",
-        "Value"
-      ],
-      "properties": {
-        "Key": {
-          "type": "string",
-          "description": "The name of the parameter."
-        },
-        "Value": {
-          "type": "string",
-          "description": "The value of the parameter."
-        }
-      }
-    },
-    "ApplicationParameterList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ApplicationParameter"
-      },
-      "description": "List of application parameters with overridden values from their default values specified in the application manifest."
-    },
     "ApplicationTypeName": {
       "type": "string",
       "description": "The application type name as defined in the application manifest."
-    },
-    "ApplicationTypeParameterList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ApplicationParameter"
-      },
-      "description": "List of application type parameters that can be overridden when creating or updating the application."
     },
     "ApplicationTypeVersion": {
       "type": "string",
@@ -1474,6 +1442,13 @@
         ]
       }
     },
+    "ApplicationParameterList": {
+      "type": "object",
+      "description": "List of application parameters with overridden values from their default values specified in the application manifest.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "ApplicationResource": {
       "description": "The application resource.",
       "properties": {
@@ -1570,6 +1545,13 @@
           "$ref": "#/definitions/ApplicationMetricDescriptionList",
           "description": "List of application capacity metric description."
         }
+      }
+    },
+    "ApplicationTypeParameterList": {
+      "type": "object",
+      "description": "List of application type parameters that can be overridden when creating or updating the application.",
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "ApplicationTypeResourceProperties": {
@@ -1697,19 +1679,6 @@
         }
       },
       "description": "Operation supported by Service Fabric resource provider"
-    },
-    "ErrorModel": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "The error details."
     },
     "OperationListResult": {
       "properties": {
@@ -2026,6 +1995,28 @@
         }
       }
     },
+    "ErrorModel": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModelError",
+          "description": "The error details."
+        }
+      },
+      "description": "The structure of the error."
+    },
+    "ErrorModelError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "The error details."
+    },
     "ServiceTypeHealthPolicy": {
       "type": "object",
       "description": "Represents the health policy used to evaluate the health of services belonging to a service type.\n",
@@ -2040,28 +2031,10 @@
       }
     },
     "ServiceTypeHealthPolicyMap": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ServiceTypeHealthPolicyMapItem"
-      },
-      "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n"
-    },
-    "ServiceTypeHealthPolicyMapItem": {
       "type": "object",
-      "description": "Defines an item in ServiceTypeHealthPolicyMap.\n",
-      "required": [
-        "key",
-        "value"
-      ],
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The key of the service type health policy map item. This is the name of the service type."
-        },
-        "value": {
-          "$ref": "#/definitions/ServiceTypeHealthPolicy",
-          "description": "The value of the service type health policy map item. This is the ServiceTypeHealthPolicy for this service type."
-        }
+      "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/ServiceTypeHealthPolicy"
       }
     }
   },
@@ -2076,7 +2049,7 @@
         "2017-07-01-preview"
       ],
       "default": "2017-07-01-preview",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "applicationName": {
       "name": "applicationName",
@@ -2124,7 +2097,7 @@
       "description": "The customer subscription identifier.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "version": {
       "name": "version",

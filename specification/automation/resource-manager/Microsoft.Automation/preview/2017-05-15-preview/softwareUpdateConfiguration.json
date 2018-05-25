@@ -102,14 +102,11 @@
               "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
             }
           },
-          "400": {
-            "description": "Bad request."
-          },
-          "404": {
-            "description": "Resource group or automation account does not exist."
-          },
-          "409": {
-            "description": "A software update configuration with different properties and the same name already exist."
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -160,6 +157,12 @@
           },
           "404": {
             "description": "Resource group, account, or software update configuration doesn't exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -208,8 +211,11 @@
           "204": {
             "description": "The software update configuration does not exist."
           },
-          "404": {
-            "description": "Resource group, account, or software update configuration doesn't exist."
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -265,6 +271,12 @@
           },
           "404": {
             "description": "Resource group, or account doesn't exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
