@@ -135,13 +135,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "name": "parameters",
@@ -188,13 +182,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -228,13 +216,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -268,13 +250,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "name": "parameters",
@@ -388,13 +364,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -430,13 +400,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "name": "regenerateKey",
@@ -552,13 +516,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "name": "parameters",
@@ -603,13 +561,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "name": "parameters",
@@ -652,13 +604,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -693,13 +639,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -743,13 +683,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
+            "$ref": "#/parameters/StorageAccountName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -766,7 +700,7 @@
             "description": "OK -- Delete management policies successfully."
           },   
           "204": {
-            "description": "No Content -- The management policies not exist."
+            "description": "No Content -- The management policies does not exist."
           }
         }
       }
@@ -2110,6 +2044,16 @@
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "StorageAccountName": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+      "maxLength": 24,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "ManagementPolicyName": {
