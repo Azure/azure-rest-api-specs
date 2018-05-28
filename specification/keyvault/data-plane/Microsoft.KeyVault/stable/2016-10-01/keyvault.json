@@ -3011,7 +3011,25 @@
           "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "P-256",
+                "description": "The NIST P-256 elliptic curve, AKA SECG curve SECP256R1."
+              },
+              {
+                "value": "P-384",
+                "description": "The NIST P-384 elliptic curve, AKA SECG curve SECP384R1."
+              },
+              {
+                "value": "P-521",
+                "description": "The NIST P-521 elliptic curve, AKA SECG curve SECP521R1."
+              },
+              {
+                "value": "SECP256K1",
+                "description": "The SECG SECP256K1 elliptic curve."
+              }
+            ]
           }
         },
         "x": {
@@ -3583,7 +3601,7 @@
         "key_size": {
           "type": "integer",
           "format": "int32",
-          "description": "The key size in bytes. For example;  1024 or 2048."
+          "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA."
         },
         "reuse_key": {
           "type": "boolean",
@@ -3876,7 +3894,7 @@
         "key_size": {
           "type": "integer",
           "format": "int32",
-          "description": "The key size in bytes. For example, 1024 or 2048."
+          "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA."
         },
         "key_ops": {
           "type": "array",
