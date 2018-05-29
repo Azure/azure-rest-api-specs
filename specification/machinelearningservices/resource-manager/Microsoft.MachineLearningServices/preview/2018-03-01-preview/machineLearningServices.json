@@ -56,7 +56,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
@@ -99,7 +99,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -152,7 +152,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -190,7 +190,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -237,7 +237,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -277,7 +277,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
@@ -320,7 +320,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -357,7 +357,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -394,7 +394,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
@@ -444,7 +444,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -489,7 +489,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -500,6 +500,7 @@
           "MachineLearningComputes"
         ],
         "operationId": "MachineLearningCompute_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
         "description": "Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
         "x-ms-examples": {
           "Create a BatchAI Compute": { "$ref": "./examples/createBasicBatchAICompute.json" },
@@ -550,7 +551,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -561,6 +562,7 @@
           "MachineLearningComputes"
         ],
         "operationId": "MachineLearningCompute_Delete",
+        "x-ms-long-running-operation": true,
         "description": "Deletes specified Machine Learning compute.",
         "x-ms-examples": {
           "Delete Compute": { "$ref": "./examples/deleteCompute.json" }
@@ -602,7 +604,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -614,7 +616,7 @@
           "OperationalizationClusters",
           "MachineLearningComputes"
         ],
-        "operationId": "MachineLearningCompute_ListKeys",
+        "operationId": "MachineLearningCompute_GetKeys",
         "description": "Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).",
         "x-ms-examples": {
           "List AKS Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" },
@@ -647,7 +649,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWrapper"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1107,7 +1109,7 @@
           "type": "array",
           "description": "Errors during provisioning",
           "items": {
-            "$ref": "#/definitions/ErrorResponseWrapper"
+            "$ref": "#/definitions/MachineLearningServiceError"
           },
           "readOnly": true
         }
@@ -1405,7 +1407,7 @@
         "modelAsString": true
       }
     },
-    "ErrorResponseWrapper": {
+    "MachineLearningServiceError": {
       "type": "object",
       "description": "Wrapper for error response to follow ARM guidelines.",
       "properties": {
