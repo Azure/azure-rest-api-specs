@@ -26,9 +26,56 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10
+tag: package-2018-03
 ```
 
+### Tag: package-2018-03
+
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file:
+- Microsoft.Storage/preview/2018-03-01-preview/storage.json
+- Microsoft.Storage/preview/2018-03-01-preview/blob.json
+
+directive:
+  - suppress: R3018
+    reason: Existing boolean properties
+    approved-by: "@fearthecowboy"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
+    suppress: R1003
+    reason: APIs return array of values, is not actually a 'list' operation
+    approved-by: "@fearthecowboy"
+
+```
+
+### Tag: package-2018-02
+
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02'
+input-file:
+- Microsoft.Storage/stable/2018-02-01/storage.json
+- Microsoft.Storage/stable/2018-02-01/blob.json
+
+directive:
+  - suppress: R3018
+    reason: Existing boolean properties
+    approved-by: "@fearthecowboy"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
+    suppress: R1003
+    reason: APIs return array of values, is not actually a 'list' operation
+    approved-by: "@fearthecowboy"
+
+```
 
 ### Tag: package-2017-10
 
@@ -38,7 +85,6 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 input-file:
 - Microsoft.Storage/stable/2017-10-01/storage.json
 ```
-
 
 ### Tag: package-2017-06
 
@@ -113,6 +159,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_storage']
 ```
 
 
@@ -147,6 +196,8 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-03-preview
+  - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2017-06
   - tag: package-2016-12
@@ -154,6 +205,24 @@ batch:
   - tag: package-2016-01
   - tag: package-2015-06
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2018-03-preview and go
+
+These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-03-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/storage/mgmt/2018-03-01-preview/storage
+```
+
+### Tag: package-2018-02 and go
+
+These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(go)
+output-folder: $(go-sdk-folder)/services/storage/mgmt/2018-02-01/storage
 ```
 
 ### Tag: package-2017-10 and go
@@ -239,11 +308,35 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-03
+  - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2017-06
   - tag: package-2016-12
   - tag: package-2016-01
   - tag: package-2015-06
+```
+
+### Tag: package-2018-03 and python
+
+These settings apply only when `--tag=package-2018-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(python)
+python:
+  namespace: azure.mgmt.storage.v2018_03_01_preview
+  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2018_03_01_preview
+```
+
+### Tag: package-2018-02 and python
+
+These settings apply only when `--tag=package-2018-02 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(python)
+python:
+  namespace: azure.mgmt.storage.v2018_02_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2018_02_01
 ```
 
 ### Tag: package-2017-10 and python

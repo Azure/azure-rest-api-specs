@@ -230,7 +230,7 @@
         },
         "x-ms-long-running-operation": true
       }
-    }, 
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}/forceFailoverAllowDataLoss": {
       "post": {
         "tags": [
@@ -275,35 +275,6 @@
     }
   },
   "definitions": {
-    "Resource":{
-      "description":"ARM resource.",
-      "properties":{
-        "id":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource ID."
-        },
-        "name":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource name."
-        },
-        "type":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource":{
-      "description":"ARM proxy resource.",
-      "allOf":[
-        {
-          "$ref":"#/definitions/Resource"
-        }
-      ]
-    },
     "DisasterRecoveryConfigurationProperties": {
       "properties": {
         "status": {
@@ -372,20 +343,20 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Type of resource this is."         
+          "description": "Type of resource this is."
         },
         "location": {
           "type": "string",
           "description": "Location of the server that contains this disaster recovery configuration.",
           "readOnly": true
-        }        
+        }
       },
       "required": [
         "properties"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a disaster recovery configuration."

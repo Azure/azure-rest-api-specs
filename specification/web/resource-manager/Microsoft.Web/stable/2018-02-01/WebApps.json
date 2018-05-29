@@ -6094,6 +6094,52 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restoreFromDeletedApp": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Restores a deleted web app to this web app.",
+        "description": "Restores a deleted web app to this web app.",
+        "operationId": "WebApps_RestoreFromDeletedApp",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restoreRequest",
+            "in": "body",
+            "description": "Deleted web app restore information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeletedAppRestoreRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Restore operation started."
+          },
+          "200": {
+            "description": "Restore operation started."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restoreSnapshot": {
       "post": {
         "tags": [
@@ -13017,6 +13063,59 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restoreFromDeletedApp": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Restores a deleted web app to this web app.",
+        "description": "Restores a deleted web app to this web app.",
+        "operationId": "WebApps_RestoreFromDeletedAppSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restoreRequest",
+            "in": "body",
+            "description": "Deleted web app restore information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeletedAppRestoreRequest"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Restore operation started."
+          },
+          "200": {
+            "description": "Restore operation started."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restoreSnapshot": {
       "post": {
         "tags": [
@@ -13479,7 +13578,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved source control for web app.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "201": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
+            "description": "Create or update source control for web app still in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
@@ -13535,12 +13646,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
@@ -14969,7 +15086,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved source control for web app.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "201": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
+            "description": "Create or update source control for web app still in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
@@ -15018,7 +15147,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
@@ -15029,7 +15158,13 @@
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
-          "default": {
+          "202": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+	  "default": {
             "description": "App Service error response.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
@@ -16754,6 +16889,35 @@
         "connectionString": {
           "description": "Contains a connection string to a database which is being backed up or restored. If the restore should happen to a new database, the database name inside is the new one.",
           "type": "string"
+        }
+      }
+    },
+    "DeletedAppRestoreRequest": {
+      "description": "Details about restoring a deleted app.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DeletedAppRestoreRequest resource specific properties",
+          "properties": {
+            "deletedSiteId": {
+              "description": "ARM resource ID of the deleted app. Example:\n/subscriptions/{subId}/providers/Microsoft.Web/deletedSites/{deletedSiteId}",
+              "type": "string"
+            },
+            "recoverConfiguration": {
+              "description": "If true, deleted site configuration, in addition to content, will be restored.",
+              "type": "boolean"
+            },
+            "snapshotTime": {
+              "description": "Point in time to restore the deleted app from, formatted as a DateTime string. \nIf unspecified, default value is the time that the app was deleted.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },

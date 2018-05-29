@@ -236,6 +236,13 @@
             "description": "The automation account name."
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -258,7 +265,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "./definitions.json#/definitions/JobSchedule"
       }
     }
   },

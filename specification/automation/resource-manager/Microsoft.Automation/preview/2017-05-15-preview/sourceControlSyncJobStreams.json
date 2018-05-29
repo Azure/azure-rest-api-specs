@@ -1,0 +1,178 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2017-05-15-preview",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}/sourceControlSyncJobs/{sourceControlSyncJobId}/streams": {
+      "get": {
+        "tags": [
+          "SourceControlSyncJobStreams"
+        ],
+        "operationId": "SourceControlSyncJobStreams_ListBySyncJob",
+        "description": "Retrieve a list of sync job streams identified by sync job id.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations"
+        },
+        "x-ms-examples": {
+          "Get a list of sync job streams identified by sync job id": {
+            "$ref": "./examples/sourceControlSyncJobStreams/getSourceControlSyncJobStreams.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The source control name."
+          },
+          {
+            "name": "sourceControlSyncJobId",
+            "in": "path",
+            "required": true,
+            "format": "uuid",
+            "type": "string",
+            "description": "The source control sync job id."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SourceControlSyncJobStreamsListBySyncJob"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}/sourceControlSyncJobs/{sourceControlSyncJobId}/streams/{streamId}": {
+      "get": {
+        "tags": [
+          "SourceControlSyncJobStreams"
+        ],
+        "operationId": "SourceControlSyncJobStreams_Get",
+        "description": "Retrieve a sync job stream identified by stream id.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations"
+        },
+        "x-ms-examples": {
+          "Get a sync job stream identified by sync job stream id.": {
+            "$ref": "./examples/sourceControlSyncJobStreams/getSourceControlSyncJobStreamsByStreamId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The source control name."
+          },
+          {
+            "name": "sourceControlSyncJobId",
+            "in": "path",
+            "required": true,
+            "format": "uuid",
+            "type": "string",
+            "description": "The source control sync job id."
+          },
+          {
+            "name": "streamId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the sync job stream."
+          },
+         
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SourceControlSyncJobStreamById"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1315,6 +1315,11 @@
           "description": "Gets or sets the last modified time.",
           "x-nullable": false
         },
+        "nodeConfigurationCount": {
+          "type": "integer",
+          "description": "Gets the number of compiled node configurations.",
+          "x-nullable": false
+        },
         "description": {
           "type": "string",
           "description": "Gets or sets the description."
@@ -1354,6 +1359,10 @@
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the next link."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets the total number of configurations matching filter criteria."
         }
       },
       "description": "The response model for the list configuration operation."
@@ -1472,32 +1481,6 @@
         }
       },
       "description": "Definition of the DSC Meta Configuration."
-    },
-    "DscNodeConfigurationCreateOrUpdateParameters": {
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/ContentSource",
-          "description": "Gets or sets the source."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the node configuration."
-        },
-        "configuration": {
-          "$ref": "#/definitions/DscConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node."
-        },
-        "newNodeConfigurationBuildVersionRequired": {
-          "type": "boolean",
-          "description": "If a new build version of NodeConfiguration is required."
-        }
-      },
-      "required": [
-        "source",
-        "name",
-        "configuration"
-      ],
-      "description": "The parameters supplied to the create or update node configuration operation."
     },
     "DscNodeConfigurationAssociationProperty": {
       "properties": {
@@ -1788,6 +1771,12 @@
           "format": "date-time",
           "description": "Gets or sets the registration time of the worker machine.",
           "x-nullable": false
+        },
+        "lastSeenDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Heartbeat from the Worker",
+          "x-nullable": false
         }
       },
       "description": "Definition of hybrid runbook worker."
@@ -1812,6 +1801,18 @@
         "credential": {
           "$ref": "#/definitions/RunAsCredentialAssociationProperty",
           "description": "Sets the credential of a worker group."
+        },
+        "groupType": {
+          "type": "string",
+          "description": "Type of the HybridWorkerGroup.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeEnum",
+            "modelAsString": true
+          }
         }
       },
       "description": "Definition of hybrid runbook worker group."
@@ -3736,6 +3737,10 @@
           "description": "Gets or sets the last modified time.",
           "x-nullable": false
         },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Details of the user who last modified the Webhook"
+        },
         "description": {
           "type": "string",
           "description": "Gets or sets the description."
@@ -3811,6 +3816,117 @@
         }
       },
       "description": "The parameters supplied to the update webhook operation."
+    },
+   "WatcherProperties": {
+    "properties": {
+      "executionFrequencyInSeconds": {
+        "type": "integer",
+        "format": "int64",
+        "description": "Gets or sets the frequency at which the watcher is invoked."
+      },
+      "scriptName": {
+        "type": "string",
+        "description": "Gets or sets the name of the script the watcher is attached to, i.e. the name of an existing runbook."
+      },
+      "scriptParameters": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Gets or sets the parameters of the script."
+      },
+      "scriptRunOn": {
+        "type": "string",
+        "description": "Gets or sets the name of the hybrid worker group the watcher will run on."
+      },
+      "status": {
+        "type": "string",
+        "readOnly": true,
+        "description": "Gets the current status of the watcher."
+      },
+      "creationTime": {
+        "type": "string",
+        "readOnly": true,
+        "format": "date-time",
+        "description": "Gets or sets the creation time.",
+        "x-nullable": false
+      },
+      "lastModifiedTime": {
+        "type": "string",
+        "readOnly": true,
+        "format": "date-time",
+        "description": "Gets or sets the last modified time.",
+        "x-nullable": false
+      },
+      "lastModifiedBy": {
+        "type": "string",
+        "readOnly": true,
+        "description": "Details of the user who last modified the watcher."
+      },
+      "description": {
+        "type": "string",
+        "description": "Gets or sets the description."
+      }
+    },
+    "description": "Definition of the watcher properties"
+  },
+  "Watcher": {
+    "properties": {
+      "properties": {
+        "$ref": "#/definitions/WatcherProperties",
+        "x-ms-client-flatten": true,
+        "description": "Gets or sets the watcher properties."
+      },
+      "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the resource."
+        }
+    },
+    "description": "Definition of the watcher type.",
+    "allOf": [
+      {
+        "$ref": "#/definitions/TrackedResource"
+      }
+    ]
+  },
+  "WatcherListResult": {
+    "properties": {
+      "value": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Watcher"
+        },
+        "description": "Gets or sets a list of watchers."
+      },
+      "nextLink": {
+        "type": "string",
+        "description": "Gets or sets the next link."
+      }
+    },
+    "description": "The response model for the list watcher operation."
+  },
+  "WatcherUpdateParameters": {
+    "properties": {
+      "properties": {
+        "$ref": "#/definitions/WatcherUpdateProperties",
+        "x-ms-client-flatten": true,
+        "description": "Gets or sets the watcher update properties."
+      },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        }
+      }
+    },
+    "WatcherUpdateProperties": {
+    "properties": {
+      "executionFrequencyInSeconds": {
+        "type": "integer",
+        "format": "int64",
+        "description": "Gets or sets the frequency at which the watcher is invoked."
+      }
+    },
+    "description": "The properties of the update watcher operation."
     }
   },
   "parameters": {
