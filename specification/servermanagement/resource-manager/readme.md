@@ -96,19 +96,19 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.servermanagement
-  package-name: azure-mgmt-servermanagement
+  namespace: azure.mgmt.servermanager
+  package-name: azure-mgmt-servermanager
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup
+  output-folder: $(python-sdks-folder)/azure-mgmt-servermanager/azure/mgmt/servermanager
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup
+  output-folder: $(python-sdks-folder)/azure-mgmt-servermanager
 ```
 
 
