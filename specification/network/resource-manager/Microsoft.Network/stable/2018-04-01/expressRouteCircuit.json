@@ -3,19 +3,17 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2018-04-01"
+    "version": "2018-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -1670,11 +1668,11 @@
         "age": {
           "type": "integer",
           "format": "int32",
-          "description": "Age"
+          "description": "Entry age in minutes"
         },
         "interface": {
           "type": "string",
-          "description": "Interface"
+          "description": "Interface address"
         },
         "ipAddress": {
           "type": "string",
@@ -1707,24 +1705,24 @@
       "properties": {
         "network": {
           "type": "string",
-          "description": "network"
+          "description": "IP address of a network entity"
         },
         "nextHop": {
           "type": "string",
-          "description": "nextHop"
+          "description": "NextHop address"
         },
         "locPrf": {
           "type": "string",
-          "description": "locPrf"
+          "description": "Local preference value as set with the set local-preference route-map configuration command"
         },
         "weight": {
           "type": "integer",
           "format": "int32",
-          "description": "weight."
+          "description": "Route Weight."
         },
         "path": {
           "type": "string",
-          "description": "path"
+          "description": "Autonomous system paths to the destination network."
         }
       },
       "description": "The routes table associated with the ExpressRouteCircuit"
@@ -1749,7 +1747,7 @@
       "properties": {
         "neighbor": {
           "type": "string",
-          "description": "Neighbor"
+          "description": "IP address of the neighbor."
         },
         "v": {
           "type": "integer",

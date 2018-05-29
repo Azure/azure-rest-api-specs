@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2018-04-01"
+    "version": "2018-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -757,7 +757,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the IP configuration that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -796,7 +796,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the authentication certificate that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -843,7 +843,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the SSL certificate that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -902,7 +902,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the frontend IP configuration that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -942,7 +942,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the frontend port that is unique within an Application Gateway"
         },
         "etag": {
           "type": "string",
@@ -1004,7 +1004,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the backend address pool that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -1027,11 +1027,11 @@
         "port": {
           "type": "integer",
           "format": "int32",
-          "description": "Port"
+          "description": "The destination port on the backend."
         },
         "protocol": {
           "type": "string",
-          "description": "Protocol.",
+          "description": "The protocol used to communicate with the backend. Possible values are 'Http' and 'Https'.",
           "enum": [
             "Http",
             "Https"
@@ -1108,7 +1108,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the backend http settings that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -1138,7 +1138,7 @@
         },
         "protocol": {
           "type": "string",
-          "description": "Protocol.",
+          "description": "Protocol of the HTTP listener. Possible values are 'Http' and 'Https'.",
           "enum": [
             "Http",
             "Https"
@@ -1175,7 +1175,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the HTTP listener that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -1229,7 +1229,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the path rule that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -1251,7 +1251,7 @@
       "properties": {
         "protocol": {
           "type": "string",
-          "description": "Protocol.",
+          "description": "The protocol used for the probe. Possible values are 'Http' and 'Https'.",
           "enum": [
             "Http",
             "Https"
@@ -1328,7 +1328,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the probe that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -1366,7 +1366,7 @@
         },
         "backendHttpSettings": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "Frontend port resource of the application gateway."
+          "description": "Backend http settings resource of the application gateway."
         },
         "httpListener": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -1395,7 +1395,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the request routing rule that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -1472,7 +1472,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the redirect configuration that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -1688,7 +1688,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Name of the URL path map that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -1964,7 +1964,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of Ssl predefined policy."
+          "description": "Name of the Ssl predefined policy."
         },
         "properties": {
           "x-ms-client-flatten": true,
