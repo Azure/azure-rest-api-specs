@@ -486,6 +486,7 @@
       "description": "OS Disk Size in GB to be used to specify the disk size for every machine in this master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified."
     },
     "ContainerServiceStorageProfile": {
+
       "type": "string",
       "x-ms-enum": {
         "name": "ContainerServiceStorageProfileTypes",
@@ -499,7 +500,7 @@
     },
     "ContainerServiceVnetSubnetID": {
       "type": "string",
-      "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+      "description": "VNet SubnetID specifies the vnet's subnet identifier."
     },
     "ContainerServiceVMSize": {
       "type": "string",
@@ -757,7 +758,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "firstConsecutiveStaticIP": {
           "type": "string",
@@ -826,7 +827,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "maxPods": {
           "type": "integer",
@@ -900,8 +901,7 @@
         "networkPolicy": {
           "type": "string",
           "enum": [
-            "calico",
-            "cilium"
+            "calico"
           ],
           "x-ms-enum": {
             "name": "NetworkPolicy",
@@ -912,6 +912,7 @@
         "podCidr": {
           "type": "string",
           "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
+          "default": "10.244.0.0/16",
           "description": "A CIDR notation IP range from which to assign pod IPs when kubenet is used."
         },
         "serviceCidr": {
