@@ -113,7 +113,7 @@ async function runScript() {
   console.log(`\t- Running Linter.`);
   for (let readme of readmesToProcess) {
       console.log(`Linter Validation on configuration file: "${readme}"`);
-      let linterCmd = 'autorest ' + readme + ' --azure-validator=true --validation --message-format=json';
+      let linterCmd = 'npx autorest ' + readme + ' --azure-validator=true --validation --message-format=json';
       const linterErrors = await runCmd(linterCmd);
       updateResult(readme, linterErrors, true);
   }
@@ -122,7 +122,7 @@ async function runScript() {
     //model validator run
   for (let readme of readmesToProcess) {
       console.log(`Model Validation on configuration file: "${readme}"`);
-      let modelValCmd = 'autorest --version=2.0.4174 --model-validator --message-format=json ' + readme;
+      let modelValCmd = 'npx autorest --model-validator --message-format=json ' + readme;
       const modelValErrors = await runCmd(modelValCmd);
       updateResult(readme, modelValErrors, true);
   }

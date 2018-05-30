@@ -80,7 +80,7 @@ async function getTagsFromConfig(config) {
 }
 
 function execLinterCommand(args) {
-  var cmd = `npx autorest@2.0.4152 --validation --azure-validator --message-format=json ${args}`.trim();
+  var cmd = `npx autorest --validation --azure-validator --message-format=json ${args}`.trim();
   console.log(`Executing: ${cmd}`);
   try {
     let result = execSync(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
