@@ -149,6 +149,9 @@
           },
           "Endpoint-GET-External-WithLocation": {
             "$ref": "./examples/Endpoint-GET-External-WithLocation.json"
+          },
+          "Endpoint-GET-External-WithSubnetMapping": {
+            "$ref": "./examples/Endpoint-GET-External-WithSubnetMapping.json"
           }
         }
       },
@@ -229,6 +232,9 @@
           },
           "Endpoint-PUT-External-WithLocation": {
             "$ref": "./examples/Endpoint-PUT-External-WithLocation.json"
+          },
+          "Endpoint-PUT-External-WithSubnetMapping": {
+            "$ref": "./examples/Endpoint-PUT-External-WithSubnetMapping.json"
           },
           "Endpoint-PUT-External-WithCustomHeaders": {
             "$ref": "./examples/Endpoint-PUT-External-WithCustomHeaders.json"
@@ -786,6 +792,110 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerUserMetricsKeys": {
+      "get": {
+        "tags": [
+          "RealUserMetrics"
+        ],
+        "operationId": "TrafficManagerUserMetricsKeys_Get",
+        "description": "Get the subscription-level key used for Real User Metrics collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subscription-level Traffic Manager Real User Metrics key.",
+            "schema": {
+              "$ref": "#/definitions/UserMetricsModel" 
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TrafficManagerUserMetricsKeys-GET": {
+            "$ref": "./examples/TrafficManagerUserMetricsKeys-GET.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RealUserMetrics"
+        ],
+        "operationId": "TrafficManagerUserMetricsKeys_CreateOrUpdate",
+        "description": "Create or update a subscription-level key used for Real User Metrics collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A new subscription-level key has been created for Real User Metrics collection.",
+            "schema": {
+              "$ref": "#/definitions/UserMetricsModel" 
+            }            
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TrafficManagerUserMetricsKeys-PUT": {
+            "$ref": "./examples/TrafficManagerUserMetricsKeys-PUT.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RealUserMetrics"
+        ],
+        "operationId": "TrafficManagerUserMetricsKeys_Delete",
+        "description": "Delete a subscription-level key used for Real User Metrics collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Traffic Manager Real User Metrics key was deleted successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TrafficManagerUserMetricsKeys-DELETE": {
+            "$ref": "./examples/TrafficManagerUserMetricsKeys-DELETE.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -830,11 +940,11 @@
         "priority": {
           "type": "integer",
           "format": "int64",
-          "description": "The priority of this endpoint when using the ‘Priority’ traffic routing method. Possible values are from 1 to 1000, lower values represent higher priority. This is an optional parameter.  If specified, it must be specified on all endpoints, and no two endpoints can share the same priority value."
+          "description": "The priority of this endpoint when using the 'Priority' traffic routing method. Possible values are from 1 to 1000, lower values represent higher priority. This is an optional parameter.  If specified, it must be specified on all endpoints, and no two endpoints can share the same priority value."
         },
         "endpointLocation": {
           "type": "string",
-          "description": "Specifies the location of the external or nested endpoints when using the ‘Performance’ traffic routing method."
+          "description": "Specifies the location of the external or nested endpoints when using the 'Performance' traffic routing method."
         },
         "endpointMonitorStatus": {
           "type": "string",
@@ -862,7 +972,29 @@
           "items": {
             "type": "string"
           },
-          "description": "The list of countries/regions mapped to this endpoint when using the ‘Geographic’ traffic routing method. Please consult Traffic Manager Geographic documentation for a full list of accepted values."
+          "description": "The list of countries/regions mapped to this endpoint when using the 'Geographic' traffic routing method. Please consult Traffic Manager Geographic documentation for a full list of accepted values."
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "first": {
+                "type": "string",
+                "description": "First address in the subnet."
+              },
+              "last": {
+                "type": "string",
+                "description": "Last address in the subnet."
+              },
+              "scope": {
+                "type": "integer",
+                "description": "Block size (number of leading bits in the subnet mask)."
+              }
+            },
+            "description": "Subnet first address, scope, and/or last address."
+          },
+          "description": "The list of subnets, IP addresses, and/or address ranges mapped to this endpoint when using the 'Subnet' traffic routing method. An empty list will match all ranges not covered by other endpoints."
         },
         "customHeaders": {
           "type": "array",
@@ -899,6 +1031,21 @@
         }
       ],
       "description": "Class representing a Traffic Manager HeatMap."
+    },
+    "UserMetricsModel": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UserMetricsProperties",
+          "description": "The properties of the Traffic Manager User Metrics."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing Traffic Manager User Metrics."
     },
     "QueryExperience": {
       "properties": {
@@ -1151,7 +1298,9 @@
             "Performance",
             "Priority",
             "Weighted",
-            "Geographic"
+            "Geographic",
+            "MultiValue",
+            "Subnet"
           ],
           "x-ms-enum": {
             "name": "TrafficRoutingMethod",
@@ -1184,6 +1333,11 @@
             "name": "TrafficViewEnrollmentStatus",
             "modelAsString": true
           }
+        },
+        "maxReturn": {
+          "type": "integer",
+          "description": "Maximum number of endpoints to be returned for MultiValue routing type.",
+          "format": "int64"
         }
       },
       "description": "Class representing the Traffic Manager profile properties."
@@ -1283,6 +1437,15 @@
         }
       ],
       "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method."
+    },
+    "UserMetricsProperties": {
+      "properties": {
+        "key": {
+          "type" : "string",
+          "description": "The key returned by the User Metrics operation."
+        }
+      },
+      "description": "Class representing a Traffic Manager Real User Metrics key response."
     },
     "Resource": {
       "description": "The core properties of ARM resources",

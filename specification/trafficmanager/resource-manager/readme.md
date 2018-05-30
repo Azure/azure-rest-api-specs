@@ -25,7 +25,7 @@ These are the global settings for the TrafficManager API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-2018-04
 ```
 
 ## Suppression
@@ -37,6 +37,15 @@ directive:
     where:
       - $.paths["/providers/Microsoft.Network/operations"]
 
+```
+
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04'
+input-file:
+- Microsoft.Network/stable/2018-04-01/trafficmanager.json
 ```
 
 ### Tag: package-2018-03
