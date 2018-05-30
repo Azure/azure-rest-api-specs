@@ -222,6 +222,14 @@ input-file:
 - Microsoft.Resources/stable/2016-09-01/links.json
 ```
 
+### Tag: package-managedapplications-2018-06
+These settings apply only when `--tag=package-managedapplications-2018-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2018-06'
+input-file:
+- Microsoft.Solutions/stable/2018-06-01/managedapplications.json
+```
+
 ### Tag: package-managedapplications-2017-09
 These settings apply only when `--tag=package-managedapplications-2017-09` is specified on the command line.
 
@@ -560,6 +568,16 @@ namespace: managedapplications
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-09-01/managedapplications
 ```
 
+### Tag: package-managedapplications-2018-06 and go
+
+These settings apply only when `--tag=package-managedapplications-2018-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-managedapplications-2018-06' && $(go)
+namespace: managedapplications
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-06-01/managedapplications
+```
+
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
@@ -586,6 +604,7 @@ batch:
   - tag: package-links-2016-09
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
+  - tag: package-managedapplications-2018-06
   - tag: package-managedapplications-2017-09
   - tag: package-policy-2018-03
   - tag: package-policy-2017-06
