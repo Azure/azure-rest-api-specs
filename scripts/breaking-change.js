@@ -64,7 +64,7 @@ function processViaAutoRest(swaggerPath) {
 
   let outputFileNameWithExt = path.basename(swaggerPath);
   let outputFileNameWithoutExt = path.basename(swaggerPath, '.json');
-  let autoRestCmd = `autorest --input-file=${swaggerPath} --output-artifact=swagger-document.json --output-file=${outputFileNameWithoutExt} --output-folder=${outputFolder}`;
+  let autoRestCmd = `npx autorest --input-file=${swaggerPath} --output-artifact=swagger-document.json --output-file=${outputFileNameWithoutExt} --output-folder=${outputFolder}`;
 
   console.log(`Executing : ${autoRestCmd}`);
 
