@@ -71,17 +71,14 @@ script:
     fi
   - >-
     if [[ $MODE == 'semantic' ]]; then
-      scripts/install-dotnet.sh
       npm test -- test/semantic.js
     fi
   - >-
     if [[ $MODE == 'model' ]]; then
-      scripts/install-dotnet.sh
       npm test -- test/model.js
     fi
   - >-
     if [[ $MODE == 'BreakingChange' ]]; then
-      scripts/install-dotnet.sh
       node -- scripts/breaking-change.js
     fi
   - >-
