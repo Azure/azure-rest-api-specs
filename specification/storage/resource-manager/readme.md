@@ -413,8 +413,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storage
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-03
   - tag: package-2018-02
   - tag: package-2017-10
+```
+### Tag: package-2018-03 and java
+
+These settings apply only when `--tag=package-2018-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.storage.v2018_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/storage/resource-manager/v2018_03_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-02 and java
