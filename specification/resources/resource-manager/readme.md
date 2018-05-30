@@ -374,8 +374,9 @@ batch:
   - tag: package-subscriptions-2016-06
   - tag: package-subscriptions-2015-11
   - tag: package-links-2016-09
-  - tag: package-managedapplications-2016-09
+  - tag: package-managedapplications-2018-06
   - tag: package-managedapplications-2017-09
+  - tag: package-managedapplications-2016-09
 ```
 
 ### Tag: package-features-2015-12 and go
@@ -548,14 +549,14 @@ namespace: links
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2016-09-01/links
 ```
 
-### Tag: package-managedapplications-2016-09 and go
+### Tag: package-managedapplications-2018-06 and go
 
-These settings apply only when `--tag=package-managedapplications-2016-09 --go` is specified on the command line.
+These settings apply only when `--tag=package-managedapplications-2018-06 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-managedapplications-2016-09' && $(go)
+``` yaml $(tag) == 'package-managedapplications-2018-06' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2016-09-01-preview/managedapplications
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-06-01/managedapplications
 ```
 
 ### Tag: package-managedapplications-2017-09 and go
@@ -568,14 +569,14 @@ namespace: managedapplications
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-09-01/managedapplications
 ```
 
-### Tag: package-managedapplications-2018-06 and go
+### Tag: package-managedapplications-2016-09 and go
 
-These settings apply only when `--tag=package-managedapplications-2018-06 --go` is specified on the command line.
+These settings apply only when `--tag=package-managedapplications-2016-09 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-managedapplications-2018-06' && $(go)
+``` yaml $(tag) == 'package-managedapplications-2016-09' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-06-01/managedapplications
+output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2016-09-01-preview/managedapplications
 ```
 
 ## Python
@@ -660,6 +661,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.resource.locks.v2015_01_01
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/locks/v2015_01_01
+```
+
+### Tag: package-managedapplications-2018-06 and python
+
+These settings apply only when `--tag=package-managedapplications-2018-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-managedapplications-2018-06' && $(python)
+python:
+  namespace: azure.mgmt.resource.managedapplications
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/managedapplications
 ```
 
 ### Tag: package-managedapplications-2017-09 and python
