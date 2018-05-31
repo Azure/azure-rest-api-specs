@@ -2027,6 +2027,13 @@
     "ApplicationCreateParameters": {
       "type": "object",
       "properties": {
+        "appRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/appRole"
+          },
+          "description": "The collection of application roles that an application may declare."
+        },
         "availableToOtherTenants": {
           "type": "boolean",
           "description": "Whether the application is available to other tenants."
@@ -2092,6 +2099,13 @@
     "ApplicationUpdateParameters": {
       "type": "object",
       "properties": {
+        "appRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/appRole"
+          },
+          "description": "The collection of application roles that an application may declare."
+        },
         "availableToOtherTenants": {
           "type": "boolean",
           "description": "Whether the application is available to other tenants"
@@ -2167,6 +2181,13 @@
             "type": "string"
           },
           "description": "The application permissions."
+        },
+        "appRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The collection of application roles that an application may declare."
         },
         "availableToOtherTenants": {
           "type": "boolean",
