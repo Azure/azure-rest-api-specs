@@ -41,7 +41,7 @@ tag: package-policy-2018-03
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2018-02
+tag: package-resources-2018-05
 ```
 
 ``` yaml $(package-subscriptions)
@@ -148,6 +148,14 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2018-05
+These settings apply only when `--tag=package-resources-2018-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2018-05'
+input-file:
+- Microsoft.Resources/stable/2018-05-01/resources.json
 ```
 
 ### Tag: package-resources-2018-02
