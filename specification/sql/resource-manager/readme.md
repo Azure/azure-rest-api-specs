@@ -268,7 +268,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
