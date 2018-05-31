@@ -787,6 +787,7 @@ batch:
   - tag: package-features-2015-12
   - tag: package-locks-2016-09
   - tag: package-policy-2018-03
+  - tag: package-policy-2016-12
   - tag: package-resources-2016-09
   - tag: package-subscriptions-2016-06
 ```
@@ -824,10 +825,31 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-policy-2018-03' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.policy.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2018_03_01
+  namespace: com.microsoft.azure.management.authorization.v2018_03_01
+  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2018_03_01
 regenerate-manager: true
 generate-interface: true
+directive:
+  from: policyAssignments.json
+  where: $.definitions.PolicyAssignmentProperties.properties.scope
+  transform: $['x-ms-client-name'] = 'scopeProperty'
+```
+
+### Tag: package-policy-2016-12 and java
+
+These settings apply only when `--tag=package-policy-2016-12 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-policy-2016-12' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.authorization.v2016_12_01
+  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2016_12_01
+regenerate-manager: true
+generate-interface: true
+directive:
+  from: policyAssignments.json
+  where: $.definitions.PolicyAssignmentProperties.properties.scope
+  transform: $['x-ms-client-name'] = 'scopeProperty'
 ```
 
 ### Tag: package-resources-2016-09 and java

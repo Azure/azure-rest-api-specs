@@ -165,3 +165,37 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-keyvault
 ```
+
+### Java multi-api
+
+```yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2016-10
+  - tag: package-2015-06
+```
+
+### Tag: package-2016-10 and java
+
+These settings apply only when `--tag=package-2016-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2016_10_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2016_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2015-06 and java
+
+These settings apply only when `--tag=package-2015-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2015_06_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2015_06_01
+regenerate-manager: true
+generate-interface: true
+```
