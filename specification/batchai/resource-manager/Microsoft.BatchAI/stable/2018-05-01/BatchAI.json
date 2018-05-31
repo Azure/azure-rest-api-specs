@@ -2358,7 +2358,7 @@
     },
     "JobProperties": {
       "properties": {
-        "priority": {
+        "schedulingPriority": {
           "type": "string",
           "default": "normal",
           "enum": [
@@ -2370,8 +2370,8 @@
             "name": "JobPriority",
             "modelAsString": true
           },
-          "title": "Priority associated with the job.",
-          "description": "Priority associated with the job."
+          "title": "Scheduling priority associated with the job.",
+          "description": "Scheduling priority associated with the job."
         },
         "cluster": {
           "title": "Specifies the Id of the cluster on which this job will run.",
@@ -2419,6 +2419,10 @@
         "caffeSettings": {
           "title": "Specifies the settings for Caffe job.",
           "$ref": "#/definitions/CaffeSettings"
+        },
+        "caffe2Settings": {
+          "title": "Specifies the settings for Caffe2 job.",
+          "$ref": "#/definitions/Caffe2Settings"
         },
         "chainerSettings": {
           "title": "Specifies the settings for Chainer job.",
