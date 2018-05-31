@@ -17,42 +17,44 @@ The profile is a one to one map. The api version specified is a single version f
 1. **Data plane map**: The top level node `data-plane` defines the map for the data plane of the resource provider and  api version of the resource type
 
 1. **Resource provider namespace **: Each RP will have a node under the top level nodes. If an RP is not specified in the profile, it means that the profile does not support the RP. Only the supported RP will have an entry in the profile.
-    - The `types` node under the namespace specifies the api version supported for the resource type in this profile.
-        - The name should match the resource type name mentioned in the resource provider manifest and in the REST API spec.
-        - The types could have a nested types defined under if they differ in supported api version from the parent resource type.
-        - The api version specified at the parent resource type is applicable for the child resource types as well, if they do not have a specific entry
+    - Under the namespace, all the supported api versions for the namespace is specified
+    - The api version should have a array value of all the resource types belong to that api version
+    - The array value is empty for the data plane, as they do not have the concept of clearly defined resource types
+    - The name should match the resource type name mentioned in the resource provider manifest and in the REST API spec.
 
-    - The `version` node under the namespace specifies the api version for all the resource types that are not specified under the `types` node
-        - If the `types` node is empty, it means that all the resource types under the RP namespace follows the api version specified in the `version` node.
 
 The structure should appear like below:
 ```bash
 {
-\---"resource-manager": {
++---"info":{
+|    |    "name":"xxxx-xx-xx-profile",
+|    |    "description":"description of profile"
+\----},
++---"resource-manager": {    
 |    +---"rp-namespace1": {
-|    |   +---"version":"xxxx-xx-xx",
-|    |   +---"types":{
-|    |        +---"resourcetype1":"xxxx-xx-xx",
-|    |        +---"resourcetype2":"xxxx-xx-xx"
-|    |   \---},
+|    |   +---"api-version1":[
+|    |        +---"resourcetype1",
+|    |        +---"resourcetype2"
+|    |        ],
+|    |   +---"api-version1":[
+|    |        +---"resourcetype3",
+|    |        +---"resourcetype4"
+|    |        ]
+|    \---},
+|    +---"rp-namespace2": {
+|    |   +---"api-version1":[
+|    |        +---"resourcetype1",
+|    |        +---"resourcetype2",
+|    |        +---"resourcetype3"
+|    |        ],
 |    \---},
 \---},
-|    ----"rp-namespace2": {
-|    |   +---"version":"xxxx-xx-xx",
-|    |   +---"types":{
-|    |        +---"resourcetype3":"xxxx-xx-xx",
-|    |        +---"resourcetype4":"xxxx-xx-xx"
-|    |   \---},
 |    +
 |    +
 |    +
 +---"data-plane": {
 |    ----"rp-namespace1": {
-|    |   +---"version":"xxxx-xx-xx",
-|    |   +---"types":{
-|    |        +---"resourcetype1":"xxxx-xx-xx",
-|    |        +---"resourcetype2":"xxxx-xx-xx"
-|    |   \---}
+|    |   +---"api-version1":[]
 |    |   \---},
 |    \---},
 \---}
