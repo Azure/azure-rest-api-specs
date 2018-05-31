@@ -4,7 +4,7 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ``` yaml $(ruby)
 ruby:
-  package-name: azure_mgmt_iotcentral
+  package-name: azure_mgmt_iot_central
   package-version: "0.0.1"
   azure-arm: true
 ```
@@ -23,5 +23,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2017-07-01-privatepreview' && $(ruby)
 namespace: "Azure::IotCentral::Mgmt::V2017_07_01_privatepreview"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_iotcentral/lib
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_iot_central/lib
 ```
