@@ -1,5 +1,5 @@
 # DataLakeAnalytics
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for DataLakeAnalytics.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for DataLakeAnalytics.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for DataLakeAnalytics, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,7 +19,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for the DataLakeAnalytics API.
 
 ``` yaml
@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-catalog-2016-11` is specified on t
 input-file:
 - Microsoft.DataLakeAnalytics/stable/2016-11-01/catalog.json
 ```
- 
+
 ### Tag: package-catalog-2015-10-preview
 
 These settings apply only when `--tag=package-catalog-2015-10-preview` is specified on the command line.
@@ -69,7 +69,7 @@ These settings apply only when `--tag=package-job-2016-11` is specified on the c
 input-file:
 - Microsoft.DataLakeAnalytics/stable/2016-11-01/job.json
 ```
- 
+
 ### Tag: package-job-2016-03-preview
 
 These settings apply only when `--tag=package-job-2016-03-preview` is specified on the command line.
@@ -78,7 +78,7 @@ These settings apply only when `--tag=package-job-2016-03-preview` is specified 
 input-file:
 - Microsoft.DataLakeAnalytics/preview/2016-03-20-preview/job.json
 ```
- 
+
 ### Tag: package-job-2015-11-preview
 
 These settings apply only when `--tag=package-job-2015-11-preview` is specified on the command line.
@@ -102,10 +102,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -190,7 +191,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-job-2017-09-preview' && $(go)
 namespace: job
-output-folder: $(go-sdk-folder)/services/datalake/analytics/2017-09-01-preview/job
+output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/2017-09-01-preview/job
 ```
 
 ### Tag: package-catalog-2016-11 and go
@@ -220,7 +221,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-job-2016-03-preview' && $(go)
 namespace: job
-output-folder: $(go-sdk-folder)/services/datalake/analytics/2016-03-20-preview/job
+output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/2016-03-20-preview/job
 ```
 
 ### Tag: package-job-2015-11-preview and go
@@ -230,7 +231,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-job-2015-11-preview' && $(go)
 namespace: job
-output-folder: $(go-sdk-folder)/services/datalake/analytics/2015-11-01-preview/job
+output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/2015-11-01-preview/job
 ```
 
 ### Tag: package-catalog-2015-10-preview and go
@@ -240,7 +241,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-catalog-2015-10-preview' && $(go)
 namespace: catalog
-output-folder: $(go-sdk-folder)/services/datalake/analytics/2015-10-01-preview/catalog
+output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/2015-10-01-preview/catalog
 ```
 
 

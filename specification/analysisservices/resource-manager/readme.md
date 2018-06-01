@@ -1,5 +1,5 @@
 # AnalysisServices
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for AnalysisServices.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for AnalysisServices.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for AnalysisServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the AnalysisServices API.
 
 ``` yaml
@@ -78,10 +78,14 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_analysis_services']
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -132,7 +136,7 @@ These settings apply only when `--tag=package-2017-08-beta --go` is specifined o
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-08-beta' && $(go)
-output-folder: $(go-sdk-folder)/services/analysisservices/mgmt/2017-08-01-beta/analysisservices
+output-folder: $(go-sdk-folder)/services/preview/analysisservices/preview/mgmt/2017-08-01-beta/analysisservices
 ```
 
 ### Tag: package-2017-07 and go

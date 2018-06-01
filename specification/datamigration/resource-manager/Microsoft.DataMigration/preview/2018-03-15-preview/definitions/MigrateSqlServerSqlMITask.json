@@ -51,21 +51,22 @@
       "type": "object",
       "description": "Output for task that migrates SQL Server databases to Azure SQL Database Managed Instance.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
         "resultType": {
           "description": "Result type",
           "type": "string"
         }
       },
-      "allOf": [
-        {
-          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
-        }
-      ],
       "required": [ "resultType" ],
       "discriminator": "resultType"
     },
     "MigrateSqlServerSqlMITaskOutputMigrationLevel": {
       "type": "object",
+      "description": "Migration level result for Sql server to Sql MI migration.",
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "properties": {
         "startedOn": {
@@ -140,6 +141,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputDatabaseLevel": {
       "type": "object",
+      "description": "Database level result for Sql Server to Sql MI migration.",
       "x-ms-discriminator-value": "DatabaseLevelOutput",
       "properties": {
         "databaseName": {
@@ -191,6 +193,7 @@
     },
     "MigrateSqlServerSqlMITaskOutputError": {
       "type": "object",
+      "description": "Task errors for Sql Server to Sql MI migration.",
       "x-ms-discriminator-value": "ErrorOutput",
       "properties": {
         "id": {
