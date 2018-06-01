@@ -710,21 +710,6 @@
       ],
       "x-ms-azure-resource": true
     },
-    "ResourceUpdate": {
-      "description": "The Resource model definition.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "sku": {
-          "$ref": "#/definitions/DiskSku"
-        }
-      }
-    },
     "Disk": {
       "properties": {
         "managedBy": {
@@ -759,13 +744,18 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DiskUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/DiskSku"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceUpdate"
-        }
-      ],
       "description": "Disk update resource."
     },
     "DiskList": {
@@ -1083,13 +1073,18 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DiskUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/SnapshotSku"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceUpdate"
-        }
-      ],
       "description": "Snapshot update resource."
     },
     "SnapshotList": {
