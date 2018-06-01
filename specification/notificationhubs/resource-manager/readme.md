@@ -24,6 +24,16 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the NotificationHubs API.
 
+directive:
+  - where:
+      - $.definitions.NamespaceCreateOrUpdateParameters
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.NamespaceCreateOrUpdateParameters
+    suppress:
+      - TrackedResourceGetOperation
+
 ``` yaml
 openapi-type: arm
 tag: package-2017-04
@@ -75,7 +85,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - rake arm:regen_all_profiles['azure_mgmt_notification_hubs']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_notification_hubs']
 ```
 
 

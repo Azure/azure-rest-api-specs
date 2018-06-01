@@ -525,28 +525,10 @@
       }
     },
     "ApplicationDeltaHealthPolicyMap": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ApplicationDeltaHealthPolicyMapItem"
-      },
-      "description": "Defines a map that contains specific application delta health policies for different applications.\nEach entry specifies as key the application name and as value an ApplicationDeltaHealthPolicy used to evaluate the application health when upgrading the cluster.\nThe map is empty by default.\n"
-    },
-    "ApplicationDeltaHealthPolicyMapItem": {
       "type": "object",
-      "description": "Defines an item in ApplicationDeltaHealthPolicyMap.\n",
-      "required": [
-        "key",
-        "value"
-      ],
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/ApplicationName",
-          "description": "The key of the application delta health policy map item. This is the name of the application."
-        },
-        "value": {
-          "$ref": "#/definitions/ApplicationDeltaHealthPolicy",
-          "description": "The value of the application delta health policy map item. This is the ApplicationDeltaHealthPolicy for this application."
-        }
+      "description": "Defines a map that contains specific application delta health policies for different applications.\nEach entry specifies as key the application name and as value an ApplicationDeltaHealthPolicy used to evaluate the application health when upgrading the cluster.\nThe application name should include the 'fabric:' URI scheme.\nThe map is empty by default.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/ApplicationDeltaHealthPolicy"
       }
     },
     "ApplicationHealthPolicy": {
@@ -564,33 +546,11 @@
       }
     },
     "ApplicationHealthPolicyMap": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ApplicationHealthPolicyMapItem"
-      },
-      "description": "Defines a map that contains specific application health policies for different applications.\nEach entry specifies as key the application name and as value an ApplicationHealthPolicy used to evaluate the application health.\nThe map is empty by default.\n"
-    },
-    "ApplicationHealthPolicyMapItem": {
       "type": "object",
-      "description": "Defines an item in ApplicationHealthPolicyMap.\n",
-      "required": [
-        "key",
-        "value"
-      ],
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/ApplicationName",
-          "description": "The key of the application health policy map item. This is the name of the application."
-        },
-        "value": {
-          "$ref": "#/definitions/ApplicationHealthPolicy",
-          "description": "The value of the application health policy map item. This is the ApplicationHealthPolicy for this application."
-        }
+      "description": "Defines a map that contains specific application health policies for different applications.\nEach entry specifies as key the application name and as value an ApplicationHealthPolicy used to evaluate the application health.\nThe application name should include the 'fabric:' URI scheme.\nThe map is empty by default.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/ApplicationHealthPolicy"
       }
-    },
-    "ApplicationName": {
-      "type": "string",
-      "description": "The name of the application, including the 'fabric:' URI scheme."
     },
     "AvailableOperationDisplay": {
       "properties": {
@@ -1183,19 +1143,6 @@
       },
       "description": "Port range details"
     },
-    "ErrorModel": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "The error details."
-    },
     "NodeTypeDescription": {
       "required": [
         "clientConnectionEndpointPort",
@@ -1397,28 +1344,10 @@
       }
     },
     "ServiceTypeDeltaHealthPolicyMap": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ServiceTypeDeltaHealthPolicyMapItem"
-      },
-      "description": "Defines a map that contains specific delta health policies for different service types.\nEach entry specifies as key the service type name and as value a ServiceTypeDeltaHealthPolicy used to evaluate the service health when upgrading the cluster.\nThe map is empty by default.\n"
-    },
-    "ServiceTypeDeltaHealthPolicyMapItem": {
       "type": "object",
-      "description": "Defines an item in ServiceTypeDeltaHealthPolicyMap.\n",
-      "required": [
-        "key",
-        "value"
-      ],
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The key of the service type delta health policy map item. This is the name of the service type."
-        },
-        "value": {
-          "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy",
-          "description": "The value of the service type delta health policy map item. This is the ServiceTypeDeltaHealthPolicy for this service type."
-        }
+      "description": "Defines a map that contains specific delta health policies for different service types.\nEach entry specifies as key the service type name and as value a ServiceTypeDeltaHealthPolicy used to evaluate the service health when upgrading the cluster.\nThe map is empty by default.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy"
       }
     },
     "SettingsParameterDescription": {
@@ -1480,6 +1409,28 @@
         "Manual"
       ]
     },
+    "ErrorModel": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModelError",
+          "description": "The error details."
+        }
+      },
+      "description": "The structure of the error."
+    },
+    "ErrorModelError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "The error details."
+    },
     "ServiceTypeHealthPolicy": {
       "type": "object",
       "description": "Represents the health policy used to evaluate the health of services belonging to a service type.\n",
@@ -1494,28 +1445,10 @@
       }
     },
     "ServiceTypeHealthPolicyMap": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ServiceTypeHealthPolicyMapItem"
-      },
-      "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n"
-    },
-    "ServiceTypeHealthPolicyMapItem": {
       "type": "object",
-      "description": "Defines an item in ServiceTypeHealthPolicyMap.\n",
-      "required": [
-        "key",
-        "value"
-      ],
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The key of the service type health policy map item. This is the name of the service type."
-        },
-        "value": {
-          "$ref": "#/definitions/ServiceTypeHealthPolicy",
-          "description": "The value of the service type health policy map item. This is the ServiceTypeHealthPolicy for this service type."
-        }
+      "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/ServiceTypeHealthPolicy"
       }
     }
   },
@@ -1530,7 +1463,7 @@
         "2018-02-01"
       ],
       "default": "2018-02-01",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "clusterNameParameter": {
       "name": "clusterName",
@@ -1582,7 +1515,7 @@
       "description": "The customer subscription identifier.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     }
   }
 }

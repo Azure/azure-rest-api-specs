@@ -28,7 +28,7 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-06
+tag: package-2018-04
 ```
 
 ### Tag: package-2018-06
@@ -686,7 +686,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - rake arm:regen_all_profiles['azure_mgmt_network']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_network']
 ```
 
 
@@ -720,6 +720,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-05
   - tag: package-2018-04
   - tag: package-2018-02
   - tag: package-2018-01
@@ -735,6 +736,15 @@ batch:
   - tag: package-2016-03
   - tag: package-2015-06split
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2018-05 and go
+
+These settings apply only when `--tag=package-2018-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-05' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2018-05-01/network
 ```
 
 ### Tag: package-2018-04 and go

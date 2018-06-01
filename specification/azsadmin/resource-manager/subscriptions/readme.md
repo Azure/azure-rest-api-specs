@@ -58,6 +58,12 @@ directive:
       - $.definitions.Subscription
       - $.definitions.PlanAcquisition
       - $.definitions.Location
+
+  - suppress: OperationIdNounVerb
+    reason: Subscriptions is both the name of the module and the operation action name.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/validateMoveSubscriptions"].post.operationId
 ```
 
 ### Tag: package-2015-11-01
