@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -87,6 +85,9 @@
               "$ref": "#/definitions/NetworkWatcher"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create network watcher": { "$ref": "./examples/NetworkWatcherCreate.json" }
         }
       },
       "get": {
@@ -124,6 +125,9 @@
               "$ref": "#/definitions/NetworkWatcher"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get network watcher": { "$ref": "./examples/NetworkWatcherGet.json" }
         }
       },
       "delete": {
@@ -162,6 +166,9 @@
           "204": {
             "description": "Delete successful."
           }
+        },
+        "x-ms-examples": {
+          "Delete network watcher": { "$ref": "./examples/NetworkWatcherDelete.json" }
         }
       },
       "patch": {
@@ -246,6 +253,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List network watchers": { "$ref": "./examples/NetworkWatcherList.json" }
         }
       }
     },
@@ -274,6 +284,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List all network watchers": { "$ref": "./examples/NetworkWatcherListAll.json" }
         }
       }
     },
@@ -382,6 +395,9 @@
               "$ref": "#/definitions/VerificationIPFlowResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Ip flow verify": { "$ref": "./examples/NetworkWatcherIpFlowVerify.json" }
         }
       }
     },
@@ -437,6 +453,9 @@
               "$ref": "#/definitions/NextHopResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get next hop": { "$ref": "./examples/NetworkWatcherNextHopGet.json" }
         }
       }
     },
@@ -492,6 +511,9 @@
               "$ref": "#/definitions/SecurityGroupViewResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get security group view": { "$ref": "./examples/NetworkWatcherSecurityGroupViewGet.json" }
         }
       }
     },
@@ -548,6 +570,9 @@
               "$ref": "#/definitions/PacketCaptureResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureCreate.json" }
         }
       },
       "get": {
@@ -592,6 +617,9 @@
               "$ref": "#/definitions/PacketCaptureResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureGet.json" }
         }
       },
       "delete": {
@@ -637,6 +665,9 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Delete packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureDelete.json" }
         }
       }
     },
@@ -684,6 +715,9 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Stop packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureStop.json" }
         }
       }
     },
@@ -737,6 +771,9 @@
               "$ref": "#/definitions/PacketCaptureQueryStatusResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Query packet capture status": { "$ref": "./examples/NetworkWatcherPacketCaptureQueryStatus.json" }
         }
       }
     },
@@ -779,6 +816,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List packet captures": { "$ref": "./examples/NetworkWatcherPacketCapturesList.json" }
         }
       }
     },
@@ -834,6 +874,9 @@
               "$ref": "#/definitions/TroubleshootingResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get troubleshooting": { "$ref": "./examples/NetworkWatcherTroubleshootGet.json" }
         }
       }
     },
@@ -889,17 +932,21 @@
               "$ref": "#/definitions/TroubleshootingResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get troubleshoot result": { "$ref": "./examples/NetworkWatcherTroubleshootResultQuery.json" }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog": {
       "post": {
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "TrafficAnalytics"
         ],
         "operationId": "NetworkWatchers_SetFlowLogConfiguration",
         "x-ms-long-running-operation": true,
-        "description": "Configures flow log on a specified resource.",
+        "description": "Configures flow log  and traffic analytics (optional) on a specified resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -933,7 +980,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request for setting flow log configuration.",
+            "description": "Successful request for setting flow log  and traffic analytics (optional) configuration.",
             "schema": {
               "$ref": "#/definitions/FlowLogInformation"
             }
@@ -944,17 +991,21 @@
               "$ref": "#/definitions/FlowLogInformation"
             }
           }
+        },
+        "x-ms-examples": {
+          "Configure flow log": { "$ref": "./examples/NetworkWatcherFlowLogConfigure.json" }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus": {
       "post": {
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "TrafficAnalytics"
         ],
         "operationId": "NetworkWatchers_GetFlowLogStatus",
         "x-ms-long-running-operation": true,
-        "description": "Queries status of flow log on a specified resource.",
+        "description": "Queries status of flow log and traffic analytics (optional) on a specified resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -977,7 +1028,7 @@
             "schema": {
               "$ref": "#/definitions/FlowLogStatusParameters"
             },
-            "description": "Parameters that define a resource to query flow log status."
+            "description": "Parameters that define a resource to query flow log and traffic analytics (optional)  status."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -988,7 +1039,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request for query flow log status.",
+            "description": "Successful request for query flow log and traffic analytics (optional) status.",
             "schema": {
               "$ref": "#/definitions/FlowLogInformation"
             }
@@ -999,6 +1050,9 @@
               "$ref": "#/definitions/FlowLogInformation"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get flow log status": { "$ref": "./examples/NetworkWatcherFlowLogStatusQuery.json" }
         }
       }
     },
@@ -1054,6 +1108,9 @@
               "$ref": "#/definitions/ConnectivityInformation"
             }
           }
+        },
+        "x-ms-examples": {
+          "Check connectivity": { "$ref": "./examples/NetworkWatcherConnectivityCheck.json" }
         }
       }
     },
@@ -1171,7 +1228,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Azure Reachability Report": {
+          "Get Available Providers List": {
             "$ref": "./examples/NetworkWatcherAvailableProvidersListGet.json"
           }
         }
@@ -1236,6 +1293,9 @@
               "$ref": "#/definitions/ConnectionMonitorResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorCreate.json" }
         }
       },
       "get": {
@@ -1280,6 +1340,9 @@
               "$ref": "#/definitions/ConnectionMonitorResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorGet.json" }
         }
       },
       "delete": {
@@ -1325,6 +1388,9 @@
           "202": {
             "description": "Accepted. The operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Delete connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorDelete.json" }
         }
       }
     },
@@ -1372,6 +1438,9 @@
           "202": {
             "description": "Accepted. The operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Stop connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorStop.json" }
         }
       }
     },
@@ -1419,6 +1488,9 @@
           "202": {
             "description": "Accepted. The operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Start connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorStart.json" }
         }
       }
     },
@@ -1472,6 +1544,9 @@
               "$ref": "#/definitions/ConnectionMonitorQueryResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Query connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorQuery.json" }
         }
       }
     },
@@ -1514,6 +1589,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List connection monitors": { "$ref": "./examples/NetworkWatcherConnectionMonitorList.json" }
         }
       }
     }
@@ -2252,13 +2330,13 @@
       }
     },
     "FlowLogStatusParameters": {
-      "description": "Parameters that define a resource to query flow log status.",
+      "description": "Parameters that define a resource to query flow log and traffic analytics (optional) status.",
       "required": [
         "targetResourceId"
       ],
       "properties": {
         "targetResourceId": {
-          "description": "The target resource where getting the flow logging status.",
+          "description": "The target resource where getting the flow log and traffic analytics (optional) status.",
           "type": "string"
         }
       }
@@ -2279,19 +2357,60 @@
       }
     },
     "FlowLogInformation": {
-      "description": "Information on the configuration of flow log.",
+      "description": "Information on the configuration of flow log and traffic analytics (optional) .",
       "required": [
         "targetResourceId",
         "properties"
       ],
       "properties": {
         "targetResourceId": {
-          "description": "The ID of the resource to configure for flow logging.",
+          "description": "The ID of the resource to configure for flow log and traffic analytics (optional) .",
           "type": "string"
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FlowLogProperties"
+        },
+        "flowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsProperties"
+        }
+      }
+    },
+     "TrafficAnalyticsProperties": {
+      "description": "Parameters that define the configuration of traffic analytics.",
+      "required": [
+        "networkWatcherFlowAnalyticsConfiguration"
+      ],
+      "properties": {
+        "networkWatcherFlowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsConfigurationProperties"
+        }
+      }
+    },
+    "TrafficAnalyticsConfigurationProperties": {
+      "description": "Parameters that define the configuration of traffic analytics.",
+      "required": [
+        "enabled",
+        "workspaceId",
+        "workspaceRegion",
+        "workspaceResourceId"
+      ],
+      "properties": {
+        "enabled": {
+          "description": "Flag to enable/disable traffic analytics.",
+          "type": "boolean"
+        },
+        "workspaceId": {
+          "description": "The resource guid of the attached workspace",
+          "type": "string"
+        },
+        "workspaceRegion": {
+          "description": "The location of the attached workspace",
+          "type": "string"
+        },
+        "workspaceResourceId": {
+          "description": "Resource Id of the attached workspace ",
+         "type": "string"
         }
       }
     },
