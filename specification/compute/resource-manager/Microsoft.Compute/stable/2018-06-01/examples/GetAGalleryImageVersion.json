@@ -18,8 +18,7 @@
           }
         }
       }
-    },
-    "$expand": "ReplicationStatus"
+    }
   },
   "responses": {
     "200": {
@@ -32,6 +31,7 @@
                 "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
               }
             },
+            "scaleTier": "S30",
             "publishedDate": "2018-01-01"
           },
           "storageProfile": {
@@ -44,23 +44,6 @@
                 "lun": 1,
                 "sizedInGB": 10,
                 "hostCaching": "None"
-              }
-            ]
-          },
-          "replicationStatus": {
-            "aggregatedState": "Completed",
-            "summary": [
-              {
-                "region": "West US",
-                "state": "Completed",
-                "details": "",
-                "progress": 100
-              },
-              {
-                "region": "East US",
-                "state": "Completed",
-                "details": "",
-                "progress": 100
               }
             ]
           },

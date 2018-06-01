@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "GalleryClient",
-    "description": "The Gallery Client.",
+    "title": "SharedImageGalleryServiceClient",
+    "description": "Shared Image Gallery Service Client.",
     "version": "2018-06-01"
   },
   "host": "management.azure.com",
@@ -81,10 +81,16 @@
               "$ref": "#/definitions/Gallery"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Gallery"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -129,7 +135,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -165,10 +171,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -179,7 +182,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -245,10 +248,16 @@
               "$ref": "#/definitions/GalleryImage"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -300,7 +309,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -343,10 +352,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -357,7 +363,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -430,10 +436,16 @@
               "$ref": "#/definitions/GalleryImageVersion"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryImageVersion"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -489,7 +501,7 @@
             ],
             "x-ms-enum": {
               "name": "ReplicationStatusTypes",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
@@ -506,7 +518,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -559,10 +571,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -573,7 +582,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -613,7 +622,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -632,7 +641,7 @@
         "tags": [
           "Galleries"
         ],
-        "operationId": "Galleries_ListBySubscription",
+        "operationId": "Galleries_List",
         "description": "List galleries under a subscription.",
         "parameters": [
           {
@@ -652,7 +661,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -671,7 +680,7 @@
         "tags": [
           "GalleryImages"
         ],
-        "operationId": "GalleryImages_ListGalleryImagesByGallery",
+        "operationId": "GalleryImages_ListByGallery",
         "description": "List gallery images under a gallery.",
         "parameters": [
           {
@@ -701,7 +710,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -720,7 +729,7 @@
         "tags": [
           "GalleryImageVersions"
         ],
-        "operationId": "GalleryImageVersions_ListGalleryImageVersionsByGalleryImage",
+        "operationId": "GalleryImageVersions_ListByGalleryImage",
         "description": "List gallery image versions under a gallery image.",
         "parameters": [
           {
@@ -757,7 +766,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -880,7 +889,7 @@
         },
         "endOfLifeDate": {
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "description": "The end of life of this gallery image."
         },
         "identifier": {
@@ -1018,9 +1027,11 @@
           ]
         },
         "storageProfile": {
+          "readOnly": true,
           "$ref": "#/definitions/GalleryImageVersionStorageProfile"
         },
         "replicationStatus": {
+          "readOnly": true,
           "$ref": "#/definitions/ReplicationStatus"
         }
       },
@@ -1060,6 +1071,18 @@
     },
     "GalleryImageVersionPublishingProfile": {
       "properties": {
+        "scaleTier": {
+          "type": "string",
+          "description": "The scale tier of the gallery image version. Valid values are 'S30' and 'S100'",
+          "enum": [
+            "S30",
+            "S100"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleTier",
+            "modelAsString": true
+          }
+        },
         "excludeFromLatest": {
           "type": "boolean",
           "description": "The flag means that if it is set to true, people deploying VMs with 'latest' as version will not use this version."
@@ -1067,12 +1090,12 @@
         "publishedDate": {
           "readOnly": true,
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "description": "The time when the gallery image version is published."
         },
         "endOfLifeDate": {
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "description": "The end of life date of the gallery image version."
         }
       },
@@ -1086,9 +1109,11 @@
     "GalleryImageVersionStorageProfile": {
       "properties": {
         "osDiskImage": {
+          "readOnly": true,
           "$ref": "#/definitions/GalleryOSDiskImage"
         },
         "dataDiskImages": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/GalleryDataDiskImage"
@@ -1109,6 +1134,7 @@
     "GalleryDataDiskImage": {
       "properties": {
         "lun": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
@@ -1123,12 +1149,14 @@
     },
     "GalleryDiskImage": {
       "properties": {
-        "sizedInGB": {
+        "sizeInGB": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "It indicates the size of the VHD to create."
         },
         "hostCaching":{
+          "readOnly": true,
           "type": "string",
           "description": "The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'",
           "enum": [
@@ -1147,6 +1175,7 @@
     "ReplicationStatus": {
       "properties": {
         "aggregatedState": {
+          "readOnly": true,
           "type": "string",
           "description": "This is the aggregated replication status based on the regional replication status.",
           "enum": [
@@ -1157,10 +1186,11 @@
           ],
           "x-ms-enum": {
             "name": "AggregatedReplicationState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "summary": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/RegionalReplicationStatus"
@@ -1173,10 +1203,12 @@
     "RegionalReplicationStatus": {
       "properties": {
         "region": {
+          "readOnly": true,
           "type": "string",
           "description": "The region where the gallery image version is published to."
         },
         "state": {
+          "readOnly": true,
           "type": "string",
           "description": "This is the regional replication state.",
           "enum": [
@@ -1187,14 +1219,16 @@
           ],
           "x-ms-enum": {
             "name": "ReplicationState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "details": {
+          "readOnly": true,
           "type": "string",
           "description": "The details of the replication status."
         },
         "progress": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "It indicates progress of the replication job."
@@ -1259,40 +1293,6 @@
       ],
       "description": "The List Gallery Image version operation response."
     },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "description": "An error response from the Gallery service."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Batch service."
-    },
     "ApiErrorBase": {
       "properties": {
         "code": {
@@ -1350,38 +1350,6 @@
         }
       },
       "description": "Api error."
-    },
-    "OperationStatusResponse": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation ID"
-        },
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation status"
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the operation"
-        },
-        "endTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the operation"
-        },
-        "error": {
-          "readOnly": true,
-          "$ref": "#/definitions/ApiError",
-          "description": "Api error"
-        }
-      },
-      "description": "Operation status response"
     },
     "Resource": {
       "description": "The Resource model definition.",
