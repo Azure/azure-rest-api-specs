@@ -261,60 +261,6 @@
         }
     },
     "definitions":{
-        "Resource":{
-            "description":"ARM resource.",
-            "properties":{
-                "id":{
-                    "readOnly":true,
-                    "type":"string",
-                    "description":"Resource ID."
-                },
-                "name":{
-                    "readOnly":true,
-                    "type":"string",
-                    "description":"Resource name."
-                },
-                "type":{
-                    "readOnly":true,
-                    "type":"string",
-                    "description":"Resource type."
-                }
-            },
-            "x-ms-azure-resource":true
-        },
-        "TrackedResource":{
-            "description":"ARM tracked top level resource.",
-            "properties":{
-                "tags":{
-                    "type":"object",
-                    "additionalProperties":{
-                        "type":"string"
-                    },
-                    "x-ms-mutability":[
-                        "read",
-                        "create",
-                        "update"
-                    ],
-                    "description":"Resource tags."
-                },
-                "location":{
-                    "type":"string",
-                    "x-ms-mutability":[
-                        "read",
-                        "create"
-                    ],
-                    "description":"Resource location."
-                }
-            },
-            "required":[
-                "location"
-            ],
-            "allOf":[
-                {
-                    "$ref":"#/definitions/Resource"
-                }
-            ]
-        },
         "ElasticPoolProperties":{
             "properties":{
                 "creationDate":{
@@ -396,7 +342,7 @@
             },
             "allOf":[
                 {
-                    "$ref":"#/definitions/TrackedResource"
+                    "$ref":"../../../common/v1/types.json#/definitions/TrackedResource"
                 }
             ],
             "description":"Represents a database elastic pool."
@@ -418,7 +364,7 @@
             },
             "allOf":[
                 {
-                    "$ref":"#/definitions/Resource"
+                    "$ref":"../../../common/v1/types.json#/definitions/Resource"
                 }
             ],
             "description":"Represents an elastic pool update."

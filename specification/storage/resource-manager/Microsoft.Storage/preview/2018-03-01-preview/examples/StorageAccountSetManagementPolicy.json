@@ -1,0 +1,136 @@
+{
+  "parameters": {
+    "subscriptionId": "45b60d85-fd72-427a-a708-f994d26e593e",
+    "resourceGroupName": "res7231",
+    "accountName": "sto288",
+    "managementPolicyName": "default",
+    "api-version": "2018-03-01-preview",
+    "monitor": "true",
+    "properties": {
+      "properties": {
+        "policy": {
+          "version": 0.5,
+          "rules": [
+            {
+              "name": "ruleFoo",
+              "type": "lifecycle",
+              "definition": {
+                "filters": {
+                  "blobTypes": [
+                    "blockBlob"
+                  ],
+                  "nameMatch": [
+                    "foo"
+                  ]
+                },
+                "actions": {
+                  "baseBlob": {
+                    "tierToCool": {
+                      "daysAfterLastModifiedGreaterThan": 30
+                    },
+                    "tierToArchive": {
+                      "daysAfterLastModifiedGreaterThan": 90
+                    },
+                    "delete": {
+                      "daysAfterLastModifiedGreaterThan": 2555
+                    }
+                  },
+                  "snapshot": {
+                    "delete": {
+                      "daysAfterCreationGreaterThan": 90
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "expirationRule",
+              "type": "Lifecycle",
+              "definition": {
+                "filters": {
+                  "blobTypes": [
+                    "blockBlob"
+                  ]
+                },
+                "actions": {
+                  "baseBlob": {
+                    "delete": {
+                      "daysAfterLastModifiedGreaterThan": 365
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/45b60d85-fd72-427a-a708-f994d26e593e/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
+        "name": "DefaultManagementPolicy",
+        "type": "Microsoft.Storage/storageAccounts/managementPolicies",
+        "properties": {
+          "policy": {
+            "version": 0.5,
+            "rules": [
+              {
+                "name": "ruleFoo",
+                "type": "lifecycle",
+                "definition": {
+                  "filters": {
+                    "blobTypes": [
+                      "blockBlob"
+                    ],
+                    "nameMatch": [
+                      "foo"
+                    ]
+                  },
+                  "actions": {
+                    "baseBlob": {
+                      "tierToCool": {
+                        "daysAfterLastModifiedGreaterThan": 30
+                      },
+                      "tierToArchive": {
+                        "daysAfterLastModifiedGreaterThan": 90
+                      },
+                      "delete": {
+                        "daysAfterLastModifiedGreaterThan": 2555
+                      }
+                    },
+                    "snapshot": {
+                      "delete": {
+                        "daysAfterCreationGreaterThan": 90
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "name": "expirationRule",
+                "type": "Lifecycle",
+                "definition": {
+                  "filters": {
+                    "blobTypes": [
+                      "blockBlob"
+                    ]
+                  },
+                  "actions": {
+                    "baseBlob": {
+                      "delete": {
+                        "daysAfterLastModifiedGreaterThan": 365
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "lastModifiedTime": "2018-04-27T03:42:59.4040683Z"
+        }
+      }
+    }
+  }
+}

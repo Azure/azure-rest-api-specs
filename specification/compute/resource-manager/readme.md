@@ -203,6 +203,17 @@ input-file:
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
+### Tag: package-compute-2018-04
+
+These settings apply only when `--tag=package-compute-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-compute-2018-04'
+input-file:
+- Microsoft.Compute/stable/2018-04-01/compute.json
+- Microsoft.Compute/stable/2018-04-01/runCommands.json
+- Microsoft.Compute/stable/2018-04-01/disk.json
+```
+
 ### Tag: package-disks-2018-04
 
 These settings apply only when `--tag=package-disks-2018-04` is specified on the command line.
@@ -562,7 +573,8 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
-  - tag: package-disks-2018-04
+  - tag: package-gallery-only-2018-06
+  - tag: package-compute-2018-04
   - tag: package-compute-only-2017-12
   - tag: package-skus-2017-09
   - tag: package-compute-2017-03
@@ -571,12 +583,23 @@ batch:
   - tag: package-compute-2015-06
 ```
 
-### Tag: package-disks-2018-04 and python
+### Tag: package-gallery-only-2018-06 and python
 
-These settings apply only when `--tag=package-disks-2018-04 --python` is specified on the command line.
+These settings apply only when `--tag=package-gallery-only-2018-06 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-disks-2018-04' && $(python)
+``` yaml $(tag) == 'package-gallery-only-2018-06' && $(python)
+python:
+  namespace: azure.mgmt.compute.v2018_06_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2018_06_01
+```
+
+### Tag: package-compute-2018-04 and python
+
+These settings apply only when `--tag=package-compute-2018-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-compute-2018-04' && $(python)
 python:
   namespace: azure.mgmt.compute.v2018_04_01
   output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2018_04_01
@@ -663,4 +686,3 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-compute
 ```
-
