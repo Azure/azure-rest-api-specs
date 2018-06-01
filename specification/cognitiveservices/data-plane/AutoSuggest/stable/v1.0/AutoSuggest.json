@@ -238,9 +238,16 @@
       ],
       "type": "object",
       "required": [
-        "SuggestionGroups"
+        "suggestionGroups"
       ],
-      "properties": {}
+      "properties": {
+        "suggestionGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuggestionsSuggestionGroup"
+          }
+        }
+      }
     },
     "SearchResultsAnswer": {
       "description": "Defines a search result answer.",
@@ -254,6 +261,39 @@
         "queryContext": {
           "$ref": "#/definitions/QueryContext",
           "readOnly": true
+        }
+      }
+    },
+    "SuggestionsSuggestionGroup": {
+      "x-ms-discriminator-value": "Suggestions/SuggestionGroup",
+      "type": "object",
+      "required": [
+        "name",
+        "searchSuggestions"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "Unknown",
+          "enum": [
+            "Unknown",
+            "Web",
+            "StoreApps",
+            "SearchHistory",
+            "PersonalSearchDocuments",
+            "PersonalSearchTags",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "ScenarioType",
+            "modelAsString": true
+          }
+        },
+        "searchSuggestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchAction"
+          }
         }
       }
     },
@@ -587,28 +627,6 @@
           ],
           "x-ms-enum": {
             "name": "ErrorCode",
-            "modelAsString": true
-          }
-        },
-        "subCode": {
-          "description": "The error code that further helps to identify the error.",
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "UnexpectedError",
-            "ResourceError",
-            "NotImplemented",
-            "ParameterMissing",
-            "ParameterInvalidValue",
-            "HttpNotAllowed",
-            "Blocked",
-            "AuthorizationMissing",
-            "AuthorizationRedundancy",
-            "AuthorizationDisabled",
-            "AuthorizationExpired"
-          ],
-          "x-ms-enum": {
-            "name": "ErrorSubCode",
             "modelAsString": true
           }
         },
