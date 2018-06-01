@@ -416,6 +416,7 @@ batch:
   - tag: package-2018-03
   - tag: package-2018-02
   - tag: package-2017-10
+  - tag: package-2016-01
 ```
 ### Tag: package-2018-03 and java
 
@@ -452,6 +453,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.storage.v2017_10_01
   output-folder: $(azure-libraries-for-java-folder)/storage/resource-manager/v2017_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2016-01 and java
+
+These settings apply only when `--tag=package-2016-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.storage.v2016_01_01
+  output-folder: $(azure-libraries-for-java-folder)/storage/resource-manager/v2016_01_01
 regenerate-manager: true
 generate-interface: true
 ```
