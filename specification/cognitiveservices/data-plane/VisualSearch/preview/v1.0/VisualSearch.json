@@ -46,7 +46,7 @@
     "/images/visualsearch": {
       "post": {
         "summary": "Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
-        "operationId": "Images_VisualSearch",
+        "operationId": "Bing_VisualSearchV7",
         "tags": [
           "ImageVisualSearch"
         ],
@@ -118,6 +118,14 @@
             "type": "string"
           },
           {
+            "name": "mkt",
+            "x-ms-client-name": "Market",
+            "in": "query",
+            "description": "The market where the results come from. Typically, mkt is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form <language code>-<country code>. For example, en-US. The string is case insensitive. For a list of possible market values, see [Market Codes](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-visual-search/supported-countries-markets). NOTE: If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in [Market Codes](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-visual-search/supported-countries-markets), Bing uses a best fit market code based on an internal mapping that is subject to change.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "knowledgeRequest",
             "x-ms-client-name": "VisualSearchRequest",
             "in": "formData",
@@ -158,6 +166,7 @@
   },
   "definitions": {
     "ImageKnowledge": {
+      "description": "Defines a visual search API response.",
       "allOf": [
         {
           "$ref": "#/definitions/Response"
@@ -202,6 +211,7 @@
       }
     },
     "ImageTag": {
+      "description": "A visual search tag.",
       "allOf": [
         {
           "$ref": "#/definitions/Thing"
@@ -349,6 +359,7 @@
       }
     },
     "Action": {
+      "description": "Defines an action.",
       "allOf": [
         {
           "$ref": "#/definitions/CreativeWork"
@@ -382,6 +393,7 @@
       }
     },
     "ImageTagRegion": {
+      "description": "Defines an image region relevant to the ImageTag.",
       "type": "object",
       "required": [
         "queryRectangle",
@@ -399,6 +411,7 @@
       }
     },
     "ImageAction": {
+      "description": "Defines an image action.",
       "allOf": [
         {
           "$ref": "#/definitions/Action"
@@ -895,21 +908,16 @@
       }
     },
     "ImageEntityAction": {
+      "description": "Defines an entity action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
         }
       ],
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "Information about the entity.",
-          "$ref": "#/definitions/Thing",
-          "readOnly": true
-        }
-      }
+      "type": "object"
     },
     "ImageModuleAction": {
+      "description": "Defines an image list action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
@@ -925,6 +933,7 @@
       }
     },
     "ImageRecipesAction": {
+      "description": "Defines an recipe action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
@@ -940,6 +949,7 @@
       }
     },
     "ImageRelatedSearchesAction": {
+      "description": "Defines an related search action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
@@ -955,6 +965,7 @@
       }
     },
     "ImageShoppingSourcesAction": {
+      "description": "Defines a shopping sources action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
@@ -1092,6 +1103,7 @@
       }
     },
     "Point2D": {
+      "description": "Defines a 2D point with X and Y coordinates.",
       "allOf": [
         {
           "$ref": "#/definitions/StructuredValue"
