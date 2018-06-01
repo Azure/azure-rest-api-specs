@@ -788,6 +788,7 @@ batch:
   - tag: package-locks-2016-09
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12
+  - tag: package-resources-2018-02
   - tag: package-resources-2016-09
   - tag: package-subscriptions-2016-06
 ```
@@ -850,6 +851,19 @@ directive:
   from: policyAssignments.json
   where: $.definitions.PolicyAssignmentProperties.properties.scope
   transform: $['x-ms-client-name'] = 'scopeProperty'
+```
+
+### Tag: package-resources-2018-02 and java
+
+These settings apply only when `--tag=package-resources-2018-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2018-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2018_02_01
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2018_02_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-resources-2016-09 and java
