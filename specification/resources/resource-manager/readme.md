@@ -467,6 +467,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-resources-2018-05' && $(go)
 namespace: resources
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-05-01/resources
+```
 
 ### Tag: package-resources-2018-02 and go
 
