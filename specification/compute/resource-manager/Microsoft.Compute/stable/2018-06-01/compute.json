@@ -6675,6 +6675,19 @@
       ],
       "description": "Describes a virtual machines scale sets network configuration's DNS settings."
     },
+    "VirtualMachineScaleSetIpTag": {
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "description": "Contains the IP tag associated with the public IP address." 
+    }, 
     "VirtualMachineScaleSetPublicIPAddressConfiguration": {
       "properties": {
         "name": {
@@ -6714,6 +6727,13 @@
         "dnsSettings": {
           "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings",
           "description": "The dns settings to be applied on the publicIP addresses ."
+        },
+        "ipTags": {
+          "type": "array",
+          "items": {
+          "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
+          },
+        "description": "The list of IP tags associated with the public IP address."
         }
       },
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
