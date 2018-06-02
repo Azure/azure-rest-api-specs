@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-preview
+tag: package-2018-06-preview
 ```
 
 
