@@ -520,7 +520,7 @@
           "description": "Gets or sets the id of the resource."
         },
         "properties": {
-          "$ref": "./../2015-10-31/definitions.json#/definitions/JobStreamProperties",
+          "$ref": "#/definitions/JobStreamProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the id of the job stream."
         }
@@ -542,6 +542,53 @@
         }
       },
       "description": "The response model for the list job stream operation."
+    },
+    "JobStreamProperties": {
+      "properties": {
+        "jobStreamId": {
+          "type": "string",
+          "description": "Gets or sets the id of the job stream."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
+        },
+        "streamType": {
+          "type": "string",
+          "description": "Gets or sets the stream type.",
+          "enum": [
+            "Progress",
+            "Output",
+            "Warning",
+            "Error",
+            "Debug",
+            "Verbose",
+            "Any"
+          ],
+          "x-ms-enum": {
+            "name": "JobStreamType",
+            "modelAsString": true
+          }
+        },
+        "streamText": {
+          "type": "string",
+          "description": "Gets or sets the stream text."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Gets or sets the summary."
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "Gets or sets the values of the job stream."
+        }
+      },
+      "description": "Definition of the job stream."
     },
     "JobProvisioningStateProperty": {
       "properties": {

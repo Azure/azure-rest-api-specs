@@ -112,7 +112,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./../2015-10-31/definitions.json#/definitions/AgentRegistrationRegenerateKeyParameter"
+              "$ref": "#/definitions/AgentRegistrationRegenerateKeyParameter"
             },
             "description": "The name of the agent registration key to be regenerated"
           },
@@ -270,7 +270,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./../2015-10-31/definitions.json#/definitions/DscNodeUpdateParameters"
+              "$ref": "#/definitions/DscNodeUpdateParameters"
             },
             "description": "Parameters supplied to the update dsc node."
           },
@@ -942,6 +942,43 @@
         }
       },
       "description": "The dsc nodeconfiguration property associated with the entity."
+    },
+    "AgentRegistrationRegenerateKeyParameter": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Gets or sets the agent registration key name - primary or secondary.",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "x-ms-enum": {
+            "name": "AgentRegistrationKeyName",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "keyName"
+      ],
+      "description": "The parameters supplied to the regenerate keys operation."
+    },
+    "DscNodeUpdateParameters": {
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "Gets or sets the id of the dsc node."
+        },
+        "properties": {
+          "properties": {
+          "nodeConfiguration": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
+            "description": "Gets or sets the configuration of the node."
+          }}
+        }
+      },
+      "description": "The parameters supplied to the update dsc node operation."
     },
     "DscNodeListResult": {
       "properties": {

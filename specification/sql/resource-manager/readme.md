@@ -268,6 +268,7 @@ input-file:
 - Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
 - Microsoft.Sql/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/2015-05-01-preview/operations.json
 - Microsoft.Sql/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/2015-05-01-preview/servers.json
 - Microsoft.Sql/2015-05-01-preview/syncAgents.json
