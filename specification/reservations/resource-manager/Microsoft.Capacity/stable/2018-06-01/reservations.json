@@ -814,8 +814,8 @@
                 "reservedResourceType": {
                     "$ref": "#/definitions/ReservedResourceType"
                 },
-                "autoFit": {
-                    "$ref": "#/definitions/AutoFit"
+                "instanceFlexibility": {
+                    "$ref": "#/definitions/InstanceFlexibility"
                 },
                 "displayName": {
                     "type": "string",
@@ -907,8 +907,8 @@
                 "appliedScopes": {
                     "$ref": "#/definitions/AppliedScopes"
                 },
-                "autoFit": {
-                    "$ref": "#/definitions/AutoFit"
+                "instanceFlexibility": {
+                    "$ref": "#/definitions/InstanceFlexibility"
                 }
             }
         },
@@ -1124,13 +1124,13 @@
                 }
             }
         },
-        "AutoFit": {
+        "InstanceFlexibility": {
             "type": "string",
-            "description": "The auto fit selection that is being applied to reserved.",
+            "description": "Allows reservation discount to be applied across skus within the same AutofitGroup. Not all skus support instance size flexibility.",
             "enum": [
-                "InstanceFlexibilityOn",
-                "CapacityPriority",
-                "InstanceFlexibilityOff"
+                "On",
+                "Off",
+                "NotSupported"
             ]
         },
         "AppliedScopeType": {
