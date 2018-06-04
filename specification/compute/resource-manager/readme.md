@@ -417,24 +417,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_compute']
 ```
 
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # last generated with AutoRest.1.0.0-Nightly20170126
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Compute
-  payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/Compute/Management.Compute/Generated
-  clear-output-folder: true
-```
-
-
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
@@ -592,12 +574,23 @@ batch:
   - tag: package-compute-2015-06
 ```
 
-### Tag: package-disks-2018-04 and python
+### Tag: package-gallery-only-2018-06 and python
 
-These settings apply only when `--tag=package-disks-2018-04 --python` is specified on the command line.
+These settings apply only when `--tag=package-gallery-only-2018-06 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-disks-2018-04' && $(python)
+``` yaml $(tag) == 'package-gallery-only-2018-06' && $(python)
+python:
+  namespace: azure.mgmt.compute.v2018_06_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2018_06_01
+```
+
+### Tag: package-compute-2018-04 and python
+
+These settings apply only when `--tag=package-compute-2018-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-compute-2018-04' && $(python)
 python:
   namespace: azure.mgmt.compute.v2018_04_01
   output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2018_04_01
