@@ -50,7 +50,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ComputeOperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           }
         },
@@ -381,20 +381,20 @@
     }
   },
   "definitions": {
-    "ComputeOperationListResult": {
+    "OperationListResult": {
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ComputeOperationValue"
+            "$ref": "#/definitions/OperationValue"
           },
           "description": "The list of compute operations"
         }
       },
       "description": "The List Compute Operation operation response."
     },
-    "ComputeOperationValue": {
+    "OperationValue": {
       "properties": {
         "origin": {
           "type": "string",
@@ -408,13 +408,13 @@
         },
         "display": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ComputeOperationValueDisplay",
+          "$ref": "#/definitions/OperationValueDisplay",
           "description": "Describes the properties of a Compute Operation Value Display."
         }
       },
       "description": "Describes the properties of a Compute Operation value."
     },
-    "ComputeOperationValueDisplay": {
+    "OperationValueDisplay": {
       "properties": {
         "operation": {
           "type": "string",
