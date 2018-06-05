@@ -289,7 +289,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+   "Resource": {
       "properties": {
         "id": {
           "type": "string",
@@ -308,7 +308,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -432,7 +436,7 @@
           "type": "number"
         },
         "metricTrigger": {
-          "$ref": "#/definitions/MetricTrigger",
+          "$ref": "#/definitions/LogMetricTrigger",
           "description": "Trigger condition for metric query rule"
         }
       },
@@ -463,7 +467,7 @@
       },
       "description": "Azure action group"
     },
-    "MetricTrigger": {
+    "LogMetricTrigger": {
       "type": "object",
       "properties": {
         "thresholdOperator": {
