@@ -164,23 +164,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_storage']
 ```
 
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Storage
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/Storage/Management.Storage/Generated
-  clear-output-folder: true
-```
-
-
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
@@ -196,7 +179,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2018-03-preview
+  - tag: package-2018-03
   - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2017-06
@@ -207,13 +190,13 @@ batch:
   - tag: package-2015-05-preview
 ```
 
-### Tag: package-2018-03-preview and go
+### Tag: package-2018-03 and go
 
-These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/storage/mgmt/2018-03-01-preview/storage
+``` yaml $(tag) == 'package-2018-03' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/storage/mgmt/2018-03-01-preview/storage
 ```
 
 ### Tag: package-2018-02 and go

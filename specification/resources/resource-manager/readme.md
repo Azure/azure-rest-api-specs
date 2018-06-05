@@ -319,30 +319,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
 ```
 
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-```yaml $(csharp)
-csharp:
-  azure-arm: true
-  namespace: Microsoft.Azure.Management.ResourceManager
-  license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
-batch:
-  - package-features: true
-    clear-output-folder: true # clear output folder on first run
-  - package-locks: true
-  - package-policy: true
-  - package-resources: true
-  - package-subscriptions: true
-  - package-links: true
-#  - package-managedapplications: true
-```
-
-
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
