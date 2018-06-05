@@ -327,9 +327,9 @@
             },
             "dependsOn": {
               "type": "array",
-              "description": "Tumbling window triggers that this trigger depends on.",
+              "description": "Tumbling window triggers that this trigger depends on. Only tumbling window triggers are supported.",
               "items": {
-                "$ref": "#/definitions/TumblingWindowTriggerReference"
+                "$ref": "#/definitions/TriggerReference"
               }
             }
           },
@@ -373,7 +373,7 @@
         }
       }
     },
-    "TumblingWindowTriggerReference": {
+    "TriggerReference": {
       "description": "Tumbling window trigger reference type.",
       "type": "object",
       "properties": {
@@ -385,7 +385,7 @@
           ]
         },
         "referenceName": {
-          "description": "Reference TumblingWindowTrigger name.",
+          "description": "Reference trigger name.",
           "type": "string"
         }
       },
