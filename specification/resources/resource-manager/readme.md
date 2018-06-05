@@ -780,6 +780,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/features/resource-manager/v2015_12_01
 regenerate-manager: true
 generate-interface: true
+fconfig: '{"moduleName": "Features"}'
 ```
 
 ### Tag: package-locks-2016-09 and java
@@ -793,6 +794,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/locks/resource-manager/v2016_09_01
 regenerate-manager: true
 generate-interface: true
+fconfig: '{"moduleName": "Locks"}'
 ```
 
 ### Tag: package-policy-2018-03 and java
@@ -806,6 +808,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2018_03_01
 regenerate-manager: true
 generate-interface: true
+fconfig: '{"moduleName": "Policy"}'
 directive:
   from: policyAssignments.json
   where: $.definitions.PolicyAssignmentProperties.properties.scope
@@ -823,6 +826,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2016_12_01
 regenerate-manager: true
 generate-interface: true
+fconfig: '{"moduleName": "Policy"}'
 directive:
   from: policyAssignments.json
   where: $.definitions.PolicyAssignmentProperties.properties.scope
