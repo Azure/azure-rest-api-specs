@@ -826,8 +826,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-policy-2018-03' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.authorization.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2018_03_01
+  namespace: com.microsoft.azure.management.policy.v2018_03_01
+  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2018_03_01
 regenerate-manager: true
 generate-interface: true
 directive:
@@ -843,8 +843,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-policy-2016-12' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.authorization.v2016_12_01
-  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2016_12_01
+  namespace: com.microsoft.azure.management.policy.v2016_12_01
+  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2016_12_01
 regenerate-manager: true
 generate-interface: true
 directive:

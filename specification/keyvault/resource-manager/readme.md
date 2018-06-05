@@ -184,6 +184,10 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/keyvault/resource-manager/v2016_10_01
 regenerate-manager: true
 generate-interface: true
+directive:
+  from: keyvault.json
+  where: $.paths["/subscriptions/{subscriptionId}/resources"].get
+  transform: $['operationId'] = 'Vaults_ListResource'
 ```
 
 ### Tag: package-2015-06 and java
