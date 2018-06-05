@@ -1,0 +1,254 @@
+{
+   "parameters": {
+      "expressRouteCircuitName": "circuitName",
+      "resourceGroupName": "rg1",
+      "api-version": "2017-11-01",
+      "subscriptionId": "subid",
+      "expressRouteCircuitPeeringParameters": {
+         "sku": {
+            "name": "Standard_MeteredData",
+            "tier": "Standard",
+            "family": "MeteredData"
+         },
+         "properties": {
+            "allowClassicOperations": false,
+            "authorizations": [],
+            "peerings": [
+               {
+                  "properties": {
+                     "peeringType": "MicrosoftPeering",
+                     "peerASN": 100,
+                     "primaryPeerAddressPrefix": "123.0.0.0/30",
+                     "secondaryPeerAddressPrefix": "123.0.0.4/30",
+                     "vlanId": 300,
+                     "microsoftPeeringConfig": {
+                        "advertisedPublicPrefixes": [
+                           "123.1.0.0/24"
+                        ],
+                        "advertisedCommunities": [],
+                        "customerASN": 23,
+                        "routingRegistryName": "ARIN"
+                     },
+                     "gatewayManagerEtag": "59",
+                     "ipv6PeeringConfig": {
+                        "primaryPeerAddressPrefix": "3FFE:FFFF:0:CD30::/126",
+                        "secondaryPeerAddressPrefix": "3FFE:FFFF:0:CD30::4/126",
+                        "microsoftPeeringConfig": {
+                           "advertisedPublicPrefixes": [
+                              "3FFE:FFFF:0:CD31::/120"
+                           ],
+                           "advertisedCommunities": [],
+                           "customerASN": 23,
+                           "routingRegistryName": "ARIN"
+                        }
+                     }
+                  },
+                  "name": "MicrosoftPeering"
+               },
+               {
+                  "properties": {
+                     "peeringType": "AzurePrivatePeering",
+                     "peerASN": 100,
+                     "primaryPeerAddressPrefix": "10.0.0.0/30",
+                     "secondaryPeerAddressPrefix": "10.0.0.4/30",
+                     "sharedKey": "A1B2C3D4",
+                     "vlanId": 200
+                  },
+                  "name": "AzurePrivatePeering"
+               }
+            ],
+            "serviceKey": "a1410692-ed3b-4ceb-b94a-b90b95d398d1",
+            "serviceProviderProperties": {
+               "serviceProviderName": "providerName",
+               "peeringLocation": "peeringLocation",
+               "bandwidthInMbps": 200
+            },
+            "gatewayManagerEtag": "59"
+         },
+         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+         "location": "westus"
+      }
+   },
+   "responses": {
+      "200": {
+         "body": {
+            "name": "circuitName",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+            "etag": "W/\"2d15d00a-a97d-42cd-bb03-02b1f8d07bb2\"",
+            "type": "Microsoft.Network/expressRouteCircuits",
+            "location": "westus",
+            "properties": {
+               "provisioningState": "Updating",
+               "resourceGuid": "262effd3-248d-4754-9068-0a89260dd918",
+               "peerings": [
+                  {
+                     "name": "MicrosoftPeering",
+                     "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/MicrosoftPeering",
+                     "etag": "W/\"2d15d00a-a97d-42cd-bb03-02b1f8d07bb2\"",
+                     "properties": {
+                        "provisioningState": "Updating",
+                        "peeringType": "MicrosoftPeering",
+                        "azureASN": 12076,
+                        "peerASN": 100,
+                        "primaryPeerAddressPrefix": "123.0.0.0/30",
+                        "secondaryPeerAddressPrefix": "123.0.0.4/30",
+                        "state": "Disabled",
+                        "vlanId": 300,
+                        "gatewayManagerEtag": "59",
+                        "lastModifiedBy": "",
+                        "microsoftPeeringConfig": {
+                           "advertisedPublicPrefixes": [
+                              "123.1.0.0/24"
+                           ],
+                           "advertisedCommunities": [],
+                           "advertisedPublicPrefixesState": "NotConfigured",
+                           "customerASN": 23,
+                           "legacyMode": 0,
+                           "routingRegistryName": "ARIN"
+                        },
+                        "ipv6PeeringConfig": {
+                           "primaryPeerAddressPrefix": "3FFE:FFFF:0:CD30::/126",
+                           "secondaryPeerAddressPrefix": "3FFE:FFFF:0:CD30::4/126",
+                           "state": "Disabled",
+                           "microsoftPeeringConfig": {
+                              "advertisedPublicPrefixes": [
+                                 "3FFE:FFFF:0:CD31::/120"
+                              ],
+                              "advertisedCommunities": [],
+                              "advertisedPublicPrefixesState": "NotConfigured",
+                              "customerASN": 23,
+                              "legacyMode": 0,
+                              "routingRegistryName": "ARIN"
+                           }
+                        }
+                     }
+                  },
+                  {
+                     "name": "AzurePrivatePeering",
+                     "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering",
+                     "etag": "W/\"2d15d00a-a97d-42cd-bb03-02b1f8d07bb2\"",
+                     "properties": {
+                        "provisioningState": "Updating",
+                        "peeringType": "AzurePrivatePeering",
+                        "azureASN": 12076,
+                        "peerASN": 100,
+                        "primaryPeerAddressPrefix": "10.0.0.0/30",
+                        "secondaryPeerAddressPrefix": "10.0.0.4/30",
+                        "sharedKey": "3082019806092A864886F70D010703A0820189308201850201003182014930820145020100302D3019311730150603550403130E6E72702D656E6372797074696F6E021024D7E76585617DB24043672221D25170300D06092A864886F70D010101050004820100A46409E85BECB39B06BA8B7C81A828384CDC1D82267A13299DD563E2BE4E462CAA25DEAE873754D6C327EE5ED4F22AE61C367AA68DF5E8E9CED3D104D01255CFB6281C647F570060FC401625FD12B8578996AB2A5CBD58F867EE2CA19DDAC4D73FF2BD5180DC9FCB9C30B61F9BA56FCC4E26C085D4ACF35BCC5304A8452A3217137807A321EF397DFEAD5E2D4E3158D5670C63A905D1B611A84EE0695B10F1029357E1CDEA3B357EBEBAECF3CA31E4020BC5BB35FBA7538AF3B285CCCD3D410BB85E25AB03C83C0AD904C303A875894FD0F9535026699F69509ACD89BD6B84FCD48D2715EF4828D5B86B37FD3A452263E054E5B00F5B50E7DE42DDADD6577C5E303306092A864886F70D010701301406082A864886F70D030704082F53B4F65BDE21F08010F8EA51F0C883FCA735EDAA9FC38F7B3B",
+                        "state": "Disabled",
+                        "vlanId": 200,
+                        "lastModifiedBy": ""
+                     }
+                  }
+               ],
+               "authorizations": [],
+               "serviceProviderProperties": {
+                  "serviceProviderName": "providerName",
+                  "peeringLocation": "peeringLocation",
+                  "bandwidthInMbps": 200
+               },
+               "circuitProvisioningState": "Disabled",
+               "allowClassicOperations": false,
+               "gatewayManagerEtag": "59",
+               "serviceKey": "a1410692-ed3b-4ceb-b94a-b90b95d398d1",
+               "serviceProviderProvisioningState": "Provisioned"
+            },
+            "sku": {
+               "name": "Standard_MeteredData",
+               "tier": "Standard",
+               "family": "MeteredData"
+            }
+         }
+      },
+      "201": {
+         "body": {
+            "name": "circuitName",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+            "etag": "W/\"2d15d00a-a97d-42cd-bb03-02b1f8d07bb2\"",
+            "type": "Microsoft.Network/expressRouteCircuits",
+            "location": "westus",
+            "properties": {
+               "provisioningState": "Updating",
+               "resourceGuid": "262effd3-248d-4754-9068-0a89260dd918",
+               "peerings": [
+                  {
+                     "name": "MicrosoftPeering",
+                     "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/MicrosoftPeering",
+                     "etag": "W/\"2d15d00a-a97d-42cd-bb03-02b1f8d07bb2\"",
+                     "properties": {
+                        "provisioningState": "Updating",
+                        "peeringType": "MicrosoftPeering",
+                        "azureASN": 12076,
+                        "peerASN": 100,
+                        "primaryPeerAddressPrefix": "123.0.0.0/30",
+                        "secondaryPeerAddressPrefix": "123.0.0.4/30",
+                        "state": "Disabled",
+                        "vlanId": 300,
+                        "gatewayManagerEtag": "59",
+                        "lastModifiedBy": "",
+                        "microsoftPeeringConfig": {
+                           "advertisedPublicPrefixes": [
+                              "123.1.0.0/24"
+                           ],
+                           "advertisedCommunities": [],
+                           "advertisedPublicPrefixesState": "NotConfigured",
+                           "customerASN": 23,
+                           "legacyMode": 0,
+                           "routingRegistryName": "ARIN"
+                        },
+                        "ipv6PeeringConfig": {
+                           "primaryPeerAddressPrefix": "3FFE:FFFF:0:CD30::/126",
+                           "secondaryPeerAddressPrefix": "3FFE:FFFF:0:CD30::4/126",
+                           "state": "Disabled",
+                           "microsoftPeeringConfig": {
+                              "advertisedPublicPrefixes": [
+                                 "3FFE:FFFF:0:CD31::/120"
+                              ],
+                              "advertisedCommunities": [],
+                              "advertisedPublicPrefixesState": "NotConfigured",
+                              "customerASN": 23,
+                              "legacyMode": 0,
+                              "routingRegistryName": "ARIN"
+                           }
+                        }
+                     }
+                  },
+                  {
+                     "name": "AzurePrivatePeering",
+                     "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering",
+                     "etag": "W/\"2d15d00a-a97d-42cd-bb03-02b1f8d07bb2\"",
+                     "properties": {
+                        "provisioningState": "Updating",
+                        "peeringType": "AzurePrivatePeering",
+                        "azureASN": 12076,
+                        "peerASN": 100,
+                        "primaryPeerAddressPrefix": "10.0.0.0/30",
+                        "secondaryPeerAddressPrefix": "10.0.0.4/30",
+                        "sharedKey": "3082019806092A864886F70D010703A0820189308201850201003182014930820145020100302D3019311730150603550403130E6E72702D656E6372797074696F6E021024D7E76585617DB24043672221D25170300D06092A864886F70D010101050004820100A46409E85BECB39B06BA8B7C81A828384CDC1D82267A13299DD563E2BE4E462CAA25DEAE873754D6C327EE5ED4F22AE61C367AA68DF5E8E9CED3D104D01255CFB6281C647F570060FC401625FD12B8578996AB2A5CBD58F867EE2CA19DDAC4D73FF2BD5180DC9FCB9C30B61F9BA56FCC4E26C085D4ACF35BCC5304A8452A3217137807A321EF397DFEAD5E2D4E3158D5670C63A905D1B611A84EE0695B10F1029357E1CDEA3B357EBEBAECF3CA31E4020BC5BB35FBA7538AF3B285CCCD3D410BB85E25AB03C83C0AD904C303A875894FD0F9535026699F69509ACD89BD6B84FCD48D2715EF4828D5B86B37FD3A452263E054E5B00F5B50E7DE42DDADD6577C5E303306092A864886F70D010701301406082A864886F70D030704082F53B4F65BDE21F08010F8EA51F0C883FCA735EDAA9FC38F7B3B",
+                        "state": "Disabled",
+                        "vlanId": 200,
+                        "lastModifiedBy": ""
+                     }
+                  }
+               ],
+               "authorizations": [],
+               "serviceProviderProperties": {
+                  "serviceProviderName": "providerName",
+                  "peeringLocation": "peeringLocation",
+                  "bandwidthInMbps": 200
+               },
+               "circuitProvisioningState": "Disabled",
+               "allowClassicOperations": false,
+               "gatewayManagerEtag": "59",
+               "serviceKey": "a1410692-ed3b-4ceb-b94a-b90b95d398d1",
+               "serviceProviderProvisioningState": "Provisioned"
+            },
+            "sku": {
+               "name": "Standard_MeteredData",
+               "tier": "Standard",
+               "family": "MeteredData"
+            }
+         }
+      }
+   }
+}
