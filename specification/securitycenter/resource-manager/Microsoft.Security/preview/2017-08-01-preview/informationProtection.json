@@ -30,12 +30,15 @@
         "/{scope}/providers/Microsoft.Security/informationProtectionPolicies/{informationProtectionPolicyName}": {
             "get": {
                 "x-ms-examples": {
-                    "Get an information protection policy for a management group": {
-                        "$ref": "./examples/InformationProtectionPolicies/GetInformationProtectionPolicy_example.json"
+                    "Get the customized information protection policy for a management group": {
+                        "$ref": "./examples/InformationProtectionPolicies/GetCustomInformationProtectionPolicy_example.json"
+                    },
+                    "Get the effective information protection policy for a management group": {
+                        "$ref": "./examples/InformationProtectionPolicies/GetEffectiveInformationProtectionPolicy_example.json"
                     }
                 },
                 "tags": ["InformationProtectionPolicies"],
-                "description": "Details of the information protection policy",
+                "description": "Details of the information protection policy.",
                 "operationId": "InformationProtectionPolicies_Get",
                 "parameters":
                 [{
@@ -63,12 +66,12 @@
             },
             "put": {
                 "x-ms-examples": {
-                    "Update an information protection policy for a management group": {
+                    "Create or update an information protection policy for a management group": {
                         "$ref": "./examples/InformationProtectionPolicies/CreateOrUpdateInformationProtectionPolicy_example.json"
                     }
                 },
                 "tags": ["InformationProtectionPolicies"],
-                "description": "Details of the information protection policy",
+                "description": "Details of the information protection policy.",
                 "operationId": "InformationProtectionPolicies_CreateOrUpdate",
                 "parameters": [{
                         "$ref": "#/parameters/ApiVersion"
@@ -81,6 +84,12 @@
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/InformationProtectionPolicy"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/InformationProtectionPolicy"
                         }
@@ -149,12 +158,12 @@
                 "code": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Short constant description of the error"
+                    "description": "Short constant description of the error."
                 },
                 "message": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Detailed description of the error and resolution suggestions"
+                    "description": "Detailed description of the error and resolution suggestions."
                 }
             }
         },
@@ -165,17 +174,17 @@
                 "id": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Resource Id"
+                    "description": "Resource Id."
                 },
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Resource name"
+                    "description": "Resource name."
                 },
                 "type": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Resource type"
+                    "description": "Resource type."
                 }
             },
             "x-ms-azure-resource": true
@@ -183,11 +192,11 @@
         "InformationProtectionPolicyList": {
             "type": "object",
             "readOnly": true,
-            "description": "Information protection policies response",
+            "description": "Information protection policies response.",
             "properties": {
                 "value": {
                     "type": "array",
-                    "description": "List of information protection policies",
+                    "description": "List of information protection policies.",
                     "items": {
                         "$ref": "#/definitions/InformationProtectionPolicy"
                     }
@@ -201,7 +210,7 @@
         },
         "InformationProtectionPolicy": {
             "type": "object",
-            "description": "Information protection policy",
+            "description": "Information protection policy.",
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -216,26 +225,42 @@
         },
         "InformationProtectionPolicyProperties": {
             "type": "object",
-            "description": "describes properties of an information protection policy",
+            "description": "describes properties of an information protection policy.",
             "properties": {
                 "lastModifiedUtc": {
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Describes the last UTC time the policy was modified"
+                    "description": "Describes the last UTC time the policy was modified."
                 },
-                "sensitivityLabels": {
-                    "type": "array",
-                    "description": "List of sensitivity labels",
-                    "items": {
+                "labels": {
+                    "type": "object",
+                    "description": "Dictionary of sensitivity labels.",
+                    "additionalProperties": {
+                        "type": "object",
                         "$ref": "#/definitions/SensitivityLabel"
                     }
                 },
-                "sensitivityInformationTypes": {
-                    "type": "array",
-                    "description": "List of sensitivity information types",
-                    "items": {
-                        "$ref": "#/definitions/SensitivityInformationType"
+                "informationTypes": {
+                    "type": "object",
+                    "description": "The sensitivity information types.",
+                    "properties": {
+                        "builtIn": {
+                            "type": "object",
+                            "description": "Dictionary of the built-in sensitivity information types.",
+                            "additionalProperties": {
+                                "type": "object",
+                                "$ref": "#/definitions/InformationType"
+                            }
+                        },
+                        "custom": {
+                            "type": "object",
+                            "description": "Dictionary of the custom sensitivity information types.",
+                            "additionalProperties": {
+                                "type": "object",
+                                "$ref": "#/definitions/InformationType"
+                            }
+                        }
                     }
                 }
             }
@@ -244,29 +269,26 @@
             "type": "object",
             "description": "The sensitivity label.",
             "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "The id of the sensitivty label."
-                },
-                "name": {
+                "displayName": {
                     "type": "string",
                     "description": "The name of the sensitivity label."
                 },
                 "order": {
                     "type": "number",
                     "description": "The order of the sensitivity label."
+                },
+                "state": {
+                    "type": "string",
+                    "enum": ["Enabled", "Disabled"],
+                    "description": "Indicates whether the label is enabled or not."
                 }
             }
         },
-        "SensitivityInformationType": {
+        "InformationType": {
             "type": "object",
             "description": "The information type.",
             "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "The id of the information type."
-                },
-                "name": {
+                "displayName": {
                     "type": "string",
                     "description": "The name of the information type."
                 },
@@ -276,7 +298,28 @@
                 },
                 "recommendedLabelId": {
                     "type": "string",
-                    "description": "The recommended label id to be associated with this information type"
+                    "format": "uuid",
+                    "description": "The recommended label id to be associated with this information type."
+                },
+                "enabled": {
+                    "type": "string",
+                    "enum": ["Enabled", "Disabled"],
+                    "description": "Indicates whether the information type is enabled or not."
+                },
+                "keywords": {
+                    "type": "object",
+                    "description": "The information type keywords.",
+                    "properties": {
+                        "builtIn": {
+                            "type": "array",
+                            "readOnly": true,
+                            "description": "The built-in keywords."
+                        },
+                        "custom": {
+                            "type": "array",
+                            "description": "The customized keywords."
+                        }
+                    }
                 }
             }
         }
@@ -288,7 +331,7 @@
             "required": true,
             "type": "string",
             "enum": ["2017-08-01-preview"],
-            "description": "API version for the operation"
+            "description": "API version for the operation."
         },
         "Scope": {
             "name": "scope",
@@ -303,7 +346,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the information protection policy",
+            "enum": ["effective", "custom"],
+            "description": "Name of the information protection policy.",
             "x-ms-parameter-location": "method"
         }
     }
