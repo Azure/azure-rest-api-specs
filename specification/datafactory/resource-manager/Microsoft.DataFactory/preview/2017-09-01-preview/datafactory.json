@@ -375,15 +375,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/sharedFactory": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/listSharedFactories": {
       "post": {
         "tags": [
           "factories"
         ],
-        "operationId": "Factories_ListSharedFactory",
+        "operationId": "Factories_ListSharedFactories",
         "x-ms-examples": {
           "Factories_ListSharedFactory": {
-            "$ref": "./examples/Factories_ListSharedFactory.json"
+            "$ref": "./examples/Factories_ListSharedFactories.json"
           }
         },
         "description": "List data factories which the given data factory has access.",
@@ -420,15 +420,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/sharedIntegrationRuntime": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/listSharedIntegrationRuntimes": {
       "post": {
         "tags": [
           "factories"
         ],
-        "operationId": "Factories_ListSharedIntegrationRuntime",
+        "operationId": "Factories_ListSharedIntegrationRuntimes",
         "x-ms-examples": {
           "Factories_ListSharedIntegrationRuntime": {
-            "$ref": "./examples/Factories_ListSharedIntegrationRuntime.json"
+            "$ref": "./examples/Factories_ListSharedIntegrationRuntimes.json"
           }
         },
         "description": "List integration runtimes which the given data factory has access.",
@@ -657,7 +657,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/IntegrationRuntimeResource"
+              "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
             }
           },
           "default": {
