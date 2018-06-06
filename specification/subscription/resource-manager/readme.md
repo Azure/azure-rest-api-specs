@@ -72,20 +72,6 @@ swagger-to-sdk:
 ```
 
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-```yaml $(csharp)
-csharp:
-  azure-arm: true
-  namespace: Microsoft.Azure.Management.Subscription
-  license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
-  clear-output-folder: true
-```
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
@@ -129,6 +115,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2018-03-preview
+  - tag: package-2017-11-preview
 ```
 
 ### Tag: package-2018-03-preview and go

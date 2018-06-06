@@ -1532,7 +1532,8 @@
                     "x-ms-enum": {
                         "name": "EventDeliverySchema",
                         "modelAsString": true
-                    }
+                    },
+                    "default": "EventGridSchema"
                 },
                 "retryPolicy": {
                     "$ref": "#/definitions/RetryPolicy",
@@ -1672,8 +1673,11 @@
             "x-ms-discriminator-value": "WebHook"
         },
         "DeadLetterDestination": {
-            "description": "Information about the dead letter destination for an event subscription",
+            "description": "Information about the dead letter destination for an event subscription. To configure a deadletter destination, do not directly instantiate an object of this class. Instead, instantiate an object of a derived class. Currently, StorageBlobDeadLetterDestination is the only class that derives from this class.",
             "type": "object",
+            "required": [
+                "endpointType"
+            ],
             "properties": {
                 "endpointType": {
                     "description": "Type of the endpoint for the dead letter destination",
@@ -1844,7 +1848,8 @@
                     "x-ms-enum": {
                         "name": "EventDeliverySchema",
                         "modelAsString": true
-                    }
+                    },
+                    "default": "EventGridSchema"
                 },
                 "retryPolicy": {
                     "$ref": "#/definitions/RetryPolicy",
@@ -1962,6 +1967,20 @@
                     "description": "Endpoint for the topic.",
                     "type": "string",
                     "readOnly": true
+                },
+                "inputSchema": {
+                    "description": "This determines the format that Event Grid should expect for incoming events published to the topic.",
+                    "enum": [
+                        "EventGridSchema",
+                        "CustomEventSchema",
+                        "CloudEventV01Schema"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "InputSchema",
+                        "modelAsString": true
+                    },
+                    "default": "EventGridSchema"
                 },
                 "inputSchemaMapping": {
                     "$ref": "#/definitions/InputSchemaMapping",

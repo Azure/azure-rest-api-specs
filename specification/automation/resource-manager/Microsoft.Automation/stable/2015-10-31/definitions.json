@@ -1092,6 +1092,84 @@
       ],
       "description": "The parameters supplied to the create compilation job operation."
     },
+    "JobStreamListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobStream"
+          },
+          "description": "A list of job streams."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job stream operation."
+    },
+    "JobStream": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobStreamProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the id of the job stream."
+        }
+      },
+      "description": "Definition of the job stream."
+    },
+    "JobStreamProperties": {
+      "properties": {
+        "jobStreamId": {
+          "type": "string",
+          "description": "Gets or sets the id of the job stream."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
+        },
+        "streamType": {
+          "type": "string",
+          "description": "Gets or sets the stream type.",
+          "enum": [
+            "Progress",
+            "Output",
+            "Warning",
+            "Error",
+            "Debug",
+            "Verbose",
+            "Any"
+          ],
+          "x-ms-enum": {
+            "name": "JobStreamType",
+            "modelAsString": true
+          }
+        },
+        "streamText": {
+          "type": "string",
+          "description": "Gets or sets the stream text."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Gets or sets the summary."
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "Gets or sets the values of the job stream."
+        }
+      },
+      "x-ms-client-flatten": true,
+      "description": "Definition of the job stream."
+    },
     "DscCompilationJobProperties": {
       "properties": {
         "configuration": {
@@ -1315,6 +1393,11 @@
           "description": "Gets or sets the last modified time.",
           "x-nullable": false
         },
+        "nodeConfigurationCount": {
+          "type": "integer",
+          "description": "Gets the number of compiled node configurations.",
+          "x-nullable": false
+        },
         "description": {
           "type": "string",
           "description": "Gets or sets the description."
@@ -1354,6 +1437,10 @@
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the next link."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets the total number of configurations matching filter criteria."
         }
       },
       "description": "The response model for the list configuration operation."
@@ -1472,32 +1559,6 @@
         }
       },
       "description": "Definition of the DSC Meta Configuration."
-    },
-    "DscNodeConfigurationCreateOrUpdateParameters": {
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/ContentSource",
-          "description": "Gets or sets the source."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the node configuration."
-        },
-        "configuration": {
-          "$ref": "#/definitions/DscConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node."
-        },
-        "newNodeConfigurationBuildVersionRequired": {
-          "type": "boolean",
-          "description": "If a new build version of NodeConfiguration is required."
-        }
-      },
-      "required": [
-        "source",
-        "name",
-        "configuration"
-      ],
-      "description": "The parameters supplied to the create or update node configuration operation."
     },
     "DscNodeConfigurationAssociationProperty": {
       "properties": {
@@ -1788,6 +1849,12 @@
           "format": "date-time",
           "description": "Gets or sets the registration time of the worker machine.",
           "x-nullable": false
+        },
+        "lastSeenDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Heartbeat from the Worker",
+          "x-nullable": false
         }
       },
       "description": "Definition of hybrid runbook worker."
@@ -1812,6 +1879,18 @@
         "credential": {
           "$ref": "#/definitions/RunAsCredentialAssociationProperty",
           "description": "Sets the credential of a worker group."
+        },
+        "groupType": {
+          "type": "string",
+          "description": "Type of the HybridWorkerGroup.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeEnum",
+            "modelAsString": true
+          }
         }
       },
       "description": "Definition of hybrid runbook worker group."
@@ -1840,72 +1919,6 @@
         }
       },
       "description": "Parameters supplied to the update operation."
-    },
-    "Job": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id of the resource."
-        },
-        "properties": {
-          "$ref": "./definitions.json#/definitions/JobProperties",
-          "x-ms-client-flatten": true,
-          "description": "The properties of the job."
-        }
-      },
-      "description": "Definition of the job."
-    },
-    "JobCreateProperties": {
-      "properties": {
-        "runbook": {
-          "$ref": "./definitions.json#/definitions/RunbookAssociationProperty",
-          "description": "Gets or sets the runbook."
-        },
-        "parameters": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the parameters of the job."
-        },
-        "runOn": {
-          "type": "string",
-          "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
-        }
-      },
-      "required": [
-        "runbook"
-      ],
-      "description": "The parameters supplied to the create job operation."
-    },
-    "JobCreateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "./definitions.json#/definitions/JobCreateProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the list of job properties."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "The parameters supplied to the create job operation."
-    },
-    "JobListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "./definitions.json#/definitions/Job"
-          },
-          "description": "Gets or sets a list of jobs."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list job operation."
     },
     "JobScheduleCreateProperties": {
       "properties": {
@@ -2016,179 +2029,6 @@
         }
       },
       "description": "The response model for the list job schedule operation."
-    },
-    "JobStream": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id of the resource."
-        },
-        "properties": {
-          "$ref": "./definitions.json#/definitions/JobStreamProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the id of the job stream."
-        }
-      },
-      "description": "Definition of the job stream."
-    },
-    "JobStreamListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "./definitions.json#/definitions/JobStream"
-          },
-          "description": "A list of job streams."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list job stream operation."
-    },
-    "JobProperties": {
-      "properties": {
-        "runbook": {
-          "$ref": "./definitions.json#/definitions/RunbookAssociationProperty",
-          "description": "Gets or sets the runbook."
-        },
-        "startedBy": {
-          "type": "string",
-          "description": "Gets or sets the job started by."
-        },
-        "runOn": {
-          "type": "string",
-          "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
-        },
-        "jobId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "Gets or sets the id of the job.",
-          "x-nullable": false
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the creation time of the job.",
-          "x-nullable": false
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the status of the job.",
-          "enum": [
-            "New",
-            "Activating",
-            "Running",
-            "Completed",
-            "Failed",
-            "Stopped",
-            "Blocked",
-            "Suspended",
-            "Disconnected",
-            "Suspending",
-            "Stopping",
-            "Resuming",
-            "Removing"
-          ],
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          }
-        },
-        "statusDetails": {
-          "type": "string",
-          "description": "Gets or sets the status details of the job."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the start time of the job.",
-          "x-nullable": true
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the end time of the job.",
-          "x-nullable": true
-        },
-        "exception": {
-          "type": "string",
-          "description": "Gets or sets the exception of the job."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the last modified time of the job.",
-          "x-nullable": true
-        },
-        "lastStatusModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the last status modified time of the job.",
-          "x-nullable": true
-        },
-        "parameters": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the parameters of the job."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningStateProperty",
-          "description": "The provisioning state of a resource."
-        }
-      },
-      "description": "Definition of job properties."
-    },
-    "JobStreamProperties": {
-      "properties": {
-        "jobStreamId": {
-          "type": "string",
-          "description": "Gets or sets the id of the job stream."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the creation time of the job.",
-          "x-nullable": false
-        },
-        "streamType": {
-          "type": "string",
-          "description": "Gets or sets the stream type.",
-          "enum": [
-            "Progress",
-            "Output",
-            "Warning",
-            "Error",
-            "Debug",
-            "Verbose",
-            "Any"
-          ],
-          "x-ms-enum": {
-            "name": "JobStreamType",
-            "modelAsString": true
-          }
-        },
-        "streamText": {
-          "type": "string",
-          "description": "Gets or sets the stream text."
-        },
-        "summary": {
-          "type": "string",
-          "description": "Gets or sets the summary."
-        },
-        "value": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "Gets or sets the values of the job stream."
-        }
-      },
-      "x-ms-client-flatten": true,
-      "description": "Definition of the job stream."
     },
     "Key":{
       "properties": {
@@ -3736,6 +3576,10 @@
           "description": "Gets or sets the last modified time.",
           "x-nullable": false
         },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Details of the user who last modified the Webhook"
+        },
         "description": {
           "type": "string",
           "description": "Gets or sets the description."
@@ -3811,6 +3655,117 @@
         }
       },
       "description": "The parameters supplied to the update webhook operation."
+    },
+   "WatcherProperties": {
+    "properties": {
+      "executionFrequencyInSeconds": {
+        "type": "integer",
+        "format": "int64",
+        "description": "Gets or sets the frequency at which the watcher is invoked."
+      },
+      "scriptName": {
+        "type": "string",
+        "description": "Gets or sets the name of the script the watcher is attached to, i.e. the name of an existing runbook."
+      },
+      "scriptParameters": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Gets or sets the parameters of the script."
+      },
+      "scriptRunOn": {
+        "type": "string",
+        "description": "Gets or sets the name of the hybrid worker group the watcher will run on."
+      },
+      "status": {
+        "type": "string",
+        "readOnly": true,
+        "description": "Gets the current status of the watcher."
+      },
+      "creationTime": {
+        "type": "string",
+        "readOnly": true,
+        "format": "date-time",
+        "description": "Gets or sets the creation time.",
+        "x-nullable": false
+      },
+      "lastModifiedTime": {
+        "type": "string",
+        "readOnly": true,
+        "format": "date-time",
+        "description": "Gets or sets the last modified time.",
+        "x-nullable": false
+      },
+      "lastModifiedBy": {
+        "type": "string",
+        "readOnly": true,
+        "description": "Details of the user who last modified the watcher."
+      },
+      "description": {
+        "type": "string",
+        "description": "Gets or sets the description."
+      }
+    },
+    "description": "Definition of the watcher properties"
+  },
+  "Watcher": {
+    "properties": {
+      "properties": {
+        "$ref": "#/definitions/WatcherProperties",
+        "x-ms-client-flatten": true,
+        "description": "Gets or sets the watcher properties."
+      },
+      "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the resource."
+        }
+    },
+    "description": "Definition of the watcher type.",
+    "allOf": [
+      {
+        "$ref": "#/definitions/TrackedResource"
+      }
+    ]
+  },
+  "WatcherListResult": {
+    "properties": {
+      "value": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Watcher"
+        },
+        "description": "Gets or sets a list of watchers."
+      },
+      "nextLink": {
+        "type": "string",
+        "description": "Gets or sets the next link."
+      }
+    },
+    "description": "The response model for the list watcher operation."
+  },
+  "WatcherUpdateParameters": {
+    "properties": {
+      "properties": {
+        "$ref": "#/definitions/WatcherUpdateProperties",
+        "x-ms-client-flatten": true,
+        "description": "Gets or sets the watcher update properties."
+      },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        }
+      }
+    },
+    "WatcherUpdateProperties": {
+    "properties": {
+      "executionFrequencyInSeconds": {
+        "type": "integer",
+        "format": "int64",
+        "description": "Gets or sets the frequency at which the watcher is invoked."
+      }
+    },
+    "description": "The properties of the update watcher operation."
     }
   },
   "parameters": {

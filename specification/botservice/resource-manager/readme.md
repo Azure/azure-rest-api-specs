@@ -35,9 +35,21 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
-- Microsoft.BotService/stable/2017-12-01/botservice.json
+- Microsoft.BotService/preview/2017-12-01/botservice.json
+directive:
+  - suppress: R3010
+    from: botservice.json
+    reason: It is not a useful operation in the bot service.
+  - suppress: R2001
+    from: botservice.json
+    reason: Flatten does not improve the programming experience here.
+  - suppress: R3018
+    from: botservice.json
+    reason: We used Enums where we might extend to multiple states, and left booleans where it would ease development.
+  - suppress: R2066
+    from: botservice.json
+    reason: The path as-is is quite descriptive.
 ```
-
 ---
 # Code Generation
 
@@ -51,7 +63,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
 ```
-
 
 ## C# 
 
@@ -82,11 +93,18 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-12-01
+```
+
 ### Tag: package-2017-12-01 and go
 
 These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-' && $(go)
-output-folder: $(go-sdk-folder)/services/botservice/mgmt/2017-12-01/botservices
+``` yaml $(tag) == 'package-2017-12-01' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/botservice/mgmt/2017-12-01/botservices
 ```

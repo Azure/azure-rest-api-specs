@@ -86,6 +86,7 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJobStreams.json
 - Microsoft.Automation/preview/2017-05-15-preview/job.json
 ```
 
@@ -116,11 +117,13 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJobStreams.json
 - Microsoft.Automation/preview/2017-05-15-preview/job.json
 - Microsoft.Automation/stable/2018-01-15/definitions.json
 - Microsoft.Automation/stable/2018-01-15/dscNode.json
 - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
 - Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2015-10-31/watcher.json
 ```
 
 ---
@@ -148,6 +151,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_automation']
 ```
 
 
@@ -228,7 +234,7 @@ These settings apply only when `--tag=package-2017-05-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/automation/mgmt/2017-05-15-preview/automation
+output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2017-05-15-preview/automation
 ```
 
 ## Java
