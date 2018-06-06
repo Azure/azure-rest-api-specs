@@ -412,7 +412,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.appservice.v2018_02_01
-  output-folder: $(azure-libraries-for-java-folder)/appservice/v2018_02_01
+  output-folder: $(azure-libraries-for-java-folder)/appservice/resource-manager/v2018_02_01
 regenerate-manager: true
 generate-interface: true
 ```
