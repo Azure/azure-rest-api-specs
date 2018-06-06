@@ -239,6 +239,23 @@
         "searchSuggestions"
       ],
       "properties": {
+        "name": {
+          "type": "string",
+          "default": "Unknown",
+          "enum": [
+            "Unknown",
+            "Web",
+            "StoreApps",
+            "SearchHistory",
+            "PersonalSearchDocuments",
+            "PersonalSearchTags",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "ScenarioType",
+            "modelAsString": true
+          }
+        },
         "searchSuggestions": {
           "type": "array",
           "items": {
