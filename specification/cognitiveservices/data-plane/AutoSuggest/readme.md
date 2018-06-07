@@ -46,6 +46,13 @@ csharp:
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingAutoSuggest/BingAutoSuggest/Generated/AutoSuggest
 ```
 
+``` yaml
+directive:
+  - suppress: R2022                       # the message to suppress
+  - suppress: R3014                       # the message to suppress
+  - suppress: R3016                       # the message to suppress
+```
+
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
@@ -99,12 +106,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'release_1_0' && $(go)
 output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/autosuggest
 ```
-
-
-## Suppressions
-directive:
-  - suppress: R3016
-    reason: _type is a polymorphic discriminator that can't be changed.
 
 
 ## Java
