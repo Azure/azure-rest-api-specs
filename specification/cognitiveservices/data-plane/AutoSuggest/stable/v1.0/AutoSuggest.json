@@ -182,7 +182,12 @@
           "200": {
             "description": "Success.",
             "schema": {
-              "$ref": "#/definitions/AutoSuggest"
+              "$ref": "#/definitions/Suggestions"
+            }
+          },
+          "x-ms-examples": {
+            "Successful query": {
+              "$ref": "./examples/SuccessfulQueryRequest.json"
             }
           },
           "default": {
@@ -191,17 +196,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful query": {
-            "$ref": "./examples//SuccessfulQueryRequest.json"
-          }
         }
       }
     }
   },
   "definitions": {
-    "AutoSuggest": {
+    "Suggestions": {
       "description": "Defines an AutoSuggest answer",
       "allOf": [
         {
@@ -317,11 +317,6 @@
       }
     },
     "SearchAction": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Action"
-        }
-      ],
       "type": "object",
       "properties": {
         "displayText": {
@@ -348,6 +343,11 @@
             "name": "SearchKind",
             "modelAsString": true
           }
+        },
+        "url": {
+          "description": "The URL to get more information about the thing represented by this object.",
+          "readOnly": true,
+          "type": "string"
         }
       }
     },
