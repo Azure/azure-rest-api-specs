@@ -47,7 +47,7 @@
   "paths": {
     "/apps/{appId}/metrics/{metricId}": {
       "get": {
-        "operationId": "GetMetric",
+        "operationId": "Metrics_Get",
         "summary": "Retrieve metric data",
         "description": "Gets metric values for a single metric",
         "x-ms-examples": {
@@ -105,7 +105,7 @@
     },
     "/apps/{appId}/metrics": {
       "post": {
-        "operationId": "GetMetrics",
+        "operationId": "Metrics_GetMultiple",
         "summary": "Retrieve metric data",
         "description": "Gets metric values for multiple metrics",
         "x-ms-examples": {
@@ -139,7 +139,7 @@
     },
     "/apps/{appId}/metrics/metadata": {
       "get": {
-        "operationId": "GetMetricsMetadata",
+        "operationId": "Metrics_GetMetadata",
         "summary": "Retrieve metric metatadata",
         "description": "Gets metadata describing the available metrics",
         "x-ms-examples": {
@@ -170,7 +170,7 @@
     },
     "/apps/{appId}/events/{eventType}": {
       "get": {
-        "operationId": "GetEvents",
+        "operationId": "Events_GetByType",
         "summary": "Execute OData query",
         "description": "Executes an OData query for events",
         "x-ms-examples": {
@@ -239,7 +239,7 @@
     },
     "/apps/{appId}/events/{eventType}/{eventId}": {
       "get": {
-        "operationId": "GetEvent",
+        "operationId": "Events_Get",
         "summary": "Get an event",
         "description": "Gets the data for a single event",
         "x-ms-examples": {
@@ -285,7 +285,7 @@
     },
     "/apps/{appId}/events/$metadata": {
       "get": {
-        "operationId": "GetEventsMetadataOData",
+        "operationId": "Events_GetOdataMetadata",
         "summary": "Get OData metadata",
         "description": "Gets OData EDMX metadata describing the event data model",
         "x-ms-examples": {
@@ -319,7 +319,7 @@
     },
     "/apps/{appId}/query": {
       "post": {
-        "operationId": "Query_Post",
+        "operationId": "Query",
         "summary": "Execute an Analytics query",
         "description": "Executes an Analytics query for data. [Here](https://dev.applicationinsights.io/documentation/Using-the-API/Query) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
@@ -388,7 +388,7 @@
     },
     "/apps/{appId}/query/schema": {
       "get": {
-        "operationId": "GetQuerySchema",
+        "operationId": "Query_GetSchema",
         "summary": "Get Analytics query metadata",
         "description": "Gets Analytics query schema describing the data model",
         "x-ms-examples": {
@@ -1680,8 +1680,8 @@
       "properties": {
         "value": {
           "description": "The value of the performance counter",
-          "type": "integer",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "name": {
           "description": "The name of the performance counter",
@@ -1742,8 +1742,8 @@
         },
         "valueCount": {
           "description": "The count of the custom metric",
-          "type": "number",
-          "format": "double"
+          "type": "integer",
+          "format": "int32"
         },
         "valueMin": {
           "description": "The minimum value of the custom metric",

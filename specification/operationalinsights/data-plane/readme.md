@@ -41,9 +41,6 @@ input-file:
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
-  - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
-    where-operation: Query_Post
-    transform: $.operationId = "Query"
 ```
 
 ``` yaml $(tag) == '20171001'
