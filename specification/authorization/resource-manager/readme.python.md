@@ -22,7 +22,8 @@ Generate all API versions currently shipped for this package
 ```yaml $(python) && $(multiapi)
 batch:
   - tag: package-2018-01-01-preview-only
-  - tag: package-2015-07
+  - tag: package-2015-07-authorization-only
+  - tag: package-2015-06-01-preview
 ```
 
 ### Tag: package-2018-01-01-preview-only and python
@@ -35,12 +36,22 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-authorization/azure/mgmt/authorization/v2018_01_01_preview
 ```
 
-### Tag: package-2015-07 and python
+### Tag: package-2015-07-authorization-only and python
 
-These settings apply only when `--tag=package-2015-07 --python` is specified on the command line.
+These settings apply only when `--tag=package-2015-07-authorization-only --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-07' && $(python)
+``` yaml $(tag) == 'package-2015-07-authorization-only' && $(python)
 python:
   namespace: azure.mgmt.authorization.v2015_07_01
   output-folder: $(python-sdks-folder)/azure-mgmt-authorization/azure/mgmt/authorization/v2015_07_01
+```
+
+### Tag: 2015-06-01-preview and python
+
+These settings apply only when `--tag=2015-06-01-preview --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-06-01-preview' && $(python)
+python:
+  namespace: azure.mgmt.authorization.v2015_06_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-authorization/azure/mgmt/authorization/v2015_06_01
 ```
