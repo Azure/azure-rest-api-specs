@@ -688,7 +688,7 @@
         "tags": [
           "VirtualMachineExtensions"
         ],
-        "operationId": "VirtualMachines_GetExtensions",
+        "operationId": "VirtualMachineExtensions_List",
         "description": "The operation to get all extensions of a Virtual Machine.",
         "parameters": [
           {
@@ -5890,7 +5890,7 @@
           "type": "boolean",
           "description": "Whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the image becomes available."
         },
-        "autoOSUpgradePolicy":{
+        "autoOSUpgradePolicy": {
           "$ref": "#/definitions/AutoOSUpgradePolicy",
           "description": "Configuration parameters used for performing automatic OS Upgrade."
         }
@@ -6667,6 +6667,19 @@
       ],
       "description": "Describes a virtual machines scale sets network configuration's DNS settings."
     },
+    "VirtualMachineScaleSetIpTag": {
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "description": "Contains the IP tag associated with the public IP address." 
+    }, 
     "VirtualMachineScaleSetPublicIPAddressConfiguration": {
       "properties": {
         "name": {
@@ -6706,6 +6719,13 @@
         "dnsSettings": {
           "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings",
           "description": "The dns settings to be applied on the publicIP addresses ."
+        },
+        "ipTags": {
+          "type": "array",
+          "items": {
+          "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
+          },
+        "description": "The list of IP tags associated with the public IP address."
         }
       },
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
@@ -7270,10 +7290,10 @@
         "rollbackError" : {
           "$ref": "#/definitions/ApiError",
           "readOnly": true,
-          "description": "Error Details if OS rollback failed."
+          "description": "Error details if OS rollback failed."
         }
       },
-      "description": "Information about rollback on failed VM instances after a OS Upgrade operation"
+      "description": "Information about rollback on failed VM instances after a OS Upgrade operation."
     },
     "UpgradeOperationHistoryStatus": {
       "properties": {
