@@ -55,7 +55,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": " The list of Active Directory Domain Controller services.",
             "schema": {
               "$ref": "#/definitions/Services"
             }
@@ -90,7 +90,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Adds the Active Directory Domain Controller Services.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -122,7 +122,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The Active Directory Domain Controller service as specified by the serviceName property. ",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -159,7 +159,7 @@
         ],
         "responses": {
           "204": {
-            "description": " "
+            "description": "Successfully deleted the service."
           }
         }
       },
@@ -195,7 +195,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Sucessfully updated service.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -257,7 +257,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of alerts for the given service.",
             "schema": {
               "$ref": "#/definitions/Alerts"
             }
@@ -296,7 +296,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The Active Directory Domain Controller service configuration. ",
             "schema": {
               "$ref": "#/definitions/AddsConfiguration"
             }
@@ -338,7 +338,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of dimensions for a server. ",
             "schema": {
               "$ref": "#/definitions/Dimensions"
             }
@@ -380,7 +380,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of Active Directory Domain Servers. ",
             "schema": {
               "$ref": "#/definitions/AddsServiceMembers"
             }
@@ -467,7 +467,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of Active Directory Domain Servers.",
             "schema": {
               "$ref": "#/definitions/AddsServiceMembers"
             }
@@ -483,11 +483,11 @@
         "tags": [ "Adds" ],
         "description": "Gets the user preferences for a given feature.",
         "x-ms-examples": {
-          "addsServices_getUserPreference": {
+          "addsServicesUserPreference_get": {
             "$ref": "./examples/UserPreference.json"
           }
         },
-        "operationId": "addsServices_getUserPreference",
+        "operationId": "addsServicesUserPreference_get",
         "parameters": [
           {
             "name": "serviceName",
@@ -509,7 +509,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The user preference settings. ",
             "schema": {
               "$ref": "#/definitions/UserPreference"
             }
@@ -520,11 +520,11 @@
         "tags": [ "Adds" ],
         "description": "Deletes the user preferences for a given feature.",
         "x-ms-examples": {
-          "addsServices_deleteUserPreference": {
+          "addsServicesUserPreference_delete": {
             "$ref": "./examples/DeleteUserPreference.json"
           }
         },
-        "operationId": "addsServices_deleteUserPreference",
+        "operationId": "addsServicesUserPreference_delete",
         "parameters": [
           {
             "name": "serviceName",
@@ -546,7 +546,7 @@
         ],
         "responses": {
           "200": {
-            "description": " "
+            "description": "Successfully deleted the user preference settings. "
           }
         }
       },
@@ -554,11 +554,11 @@
         "tags": [ "Adds" ],
         "description": "Adds the user preferences for a given feature.",
         "x-ms-examples": {
-          "addsServices_addUserPreference": {
+          "addsServicesUserPreference_add": {
             "$ref": "./examples/AddUserPreference.json"
           }
         },
-        "operationId": "addsServices_addUserPreference",
+        "operationId": "addsServicesUserPreference_add",
         "parameters": [
           {
             "name": "serviceName",
@@ -589,7 +589,7 @@
         ],
         "responses": {
           "200": {
-            "description": " "
+            "description": " Successfully added the user preference settings. "
           }
         }
       }
@@ -618,7 +618,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of forest summary for the service. ",
             "schema": {
               "$ref": "#/definitions/ForestSummary"
             }
@@ -687,11 +687,14 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The metric sets for the service. ",
             "schema": {
               "$ref": "#/definitions/MetricSets"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -733,7 +736,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metrics. ",
             "schema": {
               "$ref": "#/definitions/Metrics"
             }
@@ -782,7 +785,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of aum of the metric values for a given service. ",
             "schema": {
               "$ref": "#/definitions/Metrics"
             }
@@ -831,7 +834,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metric metadata for a service. ",
             "schema": {
               "$ref": "#/definitions/MetricMetadataList"
             }
@@ -873,7 +876,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": " The metric metadata for the service.",
             "schema": {
               "$ref": "#/definitions/MetricMetadata"
             }
@@ -942,7 +945,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The metric sets for a given service and group. ",
             "schema": {
               "$ref": "#/definitions/MetricSets"
             }
@@ -988,7 +991,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of replication details for a service. ",
             "schema": {
               "$ref": "#/definitions/ReplicationDetailsList"
             }
@@ -1004,11 +1007,11 @@
         "tags": [ "Adds" ],
         "description": "Gets Replication status for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "addsServices_getReplicationStatus": {
+          "addsServicesReplicationStatus_get": {
             "$ref": "./examples/ReplicationStatus.json"
           }
         },
-        "operationId": "addsServices_getReplicationStatus",
+        "operationId": "addsServicesReplicationStatus_get",
         "parameters": [
           {
             "name": "serviceName",
@@ -1023,7 +1026,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The replication status for a service. ",
             "schema": {
               "$ref": "#/definitions/ReplicationStatus"
             }
@@ -1107,7 +1110,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of replication summary for a service. ",
             "schema": {
               "$ref": "#/definitions/ReplicationSummaryList"
             }
@@ -1163,7 +1166,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of service members for a given service.",
             "schema": {
               "$ref": "#/definitions/ServiceMembers"
             }
@@ -1205,7 +1208,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully added the service member.",
             "schema": {
               "$ref": "#/definitions/ServiceMember"
             }
@@ -1245,7 +1248,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The service member details for a given service. ",
             "schema": {
               "$ref": "#/definitions/ServiceMember"
             }
@@ -1290,7 +1293,7 @@
         ],
         "responses": {
           "200": {
-            "description": " "
+            "description": "Successfully deleted the service member."
           }
         }
       }
@@ -1357,7 +1360,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of server alerts.",
             "schema": {
               "$ref": "#/definitions/Alerts"
             }
@@ -1407,7 +1410,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of server credentials.",
             "schema": {
               "$ref": "#/definitions/Credentials"
             }
@@ -1463,7 +1466,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of premium services.",
             "schema": {
               "$ref": "#/definitions/Services"
             }
@@ -1493,7 +1496,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The list of operations.",
             "schema": {
               "$ref": "#/definitions/OperationListResponse"
             }
@@ -1521,7 +1524,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully added the tenant.",
             "schema": {
               "$ref": "#/definitions/Tenant"
             }
@@ -1544,7 +1547,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The tenant details.",
             "schema": {
               "$ref": "#/definitions/Tenant"
             }
@@ -1576,7 +1579,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully updated the tenant.",
             "schema": {
               "$ref": "#/definitions/Tenant"
             }
@@ -1601,7 +1604,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Indicates if the user is Dev Ops or not.",
             "schema": {
               "$ref": "#/definitions/Result"
             }
@@ -1654,7 +1657,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of services.",
             "schema": {
               "$ref": "#/definitions/Services"
             }
@@ -1689,7 +1692,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully added the service.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -1742,7 +1745,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of premium services.",
             "schema": {
               "$ref": "#/definitions/Services"
             }
@@ -1777,7 +1780,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of services.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -1814,7 +1817,7 @@
         ],
         "responses": {
           "204": {
-            "description": " "
+            "description": "Successfully deleted the service."
           }
         }
       },
@@ -1850,7 +1853,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully updated the service.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -1912,7 +1915,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of alerts.",
             "schema": {
               "$ref": "#/definitions/Alerts"
             }
@@ -1954,7 +1957,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Indicates if the feature is available or not.",
             "schema": {
               "$ref": "#/definitions/Result"
             }
@@ -1986,7 +1989,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of export errors.",
             "schema": {
               "$ref": "#/definitions/ErrorCounts"
             }
@@ -2028,7 +2031,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of merged export errors.",
             "schema": {
               "$ref": "#/definitions/MergedExportErrors"
             }
@@ -2063,7 +2066,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of export statuses.",
             "schema": {
               "$ref": "#/definitions/ExportStatuses"
             }
@@ -2107,7 +2110,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully added alert feedback.",
             "schema": {
               "$ref": "#/definitions/AlertFeedback"
             }
@@ -2146,7 +2149,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of alert feedback.",
             "schema": {
               "$ref": "#/definitions/AlertFeedbacks"
             }
@@ -2162,11 +2165,11 @@
         "tags": [ "Metrics" ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "service_listMetrics": {
+          "metrics_list": {
             "$ref": "./examples/Service_MetricSets.json"
           }
         },
-        "operationId": "service_listMetrics",
+        "operationId": "metrics_list",
         "parameters": [
           {
             "name": "serviceName",
@@ -2218,7 +2221,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The metric sets for a given service.",
             "schema": {
               "$ref": "#/definitions/MetricSets"
             }
@@ -2264,7 +2267,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of average metrics for a given service.",
             "schema": {
               "$ref": "#/definitions/Metrics"
             }
@@ -2313,7 +2316,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metrics for a given service.",
             "schema": {
               "$ref": "#/definitions/Metrics"
             }
@@ -2362,7 +2365,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metric metadata for a given service.",
             "schema": {
               "$ref": "#/definitions/MetricMetadataList"
             }
@@ -2404,7 +2407,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The metric metadata for a given metric.",
             "schema": {
               "$ref": "#/definitions/MetricMetadata"
             }
@@ -2473,7 +2476,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The metric sets for a given service and group.",
             "schema": {
               "$ref": "#/definitions/MetricSets"
             }
@@ -2514,7 +2517,7 @@
         ],
         "responses": {
           "200": {
-            "description": " "
+            "description": "Successfully updated the monitoring configuration."
           }
         }
       }
@@ -2543,7 +2546,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of monitoring configurations.",
             "schema": {
               "$ref": "#/definitions/Items"
             }
@@ -2585,7 +2588,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of bad password login attempts.",
             "schema": {
               "$ref": "#/definitions/ErrorReportUsersEntries"
             }
@@ -2641,7 +2644,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of service members.",
             "schema": {
               "$ref": "#/definitions/ServiceMembers"
             }
@@ -2683,7 +2686,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully added the service member.",
             "schema": {
               "$ref": "#/definitions/ServiceMember"
             }
@@ -2723,7 +2726,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The specific service member.",
             "schema": {
               "$ref": "#/definitions/ServiceMember"
             }
@@ -2768,7 +2771,7 @@
         ],
         "responses": {
           "200": {
-            "description": " "
+            "description": "Successfully deleted the service member."
           }
         }
       }
@@ -2835,7 +2838,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of alerts.",
             "schema": {
               "$ref": "#/definitions/Alerts"
             }
@@ -2878,7 +2881,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of connector details.",
             "schema": {
               "$ref": "#/definitions/Connectors"
             }
@@ -2928,7 +2931,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of service member credentials.",
             "schema": {
               "$ref": "#/definitions/Credentials"
             }
@@ -2971,7 +2974,7 @@
         ],
         "responses": {
           "200": {
-            "description": " "
+            "description": "Successfully deleted the service member."
           }
         }
       }
@@ -3008,7 +3011,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of datafreshness details for a server.",
             "schema": {
               "$ref": "#/definitions/DataFreshnessDetails"
             }
@@ -3051,7 +3054,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of export statuses.",
             "schema": {
               "$ref": "#/definitions/ExportStatuses"
             }
@@ -3093,7 +3096,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of global configurations.",
             "schema": {
               "$ref": "#/definitions/GlobalConfigurations"
             }
@@ -3173,7 +3176,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metric sets for a given metric.",
             "schema": {
               "$ref": "#/definitions/MetricSets"
             }
@@ -3212,7 +3215,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The service configuration.",
             "schema": {
               "$ref": "#/definitions/ServiceConfiguration"
             }
@@ -3251,7 +3254,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Indicates if a tenant is whitelisted for a feature or not.",
             "schema": {
               "$ref": "#/definitions/Result"
             }
