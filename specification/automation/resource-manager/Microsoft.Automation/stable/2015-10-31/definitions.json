@@ -3,7 +3,7 @@
   "info": {
     "title": "AutomationManagement",
     "version": "2015-10-31",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -398,7 +398,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the automation account type."
@@ -547,7 +547,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Definition of the certificate."
@@ -677,7 +677,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Definition of the connection."
@@ -926,7 +926,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Definition of the credential."
@@ -1283,7 +1283,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Definition of the Dsc Compilation job."
@@ -1420,7 +1420,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the configuration type."
@@ -2030,7 +2030,7 @@
       },
       "description": "The response model for the list job schedule operation."
     },
-    "Key":{
+    "Key": {
       "properties": {
         "keyName": {
           "type": "string",
@@ -2062,7 +2062,7 @@
       },
       "description": "Automation key which is used to register a DSC Node"
     },
-    "KeyListResult":{
+    "KeyListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -2223,7 +2223,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the module type."
@@ -2316,65 +2316,6 @@
           "description": "Provider, Resource and Operation values"
         }
       }
-    },
-    "Resource": {
-      "description": "The core properties of ARM resources",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The Azure Region where the resource lives"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
     },
     "JobProvisioningStateProperty": {
       "properties": {
@@ -2832,7 +2773,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the runbook type."
@@ -3351,41 +3292,6 @@
       },
       "description": "The response model for the get usage operation."
     },
-    "VariableCreateOrUpdateProperties": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Gets or sets the value of the variable."
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the description of the variable."
-        },
-        "isEncrypted": {
-          "type": "boolean",
-          "description": "Gets or sets the encrypted flag of the variable."
-        }
-      },
-      "description": "The properties of the create variable operation."
-    },
-    "VariableCreateOrUpdateParameters": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the variable."
-        },
-        "properties": {
-          "$ref": "#/definitions/VariableCreateOrUpdateProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the properties of the variable."
-        }
-      },
-      "required": [
-        "name",
-        "properties"
-      ],
-      "description": "The parameters supplied to the create or update variable operation."
-    },
     "VariableProperties": {
       "properties": {
         "value": {
@@ -3426,53 +3332,10 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Definition of the varible."
-    },
-    "VariableListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Variable"
-          },
-          "description": "Gets or sets a list of variables."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list variables operation."
-    },
-    "VariableUpdateProperties": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Gets or sets the value of the variable."
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the description of the variable."
-        }
-      },
-      "description": "The properties of the update variable"
-    },
-    "VariableUpdateParameters": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the variable."
-        },
-        "properties": {
-          "$ref": "#/definitions/VariableUpdateProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the value of the variable."
-        }
-      },
-      "description": "The parameters supplied to the update variable operation."
     },
     "WebhookCreateOrUpdateProperties": {
       "properties": {
@@ -3598,7 +3461,7 @@
       "description": "Definition of the webhook type.",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3655,117 +3518,6 @@
         }
       },
       "description": "The parameters supplied to the update webhook operation."
-    },
-   "WatcherProperties": {
-    "properties": {
-      "executionFrequencyInSeconds": {
-        "type": "integer",
-        "format": "int64",
-        "description": "Gets or sets the frequency at which the watcher is invoked."
-      },
-      "scriptName": {
-        "type": "string",
-        "description": "Gets or sets the name of the script the watcher is attached to, i.e. the name of an existing runbook."
-      },
-      "scriptParameters": {
-        "type": "object",
-        "additionalProperties": {
-          "type": "string"
-        },
-        "description": "Gets or sets the parameters of the script."
-      },
-      "scriptRunOn": {
-        "type": "string",
-        "description": "Gets or sets the name of the hybrid worker group the watcher will run on."
-      },
-      "status": {
-        "type": "string",
-        "readOnly": true,
-        "description": "Gets the current status of the watcher."
-      },
-      "creationTime": {
-        "type": "string",
-        "readOnly": true,
-        "format": "date-time",
-        "description": "Gets or sets the creation time.",
-        "x-nullable": false
-      },
-      "lastModifiedTime": {
-        "type": "string",
-        "readOnly": true,
-        "format": "date-time",
-        "description": "Gets or sets the last modified time.",
-        "x-nullable": false
-      },
-      "lastModifiedBy": {
-        "type": "string",
-        "readOnly": true,
-        "description": "Details of the user who last modified the watcher."
-      },
-      "description": {
-        "type": "string",
-        "description": "Gets or sets the description."
-      }
-    },
-    "description": "Definition of the watcher properties"
-  },
-  "Watcher": {
-    "properties": {
-      "properties": {
-        "$ref": "#/definitions/WatcherProperties",
-        "x-ms-client-flatten": true,
-        "description": "Gets or sets the watcher properties."
-      },
-      "etag": {
-          "type": "string",
-          "description": "Gets or sets the etag of the resource."
-        }
-    },
-    "description": "Definition of the watcher type.",
-    "allOf": [
-      {
-        "$ref": "#/definitions/TrackedResource"
-      }
-    ]
-  },
-  "WatcherListResult": {
-    "properties": {
-      "value": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/Watcher"
-        },
-        "description": "Gets or sets a list of watchers."
-      },
-      "nextLink": {
-        "type": "string",
-        "description": "Gets or sets the next link."
-      }
-    },
-    "description": "The response model for the list watcher operation."
-  },
-  "WatcherUpdateParameters": {
-    "properties": {
-      "properties": {
-        "$ref": "#/definitions/WatcherUpdateProperties",
-        "x-ms-client-flatten": true,
-        "description": "Gets or sets the watcher update properties."
-      },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        }
-      }
-    },
-    "WatcherUpdateProperties": {
-    "properties": {
-      "executionFrequencyInSeconds": {
-        "type": "integer",
-        "format": "int64",
-        "description": "Gets or sets the frequency at which the watcher is invoked."
-      }
-    },
-    "description": "The properties of the update watcher operation."
     }
   },
   "parameters": {
