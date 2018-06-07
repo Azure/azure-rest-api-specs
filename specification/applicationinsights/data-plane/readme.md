@@ -41,8 +41,14 @@ input-file:
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
-  - reason: Query schema will be deprecated, so do not expose in newly generated SDKs.
-    remove-operation: GetQuerySchema
+```
+
+``` yaml $(tag) == '20180420'
+input-file:
+- microsoft.insights/preview/2018-04-20/swagger.json
+directive:
+  - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
+    remove-operation: Query_Get
 ```
 
 # Code Generation
