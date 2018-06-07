@@ -6,9 +6,9 @@
     "description": "REST APIs for Azure Active Drectory Connect Health"
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/providers/Microsoft.ADHybridHealthService/addsservices": {
       "get": {
@@ -436,8 +436,8 @@
             "description": "The next partition key to query for.",
             "required": true,
             "type": "string",
-            "enum": [" "],
-              "x-ms-enum": {
+            "enum": [ " " ],
+            "x-ms-enum": {
               "name": "nextPartitionKey",
               "modelAsString": true
             }
@@ -478,6 +478,122 @@
         }
       }
     },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/features/{featureName}/userpreference": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the user preferences for a given feature.",
+        "x-ms-examples": {
+          "addsServices_getUserPreference": {
+            "$ref": "./examples/UserPreference.json"
+          }
+        },
+        "operationId": "addsServices_getUserPreference",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "The name of the feature.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " ",
+            "schema": {
+              "$ref": "#/definitions/UserPreference"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Adds" ],
+        "description": "Deletes the user preferences for a given feature.",
+        "x-ms-examples": {
+          "addsServices_deleteUserPreference": {
+            "$ref": "./examples/DeleteUserPreference.json"
+          }
+        },
+        "operationId": "addsServices_deleteUserPreference",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "The name of the feature.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " "
+          }
+        }
+      },
+      "post": {
+        "tags": [ "Adds" ],
+        "description": "Adds the user preferences for a given feature.",
+        "x-ms-examples": {
+          "addsServices_addUserPreference": {
+            "$ref": "./examples/AddUserPreference.json"
+          }
+        },
+        "operationId": "addsServices_addUserPreference",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "The name of the feature.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "setting",
+            "in": "body",
+            "description": "The user preference setting.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserPreference"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " "
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/forestsummary": {
       "get": {
         "tags": [ "Adds" ],
@@ -505,6 +621,75 @@
             "description": " ",
             "schema": {
               "$ref": "#/definitions/ForestSummary"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metrics/{metricName}/groups/{groupName}": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the server related metrics for a given metric and group combination.",
+        "x-ms-examples": {
+          "addsService_listMetrics": {
+            "$ref": "./examples/Service_MetricSets.json"
+          }
+        },
+        "operationId": "addsService_listMetrics",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "description": "The metric name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupKey",
+            "in": "query",
+            "description": "The group key",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The start date.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The end date.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " ",
+            "schema": {
+              "$ref": "#/definitions/MetricSets"
             }
           }
         }
@@ -765,6 +950,55 @@
         }
       }
     },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/replicationdetails": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets complete domain controller list along with replication details for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
+        "x-ms-examples": {
+          "addsServices_listReplicationDetails": {
+            "$ref": "./examples/ReplicationDetails.json"
+          }
+        },
+        "operationId": "addsServices_listReplicationDetails",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The server property filter to apply.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "withDetails",
+            "in": "query",
+            "description": "Indicates if InboundReplicationNeighbor details are required or not.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " ",
+            "schema": {
+              "$ref": "#/definitions/ReplicationSummaryList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/replicationstatus": {
       "get": {
         "tags": [ "Adds" ],
@@ -884,6 +1118,183 @@
         }
       }
     },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the details of the servers, for a given Active Directory Domain Controller service, that are onboarded to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServiceMembers_list": {
+            "$ref": "./examples/ServiceMembers.json"
+          }
+        },
+        "operationId": "addsServiceMembers_list",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The server property filter to apply.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dimensionType",
+            "in": "query",
+            "description": "The server specific dimension.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dimensionSignature",
+            "in": "query",
+            "description": "The value of the dimension.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " ",
+            "schema": {
+              "$ref": "#/definitions/ServiceMembers"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "tags": [ "Adds" ],
+        "description": "Onboards  a server, for a given Active Directory Domain Controller service, to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServiceMembers_add": {
+            "$ref": "./examples/AddServiceMembers.json"
+          }
+        },
+        "operationId": "addsServiceMembers_add",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service under which the server is to be onboarded.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceMember",
+            "in": "body",
+            "description": "The server object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceMember"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " ",
+            "schema": {
+              "$ref": "#/definitions/ServiceMember"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers/{serviceMemberId}": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the details of a server, for a given Active Directory Domain Controller service, that are onboarded to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServiceMembers_get": {
+            "$ref": "./examples/ServiceMember.json"
+          }
+        },
+        "operationId": "addsServiceMembers_get",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceMemberId",
+            "in": "path",
+            "description": "The server Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " ",
+            "schema": {
+              "$ref": "#/definitions/ServiceMember"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Adds" ],
+        "description": "Deletes a Active Directory Domain Controller server that has been onboarded to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServiceMembers_delete": {
+            "$ref": "./examples/DeleteServer.json"
+          }
+        },
+        "operationId": "addsServiceMembers_delete",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceMemberId",
+            "in": "path",
+            "description": "The server Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "confirm",
+            "in": "query",
+            "description": "Indicates if the server will be permanently deleted or disabled. True indicates that the server will be permanently deleted and False indicates that the server will be marked disabled and then deleted after 30 days, if it is not re-registered.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " "
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers/{serviceMemberId}/alerts": {
       "get": {
         "tags": [ "Adds" ],
@@ -954,6 +1365,56 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers/{serviceMemberId}/credentials": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the credentials of the server which is needed by the agent to connect to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServiceMembers_listCredentials": {
+            "$ref": "./examples/Credentials.json"
+          }
+        },
+        "operationId": "addsServiceMembers_listCredentials",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The property filter to apply.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "serviceMemberId",
+            "in": "path",
+            "description": "The server Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " ",
+            "schema": {
+              "$ref": "#/definitions/Credentials"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1118,6 +1579,31 @@
             "description": " ",
             "schema": {
               "$ref": "#/definitions/Tenant"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/reports/DevOps/IsDevOps": {
+      "get": {
+        "tags": [ "DevOps" ],
+        "description": "Checks if the user is enabled for Dev Ops access.",
+        "x-ms-examples": {
+          "reports_getDevOps": {
+            "$ref": "./examples/DevOps.json"
+          }
+        },
+        "operationId": "reports_getDevOps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " ",
+            "schema": {
+              "$ref": "#/definitions/Result"
             }
           }
         }
@@ -1668,6 +2154,75 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metrics/{metricName}/groups/{groupName}": {
+      "get": {
+        "tags": [ "Metrics" ],
+        "description": "Gets the server related metrics for a given metric and group combination.",
+        "x-ms-examples": {
+          "service_listMetrics": {
+            "$ref": "./examples/Service_MetricSets.json"
+          }
+        },
+        "operationId": "service_listMetrics",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "description": "The metric name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupKey",
+            "in": "query",
+            "description": "The group key",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The start date.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The end date.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " ",
+            "schema": {
+              "$ref": "#/definitions/MetricSets"
+            }
+          }
         }
       }
     },
@@ -2330,7 +2885,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName":null
+          "nextLinkName": null
         }
       }
     },
@@ -2819,7 +3374,8 @@
           "type": "string"
         },
         "createdDate": {
-          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description":
+            "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -2874,14 +3430,16 @@
           "type": "string"
         },
         "monitoringConfigurationsComputed": {
-          "description": "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description":
+            "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
           }
         },
         "monitoringConfigurationsCustomized": {
-          "description": "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description":
+            "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
@@ -3789,7 +4347,8 @@
           "type": "string"
         },
         "type": {
-          "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
+          "description":
+            "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
           "type": "string"
         }
       }
@@ -4189,7 +4748,8 @@
           "type": "integer"
         },
         "monitoredDcCount": {
-          "description": "The number of domain controllers that are monitored by Azure Active Directory Connect Health.",
+          "description":
+            "The number of domain controllers that are monitored by Azure Active Directory Connect Health.",
           "type": "integer"
         },
         "totalDcCount": {
@@ -4685,7 +5245,8 @@
           "type": "integer"
         },
         "kind": {
-          "description": "Indicates whether the dashboard to represent the metric is a line, bar,pie, area or donut chart.",
+          "description":
+            "Indicates whether the dashboard to represent the metric is a line, bar,pie, area or donut chart.",
           "type": "string"
         },
         "isDefault": {
@@ -4728,7 +5289,8 @@
       }
     },
     "MetricSet": {
-      "description": " The set of metric values. Example of a MetricSet are Values of token requests for a Server1 or RelyingParty1.",
+      "description":
+        " The set of metric values. Example of a MetricSet are Values of token requests for a Server1 or RelyingParty1.",
       "type": "object",
       "properties": {
         "setName": {
@@ -5294,12 +5856,14 @@
           "type": "string"
         },
         "createdDate": {
-          "description": "The date and time, in UTC, when the service was onboarded to Azure Active Directory Connect Health.",
+          "description":
+            "The date and time, in UTC, when the service was onboarded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
         "customNotificationEmails": {
-          "description": "The list of additional emails that are configured to recieve notifications about the service.",
+          "description":
+            "The list of additional emails that are configured to recieve notifications about the service.",
           "type": "array",
           "items": {
             "type": "string"
@@ -5328,14 +5892,16 @@
           "format": "date-time"
         },
         "monitoringConfigurationsComputed": {
-          "description": "The monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description":
+            "The monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Items"
           }
         },
         "monitoringConfigurationsCustomized": {
-          "description": "The customized monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description":
+            "The customized monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Items"
@@ -5392,7 +5958,8 @@
           "type": "string"
         },
         "type": {
-          "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
+          "description":
+            "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
           "type": "string"
         }
       }
@@ -5447,7 +6014,8 @@
           "type": "string"
         },
         "createdDate": {
-          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description":
+            "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -5464,7 +6032,7 @@
         },
         "disabledReason": {
           "description": "The reason for disabling the server.",
-          "type": "integer"                   
+          "type": "integer"
         },
         "installedQfes": {
           "description": "The list of installed QFEs for the server.",
@@ -5502,14 +6070,16 @@
           "type": "string"
         },
         "monitoringConfigurationsComputed": {
-          "description": "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description":
+            "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
           }
         },
         "monitoringConfigurationsCustomized": {
-          "description": "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description":
+            "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
@@ -5632,7 +6202,8 @@
         },
         "agentAutoUpdate": {
           "type": "boolean",
-          "description": "Indicates if the tenant is configured to automatically receive updates for Azure Active Directory Connect Health client side features."
+          "description":
+            "Indicates if the tenant is configured to automatically receive updates for Azure Active Directory Connect Health client side features."
         },
         "alertSuppressionTimeInMins": {
           "type": "integer",
@@ -5654,7 +6225,8 @@
         "devOpsTtl": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time, in UTC, till when the tenant data can be seen by Microsoft through Azure portal."
+          "description":
+            "The date and time, in UTC, till when the tenant data can be seen by Microsoft through Azure portal."
         },
         "disabled": {
           "type": "boolean",
@@ -5678,12 +6250,14 @@
         "lastDisabled": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time, in UTC, when the tenant was last disabled in Azure Active Directory Connect Health."
+          "description":
+            "The date and time, in UTC, when the tenant was last disabled in Azure Active Directory Connect Health."
         },
         "lastVerified": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time, in UTC, when the tenant onboarding status in Azure Active Directory Connect Health was last verified."
+          "description":
+            "The date and time, in UTC, when the tenant onboarding status in Azure Active Directory Connect Health was last verified."
         },
         "onboardingAllowed": {
           "type": "boolean",
@@ -5695,11 +6269,13 @@
         },
         "pksCertificate": {
           "type": "object",
-          "description": "The certificate associated with the tenant to onboard data to Azure Active Directory Connect Health."
+          "description":
+            "The certificate associated with the tenant to onboard data to Azure Active Directory Connect Health."
         },
         "privatePreviewTenant": {
           "type": "boolean",
-          "description": "Indicates if the tenant has signed up for private preview of Azure Active Directory Connect Health features."
+          "description":
+            "Indicates if the tenant has signed up for private preview of Azure Active Directory Connect Health features."
         },
         "tenantInQuarantine": {
           "type": "boolean",
@@ -5720,8 +6296,22 @@
           "type": "boolean"
         },
         "onboardingDisplayUrl": {
-          "description": "The display url, to help tenant navigate or onboard to Azure Active Directory Connect Health blade, based on tenant onboarding status.",
+          "description":
+            "The display url, to help tenant navigate or onboard to Azure Active Directory Connect Health blade, based on tenant onboarding status.",
           "type": "string"
+        }
+      }
+    },
+    "UserPreference": {
+      "description": " The user preference for a given feature.",
+      "type": "object",
+      "properties": {
+        "metricNames": {
+          "description": "The name of the metric.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5772,7 +6362,7 @@
   },
   "security": [
     {
-      "azure_auth": [ "user_impersonation" ]
+      "azure_auth": ["user_impersonation"]
     }
   ]
 }
