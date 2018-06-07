@@ -102,12 +102,9 @@ output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/autosuggest
 
 
 ## Suppressions
-Suppressing errors due to API design:
-``` yaml
 directive:
   - suppress: R3016
     reason: _type is a polymorphic discriminator that can't be changed.
-```
 
 
 ## Java
