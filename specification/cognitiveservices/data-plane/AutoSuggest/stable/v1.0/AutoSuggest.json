@@ -202,7 +202,6 @@
   },
   "definitions": {
     "Suggestions": {
-      "description": "Defines an AutoSuggest answer",
       "allOf": [
         {
           "$ref": "#/definitions/SearchResultsAnswer"
@@ -317,6 +316,11 @@
       }
     },
     "SearchAction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
       "type": "object",
       "properties": {
         "displayText": {
@@ -343,11 +347,6 @@
             "name": "SearchKind",
             "modelAsString": true
           }
-        },
-        "url": {
-          "description": "The URL to get more information about the thing represented by this object.",
-          "readOnly": true,
-          "type": "string"
         }
       }
     },
@@ -360,6 +359,16 @@
       ],
       "type": "object",
       "properties": {
+        "readLink": {
+          "description": "The URL that returns this resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "webSearchUrl": {
+          "description": "The URL To Bing's search result for this item.",
+          "readOnly": true,
+          "type": "string"
+        },
         "potentialAction": {
           "readOnly": true,
           "type": "array",
@@ -374,7 +383,40 @@
             "$ref": "#/definitions/Action"
           }
         },
+        "preferredClickthroughUrl": {
+          "readOnly": true,
+          "type": "string"
+        },
         "adaptiveCard": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "Action": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "result": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Thing"
+          }
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "isTopAction": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "serviceUrl": {
           "readOnly": true,
           "type": "string"
         }
@@ -426,64 +468,102 @@
       ],
       "type": "object",
       "properties": {
-        "name": {
-          "description": "The name of the thing represented by this object.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "description": {
-          "description": "A short description of the item.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "wikipediaId": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "freebaseId": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "alternateName": {
-          "description": "An alias for the item",
-          "readOnly": true,
-          "type": "string"
-        },
-        "bingId": {
-          "description": "An ID that uniquely identifies this item.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "satoriId": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "ypId": {
+        "url": {
+          "description": "The URL to get more information about the thing represented by this object.",
           "readOnly": true,
           "type": "string"
         }
       }
     },
-    "Action": {
+    "CreativeWork": {
+      "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
       "allOf": [
         {
-          "$ref": "#/definitions/CreativeWork"
+          "$ref": "#/definitions/Thing"
         }
       ],
       "type": "object",
       "properties": {
-        "result": {
+        "thumbnailUrl": {
+          "description": "The URL to a thumbnail of the item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "about": {
+          "description": "For internal use only.",
           "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Thing"
           }
         },
-        "displayName": {
+        "mentions": {
+          "description": "For internal use only.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Thing"
+          }
+        },
+        "provider": {
+          "description": "The source of the creative work.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Thing"
+          }
+        },
+        "creator": {
+          "$ref": "#/definitions/Thing",
+          "readOnly": true
+        },
+        "text": {
+          "description": "Text content of this creative work",
           "readOnly": true,
           "type": "string"
         },
-        "isTopAction": {
+        "discussionUrl": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "commentCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "mainEntity": {
+          "$ref": "#/definitions/Thing",
+          "readOnly": true
+        },
+        "headLine": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "copyrightHolder": {
+          "$ref": "#/definitions/Thing",
+          "readOnly": true
+        },
+        "copyrightYear": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "disclaimer": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "isAccessibleForFree": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "genre": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isFamilyFriendly": {
           "readOnly": true,
           "type": "boolean"
         }
@@ -545,91 +625,6 @@
           "description": "The parameter's value in the request that was not valid.",
           "readOnly": true,
           "type": "string"
-        }
-      }
-    },
-    "CreativeWork": {
-      "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Thing"
-        }
-      ],
-      "type": "object",
-      "properties": {
-        "about": {
-          "description": "For internal use only.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Thing"
-          }
-        },
-        "mentions": {
-          "description": "For internal use only.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Thing"
-          }
-        },
-        "provider": {
-          "description": "The source of the creative work.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Thing"
-          }
-        },
-        "creator": {
-          "$ref": "#/definitions/Thing",
-          "readOnly": true
-        },
-        "text": {
-          "description": "Text content of this creative work",
-          "readOnly": true,
-          "type": "string"
-        },
-        "commentCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32"
-        },
-        "mainEntity": {
-          "$ref": "#/definitions/Thing",
-          "readOnly": true
-        },
-        "headLine": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "copyrightHolder": {
-          "$ref": "#/definitions/Thing",
-          "readOnly": true
-        },
-        "copyrightYear": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32"
-        },
-        "disclaimer": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "isAccessibleForFree": {
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "genre": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isFamilyFriendly": {
-          "readOnly": true,
-          "type": "boolean"
         }
       }
     }
