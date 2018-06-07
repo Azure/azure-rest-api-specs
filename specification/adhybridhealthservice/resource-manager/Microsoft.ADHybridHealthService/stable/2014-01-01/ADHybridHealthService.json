@@ -1123,11 +1123,11 @@
         "tags": [ "Adds" ],
         "description": "Gets the details of the servers, for a given Active Directory Domain Controller service, that are onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "addsServiceMembers_list": {
+          "addsServicesServiceMembers_list": {
             "$ref": "./examples/ServiceMembers.json"
           }
         },
-        "operationId": "addsServiceMembers_list",
+        "operationId": "addsServicesServiceMembers_list",
         "parameters": [
           {
             "name": "serviceName",
@@ -1177,11 +1177,11 @@
         "tags": [ "Adds" ],
         "description": "Onboards  a server, for a given Active Directory Domain Controller service, to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
-          "addsServiceMembers_add": {
+          "addsServicesServiceMembers_add": {
             "$ref": "./examples/AddServiceMembers.json"
           }
         },
-        "operationId": "addsServiceMembers_add",
+        "operationId": "addsServicesServiceMembers_add",
         "parameters": [
           {
             "name": "serviceName",
@@ -3374,8 +3374,7 @@
           "type": "string"
         },
         "createdDate": {
-          "description":
-            "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -3430,16 +3429,14 @@
           "type": "string"
         },
         "monitoringConfigurationsComputed": {
-          "description":
-            "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
           }
         },
         "monitoringConfigurationsCustomized": {
-          "description":
-            "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
@@ -4347,8 +4344,7 @@
           "type": "string"
         },
         "type": {
-          "description":
-            "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
+          "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
           "type": "string"
         }
       }
@@ -4748,8 +4744,7 @@
           "type": "integer"
         },
         "monitoredDcCount": {
-          "description":
-            "The number of domain controllers that are monitored by Azure Active Directory Connect Health.",
+          "description": "The number of domain controllers that are monitored by Azure Active Directory Connect Health.",
           "type": "integer"
         },
         "totalDcCount": {
@@ -5245,8 +5240,7 @@
           "type": "integer"
         },
         "kind": {
-          "description":
-            "Indicates whether the dashboard to represent the metric is a line, bar,pie, area or donut chart.",
+          "description": "Indicates whether the dashboard to represent the metric is a line, bar,pie, area or donut chart.",
           "type": "string"
         },
         "isDefault": {
@@ -5289,8 +5283,7 @@
       }
     },
     "MetricSet": {
-      "description":
-        " The set of metric values. Example of a MetricSet are Values of token requests for a Server1 or RelyingParty1.",
+      "description": " The set of metric values. Example of a MetricSet are Values of token requests for a Server1 or RelyingParty1.",
       "type": "object",
       "properties": {
         "setName": {
@@ -5623,6 +5616,27 @@
         }
       }
     },
+    "ReplicationDetailsList": {
+      "description": "The list of replication details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationSummary"
+          }
+        },
+        "totalCount": {
+          "description": "The total count of replication detail elements.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
+        }
+      }
+    },
     "ReplicationStatus": {
       "description": " Replication summary for a domain controller.",
       "type": "object",
@@ -5856,14 +5870,12 @@
           "type": "string"
         },
         "createdDate": {
-          "description":
-            "The date and time, in UTC, when the service was onboarded to Azure Active Directory Connect Health.",
+          "description": "The date and time, in UTC, when the service was onboarded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
         "customNotificationEmails": {
-          "description":
-            "The list of additional emails that are configured to recieve notifications about the service.",
+          "description": "The list of additional emails that are configured to recieve notifications about the service.",
           "type": "array",
           "items": {
             "type": "string"
@@ -5892,16 +5904,14 @@
           "format": "date-time"
         },
         "monitoringConfigurationsComputed": {
-          "description":
-            "The monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Items"
           }
         },
         "monitoringConfigurationsCustomized": {
-          "description":
-            "The customized monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The customized monitoring configuration of the service which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Items"
@@ -5958,8 +5968,7 @@
           "type": "string"
         },
         "type": {
-          "description":
-            "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
+          "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
           "type": "string"
         }
       }
@@ -6014,8 +6023,7 @@
           "type": "string"
         },
         "createdDate": {
-          "description":
-            "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -6070,16 +6078,14 @@
           "type": "string"
         },
         "monitoringConfigurationsComputed": {
-          "description":
-            "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
           }
         },
         "monitoringConfigurationsCustomized": {
-          "description":
-            "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
+          "description": "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
@@ -6202,8 +6208,7 @@
         },
         "agentAutoUpdate": {
           "type": "boolean",
-          "description":
-            "Indicates if the tenant is configured to automatically receive updates for Azure Active Directory Connect Health client side features."
+          "description": "Indicates if the tenant is configured to automatically receive updates for Azure Active Directory Connect Health client side features."
         },
         "alertSuppressionTimeInMins": {
           "type": "integer",
@@ -6225,8 +6230,7 @@
         "devOpsTtl": {
           "type": "string",
           "format": "date-time",
-          "description":
-            "The date and time, in UTC, till when the tenant data can be seen by Microsoft through Azure portal."
+          "description": "The date and time, in UTC, till when the tenant data can be seen by Microsoft through Azure portal."
         },
         "disabled": {
           "type": "boolean",
@@ -6250,14 +6254,12 @@
         "lastDisabled": {
           "type": "string",
           "format": "date-time",
-          "description":
-            "The date and time, in UTC, when the tenant was last disabled in Azure Active Directory Connect Health."
+          "description": "The date and time, in UTC, when the tenant was last disabled in Azure Active Directory Connect Health."
         },
         "lastVerified": {
           "type": "string",
           "format": "date-time",
-          "description":
-            "The date and time, in UTC, when the tenant onboarding status in Azure Active Directory Connect Health was last verified."
+          "description": "The date and time, in UTC, when the tenant onboarding status in Azure Active Directory Connect Health was last verified."
         },
         "onboardingAllowed": {
           "type": "boolean",
@@ -6269,13 +6271,11 @@
         },
         "pksCertificate": {
           "type": "object",
-          "description":
-            "The certificate associated with the tenant to onboard data to Azure Active Directory Connect Health."
+          "description": "The certificate associated with the tenant to onboard data to Azure Active Directory Connect Health."
         },
         "privatePreviewTenant": {
           "type": "boolean",
-          "description":
-            "Indicates if the tenant has signed up for private preview of Azure Active Directory Connect Health features."
+          "description": "Indicates if the tenant has signed up for private preview of Azure Active Directory Connect Health features."
         },
         "tenantInQuarantine": {
           "type": "boolean",
@@ -6296,8 +6296,7 @@
           "type": "boolean"
         },
         "onboardingDisplayUrl": {
-          "description":
-            "The display url, to help tenant navigate or onboard to Azure Active Directory Connect Health blade, based on tenant onboarding status.",
+          "description": "The display url, to help tenant navigate or onboard to Azure Active Directory Connect Health blade, based on tenant onboarding status.",
           "type": "string"
         }
       }
