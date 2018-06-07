@@ -19678,13 +19678,6 @@
                 "create"
               ]
             },
-            "snapshotInfo": {
-              "$ref": "./CommonDefinitions.json#/definitions/SnapshotRecoveryRequest",
-              "description": "If specified during app creation, the app is created from a previous snapshot.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
             "resourceGroup": {
               "description": "Name of the resource group the app belongs to. Read-only.",
               "type": "string",
@@ -19910,28 +19903,6 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "Snapshot": {
-      "description": "A snapshot of an app.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Snapshot resource specific properties",
-          "properties": {
-            "time": {
-              "description": "The time the snapshot was taken.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
         }
       }
     },
