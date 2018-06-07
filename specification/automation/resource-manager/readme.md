@@ -123,6 +123,7 @@ input-file:
 - Microsoft.Automation/stable/2018-01-15/dscNode.json
 - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
 - Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2015-10-31/watcher.json
 ```
 
 ---
@@ -150,6 +151,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_automation']
 ```
 
 

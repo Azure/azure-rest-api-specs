@@ -34,7 +34,18 @@ These are the global settings for the ContainerServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2017-09
+tag: package-2018-03
+```
+
+### Tag: package-2018-03
+
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file:
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2018-03-31/managedClusters.json
+- Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2017-09
@@ -128,6 +139,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
 ```
 
 
@@ -194,7 +208,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.containerservice
   package-name: azure-mgmt-containerservice
-  package-version: 3.0.1
+  package-version: 4.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

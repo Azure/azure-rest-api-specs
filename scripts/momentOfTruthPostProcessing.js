@@ -66,7 +66,7 @@ let sdkFileSummaries = '', armFileSummaries = '';
 let data = fs.readFileSync(logFilepath, 'utf8');
 let jsonData = JSON.parse(data);
 
-let token = process.env.GITHUB_TOKEN;
+let token = process.env.GH_TOKEN;
 
 octokit.authenticate({
     type: 'token',
