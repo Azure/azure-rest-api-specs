@@ -24,8 +24,28 @@
         "location": "eastus2euap",
         "name": "sto4445",
         "properties": {
-          "creationTime": "2017-05-24T13:25:33.4863236Z",
+          "networkAcls": {
+            "bypass": "AzureServices",
+            "virtualNetworkRules": [],
+            "ipRules": [],
+            "defaultAction": "Allow"
+          },
+          "encryption": {
+            "services": {
+              "file": {
+                "enabled": true,
+                "lastEnabledTime": "2018-04-13T07:04:49.8562647Z"
+              },
+              "blob": {
+                "enabled": true,
+                "lastEnabledTime": "2018-04-13T07:04:49.8562647Z"
+              }
+            },
+            "keySource": "Microsoft.Storage"
+          },
+          "creationTime": "2018-04-13T07:04:49.6145793Z",
           "primaryEndpoints": {
+            "web": "https://sto4445.web.core.windows.net/",
             "blob": "https://sto4445.blob.core.windows.net/",
             "file": "https://sto4445.file.core.windows.net/",
             "queue": "https://sto4445.queue.core.windows.net/",
