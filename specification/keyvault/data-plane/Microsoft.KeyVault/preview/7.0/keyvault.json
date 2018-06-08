@@ -4413,6 +4413,16 @@
         "reuse_key": {
           "type": "boolean",
           "description": "Indicates if the same key pair will be used on certificate renewal."
+        },
+        "crv": {
+          "x-ms-client-name": "curve",
+          "type": "string",
+          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
+          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
+          "x-ms-enum": {
+            "name": "JsonWebKeyCurveName",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the key pair backing a certificate."
