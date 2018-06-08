@@ -70,14 +70,12 @@ csharp:
 ``` yaml $(python)
 python-mode: create
 python:
-  add-credentials: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.applicationinsights
   package-name: azure-applicationinsights
   package-version: 0.1.0
   clear-output-folder: true
-  basic-setup-py: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:

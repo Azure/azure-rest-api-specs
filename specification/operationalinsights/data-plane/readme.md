@@ -85,24 +85,22 @@ csharp:
 ``` yaml $(python)
 python-mode: create
 python:
-  add-credentials: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.operationalinsights
-  package-name: azure-operationalinsights
+  namespace: azure.loganalytics
+  package-name: azure-loganalytics
   package-version: 0.1.0
   clear-output-folder: true
-  basic-setup-py: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-operationalinsights/azure/operationalinsights
+  output-folder: $(python-sdks-folder)/azure-loganalytics/azure/loganalytics
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-operationalinsights
+  output-folder: $(python-sdks-folder)/azure-loganalytics
 ```
 
 ## Go
