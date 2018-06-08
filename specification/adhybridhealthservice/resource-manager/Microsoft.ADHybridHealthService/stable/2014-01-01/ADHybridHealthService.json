@@ -434,6 +434,7 @@
             "name": "nextPartitionKey",
             "in": "query",
             "description": "The next partition key to query for.",
+            "type": "string",
             "schema": { "$ref": "#/definitions/NextPartitionKey" },
             "required": true
           },
@@ -441,6 +442,7 @@
             "name": "nextRowKey",
             "in": "query",
             "description": "The next row key to query for.",
+            "type": "string",
             "schema": { "$ref": "#/definitions/NextRowKey" },
             "required": true
           },
@@ -1063,13 +1065,15 @@
           {
             "name": "nextPartitionKey",
             "in": "query",
+            "type": "string",
             "description": "The next partition key to query for.",
-            "schema": { "$ref": "#/definitions/NextPartitionKey" },
-            "required": true
+            "required": true,
+            "schema": { "$ref": "#/definitions/NextPartitionKey" }
           },
           {
             "name": "nextRowKey",
             "in": "query",
+            "type": "string",
             "description": "The next row key to query for.",
             "schema": { "$ref": "#/definitions/NextRowKey" },
             "required": true
