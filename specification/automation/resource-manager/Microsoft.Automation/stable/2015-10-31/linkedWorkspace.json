@@ -69,7 +69,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/LinkedWorkspace"
+              "$ref": "#/definitions/LinkedWorkspace"
             }
           },
           "default": {
@@ -82,6 +82,17 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "LinkedWorkspace": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the id of the linked workspace."
+        }
+      },
+      "description": "Definition of the linked workspace."
+    }
+  },
   "parameters": {}
 }
