@@ -237,10 +237,12 @@
     },
     "SuggestionsSuggestionGroup": {
       "x-ms-discriminator-value": "Suggestions/SuggestionGroup",
+      "discriminator": "_type",
       "type": "object",
       "required": [
         "name",
-        "searchSuggestions"
+        "searchSuggestions",
+        "_type"
       ],
       "properties": {
         "name": {
@@ -265,6 +267,9 @@
           "items": {
             "$ref": "#/definitions/SearchAction"
           }
+        },
+        "_type": {
+          "type": "string"
         }
       }
     },
@@ -280,9 +285,11 @@
     },
     "QueryContext": {
       "description": "Defines the query context that Bing used for the request.",
+      "discriminator": "_type",
       "type": "object",
       "required": [
-        "originalQuery"
+        "originalQuery",
+        "_type"
       ],
       "properties": {
         "originalQuery": {
@@ -312,6 +319,9 @@
         "isTransactional": {
           "readOnly": true,
           "type": "boolean"
+        },
+        "_type": {
+          "type": "string"
         }
       }
     },
@@ -584,10 +594,12 @@
     },
     "Error": {
       "description": "Defines the error that occurred.",
+      "discriminator": "_type",
       "type": "object",
       "required": [
         "code",
-        "message"
+        "message",
+        "_type"
       ],
       "properties": {
         "code": {
@@ -624,6 +636,9 @@
         "value": {
           "description": "The parameter's value in the request that was not valid.",
           "readOnly": true,
+          "type": "string"
+        },
+        "_type": {
           "type": "string"
         }
       }
