@@ -70,6 +70,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_bus']
 ```
 
 
@@ -101,6 +104,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.servicebus
   package-name: azure-mgmt-servicebus
+  package-version: 0.5.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

@@ -7,5 +7,9 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-eventgrid
-  output-folder: $(node-sdks-folder)/lib/services/eventgrid/lib
+  package-version: 1.1.0
+  output-folder: $(node-sdks-folder)/lib/services/eventgrid
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: false
 ```

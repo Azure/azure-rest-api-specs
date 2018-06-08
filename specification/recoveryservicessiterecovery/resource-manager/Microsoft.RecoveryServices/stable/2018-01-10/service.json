@@ -1643,6 +1643,13 @@
             "description": "Protection container name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1656,6 +1663,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
+        "x-ms-odata": "#/definitions/ProtectableItemQueryParameter",
         "x-ms-examples": {
           "Gets the list of protectable items.": {
             "$ref": "./examples/ReplicationProtectableItems_ListByReplicationProtectionContainers.json"
@@ -3240,6 +3248,81 @@
         "x-ms-examples": {
           "Purge protection container mapping.": {
             "$ref": "./examples/ReplicationProtectionContainerMappings_Purge.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ReplicationProtectionContainerMappings"
+        ],
+        "summary": "Update protection container mapping.",
+        "description": "The operation to update protection container mapping.",
+        "operationId": "ReplicationProtectionContainerMappings_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "Protection container mapping name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateInput",
+            "in": "body",
+            "description": "Mapping update input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateProtectionContainerMappingInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainerMapping"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update protection container mapping.": {
+            "$ref": "./examples/ReplicationProtectionContainerMappings_Update.json"
           }
         }
       }
@@ -6006,6 +6089,34 @@
       "properties": {},
       "x-ms-discriminator-value": "A2A"
     },
+    "A2AContainerMappingInput": {
+      "description": "A2A container mapping input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationProviderSpecificContainerMappingInput"
+        }
+      ],
+      "properties": {
+        "agentAutoUpdateStatus": {
+          "description": "A value indicating whether the auto update is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentAutoUpdateStatus",
+            "modelAsString": true
+          }
+        },
+        "automationAccountArmId": {
+          "description": "The automation account arm id.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
     "A2AEnableProtectionInput": {
       "description": "A2A enable protection input.",
       "type": "object",
@@ -6152,7 +6263,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SetMultiVmSyncStatus",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -6326,6 +6437,42 @@
         }
       }
     },
+    "A2AProtectionContainerMappingDetails": {
+      "description": "A2A provider specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionContainerMappingProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "agentAutoUpdateStatus": {
+          "description": "A value indicating whether the auto update is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentAutoUpdateStatus",
+            "modelAsString": true
+          }
+        },
+        "automationAccountArmId": {
+          "description": "The automation account arm id.",
+          "type": "string"
+        },
+        "scheduleName": {
+          "description": "The schedule arm name.",
+          "type": "string"
+        },
+        "jobScheduleName": {
+          "description": "The job schedule arm name.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
     "A2ARecoveryPointDetails": {
       "description": "A2A provider specific recovery point details.",
       "type": "object",
@@ -6344,7 +6491,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPointSyncType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -6380,7 +6527,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MultiVmGroupCreateOption",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "managementId": {
@@ -6591,6 +6738,34 @@
         },
         "recoveryBootDiagStorageAccountId": {
           "description": "The boot diagnostic storage account.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
+    "A2AUpdateContainerMappingInput": {
+      "description": "A2A update protection container mapping.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationProviderSpecificUpdateContainerMappingInput"
+        }
+      ],
+      "properties": {
+        "agentAutoUpdateStatus": {
+          "description": "A value indicating whether the auto update is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentAutoUpdateStatus",
+            "modelAsString": true
+          }
+        },
+        "automationAccountArmId": {
+          "description": "The automation account arm id.",
           "type": "string"
         }
       },
@@ -7301,7 +7476,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "FailoverDeploymentModel",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "groups": {
@@ -7381,7 +7556,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DisableProtectionReason",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "replicationProviderInput": {
@@ -8068,12 +8243,13 @@
             "TestFailover",
             "Configuration",
             "FabricInfrastructure",
-            "VersionExpiry"
+            "VersionExpiry",
+            "AgentAutoUpdate"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "HealthErrorCategory",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "severity": {
@@ -8087,7 +8263,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "Severity",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "summaryMessage": {
@@ -9093,16 +9269,43 @@
           }
         },
         "hasPhysicalDisk": {
-          "description": "A value indicating whether the VM has a physical disk attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a physical disk attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": true
+          }
         },
         "hasFibreChannelAdapter": {
-          "description": "A value indicating whether the VM has a fibre channel adapter attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a fibre channel adapter attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": true
+          }
         },
         "hasSharedVhd": {
-          "description": "A value indicating whether the VM has a shared VHD attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a shared VHD attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "HyperVVirtualMachine"
@@ -9119,7 +9322,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "IdentityProviderType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "tenantId": {
@@ -9261,7 +9464,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AgentVersionStatus",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       }
@@ -9497,7 +9700,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SetMultiVmSyncStatus",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -10085,7 +10288,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPointType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "recoveryPointId": {
@@ -10162,7 +10365,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SetMultiVmSyncStatus",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -10774,17 +10977,11 @@
         },
         "affectedObjectTypes": {
           "description": "The type of objects.",
-          "type": "array",
-          "items": {
             "type": "string"
-          }
         },
         "jobStatus": {
           "description": "The states of the job to be filtered can be in.",
-          "type": "array",
-          "items": {
             "type": "string"
-          }
         }
       }
     },
@@ -11559,6 +11756,16 @@
         }
       }
     },
+    "ProtectableItemQueryParameter": {
+      "description": "Query parameter to enumerate Protectable items.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "State of the Protectable item query filter.",
+          "type": "string"
+        }
+      }
+    },
     "ProtectedItemsQueryParameter": {
       "description": "Query parameter to enumerate protected items.",
       "type": "object",
@@ -11588,7 +11795,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MultiVmGroupCreateOption",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       }
@@ -11730,7 +11937,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "ProtectionContainerProperties": {
       "description": "Protection profile custom data details.",
@@ -11850,7 +12058,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MultiVmSyncStatus",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "crashConsistentFrequencyInMinutes": {
@@ -11899,7 +12107,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "A2ARpRecoveryPointType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "cloudServiceCreationOption": {
@@ -11915,7 +12123,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MultiVmSyncPointOption",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -11957,7 +12165,7 @@
             "type": "string",
             "x-ms-enum": {
               "name": "ReplicationProtectedItemOperation",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         },
@@ -11972,7 +12180,7 @@
             "type": "string",
             "x-ms-enum": {
               "name": "PossibleOperationsDirections",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         },
@@ -12023,7 +12231,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPlanActionLocation",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -12063,7 +12271,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPlanGroupType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "replicationProtectedItems": {
@@ -12135,7 +12343,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DataSyncStatus",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "recoveryVmCreationOption": {
@@ -12147,7 +12355,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AlternateLocationRecoveryOption",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -12187,7 +12395,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "HyperVReplicaAzureRpRecoveryPointType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -12221,7 +12429,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "InMageV2RpRecoveryPointType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "useMultiVmSyncPoint": {
@@ -12253,7 +12461,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RpInMageRecoveryPointType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -12304,7 +12512,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PossibleOperationsDirections",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "providerSpecificDetails": {
@@ -12449,7 +12657,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPlanActionLocation",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -12532,7 +12740,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PossibleOperationsDirections",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "networkType": {
@@ -12586,7 +12794,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PossibleOperationsDirections",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "sourceSiteOperations": {
@@ -12598,7 +12806,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SourceSiteOperations",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "providerSpecificDetails": {
@@ -13002,7 +13210,8 @@
           "description": "The class type.",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "ReplicationProviderSpecificSettings": {
       "description": "Replication provider specific settings.",
@@ -13012,6 +13221,17 @@
           "description": "Gets the Instance type.",
           "type": "string",
           "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "ReplicationProviderSpecificUpdateContainerMappingInput": {
+      "description": "Provider specific input for update pairing operations.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -13710,6 +13930,26 @@
         }
       }
     },
+    "UpdateProtectionContainerMappingInput": {
+      "description": "Container pairing update input.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateProtectionContainerMappingInputProperties",
+          "description": "Update protection container mapping input properties."
+        }
+      }
+    },
+    "UpdateProtectionContainerMappingInputProperties": {
+      "description": "Container pairing update input.",
+      "type": "object",
+      "properties": {
+        "providerSpecificInput": {
+          "$ref": "#/definitions/ReplicationProviderSpecificUpdateContainerMappingInput",
+          "description": "Provider specific input for updating protection container mapping."
+        }
+      }
+    },
     "UpdateRecoveryPlanInput": {
       "description": "Update recovery plan input class.",
       "type": "object",
@@ -13784,7 +14024,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "LicenseType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "recoveryAvailabilitySetId": {
@@ -13877,6 +14117,10 @@
         "fabricsHealth": {
           "$ref": "#/definitions/ResourceHealthSummary",
           "description": "The list of the health detail of the fabrics in the vault."
+        },
+        "containersHealth": {
+          "$ref": "#/definitions/ResourceHealthSummary",
+          "description": "The list of the health detail of the containers in the vault."
         }
       }
     },
@@ -13967,7 +14211,7 @@
       }
     },
     "VersionDetails": {
-      "description": "Version related deatils.",
+      "description": "Version related details.",
       "type": "object",
       "properties": {
         "version": {
@@ -13991,7 +14235,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AgentVersionStatus",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       }
@@ -14126,16 +14370,43 @@
           }
         },
         "hasPhysicalDisk": {
-          "description": "A value indicating whether the VM has a physical disk attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a physical disk attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": true
+          }
         },
         "hasFibreChannelAdapter": {
-          "description": "A value indicating whether the VM has a fibre channel adapter attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a fibre channel adapter attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": true
+          }
         },
         "hasSharedVhd": {
-          "description": "A value indicating whether the VM has a shared VHD attached.",
-          "type": "boolean"
+          "description": "A value indicating whether the VM has a shared VHD attached. String value of {SrsDataContract.PresenceStatus} enum.",
+          "enum": [
+            "Unknown",
+            "Present",
+            "NotPresent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PresenceStatus",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "VmmVirtualMachine"
@@ -14576,16 +14847,16 @@
       "in": "path",
       "description": "The name of the resource group where the recovery services vault is present.",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "type": "string"
     },
     "ResourceName": {
       "name": "resourceName",
       "in": "path",
       "description": "The name of the recovery services vault.",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "type": "string"
     },
     "ApiVersion": {
       "name": "api-version",

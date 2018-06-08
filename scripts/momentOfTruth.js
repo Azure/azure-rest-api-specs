@@ -19,7 +19,7 @@ let pullRequestNumber = utils.getPullRequestNumber();
 let linterCmd = `npx autorest@2.0.4152 --validation --azure-validator --message-format=json `;
 let gitCheckoutCmd = `git checkout ${targetBranch}`;
 let gitLogCmd = `git log -3`;
-var filename = `${pullRequestNumber}_${utils.getTimeStamp()}.json`;
+var filename = `${pullRequestNumber}.json`;
 var logFilepath = path.join(getLogDir(), filename);
 var finalResult = {};
 finalResult["pullRequest"] = pullRequestNumber;
@@ -61,12 +61,12 @@ async function getLinterResult(swaggerPath) {
     if (!fs.existsSync(swaggerPath)) {
         return [];
     }
-    let cmd = linterCmd + swaggerPath;
+    let cmd = "npx autorest --reset && " + linterCmd + swaggerPath;
     console.log(`Executing: ${cmd}`);
     const { err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
         (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
 
-    let resultString = stderr;
+    let resultString = stdout + stderr;
     if (resultString.indexOf('{') !== -1) {
         resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
         //console.log('>>>>>> Trimmed Result...');
@@ -141,7 +141,6 @@ async function runScript() {
         await runTools(configFile, 'before');
     }
     writeContent(JSON.stringify(finalResult, null, 2));
-    await uploadToAzureStorage(finalResult);
 }
 
 // magic starts here

@@ -403,6 +403,16 @@
     },
     "ErrorResponse": {
       "properties": {
+        "error" : {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Properties of the Error Response."
+        }
+      },
+      "description": "Error Response."
+    },
+    "ErrorResponseBody": {
+      "properties": {
         "code": {
           "type": "string",
           "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
@@ -463,7 +473,9 @@
           "description": "Format of the policyContent.",
           "enum": [
             "xml",
-            "xml-link"
+            "xml-link",
+            "rawxml",
+            "rawxml-link"
           ],
           "x-ms-enum": {
             "name": "PolicyContentFormat",
@@ -476,6 +488,14 @@
               {
                 "value": "xml-link",
                 "description": "The policy XML document is hosted on a http endpoint accessible from the API Management service."
+              },
+              {
+                "value": "rawxml",
+                "description": "The contents are inline and Content type is a non XML encoded policy document."
+              },
+              {
+                "value": "rawxml-link",
+                "description": "The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service."
               }
             ]
           },

@@ -7,6 +7,10 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-compute
-  output-folder: $(node-sdks-folder)/lib/services/computeManagement2/lib
+  package-version: 5.1.0
+  output-folder: $(node-sdks-folder)/lib/services/computeManagement2
   payload-flattening-threshold: 1
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: false
 ```

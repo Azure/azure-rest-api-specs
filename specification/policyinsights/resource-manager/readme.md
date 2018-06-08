@@ -27,7 +27,7 @@ These are the global settings for the PolicyInsights API.
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-tag: package-2017-12
+tag: package-2018-04
 ```
 
 ### Validations
@@ -56,6 +56,17 @@ directive:
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata"].get.produces[0]
 
 ```
+
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04'
+input-file:
+- Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
+- Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
+```
+
 
 ### Tag: package-2017-12
 
@@ -164,9 +175,19 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-04
   - tag: package-2017-12
   - tag: package-2017-10
   - tag: package-2017-08
+```
+
+### Tag: package-2018-04 and go
+
+These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(go)
+output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2018-04-04/policyinsights
 ```
 
 ### Tag: package-2017-12 and go
@@ -175,7 +196,7 @@ These settings apply only when `--tag=package-2017-12 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-12' && $(go)
-output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2017-12-12-preview/policyinsights
+output-folder: $(go-sdk-folder)/services/preview/policyinsights/mgmt/2017-12-12-preview/policyinsights
 ```
 
 ### Tag: package-2017-10 and go
@@ -184,7 +205,7 @@ These settings apply only when `--tag=package-2017-10 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-10' && $(go)
-output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2017-10-17-preview/policyinsights
+output-folder: $(go-sdk-folder)/services/preview/policyinsights/mgmt/2017-10-17-preview/policyinsights
 ```
 
 ### Tag: package-2017-08 and go
@@ -193,7 +214,7 @@ These settings apply only when `--tag=package-2017-08 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2017-08-09-preview/policyinsights
+output-folder: $(go-sdk-folder)/services/preview/policyinsights/mgmt/2017-08-09-preview/policyinsights
 ```
 
 
