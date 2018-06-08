@@ -434,17 +434,25 @@
             "name": "nextPartitionKey",
             "in": "query",
             "description": "The next partition key to query for.",
+            "required": true,
             "type": "string",
-            "schema": { "$ref": "#/definitions/NextPartitionKey" },
-            "required": true
+            "enum": [ " " ],
+            "x-ms-enum": {
+              "name": "nextPartitionKey",
+              "modelAsString": true
+            }
           },
           {
             "name": "nextRowKey",
             "in": "query",
             "description": "The next row key to query for.",
+            "required": true,
             "type": "string",
-            "schema": { "$ref": "#/definitions/NextRowKey" },
-            "required": true
+            "enum": [ " " ],
+            "x-ms-enum": {
+              "name": "nextRowKey",
+              "modelAsString": true,
+            }
           },
           {
             "name": "takeCount",
@@ -1065,18 +1073,26 @@
           {
             "name": "nextPartitionKey",
             "in": "query",
-            "type": "string",
             "description": "The next partition key to query for.",
             "required": true,
-            "schema": { "$ref": "#/definitions/NextPartitionKey" }
+            "type": "string",
+            "enum": [ " " ],
+            "x-ms-enum": {
+              "name": "nextPartitionKey",
+              "modelAsString": true
+            }
           },
           {
             "name": "nextRowKey",
             "in": "query",
-            "type": "string",
             "description": "The next row key to query for.",
-            "schema": { "$ref": "#/definitions/NextRowKey" },
-            "required": true
+            "required": true,
+            "type": "string",
+            "enum": [ " " ],
+            "x-ms-enum": {
+              "name": "nextRowKey",
+              "modelAsString": true
+            }
           },
           {
             "name": "takeCount",
@@ -5029,24 +5045,6 @@
             "$ref": "#/definitions/Item"
           }
         }
-      }
-    },
-    "NextPartitionKey": {
-      "description": "The enum to represents next partition key value.",
-      "type": "string",
-      "enum": [ " " ],
-      "x-ms-enum": {
-        "name": "nextPartitionKey",
-        "modelAsString": true
-      }
-    },
-    "NextRowKey": {
-      "description": "The enum to represents next row key values.",
-      "type": "string",
-      "enum": [ " " ],
-      "x-ms-enum": {
-        "name": "nextRowKey",
-        "modelAsString": true
       }
     },
     "MergedExportError": {
