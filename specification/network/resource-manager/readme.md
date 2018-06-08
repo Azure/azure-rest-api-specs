@@ -1,4 +1,4 @@
-# Network
+﻿# Network
 
 > see https://aka.ms/autorest
 
@@ -60,6 +60,7 @@ input-file:
 - Microsoft.Network/stable/2018-06-01/virtualNetworkGateway.json
 - Microsoft.Network/stable/2018-06-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2018-06-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2018-06-01/virtualWan.json
 ```
 
 ### Tag: package-2018-05
