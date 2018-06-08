@@ -26,7 +26,16 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-2018-04
+```
+
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04'
+input-file:
+- Microsoft.Devices/stable/2018-04-01/iothub.json
 ```
 
 ### Tag: package-2018-01
@@ -80,6 +89,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
 ```
 
 
@@ -140,9 +152,28 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-04
+  - tag: package-2018-01
   - tag: package-2017-07
   - tag: package-2017-01
   - tag: package-2016-02
+```
+### Tag: package-2018-04 and go
+
+These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(go)
+output-folder: $(go-sdk-folder)/services/iothub/mgmt/2018-04-01/devices
+```
+
+### Tag: package-2018-01 and go
+
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/iothub/mgmt/2018-01-22/devices
 ```
 
 ### Tag: package-2017-07 and go

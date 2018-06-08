@@ -64,6 +64,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_server_management']
 ```
 
 
@@ -93,19 +96,19 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.servermanagement
-  package-name: azure-mgmt-servermanagement
+  namespace: azure.mgmt.servermanager
+  package-name: azure-mgmt-servermanager
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup
+  output-folder: $(python-sdks-folder)/azure-mgmt-servermanager/azure/mgmt/servermanager
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup
+  output-folder: $(python-sdks-folder)/azure-mgmt-servermanager
 ```
 
 
@@ -135,7 +138,7 @@ These settings apply only when `--tag=package-2016-07-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-07-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/servermanagement/mgmt/2016-07-01-preview/servermanagement
+output-folder: $(go-sdk-folder)/services/preview/servermanagement/mgmt/2016-07-01-preview/servermanagement
 ```
 
 ### Tag: package-2015-07-preview and go
@@ -144,7 +147,7 @@ These settings apply only when `--tag=package-2015-07-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-07-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/servermanagement/mgmt/2015-07-01-preview/servermanagement
+output-folder: $(go-sdk-folder)/services/preview/servermanagement/mgmt/2015-07-01-preview/servermanagement
 ```
 
 

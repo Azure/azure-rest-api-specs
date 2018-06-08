@@ -54,7 +54,7 @@ script:
     fi
   - >-
     if [[ $MODE == 'node' ]]; then
-      $DOCKER_CMD Azure/azure-sdk-for-node -v
+      travis_wait 30 $DOCKER_CMD Azure/azure-sdk-for-node -v
     fi
   - >-
     if [[ $MODE == 'ruby' ]]; then
@@ -96,6 +96,7 @@ script:
   - >-
     if [[ $MODE == 'azurebot' ]]; then
       node scripts/momentOfTruth.js
+      node scripts/momentOfTruthPostProcessing.js
     fi
   - >-
     if [[ $MODE == 'liveValidation' ]]; then

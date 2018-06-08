@@ -2549,6 +2549,885 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues": {
+      "get": {
+        "tags": [
+          "ApiIssues"
+        ],
+        "operationId": "ApiIssues_ListByService",
+        "description": "Lists all issues assosiated with the specified API.",
+        "x-ms-examples": {
+          "ApiManagementListApiIssues": {
+            "$ref": "./examples/ApiManagementListApiIssues.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| state        | eq                     |                                   |\n| userId          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paged Result reponse of issues for the API.",
+            "schema": {
+              "$ref": "#/definitions/IssueCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/IssueContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}": {
+      "head": {
+        "tags": [
+          "ApiIssues"
+        ],
+        "operationId": "ApiIssue_Head",
+        "description": "Gets the entity state (Etag) version of the Issue for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiIssue": {
+            "$ref": "./examples/ApiManagementHeadApiIssue.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApiIssues"
+        ],
+        "operationId": "ApiIssue_Get",
+        "description": "Gets the details of the Issue for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetApiIssue": {
+            "$ref": "./examples/ApiManagementGetApiIssue.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Issue entity.",
+            "schema": {
+              "$ref": "#/definitions/IssueContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiIssues"
+        ],
+        "operationId": "ApiIssue_CreateOrUpdate",
+        "description": "Creates a new Issue for an API or updates an existing one.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiIssue": {
+            "$ref": "./examples/ApiManagementCreateApiIssue.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "ETag of the Issue Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Issue was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/IssueContract"
+            }
+          },
+          "200": {
+            "description": "Issue was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/IssueContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiIssues"
+        ],
+        "operationId": "ApiIssue_Delete",
+        "description": "Deletes the specified Issue from an API.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiIssue": {
+            "$ref": "./examples/ApiManagementDeleteApiIssue.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of the Issue Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Issue was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/comments": {
+      "get": {
+        "tags": [
+          "ApiIssueComments"
+        ],
+        "operationId": "ApiIssueComments_ListByService",
+        "description": "Lists all comments for the Issue assosiated with the specified API.",
+        "x-ms-examples": {
+          "ApiManagementListApiIssueComments": {
+            "$ref": "./examples/ApiManagementListApiIssueComments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| userId          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paged Result reponse of issue comments for the API.",
+            "schema": {
+              "$ref": "#/definitions/IssueCommentCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/IssueCommentContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/comments/{commentId}": {
+      "head": {
+        "tags": [
+          "ApiIssueCommentss"
+        ],
+        "operationId": "ApiIssuComment_Head",
+        "description": "Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiIssueComment": {
+            "$ref": "./examples/ApiManagementHeadApiIssueComment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CommentIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApiIssueComments"
+        ],
+        "operationId": "ApiIssueComment_Get",
+        "description": "Gets the details of the issue Comment for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetApiIssueComment": {
+            "$ref": "./examples/ApiManagementGetApiIssueComment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CommentIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified issue Comment entity.",
+            "schema": {
+              "$ref": "#/definitions/IssueCommentContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiIssueCommentss"
+        ],
+        "operationId": "ApiIssueComment_CreateOrUpdate",
+        "description": "Creates a new Comment for the Issue in an API or updates an existing one.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiIssueComment": {
+            "$ref": "./examples/ApiManagementCreateApiIssueComment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CommentIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueCommentContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "ETag of the Issue Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Issue Comment was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/IssueCommentContract"
+            }
+          },
+          "200": {
+            "description": "Issue Comment was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/IssueCommentContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiIssueComments"
+        ],
+        "operationId": "ApiIssueComment_Delete",
+        "description": "Deletes the specified comment from an Issue.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiIssueComment": {
+            "$ref": "./examples/ApiManagementDeleteApiIssueComment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CommentIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of the Issue Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The issue Comment was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/attachments": {
+      "get": {
+        "tags": [
+          "ApiIssueAttachments"
+        ],
+        "operationId": "ApiIssueAttachments_ListByService",
+        "description": "Lists all comments for the Issue assosiated with the specified API.",
+        "x-ms-examples": {
+          "ApiManagementListApiIssueAttachments": {
+            "$ref": "./examples/ApiManagementListApiIssueAttachments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| userId          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paged Result reponse of issue comments for the API.",
+            "schema": {
+              "$ref": "#/definitions/IssueAttachmentCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/IssueAttachmentContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/attachments/{attachmentId}": {
+      "head": {
+        "tags": [
+          "ApiIssueAttachmentss"
+        ],
+        "operationId": "ApiIssuAttachment_Head",
+        "description": "Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiIssueAttachment": {
+            "$ref": "./examples/ApiManagementHeadApiIssueAttachment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachmentIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApiIssueAttachments"
+        ],
+        "operationId": "ApiIssueAttachment_Get",
+        "description": "Gets the details of the issue Attachment for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetApiIssueAttachment": {
+            "$ref": "./examples/ApiManagementGetApiIssueAttachment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachmentIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified issue Attachment entity.",
+            "schema": {
+              "$ref": "#/definitions/IssueAttachmentContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiIssueAttachmentss"
+        ],
+        "operationId": "ApiIssueAttachment_CreateOrUpdate",
+        "description": "Creates a new Attachment for the Issue in an API or updates an existing one.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiIssueAttachment": {
+            "$ref": "./examples/ApiManagementCreateApiIssueAttachment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachmentIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueAttachmentContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "ETag of the Issue Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Issue Attachment was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/IssueAttachmentContract"
+            }
+          },
+          "200": {
+            "description": "Issue Attachment was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/IssueAttachmentContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiIssueAttachments"
+        ],
+        "operationId": "ApiIssueAttachment_Delete",
+        "description": "Deletes the specified comment from an Issue.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiIssueAttachment": {
+            "$ref": "./examples/ApiManagementDeleteApiIssueAttachment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachmentIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of the Issue Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The issue Attachment was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -2662,11 +3541,13 @@
           "items": {
             "$ref": "#/definitions/ApiContract"
           },
-          "description": "Page values."
+          "description": "Page values.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged Api list representation."
@@ -3033,11 +3914,13 @@
           "items": {
             "$ref": "#/definitions/ApiReleaseContract"
           },
-          "description": "Page values."
+          "description": "Page values.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged Api Revision list representation."
@@ -3111,11 +3994,13 @@
           "items": {
             "$ref": "#/definitions/OperationContract"
           },
-          "description": "Page values."
+          "description": "Page values.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged Operation list representation."
@@ -3396,11 +4281,13 @@
           "items": {
             "$ref": "#/definitions/SchemaContract"
           },
-          "description": "Api Schema Contract value."
+          "description": "Api Schema Contract value.",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any."
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "The response of the list schema operation."
@@ -3445,6 +4332,217 @@
         }
       },
       "description": "Schema Document Properties."
+    },
+    "IssueCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IssueContract"
+          },
+          "description": "Issue values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Issue list representation."
+    },
+    "IssueContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IssueContractProperties",
+          "description": "Properties of the Issue."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Issue Contract details."
+    },
+    "IssueContractProperties": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The issue title."
+        },
+        "description": {
+          "type": "string",
+          "description": "Text describing the issue."
+        },
+        "createdDate": {
+          "type":"string",
+          "format": "date-time",
+          "description": "Date and time when the issue was created."
+        },
+        "state": {
+          "type": "string",
+          "description": "Status of the issue.",
+          "enum": [
+            "proposed",
+            "open",
+            "removed",
+            "resolved",
+            "closed"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "proposed",
+                "description": "The issue is proposed."
+              },
+              {
+                "value": "open",
+                "description": "The issue is opened."
+              },
+              {
+                "value": "removed",
+                "description": "The issue was removed."
+              },
+              {
+                "value": "resolved",
+                "description": "The issue is now resolved."
+              },
+              {
+                "value": "closed",
+                "description": "The issue was closed."
+              }
+            ]
+          }
+        },
+        "userId": {
+          "type": "string",
+          "description": "A resource identifier for the user created the issue."
+        },
+        "apiId": {
+          "type": "string",
+          "description": "A resource identifier for the API the issue was created for."
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "userId"
+      ],
+      "description": "Issue contract Properties."
+    },
+    "IssueCommentCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IssueCommentContract"
+          },
+          "description": "Issue Comment values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Issue Comment list representation."
+    },
+    "IssueCommentContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IssueCommentContractProperties",
+          "description": "Properties of the Issue Comment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Issue Comment Contract details."
+    },
+    "IssueCommentContractProperties": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Comment text."
+        },
+        "createdDate": {
+          "type":"string",
+          "format": "date-time",
+          "description": "Date and time when the comment was created."
+        },
+        "userId": {
+          "type": "string",
+          "description": "A resource identifier for the user who left the comment."
+        }
+      },
+      "required": [
+        "text",
+        "userId"
+      ],
+      "description": "Issue Comment contract Properties."
+    },
+    "IssueAttachmentCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IssueAttachmentContract"
+          },
+          "description": "Issue Attachment values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Issue Attachment list representation."
+    },
+    "IssueAttachmentContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IssueAttachmentContractProperties",
+          "description": "Properties of the Issue Attachment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Issue Attachment Contract details."
+    },
+    "IssueAttachmentContractProperties": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Filename by which the binary data will be saved."
+        },
+        "contentFormat": {
+          "type":"string",
+          "description": "Either 'link' if content is provided via an HTTP link or the MIME type of the Base64-encoded binary data provided in the 'content' property."
+        },
+        "content": {
+          "type": "string",
+          "description": "An HTTP link or Base64-encoded binary data."
+        }
+      },
+      "required": [
+        "title",
+        "contentFormat",
+        "content"
+      ],
+      "description": "Issue Attachment contract Properties."
     }
   },
   "parameters": {
@@ -3495,6 +4593,39 @@
       "required": true,
       "type": "string",
       "description": "Schema identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "IssueIdParameter": {
+      "name": "issueId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Issue identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "CommentIdParameter": {
+      "name": "commentId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Comment identifier within an Issue. Must be unique in the current Issue.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "AttachmentIdParameter": {
+      "name": "attachmentId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Attachment identifier within an Issue. Must be unique in the current Issue.",
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",

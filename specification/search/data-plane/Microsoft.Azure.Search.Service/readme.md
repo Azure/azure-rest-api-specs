@@ -24,7 +24,25 @@ These are the global settings for SearchServiceClient.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2016-09-preview
+tag: package-2017-11-preview
+```
+
+### Tag: package-2017-11-preview
+
+These settings apply only when `--tag=package-2017-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-preview'
+input-file:
+- preview/2017-11-11-preview/searchservice.json
+```
+
+### Tag: package-2017-11
+
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- preview/2017-11-11/searchservice.json
 ```
 
 ### Tag: package-2016-09-preview
@@ -83,4 +101,19 @@ csharp:
   namespace: Microsoft.Azure.Search
   clear-output-folder: true
   output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search.Service/Generated
+
+directive: 
+  # TODO: remove this workaround once AutoRest fixes the incorrect code generation when using a parameterized host and both client and operation groups paths.
+  - from: source-file-csharp
+    where: $
+    transform: >
+      if ( $.includes("class DataSourcesOperations") || $.includes("class IndexersOperations") || 
+        $.includes("class IndexesOperations") ||  $.includes("class SynonymMapsOperations") ) 
+        
+        return $.
+          replace(/this.SearchServiceName/g,"Client.SearchServiceName").
+          replace(/this.SearchDnsSuffix/g,"Client.SearchDnsSuffix").
+          replace(/\"Client.SearchServiceName\"/g,"\"this.Client.SearchServiceName\"").
+          replace(/\"Client.SearchDnsSuffix\"/g,"\"this.Client.SearchDnsSuffix\"");
+      return $;  
 ```
