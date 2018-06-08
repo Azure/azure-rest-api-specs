@@ -32,6 +32,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_spellcheck']
 ```
 
 
@@ -39,7 +42,7 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  namespace: Microsoft.Azure.CognitiveServices.SpellCheck
+  namespace: Microsoft.Azure.CognitiveServices.Language.SpellCheck
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/SpellCheck/BingSpellCheck/Generated/
   sync-methods: none
 ```
@@ -107,9 +110,11 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.cognitiveservices.spellcheck
+  namespace: com.microsoft.azure.cognitiveservices.language.spellcheck
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/spellcheck
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/language/bingspellcheck
+  with-optional-parameters: true
+  prefix-model-type: Bing
+  with-single-async-method: true
 ```

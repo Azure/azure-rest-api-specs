@@ -79,6 +79,9 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_datalake_store']
 ```
 
 
@@ -158,7 +161,7 @@ These settings apply only when `--tag=package-2015-10-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/datalake/store/mgmt/2015-10-01-preview/account
+output-folder: $(go-sdk-folder)/services/preview/datalake/store/mgmt/2015-10-01-preview/account
 ```
 
 

@@ -138,7 +138,7 @@ batch:
 These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag)=='package-2017-11' && $(go)
+``` yaml $(tag)=='package-2018-01' && $(go)
 output-folder: $(go-sdk-folder)/services/provisioningservices/mgmt/2018-01-22/iothub
 ```
 
@@ -153,11 +153,11 @@ output-folder: $(go-sdk-folder)/services/provisioningservices/mgmt/2017-11-15/io
 
 ### Tag: package-2017-08 and go
 
-These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
+These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/provisioningservices/mgmt/2017-08-21-preview/iothub
+output-folder: $(go-sdk-folder)/services/preview/provisioningservices/preview/mgmt/2017-08-21-preview/iothub
 ```
 
 ## Java
