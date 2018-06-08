@@ -631,11 +631,11 @@
         "tags": [ "Adds" ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "addsService_listMetrics": {
+          "addsService_getMetrics": {
             "$ref": "./examples/Service_MetricSets.json"
           }
         },
-        "operationId": "addsService_listMetrics",
+        "operationId": "addsService_getMetrics",
         "parameters": [
           {
             "name": "serviceName",
@@ -692,9 +692,6 @@
               "$ref": "#/definitions/MetricSets"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -1078,23 +1075,17 @@
             "in": "query",
             "description": "The next partition key to query for.",
             "required": true,
-            "type": "string",
-            "enum": [ " " ],
-            "x-ms-enum": {
-              "name": "nextPartitionKey",
-              "modelAsString": true
-            }
+            "schema": {
+              "$ref": "#/definitions/NextPartitionKey" 
+            } 
           },
           {
             "name": "nextRowKey",
             "in": "query",
             "description": "The next row key to query for.",
             "required": true,
-            "type": "string",
-            "enum": [ " " ],
-            "x-ms-enum": {
-              "name": "nextRowKey",
-              "modelAsString": true
+            "schema": {
+              "$ref": "#/definitions/NextRowKey"
             }
           },
           {
@@ -2165,11 +2156,11 @@
         "tags": [ "Metrics" ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "metrics_list": {
+          "service_getMetrics": {
             "$ref": "./examples/Service_MetricSets.json"
           }
         },
-        "operationId": "metrics_list",
+        "operationId": "service_getMetrics",
         "parameters": [
           {
             "name": "serviceName",
@@ -3112,11 +3103,11 @@
         "tags": [ "Metrics" ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "serviceMembers_listMetrics": {
+          "serviceMembers_getMetrics": {
             "$ref": "./examples/Server_MetricSets.json"
           }
         },
-        "operationId": "serviceMembers_listMetrics",
+        "operationId": "serviceMembers_getMetrics",
         "parameters": [
           {
             "name": "serviceName",
@@ -5048,6 +5039,18 @@
             "$ref": "#/definitions/Item"
           }
         }
+      }
+    },
+    "NextPartitionKey": {
+      "description": "The enum to represents next partition key value.",
+      "schema": {
+        "$ref": "#/definitions/NextPartitionKey"
+      }
+    },
+    "NextRowKey": {
+      "description": "The enum to represents next row key values.",
+      "schema": {
+        "$ref": "#/definitions/NextRowKey"
       }
     },
     "MergedExportError": {
