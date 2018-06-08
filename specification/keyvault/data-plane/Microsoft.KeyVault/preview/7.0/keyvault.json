@@ -3724,11 +3724,33 @@
         },
         "kty": {
           "type": "string",
-          "description": "JsonWebKey key type (kty).",
+          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40.",
           "enum": [ "EC", "EC-HSM", "RSA", "RSA-HSM", "oct" ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EC",
+                "description": "Elliptic Curve."
+              },
+              {
+                "value": "EC-HSM",
+                "description": "Elliptic Curve with a private key which is not exportable from the HSM."
+              },
+              {
+                "value": "RSA",
+                "description": "RSA (https://tools.ietf.org/html/rfc3447)"
+              },
+              {
+                "value": "RSA-HSM",
+                "description": "RSA with a private key which is not exportable from the HSM."
+              },
+              {
+                "value": "oct",
+                "description": "Octet sequence (used to represent symmetric keys)"
+              }
+            ]
           }
         },
         "key_ops": {
@@ -4375,9 +4397,13 @@
           "description": "Indicates if the private key can be exported."
         },
         "kty": {
-          "x-ms-client-name": "keyType",
           "type": "string",
-          "description": "The key type."
+          "description": "The type of key pair to be used for the certificate.",
+          "enum": [ "EC", "EC-HSM", "RSA", "RSA-HSM", "oct" ],
+          "x-ms-enum": {
+            "name": "JsonWebKeyType",
+            "modelAsString": true
+          }
         },
         "key_size": {
           "type": "integer",
