@@ -128,10 +128,10 @@ input-file:
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: definitions.json
+    from: runbook.json
     where: $.definitions.TestJob
   - suppress: BodyTopLevelProperties
-    from: definitions.json
+    from: runbook.json
     where: $.definitions.TestJob.properties
 ```
 

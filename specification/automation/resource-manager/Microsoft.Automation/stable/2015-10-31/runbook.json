@@ -3,7 +3,7 @@
   "info": {
     "title": "AutomationManagement",
     "version": "2015-10-31",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -70,14 +70,14 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },          
+          },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",           
+            "description": "OK",
             "schema": {
               "type": "string"
             }
@@ -138,7 +138,7 @@
           }
         ],
         "responses": {
-          "200": {            
+          "200": {
             "description": "OK",
             "schema": {
               "type": "string"
@@ -194,7 +194,7 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },          
+          },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
@@ -246,13 +246,13 @@
             "required": true,
             "type": "string",
             "description": "The parameters supplied to the publish runbook operation."
-          },          
+          },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {            
+          "200": {
             "description": "OK",
             "schema": {
               "type": "string"
@@ -308,7 +308,7 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },          
+          },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
@@ -363,13 +363,13 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },          
+          },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {            
+          "200": {
             "description": "OK",
             "schema": {
               "type": "string"
@@ -399,7 +399,7 @@
             "$ref": "./examples/getRunbook.json"
           }
         },
-        "parameters": [          
+        "parameters": [
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
@@ -450,7 +450,7 @@
           },
           "Create runbook as draft": {
             "$ref": "./examples/createRunbookAsDraft.json"
-          }          
+          }
         },
         "parameters": [
           {
@@ -477,7 +477,7 @@
               "$ref": "#/definitions/RunbookCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for runbook. Provide either content link for a published runbook or draft, not both."
-          },     
+          },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
@@ -761,7 +761,7 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
-          },          
+          },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
@@ -1519,31 +1519,30 @@
             "type": "string"
           },
           "description": "Gets or sets the runbook output types."
+        }
+      }
+    },
+    "RunbookParameter": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the parameter."
         },
-        "RunbookParameter": {
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "Gets or sets the type of the parameter."
-            },
-            "isMandatory": {
-              "type": "boolean",
-              "description": "Gets or sets a Boolean value to indicate whether the parameter is madatory or not."
-            },
-            "position": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Get or sets the position of the parameter."
-            },
-            "defaultValue": {
-              "type": "string",
-              "description": "Gets or sets the default value of parameter."
-            }
-          },
-          "description": "Definition of the runbook parameter type."
+        "isMandatory": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value to indicate whether the parameter is madatory or not."
+        },
+        "position": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Get or sets the position of the parameter."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Gets or sets the default value of parameter."
         }
       },
-      "description": "Definition of the runbook type."
+      "description": "Definition of the runbook parameter type."
     },
     "TestJobCreateParameters": {
       "properties": {
