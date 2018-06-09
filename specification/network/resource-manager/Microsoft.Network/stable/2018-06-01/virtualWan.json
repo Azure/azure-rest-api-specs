@@ -1391,6 +1391,126 @@
             }
           }
         }
+      },
+      "put": {
+        "operationId": "VpnConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "VpnConnectionPut": { "$ref": "./examples/VpnConnectionPut.json" }
+        },
+        "description": "Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "vpnConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            },
+            "description": "Parameters supplied to create or Update a VPN Connection."
+          },
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the vpn connection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "201": {
+            "description": "Request successful. Returns the details of the vpn connection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VpnConnections_Delete",
+        "x-ms-examples": {
+          "VpnConnectionDelete": { "$ref": "./examples/VpnConnectionDelete.json" }
+        },
+        "description": "Deletes a vpn connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Vpn Connection deleted."
+          },
+          "202": {
+            "description": "Request received successfully. Vpn Connection deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No vpn connections exist by the name provided."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections": {
