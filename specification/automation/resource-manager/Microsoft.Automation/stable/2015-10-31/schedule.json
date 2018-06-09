@@ -3,7 +3,7 @@
   "info": {
     "title": "AutomationManagement",
     "version": "2015-10-31",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -312,6 +312,61 @@
     }
   },
   "definitions": {
+    "AdvancedSchedule": {
+      "properties": {
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Days of the week that the job should execute on."
+        },
+        "monthDays": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "x-nullable": false
+          },
+          "description": "Days of the month that the job should execute on. Must be between 1 and 31."
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvancedScheduleMonthlyOccurrence"
+          },
+          "description": "Occurrences of days within a month."
+        }
+      },
+      "description": "The properties of the create Advanced Schedule."
+    },
+    "AdvancedScheduleMonthlyOccurrence": {
+      "properties": {
+        "occurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Occurrence of the week within the month. Must be between 1 and 5"
+        },
+        "day": {
+          "type": "string",
+          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleDay",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties of the create advanced schedule monthly occurrence."
+    },
     "ScheduleCreateOrUpdateProperties": {
       "properties": {
         "description": {
