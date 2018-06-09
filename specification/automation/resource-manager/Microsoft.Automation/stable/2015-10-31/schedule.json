@@ -352,6 +352,21 @@
       ],
       "description": "The parameters supplied to the create or update schedule operation."
     },
+    "scheduleFrequency": {
+      "type": "string",
+      "description": "Gets or sets the frequency of the schedule.",
+      "enum": [
+        "OneTime",
+        "Day",
+        "Hour",
+        "Week",
+        "Month"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleFrequency",
+        "modelAsString": true
+      }
+    },
     "ScheduleCreateOrUpdateParameters": {
       "properties": {
         "name": {
@@ -384,6 +399,95 @@
         }
       ],
       "description": "Definition of the schedule."
+    },
+    "ScheduleProperties": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time of the schedule.",
+          "x-nullable": false
+        },
+        "startTimeOffsetMinutes": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "Gets the start time's offset in minutes.",
+          "x-nullable": false
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time of the schedule.",
+          "x-nullable": true
+        },
+        "expiryTimeOffsetMinutes": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the expiry time's offset in minutes.",
+          "x-nullable": false
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Gets or sets a value indicating whether this schedule is enabled."
+        },
+        "nextRun": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the next run time of the schedule.",
+          "x-nullable": true
+        },
+        "nextRunOffsetMinutes": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the next run time's offset in minutes.",
+          "x-nullable": false
+        },
+        "interval": {
+          "description": "Gets or sets the interval of the schedule."
+        },
+        "frequency": {
+          "type": "string",
+          "description": "Gets or sets the frequency of the schedule.",
+          "enum": [
+            "OneTime",
+            "Day",
+            "Hour",
+            "Week",
+            "Month"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleFrequency",
+            "modelAsString": true
+          }
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Gets or sets the time zone of the schedule."
+        },
+        "advancedSchedule": {
+          "$ref": "#/definitions/AdvancedSchedule",
+          "description": "Gets or sets the advanced schedule."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of schedule parameters."
     },
     "ScheduleUpdateProperties": {
       "properties": {

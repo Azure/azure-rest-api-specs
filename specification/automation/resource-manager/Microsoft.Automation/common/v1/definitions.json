@@ -1,10 +1,28 @@
 {
     "swagger": "2.0",
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
     "info": {
-        "version": "1.0",
+        "version": "2018-06-10",
         "title": "Common types"
     },
-    "paths":{},
+    "paths": {},
     "definitions": {
         "ErrorResponse": {
             "type": "object",
@@ -22,7 +40,7 @@
         },
         "Resource": {
             "description": "The core properties of ARM resources",
-            "type":"object",
+            "type": "object",
             "properties": {
                 "id": {
                     "readOnly": true,
@@ -44,9 +62,9 @@
         },
         "TrackedResource": {
             "description": "The resource model definition for a ARM tracked top level resource",
-            "type":"object",
+            "type": "object",
             "properties": {
-                "tags": { 
+                "tags": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -74,14 +92,14 @@
             ]
         },
         "ProxyResource": {
-            "description":"ARM proxy resource.",
-            "type":"object",
+            "description": "ARM proxy resource.",
+            "type": "object",
             "allOf": [
                 {
                     "$ref": "#/definitions/Resource"
                 }
             ],
-            "properties":{}
+            "properties": {}
         }
     },
     "parameters": {

@@ -34,12 +34,12 @@ These settings apply only when `--tag=package-2015-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-10'
 input-file:
+- Microsoft.Automation/common/v1/definitions.json
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
 - Microsoft.Automation/stable/2015-10-31/connection.json
 - Microsoft.Automation/stable/2015-10-31/connectionType.json
 - Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/definitions.json
 - Microsoft.Automation/stable/2015-10-31/dscCompilationJob.json
 - Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/dscNode.json
@@ -62,12 +62,12 @@ These settings apply only when `--tag=package-2017-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-05-preview'
 input-file:
+- Microsoft.Automation/common/v1/definitions.json
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
 - Microsoft.Automation/stable/2015-10-31/connection.json
 - Microsoft.Automation/stable/2015-10-31/connectionType.json
 - Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/definitions.json
 - Microsoft.Automation/stable/2015-10-31/dscCompilationJob.json
 - Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/dscNode.json
@@ -80,7 +80,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
-- Microsoft.Automation/preview/2017-05-15-preview/definitions.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
@@ -102,7 +101,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/connection.json
 - Microsoft.Automation/stable/2015-10-31/connectionType.json
 - Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/definitions.json
 - Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json

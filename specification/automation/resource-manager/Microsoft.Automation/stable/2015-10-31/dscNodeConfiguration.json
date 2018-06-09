@@ -266,7 +266,7 @@
           "x-nullable": false
         },
         "configuration": {
-          "$ref": "./definitions.json#/definitions/DscConfigurationAssociationProperty",
+          "$ref": "#/definitions/DscConfigurationAssociationProperty",
           "description": "Gets or sets the configuration of the node."
         }
       },
@@ -334,7 +334,7 @@
           "description": "Name of the node configuration."
         },
         "configuration": {
-          "$ref": "./definitions.json#/definitions/DscConfigurationAssociationProperty",
+          "$ref": "#/definitions/DscConfigurationAssociationProperty",
           "description": "Gets or sets the configuration of the node."
         },
         "incrementNodeConfigurationBuild": {
@@ -364,6 +364,15 @@
         }
       },
       "description": "The response model for the list job operation."
+    },
+    "DscConfigurationAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the Dsc configuration."
+        }
+      },
+      "description": "The Dsc configuration property associated with the entity."
     }
   },
   "parameters": {}

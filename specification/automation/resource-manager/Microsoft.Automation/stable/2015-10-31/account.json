@@ -461,7 +461,7 @@
         "operationId": "Keys_ListByAutomationAccount",
         "description": "Retrieve the automation keys for an account.",
         "x-ms-examples": {
-          "Get usages of an automation account": {
+          "Get lists of an automation account": {
             "$ref": "./examples/listAutomationAccountKeys.json"
           }
         },
@@ -492,9 +492,6 @@
               "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     }
@@ -788,11 +785,12 @@
     "Key": {
       "properties": {
         "keyName": {
+          "readOnly": true,
           "type": "string",
           "description": "Automation key name.",
           "enum": [
-            "primary",
-            "secondary"
+            "Primary",
+            "Secondary"
           ],
           "x-ms-enum": {
             "name": "AutomationKeyName",
@@ -800,9 +798,11 @@
           }
         },
         "permissions": {
+          "readOnly": true,
           "type": "string",
           "description": "Automation key permissions.",
           "enum": [
+            "Read",
             "Full"
           ],
           "x-ms-enum": {
@@ -811,6 +811,7 @@
           }
         },
         "value": {
+          "readOnly": true,
           "type": "string",
           "description": "Value of the Automation Key used for registration."
         }
@@ -819,7 +820,7 @@
     },
     "KeyListResult": {
       "properties": {
-        "value": {
+        "keys": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Key"
