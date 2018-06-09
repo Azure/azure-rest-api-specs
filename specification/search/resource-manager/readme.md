@@ -163,3 +163,39 @@ license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-search
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-02
+  - tag: package-2015-08
+```
+
+### Tag: package-2015-02 and java
+
+These settings apply only when `--tag=package-2015-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.searchmanagementclient.v2015_02_28
+  output-folder: $(azure-libraries-for-java-folder)/searchmanagementclient/resource-manager/v2015_02_28
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2015-08 and java
+
+These settings apply only when `--tag=package-2015-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.searchmanagementclient.v2015_08_19
+  output-folder: $(azure-libraries-for-java-folder)/searchmanagementclient/resource-manager/v2015_08_19
+regenerate-manager: true
+generate-interface: true
+```
+
+

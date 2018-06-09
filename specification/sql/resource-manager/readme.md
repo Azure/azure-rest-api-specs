@@ -645,6 +645,42 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-sql
 ```
 
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-pure-2017-10-preview
+  - tag: package-2014-04
+```
+
+### Tag: package-pure-2017-10-preview and java
+
+These settings apply only when `--tag=package-pure-2017-10-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-pure-2017-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.sql.v2017_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2017_10_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2014-04 and java
+
+These settings apply only when `--tag=package-2014-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2014-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.sql.v2014_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2014_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
 ## Validation
 
 ``` yaml

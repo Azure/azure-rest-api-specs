@@ -138,3 +138,25 @@ license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-reservations
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-11
+```
+
+### Tag: package-2017-11 and java
+
+These settings apply only when `--tag=package-2017-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.reservations.v2017_11_01
+  output-folder: $(azure-libraries-for-java-folder)/reservations/resource-manager/v2017_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+

@@ -103,3 +103,25 @@ license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-visualstudio
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2014-04-preview
+```
+
+### Tag: package-2014-04-preview and java
+
+These settings apply only when `--tag=package-2014-04-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2014-04-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.visualstudio.v2014_04_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/visualstudio/resource-manager/v2014_04_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+

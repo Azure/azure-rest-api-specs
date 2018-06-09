@@ -132,3 +132,25 @@ license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datacatalog
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2016-03-30
+```
+
+### Tag: package-2016-03-30 and java
+
+These settings apply only when `--tag=package-2016-03-30 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-03-30' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.datacatalog.v2016_03_30
+  output-folder: $(azure-libraries-for-java-folder)/datacatalog/resource-manager/v2016_03_30
+regenerate-manager: true
+generate-interface: true
+```
+
+

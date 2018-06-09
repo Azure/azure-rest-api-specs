@@ -291,3 +291,67 @@ license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-trafficmanager
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-11
+  - tag: package-2018-03
+  - tag: package-2017-03
+  - tag: package-2017-05
+```
+
+### Tag: package-2015-11 and java
+
+These settings apply only when `--tag=package-2015-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.trafficmanager.v2015_11_01
+  output-folder: $(azure-libraries-for-java-folder)/trafficmanager/resource-manager/v2015_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-03 and java
+
+These settings apply only when `--tag=package-2018-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.trafficmanager.v2018_03_01
+  output-folder: $(azure-libraries-for-java-folder)/trafficmanager/resource-manager/v2018_03_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-03 and java
+
+These settings apply only when `--tag=package-2017-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.trafficmanager.v2017_03_01
+  output-folder: $(azure-libraries-for-java-folder)/trafficmanager/resource-manager/v2017_03_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-05 and java
+
+These settings apply only when `--tag=package-2017-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.trafficmanager.v2017_05_01
+  output-folder: $(azure-libraries-for-java-folder)/trafficmanager/resource-manager/v2017_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
