@@ -544,7 +544,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobStreamListResult"
+              "$ref": "#/definitions/JobStreamListResult"
             }
           },
           "default": {
@@ -812,6 +812,22 @@
       },
       "x-ms-client-flatten": true,
       "description": "Definition of the job stream."
+    },
+    "JobStreamListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobStream"
+          },
+          "description": "A list of job streams."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job stream operation."
     }
   },
   "parameters": {}

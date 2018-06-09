@@ -70,7 +70,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/ScheduleCreateOrUpdateParameters"
+              "$ref": "#/definitions/ScheduleCreateOrUpdateParameters"
             },
             "description": "The parameters supplied to the create or update schedule operation."
           },
@@ -82,10 +82,10 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Schedule"
+              "$ref": "#/definitions/Schedule"
             }
           },
           "409": {
@@ -132,7 +132,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/ScheduleUpdateParameters"
+              "$ref": "#/definitions/ScheduleUpdateParameters"
             },
             "description": "The parameters supplied to the update schedule operation."
           },
@@ -147,7 +147,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Schedule"
+              "$ref": "#/definitions/Schedule"
             }
           },
           "default": {
@@ -197,7 +197,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Schedule"
+              "$ref": "#/definitions/Schedule"
             }
           },
           "default": {
@@ -295,7 +295,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ScheduleListResult"
+              "$ref": "#/definitions/ScheduleListResult"
             }
           },
           "default": {
@@ -311,6 +311,123 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "ScheduleCreateOrUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the schedule."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time of the schedule.",
+          "x-nullable": false
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time of the schedule.",
+          "x-nullable": true
+        },
+        "interval": {
+          "description": "Gets or sets the interval of the schedule."
+        },
+        "frequency": {
+          "type": "string",
+          "$ref": "#/definitions/scheduleFrequency"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Gets or sets the time zone of the schedule."
+        },
+        "advancedSchedule": {
+          "$ref": "#/definitions/AdvancedSchedule",
+          "description": "Gets or sets the AdvancedSchedule."
+        }
+      },
+      "required": [
+        "startTime",
+        "frequency"
+      ],
+      "description": "The parameters supplied to the create or update schedule operation."
+    },
+    "ScheduleCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the schedule."
+        },
+        "properties": {
+          "$ref": "#/definitions/ScheduleCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of schedule properties."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update schedule operation."
+    },
+    "Schedule": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduleProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the schedule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Definition of the schedule."
+    },
+    "ScheduleUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the schedule."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether this schedule is enabled."
+        }
+      },
+      "description": "The parameters supplied to the update schedule operation."
+    },
+    "ScheduleUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the schedule."
+        },
+        "properties": {
+          "$ref": "#/definitions/ScheduleUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of schedule properties."
+        }
+      },
+      "description": "The parameters supplied to the update schedule operation."
+    },
+    "ScheduleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "description": "Gets or sets a list of schedules."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list schedule operation."
+    }
+  },
   "parameters": {}
 }
