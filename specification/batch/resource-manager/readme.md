@@ -212,7 +212,7 @@ namespace: com.microsoft.azure.management.batch
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-batch
-``
+```
 
 ### Java multi-api
 
