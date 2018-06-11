@@ -49,6 +49,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_msi']
 ```
 
 
@@ -117,7 +120,7 @@ These settings apply only when `--tag=package-2015-08-31-preview --go` is specif
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-08-31-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/msi/mgmt/2015-08-31-preview/msi
+output-folder: $(go-sdk-folder)/services/preview/msi/mgmt/2015-08-31-preview/msi
 ```
 
 

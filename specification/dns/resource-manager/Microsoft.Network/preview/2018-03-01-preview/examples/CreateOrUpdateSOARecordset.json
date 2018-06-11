@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "zoneName": "zone1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-03-01-preview",
+    "subscriptionId": "subid",
+    "relativeRecordSetName": "@",
+    "recordType": "SOA",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key1": "value1"
+        },
+        "TTL": 3600,
+        "SOARecord": {
+          "host": "ns1.contoso.com",
+          "email": "hostmaster.contoso.com",
+          "serialNumber": 1,
+          "refreshTime": 3600,
+          "retryTime": 300,
+          "expireTime": 2419200,
+          "minimumTTL": 300
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/SOA/@",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "@",
+        "type": "Microsoft.Network/dnsZones/SOA",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "TTL": 3600,
+          "fqdn": "zone1",
+          "SOARecord": {
+            "host": "ns1.contoso.com",
+            "email": "hostmaster.contoso.com",
+            "serialNumber": 1,
+            "refreshTime": 3600,
+            "retryTime": 300,
+            "expireTime": 2419200,
+            "minimumTTL": 300
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/SOA/@",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "@",
+        "type": "Microsoft.Network/dnsZones/SOA",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "TTL": 3600,
+          "fqdn": "zone1",
+          "SOARecord": {
+            "host": "ns1.contoso.com",
+            "email": "hostmaster.contoso.com",
+            "serialNumber": 1,
+            "refreshTime": 3600,
+            "retryTime": 300,
+            "expireTime": 2419200,
+            "minimumTTL": 300
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "deploymentName": "{deploymentName}",
+    "api-version": "2018-02-01",
+    "parameters": {
+      "properties": {
+        "templateLink": "{templateUri}",
+        "parameters": {},
+        "mode": "Complete",
+        "onErrorDeployment": {
+          "type": "SpecificDeployment",
+          "deploymentName": "{nameOfDeploymentToUse}"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/{deploymentName}",
+        "name": "{deploymentName}",
+        "properties": {
+          "provisioningState": "Accepted",
+          "correlationId": "{correlationId}",
+          "timeStamp": "{timeStamp}",
+          "mode": "Complete",
+          "onErrorDeployment": {
+            "type": "SpecificDeployment",
+            "deploymentName": "{nameOfDeploymentToUse}"
+          }
+        }
+      }
+    }
+  }
+}

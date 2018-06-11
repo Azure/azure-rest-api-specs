@@ -1,4 +1,4 @@
-{
+﻿{
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
@@ -30,6 +30,13 @@
         "parameters": {
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
           "description": "Parameters for dataset."
+        },
+        "annotations": {
+          "description": "List of tags that can be used for describing the Dataset.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
         }
       },
       "additionalProperties": {
@@ -1383,6 +1390,54 @@
         } 
       ], 
       "properties": { 
+      }
+    },
+    "NetezzaTableDataset" : {
+      "x-ms-discriminator-value": "NetezzaTable",
+      "description": "Netezza dataset.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+            "$ref": "#/definitions/Dataset" 
+        } 
+      ], 
+      "properties": { 
+      }
+    },
+    "VerticaTableDataset" : {
+      "x-ms-discriminator-value": "VerticaTable",
+      "description": "Vertica dataset.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+            "$ref": "#/definitions/Dataset" 
+        } 
+      ], 
+      "properties": { 
+      }
+    },
+    "SalesforceMarketingCloudObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceMarketingCloudObject",
+      "description": "Salesforce Marketing Cloud dataset.",
+      "type": "object",
+      "allOf": [
+        {
+            "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+      }
+    },
+    "ResponsysObjectDataset": {
+      "x-ms-discriminator-value": "ResponsysObject",
+      "description": "Responsys dataset.",
+      "type": "object",
+      "allOf": [
+        {
+            "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
       }
     }
   }

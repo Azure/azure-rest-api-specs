@@ -49,6 +49,9 @@ input-file:
 - Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
+- Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
+- Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
+- Microsoft.Media/stable/2018-01-01/MediaServices.json
 ```
 
 ---
@@ -64,6 +67,10 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_event_grid']
 ```
 
 ## C#
@@ -96,7 +103,7 @@ python:
   add-credentials: true
   namespace: azure.eventgrid
   package-name: azure-eventgrid
-  package-version: 0.1.0
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
