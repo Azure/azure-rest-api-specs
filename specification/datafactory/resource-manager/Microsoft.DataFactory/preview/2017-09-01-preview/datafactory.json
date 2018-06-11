@@ -1370,7 +1370,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK."
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimePermissionResponse"
+            }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -1421,7 +1424,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK."
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimePermissionResponse"
+            }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -2935,6 +2941,10 @@
       "description": "Grant or revoke access to integration runtime request.",
       "type": "object",
       "properties": {
+        "factoryName": {
+          "description": "The data factory name.",
+          "type": "string"
+        },
         "factoryIdentity": {
           "description": "The data factory identity.",
           "type": "string"
@@ -2943,6 +2953,16 @@
       "required": [
         "factoryIdentity"
       ]
+    },
+    "IntegrationRuntimePermissionResponse": {
+      "description": "The response of granting/revoking integration runtime permission operation.",
+      "type": "object",
+      "properties": {
+        "sharedIntegrationRuntimeCount": {
+          "description": "The number of the integration runtimes to which the given data factory has been granted access.",
+          "type": "integer"
+        }
+      }
     },
     "LinkedServiceListResponse": {
       "description": "A list of linked service resources.",
