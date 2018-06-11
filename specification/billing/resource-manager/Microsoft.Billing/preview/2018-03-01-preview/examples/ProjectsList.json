@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2018-03-01-preview",
+    "$expand": "assetDetails",
+    "$filter": "properties/canCreateSubscription eq 'true'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId1",
+            "name": "ProjectId1",
+            "type": "Microsoft.Billing/projects",
+            "properties": {
+              "projectName": "ProjectName1",
+              "startDate": "2017-02-01",
+              "assetIds": [
+                "DelegatedAssetId1",
+                "DelegatedAssetId2"
+              ],
+              "assetDetails": [
+                {
+                  "parentAssetId": "Asset1",
+                  "owningProjectId": "ProjectId1",
+                  "type": "Direct",
+                  "startDate": "2017-02-01",
+                  "endDate": "2019-02-01",
+                  "billingProfileId": "BillingProfileId1",
+                  "productId": "Product1"
+                },
+                {
+                  "parentAssetId": "Asset2",
+                  "owningProjectId": "ProjectId1",
+                  "type": "Direct",
+                  "startDate": "2017-02-01",
+                  "endDate": "2019-02-01",
+                  "billingProfileId": "BillingProfileId2",
+                  "productId": "Product2"
+                }
+              ],
+              "costCenter": "1376",
+              "canCreateSubscription": true
+              
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId2",
+            "name": "ProjectId2",
+            "type": "Microsoft.Billing/projects",
+            "properties": {
+              "projectName": "ProjectName2",
+              "startDate": "2017-02-01",
+              "assetIds": [
+                "DelegatedAssetId3",
+                "DelegatedAssetId4"
+              ],
+              "assetDetails": [
+                {
+                  "parentAssetId": "Asset3",
+                  "owningProjectId": "ProjectId2",
+                  "type": "Direct",
+                  "startDate": "2017-02-01",
+                  "endDate": "2019-02-01",
+                  "billingProfileId": "BillingProfileId3",
+                  "productId": "Product1"
+                },
+                {
+                  "parentAssetId": "Asset4",
+                  "owningProjectId": "ProjectId2",
+                  "type": "Direct",
+                  "startDate": "2017-02-01",
+                  "endDate": "2019-02-01",
+                  "billingProfileId": "BillingProfileId4",
+                  "productId": "Product2"
+                }
+              ],
+              "costCenter": "1376",
+              "canCreateSubscription": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

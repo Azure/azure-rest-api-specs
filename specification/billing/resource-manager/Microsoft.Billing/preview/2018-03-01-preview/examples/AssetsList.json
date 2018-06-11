@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2018-03-01-preview",
+    "$filter": "type eq 'Delegated'",
+    "$expand": "billingProfileDetails,productInfo"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets/AssetId1",
+            "name": "AssetId1",
+            "type": "Microsoft.Billing/assets",
+            "properties": {
+              "parentAssetId": "ParentAsset1",
+              "owningProjectId": "12345",
+              "assetType": "Delegated",
+              "startDate": "2017-02-01",
+              "endDate": "2019-02-01",
+              "billingProfileId": "BillingProfileId1",
+              "billingProfileDetails": {
+                "billingProfileName": "BillingProfileName1",
+                "startDate": "2017-02-01",
+                "useCredits": true,
+                "poNumber": "12345"
+              },
+              "productId": "Product1",
+              "productInfo": {
+                "productName": "ProductName1",
+                "skuId": "SKU12345",
+                "availabilityId": "AvailabilityId1"
+              }
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/assets/AssetId2",
+            "name": "AssetId2",
+            "type": "Microsoft.Billing/assets",
+            "properties": {
+              "parentAssetId": "ParentAsset2",
+              "owningProjectId": "12345678",
+              "assetType": "Delegated",
+              "startDate": "2017-02-01",
+              "endDate": "2019-02-01",
+              "billingProfileId": "BillingProfileId2",
+              "billingProfileDetails": {
+                "billingProfileName": "BillingProfileName2",
+                "startDate": "2017-02-01",
+                "useCredits": true,
+                "poNumber": "12345"
+              },
+              "productId": "Product2",
+              "productInfo": {
+                "productName": "ProductName2",
+                "skuId": "SKU12345",
+                "availabilityId": "AvailabilityId2"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
