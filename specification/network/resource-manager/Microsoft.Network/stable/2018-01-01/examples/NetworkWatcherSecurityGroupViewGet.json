@@ -5,9 +5,7 @@
     "resourceGroupName" : "rg1",
     "networkWatcherName" : "nw1",
     "parameters" : {
-      "properties" : {
-        "targetResourceId" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1"
-      }
+      "targetResourceId" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1"
     }
   },
   "responses" : {
@@ -17,6 +15,31 @@
           {
             "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1",
             "securityRuleAssociations" : {
+              "networkInterfaceAssociation": {
+                "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1",
+                "securityRules": [
+                  {
+                    "name": "default-allow-rdp",
+                    "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkSecurityGroups/nsg1/securityRules/default-allow-rdp",
+                    "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "protocol": "Tcp",
+                      "sourcePortRange": "*",
+                      "destinationPortRange": "3389",
+                      "sourceAddressPrefix": "*",
+                      "destinationAddressPrefix": "*",
+                      "access": "Allow",
+                      "priority": 1000,
+                      "direction": "Inbound",
+                      "sourcePortRanges": [],
+                      "destinationPortRanges": [],
+                      "sourceAddressPrefixes": [],
+                      "destinationAddressPrefixes": []
+                    }
+                  }
+                ]
+              },
               "subnetAssociation" : {
                 "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
                 "securityRules" : [
@@ -37,39 +60,39 @@
                       "direction" : "Inbound"
                     }
                   }
-                ],         
-                "defaultSecurityRules" : [
-                  {
-                    "name" : "AllowVnetInBound",
-                    "id" : "/subscriptions//resourceGroups//providers/Microsoft.Network/networkSecurityGroups//defaultSecurityRules/",
-                    "properties" : {
-                      "provisioningState" : "Succeeded",
-                      "description" : "Allow inbound traffic from all VMs in VNET",
-                      "protocol" : "*",
-                      "sourcePortRange" : "*",
-                      "destinationPortRange" : "*",
-                      "sourceAddressPrefix" : "VirtualNetwork",
-                      "destinationAddressPrefix" : "VirtualNetwork",
-                      "access" : "Allow",
-                      "priority" : 65000,
-                      "direction" : "Inbound"
-                    }
+                ]
+              },         
+              "defaultSecurityRules" : [
+                {
+                  "name" : "AllowVnetInBound",
+                  "id" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/",
+                  "properties" : {
+                    "provisioningState" : "Succeeded",
+                    "description" : "Allow inbound traffic from all VMs in VNET",
+                    "protocol" : "*",
+                    "sourcePortRange" : "*",
+                    "destinationPortRange" : "*",
+                    "sourceAddressPrefix" : "VirtualNetwork",
+                    "destinationAddressPrefix" : "VirtualNetwork",
+                    "access" : "Allow",
+                    "priority" : 65000,
+                    "direction" : "Inbound"
                   }
-                ],        
-                "effectiveSecurityRules" : [
-                  {
-                    "name" : "DefaultOutboundDenyAll",
-                    "protocol" : "All",
-                    "sourcePortRange" : "0-65535",
-                    "destinationPortRange" : "0-65535",
-                    "sourceAddressPrefix" : "*",
-                    "destinationAddressPrefix" : "*",
-                    "access" : "Deny",
-                    "priority" : 65500,
-                    "direction" : "Outbound"
-                  }
-                ]  
-              }
+                }
+              ],        
+              "effectiveSecurityRules" : [
+                {
+                  "name" : "DefaultOutboundDenyAll",
+                  "protocol" : "All",
+                  "sourcePortRange" : "0-65535",
+                  "destinationPortRange" : "0-65535",
+                  "sourceAddressPrefix" : "*",
+                  "destinationAddressPrefix" : "*",
+                  "access" : "Deny",
+                  "priority" : 65500,
+                  "direction" : "Outbound"
+                }
+              ]  
             }
           }
         ]
@@ -77,12 +100,37 @@
     },
     "202" : {
       "body" : {
-        "networkInterfaces": [
+        "networkInterfaces" : [
           {
-            "id" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1",
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1",
             "securityRuleAssociations" : {
+              "networkInterfaceAssociation": {
+                "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1",
+                "securityRules": [
+                  {
+                    "name": "default-allow-rdp",
+                    "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkSecurityGroups/nsg1/securityRules/default-allow-rdp",
+                    "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "protocol": "Tcp",
+                      "sourcePortRange": "*",
+                      "destinationPortRange": "3389",
+                      "sourceAddressPrefix": "*",
+                      "destinationAddressPrefix": "*",
+                      "access": "Allow",
+                      "priority": 1000,
+                      "direction": "Inbound",
+                      "sourcePortRanges": [],
+                      "destinationPortRanges": [],
+                      "sourceAddressPrefixes": [],
+                      "destinationAddressPrefixes": []
+                    }
+                  }
+                ]
+              },
               "subnetAssociation" : {
-                "id" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+                "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
                 "securityRules" : [
                   {
                     "name" : "fe_rule",
@@ -101,39 +149,39 @@
                       "direction" : "Inbound"
                     }
                   }
-                ],         
-                "defaultSecurityRules" : [
-                  {
-                    "name" : "AllowVnetInBound",
-                    "id" : "/subscriptions//resourceGroups//providers/Microsoft.Network/networkSecurityGroups//defaultSecurityRules/",
-                    "properties" : {
-                      "provisioningState" : "Succeeded",
-                      "description" : "Allow inbound traffic from all VMs in VNET",
-                      "protocol" : "*",
-                      "sourcePortRange" : "*",
-                      "destinationPortRange" : "*",
-                      "sourceAddressPrefix" : "VirtualNetwork",
-                      "destinationAddressPrefix" : "VirtualNetwork",
-                      "access" : "Allow",
-                      "priority" : 65000,
-                      "direction" : "Inbound"
-                    }
+                ]
+              },         
+              "defaultSecurityRules" : [
+                {
+                  "name" : "AllowVnetInBound",
+                  "id" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/",
+                  "properties" : {
+                    "provisioningState" : "Succeeded",
+                    "description" : "Allow inbound traffic from all VMs in VNET",
+                    "protocol" : "*",
+                    "sourcePortRange" : "*",
+                    "destinationPortRange" : "*",
+                    "sourceAddressPrefix" : "VirtualNetwork",
+                    "destinationAddressPrefix" : "VirtualNetwork",
+                    "access" : "Allow",
+                    "priority" : 65000,
+                    "direction" : "Inbound"
                   }
-                ],        
-                "effectiveSecurityRules" : [
-                  {
-                    "name" : "DefaultOutboundDenyAll",
-                    "protocol" : "All",
-                    "sourcePortRange" : "0-65535",
-                    "destinationPortRange" : "0-65535",
-                    "sourceAddressPrefix" : "*",
-                    "destinationAddressPrefix" : "*",
-                    "access" : "Deny",
-                    "priority" : 65500,
-                    "direction" : "Outbound"
-                  }
-                ]  
-              }
+                }
+              ],        
+              "effectiveSecurityRules" : [
+                {
+                  "name" : "DefaultOutboundDenyAll",
+                  "protocol" : "All",
+                  "sourcePortRange" : "0-65535",
+                  "destinationPortRange" : "0-65535",
+                  "sourceAddressPrefix" : "*",
+                  "destinationAddressPrefix" : "*",
+                  "access" : "Deny",
+                  "priority" : 65500,
+                  "direction" : "Outbound"
+                }
+              ]  
             }
           }
         ]

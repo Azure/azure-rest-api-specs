@@ -107,13 +107,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/timeseriesinsights/mgmt/2017-11-15/timeseriesinsights
 ```
 
-### Tag: package-2017-11-15 and go
+### Tag: package-2017-02-preview and go
 
 These settings apply only when `--tag=package-2017-02-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-02-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/timeseriesinsights/mgmt/2017-02-28-preview/timeseriesinsights
+output-folder: $(go-sdk-folder)/services/preview/timeseriesinsights/mgmt/2017-02-28-preview/timeseriesinsights
 ```
 
 ## Java

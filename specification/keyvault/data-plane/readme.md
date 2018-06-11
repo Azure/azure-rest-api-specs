@@ -1,5 +1,5 @@
 # KeyVault
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for KeyVault.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for KeyVault.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the KeyVault API.
 
 ``` yaml
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 input-file:
 - Microsoft.KeyVault/stable/2016-10-01/keyvault.json
 ```
- 
+
 ### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
@@ -69,10 +69,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -130,8 +131,18 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-7.0-preview
   - tag: package-2016-10
   - tag: package-2015-06
+```
+
+### Tag: package-7.0-preview and go
+
+These settings apply only when `--tag=package-7.0-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-7.0-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/keyvault/v7.0/keyvault
 ```
 
 ### Tag: package-2016-10 and go

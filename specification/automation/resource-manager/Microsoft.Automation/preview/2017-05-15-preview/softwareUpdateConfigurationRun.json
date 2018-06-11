@@ -6,7 +6,10 @@
     "contact": {
       "name": "Mohamed Enein"
     },
-    "version": "2017-05-15-preview"
+    "version": "2017-05-15-preview",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true
+    }
   },
   "consumes": [
     "application/json"
@@ -55,13 +58,13 @@
         "operationId": "SoftwareUpdateConfigurationRuns_GetById",
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/automationAccountName"
+            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "softwareUpdateConfigurationRunId",
@@ -72,7 +75,7 @@
             "format": "uuid"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/clientRequestId"
@@ -87,6 +90,12 @@
           },
           "404": {
             "description": "Resource group, account, or software update configuration doesn't exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -111,19 +120,19 @@
         "operationId": "SoftwareUpdateConfigurationRuns_List",
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/automationAccountName"
+            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/clientRequestId"
+            "$ref": "./definitions.json#/parameters/clientRequestId"
           },
           {
             "name": "$filter",
@@ -156,6 +165,12 @@
           },
           "404": {
             "description": "Resource group, or account doesn't exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }

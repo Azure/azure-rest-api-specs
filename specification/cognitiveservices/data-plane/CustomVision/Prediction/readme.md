@@ -17,17 +17,21 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: stable/v1.1/Prediction.json
+input-file: stable/v2.0/Prediction.json
+```
+
+# Validation
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3017  # GuidUsage
+    reason:
+      - Existing service and previous versions use Guid as ids.
 ```
 
 # Code Generation
-
-## Suppression
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: Live service and portal doesn't use came case properties
-```
 
 ## Swagger to SDK
 
@@ -36,6 +40,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
 ```
 
@@ -43,11 +48,11 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
-  sync-methods: None
+  sync-methods: all
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Vision/Generated/CustomVision/Prediction
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/CustomVision/Prediction/Generated
   clear-output-folder: true
 ```
 
@@ -75,4 +80,48 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision
+```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: prediction
+  clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: release_1_0
+```
+
+### Tag: release_1_0 and go
+
+These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'release_1_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.1/customvision/$(namespace)
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  namespace: com.microsoft.azure.cognitiveservices.vision.customvision.prediction
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/vision/customvision/prediction
+  with-optional-parameters: true
+  with-single-async-method: true
 ```

@@ -24,7 +24,7 @@ These are the global settings for the Batch AI.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-09-preview
+tag: package-2018-05
 ```
 
 
@@ -33,8 +33,26 @@ tag: package-2017-09-preview
 These settings apply only when `--tag=package-2017-09-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-09-preview'
-input-file: 
+input-file:
 - Microsoft.BatchAI/preview/2017-09-01-preview/BatchAI.json
+```
+
+### Tag: package-2018-03
+
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file:
+- Microsoft.BatchAI/stable/2018-03-01/BatchAI.json
+```
+
+### Tag: package-2018-05
+
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05'
+input-file:
+- Microsoft.BatchAI/stable/2018-05-01/BatchAI.json
 ```
 
 ---
@@ -49,8 +67,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -112,6 +131,8 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-09-preview
+  - tag: package-2018-03
+  - tag: package-2018-05
 ```
 
 ### Tag: package-2017-09-preview and go
@@ -120,9 +141,26 @@ These settings apply only when `--tag=package-2017-09-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-09-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/batchai/mgmt/2017-09-preview/batchai
+output-folder: $(go-sdk-folder)/services/preview/batchai/mgmt/2017-09-preview/batchai
 ```
 
+### Tag: package-2018-03 and go
+
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-03' && $(go)
+output-folder: $(go-sdk-folder)/services/batchai/mgmt/2018-03-01/batchai
+```
+
+### Tag: package-2018-05 and go
+
+These settings apply only when `--tag=package-2018-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-05' && $(go)
+output-folder: $(go-sdk-folder)/services/batchai/mgmt/2018-05-01/batchai
+```
 
 ## Java
 

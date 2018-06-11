@@ -1,5 +1,5 @@
 # ServiceBus
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for ServiceBus.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for ServiceBus.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for ServiceBus, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the ServiceBus API.
 
 ``` yaml
@@ -42,7 +42,7 @@ input-file:
 
 Important notes:
 On the advice of @fearthecowboy, the  `EncodingCaptureDescription` enum previously contained two values [`Avro`,`AvroDeflate`] ; the service has been changed (on 2018-01-17) and will not ever return the `AvroDeflate` value,
- however, we have left the value in the enum (in servicebus.json) so that existing clients won't suffer a binary breaking change 
+ however, we have left the value in the enum (in servicebus.json) so that existing clients won't suffer a binary breaking change
 The `AvroDeflate` value will likely be removed in a future API version, and at that a breaking binary change may happen.
 
 ### Tag: package-2015-08
@@ -69,10 +69,14 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_bus']
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -100,6 +104,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.servicebus
   package-name: azure-mgmt-servicebus
+  package-version: 0.5.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
