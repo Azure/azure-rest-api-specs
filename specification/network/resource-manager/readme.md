@@ -31,6 +31,37 @@ openapi-type: arm
 tag: package-2018-04
 ```
 
+### Tag: package-2018-05
+
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05'
+
+input-file:
+- Microsoft.Network/stable/2018-05-01/applicationGateway.json
+- Microsoft.Network/stable/2018-05-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2018-05-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-05-01/ddosProtectionPlan.json
+- Microsoft.Network/stable/2018-05-01/endpointService.json
+- Microsoft.Network/stable/2018-05-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-05-01/expressRouteCrossConnection.json
+- Microsoft.Network/stable/2018-05-01/loadBalancer.json
+- Microsoft.Network/stable/2018-05-01/network.json
+- Microsoft.Network/stable/2018-05-01/networkInterface.json
+- Microsoft.Network/stable/2018-05-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2018-05-01/networkWatcher.json
+- Microsoft.Network/stable/2018-05-01/operation.json
+- Microsoft.Network/stable/2018-05-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-05-01/routeFilter.json
+- Microsoft.Network/stable/2018-05-01/routeTable.json
+- Microsoft.Network/stable/2018-05-01/serviceCommunity.json
+- Microsoft.Network/stable/2018-05-01/usage.json
+- Microsoft.Network/stable/2018-05-01/virtualNetwork.json
+- Microsoft.Network/stable/2018-05-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-05-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2018-05-01/vmssPublicIpAddress.json
+```
+
 ### Tag: package-2018-04
 
 These settings apply only when `--tag=package-2018-04` is specified on the command line.
@@ -515,6 +546,96 @@ input-file:
 - Microsoft.Network/preview/2015-05-01-preview/network.json
 ```
 
+## Suppression  
+``` yaml
+directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: applicationGateway.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: applicationSecurityGroup.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: checkDnsAvailability.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: ddosProtectionPlan.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: endpointService.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRouteCircuit.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRouteCrossConnection.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: loadBalancer.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkInterface.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkSecurityGroup.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkWatcher.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: operation.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: publicIpAddress.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: routeFilter.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: routeTable.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: serviceCommunity.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: usage.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualNetwork.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualNetworkGateway.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: TrackedResourceListByImmediateParent
+    reason: Another list APIs naming approach is used over the specs
+  - suppress: EnumInsteadOfBoolean
+    reason: Booleans are used by networking APIs
+  - suppress: GetInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability"].get.operationId
+    reason: Customized verb is used for API
+  - suppress: GetInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability"].get.operationId
+    reason: Customized verb is used for API
+  - suppress: PutInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey"].put.operationId
+    reason: Customized verb is used for API
+  - suppress: PostOperationIdContainsUrlVerb
+    from: networkWatcher.json
+    reason: Customized verbs are used for API
+  - suppress: PostOperationIdContainsUrlVerb
+    from: expressRouteCircuit.json
+    reason: Customized verbs are used for API
+  - suppress: PostOperationIdContainsUrlVerb
+    from: expressRouteCrossConnection.json
+    reason: Customized verbs are used for API
+  - suppress: OperationIdNounVerb
+    from: vmssPublicIpAddress.json
+    reason: VMSS specs have custom naming
+  - suppress: OperationIdNounVerb
+    from: vmssNetworkInterface.json
+    reason: VMSS specs have custom naming
+```
+
 ---
 # Code Generation
 
@@ -532,23 +653,10 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_network']
 ```
-
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Network
-  output-folder: $(csharp-sdks-folder)/Network/Management.Network/Generated
-  clear-output-folder: true
-```
-
 
 ## Go
 
@@ -565,6 +673,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-05
   - tag: package-2018-04
   - tag: package-2018-02
   - tag: package-2018-01
@@ -580,6 +689,15 @@ batch:
   - tag: package-2016-03
   - tag: package-2015-06split
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2018-05 and go
+
+These settings apply only when `--tag=package-2018-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-05' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2018-05-01/network
 ```
 
 ### Tag: package-2018-04 and go
@@ -755,6 +873,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-04
   - tag: package-2018-02
   - tag: package-2018-01
   - tag: package-2017-11
@@ -766,6 +885,17 @@ batch:
   - tag: package-2016-12
   - tag: package-2016-09
   - tag: package-2015-06split
+```
+
+### Tag: package-2018-04 and python
+
+These settings apply only when `--tag=package-2018-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(python)
+python:
+  namespace: azure.mgmt.network.v2018_04_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-network/azure/mgmt/network/v2018_04_01
 ```
 
 ### Tag: package-2018-02 and python

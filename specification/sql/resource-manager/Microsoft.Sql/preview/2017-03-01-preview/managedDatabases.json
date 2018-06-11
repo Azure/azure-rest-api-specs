@@ -473,57 +473,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ManagedDatabase": {
       "description": "A managed database resource.",
       "required": [
@@ -532,7 +481,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {

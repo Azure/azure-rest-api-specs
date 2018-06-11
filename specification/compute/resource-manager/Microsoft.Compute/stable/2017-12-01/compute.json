@@ -5153,7 +5153,7 @@
     },
     "CreateOption": {
       "type": "string",
-      "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.",
+      "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.",
       "enum": [
         "FromImage",
         "Empty",
@@ -5230,7 +5230,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -5276,7 +5276,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach**  This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -5952,6 +5952,15 @@
       },
       "description": "Describes a virtual machine scale set sku."
     },
+    "AutoOSUpgradePolicy": {
+      "properties": {
+        "disableAutoRollback": {
+          "type": "boolean",
+          "description": "Whether OS image rollback feature should be disabled. Default value is false."
+        }
+      },
+      "description": "The configuration parameters used for performing automatic OS upgrade."
+    },
     "UpgradePolicy": {
       "properties": {
         "mode": {
@@ -5974,6 +5983,10 @@
         "automaticOSUpgrade": {
           "type": "boolean",
           "description": "Whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the image becomes available."
+        },
+        "autoOSUpgradePolicy": {
+          "$ref": "#/definitions/AutoOSUpgradePolicy",
+          "description": "Configuration parameters used for performing automatic OS Upgrade."
         }
       },
       "description": "Describes an upgrade policy - automatic, manual, or rolling."
@@ -6328,7 +6341,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage**  This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "osType": {
           "type": "string",
@@ -7351,10 +7364,10 @@
         "rollbackError" : {
           "$ref": "#/definitions/ApiError",
           "readOnly": true,
-          "description": "Error Details if OS rollback failed."
+          "description": "Error details if OS rollback failed."
         }
       },
-      "description": "Information about rollback on failed VM instances after a OS Upgrade operation"
+      "description": "Information about rollback on failed VM instances after a OS Upgrade operation."
     },
     "UpgradeOperationHistoryStatus": {
       "properties": {

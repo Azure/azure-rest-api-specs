@@ -100,6 +100,80 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions": {
+            "post": {
+                "x-ms-examples": {
+                    "Move user subscriptions from the Default Provider to a Delegated Provider.": {
+                        "$ref": "./examples/Subscriptions/MoveSubscriptionsToDelegatedProvider.json"
+                    },
+                    "Move user subscriptions from a Delegated Provider to the Default Provider.": {
+                        "$ref": "./examples/Subscriptions/MoveSubscriptionsToDefaultProvider.json"
+                    }
+                },
+                "description": "Move subscriptions between delegated provider offers.",
+                "tags": [
+                    "Subscriptions"
+                ],
+                "operationId": "Subscriptions_MoveSubscriptions",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/MoveSubscriptionsParameter"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content -- The subscriptions were successfully moved to the target delegated provider offer."
+                    },
+                    "202": {
+                        "description": "Accepted -- Move subscriptions request accepted; operation will complete asynchronously."
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/validateMoveSubscriptions": {
+            "post": {
+                "x-ms-examples": {
+                    "Validate that user subscriptions can be moved from the Default Provider to a Delegated Provider.": {
+                        "$ref": "./examples/Subscriptions/ValidateMoveSubscriptionsToDelegatedProvider.json"
+                    },
+                    "Validate that user subscriptions can be moved from a Delegated Provider to the Default Provider.": {
+                        "$ref": "./examples/Subscriptions/ValidateMoveSubscriptionsToDefaultProvider.json"
+                    }
+                },
+                "description": "Validate that user subscriptions can be moved between delegated provider offers.",
+                "tags": [
+                    "Subscriptions"
+                ],
+                "operationId": "Subscriptions_ValidateMoveSubscriptions",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/MoveSubscriptionsParameter"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content -- The subscriptions can be moved to the target delegated provider offer."
+                    },
+                    "202": {
+                        "description": "Accepted -- Validate move subscriptions request accepted; operation will complete asynchronously."
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions": {
             "get": {
                 "x-ms-examples": {
@@ -410,6 +484,26 @@
             "x-ms-enum": {
                 "name": "NameUnavailabilityReason",
                 "modelAsString": true
+            }
+        },
+        "MoveSubscriptionsDefinition": {
+            "description": "The move subscriptions action definition",
+            "type": "object",
+            "required": [
+                "resources"
+            ],
+            "properties": {
+                "targetDelegatedProviderOffer": {
+                    "description": "The delegated provider offer identifier (from the Admin context) that the subscriptions to be moved to.",
+                    "type": "string"
+                },
+                "resources": {
+                    "description": "A collection of subscriptions to move to the target delegated provider offer.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
             }
         },
         "Subscription": {
@@ -836,6 +930,16 @@
             "in": "body",
             "schema": {
                 "$ref": "#/definitions/CheckNameAvailabilityDefinition"
+            },
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "MoveSubscriptionsParameter": {
+            "description": "Move subscriptions parameter.",
+            "name": "moveSubscriptionsDefinition",
+            "in": "body",
+            "schema": {
+                "$ref": "#/definitions/MoveSubscriptionsDefinition"
             },
             "required": true,
             "x-ms-parameter-location": "method"

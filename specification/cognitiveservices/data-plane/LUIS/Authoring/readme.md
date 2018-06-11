@@ -2,28 +2,28 @@
 
 > see https://aka.ms/autorest
 
-Configuration for generating LUIS Programmatic SDK.
+Configuration for generating LUIS Authoring SDK.
 
 ``` yaml
-tag: programmatic_2_0
+tag: authoring_2_0
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the Programmatic Endpoint is `programmatic_2_0`.
+The current release for the Authoring Endpoint is `authoring_2_0`.
 
 # Releases
 
-## Programmatic 2.0
-These settings apply only when `--tag=programmatic_2_0` is specified on the command line.
+## Authoring 2.0
+These settings apply only when `--tag=authoring_2_0` is specified on the command line.
 
-``` yaml $(tag) == 'programmatic_2_0'
-input-file: stable/v2.0/LUIS-Programmatic.json
+``` yaml $(tag) == 'authoring_2_0'
+input-file: stable/v2.0/LUIS-Authoring.json
 ```
 
 Deprecated Pattern's Operations
 
-``` yaml $(tag) == 'programmatic_2_0'
+``` yaml $(tag) == 'authoring_2_0'
 directive:
   - reason: Deprecated
     remove-operation: Features_GetApplicationVersionPatternFeatures
@@ -62,16 +62,16 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
 ```
 
-### Programmatic 2.0 - CSharp Settings
+### Authoring 2.0 - CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  override-client-name: LuisProgrammaticAPI
+  override-client-name: LuisAuthoringAPI
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Programmatic/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Authoring/Generated
   clear-output-folder: true
 ```
 
@@ -82,7 +82,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: programmatic
+  namespace: authoring
   clear-output-folder: true
 ```
 
@@ -90,16 +90,16 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: programmatic_2_0
+  - tag: authoring_2_0
 ```
 
-### Tag: programmatic_2_0 and go
+### Tag: authoring_2_0 and go
 
-These settings apply only when `--tag=programmatic_2_0 --go` is specified on the command line.
+These settings apply only when `--tag=authoring_2_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'programmatic_2_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/luis/programmatic
+``` yaml $(tag) == 'authoring_2_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/luis/$(namespace)
 ```
 
 
@@ -111,9 +111,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.cognitiveservices.luis.programmatic
+  namespace: com.microsoft.azure.cognitiveservices.language.luis.authoring
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/luis/programmatic
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/language/luis/authoring
+  with-optional-parameters: true
+  with-single-async-method: true
 ```

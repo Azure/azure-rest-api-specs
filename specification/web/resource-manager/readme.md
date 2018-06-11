@@ -282,23 +282,12 @@ swagger-to-sdk:
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_web']
 ```
 
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # last generated with commit e416af734666d658a04530df605f60480c01cc10
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.WebSites
-  output-folder: $(csharp-sdks-folder)/WebSites/Management.WebSites/Generated
-  clear-output-folder: true
-```
 
 ## Python
 
