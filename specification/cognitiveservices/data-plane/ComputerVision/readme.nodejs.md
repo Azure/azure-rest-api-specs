@@ -6,7 +6,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-computervision
-  package-version: 1.0.0-preview
+  package-version: 2.0.0-preview
   output-folder: $(node-sdks-folder)/lib/services/computerVision
   override-client-name: ComputerVisionAPIClient
   azure-arm: false
