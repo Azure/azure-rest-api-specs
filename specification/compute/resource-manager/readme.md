@@ -409,7 +409,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-compute
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -669,11 +669,72 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.compute
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-compute
+```
+
+### Java multi-api
+
+```yaml $(java) && $(multiapi)
+batch:
+  - tag: package-disks-2018-04
+  - tag: package-compute-only-2017-12
+  - tag: package-skus-2017-09
+  - tag: package-compute-2017-03
+```
+
+### Tag: package-disks-2018-04 and java
+
+These settings apply only when `--tag=package-disks-2018-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-disks-2018-04' && $(java) && $(multiapi)
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.compute
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-compute
+  namespace: com.microsoft.azure.management.compute.v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2018_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-compute-only-2017-12 and java
+
+These settings apply only when `--tag=package-compute-only-2017-12 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-compute-only-2017-12' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.compute.v2017_12_01
+  output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2017_12_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-skus-2017-09 and java
+
+These settings apply only when `--tag=package-skus-2017-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-skus-2017-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.compute.v2017_09_01
+  output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2017_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-compute-2017-03 and java
+
+These settings apply only when `--tag=package-compute-2017-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-compute-2017-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.compute.v2017_03_30
+  output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2017_03_30
+regenerate-manager: true
+generate-interface: true
 ```
