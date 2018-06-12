@@ -358,14 +358,14 @@
     },
     "/recognizeText": {
       "post": {
-        "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Handwritten Text Operation Result operation.",
+        "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Recognize Text Operation Result operation.",
         "operationId": "RecognizeText",
         "parameters": [
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
           },
           {
-            "$ref": "#/parameters/HandwritingBoolean"
+            "$ref": "#/parameters/TextRecognitionMode"
           }
         ],
         "consumes": [
@@ -406,7 +406,7 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "Id of the text operation returned in the response of the 'Recognize Handwritten Text'",
+            "description": "Id of the text operation returned in the response of the 'Recognize Text'",
             "required": true,
             "type": "string"
           }
@@ -734,11 +734,11 @@
     },
     "/recognizeText?overload=stream": {
       "post": {
-        "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Handwritten Text Operation Result operation.",
+        "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Recognize Text Operation Result operation.",
         "operationId": "RecognizeTextInStream",
         "parameters": [
           {
-            "$ref": "#/parameters/HandwritingBoolean"
+            "$ref": "#/parameters/TextRecognitionMode"
           },
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
@@ -1457,14 +1457,21 @@
       "type": "boolean",
       "default": true
     },
-    "HandwritingBoolean": {
-      "name": "detectHandwriting",
+    "TextRecognitionMode": {
+      "name": "mode",
       "in": "query",
-      "description": "If 'true' is specified, handwriting recognition is performed. If this parameter is set to 'false' or is not specified, printed text recognition is performed.",
-      "required": false,
+      "description": "Type of text to recognize, either 'Handwritten', or 'Printed'.",
+      "required": true,
       "x-ms-parameter-location": "method",
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TextRecognitionMode",
+        "modelAsString": false
+      },
+      "enum": [
+        "Handwritten",
+        "Printed"
+      ]
     },
     "ServiceLanguage": {
       "name": "language",
