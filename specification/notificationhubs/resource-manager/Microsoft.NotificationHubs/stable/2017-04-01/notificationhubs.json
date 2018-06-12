@@ -1028,7 +1028,7 @@
           "201": {
             "description": "push send status",
             "schema": {
-              "$ref": "#/definitions/NotificationHubResource"
+              "$ref": "#/definitions/DebugSendResponse"
             }
           }
         }
@@ -2164,6 +2164,21 @@
       ],
       "description": "Description of a NotificationHub Resource."
     },
+    "DebugSendResponse": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DebugSendResult",
+          "description": "Properties of the NotificationHub."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a NotificationHub Resource."
+    },
     "PnsCredentialsResource": {
       "properties": {
         "properties": {
@@ -2264,6 +2279,23 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DebugSendResult": {
+      "properties": {
+        "success": {
+          "type": "number",
+          "description": "successful send"
+        },
+        "failure": {
+          "type": "number",
+          "description": "send failure"
+        },
+        "results": {
+          "type": "string",
+          "description": "actual failure description"
         }
       },
       "x-ms-azure-resource": true
