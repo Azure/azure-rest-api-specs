@@ -678,16 +678,7 @@
           "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "osType": {
-          "type": "string",
-          "default": "Linux",
-          "enum": [
-            "Linux",
-            "Windows"
-          ],
-          "x-ms-enum": {
-            "name": "OSType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/OSType",
           "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
         }
       },
@@ -873,6 +864,19 @@
         "linuxProfile"
       ],
       "description": "Properties of the container service."
+    },
+    "OSType": {
+      "type": "string",
+      "default": "Linux",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "name": "OSType",
+        "modelAsString": true
+      },
+      "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
     }
   },
   "parameters": {
