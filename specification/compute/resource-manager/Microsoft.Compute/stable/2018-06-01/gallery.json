@@ -90,7 +90,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -135,7 +135,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -182,7 +182,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -257,7 +257,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -309,7 +309,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -363,7 +363,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -445,7 +445,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -518,7 +518,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -582,7 +582,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -622,7 +622,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -661,7 +661,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -710,7 +710,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -766,7 +766,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1294,6 +1294,43 @@
       ],
       "description": "The List Gallery Image version operation response."
     },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ApiError"
+        }
+      },
+      "description": "An error response from the Gallery service."
+    },
+    "ApiError": {
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiErrorBase"
+          },
+          "description": "The Api error details"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "The Api inner error"
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "Api error."
+    },
     "ApiErrorBase": {
       "properties": {
         "code": {
@@ -1323,34 +1360,6 @@
         }
       },
       "description": "Inner error details."
-    },
-    "ApiError": {
-      "properties": {
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiErrorBase"
-          },
-          "description": "The Api error details"
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        },
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error."
     },
     "Resource": {
       "description": "The Resource model definition.",
