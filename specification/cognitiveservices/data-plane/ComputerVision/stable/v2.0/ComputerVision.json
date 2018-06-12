@@ -738,10 +738,10 @@
         "operationId": "RecognizeTextInStream",
         "parameters": [
           {
-            "$ref": "#/parameters/TextRecognitionMode"
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/TextRecognitionMode"
           }
         ],
         "consumes": [
@@ -1460,7 +1460,7 @@
     "TextRecognitionMode": {
       "name": "mode",
       "in": "query",
-      "description": "Type of text to recognize, either 'Handwritten', or 'Printed'.",
+      "description": "Type of text to recognize.",
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string",
