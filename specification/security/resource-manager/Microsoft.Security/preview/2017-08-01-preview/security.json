@@ -35,7 +35,7 @@
                 },
                 "tags": ["Pricings"],
                 "description": "Security pricing configurations in the subscription",
-                "operationId": "PricingsSubscription_List",
+                "operationId": "Pricings_List",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -69,7 +69,7 @@
                 },
                 "tags": ["Pricings"],
                 "description": "Security pricing configurations in the resource group",
-                "operationId": "PricingsResourceGroup_List",
+                "operationId": "Pricings_ListByResourceGroup",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -90,6 +90,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -102,7 +105,7 @@
                 },
                 "tags": ["Pricings"],
                 "description": "Security pricing configuration in the subscriptionSecurity pricing configuration in the subscription",
-                "operationId": "PricingsSubscription_Get",
+                "operationId": "Pricings_GetSubscriptionPricing",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -133,7 +136,7 @@
                 },
                 "tags": ["Pricings"],
                 "description": "Security pricing configuration in the subscription",
-                "operationId": "PricingsSubscription_Create",
+                "operationId": "Pricings_UpdateSubscriptionPricing",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -168,7 +171,7 @@
                 },
                 "tags": ["Pricings"],
                 "description": "Security pricing configuration in the resource group",
-                "operationId": "PricingsResourceGroup_Get",
+                "operationId": "Pricings_GetResourceGroupPricing",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -201,7 +204,7 @@
                 },
                 "tags": ["Pricings"],
                 "description": "Security pricing configuration in the resource group",
-                "operationId": "PricingsResourceGroup_Create",
+                "operationId": "Pricings_CreateOrUpdateResourceGroupPricing",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -238,7 +241,7 @@
                 },
                 "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
-                "operationId": "SecurityContactSubscription_List",
+                "operationId": "SecurityContacts_List",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -256,44 +259,14 @@
                         "schema": {
                             "$ref": "#/definitions/CloudError"
                         }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityContacts": {
-            "get": {
-                "x-ms-examples": {
-                    "Update security contact data": {
-                        "$ref": "./examples/SecurityContacts/GetSecurityContactsResourceGroup_example.json"
                     }
                 },
-                "tags": ["Security Contacts"],
-                "description": "Security contact configurations for the subscription",
-                "operationId": "SecurityContactResourceGroup_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/SecurityContactList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityContacts/{securityContactName}": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityContacts/{securityContactName}": {
             "get": {
                 "x-ms-examples": {
                     "Get security contact data": {
@@ -302,15 +275,13 @@
                 },
                 "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
-                "operationId": "SecurityContactResourceGroup_Get",
+                "operationId": "SecurityContacts_Get",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
                     "$ref": "#/parameters/SubscriptionId"
                 }, {
                     "$ref": "#/parameters/SecurityContactName"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
                 }],
                 "responses": {
                     "200": {
@@ -335,7 +306,7 @@
                 },
                 "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
-                "operationId": "SecurityContactResourceGroup_Create",
+                "operationId": "SecurityContacts_Crete",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -344,8 +315,6 @@
                     "$ref": "#/parameters/SecurityContactName"
                 }, {
                     "$ref": "#/parameters/SecurityContact"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
                 }],
                 "responses": {
                     "200": {
@@ -370,15 +339,13 @@
                 },
                 "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
-                "operationId": "SecurityContactResourceGroup_Delete",
+                "operationId": "SecurityContacts_Delete",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
                     "$ref": "#/parameters/SubscriptionId"
                 }, {
                     "$ref": "#/parameters/SecurityContactName"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
                 }],
                 "responses": {
                     "200": {
@@ -400,7 +367,7 @@
                 },
                 "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
-                "operationId": "SecurityContactResourceGroup_Update",
+                "operationId": "SecurityContacts_Update",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -409,8 +376,6 @@
                     "$ref": "#/parameters/SecurityContactName"
                 }, {
                     "$ref": "#/parameters/SecurityContact"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
                 }],
                 "responses": {
                     "200": {
@@ -432,12 +397,12 @@
             "get": {
                 "x-ms-examples": {
                     "Get workspace settings on subscription": {
-                        "$ref": "./examples/WorkspaceSettings/GetWorkspaceSettingsSubscription_example.json"
+                        "$ref": "./examples/WorkspaceSettings/GetWorkspaceSettings_example.json"
                     }
                 },
                 "tags": ["Workspace Settings"],
                 "description": "Settings about where we should store your security data and logs",
-                "operationId": "WorkspaceSettingsSubscription_List",
+                "operationId": "WorkspaceSettings_List",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -466,12 +431,12 @@
             "get": {
                 "x-ms-examples": {
                     "Get a workspace setting on subscription": {
-                        "$ref": "./examples/WorkspaceSettings/GetWorkspaceSettingSubscription_example.json"
+                        "$ref": "./examples/WorkspaceSettings/GetWorkspaceSetting_example.json"
                     }
                 },
                 "tags": ["Workspace Settings"],
                 "description": "Settings about where we should store your security data and logs",
-                "operationId": "WorkspaceSettingsSubscription_Get",
+                "operationId": "WorkspaceSettings_Get",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -497,12 +462,12 @@
             "put": {
                 "x-ms-examples": {
                     "Create a workspace setting data for subscription": {
-                        "$ref": "./examples/WorkspaceSettings/CreateWorkspaceSettingSubscription_example.json"
+                        "$ref": "./examples/WorkspaceSettings/CreateWorkspaceSetting_example.json"
                     }
                 },
                 "tags": ["Workspace Settings"],
-                "description": "Settings about where we should store your security data and logs",
-                "operationId": "WorkspaceSettingsSubscription_Create",
+                "description": "creating settings about where we should store your security data and logs",
+                "operationId": "WorkspaceSettings_Create",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -530,12 +495,12 @@
             "patch": {
                 "x-ms-examples": {
                     "Update a workspace setting data for subscription": {
-                        "$ref": "./examples/WorkspaceSettings/UpdateWorkspaceSettingSubscription_example.json"
+                        "$ref": "./examples/WorkspaceSettings/UpdateWorkspaceSetting_example.json"
                     }
                 },
                 "tags": ["Workspace Settings"],
                 "description": "Settings about where we should store your security data and logs",
-                "operationId": "WorkspaceSettingsSubscription_Update",
+                "operationId": "WorkspaceSettings_Update",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -544,112 +509,6 @@
                     "$ref": "#/parameters/WorkspaceSettingName"
                 }, {
                     "$ref": "#/parameters/WorkspaceSetting"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/WorkspaceSetting"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/workspaceSettings": {
-            "get": {
-                "x-ms-examples": {
-                    "Get workspace settings data for resource group": {
-                        "$ref": "./examples/WorkspaceSettings/GetWorkspaceSettingsResourceGroup_example.json"
-                    }
-                },
-                "tags": ["Workspace Settings"],
-                "description": "Settings about where we should store your security data and logs",
-                "operationId": "WorkspaceSettingsResourceGroups_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/WorkspaceSettingList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/workspaceSettings/{workspaceSettingName}": {
-            "get": {
-                "x-ms-examples": {
-                    "Get a workspace setting data for resource group": {
-                        "$ref": "./examples/WorkspaceSettings/GetWorkspaceSettingResourceGroup_example.json"
-                    }
-                },
-                "tags": ["Workspace Settings"],
-                "description": "Settings about where we should store your security data and logs",
-                "operationId": "WorkspaceSettingsResourceGroups_Get",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/WorkspaceSettingName"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/WorkspaceSetting"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Create a workspace setting data for resource group": {
-                        "$ref": "./examples/WorkspaceSettings/CreateWorkspaceSettingResourceGroup_example.json"
-                    }
-                },
-                "tags": ["Workspace Settings"],
-                "description": "Settings about where we should store your security data and logs",
-                "operationId": "WorkspaceSettingsResourceGroups_Create",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/WorkspaceSettingName"
-                }, {
-                    "$ref": "#/parameters/WorkspaceSetting"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
                 }],
                 "responses": {
                     "200": {
@@ -669,59 +528,22 @@
             "delete": {
                 "x-ms-examples": {
                     "Delete a workspace setting data for resource group": {
-                        "$ref": "./examples/WorkspaceSettings/DeleteWorkspaceSettingResourceGroup_example.json"
+                        "$ref": "./examples/WorkspaceSettings/DeleteWorkspaceSetting_example.json"
                     }
                 },
                 "tags": ["Workspace Settings"],
-                "description": "Settings about where we should store your security data and logs",
-                "operationId": "WorkspaceSettingsResourceGroups_Delete",
+                "description": "Deletes the custom workspace settings for this subscription. new VMs will report to the default workspace",
+                "operationId": "WorkspaceSettings_Delete",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
                     "$ref": "#/parameters/SubscriptionId"
                 }, {
                     "$ref": "#/parameters/WorkspaceSettingName"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
                 }],
                 "responses": {
                     "204": {
                         "description": "No Content"
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "x-ms-examples": {
-                    "Update a workspace setting data for resource group": {
-                        "$ref": "./examples/WorkspaceSettings/UpdateWorkspaceSettingResourceGroup_example.json"
-                    }
-                },
-                "tags": ["Workspace Settings"],
-                "description": "Settings about where we should store your security data and logs",
-                "operationId": "WorkspaceSettingsResourceGroups_Update",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/WorkspaceSettingName"
-                }, {
-                    "$ref": "#/parameters/WorkspaceSetting"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/WorkspaceSetting"
-                        }
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -762,6 +584,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -967,6 +792,11 @@
                     "items": {
                         "$ref": "#/definitions/SecurityContact"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -1164,6 +994,11 @@
                     "items": {
                         "$ref": "#/definitions/AutoProvisioningSetting"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
