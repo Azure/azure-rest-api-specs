@@ -2528,6 +2528,11 @@
           "type": "string",
           "description": "The tenant ID of resource."
         },
+        "identities": {
+          "additionalProperties": {
+            "$ref": "#/definitions/UserDefinedIdentity"
+          }
+        },
         "type": {
           "type": "string",
           "description": "The identity type.",
@@ -2544,6 +2549,19 @@
         }
       },
       "description": "Identity for the resource."
+    },
+    "UserDefinedIdentity": {
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientId", "principalId"
+      ]
     },
     "ResourceListResult": {
       "properties": {
