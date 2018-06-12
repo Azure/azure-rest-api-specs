@@ -1615,7 +1615,11 @@
       "properties": {
         "columnMappings": {
           "type": "object",
-          "description": "Column mappings. Type: string (or Expression with resultType string)."
+          "description": "Column mappings. Example: \"UserId: MyUserId, Group: MyGroup, Name: MyName\" Type: string (or Expression with resultType string)."
+        },
+        "schemaMapping": {
+          "type": "object",
+          "description": "The schema mapping to map between tabular data and hierarchical data. Example: {\"Column1\": \"$.Column1\", \"Column2\": \"$.Column2.Property1\", \"Column3\": \"$.Column2.Property2\"}. Type: object (or Expression with resultType object)."
         }
       }
     },

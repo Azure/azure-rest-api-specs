@@ -47,6 +47,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -58,7 +61,7 @@
                     }
                 },
                 "tags": ["Locations"],
-                "description": "The location of the responsible ASC of the specific subscription. For each subscription there is only one responsible location. The location in the response should be used to read or write other resources in ASC according to their ID.",
+                "description": "The location of the responsible ASC of the specific subscription (home region). For each subscription there is only one responsible location. The location in the response should be used to read or write other resources in ASC according to their ID.",
                 "operationId": "Locations_List",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
@@ -78,6 +81,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -123,7 +129,7 @@
                 },
                 "tags": ["Tasks"],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksSubscription_List",
+                "operationId": "Tasks_List",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -135,7 +141,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TaskList"
+                            "$ref": "#/definitions/SecurityTaskList"
                         }
                     },
                     "default": {
@@ -159,7 +165,7 @@
                 },
                 "tags": ["Tasks"],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksSubscriptionLocation_List",
+                "operationId": "Tasks_ListByHomeRegion",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -173,7 +179,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TaskList"
+                            "$ref": "#/definitions/SecurityTaskList"
                         }
                     },
                     "default": {
@@ -197,7 +203,7 @@
                 },
                 "tags": ["Tasks"],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksSubscriptionLocation_Get",
+                "operationId": "Tasks_GetSubscriptionLevelTask",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -211,7 +217,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Task"
+                            "$ref": "#/definitions/SecurityTask"
                         }
                     },
                     "default": {
@@ -232,7 +238,7 @@
                 },
                 "tags": ["Tasks"],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksSubscriptionLocation_Update",
+                "operationId": "Tasks_UpdateSubscriptionLevelTaskState",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -266,7 +272,7 @@
                 },
                 "tags": ["Tasks"],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksResourceGroupLocation_List",
+                "operationId": "Tasks_ListByResourceGroup",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -282,7 +288,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TaskList"
+                            "$ref": "#/definitions/SecurityTaskList"
                         }
                     },
                     "default": {
@@ -306,7 +312,7 @@
                 },
                 "tags": ["Tasks"],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksResourceGroupLocation_Get",
+                "operationId": "Tasks_GetResourceGroupLevelTask",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -322,7 +328,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Task"
+                            "$ref": "#/definitions/SecurityTask"
                         }
                     },
                     "default": {
@@ -343,7 +349,7 @@
                 },
                 "tags": ["Tasks"],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksResourceGroupLocation_Update",
+                "operationId": "Tasks_UpdateResourceGroupLevelTaskState",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -379,7 +385,7 @@
                 },
                 "tags": ["Alerts"],
                 "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsSubscription_List",
+                "operationId": "Alerts_List",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -419,7 +425,7 @@
                 },
                 "tags": ["Alerts"],
                 "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsResourceGroup_List",
+                "operationId": "Alerts_ListByResourceGroup",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -461,7 +467,7 @@
                 },
                 "tags": ["Alerts"],
                 "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsSubscriptionLocation_List",
+                "operationId": "Alerts_ListSubscriptionLevelAlertsByRegion",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -503,7 +509,7 @@
                 },
                 "tags": ["Alerts"],
                 "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsResourceGroupLocation_List",
+                "operationId": "Alerts_ListResourceGroupLevelAlertsByRegion",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -547,7 +553,7 @@
                 },
                 "tags": ["Alerts"],
                 "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsSubscriptionLocation_Get",
+                "operationId": "Alerts_GetSubscriptionLevelAlert",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -582,7 +588,7 @@
                 },
                 "tags": ["Alerts"],
                 "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsResourceGroupLocation_Get",
+                "operationId": "Alerts_GetResourceGroupLevelAlerts",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -619,7 +625,7 @@
                 },
                 "tags": ["Alerts"],
                 "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsSubscriptionLocation_Update",
+                "operationId": "Alerts_UpdateSubscriptionLevelAlertState",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -653,7 +659,7 @@
                 },
                 "tags": ["Alerts"],
                 "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsResourceGroupLocation_Update",
+                "operationId": "Alerts_UpdateResourceGroupLevelAlertState",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -689,7 +695,7 @@
                 },
                 "tags": ["DiscoveredSecuritySolutions"],
                 "description": "Gets a list of discovered Security Solutions for the subscription.",
-                "operationId": "DiscoveredSecuritySolutionsSubscription_List",
+                "operationId": "DiscoveredSecuritySolutions_List",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -710,6 +716,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -722,7 +731,7 @@
                 },
                 "tags": ["DiscoveredSecuritySolutions"],
                 "description": "Gets a list of discovered Security Solutions for the subscription and location.",
-                "operationId": "DiscoveredSecuritySolutionsSubscriptionLocation_List",
+                "operationId": "DiscoveredSecuritySolutions_ListByHomeRegion",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -746,6 +755,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -758,7 +770,7 @@
                 },
                 "tags": ["DiscoveredSecuritySolutions"],
                 "description": "Gets a specific discovered Security Solution.",
-                "operationId": "DiscoveredSecuritySolutionsSubscriptionLocation_Get",
+                "operationId": "DiscoveredSecuritySolutions_Get",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -800,7 +812,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Policies for protecting resources using Just-in-Time access control.",
-                "operationId": "JitNetworkAccessPoliciesSubscription_List",
+                "operationId": "JitNetworkAccessPolicies_List",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -821,6 +833,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -833,7 +848,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPoliciesSubscriptionLocation_List",
+                "operationId": "JitNetworkAccessPolicies_ListByHomeRegion",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -857,6 +872,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -869,7 +887,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPoliciesResourceGroup_List",
+                "operationId": "JitNetworkAccessPolicies_ListByResourceGroup",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -893,6 +911,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -905,7 +926,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_List",
+                "operationId": "JitNetworkAccessPolicies_ListByResourceGroupAndHomeRegion",
                 "produces": [
                     "application/json"
                 ],
@@ -935,6 +956,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -947,7 +971,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_Get",
+                "operationId": "JitNetworkAccessPolicies_Get",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -987,7 +1011,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Create a policy for protecting resources using Just-in-Time access control",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_Create",
+                "operationId": "JitNetworkAccessPolicies_CreateOrUpdate",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -1030,7 +1054,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Delete a Just-in-Time access control policy.",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_Delete",
+                "operationId": "JitNetworkAccessPolicies_Delete",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -1069,7 +1093,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Perform an action on a specific Just-in-Time policy configuration.",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_Update",
+                "operationId": "JitNetworkAccessPolicies_Invoke",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -1093,8 +1117,8 @@
                     }
                 ],
                 "responses": {
-                    "204": {
-                        "description": "No Content"
+                    "202": {
+                        "description": "Accepted"
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -1114,7 +1138,7 @@
                 },
                 "description": "Gets a list of external security solutions for the subscription.",
                 "tags": ["ExternalSecuritySolutions"],
-                "operationId": "ExternalSecuritySolutionsSubscription_List",
+                "operationId": "ExternalSecuritySolutions_List",
                 "parameters": [{
                         "$ref": "#/parameters/ApiVersion"
                     },
@@ -1135,6 +1159,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -1147,7 +1174,7 @@
                 },
                 "description": "Gets a list of external Security Solutions for the subscription and location.",
                 "tags": ["ExternalSecuritySolutions"],
-                "operationId": "ExternalSecuritySolutionsSubscriptionLocation_List",
+                "operationId": "ExternalSecuritySolutions_ListByHomeRegion",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -1171,6 +1198,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -1183,7 +1213,7 @@
                 },
                 "description": "Gets a specific external Security Solution.",
                 "tags": ["ExternalSecuritySolutions"],
-                "operationId": "ExternalSecuritySolutionsSubscriptionLocation_Get",
+                "operationId": "ExternalSecuritySolutions_Get",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -1301,6 +1331,11 @@
                     "items": {
                         "$ref": "#/definitions/Operation"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -1349,7 +1384,7 @@
                 }
             }
         },
-        "TaskList": {
+        "SecurityTaskList": {
             "type": "object",
             "description": "List of security task recommendations",
             "properties": {
@@ -1357,7 +1392,7 @@
                     "readOnly": true,
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Task"
+                        "$ref": "#/definitions/SecurityTask"
                     }
                 },
                 "nextLink": {
@@ -1367,20 +1402,20 @@
                 }
             }
         },
-        "Task": {
+        "SecurityTask": {
             "type": "object",
             "description": "Security task that we recommend to do in order to strengthen security",
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/TaskProperties"
+                    "$ref": "#/definitions/SecurityTaskProperties"
                 }
             },
             "allOf": [{
                 "$ref": "#/definitions/Resource"
             }]
         },
-        "TaskProperties": {
+        "SecurityTaskProperties": {
             "type": "object",
             "description": "Describes properties of a task.",
             "properties": {
@@ -1435,6 +1470,11 @@
                     "items": {
                         "$ref": "#/definitions/AscLocation"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -1648,6 +1688,11 @@
                     "items": {
                         "$ref": "#/definitions/DiscoveredSecuritySolution"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -1728,6 +1773,11 @@
                     "items": {
                         "$ref": "#/definitions/JitNetworkAccessPolicy"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -2028,6 +2078,11 @@
                     "items": {
                         "$ref": "#/definitions/ExternalSecuritySolution"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -2036,7 +2091,7 @@
             "description": "Represents a security solution external to Azure Security Center which sends information to an OMS workspace and whos data is displayed by Azure Security Center.",
             "discriminator": "kind",
             "properties": {
-                "properties": {
+                "properties":{
                     "additionalProperties": {
                         "type": "object"
                     }
