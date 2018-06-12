@@ -3,7 +3,10 @@
   "info": {
     "title": "Microsoft Storage Sync",
     "description": "Microsoft Storage Sync Service API",
-    "version": "2017-06-05-preview"
+    "version": "2017-06-05-preview",
+	"x-ms-code-generation-settings": {
+      "name": "StorageSyncManagementClient"
+     }
   },
   "host": "azure.microsoft.com",
   "schemes": [
@@ -22,7 +25,7 @@
           "ResourceProvider",
           "Operations"
         ],
-        "operationId": "OperationGet_list",
+        "operationId": "Operations_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -30,8 +33,8 @@
         ],
         "description": "Lists all of the available Storage Sync Rest API operations.",
         "x-ms-examples": {
-          "OperationGet_list": {
-            "$ref": "./examples/OperationGet_list.json"
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "responses": {
@@ -305,11 +308,11 @@
         "tags": [
           "StorageSyncServices Resource"
         ],
-        "operationId": "StorageSyncServiceByResourceGroupGet_list",
+        "operationId": "StorageSyncServices_ListByResourceGroup",
         "description": "Get a StorageSyncService list by Resource group name.",
         "x-ms-examples": {
-          "StorageSyncServiceGet_ListByResourceGroup": {
-            "$ref": "./examples/StorageSyncServiceGet_ListByResourceGroup.json"
+          "StorageSyncServices_ListByResourceGroup": {
+            "$ref": "./examples/StorageSyncServices_ListByResourceGroup.json"
           }
         },
         "responses": {
@@ -354,11 +357,11 @@
         "tags": [
           "StorageSyncServices Resource"
         ],
-        "operationId": "StorageSyncServiceGet_ListBySubscription",
+        "operationId": "StorageSyncServices_ListBySubscription",
         "description": "Get a StorageSyncService list by subscription.",
         "x-ms-examples": {
-          "StorageSyncServiceGet_ListBySubscription": {
-            "$ref": "./examples/StorageSyncServiceGet_ListBySubscription.json"
+          "StorageSyncServices_ListBySubscription": {
+            "$ref": "./examples/StorageSyncServices_ListBySubscription.json"
           }
         },
         "responses": {
@@ -413,11 +416,11 @@
         "tags": [
           "SyncGroup Resource"
         ],
-        "operationId": "GetSyncGroups_ListByStorageSyncService",
+        "operationId": "SyncGroups_ListByStorageSyncService",
         "description": "Get a SyncGroup List.",
         "x-ms-examples": {
-          "GetSyncGroups_ListByStorageSyncService": {
-            "$ref": "./examples/GetSyncGroups_ListByStorageSyncService.json"
+          "SyncGroups_ListByStorageSyncService": {
+            "$ref": "./examples/SyncGroups_ListByStorageSyncService.json"
           }
         },
         "responses": {
@@ -940,11 +943,11 @@
         "tags": [
           "CloudEndpoint Resource"
         ],
-        "operationId": "CloudEndpointsGet_ListBySyncGroup",
+        "operationId": "CloudEndpoints_ListBySyncGroup",
         "description": "Get a CloudEndpoint List.",
         "x-ms-examples": {
-          "CloudEndpointsGet_ListBySyncGroup": {
-            "$ref": "./examples/CloudEndpointsGet_ListBySyncGroup.json"
+          "CloudEndpoints_ListBySyncGroup": {
+            "$ref": "./examples/CloudEndpoints_ListBySyncGroup.json"
           }
         },
         "responses": {
@@ -1024,11 +1027,11 @@
           "Actions",
           "Backup Restore"
         ],
-        "operationId": "CloudEndpointPreBackup_Post",
+        "operationId": "CloudEndpoints_PreBackup",
         "description": "Pre Backup a given CloudEndpoint.",
         "x-ms-examples": {
-          "CloudEndpointPreBackup_Post": {
-            "$ref": "./examples/CloudEndpointPreBackup_Post.json"
+          "CloudEndpoints_PreBackup": {
+            "$ref": "./examples/CloudEndpoints_PreBackup.json"
           }
         },
         "responses": {
@@ -1124,11 +1127,11 @@
           "Actions",
           "Backup Restore"
         ],
-        "operationId": "CloudEndpointPostBackup_Post",
+        "operationId": "CloudEndpoints_PostBackup",
         "description": "Post Backup a given CloudEndpoint.",
         "x-ms-examples": {
-          "CloudEndpointPostBackup_Post": {
-            "$ref": "./examples/CloudEndpointPostBackup_Post.json"
+          "CloudEndpoints_PostBackup": {
+            "$ref": "./examples/CloudEndpoints_PostBackup.json"
           }
         },
         "responses": {
@@ -1227,11 +1230,11 @@
           "Actions",
           "Backup Restore"
         ],
-        "operationId": "CloudEndpointPreRestore_Post",
+        "operationId": "CloudEndpoints_PreRestore",
         "description": "Pre Restore a given CloudEndpoint.",
         "x-ms-examples": {
-          "CloudEndpointPreRestore_Post": {
-            "$ref": "./examples/CloudEndpointPreRestore_Post.json"
+          "CloudEndpoints_PreRestore": {
+            "$ref": "./examples/CloudEndpoints_PreRestore.json"
           }
         },
         "responses": {
@@ -1304,11 +1307,11 @@
           "Actions",
           "Backup Restore"
         ],
-        "operationId": "CloudEndpointRestoreHeatbeat_Post",
+        "operationId": "CloudEndpoints_RestoreHeatbeat",
         "description": "Restore Heartbeat a given CloudEndpoint.",
         "x-ms-examples": {
-          "CloudEndpointRestoreHeatbeat_Post": {
-            "$ref": "./examples/CloudEndpointRestoreHeatbeat_Post.json"
+          "CloudEndpoints_RestoreHeatbeat": {
+            "$ref": "./examples/CloudEndpoints_RestoreHeatbeat.json"
           }
         },
         "responses": {
@@ -1382,11 +1385,11 @@
           "Actions",
           "Backup Restore"
         ],
-        "operationId": "CloudEndpointPostRestore_Post",
+        "operationId": "CloudEndpoints_PostRestore",
         "description": "Post Restore a given CloudEndpoint.",
         "x-ms-examples": {
-          "CloudEndpointPostRestore_Post": {
-            "$ref": "./examples/CloudEndpointPostRestore_Post.json"
+          "CloudEndpoints_PostRestore": {
+            "$ref": "./examples/CloudEndpoints_PostRestore.json"
           }
         },
         "responses": {
@@ -1800,11 +1803,11 @@
         "tags": [
           "ServerEndpoint Resource"
         ],
-        "operationId": "ServerEndpointsGet_ListBySyncGroup",
+        "operationId": "ServerEndpoints_ListBySyncGroup",
         "description": "Get a ServerEndpoint list.",
         "x-ms-examples": {
-          "ServerEndpointsGet_ListBySyncGroup": {
-            "$ref": "./examples/ServerEndpointsGet_ListBySyncGroup.json"
+          "ServerEndpoints_ListBySyncGroup": {
+            "$ref": "./examples/ServerEndpoints_ListBySyncGroup.json"
           }
         },
         "responses": {
@@ -1878,11 +1881,11 @@
           "ServerEndpoint Resource",
           "Actions"
         ],
-        "operationId": "ServerEndpointRecall_Post",
+        "operationId": "ServerEndpoints_Recall",
         "description": "Recall a serverendpoint.",
         "x-ms-examples": {
-          "ServerEndpointRecall_Post": {
-            "$ref": "./examples/ServerEndpointRecall_Post.json"
+          "ServerEndpoints_Recall": {
+            "$ref": "./examples/ServerEndpoints_Recall.json"
           }
         },
         "responses": {
@@ -1949,11 +1952,11 @@
         "tags": [
           "RegisteredServer Resource"
         ],
-        "operationId": "RegisteredServersGet_ListByStorageSyncService",
+        "operationId": "RegisteredServers_ListByStorageSyncService",
         "description": "Get a given registered server list.",
         "x-ms-examples": {
-          "RegisteredServersGet_ListByStorageSyncService": {
-            "$ref": "./examples/RegisteredServersGet_ListByStorageSyncService.json"
+          "RegisteredServers_ListByStorageSyncService": {
+            "$ref": "./examples/RegisteredServers_ListByStorageSyncService.json"
           }
         },
         "responses": {
@@ -2313,11 +2316,11 @@
           "Workflow Resource",
           "Actions"
         ],
-        "operationId": "AbortWorkflows_Post",
+        "operationId": "Workflows_Abort",
         "description": "Abort the given workflow.",
         "x-ms-examples": {
-          "AbortWorkflows_Post": {
-            "$ref": "./examples/AbortWorkflows_Post.json"
+          "Workflows_Abort": {
+            "$ref": "./examples/Workflows_Abort.json"
           }
         },
         "responses": {
@@ -2442,7 +2445,8 @@
         },
         "istransitioning": {
           "type": "boolean",
-          "description": "Is Transitioning"
+          "description": "Is Transitioning",
+          "readOnly": true
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2751,9 +2755,9 @@
             "description": "Pre Restore restore file spec items array."
           }
         },
-        "pausewaitforsyncdraintimeperiodinseconds": {
+        "pauseWaitForSyncDrainTimePeriodInSeconds": {
           "type": "integer",
-          "description": "Pre Restore pause wait for sync drain time period in seconds."
+          "description": "Pre Restore pause wait for sync drain time period in seconds.",
         }
       }
     },
@@ -2788,7 +2792,8 @@
         },
         "isdir": {
           "type": "boolean",
-          "description": "Restore file spec isdir"
+          "description": "Restore file spec isdir",
+          "readOnly": true
         }
       }
     },
@@ -3030,7 +3035,8 @@
         },
         "backupEnabled": {
           "type": "boolean",
-          "description": "Backup Enabled"
+          "description": "Backup Enabled",
+          "readOnly": true
         },
         "provisioningState": {
           "type": "string",
