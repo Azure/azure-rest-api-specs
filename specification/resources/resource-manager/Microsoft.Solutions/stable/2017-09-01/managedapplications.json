@@ -869,6 +869,23 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/providers/Microsoft.Solutions/operations": {
+      "get": {
+        "tags": [
+          "Solutions"
+        ],
+        "operationId": "Solutions_Operations",
+        "description": "Gets all the preview solution operations.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array containing metadata about the solution operations. The metadata includes the name of the solution operation, the provider, the resource, the operation, and the description.",
+            "schema": {
+              "$ref": "#/definitions/OperationsList"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1355,6 +1372,49 @@
         "errorMessage": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Operation provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Operation resource."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        }
+      }
+    },
+    "OperationDefinition": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The operation display definition."
+        }
+      }
+    },
+    "OperationsList": {
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDefinition"
+          },
+          "description": "The array of solution operations."
         }
       }
     }

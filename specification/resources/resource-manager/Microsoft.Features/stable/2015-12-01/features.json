@@ -64,6 +64,23 @@
         }
       }
     },
+    "/providers/Microsoft.Features/operations": {
+      "get": {
+        "tags": [
+          "Features"
+        ],
+        "operationId": "Features_Operations",
+        "description": "Gets all the preview feature operations.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array containing metadata about the feature operations. The metadata includes the name of the feature operation, the provider, the resource, the operation, and the description.",
+            "schema": {
+              "$ref": "#/definitions/OperationsList"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features": {
       "get": {
         "tags": [
@@ -224,6 +241,49 @@
         }
       },
       "description": "List of previewed features."
+    },
+    "OperationDisplay": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Operation provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Operation resource."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        }
+      }
+    },
+    "OperationDefinition": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The operation display definition."
+        }
+      }
+    },
+    "OperationsList": {
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDefinition"
+          },
+          "description": "The array of feature operations."
+        }
+      }
     }
   },
   "parameters": {

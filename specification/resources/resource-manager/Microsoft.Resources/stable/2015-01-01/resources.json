@@ -1,0 +1,99 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ResourceManagementClient",
+    "version": "2015-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Resources/operations": {
+      "get": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_Operations",
+        "description": "Gets all the preview resource operations.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array containing metadata about the resource operations. The metadata includes the name of the resource operation, the provider, the resource, the operation, and the description.",
+            "schema": {
+              "$ref": "#/definitions/OperationsList"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationDisplay": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Operation provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Operation resource."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        }
+      }
+    },
+    "OperationDefinition": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The operation display definition."
+        }
+      }
+    },
+    "OperationsList": {
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDefinition"
+          },
+          "description": "The array of resource operations."
+        }
+      }
+    }
+  }
+}
