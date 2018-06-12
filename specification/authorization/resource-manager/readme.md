@@ -46,6 +46,16 @@ These settings apply only when `--tag=package-2015-07` is specified on the comma
 ``` yaml $(tag) == 'package-2015-07'
 input-file:
 - Microsoft.Authorization/stable/2015-07-01/authorization.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+```
+
+### Tag: package-2015-07-authorization-only
+
+These settings apply only when `--tag=package-2015-07-authorization-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-07-authorization-only'
+input-file:
+- Microsoft.Authorization/stable/2015-07-01/authorization.json
 ```
 
 ### Tag: package-2015-06-01-preview
@@ -117,40 +127,14 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-authorization
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_authorization']
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.authorization
-  package-name: azure-mgmt-authorization
-  package-version: 0.40.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-authorization/azure/mgmt/authorization
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-authorization
 ```
 
 ## Go
