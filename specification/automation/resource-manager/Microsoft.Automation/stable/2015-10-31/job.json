@@ -682,9 +682,26 @@
         "provisioningState": {
           "$ref": "#/definitions/JobProvisioningStateProperty",
           "description": "The provisioning state of a resource."
+        },
+        "jobScheduleId": {
+          "type": "string",
+          "description": "Gets or sets the id of job schedule."
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduleAssociationProperty",
+          "description": "Gets or sets the runbook."
         }
       },
       "description": "Definition of job properties."
+    },
+    "ScheduleAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the Schedule."
+        }
+      },
+      "description": "The schedule property associated with the entity."
     },
     "RunbookAssociationProperty": {
       "properties": {
