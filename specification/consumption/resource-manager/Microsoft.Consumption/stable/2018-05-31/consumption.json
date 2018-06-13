@@ -707,19 +707,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/Insights": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/AnalyzeUsage": {
       "post": {
         "tags": [
-          "Insights"
+          "UsageAnalysis"
         ],
-        "operationId": "SubscriptionInsights_Post",
-        "description": "Lists the consumption data for subscriptionId.",
+        "operationId": "AnalyzeSubscriptionUsage",
+        "description": "Lists the usage data for subscriptionId.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "SubscriptionInsightsList": {
-            "$ref": "./examples/SubscriptionInsightList.json"
+          "SubscriptionUsage": {
+            "$ref": "./examples/SubscriptionUsage.json"
           }
         },
         "parameters": [
@@ -743,7 +743,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/InsightsListResult"
+              "$ref": "#/definitions/UsageAnalysisResult"
             }
           },
           "default": {
@@ -758,19 +758,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Consumption/Insights": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Consumption/AnalyzeUsage": {
       "post": {
         "tags": [
-          "Insights"
+          "UsageAnalysis"
         ],
-        "operationId": "ResourceGroupInsights_Post",
-        "description": "Lists the consumption data for subscriptionId and resource group.",
+        "operationId": "AnalyzeResourceGroupUsage",
+        "description": "Lists the usage data for subscriptionId and resource group.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "ResourceGroupInsightsList": {
-            "$ref": "./examples/ResourceGroupInsightList.json"
+          "ResourceGroupUsage": {
+            "$ref": "./examples/ResourceGroupUsage.json"
           }
         },
         "parameters": [
@@ -797,7 +797,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/InsightsListResult"
+              "$ref": "#/definitions/UsageAnalysisResult"
             }
           },
           "default": {
@@ -812,19 +812,19 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/insights": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/AnalyzeUsage": {
       "post": {
         "tags": [
-          "Insights"
+          "UsageAnalysis"
         ],
-        "operationId": "BillingAccountInsights_Post",
-        "description": "Lists the consumption data for billing account.",
+        "operationId": "AnalyzeBillingAccountUsage",
+        "description": "Lists the usage data for billing account.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "BillingAccountInsightsList": {
-            "$ref": "./examples/BillingAccountInsightList.json"
+          "BillingAccountUsage": {
+            "$ref": "./examples/BillingAccountUsage.json"
           }
         },
         "parameters": [
@@ -848,7 +848,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/InsightsListResult"
+              "$ref": "#/definitions/UsageAnalysisResult"
             }
           },
           "default": {
@@ -1255,38 +1255,22 @@
     "ReportConfigDeliveryDestination": {
       "description": "The destination information for the delivery of the report.",
       "properties": {
-        "subscriptionId": {
-          "description": "The subscription id of the storage account where reports will be delivered.",
-          "type": "string"
-        },
-        "resourceGroup": {
-          "description": "The resource group of the storage account here reports will be delivered.",
-          "type": "string"
-        },
-        "storageAccount": {
-          "description": "The storage account here reports will be delivered.",
-          "type": "string"
-        },
-        "endpoint": {
-          "description": "The endpoint of the storage service where reports will be delivered.",
+        "resourceId": {
+          "description": "The resource id of the storage account where reports will be delivered.",
           "type": "string"
         },
         "container": {
           "description": "The name of the container where reports will be uploaded.",
           "type": "string"
         },
-        "category": {
+        "rootFolderPath": {
           "description": "The name of the directory where reports will be uploaded.",
           "type": "string"
         }
       },
       "required": [
-        "subscriptionId",
-        "resourceGroup",
-        "storageAccount",
-        "endpoint",
-        "container",
-        "category"
+        "resourceId",
+        "container"
       ]
     },
     "ReportConfigTimePeriod": {
@@ -1539,21 +1523,21 @@
         }
       }
     },
-    "InsightsListResult": {
-      "description": "Result of listing insights. It contains all columns listed under groupings and aggregation.",
+    "UsageAnalysisResult": {
+      "description": "Result of listing usages. It contains all columns listed under groupings and aggregation.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of insights.",
+          "description": "The list of usage data.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Insight"
+            "$ref": "#/definitions/UsageAnalysis"
           }
         }
       }
     },
-    "Insight": {
+    "UsageAnalysis": {
       "type": "object",
       "allOf": [
         {
@@ -1563,12 +1547,12 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InsightProperties",
-          "title": "Insight properties"
+          "$ref": "#/definitions/UsageAnalysisProperties",
+          "title": "Usage analysis properties"
         }
       }
     },
-    "InsightProperties": {
+    "UsageAnalysisProperties": {
       "type": "object",
       "properties": {
         "nextLink": {
@@ -1578,7 +1562,7 @@
           "description": "Array of columns",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/InsightColumn"
+            "$ref": "#/definitions/UsageAnalysisColumn"
           }
         },
         "rows": {
@@ -1590,7 +1574,7 @@
         }
       }
     },
-    "InsightColumn":{
+    "UsageAnalysisColumn":{
       "type": "object",
       "properties": {
         "name": {
