@@ -37,8 +37,13 @@ directive:
 ``` yaml
 openapi-type: arm
 tag: package-2017-04
+directive:
+  - where:
+      - $.definitions.NamespaceCreateOrUpdateParameters
+    suppress:
+      - TrackedResourcePatchOperation
+      - TrackedResourceGetOperation
 ```
-
 
 ### Tag: package-2017-04
 
