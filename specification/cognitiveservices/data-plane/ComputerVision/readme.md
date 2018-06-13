@@ -48,6 +48,13 @@ csharp:
   namespace: Microsoft.Azure.CognitiveServices.Vision.ComputerVision
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/ComputerVision/ComputerVision/Generated
   clear-output-folder: true
+
+directive:
+  from: source-file-csharp
+  where: $
+  transform: >
+    $ = $.replace( /TextRecognitionMode mode, string url,/g, "string url, TextRecognitionMode mode," );
+    $ = $.replace( /mode, url,/g, "url, mode," );
 ```
 
 ## Python
@@ -65,6 +72,12 @@ python:
   namespace: azure.cognitiveservices.vision.computervision
   package-name: azure-cognitiveservices-vision-computervision
   clear-output-folder: true
+
+directive:
+  from: source-file-python
+  where: $
+  transform: >
+    $ = $.replace( /self, mode, url,/g, "self, url, mode," );
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
@@ -119,4 +132,11 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/vision/computervision
   with-optional-parameters: true
   with-single-async-method: true
+
+directive:
+  from: source-file-java
+  where: $
+  transform: >
+    $ = $.replace( /TextRecognitionMode mode, String url/g, "String url, TextRecognitionMode mode" );
+    $ = $.replace( /recognizeTextWithServiceResponseAsync\(mode, url\)/g, "recognizeTextWithServiceResponseAsync(url, mode)" )
 ```

@@ -7,6 +7,12 @@ ruby:
   package-name: azure_cognitiveservices_computervision
   package-version: "0.16.0"
   azure-arm: true
+
+directive:
+  from: source-file-ruby
+  where: $
+  transform: >
+    $ = $.replace( /mode, url/g, "url, mode" );
 ```
 
 ### Ruby multi-api

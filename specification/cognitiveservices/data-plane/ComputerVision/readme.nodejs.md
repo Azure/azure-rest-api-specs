@@ -13,4 +13,11 @@ nodejs:
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: false
+
+directive:
+  from: source-file-nodejs
+  where: $
+  transform: >
+    $ = $.replace( /mode: string, url: string/g, "url: string, mode: string" );
+    $ = $.replace( /mode, url/g, "url, mode" );
 ```
