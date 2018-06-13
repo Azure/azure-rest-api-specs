@@ -244,7 +244,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/purge": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/purge": {
       "post": {
         "description": "Purges data in an Application Insights component by a set of user-defined filters.",
         "operationId": "Components_Purge",
@@ -283,7 +283,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/operations/{purgeId}": {
       "get": {
         "description": "Get status for an ongoing purge operation.",
-        "operationId": "Components_PurgeStatus",
+        "operationId": "Components_GetPurgeStatus",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -318,7 +318,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "ComponentsResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -377,7 +377,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ComponentsResource"
         }
       ],
       "required": [
