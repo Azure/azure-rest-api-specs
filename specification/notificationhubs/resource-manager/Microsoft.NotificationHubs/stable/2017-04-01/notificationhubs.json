@@ -1013,9 +1013,9 @@
             "in": "body",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/DebugSendParameters"
             },
-            "description": "Debug send message payload"
+            "description": "Debug send parameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2148,6 +2148,10 @@
         }
       ],
       "description": "Parameters supplied to the patch NotificationHub operation."
+    },
+    "DebugSendParameters": {
+      "description": "Debug Send payload",
+      "type": "object"
     },
     "NotificationHubResource": {
       "properties": {
