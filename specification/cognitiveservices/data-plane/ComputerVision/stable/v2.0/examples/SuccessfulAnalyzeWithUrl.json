@@ -1,13 +1,11 @@
 {
   "parameters": {
-    "Content-Type": "application/json",
+    "AzureRegion": "Westus",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "visualFeatures": "Categories,Adult,Tags,Description,Faces,Color,ImageType",
-    "details": "Celebrities",
+    "details": "Celebrities,Landmarks",
     "language": "en",
-    "body": {
-      "url": "{Image Url here}"
-    }
+    "ImageUrl": "{url}"
   },
   "responses": {
     "200": {
@@ -33,11 +31,17 @@
                   },
                   "confidence": 0.999028444
                 }
-              ],
+              ]
+            }
+          },
+          {
+            "name": "building_",
+            "score": 0.984375,
+            "detail": {
               "landmarks": [
                 {
                   "name": "Forbidden City",
-                  "confidence": 0.9978346
+                  "confidence": 0.98290169239044189
                 }
               ]
             }

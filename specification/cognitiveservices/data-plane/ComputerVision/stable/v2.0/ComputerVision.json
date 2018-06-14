@@ -1036,19 +1036,7 @@
         "landmarks": {
           "type": "array",
           "items": {
-            "type": "object",
-            "description": "A landmark recognized in the image",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Name of the landmark."
-              },
-              "confidence": {
-                "type": "number",
-                "format": "double",
-                "description": "Confidence level for the landmark recognition."
-              }
-            }
+            "$ref": "#/definitions/LandmarksModel"
           }
         },
         "requestId": {
@@ -1067,6 +1055,13 @@
         "description": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ImageDescriptionDetails"
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Id of the REST API request."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ImageMetadata"
         }
       }
     },
@@ -1107,13 +1102,6 @@
           "items": {
             "$ref": "#/definitions/ImageCaption"
           }
-        },
-        "requestId": {
-          "type": "string",
-          "description": "Id of the REST API request."
-        },
-        "metadata": {
-          "$ref": "#/definitions/ImageMetadata"
         }
       }
     },
@@ -1182,6 +1170,21 @@
         },
         "faceRectangle": {
           "$ref": "#/definitions/FaceRectangle"
+        }
+      }
+    },
+    "LandmarksModel": {
+      "type": "object",
+      "description": "A landmark recognized in the image",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the landmark."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence level for the landmark recognition."
         }
       }
     },
@@ -1330,6 +1333,13 @@
           "description": "An array of celebrities if any identified.",
           "items": {
             "$ref": "#/definitions/CelebritiesModel"
+          }
+        },
+        "landmarks": {
+          "type": "array",
+          "description": "An array of landmarks if any identified.",
+          "items": {
+            "$ref": "#/definitions/LandmarksModel"
           }
         }
       }
