@@ -60,9 +60,12 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -96,7 +99,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -147,7 +150,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -186,7 +189,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -240,7 +243,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -289,7 +292,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -329,7 +332,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -369,7 +372,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -399,6 +402,13 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
           }
         ],
         "responses": {
@@ -408,10 +418,13 @@
               "$ref": "#/definitions/IntegrationRuntimeListResponse"
             }
           },
+          "304": {
+            "description": "No content."
+          },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -475,7 +488,7 @@
           "default": {
             "description": "An error response received from PUT integration runtime operation.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -518,7 +531,7 @@
           "default": {
             "description": "An error response received from GET integration runtime operation.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -564,13 +577,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
+              "$ref": "#/definitions/IntegrationRuntimeResource"
             }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -613,7 +626,7 @@
           "default": {
             "description": "An error response received from DELETE integration runtime operation.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -658,7 +671,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -703,7 +716,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -757,7 +770,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -802,7 +815,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -851,7 +864,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -897,7 +910,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -951,7 +964,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -993,7 +1006,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1038,7 +1051,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1080,7 +1093,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1128,7 +1141,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1183,7 +1196,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1231,7 +1244,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1273,7 +1286,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1340,7 +1353,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1371,6 +1384,13 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the linked service entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
           }
         ],
         "responses": {
@@ -1380,10 +1400,13 @@
               "$ref": "#/definitions/LinkedServiceResource"
             }
           },
+          "304": {
+            "description": "No content."
+          },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1426,7 +1449,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1468,7 +1491,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1535,7 +1558,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1566,6 +1589,13 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the dataset entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
           }
         ],
         "responses": {
@@ -1575,10 +1605,13 @@
               "$ref": "#/definitions/DatasetResource"
             }
           },
+          "304": {
+            "description": "No content."
+          },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1621,7 +1654,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1663,7 +1696,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1730,7 +1763,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1761,6 +1794,13 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the pipeline entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
           }
         ],
         "responses": {
@@ -1770,10 +1810,13 @@
               "$ref": "#/definitions/PipelineResource"
             }
           },
+          "304": {
+            "description": "No content."
+          },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1816,7 +1859,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1851,8 +1894,16 @@
             "$ref": "#/parameters/api-version"
           },
           {
+            "name": "referencePipelineRunId",
+            "description": "The pipeline run identifier. If run ID is specified the parameters of the the specified run will be used to create a new run.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
             "name": "parameters",
-            "description": "Parameters of the pipeline run.",
+            "description": "Parameters of the pipeline run. These parameters will be used only if the runId is not specified.",
             "in": "body",
             "required": false,
             "schema": {
@@ -1861,8 +1912,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted.",
+          "200": {
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/CreateRunResponse"
             }
@@ -1870,13 +1921,13 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryPipelineRuns": {
       "post": {
         "operationId": "PipelineRuns_QueryByFactory",
         "x-ms-examples": {
@@ -1907,7 +1958,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PipelineRunFilterParameters"
+              "$ref": "#/definitions/RunFilterParameters"
             }
           }
         ],
@@ -1915,13 +1966,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/PipelineRunQueryResponse"
+              "$ref": "#/definitions/PipelineRunsQueryResponse"
             }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1966,21 +2017,21 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/activityruns": {
-      "get": {
-        "operationId": "ActivityRuns_ListByPipelineRun",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns": {
+      "post": {
+        "operationId": "ActivityRuns_QueryByPipelineRun",
         "x-ms-examples": {
-          "ActivityRuns_ListByPipelineRun": {
-            "$ref": "./examples/ActivityRuns_ListByPipelineRun.json"
+          "ActivityRuns_QueryByPipelineRun": {
+            "$ref": "./examples/ActivityRuns_QueryByPipelineRun.json"
           }
         },
-        "description": "List activity runs based on input filter conditions.",
+        "description": "Query activity runs based on input filter conditions.",
         "tags": [
           "activityruns"
         ],
@@ -2001,57 +2052,26 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "startTime",
-            "description": "The start time of activity runs in ISO8601 format.",
-            "in": "query",
+            "name": "filterParameters",
+            "description": "Parameters to filter the activity runs.",
+            "in": "body",
             "required": true,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "endTime",
-            "description": "The end time of activity runs in ISO8601 format.",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "status",
-            "description": "The status of the pipeline run.",
-            "type": "string",
-            "in": "query",
-            "required": false
-          },
-          {
-            "name": "activityName",
-            "description": "The name of the activity.",
-            "type": "string",
-            "in": "query",
-            "required": false
-          },
-          {
-            "name": "linkedServiceName",
-            "description": "The linked service name.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
-            "minLength": 1,
-            "maxLength": 260
+            "schema": {
+              "$ref": "#/definitions/RunFilterParameters"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ActivityRunsListResponse"
+              "$ref": "#/definitions/ActivityRunsQueryResponse"
             }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2060,12 +2080,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/cancelpipelinerun/{runId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel": {
       "post": {
-        "operationId": "Factories_CancelPipelineRun",
+        "operationId": "PipelineRuns_Cancel",
         "x-ms-examples": {
-          "Factories_CancelPipelineRun": {
-            "$ref": "./examples/Factories_CancelPipelineRun.json"
+          "PipelineRuns_Cancel": {
+            "$ref": "./examples/PipelineRuns_Cancel.json"
           }
         },
         "description": "Cancel a pipeline run by its run ID.",
@@ -2096,7 +2116,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2138,7 +2158,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2205,7 +2225,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2236,6 +2256,13 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the trigger entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
           }
         ],
         "responses": {
@@ -2245,10 +2272,13 @@
               "$ref": "#/definitions/TriggerResource"
             }
           },
+          "304": {
+            "description": "No content."
+          },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2291,7 +2321,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2334,7 +2364,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2377,24 +2407,24 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerruns": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryTriggerRuns": {
+      "post": {
         "tags": [
-          "triggers"
+          "triggerruns"
         ],
-        "operationId": "Triggers_ListRuns",
+        "operationId": "TriggerRuns_QueryByFactory",
         "x-ms-examples": {
-          "Triggers_ListRuns": {
-            "$ref": "./examples/Triggers_ListRuns.json"
+          "TriggerRuns_QueryByFactory": {
+            "$ref": "./examples/TriggerRuns_QueryByFactory.json"
           }
         },
-        "description": "List trigger runs.",
+        "description": "Query trigger runs.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2406,39 +2436,29 @@
             "$ref": "#/parameters/factoryName"
           },
           {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "startTime",
-            "description": "Start time for trigger runs.",
-            "type": "string",
-            "format": "date-time",
-            "in": "query",
-            "required": true
-          },
-          {
-            "name": "endTime",
-            "description": "End time for trigger runs.",
-            "type": "string",
-            "format": "date-time",
-            "in": "query",
-            "required": true
+            "name": "filterParameters",
+            "description": "Parameters to filter the pipeline run.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunFilterParameters"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/TriggerRunListResponse"
+              "$ref": "#/definitions/TriggerRunsQueryResponse"
             }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2829,28 +2849,44 @@
           "runId"
         ]
       },
-      "ErrorResponse": {
-        "description": "The object that defines the structure of an Azure Data Factory response.",
+      "CloudError": {
+        "x-ms-external" : true,
+        "description": "The object that defines the structure of an Azure Data Factory error response.",
         "type": "object",
         "properties": {
-          "code": {
-            "description": "Error code.",
-            "type": "string"
-          },
-          "message": {
-            "description": "Error message.",
-            "type": "string"
-          },
-          "target": {
-            "description": "Property name/path in request associated with error.",
-            "type": "string"
-          },
-          "details": {
-            "description": "Array with additional error details.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "error": {
+            "x-ms-client-flatten": true,
+            "description": "Error data",
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        },
+        "required": [
+          "error"
+        ]
+      },
+      "CloudErrorBody": {
+        "x-ms-external" : true,
+        "description": "The object that defines the structure of an Azure Data Factory error.",
+        "type": "object",
+        "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Error message.",
+              "type": "string"
+            },
+            "target": {
+              "description": "Property name/path in request associated with error.",
+              "type": "string"
+            },
+            "details": {
+              "description": "Array with additional error details.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudError"
+              }
           }
         },
         "required": [
@@ -3205,8 +3241,8 @@
           "properties"
         ]
       },
-      "PipelineRunFilterParameters": {
-        "description": "Query parameters for listing pipeline runs.",
+      "RunFilterParameters": {
+        "description": "Query parameters for listing runs.",
         "type": "object",
         "properties": {
           "continuationToken": {
@@ -3214,12 +3250,12 @@
             "type": "string"
           },
           "lastUpdatedAfter": {
-            "description": "The time at or after which the pipeline run event was updated in 'ISO 8601' format.",
+            "description": "The time at or after which the run event was updated in 'ISO 8601' format.",
             "type": "string",
             "format": "date-time"
           },
           "lastUpdatedBefore": {
-            "description": "The time at or before which the pipeline run event was updated in 'ISO 8601' format.",
+            "description": "The time at or before which the run event was updated in 'ISO 8601' format.",
             "type": "string",
             "format": "date-time"
           },
@@ -3227,14 +3263,14 @@
             "type": "array",
             "description": "List of filters.",
             "items": {
-              "$ref": "#/definitions/PipelineRunQueryFilter"
+              "$ref": "#/definitions/RunQueryFilter"
             }
           },
           "orderBy": {
             "type": "array",
             "description": "List of OrderBy option.",
             "items": {
-              "$ref": "#/definitions/PipelineRunQueryOrderBy"
+              "$ref": "#/definitions/RunQueryOrderBy"
             }
           }
         },
@@ -3243,21 +3279,27 @@
           "lastUpdatedBefore"
         ]
       },
-      "PipelineRunQueryFilter": {
-        "description": "Query filter option for listing pipeline runs.",
+      "RunQueryFilter": {
+        "description": "Query filter option for listing runs.",
         "type": "object",
         "properties": {
           "operand": {
-            "description": "Parameter name to be used for filter.",
+            "description": "Parameter name to be used for filter. The allowed operands to query pipeline runs are PipelineName, RunStart, RunEnd and Status; to query activity runs are ActivityName, ActivityRunStart, ActivityRunEnd, ActivityType and Status, and to query trigger runs are TriggerName, TriggerRunTimestamp and Status.",
             "type": "string",
             "enum": [
               "PipelineName",
               "Status",
               "RunStart",
-              "RunEnd"
+              "RunEnd",
+              "ActivityName",
+              "ActivityRunStart",
+              "ActivityRunEnd",
+              "ActivityType",
+              "TriggerName",
+              "TriggerRunTimestamp"
             ],
             "x-ms-enum": {
-              "name": "PipelineRunQueryFilterOperand",
+              "name": "RunQueryFilterOperand",
               "modelAsString": true
             }
           },
@@ -3271,7 +3313,7 @@
               "NotIn"
             ],
             "x-ms-enum": {
-              "name": "PipelineRunQueryFilterOperator",
+              "name": "RunQueryFilterOperator",
               "modelAsString": true
             }
           },
@@ -3289,19 +3331,26 @@
           "values"
         ]
       },
-      "PipelineRunQueryOrderBy": {
-        "description": "An object to provide order by options for listing pipeline runs.",
+      "RunQueryOrderBy": {
+        "description": "An object to provide order by options for listing runs.",
         "type": "object",
         "properties": {
           "orderBy": {
-            "description": "Parameter name to be used for order by.",
+            "description": "Parameter name to be used for order by. The allowed parameters to order by for pipeline runs are PipelineName, RunStart, RunEnd and Status; for activity runs are ActivityName, ActivityRunStart, ActivityRunEnd and Status; for trigger runs are TriggerName, TriggerRunTimestamp and Status.",
             "type": "string",
             "enum": [
               "RunStart",
-              "RunEnd"
+              "RunEnd",
+              "PipelineName",
+              "Status", 
+              "ActivityName", 
+              "ActivityRunStart",
+              "ActivityRunEnd",
+              "TriggerName",
+              "TriggerRunTimestamp"
             ],
             "x-ms-enum": {
-              "name": "PipelineRunQueryOrderByField",
+              "name": "RunQueryOrderByField",
               "modelAsString": true
             }
           },
@@ -3313,7 +3362,7 @@
               "DESC"
             ],
             "x-ms-enum": {
-              "name": "PipelineRunQueryOrder",
+              "name": "RunQueryOrder",
               "modelAsString": true
             }
           }
@@ -3323,7 +3372,7 @@
           "order"
         ]
       },
-      "PipelineRunQueryResponse": {
+      "PipelineRunsQueryResponse": {
         "description": "A list pipeline runs.",
         "type": "object",
         "required": [
@@ -3424,7 +3473,7 @@
           }
         }
       },
-      "ActivityRunsListResponse": {
+      "ActivityRunsQueryResponse": {
         "description": "A list activity runs.",
         "type": "object",
         "required": [
@@ -3520,7 +3569,7 @@
           "type": "object"
         }
       },
-      "TriggerRunListResponse": {
+      "TriggerRunsQueryResponse": {
         "description": "A list of trigger runs.",
         "type": "object",
         "required": [
@@ -3854,14 +3903,6 @@
       },
       "runId": {
         "name": "runId",
-        "description": "The pipeline run identifier.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "referencePipelineRunId": {
-        "name": "referencePipelineRunId",
         "description": "The pipeline run identifier.",
         "in": "path",
         "required": true,
