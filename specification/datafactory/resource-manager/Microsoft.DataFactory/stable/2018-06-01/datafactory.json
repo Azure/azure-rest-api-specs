@@ -916,60 +916,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/removeNode": {
-      "post": {
-        "tags": [
-          "integrationRuntimes"
-        ],
-        "operationId": "IntegrationRuntimes_RemoveNode",
-        "x-ms-examples": {
-          "IntegrationRuntimes_RemoveNode": {
-            "$ref": "./examples/IntegrationRuntimes_RemoveNode.json"
-          }
-        },
-        "description": "Remove a node from integration runtime.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/integrationRuntimeName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "removeNodeParameters",
-            "description": "The name of the node to be removed from an integration runtime.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeRemoveNodeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK."
-          },
-          "204": {
-            "description": "No Content."
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/syncCredentials": {
       "post": {
         "tags": [
