@@ -318,10 +318,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs": {
       "get": {
-        "operationId": "ContainerLogs_List",
+        "operationId": "Container_ListLogs",
         "x-ms-examples": {
-          "ContainerLogsList": {
-            "$ref": "./examples/ContainerLogsList.json"
+          "ContainerListLogs": {
+            "$ref": "./examples/ContainerListLogs.json"
           }
         },
         "summary": "Get the logs for a specified container instance.",
@@ -365,14 +365,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/exec": {
       "post": {
-        "operationId": "StartContainer_LaunchExec",
+        "operationId": "Container_ExecuteCommand",
         "x-ms-examples": {
-          "ContainerExecStart": {
-            "$ref": "./examples/ContainerExecStart.json"
+          "ContainerExec": {
+            "$ref": "./examples/ContainerExec.json"
           }
         },
-        "summary": "Starts the exec command for a specific container instance.",
-        "description": "Starts the exec command for a specified container instance in a specified resource group and container group.",
+        "summary": "Executes a command in a specific container instance.",
+        "description": "Executes a command for a specific container instance in a specified resource group and container group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1231,7 +1231,7 @@
       }
     },
     "ContainerExecRequest": {
-      "description": "The start container exec request.",
+      "description": "The container exec request.",
       "type": "object",
       "properties": {
         "command": {
