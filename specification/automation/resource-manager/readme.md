@@ -133,6 +133,15 @@ directive:
   - suppress: BodyTopLevelProperties
     from: runbook.json
     where: $.definitions.TestJob.properties
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: account.json
+    where: $.definitions.Key.properties.KeyName
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: account.json
+    where: $.definitions.Key.properties.Permissions
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: account.json
+    where: $.definitions.Key.properties.Value
 ```
 
 ---
