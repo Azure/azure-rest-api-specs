@@ -1,42 +1,57 @@
 {
-    "parameters": {
-        "vpnConnectionName": "vpnConnection1",
-        "gatewayName": "gateway1",
-        "resourceGroupName": "rg1",
-        "api-version": "2018-06-01",
-        "subscriptionId": "subid",
-        "VpnConnectionParameters": {
-            "tags": {
-                "key1": "value1"
-            },
-            "properties": {
-                "connectedSite": "/subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/vpnSites/vpnSite1",
-                "sharedKey": "value",
-                "routingWeight": "0"
-            }
-        }
-    },
-    "responses": {
-        "200": {
-          "name": "vpnConnection1",
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1",
-          "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-          "properties": {
-            "provisioningState": "Succeeded",
-            "remoteVpnSite": {
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
-            },
-            "connectionStatus": "Connected",
-            "tunnelConnectionStatus": "Connected",
-            "ingressBytesTransferred": 0,
-            "egressBytesTransferred": 0,
-            "routingWeight": 0,
-            "connectionBandwidthInMbps": 100,
-            "sharedKey": "key"
-          }
-        },
-        "202": {
-            "description": "Request received successfully. Vpn connection is not yet provisioned; follow the Location header to poll for the vpn connection."
-        }
+  "parameters": {
+    "connectionName": "vpnConnection1",
+    "gatewayName": "gateway1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-06-01",
+    "subscriptionId": "subid",
+    "VpnConnectionParameters": {
+      "tags": {
+        "key1": "value1"
+      },
+      "properties": {
+        "connectedSite": "/subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/vpnSites/vpnSite1",
+        "sharedKey": "value",
+        "routingWeight": "0"
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "name": "vpnConnection1",
+      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1",
+      "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "remoteVpnSite": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+        },
+        "connectionStatus": "Connected",
+        "tunnelConnectionStatus": "Connected",
+        "ingressBytesTransferred": 0,
+        "egressBytesTransferred": 0,
+        "routingWeight": 0,
+        "connectionBandwidthInMbps": 100,
+        "sharedKey": "key"
+      }
+    },
+    "201": {
+      "name": "vpnConnection1",
+      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1",
+      "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "remoteVpnSite": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+        },
+        "connectionStatus": "Connected",
+        "tunnelConnectionStatus": "Connected",
+        "ingressBytesTransferred": 0,
+        "egressBytesTransferred": 0,
+        "routingWeight": 0,
+        "connectionBandwidthInMbps": 100,
+        "sharedKey": "key"
+      }
+    }
+  }
 }
