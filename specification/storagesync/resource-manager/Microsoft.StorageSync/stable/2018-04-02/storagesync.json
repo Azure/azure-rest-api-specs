@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Storage Sync",
     "description": "Microsoft Storage Sync Service API",
-    "version": "2017-06-05-preview",
+    "version": "2018-04-02",
 	"x-ms-code-generation-settings": {
       "name": "StorageSyncManagementClient"
      }
@@ -64,6 +64,51 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "StorageSyncService"
+        ],
+        "operationId": "StorageSyncServices_CheckNameAvailability",
+        "x-ms-examples": {
+          "StorageSyncServiceCheckNameAvailability_Available": { "$ref": "./examples/StorageSyncServiceCheckNameAvailability_Available.json" },
+		  "StorageSyncServiceCheckNameAvailability_AlreadyExists": { "$ref": "./examples/StorageSyncServiceCheckNameAvailability_AlreadyExists.json" }
+        },
+        "description": "Check the give namespace name availability.",
+        "parameters": [
+        {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The desired region for the name check."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters to check availability of the given namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
         }
       }
     },
@@ -1307,10 +1352,10 @@
           "Actions",
           "Backup Restore"
         ],
-        "operationId": "CloudEndpoints_RestoreHeatbeat",
+        "operationId": "CloudEndpoints_restoreheartbeat",
         "description": "Restore Heartbeat a given CloudEndpoint.",
         "x-ms-examples": {
-          "CloudEndpoints_RestoreHeatbeat": {
+          "CloudEndpoints_restoreheartbeat": {
             "$ref": "./examples/CloudEndpoints_RestoreHeatbeat.json"
           }
         },
@@ -1881,10 +1926,10 @@
           "ServerEndpoint Resource",
           "Actions"
         ],
-        "operationId": "ServerEndpoints_Recall",
+        "operationId": "ServerEndpoints_recallAction",
         "description": "Recall a serverendpoint.",
         "x-ms-examples": {
-          "ServerEndpoints_Recall": {
+          "ServerEndpoints_recallAction": {
             "$ref": "./examples/ServerEndpoints_Recall.json"
           }
         },
@@ -2673,6 +2718,56 @@
         }
       }
     },
+    "CheckNameAvailabilityParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name to check for availability"
+        },
+        "type": {
+          "type": "string",
+          "enum": [ "Microsoft.StorageSync/storageSyncServices" ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The resource type. Must be set to Microsoft.StorageSync/storageSyncServices"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "Parameters for a check name availability request."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "NameAvailabilityReason",
+            "modelAsString": false
+          },
+          "description": "Gets the reason that a Storage Sync Service name could not be used. The Reason element is only returned if NameAvailable is false."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets an error message explaining the Reason value in more detail."
+        }
+      },
+      "description": "The CheckNameAvailability operation response."
+    },
     "PostRestoreRequest": {
       "type": "object",
       "description": "Post Restore Request",
@@ -2998,6 +3093,22 @@
         "lastWorkflowId": {
           "type": "string",
           "description": "Registered Server lastWorkflowId"
+        },
+        "lastOperationName": {
+          "type": "string",
+          "description": "Resource Last Operation Name"
+        },
+        "discoveryEndpointUri": {
+          "type": "string",
+          "description": "Resource discoveryEndpointUri"
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "serviceLocation": {
+          "type": "string",
+          "description": "Service Location"
         }
       }
     },
@@ -3045,6 +3156,10 @@
         "lastWorkflowId": {
           "type": "string",
           "description": "CloudEndpoint lastWorkflowId"
+        },
+        "lastOperationName": {
+          "type": "string",
+          "description": "Resource Last Operation Name"
         }
       }
     },
@@ -3070,60 +3185,6 @@
           "type": "string",
           "description": "Friendly Name"
         },
-        "lastSyncSuccess": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last Sync Success"
-        },
-        "syncErrorState": {
-          "type": "string",
-          "description": "Sync Error State"
-        },
-        "syncErrorStateTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Sync Error State Timestamp"
-        },
-        "syncErrorDirection": {
-          "$ref": "#/definitions/ProgressType",
-          "description": "Sync Error Direction."
-        },
-        "itemUploadErrorCount": {
-          "type": "integer",
-          "description": "Item Upload Error Count."
-        },
-        "itemDownloadErrorCount": {
-          "type": "integer",
-          "description": "Item download error count."
-        },
-        "syncErrorContext": {
-          "type": "string",
-          "description": "sync error context."
-        },
-        "currentProgressType": {
-          "$ref": "#/definitions/ProgressType",
-          "description": "current progress type."
-        },
-        "itemProgressCount": {
-          "type": "integer",
-          "description": "Item Progress Count"
-        },
-        "itemTotalCount": {
-          "type": "integer",
-          "description": "Item Total Count"
-        },
-        "byteProgress": {
-          "type": "integer",
-          "description": "Bytes in progress"
-        },
-        "totalProgress": {
-          "type": "integer",
-          "description": "Total progress"
-        },
-        "byteTotal": {
-          "type": "integer",
-          "description": "Bytes total"
-        },
         "serverResourceId": {
           "$ref": "#/definitions/ResourceId",
           "description": "Server Resource Id."
@@ -3135,6 +3196,14 @@
         "lastWorkflowId": {
           "type": "string",
           "description": "ServerEndpoint lastWorkflowId"
+        },
+        "lastOperationName": {
+          "type": "string",
+          "description": "Resource Last Operation Name"
+        },
+        "syncStatus": {
+          "type": "string",
+          "description": "Sync Health Status"
         }
       }
     },
