@@ -148,6 +148,35 @@ input-file:
 - microsoft.insights/stable/2017-04-01/activityLogAlerts_API.json
 ```
 
+### Tag: package-2018-01-01-only
+
+These settings apply only when `--tag=package-2018-01-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01-01-only'
+input-file:
+- microsoft.insights/stable/2018-01-01/metricDefinitions_API.json
+- microsoft.insights/stable/2018-01-01/metrics_API.json
+```
+
+### Tag: package-2018-03-01-only
+
+These settings apply only when `--tag=package-2018-03-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-01-only'
+input-file:
+- microsoft.insights/stable/2018-03-01/metricAlert_API.json
+- microsoft.insights/stable/2018-03-01/actionGroups_API.json
+```
+
+### Tag: package-2018-04-16-only
+
+These settings apply only when `--tag=package-2018-04-16-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04-16-only'
+input-file:
+- microsoft.insights/stable/2018-04-16/scheduledQueryRule_API.json
+```
+
 ### Tag: package-2015-04-01-only
 
 These settings apply only when `--tag=package-2015-04-01-only` is specified on the command line.
