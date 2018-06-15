@@ -74,11 +74,6 @@
       ],
       "type": "object",
       "properties": {
-        "certificateName": {
-          "description": "The name of the certificate",
-          "type": "string",
-          "readOnly": true
-        },
         "privateBlob": {
           "description": "The base64 encoded certificate private blob.",
           "type": "string",
@@ -97,44 +92,12 @@
         }
       }
     },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
-    },
     "TdeCertificate": {
       "description": "A TDE certificate that can be uploaded into a server.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
