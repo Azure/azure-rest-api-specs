@@ -578,7 +578,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/vpnSites": {
       "get": {
-        "operationId": "VpnSites_ListBySubscriptionId",
+        "operationId": "VpnSites_List",
         "x-ms-examples": {
           "VpnSiteList": { "$ref": "./examples/VpnSiteList.json" }
         },
@@ -653,7 +653,7 @@
             "description": "Request successful. Follow the location header for sas-url to output blob."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously. Follow the location header for sas-url to output blob."
           },
           "default": {
             "description": "Error",
@@ -921,7 +921,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualHubs": {
       "get": {
-        "operationId": "VirtualHubs_ListBySubscriptionId",
+        "operationId": "VirtualHubs_List",
         "x-ms-examples": {
           "VirtualHubList": { "$ref": "./examples/VirtualHubList.json" }
         },
@@ -1309,7 +1309,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/vpnGateways": {
       "get": {
-        "operationId": "VpnGateways_ListBySubscriptionId",
+        "operationId": "VpnGateways_List",
         "x-ms-examples": {
           "VpnGatewayListBySubscription": { "$ref": "./examples/VpnGatewayList.json" }
         },
@@ -1791,6 +1791,10 @@
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "policies": {
+          "description": "The policies applied to this vpn gateway.",
+          "$ref": "#/definitions/Policies"
         }
       },
       "description": "Parameters for VpnGateway"
@@ -1848,10 +1852,6 @@
           "description": "The connection status.",
           "$ref": "#/definitions/VpnConnectionStatus"
         },
-        "tunnelConnectionStatus": {
-          "description": "The connection status of tunnel.",
-          "$ref": "#/definitions/TunnelConnectionStatus"
-        },
         "ingressBytesTransferred": {
           "type": "integer",
           "format": "int64",
@@ -1877,6 +1877,17 @@
         "enableBgp": {
           "type": "boolean",
           "description": "EnableBgp flag"
+        },
+        "ipsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualNetworkGateway.json#/definitions/IpsecPolicy"
+          },
+          "description": "The IPSec Policies to be considered by this connection."
+        },
+        "enableRateLimiting": {
+          "type": "boolean",
+          "description": "EnableRateLimiting flag"
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
@@ -2008,6 +2019,19 @@
         }
       },
       "description": "List of properties of the device."
+    },
+    "Policies": {
+      "properties": {
+        "allowBranchToBranchTraffic": {
+          "type": "boolean",
+          "description": "True if branch to branch traffic is allowed."
+        },
+        "allowVnetToVnetTraffic": {
+          "type": "boolean",
+          "description": "True if Vnet to Vnet traffic is allowed."
+        }
+      },
+      "description": "Policies for vpn gateway."
     },
     "ProvisioningState": {
       "type": "string",
