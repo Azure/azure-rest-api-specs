@@ -448,7 +448,7 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimapis.json#/parameters/ApiIdParameter"
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -494,7 +494,7 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimapis.json#/parameters/ApiIdParameter"
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -546,7 +546,7 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimapis.json#/parameters/ApiIdParameter"
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1177,13 +1177,13 @@
           "type": "boolean"
         },
         "approvalRequired": {
-          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.",
           "type": "boolean"
         },
         "subscriptionsLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
         },
         "state": {
           "type": "string",
