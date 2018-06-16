@@ -385,7 +385,7 @@
         ],
         "operationId": "Factories_Upgrade",
         "x-ms-examples": {
-          "Factories_CreateOrUpdate": {
+          "Factories_Upgrade": {
             "$ref": "./examples/Factories_Upgrade.json"
           }
         },
@@ -2062,9 +2062,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2449,9 +2446,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -3525,8 +3519,8 @@
             "$ref": "#/definitions/ActivityRun"
           }
         },
-        "nextLink": {
-          "description": "The link to the next page of results, if any remaining results exist.",
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
           "type": "string"
         }
       }
@@ -3621,8 +3615,8 @@
             "$ref": "#/definitions/TriggerRun"
           }
         },
-        "nextLink": {
-          "description": "The link to the next page of results, if any remaining results exist.",
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
           "type": "string"
         }
       }
