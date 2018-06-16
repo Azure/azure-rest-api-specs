@@ -44,25 +44,18 @@
                         "$ref": "./examples/GetAllApplications.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -93,32 +86,21 @@
                         "$ref": "./examples/GetApplicationInProgress.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
+                "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "applicationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The constant value for the application name."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApplicationNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -141,33 +123,21 @@
                         "$ref": "./examples/CreateApplication.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
-                        "name": "applicationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The constant value for the application name.",
-                        "enum": [
-                            "hue"
-                        ],
-                        "x-ms-enum": {
-                            "name": "ApplicationName",
-                            "modelAsString": false
-                        }
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApplicationNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "parameters",
@@ -177,12 +147,6 @@
                             "$ref": "#/definitions/ApplicationGetProperties"
                         },
                         "description": "The application create request."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -205,39 +169,21 @@
                         "$ref": "./examples/DeleteApplication.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
-                        "name": "applicationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The constant value for the application name.",
-                        "enum": [
-                            "hue"
-                        ],
-                        "x-ms-enum": {
-                            "name": "ApplicationName",
-                            "modelAsString": false
-                        }
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApplicationNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -424,6 +370,27 @@
             "required": true,
             "type": "string",
             "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ResourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+        },
+        "ClusterNameParameter": {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+        },
+        "ApplicationNameParameter": {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the application name."
         },
         "ApiVersionParameter": {
             "name": "api-version",

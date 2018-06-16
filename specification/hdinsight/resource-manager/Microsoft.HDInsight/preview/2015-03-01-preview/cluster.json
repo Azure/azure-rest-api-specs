@@ -53,19 +53,18 @@
                         "$ref": "./examples/CreateLinuxHadoopSecureHadoop.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "parameters",
@@ -75,12 +74,6 @@
                             "$ref": "#/definitions/ClusterCreateParametersExtended"
                         },
                         "description": "The cluster create request."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -104,19 +97,18 @@
                         "$ref": "./examples/PatchLinuxHadoopCluster.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "parameters",
@@ -126,12 +118,6 @@
                             "$ref": "#/definitions/ClusterPatchParameters"
                         },
                         "description": "The cluster patch request."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -154,25 +140,18 @@
                         "$ref": "./examples/DeleteLinuxHadoopCluster.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -199,25 +178,18 @@
                         "$ref": "./examples/GetLinuxSparkCluster.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -242,18 +214,15 @@
                         "$ref": "./examples/GetLinuxHadoopAllClustersInResourceGroup.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -281,19 +250,15 @@
                         "$ref": "./examples/ResizeLinuxHadoopCluster.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "name": "roleName",
@@ -310,6 +275,9 @@
                         }
                     },
                     {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
@@ -317,12 +285,6 @@
                             "$ref": "#/definitions/ClusterResizeParameters"
                         },
                         "description": "The parameters for the resize operation."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -348,11 +310,12 @@
                     }
                 },
                 "description": "Lists all the HDInsight clusters under the subscription.",
-                "parameters": [{
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
+                "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -483,6 +446,53 @@
                 }
             }
         },
+        "SshPublicKey": {
+            "description": "The SSH public key for the cluster nodes.",
+            "properties": {
+                "certificateData": {
+                    "type": "string",
+                    "description": "The certificate for SSH."
+                }
+            }
+        },
+        "SshProfile": {
+            "description": "The list of SSH public keys.",
+            "properties": {
+                "publicKeys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SshPublicKey"
+                    },
+                    "description": "The list of SSH public keys."
+                }
+            }
+        },
+        "LinuxOperatingSystemProfile": {
+            "description": "The ssh username, password, and ssh public key.",
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "The username."
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The password."
+                },
+                "sshProfile": {
+                    "$ref": "#/definitions/SshProfile",
+                    "description": "The SSH profile."
+                }
+            }
+        },
+        "OsProfile": {
+            "description": "The Linux operation systems profile.",
+            "properties": {
+                "linuxOperatingSystemProfile": {
+                    "$ref": "#/definitions/LinuxOperatingSystemProfile",
+                    "description": "The Linux OS profile."
+                }
+            }
+        },
         "Role": {
             "properties": {
                 "name": {
@@ -504,7 +514,7 @@
                     "description": "The hardware profile."
                 },
                 "osProfile": {
-                    "$ref": "./configurations.json#/definitions/OsProfile",
+                    "$ref": "#/definitions/OsProfile",
                     "description": "The operating system profile."
                 },
                 "virtualNetworkProfile": {
@@ -1118,6 +1128,20 @@
             "required": true,
             "type": "string",
             "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ResourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+        },
+        "ClusterNameParameter": {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
         },
         "ApiVersionParameter": {
             "name": "api-version",

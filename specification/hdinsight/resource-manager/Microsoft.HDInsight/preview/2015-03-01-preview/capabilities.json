@@ -44,18 +44,15 @@
                         "$ref": "./examples/GetHDInsightCapabilities.json"
                     }
                 },
-                "parameters": [{
-                        "name": "location",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The location to get capabilities for."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LocationParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -257,6 +254,13 @@
             "required": true,
             "type": "string",
             "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "LocationParameter": {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location to get capabilities for."
         },
         "ApiVersionParameter": {
             "name": "api-version",

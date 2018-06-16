@@ -44,32 +44,21 @@
                         "$ref": "./examples/DeleteScriptAction.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
-                        "name": "scriptName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the script."
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ScriptNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -91,19 +80,18 @@
                         "$ref": "./examples/PostExecuteScriptAction.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "parameters",
@@ -113,12 +101,6 @@
                             "$ref": "./cluster.json#/definitions/ExecuteScriptActionParameters"
                         },
                         "description": "The parameters for executing script actions."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -144,25 +126,18 @@
                         "$ref": "./examples/GetLinuxHadoopScriptAction.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -190,32 +165,21 @@
                         "$ref": "./examples/GetScriptActionById.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
-                        "name": "scriptExecutionId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The script execution Id"
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ScriptExecutionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -240,25 +204,18 @@
                         "$ref": "./examples/GetScriptExecutionHistory.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -286,33 +243,21 @@
                         "$ref": "./examples/PromoteLinuxHadoopScriptAction.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
-                        "name": "scriptExecutionId",
-                        "in": "path",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64",
-                        "description": "The script execution ID."
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ScriptExecutionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -435,6 +380,34 @@
             "required": true,
             "type": "string",
             "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ResourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+        },
+        "ClusterNameParameter": {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+        },
+        "ScriptNameParameter": {
+            "name": "scriptName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the script."
+        },
+        "ScriptExecutionIdParameter": {
+            "name": "scriptExecutionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The script execution Id"
         },
         "ApiVersionParameter": {
             "name": "api-version",
