@@ -1560,8 +1560,8 @@
         },
         "cachingType": {
           "type": "string",
-          "title": "Caching Type.",
-          "description": "Caching Type for the disks. Available values are none (default), readonly, readwrite. Caching type can be set only for VM sizes supporting premium storage.",
+          "title": "Caching type.",
+          "description": "Caching type for the disks. Available values are none (default), readonly, readwrite. Caching type can be set only for VM sizes supporting premium storage.",
           "default": "none",
           "enum": [
             "none",
@@ -1605,14 +1605,14 @@
     "KeyVaultSecretReference": {
       "properties": {
         "sourceVault": {
-          "title": "Key Vault resource ID.",
-          "description": "Fully qualified resource ID for the Key Vault.",
+          "title": "Key Vault resource identifier.",
+          "description": "Fully qualified resource indentifier of the Key Vault.",
           "$ref": "#/definitions/ResourceId"
         },
         "secretUrl": {
           "type": "string",
           "title": "Secret URL.",
-          "description": "The URL referencing a secret in a Key Vault."
+          "description": "The URL referencing a secret in the Key Vault."
         }
       },
       "required": [
@@ -1626,7 +1626,7 @@
         "mountPoint": {
           "type": "string",
           "title": "Mount Point.",
-          "description": "Path where the NFS is mounted on the File Server."
+          "description": "Path where the data disks are mounted on the File Server."
         },
         "fileServerPublicIP": {
           "type": "string",
@@ -1639,7 +1639,7 @@
           "description": "Internal IP address of the File Server which can be used to access the File Server from within the subnet."
         }
       },
-      "description": "File Server Mount Information."
+      "description": "File Server mount Information."
     },
     "SshConfiguration": {
       "properties": {
