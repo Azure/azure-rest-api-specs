@@ -75,7 +75,6 @@ python:
   namespace: azure.applicationinsights
   package-name: azure-applicationinsights
   package-version: 0.1.0
-  clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
