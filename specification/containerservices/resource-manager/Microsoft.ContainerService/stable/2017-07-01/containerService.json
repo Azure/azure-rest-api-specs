@@ -309,7 +309,7 @@
     },
     "ContainerServiceVnetSubnetID": {
       "type": "string",
-      "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+      "description": "VNet SubnetID specifies the vnet's subnet identifier."
     },
     "ContainerServiceVMSize": {
       "type": "string",
@@ -606,7 +606,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "firstConsecutiveStaticIP": {
           "type": "string",
@@ -675,18 +675,10 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "osType": {
-          "type": "string",
-          "default": "Linux",
-          "enum": [
-            "Linux",
-            "Windows"
-          ],
-          "x-ms-enum": {
-            "name": "OSType"
-          },
+          "$ref": "#/definitions/OSType",
           "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
         }
       },
@@ -872,6 +864,19 @@
         "linuxProfile"
       ],
       "description": "Properties of the container service."
+    },
+    "OSType": {
+      "type": "string",
+      "default": "Linux",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "name": "OSType",
+        "modelAsString": true
+      },
+      "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
     }
   },
   "parameters": {

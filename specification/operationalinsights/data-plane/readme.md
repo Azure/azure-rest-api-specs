@@ -41,6 +41,12 @@ input-file:
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
+```
+
+``` yaml $(tag) == '20171001'
+input-file:
+- Microsoft.OperationalInsights/preview/2017-10-01/swagger.json
+directive:
   - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
     where-operation: Query_Post
     transform: $.operationId = "Query"
@@ -79,24 +85,22 @@ csharp:
 ``` yaml $(python)
 python-mode: create
 python:
-  add-credentials: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.operationalinsights
-  package-name: azure-operationalinsights
+  namespace: azure.loganalytics
+  package-name: azure-loganalytics
   package-version: 0.1.0
   clear-output-folder: true
-  basic-setup-py: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-operationalinsights/azure/operationalinsights
+  output-folder: $(python-sdks-folder)/azure-loganalytics/azure/loganalytics
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-operationalinsights
+  output-folder: $(python-sdks-folder)/azure-loganalytics
 ```
 
 ## Go

@@ -126,6 +126,43 @@
           "Get rule": { "$ref": "./examples/getScheduledQueryRules.json" }
         }
       },
+      "patch": {
+       "tags": [ "scheduledQueryRules" ],
+        "description": "Update log search Rule.",
+        "operationId": "scheduledQueryRules_Update",
+        "parameters": [
+          { "$ref": "#/parameters/SubscriptionIdParameter" },
+          { "$ref": "#/parameters/ResourceGroupNameParameter" },
+          { "$ref": "#/parameters/RuleNameParameter" },
+          { "$ref": "#/parameters/ApiVersionParameter" },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogSearchRuleResourcePatch"
+            },
+            "description": "The parameters of the rule to update."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to update an Log Search rule",
+            "schema": {
+              "$ref": "#/definitions/LogSearchRuleResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Log Search Rule": { "$ref": "./examples/patchScheduledQueryRules.json" }
+        }
+      },
       "delete": {
         "description": "Deletes a Log Search rule",
         "tags": [
@@ -252,7 +289,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+   "Resource": {
       "properties": {
         "id": {
           "type": "string",
@@ -271,7 +308,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -304,6 +345,22 @@
         }
       },
       "description": "The Log Search Rule resource."
+    },
+    "LogSearchRuleResourcePatch": {
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LogSearchRulePatch",
+          "description": "The log search rule properties of the resource."
+        }
+      },
+      "description": "The log search rule resource for patch operations."
     },
     "LogSearchRuleResourceCollection": {
       "properties": {
@@ -338,7 +395,7 @@
         },
         "queryType": {
           "$ref": "#/definitions/QueryType",
-          "description": "Set value to ResultCount if query should be returning search result count. Set it to Number if its a metric query."
+          "description": "Set value to 'ResultCount' ."
         }
       },
       "required": [
@@ -379,7 +436,7 @@
           "type": "number"
         },
         "metricTrigger": {
-          "$ref": "#/definitions/MetricTrigger",
+          "$ref": "#/definitions/LogMetricTrigger",
           "description": "Trigger condition for metric query rule"
         }
       },
@@ -410,7 +467,7 @@
       },
       "description": "Azure action group"
     },
-    "MetricTrigger": {
+    "LogMetricTrigger": {
       "type": "object",
       "properties": {
         "thresholdOperator": {
@@ -480,7 +537,7 @@
         "name": "QueryType",
         "modelAsString": true
       },
-      "description": "Output of query to be used"
+      "description": "Set value to 'ResultAcount'"
     },
     "LogSearchRule": {
       "description": "Log Search Rule Definition",
@@ -541,6 +598,23 @@
         "action"
       ]
     },
+    "LogSearchRulePatch": {
+      "description": "Log Search Rule Definition for Patching",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "The flag which indicates whether the Log Search rule is enabled. Value should be true or false",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "enabled",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "Action": {
       "type": "object",
       "discriminator": "odata.type",
@@ -588,7 +662,7 @@
         "severity"
       ]
     },
-     "ErrorResponse": {
+    "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
