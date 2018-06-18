@@ -9,7 +9,7 @@ nodejs:
   package-version: 0.1.0
   output-folder: $(node-sdks-folder)/lib/services/loganalytics
   override-client-name: LogAnalyticsClient
-  generate-license-txt: false
-  generate-package-json: false
+  generate-license-txt: true
+  generate-package-json: true
   generate-readme-md: false
 ```
