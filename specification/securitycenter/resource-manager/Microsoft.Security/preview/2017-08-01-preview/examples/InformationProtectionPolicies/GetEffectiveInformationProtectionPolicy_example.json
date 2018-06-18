@@ -35,20 +35,52 @@
                                 "order": 100,
                                 "recommendedLabelId": "575739d2-3d53-4df0-9042-4c7772d5c7b1",
                                 "enabled": true,
-                                "keywords": {
-                                    "builtIn": ["ip", "ip%address%", "%mac%address%"],
-                                    "custom": ["%networking%"]
-                                }
+                                "keywords": [{
+                                        "pattern": "%ip%",
+                                        "custom": false,
+                                        "canBeNumeric": false
+                                    }, {
+                                        "pattern": "ip%address%",
+                                        "custom": false,
+                                        "canBeNumeric": false
+                                    }, {
+                                        "pattern": "%mac%address%",
+                                        "custom": false,
+                                        "canBeNumeric": false
+                                    }, {
+                                        "pattern": "%networking%",
+                                        "custom": true,
+                                        "canBeNumeric": true
+                                    }
+                                ]
                             },
                             "5856f35c-8e08-4d08-9bf7-87a146150569": {
                                 "displayName": "Contact Info",
                                 "order": 200,
                                 "recommendedLabelId": "575739d2-3d53-4df0-9042-4c7772d5c7b1",
                                 "enabled": true,
-                                "keywords": {
-                                    "builtIn": ["%email%", "%e-mail%", "%addr%", "%street%", "%city%", "%phone%", "%mobile%", "%area%code%"],
-                                    "custom": []
-                                }
+                                "keywords": [{
+                                        "pattern": "%email%",
+                                        "custom": false,
+                                        "canBeNumeric": false
+                                    }, {
+                                        "pattern": "%e-mail%",
+                                        "custom": false,
+                                        "canBeNumeric": false
+                                    }, {
+                                        "pattern": "%addr%",
+                                        "custom": false,
+                                        "canBeNumeric": false
+                                    }, {
+                                        "pattern": "%street%",
+                                        "custom": false,
+                                        "canBeNumeric": true
+                                    }, {
+                                        "pattern": "%city%",
+                                        "custom": false,
+                                        "canBeNumeric": false
+                                    }
+                                ]
                             }
                         },
                         "custom": {
@@ -57,9 +89,12 @@
                                 "order": 1400,
                                 "recommendedLabelId": "7aa516c7-5a53-4857-bc6e-6808c6acd542",
                                 "enabled": true,
-                                "keywords": {
-                                    "custom": ["%custom%"]
-                                }
+                                "keywords": [{
+                                        "pattern": "%networking%",
+                                        "custom": true,
+                                        "canBeNumeric": false
+                                    }
+                                ]
                             }
                         }
                     }

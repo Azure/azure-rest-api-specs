@@ -277,9 +277,8 @@
                     "type": "number",
                     "description": "The order of the sensitivity label."
                 },
-                "state": {
-                    "type": "string",
-                    "enum": ["Enabled", "Disabled"],
+                "enabled": {
+                    "type": "boolean",
                     "description": "Indicates whether the label is enabled or not."
                 }
             }
@@ -302,30 +301,33 @@
                     "description": "The recommended label id to be associated with this information type."
                 },
                 "enabled": {
-                    "type": "string",
-                    "enum": ["Enabled", "Disabled"],
+                    "type": "boolean",
                     "description": "Indicates whether the information type is enabled or not."
                 },
                 "keywords": {
-                    "type": "object",
+                    "type": "array",
                     "description": "The information type keywords.",
-                    "properties": {
-                        "builtIn": {
-                            "type": "array",
-                            "readOnly": true,
-                            "description": "The built-in keywords.",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "custom": {
-                            "type": "array",
-                            "description": "The customized keywords.",
-                            "items": {
-                                "type": "string"
-                            }
-                        }
+                    "items": {
+                        "$ref": "#/definitions/InformationProtectionKeyword"
                     }
+                }
+            }
+        },
+        "InformationProtectionKeyword": {
+            "type": "object",
+            "description": "The information type keyword.",
+            "properties": {
+                "pattern": {
+                    "type": "string",
+                    "description": "The keyword pattern."
+                },
+                "custom": {
+                    "type": "boolean",
+                    "description": "Indicates whether the keyword is custom or not."
+                },
+                "canBeNumeric": {
+                    "type": "boolean",
+                    "description": "Indicates whether the keyword can be applied on numeric types or not."
                 }
             }
         }
