@@ -136,7 +136,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -159,9 +159,20 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-03
   - tag: package-2017-09
   - tag: package-2017-08
   - tag: package-2017-07
+```
+
+### Tag: package-2018-03 and go
+
+These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-03' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2018-03-31/containerservice
 ```
 
 ### Tag: package-2017-09 and go
@@ -208,7 +219,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.containerservice
   package-name: azure-mgmt-containerservice
-  package-version: 4.0.0
+  package-version: 4.1.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -229,13 +240,59 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.containerservice
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice
+title: ContainerServiceManagementClient
+description: "Container Service Client"
+```
+
+### Java multi-api
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-09-only
+  - tag: package-2017-08-only
+  - tag: package-2017-07
+```
+
+### Tag: package-2017-09-only and java
+
+These settings apply only when `--tag=package-2017-09-only` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-09-only' && $(java) && $(multiapi)
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.containerservice
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice
-  title: ContainerServiceManagementClient
-  description: "Container Service Client"
+  namespace: com.microsoft.azure.management.containerservice.v2017_09_30
+  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_09_30
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-08-only and java
+
+These settings apply only when `--tag=package-2017-08-only` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-08-only' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2017_08_31
+  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_08_31
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-07 and java
+
+These settings apply only when `--tag=package-2017-07` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2017_07_01
+  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_07_01
+regenerate-manager: true
+generate-interface: true
 ```
