@@ -68,9 +68,9 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/HttpConnectivitySettings"
+                            "$ref": "#/definitions/ClusterConfiguration"
                         },
-                        "description": "The name of the resource group."
+                        "description": "The cluster configurations."
                     }
                 ],
                 "responses": {
@@ -118,10 +118,7 @@
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
-                            "type": "object",
-							"additionalProperties": {
-								"type": "string"
-							}
+                            "$ref": "#/definitions/ClusterConfiguration"
                         }
                     }
                 }
@@ -129,30 +126,12 @@
         }
     },
     "definitions": {
-        "HttpConnectivitySettings": {
-            "properties": {
-                "restAuthCredential.isEnabled": {
-                    "x-ms-client-name": "enabledCredential",
-                    "type": "string",
-                    "description": "Whether or not the HTTP based authorization is enabled.",
-                    "enum": [
-                        "true",
-                        "false"
-                    ]
-                },
-                "restAuthCredential.username": {
-                    "x-ms-client-name": "username",
-                    "type": "string",
-                    "description": "The HTTP username."
-                },
-                "restAuthCredential.password": {
-                    "x-ms-client-name": "password",
-                    "type": "string",
-                    "format": "password",
-                    "description": "The HTTP user password."
-                }
+        "ClusterConfiguration": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
             },
-            "description": "The payload for a Configure HTTP settings request."
+            "description": "The configuration object for the specified configuration for the specified cluster."
         }
     },
 	"parameters": {
