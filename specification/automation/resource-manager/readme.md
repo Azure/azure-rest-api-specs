@@ -142,6 +142,9 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: account.json
     where: $.definitions.Key.properties.Value
+  - suppress: LongRunningResponseStatusCode
+    from: runbook.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/publish"].post["x-ms-long-running-operation"]
 ```
 
 ---
