@@ -901,6 +901,7 @@
         "textAngle": {
           "type": "number",
           "format": "double",
+          "x-nullable": false,
           "description": "The angle, in degrees, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly."
         },
         "orientation": {
@@ -1116,6 +1117,7 @@
         "confidence": {
           "type": "number",
           "format": "double",
+          "x-nullable": false,
           "description": "The level of confidence the service has in the caption"
         }
       }
@@ -1131,6 +1133,7 @@
         "confidence": {
           "type": "number",
           "format": "double",
+          "x-nullable": false,
           "description": "The level of confidence the service has in the caption"
         },
         "hint": {
@@ -1146,11 +1149,13 @@
         "width": {
           "type": "integer",
           "format": "int32",
+          "x-nullable": false,
           "description": "Image width"
         },
         "height": {
           "type": "integer",
           "format": "int32",
+          "x-nullable": false,
           "description": "Image height"
         },
         "format": {
@@ -1170,6 +1175,7 @@
         "confidence": {
           "type": "number",
           "format": "double",
+          "x-nullable": false,
           "description": "Level of confidence ranging from 0 to 1."
         },
         "faceRectangle": {
@@ -1188,6 +1194,7 @@
         "confidence": {
           "type": "number",
           "format": "double",
+          "x-nullable": false,
           "description": "Confidence level for the landmark recognition."
         }
       }
@@ -1198,18 +1205,22 @@
       "properties": {
         "left": {
           "type": "integer",
+          "x-nullable": false,
           "description": "X-coordinate of the top left point of the face."
         },
         "top": {
           "type": "integer",
+          "x-nullable": false,
           "description": "Y-coordinate of the top left point of the face."
         },
         "width": {
           "type": "integer",
+          "x-nullable": false,
           "description": "Width measured from the top-left point of the face."
         },
         "height": {
           "type": "integer",
+          "x-nullable": false,
           "description": "Height measured from the top-left point of the face."
         }
       }
@@ -1220,6 +1231,7 @@
       "properties": {
         "age": {
           "type": "integer",
+          "x-nullable": false,
           "description": "Possible age of the face."
         },
         "gender": {
@@ -1245,10 +1257,12 @@
       "properties": {
         "clipArtType": {
           "type": "number",
+          "x-nullable": false,
           "description": "Confidence level that the image is a clip art."
         },
         "lineDrawingType": {
           "type": "number",
+          "x-nullable": false,
           "description": "Confidence level that the image is a line drawing."
         }
       }
@@ -1321,6 +1335,7 @@
         "score": {
           "type": "number",
           "format": "double",
+          "x-nullable": false,
           "description": "Scoring of the category."
         },
         "detail": {
