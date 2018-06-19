@@ -231,6 +231,13 @@
             "schema": {
               "$ref": "#/definitions/Factory"
             }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the factory entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
           }
         ],
         "responses": {
@@ -320,6 +327,13 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the factory entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
           }
         ],
         "responses": {
@@ -328,6 +342,9 @@
             "schema": {
               "$ref": "#/definitions/Factory"
             }
+          },
+          "304": {
+            "description": "Not modified."
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -2484,6 +2501,11 @@
             "type": "string"
           },
           "description": "The resource tags."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Etag identifies change in the resource.",
+          "readOnly": true
         }
       }
     },
