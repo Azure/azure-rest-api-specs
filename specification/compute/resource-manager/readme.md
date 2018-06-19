@@ -163,17 +163,17 @@ directive:
 
 ```
 
-### Tag: package-gallery-2018-06
+### Tag: package-2018-06-01
 
-These settings apply only when `--tag=package-gallery-2018-06` is specified on the command line.
+These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-gallery-2018-06'
+``` yaml $(tag) == 'package-2018-06-01'
 input-file:
-- Microsoft.Compute/preview/2018-06-01/gallery.json
 - Microsoft.Compute/stable/2018-04-01/compute.json
 - Microsoft.Compute/stable/2018-04-01/runCommands.json
 - Microsoft.Compute/stable/2017-09-01/skus.json
 - Microsoft.Compute/stable/2018-04-01/disk.json
+- Microsoft.Compute/stable/2018-06-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
@@ -183,7 +183,7 @@ These settings apply only when `--tag=package-gallery-only-2018-06` is specified
 
 ``` yaml $(tag) == 'package-gallery-only-2018-06'
 input-file:
-- Microsoft.Compute/preview/2018-06-01/gallery.json
+- Microsoft.Compute/stable/2018-06-01/gallery.json
 ```
 
 ### Tag: package-2018-04-01
