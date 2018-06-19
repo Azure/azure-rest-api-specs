@@ -142,4 +142,5 @@ java:
   namespace: com.microsoft.azure.loganalytics
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/loganalytics/data-plane
   ```
