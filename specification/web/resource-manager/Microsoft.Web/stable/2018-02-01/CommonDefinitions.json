@@ -807,7 +807,8 @@
         "deletedSiteId": {
           "format": "int32",
           "description": "Numeric id for the deleted site",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "deletedTimestamp": {
           "description": "Time in UTC when the app was deleted.",
@@ -1131,24 +1132,32 @@
           "type": "string"
         },
         "action": {
-          "description": "** New Implementation Only **\nAllow or Deny action.",
+          "description": "Allow or Deny access for this IP range.",
           "type": "string"
         },
         "tag": {
-          "description": "** New Implementation Only **\nTag.",
-          "type": "string"
+          "description": "Defines what this IP filter will be used for. This is to support IP filtering on proxies.",
+          "enum": [
+            "Default",
+            "XffProxy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IpFilterTag",
+            "modelAsString": false
+          }
         },
         "priority": {
           "format": "int32",
-          "description": "** New Implementation Only **\nPriority.",
+          "description": "Priority of IP restriction rule.",
           "type": "integer"
         },
         "name": {
-          "description": "** New Implementation Only **\nName.",
+          "description": "IP restriction rule name.",
           "type": "string"
         },
         "description": {
-          "description": "** New Implementation Only **\nDescription.",
+          "description": "IP restriction rule description.",
           "type": "string"
         }
       }
