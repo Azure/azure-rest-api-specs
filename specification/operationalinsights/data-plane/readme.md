@@ -25,7 +25,7 @@ These are the global settings for the OperationalInsightsData API.
 
 ``` yaml
 title: OperationalInsightsDataClient
-description: Operational Insights Data Client
+description: Log Analytics Data Plane Client
 add-credentials: true
 openapi-type: data-plane
 tag: v1
@@ -134,14 +134,12 @@ output-folder: $(go-sdk-folder)/services/operationalinsights/v1/operationalinsig
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.operationalinsights
+  fluent: false
+  namespace: com.microsoft.azure.loganalytics
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-operationalinsights
-```
+  ```
