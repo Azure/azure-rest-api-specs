@@ -18,7 +18,8 @@
           }
         }
       }
-    }
+    },
+    "$expand": "ReplicationStatus"
   },
   "responses": {
     "200": {
@@ -31,27 +32,40 @@
                 "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
               }
             },
-            "publishedDate": "2018-01-01"
+            "scaleTier": "S30",
+            "publishedDate": "2018-01-01T00:00:00Z"
           },
-          "provisioningState": "Updating"
-        },
-        "location": "West US",
-        "name": "1.0.0"
-      }
-    },
-    "201": {
-      "body": {
-        "properties": {
-          "publishingProfile": {
-            "regions": ["West US", "East US"],
-            "source": {
-              "managedImage": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
-              }
+          "storageProfile": {
+            "osDiskImage": {
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
             },
-            "publishedDate": "2018-01-01"
+            "dataDiskImages": [
+              {
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
+              }
+            ]
           },
-          "provisioningState": "Creating"
+          "replicationStatus": {
+            "aggregatedState": "Completed",
+            "summary": [
+              {
+                "region": "West US",
+                "state": "Completed",
+                "details": "",
+                "progress": 100
+              },
+              {
+                "region": "East US",
+                "state": "Completed",
+                "details": "",
+                "progress": 100
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
         },
         "location": "West US",
         "name": "1.0.0"
