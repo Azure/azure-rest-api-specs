@@ -111,7 +111,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/configureFactoryRepo": {
       "post": {
         "tags": [
-          "configureFactoryRepo"
+          "factories"
         ],
         "operationId": "Factories_ConfigureFactoryRepo",
         "x-ms-examples": {
@@ -444,13 +444,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
           }
         ],
         "responses": {
@@ -459,9 +452,6 @@
             "schema": {
               "$ref": "#/definitions/IntegrationRuntimeListResponse"
             }
-          },
-          "304": {
-            "description": "No content."
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -561,6 +551,13 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
           }
         ],
         "responses": {
@@ -569,6 +566,9 @@
             "schema": {
               "$ref": "#/definitions/IntegrationRuntimeResource"
             }
+          },
+          "304": {
+            "description": "Not modified."
           },
           "default": {
             "description": "An error response received from GET integration runtime operation.",
@@ -1389,7 +1389,7 @@
             }
           },
           "304": {
-            "description": "No content."
+            "description": "Not modified."
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -1594,7 +1594,7 @@
             }
           },
           "304": {
-            "description": "No content."
+            "description": "Not modified."
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -1799,7 +1799,7 @@
             }
           },
           "304": {
-            "description": "No content."
+            "description": "Not modified."
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -2258,7 +2258,7 @@
             }
           },
           "304": {
-            "description": "No content."
+            "description": "Not modified."
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -3003,10 +3003,6 @@
       "properties": {
         "factoryResourceId": {
           "description": "The factory resource id.",
-          "type": "string"
-        },
-        "resourceGroupName": {
-          "description": "The resource group name.",
           "type": "string"
         },
         "repoConfiguration": {
@@ -3833,6 +3829,13 @@
           "items": {
             "$ref": "#/definitions/OperationMetricAvailability"
           }
+        },
+        "dimensions": {
+          "description": "Defines the metric dimension.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetricDimension"
+          }
         }
       }
     },
@@ -3847,6 +3850,24 @@
         "blobDuration": {
           "description": "Blob created in the customer storage account, per hour.",
           "type": "string"
+        }
+      }
+    },
+    "OperationMetricDimension": {
+      "description": "Defines the metric dimension.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the dimension for the metric.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the metric dimension.",
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "Whether the dimension should be exported to Azure Monitor.",
+          "type": "boolean"
         }
       }
     }
