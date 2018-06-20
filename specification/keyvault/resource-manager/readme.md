@@ -36,8 +36,8 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
-- Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
+- Microsoft.KeyVault/2018-02-14/keyvault.json
+- Microsoft.KeyVault/2018-02-14/providers.json
 ```
 
 
@@ -97,7 +97,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.keyvault
   package-name: azure-mgmt-keyvault
-  package-version: 1.0.0b1
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -127,8 +127,18 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-02
   - tag: package-2016-10
   - tag: package-2015-06
+```
+
+### Tag: package-2018-02 and go
+
+These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(go)
+output-folder: $(go-sdk-folder)/services/keyvault/mgmt/2018-02-14/keyvault
 ```
 
 ### Tag: package-2016-10 and go
