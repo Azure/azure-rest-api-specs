@@ -3817,7 +3817,7 @@
         "crv": {
           "type": "string",
           "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
-          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
+          "enum": [ "P-256", "P-384", "P-521", "P-256K" ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
             "modelAsString": true,
@@ -3835,7 +3835,7 @@
                 "description": "The NIST P-521 elliptic curve, AKA SECG curve SECP521R1."
               },
               {
-                "value": "SECP256K1",
+                "value": "P-256K",
                 "description": "The SECG SECP256K1 elliptic curve."
               }
             ]
@@ -4418,7 +4418,7 @@
           "x-ms-client-name": "curve",
           "type": "string",
           "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
-          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
+          "enum": [ "P-256", "P-384", "P-521", "P-256K" ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
             "modelAsString": true
@@ -4745,7 +4745,7 @@
           "x-ms-client-name": "curve",
           "type": "string",
           "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
-          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
+          "enum": [ "P-256", "P-384", "P-521", "P-256K" ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
             "modelAsString": true
@@ -4809,10 +4809,56 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL", "ES256", "ES384", "ES512", "ECDSA256" ],
+          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL", "ES256", "ES384", "ES512", "ES256K" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PS256",
+                "description": "RSASSA-PSS using SHA-256 and MGF1 with SHA-256, as described in https://tools.ietf.org/html/rfc7518"
+              },
+              {
+                "value": "PS384",
+                "description": "RSASSA-PSS using SHA-384 and MGF1 with SHA-384, as described in https://tools.ietf.org/html/rfc7518"
+              },
+              {
+                "value": "PS512",
+                "description": "RSASSA-PSS using SHA-512 and MGF1 with SHA-512, as described in https://tools.ietf.org/html/rfc7518"
+              },
+              {
+                "value": "RS256",
+                "description": "RSASSA-PKCS1-v1_5 using SHA-256, as described in https://tools.ietf.org/html/rfc7518"
+              },
+              {
+                "value": "RS384",
+                "description": "RSASSA-PKCS1-v1_5 using SHA-384, as described in https://tools.ietf.org/html/rfc7518"
+              },
+              {
+                "value": "RS512",
+                "description": "RSASSA-PKCS1-v1_5 using SHA-512, as described in https://tools.ietf.org/html/rfc7518"
+              },
+              {
+                "value": "RSNULL",
+                "description": "Reserved"
+              },
+              {
+                "value": "ES256",
+                "description": "ECDSA using P-256 and SHA-256, as described in https://tools.ietf.org/html/rfc7518."
+              },
+              {
+                "value": "ES384",
+                "description": "ECDSA using P-384 and SHA-384, as described in https://tools.ietf.org/html/rfc7518"
+              },
+              {
+                "value": "ES512",
+                "description": "ECDSA using P-521 and SHA-512, as described in https://tools.ietf.org/html/rfc7518"
+              },
+              {
+                "value": "ES256K",
+                "description": "ECDSA using P-256K and SHA-256, as described in https://tools.ietf.org/html/rfc7518"
+              }
+            ]
           }
         },
         "value": {
@@ -4830,7 +4876,7 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL", "ES256", "ES384", "ES512", "ECDSA256" ],
+          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL", "ES256", "ES384", "ES512", "ES256K" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true
