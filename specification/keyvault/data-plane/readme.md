@@ -26,16 +26,16 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-7.0-preview
+tag: package-7.0
 ```
 
-### Tag: package-7.0-preview
+### Tag: package-7.0
 
-These settings apply only when `--tag=package-7.0-preview` is specified on the command line.
+These settings apply only when `--tag=package-7.0` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.0-preview'
+``` yaml $(tag) == 'package-7.0'
 input-file:
-- Microsoft.KeyVault/preview/7.0/keyvault.json
+- Microsoft.KeyVault/stable/7.0/keyvault.json
 ```
 
 ### Tag: package-2016-10
@@ -102,7 +102,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.keyvault
   package-name: azure-keyvault
-  package-version: 1.0.0b1
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -132,18 +132,18 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-7.0-preview
+  - tag: package-7.0
   - tag: package-2016-10
   - tag: package-2015-06
 ```
 
-### Tag: package-7.0-preview and go
+### Tag: package-7.0 and go
 
-These settings apply only when `--tag=package-7.0-preview --go` is specified on the command line.
+These settings apply only when `--tag=package-7.0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-7.0-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/keyvault/v7.0/keyvault
+``` yaml $(tag) == 'package-7.0' && $(go)
+output-folder: $(go-sdk-folder)/services/keyvault/v7.0/keyvault
 ```
 
 ### Tag: package-2016-10 and go
