@@ -683,6 +683,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/locations/{location}/operationresults/{operationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get Server Details": {
+             "$ref": "./examples/operationResults.json"
+             }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "OperationResult_Get",
+        "description": "List the result of the specified operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name which the operation will lookup into. including 'global'"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The target operation Id."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If the operation completed successfully, the service should return 200 (OK)."
+          },
+          "202": {
+            "description": "If the operation has been accepted and is ongoing, the service should return 202 (Accepted)"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/BotServices/listServiceProviders": {
       "post": {
         "tags": [
@@ -765,7 +815,7 @@
             }
           }
         }
-      }      
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/Connections/{connectionName}": {
       "put": {
@@ -1990,7 +2040,7 @@
           "description": "Diplay Name of the Service Provider",
           "readOnly": true
         },
-        "serviceProviderName": {  
+        "serviceProviderName": {
           "type": "string",
           "description": "Diplay Name of the Service Provider",
           "readOnly": true
@@ -2212,34 +2262,34 @@
         "modelAsString": false,
         "values": [
           {
-            "value": "FacebookChannel"  
+            "value": "FacebookChannel"
           },
           {
-            "value": "EmailChannel"  
+            "value": "EmailChannel"
           },
           {
-            "value": "KikChannel"  
+            "value": "KikChannel"
           },
           {
-            "value": "TelegramChannel"  
+            "value": "TelegramChannel"
           },
           {
-            "value": "SlackChannel"  
+            "value": "SlackChannel"
           },
           {
-            "value": "MsTeamsChannel"  
+            "value": "MsTeamsChannel"
           },
           {
-            "value": "SkypeChannel"  
+            "value": "SkypeChannel"
           },
           {
-            "value": "WebChatChannel"  
+            "value": "WebChatChannel"
           },
           {
-            "value": "DirectLineChannel"  
+            "value": "DirectLineChannel"
           },
           {
-            "value": "SmsChannel"  
+            "value": "SmsChannel"
           }
         ]
       },
