@@ -2214,20 +2214,30 @@
       ],
       "description": "The virtual network connection reset shared key"
     },
-    "ConnectionSharedKey": {
+    "ConnectionSharedKeyPropertiesFormat": {
       "properties": {
         "value": {
           "type": "string",
-          "description": "The virtual network connection shared key value."
+          "description": "The virtual network gateway connection shared key value."
         }
       },
-	  "allOf": [
+      "description": "Properties of the virtual network gateway connection shared key."
+    },
+    "ConnectionSharedKey": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionSharedKeyPropertiesFormat",
+          "description": "Properties of the virtual network gateway connection shared key."
+        }
+      },
+      "allOf": [
         {
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "required": [
-        "value"
+        "properties"
       ],
       "description": "Response for GetConnectionSharedKey API service call"
     },
