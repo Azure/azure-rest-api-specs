@@ -60,7 +60,6 @@ input-file:
 - Microsoft.Network/stable/2018-06-01/virtualNetworkGateway.json
 - Microsoft.Network/stable/2018-06-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2018-06-01/vmssPublicIpAddress.json
-- Microsoft.Network/stable/2018-06-01/virtualWan.json
 ```
 
 ### Tag: package-2018-05
@@ -121,6 +120,7 @@ input-file:
 - Microsoft.Network/stable/2018-04-01/usage.json
 - Microsoft.Network/stable/2018-04-01/virtualNetwork.json
 - Microsoft.Network/stable/2018-04-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-04-01/virtualWan.json
 - Microsoft.Network/stable/2018-04-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2018-04-01/vmssPublicIpAddress.json
 ```
@@ -636,9 +636,6 @@ directive:
     from: virtualNetwork.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: virtualWan.json
-    reason: name, id and type properties are inherited from the upper level
-  - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: TrackedResourceListByImmediateParent
@@ -762,6 +759,9 @@ output-folder: $(go-sdk-folder)/services/network/mgmt/2018-02-01/network
 ## Suppression
 ``` yaml
 directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualWan.json
+    reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkwatcher.json
     where: $.definitions.PacketCaptureResult
