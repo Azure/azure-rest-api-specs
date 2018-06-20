@@ -1,4 +1,4 @@
-# Network
+﻿# Network
 
 > see https://aka.ms/autorest
 
@@ -120,6 +120,7 @@ input-file:
 - Microsoft.Network/stable/2018-04-01/usage.json
 - Microsoft.Network/stable/2018-04-01/virtualNetwork.json
 - Microsoft.Network/stable/2018-04-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-04-01/virtualWan.json
 - Microsoft.Network/stable/2018-04-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2018-04-01/vmssPublicIpAddress.json
 ```
@@ -758,6 +759,9 @@ output-folder: $(go-sdk-folder)/services/network/mgmt/2018-02-01/network
 ## Suppression
 ``` yaml
 directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualWan.json
+    reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkwatcher.json
     where: $.definitions.PacketCaptureResult
