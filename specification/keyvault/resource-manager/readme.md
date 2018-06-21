@@ -36,8 +36,8 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.KeyVault/2018-02-14/keyvault.json
-- Microsoft.KeyVault/2018-02-14/providers.json
+- Microsoft.KeyVault/stable/2018-02-14/keyvault.json
+- Microsoft.KeyVault/stable/2018-02-14/providers.json
 ```
 
 
