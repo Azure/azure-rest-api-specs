@@ -643,6 +643,9 @@ directive:
   - suppress: OperationIdNounVerb
     from: vmssNetworkInterface.json
     reason: VMSS specs have custom naming
+  - suppress: BodyTopLevelProperties
+    from: virtualNetworkGateway.json
+    reason: shipped. fixing this causes breaking change in resource
 ```
 
 ---
