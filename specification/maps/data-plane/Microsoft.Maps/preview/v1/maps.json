@@ -1039,7 +1039,7 @@
         "/map/static/{format}": {
             "get": {
                 "description": "The static image service renders a user-defined, rectangular image containing a map section using a zoom level from 0 to 20.\n\nThe supported resolution range for the map image is from 1x1 to 8192x8192.\n\nIf you are deciding when to use the static image service over the map tile service, you may want to consider how you would like to interact with the rendered map. If the map contents will be relatively unchanging, a static map is a good choice. If you want to support a lot of zooming, panning and changing of the map content, the map tile service would be a better choice.\n\n_Note_ : Either **center** or **bbox** parameter must be supplied to the API.",
-                "operationId": "RenderService_GetMapImage",
+                "operationId": "Render_GetMapImage",
                 "x-ms-examples": {
                     "GetMapStaticImage": {
                         "$ref": "./examples/GetMapImage.json"
@@ -1177,7 +1177,7 @@
         "/map/tile/{format}": {
             "get": {
                 "description": "Fetches map tiles in vector or raster format typically to be integrated into a new map control or SDK. By default, Azure uses vector map tiles for its web map control (see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid))",
-                "operationId": "RenderService_GetMapTile",
+                "operationId": "Render_GetMapTile",
                 "x-ms-examples": {
                     "GetMapTile": {
                         "$ref": "./examples/GetMapTile.json"
@@ -1320,7 +1320,7 @@
         "/map/copyright/caption/{format}": {
             "get": {
                 "description": "Returns the a copyright string for the respective map supplier as a short string. Commonly used in scenarios where map tiles are wrapped in a new map control or SDK",
-                "operationId": "RenderService_GetCopyrightCaption",
+                "operationId": "Render_GetCopyrightCaption",
                 "x-ms-examples": {
                     "GetCopyrightCaption": {
                         "$ref": "./examples/GetCopyrightCaption.json"
@@ -1365,7 +1365,7 @@
         "/map/copyright/bounding/{format}": {
             "get": {
                 "description": "Returns copyright information for a given bounding box. Bounding-box requests should specify the minimum and maximum longitude and latitude (EPSG-3857) coordinates",
-                "operationId": "RenderService_GetCopyrightFromBoundingBox",
+                "operationId": "Render_GetCopyrightFromBoundingBox",
                 "x-ms-examples": {
                     "GetCopyrightBounding": {
                         "$ref": "./examples/GetCopyrightFromBoundingBox.json"
@@ -1427,7 +1427,7 @@
         "/map/copyright/tile/{format}": {
             "get": {
                 "description": "Returns the copyright information for a particular tile. To obtain the copyright information for a particular tile, the request should specify the tile\u0027s zoom level and x and y coordinates.",
-                "operationId": "RenderService_GetCopyrightForTile",
+                "operationId": "Render_GetCopyrightForTile",
                 "x-ms-examples": {
                     "GetCopyrightTile": {
                         "$ref": "./examples/GetCopyrightForTile.json"
@@ -1484,7 +1484,7 @@
         "/map/copyright/world/{format}": {
             "get": {
                 "description": "Returns the copyright information for the whole world. To obtain the default copyright information for the whole world, do not specify a tile or bounding box.",
-                "operationId": "RenderService_GetCopyrightForWorld",
+                "operationId": "Render_GetCopyrightForWorld",
                 "x-ms-examples": {
                     "GetCopyrightWorld": {
                         "$ref": "./examples/GetCopyrightForWorld.json"
@@ -1532,7 +1532,7 @@
         "/search/fuzzy/{format}": {
             "get": {
                 "description": "**Free Form Search**\u003cbr\u003e\u003cbr\u003eThe basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical \u0027single line search\u0027. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.\u003cbr\u003e\u003cbr\u003eWe strongly advise you to use the \u0027countrySet\u0027 parameter to specify only the countries for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.\u003cbr\u003e\u003cbr\u003e E.g.: `countrySet`=US,FR \u003cbr\u003e\u003cbr\u003ePlease see [Search Coverage](https://docs.microsoft.com/en-us/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries.\u003cbr\u003e\u003cbr\u003eMost Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
-                "operationId": "SearchService_GetSearchFuzzy",
+                "operationId": "Search_GetSearchFuzzy",
                 "x-ms-examples": {
                     "Search City Seattle": {
                         "$ref": "./examples/GetSearchFuzzy.json"
@@ -1648,7 +1648,7 @@
         "/search/poi/{format}": {
             "get": {
                 "description": "**Get POI by Name**\u003cbr\u003e\u003cbr\u003eIf your search use case only requires POI results, you may use the POI endpoint for searching. This endpoint will only return POI results.",
-                "operationId": "SearchService_GetSearchPOI",
+                "operationId": "Search_GetSearchPOI",
                 "x-ms-examples": {
                     "Search for juice bars within 5 miles of Seattle Downtown and limit the response to 5 results": {
                         "$ref": "./examples/GetSearchPOI.json"
@@ -1736,7 +1736,7 @@
         "/search/nearby/{format}": {
             "get": {
                 "description": "**Nearby Search**\u003cbr\u003e\u003cbr\u003eIf you have a use case for only retrieving POI results around a specific location, the nearby search method may be the right choice. This endpoint will only return POI results, and does not take in a search query parameter.",
-                "operationId": "SearchService_GetSearchNearby",
+                "operationId": "Search_GetSearchNearby",
                 "x-ms-examples": {
                     "Search for any points of interest (POI) within 5 miles of Manhattan NY and return the top 10 results": {
                         "$ref": "./examples/GetSearchNearby.json"
@@ -1816,7 +1816,7 @@
         "/search/poi/category/{format}": {
             "get": {
                 "description": "**Get POI by Category**\u003cbr\u003e\u003cbr\u003eIf your search use case only requires POI results filtered by category, you may use the category endpoint. This endpoint will only return POI results which are categorized as specified.\u003cbr\u003e\u003cbr\u003eList of available categories can be found [here](https://docs.microsoft.com/en-us/azure/azure-maps/search-categories).",
-                "operationId": "SearchService_GetSearchPOICategory",
+                "operationId": "Search_GetSearchPOICategory",
                 "x-ms-examples": {
                     "Search for atm\u0027s within 2 miles of Times Square NY and return the top 3 results": {
                         "$ref": "./examples/GetSearchPOICategory.json"
@@ -1910,7 +1910,7 @@
         "/search/address/{format}": {
             "get": {
                 "description": "**Address Geocoding**\u003cbr\u003e\u003cbr\u003eIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocode endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
-                "operationId": "SearchService_GetSearchAddress",
+                "operationId": "Search_GetSearchAddress",
                 "x-ms-examples": {
                     "Search detail address 15127 NE 24th Street, Redmond, WA 98052": {
                         "$ref": "./examples/GetSearchAddress.json"
@@ -1997,7 +1997,7 @@
         "/search/address/reverse/{format}": {
             "get": {
                 "description": "**Reverse Geocode to an Address**\u003cbr\u003e\u003cbr\u003eThere may be times when you need to translate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located. This endpoint will return address information for a given coordinate.",
-                "operationId": "SearchService_GetSearchAddressReverse",
+                "operationId": "Search_GetSearchAddressReverse",
                 "x-ms-examples": {
                     "GetSearchAddressReverse": {
                         "$ref": "./examples/GetSearchAddressReverse.json"
@@ -2087,7 +2087,7 @@
         "/search/address/reverse/crossStreet/{format}": {
             "get": {
                 "description": "**Reverse Geocode to a Cross Street**\u003cbr\u003e\u003cbr\u003eThere may be times when you need to translate a coordinate (example: 37.786505, -122.3862) into a human understandable cross street. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located.\u003cbr\u003e\u003cbr\u003eThis endpoint will return cross street information for a given coordinate.",
-                "operationId": "SearchService_GetSearchAddressReverseCrossStreet",
+                "operationId": "Search_GetSearchAddressReverseCrossStreet",
                 "x-ms-examples": {
                     "GetSearchAddressReverseCrossStreet": {
                         "$ref": "./examples/GetSearchAddressReverseCrossStreet.json"
@@ -2150,7 +2150,7 @@
         "/search/address/structured/{format}": {
             "get": {
                 "description": "**Structured Address Geocoding**\u003cbr\u003e\u003cbr\u003eAzure Address Geocoding can also be accessed for structured address look up exclusively. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
-                "operationId": "SearchService_GetSearchAddressStructured",
+                "operationId": "Search_GetSearchAddressStructured",
                 "x-ms-examples": {
                     "GetSearchAddressStructured": {
                         "$ref": "./examples/GetSearchAddressStructured.json"
@@ -2285,7 +2285,7 @@
         "/search/geometry/{format}": {
             "post": {
                 "description": "The Search Geometry endpoint allows you to perform a free form search inside a single geometry or many of them. The search results that fall inside the geometry/geometries will be returned.\u003cbr\u003e\u003cbr\u003eTo send the geometry you will use a `POST` request where the request body will contain the `geometry` object represented as a `GeoJSON` type and the `Content-Type` header will be set to `application/json`. The geographical features to be searched can be modeled as Polygon and/or Circle geometries represented using any one of the following `GeoJSON` types:\u003cul\u003e\u003cli\u003e**GeoJSON FeatureCollection** \u003cbr\u003eThe `geometry` can be represented as a `GeoJSON FeatureCollection` object. This is the recommended option if the geometry contains both Polygons and Circles. The `FeatureCollection` can contain a max of 50 `GeoJSON Feature` objects. Each `Feature` object should represent either a Polygon or a Circle with the following conditions:\u003cul style=\"list-style-type:none\"\u003e\u003cli\u003eA `Feature` object for the Polygon geometry can have a max of 50 coordinates and it\u0027s properties must be empty.\u003c/li\u003e\u003cli\u003eA `Feature` object for the Circle geometry is composed of a _center_ represented using a `GeoJSON Point` type and a _radius_ value (in meters) which must be specified in the object\u0027s properties along with the _subType_ property whose value should be \u0027Circle\u0027.\u003c/li\u003e\u003c/ul\u003e\u003cbr\u003e Please see the Examples section below for a sample `FeatureCollection` representation.\u003cbr\u003e\u003cbr\u003e\u003c/li\u003e\u003cli\u003e**GeoJSON GeometryCollection**\u003cbr\u003eThe `geometry` can be represented as a `GeoJSON GeometryCollection` object. This is the recommended option if the geometry contains a list of Polygons only. The `GeometryCollection` can contain a max of 50 `GeoJSON Polygon` objects. Each `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `GeometryCollection` representation.\u003cbr\u003e\u003cbr\u003e\u003c/li\u003e\u003cli\u003e**GeoJSON Polygon**\u003cbr\u003eThe `geometry` can be represented as a `GeoJSON Polygon` object. This is the recommended option if the geometry contains a single Polygon. The `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `Polygon` representation.\u003cbr\u003e\u003cbr\u003e\u003c/li\u003e\u003c/ul\u003e.\u003cbr\u003e\u003cbr\u003e",
-                "operationId": "SearchService_PostSearchInsideGeometry",
+                "operationId": "Search_PostSearchInsideGeometry",
                 "x-ms-examples": {
                     "Search for pizza places inside a geometry represented as a GeoJSON FeatureCollection type": {
                         "$ref": "./examples/PostSearchInsideFeatureCollection.json"
@@ -2360,7 +2360,7 @@
         "/search/alongRoute/{format}": {
             "post": {
                 "description": "The Search Along Route endpoint allows you to perform a fuzzy search for POIs along a specified route. This search is constrained by specifying the `maxDetourTime` limiting measure.\u003cbr\u003e\u003cbr\u003eTo send the route-points you will use a `POST` request where the request body will contain the `route` object represented as a `GeoJSON LineString` type and the `Content-Type` header will be set to `application/json`. Each route-point in `route` is represented as a `GeoJSON Position` type i.e. an array where the _longitude_ value is followed by the _latitude_ value and the _altitude_ value is ignored. The `route` should contain at least 2 route-points.\u003cbr\u003e\u003cbr\u003eIt is possible that original route will be altered, some of it\u0027s points may be skipped. If the route that passes through the found point is faster than the original one, the `detourTime` value in the response is negative.",
-                "operationId": "SearchService_PostSearchAlongRoute",
+                "operationId": "Search_PostSearchAlongRoute",
                 "x-ms-examples": {
                     "Search for burger joints along a route": {
                         "$ref": "./examples/PostSearchAlongRoute.json"
@@ -2434,7 +2434,7 @@
         "/route/directions/{format}": {
             "get": {
                 "description": "Returns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/en-us/azure/azure-maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
-                "operationId": "RouteService_GetRouteDirections",
+                "operationId": "Route_GetRouteDirections",
                 "x-ms-examples": {
                     "GetRouteDirections": {
                         "$ref": "./examples/GetRouteDirections.json"
@@ -2625,7 +2625,7 @@
             },
             "post": {
                 "description": "Returns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/en-us/rest/api/maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
-                "operationId": "RouteService_PostRouteDirections",
+                "operationId": "Route_PostRouteDirections",
                 "x-ms-examples": {
                     "PostRouteDirections": {
                         "$ref": "./examples/PostRouteDirections.json"
@@ -2826,7 +2826,7 @@
         "/timezone/byId/{format}": {
             "get": {
                 "description": "__Time Zone by Id__\n\nThis API returns current, historical, and future time zone information for the specified IANA time zone ID.",
-                "operationId": "TimezoneService_GetTimezoneByID",
+                "operationId": "Timezone_GetTimezoneByID",
                 "x-ms-examples": {
                     "GetTimezoneByID": {
                         "$ref": "./examples/GetTimezoneByID.json"
@@ -2892,7 +2892,7 @@
         "/timezone/byCoordinates/{format}": {
             "get": {
                 "description": "__Time Zone by Coordinates__\n\nThis API returns current, historical, and future time zone information for a specified latitude-longitude pair.",
-                "operationId": "TimezoneService_GetTimezoneByCoordinates",
+                "operationId": "Timezone_GetTimezoneByCoordinates",
                 "x-ms-examples": {
                     "GetTimezoneByCoordinates": {
                         "$ref": "./examples/GetTimezoneByCoordinates.json"
@@ -2958,7 +2958,7 @@
         "/timezone/enumWindows/{format}": {
             "get": {
                 "description": "__Enumerate Windows Time Zones__\n\nThis API returns a full list of Windows Time Zone IDs.",
-                "operationId": "TimezoneService_GetTimezoneEnumWindows",
+                "operationId": "Timezone_GetTimezoneEnumWindows",
                 "x-ms-examples": {
                     "GetTimezoneEnumWindows": {
                         "$ref": "./examples/GetTimezoneEnumWindows.json"
@@ -3006,7 +3006,7 @@
         "/timezone/enumIana/{format}": {
             "get": {
                 "description": "__Enumerate IANA Time Zones__\n\nThis API returns a full list of IANA time zone IDs. Updates to the IANA service will be reflected in the system within one day.",
-                "operationId": "TimezoneService_GetTimezoneEnumIANA",
+                "operationId": "Timezone_GetTimezoneEnumIANA",
                 "x-ms-examples": {
                     "GetTimezoneEnumIANA": {
                         "$ref": "./examples/GetTimezoneEnumIANA.json"
@@ -3054,7 +3054,7 @@
         "/timezone/ianaVersion/{format}": {
             "get": {
                 "description": "__Time Zone IANA Version__\n\nThis API returns the current IANA version number.",
-                "operationId": "TimezoneService_GetTimezoneIANAVersion",
+                "operationId": "Timezone_GetTimezoneIANAVersion",
                 "x-ms-examples": {
                     "GetTimezoneIANAVersion": {
                         "$ref": "./examples/GetTimezoneIANAVersion.json"
@@ -3102,7 +3102,7 @@
         "/timezone/windowsToIana/{format}": {
             "get": {
                 "description": "__Windows to IANA Time Zone__\n\nThis API returns a corresponding IANA ID, given a valid Windows Time Zone ID. Multiple IANA IDs may be returned for a single Windows ID. It is possible to narrow these results by adding an optional territory parameter.",
-                "operationId": "TimezoneService_GetTimezoneWindowsToIANA",
+                "operationId": "Timezone_GetTimezoneWindowsToIANA",
                 "x-ms-examples": {
                     "GetTimezoneWindowsToIANA": {
                         "$ref": "./examples/GetTimezoneWindowsToIANA.json"
@@ -3160,7 +3160,7 @@
         "/traffic/flow/tile/{format}": {
             "get": {
                 "description": "__Traffic Flow Tile__ \u003cbr/\u003e\u003cbr/\u003eThe Azure Flow Tile API serves 256 x 256 pixel tiles showing traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
-                "operationId": "TrafficService_GetTrafficFlowTile",
+                "operationId": "Traffic_GetTrafficFlowTile",
                 "x-ms-examples": {
                     "GetTrafficFlowTile": {
                         "$ref": "./examples/GetTrafficFlowTile.json"
@@ -3263,7 +3263,7 @@
         "/traffic/flow/segment/{format}": {
             "get": {
                 "description": "__Traffic Flow Segment__\u003cbr/\u003e\u003cbr/\u003eThis service provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the Render Service to support clickable flow data visualizations. With this API, the client side can connect any place in the map with flow data on the closest road and present it to the user.",
-                "operationId": "TrafficService_GetTrafficFlowSegment",
+                "operationId": "Traffic_GetTrafficFlowSegment",
                 "x-ms-examples": {
                     "GetTrafficFlowSegment": {
                         "$ref": "./examples/GetTrafficFlowSegment.json"
@@ -3378,7 +3378,7 @@
         "/traffic/incident/tile/{format}": {
             "get": {
                 "description": "__Traffic Incident Tile__ \u003cbr/\u003e\u003cbr/\u003eThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API\u0027s. The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute, and is valid for two minutes before it times out. It is used in rendering [traffic tiles](https://docs.microsoft.com/en-us/rest/api/location-based-services/traffic/gettrafficincidenttile). It can be obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/location-based-services/traffic/gettrafficincidentviewport).",
-                "operationId": "TrafficService_GetTrafficIncidentTile",
+                "operationId": "Traffic_GetTrafficIncidentTile",
                 "x-ms-examples": {
                     "GetTrafficIncidentTile": {
                         "$ref": "./examples/GetTrafficIncidentTile.json"
@@ -3476,7 +3476,7 @@
         "/traffic/incident/detail/{format}": {
             "get": {
                 "description": "__Traffic Incident Detail__ \u003cbr/\u003e\u003cbr/\u003eThe Azure Traffic Incident Tile API serves 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
-                "operationId": "TrafficService_GetTrafficIncidentDetail",
+                "operationId": "Traffic_GetTrafficIncidentDetail",
                 "x-ms-examples": {
                     "GetTrafficIncidentDetail": {
                         "$ref": "./examples/GetTrafficIncidentDetail.json"
@@ -3638,7 +3638,7 @@
         "/traffic/incident/viewport/{format}": {
             "get": {
                 "description": "__Traffic Incident Viewport__ \u003cbr/\u003e\u003cbr/\u003eThis API returns legal and technical information for the viewport described in the request. It should be called by client applications whenever the viewport changes (for instance, through zooming, panning, going to a location, or displaying a route). The request should contain the bounding box and zoom level of the viewport whose information is needed. The return will contain map version information, as well as the current Traffic Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to retrieve last traffic information for further processing.",
-                "operationId": "TrafficService_GetTrafficIncidentViewport",
+                "operationId": "Traffic_GetTrafficIncidentViewport",
                 "x-ms-examples": {
                     "GetTrafficIncidentViewport": {
                         "$ref": "./examples/GetTrafficIncidentViewport.json"
