@@ -261,7 +261,7 @@
          "properties":{  
 			"privateIPAddress": {
 			  "type": "string",
-			  "description": "PrivateIPAddress of the network interface IP Configuration. This field is populated in the output."
+			  "description": "The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes."
 			},
             "subnet":{  
                "$ref":"./network.json#/definitions/SubResource",
@@ -376,7 +376,7 @@
                "format":"int32",
                "maximum":65000,
                "exclusiveMaximum":false,
-               "minimum":0,
+               "minimum":100,
                "exclusiveMinimum":false,
                "description":"Priority of the application rule collection resource."
             },
@@ -480,7 +480,7 @@
                "format":"int32",
                "maximum":65000,
                "exclusiveMaximum":false,
-               "minimum":0,
+               "minimum":100,
                "exclusiveMinimum":false,
                "description":"Priority of the network rule collection resource."
             },
