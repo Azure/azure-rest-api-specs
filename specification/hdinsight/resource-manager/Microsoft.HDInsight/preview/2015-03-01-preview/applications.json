@@ -156,7 +156,8 @@
                             "$ref": "#/definitions/Application"
                         }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "tags": [
@@ -189,6 +190,9 @@
                 "responses": {
                     "200": {
                         "description": "OK. The request has succeeded."
+                    },
+                    "202": {
+                        "description": "Accepted response definition."
                     }
                 },
                 "x-ms-long-running-operation": true

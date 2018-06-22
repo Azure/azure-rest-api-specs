@@ -78,7 +78,7 @@
                 "tags": [
                     "Applications"
                 ],
-                "description": "Lists properties of the specified application.",
+                "description": "Gets properties of the specified application.",
                 "operationId": "Applications_Get",
                 "x-ms-examples": {
                     "Get application on HDInsight cluster successfully created.": {
@@ -158,7 +158,8 @@
                             "$ref": "#/definitions/Application"
                         }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "tags": [
@@ -191,6 +192,9 @@
                 "responses": {
                     "200": {
                         "description": "OK. The request has succeeded."
+                    },
+                    "202": {
+                        "description": "Accepted response definition."
                     }
                 },
                 "x-ms-long-running-operation": true
