@@ -37,7 +37,7 @@
                 "tags": [
                     "Regions"
                 ],
-                "operationId": "Location_GetCapabilities",
+                "operationId": "Locations_GetCapabilities",
                 "description": "Gets the capabilities for the specified location.",
                 "x-ms-examples": {
                     "Get the subscription capabilities for specific location": {
@@ -65,7 +65,7 @@
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
-                            "$ref": "#/definitions/capabilitiesResult"
+                            "$ref": "#/definitions/CapabilitiesResult"
                         }
                     }
                 }
@@ -76,7 +76,7 @@
                 "tags": [
                     "Regions"
                 ],
-                "operationId": "Location_ListUsages",
+                "operationId": "Locations_ListUsages",
                 "description": "Lists the usages for the specified location.",
                 "x-ms-examples": {
                     "Get the subscription usages for specific location": {
@@ -112,7 +112,7 @@
         }
     },
     "definitions": {
-        "versionSpec": {
+        "VersionSpec": {
             "description": "The version properties.",
             "properties": {
                 "friendlyName": {
@@ -136,19 +136,19 @@
                 }
             }
         },
-        "versionsCapability": {
+        "VersionsCapability": {
             "description": "The version capability.",
             "properties": {
                 "available": {
                     "description": "The list of version capabilities.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/versionSpec"
+                        "$ref": "#/definitions/VersionSpec"
                     }
                 }
             }
         },
-        "regionsCapability": {
+        "RegionsCapability": {
             "description": "The regions capability.",
             "properties": {
                 "available": {
@@ -160,7 +160,7 @@
                 }
             }
         },
-        "vmSizesCapability": {
+        "VmSizesCapability": {
             "description": "The virtual machine sizes capability.",
             "properties": {
                 "available": {
@@ -172,7 +172,7 @@
                 }
             }
         },
-        "vmSizeCompatibilityFilter": {
+        "VmSizeCompatibilityFilter": {
             "description": "The virtual machine type compatibility filter.",
             "properties": {
                 "FilterMode": {
@@ -216,7 +216,7 @@
                 }
             }
         },
-        "regionalQuotaCapability": {
+        "RegionalQuotaCapability": {
             "description": "The regional quota capacity.",
             "properties": {
                 "region_name": {
@@ -235,47 +235,47 @@
                 }
             }
         },
-        "quotaCapability": {
+        "QuotaCapability": {
             "description": "The regional quota capability.",
             "properties": {
                 "regionalQuotas": {
                     "description": "The list of region quota capabilities.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/regionalQuotaCapability"
+                        "$ref": "#/definitions/RegionalQuotaCapability"
                     }
                 }
             }
         },
-        "capabilitiesResult": {
+        "CapabilitiesResult": {
             "description": "The Get Capabilities operation response.",
             "properties": {
                 "versions": {
                     "description": "The version capability.",
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/definitions/versionsCapability"
+                        "$ref": "#/definitions/VersionsCapability"
                     }
                 },
                 "regions": {
                     "description": "The virtual machine size compatibilty features.",
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/definitions/regionsCapability"
+                        "$ref": "#/definitions/RegionsCapability"
                     }
                 },
                 "vmSizes": {
                     "description": "The virtual machine sizes.",
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/definitions/vmSizesCapability"
+                        "$ref": "#/definitions/VmSizesCapability"
                     }
                 },
                 "vmSize_filters": {
                     "description": "The virtual machine size compatibilty filters.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/vmSizeCompatibilityFilter"
+                        "$ref": "#/definitions/VmSizeCompatibilityFilter"
                     }
                 },
                 "features": {
@@ -287,7 +287,7 @@
                 },
                 "quota": {
                     "description": "The quota capability.",
-                    "$ref": "#/definitions/quotaCapability"
+                    "$ref": "#/definitions/QuotaCapability"
                 }
             }
         },
