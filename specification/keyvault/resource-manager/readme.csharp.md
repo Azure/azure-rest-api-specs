@@ -25,8 +25,6 @@ namespace: Microsoft.Azure.Management.KeyVault.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 
 batch:
-  - tag: package-2018-02
-    ApiVersionName: Api2018_02_14
   - tag: package-2016-10
     ApiVersionName: Api2016_10_01
 ```
