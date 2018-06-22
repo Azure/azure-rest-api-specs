@@ -32,7 +32,7 @@ tag: package-2018-02
 
 ### Tag: package-2018-02
 
-These settings apply only when `--tag=package-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-2018-02` is specified on the command-line.
 
 ``` yaml $(tag) == 'package-2018-02'
 input-file:
