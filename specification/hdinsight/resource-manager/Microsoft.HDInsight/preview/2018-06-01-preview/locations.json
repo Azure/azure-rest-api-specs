@@ -3,7 +3,7 @@
     "info": {
         "title": "HDInsightManagementClient",
         "description": "The HDInsight Management Client.",
-        "version": "2015-03-01-preview"
+        "version": "2018-06-01-preview"
     },
     "host": "management.azure.com",
     "schemes": [
@@ -59,7 +59,7 @@
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
-                            "$ref": "#/definitions/UsagesResult"
+                            "$ref": "#/definitions/UsagesListResult"
                         }
                     }
                 }
@@ -78,7 +78,8 @@
                     "description": "The localized name of the used resource.",
                     "type": "string"
                 }
-            }
+            },
+            "readOnly": true
         },
         "Usage": {
             "description": "The details about the usage of a particular limited resource.",
@@ -99,9 +100,10 @@
                     "description": "The details about the localizable name of the used resource.",
                     "$ref": "#/definitions/LocalizedName"
                 }
-            }
+            },
+            "readOnly": true
         },
-        "UsagesResult": {
+        "UsagesListResult": {
             "description": "The response for the operation to get regional usages for a subscription.",
             "properties": {
                 "value": {
@@ -111,7 +113,8 @@
                         "$ref": "#/definitions/Usage"
                     }
                 }
-            }
+            },
+            "readOnly": true
         }
     },
     "parameters": {
@@ -127,7 +130,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The location to get capabilities for."
+            "description": "The location to get capabilities for.",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",

@@ -92,7 +92,7 @@
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
-                            "$ref": "#/definitions/UsagesResult"
+                            "$ref": "#/definitions/UsagesListResult"
                         }
                     }
                 }
@@ -313,7 +313,7 @@
                 }
             }
         },
-        "UsagesResult": {
+        "UsagesListResult": {
             "description": "The response for the operation to get regional usages for a subscription.",
             "properties": {
                 "value": {
@@ -339,7 +339,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The location."
+            "description": "The location.",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",

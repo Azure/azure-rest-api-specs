@@ -3,7 +3,7 @@
     "info": {
         "title": "HDInsightManagementClient",
         "description": "The HDInsight Management Client.",
-        "version": "2015-03-01-preview"
+        "version": "2018-06-01-preview"
     },
     "host": "management.azure.com",
     "schemes": [
@@ -119,7 +119,7 @@
                 "tags": [
                     "ScriptActions"
                 ],
-                "operationId": "ScriptActions_ListPersistedScripts",
+                "operationId": "ScriptActions_ListPersistedScriptsByCluster",
                 "description": "Lists all the persisted script actions for the specified cluster.",
                 "x-ms-examples": {
                     "List all persisted script actions for the given cluster": {
@@ -197,7 +197,7 @@
                 "tags": [
                     "ScriptExecutionHistory"
                 ],
-                "operationId": "ScriptExecutionHistory_List",
+                "operationId": "ScriptExecutionHistory_ListByCluster",
                 "description": "Lists all scripts' execution history for the specified cluster.",
                 "x-ms-examples": {
                     "Get Script Execution History List": {
@@ -386,28 +386,32 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the resource group.",
+            "x-ms-parameter-location": "method"
         },
         "ClusterNameParameter": {
             "name": "clusterName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cluster."
+            "description": "The name of the cluster.",
+            "x-ms-parameter-location": "method"
         },
         "ScriptNameParameter": {
             "name": "scriptName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the script."
+            "description": "The name of the script.",
+            "x-ms-parameter-location": "method"
         },
         "ScriptExecutionIdParameter": {
             "name": "scriptExecutionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The script execution Id"
+            "description": "The script execution Id",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",

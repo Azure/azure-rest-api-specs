@@ -675,7 +675,7 @@
                 }
             }
         },
-        "errors": {
+        "Errors": {
             "description": "The error message associated with the cluster creation.",
             "properties": {
                 "code": {
@@ -783,7 +783,7 @@
                 "errors": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/errors"
+                        "$ref": "#/definitions/Errors"
                     },
                     "description": "The list of errors."
                 },
@@ -1012,7 +1012,7 @@
                     }
                 },
                 "error": {
-                    "$ref": "#/definitions/errors",
+                    "$ref": "#/definitions/Errors",
                     "description": "The operation error information."
                 }
             },
@@ -1134,14 +1134,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the resource group.",
+            "x-ms-parameter-location": "method"
         },
         "ClusterNameParameter": {
             "name": "clusterName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cluster."
+            "description": "The name of the cluster.",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",

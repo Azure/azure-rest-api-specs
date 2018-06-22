@@ -187,6 +187,9 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded."
+                    },
                     "202": {
                         "description": "OK. The request has succeeded."
                     }
@@ -258,6 +261,9 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Ok response definition."
+                    },
                     "202": {
                         "description": "OK response definition."
                     }
@@ -319,21 +325,24 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the resource group.",
+            "x-ms-parameter-location": "method"
         },
         "ClusterNameParameter": {
             "name": "clusterName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cluster."
+            "description": "The name of the cluster.",
+            "x-ms-parameter-location": "method"
         },
         "ExtensionNameParameter": {
             "name": "extensionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cluster extension."
+            "description": "The name of the cluster extension.",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",

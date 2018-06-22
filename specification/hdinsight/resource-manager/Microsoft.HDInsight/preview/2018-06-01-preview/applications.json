@@ -3,7 +3,7 @@
     "info": {
         "title": "HDInsightManagementClient",
         "description": "The HDInsight Management Client.",
-        "version": "2015-03-01-preview"
+        "version": "2018-06-01-preview"
     },
     "host": "management.azure.com",
     "schemes": [
@@ -15,11 +15,13 @@
     "produces": [
         "application/json"
     ],
-    "security": [{
-        "azure_auth": [
-            "user_impersonation"
-        ]
-    }],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
     "securityDefinitions": {
         "azure_auth": {
             "type": "oauth2",
@@ -37,8 +39,8 @@
                 "tags": [
                     "Applications"
                 ],
-                "description": "Lists all of the applications HDInsight cluster.",
-                "operationId": "Applications_List",
+                "description": "Lists all of the applications for the HDInsight cluster.",
+                "operationId": "Applications_ListByCluster",
                 "x-ms-examples": {
                     "Get All Applications for an HDInsight cluster": {
                         "$ref": "./examples/GetAllApplications.json"
@@ -144,7 +146,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ApplicationGetProperties"
+                            "$ref": "#/definitions/ApplicationProperties"
                         },
                         "description": "The application create request."
                     }
@@ -246,7 +248,7 @@
                 }
             }
         },
-        "ApplicationGetProperties": {
+        "ApplicationProperties": {
             "description": "The HDInsight cluster application GET response.",
             "type": "object",
             "properties": {
@@ -299,7 +301,7 @@
                 "errors": {
                     "type": "array",
                     "items": {
-                        "$ref": "./cluster.json#/definitions/errors"
+                        "$ref": "./cluster.json#/definitions/Errors"
                     },
                     "description": "The list of errors."
                 },
@@ -340,7 +342,7 @@
                     }
                 },
                 "properties": {
-                    "$ref": "#/definitions/ApplicationGetProperties",
+                    "$ref": "#/definitions/ApplicationProperties",
                     "description": "The properties of the application."
                 }
             }
@@ -376,21 +378,24 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the resource group.",
+            "x-ms-parameter-location": "method"
         },
         "ClusterNameParameter": {
             "name": "clusterName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cluster."
+            "description": "The name of the cluster.",
+            "x-ms-parameter-location": "method"
         },
         "ApplicationNameParameter": {
             "name": "applicationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The constant value for the application name."
+            "description": "The constant value for the application name.",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",
