@@ -77,6 +77,12 @@
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -121,6 +127,12 @@
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -155,6 +167,12 @@
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "202": {
                         "description": "Accepted response definition."
                     },
@@ -193,6 +211,12 @@
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -226,6 +250,12 @@
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -288,6 +318,12 @@
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition."
                     },
@@ -319,6 +355,12 @@
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -1076,49 +1118,6 @@
                     "$ref": "#/definitions/Resource"
                 }
             ]
-        },
-        "Operation": {
-            "description": "The HDInsight REST API operation.",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "The operation name: {provider}/{resource}/{operation}",
-                    "type": "string"
-                },
-                "display": {
-                    "description": "The object that represents the operation.",
-                    "properties": {
-                        "provider": {
-                            "description": "The service provider: Microsoft.HDInsight",
-                            "type": "string"
-                        },
-                        "resource": {
-                            "description": "The resource on which the operation is performed: Cluster, Applications, etc.",
-                            "type": "string"
-                        },
-                        "operation": {
-                            "description": "The operation type: read, write, delete, etc.",
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "OperationListResult": {
-            "description": "Result of the request to list HDInsight operations. It contains a list of operations and a URL link to get the next set of results.",
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Operation"
-                    },
-                    "description": "The list of HDInsight operations supported by the HDInsight resource provider."
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "The URL to get the next set of operation list results if there are any."
-                }
-            }
         }
     },
     "parameters": {

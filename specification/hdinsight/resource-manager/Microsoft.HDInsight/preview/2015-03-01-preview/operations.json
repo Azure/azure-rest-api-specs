@@ -29,10 +29,18 @@
 				"tags": ["Operations"],
 				"description": "Lists all of the available HDInsight REST API operations.",
 				"operationId": "Operations_List",
-				"parameters": [{
-					"$ref": "#/parameters/ApiVersionParameter"
-				}],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
 				"responses": {
+					"default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
 					"200": {
 						"description": "OK. The request has succeeded.",
 						"schema": {
@@ -87,6 +95,20 @@
 				"nextLink": {
 					"type": "string",
 					"description": "The URL to get the next set of operation list results if there are any."
+				}
+			}
+		},
+		"ErrorResponse": {
+			"description": "Describes the format of Error response.",
+			"type": "object",
+			"properties": {
+				"code": {
+					"description": "Error code",
+					"type": "string"
+				},
+				"message": {
+					"description": "Error message indicating why the operation failed.",
+					"type": "string"
 				}
 			}
 		}
