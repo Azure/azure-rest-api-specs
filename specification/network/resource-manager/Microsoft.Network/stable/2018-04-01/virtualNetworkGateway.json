@@ -758,7 +758,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Set VirtualNetworkGateway VpnClientIpsecParameters": { "$ref": "./examples/VirtualNetworkGatewaySetVpnClientIpsecParameters.json" }
+        }
       }
     },
 	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
@@ -798,7 +801,11 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Get VirtualNetworkGateway VpnClientIpsecParameters": { "$ref": "./examples/VirtualNetworkGatewayGetVpnClientIpsecParameters.json" } 
+        }               
+
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript": {
@@ -939,7 +946,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting VirtualNetworkPeering resource.",
+            "description": "Request successful. The operation returns the resulting VirtualNetworkGatewayConnection resource.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGatewayConnection"
             }
@@ -1034,7 +1041,7 @@
           "200": {
             "description": "Update successful. The operation returns the resulting VirtualNetworkGatewayConnection resource.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntity"
+              "$ref": "#/definitions/VirtualNetworkGatewayConnection"
             }
           }
         },
@@ -1700,7 +1707,8 @@
             "description": "VPN client protocol enabled for the virtual network gateway.",
             "enum": [
               "IkeV2",
-              "SSTP"
+              "SSTP",
+              "OpenVPN"
             ],
             "x-ms-enum": {
               "name": "VpnClientProtocol",
@@ -2220,6 +2228,11 @@
           "description": "The virtual network connection shared key value."
         }
       },
+	  "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "required": [
         "value"
       ],
