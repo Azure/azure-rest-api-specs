@@ -37,7 +37,7 @@
       }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettings/{settingName}": {
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettings/{diagnosticSettingsName}": {
             "put": {
                 "description": "Creates or updates guest diagnostics settings.",
                 "tags": [
@@ -341,7 +341,9 @@
         },   
         "SinkConfiguration": {
             "type": "object",
-            "required": "type",
+            "required": [
+                "type"
+            ],
             "properties": {
                 "kind": {
                     "type": "string",
@@ -356,35 +358,27 @@
         "DataSourceConfiguration": {
             "type": "object",
             "properties": {
-                "oneOf": [
-                    {
-                        "providers": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/EtwProviderConfiguration"
-                            },
-                            "description": "ETW providers configuration"
-                        }
+                "providers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EtwProviderConfiguration"
                     },
-                    {
-                        "perfCounters": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/PerformanceCounterConfiguration"
-                            },
-                            "description": "Performance counter configuration"
-                        }
+                    "description": "ETW providers configuration"
+                },
+                "perfCounters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PerformanceCounterConfiguration"
                     },
-                    {
-                        "eventLogs": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/EventLogConfiguration"
-                            },
-                            "description": "Windows event logs configuration."
-                        }
-                    }
-                ]
+                    "description": "Performance counter configuration"
+                },
+                "eventLogs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EventLogConfiguration"
+                    },
+                    "description": "Windows event logs configuration."
+                }
             }
         },
         "EtwEventConfiguration": {
