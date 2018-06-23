@@ -275,6 +275,7 @@ batch:
   - tag: package-2018-03
   - tag: package-2017-12-preview
   - tag: package-2018-05
+  - tag: package-2018-07
 ```
 
 ### Tag: package-2017-04-preview and java
