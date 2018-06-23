@@ -103,13 +103,15 @@
                 "operationId": "guestDiagnosticsSettingsAssociation_Get",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                        "name": "resourceUri",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The fully qualified ID of the resource, including the resource name and resource type.",
+                        "x-ms-skip-url-encoding": true
                     },
                     {
                         "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -144,13 +146,15 @@
                 "operationId": "GuestDiagnosticsSettingsAssociation_Delete",                
                 "parameters": [
                     {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                        "name": "resourceUri",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The fully qualified ID of the resource, including the resource name and resource type.",
+                        "x-ms-skip-url-encoding": true
                     },
                     {
                         "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -272,7 +276,7 @@
         "GuestDiagnosticSettingsAssociation": {
             "description": "A guest diagnostic settings association.",
             "properties": {
-                "guestDiagnosticSettingsId": {
+                "guestDiagnosticSettingsName": {
                     "type": "string",                    
                     "description": "The guest diagnostic settings name."
                 }                
