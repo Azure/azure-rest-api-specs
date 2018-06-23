@@ -432,8 +432,8 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "DownloadChargesForBillingAccount": {
-            "$ref": "./examples/DownloadChargesForBillingAccount.json"
+          "DownloadUsageChargeForBillingAccount": {
+            "$ref": "./examples/DownloadUsageChargeForBillingAccount.json"
           }
         },
         "parameters": [
@@ -489,8 +489,8 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "DownloadChargesForProject": {
-            "$ref": "./examples/DownloadChargesForProject.json"
+          "DownloadUsageChargeForProject": {
+            "$ref": "./examples/DownloadUsageChargeForProject.json"
           }
         },
         "parameters": [
@@ -549,8 +549,8 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "DownloadChargesForBillingProfile": {
-            "$ref": "./examples/DownloadChargesForBillingProfile.json"
+          "DownloadUsageChargeForBillingProfile": {
+            "$ref": "./examples/DownloadUsageChargeForBillingProfile.json"
           }
         },
         "parameters": [
@@ -921,7 +921,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProductListResult"
+              "$ref": "#/definitions/ProductsListResult"
             }
           },
           "default": {
@@ -1561,7 +1561,7 @@
         }
       }
     },
-    "ProductListResult": {
+    "ProductsListResult": {
       "description": "Result of listing products summary. It contains a list of available products summaries in reverse chronological order by purchase date.",
       "properties": {
         "value": {
@@ -1590,12 +1590,12 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProductSummaryProperties",
+          "$ref": "#/definitions/ProductsSummaryProperties",
           "title": "Product summary properties"
         }
       }
     },
-    "ProductSummaryProperties": {
+    "ProductsSummaryProperties": {
       "description": "The properties of the product summary.",
       "properties": {
         "displayName": {
@@ -1770,7 +1770,7 @@
             "ChequeWire"
           ],
           "x-ms-enum": {
-            "name": "BillingFrequency",
+            "name": "PaymentMethodType",
             "modelAsString": true
           }
         },
@@ -1945,6 +1945,113 @@
         "department": {
           "description": "Associated department. By default this is not populated, unless it's specified in $expand.",
           "$ref": "#/definitions/Department"
+        }
+      }
+    },
+    "Enrollment": {
+      "description": "Current entity level details",
+      "properties": {
+        "startDate": {
+          "description": "Enrollment Start Date",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "Enrollment End Date",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "currency": {
+          "description": "The currency associated with enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "channel": {
+          "description": "The channel for Enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "policies": {
+          "description": "The attributes associated with legacy enrollment.",
+          "$ref": "#/definitions/EnrollmentPolicies",
+          "readOnly": true
+        },
+        "language": {
+          "description": "The language for Enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCode": {
+          "description": "The countryCode for Enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Enrollment status",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCylce": {
+          "description": "Enrollment billing cycle",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProductDetails": {
+      "description": "Details about the product.",
+      "properties": {
+        "productName": {
+          "description": "The product name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "The sku id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuDescription": {
+          "description": "The sku description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilityId": {
+          "description": "The availability id used by purchase.",
+          "type": "string",
+          "readOnly": true
+        },
+        "legacyId": {
+          "description": "The legacy id of the product.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnrollmentPolicies": {
+      "description": "The attributes associated with legacy enrollment",
+      "properties": {
+        "accountOwnerViewCharges": {
+          "description": "The accountOwnerViewCharges flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "departmentAdminViewCharges": {
+          "description": "The departmentAdminViewCharges flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "marketplacesEnabled": {
+          "description": "The marketplaces flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reservedInstancesEnabled": {
+          "description": "The reserved instances flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     }
