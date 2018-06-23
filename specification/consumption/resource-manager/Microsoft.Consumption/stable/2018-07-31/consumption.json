@@ -132,7 +132,7 @@
         "tags": [
           "Charges"
         ],
-        "operationId": "ChargesByProject_List",
+        "operationId": "ChargesForBillingAccountByProject_List",
         "description": "Lists charges for all projects under a billing account given start and end date. Start and end date are used to determine the billing period. For current month, the data will be provided from month to date. If there are no chages for a month then that month will show all zeroes.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -279,7 +279,7 @@
         "tags": [
           "Charges"
         ],
-        "operationId": "ChargesByBillingProfile_List",
+        "operationId": "ChargesForBillingAccountByBillingProfile_List",
         "description": "Lists the charges by billing profile id for given start and end date. Start and end date are used to determine the billing period. For current month, the data will be provided from month to date. If there are no chages for a month then that month will show all zeroes.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -378,7 +378,7 @@
         "tags": [
           "Charges"
         ],
-        "operationId": "ChargesByBillingAccount_ListByBillingPeriod",
+        "operationId": "ChargesByBillingProfile_ListByBillingPeriod",
         "description": "Lists the charges based on billingAccountId by billing period.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -893,7 +893,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "ProductsByBillingProfile_Download",
+        "operationId": "ProductsByBillingProfile",
         "description": "Lists the products by billingProfileId for given start and end date.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -911,10 +911,13 @@
             "$ref": "#/parameters/billingProfileIdParameter"
           },
           {
-            "$ref": "#/parameters/billingPeriodNameParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
           }
         ],
         "responses": {
@@ -2085,16 +2088,14 @@
       "in": "path",
       "description": "Start date",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "type": "string"
     },
     "endDateParameter": {
       "name": "endDate",
       "in": "path",
       "description": "End date",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "type": "string"
     },
     "projectIdParameter": {
       "name": "projectId",
