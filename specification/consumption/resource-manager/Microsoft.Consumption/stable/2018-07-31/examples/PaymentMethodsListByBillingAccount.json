@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2018-07-31",
+    "billingAccountId": "1234"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/42425/providers/Microsoft.Consumption/paymentMethods/paymentMethodId1",
+            "name": "paymentMethodId1",
+            "type": "Microsoft.Consumption/paymentMethods",
+            "properties": {
+              "methodType": "Credits",
+              "lastBilledCharge": 2000.00,
+              "currentCharge": 500.00,
+              "remainingAmount": 17500.00,
+              "originalAmount": 20000.00,
+              "currency": "USD"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/42425/providers/Microsoft.Consumption/paymentMethods/paymentMethodId2",
+            "name": "paymentMethodId2",
+            "type": "Microsoft.Consumption/paymentMethods",
+            "properties": {
+              "methodType": "ChequeWire",
+              "lastBilledCharge": 100.00,
+              "currentCharge": 100.00,
+              "remainingAmount": null,
+              "originalAmount": null,
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

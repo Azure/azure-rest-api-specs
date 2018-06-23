@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2018-07-31",
+    "billingAccountId": "{billingAccountId}",
+    "billingProfileId": "{billingProfileId}",
+    "startDate": "2018-04-01",
+    "endDate": "2018-05-30",
+    "$expand": "lots,events"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountId}/BillingProfiles/{billingProfileId}/providers/Microsoft.Consumption/credits/creditId1",
+        "name": "creditId1",
+        "type": "Microsoft.Consumption/credits",
+        "properties": {
+          "availableBalance": 600.00,
+          "closedAmount": 100.00,
+          "pendingCreditAdjustments": 500.00,
+          "pendingExpiredCredit": 0.00,
+          "pendingEligibleCharges": 0.00,
+          "currency": "USD"
+        }
+      }
+    }
+  }
+}

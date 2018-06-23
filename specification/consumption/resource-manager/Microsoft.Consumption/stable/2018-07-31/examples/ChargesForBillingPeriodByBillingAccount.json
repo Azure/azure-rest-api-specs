@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2018-07-31",
+    "billingAccountId": "1234", 
+    "billingPeriodName": "201804",
+    "$expand": "billingAccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/1234/providers/Microsoft.Consumption/charges/chargeSummaryId1",
+        "name": "chargeSummaryId1",
+        "type": "Microsoft.Consumption/charges",
+        "properties": {
+          "billingPeriodId": "/providers/Microsoft.Billing/BillingAccounts/1234/providers/Microsoft.Billing/billingPeriods/201804",
+          "billingStartDate": "2018-04-01",
+          "billingEndDate": "2018-04-30",
+          "azureCharges": 5000.00,
+          "chargesBilledSeparately": 60.90,
+          "marketplaceCharges": 100.00,
+          "currency": "USD",
+          "billingAccount": {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234",
+            "name": "1234",
+            "type": "Microsoft.Billing/billingAccounts",
+            "properties": {
+              "displayName": "Test Account",
+              "accountType": "CommerceRoot"
+            }
+          }          
+        }
+      }
+    }
+  }
+}

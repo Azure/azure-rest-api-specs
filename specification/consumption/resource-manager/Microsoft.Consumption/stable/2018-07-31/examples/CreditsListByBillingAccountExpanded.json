@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2018-07-31",
+    "billingAccountId": "{billingAccountId}",
+    "startDate": "2018-04-01",
+    "endDate": "2018-05-30",
+    "$expand": "lots,events"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountId}/providers/Microsoft.Consumption/credits/creditId1",
+        "name": "creditId1",
+        "type": "Microsoft.Consumption/credits",
+        "properties": {
+          "availableBalance": 600.00,
+          "closedAmount": 100.00,
+          "pendingCreditAdjustments": 500.00,
+          "pendingExpiredCredit": 0.00,
+          "pendingEligibleCharges": 0.00,
+          "currency": "USD",
+          "events": [
+            {
+              "transactionDate": "2018-01-01T00:00:00Z",
+              "beginningBalance": 0.00,
+              "newCredit": 1000.00,
+              "adjustments": 0.00,
+              "creditExpired": 0.00,
+              "charges": 500.00,
+              "closedBalance": 500.00
+            },
+            {
+              "transactionDate": "2018-02-01T00:00:00Z",
+              "beginningBalance": 500.00,
+              "newCredit": 0.00,
+              "adjustments": 0.00,
+              "creditExpired": 0.00,
+              "charges": 400.00,
+              "closedBalance": 100.00
+            },
+            {
+              "transactionDate": "2018-03-01T00:00:00Z",
+              "beginningBalance": 100.00,
+              "newCredit": 0.00,
+              "adjustments": 600.00,
+              "creditExpired": 0.00,
+              "charges": 300.00,
+              "closedBalance": 300.00
+            },
+            {
+              "transactionDate": "2018-04-01T00:00:00Z",
+              "beginningBalance": 300.00,
+              "newCredit": 0.00,
+              "adjustments": 0.00,
+              "creditExpired": 100.00,
+              "charges": 300.00,
+              "closedBalance": 0.00
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-03-01-preview",
+    "version": "2018-05-31-preview",
     "title": "BillingManagementClient",
     "description": "Billing client provides access to billing resources for Azure subscriptions."
   },
@@ -16,375 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Billing/enrollmentAccounts": {
-      "get": {
-        "tags": [
-          "EnrollmentAccounts"
-        ],
-        "x-ms-examples": {
-          "EnrollmentAccountsList": {
-            "$ref": "./examples/EnrollmentAccountsList.json"
-          }
-        },
-        "operationId": "EnrollmentAccounts_List",
-        "description": "Lists the enrollment accounts the caller has access to.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EnrollmentAccountListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/enrollmentAccounts/{name}": {
-      "get": {
-        "tags": [
-          "EnrollmentAccounts"
-        ],
-        "x-ms-examples": {
-          "EnrollmentAccountsGet": {
-            "$ref": "./examples/EnrollmentAccountsGet.json"
-          }
-        },
-        "operationId": "EnrollmentAccounts_Get",
-        "description": "Gets a enrollment account by name.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Enrollment Account name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EnrollmentAccount"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods": {
-      "get": {
-        "tags": [
-          "BillingPeriods"
-        ],
-        "operationId": "BillingPeriods_List",
-        "description": "Lists the available billing periods for a subscription in reverse chronological order. This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
-        "externalDocs": {
-          "url": "https://go.microsoft.com/fwlink/?linkid=844490"
-        },
-        "x-ms-examples": {
-          "BillingPeriodsList": {
-            "$ref": "./examples/BillingPeriodsList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter billing periods by billingPeriodEndDate. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "description": "May be used to limit the number of results to the most recent N billing periods.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 100
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingPeriodsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}": {
-      "get": {
-        "tags": [
-          "BillingPeriods"
-        ],
-        "operationId": "BillingPeriods_Get",
-        "description": "Gets a named billing period.  This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
-        "x-ms-examples": {
-          "BillingPeriodsGet": {
-            "$ref": "./examples/BillingPeriodsGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "billingPeriodName",
-            "description": "The name of a BillingPeriod resource.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingPeriod"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices": {
-      "get": {
-        "tags": [
-          "Invoices"
-        ],
-        "operationId": "Invoices_List",
-        "description": "Lists the available invoices for a subscription in reverse chronological order beginning with the most recent invoice. In preview, invoices are available via this API only for invoice periods which end December 1, 2016 or later.  This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
-        "externalDocs": {
-          "url": "https://go.microsoft.com/fwlink/?linkid=842057"
-        },
-        "x-ms-examples": {
-          "InvoicesList": {
-            "$ref": "./examples/InvoicesList.json"
-          },
-          "InvoicesExpand": {
-            "$ref": "./examples/InvoicesExpand.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the downloadUrl property within a list of invoices. This enables download links to be generated for multiple invoices at once. By default, downloadURLs are not included when listing invoices.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter invoices by invoicePeriodEndDate. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "description": "May be used to limit the number of results to the most recent N invoices.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 100
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/InvoicesListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices/{invoiceName}": {
-      "get": {
-        "tags": [
-          "Invoices"
-        ],
-        "operationId": "Invoices_Get",
-        "description": "Gets a named invoice resource. When getting a single invoice, the downloadUrl property is expanded automatically.  This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
-        "x-ms-examples": {
-          "InvoicesGet": {
-            "$ref": "./examples/InvoicesGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "invoiceName",
-            "description": "The name of an invoice resource.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Invoice"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices/latest": {
-      "get": {
-        "tags": [
-          "Invoices"
-        ],
-        "operationId": "Invoices_GetLatest",
-        "description": "Gets the most recent invoice. When getting a single invoice, the downloadUrl property is expanded automatically.  This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
-        "x-ms-examples": {
-          "InvoicesGetLatest": {
-            "$ref": "./examples/InvoicesGetLatest.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Invoice"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Lists all of the available billing REST API operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts": {
       "get": {
         "tags": [
@@ -1138,6 +769,107 @@
     }
   },
   "definitions": {
+    "BillingAccountListResult": {
+      "description": "Result of listing billing accounts.",
+      "properties": {
+        "value": {
+          "description": "The list of billing accounts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingAccount"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingAccount": {
+      "description": "A billing account resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingAccountProperties"
+        }
+      }
+    },
+    "BillingAccountProperties": {
+      "description": "The properties of the billing account.",
+      "properties": {
+        "displayName": {
+          "description": "Name of the billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountType": {
+          "description": "The billing account Type.",
+          "type": "string",
+          "enum": [
+            "CommerceRoot",
+            "Enrollment"
+          ],
+          "readOnly": true
+        },
+        "address": {
+          "description": "The address associated with billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "The ISO currency, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "description": "The country associated with billing account..",
+          "type": "string",
+          "readOnly": true
+        },
+        "projects": {
+          "description": "The projects associated to the billing account.",
+          "type": "array",
+          "items": {
+            "type": "Project"
+          }
+        },
+        "billingProfiles": {
+          "description": "The billing profiles associated to the billing account.",
+          "type": "array",
+          "items": {
+            "type": "BillingProfile"
+          }
+        },
+        "enrollmentDetails": {
+          "description": "The details about the associated legacy enrollment. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/Enrollment",
+          "readOnly": true
+        },
+        "departments": {
+          "description": "The departments associated to the enrollment.",
+          "type": "array",
+          "items": {
+            "type": "Department"
+          }
+        },
+        "enrollmentAccounts": {
+          "description": "The accounts associated to the enrollment.",
+          "type": "array",
+          "items": {
+            "type": "EnrollmentAccount"
+          }
+        }
+      }
+    },
     "Enrollment": {
       "description": "Current entity level details",
       "properties": {
@@ -1266,7 +998,7 @@
           "description": "Associated enrollment accounts. By default this is not populated, unless it's specified in $expand.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EnrollmentAccount"
+            "type": "EnrollmentAccount"
           }
         }
       }
@@ -1336,191 +1068,10 @@
         },
         "department": {
           "description": "Associated department. By default this is not populated, unless it's specified in $expand.",
-          "$ref": "#/definitions/Department"
+          "type": "Department"
         }
       }
     },
-    "BillingPeriod": {
-      "description": "A billing period resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "A billing period.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BillingPeriodProperties"
-        }
-      }
-    },
-    "BillingPeriodsListResult": {
-      "description": "Result of listing billing periods. It contains a list of available billing periods in reverse chronological order.",
-      "properties": {
-        "value": {
-          "description": "The list of billing periods.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/BillingPeriod"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "BillingPeriodProperties": {
-      "description": "The properties of the billing period.",
-      "properties": {
-        "billingPeriodStartDate": {
-          "description": "The start of the date range covered by the billing period.",
-          "type": "string",
-          "format": "date",
-          "readOnly": true
-        },
-        "billingPeriodEndDate": {
-          "description": "The end of the date range covered by the billing period.",
-          "type": "string",
-          "format": "date",
-          "readOnly": true
-        },
-        "invoiceIds": {
-          "description": "Array of invoice ids that associated with.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "DownloadUrl": {
-      "description": "A secure URL that can be used to download a PDF invoice until the URL expires.",
-      "properties": {
-        "expiryTime": {
-          "description": "The time in UTC at which this download URL will expire.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "url": {
-          "description": "The URL to the PDF file.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "BillingAccountListResult": {
-      "description": "Result of listing billing accounts.",
-      "properties": {
-        "value": {
-          "description": "The list of billing accounts.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/BillingAccount"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "BillingAccount": {
-      "description": "A billing account resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "A billing account.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BillingAccountProperties"
-        }
-      }
-    },
-    "BillingAccountProperties": {
-      "description": "The properties of the billing account.",
-      "properties": {
-        "displayName": {
-          "description": "Name of the billing account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "accountType": {
-          "description": "The billing account Type.",
-          "type": "string",
-          "enum": [
-            "CommerceRoot",
-            "Enrollment"
-          ],
-          "readOnly": true
-        },
-        "address": {
-          "description": "The address associated with billing account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "currency": {
-          "description": "The ISO currency, for example, USD.",
-          "type": "string",
-          "readOnly": true
-        },
-        "country": {
-          "description": "The country associated with billing account..",
-          "type": "string",
-          "readOnly": true
-        },
-        "projects": {
-          "description": "The projects associated to the billing account.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Project"
-          }
-        },
-        "billingProfiles": {
-          "description": "The billing profiles associated to the billing account.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/BillingProfile"
-          }
-        },
-        "enrollmentDetails": {
-          "description": "The details about the associated legacy enrollment. By default this is not populated, unless it's specified in $expand.",
-          "$ref": "#/definitions/Enrollment",
-          "readOnly": true
-        },
-        "departments": {
-          "description": "The departments associated to the enrollment.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Department"
-          }
-        },
-        "enrollmentAccounts": {
-          "description": "The accounts associated to the enrollment.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/EnrollmentAccount"
-          }
-        }
-      }
-    },
-    
     "BillingProfileListResult": {
       "description": "Result of listing billing profiles.",
       "properties": {
@@ -1613,7 +1164,7 @@
           "description": "The eligible offers attached to the project.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EligibleOffer"
+            "type": "EligibleOffer"
           }
         },
         "costCenter": {
@@ -1665,34 +1216,28 @@
         },
         "parentAssetId": {
           "description": "The id of the parent asset.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "owningProjectId": {
           "description": "The id of the project.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "startDate": {
           "description": "The start date.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "endDate": {
           "description": "The end date.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "billingProfiles": {
           "description": "The billing profiles associated to the eligible offer.",
-          "readOnly": true,
           "$ref": "#/definitions/BillingProfile"
         },
         "productDetails": {
           "description": "Information about the product.",
-          "readOnly": true,
           "$ref": "#/definitions/ProductDetails"
         }
       }
@@ -1702,23 +1247,24 @@
       "properties": {
         "productName": {
           "description": "The product name.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuId": {
           "description": "The sku id.",
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "The sku description.",
           "type": "string",
           "readOnly": true
         },
         "availabilityId": {
           "description": "The availability id used by purchase.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "legacyId": {
           "description": "The legacy id of the product.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -1732,13 +1278,11 @@
         },
         "status": {
           "description": "Status of the pending operation",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "statusDetail": {
           "description": "Status Detail of the pending operation",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -1772,118 +1316,6 @@
         }
       }
     },
-    "Invoice": {
-      "description": "An invoice resource can be used download a PDF version of an invoice.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "An invoice.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InvoiceProperties"
-        }
-      }
-    },
-    "InvoicesListResult": {
-      "description": "Result of listing invoices. It contains a list of available invoices in reverse chronological order.",
-      "properties": {
-        "value": {
-          "description": "The list of invoices.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Invoice"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "InvoiceProperties": {
-      "description": "The properties of the invoice.",
-      "properties": {
-        "downloadUrl": {
-          "description": "A secure link to download the PDF version of an invoice. The link will cease to work after its expiry time is reached.",
-          "$ref": "#/definitions/DownloadUrl"
-        },
-        "invoicePeriodStartDate": {
-          "description": "The start of the date range covered by the invoice.",
-          "type": "string",
-          "format": "date",
-          "readOnly": true
-        },
-        "invoicePeriodEndDate": {
-          "description": "The end of the date range covered by the invoice.",
-          "type": "string",
-          "format": "date",
-          "readOnly": true
-        },
-        "billingPeriodIds": {
-          "description": "Array of billing perdiod ids that the invoice is attributed to.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "Operation": {
-      "description": "A Billing REST API operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Billing.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Invoice, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result listing billing operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "description": "List of billing operations supported by the Microsoft.Billing resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "Resource": {
       "description": "The Resource model definition.",
       "properties": {
@@ -1912,7 +1344,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
+      "description": "Version of the API to be used with the client request. The current version is 2018-05-31-preview."
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
