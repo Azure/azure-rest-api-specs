@@ -497,7 +497,11 @@
                 "Merged",
                 "Expired",
                 "Succeeded"
-            ]
+            ],
+            "x-ms-enum": {
+                "name": "ReservationStatusCode",
+                "modelAsString": true
+            }
         },
         "ErrorResponseCode": {
             "type": "string",
@@ -557,60 +561,11 @@
                 "FulfillmentTransientError",
                 "FulfillmentError",
                 "CalculatePriceFailed"
-            ]
-        },
-        "ProvisioningState": {
-            "type": "string",
-            "description": "Represent the current state of the Reservation.",
-            "enum": [
-                "Creating",
-                "PendingResourceHold",
-                "ConfirmedResourceHold",
-                "PendingBilling",
-                "ConfirmedBilling",
-                "Created",
-                "Succeeded",
-                "Cancelled",
-                "Expired",
-                "BillingFailed",
-                "Failed",
-                "Split",
-                "Merged"
-            ]
-        },
-        "Location": {
-            "type": "string",
-            "description": "Location in which the Resources needs to be reserved. It cannot be changed after the resource has been created.",
-            "enum": [
-                "westus",
-                "eastus",
-                "eastus2",
-                "northcentralus",
-                "westus2",
-                "southcentralus",
-                "centralus",
-                "westeurope",
-                "northeurope",
-                "eastasia",
-                "southeastasia",
-                "japaneast",
-                "japanwest",
-                "brazilsouth",
-                "australiaeast",
-                "australiasoutheast",
-                "southindia",
-                "westindia",
-                "centralindia",
-                "canadacentral",
-                "canadaeast",
-                "uksouth",
-                "westcentralus",
-                "ukwest",
-                "francecentral",
-                "francesouth",
-                "australiac",
-                "australiac2"
-            ]
+            ],
+            "x-ms-enum": {
+                "name": "ErrorResponseCode",
+                "modelAsString": true
+            }
         },
         "SkuName": {
             "type": "object",
@@ -732,7 +687,11 @@
             "enum": [
                 "P1Y",
                 "P3Y"
-            ]
+            ],
+            "x-ms-enum": {
+                "name": "ReservationTerm",
+                "modelAsString": true
+            }
         },
         "ReservationOrderProperties": {
             "type": "object",
@@ -765,7 +724,8 @@
                     "$ref": "#/definitions/ReservationTerm"
                 },
                 "provisioningState": {
-                    "$ref": "#/definitions/ProvisioningState"
+                    "type": "string",
+                    "description": "Current state of the reservation."
                 },
                 "reservations": {
                     "type": "array",
@@ -780,7 +740,9 @@
             "x-ms-azure-resource": true,
             "properties": {
                 "location": {
-                    "$ref": "#/definitions/Location"
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The Azure Region where the reserved resource lives."
                 },
                 "etag": {
                     "type": "integer"
@@ -833,7 +795,8 @@
                     "description": "Quantity of the SKUs that are part of the Reservation."
                 },
                 "provisioningState": {
-                    "$ref": "#/definitions/ProvisioningState"
+                    "type": "string",
+                    "description": "Current state of the reservation."
                 },
                 "effectiveDateTime": {
                     "type": "string",
