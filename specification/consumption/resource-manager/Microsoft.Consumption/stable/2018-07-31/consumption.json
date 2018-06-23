@@ -1804,6 +1804,149 @@
           "readOnly": true
         }
       }
+    },
+    "EligibleOffer": {
+      "description": "An Eligible Offer resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The Eligible Offer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EligibleOfferProperties"
+        }
+      }
+    },
+    "EligibleOfferProperties": {
+      "description": "The properties of an Eligible Offer.",
+      "properties": {
+        "displayName": {
+          "description": "Offer name.",
+          "type": "string"
+        },
+        "parentAssetId": {
+          "description": "The id of the parent asset.",
+          "type": "string"
+        },
+        "owningProjectId": {
+          "description": "The id of the project.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "The start date.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The end date.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "billingProfiles": {
+          "description": "The billing profiles associated to the eligible offer.",
+          "$ref": "#/definitions/BillingProfile"
+        },
+        "productDetails": {
+          "description": "Information about the product.",
+          "$ref": "#/definitions/ProductDetails"
+        }
+      }
+    },
+    
+    "Department": {
+      "description": "A department resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A department.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DepartmentProperties"
+        }
+      }
+    },
+    "DepartmentProperties": {
+      "description": "The properties of the department.",
+      "properties": {
+        "departmentName": {
+          "description": "The name for department.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status for department.",
+          "type": "string"
+        },
+        "enrollmentAccounts": {
+          "description": "Associated enrollment accounts. By default this is not populated, unless it's specified in $expand.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrollmentAccount"
+          }
+        }
+      }
+    },
+    "EnrollmentAccount": {
+      "description": "An account resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "An account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnrollmentAccountProperties"
+        }
+      }
+    },
+    "EnrollmentAccountProperties": {
+      "description": "The properties of the account.",
+      "properties": {
+        "accountName": {
+          "description": "The account name.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center name.",
+          "type": "string"
+        },
+        "accountOwner": {
+          "description": "The account owner",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status for account.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "Account Start Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "Account End Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "department": {
+          "description": "Associated department. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/Department"
+        }
+      }
     }
   },
   "parameters": {

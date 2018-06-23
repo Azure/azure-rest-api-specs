@@ -839,14 +839,14 @@
           "description": "The projects associated to the billing account.",
           "type": "array",
           "items": {
-            "type": "Project"
+            "$ref": "#/definitions/Project"
           }
         },
         "billingProfiles": {
           "description": "The billing profiles associated to the billing account.",
           "type": "array",
           "items": {
-            "type": "BillingProfile"
+            "$ref": "#/definitions/BillingProfile"
           }
         },
         "enrollmentDetails": {
@@ -858,14 +858,14 @@
           "description": "The departments associated to the enrollment.",
           "type": "array",
           "items": {
-            "type": "Department"
+            "$ref": "#/definitions/Department"
           }
         },
         "enrollmentAccounts": {
           "description": "The accounts associated to the enrollment.",
           "type": "array",
           "items": {
-            "type": "EnrollmentAccount"
+            "$ref": "#/definitions/EnrollmentAccount"
           }
         }
       }
@@ -876,11 +876,13 @@
         "startDate": {
           "description": "Enrollment Start Date",
           "type": "string",
+          "readOnly": true,
           "format": "date-time"
         },
         "endDate": {
           "description": "Enrollment End Date",
           "type": "string",
+          "readOnly": true,
           "format": "date-time"
         },
         "currency": {
@@ -984,21 +986,24 @@
       "properties": {
         "departmentName": {
           "description": "The name for department.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "costCenter": {
           "description": "The cost center name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "status": {
           "description": "The status for department.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "enrollmentAccounts": {
           "description": "Associated enrollment accounts. By default this is not populated, unless it's specified in $expand.",
           "type": "array",
           "items": {
-            "type": "EnrollmentAccount"
+            "$ref": "#/definitions/EnrollmentAccount"
           }
         }
       }
@@ -1042,33 +1047,39 @@
       "properties": {
         "accountName": {
           "description": "The account name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "costCenter": {
           "description": "The cost center name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "accountOwner": {
           "description": "The account owner",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "status": {
           "description": "The status for account.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "startDate": {
           "description": "Account Start Date",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "endDate": {
           "description": "Account End Date",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "department": {
           "description": "Associated department. By default this is not populated, unless it's specified in $expand.",
-          "type": "Department"
+          "$ref": "#/definitions/Department"
         }
       }
     },
@@ -1164,7 +1175,7 @@
           "description": "The eligible offers attached to the project.",
           "type": "array",
           "items": {
-            "type": "EligibleOffer"
+            "$ref": "#/definitions/EligibleOffer"
           }
         },
         "costCenter": {
@@ -1212,25 +1223,30 @@
       "properties": {
         "displayName": {
           "description": "Offer name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "parentAssetId": {
           "description": "The id of the parent asset.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "owningProjectId": {
           "description": "The id of the project.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "startDate": {
           "description": "The start date.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "endDate": {
           "description": "The end date.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "billingProfiles": {
           "description": "The billing profiles associated to the eligible offer.",
@@ -1247,11 +1263,13 @@
       "properties": {
         "productName": {
           "description": "The product name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "skuId": {
           "description": "The sku id.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "skuDescription": {
           "description": "The sku description.",
@@ -1260,11 +1278,13 @@
         },
         "availabilityId": {
           "description": "The availability id used by purchase.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "legacyId": {
           "description": "The legacy id of the product.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1278,11 +1298,13 @@
         },
         "status": {
           "description": "Status of the pending operation",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "statusDetail": {
           "description": "Status Detail of the pending operation",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
