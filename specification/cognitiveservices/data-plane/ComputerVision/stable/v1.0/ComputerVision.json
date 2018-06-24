@@ -326,16 +326,10 @@
             "in": "path",
             "description": "The domain-specific content to recognize.",
             "required": true,
-            "type": "string",
-            "x-nullable": false,
-            "x-ms-enum": {
-              "name": "DomainModels",
-              "modelAsString": false
-            },
-            "enum": [
-              "Celebrities",
-              "Landmarks"
-            ]
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ServiceLanguage"
           },
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
@@ -664,6 +658,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ServiceLanguage"
+          },
+          {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
           }
         ],
@@ -706,6 +703,9 @@
             "description": "The domain-specific content to recognize.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ServiceLanguage"
           },
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
@@ -895,7 +895,8 @@
       "type": "object",
       "properties": {
         "language": {
-          "$ref": "#/definitions/OcrResult"
+          "type": "string",
+          "description": "The BCP-47 language code of the text in the image."
         },
         "textAngle": {
           "type": "number",
@@ -997,7 +998,8 @@
       "properties": {
         "result": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DomainModelResult"
+          "type": "object",
+          "description": "Model-specific response"
         },
         "requestId": {
           "type": "string",
@@ -1008,15 +1010,53 @@
         }
       }
     },
-    "DomainModelResult": {
+    "CelebrityResults": {
       "type": "object",
+      "description": "List of celebrities recognized in the image.",
       "properties": {
         "celebrities": {
           "type": "array",
-          "description": "An array of possible celebritied identified in the image.",
           "items": {
             "$ref": "#/definitions/CelebritiesModel"
           }
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Id of the REST API request."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ImageMetadata"
+        }
+      }
+    },
+    "LandmarkResults": {
+      "type": "object",
+      "description": "List of landmarks recognized in the image.",
+      "properties": {
+        "landmarks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "A landmark recognized in the image",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the landmark."
+              },
+              "confidence": {
+                "type": "number",
+                "format": "double",
+                "description": "Confidence level for the landmark recognition."
+              }
+            }
+          }
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Id of the REST API request."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ImageMetadata"
         }
       }
     },
@@ -1429,7 +1469,7 @@
     "ServiceLanguage": {
       "name": "language",
       "in": "query",
-      "description": "The desired language for output generation. If this parameter is not specified, the default value is &quot;en&quot;.Supported languages:en - English, Default.ja - Japanese pt - Portuguese zh - Simplified Chinese.",
+      "description": "The desired language for output generation. If this parameter is not specified, the default value is &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja - Japanese, pt - Portuguese, zh - Simplified Chinese.",
       "type": "string",
       "required": false,
       "x-ms-parameter-location": "method",
@@ -1437,6 +1477,7 @@
       "default": "en",
       "enum": [
         "en",
+        "es",
         "ja",
         "pt",
         "zh"

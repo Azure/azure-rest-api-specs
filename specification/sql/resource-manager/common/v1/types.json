@@ -131,6 +131,29 @@
        }
     },
     "parameters":{
-
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription ID that identifies an Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "client"
+          },
+          "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for the request.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "client"
+          },
+          "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
     }
  }
