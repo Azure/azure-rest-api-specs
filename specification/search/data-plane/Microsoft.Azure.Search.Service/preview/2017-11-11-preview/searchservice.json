@@ -597,7 +597,7 @@
 			"x-ms-request-id": "request-id",
 			"responses": {
 				"200": {
-					"description": "",
+					"description": "The skillset is successfully returned.",
 					"schema": {
 						"$ref": "#/definitions/Skillset"
 					}
@@ -631,7 +631,7 @@
 					"schema": {
 						"$ref": "#/definitions/Skillset"
 					},
-					"description": "The list of desired Cognitive Search skills in the skillset in an Azure Search service"
+					"description": "The skillset containing one or more Cognitive Search skills to create or update in an Azure Search service."
 				},
 				{
 					"$ref": "#/parameters/ClientRequestIdParameter"
@@ -646,13 +646,13 @@
 			"x-ms-request-id": "request-id",
 			"responses": {
 				"200": {
-					"description": "",
+					"description": "The skillset is successfully updated.",
 					"schema": {
 						"$ref": "#/definitions/Skillset"
 					}
 				},
 				"201": {
-					"description": "",
+					"description": "The skillset is successfully created.",
 					"schema": {
 						"$ref": "#/definitions/Skillset"
 					}
@@ -689,10 +689,10 @@
 			"x-ms-request-id": "request-id",
 			"responses": {
 				"204": {
-					"description": ""
+					"description": "The skillset is successfully deleted."
 				},
 				"404": {
-					"description": ""
+					"description": "The provided skillset name is not found."
 				}
 			}
 		}
@@ -721,7 +721,7 @@
 			"x-ms-request-id": "request-id",
 			"responses": {
 				"200": {
-					"description": "",
+					"description": "The list is successfully returned.",
 					"schema": {
 						"$ref": "#/definitions/SkillsetListResult"
 					}
@@ -736,7 +736,7 @@
 					"$ref": "./examples/SearchServiceCreateSkillset.json"
 				}
 			},
-			"description": "Creates a new Cognitive Search skillset under the search service.",
+			"description": "Creates a new Cognitive Search skillset in an Azure Search service.",
 			"externalDocs": {
 				"url": "https://docs.microsoft.com/rest/api/searchservice/create-skillset"
 			},
@@ -748,7 +748,7 @@
 					"schema": {
 						"$ref": "#/definitions/Skillset"
 					},
-					"description": "The definition of skills."
+					"description": "The skillset containing one or more Cognitive Search skills to create in an Azure Search service."
 				},
 				{
 					"$ref": "#/parameters/ClientRequestIdParameter"
@@ -760,7 +760,7 @@
 			"x-ms-request-id": "request-id",
 			"responses": {
 				"201": {
-					"description": "",
+					"description": "The skillset is successfully created.",
 					"schema": {
 						"$ref": "#/definitions/Skillset"
 					}
@@ -4268,8 +4268,8 @@
 		}],
 		"properties": {
 			"defaultLanguageCode": {
-				"$ref": "#/definitions/KeyPhraseExtractionSkillSupportedLanguageCodes",
-				"description": "A value indicating which language code. Default is en."
+				"$ref": "#/definitions/KeyPhraseExtractionSkillLanguage",
+				"description": "A value indicating which language code to use. Default is en."
 			},
 			"maxKeyPhraseCount": {
 				"type": "integer",
@@ -4290,11 +4290,11 @@
 		"properties": {
 			"textExtractionAlgorithm": {
 				"$ref": "#/definitions/TextExtractionAlgorithm",
-				"description": "A value indicating which algorithm to use. Default is printed."
+				"description": "A value indicating which algorithm to use for extracting text. Default is printed."
 			},
 			"defaultLanguageCode": {
-				"$ref": "#/definitions/OcrSkillSupportedLanguageCodes",
-				"description": "A value indicating which language code. Default is en."
+				"$ref": "#/definitions/OcrSkillLanguage",
+				"description": "A value indicating which language code to use. Default is en."
 			},
 			"detectOrientation": {
 			    "x-ms-client-name": "ShouldDetectOrientation",
@@ -4315,24 +4315,22 @@
 		}],
 		"properties": {
 			"defaultLanguageCode": {
-				"$ref": "#/definitions/ImageAnalysisSkillSupportedLanguageCodes",
-				"description": "A value indicating which language code. Default is en."
+				"$ref": "#/definitions/ImageAnalysisSkillLanguage",
+				"description": "A value indicating which language code to use. Default is en."
 			},
 			"visualFeatures": {
 				"type": "array",
 				"items": {
-					"$ref": "#/definitions/VisualFeatures",
-					"description": "The strings indicating what visual feature types to return."
+					"$ref": "#/definitions/VisualFeatures"
 				},
 				"description": "A list of visual features."
 			},
 			"details": {
 				"type": "array",
 				"items": {
-					"$ref": "#/definitions/Details",
-					"description": "A string indicating which domain-specific details to return. The supported values are 'Celebrities' and 'Landmarks'."
+					"$ref": "#/definitions/Details"
 				},
-				"description": "Celebrities or Landmarks."
+				"description": "A string indicating which domain-specific details to return."
 			}
 		},
 		"externalDocs": {
@@ -4391,14 +4389,13 @@
 			"categories": {
 				"type": "array",
 				"items": {
-					"$ref": "#/definitions/Categories",
-					"description": "A string indicating which named entity categories to return. The supported values are 'Location', 'Organization', and 'Person'."
+					"$ref": "#/definitions/Categories"
 				},
-				"description": "A list of categories."
+				"description": "A list of named entity categories."
 			},
 			"defaultLanguageCode": {
-				"$ref": "#/definitions/NamedEntityRecognitionSkillSupportedLanguageCodes",
-				"description": "A value indicating which language code. Default is en."
+				"$ref": "#/definitions/NamedEntityRecognitionSkillLanguage",
+				"description": "A value indicating which language code to use. Default is en."
 			},
 			"minimumPrecision": {
 				"type": "number",
@@ -4419,8 +4416,8 @@
 		}],
 		"properties": {
 			"defaultLanguageCode": {
-				"$ref": "#/definitions/SentimentSkillSupportedLanguageCodes",
-				"description": "A value indicating which language code. Default is en."
+				"$ref": "#/definitions/SentimentSkillLanguage",
+				"description": "A value indicating which language code to use. Default is en."
 			}
 		},
 		"externalDocs": {
@@ -4435,12 +4432,12 @@
 		}],
 		"properties": {
 			"defaultLanguageCode": {
-				"$ref": "#/definitions/SplitSkillSupportedLanguageCodes",
-				"description": "A value indicating which language code. Default is en."
+				"$ref": "#/definitions/SplitSkillLanguage",
+				"description": "A value indicating which language code to use. Default is en."
 			},
 			"textSplitMode": {
 				"$ref": "#/definitions/TextSplitMode",
-				"description": "A value indicating which split mode to perform. The supported values are 'pages' and 'sentences'."
+				"description": "A value indicating which split mode to perform."
 			},
 			"maximumPageLength": {
 				"type": "integer",
@@ -4539,17 +4536,17 @@
           "name": "TextSplitMode",
           "modelAsString": false
         },
-		"description": "A value indicating which split mode to perform. The supported values are 'pages' and 'sentences'."
+		"description": "A value indicating which split mode to perform."
 	},
 	"VisualFeatures": {
 		"type": "string",
         "enum": [
-          "Categories",
-          "Tags",
-		  "Description",
-		  "Faces",
-		  "ImageType",
-		  "Color"
+          "categories",
+          "tags",
+		  "description",
+		  "faces",
+		  "imageType",
+		  "color"
         ],
         "x-ms-enum": {
           "name": "VisualFeatures",
@@ -4560,80 +4557,80 @@
 	"Details": {
 		"type": "string",
         "enum": [
-          "Celebrities",
-          "Landmarks"
+          "celebrities",
+          "landmarks"
         ],
         "x-ms-enum": {
           "name": "Details",
           "modelAsString": false
         },
-		"description": "A string indicating which domain-specific details to return. The supported values are 'Celebrities' and 'Landmarks'."
+		"description": "A string indicating which domain-specific details to return."
 	},
 	"Categories": {
 		"type": "string",
         "enum": [
-          "Location",
-          "Organization",
-		  "Person"
+          "location",
+          "organization",
+		  "person"
         ],
         "x-ms-enum": {
           "name": "Categories",
           "modelAsString": false
         },
-		"description": "A string indicating which named entity categories to return. The supported values are 'Location', 'Organization', and 'Person'."
+		"description": "A string indicating which named entity categories to return."
 	},
-	"SentimentSkillSupportedLanguageCodes": {
+	"SentimentSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
         }
       },
-      "description": "The language codes supported by SentimentSkill.",
+      "description": "The language codes supported for input text by SentimentSkill.",
       "x-ms-external": true
     },
-	"KeyPhraseExtractionSkillSupportedLanguageCodes": {
+	"KeyPhraseExtractionSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
         }
       },
-      "description": "The language codes supported by KeyPhraseExtractionSkill.",
+      "description": "The language codes supported for input text by KeyPhraseExtractionSkill.",
       "x-ms-external": true
     },
-	"OcrSkillSupportedLanguageCodes": {
+	"OcrSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
         }
       },
-      "description": "The language codes supported by OcrSkill.",
+      "description": "The language codes supported for input by OcrSkill.",
       "x-ms-external": true
     },
-	"SplitSkillSupportedLanguageCodes": {
+	"SplitSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
         }
       },
-      "description": "The language codes supported by SplitSkill.",
+      "description": "The language codes supported for input text by SplitSkill.",
       "x-ms-external": true
     },
-	"NamedEntityRecognitionSkillSupportedLanguageCodes": {
+	"NamedEntityRecognitionSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
         }
       },
-      "description": "The language codes supported by NamedEntityRecognitionSkill.",
+      "description": "The language codes supported for input text by NamedEntityRecognitionSkill.",
       "x-ms-external": true
     },
-	"ImageAnalysisSkillSupportedLanguageCodes": {
+	"ImageAnalysisSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
         }
       },
-      "description": "The language codes supported by ImageAnalysisSkill.",
+      "description": "The language codes supported for input by ImageAnalysisSkill.",
       "x-ms-external": true
     },
     "SynonymMapFormat": {
