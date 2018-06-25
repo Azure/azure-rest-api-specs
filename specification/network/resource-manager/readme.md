@@ -79,6 +79,7 @@ These settings apply only when `--tag=package-2018-04` is specified on the comma
 ``` yaml $(tag) == 'package-2018-04'
 
 input-file:
+- Microsoft.Network/stable/2018-04-01/azureFirewall.json
 - Microsoft.Network/stable/2018-04-01/applicationGateway.json
 - Microsoft.Network/stable/2018-04-01/applicationSecurityGroup.json
 - Microsoft.Network/stable/2018-04-01/checkDnsAvailability.json
