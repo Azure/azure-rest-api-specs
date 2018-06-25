@@ -260,21 +260,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerregistry
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2016-06-preview
+  - tag: package-2018-02-preview
   - tag: package-2017-10
   - tag: package-2017-06-preview
   - tag: package-2017-03
+  - tag: package-2016-06-preview
 ```
 
-### Tag: package-2016-06-preview and java
+### Tag: package-2018-02-preview and java
 
-These settings apply only when `--tag=package-2016-06-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-02-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2016-06-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.containerregistry.v2016_06_27_preview
-  output-folder: $(azure-libraries-for-java-folder)/containerregistry/resource-manager/v2016_06_27_preview
+  namespace: com.microsoft.azure.management.containerregistry.v2018_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/containerregistry/resource-manager/v2018_02_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -318,4 +319,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2016-06-preview and java
 
+These settings apply only when `--tag=package-2016-06-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-06-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerregistry.v2016_06_27_preview
+  output-folder: $(azure-libraries-for-java-folder)/containerregistry/resource-manager/v2016_06_27_preview
+regenerate-manager: true
+generate-interface: true
+```
