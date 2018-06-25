@@ -34,12 +34,12 @@ These settings apply only when `--tag=package-2015-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-10'
 input-file:
+- Microsoft.Automation/common/v1/definitions.json
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
 - Microsoft.Automation/stable/2015-10-31/connection.json
 - Microsoft.Automation/stable/2015-10-31/connectionType.json
 - Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/definitions.json
 - Microsoft.Automation/stable/2015-10-31/dscCompilationJob.json
 - Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/dscNode.json
@@ -62,12 +62,12 @@ These settings apply only when `--tag=package-2017-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-05-preview'
 input-file:
+- Microsoft.Automation/common/v1/definitions.json
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
 - Microsoft.Automation/stable/2015-10-31/connection.json
 - Microsoft.Automation/stable/2015-10-31/connectionType.json
 - Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/definitions.json
 - Microsoft.Automation/stable/2015-10-31/dscCompilationJob.json
 - Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/dscNode.json
@@ -80,7 +80,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
-- Microsoft.Automation/preview/2017-05-15-preview/definitions.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
@@ -96,12 +95,12 @@ These settings apply only when `--tag=package-2018-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-01-preview'
 input-file:
+- Microsoft.Automation/common/v1/definitions.json
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
 - Microsoft.Automation/stable/2015-10-31/connection.json
 - Microsoft.Automation/stable/2015-10-31/connectionType.json
 - Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/definitions.json
 - Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
@@ -111,7 +110,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
-- Microsoft.Automation/preview/2017-05-15-preview/definitions.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
@@ -119,10 +117,10 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJobStreams.json
 - Microsoft.Automation/preview/2017-05-15-preview/job.json
-- Microsoft.Automation/stable/2018-01-15/definitions.json
 - Microsoft.Automation/stable/2018-01-15/dscNode.json
 - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
 - Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2015-10-31/watcher.json
 ```
 
 ---
@@ -130,11 +128,23 @@ input-file:
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: definitions.json
+    from: runbook.json
     where: $.definitions.TestJob
   - suppress: BodyTopLevelProperties
-    from: definitions.json
+    from: runbook.json
     where: $.definitions.TestJob.properties
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: account.json
+    where: $.definitions.Key.properties.KeyName
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: account.json
+    where: $.definitions.Key.properties.Permissions
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: account.json
+    where: $.definitions.Key.properties.Value
+  - suppress: LongRunningResponseStatusCode
+    from: runbook.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/publish"].post["x-ms-long-running-operation"]
 ```
 
 ---
@@ -242,11 +252,32 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.automation
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-automation
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.automation
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-automation
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-10
+```
+
+### Tag: package-2015-10 and java
+
+These settings apply only when `--tag=package-2015-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.automation.v2015_10_31
+  output-folder: $(azure-libraries-for-java-folder)/automation/resource-manager/v2015_10_31
+regenerate-manager: true
+generate-interface: true
+```
+
+

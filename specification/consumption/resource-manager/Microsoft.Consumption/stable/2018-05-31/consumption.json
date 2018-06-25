@@ -1,0 +1,2784 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-05-31",
+    "title": "ConsumptionManagementClient",
+    "description": "Consumption management client provides access to consumption resources for Azure Enterprise Subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default": {
+      "get": {
+        "tags": [
+          "PriceSheet"
+        ],
+        "operationId": "PriceSheet_Get",
+        "description": "Gets the price sheet for a scope by subscriptionId. Price sheet is available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "PriceSheet": {
+            "$ref": "./examples/PriceSheet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/meterDetails within a price sheet. By default, these fields are not included when returning price sheet.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the top N results.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PriceSheetResult"
+            }
+          },
+          "default": {
+          "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/default": {
+      "get": {
+        "tags": [
+          "PriceSheet"
+        ],
+        "operationId": "PriceSheet_GetByBillingPeriod",
+        "description": "Get the price sheet for a scope by subscriptionId and billing period. Price sheet is available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "PriceSheetForBillingPeriod": {
+            "$ref": "./examples/PriceSheetForBillingPeriod.json"
+          },
+          "PriceSheetExpand": {
+            "$ref": "./examples/PriceSheetExpand.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/meterDetails within a price sheet. By default, these fields are not included when returning price sheet.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the top N results.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PriceSheetResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_List",
+        "description": "Lists the usage details for a scope by current billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsList": {
+            "$ref": "./examples/UsageDetailsList.json"
+          },
+          "UsageDetailsListFilterByTag": {
+            "$ref": "./examples/UsageDetailsListFilterByTag.json"
+          },
+          "UsageDetailsListGroupByTagDate": {
+            "$ref": "./examples/UsageDetailsListGroupByTagDate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName, properties/instanceId or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListByBillingPeriod",
+        "description": "Lists the usage details for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsListForBillingPeriod": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriod.json"
+          },
+          "UsageDetailsExpand": {
+            "$ref": "./examples/UsageDetailsExpand.json"
+          },
+          "UsageDetailsListForBillingPeriodGroupByTag": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodGroupByTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListByBillingAccount",
+        "description": "Lists the usage details by billingAccountId for a scope by current billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsList": {
+            "$ref": "./examples/UsageDetailsListByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName, properties/instanceId or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListForBillingPeriodByBillingAccount",
+        "description": "Lists the usage details based on billingAccountId for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsListForBillingPeriod": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListByDepartment",
+        "description": "Lists the usage details by departmentId for a scope by current billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsList": {
+            "$ref": "./examples/UsageDetailsListByDepartment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName, properties/instanceId or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
+"get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListForBillingPeriodByDepartment",
+        "description": "Lists the usage details based on departmentId for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsListForBillingPeriod": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByDepartment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListByEnrollmentAccount",
+        "description": "Lists the usage details by enrollmentAccountId for a scope by current billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsList": {
+            "$ref": "./examples/UsageDetailsListByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName, properties/instanceId or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
+"get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListForBillingPeriodByEnrollmentAccount",
+        "description": "Lists the usage details based on enrollmentAccountId for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsListForBillingPeriod": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/forecasts": {
+      "get": {
+        "tags": [
+          "Forecasts"
+        ],
+        "x-ms-odata": "#/definitions/Forecast",
+        "operationId": "Forecasts_List",
+        "description": "Lists the forecast charges by subscriptionId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ForecastsList": {
+            "$ref": "./examples/ForecastsList.json"
+          },
+          "ForecastsListFilterByGrain": {
+            "$ref": "./examples/ForecastsListFilterByGrain.json"
+          },
+          "ForecastsListFilterByDates": {
+            "$ref": "./examples/ForecastsListFilterByDates.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ForecastsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Consumption/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available consumption REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/reportconfigs": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_List",
+        "description": "Lists all report configs for a subscription.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReportConfigList": {
+            "$ref": "./examples/ReportConfigList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfigListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Consumption/reportconfigs": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_ListByResourceGroupName",
+        "description": "Lists all report configs for a resource group under a subscription.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReportConfigList": {
+            "$ref": "./examples/ReportConfigList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfigListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/reportconfigs/{reportConfigName}": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_Get",
+        "description": "Gets the report config for a subscription by report config name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Report": {
+            "$ref": "./examples/ReportConfig.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_CreateOrUpdate",
+        "description": "The operation to create or update a report config. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateReport": {
+            "$ref": "./examples/ReportConfigCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_Delete",
+        "description": "The operation to delete a report.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "DeleteReport": {
+            "$ref": "./examples/ReportConfigDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Consumption/reportconfigs/{reportConfigName}": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_GetByResourceGroupName",
+        "description": "Gets the report config for a resource group under a subscription by report config name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReportConfig": {
+            "$ref": "./examples/ReportConfig.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_CreateOrUpdateByResourceGroupName",
+        "description": "The operation to create or update a report config. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateReport": {
+            "$ref": "./examples/ReportConfigCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_DeleteByResourceGroupName",
+        "description": "The operation to delete a report config.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "DeleteReport": {
+            "$ref": "./examples/ReportConfigDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "BillingAccountDimensions_List",
+        "description": "Lists the dimensions by billingAccount Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingAccountDimensionsList": {
+            "$ref": "./examples/BillingAccountDimensionsList.json"
+          },
+          "BillingAccountDimensionsListExpandAndTop": {
+            "$ref": "./examples/BillingAccountDimensionsListExpandAndTop.json"
+          },
+          "BillingAccountDimensionsListWithFilter": {
+            "$ref": "./examples/BillingAccountDimensionsListWithFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "SubscriptionDimensions_List",
+        "description": "Lists the dimensions by subscription Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "SubscriptionDimensionsList": {
+            "$ref": "./examples/SubscriptionDimensionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Consumption/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "ResourceGroupDimensions_List",
+        "description": "Lists the dimensions by resource group Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupDimensionsList": {
+            "$ref": "./examples/ResourceGroupDimensionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/AnalyzeUsage": {
+      "post": {
+        "tags": [
+          "UsageAnalysis"
+        ],
+        "operationId": "AnalyzeSubscriptionUsage",
+        "description": "Lists the usage data for subscriptionId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "SubscriptionUsage": {
+            "$ref": "./examples/SubscriptionUsage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageAnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Consumption/AnalyzeUsage": {
+      "post": {
+        "tags": [
+          "UsageAnalysis"
+        ],
+        "operationId": "AnalyzeResourceGroupUsage",
+        "description": "Lists the usage data for subscriptionId and resource group.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupUsage": {
+            "$ref": "./examples/ResourceGroupUsage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageAnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/AnalyzeUsage": {
+      "post": {
+        "tags": [
+          "UsageAnalysis"
+        ],
+        "operationId": "AnalyzeBillingAccountUsage",
+        "description": "Lists the usage data for billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingAccountUsage": {
+            "$ref": "./examples/BillingAccountUsage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageAnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Consumption REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Consumption.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: UsageDetail, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }        
+    },
+    "OperationListResult": {
+      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of consumption operations supported by the Microsoft.Consumption resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PriceSheetResult": {
+      "description": "An pricesheet resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PriceSheetModel",
+          "title": "Price sheet properties"
+        }
+      }
+    },
+    "PriceSheetModel": {
+      "description": "price sheet result. It contains the pricesheet associated with billing period",
+      "properties": {
+        "pricesheets": {
+          "description": "Price sheet",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PriceSheetProperties"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PriceSheetProperties": {
+      "description": "The properties of the price sheet.",
+      "properties": {
+        "billingPeriodId": {
+          "description": "The id of the billing period resource that the usage belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "The meter id (GUID)",
+          "type": "string",
+          "format":"uuid",
+          "readOnly": true
+        },
+        "meterDetails": {
+          "description": "The details about the meter. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/MeterDetails",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "Unit of measure",
+          "type": "string",
+          "readOnly": true
+        },
+        "includedQuantity": {
+          "description": "Included quality for an offer",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "partNumber": {
+          "description": "Part Number",
+          "type": "string",
+          "readOnly": true
+        },
+        "unitPrice": {
+          "description": "Unit Price",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "currencyCode": {
+          "description": "Currency Code",
+          "type": "string",
+          "readOnly": true
+        },        
+        "offerId": {
+          "description": "Offer Id",
+          "type": "string",
+          "readOnly": true
+		    }
+	    }
+    },   
+    "Forecast": {
+      "description": "A forecast resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ForecastProperties",
+          "title": "Forecast properties"
+        }
+      }
+    },
+    "MeterDetails": {
+      "description": "The properties of the meter detail.",
+      "properties": {
+        "meterName": {
+          "description": "The name of the meter, within the given meter category",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterCategory": {
+          "description": "The category of the meter, for example, 'Cloud services', 'Networking', etc..",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterSubCategory": {
+          "description": "The subcategory of the meter, for example, 'A6 Cloud services', 'ExpressRoute (IXP)', etc..",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit in which the meter consumption is charged, for example, 'Hours', 'GB', etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterLocation": {
+          "description": "The location in which the Azure service is available.",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalIncludedQuantity": {
+          "description": "The total included quantity associated with the offer.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "pretaxStandardRate": {
+          "description": "The pretax listing price.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }
+      }
+    },
+    "UsageDetail": {
+      "description": "An usage detail resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UsageDetailProperties",
+          "title": "Usage detail properties"
+        }
+      }
+    },
+    "UsageDetailsListResult": {
+      "description": "Result of listing usage details. It contains a list of available usage details in reverse chronological order by billing period.",
+      "properties": {
+        "value": {
+          "description": "The list of usage details.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/UsageDetail"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UsageDetailProperties": {
+      "description": "The properties of the usage detail.",
+      "properties": {
+        "billingPeriodId": {
+          "description": "The id of the billing period resource that the usage belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceId": {
+          "description": "The id of the invoice resource that the usage belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usageStart": {
+          "description": "The start of the date time range covered by the usage detail.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "usageEnd": {
+          "description": "The end of the date time range covered by the usage detail.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "instanceName": {
+          "description": "The name of the resource instance that the usage is about.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceId": {
+          "description": "The uri of the resource instance that the usage is about.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceLocation": {
+          "description": "The location of the resource instance that the usage is about.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "The ISO currency in which the meter is charged, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usageQuantity": {
+          "description": "The quantity of usage.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "billableQuantity": {
+          "description": "The billable usage quantity.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "pretaxCost": {
+          "description": "The amount of cost before tax.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "isEstimated": {
+          "description": "The estimated usage is subject to change.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "The meter id (GUID).",
+          "type": "string",
+          "format":"uuid",
+          "readOnly": true
+        },
+        "meterDetails": {
+          "description": "The details about the meter. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/MeterDetails",
+          "readOnly": true
+        },
+        "subscriptionGuid": {
+          "description": "Subscription guid.",
+          "type": "string",
+          "format":"uuid",
+          "readOnly": true
+        },
+        "subscriptionName": {
+          "description": "Subscription name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountName": {
+          "description": "Account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "departmentName": {
+          "description": "Department name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "product": {
+          "description": "Product name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumedService": {
+          "description": "Consumed service name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costCenter": {
+          "description": "The cost center of this department if it is a department and a costcenter exists",
+          "type": "string",
+          "readOnly": true
+        },
+        "partNumber": {
+          "description": "Part Number",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "description": "Resource Guid",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerId": {
+          "description": "Offer Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "chargesBilledSeparately": {
+          "description": "Charges billed separately",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "additionalProperties": {
+          "description": "Additional details of this usage item. By default this is not populated, unless it's specified in $expand.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ForecastsListResult": {
+      "description": "Result of listing forecasts. It contains a list of available forecasts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of forecasts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Forecast"
+          }
+        }
+      }
+    },
+    "ForecastProperties": {
+      "description": "The properties of the forecast charge.",
+      "type": "object",
+      "properties": {
+        "usageDate": {
+          "description": "The usage date of the forecast.",
+          "type": "string",
+          "readOnly": true
+        },
+        "grain": {
+          "description": "The granularity of forecast.",
+          "type": "string",
+          "enum": [
+            "Daily",
+            "Monthly",
+            "Yearly"
+          ],
+          "x-ms-enum": {
+            "name": "Grain",
+            "modelAsString": true
+          }
+        },
+        "charge": {
+          "description": "The amount of charge",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "The ISO currency in which the meter is charged, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
+        "chargeType": {
+          "description": "The type of the charge. Could be actual or forecast",
+          "type": "string",
+          "enum": [
+            "Actual",
+            "Forecast"
+          ],
+          "x-ms-enum": {
+            "name": "ChargeType",
+            "modelAsString": true
+          }
+        },
+        "confidenceLevels": {
+          "description": "The details about the forecast confidence levels. This is populated only when chargeType is Forecast.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "percentage": {
+                "description": "The percentage level of the confidence",
+                "type": "number",
+                "format": "decimal",
+                "readOnly": true
+              },
+              "bound": {
+                "description": "The boundary of the percentage, values could be 'Upper' or 'Lower'",
+                "type": "string",
+                "enum": [
+                  "Upper",
+                  "Lower"
+                ],
+                "x-ms-enum": {
+                  "name": "Bound",
+                  "modelAsString": true
+                }
+              },
+              "value": {
+                "description": "The amount of forecast within the percentage level",
+                "type": "number",
+                "format": "decimal",
+                "readOnly": true
+              }
+            }
+          },
+
+          "readOnly": true
+        }
+      }
+    },
+    "ReportConfigListResult": {
+      "description": "Result of listing report configs. It contains a list of available report configurations in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of report configs.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReportConfig"
+          }
+        }
+      }
+    },
+    "ReportConfig": {
+      "description": "A report config resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReportConfigProperties",
+          "title": "Report config properties"
+        }
+      }
+    },
+    "ReportConfigProperties": {
+      "description": "The properties of the report config.",
+      "properties": {
+        "schedule": {
+          "description": "Has schedule information for the report config.",
+          "$ref": "#/definitions/ReportConfigSchedule"
+        },
+        "format": {
+          "description": "The format of the report being delivered.",
+          "type": "string",
+          "enum": [
+            "Csv"
+          ],
+          "x-ms-enum": {
+            "name": "FormatType",
+            "modelAsString": true
+          }
+        },
+        "deliveryInfo": {
+          "description": "Has delivery information for the report config.",
+          "$ref": "#/definitions/ReportConfigDeliveryInfo"
+        },
+        "definition": {
+          "description": "Has definition for the report config.",
+          "$ref": "#/definitions/ReportConfigDefinition"
+        }
+      },
+      "required": [
+        "deliveryInfo",
+        "definition"
+      ]
+    },
+    "ReportConfigSchedule": {
+      "description": "The schedule associated with a report config.",
+      "properties": {
+        "status": {
+          "description": "The status of the schedule. Whether active or not. If inactive, the report's scheduled execution is paused.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          }
+        },
+        "recurrence": {
+          "description": "The schedule recurrence.",
+          "type": "string",
+          "enum": [
+            "Daily",
+            "Weekly",
+            "Monthly",
+            "Annually"
+          ],
+          "x-ms-enum": {
+            "name": "RecurrenceType",
+            "modelAsString": true
+          }
+        },
+        "recurrencePeriod": {
+          "description": "Has start and end date of the recurrence. The start date must be in future. If present, the end date must be greater than start date.",
+          "$ref": "#/definitions/ReportConfigRecurrencePeriod"
+        }
+      },
+      "required": [
+        "recurrence",
+        "recurrencePeriod"
+      ]
+    },
+    "ReportConfigDeliveryInfo": {
+      "description": "The delivery information associated with a report config.",
+      "properties": {
+        "destination": {
+          "description": "Has destination for the report being delivered.",
+          "$ref": "#/definitions/ReportConfigDeliveryDestination"
+        }
+      },
+      "required": [
+        "destination"
+      ]
+    },
+    "ReportConfigDefinition":{
+      "description": "The definition of a report config.",
+      "properties": {
+        "type": {
+          "description": "The type of the report.",
+          "type": "string",
+          "enum": [
+            "Usage"
+          ],
+          "x-ms-enum": {
+            "name": "ReportType",
+            "modelAsString": true
+          }
+        },
+        "timeframe": {
+          "description": "The time frame for pulling data for the report. If custom, then a specific time period must be provided.",
+          "type": "string",
+          "enum": [
+            "WeekToDate",
+            "MonthToDate",
+            "YearToDate",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "TimeframeType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has time period for pulling data for the report.",
+          "$ref": "#/definitions/ReportConfigTimePeriod"
+        },
+        "dataset": {
+          "description": "Has definition for data in this report config.",
+          "$ref": "#/definitions/ReportConfigDataset"
+        }
+      },
+      "required": [
+        "type",
+        "timeframe"
+      ]
+    },
+    "ReportConfigRecurrencePeriod": {
+      "description": "The start and end date for recurrence schedule.",
+      "properties": {
+        "from": {
+          "description": "The start date of recurrence.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date of recurrence. If not provided, we default this to 10 years from the start date.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "ReportConfigDeliveryDestination": {
+      "description": "The destination information for the delivery of the report.",
+      "properties": {
+        "resourceId": {
+          "description": "The resource id of the storage account where reports will be delivered.",
+          "type": "string"
+        },
+        "container": {
+          "description": "The name of the container where reports will be uploaded.",
+          "type": "string"
+        },
+        "rootFolderPath": {
+          "description": "The name of the directory where reports will be uploaded.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceId",
+        "container"
+      ]
+    },
+    "ReportConfigTimePeriod": {
+      "description": "The start and end date for pulling data for the report.",
+      "properties": {
+        "from": {
+          "description": "The start date to pull data from.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date to pull data to.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "ReportConfigDataset": {
+      "description": "The definition of data present in the report.",
+      "properties": {
+        "granularity": {
+          "description": "The granularity of rows in the report.",
+          "type": "string",
+          "enum": [
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "GranularityType",
+            "modelAsString": true
+          }
+        },
+        "configuration": {
+          "description": "Has configuration information for the data in the report. The configuration will be ignored if aggregation and grouping are provided.",
+          "$ref": "#/definitions/ReportConfigDatasetConfiguration"
+        },
+        "aggregation": {
+          "type": "object",
+          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have upto 2 aggregation clauses.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/ReportConfigAggregation"
+          },
+          "maxItems": 2
+        },
+        "grouping": {
+          "description": "Array of group by expression to use in the report. Report can have upto 2 group by clauses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigGrouping"
+          },
+          "maxItems": 2
+        },
+        "filter": {
+          "type": "object",
+          "description": "Has filter expression to use in the report.",
+          "$ref": "#/definitions/ReportConfigFilter"
+        }
+      }
+    },
+    "ReportConfigDatasetConfiguration": {
+      "description": "The configuration of dataset in the report.",
+      "properties": {
+        "columns": {
+          "description": "Array of column names to be included in the report. Any valid report column name is allowed. If not provided, then report includes all columns.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReportConfigAggregation": {
+      "description": "The aggregation expression to be used in the report.",
+      "properties":{
+        "name": {
+          "description": "The name of the column to aggregate.",
+          "type": "string"
+        },
+        "function": {
+          "description": "The name of the aggregation function to use.",
+          "type": "string",
+          "enum": [
+            "Sum"
+          ],
+          "x-ms-enum": {
+            "name": "FunctionType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "function"
+      ]
+    },
+    "ReportConfigGrouping": {
+      "description": "The group by expression to be used in the report.",
+      "properties":{
+        "columnType": {
+          "description": "Has type of the column to group.",
+          "$ref": "#/definitions/ReportConfigColumnType"
+        },
+        "name": {
+          "description": "The name of the column to group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "columnType",
+        "name"
+      ]
+    },
+    "ReportConfigFilter": {
+      "description": "The filter expression to be used in the report.",
+      "properties": { 
+        "and": {
+          "description": "The logical \"AND\" expression. Must have atleast 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigFilter"
+          },
+          "minItems": 2
+        },
+        "or": {
+          "description": "The logical \"OR\" expression. Must have atleast 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigFilter"
+          },
+          "minItems": 2
+        },
+        "not": {
+          "description": "The logical \"NOT\" expression.",
+          "$ref": "#/definitions/ReportConfigFilter"
+        },
+        "dimension": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/ReportConfigComparisonExpression"
+        },
+        "tag": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/ReportConfigComparisonExpression"
+        }
+      }
+    },
+    "ReportConfigColumnType": {
+      "description": "The type of the column in the report.",
+      "type": "string",
+      "enum": [
+        "Tag",
+        "Dimension"
+      ],
+      "x-ms-enum": {
+        "name": "ReportConfigColumnType",
+        "modelAsString": true
+      }
+    },
+    "ReportConfigComparisonExpression": {
+      "description": "The comparison expression to be used in the report.",
+      "properties":{
+        "name": {
+          "description": "The name of the column to use in comaprison.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The operator to use for comparison.",
+          "type": "string",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+          "name": "OperatorType",
+          "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Array of values to use for comparison",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
+    "DimensionsListResult": {
+      "description": "Result of listing dimensions. It contains a list of available dimensions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of dimensions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DimensionProperties",
+          "title": "Dimension properties"
+        }
+      }
+    },
+    "DimensionProperties": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "category": {
+          "type": "string"
+        },
+        "usageStart": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "usageEnd": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "UsageAnalysisResult": {
+      "description": "Result of listing usages. It contains all columns listed under groupings and aggregation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of usage data.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/UsageAnalysis"
+          }
+        }
+      }
+    },
+    "UsageAnalysis": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UsageAnalysisProperties",
+          "title": "Usage analysis properties"
+        }
+      }
+    },
+    "UsageAnalysisProperties": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string"
+        },
+        "columns": {
+          "description": "Array of columns",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageAnalysisColumn"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      }
+    },
+    "UsageAnalysisColumn":{
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2018-05-31."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Azure Resource Group Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingPeriodNameParameter": {
+      "name": "billingPeriodName",
+      "in": "path",
+      "description": "Billing Period Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+	 "departmentIdParameter": {
+      "name": "departmentId",
+      "in": "path",
+      "description": "Department ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+	 "enrollmentAccountIdParameter": {
+      "name": "enrollmentAccountId",
+      "in": "path",
+      "description": "EnrollmentAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reportConfigNameParameter": {
+      "name": "reportConfigName",
+      "in": "path",
+      "description": "Report Config Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
