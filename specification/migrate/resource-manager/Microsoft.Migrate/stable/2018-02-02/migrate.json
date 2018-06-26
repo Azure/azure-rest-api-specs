@@ -91,6 +91,13 @@
       "type": "string",
       "in": "header",
       "x-ms-parameter-location": "client"
+    },
+    "locationName": {
+      "name": "locationName",
+      "description": "Azure region in which the project is created.",
+      "type": "string",
+      "in": "path",
+      "required": true
     }
   },
   "securityDefinitions": {
@@ -1673,6 +1680,101 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/deleteSubscriptionNotification": {
+      "delete": {
+        "summary": "Delete all projects in the subscription.",
+        "description": "Delete all projects in the subscription. Deleting non-existent project is a no-operation.",
+        "operationId": "SubscriptionNotification_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Deleted the projects.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            }
+          },
+          "204": {
+            "description": "No content. No project with specified name was found."
+          },
+          "400": {
+            "description": "Bad request. (Invalid subscriptionId)."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionNotification_Delete": {
+            "$ref": "./examples/SubscriptionNotification_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/locations/{locationName}/assessmentOptions": {
+      "get": {
+        "summary": "Get the assessment options.",
+        "description": "Get the available options for the properties of an assessment.",
+        "operationId": "AssessmentOptions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/locationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns assessment options.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultList"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Get": {
+            "$ref": "./examples/AssessmentOptions_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects": {
       "get": {
         "summary": "Get all projects.",
