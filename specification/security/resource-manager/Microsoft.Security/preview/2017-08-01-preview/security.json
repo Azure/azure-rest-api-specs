@@ -727,6 +727,116 @@
                     }
                 }
             }
+        },
+        "/{resourceUri}/providers/Microsoft.Security/advancedThreatProtectionSettings/{settingName}": {
+          "get": {
+            "x-ms-examples": {
+              "Gets the Advanced Threat Protection settings for the specified resource.": {
+                "$ref": "./examples/AdvancedThreatProtection/GetAdvancedThreatProtectionSettings_example.json"
+              }
+            },
+            "tags": [ "AdvancedThreatProtection" ],
+            "description": "Gets the Advanced Threat Protection settings for the specified resource.",
+            "operationId": "AdvancedThreatProtection_Get",
+            "parameters": [
+              {
+                "$ref": "#/parameters/ApiVersion"
+              },
+              {
+                "$ref": "#/parameters/ResourceUri"
+              },
+              {
+                "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful request to get Advanced Threat Protection settings.",
+                "schema": {
+                  "$ref": "#/definitions/AdvancedThreatProtectionSettings"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "#/definitions/CloudError"
+                }
+              }
+            }
+          },
+          "put": {
+            "x-ms-examples": {
+              "Creates or updates the Advanced Threat Protection settings on a specified resource.": {
+                "$ref": "./examples/AdvancedThreatProtection/PutAdvancedThreatProtectionSettings_example.json"
+              }
+            },
+            "tags": [ "AdvancedThreatProtection" ],
+            "description": "Creates or updates the Advanced Threat Protection settings on a specified resource.",
+            "operationId": "AdvancedThreatProtection_Put",
+            "parameters": [
+              {
+                "$ref": "#/parameters/ApiVersion"
+              },
+              {
+                "$ref": "#/parameters/ResourceUri"
+              },
+              {
+                "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
+              },
+              {
+                "$ref": "#/parameters/AdvancedThreatProtectionSettings"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful request to put Advanced Threat Protection settings.",
+                "schema": {
+                  "$ref": "#/definitions/AdvancedThreatProtectionSettings"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "#/definitions/CloudError"
+                }
+              }
+            }
+          },
+          "delete": {
+            "x-ms-examples": {
+              "Deletes the Advanced Threat Protection settings on a specified resource.": {
+                "$ref": "./examples/AdvancedThreatProtection/DeleteAdvancedThreatProtectionSettings_example.json"
+              }
+            },
+            "tags": [ "AdvancedThreatProtection" ],
+            "description": "Deletes the Advanced Threat Protection settings on a specified resource.",
+            "operationId": "AdvancedThreatProtection_Delete",
+            "parameters": [
+              {
+                "$ref": "#/parameters/ApiVersion"
+              },
+              {
+                "$ref": "#/parameters/ResourceUri"
+              },
+              {
+                "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful request to remove Advanced Threat Protection setting."
+              },
+              "204": {
+                "description": "Successful request, Advanced Threat Protection does not exist."
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "#/definitions/CloudError"
+                }
+              }
+            }
+          }
         }
     },
     "definitions": {
@@ -1118,6 +1228,30 @@
                     "description": "The size (%) of the segment."
                 }
             }
+        },
+        "AdvancedThreatProtectionProperties": {
+          "properties": {
+            "isEnabled": {
+              "type": "boolean",
+              "description": "Indicates whether Advanced Threat Protection is enabled."
+            }
+          },
+          "description": "The Advanced Threat Protection settings."
+        },
+        "AdvancedThreatProtectionSettings": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Resource"
+            }
+          ],
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/AdvancedThreatProtectionProperties"
+            }
+          },
+          "description": "The Advanced Threat Protection resource."
         }
     },
     "parameters": {
@@ -1235,6 +1369,32 @@
             "type": "string",
             "description": "name of the Compliance",
             "x-ms-parameter-location": "method"
+        },
+        "ResourceUri": {
+          "name": "resourceUri",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The identifier of the resource.",
+          "x-ms-parameter-location": "method"
+        },
+        "AdvancedThreatProtectionSettingName": {
+          "name": "settingName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "Advanced Threat Protection setting name.",
+          "x-ms-parameter-location": "method"
+        },
+        "AdvancedThreatProtectionSettings": {
+          "name": "advancedThreatProtectionSettings",
+          "in": "body",
+          "required": true,
+          "description": "Advanced Threat Protection Settings",
+          "schema": {
+            "$ref": "#/definitions/AdvancedThreatProtectionSettings"
+          },
+          "x-ms-parameter-location": "method"
         }
     }
 }
