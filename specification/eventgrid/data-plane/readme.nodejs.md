@@ -12,5 +12,4 @@ nodejs:
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: false
-  generate-empty-classes: true
 ```

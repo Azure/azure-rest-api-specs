@@ -7,7 +7,6 @@ ruby:
   package-name: azure_event_grid
   package-version: "0.16.1"
   azure-arm: true
-  generate-empty-classes: true
 ```
 
 ### Ruby multi-api
