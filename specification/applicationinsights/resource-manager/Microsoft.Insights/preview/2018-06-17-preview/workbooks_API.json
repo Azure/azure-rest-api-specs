@@ -232,12 +232,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "workbookProperties",
+            "name": "WorkbookUpdateParameters",
             "description": "Properties that need to be specified to create a new workbook.",
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/WorkbookUpdateParameters"
             }
           }
         ],
@@ -273,13 +273,25 @@
         },
         "name": {
           "type": "string",
-          "description": "Azure resource name",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Azure resource name. This is GUID value. The display name should be assigned within properties field."
         },
         "type": {
           "type": "string",
           "readOnly": true,
           "description": "Azure resource type"
+        },
+        "kind": {
+          "type": "string",          
+          "description": "The kind of workbook. Choices are user and shared.",
+          "enum": [
+            "user",
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "SharedTypeKind",
+            "modelAsString": true
+          }
         },
         "location": {
           "type": "string",
@@ -290,12 +302,16 @@
           ]
         },
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "Resource tags"
         }
       },
+      "required": [
+        "location"
+      ],
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
@@ -319,82 +335,29 @@
         }
       ],
       "properties": {
-        "kind": {
-          "type": "string",          
-          "description": "The kind of workbook. Choices are user and shared.",
-          "enum": [
-            "user",
-            "shared"
-          ],
-          "x-ms-enum": {
-            "name": "SharedTypeKind",
-            "modelAsString": true
-          }
-        },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Metadata describing a web test for an Azure resource.",
+          "description": "Metadata describing a workbook for an Azure resource.",
           "$ref": "#/definitions/WorkbookProperties"
-        }
-      }
-    },
-    "LinkProperties": {
-      "description": "Contains a sourceId and workbook resource id to link two resources.",
-      "properties": {
-        "sourceId": {
-          "type": "string",
-          "description": "The source Azure resource id"
-        },
-        "targetId": {
-          "type": "string",
-          "description": "The workbook Azure resource id"
-        },
-        "category": {
-          "type": "string",
-          "description": "The category of workbook"
         }
       }
     },
     "WorkbookProperties": {
       "description": "Properties that contain a workbook.",
       "required": [
-        "name",
-        "kind",
+        "displayName",
         "category",
-        "workbookId",
         "serializedData",
         "userId"
       ],
       "properties": {
-        "name": {
+        "displayName": {
           "type": "string",
-          "description": "The user-defined name of the workbook."
+          "description": "The user-defined name (display name) of the workbook."
         },
         "serializedData": {
           "type": "string",
           "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
-        },
-        "version": {
-          "type": "string",
-          "description": "This instance's version of the data model. This can change as new features are added that can be marked workbook."
-        },
-        "workbookId": {
-          "type": "string",
-          "description": "Internally assigned unique id of the workbook definition."
-        },
-        "kind": {
-          "description": "Enum indicating if this workbook definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
-          "x-ms-client-name": "SharedTypeKind",
-          "default": "shared",
-          "type": "string",
-          "enum": [
-            "shared",
-            "user"
-          ],
-          "x-ms-enum": {
-            "name": "SharedTypeKind",
-            "modelAsString": true
-          }
         },
         "timeModified": {
           "type": "string",
@@ -404,6 +367,10 @@
         "category": {
           "type": "string",
           "description": "Workbook category, as defined by the user at creation time."
+        },
+        "version": {
+          "type": "string",
+          "description": "Workbook version"
         },
         "tags": {
           "type": "array",
@@ -415,10 +382,67 @@
         "userId": {
           "type": "string",
           "description": "Unique user id of the specific user that owns this workbook."
+        }
+      }
+    },
+    "WorkbookUpdateParameters": {
+      "properties": {
+        "kind": {
+            "type": "string",
+            "description": "The kind of workbook. Choices are user and shared.",
+            "enum": [
+                "user",
+                "shared"
+            ],
+            "x-ms-enum": {
+                "name": "SharedTypeKind",
+                "modelAsString": true
+            }
         },
-        "sourceResourceId": {
+        "tags": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "Resource tags"
+        },
+        "location": {
           "type": "string",
-          "description": "Optional resourceId for a source resource."
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "properties": {
+            "x-ms-client-flatten": true,
+            "description": "Metadata describing a workbook for an Azure resource.",
+            "$ref": "#/definitions/WorkbookPropertiesUpdateParameters"
+        }
+    },
+    "description": "The parameters that can be provided when updating workbook properties properties."
+  },
+  "WorkbookPropertiesUpdateParameters": {
+      "description": "Properties that contain a workbook for PATCH operation.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The user-defined name (display name) of the workbook."
+        },
+        "serializedData": {
+          "type": "string",
+          "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
+        },
+        "category": {
+          "type": "string",
+          "description": "Workbook category, as defined by the user at creation time."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of 0 or more tags that are associated with this workbook definition"
         }
       }
     },
