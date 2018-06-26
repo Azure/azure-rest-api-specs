@@ -1834,6 +1834,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/projects": {
+      "get": {
+        "summary": "Get all projects.",
+        "description": "Get all the projects in thh subscription.",
+        "operationId": "Projects_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProjectResultList"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/ProjectsInSubscription_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects": {
       "get": {
         "summary": "Get all projects.",
