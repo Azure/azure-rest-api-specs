@@ -156,6 +156,7 @@ azure-arm: true
 namespace: com.microsoft.azure.eventgrid
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
+generate-constructor: true
 output-folder: $(azure-libraries-for-java-folder)/azure-eventgrid
 ```
 
