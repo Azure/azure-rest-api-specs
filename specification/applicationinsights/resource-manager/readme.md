@@ -268,6 +268,14 @@ input-file:
 - Microsoft.Insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
 ```
 
+### Tag: package-2018-06-17-preview
+
+These settings apply only when `--tag=package-2018-06-17-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-17-preview'
+input-file:
+- Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
+```
 ---
 # Code Generation
 
@@ -391,4 +399,13 @@ input-file:
 
 override-info:
   title: ApplicationInsightsManagementClient
+```
+
+### Tag: schema-2018-06-17-preview
+
+These settings apply only when `--tag=schema-2018-06-17-preview` is specified on the command line.
+
+``` yaml $(tag) == 'schema-2018-06-17-preview'
+input-file:
+- Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
