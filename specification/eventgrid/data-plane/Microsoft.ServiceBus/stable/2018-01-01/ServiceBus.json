@@ -10,6 +10,11 @@
     "ServiceBusActiveMessagesAvailableWithNoListenersEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.ActiveMessagesAvailableWithNoListeners event.",
       "type": "object",
+      "allOf": [
+        {
+            "$ref": "../../../Microsoft.EventGrid/stable/2018-01-01/EventGrid.json#/definitions/EventGridEventData"
+        }
+      ],
       "properties": {
         "namespaceName": {
           "description": "The namespace name of the Microsoft.ServiceBus resource.",
@@ -40,6 +45,11 @@
     "ServiceBusDeadletterMessagesAvailableWithNoListenersEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.DeadletterMessagesAvailableWithNoListenersEvent event.",
       "type": "object",
+      "allOf": [
+        {
+            "$ref": "../../../Microsoft.EventGrid/stable/2018-01-01/EventGrid.json#/definitions/EventGridEventData"
+        }
+      ],
       "properties": {
         "namespaceName": {
           "description": "The namespace name of the Microsoft.ServiceBus resource.",

@@ -10,6 +10,11 @@
         "EventHubCaptureFileCreatedEventData": {
             "description": "Schema of the Data property of an EventGridEvent for an Microsoft.EventHub.CaptureFileCreated event.",
             "type": "object",
+            "allOf": [
+                {
+                    "$ref": "../../../Microsoft.EventGrid/stable/2018-01-01/EventGrid.json#/definitions/EventGridEventData"
+                }
+            ],
             "properties": {
                 "fileurl": {
                     "description": "The path to the capture file.",

@@ -86,6 +86,7 @@ csharp:
   sync-methods: None
   output-folder: $(csharp-sdks-folder)/EventGrid/DataPlane/Microsoft.Azure.EventGrid/Generated
   clear-output-folder: true
+  generate-empty-classes: true
 ```
 
 
@@ -105,6 +106,7 @@ python:
   package-name: azure-eventgrid
   package-version: 1.0.0
   clear-output-folder: true
+  generate-empty-classes: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
@@ -126,6 +128,7 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: eventgrid
   clear-output-folder: true
+  generate-empty-classes: true
 ```
 
 ### Go multi-api
@@ -156,6 +159,7 @@ namespace: com.microsoft.azure.eventgrid
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-eventgrid
+generate-empty-classes: true
 ```
 
 ### Java multi-api
