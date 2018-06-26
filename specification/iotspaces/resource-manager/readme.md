@@ -5,6 +5,28 @@
 This is the AutoRest configuration file for IoTSpaces Service.
 
 ---
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-10-preview
+```
+
+### Tag: package-2017-10-preview and java
+
+These settings apply only when `--tag=package-2017-10-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.iotspacesservice.v2017_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/iotspacesservice/resource-manager/v2017_10_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+
 ## Getting Started
 To build the SDK for IoTSpaces Service, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 

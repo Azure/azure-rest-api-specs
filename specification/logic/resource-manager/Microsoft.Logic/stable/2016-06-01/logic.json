@@ -58,7 +58,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: State, Trigger, and ReferencedResourceId.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -109,7 +109,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: State, Trigger, and ReferencedResourceId.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -423,6 +423,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/listCallbackUrl": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_ListCallbackUrl",
+        "description": "Get the workflow callback Url.",
+        "x-ms-examples": {
+          "Get callback url": {
+            "$ref": "./examples/WorkflowsListCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "listCallbackUrl",
+            "description": "Which callback url to list.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetCallbackUrlParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/listSwagger": {
       "post": {
         "tags": [
@@ -458,6 +511,59 @@
             "schema": {
               "$ref": "#/definitions/Object"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/move": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_Move",
+        "description": "Moves an existing workflow.",
+        "x-ms-examples": {
+          "Move a workflow": {
+            "$ref": "./examples/WorkflowsMove.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "move",
+            "description": "The workflow to move.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "No Content"
           }
         }
       }
@@ -499,6 +605,51 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/RegenerateActionParameter"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/validate": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_ValidateWorkflow",
+        "description": "Validates the workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "validate",
+            "description": "The workflow.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workflow"
             }
           },
           {
@@ -712,6 +863,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/reset": {
+      "post": {
+        "tags": [
+          "WorkflowTriggers"
+        ],
+        "operationId": "WorkflowTriggers_Reset",
+        "description": "Resets a workflow trigger.",
+        "x-ms-examples": {
+          "Reset trigger": {
+            "$ref": "./examples/WorkflowsTriggerReset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/run": {
       "post": {
         "tags": [
@@ -758,13 +957,121 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/schemas/json": {
+      "get": {
+        "tags": [
+          "WorkflowTriggers"
+        ],
+        "operationId": "WorkflowTriggers_GetSchemaJson",
+        "description": "Get the trigger schema as JSON.",
+        "x-ms-examples": {
+          "Get trigger schema": {
+            "$ref": "./examples/WorkflowsTriggerSchemaJson.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JsonSchema"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/setState": {
+      "post": {
+        "tags": [
+          "WorkflowTriggers"
+        ],
+        "operationId": "WorkflowTriggers_SetState",
+        "description": "Sets the state of a workflow trigger.",
+        "x-ms-examples": {
+          "Set trigger state": {
+            "$ref": "./examples/WorkflowsTriggerSetState.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "setState",
+            "description": "The workflow trigger state.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetTriggerStateActionDefinition"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/listCallbackUrl": {
       "post": {
         "tags": [
           "WorkflowTriggers"
         ],
         "operationId": "WorkflowTriggers_ListCallbackUrl",
-        "description": "Gets the callback URL for a workflow trigger.",
+        "description": "Get the callback URL for a workflow trigger.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -810,9 +1117,9 @@
           "WorkflowTriggers"
         ],
         "operationId": "WorkflowVersions_ListCallbackUrl",
-        "description": "Lists the callback URL for a trigger of a workflow version.",
+        "description": "Get the callback url for a trigger of a workflow version.",
         "x-ms-examples": {
-          "Get callback URL for a trigger of a workflow version": {
+          "Get the callback url for a trigger of a workflow version": {
             "$ref": "./examples/WorkflowVersionsListCallbackUrl.json"
           }
         },
@@ -916,7 +1223,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: Status, StartTime, and ClientTrackingId.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1082,7 +1389,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: Status, StartTime, and ClientTrackingId.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1236,7 +1543,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: Status.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1304,6 +1611,444 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/WorkflowRunAction"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/listExpressionTraces": {
+      "post": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActions_ListExpressionTraces",
+        "description": "Lists a workflow run expression trace.",
+        "x-ms-examples": {
+          "List expression traces": {
+            "$ref": "./examples/WorkflowRunActionsListExpressionTraces.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExpressionTraces"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "inputs"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRepetitions_List",
+        "description": "Get all of a workflow run action repetitions.",
+        "x-ms-examples": {
+          "List repetitions": {
+            "$ref": "./examples/WorkflowRunActionRepetitionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunActionRepetitionDefinitionCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRepetitions_Get",
+        "description": "Get a workflow run action repetition.",
+        "x-ms-examples": {
+          "Get a repetition": {
+            "$ref": "./examples/WorkflowRunActionRepetitionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "repetitionName",
+            "description": "The workflow repetition.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunActionRepetitionDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/listExpressionTraces": {
+      "post": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRepetitions_ListExpressionTraces",
+        "description": "Lists a workflow run expression trace.",
+        "x-ms-examples": {
+          "List expression traces": {
+            "$ref": "./examples/WorkflowRunActionsListExpressionTraces.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "repetitionName",
+            "description": "The workflow repetition.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExpressionTraces"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "inputs"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionScopedRepetitions_List",
+        "description": "List the workflow run action scoped repetitions.",
+        "x-ms-examples": {
+          "List the scoped repetitions": {
+            "$ref": "./examples/WorkflowRunActionScopeRepetitionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunActionRepetitionDefinitionCollection"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions/{repetitionName}": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionScopedRepetitions_Get",
+        "description": "Get a workflow run action scoped repetition.",
+        "x-ms-examples": {
+          "Get a scoped repetition": {
+            "$ref": "./examples/WorkflowRunActionScopeRepetitionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "repetitionName",
+            "description": "The workflow repetition.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunActionRepetitionDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "WorkflowRunOperations"
+        ],
+        "operationId": "WorkflowRunOperations_Get",
+        "description": "Gets an operation for a run.",
+        "x-ms-examples": {
+          "Get a run operation": {
+            "$ref": "./examples/WorkflowRunOperationsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "description": "The workflow operation id.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRun"
             }
           }
         }
@@ -1410,7 +2155,7 @@
         "operationId": "IntegrationAccounts_ListByResourceGroup",
         "description": "Gets a list of integration accounts by resource group.",
         "x-ms-examples": {
-          "List IntegrationAccounts by resourcegroup name": {
+          "List IntegrationAccounts by resource group name": {
             "$ref": "./examples/IntegrationAccountsListByResourceGroup.json"
           }
         },
@@ -1644,6 +2389,479 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/assemblies": {
+      "get": {
+        "tags": [
+          "IntegrationAccountAssemblies"
+        ],
+        "operationId": "IntegrationAccountAssemblies_List",
+        "description": "List the assemblies for an integration account.",
+        "x-ms-examples": {
+          "List integration account assemblies.": {
+            "$ref": "./examples/IntegrationAccountsAssembliesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssemblyCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/assemblies/{assemblyArtifactName}": {
+      "get": {
+        "tags": [
+          "IntegrationAccountAssemblies"
+        ],
+        "operationId": "IntegrationAccountAssemblies_Get",
+        "description": "Get an assembly for an integration account.",
+        "x-ms-examples": {
+          "Get an integration account assembly.": {
+            "$ref": "./examples/IntegrationAccountsAssembliesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assemblyArtifactName",
+            "description": "The assembly artifact name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssemblyDefinition"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationAccountAssemblies"
+        ],
+        "operationId": "IntegrationAccountAssemblies_CreateOrUpdate",
+        "description": "Create or update an assembly for an integration account.",
+        "x-ms-examples": {
+          "Create or update an account assembly.": {
+            "$ref": "./examples/IntegrationAccountsAssembliesCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assemblyArtifactName",
+            "description": "The assembly artifact name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assemblyArtifact",
+            "description": "The assembly artifact.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssemblyDefinition"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssemblyDefinition"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AssemblyDefinition"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationAccountAssemblies"
+        ],
+        "operationId": "IntegrationAccountAssemblies_Delete",
+        "description": "Delete an assembly for an integration account.",
+        "x-ms-examples": {
+          "Delete an integration account assembly.": {
+            "$ref": "./examples/IntegrationAccountsAssembliesDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assemblyArtifactName",
+            "description": "The assembly artifact name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/assemblies/{assemblyArtifactName}/listContentCallbackUrl": {
+      "post": {
+        "tags": [
+          "IntegrationAccountAssemblies"
+        ],
+        "operationId": "IntegrationAccountAssemblies_ListContentCallbackUrl",
+        "description": "Get the content callback url for an integration account assembly.",
+        "x-ms-examples": {
+          "Get the callback url for an integration account assembly.": {
+            "$ref": "./examples/IntegrationAccountsAssembliesListContentCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assemblyArtifactName",
+            "description": "The assembly artifact name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/batchConfigurations": {
+      "get": {
+        "tags": [
+          "IntegrationAccountBatchConfigurations"
+        ],
+        "operationId": "IntegrationAccountBatchConfigurations_List",
+        "description": "List the batch configurations for an integration account.",
+        "x-ms-examples": {
+          "List batch configurations.": {
+            "$ref": "./examples/IntegrationAccountBatchConfigurationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BatchConfigurationCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/batchConfigurations/{batchConfigurationName}": {
+      "get": {
+        "tags": [
+          "IntegrationAccountBatchConfigurations"
+        ],
+        "operationId": "IntegrationAccountBatchConfigurations_Get",
+        "description": "Get a batch configuration for an integration account.",
+        "x-ms-examples": {
+          "Get a batch configuration.": {
+            "$ref": "./examples/IntegrationAccountBatchConfigurationsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "batchConfigurationName",
+            "description": "The batch configuration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BatchConfiguration"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationAccountBatchConfigurations"
+        ],
+        "operationId": "IntegrationAccountBatchConfigurations_CreateOrUpdate",
+        "description": "Create or update a batch configuration for an integration account.",
+        "x-ms-examples": {
+          "Create or update a batch configuration.": {
+            "$ref": "./examples/IntegrationAccountBatchConfigurationsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "batchConfigurationName",
+            "description": "The batch configuration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "batchConfiguration",
+            "description": "The batch configuration.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchConfiguration"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BatchConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BatchConfiguration"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationAccountBatchConfigurations"
+        ],
+        "operationId": "IntegrationAccountBatchConfigurations_Delete",
+        "description": "Delete a batch configuration for an integration account.",
+        "x-ms-examples": {
+          "Delete a batch configuration.": {
+            "$ref": "./examples/IntegrationAccountBatchConfigurationsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "batchConfigurationName",
+            "description": "The batch configuration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/listCallbackUrl": {
       "post": {
         "tags": [
@@ -1697,6 +2915,165 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/listKeyVaultKeys": {
+      "post": {
+        "tags": [
+          "IntegrationAccounts"
+        ],
+        "operationId": "IntegrationAccounts_ListKeyVaultKeys",
+        "description": "Gets the integration account's Key Vault keys.",
+        "x-ms-examples": {
+          "Get Integration Account callback URL": {
+            "$ref": "./examples/IntegrationAccountsListKeyVaultKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "listKeyVaultKeys",
+            "description": "The key vault parameters.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListKeyVaultKeysDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultKeyCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/logTrackingEvents": {
+      "post": {
+        "tags": [
+          "IntegrationAccounts"
+        ],
+        "operationId": "IntegrationAccounts_LogTrackingEvents",
+        "description": "Logs the integration account's tracking events.",
+        "x-ms-examples": {
+          "Log a tracked event": {
+            "$ref": "./examples/IntegrationAccountsLogTrackingEvent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "logTrackingEvents",
+            "description": "The callback URL parameters.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrackingEventsDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/regenerateAccessKey": {
+      "post": {
+        "tags": [
+          "IntegrationAccounts"
+        ],
+        "operationId": "IntegrationAccounts_RegenerateAccessKey",
+        "description": "Regenerates the integration account access key.",
+        "x-ms-examples": {
+          "Regenerate access key": {
+            "$ref": "./examples/IntegrationAccountsRegenerateAccessKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "regenerateAccessKey",
+            "description": "The access key type.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateActionParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccount"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/schemas": {
       "get": {
         "tags": [
@@ -1740,7 +3117,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: SchemaType.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1924,6 +3301,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/schemas/{schemaName}/listContentCallbackUrl": {
+      "post": {
+        "tags": [
+          "IntegrationAccountSchemas"
+        ],
+        "operationId": "Schemas_ListContentCallbackUrl",
+        "description": "Get the content callback url.",
+        "x-ms-examples": {
+          "Get the content callback url": {
+            "$ref": "./examples/SchemasListContentCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "schemaName",
+            "description": "The integration account schema name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "listContentCallbackUrl",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetCallbackUrlParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/maps": {
       "get": {
         "tags": [
@@ -1967,7 +3403,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: MapType.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2151,6 +3587,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/maps/{mapName}/listContentCallbackUrl": {
+      "post": {
+        "tags": [
+          "IntegrationAccountMaps"
+        ],
+        "operationId": "Maps_ListContentCallbackUrl",
+        "description": "Get the content callback url.",
+        "x-ms-examples": {
+          "Get the content callback url": {
+            "$ref": "./examples/MapsListContentCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mapName",
+            "description": "The integration account map name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "listContentCallbackUrl",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetCallbackUrlParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/partners": {
       "get": {
         "tags": [
@@ -2159,7 +3654,7 @@
         "operationId": "Partners_ListByIntegrationAccounts",
         "description": "Gets a list of integration account partners.",
         "x-ms-examples": {
-          "Get partners by integrationaccount name": {
+          "Get partners by integration account name": {
             "$ref": "./examples/PartnersListByIntegrationAccounts.json"
           }
         },
@@ -2194,7 +3689,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: PartnerType.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2378,6 +3873,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/partners/{partnerName}/listContentCallbackUrl": {
+      "post": {
+        "tags": [
+          "IntegrationAccountPartners"
+        ],
+        "operationId": "Partners_ListContentCallbackUrl",
+        "description": "Get the content callback url.",
+        "x-ms-examples": {
+          "Get the content callback url": {
+            "$ref": "./examples/PartnersListContentCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerName",
+            "description": "The integration account partner name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "listContentCallbackUrl",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetCallbackUrlParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/agreements": {
       "get": {
         "tags": [
@@ -2386,7 +3940,7 @@
         "operationId": "Agreements_ListByIntegrationAccounts",
         "description": "Gets a list of integration account agreements.",
         "x-ms-examples": {
-          "Get agreements by integrationaccount name": {
+          "Get agreements by integration account name": {
             "$ref": "./examples/AgreementsListByIntegrationAccounts.json"
           }
         },
@@ -2421,7 +3975,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: AgreementType.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2601,6 +4155,65 @@
           },
           "204": {
             "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/agreements/{agreementName}/listContentCallbackUrl": {
+      "post": {
+        "tags": [
+          "IntegrationAccountAgreements"
+        ],
+        "operationId": "Agreements_ListContentCallbackUrl",
+        "description": "Get the content callback url.",
+        "x-ms-examples": {
+          "Get the content callback url": {
+            "$ref": "./examples/AgreementsListContentCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agreementName",
+            "description": "The integration account agreement name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "listContentCallbackUrl",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetCallbackUrlParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
           }
         }
       }
@@ -2867,7 +4480,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: ChangedTime.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -3522,6 +5135,10 @@
         "sig": {
           "type": "string",
           "description": "The SAS signature."
+        },
+        "se": {
+          "type":"string",
+          "description": "The SAS timestamp."
         }
       },
       "description": "Gets the workflow trigger callback URL query parameters."
@@ -3670,6 +5287,12 @@
     "WorkflowRunProperties": {
       "type": "object",
       "properties": {
+        "waitEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the wait end time."
+        },
         "startTime": {
           "type": "string",
           "format": "date-time",
@@ -4194,7 +5817,7 @@
           "description": "The occurrence."
         }
       },
-      "description": "The recurrence schedule occurence."
+      "description": "The recurrence schedule occurrence."
     },
     "WorkflowTriggerRecurrence": {
       "type": "object",
@@ -4210,12 +5833,10 @@
         },
         "startTime": {
           "type": "string",
-          "format": "date-time",
           "description": "The start time."
         },
         "endTime": {
           "type": "string",
-          "format": "date-time",
           "description": "The end time."
         },
         "timeZone": {
@@ -4256,6 +5877,12 @@
           "$ref": "#/definitions/ContentLink",
           "readOnly": true,
           "description": "Gets the link to outputs."
+        },
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the scheduled time."
         },
         "startTime": {
           "type": "string",
@@ -5012,7 +6639,7 @@
           "description": "The AS2 protocol settings."
         }
       },
-      "description": "The integration account AS2 oneway agreement."
+      "description": "The integration account AS2 one-way agreement."
     },
     "AS2ProtocolSettings": {
       "type": "object",
@@ -5083,7 +6710,7 @@
           "description": "The value indicating whether to unfold the HTTP headers."
         }
       },
-      "description": "The AS2 agreement acknowledegment connection settings."
+      "description": "The AS2 agreement acknowledgement connection settings."
     },
     "AS2MessageConnectionSettings": {
       "type": "object",
@@ -5366,7 +6993,7 @@
           "description": "The X12 protocol settings."
         }
       },
-      "description": "The X12 oneway agreement."
+      "description": "The X12 one-way agreement."
     },
     "X12ProtocolSettings": {
       "type": "object",
@@ -6781,7 +8408,7 @@
           "description": "The application password."
         }
       },
-      "description": "The Edifact enevlope override settings."
+      "description": "The Edifact envelope override settings."
     },
     "EdifactMessageIdentifier": {
       "type": "object",
@@ -6901,7 +8528,7 @@
         },
         "messageRelease": {
           "type": "string",
-          "description": "The message releaseversion."
+          "description": "The message release."
         },
         "dataElementSeparator": {
           "type": "integer",
@@ -7204,7 +8831,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates Logic service is not able to process the incoming request. The error property contains the error details.",
+      "description": "Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.",
       "type": "object",
       "properties": {
         "error": {
@@ -7224,6 +8851,709 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "ListKeyVaultKeysDefinition": {
+      "type": "object",
+      "description": "The list key vault keys definition.",
+      "additionalProperties": false,
+      "required": [
+        "keyVault"
+      ],
+      "properties": {
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "The key vault reference."
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "The skip token."
+        }
+      }
+    },
+    "KeyVaultReference": {
+      "type": "object",
+      "description": "The key vault reference.",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The key vault name."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ]
+    },
+    "KeyVaultKeyCollection": {
+      "type": "object",
+      "description": "Collection of key vault keys.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyVaultKey"
+          },
+          "description": "The key vault keys."
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "The skip token."
+        }
+      }
+    },
+    "KeyVaultKey": {
+      "type": "object",
+      "description": "The key vault key.",
+      "properties": {
+        "kid": {
+          "type": "string",
+          "description": "The key id."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "The key attributes.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether the key is enabled or not."
+            },
+            "created": {
+              "type": "integer",
+              "format": "int64",
+              "description": "When the key was created."
+            },
+            "updated": {
+              "type": "integer",
+              "format": "int64",
+              "description": "When the key was updated."
+            }
+          }
+        }
+      }
+    },
+    "TrackingEventsDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceType",
+        "events"
+      ],
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "trackEventsOptions": {
+          "$ref": "#/definitions/TrackEventsOperationOptions"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrackingEvent"
+          }
+        }
+      }
+    },
+    "TrackEventsOperationOptions": {
+      "type": "string",
+      "enum": [
+        "None",
+        "DisableSourceInfoEnrich"
+      ],
+      "x-ms-enum": {
+        "name": "TrackEventsOperationOptions",
+        "modelAsString": false
+      },
+      "description": "The track events operation options."
+    },
+    "TrackingEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventLevel",
+        "eventTime",
+        "recordType"
+      ],
+      "properties": {
+        "eventLevel": {
+          "$ref": "#/definitions/EventLevel"
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "recordType": {
+          "$ref": "#/definitions/TrackingRecordType"
+        },
+        "error": {
+          "$ref": "#/definitions/TrackingEventErrorInfo"
+        }
+      }
+    },
+    "EventLevel": {
+      "type": "string",
+      "enum": [
+        "LogAlways",
+        "Critical",
+        "Error",
+        "Warning",
+        "Informational",
+        "Verbose"
+      ],
+      "x-ms-enum": {
+        "name": "EventLevel",
+        "modelAsString": false
+      },
+      "description": "The event level."
+    },
+    "TrackingRecordType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Custom",
+        "AS2Message",
+        "AS2MDN",
+        "X12Interchange",
+        "X12FunctionalGroup",
+        "X12TransactionSet",
+        "X12InterchangeAcknowledgment",
+        "X12FunctionalGroupAcknowledgment",
+        "X12TransactionSetAcknowledgment",
+        "EdifactInterchange",
+        "EdifactFunctionalGroup",
+        "EdifactTransactionSet",
+        "EdifactInterchangeAcknowledgment",
+        "EdifactFunctionalGroupAcknowledgment",
+        "EdifactTransactionSetAcknowledgment"
+      ],
+      "x-ms-enum": {
+        "name": "TrackingRecordType",
+        "modelAsString": false
+      },
+      "description": "The tracking record type."
+    },
+    "TrackingEventErrorInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "AccessKeyRegenerateActionDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "keyType"
+      ],
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/AccessKeyType"
+        }
+      }
+    },
+    "AccessKeyType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "AccessKeyType",
+        "modelAsString": false
+      },
+      "description": "The access key type."
+    },
+    "SetTriggerStateActionDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/WorkflowTrigger"
+        }
+      }
+    },
+    "ExpressionTraces": {
+      "type": "object",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressionRoot"
+          }
+        }
+      }
+    },
+    "ExpressionRoot": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path."
+        }
+      },
+      "allOf": [ 
+        {
+          "$ref": "#/definitions/Expression"
+        }
+      ]
+    },
+    "Expression": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "value": {},
+        "subexpressions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Expression"
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/AzureResourceErrorInfo"
+        }
+      }
+    },
+    "AzureResourceErrorInfo": {
+      "type": "object",
+      "description": "The azure resource error info.",
+      "additionalProperties": false,
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureResourceErrorInfo"
+          },
+          "description": "The error details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ErrorInfo"
+        }
+      ]
+    },
+    "ErrorInfo": {
+      "type": "object",
+      "description": "The error info.",
+      "additionalProperties": false,
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        }
+      }
+    },
+    "WorkflowRunActionRepetitionDefinitionCollection": {
+      "type": "object",
+      "description": "A collection of workflow run action repetitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowRunActionRepetitionDefinition"
+          }
+        }
+      }
+    },
+    "WorkflowRunActionRepetitionDefinition": {
+      "type": "object",
+      "description": "The workflow run action repetition definition.",
+      "additionalProperties": false,
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkflowRunActionRepetitionProperties",
+          "description": "The workflow run action repetition properties definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "WorkflowRunActionRepetitionProperties": {
+      "type": "object",
+      "description": "The workflow run action repetition properties definition.",
+      "additionalProperties": false,
+      "properties": {
+        "repetitionIndexes": {
+          "type": "array",
+          "description": "The repetition indexes.",
+          "items": {
+            "$ref": "#/definitions/RepetitionIndex"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResult"
+        }
+      ]
+    },
+    "RepetitionIndex": {
+      "type": "object",
+      "description": "The workflow run action repetition index.",
+      "additionalProperties": false,
+      "required": [
+        "itemIndex"
+      ],
+      "properties": {
+        "scopeName": {
+          "type": "string",
+          "description": "The scope."
+        },
+        "itemIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index."
+        }
+      }
+    },
+    "OperationResult": {
+      "type": "object",
+      "description": "The operation result definition.",
+      "additionalProperties": false,
+      "properties": {
+        "trackingId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the tracking id."
+        },
+        "inputs": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the inputs."
+        },
+        "inputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to inputs."
+        },
+        "outputs": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the outputs."
+        },
+        "outputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to outputs."
+        },
+        "trackedProperties": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the tracked properties."
+        },
+        "retryHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RetryHistory"
+          },
+          "description": "Gets the retry histories."
+        },
+        "iterationCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResultProperties"
+        }
+      ]
+    },
+    "OperationResultProperties": {
+      "type": "object",
+      "x-abstract": true,
+      "description": "The run operation result properties.",
+      "additionalProperties": false,
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the workflow scope repetition."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the workflow scope repetition."
+        },
+        "correlation": {
+          "$ref": "#/definitions/RunActionCorrelation",
+          "description": "The correlation properties."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "The status of the workflow scope repetition."
+        },
+        "code": {
+          "type": "string",
+          "description": "The workflow scope repetition code."
+        },
+        "error": {}
+      }
+    },
+    "RunActionCorrelation": {
+      "type": "object",
+      "description": "The workflow run action correlation properties.",
+      "additionalProperties": false,
+      "properties": {
+        "actionTrackingId": {
+          "type": "string",
+          "description": "The action tracking identifier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunCorrelation"
+        }
+      ]
+    },
+    "RunCorrelation": {
+      "type": "object",
+      "description": "The correlation properties.",
+      "additionalProperties": false,
+      "properties": {
+        "clientTrackingId": {
+          "type": "string",
+          "description": "The client tracking identifier."
+        },
+        "clientKeywords": {
+          "type": "array",
+          "description": "The client keywords.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "JsonSchema": {
+      "type": "object",
+      "description": "The JSON schema.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The JSON title."
+        },
+        "content": {
+          "type": "string",
+          "description": "The JSON content."
+        }
+      }
+    },
+    "AssemblyCollection": {
+      "type": "object",
+      "description": "A collection of assembly definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssemblyDefinition"
+          }
+        }
+      }
+    },
+    "AssemblyDefinition": {
+      "type": "object",
+      "description": "The assembly definition.",
+      "additionalProperties": false,
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssemblyProperties",
+          "description": "The assembly properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "AssemblyProperties": {
+      "type": "object",
+      "description": "The assembly properties definition.",
+      "additionalProperties": false,
+      "required": [
+        "assemblyName"
+      ],
+      "properties": {
+        "assemblyName": {
+          "type": "string",
+          "description": "The assembly name."
+        },
+        "assemblyVersion": {
+          "type": "string",
+          "description": "The assembly version."
+        },
+        "assemblyCulture": {
+          "type": "string",
+          "description": "The assembly culture."
+        },
+        "assemblyPublicKeyToken": {
+          "type": "string",
+          "description": "The assembly public key token."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactContentPropertiesDefinition"
+        }
+      ]
+    },
+    "ArtifactContentPropertiesDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The artifact content properties definition.",
+      "properties": {
+        "content": {},
+        "contentType": {
+          "type": "string",
+          "description": "The content type."
+        },
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "The content link."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactProperties"
+        }
+      ]
+    },
+    "ArtifactProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The artifact properties definition.",
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The artifact creation time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The artifact changed time."
+        },
+        "metadata": {}
+      }
+    },
+    "BatchConfigurationCollection": {
+      "type": "object",
+      "description": "A collection of batch configurations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchConfiguration"
+          }
+        }
+      }
+    },
+    "BatchConfiguration": {
+      "type": "object",
+      "description": "The batch configuration resource definition.",
+      "additionalProperties": false,
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BatchConfigurationProperties",
+          "description": "The batch configuration properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "BatchConfigurationProperties": {
+      "type": "object",
+      "description": "The batch configuration properties definition.",
+      "additionalProperties": false,
+      "required": [
+        "batchGroupName",
+        "releaseCriteria"
+      ],
+      "properties": {
+        "batchGroupName": {
+          "type": "string",
+          "description": "The name of the batch group."
+        },
+        "releaseCriteria": {
+          "$ref": "#/definitions/BatchReleaseCriteria",
+          "description": "The batch release criteria."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The changed time."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactProperties"
+        }
+      ]
+    },
+    "BatchReleaseCriteria": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The batch release criteria.",
+      "properties": {
+        "messageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The message count."
+        },
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The batch size in bytes."
+        },
+        "recurrence": {
+          "$ref": "#/definitions/WorkflowTriggerRecurrence",
+          "description": "The recurrence."
         }
       }
     }

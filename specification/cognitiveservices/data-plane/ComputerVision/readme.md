@@ -4,21 +4,21 @@
 
 Configuration for generating Computer Vision SDK.
 
-The current release is `release_1_0`.
+The current release is `release_2_0`.
 
 ``` yaml
 
-tag: release_1_0
+tag: release_2_0
 add-credentials: true
 openapi-type: data-plane
 ```
 # Releases
 
-### Release 1.0
-These settings apply only when `--tag=release_1_0` is specified on the command line.
+### Release 2.0
+These settings apply only when `--tag=release_2_0` is specified on the command line.
 
-``` yaml $(tag) == 'release_1_0'
-input-file: stable/v1.0/ComputerVision.json
+``` yaml $(tag) == 'release_2_0'
+input-file: stable/v2.0/ComputerVision.json
 ```
 
 ## Swagger to SDK
@@ -29,9 +29,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_computervision']
 ```
 
 
@@ -45,6 +48,13 @@ csharp:
   namespace: Microsoft.Azure.CognitiveServices.Vision.ComputerVision
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/ComputerVision/ComputerVision/Generated
   clear-output-folder: true
+
+directive:
+  from: source-file-csharp
+  where: $
+  transform: >
+    $ = $.replace( /TextRecognitionMode mode, string url,/g, "string url, TextRecognitionMode mode," );
+    $ = $.replace( /mode, url,/g, "url, mode," );
 ```
 
 ## Python
@@ -62,6 +72,12 @@ python:
   namespace: azure.cognitiveservices.vision.computervision
   package-name: azure-cognitiveservices-vision-computervision
   clear-output-folder: true
+
+directive:
+  from: source-file-python
+  where: $
+  transform: >
+    $ = $.replace( /self, mode, url,/g, "self, url, mode," );
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
@@ -89,16 +105,16 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: release_1_0
+  - tag: release_2_0
 ```
 
-### Tag: release_1_0 and go
+### Tag: release_2_0 and go
 
-These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
+These settings apply only when `--tag=release_2_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'release_1_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/computervision
+``` yaml $(tag) == 'release_2_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/computervision
 ```
 
 
@@ -110,9 +126,17 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.cognitiveservices.computervision
+  namespace: com.microsoft.azure.cognitiveservices.vision.computervision
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/computervision
+  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/vision/computervision
+  with-optional-parameters: true
+  with-single-async-method: true
+
+directive:
+  from: source-file-java
+  where: $
+  transform: >
+    $ = $.replace( /TextRecognitionMode mode, String url/g, "String url, TextRecognitionMode mode" );
+    $ = $.replace( /recognizeTextWithServiceResponseAsync\(mode, url\)/g, "recognizeTextWithServiceResponseAsync(url, mode)" )
 ```

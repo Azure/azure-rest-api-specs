@@ -61,7 +61,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-node
 ```
@@ -94,7 +94,7 @@ These settings apply only when `--tag=package-2015-03-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/hdinsight/mgmt/2015-03-01-preview/hdinsight
+output-folder: $(go-sdk-folder)/services/preview/hdinsight/mgmt/2015-03-01-preview/hdinsight
 ```
 
 ## C#
@@ -117,11 +117,32 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.hdinsight
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsight
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.hdinsight
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsight
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-03-preview
+```
+
+### Tag: package-2015-03-preview and java
+
+These settings apply only when `--tag=package-2015-03-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-03-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.hdinsight.v2015_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/hdinsight/resource-manager/v2015_03_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+

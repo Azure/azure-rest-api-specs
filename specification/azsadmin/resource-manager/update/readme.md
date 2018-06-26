@@ -33,6 +33,7 @@ These settings apply only when `--tag=package-2016-05-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2016-05-01'
 input-file:
+    - "Microsoft.Update.Admin/preview/2016-05-01/Update.json"
     - "Microsoft.Update.Admin/preview/2016-05-01/Updates.json"
     - "Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json"
     - "Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json"
@@ -52,6 +53,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.AzureStack.Management.Update.Admin
   payload-flattening-threshold: 1
-  output-folder: Generated
+  output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
 ```

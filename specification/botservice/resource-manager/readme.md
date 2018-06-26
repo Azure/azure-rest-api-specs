@@ -7,6 +7,28 @@ This is the AutoRest configuration file for BotService.
 
 
 ---
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-12-01
+```
+
+### Tag: package-2017-12-01 and java
+
+These settings apply only when `--tag=package-2017-12-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-12-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.botservice.v2017_12_01
+  output-folder: $(azure-libraries-for-java-folder)/botservice/resource-manager/v2017_12_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
 ## Getting Started 
 To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
@@ -35,9 +57,21 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
-- Microsoft.BotService/stable/2017-12-01/botservice.json
+- Microsoft.BotService/preview/2017-12-01/botservice.json
+directive:
+  - suppress: R3010
+    from: botservice.json
+    reason: It is not a useful operation in the bot service.
+  - suppress: R2001
+    from: botservice.json
+    reason: Flatten does not improve the programming experience here.
+  - suppress: R3018
+    from: botservice.json
+    reason: We used Enums where we might extend to multiple states, and left booleans where it would ease development.
+  - suppress: R2066
+    from: botservice.json
+    reason: The path as-is is quite descriptive.
 ```
-
 ---
 # Code Generation
 
@@ -51,7 +85,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
 ```
-
 
 ## C# 
 
@@ -82,11 +115,18 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-12-01
+```
+
 ### Tag: package-2017-12-01 and go
 
 These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-' && $(go)
-output-folder: $(go-sdk-folder)/services/botservice/mgmt/2017-12-01/botservices
+``` yaml $(tag) == 'package-2017-12-01' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/botservice/mgmt/2017-12-01/botservices
 ```

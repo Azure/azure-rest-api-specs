@@ -48,26 +48,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.AzureStack.Management.KeyVault.Admin
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/KeyVault/KeyVault.Admin/Generated
+  output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-```
-
-### Tag: package-2017-02-01-preview and python
-
-These settings apply only when `--tag=package-2017-02-01-preview --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-02-01-preview' && $(python)
-namespace: azure.mgmt.KeyVault.admin.v2015_06_01_preview
 ```

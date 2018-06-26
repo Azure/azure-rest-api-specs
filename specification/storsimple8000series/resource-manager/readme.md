@@ -56,6 +56,9 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_stor_simple8000_series']
 ```
 
 
@@ -108,11 +111,32 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.storsimple8000series
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storsimple8000series
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.storsimple8000series
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storsimple8000series
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-06
+```
+
+### Tag: package-2017-06 and java
+
+These settings apply only when `--tag=package-2017-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.storsimple.v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/storsimple/resource-manager/v2017_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
