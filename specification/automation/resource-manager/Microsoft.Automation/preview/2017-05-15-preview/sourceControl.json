@@ -352,7 +352,8 @@
         },
         "securityToken": {
           "type": "string",
-          "description": "Gets or sets the authorization token for the repo of the source control."
+          "description": "Gets or sets the authorization token for the repo of the source control.",
+          "$ref": "#/definitions/SourceControlSecurityTokenProperties"
         },
         "description": {
           "type": "string",
@@ -493,8 +494,8 @@
         },
         "securityToken": {
           "type": "string",
-          "maxLength": 1024,
-          "description": "Gets or sets the authorization token for the repo of the source control."
+          "description": "Gets or sets the authorization token for the repo of the source control.",
+          "$ref": "#/definitions/SourceControlSecurityTokenProperties"
         },
         "description": {
           "type": "string",
@@ -503,6 +504,32 @@
         }
       },
       "description": "The properties of the create source control operation."
+    },
+    "SourceControlSecurityTokenProperties": {
+      "properties":{
+        "accessToken":{
+          "type":"string",
+          "maxLength":1024,
+          "description":"Gets or sets the access token."
+        },
+        "refreshToken":{
+          "type":"string",
+          "maxLength":1024,
+          "description":"Gets or sets the refresh token."
+        },
+        "tokenType":{
+          "type": "string",
+          "description": "The token type. Must be either PersonalAccessToken or Oauth.",
+          "enum": [
+            "PersonalAccessToken",
+            "Oauth"
+          ],
+          "x-ms-enum": {
+            "name": "tokenType",
+            "modelAsString": true
+          }
+        }
+      }
     }
   }
 }
