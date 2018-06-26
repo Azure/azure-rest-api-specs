@@ -7,7 +7,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-keyvault
-  package-version: 3.0.4-preview
+  package-version: 3.0.4
   output-folder: $(node-sdks-folder)/lib/services/keyvault
   generate-license-txt: true
   generate-package-json: true
