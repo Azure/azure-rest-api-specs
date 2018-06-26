@@ -97,6 +97,7 @@
       "description": "Azure region in which the project is created.",
       "type": "string",
       "in": "path",
+      "x-ms-parameter-location": "method",
       "required": true
     }
   },
@@ -1600,6 +1601,37 @@
         }
       }
     },
+    "VmFamily": {
+      "type": "object",
+      "description": "VM family name, the list of targeted azure locations and the category of the family.",
+      "properties": {
+        "familyName": {
+          "type": "string",
+          "description": "Name of the VM family.",
+          "readOnly": true
+        },
+        "targetLocations": {
+          "type": "array",
+          "description": "List of Azure regions.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "Azure region name.",
+            "readOnly": true
+          }
+        },
+        "category": {
+          "type": "array",
+          "description": "Category of the VM family.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "VM family Category.",
+            "readOnly": true
+          }
+        }
+      }
+    },
     "ProjectResultList": {
       "type": "object",
       "description": "List of projects.",
@@ -1674,6 +1706,30 @@
           "description": "List of operations.",
           "items": {
             "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "AssessmentOptionsResultList": {
+      "type": "object",
+      "description": "List of assessment options.",
+      "properties": {
+        "vmFamilies": {
+          "type": "object",
+          "description": "Dictionary of VM families grouped by vm family name describing the targeted azure locations of VM family and the category of the family.",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/VmFamily"
+          }
+        },
+        "reservedInstanceVmFamilies": {
+          "type": "array",
+          "description": "List of supported VM Families.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "Azure VM family name.",
+            "readOnly": true
           }
         }
       }
@@ -1752,7 +1808,7 @@
           "200": {
             "description": "OK. Returns assessment options.",
             "schema": {
-              "$ref": "#/definitions/OperationResultList"
+              "$ref": "#/definitions/AssessmentOptionsResultList"
             }
           },
           "401": {
@@ -1767,6 +1823,9 @@
           "503": {
             "description": "Service Unavailable."
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "Projects_Get": {
