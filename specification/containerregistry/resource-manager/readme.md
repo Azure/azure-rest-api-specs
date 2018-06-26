@@ -270,7 +270,7 @@ batch:
 ### Tag: package-2018-02-preview and java
 
 These settings apply only when `--tag=package-2018-02-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2018-02-preview' && $(java) && $(multiapi)
 java:
@@ -283,7 +283,7 @@ generate-interface: true
 ### Tag: package-2017-10 and java
 
 These settings apply only when `--tag=package-2017-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
 java:
@@ -296,7 +296,7 @@ generate-interface: true
 ### Tag: package-2017-06-preview and java
 
 These settings apply only when `--tag=package-2017-06-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2017-06-preview' && $(java) && $(multiapi)
 java:
@@ -309,7 +309,7 @@ generate-interface: true
 ### Tag: package-2017-03 and java
 
 These settings apply only when `--tag=package-2017-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2017-03' && $(java) && $(multiapi)
 java:
@@ -322,7 +322,7 @@ generate-interface: true
 ### Tag: package-2016-06-preview and java
 
 These settings apply only when `--tag=package-2016-06-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2016-06-preview' && $(java) && $(multiapi)
 java:
