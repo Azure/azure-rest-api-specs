@@ -12,19 +12,20 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiApi)
+``` yaml $(csharp) && !$(multiapi)
 namespace: Microsoft.Azure.Management.KeyVault
 output-folder: $(csharp-sdks-folder)/KeyVault/Management/Management.KeyVault/Generated
 ```
 
 ## Batch settings
-These settings are for batch mode only: (ie, add `--MultiApi` to the command line )
+These settings are for batch mode only: (ie, add `--multiapi` to the command line )
 
-``` yaml $(multiApi)
-namespace: Microsoft.Azure.Management.KeyVault.$(ApiVersionName)
-output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
+``` yaml $(multiapi)
+ProfileName: 2018-03-01-profile
+namespace: Microsoft.Azure.$(ProfileName).KeyVault
+output-folder: $(csharp-sdks-folder)/$(ProfileName)/Generated
 
 batch:
   - tag: package-2016-10
-    ApiVersionName: Api2016_10_01
+  - tag: package-2015-06
 ```
