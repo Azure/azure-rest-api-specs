@@ -3,7 +3,7 @@
     "info": {
         "title": "HDInsightManagementClient",
         "description": "The HDInsight Management Client.",
-        "version": "2015-03-01-preview"
+        "version": "2018-06-01-preview"
     },
     "host": "management.azure.com",
     "schemes": [
@@ -43,7 +43,7 @@
                         "$ref": "./examples/EnableLinuxClusterMonitoring.json"
                     }
                 },
-                "operationId": "Extension_EnableMonitoring",
+                "operationId": "Extensions_EnableMonitoring",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -93,7 +93,7 @@
                         "$ref": "./examples/GetLinuxClusterMonitoringStatus.json"
                     }
                 },
-                "operationId": "Extension_GetMonitoringStatus",
+                "operationId": "Extensions_GetMonitoringStatus",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -133,7 +133,7 @@
                         "$ref": "./examples/DisableLinuxClusterMonitoring.json"
                     }
                 },
-                "operationId": "Extension_DisableMonitoring",
+                "operationId": "Extensions_DisableMonitoring",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -172,7 +172,7 @@
                     "Extensions"
                 ],
                 "description": "Creates an HDInsight cluster extension.",
-                "operationId": "Extension_Create",
+                "operationId": "Extensions_Create",
                 "x-ms-examples": {
                     "Create a monitoring extension on Hadoop Linux cluster": {
                         "$ref": "./examples/CreateExtension.json"
@@ -212,12 +212,13 @@
                         }
                     },
                     "200": {
-                        "description": "OK. The request has succeeded."
+                        "description": "Ok response definition."
                     },
                     "202": {
-                        "description": "OK. The request has succeeded."
+                        "description": "Accepted response definition."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "get": {
                 "tags": [
@@ -229,7 +230,7 @@
                         "$ref": "./examples/GetExtension.json"
                     }
                 },
-                "operationId": "Extension_Get",
+                "operationId": "Extensions_Get",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -272,7 +273,7 @@
                         "$ref": "./examples/DeleteExtension.json"
                     }
                 },
-                "operationId": "Extension_Delete",
+                "operationId": "Extensions_Delete",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -301,9 +302,10 @@
                         "description": "Ok response definition."
                     },
                     "202": {
-                        "description": "OK response definition."
+                        "description": "Accepted response definition."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         }
     },

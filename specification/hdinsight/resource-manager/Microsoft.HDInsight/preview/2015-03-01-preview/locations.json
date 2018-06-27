@@ -37,32 +37,74 @@
                 "tags": [
                     "Regions"
                 ],
-                "operationId": "Location_GetCapabilities",
+                "operationId": "Locations_GetCapabilities",
                 "description": "Gets the capabilities for the specified location.",
                 "x-ms-examples": {
                     "Get the subscription capabilities for specific location": {
                         "$ref": "./examples/GetHDInsightCapabilities.json"
                     }
                 },
-                "parameters": [{
-                        "name": "location",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The location to get capabilities for."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LocationParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
-                            "$ref": "#/definitions/capabilitiesResult"
+                            "$ref": "#/definitions/CapabilitiesResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/usages": {
+            "get": {
+                "tags": [
+                    "Regions"
+                ],
+                "operationId": "Locations_ListUsages",
+                "description": "Lists the usages for the specified location.",
+                "x-ms-examples": {
+                    "Get the subscription usages for specific location": {
+                        "$ref": "./examples/GetHDInsightUsages.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "OK response definition.",
+                        "schema": {
+                            "$ref": "#/definitions/UsagesListResult"
                         }
                     }
                 }
@@ -70,7 +112,7 @@
         }
     },
     "definitions": {
-        "versionSpec": {
+        "VersionSpec": {
             "description": "The version properties.",
             "properties": {
                 "friendlyName": {
@@ -94,19 +136,19 @@
                 }
             }
         },
-        "versionsCapability": {
+        "VersionsCapability": {
             "description": "The version capability.",
             "properties": {
                 "available": {
                     "description": "The list of version capabilities.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/versionSpec"
+                        "$ref": "#/definitions/VersionSpec"
                     }
                 }
             }
         },
-        "regionsCapability": {
+        "RegionsCapability": {
             "description": "The regions capability.",
             "properties": {
                 "available": {
@@ -118,7 +160,7 @@
                 }
             }
         },
-        "vmSizesCapability": {
+        "VmSizesCapability": {
             "description": "The virtual machine sizes capability.",
             "properties": {
                 "available": {
@@ -130,7 +172,7 @@
                 }
             }
         },
-        "vmSizeCompatibilityFilter": {
+        "VmSizeCompatibilityFilter": {
             "description": "The virtual machine type compatibility filter.",
             "properties": {
                 "FilterMode": {
@@ -174,7 +216,7 @@
                 }
             }
         },
-        "regionalQuotaCapability": {
+        "RegionalQuotaCapability": {
             "description": "The regional quota capacity.",
             "properties": {
                 "region_name": {
@@ -193,47 +235,47 @@
                 }
             }
         },
-        "quotaCapability": {
+        "QuotaCapability": {
             "description": "The regional quota capability.",
             "properties": {
                 "regionalQuotas": {
                     "description": "The list of region quota capabilities.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/regionalQuotaCapability"
+                        "$ref": "#/definitions/RegionalQuotaCapability"
                     }
                 }
             }
         },
-        "capabilitiesResult": {
+        "CapabilitiesResult": {
             "description": "The Get Capabilities operation response.",
             "properties": {
                 "versions": {
                     "description": "The version capability.",
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/definitions/versionsCapability"
+                        "$ref": "#/definitions/VersionsCapability"
                     }
                 },
                 "regions": {
                     "description": "The virtual machine size compatibilty features.",
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/definitions/regionsCapability"
+                        "$ref": "#/definitions/RegionsCapability"
                     }
                 },
                 "vmSizes": {
                     "description": "The virtual machine sizes.",
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/definitions/vmSizesCapability"
+                        "$ref": "#/definitions/VmSizesCapability"
                     }
                 },
                 "vmSize_filters": {
                     "description": "The virtual machine size compatibilty filters.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/vmSizeCompatibilityFilter"
+                        "$ref": "#/definitions/VmSizeCompatibilityFilter"
                     }
                 },
                 "features": {
@@ -245,7 +287,53 @@
                 },
                 "quota": {
                     "description": "The quota capability.",
-                    "$ref": "#/definitions/quotaCapability"
+                    "$ref": "#/definitions/QuotaCapability"
+                }
+            }
+        },
+        "LocalizedName": {
+            "description": "The details about the localizable name of a type of usage.",
+            "properties": {
+                "value": {
+                    "description": "The name of the used resource.",
+                    "type": "string"
+                },
+                "localizedValue": {
+                    "description": "The localized name of the used resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "Usage": {
+            "description": "The details about the usage of a particular limited resource.",
+            "properties": {
+                "unit": {
+                    "description": "The type of measurement for usage.",
+                    "type": "string"
+                },
+                "currentValue": {
+                    "description": "The current usage.",
+                    "type": "integer"
+                },
+                "limit": {
+                    "description": "The maximum allowed usage.",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "The details about the localizable name of the used resource.",
+                    "$ref": "#/definitions/LocalizedName"
+                }
+            }
+        },
+        "UsagesListResult": {
+            "description": "The response for the operation to get regional usages for a subscription.",
+            "properties": {
+                "value": {
+                    "description": "The list of usages.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Usage"
+                    }
                 }
             }
         }
@@ -257,6 +345,14 @@
             "required": true,
             "type": "string",
             "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "LocationParameter": {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location.",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",
