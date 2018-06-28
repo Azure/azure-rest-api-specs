@@ -237,7 +237,7 @@
         "tags": [
           "AvailabilitySets"
         ],
-        "operationId": "AvailabilitySets_ListAll",
+        "operationId": "AvailabilitySets_ListBySubscription",
         "description": "Lists all availability sets in a subscription.",
         "parameters": [
           {
@@ -5109,10 +5109,11 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS.",
+      "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS.",
       "enum": [
         "Standard_LRS",
-        "Premium_LRS"
+        "Premium_LRS",
+		"StandardSSD_LRS"
       ],
       "x-ms-enum": {
         "name": "StorageAccountTypes",
@@ -5123,7 +5124,7 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "allOf": [
@@ -6022,7 +6023,7 @@
         },
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "required": [
@@ -6070,7 +6071,7 @@
         },
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "required": [
@@ -6263,7 +6264,7 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "description": "Describes the parameters of a ScaleSet managed disk."
