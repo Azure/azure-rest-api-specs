@@ -144,51 +144,7 @@
                                     "kind": "LogAnalytics"
                                 }
                             ]
-                        },
-                        {
-                            "kind": "ETWProviders",
-                            "configuration": {
-                                "providers": [
-                                    {
-                                        "name": "AuditLog",
-                                        "id": 1,
-                                        "filter": "filter exp"
-                                    },
-                                    {
-                                        "name": "TraceLog",
-                                        "id": 2
-                                    }
-                                ]
-                            },
-                            "sinks": [
-                                {
-                                    "kind": "LogAnalytics"
-                                }
-                            ]
-                        },
-                        {
-                            "kind": "WindowsEventLogs",
-                            "configuration": {
-                                "eventLogs": [
-                                    {
-                                        "logName": "Application",
-                                        "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"CatWoman\""
-        
-                                    },
-                                    {
-                                        "logName": "Application",
-                                        "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"BatMan\""
-                                    }
-        
-                                ]
-                            },
-                            "sinks": [
-                                {
-                                    "kind": "LogAnalytics"
-                                }
-                            ]
-                        }
-        
+                        }        
                     ]
                 }
             }
