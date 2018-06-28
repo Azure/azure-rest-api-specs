@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for AnalysisServices.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for AnalysisServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for AnalysisServices, simply [Install AutoRest](https://aka.ms/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the AnalysisServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-08
+tag: package-3124-23
 ```
 
 
+### Tag: package-3124-23
+
+These settings apply only when `--tag=package-3124-23` is specified on the command line.
+
+```yaml $(tag) == 'package-3124-23'
+input-file:
+  - Microsoft.AnalysisServices/stable/3124-23-23/analysisservices.json
+```
 ### Tag: package-2017-08
 
 These settings apply only when `--tag=package-2017-08` is specified on the command line.
@@ -67,8 +75,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -84,7 +92,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_analysis_services']
 ```
 
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -98,7 +105,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/AnalysisServices/Management.Analysis/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
@@ -156,7 +162,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2016-05' && $(go)
 output-folder: $(go-sdk-folder)/services/analysisservices/mgmt/2016-05-16/analysisservices
 ```
-
 
 ## Java
 
@@ -233,5 +238,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
