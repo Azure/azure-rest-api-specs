@@ -120,12 +120,6 @@
                             "$ref": "#/definitions/GuestDiagnosticSettingsResource"
                         }
                     },
-                    "404": {
-                        "description": "The diagnostic settings does not exist.",
-                        "schema": {
-                            "$ref": "#/definitions/GuestDiagnosticSettingsResource"
-                        }
-                    },
                     "default": {
                         "description": "An error occurred and the diagnostic settings could not be retrieved.",
                         "schema": {
@@ -134,6 +128,53 @@
                     }
                 }
             },
+            "patch": {
+                "description": "Updates guest diagnostics settings.",                
+                "operationId": "guestDiagnosticsSettings_Update",                
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/DiagnosticSettingNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "diagnosticSettingsPatch",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GuestDiagnosticSettingsPatchResource"
+                        },
+                        "description": "The configuration to patch."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An existing guest diagnostic settings was successfully updated.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestDiagnosticSettingsResource"
+                        }
+                    },
+                    "201": {
+                        "description": "A new guest diagnostic settings was successfully created.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestDiagnosticSettingsResource"
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred and the guest diagnostic settings could not be created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }, 
             "delete": {
                 "description": "Delete guest diagnostics settings.",
                 "tags": [
@@ -292,8 +333,8 @@
                 "osType": {
                     "type": "string",
                     "enum": [
-                        "windows",
-                        "linux"
+                        "Windows",
+                        "Linux"
                     ],       
                     "description" :  "Operating system type for the configuration"
                 },
@@ -306,6 +347,22 @@
                 },
                 "proxySetting": {
                     "type": "string"
+                }
+            }
+        },
+        "GuestDiagnosticSettingsPatchResource": {
+            "description": "An diagnostic settings object for the body of patch operations.",
+            "properties": {
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/DiagnosticSettings",
+                    "description": "The diagnostic settings for an update operation."
                 }
             }
         },
