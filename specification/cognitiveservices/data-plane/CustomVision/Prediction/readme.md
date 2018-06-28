@@ -42,7 +42,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java  
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
 ```
 

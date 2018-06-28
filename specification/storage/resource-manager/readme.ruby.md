@@ -5,7 +5,7 @@ These settings apply only when `--ruby` is specified on the command line.
 ``` yaml $(ruby)
 ruby:
   package-name: azure_mgmt_storage
-  package-version: "0.16.1"
+  package-version: "0.16.3"
   azure-arm: true
 ```
 
