@@ -728,7 +728,7 @@
                 }
             }
         },
-        "/{resourceUri}/providers/Microsoft.Security/advancedThreatProtectionSettings/{settingName}": {
+        "/{resourceId}/providers/Microsoft.Security/advancedThreatProtectionSettings/{settingName}": {
           "get": {
             "x-ms-examples": {
               "Gets the Advanced Threat Protection settings for the specified resource.": {
@@ -743,7 +743,7 @@
                 "$ref": "#/parameters/ApiVersion"
               },
               {
-                "$ref": "#/parameters/ResourceUri"
+                "$ref": "#/parameters/ResourceId"
               },
               {
                 "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
@@ -772,13 +772,13 @@
             },
             "tags": [ "AdvancedThreatProtection" ],
             "description": "Creates or updates the Advanced Threat Protection settings on a specified resource.",
-            "operationId": "AdvancedThreatProtection_Put",
+            "operationId": "AdvancedThreatProtection_Create",
             "parameters": [
               {
                 "$ref": "#/parameters/ApiVersion"
               },
               {
-                "$ref": "#/parameters/ResourceUri"
+                "$ref": "#/parameters/ResourceId"
               },
               {
                 "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
@@ -816,7 +816,7 @@
                 "$ref": "#/parameters/ApiVersion"
               },
               {
-                "$ref": "#/parameters/ResourceUri"
+                "$ref": "#/parameters/ResourceId"
               },
               {
                 "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
@@ -1231,7 +1231,7 @@
         },
         "AdvancedThreatProtectionProperties": {
           "properties": {
-            "isEnabled": {
+            "enabled": {
               "type": "boolean",
               "description": "Indicates whether Advanced Threat Protection is enabled."
             }
@@ -1370,8 +1370,8 @@
             "description": "name of the Compliance",
             "x-ms-parameter-location": "method"
         },
-        "ResourceUri": {
-          "name": "resourceUri",
+        "ResourceId": {
+          "name": "resourceId",
           "in": "path",
           "required": true,
           "type": "string",
