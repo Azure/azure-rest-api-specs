@@ -232,7 +232,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets": {
       "get": {
         "tags": [
           "AvailabilitySets"
@@ -291,7 +291,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4308,8 +4308,15 @@
             "$ref": "#/definitions/AvailabilitySet"
           },
           "description": "The list of availability sets"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Availability Set operation response."
     },
     "VirtualMachineSize": {
@@ -5113,7 +5120,7 @@
       "enum": [
         "Standard_LRS",
         "Premium_LRS",
-		"StandardSSD_LRS"
+        "StandardSSD_LRS"
       ],
       "x-ms-enum": {
         "name": "StorageAccountTypes",
