@@ -145,7 +145,7 @@
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "diagnosticSettingsPatch",
+                        "name": "parameters",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -214,7 +214,7 @@
         "/subscriptions/{subscriptionId}/providers/microsoft.insights/guestDiagnosticSettings": {
             "get": {
                 "description": "Get a list of all guest diagnostic settings in a subscription.",
-                "operationId": "guestDiagnosticsSettings_ListBySubscriptionId",                
+                "operationId": "guestDiagnosticsSettings_List",                
                 "x-ms-pageable": {
                     "nextLinkName": null
                 },
@@ -245,7 +245,7 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettings": {
             "get": {
                 "description": "Get a list of all guest diagnostic settings in a resource group.",
-                "operationId": "guestDiagnosticsSettings_ListByResourceGroup",                
+                "operationId": "guestDiagnosticsSettings_List",                
                 "x-ms-pageable": {
                     "nextLinkName": null
                 },
@@ -321,13 +321,13 @@
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/DiagnosticSettings",
+                    "$ref": "#/definitions/GuestDiagnosticSettings",
                     "description": "The diagnostic settings to be applied to azure resources."
                 }
             },
             "description": "Virtual machine guest diagnostics settings resource."
         },
-        "DiagnosticSettings": {
+        "GuestDiagnosticSettings": {
             "description": "Virtual machine diagnostic settings",
             "properties": {
                 "osType": {
@@ -361,7 +361,7 @@
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/DiagnosticSettings",
+                    "$ref": "#/definitions/GuestDiagnosticSettings",
                     "description": "The diagnostic settings for an update operation."
                 }
             }
