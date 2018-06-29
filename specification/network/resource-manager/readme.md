@@ -1,4 +1,4 @@
-# Network
+﻿# Network
 
 > see https://aka.ms/autorest
 
@@ -79,6 +79,7 @@ These settings apply only when `--tag=package-2018-04` is specified on the comma
 ``` yaml $(tag) == 'package-2018-04'
 
 input-file:
+- Microsoft.Network/stable/2018-04-01/azureFirewall.json
 - Microsoft.Network/stable/2018-04-01/applicationGateway.json
 - Microsoft.Network/stable/2018-04-01/applicationSecurityGroup.json
 - Microsoft.Network/stable/2018-04-01/checkDnsAvailability.json
@@ -99,6 +100,7 @@ input-file:
 - Microsoft.Network/stable/2018-04-01/usage.json
 - Microsoft.Network/stable/2018-04-01/virtualNetwork.json
 - Microsoft.Network/stable/2018-04-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-04-01/virtualWan.json
 - Microsoft.Network/stable/2018-04-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2018-04-01/vmssPublicIpAddress.json
 ```
@@ -644,6 +646,9 @@ directive:
   - suppress: OperationIdNounVerb
     from: vmssNetworkInterface.json
     reason: VMSS specs have custom naming
+  - suppress: BodyTopLevelProperties
+    from: virtualNetworkGateway.json
+    reason: shipped. fixing this causes breaking change in resource
 ```
 
 ---
@@ -731,6 +736,9 @@ output-folder: $(go-sdk-folder)/services/network/mgmt/2018-02-01/network
 ## Suppression
 ``` yaml
 directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualWan.json
+    reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkwatcher.json
     where: $.definitions.PacketCaptureResult

@@ -1,447 +1,531 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "AutomationManagement",
-      "version": "2015-10-31",
-      "x-ms-code-generation-settings": {  
-        "useDateTimeOffset": true
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
-    },
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
-      }
-    ],
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/watchers/{watcherName}": {
+      "put": {
+        "tags": [
+          "Watcher"
+        ],
+        "operationId": "Watcher_CreateOrUpdate",
+        "description": "Create the watcher identified by watcher name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/watcheroperations"
+        },
+        "x-ms-examples": {
+          "Create or update watcher": {
+            "$ref": "./examples/createOrUpdateWatcher.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "watcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The watcher name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Watcher"
+            },
+            "description": "The create or update parameters for watcher."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Watcher"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Watcher"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Watcher"
+        ],
+        "operationId": "Watcher_Get",
+        "description": "Retrieve the watcher identified by watcher name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/watcheroperations"
+        },
+        "x-ms-examples": {
+          "Get watcher": {
+            "$ref": "./examples/getWatcher.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "watcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The watcher name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Watcher"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Watcher"
+        ],
+        "operationId": "Watcher_Update",
+        "description": "Update the watcher identified by watcher name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/watcheroperations"
+        },
+        "x-ms-examples": {
+          "Update watcher": {
+            "$ref": "./examples/updateWatcher.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "watcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The watcher name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WatcherUpdateParameters"
+            },
+            "description": "The update parameters for watcher."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Watcher"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Watcher"
+        ],
+        "operationId": "Watcher_Delete",
+        "description": "Delete the watcher by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/watcheroperations"
+        },
+        "x-ms-examples": {
+          "Delete watcher": {
+            "$ref": "./examples/deleteWatcher.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "watcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The watcher name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/watchers/{watcherName}": {
-            "put": {
-                "tags": [
-                  "Watcher"
-                ],
-                "operationId": "Watcher_CreateOrUpdate",
-                "description": "Create the watcher identified by watcher name.",
-                "externalDocs": {
-                  "url": "http://aka.ms/azureautomationsdk/watcheroperations"
-                },
-                "x-ms-examples": {
-                  "Create or update watcher": {
-                    "$ref": "./examples/createOrUpdateWatcher.json"
-                  }
-                },
-                "parameters": [
-                  {
-                    "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-                  },
-                  {
-                    "name": "automationAccountName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The automation account name."
-                  },
-                  {
-                    "name": "watcherName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The watcher name."
-                  },
-                  {
-                    "name": "parameters",
-                    "in": "body",
-                    "required": true,
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/Watcher"
-                    },
-                    "description": "The create or update parameters for watcher."
-                  },
-                  {
-                    "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                    "$ref": "./definitions.json#/parameters/ApiVersionParameter"
-                  }
-                ],
-                "responses": {
-                  "200": {
-                    "description": "OK",
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/Watcher"
-                    }
-                  },
-                  "201": {
-                    "description": "Created",
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/Watcher"
-                    }
-                  },
-                  "default": {
-                    "description": "Automation error response describing why the operation failed.",
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/ErrorResponse"
-                    }
-                  }
-                }
-              },
-              "get": {
-                "tags": [
-                  "Watcher"
-                ],
-                "operationId": "Watcher_Get",
-                "description": "Retrieve the watcher identified by watcher name.",
-                "externalDocs": {
-                  "url": "http://aka.ms/azureautomationsdk/watcheroperations"
-                },
-                "x-ms-examples": {
-                  "Get watcher": {
-                    "$ref": "./examples/getWatcher.json"
-                  }
-                },
-                "parameters": [
-                  {
-                    "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-                  },
-                  {
-                    "name": "automationAccountName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The automation account name."
-                  },
-                  {
-                    "name": "watcherName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The watcher name."
-                  },
-                  {
-                    "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                    "$ref": "./definitions.json#/parameters/ApiVersionParameter"
-                  }
-                ],
-                "responses": {
-                  "200": {
-                    "description": "OK",
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/Watcher"
-                    }
-                  },
-                  "default": {
-                    "description": "Automation error response describing why the operation failed.",
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/ErrorResponse"
-                    }
-                  }
-                }
-              },
-              "patch": {
-                "tags": [
-                  "Watcher"
-                ],
-                "operationId": "Watcher_Update",
-                "description": "Update the watcher identified by watcher name.",
-                "externalDocs": {
-                  "url": "http://aka.ms/azureautomationsdk/watcheroperations"
-                },
-                "x-ms-examples": {
-                  "Update watcher": {
-                    "$ref": "./examples/updateWatcher.json"
-                  }
-                },
-                "parameters": [
-                  {
-                    "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-                  },
-                  {
-                    "name": "automationAccountName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The automation account name."
-                  },
-                  {
-                    "name": "watcherName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The watcher name."
-                  },
-                  {
-                    "name": "parameters",
-                    "in": "body",
-                    "required": true,
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/WatcherUpdateParameters"
-                    },
-                    "description": "The update parameters for watcher."
-                  },
-                  {
-                    "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                    "$ref": "./definitions.json#/parameters/ApiVersionParameter"
-                  }
-                ],
-                "responses": {
-                  "200": {
-                    "description": "OK",
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/Watcher"
-                    }
-                  },
-                  "default": {
-                    "description": "Automation error response describing why the operation failed.",
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/ErrorResponse"
-                    }
-                  }
-                }
-              },
-              "delete": {
-                "tags": [
-                  "Watcher"
-                ],
-                "operationId": "Watcher_Delete",
-                "description": "Delete the watcher by name.",
-                "externalDocs": {
-                  "url": "http://aka.ms/azureautomationsdk/watcheroperations"
-                },
-                "x-ms-examples": {
-                  "Delete watcher": {
-                    "$ref": "./examples/deleteWatcher.json"
-                  }
-                },
-                "parameters": [
-                  {
-                    "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-                  },
-                  {
-                    "name": "automationAccountName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The automation account name."
-                  },
-                  {
-                    "name": "watcherName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The watcher name."
-                  },
-                  {
-                    "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                    "$ref": "./definitions.json#/parameters/ApiVersionParameter"
-                  }
-                ],
-                "responses": {
-                  "200": {
-                    "description": "OK"
-                  },
-                  "default": {
-                    "description": "Automation error response describing why the operation failed.",
-                    "schema": {
-                      "$ref": "./definitions.json#/definitions/ErrorResponse"
-                    }
-                  }
-                }
-              }
-            },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/watchers/{watcherName}/start": {
-            "post": {
-                "tags": [
-                "Watcher"
-                ],
-                "operationId": "Watcher_Start",
-                "description": "Resume the watcher identified by watcher name.",
-                "externalDocs": {
-                "url": "http://aka.ms/azureautomationsdk/watcheroperations"
-                },
-                "x-ms-examples": {
-                "Start Watcher": {
-                    "$ref": "./examples/startWatcher.json"
-                }
-                },
-                "parameters": [
-                {
-                    "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-                },
-                {
-                    "name": "automationAccountName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The automation account name."
-                },
-                {
-                    "name": "watcherName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The watcher name."
-                },
-                {
-                    "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "$ref": "./definitions.json#/parameters/ApiVersionParameter"
-                }
-                ],
-                "responses": {
-                "200": {
-                    "description": "OK"
-                },
-                "default": {
-                    "description": "Automation error response describing why the operation failed.",
-                    "schema": {
-                    "$ref": "./definitions.json#/definitions/ErrorResponse"
-                    }
-                }
-                }
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/watchers/{watcherName}/start": {
+      "post": {
+        "tags": [
+          "Watcher"
+        ],
+        "operationId": "Watcher_Start",
+        "description": "Resume the watcher identified by watcher name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/watcheroperations"
+        },
+        "x-ms-examples": {
+          "Start Watcher": {
+            "$ref": "./examples/startWatcher.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "watcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The watcher name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
-            },
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/watchers/{watcherName}/stop": {
-            "post": {
-                "tags": [
-                "Watcher"
-                ],
-                "operationId": "Watcher_Stop",
-                "description": "Resume the watcher identified by watcher name.",
-                "externalDocs": {
-                "url": "http://aka.ms/azureautomationsdk/watcheroperations"
-                },
-                "x-ms-examples": {
-                    "Start Watcher": {
-                        "$ref": "./examples/stopWatcher.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "name": "automationAccountName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The automation account name."
-                    },
-                    {
-                        "name": "watcherName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The watcher name."
-                    },
-                    {
-                        "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "./definitions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "default": {
-                        "description": "Automation error response describing why the operation failed.",
-                        "schema": {
-                        "$ref": "./definitions.json#/definitions/ErrorResponse"
-                        }
-                    }
-                }
-            }
-            },
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/watchers": {
-            "get": {
-                "tags": [
-                "Watcher"
-                ],
-                "operationId": "Watcher_ListByAutomationAccount",
-                "description": "Retrieve a list of watchers.",
-                "externalDocs": {
-                "url": "http://aka.ms/azureautomationsdk/watcheroperations"
-                },
-                "x-ms-examples": {
-                "List watchers by Automation Account": {
-                    "$ref": "./examples/listWatchersByAutomationAccount.json"
-                }
-                },
-                "parameters": [
-                {
-                    "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-                },
-                {
-                    "name": "automationAccountName",
-                    "in": "path",
-                    "required": true,
-                    "type": "string",
-                    "description": "The automation account name."
-                },
-                {
-                    "name": "$filter",
-                    "in": "query",
-                    "required": false,
-                    "type": "string",
-                    "description": "The filter to apply on the operation."
-                },
-                {
-                    "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "$ref": "./definitions.json#/parameters/ApiVersionParameter"
-                }
-                ],
-                "responses": {
-                "200": {
-                    "description": "OK",
-                    "schema": {
-                    "$ref": "./definitions.json#/definitions/WatcherListResult"
-                    }
-                },
-                "default": {
-                    "description": "Automation error response describing why the operation failed.",
-                    "schema": {
-                    "$ref": "./definitions.json#/definitions/ErrorResponse"
-                    }
-                }
-                },
-                "x-ms-pageable": {
-                "nextLinkName": "nextLink"
-                },
-                "x-ms-odata": "./definitions.json#/definitions/Watcher"
-            }
+          }
         }
+      }
     },
-    "definitions": {},
-    "parameters": {}
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/watchers/{watcherName}/stop": {
+      "post": {
+        "tags": [
+          "Watcher"
+        ],
+        "operationId": "Watcher_Stop",
+        "description": "Resume the watcher identified by watcher name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/watcheroperations"
+        },
+        "x-ms-examples": {
+          "Start Watcher": {
+            "$ref": "./examples/stopWatcher.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "watcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The watcher name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/watchers": {
+      "get": {
+        "tags": [
+          "Watcher"
+        ],
+        "operationId": "Watcher_ListByAutomationAccount",
+        "description": "Retrieve a list of watchers.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/watcheroperations"
+        },
+        "x-ms-examples": {
+          "List watchers by Automation Account": {
+            "$ref": "./examples/listWatchersByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatcherListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/Watcher"
+      }
+    }
+  },
+  "definitions": {
+    "Watcher": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WatcherProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the watcher properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the resource."
+        }
+      },
+      "description": "Definition of the watcher type.",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WatcherProperties": {
+      "properties": {
+        "executionFrequencyInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the frequency at which the watcher is invoked."
+        },
+        "scriptName": {
+          "type": "string",
+          "description": "Gets or sets the name of the script the watcher is attached to, i.e. the name of an existing runbook."
+        },
+        "scriptParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the script."
+        },
+        "scriptRunOn": {
+          "type": "string",
+          "description": "Gets or sets the name of the hybrid worker group the watcher will run on."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the current status of the watcher."
+        },
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Details of the user who last modified the watcher."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of the watcher properties"
+    },
+    "WatcherUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WatcherUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the watcher update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        }
+      }
+    },
+    "WatcherUpdateProperties": {
+      "properties": {
+        "executionFrequencyInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the frequency at which the watcher is invoked."
+        }
+      },
+      "description": "The properties of the update watcher operation."
+    },
+    "WatcherListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Watcher"
+          },
+          "description": "Gets or sets a list of watchers."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list watcher operation."
+    }
+  },
+  "parameters": {}
 }

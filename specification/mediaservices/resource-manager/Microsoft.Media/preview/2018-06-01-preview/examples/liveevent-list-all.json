@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "subscriptionId": "0a6ec948-5a62-437d-b9df-934dc7c1b722",
+    "resourceGroupName": "mediaresources",
+    "accountName": "slitestmedia10",
+    "api-version": "2018-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myLiveEvent1",
+            "id": "/subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents/myLiveEvent1",
+            "type": "Microsoft.Media/mediaservices/liveevents",
+            "location": "West US",
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            },
+            "properties": {
+              "description": "test event 1",
+              "resourceState": "Stopped",
+              "provisioningState": "Succeeded",
+              "created": "2018-03-03T02:25:08.5564064Z",
+              "lastModified": "2018-03-03T02:25:08.5564064Z",
+              "vanityUrl": false,
+              "streamOptions": [],
+              "input": {
+                "keyFrameIntervalDuration": "PT6S",
+                "streamingProtocol": "FragmentedMP4",
+                "accessToken": "de153bb0814542d9b7e2339ce9430dc4",
+                "endpoints": [
+                  {
+                    "protocol": "FragmentedMP4",
+                    "url": "http://clouddeployment.media-test.net/de153bb0814542d9b7e2339ce9430dc4/ingest.isml"
+                  }
+                ]
+              },
+              "preview": {
+                "previewLocator": "a220e223-faf8-4e03-b9a9-2c2432f48025",
+                "streamingPolicyName": null,
+                "accessControl": {
+                  "ip": {
+                    "allow": [
+                      {
+                        "name": "AllowAll",
+                        "address": "0.0.0.0",
+                        "subnetPrefixLength": null
+                      }
+                    ]
+                  }
+                },
+                "endpoints": [
+                  {
+                    "protocol": "FragmentedMP4",
+                    "url": "https://myliveevent1-slitestmedia10.preview-usso.channel.mediaservices.windows.net/a220e223-faf8-4e03-b9a9-2c2432f48025/preview.ism/manifest"
+                  }
+                ]
+              },
+              "encoding": {
+                "encodingType": "None",
+                "presetName": null
+              },
+              "crossSiteAccessPolicies": {
+                "clientAccessPolicy": null,
+                "crossDomainPolicy": null
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
