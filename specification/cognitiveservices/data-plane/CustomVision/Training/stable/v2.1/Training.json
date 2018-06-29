@@ -1,11 +1,11 @@
 ﻿{
     "swagger": "2.0",
     "info": {
-        "version": "2.0",
+        "version": "2.1",
         "title": "TrainingApi"
     },
     "host": "southcentralus.api.cognitive.microsoft.com",
-    "basePath": "/customvision/v2.0/Training",
+    "basePath": "/customvision/v2.1/Training",
     "schemes": [
         "https"
     ],
@@ -1387,6 +1387,18 @@
                         "x-nullable": true
                     },
                     {
+                        "name": "classificationType",
+                        "in": "query",
+                        "description": "The type of classifier to create for this project",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "Multiclass",
+                            "Multilabel"
+                        ],
+                        "x-nullable": false
+                    },
+                    {
                         "$ref": "#/parameters/ApiKey"
                     }
                 ],
@@ -2072,6 +2084,12 @@
                         "description": "The target platform (coreml or tensorflow)",
                         "required": true,
                         "type": "string",
+                        "enum": [
+                            "CoreML",
+                            "TensorFlow",
+                            "DockerFile",
+                            "ONNX"
+                        ],
                         "x-nullable": true
                     },
                     {
@@ -2080,6 +2098,10 @@
                         "description": "The flavor of the target platform (Windows, Linux, ARM, or GPU)",
                         "required": false,
                         "type": "string",
+                        "enum": [
+                            "Linux",
+                            "Windows"
+                        ],
                         "x-nullable": true
                     },
                     {
@@ -3340,6 +3362,20 @@
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
+                },
+                "classificationType": {
+                    "description": "Gets the classification type of the project",
+                    "enum": [
+                        "Multiclass",
+                        "Multilabel"
+                    ],
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true,
+                    "x-ms-enum": {
+                        "name": "Classifier",
+                        "modelAsString": true
+                    }
                 }
             },
             "x-nullable": true
@@ -3401,6 +3437,19 @@
                     "description": "Gets or sets the id of the Domain to use with this project",
                     "type": "string",
                     "x-nullable": false
+                },
+                "classificationType": {
+                    "description": "Gets or sets the classification type of the project",
+                    "enum": [
+                        "Multiclass",
+                        "Multilabel"
+                    ],
+                    "type": "string",
+                    "x-nullable": true,
+                    "x-ms-enum": {
+                        "name": "Classifier",
+                        "modelAsString": true
+                    }
                 }
             },
             "x-nullable": true
@@ -3623,6 +3672,11 @@
                         "name": "ExportFlavor",
                         "modelAsString": true
                     }
+                },
+                "newerVersionAvailable": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "x-nullable": false
                 }
             },
             "x-nullable": true
