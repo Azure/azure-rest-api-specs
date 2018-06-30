@@ -156,7 +156,7 @@
           "enum": [
             "Standard",
             "Enterprise"
-          ], 
+          ],
           "x-ms-enum": {
             "name": "IntegrationRuntimeEdition",
             "modelAsString": true
@@ -231,15 +231,12 @@
         "typeProperties": {
           "description": "When this property is not null, means this is a linked integration runtime. The property is used to access original integration runtime.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LinkedIntegrationRuntimeTypeProperties"
+          "$ref": "#/definitions/SelfHostedIntegrationRuntimeTypeProperties"
         }
-      },
-      "required": [
-        "typeProperties"
-      ]
+      }
     },
-    "LinkedIntegrationRuntimeTypeProperties": {
-      "description": "The base definition of a secret type.",
+    "SelfHostedIntegrationRuntimeTypeProperties": {
+      "description": "The self-hosted integration runtime properties.",
       "type": "object",
       "properties": {
         "linkedInfo": {
@@ -248,13 +245,13 @@
       }
     },
     "LinkedIntegrationRuntimeProperties": {
-      "description": "The base definition of a secret type.",
+      "description": "The base definition of a linked integration runtime properties.",
       "discriminator": "authorizationType",
       "type": "object",
       "properties": {
         "authorizationType": {
           "type": "string",
-          "description": "Type of the secret."
+          "description": "The authorization type for integration runtime sharing."
         }
       },
       "required": [
@@ -263,7 +260,7 @@
     },
     "LinkedIntegrationRuntimeKey": {
       "x-ms-discriminator-value": "Key",
-      "description": "The base definition of a secret type.",
+      "description": "The key authorization type.",
       "type": "object",
       "allOf": [
         {
@@ -272,7 +269,7 @@
       ],
       "properties": {
         "key": {
-          "description": "Type of the secret.",
+          "description": "The key used for authorization.",
           "$ref": "../datafactory.json#/definitions/SecureString"
         }
       },
@@ -282,7 +279,7 @@
     },
     "LinkedIntegrationRuntimeRbac": {
       "x-ms-discriminator-value": "RBAC",
-      "description": "The base definition of a secret type.",
+      "description": "The role based access control (RBAC) authorization type.",
       "type": "object",
       "allOf": [
         {
@@ -291,7 +288,7 @@
       ],
       "properties": {
         "resourceId": {
-          "description": "The resource ID of the integration runtime to be shared.",
+          "description": "The resource identifier of the integration runtime to be shared.",
           "type": "string"
         }
       },
@@ -311,16 +308,13 @@
         "dataFactoryName": {
           "description": "The data factory name which the integration runtime belong to.",
           "type": "string",
-          "readOnly":  true
+          "readOnly": true
         },
         "state": {
           "description": "The state of integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeState",
           "readOnly": true
         }
-      },
-      "additionalProperties": {
-        "type": "object"
       }
     },
     "IntegrationRuntimeState": {
@@ -336,7 +330,8 @@
         "NeedRegistration",
         "Online",
         "Limited",
-        "Offline"
+        "Offline",
+        "AccessDenied"
       ],
       "x-ms-enum": {
         "name": "IntegrationRuntimeState",
@@ -394,6 +389,9 @@
           "$ref": "#/definitions/ManagedIntegrationRuntimeOperationResult",
           "readOnly": true
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "ManagedIntegrationRuntimeOperationResult": {
@@ -617,7 +615,29 @@
           "items": {
             "$ref": "#/definitions/LinkedIntegrationRuntime"
           }
+        },
+        "sharedWithFactories": {
+          "description": "The MSI-s of the data factories to which the integration runtime is shared.",
+          "type": "array",
+          "items": {
+            "description": "The service principals of data factories",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "pushedVersion": {
+          "description": "The version that the integration runtime is going to update to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestVersion": {
+          "description": "The latest version on download center.",
+          "type": "string",
+          "readOnly": true
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "IntegrationRuntimeAutoUpdate": {
