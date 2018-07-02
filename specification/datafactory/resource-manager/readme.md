@@ -27,7 +27,7 @@ These are the global settings for the Data Factory V2 API.
 title: DataFactoryManagementClient
 description: The Azure Data Factory V2 management API provides a RESTful set of web services that interact with Azure Data Factory V2 services.
 openapi-type: arm
-tag: package-2017-09-preview
+tag: package-2018-06
 ```
 
 ### Tag: package-2018-06
@@ -94,7 +94,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.datafactory
   package-name: azure-mgmt-dafactory
-  package-version: 0.6.0
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
