@@ -753,7 +753,7 @@
               "200": {
                 "description": "Successful request to get Advanced Threat Protection settings.",
                 "schema": {
-                  "$ref": "#/definitions/AdvancedThreatProtectionSettings"
+                  "$ref": "#/definitions/AdvancedThreatProtectionSetting"
                 }
               },
               "default": {
@@ -784,14 +784,14 @@
                 "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
               },
               {
-                "$ref": "#/parameters/AdvancedThreatProtectionSettings"
+                "$ref": "#/parameters/AdvancedThreatProtectionSetting"
               }
             ],
             "responses": {
               "200": {
                 "description": "Successful request to put Advanced Threat Protection settings.",
                 "schema": {
-                  "$ref": "#/definitions/AdvancedThreatProtectionSettings"
+                  "$ref": "#/definitions/AdvancedThreatProtectionSetting"
                 }
               },
               "default": {
@@ -1238,7 +1238,7 @@
           },
           "description": "The Advanced Threat Protection settings."
         },
-        "AdvancedThreatProtectionSettings": {
+        "AdvancedThreatProtectionSetting": {
           "type": "object",
           "allOf": [
             {
@@ -1386,13 +1386,13 @@
           "description": "Advanced Threat Protection setting name.",
           "x-ms-parameter-location": "method"
         },
-        "AdvancedThreatProtectionSettings": {
-          "name": "advancedThreatProtectionSettings",
+        "AdvancedThreatProtectionSetting": {
+          "name": "advancedThreatProtectionSetting",
           "in": "body",
           "required": true,
           "description": "Advanced Threat Protection Settings",
           "schema": {
-            "$ref": "#/definitions/AdvancedThreatProtectionSettings"
+            "$ref": "#/definitions/AdvancedThreatProtectionSetting"
           },
           "x-ms-parameter-location": "method"
         }
