@@ -247,6 +247,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2017-05-15-preview/automation
 ```
 
+### Tag: package-2018-01-preview and go
+
+These settings apply only when `--tag=package-2018-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2018-01-preview/automation
+```
+
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
