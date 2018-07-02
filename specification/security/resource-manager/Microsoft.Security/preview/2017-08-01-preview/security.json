@@ -801,41 +801,6 @@
                 }
               }
             }
-          },
-          "delete": {
-            "x-ms-examples": {
-              "Deletes the Advanced Threat Protection settings on a specified resource.": {
-                "$ref": "./examples/AdvancedThreatProtection/DeleteAdvancedThreatProtectionSettings_example.json"
-              }
-            },
-            "tags": [ "AdvancedThreatProtection" ],
-            "description": "Deletes the Advanced Threat Protection settings on a specified resource.",
-            "operationId": "AdvancedThreatProtection_Delete",
-            "parameters": [
-              {
-                "$ref": "#/parameters/ApiVersion"
-              },
-              {
-                "$ref": "#/parameters/ResourceId"
-              },
-              {
-                "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "Successful request to remove Advanced Threat Protection setting."
-              },
-              "204": {
-                "description": "Successful request, Advanced Threat Protection does not exist."
-              },
-              "default": {
-                "description": "Error response describing why the operation failed.",
-                "schema": {
-                  "$ref": "#/definitions/CloudError"
-                }
-              }
-            }
           }
         }
     },
