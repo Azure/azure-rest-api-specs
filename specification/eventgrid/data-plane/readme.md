@@ -35,6 +35,7 @@ These are the global settings for the EventGrid API.
 title: EventGridClient
 description: EventGrid Client
 openapi-type: data-plane
+generate-empty-classes: true
 tag: package-2018-01
 ```
 
@@ -155,6 +156,7 @@ azure-arm: true
 namespace: com.microsoft.azure.eventgrid
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
+generate-constructor: true
 output-folder: $(azure-libraries-for-java-folder)/azure-eventgrid
 ```
 

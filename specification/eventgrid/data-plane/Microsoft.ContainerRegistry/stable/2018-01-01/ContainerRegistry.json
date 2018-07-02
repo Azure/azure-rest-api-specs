@@ -27,6 +27,11 @@
         },
         "ContainerRegistryEventData": {
             "description": "The content of the event request message.",
+            "allOf": [
+                {
+                    "$ref": "../../../Microsoft.EventGrid/stable/2018-01-01/EventGrid.json#/definitions/EventGridEventData"
+                }
+            ],
             "properties": {
                 "id": {
                     "description": "The event ID.",
