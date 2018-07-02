@@ -91,6 +91,10 @@ python:
   package-name: azure-loganalytics
   package-version: 0.1.0
   clear-output-folder: true
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:

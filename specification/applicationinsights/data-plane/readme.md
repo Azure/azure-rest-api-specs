@@ -85,6 +85,10 @@ python:
   namespace: azure.applicationinsights
   package-name: azure-applicationinsights
   package-version: 0.1.0
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
