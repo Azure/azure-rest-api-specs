@@ -61,9 +61,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_server_management']
 ```
 
 
@@ -93,19 +96,19 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.servermanagement
-  package-name: azure-mgmt-servermanagement
+  namespace: azure.mgmt.servermanager
+  package-name: azure-mgmt-servermanager
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup
+  output-folder: $(python-sdks-folder)/azure-mgmt-servermanager/azure/mgmt/servermanager
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup
+  output-folder: $(python-sdks-folder)/azure-mgmt-servermanager
 ```
 
 
@@ -154,11 +157,46 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.servermanagement
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servermanagement
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.servermanagement
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servermanagement
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-07-preview
+  - tag: package-2016-07-preview
+```
+
+### Tag: package-2015-07-preview and java
+
+These settings apply only when `--tag=package-2015-07-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-07-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.servermanagement.v2015_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/servermanagement/resource-manager/v2015_07_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2016-07-preview and java
+
+These settings apply only when `--tag=package-2016-07-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-07-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.servermanagement.v2016_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/servermanagement/resource-manager/v2016_07_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+

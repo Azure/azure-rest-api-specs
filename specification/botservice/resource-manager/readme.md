@@ -7,6 +7,28 @@ This is the AutoRest configuration file for BotService.
 
 
 ---
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-12-01
+```
+
+### Tag: package-2017-12-01 and java
+
+These settings apply only when `--tag=package-2017-12-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-12-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.botservice.v2017_12_01
+  output-folder: $(azure-libraries-for-java-folder)/botservice/resource-manager/v2017_12_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
 ## Getting Started 
 To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
@@ -91,6 +113,13 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: botservice
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-12-01
 ```
 
 ### Tag: package-2017-12-01 and go

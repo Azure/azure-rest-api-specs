@@ -24,11 +24,26 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the NotificationHubs API.
 
+directive:
+  - where:
+      - $.definitions.NamespaceCreateOrUpdateParameters
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.NamespaceCreateOrUpdateParameters
+    suppress:
+      - TrackedResourceGetOperation
+
 ``` yaml
 openapi-type: arm
 tag: package-2017-04
+directive:
+  - where:
+      - $.definitions.NamespaceCreateOrUpdateParameters
+    suppress:
+      - TrackedResourcePatchOperation
+      - TrackedResourceGetOperation
 ```
-
 
 ### Tag: package-2017-04
 
@@ -70,9 +85,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_notification_hubs']
 ```
 
 
@@ -173,11 +191,60 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.notificationhubs
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-notificationhubs
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.notificationhubs
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-notificationhubs
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2014-09
+  - tag: package-2017-04
+  - tag: package-2016-03
+```
+
+### Tag: package-2014-09 and java
+
+These settings apply only when `--tag=package-2014-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2014-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.notificationhubs.v2014_09_01
+  output-folder: $(azure-libraries-for-java-folder)/notificationhubs/resource-manager/v2014_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-04 and java
+
+These settings apply only when `--tag=package-2017-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.notificationhubs.v2017_04_01
+  output-folder: $(azure-libraries-for-java-folder)/notificationhubs/resource-manager/v2017_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2016-03 and java
+
+These settings apply only when `--tag=package-2016-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.notificationhubs.v2016_03_01
+  output-folder: $(azure-libraries-for-java-folder)/notificationhubs/resource-manager/v2016_03_01
+regenerate-manager: true
+generate-interface: true
+```
+
+

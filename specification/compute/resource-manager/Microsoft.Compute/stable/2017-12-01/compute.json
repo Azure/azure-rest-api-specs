@@ -235,6 +235,34 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_ListBySubscription",
+        "description": "Lists all availability sets in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets": {
       "get": {
         "tags": [
@@ -266,7 +294,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1416,7 +1444,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
@@ -1733,7 +1764,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate": {
@@ -1776,7 +1810,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/generalize": {
@@ -1963,7 +2000,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart": {
@@ -2006,7 +2046,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/start": {
@@ -2049,7 +2092,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy": {
@@ -2092,7 +2138,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/performMaintenance": {
@@ -2135,7 +2184,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
@@ -2405,7 +2457,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete": {
@@ -2457,7 +2512,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView": {
@@ -2901,7 +2959,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart": {
@@ -2953,7 +3014,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start": {
@@ -3005,7 +3069,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy": {
@@ -3057,7 +3124,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance": {
@@ -3109,7 +3179,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade": {
@@ -3161,7 +3234,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage": {
@@ -3213,7 +3289,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall": {
@@ -3265,7 +3344,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel": {
@@ -3308,7 +3390,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade": {
@@ -3351,7 +3436,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest": {
@@ -3486,7 +3574,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimageall": {
@@ -3536,7 +3627,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate": {
@@ -3586,7 +3680,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}": {
@@ -3903,7 +4000,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart": {
@@ -3953,7 +4053,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start": {
@@ -4003,7 +4106,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/redeploy": {
@@ -4053,7 +4159,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/performMaintenance": {
@@ -4103,7 +4212,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval": {
@@ -4154,7 +4266,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests": {
@@ -4205,7 +4320,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via":"azure-async-operation"
+        }        
       }
     }
   },
@@ -4376,8 +4494,15 @@
             "$ref": "#/definitions/AvailabilitySet"
           },
           "description": "The list of availability sets"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Availability Set operation response."
     },
     "VirtualMachineSize": {
@@ -5952,6 +6077,15 @@
       },
       "description": "Describes a virtual machine scale set sku."
     },
+    "AutoOSUpgradePolicy": {
+      "properties": {
+        "disableAutoRollback": {
+          "type": "boolean",
+          "description": "Whether OS image rollback feature should be disabled. Default value is false."
+        }
+      },
+      "description": "The configuration parameters used for performing automatic OS upgrade."
+    },
     "UpgradePolicy": {
       "properties": {
         "mode": {
@@ -5974,6 +6108,10 @@
         "automaticOSUpgrade": {
           "type": "boolean",
           "description": "Whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the image becomes available."
+        },
+        "autoOSUpgradePolicy": {
+          "$ref": "#/definitions/AutoOSUpgradePolicy",
+          "description": "Configuration parameters used for performing automatic OS Upgrade."
         }
       },
       "description": "Describes an upgrade policy - automatic, manual, or rolling."
@@ -7334,6 +7472,28 @@
       ],
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
+    "RollbackStatusInfo": {
+      "properties":{
+        "successfullyRolledbackInstanceCount" : {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances which have been successfully rolled back."
+        },
+        "failedRolledbackInstanceCount" : {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances which failed to rollback."
+        },
+        "rollbackError" : {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "Error details if OS rollback failed."
+        }
+      },
+      "description": "Information about rollback on failed VM instances after a OS Upgrade operation."
+    },
     "UpgradeOperationHistoryStatus": {
       "properties": {
         "code": {
@@ -7401,6 +7561,11 @@
           "$ref": "#/definitions/ImageReference",
           "readOnly": true,
           "description": "Image Reference details"
+        },
+        "rollbackInfo": {
+          "$ref": "#/definitions/RollbackStatusInfo",
+          "readOnly": true,
+          "description": "Information about OS rollback if performed"
         }
       },
       "description": "Describes each OS upgrade on the Virtual Machine Scale Set."

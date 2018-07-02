@@ -90,6 +90,9 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_machine_learning']
 ```
 
 
@@ -133,6 +136,7 @@ go:
 batch:
   - tag: package-webservices-2017-01
   - tag: package-webservices-2016-05-preview
+  - tag: package-workspaces-2016-04
   - tag: package-commitmentPlans-2016-05-preview
 ```
 
@@ -156,6 +160,16 @@ namespace: webservices
 output-folder: $(go-sdk-folder)/services/preview/machinelearning/mgmt/2016-05-01-preview/webservices
 ```
 
+### Tag: package-workspaces-2016-04 and go
+
+These settings apply only when `--tag=package-workspaces-2016-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-workspaces-2016-04' && $(go)
+namespace: workspaces
+output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2016-04-01/workspaces
+```
+
 ### Tag: package-commitmentPlans-2016-05-preview and go
 
 These settings apply only when `--tag=package-commitmentPlans-2016-05-preview --go` is specified on the command line.
@@ -173,13 +187,12 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.machinelearning
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.machinelearning
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning
 ```
 
 # Validation
@@ -192,3 +205,67 @@ batch:
   - package-commitmentPlans: true
   - package-workspaces: true
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-webservices-2017-01
+  - tag: package-commitmentPlans-2016-05-preview
+  - tag: package-webservices-2016-05-preview
+  - tag: package-workspaces-2016-04
+```
+
+### Tag: package-webservices-2017-01 and java
+
+These settings apply only when `--tag=package-webservices-2017-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-webservices-2017-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearning.v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/machinelearning/resource-manager/v2017_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-commitmentPlans-2016-05-preview and java
+
+These settings apply only when `--tag=package-commitmentPlans-2016-05-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-commitmentPlans-2016-05-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearning.v2016_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/machinelearning/resource-manager/v2016_05_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-webservices-2016-05-preview and java
+
+These settings apply only when `--tag=package-webservices-2016-05-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-webservices-2016-05-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearning.v2016_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/machinelearning/resource-manager/v2016_05_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-workspaces-2016-04 and java
+
+These settings apply only when `--tag=package-workspaces-2016-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-workspaces-2016-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearning.v2016_04_01
+  output-folder: $(azure-libraries-for-java-folder)/machinelearning/resource-manager/v2016_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+

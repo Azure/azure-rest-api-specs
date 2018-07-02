@@ -4,12 +4,19 @@
     "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
     "appName": "Test LUIS App",
     "luisApp": {
-      "luis_schema_version": "2.1.0",
+      "luis_schema_version": "3.0.0",
       "versionId": "0.1",
       "name": "LuisBot",
       "desc": "",
       "culture": "en-us",
       "intents": [
+        {
+          "name": "HomeAutomation.TurnOff",
+          "inherits": {
+            "domain_name": "HomeAutomation",
+            "model_name": "TurnOff"
+          }
+        },
         {
           "name": "dateintent"
         },
@@ -28,17 +35,44 @@
       ],
       "entities": [
         {
-          "name": "AirportCode"
+          "name": "AirportCode",
+          "roles": [
+            "destination"
+          ]
         },
         {
-          "name": "Hotel"
+          "name": "Hotel",
+          "roles": []
         }
       ],
       "composites": [],
       "closedLists": [],
-      "bing_entities": [
-        "datetimeV2",
-        "geography"
+      "patternAnyEntities": [
+        {
+          "name": "patternAny1",
+          "explicitList": [],
+          "roles": [
+            "role1",
+            "role2"
+          ]
+        }
+      ],
+      "regex_entities": [
+        {
+          "name": "regex1",
+          "regexPattern": "[^a]+",
+          "roles": [
+            "regex role"
+          ]
+        }
+      ],
+      "prebuiltEntities": [
+        {
+          "name": "datetimeV2",
+          "roles": [
+            "datetime role"
+          ]
+        }
       ],
       "model_features": [
         {
@@ -59,6 +93,12 @@
           "name": "AirportCodeRegex",
           "pattern": "[a-z]{3}",
           "activated": true
+        }
+      ],
+      "patterns": [
+        {
+          "pattern": "this is [a test] {patternAny1:role1}",
+          "intent": "Help"
         }
       ],
       "utterances": [
@@ -259,7 +299,7 @@
   "responses": {
     "201": {
       "headers": {
-        "Location": "https://api.luis.ai/api/v2.0/apps/374fac89-ae12-4afd-8c21-8a6424ce1c1f"
+        "Location": "https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/374fac89-ae12-4afd-8c21-8a6424ce1c1f"
       },
       "body": "374fac89-ae12-4afd-8c21-8a6424ce1c1f"
     }

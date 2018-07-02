@@ -26,7 +26,17 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-2018-05-preview
+```
+
+
+### Tag: package-2018-05-preview
+
+These settings apply only when `--tag=package-2018-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05-preview'
+input-file:
+- Microsoft.EventGrid/preview/2018-05-01-preview/EventGrid.json
 ```
 
 
@@ -72,9 +82,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_event_grid']
 ```
 
 
@@ -107,6 +120,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.eventgrid
   package-name: azure-mgmt-eventgrid
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -135,9 +149,19 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-05-preview
   - tag: package-2018-01
   - tag: package-2017-09-preview
   - tag: package-2017-06-preview
+```
+
+### Tag: package-2018-05-preview and go
+
+These settings apply only when `--tag=package-2018-05-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-05-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/eventgrid/mgmt/2018-05-01-preview/eventgrid
 ```
 
 ### Tag: package-2018-01 and go
@@ -174,11 +198,44 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.eventgrid
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-eventgrid
+```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2018-05-preview
+  - tag: package-2018-01
+```
+
+### Tag: package-2018-05-preview and java
+
+These settings apply only when `--tag=package-2018-05-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-05-preview' && $(java) && $(multiapi)
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.eventgrid
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-eventgrid
+  namespace: com.microsoft.azure.management.eventgrid.v2018_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_05_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-01 and java
+
+These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.eventgrid.v2018_01_01
+  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_01_01
+regenerate-manager: true
+generate-interface: true
 ```

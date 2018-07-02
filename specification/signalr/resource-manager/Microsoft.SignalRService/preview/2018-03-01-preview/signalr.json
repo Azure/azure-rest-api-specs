@@ -46,7 +46,7 @@
               }
           }
       },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/checkNameAvailability": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/checkNameAvailability": {
           "post": {
               "tags": [
                   "SignalR"
@@ -54,6 +54,13 @@
               "description": "Checks that the SignalR name is valid and is not already in use.",
               "operationId": "SignalR_CheckNameAvailability",
               "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "description": "the region",
+                        "required": true,
+                        "type": "string"
+                    },
                   {
                       "name": "parameters",
                       "in": "body",
@@ -675,10 +682,11 @@
                   "type": "string"
               },
               "tier": {
-                  "description": "The tier of this particular SKU. Optional.",
+                  "description": "Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead for Basic tier",
                   "enum": [
                       "Free",
                       "Basic",
+                      "Standard",
                       "Premium"
                   ],
                   "type": "string",
@@ -844,7 +852,10 @@
           "in": "query",
           "description": "Client Api Version.",
           "required": true,
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "2018-03-01-preview"
+          ]
       },
       "SubscriptionIdParameter": {
           "name": "subscriptionId",

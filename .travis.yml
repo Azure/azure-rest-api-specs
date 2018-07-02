@@ -47,14 +47,14 @@ before_install:
 install:
   - npm install
 script:
-  - DOCKER_CMD="docker run --rm --env-file /tmp/env_file -e GH_TOKEN -v $PWD:/git-restapi/ lmazuel/swagger-to-sdk"
+  - DOCKER_CMD="travis_wait 30 docker run --rm --env-file /tmp/env_file -e GH_TOKEN -v $PWD:/git-restapi/ lmazuel/swagger-to-sdk"
   - >-
     if [[ $MODE == 'python' ]]; then
       $DOCKER_CMD Azure/azure-sdk-for-python -v
     fi
   - >-
     if [[ $MODE == 'node' ]]; then
-      travis_wait 30 $DOCKER_CMD Azure/azure-sdk-for-node -v
+      $DOCKER_CMD Azure/azure-sdk-for-node -v
     fi
   - >-
     if [[ $MODE == 'ruby' ]]; then

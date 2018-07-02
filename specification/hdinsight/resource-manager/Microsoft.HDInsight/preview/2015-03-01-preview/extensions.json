@@ -44,19 +44,18 @@
                     }
                 },
                 "operationId": "Extension_EnableMonitoring",
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "parameters",
@@ -66,15 +65,18 @@
                             "$ref": "#/definitions/ClusterMonitoringRequest"
                         },
                         "description": "The Operations Management Suite (OMS) workspace parameters."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "Ok response definition."
+                    },
                     "202": {
                         "description": "Accepted response definition."
                     }
@@ -92,28 +94,27 @@
                     }
                 },
                 "operationId": "Extension_GetMonitoringStatus",
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK. The request has succeeded.",
                         "schema": {
@@ -133,28 +134,30 @@
                     }
                 },
                 "operationId": "Extension_DisableMonitoring",
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "Ok response definition."
+                    },
                     "202": {
                         "description": "OK response definition."
                     }
@@ -175,19 +178,21 @@
                         "$ref": "./examples/CreateExtension.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtensionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "parameters",
@@ -197,29 +202,18 @@
                             "$ref": "#/definitions/Extension"
                         },
                         "description": "The cluster extensions create request."
-                    },
-                    {
-                        "name": "extensionName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster extension.",
-                        "enum": [
-                            "clustermonitoring"
-                        ],
-                        "x-ms-enum": {
-                            "name": "ExtensionName",
-                            "modelAsString": false
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "OK. The request has succeeded."
+                    },
                     "202": {
                         "description": "OK. The request has succeeded."
                     }
@@ -236,42 +230,30 @@
                     }
                 },
                 "operationId": "Extension_Get",
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
-                        "name": "extensionName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster extension.",
-                        "enum": [
-                            "clustermonitoring"
-                        ],
-                        "x-ms-enum": {
-                            "name": "ExtensionName",
-                            "modelAsString": false
-                        }
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtensionNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK. The request has succeeded.",
                         "schema": {
@@ -291,42 +273,33 @@
                     }
                 },
                 "operationId": "Extension_Delete",
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
-                        "name": "extensionName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster extension.",
-                        "enum": [
-                            "clustermonitoring"
-                        ],
-                        "x-ms-enum": {
-                            "name": "ExtensionName",
-                            "modelAsString": false
-                        }
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtensionNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "Ok response definition."
+                    },
                     "202": {
                         "description": "OK response definition."
                     }
@@ -351,11 +324,11 @@
 		"ClusterMonitoringResponse": {
 			"description": "The Operations Management Suite (OMS) status response",
 			"properties": {
-				"ClusterMonitoringEnabled": {
+				"clusterMonitoringEnabled": {
 					"description": "The status of the Operations Management Suite (OMS) on the HDInsight cluster.",
 					"type": "boolean"
 				},
-				"WorkspaceId": {
+				"workspaceId": {
 					"description": "The workspace ID of the Operations Management Suite (OMS) on the HDInsight cluster.",
 					"type": "string"
 				}
@@ -376,19 +349,43 @@
 		}
     },
 	"parameters": {
-		"SubscriptionIdParameter": {
-			"name": "subscriptionId",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-		},
-		"ApiVersionParameter": {
-			"name": "api-version",
-			"in": "query",
-			"required": true,
-			"type": "string",
-			"description": "The HDInsight client API Version."
-		}
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ResourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group.",
+            "x-ms-parameter-location": "method"
+        },
+        "ClusterNameParameter": {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster.",
+            "x-ms-parameter-location": "method"
+        },
+        "ExtensionNameParameter": {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster extension.",
+            "x-ms-parameter-location": "method"
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The HDInsight client API Version."
+        }
 	}
 }
