@@ -40,8 +40,8 @@
                 "tags": ["InformationProtectionPolicies"],
                 "description": "Details of the information protection policy.",
                 "operationId": "InformationProtectionPolicies_Get",
-                "parameters":
-                [{
+                "parameters":[
+                    {
                         "$ref": "#/parameters/ApiVersion"
                     }, {
                         "$ref": "#/parameters/Scope"
@@ -244,23 +244,9 @@
                 "informationTypes": {
                     "type": "object",
                     "description": "The sensitivity information types.",
-                    "properties": {
-                        "builtIn": {
-                            "type": "object",
-                            "description": "Dictionary of the built-in sensitivity information types.",
-                            "additionalProperties": {
-                                "type": "object",
-                                "$ref": "#/definitions/InformationType"
-                            }
-                        },
-                        "custom": {
-                            "type": "object",
-                            "description": "Dictionary of the custom sensitivity information types.",
-                            "additionalProperties": {
-                                "type": "object",
-                                "$ref": "#/definitions/InformationType"
-                            }
-                        }
+                    "additionalProperties": {
+                        "type": "object",
+                        "$ref": "#/definitions/InformationType"
                     }
                 }
             }
@@ -303,6 +289,10 @@
                 "enabled": {
                     "type": "boolean",
                     "description": "Indicates whether the information type is enabled or not."
+                },
+                "custom": {
+                    "type": "boolean",
+                    "description": "Indicates whether the information type is custom or not."
                 },
                 "keywords": {
                     "type": "array",
