@@ -85,6 +85,7 @@ csharp:
 ``` yaml $(python)
 python-mode: create
 python:
+  override-client-name: LogAnalyticsDataClient
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.loganalytics
