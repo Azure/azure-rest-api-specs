@@ -738,41 +738,6 @@
       "type": "object",
       "description": "A Content Key Policy resource."
     },
-    "ODataError": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "A language-independent error name."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error (for example, the name of the property in error)."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          },
-          "description": "The error details."
-        }
-      },
-      "type": "object",
-      "description": "Information about an error."
-    },
-    "ApiError": {
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError",
-          "description": "The error properties."
-        }
-      },
-      "type": "object",
-      "description": "The API error."
-    },
     "ContentKeyPolicyCollection": {
       "properties": {
         "value": {
@@ -807,7 +772,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -881,7 +846,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -932,7 +897,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -995,7 +960,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -1040,7 +1005,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -1099,7 +1064,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
