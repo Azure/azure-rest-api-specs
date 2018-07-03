@@ -62,7 +62,7 @@
           "200": {
             "description": "A list containing 0 or more workbook definitions.",
             "schema": {
-              "$ref": "#/definitions/WorkbooksListResult"
+              "$ref": "#/definitions/Workbooks"
             }
           },
           "default": {
@@ -71,9 +71,6 @@
               "$ref": "#/definitions/WorkbookError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         },
         "x-ms-examples": {
           "WorkbooksList": {
@@ -85,7 +82,7 @@
     "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {  
       "get": {
         "description": "Get a single workbook by its resourceName.",
-        "operationId": "Workbooks_Get",
+        "operationId": "Workbook_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -122,7 +119,7 @@
       },
       "delete": {
         "description": "Delete a workbook.",
-        "operationId": "Workbooks_Delete",
+        "operationId": "Workbook_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -159,7 +156,7 @@
       },
       "put": {
         "description": "Create a new workbook.",
-        "operationId": "Workbooks_CreateOrUpdate",
+        "operationId": "Workbook_CreateOrUpdate",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -211,7 +208,7 @@
       },
       "patch": {
         "description": "Updates a workbook that has already been added.",
-        "operationId": "Workbooks_Update",
+        "operationId": "Workbook_Update",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -226,12 +223,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "workbookProperties",
+            "name": "workbookUpdateParameters",
             "description": "Properties that need to be specified to create a new workbook.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/WorkbookUpdateParameters"
             }
           }
         ],
@@ -258,7 +255,7 @@
     }
   },
   "definitions": {
-    "WorkbookResource": {
+    "Resource": {
       "properties": {
         "id": {
           "type": "string",
@@ -296,11 +293,10 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "WorkbooksListResult": {
+    "Workbooks": {
       "properties": {
         "value": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Workbook"
           },
@@ -313,7 +309,7 @@
       "description": "An Application Insights workbook definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/WorkbookResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -417,6 +413,67 @@
         "sourceResourceId": {
           "type": "string",
           "description": "Optional resourceId for a source resource."
+        }
+      }
+    },
+    "WorkbookUpdateParameters": {
+      "properties": {
+        "kind": {
+            "type": "string",
+            "description": "The kind of workbook. Choices are user and shared.",
+            "enum": [
+                "user",
+                "shared"
+            ],
+            "x-ms-enum": {
+                "name": "SharedTypeKind",
+                "modelAsString": true
+            }
+        },
+        "tags": {
+            "type": "array",
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "Resource tags"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "properties": {
+            "x-ms-client-flatten": true,
+            "description": "Metadata describing a workbook for an Azure resource.",
+            "$ref": "#/definitions/WorkbookPropertiesUpdateParameters"
+        }
+    },
+    "description": "The parameters that can be provided when updating workbook properties properties."
+  },
+  "WorkbookPropertiesUpdateParameters": {
+      "description": "Properties that contain a workbook for PATCH operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The user-defined name (display name) of the workbook."
+        },
+        "serializedData": {
+          "type": "string",
+          "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
+        },
+        "category": {
+          "type": "string",
+          "description": "Workbook category, as defined by the user at creation time."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of 0 or more tags that are associated with this workbook definition"
         }
       }
     },
