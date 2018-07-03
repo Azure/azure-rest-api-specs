@@ -544,6 +544,13 @@
             "description": "Name of the container in which inquiry needs to be triggered.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -552,6 +559,7 @@
           }
         },
         "deprecated": false,
+        "x-ms-odata": "#/definitions/BMSContainersInquiryQueryObject",
         "x-ms-examples": {
           "Inquire Azure Storage Protection Containers": {
             "$ref": "./examples/AzureStorage/ProtectionContainers_Inquire.json"
@@ -2717,6 +2725,11 @@
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
         },
+        "instantRpRetentionRangeInDays": {
+          "format": "int32",
+          "description": "Instant RP retention policy range in days",
+          "type": "integer"
+        },
         "timeZone": {
           "description": "TimeZone optional input as string. For example: TimeZone = \"Pacific Standard Time\".",
           "type": "string"
@@ -2922,7 +2935,7 @@
           "type": "string"
         },
         "parentUniqueName": {
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent \r\n            Only Applicable for data bases where the parent would be either Instance or a SQL AG.",
+          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\r\n            Only Applicable for data bases where the parent would be either Instance or a SQL AG.",
           "type": "string"
         },
         "serverName": {
@@ -2946,6 +2959,99 @@
         "prebackupvalidation": {
           "$ref": "#/definitions/PreBackupValidation",
           "description": "Pre-backup validation for protectable objects"
+        }
+      }
+    },
+    "AzureVmWorkloadProtectedItem": {
+      "description": "Azure VM workload-specific protected item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedItem"
+        }
+      ],
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of the DB represented by this backup item.",
+          "type": "string"
+        },
+        "serverName": {
+          "description": "Host/Cluster Name for instance or AG",
+          "type": "string"
+        },
+        "parentName": {
+          "description": "Parent name of the DB such as Instance or Availability Group.",
+          "type": "string"
+        },
+        "parentType": {
+          "description": "Parent type of protected item, example: for a DB, standalone server or distributed",
+          "type": "string"
+        },
+        "protectionStatus": {
+          "description": "Backup status of this backup item.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Backup state of this backup item.",
+          "enum": [
+            "Invalid",
+            "IRPending",
+            "Protected",
+            "ProtectionError",
+            "ProtectionStopped",
+            "ProtectionPaused"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionState",
+            "modelAsString": true
+          }
+        },
+        "lastBackupStatus": {
+          "description": "Last backup operation status. Possible values: Healthy, Unhealthy.",
+          "enum": [
+            "Invalid",
+            "Healthy",
+            "Unhealthy",
+            "IRPending"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LastBackupStatus",
+            "modelAsString": true
+          }
+        },
+        "lastBackupTime": {
+          "format": "date-time",
+          "description": "Timestamp of the last backup operation on this backup item.",
+          "type": "string"
+        },
+        "lastBackupErrorDetail": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "Error details in last backup"
+        },
+        "protectedItemDataSourceId": {
+          "description": "Data ID of the protected item.",
+          "type": "string"
+        },
+        "protectedItemHealthStatus": {
+          "description": "Health status of the backup item, evaluated based on last heartbeat received",
+          "enum": [
+            "Invalid",
+            "Healthy",
+            "Unhealthy",
+            "NotReachable",
+            "IRPending"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectedItemHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
+          "description": "Additional information for this backup item."
         }
       }
     },
@@ -2995,6 +3101,56 @@
         }
       },
       "x-ms-discriminator-value": "AzureWorkload"
+    },
+    "AzureVmWorkloadSAPHanaDatabaseProtectableItem": {
+      "description": "Azure VM workload-specific protectable item representing SAP Hana Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPHanaDatabase"
+    },
+    "AzureVmWorkloadSAPHanaDatabaseProtectedItem": {
+      "description": "Azure VM workload-specific protected item representing SAP Hana Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadSAPHanaDatabase"
+    },
+    "AzureVmWorkloadSAPHanaDatabaseWorkloadItem": {
+      "description": "Azure VM workload-specific workload item representing SAP Hana Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPHanaDatabase"
+    },
+    "AzureVmWorkloadSAPHanaSystemProtectableItem": {
+      "description": "Azure VM workload-specific protectable item representing SAP Hana System.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPHanaSystem"
+    },
+    "AzureVmWorkloadSAPHanaSystemWorkloadItem": {
+      "description": "Azure VM workload-specific workload item representing SAP Hana System.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPHanaSystem"
     },
     "AzureVmWorkloadSQLAvailabilityGroupProtectableItem": {
       "description": "Azure VM workload-specific protectable item representing SQL Availability Group.",
@@ -3206,6 +3362,30 @@
         "extendedInfo": {
           "$ref": "#/definitions/AzureWorkloadContainerExtendedInfo",
           "description": "Additional details of a workload container."
+        },
+        "workloadType": {
+          "description": "Workload type for which registration was sent.",
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3297,6 +3477,114 @@
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
+    },
+    "AzureWorkloadSAPHanaPointInTimeRecoveryPoint": {
+      "description": "Recovery point specific to PointInTime in SAPHana",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSAPHanaRecoveryPoint"
+        }
+      ],
+      "properties": {
+        "timeRanges": {
+          "description": "List of log ranges",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PointInTimeRange"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
+    },
+    "AzureWorkloadSAPHanaPointInTimeRestoreRequest": {
+      "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSAPHanaRestoreRequest"
+        }
+      ],
+      "properties": {
+        "pointInTime": {
+          "format": "date-time",
+          "description": "PointInTime value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
+    },
+    "AzureWorkloadSAPHanaRecoveryPoint": {
+      "description": "SAPHana specific recoverypoint, specifcally encaspulates full/diff recoverypoints",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPoint"
+        }
+      ],
+      "properties": {
+        "recoveryPointTimeInUTC": {
+          "format": "date-time",
+          "description": "UTC time at which recoverypoint was created",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of restore point",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPHanaRecoveryPoint"
+    },
+    "AzureWorkloadSAPHanaRestoreRequest": {
+      "description": "AzureWorkload SAP Hana-specific restore.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestoreRequest"
+        }
+      ],
+      "properties": {
+        "targetInfo": {
+          "$ref": "#/definitions/TargetRestoreInfo",
+          "description": "Details of target database"
+        },
+        "recoveryType": {
+          "description": "OLR/ALR, RestoreDisks is invalid option",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId": {
+          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered.",
+          "type": "string"
+        },
+        "propertyBag": {
+          "description": "Workload specific property bag.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
     },
     "AzureWorkloadSQLPointInTimeRecoveryPoint": {
       "description": "Recovery point specific to PointInTime",
@@ -3822,7 +4110,12 @@
             "VMAppContainer",
             "SQLAGWorkLoadContainer",
             "StorageContainer",
-            "GenericContainer"
+            "GenericContainer",
+            "SqlCluster",
+            "ExchangeDAG",
+            "SharepointFarm",
+            "HyperVCluster",
+            "WindowsClient"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3845,6 +4138,55 @@
         "friendlyName": {
           "description": "Friendly name of this container.",
           "type": "string"
+        }
+      }
+    },
+    "BMSContainersInquiryQueryObject": {
+      "description": "The query filters that can be used with the inquire container API.",
+      "type": "object",
+      "properties": {
+        "backupManagementType": {
+          "description": "Backup management type for this container.",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload",
+            "DefaultBackup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        },
+        "workloadType": {
+          "description": "Workload type for this container.",
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3886,7 +4228,8 @@
             "Client",
             "GenericDataSource",
             "SQLDataBase",
-            "AzureFileShare"
+            "AzureFileShare",
+            "SAPHanaDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3909,7 +4252,7 @@
       }
     },
     "BMSRefreshContainersQueryObject": {
-      "description": "The query filters that can be used with the list containers API.",
+      "description": "The query filters that can be used with the refresh container API.",
       "type": "object",
       "properties": {
         "backupManagementType": {
@@ -3997,7 +4340,9 @@
           "enum": [
             "Invalid",
             "SQLInstance",
-            "SQLDataBase"
+            "SQLDataBase",
+            "SAPHanaSystem",
+            "SAPHanaDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4020,7 +4365,8 @@
             "Client",
             "GenericDataSource",
             "SQLDataBase",
-            "AzureFileShare"
+            "AzureFileShare",
+            "SAPHanaDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4685,8 +5031,12 @@
           "type": "string"
         },
         "originalStorageAccountOption": {
-          "description": "Original SA Option",
+          "description": "Original Storage Account Option",
           "type": "boolean"
+        },
+        "osType": {
+          "description": "OS type",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "IaasVMRecoveryPoint"
@@ -4759,7 +5109,7 @@
           "type": "boolean"
         },
         "originalStorageAccountOption": {
-          "description": "Original SA Option",
+          "description": "Original Storage Account Option",
           "type": "boolean"
         },
         "encryptionDetails": {
@@ -4864,7 +5214,7 @@
       }
     },
     "KeyAndSecretDetails": {
-      "description": "BEK is bitlocker key.\r\n            KEK is encryption key for BEK\r\n            If the VM was encrypted then we will store follwing details :\r\n            1. Secret(BEK) - Url + Backup Data + vaultId.\r\n            2. Key(KEK) - Url + Backup Data + vaultId.\r\n            BEK and KEK can potentiallty have different vault ids.",
+      "description": "BEK is bitlocker key.\r\n            KEK is encryption key for BEK\r\n            If the VM was encrypted then we will store follwing details :\r\n            1. Secret(BEK) - Url + Backup Data + vaultId.\r\n            2. Key(KEK) - Url + Backup Data + vaultId.\r\n            3. EncryptionMechanism\r\n            BEK and KEK can potentiallty have different vault ids.",
       "type": "object",
       "properties": {
         "kekDetails": {
@@ -4874,6 +5224,10 @@
         "bekDetails": {
           "$ref": "#/definitions/BEKDetails",
           "description": "BEK is bitlocker encrpytion key."
+        },
+        "encryptionMechanism": {
+          "description": "Encryption mechanism: None/ SinglePass/ DoublePass",
+          "type": "string"
         }
       }
     },
@@ -4974,7 +5328,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "MABWindowsContainer"
+      "x-ms-discriminator-value": "Windows"
     },
     "MabContainerExtendedInfo": {
       "description": "Additional information of the container.",
@@ -5000,7 +5354,8 @@
             "Client",
             "GenericDataSource",
             "SQLDataBase",
-            "AzureFileShare"
+            "AzureFileShare",
+            "SAPHanaDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5396,7 +5751,12 @@
             "VMAppContainer",
             "SQLAGWorkLoadContainer",
             "StorageContainer",
-            "GenericContainer"
+            "GenericContainer",
+            "SqlCluster",
+            "ExchangeDAG",
+            "SharepointFarm",
+            "HyperVCluster",
+            "WindowsClient"
           ],
           "type": "string",
           "readOnly": true,
@@ -5490,7 +5850,8 @@
             "Client",
             "GenericDataSource",
             "SQLDataBase",
-            "AzureFileShare"
+            "AzureFileShare",
+            "SAPHanaDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5518,6 +5879,19 @@
         "backupSetName": {
           "description": "Name of the backup set the backup item belongs to",
           "type": "string"
+        },
+        "createMode": {
+          "description": "Create mode to indicate recovery of existing soft deleted data source or creation of new data source.",
+          "enum": [
+            "Invalid",
+            "Default",
+            "Recover"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "protectedItemType"
@@ -5588,7 +5962,12 @@
             "VMAppContainer",
             "SQLAGWorkLoadContainer",
             "StorageContainer",
-            "GenericContainer"
+            "GenericContainer",
+            "SqlCluster",
+            "ExchangeDAG",
+            "SharepointFarm",
+            "HyperVCluster",
+            "WindowsClient"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5901,6 +6280,10 @@
         "issqlcompression": {
           "description": "SQL compression flag",
           "type": "boolean"
+        },
+        "isCompression": {
+          "description": "Workload compression flag. This has been added so that 'isSqlCompression'\r\n            will be deprecated once clients upgrade to consider this flag.",
+          "type": "boolean"
         }
       }
     },
@@ -6090,7 +6473,7 @@
           "type": "string"
         },
         "databaseName": {
-          "description": "Database name SQL InstanceName/DataBaseName",
+          "description": "Database name InstanceName/DataBaseName for SQL or System/DbName for SAP Hana",
           "type": "string"
         }
       }
@@ -6147,7 +6530,8 @@
               "Second",
               "Third",
               "Fourth",
-              "Last"
+              "Last",
+              "Invalid"
             ],
             "type": "string",
             "x-ms-enum": {

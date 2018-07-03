@@ -384,7 +384,7 @@
                     }
                 },
                 "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
+                "description": "List all the alerts that are associated with the subscription",
                 "operationId": "Alerts_List",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
@@ -424,7 +424,7 @@
                     }
                 },
                 "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
+                "description": "List all the alerts alerts that are associated with the resource group",
                 "operationId": "Alerts_ListByResourceGroup",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
@@ -466,7 +466,7 @@
                     }
                 },
                 "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
+                "description": "List all the alerts that are associated with the subscription that are stored in a specific location",
                 "operationId": "Alerts_ListSubscriptionLevelAlertsByRegion",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
@@ -508,7 +508,7 @@
                     }
                 },
                 "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
+                "description": "List all the alerts that are associated with the resource group that are stored in a specific location",
                 "operationId": "Alerts_ListResourceGroupLevelAlertsByRegion",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
@@ -552,7 +552,7 @@
                     }
                 },
                 "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
+                "description": "Get an alert that is associated with a subscription",
                 "operationId": "Alerts_GetSubscriptionLevelAlert",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
@@ -587,7 +587,7 @@
                     }
                 },
                 "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
+                "description": "Get an alert that is associated a resource group or a resource in a resource group",
                 "operationId": "Alerts_GetResourceGroupLevelAlerts",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
@@ -624,7 +624,7 @@
                     }
                 },
                 "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
+                "description": "Update the alert's state",
                 "operationId": "Alerts_UpdateSubscriptionLevelAlertState",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
@@ -658,7 +658,7 @@
                     }
                 },
                 "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
+                "description": "Update the alert's state",
                 "operationId": "Alerts_UpdateResourceGroupLevelAlertState",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
@@ -848,7 +848,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPolicies_ListByHomeRegion",
+                "operationId": "JitNetworkAccessPolicies_ListByRegion",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },
@@ -926,7 +926,7 @@
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPolicies_ListByResourceGroupAndHomeRegion",
+                "operationId": "JitNetworkAccessPolicies_ListByResourceGroupAndRegion",
                 "produces": [
                     "application/json"
                 ],
@@ -1048,7 +1048,7 @@
             },
             "delete": {
                 "x-ms-examples": {
-                    "Delete JIT network access policy": {
+                    "Delete a JIT network access policy": {
                         "$ref": "./examples/JitNetworkAccessPolicies/DeleteJitNetworkAccessPolicy_example.json"
                     }
                 },
@@ -1072,8 +1072,11 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK - Resource was deleted"
+                    },
                     "204": {
-                        "description": "No Content"
+                        "description": "No Content - Resource does not exist"
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -1087,13 +1090,13 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyActionType}": {
             "post": {
                 "x-ms-examples": {
-                    "Invoke an action on a JIT network access policy": {
-                        "$ref": "./examples/JitNetworkAccessPolicies/InvokeJitNetworkAccessPolicy_example.json"
+                    "Initiate an action on a JIT network access policy": {
+                        "$ref": "./examples/JitNetworkAccessPolicies/InitiateJitNetworkAccessPolicy_example.json"
                     }
                 },
                 "tags": ["JitNetworkAccessPolicies"],
                 "description": "Perform an action on a specific Just-in-Time policy configuration.",
-                "operationId": "JitNetworkAccessPolicies_Invoke",
+                "operationId": "JitNetworkAccessPolicies_Initiate",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
                     },

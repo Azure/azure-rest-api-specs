@@ -19,7 +19,14 @@ To see additional help and options, run:
 
 ## Configuration
 
-
+## Suppression
+``` yaml
+directive:
+  - suppress: ValidFormats
+    from: security.json
+    where: $.definitions.SecurityContactProperties.properties.email.format
+    reason: email format is allowed
+```
 
 ### Basic Information 
 These are the global settings for the Security API.

@@ -39,7 +39,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/connection.json
 - Microsoft.Automation/stable/2015-10-31/connectionType.json
 - Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/definitions.json
 - Microsoft.Automation/stable/2015-10-31/dscCompilationJob.json
 - Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/dscNode.json
@@ -67,7 +66,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/connection.json
 - Microsoft.Automation/stable/2015-10-31/connectionType.json
 - Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/definitions.json
 - Microsoft.Automation/stable/2015-10-31/dscCompilationJob.json
 - Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/dscNode.json
@@ -80,7 +78,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
-- Microsoft.Automation/preview/2017-05-15-preview/definitions.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
@@ -101,7 +98,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/connection.json
 - Microsoft.Automation/stable/2015-10-31/connectionType.json
 - Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/definitions.json
 - Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
@@ -111,7 +107,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
-- Microsoft.Automation/preview/2017-05-15-preview/definitions.json
+- Microsoft.Automation/stable/2015-10-31/watcher.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
@@ -119,11 +115,10 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
 - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJobStreams.json
 - Microsoft.Automation/preview/2017-05-15-preview/job.json
-- Microsoft.Automation/stable/2018-01-15/definitions.json
 - Microsoft.Automation/stable/2018-01-15/dscNode.json
 - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
 - Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
-- Microsoft.Automation/stable/2015-10-31/watcher.json
+- Microsoft.Automation/stable/2018-01-15/dscNodeCounts.json
 ```
 
 ---
@@ -131,11 +126,23 @@ input-file:
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: definitions.json
+    from: runbook.json
     where: $.definitions.TestJob
   - suppress: BodyTopLevelProperties
-    from: definitions.json
+    from: runbook.json
     where: $.definitions.TestJob.properties
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: account.json
+    where: $.definitions.Key.properties.KeyName
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: account.json
+    where: $.definitions.Key.properties.Permissions
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: account.json
+    where: $.definitions.Key.properties.Value
+  - suppress: LongRunningResponseStatusCode
+    from: runbook.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/publish"].post["x-ms-long-running-operation"]
 ```
 
 ---
@@ -235,6 +242,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-05-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2017-05-15-preview/automation
+```
+
+### Tag: package-2018-01-preview and go
+
+These settings apply only when `--tag=package-2018-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2018-01-preview/automation
 ```
 
 ## Java
