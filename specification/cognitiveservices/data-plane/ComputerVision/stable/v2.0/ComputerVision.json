@@ -21,10 +21,11 @@
     "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
     "parameters": [
       {
-        "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
+        "$ref": "#/parameters/AzureRegion"
       }
     ]
   },
+  "host": "westcentralus.api.cognitive.microsoft.com",
   "basePath": "/vision/v2.0",
   "schemes": [
     "https"
@@ -96,7 +97,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -150,7 +151,7 @@
             "description": "Height of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50."
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "name": "smartCropping",
@@ -197,7 +198,7 @@
             "$ref": "#/parameters/DetectOrientation"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "$ref": "#/parameters/OcrLanguage"
@@ -247,7 +248,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -286,7 +287,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -332,7 +333,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -362,7 +363,7 @@
         "operationId": "RecognizeText",
         "parameters": [
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "$ref": "#/parameters/TextRecognitionMode"
@@ -467,7 +468,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -522,7 +523,7 @@
             "description": "Height of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50."
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           },
           {
             "name": "smartCropping",
@@ -573,7 +574,7 @@
             "$ref": "#/parameters/DetectOrientation"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -621,7 +622,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -661,7 +662,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -708,7 +709,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -738,7 +739,7 @@
         "operationId": "RecognizeTextInStream",
         "parameters": [
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           },
           {
             "$ref": "#/parameters/TextRecognitionMode"
@@ -1405,6 +1406,18 @@
     },
     "ServiceLanguage": {
       "type": "string"
+    },
+    "ImageUrl": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -1517,6 +1530,55 @@
         "ja",
         "pt",
         "zh"
+      ]
+    },
+    "ImageUrl": {
+      "name": "ImageUrl",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true,
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      }
+    },
+    "ImageStream": {
+      "name": "Image",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "An image stream.",
+      "schema": {
+        "type": "object",
+        "format": "file"
+      }
+    },
+    "AzureRegion": {
+      "name": "AzureRegion",
+      "description": "Supported Azure regions for Cognitive Services endpoints",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-enum": {
+        "name": "AzureRegions",
+        "modelAsString": false
+      },
+      "enum": [
+        "westus",
+        "westeurope",
+        "southeastasia",
+        "eastus2",
+        "westcentralus",
+        "westus2",
+        "eastus",
+        "southcentralus",
+        "northeurope",
+        "eastasia",
+        "australiaeast",
+        "brazilsouth"
       ]
     }
   }

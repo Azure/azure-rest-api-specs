@@ -34,7 +34,6 @@ These settings apply only when `--tag=package-2015-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-10'
 input-file:
-- Microsoft.Automation/common/v1/definitions.json
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
 - Microsoft.Automation/stable/2015-10-31/connection.json
@@ -62,7 +61,6 @@ These settings apply only when `--tag=package-2017-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-05-preview'
 input-file:
-- Microsoft.Automation/common/v1/definitions.json
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
 - Microsoft.Automation/stable/2015-10-31/connection.json
@@ -95,7 +93,6 @@ These settings apply only when `--tag=package-2018-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-01-preview'
 input-file:
-- Microsoft.Automation/common/v1/definitions.json
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
 - Microsoft.Automation/stable/2015-10-31/connection.json
@@ -110,6 +107,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
+- Microsoft.Automation/stable/2015-10-31/watcher.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
@@ -120,7 +118,7 @@ input-file:
 - Microsoft.Automation/stable/2018-01-15/dscNode.json
 - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
 - Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
-- Microsoft.Automation/stable/2015-10-31/watcher.json
+- Microsoft.Automation/stable/2018-01-15/dscNodeCounts.json
 ```
 
 ---
@@ -244,6 +242,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-05-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2017-05-15-preview/automation
+```
+
+### Tag: package-2018-01-preview and go
+
+These settings apply only when `--tag=package-2018-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2018-01-preview/automation
 ```
 
 ## Java

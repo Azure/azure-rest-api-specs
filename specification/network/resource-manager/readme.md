@@ -31,47 +31,6 @@ openapi-type: arm
 tag: package-2018-04
 ```
 
-### Tag: package-2018-05
-
-These settings apply only when `--tag=package-2018-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-05'
-
-input-file:
-- Microsoft.Network/stable/2018-05-01/applicationGateway.json
-- Microsoft.Network/stable/2018-05-01/applicationSecurityGroup.json
-- Microsoft.Network/stable/2018-05-01/checkDnsAvailability.json
-- Microsoft.Network/stable/2018-05-01/ddosProtectionPlan.json
-- Microsoft.Network/stable/2018-05-01/endpointService.json
-- Microsoft.Network/stable/2018-05-01/expressRouteCircuit.json
-- Microsoft.Network/stable/2018-05-01/expressRouteCrossConnection.json
-- Microsoft.Network/stable/2018-05-01/loadBalancer.json
-- Microsoft.Network/stable/2018-05-01/network.json
-- Microsoft.Network/stable/2018-05-01/networkInterface.json
-- Microsoft.Network/stable/2018-05-01/networkSecurityGroup.json
-- Microsoft.Network/stable/2018-05-01/networkWatcher.json
-- Microsoft.Network/stable/2018-05-01/operation.json
-- Microsoft.Network/stable/2018-05-01/publicIpAddress.json
-- Microsoft.Network/stable/2018-05-01/routeFilter.json
-- Microsoft.Network/stable/2018-05-01/routeTable.json
-- Microsoft.Network/stable/2018-05-01/serviceCommunity.json
-- Microsoft.Network/stable/2018-05-01/usage.json
-- Microsoft.Network/stable/2018-05-01/virtualNetwork.json
-- Microsoft.Network/stable/2018-05-01/virtualNetworkGateway.json
-- Microsoft.Network/stable/2018-05-01/vmssNetworkInterface.json
-- Microsoft.Network/stable/2018-05-01/vmssPublicIpAddress.json
-```
-
-### Tag: package-2018-05-expressroutecrossconnection-only
-
-These settings apply only when `--tag=package-2018-05-expressroutecrossconnection-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-05-expressroutecrossconnection-only'
-
-input-file:
-- Microsoft.Network/stable/2018-05-01/expressRouteCrossConnection.json
-```
-
 ### Tag: package-2018-04
 
 These settings apply only when `--tag=package-2018-04` is specified on the command line.
@@ -79,6 +38,7 @@ These settings apply only when `--tag=package-2018-04` is specified on the comma
 ``` yaml $(tag) == 'package-2018-04'
 
 input-file:
+- Microsoft.Network/stable/2018-04-01/azureFirewall.json
 - Microsoft.Network/stable/2018-04-01/applicationGateway.json
 - Microsoft.Network/stable/2018-04-01/applicationSecurityGroup.json
 - Microsoft.Network/stable/2018-04-01/checkDnsAvailability.json
@@ -565,6 +525,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationSecurityGroup.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: azureFirewall.json	
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: checkDnsAvailability.json
@@ -1055,8 +1018,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 
 ```yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-04
   - tag: package-2018-05
   - tag: package-2017-10
+```
+
+### Tag: package-2018-04 and java
+
+These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-05 and java

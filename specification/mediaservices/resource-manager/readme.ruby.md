@@ -2,11 +2,10 @@
 
 These settings apply only when `--ruby` is specified on the command line.
 
-``` yaml $(ruby)
-ruby:
-  package-name: azure_mgmt_media_services
-  package-version: "0.16.2"
-  azure-arm: true
+``` yaml
+package-name: azure_mgmt_media_services
+package-version: "0.16.1"
+azure-arm: true
 ```
 
 ### Ruby multi-api
