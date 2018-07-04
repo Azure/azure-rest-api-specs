@@ -55,7 +55,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": " The list of Active Directory Domain Controller services.",
             "schema": {
               "$ref": "#/definitions/Services"
             }
@@ -90,7 +90,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Adds the Active Directory Domain Controller Services.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -122,7 +122,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The Active Directory Domain Controller service as specified by the serviceName property. ",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -159,7 +159,7 @@
         ],
         "responses": {
           "204": {
-            "description": " "
+            "description": "Successfully deleted the service."
           }
         }
       },
@@ -195,7 +195,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Sucessfully updated service.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -257,7 +257,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of alerts for the given service.",
             "schema": {
               "$ref": "#/definitions/Alerts"
             }
@@ -296,7 +296,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The Active Directory Domain Controller service configuration. ",
             "schema": {
               "$ref": "#/definitions/AddsConfiguration"
             }
@@ -338,7 +338,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of dimensions for a server. ",
             "schema": {
               "$ref": "#/definitions/Dimensions"
             }
@@ -380,7 +380,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of Active Directory Domain Servers. ",
             "schema": {
               "$ref": "#/definitions/AddsServiceMembers"
             }
@@ -436,8 +436,8 @@
             "description": "The next partition key to query for.",
             "required": true,
             "type": "string",
-            "enum": [" "],
-              "x-ms-enum": {
+            "enum": [ " " ],
+            "x-ms-enum": {
               "name": "nextPartitionKey",
               "modelAsString": true
             }
@@ -467,7 +467,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of Active Directory Domain Servers.",
             "schema": {
               "$ref": "#/definitions/AddsServiceMembers"
             }
@@ -475,6 +475,122 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/features/{featureName}/userpreference": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the user preferences for a given feature.",
+        "x-ms-examples": {
+          "addsServicesUserPreference_get": {
+            "$ref": "./examples/UserPreference.json"
+          }
+        },
+        "operationId": "addsServicesUserPreference_get",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "The name of the feature.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user preference settings. ",
+            "schema": {
+              "$ref": "#/definitions/UserPreference"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Adds" ],
+        "description": "Deletes the user preferences for a given feature.",
+        "x-ms-examples": {
+          "addsServicesUserPreference_delete": {
+            "$ref": "./examples/DeleteUserPreference.json"
+          }
+        },
+        "operationId": "addsServicesUserPreference_delete",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "The name of the feature.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the user preference settings. "
+          }
+        }
+      },
+      "post": {
+        "tags": [ "Adds" ],
+        "description": "Adds the user preferences for a given feature.",
+        "x-ms-examples": {
+          "addsServicesUserPreference_add": {
+            "$ref": "./examples/AddUserPreference.json"
+          }
+        },
+        "operationId": "addsServicesUserPreference_add",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "The name of the feature.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "setting",
+            "in": "body",
+            "description": "The user preference setting.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserPreference"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " Successfully added the user preference settings. "
+          }
         }
       }
     },
@@ -502,9 +618,78 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of forest summary for the service. ",
             "schema": {
               "$ref": "#/definitions/ForestSummary"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metrics/{metricName}/groups/{groupName}": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the server related metrics for a given metric and group combination.",
+        "x-ms-examples": {
+          "addsService_getMetrics": {
+            "$ref": "./examples/Service_MetricSets.json"
+          }
+        },
+        "operationId": "addsService_getMetrics",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "description": "The metric name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupKey",
+            "in": "query",
+            "description": "The group key",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The start date.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The end date.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metric sets for the service. ",
+            "schema": {
+              "$ref": "#/definitions/MetricSets"
             }
           }
         }
@@ -548,7 +733,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metrics. ",
             "schema": {
               "$ref": "#/definitions/Metrics"
             }
@@ -597,7 +782,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of aum of the metric values for a given service. ",
             "schema": {
               "$ref": "#/definitions/Metrics"
             }
@@ -646,7 +831,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metric metadata for a service. ",
             "schema": {
               "$ref": "#/definitions/MetricMetadataList"
             }
@@ -688,7 +873,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": " The metric metadata for the service.",
             "schema": {
               "$ref": "#/definitions/MetricMetadata"
             }
@@ -757,11 +942,60 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The metric sets for a given service and group. ",
             "schema": {
               "$ref": "#/definitions/MetricSets"
             }
           }
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/replicationdetails": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets complete domain controller list along with replication details for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
+        "x-ms-examples": {
+          "addsServices_listReplicationDetails": {
+            "$ref": "./examples/ReplicationDetails.json"
+          }
+        },
+        "operationId": "addsServices_listReplicationDetails",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The server property filter to apply.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "withDetails",
+            "in": "query",
+            "description": "Indicates if InboundReplicationNeighbor details are required or not.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of replication details for a service. ",
+            "schema": {
+              "$ref": "#/definitions/ReplicationDetailsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -770,11 +1004,11 @@
         "tags": [ "Adds" ],
         "description": "Gets Replication status for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
-          "addsServices_getReplicationStatus": {
+          "addsServicesReplicationStatus_get": {
             "$ref": "./examples/ReplicationStatus.json"
           }
         },
-        "operationId": "addsServices_getReplicationStatus",
+        "operationId": "addsServicesReplicationStatus_get",
         "parameters": [
           {
             "name": "serviceName",
@@ -789,7 +1023,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The replication status for a service. ",
             "schema": {
               "$ref": "#/definitions/ReplicationStatus"
             }
@@ -873,7 +1107,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of replication summary for a service. ",
             "schema": {
               "$ref": "#/definitions/ReplicationSummaryList"
             }
@@ -881,6 +1115,183 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the details of the servers, for a given Active Directory Domain Controller service, that are onboarded to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServicesServiceMembers_list": {
+            "$ref": "./examples/ServiceMembers.json"
+          }
+        },
+        "operationId": "addsServicesServiceMembers_list",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The server property filter to apply.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dimensionType",
+            "in": "query",
+            "description": "The server specific dimension.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dimensionSignature",
+            "in": "query",
+            "description": "The value of the dimension.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of service members for a given service.",
+            "schema": {
+              "$ref": "#/definitions/ServiceMembers"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "tags": [ "Adds" ],
+        "description": "Onboards  a server, for a given Active Directory Domain Controller service, to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServicesServiceMembers_add": {
+            "$ref": "./examples/AddServiceMembers.json"
+          }
+        },
+        "operationId": "addsServicesServiceMembers_add",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service under which the server is to be onboarded.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceMember",
+            "in": "body",
+            "description": "The server object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceMember"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully added the service member.",
+            "schema": {
+              "$ref": "#/definitions/ServiceMember"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers/{serviceMemberId}": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the details of a server, for a given Active Directory Domain Controller service, that are onboarded to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServiceMembers_get": {
+            "$ref": "./examples/ServiceMember.json"
+          }
+        },
+        "operationId": "addsServiceMembers_get",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceMemberId",
+            "in": "path",
+            "description": "The server Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service member details for a given service. ",
+            "schema": {
+              "$ref": "#/definitions/ServiceMember"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Adds" ],
+        "description": "Deletes a Active Directory Domain Controller server that has been onboarded to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServiceMembers_delete": {
+            "$ref": "./examples/DeleteServer.json"
+          }
+        },
+        "operationId": "addsServiceMembers_delete",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceMemberId",
+            "in": "path",
+            "description": "The server Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "confirm",
+            "in": "query",
+            "description": "Indicates if the server will be permanently deleted or disabled. True indicates that the server will be permanently deleted and False indicates that the server will be marked disabled and then deleted after 30 days, if it is not re-registered.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the service member."
+          }
         }
       }
     },
@@ -946,7 +1357,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of server alerts.",
             "schema": {
               "$ref": "#/definitions/Alerts"
             }
@@ -954,6 +1365,56 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers/{serviceMemberId}/credentials": {
+      "get": {
+        "tags": [ "Adds" ],
+        "description": "Gets the credentials of the server which is needed by the agent to connect to Azure Active Directory Connect Health Service.",
+        "x-ms-examples": {
+          "addsServiceMembers_listCredentials": {
+            "$ref": "./examples/Credentials.json"
+          }
+        },
+        "operationId": "addsServiceMembers_listCredentials",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The property filter to apply.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "serviceMemberId",
+            "in": "path",
+            "description": "The server Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of server credentials.",
+            "schema": {
+              "$ref": "#/definitions/Credentials"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1002,7 +1463,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of premium services.",
             "schema": {
               "$ref": "#/definitions/Services"
             }
@@ -1032,7 +1493,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The list of operations.",
             "schema": {
               "$ref": "#/definitions/OperationListResponse"
             }
@@ -1060,7 +1521,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully added the tenant.",
             "schema": {
               "$ref": "#/definitions/Tenant"
             }
@@ -1083,7 +1544,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The tenant details.",
             "schema": {
               "$ref": "#/definitions/Tenant"
             }
@@ -1115,9 +1576,34 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully updated the tenant.",
             "schema": {
               "$ref": "#/definitions/Tenant"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/reports/DevOps/IsDevOps": {
+      "get": {
+        "tags": [ "DevOps" ],
+        "description": "Checks if the user is enabled for Dev Ops access.",
+        "x-ms-examples": {
+          "reports_getDevOps": {
+            "$ref": "./examples/DevOps.json"
+          }
+        },
+        "operationId": "reports_getDevOps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicates if the user is Dev Ops or not.",
+            "schema": {
+              "$ref": "#/definitions/Result"
             }
           }
         }
@@ -1168,7 +1654,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of services.",
             "schema": {
               "$ref": "#/definitions/Services"
             }
@@ -1203,7 +1689,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully added the service.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -1256,7 +1742,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of premium services.",
             "schema": {
               "$ref": "#/definitions/Services"
             }
@@ -1291,7 +1777,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of services.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -1328,7 +1814,7 @@
         ],
         "responses": {
           "204": {
-            "description": " "
+            "description": "Successfully deleted the service."
           }
         }
       },
@@ -1364,7 +1850,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully updated the service.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -1426,7 +1912,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of alerts.",
             "schema": {
               "$ref": "#/definitions/Alerts"
             }
@@ -1468,7 +1954,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Indicates if the feature is available or not.",
             "schema": {
               "$ref": "#/definitions/Result"
             }
@@ -1500,7 +1986,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of export errors.",
             "schema": {
               "$ref": "#/definitions/ErrorCounts"
             }
@@ -1542,7 +2028,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of merged export errors.",
             "schema": {
               "$ref": "#/definitions/MergedExportErrors"
             }
@@ -1577,7 +2063,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of export statuses.",
             "schema": {
               "$ref": "#/definitions/ExportStatuses"
             }
@@ -1621,7 +2107,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully added alert feedback.",
             "schema": {
               "$ref": "#/definitions/AlertFeedback"
             }
@@ -1660,7 +2146,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of alert feedback.",
             "schema": {
               "$ref": "#/definitions/AlertFeedbacks"
             }
@@ -1668,6 +2154,75 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metrics/{metricName}/groups/{groupName}": {
+      "get": {
+        "tags": [ "Metrics" ],
+        "description": "Gets the server related metrics for a given metric and group combination.",
+        "x-ms-examples": {
+          "service_getMetrics": {
+            "$ref": "./examples/Service_MetricSets.json"
+          }
+        },
+        "operationId": "service_getMetrics",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "description": "The metric name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupKey",
+            "in": "query",
+            "description": "The group key",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The start date.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The end date.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metric sets for a given service.",
+            "schema": {
+              "$ref": "#/definitions/MetricSets"
+            }
+          }
         }
       }
     },
@@ -1709,7 +2264,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of average metrics for a given service.",
             "schema": {
               "$ref": "#/definitions/Metrics"
             }
@@ -1758,7 +2313,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metrics for a given service.",
             "schema": {
               "$ref": "#/definitions/Metrics"
             }
@@ -1807,7 +2362,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metric metadata for a given service.",
             "schema": {
               "$ref": "#/definitions/MetricMetadataList"
             }
@@ -1849,7 +2404,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The metric metadata for a given metric.",
             "schema": {
               "$ref": "#/definitions/MetricMetadata"
             }
@@ -1918,7 +2473,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The metric sets for a given service and group.",
             "schema": {
               "$ref": "#/definitions/MetricSets"
             }
@@ -1959,7 +2514,7 @@
         ],
         "responses": {
           "200": {
-            "description": " "
+            "description": "Successfully updated the monitoring configuration."
           }
         }
       }
@@ -1988,7 +2543,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of monitoring configurations.",
             "schema": {
               "$ref": "#/definitions/Items"
             }
@@ -2030,7 +2585,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of bad password login attempts.",
             "schema": {
               "$ref": "#/definitions/ErrorReportUsersEntries"
             }
@@ -2086,7 +2641,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of service members.",
             "schema": {
               "$ref": "#/definitions/ServiceMembers"
             }
@@ -2128,7 +2683,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Successfully added the service member.",
             "schema": {
               "$ref": "#/definitions/ServiceMember"
             }
@@ -2168,7 +2723,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The specific service member.",
             "schema": {
               "$ref": "#/definitions/ServiceMember"
             }
@@ -2213,7 +2768,7 @@
         ],
         "responses": {
           "200": {
-            "description": " "
+            "description": "Successfully deleted the service member."
           }
         }
       }
@@ -2280,7 +2835,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of alerts.",
             "schema": {
               "$ref": "#/definitions/Alerts"
             }
@@ -2323,14 +2878,14 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of connector details.",
             "schema": {
               "$ref": "#/definitions/Connectors"
             }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName":null
+          "nextLinkName": null
         }
       }
     },
@@ -2373,7 +2928,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of service member credentials.",
             "schema": {
               "$ref": "#/definitions/Credentials"
             }
@@ -2416,7 +2971,7 @@
         ],
         "responses": {
           "200": {
-            "description": " "
+            "description": "Successfully deleted the service member."
           }
         }
       }
@@ -2453,7 +3008,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of datafreshness details for a server.",
             "schema": {
               "$ref": "#/definitions/DataFreshnessDetails"
             }
@@ -2496,7 +3051,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of export statuses.",
             "schema": {
               "$ref": "#/definitions/ExportStatuses"
             }
@@ -2538,7 +3093,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of global configurations.",
             "schema": {
               "$ref": "#/definitions/GlobalConfigurations"
             }
@@ -2554,11 +3109,11 @@
         "tags": [ "Metrics" ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
-          "serviceMembers_listMetrics": {
+          "serviceMembers_getMetrics": {
             "$ref": "./examples/Server_MetricSets.json"
           }
         },
-        "operationId": "serviceMembers_listMetrics",
+        "operationId": "serviceMembers_getMetrics",
         "parameters": [
           {
             "name": "serviceName",
@@ -2618,7 +3173,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The list of metric sets for a given metric.",
             "schema": {
               "$ref": "#/definitions/MetricSets"
             }
@@ -2657,7 +3212,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "The service configuration.",
             "schema": {
               "$ref": "#/definitions/ServiceConfiguration"
             }
@@ -2696,7 +3251,7 @@
         ],
         "responses": {
           "200": {
-            "description": " ",
+            "description": "Indicates if a tenant is whitelisted for a feature or not.",
             "schema": {
               "$ref": "#/definitions/Result"
             }
@@ -5061,6 +5616,31 @@
         }
       }
     },
+    "ReplicationDetailsList": {
+      "description": "The list of replication details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationSummary"
+          }
+        },
+        "totalCount": {
+          "description": "The total count of replication detail elements.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
     "ReplicationStatus": {
       "description": " Replication summary for a domain controller.",
       "type": "object",
@@ -5464,7 +6044,7 @@
         },
         "disabledReason": {
           "description": "The reason for disabling the server.",
-          "type": "integer"                   
+          "type": "integer"
         },
         "installedQfes": {
           "description": "The list of installed QFEs for the server.",
@@ -5722,6 +6302,19 @@
         "onboardingDisplayUrl": {
           "description": "The display url, to help tenant navigate or onboard to Azure Active Directory Connect Health blade, based on tenant onboarding status.",
           "type": "string"
+        }
+      }
+    },
+    "UserPreference": {
+      "description": " The user preference for a given feature.",
+      "type": "object",
+      "properties": {
+        "metricNames": {
+          "description": "The name of the metric.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

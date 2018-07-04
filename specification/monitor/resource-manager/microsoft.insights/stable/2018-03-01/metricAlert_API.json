@@ -45,58 +45,6 @@
             "description": "Successful request for a list of metric alerts",
             "schema": {
               "$ref": "#/definitions/MetricAlertResourceCollection"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "location": "global",
-                    "tags": {
-                      "key1": "value1",
-                      "key2": "value2"
-                    },
-                    "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourcegroups/test/providers/microsoft.insights/metricalerts/storageTest",
-                    "name": "storageTest",
-                    "properties": {
-                      "description": "This is the description of the xstore multidim rule1",
-                      "severity": 3,
-                      "enabled": true,
-                      "scopes": [
-                        "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/testmultidim/blobServices/default"
-                      ],
-                      "evaluationFrequency": "PT1M",
-                      "windowSize": "PT15M",
-                      "criteria": {
-                        "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-                        "allOf": [
-                          {
-                            "name": "HowManyBytes",
-                            "metricName": "BlobCapacity",
-                            "dimensions": [
-                              {
-                                "name": "BlobType",
-                                "operator": "Include",
-                                "values": [
-                                  "BlockBlob",
-                                  "PageBlob"
-                                ]
-                              }
-                            ],
-                            "operator": "GreaterThanOrEqual",
-                            "threshold": 5.0,
-                            "timeAggregation": "Maximum"
-                          }
-                        ]
-                      },
-                      "actions": [
-                        {
-                          "actionGroupId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/microsoft.insights/actionGroups/testActionGroup"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -127,58 +75,6 @@
             "description": "Successful request for a list of metric alerts",
             "schema": {
               "$ref": "#/definitions/MetricAlertResourceCollection"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "location": "global",
-                    "tags": {
-                      "key1": "value1",
-                      "key2": "value2"
-                    },
-                    "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourcegroups/test/providers/microsoft.insights/metricalerts/storageTest",
-                    "name": "storageTest",
-                    "properties": {
-                      "description": "This is the description of the xstore multidim rule1",
-                      "severity": 3,
-                      "enabled": true,
-                      "scopes": [
-                        "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/testmultidim/blobServices/default"
-                      ],
-                      "evaluationFrequency": "PT1M",
-                      "windowSize": "PT15M",
-                      "criteria": {
-                        "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-                        "allOf": [
-                          {
-                            "name": "HowManyBytes",
-                            "metricName": "BlobCapacity",
-                            "dimensions": [
-                              {
-                                "name": "BlobType",
-                                "operator": "Include",
-                                "values": [
-                                  "BlockBlob",
-                                  "PageBlob"
-                                ]
-                              }
-                            ],
-                            "operator": "GreaterThanOrEqual",
-                            "threshold": 5.0,
-                            "timeAggregation": "Maximum"
-                          }
-                        ]
-                      },
-                      "actions": [
-                        {
-                          "actionGroupId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/microsoft.insights/actionGroups/testActionGroup"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -210,54 +106,6 @@
             "description": "Successful request for a list of metric alerts",
             "schema": {
               "$ref": "#/definitions/MetricAlertResource"
-            },
-            "examples": {
-              "application/json": {
-                  "location": "global",
-                  "tags": {
-                    "key1": "value1",
-                    "key2": "value2"
-                  },
-                  "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourcegroups/test/providers/microsoft.insights/metricalerts/storageTest",
-                  "name": "storageTest",
-                  "properties": {
-                    "description": "This is the description of the xstore multidim rule1",
-                    "severity": 3,
-                    "enabled": true,
-                    "scopes": [
-                      "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/testmultidim/blobServices/default"
-                    ],
-                    "evaluationFrequency": "PT1M",
-                    "windowSize": "PT15M",
-                    "criteria": {
-                      "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-                      "allOf": [
-                        {
-                          "name": "HowManyBytes",
-                          "metricName": "BlobCapacity",
-                          "dimensions": [
-                            {
-                              "name": "BlobType",
-                              "operator": "Include",
-                              "values": [
-                                "BlockBlob",
-                                "PageBlob"
-                              ]
-                            }
-                          ],
-                          "operator": "GreaterThanOrEqual",
-                          "threshold": 5.0,
-                          "timeAggregation": "Maximum"
-                        }
-                      ]
-                    },
-                    "actions": [
-                      {
-                        "actionGroupId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/test/providers/microsoft.insights/actionGroups/testActionGroup"
-                      }
-                    ]
-                  }
-              }
             }
           },
           "default": {
@@ -293,57 +141,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MetricAlertResource"
-            },
-            "examples": {
-              "application/json": {
-                "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/metricalerts/chiricutin",
-                "name": "chiricutin",
-                "type": "Microsoft.Insights/metricalerts",
-                "location": "West US",
-                "tags": {
-                  "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
-                },
-                "properties": {
-                  "description": "This is the description of the rule1",
-                  "severity": 0,
-                  "enabled": true,
-                  "scopes": [
-                    "/subscriptions/3b7f8a43-4372-4be1-9853-9e51f243d9be/resourceGroups/test/providers/Microsoft.Compute/virtualMachines/testVmLin"
-                  ],
-                  "evaluationFrequency": "Pt1m",
-                  "windowSize": "Pt15m",
-                  "criteria": {
-                    "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-                    "allOf": [
-                      {
-                        "name": "High_CPU_80",
-                        "metricName": "Percentage CPU",
-                        "dimensions": [],
-                        "operator": "GreaterThan",
-                        "threshold": 80.50,
-                        "timeAggregation": "Total"
-                      },
-                      {
-                        "name": "High_Disk_50",
-                        "metricName": "Disk Write Operations/Sec",
-                        "dimensions": [],
-                        "operator": "GreaterThanOrEqual",
-                        "threshold": 0.55,
-                        "timeAggregation": "Maximum"
-                      }
-                    ]
-                  },
-                  "actions": [
-                    {
-                      "actionGroupId": "/subscriptions/3b7f8a43-4372-4be1-9853-9e51f243d9be/resourceGroups/test/providers/microsoft.insights/actionGroups/TestActionGroup",
-                      "webhookProperties": {
-                        "key01": "value01",
-                        "key02": "value02"
-                      }
-                    }
-                  ]
-                }
-              }
             }
           },
           "default": {
@@ -379,57 +176,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MetricAlertResource"
-            },
-            "examples": {
-              "application/json": {
-                "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/metricalerts/chiricutin",
-                "name": "chiricutin",
-                "type": "Microsoft.Insights/metricalerts",
-                "location": "global",
-                "tags": {
-                  "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
-                },
-                "properties": {
-                  "description": "This is the description of the rule1",
-                  "severity": 0,
-                  "enabled": true,
-                  "scopes": [
-                    "/subscriptions/3b7f8a43-4372-4be1-9853-9e51f243d9be/resourceGroups/test/providers/Microsoft.Compute/virtualMachines/testVmLin"
-                  ],
-                  "evaluationFrequency": "Pt1m",
-                  "windowSize": "Pt15m",
-                  "criteria": {
-                    "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-                    "allOf": [
-                      {
-                        "name": "High_CPU_80",
-                        "metricName": "Percentage CPU",
-                        "dimensions": [],
-                        "operator": "GreaterThan",
-                        "threshold": 80.50,
-                        "timeAggregation": "Total"
-                      },
-                      {
-                        "name": "High_Disk_50",
-                        "metricName": "Disk Write Operations/Sec",
-                        "dimensions": [],
-                        "operator": "GreaterThanOrEqual",
-                        "threshold": 0.55,
-                        "timeAggregation": "Maximum"
-                      }
-                    ]
-                  },
-                  "actions": [
-                    {
-                      "actionGroupId": "/subscriptions/3b7f8a43-4372-4be1-9853-9e51f243d9be/resourceGroups/test/providers/microsoft.insights/actionGroups/TestActionGroup",
-                      "webhookProperties": {
-                        "key01": "value01",
-                        "key02": "value02"
-                      }
-                    }
-                  ]
-                }
-              }
             }
           },
           "default": {
@@ -480,24 +226,6 @@
             "description": "Successful request for a list of metric alerts",
             "schema": {
               "$ref": "#/definitions/MetricAlertStatusCollection"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "id": "/subscriptions/009f6022-67ec-423e-9aa7-691182870588/resourceGroups/EastUs/providers/microsoft.insights/metricAlerts/LeoAlert_custom1",
-                    "name": "cmVzb3VyY2VJZD0vc3Vic2NyaXB0aW9ucy8xNGRkZjBjNS03N2M1LTRiNTMtODRmNi1lMWZhNDNhZDY4ZjcvcmVzb3VyY2VHcm91cHMvZ2lndGVzdC9wcm92aWRlcnMvTWljcm9zb2Z0LkNvbXB1dGUvdmlydHVhbE1hY2hpbmVzL2dpZ3dhZG1l",
-                    "type": "Microsoft.Insights/metricAlerts/status",
-                    "properties": {
-                      "dimensions": {
-                        "resourceId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
-                      },
-                      "status": "Healthy",
-                      "timestamp": "2018-01-17T20:17:25.6293237Z"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -527,24 +255,6 @@
             "description": "Successful request for a list of metric alerts",
             "schema": {
               "$ref": "#/definitions/MetricAlertStatusCollection"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "id": "/subscriptions/009f6022-67ec-423e-9aa7-691182870588/resourceGroups/EastUs/providers/microsoft.insights/metricAlerts/LeoAlert_custom1",
-                    "name": "cmVzb3VyY2VJZD0vc3Vic2NyaXB0aW9ucy8xNGRkZjBjNS03N2M1LTRiNTMtODRmNi1lMWZhNDNhZDY4ZjcvcmVzb3VyY2VHcm91cHMvZ2lndGVzdC9wcm92aWRlcnMvTWljcm9zb2Z0LkNvbXB1dGUvdmlydHVhbE1hY2hpbmVzL2dpZ3dhZG1l",
-                    "type": "Microsoft.Insights/metricAlerts/status",
-                    "properties": {
-                      "dimensions": {
-                        "resourceId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
-                      },
-                      "status": "Healthy",
-                      "timestamp": "2018-01-17T20:17:25.6293237Z"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -597,7 +307,7 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "Action": {
+    "MetricAlertAction": {
       "description": "An alert action.",
       "properties": {
         "actionGroupId": {
@@ -609,7 +319,8 @@
           "additionalProperties": {
             "type": "string",
             "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
-          }
+          },
+          "description": "The properties of a webhook object."
         }
       }
     },
@@ -663,7 +374,7 @@
         "actions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Action"
+            "$ref": "#/definitions/MetricAlertAction"
           },
           "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
         },
@@ -742,7 +453,8 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "description": "An object describing the type of the dimensions."
         },
         "status": {
           "type": "string",
@@ -786,8 +498,7 @@
       "properties": {
         "odata.type": {
           "enum": [
-            "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-            "Microsoft.Azure.Monitor.DefaultCriteria"
+            "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria"
           ],
           "x-ms-enum": {
             "name": "odatatype",
@@ -879,7 +590,8 @@
           },
           "description": "List of dimension conditions."
         }
-      }
+      },
+      "description": "Criterion to filter metrics."
     },
     "MetricDimension": {
       "required": [
@@ -903,7 +615,8 @@
           },
           "description": "list of dimension values."
         }
-      }
+      },
+      "description": "Specifies a metric dimension."
     }
   },
   "parameters": {

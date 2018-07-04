@@ -29,10 +29,18 @@
 				"tags": ["Operations"],
 				"description": "Lists all of the available HDInsight REST API operations.",
 				"operationId": "Operations_List",
-				"parameters": [{
-					"$ref": "#/parameters/ApiVersionParameter"
-				}],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
 				"responses": {
+					"default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
 					"200": {
 						"description": "OK. The request has succeeded.",
 						"schema": {
@@ -63,7 +71,7 @@
 							"type": "string"
 						},
 						"resource": {
-							"description": "The resource on which the operation is performed: Cluster, Capabilities, etc.",
+							"description": "The resource on which the operation is performed: Cluster, Applications, etc.",
 							"type": "string"
 						},
 						"operation": {
@@ -89,16 +97,23 @@
 					"description": "The URL to get the next set of operation list results if there are any."
 				}
 			}
+		},
+		"ErrorResponse": {
+			"description": "Describes the format of Error response.",
+			"type": "object",
+			"properties": {
+				"code": {
+					"description": "Error code",
+					"type": "string"
+				},
+				"message": {
+					"description": "Error message indicating why the operation failed.",
+					"type": "string"
+				}
+			}
 		}
 	},
 	"parameters": {
-		"SubscriptionIdParameter": {
-			"name": "subscriptionId",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-		},
 		"ApiVersionParameter": {
 			"name": "api-version",
 			"in": "query",
