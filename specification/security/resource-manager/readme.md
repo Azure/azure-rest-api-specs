@@ -44,6 +44,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
 - Microsoft.Security/preview/2017-08-01-preview/security.json
+- Microsoft.Security/preview/2017-08-01-preview/informationProtection.json
 - Microsoft.Security/preview/2015-06-01-preview/security.json
 ```
 
