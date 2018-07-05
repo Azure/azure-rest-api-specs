@@ -2953,10 +2953,24 @@
             "modelAsString": false
           }
         },
-        "userAssignedIdentities":{
+        "userAssignedIdentities": {
           "type": "object",
-          "description": "The identities of the resource, should be represented as an object where the property names are the resource id of the identity and the value an empty JObject.",
-          "minProperties": 1
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the resource."
