@@ -329,7 +329,7 @@
               "type": "array",
               "description": "Tumbling window triggers that this trigger depends on. Only tumbling window triggers are supported.",
               "items": {
-                "$ref": "#/definitions/TriggerReference"
+                "$ref": "#/definitions/DependencyReference"
               }
             }
           },
@@ -393,6 +393,65 @@
         "type",
         "referenceName"
       ]
+    },
+    "DependencyReference": {
+      "description": "Referenced dependency",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "The type of dependency reference",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "TumblingWindowTriggerDependencyReference": {
+      "description": "Referenced tumbling window trigger dependency",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DependencyReference"
+        }
+      ],
+      "properties": {
+        "referenceTrigger": {
+          "description": "Referenced trigger",
+          "$ref": "#/definitions/TriggerReference"
+        },
+        "offset": {
+          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
+          "type": "string"
+        },
+        "size": {
+          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "referenceTrigger"
+      ]
+    },
+    "SelfDependencyTumblingWindowTriggerReference": {
+      "description": "Self referenced tumbling window trigger dependency",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DependencyReference"
+        }
+      ],
+      "properties": {
+        "offset": {
+          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
+          "type": "string"
+        },
+        "size": {
+          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
+          "type": "string"
+        }
+      }
     }
   }
 }
