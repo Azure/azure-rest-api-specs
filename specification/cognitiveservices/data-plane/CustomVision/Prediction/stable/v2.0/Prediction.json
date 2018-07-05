@@ -2,15 +2,15 @@
     "swagger": "2.0",
     "info": {
         "version": "2.0",
-        "title": "PredictionEndpoint"
+        "title": "Prediction Client"
     },
-    "host": "southcentralus.api.cognitive.microsoft.com",
-    "basePath": "/customvision/v2.0/Prediction",
+    "host": "*.api.cognitive.microsoft.com",
+    "basePath": "/customvision/v2.0",
     "schemes": [
         "https"
     ],
     "paths": {
-        "/{projectId}/url": {
+        "/prediction/{projectId}/url": {
             "post": {
                 "tags": [
                     "ImagePredictionApi"
@@ -85,7 +85,7 @@
                 }
             }
         },
-        "/{projectId}/image": {
+        "/prediction/{projectId}/image": {
             "post": {
                 "tags": [
                     "ImagePredictionApi"
@@ -154,7 +154,7 @@
                 }
             }
         },
-        "/{projectId}/url/nostore": {
+        "/prediction/{projectId}/url/nostore": {
             "post": {
                 "tags": [
                     "ImagePredictionApi"
@@ -229,7 +229,7 @@
                 }
             }
         },
-        "/{projectId}/image/nostore": {
+        "/prediction/{projectId}/image/nostore": {
             "post": {
                 "tags": [
                     "ImagePredictionApi"
