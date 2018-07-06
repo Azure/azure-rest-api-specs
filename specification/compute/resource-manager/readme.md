@@ -177,12 +177,13 @@ input-file:
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
-### Tag: package-gallery-only-2018-06
+### Tag: package-compute-only-2018-06
 
-These settings apply only when `--tag=package-gallery-only-2018-06` is specified on the command line.
+These settings apply only when `--tag=package-compute-only-2018-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-gallery-only-2018-06'
+``` yaml $(tag) == 'package-compute-only-2018-06'
 input-file:
+- Microsoft.Compute/stable/2018-06-01/compute.json
 - Microsoft.Compute/stable/2018-06-01/gallery.json
 ```
 
@@ -564,7 +565,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
-  - tag: package-gallery-only-2018-06
+  - tag: package-compute-only-2018-06
   - tag: package-compute-2018-04
   - tag: package-compute-only-2017-12
   - tag: package-skus-2017-09
@@ -574,12 +575,12 @@ batch:
   - tag: package-compute-2015-06
 ```
 
-### Tag: package-gallery-only-2018-06 and python
+### Tag: package-compute-only-2018-06 and python
 
-These settings apply only when `--tag=package-gallery-only-2018-06 --python` is specified on the command line.
+These settings apply only when `--tag=package-compute-only-2018-06 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-gallery-only-2018-06' && $(python)
+``` yaml $(tag) == 'package-compute-only-2018-06' && $(python)
 python:
   namespace: azure.mgmt.compute.v2018_06_01
   output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2018_06_01
