@@ -69,6 +69,53 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/listBillingAccountsWithCreateProjectPermission ": {
+      "get": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "BillingAccountsListWithCreateProjectPermission": {
+            "$ref": "./examples/BillingAccountsListWithCreateProjectPermission.json"
+          }
+        },
+        "operationId": "BillingAccounts_ListWithCreateProjectPermission",
+        "description": "Lists all billing accounts with create project permission for a user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the projects and billingProfiles.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by permission. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}": {
       "get": {
         "tags": [
@@ -189,6 +236,65 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "operationId": "BillingProfiles_Update",
+        "description": "The operation to update a billing profile.",
+        "x-ms-examples": {
+          "UpdateBillingProfile": {
+            "$ref": "./examples/UpdateBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            },
+            "description": "Parameters supplied to the update billing profile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted. Billing profile update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -732,39 +838,6 @@
             }
           }
         }
-      }
-    },
-    "/providers/Microsoft.Billing/operationStatus/{operationId}": {
-      "get": {
-        "description": "Get the status of pending Microsoft.Billing API operation.",
-        "operationId": "OperationStatus_Get",
-        "x-ms-examples": {
-          "OperationStatus": {
-            "$ref": "./examples/OperationStatus.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/operationIdParameter"
-          }
-        ]
       }
     }
   },

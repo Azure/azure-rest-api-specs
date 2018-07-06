@@ -421,7 +421,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails/download": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails/Latest/download": {
       "get": {
         "tags": [
           "Charges"
@@ -478,7 +478,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails/download": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails/Latest/download": {
       "get": {
         "tags": [
           "Charges"
@@ -538,7 +538,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails/download": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails/Latest/download": {
       "get": {
         "tags": [
           "Charges"
@@ -598,22 +598,19 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/credits": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/credits/latest": {
       "get": {
         "tags": [
           "Credits"
         ],
-        "operationId": "CreditsByBillingAccount_List",
-        "description": "Lists the credits by billingAccountId and project id for given start and end date.",
+        "operationId": "CreditSummaryByBillingAccount_Get",
+        "description": "The credit summary by billingAccountId.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "CreditsListByBillingAccount": {
-            "$ref": "./examples/CreditsListByBillingAccount.json"
-          },
-          "CreditsListByBillingAccountExpanded": {
-            "$ref": "./examples/CreditsListByBillingAccountExpanded.json"
+          "CreditSummaryByBillingAccount": {
+            "$ref": "./examples/CreditSummaryByBillingAccount.json"
           }
         },
         "parameters": [
@@ -622,19 +619,6 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/startDateParameter"
-          },
-          {
-            "$ref": "#/parameters/endDateParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the billingProfiles or events within a list of credits. By default, these fields are not included when listing monitory credits.",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -656,22 +640,112 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/credits": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/credits/latest": {
       "get": {
         "tags": [
           "Credits"
         ],
-        "operationId": "CreditsByBillingProfile_List",
-        "description": "Lists the credits by billingAccountId and billingProfileId for given start and end date.",
+        "operationId": "CreditSummaryByBillingProfile_Get",
+        "description": "The credit summary by billingAccountId and billingProfileId for given start and end date.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "CreditsListByBillingProfile": {
-            "$ref": "./examples/CreditsListByBillingProfile.json"
+          "CreditSummaryByBillingProfile": {
+            "$ref": "./examples/CreditSummaryByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
           },
-          "CreditsListByBillingAccountExpanded": {
-            "$ref": "./examples/CreditsListByBillingProfileExpanded.json"
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CreditSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "operationId": "EventsByBillingAccount_List",
+        "description": "Lists the events by billingAccountId for given start and end date.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "EventsListByBillingAccount": {
+            "$ref": "./examples/EventsListByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Events"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "operationId": "EventsByBillingProfile_List",
+        "description": "Lists the events by billingAccountId and billingProfileId for given start and end date.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "EventsListByBillingProfile": {
+            "$ref": "./examples/EventsListByBillingProfile.json"
           }
         },
         "parameters": [
@@ -689,20 +763,13 @@
           },
           {
             "$ref": "#/parameters/endDateParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the lots or events within a list of credits. By default, these fields are not included when listing monitory credits.",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CreditSummary"
+              "$ref": "#/definitions/Events"
             }
           },
           "default": {
@@ -717,7 +784,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/credits/download": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/credits/Latest/download": {
       "get": {
         "tags": [
           "Credits"
@@ -777,7 +844,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/credits/download": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/credits/Latest/download": {
       "get": {
         "tags": [
           "Credits"
@@ -933,48 +1000,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/paymentMethods": {
-      "get": {
-        "tags": [
-          "PaymentMethods"
-        ],
-        "operationId": "PaymentMethodsByBillingAccount_List",
-        "description": "Lists the Payment Methods by billingAccountId.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "PaymentMethodsListByBillingAccount": {
-            "$ref": "./examples/PaymentMethodsListByBillingAccount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PaymentMethodsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1507,18 +1532,45 @@
           "description": "Currency Code",
           "type": "string",
           "readOnly": true
-        },
-        "events": {
-          "description": "The events associated to credit summary.",
+        }        
+      }
+    },
+    "Events": {
+      "description": "Result of listing event summary.",
+      "properties": {
+        "value": {
+          "description": "The list of event summary.",
           "type": "array",
+          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Event"
+            "$ref": "#/definitions/EventSummary"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "Event": {
-      "description": "The credit event associated to credit summary.",
+    "EventSummary": {
+      "description": "An event summary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EventProperties",
+          "title": "Event summary properties"
+        }
+      }
+    },
+    "EventProperties": {
+      "description": "The event properties.",
       "properties": {
         "transactionDate": {
           "description": "Transaction Date.",
@@ -1777,6 +1829,11 @@
             "modelAsString": true
           }
         },
+        "details": {
+          "description": "Details about the payment method.",
+          "type": "string",
+          "readOnly": true
+        },
         "lastBilledCharge": {
           "description": "Last billed charge.",
           "type": "number",
@@ -1789,16 +1846,9 @@
           "format": "decimal",
           "readOnly": true
         },
-        "remainingAmount": {
-          "description": "Remaining amount.",
-          "type": "number",
-          "format": "decimal",
-          "readOnly": true
-        },
-        "originalAmount": {
-          "description": "Original amount.",
-          "type": "number",
-          "format": "decimal",
+        "expiration": {
+          "description": "Expiration date.",
+          "type": "string",
           "readOnly": true
         },
         "currency": {
