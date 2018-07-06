@@ -275,6 +275,7 @@ batch:
   - tag: package-2018-03
   - tag: package-2017-12-preview
   - tag: package-2018-05
+  - tag: package-2018-06
 ```
 
 ### Tag: package-2017-04-preview and java
@@ -351,6 +352,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_05_31
   output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_05_31
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-06 and java
+
+These settings apply only when `--tag=package-2018-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_06_30
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_06_30
 regenerate-manager: true
 generate-interface: true
 ```
