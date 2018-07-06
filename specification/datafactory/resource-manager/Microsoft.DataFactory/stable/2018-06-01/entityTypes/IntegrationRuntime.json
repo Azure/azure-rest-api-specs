@@ -240,12 +240,12 @@
       "type": "object",
       "properties": {
         "linkedInfo": {
-          "$ref": "#/definitions/LinkedIntegrationRuntimeProperties"
+          "$ref": "#/definitions/LinkedIntegrationRuntimeType"
         }
       }
     },
-    "LinkedIntegrationRuntimeProperties": {
-      "description": "The base definition of a linked integration runtime properties.",
+    "LinkedIntegrationRuntimeType": {
+      "description": "The base definition of a linked integration runtime.",
       "discriminator": "authorizationType",
       "type": "object",
       "properties": {
@@ -258,13 +258,13 @@
         "authorizationType"
       ]
     },
-    "LinkedIntegrationRuntimeKey": {
+    "LinkedIntegrationRuntimeKeyAuthorization": {
       "x-ms-discriminator-value": "Key",
-      "description": "The key authorization type.",
+      "description": "The key authorization type integration runtime.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/LinkedIntegrationRuntimeProperties"
+          "$ref": "#/definitions/LinkedIntegrationRuntimeType"
         }
       ],
       "properties": {
@@ -277,13 +277,13 @@
         "key"
       ]
     },
-    "LinkedIntegrationRuntimeRbac": {
+    "LinkedIntegrationRuntimeRbacAuthorization": {
       "x-ms-discriminator-value": "RBAC",
-      "description": "The role based access control (RBAC) authorization type.",
+      "description": "The role based access control (RBAC) authorization type integration runtime.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/LinkedIntegrationRuntimeProperties"
+          "$ref": "#/definitions/LinkedIntegrationRuntimeType"
         }
       ],
       "properties": {
