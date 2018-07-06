@@ -408,10 +408,10 @@
         "type"
       ]
     },
-    "TumblingWindowTriggerDependencyReference": {
-      "description": "Referenced tumbling window trigger dependency",
+    "TriggerDependencyReference": {
+      "description": "Trigger referenced dependency",
       "type": "object",
-      "allOf": [
+     "allOf": [
         {
           "$ref": "#/definitions/DependencyReference"
         }
@@ -420,7 +420,21 @@
         "referenceTrigger": {
           "description": "Referenced trigger",
           "$ref": "#/definitions/TriggerReference"
-        },
+        }
+      },
+      "required": [
+        "referenceTrigger"
+      ]
+    },
+    "TumblingWindowTriggerDependencyReference": {
+      "description": "Referenced tumbling window trigger dependency",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggerDependencyReference"
+        }
+      ],
+      "properties": {
         "offset": {
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
           "type": "string"
@@ -429,10 +443,7 @@
           "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
           "type": "string"
         }
-      },
-      "required": [
-        "referenceTrigger"
-      ]
+      }
     },
     "SelfDependencyTumblingWindowTriggerReference": {
       "description": "Self referenced tumbling window trigger dependency",
@@ -450,7 +461,10 @@
         "size": {
           "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
           "type": "string"
-        }
+        },
+        "required": [
+          "offset"
+        ]
       }
     }
   }
