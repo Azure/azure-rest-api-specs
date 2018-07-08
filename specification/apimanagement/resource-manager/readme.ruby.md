@@ -2,11 +2,10 @@
 
 These settings apply only when `--ruby` is specified on the command line.
 
-``` yaml $(ruby)
-ruby:
-  package-name: azure_mgmt_api_management
-  package-version: "0.16.1"
-  azure-arm: true
+``` yaml
+package-name: azure_mgmt_api_management
+package-version: "0.17.0"
+azure-arm: true
 ```
 
 ### Ruby multi-api
@@ -24,7 +23,7 @@ These settings apply only when `--tag=package-2018-01 --ruby` is specified on th
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2018-01' && $(ruby)
-namespace: "Azure::ApiManagement::Mgmt::V2018_01_01"
+namespace: "Azure::ApiManagement::Mgmt::V2018_01_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_api_management/lib
 ```
 

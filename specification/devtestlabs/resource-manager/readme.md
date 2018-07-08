@@ -61,9 +61,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_devtestlabs']
 ```
 
 
@@ -154,11 +157,46 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.devtestlabs
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-devtestlabs
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.devtestlabs
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-devtestlabs
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2016-05
+  - tag: package-2015-05-preview
+```
+
+### Tag: package-2016-05 and java
+
+These settings apply only when `--tag=package-2016-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.devtestlab.v2016_05_15
+  output-folder: $(azure-libraries-for-java-folder)/devtestlab/resource-manager/v2016_05_15
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2015-05-preview and java
+
+These settings apply only when `--tag=package-2015-05-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-05-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.devtestlab.v2015_05_21_preview
+  output-folder: $(azure-libraries-for-java-folder)/devtestlab/resource-manager/v2015_05_21_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+

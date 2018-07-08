@@ -62,9 +62,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_cognitive_services']
 ```
 
 
@@ -127,11 +130,46 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.cognitiveservices
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-cognitiveservices
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.cognitiveservices
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-cognitiveservices
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-04
+  - tag: package-2016-02-preview
+```
+
+### Tag: package-2017-04 and java
+
+These settings apply only when `--tag=package-2017-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.cognitiveservices.v2017_04_18
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/resource-manager/v2017_04_18
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2016-02-preview and java
+
+These settings apply only when `--tag=package-2016-02-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-02-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.cognitiveservices.v2016_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/resource-manager/v2016_02_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+

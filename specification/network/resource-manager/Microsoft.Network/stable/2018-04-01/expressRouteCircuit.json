@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -83,7 +81,10 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit Authorization": { "$ref": "./examples/ExpressRouteCircuitAuthorizationDelete.json" } 
+        }
       },
       "get": {
         "tags": [
@@ -127,6 +128,9 @@
               "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit Authorization": { "$ref": "./examples/ExpressRouteCircuitAuthorizationGet.json" } 
         }
       },
       "put": {
@@ -187,7 +191,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": { 
+          "Create ExpressRouteCircuit Authorization": { "$ref": "./examples/ExpressRouteCircuitAuthorizationCreate.json" } 
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations": {
@@ -229,6 +236,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": { 
+          "List ExpressRouteCircuit Authorization": { "$ref": "./examples/ExpressRouteCircuitAuthorizationList.json" } 
         }
       }
     },
@@ -279,14 +289,17 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit Peerings": { "$ref": "./examples/ExpressRouteCircuitPeeringDelete.json" }
+        }
       },
       "get": {
         "tags": [
           "ExpressRouteCircuitPeerings"
         ],
         "operationId": "ExpressRouteCircuitPeerings_Get",
-        "description": "Gets the specified authorization from the specified express route circuit.",
+        "description": "Gets the specified peering for the express route circuit.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -323,6 +336,9 @@
               "$ref": "#/definitions/ExpressRouteCircuitPeering"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit Peering": { "$ref": "./examples/ExpressRouteCircuitPeeringGet.json" }
         }
       },
       "put": {
@@ -383,7 +399,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create ExpressRouteCircuit Peerings": { "$ref": "./examples/ExpressRouteCircuitPeeringCreate.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings": {
@@ -425,6 +444,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples":{
+          "List ExpressRouteCircuit Peerings": { "$ref": "./examples/ExpressRouteCircuitPeeringList.json" }
         }
       }
     },
@@ -483,9 +505,7 @@
           }
         },
         "x-ms-examples": {
-          "ExpressRouteCircuitConnectionDelete": {
-            "$ref": "./examples/ExpressRouteCircuitConnectionDelete.json"
-          }
+          "Delete ExpressRouteCircuit": { "$ref": "./examples/ExpressRouteCircuitConnectionDelete.json" } 
         },
         "x-ms-long-running-operation": true
       },
@@ -658,7 +678,10 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit": { "$ref": "./examples/ExpressRouteCircuitDelete.json" }
+        }
       },
       "get": {
         "tags": [
@@ -695,6 +718,9 @@
               "$ref": "#/definitions/ExpressRouteCircuit"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit": { "$ref": "./examples/ExpressRouteCircuitGet.json" }
         }
       },
       "put": {
@@ -748,7 +774,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create ExpressRouteCircuit": { "$ref": "./examples/ExpressRouteCircuitCreate.json" }
+        }
       },
       "patch": {
         "tags": [
@@ -857,7 +886,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "List ARP Table": { "$ref": "./examples/ExpressRouteCircuitARPTableList.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}": {
@@ -914,7 +946,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "List Route Tables": { "$ref": "./examples/ExpressRouteCircuitRouteTableList.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
@@ -971,7 +1006,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "List Route Table Summary": { "$ref": "./examples/ExpressRouteCircuitRouteTableSummaryList.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
@@ -1010,6 +1048,9 @@
               "$ref": "#/definitions/ExpressRouteCircuitStats"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get ExpressRoute Circuit Traffic Stats": { "$ref": "./examples/ExpressRouteCircuitStats.json" }
         }
       }
     },
@@ -1056,6 +1097,9 @@
               "$ref": "#/definitions/ExpressRouteCircuitStats"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get ExpressRoute Circuit Peering Traffic Stats": { "$ref": "./examples/ExpressRouteCircuitPeeringStats.json" }
         }
       }
     },
@@ -1091,6 +1135,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuits in a resource group": { "$ref": "./examples/ExpressRouteCircuitListByResourceGroup.json" }
         }
       }
     },
@@ -1119,6 +1166,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuits in a subscription": { "$ref": "./examples/ExpressRouteCircuitListBySubscription.json" } 
         }
       }
     },
@@ -1147,6 +1197,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRoute providers": { "$ref": "./examples/ExpressRouteProviderList.json" }
         }
       }
     }
@@ -1670,11 +1723,11 @@
         "age": {
           "type": "integer",
           "format": "int32",
-          "description": "Age"
+          "description": "Entry age in minutes"
         },
         "interface": {
           "type": "string",
-          "description": "Interface"
+          "description": "Interface address"
         },
         "ipAddress": {
           "type": "string",
@@ -1707,24 +1760,24 @@
       "properties": {
         "network": {
           "type": "string",
-          "description": "network"
+          "description": "IP address of a network entity"
         },
         "nextHop": {
           "type": "string",
-          "description": "nextHop"
+          "description": "NextHop address"
         },
         "locPrf": {
           "type": "string",
-          "description": "locPrf"
+          "description": "Local preference value as set with the set local-preference route-map configuration command"
         },
         "weight": {
           "type": "integer",
           "format": "int32",
-          "description": "weight."
+          "description": "Route Weight."
         },
         "path": {
           "type": "string",
-          "description": "path"
+          "description": "Autonomous system paths to the destination network."
         }
       },
       "description": "The routes table associated with the ExpressRouteCircuit"
@@ -1749,7 +1802,7 @@
       "properties": {
         "neighbor": {
           "type": "string",
-          "description": "Neighbor"
+          "description": "IP address of the neighbor."
         },
         "v": {
           "type": "integer",
