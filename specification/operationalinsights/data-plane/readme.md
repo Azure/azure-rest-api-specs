@@ -85,12 +85,17 @@ csharp:
 ``` yaml $(python)
 python-mode: create
 python:
+  override-client-name: LogAnalyticsDataClient
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.loganalytics
   package-name: azure-loganalytics
   package-version: 0.1.0
   clear-output-folder: true
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
