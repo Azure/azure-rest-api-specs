@@ -66,7 +66,6 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  override-client-name: LuisAuthoringAPI
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
