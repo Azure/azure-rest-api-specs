@@ -327,7 +327,7 @@
             },
             "dependsOn": {
               "type": "array",
-              "description": "Tumbling window triggers that this trigger depends on. Only tumbling window triggers are supported.",
+              "description": "Triggers that this trigger depends on. Only tumbling window triggers are supported.",
               "items": {
                 "$ref": "#/definitions/DependencyReference"
               }
@@ -395,12 +395,12 @@
       ]
     },
     "DependencyReference": {
-      "description": "Referenced dependency",
+      "description": "Referenced dependency.",
       "type": "object",
       "discriminator": "type",
       "properties": {
         "type": {
-          "description": "The type of dependency reference",
+          "description": "The type of dependency reference.",
           "type": "string"
         }
       },
@@ -409,7 +409,7 @@
       ]
     },
     "TriggerDependencyReference": {
-      "description": "Trigger referenced dependency",
+      "description": "Trigger referenced dependency.",
       "type": "object",
      "allOf": [
         {
@@ -418,7 +418,7 @@
       ],
       "properties": {
         "referenceTrigger": {
-          "description": "Referenced trigger",
+          "description": "Referenced trigger.",
           "$ref": "#/definitions/TriggerReference"
         }
       },
@@ -427,7 +427,7 @@
       ]
     },
     "TumblingWindowTriggerDependencyReference": {
-      "description": "Referenced tumbling window trigger dependency",
+      "description": "Referenced tumbling window trigger dependency.",
       "type": "object",
       "allOf": [
         {
@@ -446,7 +446,7 @@
       }
     },
     "SelfDependencyTumblingWindowTriggerReference": {
-      "description": "Self referenced tumbling window trigger dependency",
+      "description": "Self referenced tumbling window trigger dependency.",
       "type": "object",
       "allOf": [
         {
