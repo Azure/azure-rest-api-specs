@@ -1347,7 +1347,7 @@
       "description": "The properties of the billing account.",
       "properties": {
         "company": {
-          "description": "Name of the billing account.",
+          "description": "The Company this billing account belongs to.",
           "type": "string",
           "readOnly": true
         },
@@ -1362,8 +1362,7 @@
         },
         "address": {
           "description": "The address associated with billing account.",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/Address"
         },
         "defaultCurrency": {
           "description": "The ISO currency, for example, USD.",
@@ -1448,8 +1447,7 @@
         },
         "billingAddress": {            
           "description": "Billing address.",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/Address"
         },
         "billingContact": {            
           "description": "Billing contact.",
@@ -1470,6 +1468,43 @@
           "description": "Currency.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "Address": {
+      "description": "Address details.",
+      "properties": {
+        "AddressLine1": {
+          "description": "Address Line1.",
+          "type": "string"
+        },
+        "AddressLine2": {
+          "description": "Address Line2.",
+          "type": "string"
+        },
+        "AddressLine3": {
+          "description": "Address Line3.",
+          "type": "string"
+        },
+        "City": {
+          "description": "City.",
+          "type": "string"
+        },
+        "Region": {
+          "description": "Region.",
+          "type": "string"
+        },
+        "Country": {
+          "description": "Country.",
+          "type": "string"
+        },
+        "PostalCode": {
+          "description": "Postal Code.",
+          "type": "string"
+        },
+        "PhoneNumber": {
+          "description": "Phone Number.",
+          "type": "string"
         }
       }
     },
