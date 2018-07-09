@@ -879,7 +879,7 @@
     "BillingAccountProperties": {
       "description": "The properties of the billing account.",
       "properties": {
-        "displayName": {
+        "company": {
           "description": "Name of the billing account.",
           "type": "string",
           "readOnly": true
@@ -898,13 +898,18 @@
           "type": "string",
           "readOnly": true
         },
-        "currency": {
+        "defaultCurrency": {
           "description": "The ISO currency, for example, USD.",
           "type": "string",
           "readOnly": true
         },
         "country": {
           "description": "The country associated with billing account..",
+          "type": "string",
+          "readOnly": true
+        },
+        "agreements": {
+          "description": "Agreements.",
           "type": "string",
           "readOnly": true
         },
@@ -1200,6 +1205,31 @@
         "poNumber": {
           "description": "Purchase order number.",
           "type": "string"
+        },
+        "billingAddress": {            
+          "description": "Billing address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingContact": {            
+          "description": "Billing contact.",
+          "type": "string",
+          "readOnly": true
+        },
+        "emailInvoice": {            
+          "description": "Email invoice.",
+          "type": "boolean",          
+          "readOnly": true
+        },
+        "invoiceDay": {            
+          "description": "Invoice day.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currency": {            
+          "description": "Currency.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
