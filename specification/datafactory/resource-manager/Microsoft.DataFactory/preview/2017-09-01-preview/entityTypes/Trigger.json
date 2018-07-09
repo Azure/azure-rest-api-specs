@@ -411,7 +411,7 @@
     "TriggerDependencyReference": {
       "description": "Trigger referenced dependency.",
       "type": "object",
-     "allOf": [
+      "allOf": [
         {
           "$ref": "#/definitions/DependencyReference"
         }
@@ -436,12 +436,18 @@
       ],
       "properties": {
         "offset": {
-          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
-          "type": "string"
+          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency, .Net timespan format.",
+          "type": "string",
+          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "minLength": 8,
+          "maxLength": 15
         },
         "size": {
-          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
-          "type": "string"
+          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, .Net timespan format.",
+          "type": "string",
+          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "minLength": 8,
+          "maxLength": 15
         }
       }
     },
@@ -455,12 +461,18 @@
       ],
       "properties": {
         "offset": {
-          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
-          "type": "string"
+          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency, .Net timespan format.",
+          "type": "string",
+          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "minLength": 8,
+          "maxLength": 15
         },
         "size": {
-          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).",
-          "type": "string"
+          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, .Net timespan format.",
+          "type": "string",
+          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "minLength": 8,
+          "maxLength": 15
         }
       },
       "required": [
