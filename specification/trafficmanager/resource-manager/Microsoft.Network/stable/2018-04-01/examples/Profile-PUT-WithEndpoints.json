@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "subscriptionId": "e68d4145-c9ae-4667-925d-c51c8d88ad73",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "azuresdkfornetautoresttrafficmanager2583",
     "profileName": "azuresdkfornetautoresttrafficmanager6192",
-    "api-version": "2018-03-01",
+    "api-version": "2018-04-01",
     "parameters": {
       "properties": {
         "profileStatus": "Enabled",
@@ -18,11 +18,8 @@
           "path": "/testpath.aspx",
           "intervalInSeconds": 10,
           "timeoutInSeconds": 5,
-          "toleratedNumberOfFailures": 2,
-          "customHeaders" : [{"name":"header-1", "value":"value-1"},{"name":"header-2", "value":"value-2"}],
-          "expectedStatusCodeRanges" : [{"min":200, "max":205},{"min":400, "max":410}]
+          "toleratedNumberOfFailures": 2
         },
-        "trafficViewEnrollmentStatus": "Disabled",
         "endpoints": [
           {
             "name": "My external endpoint",
@@ -30,8 +27,7 @@
             "properties": {
               "target": "foobar.contoso.com",
               "endpointStatus": "Enabled",
-              "endpointLocation": "North Europe",
-              "customHeaders" : [{"name":"header-2", "value":"value-2-overriden"}]
+              "endpointLocation": "North Europe"
             }
           }
         ]
@@ -42,7 +38,7 @@
   "responses": {
     "201": {
       "body": {
-        "id": "/subscriptions/e68d4145-c9ae-4667-925d-c51c8d88ad73/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
         "name": "azuresdkfornetautoresttrafficmanager6192",
         "type": "Microsoft.Network/trafficManagerProfiles",
         "location": "global",
@@ -61,13 +57,11 @@
             "path": "/testpath.aspx",
             "intervalInSeconds": 10,
             "toleratedNumberOfFailures": 2,
-            "timeoutInSeconds": 5,
-            "customHeaders" : [{"name":"header-1", "value":"value-1"},{"name":"header-2", "value":"value-2"}]
+            "timeoutInSeconds": 5
           },
-          "trafficViewEnrollmentStatus": "Disabled",
           "endpoints": [
             {
-              "id": "/subscriptions/e68d4145-c9ae-4667-925d-c51c8d88ad73/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
               "name": "My external endpoint",
               "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
               "properties": {
@@ -76,8 +70,7 @@
                 "target": "foobar.contoso.com",
                 "weight": 1,
                 "priority": 1,
-                "endpointLocation": "North Europe",
-                "customHeaders" : [{"name":"header-2", "value":"value-2-overriden"}]
+                "endpointLocation": "North Europe"
               }
             }
           ]
@@ -86,7 +79,7 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/e68d4145-c9ae-4667-925d-c51c8d88ad73/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
         "name": "azuresdkfornetautoresttrafficmanager6192",
         "type": "Microsoft.Network/trafficManagerProfiles",
         "location": "global",
@@ -105,13 +98,11 @@
             "path": "/testpath.aspx",
             "intervalInSeconds": 10,
             "toleratedNumberOfFailures": 2,
-            "timeoutInSeconds": 5,
-            "customHeaders" : [{"name":"header-1", "value":"value-1"},{"name":"header-2", "value":"value-2"}]
+            "timeoutInSeconds": 5
           },
-          "trafficViewEnrollmentStatus": "Disabled",
           "endpoints": [
             {
-              "id": "/subscriptions/e68d4145-c9ae-4667-925d-c51c8d88ad73/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
               "name": "My external endpoint",
               "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
               "properties": {
@@ -120,8 +111,7 @@
                 "target": "foobar.contoso.com",
                 "weight": 1,
                 "priority": 1,
-                "endpointLocation": "North Europe",
-                "customHeaders" : [{"name":"header-2", "value":"value-2-overriden"}]
+                "endpointLocation": "North Europe"
               }
             }
           ]
