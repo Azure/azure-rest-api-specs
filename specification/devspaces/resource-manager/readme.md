@@ -122,7 +122,7 @@ batch:
 These settings apply only when `--tag=2018-06-01-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag)=='2018-06-01-preview' && $(java) && $(multiapi)
+``` yaml $(tag)=='package-2018-06-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.devspaces.v2018_06_01_preview
   output-folder: $(azure-libraries-for-java-folder)/devspaces/resource-manager/v2018_06_01_preview
