@@ -491,6 +491,91 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listPolicies": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Lists the policies for the specified container registry.",
+        "operationId": "Registries_ListPolicies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the registry policies were retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegistryPolicies"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryListPolicies": {
+            "$ref": "./examples/RegistryListPolicies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/updatePolicies": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Updates the policies for the specified container registry.",
+        "operationId": "Registries_UpdatePolicies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "registryPoliciesUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating policies of a container registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryPolicies"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RegistryPolicies"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "RegistryUpdatePolicies": {
+            "$ref": "./examples/RegistryUpdatePolicies.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications/{replicationName}": {
       "get": {
         "tags": [
@@ -1186,6 +1271,10 @@
       "description": "The definition of a container registry operation.",
       "type": "object",
       "properties": {
+        "origin": {
+          "description": "The origin information of the container registry operation.",
+          "type": "string"
+        },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string"
@@ -1193,6 +1282,11 @@
         "display": {
           "$ref": "#/definitions/OperationDisplayDefinition",
           "description": "The display information for the container registry operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationPropertiesDefinition",
+          "description": "The properties information for the container registry operation.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1214,6 +1308,59 @@
         },
         "description": {
           "description": "The description for the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationPropertiesDefinition": {
+      "description": "The definition of Azure Monitoring properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationServiceSpecificationDefinition",
+          "description": "The definition of Azure Monitoring service."
+        }
+      }
+    },
+    "OperationServiceSpecificationDefinition": {
+      "description": "The definition of Azure Monitoring metrics list.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "A list of Azure Monitoring metrics definition.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetricSpecificationDefinition"
+          }
+        }
+      }
+    },
+    "OperationMetricSpecificationDefinition": {
+      "description": "The definition of Azure Monitoring metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Metric name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Metric display name.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Metric description.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Metric unit.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Metric aggregation type.",
+          "type": "string"
+        },
+        "internalMetricName": {
+          "description": "Internal metric name.",
           "type": "string"
         }
       }
@@ -1520,6 +1667,67 @@
         }
       }
     },
+    "RegistryPolicies": {
+      "description": "An object that represents policies for a container registry.",
+      "type": "object",
+      "properties": {
+        "quarantinePolicy": {
+          "$ref": "#/definitions/QuarantinePolicy",
+          "description": "An object that represents quarantine policy for a container registry."
+        },
+        "trustPolicy": {
+          "$ref": "#/definitions/TrustPolicy",
+          "description": "An object that represents content trust policy for a container registry."
+        }
+      }
+    },
+    "QuarantinePolicy": {
+      "description": "An object that represents quarantine policy for a container registry.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TrustPolicy": {
+      "description": "An object that represents content trust policy for a container registry.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of trust policy.",
+          "enum": [
+            "Notary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TrustPolicyType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "Replication": {
       "description": "An object that represents a replication for a container registry.",
       "type": "object",
@@ -1639,7 +1847,8 @@
           "items": {
             "enum": [
               "push",
-              "delete"
+              "delete",
+              "quarantine"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1733,7 +1942,8 @@
           "items": {
             "enum": [
               "push",
-              "delete"
+              "delete",
+              "quarantine"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1799,7 +2009,8 @@
           "items": {
             "enum": [
               "push",
-              "delete"
+              "delete",
+              "quarantine"
             ],
             "type": "string",
             "x-ms-enum": {

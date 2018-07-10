@@ -1513,7 +1513,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections": {
       "get": {
         "operationId": "VpnConnections_ListByVpnGateway",
         "x-ms-examples": {
@@ -1523,6 +1523,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
           },
           {
             "name": "gatewayName",
@@ -1864,7 +1871,7 @@
           "readOnly": true,
           "description": "Egress bytes transferred."
         },
-        "connectionBandwidthInMbps": {
+        "connectionBandwidth": {
           "type": "integer",
           "format": "int32",
           "readOnly": true,

@@ -683,7 +683,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/BotServices/listServiceProviders": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/listAuthServiceProviders": {
       "post": {
         "tags": [
           "ListServiceProviders"
@@ -696,9 +696,6 @@
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -1851,13 +1848,11 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Key for the Connection Setting Parameter.",
-          "readOnly": true
+          "description": "Key for the Connection Setting Parameter."
         },
         "value": {
           "type": "string",
-          "description": "Value associated with the Connection Setting Parameter.",
-          "readOnly": true
+          "description": "Value associated with the Connection Setting Parameter."
         }
       },
       "description": "Extra Parameter in a Connection Setting Properties to indicate service provider specific properties"
@@ -1867,6 +1862,11 @@
         "clientId": {
           "type": "string",
           "description": "Client Id associated with the Connection Setting."
+        },
+        "settingId": {
+          "type": "string",
+          "description": "Setting Id set by the service for the Connection Setting.",
+          "readOnly": true
         },
         "clientSecret": {
           "type": "string",

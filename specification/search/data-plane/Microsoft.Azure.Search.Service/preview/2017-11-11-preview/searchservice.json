@@ -677,8 +677,7 @@
             "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
+            "$ref": "#/parameters/ApiVersionParameter"          }
         ],
         "x-ms-request-id": "request-id",
         "responses": {
@@ -687,8 +686,8 @@
           },
           "404": {
             "description": "The provided skillset name is not found."
-          }
-        }
+           }
+         }
       }
     },
     "/skillsets": {
@@ -697,32 +696,33 @@
         "operationId": "Skillsets_List",
         "x-ms-examples": {
           "SearchServiceListSkillsets": { "$ref": "./examples/SearchServiceListSkillsets.json" }
-        },
-        "description": "List all cognitive skillsets in an Azure Search service.",
+         },
+         "description": "List all cognitive skillsets in an Azure Search service.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/list-skillset"
-        },
+         },
         "parameters": [
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
+           {
+             "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-request-id": "request-id",
+ 
         "responses": {
-          "200": {
+           "200": {
             "description": "The list is successfully returned.",
             "schema": {
               "$ref": "#/definitions/SkillsetListResult"
             }
-          }
+           }
 		}
       },
       "post": {
-        "tags": ["Skillsets"],
-        "operationId": "Skillsets_Create",
+         "tags": ["Skillsets"],
+         "operationId": "Skillsets_Create",
         "x-ms-examples": {
           "SearchServiceCreateSkillset": {
             "$ref": "./examples/SearchServiceCreateSkillset.json"
@@ -740,7 +740,7 @@
             "schema": {
               "$ref": "#/definitions/Skillset"
             },
-            "description": "The skillset containing one or more cognitive skills to create in an Azure Search service."
+    "description": "The skillset containing one or more cognitive skills to create in an Azure Search service."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2.0",
-    "title": "Computer Vision API",
+    "title": "Computer Vision Client",
     "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the faces in an image.  It also has other features like estimating dominant and accent colors, categorizing the content of images, and describing an image with complete English sentences.  Additionally, it can also intelligently generate images thumbnails for displaying large images effectively."
   },
   "securityDefinitions": {
@@ -17,14 +17,7 @@
       "apim_key": []
     }
   ],
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
-      }
-    ]
-  },
+  "host": "api.cognitive.microsoft.com",
   "basePath": "/vision/v2.0",
   "schemes": [
     "https"
@@ -96,7 +89,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -150,7 +143,7 @@
             "description": "Height of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50."
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "name": "smartCropping",
@@ -197,7 +190,7 @@
             "$ref": "#/parameters/DetectOrientation"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "$ref": "#/parameters/OcrLanguage"
@@ -247,7 +240,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -286,7 +279,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -332,7 +325,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -362,7 +355,7 @@
         "operationId": "RecognizeText",
         "parameters": [
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "$ref": "#/parameters/TextRecognitionMode"
@@ -467,7 +460,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -522,7 +515,7 @@
             "description": "Height of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50."
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           },
           {
             "name": "smartCropping",
@@ -573,7 +566,7 @@
             "$ref": "#/parameters/DetectOrientation"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -621,7 +614,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -661,7 +654,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -708,7 +701,7 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -738,7 +731,7 @@
         "operationId": "RecognizeTextInStream",
         "parameters": [
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           },
           {
             "$ref": "#/parameters/TextRecognitionMode"
@@ -1405,6 +1398,18 @@
     },
     "ServiceLanguage": {
       "type": "string"
+    },
+    "ImageUrl": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -1518,6 +1523,28 @@
         "pt",
         "zh"
       ]
+    },
+    "ImageUrl": {
+      "name": "ImageUrl",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true,
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      }
+    },
+    "ImageStream": {
+      "name": "Image",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "An image stream.",
+      "schema": {
+        "type": "object",
+        "format": "file"
+      }
     }
   }
 }

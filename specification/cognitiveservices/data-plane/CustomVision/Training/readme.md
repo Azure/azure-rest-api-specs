@@ -4,11 +4,11 @@
 
 Configuration for generating Custom Vision Training SDK.
 
-The current release is `release_1_0`.
+The current release is `release_2_1`.
 
 ``` yaml
 
-tag: release_1_0
+tag: release_2_1
 openapi-type: data-plane
 ```
 # Releases
@@ -20,6 +20,12 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 input-file: stable/v2.0/Training.json
 ```
 
+### Release 2.1
+These settings apply only when `--tag=release_2_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_1'
+input-file: stable/v2.1/Training.json
+```
 # Validation
 
 ## Suppression
@@ -42,7 +48,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java  
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
 ```
 
@@ -101,6 +107,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: release_1_0
+  - tag: release_2_1
 ```
 
 ### Tag: release_1_0 and go
@@ -112,6 +119,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.2/customvision/$(namespace)
 ```
 
+### Tag: release_2_1 and go
+
+These settings apply only when `--tag=release_2_1 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'release_2_1' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.1/customvision/$(namespace)
+```
 
 ## Java
 

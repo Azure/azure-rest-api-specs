@@ -28,7 +28,51 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-2018-01
+tag: package-2018-06-preview
+```
+
+### Tag: package-2018-06-preview
+
+These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-preview'
+input-file:
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimanagement.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimapis.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimauthorizationservers.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimbackends.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimcertificates.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimdeployment.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimdiagnostics.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimemailtemplate.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimgroups.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimidentityprovider.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimloggers.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimnotifications.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimnetworkstatus.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimportalsettings.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimproducts.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimproperties.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimquotas.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimreports.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimsubscriptions.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimtagresources.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimtags.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimtenant.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimusers.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimversionsets.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: R3016
+    reason: existing properties, can't be changed without breaking API.
+    #where:
+    #  - $.definitions.ApiManagementServiceUploadCertificateParameters.properties.certificate_password
+    #  - $.definitions.QuotaCounterContract.properties.Value
+
 ```
 
 ### Tag: package-2018-01
@@ -200,10 +244,20 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-06-preview
   - tag: package-2018-01
   - tag: package-2017-03
   - tag: package-2016-10
   - tag: package-2016-07
+```
+
+### Tag: package-2018-06-preview and go
+
+These settings apply only when `--tag=package-2018-06-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-06-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/apimanagement/mgmt/2018-06-01-preview/apimanagement
 ```
 
 ### Tag: package-2018-01 and go
