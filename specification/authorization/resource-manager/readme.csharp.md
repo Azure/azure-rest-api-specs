@@ -32,16 +32,10 @@ batch:
  - tag: package-2015-07
  ```
 
- ``` yaml $(profile)=='hybrid-2018-03-01'
+ ``` yaml $(profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).Authorization
 output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authorization/Generated
 
 batch:
  - tag: package-2015-07
-
- directive:
-  from: source-file-csharp
-  where: $
-  transform: >
-    $ = $.replace( "hybrid-2018-03-01", "hybrid_2018_03_01" );
  ```

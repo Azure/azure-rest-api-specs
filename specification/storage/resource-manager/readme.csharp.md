@@ -34,8 +34,7 @@ batch:
     ApiVersionName: Api2015_06_05
 ```
 
-```yaml $(profile)=='hybrid-2018-03-01'
-profile: hybrid_2018_03_01
+```yaml $(profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).Storage
 output-folder: $(csharp-sdks-folder)/$(profile)/Storage/Management.Storage/Generated
 batch:
@@ -43,10 +42,4 @@ batch:
   - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2016-01
-
-directive:
-  from: source-file-csharp
-  where: $
-  transform: >
-    $ = $.replace( "hybrid-2018-03-01", "hybrid_2018_03_01" );
 ```

@@ -261,8 +261,7 @@ input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 ```
 
-```yaml $(profile)=='hybrid-2018-03-01'
-profile: hybrid_2018_03_01
+```yaml $(profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  
 output-folder: $(csharp-sdks-folder)/$(profile)/Resource/Management.ResourceManager/Generated
 

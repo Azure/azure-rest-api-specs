@@ -37,16 +37,10 @@ batch:
     ApiVersionName: Api2016_06_15
 ```
 
-```yaml $(profile)=='hybrid-2018-03-01'
+```yaml $(profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).Network
 output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Generated
 batch:
   - tag: package-2018-05
   - tag: package-2017-10
-
-directive:
-  from: source-file-csharp
-  where: $
-  transform: >
-    $ = $.replace( "hybrid-2018-03-01", "hybrid_2018_03_01" );
 ```
