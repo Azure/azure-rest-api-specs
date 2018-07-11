@@ -433,7 +433,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2018-06-01
-  - tag: package-2018-04
+  #- tag: package-2018-04 broken
   #- tag: package-2017-12 broken
   - tag: package-2017-03
   - tag: package-container-service-2017-01
