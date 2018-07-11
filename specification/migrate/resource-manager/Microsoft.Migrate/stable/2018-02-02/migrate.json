@@ -1733,58 +1733,43 @@
           }
         }
       }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Azure Migrate service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Azure Migrate service."
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/deleteSubscriptionNotification": {
-      "delete": {
-        "summary": "Delete all projects in the subscription.",
-        "description": "Delete all projects in the subscription. Deleting non-existent project is a no-operation.",
-        "operationId": "Projects_DeleteBySubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Deleted the projects.",
-            "headers": {
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "Service generated Request ID."
-              }
-            }
-          },
-          "204": {
-            "description": "No content. No project with specified name was found."
-          },
-          "400": {
-            "description": "Bad request. (Invalid subscriptionId)."
-          },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)"
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
-          }
-        },
-        "x-ms-examples": {
-          "SubscriptionNotification_Delete": {
-            "$ref": "./examples/SubscriptionNotification_Delete.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/locations/{locationName}/assessmentOptions": {
       "get": {
         "summary": "Get the assessment options.",
@@ -1811,17 +1796,11 @@
               "$ref": "#/definitions/AssessmentOptionsResultList"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1860,17 +1839,11 @@
               "$ref": "#/definitions/ProjectResultList"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1915,17 +1888,11 @@
               "$ref": "#/definitions/ProjectResultList"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription or resource group)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1973,17 +1940,11 @@
               "$ref": "#/definitions/Project"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2046,17 +2007,11 @@
               "$ref": "#/definitions/Project"
             }
           },
-          "400": {
-            "description": "Bad Request (Read only settings of an existing project cannot be changed)."
-          },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2107,20 +2062,11 @@
               "$ref": "#/definitions/Project"
             }
           },
-          "400": {
-            "description": "Bad Request (Read only settings of an existing project cannot be changed)."
-          },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, or nestName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2160,20 +2106,11 @@
               }
             }
           },
-          "204": {
-            "description": "No content. No project with specified name was found."
-          },
-          "400": {
-            "description": "Bad request. (Invalid subscriptionId or resourceGroupName)."
-          },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)"
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2218,17 +2155,11 @@
               "$ref": "#/definitions/ProjectKey"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2273,17 +2204,11 @@
               "$ref": "#/definitions/MachineResultList"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2334,17 +2259,11 @@
               "$ref": "#/definitions/Machine"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or machineName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2389,17 +2308,11 @@
               "$ref": "#/definitions/GroupResultList"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2450,17 +2363,11 @@
               "$ref": "#/definitions/Group"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or groupName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2526,17 +2433,11 @@
               "$ref": "#/definitions/Group"
             }
           },
-          "400": {
-            "description": "Bad Request (Read only settings of an existing group cannot be changed)."
-          },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2579,20 +2480,11 @@
               }
             }
           },
-          "204": {
-            "description": "No content. No group with specified name was found."
-          },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)"
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName)"
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2640,17 +2532,11 @@
               "$ref": "#/definitions/AssessmentResultList"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, assessmentName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2698,17 +2584,11 @@
               "$ref": "#/definitions/AssessmentResultList"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, assessmentName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2762,17 +2642,11 @@
               "$ref": "#/definitions/Assessment"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or assesmentName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2841,17 +2715,11 @@
               "$ref": "#/definitions/Assessment"
             }
           },
-          "400": {
-            "description": "Bad Request. Assessment is under computation and cannot be updated yet."
-          },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2897,20 +2765,11 @@
               }
             }
           },
-          "204": {
-            "description": "No content. No assessment with specified name was found."
-          },
-          "400": {
-            "description": "Bad Request. Assessment is under computation and cannot be deleted yet."
-          },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)"
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2961,17 +2820,11 @@
               "$ref": "#/definitions/DownloadUrl"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -3022,17 +2875,11 @@
               "$ref": "#/definitions/AssessedMachineResultList"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or assessmentName)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -3089,17 +2936,11 @@
               "$ref": "#/definitions/AssessedMachine"
             }
           },
-          "401": {
-            "description": "Not authorized (No access to subscription, resource group, or project)."
-          },
-          "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, groupName, assessmentName, or machineId)."
-          },
-          "500": {
-            "description": "Internal Server Error."
-          },
-          "503": {
-            "description": "Service Unavailable."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
