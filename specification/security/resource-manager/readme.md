@@ -83,7 +83,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: mysql
+  namespace: security
   clear-output-folder: true
 ```
 
@@ -100,5 +100,5 @@ These settings apply only when `--tag=package-composite-v1 --go` is specified on
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-composite-v1' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/security/mgmt/2017-08-01-preview/security
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-08-01-preview/$(namespace)
 ```
