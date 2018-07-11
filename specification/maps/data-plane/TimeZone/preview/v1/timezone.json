@@ -1,0 +1,867 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Time Zone Service",
+    "version": "1.0",
+    "description": "Azure Maps Time Zone REST APIs"
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "202": {
+      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "schema": {
+        "type": "object",
+        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry.",
+        "properties": {
+          "Location": {
+            "type": "string",
+            "readOnly": true,
+            "description": "New URL to check for the results of the long running process."
+          }
+        }
+      }
+    },
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "Azure Maps subscription key",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "JsonFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Only `JSON` format is supported.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-enum": {
+        "name": "JsonFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Query": {
+      "name": "query",
+      "in": "query",
+      "description": "The applicable query string. Must be properly URL encoded.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TimezoneAcceptLanguage": {
+      "name": "Accept-Language",
+      "in": "header",
+      "description": "Specifies the language code in which the timezone names should be returned. If no language code is provided, the response will be in \"EN\". Please refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TimezoneOptions": {
+      "name": "options",
+      "in": "query",
+      "description": "Alternatively, use alias \"o\". Options available for types of information returned in the result.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "none",
+        "zoneInfo",
+        "transitions",
+        "all"
+      ],
+      "x-ms-enum": {
+        "name": "TimezoneOptions",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "none",
+            "description": "Do not include zoneinfo or transitions in the result."
+          },
+          {
+            "value": "zoneInfo",
+            "description": "Include additional time zone info in the result."
+          },
+          {
+            "value": "transitions",
+            "description": "Include transition information in the result (The number of transitions is currently capped at 250)."
+          },
+          {
+            "value": "all",
+            "description": "Include both zoneinfo and transitions in the result."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TimezoneTimeStamp": {
+      "name": "timeStamp",
+      "in": "query",
+      "description": "Alternatively, use alias \"stamp\", or \"s\". Reference time, if omitted, the API will use the machine time serving the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "format": "date-time"
+    },
+    "TimezoneTransitionsFrom": {
+      "name": "transitionsFrom",
+      "in": "query",
+      "description": "Alternatively, use alias \"tf\". The start date from which daylight savings time (DST) transitions are requested, only applies when \"options\" = all or \"options\" = transitions.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "format": "date-time"
+    },
+    "TimezoneTransitionsYears": {
+      "name": "transitionsYears",
+      "in": "query",
+      "description": "Alternatively, use alias \"ty\". The number of years from \"transitionsFrom\" for which DST transitions are requested, only applies when \"options\" = all or \"options\" = transitions.",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/timezone/byId/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Time Zone by Id__\n\nThis API returns current, historical, and future time zone information for the specified IANA time zone ID.",
+        "operationId": "Timezone_GetTimezoneByID",
+        "x-ms-examples": {
+          "GetTimezoneByID": {
+            "$ref": "./examples/GetTimezoneByID.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TimezoneAcceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/TimezoneOptions"
+          },
+          {
+            "$ref": "#/parameters/TimezoneTimeStamp"
+          },
+          {
+            "$ref": "#/parameters/TimezoneTransitionsFrom"
+          },
+          {
+            "$ref": "#/parameters/TimezoneTransitionsYears"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/Query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TimezoneByIdResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/timezone/byCoordinates/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Time Zone by Coordinates__\n\nThis API returns current, historical, and future time zone information for a specified latitude-longitude pair.",
+        "operationId": "Timezone_GetTimezoneByCoordinates",
+        "x-ms-examples": {
+          "GetTimezoneByCoordinates": {
+            "$ref": "./examples/GetTimezoneByCoordinates.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TimezoneAcceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/TimezoneOptions"
+          },
+          {
+            "$ref": "#/parameters/TimezoneTimeStamp"
+          },
+          {
+            "$ref": "#/parameters/TimezoneTransitionsFrom"
+          },
+          {
+            "$ref": "#/parameters/TimezoneTransitionsYears"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/Query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TimezoneByCoordinatesResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/timezone/enumWindows/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Enumerate Windows Time Zones__\n\nThis API returns a full list of Windows Time Zone IDs.",
+        "operationId": "Timezone_GetTimezoneEnumWindows",
+        "x-ms-examples": {
+          "GetTimezoneEnumWindows": {
+            "$ref": "./examples/GetTimezoneEnumWindows.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TimezoneEnumWindowsResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/timezone/enumIana/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Enumerate IANA Time Zones__\n\nThis API returns a full list of IANA time zone IDs. Updates to the IANA service will be reflected in the system within one day.",
+        "operationId": "Timezone_GetTimezoneEnumIANA",
+        "x-ms-examples": {
+          "GetTimezoneEnumIANA": {
+            "$ref": "./examples/GetTimezoneEnumIANA.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TimezoneEnumIanaResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/timezone/ianaVersion/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Time Zone IANA Version__\n\nThis API returns the current IANA version number.",
+        "operationId": "Timezone_GetTimezoneIANAVersion",
+        "x-ms-examples": {
+          "GetTimezoneIANAVersion": {
+            "$ref": "./examples/GetTimezoneIANAVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TimezoneIanaVersionResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/timezone/windowsToIana/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Windows to IANA Time Zone__\n\nThis API returns a corresponding IANA ID, given a valid Windows Time Zone ID. Multiple IANA IDs may be returned for a single Windows ID. It is possible to narrow these results by adding an optional territory parameter.",
+        "operationId": "Timezone_GetTimezoneWindowsToIANA",
+        "x-ms-examples": {
+          "GetTimezoneWindowsToIANA": {
+            "$ref": "./examples/GetTimezoneWindowsToIANA.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/Query"
+          },
+          {
+            "name": "territory",
+            "in": "query",
+            "description": "Windows Time Zone territory code.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TimezoneWindowToIanaResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The HTTP status code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        }
+      }
+    },
+    "Country": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "Country Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "Code": {
+          "description": "Country Code",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TimeTransition": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "Tag": {
+          "description": "Tag property",
+          "type": "string",
+          "readOnly": true
+        },
+        "StandardOffset": {
+          "description": "StandardOffset property",
+          "type": "string",
+          "readOnly": true
+        },
+        "DaylightSavings": {
+          "description": "DaylightSavings property",
+          "type": "string",
+          "readOnly": true
+        },
+        "UtcStart": {
+          "description": "UtcStart property",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "UtcEnd": {
+          "description": "UtcEnd property",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        }
+      }
+    },
+    "TimezoneByIdResult": {
+      "description": "This object is returned from a successful Timezone By ID call",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version property",
+          "type": "string",
+          "readOnly": true
+        },
+        "referenceUtcTimestamp": {
+          "description": "Reference Utc Timestamp property",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "timeZones": {
+          "$ref": "#/definitions/TimeZones"
+        },
+        "count": {
+          "description": "Count property",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "TimezoneByCoordinatesResult": {
+      "description": "This object is returned from a successful Timezone By Coordinates call",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version property",
+          "type": "string",
+          "readOnly": true
+        },
+        "referenceUtcTimestamp": {
+          "description": "Reference Utc Timestamp property",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "timeZones": {
+          "$ref": "#/definitions/TimeZones"
+        },
+        "count": {
+          "description": "Count property",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "TimezoneEnumWindowsResult": {
+      "description": "This object is returned from a successful Timezone Enum Windows call",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TimezoneEnumWindow"
+      }
+    },
+    "TimezoneEnumWindow": {
+      "type": "object",
+      "properties": {
+        "WindowsId": {
+          "description": "Windows Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "Territory": {
+          "description": "Territory property",
+          "type": "string",
+          "readOnly": true
+        },
+        "IanaIds": {
+          "description": "IanaIds array",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "TimezoneEnumIanaResult": {
+      "description": "This object is returned from a successful Timezone Enum IANA call",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IanaId"
+      }
+    },
+    "TimezoneIanaVersionResult": {
+      "description": "This object is returned from a successful Timezone IANA Version call",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version property",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TimezoneWindowToIanaResult": {
+      "description": "This object is returned from a successful Timezone Windows To IANA call",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IanaId"
+      }
+    },
+    "IanaId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "isAlias": {
+          "description": "IsAlias property",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "aliasOf": {
+          "description": "AliasOf property",
+          "type": "string",
+          "readOnly": true
+        },
+        "hasZone1970Location": {
+          "description": "HasZone1970Location property",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "TimeZones": {
+      "description": "TimeZones array",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/Timezone"
+      }
+    },
+    "Timezone": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "Aliases": {
+          "description": "Aliases array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "Countries": {
+          "description": "Countries array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Country"
+          }
+        },
+        "Names": {
+          "type": "object",
+          "properties": {
+            "ISO6391LanguageCode": {
+              "description": "The ISO 639-1 language code of the Names",
+              "type": "string",
+              "readOnly": true
+            },
+            "Generic": {
+              "description": "Generic Name",
+              "type": "string",
+              "readOnly": true
+            },
+            "Standard": {
+              "description": "Standard Name",
+              "type": "string",
+              "readOnly": true
+            },
+            "Daylight": {
+              "description": "Daylight Name",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "ReferenceTime": {
+          "description": "Reference Time object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "Tag": {
+              "description": "Tag property",
+              "type": "string",
+              "readOnly": true
+            },
+            "StandardOffset": {
+              "description": "Standard Offset property",
+              "type": "string",
+              "readOnly": true
+            },
+            "DaylightSavings": {
+              "description": "Daylight Savings property",
+              "type": "string",
+              "readOnly": true
+            },
+            "WallTime": {
+              "description": "Wall Time property",
+              "type": "string",
+              "readOnly": true
+            },
+            "PosixTimezoneValidYear": {
+              "description": "Posix Timezone Valid Year property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "PosixTimezone": {
+              "description": "Posix timezone property",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "RepresentativePoint": {
+          "description": "Representative point property",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "Latitude": {
+              "description": "Latitude property",
+              "type": "number",
+              "readOnly": true
+            },
+            "Longitude": {
+              "description": "Longitude property",
+              "type": "number",
+              "readOnly": true
+            }
+          }
+        },
+        "TimeTransitions": {
+          "description": "TimeTransitions array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TimeTransition"
+          }
+        }
+      }
+    }
+  }
+}

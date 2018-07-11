@@ -1,0 +1,71 @@
+{
+    "parameters": {
+        "format": "json",
+        "api-version": "1.0",
+        "subscription-key": "[subscription-key]",
+        "searchAddressBatchRequestBody": {
+            "queries": [
+                "?query=400 Broad St, Seattle, WA 98109&limit=3",
+                "?query=One, Microsoft Way, Redmond, WA 98052&limit=3",
+                "?query=350 5th Ave, New York, NY 10118&limit=1",
+                "?query=Pike Pl, Seattle, WA 98101&lat=47.610970&lon=-122.342469&radius=1000",
+                "?query=Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France&limit=1"                
+            ]
+        }
+    },
+
+  "responses": {
+    
+    "202": {
+      "headers": {
+        "Location": "URL to download the results of the long-running batch request."
+      },
+      "body": {}
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

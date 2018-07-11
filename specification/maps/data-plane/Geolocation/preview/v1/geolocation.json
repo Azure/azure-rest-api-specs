@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Geolocation Service",
+    "version": "1.0",
+    "description": "Azure Maps Geolocation REST APIs"
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "Azure Maps subscription key",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "TextFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json",
+        "xml"
+      ],
+      "x-ms-enum": {
+        "name": "TextFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          },
+          {
+            "value": "xml",
+            "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/geolocation/ip/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "This service will return the ISO country code for the provided IP address. Developers can use this information  to block or alter certain content based on geographical locations where the application is being viewed from. \n\n\n__Note:__ This service returns results from IANA and do not necessarily reflect the views of Microsoft  Corporation.",
+        "operationId": "Geolocation_GetIPToLocationPreview",
+        "x-ms-examples": {
+          "GetIpAddressToCountry": {
+            "$ref": "./examples/GetIpAddressToCountry.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "ip",
+            "in": "query",
+            "description": "The IP address",
+            "required": true,
+            "type": "string",
+            "format": "IPv4 or IPv6"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IpAddressToLocationResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The HTTP status code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        }
+      }
+    },
+    "IpAddressToLocationResult": {
+      "description": "This object is returned from a successful call to IP Address to country/region API",
+      "type": "object",
+      "properties": {
+        "CountryRegion": {
+          "description": "The object containing the country/region information.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "IsoCode": {
+              "description": "The IP Address's 2-character code (ISO 3166-1) of the country or region as assigned by IANA and regional internet authorities. Please note, IP address in ranges reserved for special purpose will return Null for country/region. ",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "IPAddress": {
+          "description": "The IP Address of the request.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

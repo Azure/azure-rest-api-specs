@@ -1,0 +1,3049 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Search Service",
+    "version": "1.0",
+    "description": "Azure Maps Search REST APIs"
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "202": {
+      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "schema": {
+        "type": "object",
+        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry.",
+        "properties": {
+          "Location": {
+            "type": "string",
+            "readOnly": true,
+            "description": "New URL to check for the results of the long running process."
+          }
+        }
+      }
+    },
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "Azure Maps subscription key",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "JsonFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Only `JSON` format is supported.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-enum": {
+        "name": "JsonFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TextFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json",
+        "xml"
+      ],
+      "x-ms-enum": {
+        "name": "TextFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          },
+          {
+            "value": "xml",
+            "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Limit": {
+      "name": "limit",
+      "in": "query",
+      "description": "Maximum number of responses that will be returned. Default: 10, minimum: 1 and maximum: 100",
+      "required": false,
+      "type": "integer",
+      "default": 10,
+      "minimum": 1,
+      "maximum": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "OptionalBiasLat": {
+      "name": "lat",
+      "in": "query",
+      "description": "Latitude where results should be biased. E.g. 37.337",
+      "required": false,
+      "type": "number",
+      "x-ms-parameter-location": "method"
+    },
+    "OptionalBiasLon": {
+      "name": "lon",
+      "in": "query",
+      "description": "Longitude where results should be biased. E.g. -121.89",
+      "required": false,
+      "type": "number",
+      "x-ms-parameter-location": "method"
+    },
+    "BoundingBoxTopLeft": {
+      "x-client-name": "BoundingBoxTopLeft",
+      "name": "topLeft",
+      "in": "query",
+      "description": "Top left position of the bounding box. E.g. 37.553,-122.453",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BoundingBoxBottomRight": {
+      "x-client-name": "BoundingBoxBottomRight",
+      "name": "btmRight",
+      "in": "query",
+      "description": "Bottom right position of the bounding box. E.g. 37.553,-122.453",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RequiredBiasLat": {
+      "name": "lat",
+      "in": "query",
+      "description": "Latitude where results should be biased. E.g. 37.337.",
+      "required": true,
+      "type": "number",
+      "x-ms-parameter-location": "method"
+    },
+    "RequiredBiasLon": {
+      "name": "lon",
+      "in": "query",
+      "description": "Longitude where results should be biased. E.g. -121.89.",
+      "required": true,
+      "type": "number",
+      "x-ms-parameter-location": "method"
+    },
+    "Language": {
+      "name": "language",
+      "in": "query",
+      "description": "Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Query": {
+      "name": "query",
+      "in": "query",
+      "description": "The applicable query string. Must be properly URL encoded.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Position": {
+      "name": "query",
+      "in": "query",
+      "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268, -122.125679\".",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SearchIndexSet": {
+      "name": "idxSet",
+      "in": "query",
+      "description": "A comma separated list of indexes which should be utilized for the search. Item order does not matter. Available indexes are: Addr = Address range interpolation, Geo = Geographies, PAD = Point Addresses, POI = Points of interest, Str = Streets, Xstr = Cross Streets (intersections)",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Addr",
+          "Geo",
+          "PAD",
+          "POI",
+          "Str",
+          "Xstr"
+        ],
+        "x-ms-enum": {
+          "name": "SearchIndexSet",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "Addr",
+              "description": "Address range interpolation"
+            },
+            {
+              "value": "Geo",
+              "description": "Geographies"
+            },
+            {
+              "value": "PAD",
+              "description": "Point Addresses"
+            },
+            {
+              "value": "POI",
+              "description": "Points of interest"
+            },
+            {
+              "value": "Str",
+              "description": "Streets"
+            },
+            {
+              "value": "Xstr",
+              "description": "Cross Streets (Intersections)"
+            }
+          ]
+        }
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "ExtendedPostalCodesFor": {
+      "name": "extendedPostalCodesFor",
+      "in": "query",
+      "description": "Indexes for which extended postal codes should be included in the results.\n\nAvailable indexes are: \n\n **Addr** = Address ranges \n\n **Geo** = Geographies \n\n **PAD** = Point Addresses \n\n **POI** = Points of Interest \n\n **Str** = Streets \n\n **XStr** = Cross Streets (intersections)\n\nValue should be a comma separated list of index types (in any order) or **None** for no indexes.\n\nBy default extended postal codes are included for all indexes except Geo. Extended postal code lists for geographies can be quite long so they have to be explicitly requested when needed.\n\nUsage examples:\n\n extendedPostalCodesFor=POI \n\n extendedPostalCodesFor=PAD,Addr,POI \n\n extendedPostalCodesFor=None\n\nExtended postal code is returned as an **extendedPostalCode** property of an address. Availability is region-dependent.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ExtendedPostalCodesForPoi": {
+      "name": "extendedPostalCodesFor",
+      "in": "query",
+      "description": "Indexes for which extended postal codes should be included in the results.\n\nAvailable indexes are: \n\n **POI** = Points of Interest \n\nValue should be **POI** or **None** to disable extended postal codes.\n\nBy default extended postal codes are included.\n\nUsage examples:\n\n extendedPostalCodesFor=POI \n\n extendedPostalCodesFor=None\n\nExtended postal code is returned as an **extendedPostalCode** property of an address. Availability is region-dependent.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Typeahead": {
+      "name": "typeahead",
+      "in": "query",
+      "description": "Boolean. If the typeahead flag is set, the query will be interpreted as a partial input and the search will enter predictive mode",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "CountrySet": {
+      "name": "countrySet",
+      "in": "query",
+      "description": "Comma separated string of country codes, e.g. FR, ES. This will limit the search to the specified countries",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "Radius": {
+      "name": "radius",
+      "in": "query",
+      "description": "The radius in meters to for the results to be constrained to the defined area",
+      "required": false,
+      "type": "number",
+      "x-ms-parameter-location": "method"
+    },
+    "FuzzyQuery": {
+      "name": "query",
+      "in": "query",
+      "description": "The applicable query string (e.g., \"burger joints\", \"pizza\"). Can _also_ be specified as a comma separated string composed by latitude followed by longitude (e.g., \"47.641268, -122.125679\"). Must be properly URL encoded.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/search/polygon/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Get Polygon**<br><br>The Get Polygon service allows you to request the geometry data such as a city or country outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. <br><br> Please note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client should not store geometry IDs in persistent storage for later referral,  as the stability of these identifiers is not guaranteed for a long period of time.  It is expected that a request to the Polygon method is made within a few minutes of the request to the Online Search method that provided the ID. The service allows for batch requests up to 20 identifiers.",
+        "operationId": "Search_GetSearchPolygonPreview",
+        "x-ms-examples": {
+          "Get the Geometry using the geometry id returned by the previous Search": {
+            "$ref": "./examples/GetSearchPolygon.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "geometries",
+            "in": "query",
+            "description": "Comma separated list of geometry UUIDs, previously retrieved from an Online Search request.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This object is returned from a successful Search Polygon call",
+            "schema": {
+              "$ref": "#/definitions/SearchPolygonResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/fuzzy/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Free Form Search**<br><br>The basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical 'single line search'. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.<br><br>We strongly advise you to use the 'countrySet' parameter to specify only the countries for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.<br><br> E.g.: `countrySet`=US,FR <br><br>Please see [Search Coverage](https://docs.microsoft.com/en-us/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries.<br><br>Most Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
+        "operationId": "Search_GetSearchFuzzy",
+        "x-ms-examples": {
+          "Search City Seattle": {
+            "$ref": "./examples/GetSearchFuzzy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The applicable query string (e.g., \"seattle\", \"pizza\"). Can _also_ be specified as a comma separated string composed by latitude followed by longitude (e.g., \"47.641268, -122.125679\"). Must be properly URL encoded.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/Typeahead"
+          },
+          {
+            "$ref": "#/parameters/Limit"
+          },
+          {
+            "name": "ofs",
+            "in": "query",
+            "description": "Starting offset of the returned results within the full result set. Default: 0, minimum: 0 and maximum: 1900",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 1900
+          },
+          {
+            "$ref": "#/parameters/CountrySet"
+          },
+          {
+            "$ref": "#/parameters/OptionalBiasLat"
+          },
+          {
+            "$ref": "#/parameters/OptionalBiasLon"
+          },
+          {
+            "$ref": "#/parameters/Radius"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxTopLeft"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxBottomRight"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/ExtendedPostalCodesFor"
+          },
+          {
+            "name": "minFuzzyLevel",
+            "in": "query",
+            "description": "Maximum fuzzyness level to be used. Default: 2, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel. ",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1,
+            "maximum": 4
+          },
+          {
+            "name": "maxFuzzyLevel",
+            "in": "query",
+            "description": "Maximum fuzzyness level to be used. Default: 2, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel.",
+            "required": false,
+            "type": "integer",
+            "default": 2,
+            "minimum": 1,
+            "maximum": 4
+          },
+          {
+            "$ref": "#/parameters/SearchIndexSet"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchFuzzyResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/poi/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Get POI by Name**<br><br>If your search use case only requires POI results, you may use the POI endpoint for searching. This endpoint will only return POI results.",
+        "operationId": "Search_GetSearchPOI",
+        "x-ms-examples": {
+          "Search for juice bars within 5 miles of Seattle Downtown and limit the response to 5 results": {
+            "$ref": "./examples/GetSearchPOI.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The POI name to search for (e.g., \"statue of liberty\", \"starbucks\"), must be properly URL encoded.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/Typeahead"
+          },
+          {
+            "$ref": "#/parameters/Limit"
+          },
+          {
+            "name": "ofs",
+            "in": "query",
+            "description": "Starting offset of the returned results within the full result set. Default: 0, minimum: 0 and maximum: 1900",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 1900
+          },
+          {
+            "$ref": "#/parameters/CountrySet"
+          },
+          {
+            "$ref": "#/parameters/OptionalBiasLat"
+          },
+          {
+            "$ref": "#/parameters/OptionalBiasLon"
+          },
+          {
+            "$ref": "#/parameters/Radius"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxTopLeft"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxBottomRight"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/ExtendedPostalCodesForPoi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchPoiResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/nearby/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Nearby Search**<br><br>If you have a use case for only retrieving POI results around a specific location, the nearby search method may be the right choice. This endpoint will only return POI results, and does not take in a search query parameter.",
+        "operationId": "Search_GetSearchNearby",
+        "x-ms-examples": {
+          "Search for any points of interest (POI) within 5 miles of Manhattan NY and return the top 10 results": {
+            "$ref": "./examples/GetSearchNearby.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "$ref": "#/parameters/RequiredBiasLat"
+          },
+          {
+            "$ref": "#/parameters/RequiredBiasLon"
+          },
+          {
+            "$ref": "#/parameters/Limit"
+          },
+          {
+            "name": "ofs",
+            "in": "query",
+            "description": "Starting offset of returned results. Max value is 1900.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 1900
+          },
+          {
+            "$ref": "#/parameters/CountrySet"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "The radius in meters to for the results to be constrained to the defined area, Min value is 1, Max Value is 50000.",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/ExtendedPostalCodesFor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchNearbyResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/poi/category/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Get POI by Category**<br><br>If your search use case only requires POI results filtered by category, you may use the category endpoint. This endpoint will only return POI results which are categorized as specified.<br><br>List of available categories can be found [here](https://docs.microsoft.com/en-us/azure/azure-maps/search-categories).",
+        "operationId": "Search_GetSearchPOICategory",
+        "x-ms-examples": {
+          "Search for atm's within 2 miles of Times Square NY and return the top 3 results": {
+            "$ref": "./examples/GetSearchPOICategory.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The POI category to search for (e.g., \"AIRPORT\", \"BEACH\"), must be properly URL encoded.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/Typeahead"
+          },
+          {
+            "$ref": "#/parameters/Limit"
+          },
+          {
+            "name": "multiplier",
+            "in": "query",
+            "description": "Multiplies the limit by this value to gather more candidate POIs, which will then be sorted by drive distance, returning only the top candidates according to the limit.",
+            "required": false,
+            "type": "integer",
+            "default": 2
+          },
+          {
+            "name": "routingTimeout",
+            "in": "query",
+            "description": "Number of milliseconds routing engine can take to give the results.",
+            "required": false,
+            "type": "integer",
+            "default": 4000
+          },
+          {
+            "$ref": "#/parameters/CountrySet"
+          },
+          {
+            "$ref": "#/parameters/OptionalBiasLat"
+          },
+          {
+            "$ref": "#/parameters/OptionalBiasLon"
+          },
+          {
+            "$ref": "#/parameters/Radius"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxTopLeft"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxBottomRight"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/ExtendedPostalCodesFor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchPoiCategoryResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/address/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Address Geocoding**<br><br>In many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocode endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
+        "operationId": "Search_GetSearchAddress",
+        "x-ms-examples": {
+          "Search detail address 15127 NE 24th Street, Redmond, WA 98052": {
+            "$ref": "./examples/GetSearchAddress.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The address to search for (e.g., \"1 Microsoft way, Redmond, WA\"), must be properly URL encoded.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/Typeahead"
+          },
+          {
+            "$ref": "#/parameters/Limit"
+          },
+          {
+            "name": "ofs",
+            "in": "query",
+            "description": "Starting offset of the returned results within the full result set.",
+            "required": false,
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          {
+            "$ref": "#/parameters/CountrySet"
+          },
+          {
+            "$ref": "#/parameters/OptionalBiasLat"
+          },
+          {
+            "$ref": "#/parameters/OptionalBiasLon"
+          },
+          {
+            "$ref": "#/parameters/Radius"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxTopLeft"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxBottomRight"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/ExtendedPostalCodesFor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchAddressResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/address/reverse/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Reverse Geocode to an Address**<br><br>There may be times when you need to translate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located. This endpoint will return address information for a given coordinate.",
+        "operationId": "Search_GetSearchAddressReverse",
+        "x-ms-examples": {
+          "GetSearchAddressReverse": {
+            "$ref": "./examples/GetSearchAddressReverse.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "$ref": "#/parameters/Position"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "name": "returnSpeedLimit",
+            "in": "query",
+            "description": "Boolean. To enable return of the posted speedlimit",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "heading",
+            "in": "query",
+            "description": "The directional heading of the vehicle in degrees, for travel along a segment of roadway. 0 is North, 90 is East and so on, values range from -360 to 360. The precision can include upto one decimal place",
+            "required": false,
+            "type": "number",
+            "minimum": -360,
+            "maximum": 360
+          },
+          {
+            "$ref": "#/parameters/Radius"
+          },
+          {
+            "name": "number",
+            "in": "query",
+            "description": "If a number is sent in along with the request, the response may include the side of the street (Left/Right) and also an offset position for that number",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "returnRoadUse",
+            "in": "query",
+            "description": "Boolean. To enable return of the road use array for reversegeocodes at street level",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "roadUse",
+            "in": "query",
+            "description": "To restrict reversegeocodes to a certain type of roaduse. The road use array for reversegeocodes can be one or more of LimitedAccess, Arterial, Terminal, Ramp, Rotary, LocalStreet",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "allowFreeformNewline",
+            "in": "query",
+            "description": "Format of newlines in the formatted address.\n\nIf true, the address will contain newlines.\nIf false, newlines will be converted to commas.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "dateTime",
+            "in": "query",
+            "description": "The date and time to return time zone information for. It allows  the service to decide whether Daylight Saving Time time zone should  be used or not. It must conform to  [RFC-3339](https://www.ietf.org/rfc/rfc3339.txt).\n\nExamples:\n* 2017-12-19T16:39:57\n* 2017-12-19T16:39:57-08:00",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "returnMatchType",
+            "in": "query",
+            "description": "Include information on the type of match the geocoder achieved in the response.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchAddressReverseResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/address/reverse/crossStreet/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Reverse Geocode to a Cross Street**<br><br>There may be times when you need to translate a coordinate (example: 37.786505, -122.3862) into a human understandable cross street. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located.<br><br>This endpoint will return cross street information for a given coordinate.",
+        "operationId": "Search_GetSearchAddressReverseCrossStreet",
+        "x-ms-examples": {
+          "GetSearchAddressReverseCrossStreet": {
+            "$ref": "./examples/GetSearchAddressReverseCrossStreet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "$ref": "#/parameters/Position"
+          },
+          {
+            "name": "heading",
+            "in": "query",
+            "description": "The directional heading of the vehicle in degrees, for travel along a segment of roadway. 0 is North, 90 is East and so on, values range from -360 to 360. The precision can include upto one decimal place",
+            "required": false,
+            "type": "number",
+            "minimum": -360,
+            "maximum": 360
+          },
+          {
+            "$ref": "#/parameters/Radius"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchAddressReverseCrossStreetResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/address/structured/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Structured Address Geocoding**<br><br>Azure Address Geocoding can also be accessed for structured address look up exclusively. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
+        "operationId": "Search_GetSearchAddressStructured",
+        "x-ms-examples": {
+          "GetSearchAddressStructured": {
+            "$ref": "./examples/GetSearchAddressStructured.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "name": "countryCode",
+            "in": "query",
+            "description": "The 2 or 3 letter country code portion of an address. E.g. US",
+            "required": true,
+            "default": "US",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of responses that will be returned",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "ofs",
+            "in": "query",
+            "description": "Starting offset of the returned results within the full result set",
+            "required": false,
+            "type": "integer",
+            "default": 0
+          },
+          {
+            "name": "streetNumber",
+            "in": "query",
+            "description": "The street number portion of an address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "streetName",
+            "in": "query",
+            "description": "The street name portion of an address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "crossStreet",
+            "in": "query",
+            "description": "The cross street name for the structured address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "municipality",
+            "in": "query",
+            "description": "The municipality portion of an address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "municipalitySubdivision",
+            "in": "query",
+            "description": "The municipality subdivision (sub/super city) for the structured address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countryTertiarySubdivision",
+            "in": "query",
+            "description": "The named area for the structured address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countrySecondarySubdivision",
+            "in": "query",
+            "description": "The county for the structured address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countrySubdivision",
+            "in": "query",
+            "description": "The country subdividion portion of an address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "postalCode",
+            "in": "query",
+            "description": "The postal code portion of an address",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ExtendedPostalCodesFor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchAddressStructuredResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/geometry/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "The Search Geometry endpoint allows you to perform a free form search inside a single geometry or many of them. The search results that fall inside the geometry/geometries will be returned.<br><br>To send the geometry you will use a `GET` request where the `geometry` parameter is represented as a `GeoJSON` type. The geographical features to be searched can be modeled as Polygon and/or Circle geometries represented using any one of the following `GeoJSON` types:<ul><li>**GeoJSON FeatureCollection** <br>The `geometry` can be represented as a `GeoJSON FeatureCollection` object. This is the recommended option if the geometry contains both Polygons and Circles. The `FeatureCollection` can contain a max of 50 `GeoJSON Feature` objects. Each `Feature` object should represent either a Polygon or a Circle with the following conditions:<ul style=\"list-style-type:none\"><li>A `Feature` object for the Polygon geometry can have a max of 50 coordinates and it's properties must be empty.</li><li>A `Feature` object for the Circle geometry is composed of a _center_ represented using a `GeoJSON Point` type and a _radius_ value (in meters) which must be specified in the object's properties along with the _subType_ property whose value should be 'Circle'.</li></ul><br> Please see the Examples section below for a sample `FeatureCollection` representation.<br><br></li><li>**GeoJSON GeometryCollection**<br>The `geometry` can be represented as a `GeoJSON GeometryCollection` object. This is the recommended option if the geometry contains a list of Polygons only. The `GeometryCollection` can contain a max of 50 `GeoJSON Polygon` objects. Each `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `GeometryCollection` representation.<br><br></li><li>**GeoJSON Polygon**<br>The `geometry` can be represented as a `GeoJSON Polygon` object. This is the recommended option if the geometry contains a single Polygon. The `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `Polygon` representation.<br><br></li></ul>.<br><br>",
+        "operationId": "Search_GetSearchInsideGeometry",
+        "x-ms-examples": {
+          "Search for pizza places inside a geometry represented as a GeoJSON FeatureCollection type": {
+            "$ref": "./examples/GetSearchInsideFeatureCollection.json"
+          },
+          "Search for burger joints inside a geometry represented as a GeoJSON GeometryCollection type": {
+            "$ref": "./examples/GetSearchInsideGeometryCollection.json"
+          },
+          "Search for subs joints inside a geometry represented as a GeoJSON Polygon type": {
+            "$ref": "./examples/GetSearchInsideGeometry.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/FuzzyQuery"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "geometry",
+            "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) to search in and should be a GeoJSON compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
+            "required": true,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "$ref": "#/parameters/Limit"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/ExtendedPostalCodesFor"
+          },
+          {
+            "$ref": "#/parameters/SearchIndexSet"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchGeometryResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "post": {
+        "x-publish": true,
+        "description": "The Search Geometry endpoint allows you to perform a free form search inside a single geometry or many of them. The search results that fall inside the geometry/geometries will be returned.<br><br>To send the geometry you will use a `POST` request where the request body will contain the `geometry` object represented as a `GeoJSON` type and the `Content-Type` header will be set to `application/json`. The geographical features to be searched can be modeled as Polygon and/or Circle geometries represented using any one of the following `GeoJSON` types:<ul><li>**GeoJSON FeatureCollection** <br>The `geometry` can be represented as a `GeoJSON FeatureCollection` object. This is the recommended option if the geometry contains both Polygons and Circles. The `FeatureCollection` can contain a max of 50 `GeoJSON Feature` objects. Each `Feature` object should represent either a Polygon or a Circle with the following conditions:<ul style=\"list-style-type:none\"><li>A `Feature` object for the Polygon geometry can have a max of 50 coordinates and it's properties must be empty.</li><li>A `Feature` object for the Circle geometry is composed of a _center_ represented using a `GeoJSON Point` type and a _radius_ value (in meters) which must be specified in the object's properties along with the _subType_ property whose value should be 'Circle'.</li></ul><br> Please see the Examples section below for a sample `FeatureCollection` representation.<br><br></li><li>**GeoJSON GeometryCollection**<br>The `geometry` can be represented as a `GeoJSON GeometryCollection` object. This is the recommended option if the geometry contains a list of Polygons only. The `GeometryCollection` can contain a max of 50 `GeoJSON Polygon` objects. Each `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `GeometryCollection` representation.<br><br></li><li>**GeoJSON Polygon**<br>The `geometry` can be represented as a `GeoJSON Polygon` object. This is the recommended option if the geometry contains a single Polygon. The `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `Polygon` representation.<br><br></li></ul>.<br><br>",
+        "operationId": "Search_PostSearchInsideGeometry",
+        "x-ms-examples": {
+          "Search for pizza places inside a geometry represented as a GeoJSON FeatureCollection type": {
+            "$ref": "./examples/PostSearchInsideFeatureCollection.json"
+          },
+          "Search for burger joints inside a geometry represented as a GeoJSON GeometryCollection type": {
+            "$ref": "./examples/PostSearchInsideGeometryCollection.json"
+          },
+          "Search for subs joints inside a geometry represented as a GeoJSON Polygon type": {
+            "$ref": "./examples/PostSearchInsideGeometry.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/FuzzyQuery"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "$ref": "#/parameters/Limit"
+          },
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/ExtendedPostalCodesFor"
+          },
+          {
+            "$ref": "#/parameters/SearchIndexSet"
+          },
+          {
+            "name": "searchInsideGeometryRequestBody",
+            "in": "body",
+            "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) to search in and should be a GeoJSON compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchInsideGeometryRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchGeometryResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/alongRoute/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "The Search Along Route endpoint allows you to perform a fuzzy search for POIs along a specified route. This search is constrained by specifying the `maxDetourTime` limiting measure.<br><br>To send the route-points you will use a `GET` request where the `route` parameter is represented as a `GeoJSON LineString` type. Each route-point in `route` is represented as a `GeoJSON Position` type i.e. an array where the _longitude_ value is followed by the _latitude_ value and the _altitude_ value is ignored. The `route` should contain at least 2 route-points.<br><br>It is possible that original route will be altered, some of it's points may be skipped. If the route that passes through the found point is faster than the original one, the `detourTime` value in the response is negative.",
+        "operationId": "Search_GetSearchAlongRoute",
+        "x-ms-examples": {
+          "Search for burger joints along a route": {
+            "$ref": "./examples/GetSearchAlongRoute.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/FuzzyQuery"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "route",
+            "description": "This represents the route to search along and should be a valid `GeoJSON LineString` type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
+            "required": true,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "name": "maxDetourTime",
+            "description": "Maximum detour time of the point of interest in seconds. Max value is 3600 seconds",
+            "required": true,
+            "type": "integer",
+            "in": "query",
+            "maximum": 3600
+          },
+          {
+            "name": "limit",
+            "description": "Maximum number of responses that will be returned. Default value is 10. Max value is 20",
+            "required": false,
+            "type": "integer",
+            "in": "query",
+            "default": 10,
+            "maximum": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchAlongRouteResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "post": {
+        "x-publish": true,
+        "description": "The Search Along Route endpoint allows you to perform a fuzzy search for POIs along a specified route. This search is constrained by specifying the `maxDetourTime` limiting measure.<br><br>To send the route-points you will use a `POST` request where the request body will contain the `route` object represented as a `GeoJSON LineString` type and the `Content-Type` header will be set to `application/json`. Each route-point in `route` is represented as a `GeoJSON Position` type i.e. an array where the _longitude_ value is followed by the _latitude_ value and the _altitude_ value is ignored. The `route` should contain at least 2 route-points.<br><br>It is possible that original route will be altered, some of it's points may be skipped. If the route that passes through the found point is faster than the original one, the `detourTime` value in the response is negative.",
+        "operationId": "Search_PostSearchAlongRoute",
+        "x-ms-examples": {
+          "Search for burger joints along a route": {
+            "$ref": "./examples/PostSearchAlongRoute.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/FuzzyQuery"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "maxDetourTime",
+            "description": "Maximum detour time of the point of interest in seconds. Max value is 3600 seconds",
+            "required": true,
+            "type": "integer",
+            "in": "query",
+            "maximum": 3600
+          },
+          {
+            "name": "limit",
+            "description": "Maximum number of responses that will be returned. Default value is 10. Max value is 20",
+            "required": false,
+            "type": "integer",
+            "in": "query",
+            "default": 10,
+            "maximum": 20
+          },
+          {
+            "name": "searchAlongRouteRequestBody",
+            "in": "body",
+            "description": "This represents the route to search along and should be a valid `GeoJSON LineString` type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchAlongRouteRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchAlongRouteResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/fuzzy/batch/{format}": {
+      "post": {
+        "x-publish": true,
+        "description": "**Search Fuzzy Batch API**<br><br> The Search Fuzzy Batch API allows the caller to batch up to 10,000 [Search Fuzzy API](https://docs.microsoft.com/en-us/rest/api/maps/searchservice/getsearchfuzzy) queries/requests using just a single API call. To send the _search fuzzy_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`.<br><br>A _search fuzzy_ query in a batch is just a partial URL without the protocol, base URL, path, api-version and subscription-key. All these values will be reused from the Search Fuzzy Batch API call itself. The string values in the _search fuzzy_ query must be properly escaped (e.g. \" character should be escaped with \\\\) and it should also be properly URL-encoded.<br><br> for example: \"?_query_=atm&_lat_=47.639769&_lon_=-122.128362&_radius_=5000&_limit_=5\"<br><br> The maximum number of queries that can be specified in the batch is 10,000  and the batch should contain at least 1 query.<br><br>Please note that the Search Fuzzy Batch API is a long-running request. When the client `POST`'s the initial batch request, the server responds immediately with a `202 Accepted` response with the `Location` header containing the URL to download the results of the batch request later. To download the batch results you will issue a `GET` request to this download endpoint. If the batch processing has finished, this call returns a `200 OK` response with all the batch results, else it continues to return a `202 Accepted` response. Please, be aware that batch results are available for download for 14 days, after which the request for results download will return `400 Bad Request` response.",
+        "operationId": "Search_PostSearchFuzzyBatchPreview",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "A Search Fuzzy Batch API call containing 5 Search Fuzzy API queries": {
+            "$ref": "./examples/PostSearchFuzzyBatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "searchFuzzyBatchRequestBody",
+            "in": "body",
+            "description": "The list of search fuzzy queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/responses/202"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/address/batch/{format}": {
+      "post": {
+        "x-publish": true,
+        "description": "**Address Geocoding Batch API**<br><br> The Address Geocoding Batch API allows the caller to batch up to 10,000 [Address Geocoding API](https://docs.microsoft.com/en-us/rest/api/maps/searchservice/getsearchaddress) queries/requests using just a single API call. To send the _address geocoding_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`.<br><br>An _address geocoding_ query in a batch is just a partial URL without the protocol, base URL, path, api-version and subscription-key. All these values will be reused from the Address Geocoding Batch API call itself. The string values in the _address geocoding_ query must be properly escaped (e.g. \" character should be escaped with \\\\) and it should also be properly URL-encoded.<br><br> for example: \"?_query_=Pike Pl, Seattle, WA 98101&_lat_=47.610970&_lon_=-122.342469&_radius_=1000&_limit_=3\"<br><br> The maximum number of queries that can be specified in the batch is 10,000  and the batch should contain at least 1 query.<br><br>Please note that the Address Geocoding Batch API is a long-running request. When the client `POST`'s the initial batch request, the server responds immediately with a `202 Accepted` response with the `Location` header containing the URL to download the results of the batch request later. To download the batch results you will issue a `GET` request to this download endpoint. If the batch processing has finished, this call returns a `200 OK` response with all the batch results, else it continues to return a `202 Accepted` response. Please, be aware that batch results are available for download for 14 days, after which the request for results download will return `400 Bad Request` response.",
+        "operationId": "Search_PostSearchAddressBatchPreview",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "An Address Geocoding Batch API call containing 5 Address Geocoding API queries": {
+            "$ref": "./examples/PostSearchAddressBatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "searchAddressBatchRequestBody",
+            "in": "body",
+            "description": "The list of address geocoding queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/responses/202"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/address/reverse/batch/{format}": {
+      "post": {
+        "x-publish": true,
+        "description": "**Reverse Geocoding Batch API**<br><br> The Reverse Geocoding Batch API allows the caller to batch up to 10,000 [Reverse Geocoding API](https://docs.microsoft.com/en-us/rest/api/maps/searchservice/getsearchaddressreverse) queries/requests using just a single API call. To send the _reverse geocoding_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`.<br><br>An _reverse geocoding_ query in a batch is just a partial URL without the protocol, base URL, path, api-version and subscription-key. All these values will be reused from the Reverse Geocoding Batch API call itself. The string values in the _reverse geocoding_ query must be properly escaped (e.g. \" character should be escaped with \\\\) and it should also be properly URL-encoded.<br><br> for example: \"?_query_=47.639765,-122.127896&_radius_=5000&_limit_=2\"<br><br> The maximum number of queries that can be specified in the batch is 10,000  and the batch should contain at least 1 query.<br><br>Please note that the Reverse Geocoding Batch API is a long-running request. When the client `POST`'s the initial batch request, the server responds immediately with a `202 Accepted` response with the `Location` header containing the URL to download the results of the batch request later. To download the batch results you will issue a `GET` request to this download endpoint. If the batch processing has finished, this call returns a `200 OK` response with all the batch results, else it continues to return a `202 Accepted` response. Please, be aware that batch results are available for download for 14 days, after which the request for results download will return `400 Bad Request` response.",
+        "operationId": "Search_PostSearchAddressReverseBatchPreview",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "A Reverse Geocoding Batch API call containing 5 Reverse Geocoding API queries": {
+            "$ref": "./examples/PostSearchAddressReverseBatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "searchAddressReverseBatchRequestBody",
+            "in": "body",
+            "description": "The list of reverse geocoding queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/responses/202"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The HTTP status code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        }
+      }
+    },
+    "Geometry": {
+      "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "Specifies the `type` for the geometry object. This value must be one of: `FeatureCollection`, `GeometryCollection` and `Polygon`.",
+          "type": "string",
+          "enum": [
+            "FeatureCollection",
+            "GeometryCollection",
+            "Polygon"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "BatchRequestBody": {
+      "description": "This type represents the request body for the Batch service.",
+      "type": "object",
+      "properties": {
+        "queries": {
+          "description": "The list of queries/requests to process",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SearchPolygonResponse": {
+      "description": "This object is returned from a successful Search Polygon call",
+      "type": "object",
+      "properties": {
+        "additionalData": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchPolygonResult"
+          }
+        }
+      }
+    },
+    "SearchPolygonResult": {
+      "type": "object",
+      "properties": {
+        "providerID": {
+          "description": "ID of the returned entity",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Reason for the failure to obtain data for this provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "geometryData": {
+          "description": "Geometry data in GeoJSON format. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details. Present only if \"error\" is not present.",
+          "$ref": "#/definitions/Geometry"
+        }
+      }
+    },
+    "SearchFuzzyResponse": {
+      "description": "This object is returned from a successful Search Fuzzy call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "query": {
+              "description": "Query property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryType": {
+              "description": "QueryType property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "offset": {
+              "description": "Offset property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalResults": {
+              "description": "TotalResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "fuzzyLevel": {
+              "description": "FuzzyLevel property",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchFuzzyResult"
+          }
+        }
+      }
+    },
+    "SearchFuzzyResult": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "description": "Score property",
+          "type": "number",
+          "readOnly": true
+        },
+        "info": {
+          "description": "Info property",
+          "type": "string",
+          "readOnly": true
+        },
+        "entityType": {
+          "description": "Entity Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "poi": {
+          "$ref": "#/definitions/SearchResultPoi"
+        },
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "$ref": "#/definitions/SearchResultPosition"
+        },
+        "viewport": {
+          "$ref": "#/definitions/SearchResultViewport"
+        },
+        "entryPoints": {
+          "description": "Entry Points array",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResultEntryPoint"
+          }
+        },
+        "addressRanges": {
+          "$ref": "#/definitions/SearchResultAddressRanges"
+        }
+      }
+    },
+    "SearchPoiResponse": {
+      "description": "This object is returned from a successful Search POI call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "query": {
+              "description": "Query property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryType": {
+              "description": "QueryType property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "offset": {
+              "description": "Offset property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalResults": {
+              "description": "TotalResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "fuzzyLevel": {
+              "description": "FuzzyLevel property",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchPoiResult"
+          }
+        }
+      }
+    },
+    "SearchPoiResult": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "description": "Score property",
+          "type": "number",
+          "readOnly": true
+        },
+        "dist": {
+          "description": "Distance property",
+          "type": "number",
+          "readOnly": true
+        },
+        "info": {
+          "description": "Info property",
+          "type": "string",
+          "readOnly": true
+        },
+        "entityType": {
+          "description": "Entity Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "poi": {
+          "$ref": "#/definitions/SearchResultPoi"
+        },
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "$ref": "#/definitions/SearchResultPosition"
+        },
+        "viewport": {
+          "$ref": "#/definitions/SearchResultViewport"
+        },
+        "entryPoints": {
+          "description": "Entry Points array",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResultEntryPoint"
+          }
+        }
+      }
+    },
+    "SearchNearbyResponse": {
+      "description": "This object is returned from a successful Search Nearby call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "queryType": {
+              "description": "QueryType property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "offset": {
+              "description": "Offset property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalResults": {
+              "description": "TotalResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "fuzzyLevel": {
+              "description": "FuzzyLevel property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "geoBias": {
+              "description": "GeoBias property",
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "lat": {
+                  "description": "Latitude property",
+                  "type": "number",
+                  "readOnly": true
+                },
+                "lon": {
+                  "description": "Longitude property",
+                  "type": "number",
+                  "readOnly": true
+                }
+              }
+            }
+          }
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchNearbyResult"
+          }
+        }
+      }
+    },
+    "SearchNearbyResult": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "description": "Score property",
+          "type": "number",
+          "readOnly": true
+        },
+        "dist": {
+          "description": "Distance property",
+          "type": "number",
+          "readOnly": true
+        },
+        "info": {
+          "description": "Info property",
+          "type": "string",
+          "readOnly": true
+        },
+        "poi": {
+          "$ref": "#/definitions/SearchResultPoi"
+        },
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "$ref": "#/definitions/SearchResultPosition"
+        },
+        "viewport": {
+          "$ref": "#/definitions/SearchResultViewport"
+        },
+        "entryPoints": {
+          "description": "Entry Points array",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResultEntryPoint"
+          }
+        }
+      }
+    },
+    "SearchPoiCategoryResponse": {
+      "description": "This object is returned from a successful Search POI Category call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "query": {
+              "description": "Query property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryType": {
+              "description": "QueryType property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "offset": {
+              "description": "Offset property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalResults": {
+              "description": "TotalResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "fuzzyLevel": {
+              "description": "FuzzyLevel property",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchPoiCategoryResult"
+          }
+        }
+      }
+    },
+    "SearchPoiCategoryResult": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "description": "Score property",
+          "type": "number",
+          "readOnly": true
+        },
+        "dist": {
+          "description": "Distance in meters",
+          "type": "number",
+          "readOnly": true
+        },
+        "info": {
+          "description": "Info property",
+          "type": "string",
+          "readOnly": true
+        },
+        "entityType": {
+          "description": "Entity Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "poi": {
+          "$ref": "#/definitions/SearchResultPoi"
+        },
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "$ref": "#/definitions/SearchResultPosition"
+        },
+        "viewport": {
+          "$ref": "#/definitions/SearchResultViewport"
+        },
+        "entryPoints": {
+          "description": "Entry Points array",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResultEntryPoint"
+          }
+        }
+      }
+    },
+    "SearchAddressResponse": {
+      "description": "This object is returned from a successful Search Address call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "query": {
+              "description": "Query property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryType": {
+              "description": "QueryType property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "offset": {
+              "description": "Offset property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalResults": {
+              "description": "TotalResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "fuzzyLevel": {
+              "description": "FuzzyLevel property",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAddressResult"
+          }
+        }
+      }
+    },
+    "SearchAddressResult": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "description": "Score property",
+          "type": "number",
+          "readOnly": true
+        },
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "$ref": "#/definitions/SearchResultPosition"
+        },
+        "viewport": {
+          "$ref": "#/definitions/SearchResultViewport"
+        },
+        "entryPoints": {
+          "description": "Entry Points array",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResultEntryPoint"
+          }
+        }
+      }
+    },
+    "SearchAddressReverseResponse": {
+      "description": "This object is returned from a successful Search Address Reverse call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "addresses": {
+          "description": "Addresses array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAddressReverseResult"
+          }
+        }
+      }
+    },
+    "SearchAddressReverseResult": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Position property in the form of \"{latitude},{longitude}\""
+        }
+      }
+    },
+    "SearchAddressReverseCrossStreetResponse": {
+      "description": "This object is returned from a successful Search Address Reverse CrossStreet call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "addresses": {
+          "description": "Addresses array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAddressReverseCrossStreetResult"
+          }
+        }
+      }
+    },
+    "SearchAddressReverseCrossStreetResult": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Position property in the form of \"{latitude},{longitude}\""
+        }
+      }
+    },
+    "SearchAddressStructuredResponse": {
+      "description": "This object is returned from a successful Search Address Structured call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "query": {
+              "description": "Query property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryType": {
+              "description": "QueryType property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "limit": {
+              "description": "Maximum number of responses that will be returned",
+              "readOnly": true,
+              "type": "integer"
+            },
+            "offset": {
+              "description": "Offset property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalResults": {
+              "description": "TotalResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "fuzzyLevel": {
+              "description": "FuzzyLevel property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "geoBias": {
+              "description": "Geo Bias of the result",
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number",
+                  "readOnly": true,
+                  "description": "Latitude property"
+                },
+                "lon": {
+                  "type": "number",
+                  "readOnly": true,
+                  "description": "Longitude property"
+                }
+              }
+            }
+          }
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAddressStructuredResult"
+          }
+        }
+      }
+    },
+    "SearchAddressStructuredResult": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "description": "Score property",
+          "type": "number",
+          "readOnly": true
+        },
+        "dist": {
+          "description": "Dist property",
+          "type": "number",
+          "readOnly": true
+        },
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "$ref": "#/definitions/SearchResultPosition"
+        },
+        "viewport": {
+          "$ref": "#/definitions/SearchResultViewport"
+        },
+        "entryPoints": {
+          "description": "Entry Points array",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResultEntryPoint"
+          }
+        },
+        "addressRanges": {
+          "$ref": "#/definitions/SearchResultAddressRanges"
+        }
+      }
+    },
+    "SearchGeometryResponse": {
+      "description": "This object is returned from a successful Search By Geometry call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "query": {
+              "description": "Query property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryType": {
+              "description": "QueryType property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "offset": {
+              "description": "Offset property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalResults": {
+              "description": "TotalResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "fuzzyLevel": {
+              "description": "FuzzyLevel property",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "results": {
+          "description": "A list of Search Inside Geometry results.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchGeometryResult"
+          }
+        }
+      }
+    },
+    "SearchGeometryResult": {
+      "description": "This type represents the Search Inside Geometry result object.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "description": "Score property",
+          "type": "number",
+          "readOnly": true
+        },
+        "info": {
+          "description": "Info property",
+          "type": "string",
+          "readOnly": true
+        },
+        "entityType": {
+          "description": "Entity Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "poi": {
+          "$ref": "#/definitions/SearchResultPoi"
+        },
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "$ref": "#/definitions/SearchResultPosition"
+        },
+        "viewport": {
+          "$ref": "#/definitions/SearchResultViewport"
+        },
+        "entryPoints": {
+          "description": "Entry Points array",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResultEntryPoint"
+          }
+        }
+      }
+    },
+    "SearchAlongRouteResponse": {
+      "description": "This object is returned from a successful Search Along Route call.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "query": {
+              "description": "Query property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryType": {
+              "description": "QueryType property",
+              "type": "string",
+              "readOnly": true
+            },
+            "queryTime": {
+              "description": "QueryTime property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "numResults": {
+              "description": "NumResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "offset": {
+              "description": "Offset property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalResults": {
+              "description": "TotalResults property",
+              "type": "integer",
+              "readOnly": true
+            },
+            "fuzzyLevel": {
+              "description": "FuzzyLevel property",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "results": {
+          "description": "A list of Search Along Route results.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAlongRouteResult"
+          }
+        }
+      }
+    },
+    "SearchAlongRouteResult": {
+      "description": "This type represents the Search Along Route result object.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "description": "Score property",
+          "type": "number",
+          "readOnly": true
+        },
+        "info": {
+          "description": "Info property",
+          "type": "string",
+          "readOnly": true
+        },
+        "entityType": {
+          "description": "Entity Type property",
+          "type": "string",
+          "readOnly": true
+        },
+        "poi": {
+          "$ref": "#/definitions/SearchResultPoi"
+        },
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "$ref": "#/definitions/SearchResultPosition"
+        },
+        "viewport": {
+          "$ref": "#/definitions/SearchResultViewport"
+        },
+        "entryPoints": {
+          "description": "Entry Points array",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResultEntryPoint"
+          }
+        },
+        "dist": {
+          "description": "Distance in meters",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "detourTime": {
+          "description": "Detour time in seconds",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "SearchInsideGeometryRequestBody": {
+      "description": "This type represents the request body for the Search Inside Geometry service.",
+      "type": "object",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/Geometry"
+        }
+      }
+    },
+    "SearchAlongRouteRequestBody": {
+      "description": "This type represents the request body for the Search Along Route service.",
+      "type": "object",
+      "properties": {
+        "route": {
+          "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
+          "type": "object",
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"LineString\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Coordinates for the `LineString` geometry.",
+              "type": "array",
+              "items": {
+                "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, , precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SearchResultPoi": {
+      "description": "Details of the poi including the name, phone, url, and categories.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name property",
+          "type": "string",
+          "readOnly": true
+        },
+        "phone": {
+          "description": "Phone property",
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "description": "URL property",
+          "type": "string",
+          "readOnly": true
+        },
+        "categories": {
+          "description": "Categories array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "classifications": {
+          "description": "Classification array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchResultPoiClassification"
+          }
+        }
+      }
+    },
+    "SearchResultPoiClassification": {
+      "description": "The classification for the POI being returned",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Code property",
+          "type": "string",
+          "readOnly": true
+        },
+        "names": {
+          "description": "Names array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "Name for the classification",
+            "type": "object",
+            "properties": {
+              "nameLocale": {
+                "description": "Name Locale property",
+                "type": "string",
+                "readOnly": true
+              },
+              "name": {
+                "description": "Name property",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "SearchResultAddress": {
+      "description": "The address of the result",
+      "type": "object",
+      "properties": {
+        "buildingNumber": {
+          "description": "Building Number property",
+          "type": "string",
+          "readOnly": true
+        },
+        "street": {
+          "description": "Street property",
+          "type": "string",
+          "readOnly": true
+        },
+        "crossStreet": {
+          "description": "Cross Street property",
+          "type": "string",
+          "readOnly": true
+        },
+        "streetNumber": {
+          "description": "Street Number property",
+          "type": "string",
+          "readOnly": true
+        },
+        "routeNumbers": {
+          "description": "number of routes",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "readOnly": true
+        },
+        "streetName": {
+          "description": "Street Name property",
+          "type": "string",
+          "readOnly": true
+        },
+        "streetNameAndNumber": {
+          "description": "Street Name and Number property",
+          "type": "string",
+          "readOnly": true
+        },
+        "municipality": {
+          "description": "Municipality property",
+          "type": "string",
+          "readOnly": true
+        },
+        "municipalitySubdivision": {
+          "description": "Municipality Subdivision property",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryTertiarySubdivision": {
+          "description": "Country Tertiary Subdivision property",
+          "type": "string",
+          "readOnly": true
+        },
+        "countrySecondarySubdivision": {
+          "description": "Country Secondary Subdivision property",
+          "type": "string",
+          "readOnly": true
+        },
+        "countrySubdivision": {
+          "description": "Country Subdivision property",
+          "type": "string",
+          "readOnly": true
+        },
+        "postalCode": {
+          "description": "Postal Code property",
+          "type": "string",
+          "readOnly": true
+        },
+        "extendedPostalCode": {
+          "description": "Extended Postal Code property",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCode": {
+          "description": "Country Code property",
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "description": "Country property",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCodeISO3": {
+          "description": "Country Code ISO3 property",
+          "type": "string",
+          "readOnly": true
+        },
+        "freeformAddress": {
+          "description": "Free form Address property",
+          "type": "string",
+          "readOnly": true
+        },
+        "countrySubdivisionName": {
+          "description": "Country Subdividion Name property",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SearchResultPosition": {
+      "description": "Coordinates of the result",
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Latitude property"
+        },
+        "lon": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Longitude property"
+        }
+      }
+    },
+    "SearchResultViewport": {
+      "description": "The viewport that covers the result",
+      "type": "object",
+      "properties": {
+        "topLeftPoint": {
+          "description": "Top left of the viewport",
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number",
+              "readOnly": true,
+              "description": "Latitude"
+            },
+            "lon": {
+              "type": "number",
+              "readOnly": true,
+              "description": "Longitude"
+            }
+          }
+        },
+        "btmRightPoint": {
+          "description": "Bottom right of the viewport",
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number",
+              "readOnly": true,
+              "description": "Latitude"
+            },
+            "lon": {
+              "type": "number",
+              "readOnly": true,
+              "description": "Longitude"
+            }
+          }
+        }
+      }
+    },
+    "SearchResultEntryPoint": {
+      "description": "The entry point for the POI being returned.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of entry point. Value can be either _main_ or _minor_.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "main",
+            "minor"
+          ]
+        },
+        "position": {
+          "description": "Name property",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "lat": {
+              "description": "Latitude property",
+              "type": "number",
+              "readOnly": true
+            },
+            "lon": {
+              "description": "Longitude property",
+              "type": "number",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "SearchResultAddressRanges": {
+      "type": "object",
+      "properties": {
+        "rangeLeft": {
+          "type": "string"
+        },
+        "rangeRight": {
+          "type": "string"
+        },
+        "from": {
+          "description": "A postion of start point",
+          "type": "object",
+          "properties": {
+            "lon": {
+              "description": "longitude of start point",
+              "type": "number",
+              "format": "double"
+            },
+            "lat": {
+              "description": "latitude of start point",
+              "type": "number",
+              "format": "double"
+            }
+          }
+        },
+        "to": {
+          "description": "A postion of destination",
+          "type": "object",
+          "properties": {
+            "lon": {
+              "description": "longitude of destination",
+              "type": "number",
+              "format": "double"
+            },
+            "lat": {
+              "description": "latitude of destination",
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      }
+    }
+  }
+}
