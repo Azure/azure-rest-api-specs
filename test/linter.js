@@ -106,7 +106,7 @@ describe('AutoRest Linter validation:', function () {
         // find all tags in the config file
         const tagsToProcess = await getTagsFromConfig(config);
 
-        var errorsFound = false;
+        let errorsFound = false;
 
         // if no tags found to process, run with the defaults    
         if (tagsToProcess === null || tagsToProcess.length === 0) {
@@ -122,13 +122,13 @@ describe('AutoRest Linter validation:', function () {
             return prFile.startsWith(configDir) && prFile.indexOf('examples') === -1 && prFile.endsWith('.json');
           }).forEach(prFileInConfigFile => {
             console.warn(`WARNING: Configuration file not found for file: ${prFileInConfigFile}, running validation rules against it in individual context.`);
-            errorsFound = errorsFound && execLinterCommand(`--input-file=${prFileInConfigFile}`);
+            errorsFound = execLinterCommand(`--input-file=${prFileInConfigFile}`) && errorsFound;
           });
         }
         else {
           // if tags found, run linter against every single tag
           tagsToProcess.forEach((tagToProcess) => {
-            errorsFound = errorsFound && execLinterCommand(`${config} --tag=${tagToProcess}`);
+            errorsFound = execLinterCommand(`${config} --tag=${tagToProcess}`) && errorsFound;
           }, this);
         }
 
