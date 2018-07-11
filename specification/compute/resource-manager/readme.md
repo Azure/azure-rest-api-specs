@@ -158,16 +158,16 @@ directive:
       - TrackedResourcePatchOperation
 ```
 
-
 ### Tag: package-2018-09
 
 These settings apply only when `--tag=package-2018-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-09'
+``` yaml $(tag) == 'package-2018-09'
 input-file:
   - Microsoft.Compute/stable/2018-09-11/compute.json
   - Microsoft.Compute/stable/2018-09-11/gallery.json
 ```
+
 ### Tag: package-2018-06-01
 
 These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
@@ -740,4 +740,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2017_03_30
 regenerate-manager: true
 generate-interface: true
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade"].post.operationId'
+    from: compute.json
+    suppress: PostOperationIdContainsUrlVerb
+    reason: reason
 ```
