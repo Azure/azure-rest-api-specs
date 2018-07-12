@@ -31,14 +31,12 @@ openapi-type: arm
 tag: package-2018-07-01-preview
 
 directive:
-  - supress: RequiredPropertiesMissingInResourceModel
-    reason: Service is a proxy resource that is managed (created and updated) by including it in the application resource. The name is required for RP to manager those resources. The name is readOnly in the default resource schema so it is not serialized on the wire by AutoRest generated libraries. This is a bug on our RP and should be fixed.
-  - supress: EnumInsteadOfBoolean
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: Service is a proxy resource that is managed (created and updated) by including it in the application resource. The name is required by RP to manage those resources. The name is readOnly in the default resource schema so it is not serialized on the wire by AutoRest generated libraries. This is a bug on our RP and should be fixed. The inlined objects should be part of the application properties and not a seperate proxy resource.
+  - suppress: EnumInsteadOfBoolean
     reason: The `readOnly` boolean schema is part of Azure Resource Manager common schema.
-  - supress: TrackedResourcePatchOperation
+  - suppress: TrackedResourcePatchOperation
     reason: The patch operation is not implemented in the preview APIs.
-  - supress: TrackedResourceListByImmediateParent
-    reason: There are operations to list the tracked resources by parent. This seems like a issue in the validator. 
 ```
 ### Tag: package-2018-07-01-preview
 
