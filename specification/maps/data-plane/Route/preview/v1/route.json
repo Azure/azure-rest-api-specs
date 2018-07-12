@@ -860,7 +860,7 @@
         "description": "This service allows users to query for the results of the asynchronous [matrix POST request](./postroutematrixpreview).\n\nIf the request has not been completed, this call returns a 202 response with the location header identical to the current call. It should be tried again.\n\nThe response for the known requestId can be queried for 14 days.",
         "operationId": "Route_GetRouteMatrixPreview",
         "x-ms-examples": {
-          "DistanceMatrix": {
+          "MatrixRoute": {
             "$ref": "./examples/GetMatrixRouteCalculate.json"
           }
         },
@@ -909,7 +909,7 @@
         "description": "The Matrix Routing service allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations. For every given origin, this service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. For each route, the travel times and distances are calculated. You can use the computed costs to determine which routes to calculate using the Routing Directions API. If the computation takes longer than 20 seconds or forceAsyn parameter in the request is set to true, this API returns a 202 response code along a redirect URL in the Location field of the response header. This URL should be checked periodically until the response data or error information is available. \n\nThe asynchronous responses are stored for 14 days. The redirect URL returns a 400 response if used after the expiration period.",
         "operationId": "Route_PostRouteMatrixPreview",
         "x-ms-examples": {
-          "DistanceMatrix": {
+          "MatrixRoute": {
             "$ref": "./examples/PostMatrixRouteCalculate.json"
           }
         },
@@ -1375,7 +1375,7 @@
           },
           {
             "name": "coordinateList",
-            "description": "The Coordinates through which the route is calculated. Needs two coordinates at least. First one is the origin and the last is the destination of the route. Optional coordinates in between act as WayPoints in the route.",
+            "description": "Used for reconstructing a route and for calculating zero or more alternative routes to this reference route. The provided sequence of supporting points is used as input for route reconstruction. The alternative routes are calculated between the origin and destination points specified in the base path parameter locations.  If both minDeviationDistance and minDeviationTime are set to zero, then these origin and destination points are expected to be at (or very near) the beginning and end of the reference route, respectively. Intermediate locations (waypoints) are not supported when using coordinateList.\n\nSetting at least one of minDeviationDistance or minDeviationTime to a value greater than zero has the following consequences:\n\n*  The origin point of the calculateRoute request must be on (or very near) the input reference route. If this is not the case, an error is returned. However, the origin point does not need to be at the beginning of the input reference route (it can be thought of as the current vehicle position on the reference route).\n*  The reference route, returned as the first route in the calculateRoute response, will start at the origin point specified in the calculateRoute request. The initial part of the input reference route up until the origin point will be excluded from the response.\n*  The values of minDeviationDistance and minDeviationTime determine how far alternative routes will be guaranteed to follow the reference route from the origin point onwards.\n*  The route must use departAt.\n*  The vehicleHeading is ignored.",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/GeoJSONFeatureCollection"
@@ -1581,7 +1581,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/TextFormat"
+            "$ref": "#/parameters/JsonFormat"
           },
           {
             "name": "routeDirectionsBatchRequestBody",
