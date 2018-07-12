@@ -26,9 +26,18 @@ These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-preview
+tag: package-2018-05-preview
 ```
 
+
+### Tag: package-2018-05-preview
+
+These settings apply only when `--tag=package-2018-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05-preview'
+input-file:
+- Microsoft.Billing/preview/2018-05-31-preview/billing.json
+```
 
 ### Tag: package-2018-03-preview
 
@@ -135,9 +144,19 @@ go:
 ### Go multi-api
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-05-preview
   - tag: package-2018-03-preview
   - tag: package-2017-04-preview
   - tag: package-2017-02-preview
+```
+
+### Tag: package-2018-05-preview and go
+
+These settings apply only when `--tag=package-2018-05-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-05-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/billing/mgmt/2018-05-31-preview/billing
 ```
 
 ### Tag: package-2018-03-preview and go
@@ -186,6 +205,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-billing
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-05-preview
   - tag: package-2017-04-preview
   - tag: package-2018-03-preview
   - tag: package-2017-02-preview
@@ -200,6 +220,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.billing.v2017_04_24_preview
   output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2017_04_24_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-05-preview and java
+
+These settings apply only when `--tag=package-2018-05-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-05-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.billing.v2018_05_31_preview
+  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2018_05_31_preview
 regenerate-manager: true
 generate-interface: true
 ```

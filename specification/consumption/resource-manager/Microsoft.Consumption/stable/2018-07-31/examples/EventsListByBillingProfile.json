@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2018-07-31",
+    "billingAccountId": "{billingAccountId}",
+    "billingProfileId": "{billingProfileId}",
+    "startDate": "2018-04-01",
+    "endDate": "2018-05-30"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/12345/providers/Microsoft.Consumption/events/event1",
+            "name": "event1",
+            "type": "Microsoft.Consumption/charges",
+            "properties": {
+              "transactionDate": "2018-01-01T00:00:00Z",
+              "beginningBalance": 0.00,
+              "newCredit": 1000.00,
+              "adjustments": 0.00,
+              "creditExpired": 0.00,
+              "charges": 500.00,
+              "closedBalance": 500.00
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/12345/providers/Microsoft.Consumption/events/event2",
+            "name": "event2",
+            "type": "Microsoft.Consumption/charges",
+            "properties": {
+              "transactionDate": "2018-02-01T00:00:00Z",
+              "beginningBalance": 500.00,
+              "newCredit": 0.00,
+              "adjustments": 0.00,
+              "creditExpired": 0.00,
+              "charges": 400.00,
+              "closedBalance": 100.00
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/12345/providers/Microsoft.Consumption/events/event3",
+            "name": "event3",
+            "type": "Microsoft.Consumption/charges",
+            "properties": {
+              "transactionDate": "2018-03-01T00:00:00Z",
+              "beginningBalance": 100.00,
+              "newCredit": 0.00,
+              "adjustments": 600.00,
+              "creditExpired": 0.00,
+              "charges": 300.00,
+              "closedBalance": 300.00
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/12345/providers/Microsoft.Consumption/events/event3",
+            "name": "event4",
+            "type": "Microsoft.Consumption/charges",
+            "properties": {
+              "transactionDate": "2018-04-01T00:00:00Z",
+              "beginningBalance": 300.00,
+              "newCredit": 0.00,
+              "adjustments": 0.00,
+              "creditExpired": 100.00,
+              "charges": 300.00,
+              "closedBalance": 0.00
+            }
+          }
+        ]
+      }
+    }
+  }
+}

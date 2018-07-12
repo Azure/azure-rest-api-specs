@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2018-07-31",
+    "billingAccountId": "1234",
+    "billingProfileId": "42425"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/42425/providers/Microsoft.Consumption/paymentMethods/paymentMethodId1",
+            "name": "paymentMethodId1",
+            "type": "Microsoft.Consumption/paymentMethods",
+            "properties": {
+              "methodType": "Credits",
+              "details": "Card ending with 0004",
+              "lastBilledCharge": 2000.00,
+              "currentCharge": 500.00,
+              "expiration": "09/2019",
+              "currency": "USD"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/42425/providers/Microsoft.Consumption/paymentMethods/paymentMethodId2",
+            "name": "paymentMethodId2",
+            "type": "Microsoft.Consumption/paymentMethods",
+            "properties": {
+              "methodType": "ChequeWire",
+              "details": null,
+              "lastBilledCharge": 100.00,
+              "currentCharge": 100.00,
+              "expiration": null,
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
