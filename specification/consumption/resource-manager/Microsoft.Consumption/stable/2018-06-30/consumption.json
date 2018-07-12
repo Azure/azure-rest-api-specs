@@ -2138,7 +2138,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostTags"
+              "$ref": "#/definitions/CostTagsResult"
             }
           },
           "default": {
@@ -2175,7 +2175,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CostTags"
+              "$ref": "#/definitions/CostTagsResult"
             },
             "description": "Parameters supplied to the Create cost tags operation."
           }
@@ -2184,13 +2184,13 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostTags"
+              "$ref": "#/definitions/CostTagsResult"
             }
           },
           "201": {
             "description": "Created.",
             "schema": {
-              "$ref": "#/definitions/CostTags"
+              "$ref": "#/definitions/CostTagsResult"
             }
           },
           "default": {
@@ -3416,7 +3416,7 @@
         "contactEmails"
       ]
     },
-    "CostTags": {
+    "CostTagsResult": {
       "description": "A cost tag resource.",
       "type": "object",
       "allOf": [
@@ -3427,25 +3427,25 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CostTagProperties",
+          "$ref": "#/definitions/CostTagsModel",
           "title": "Cost tag properties"
         }
       }
     },
-    "CostTagProperties": {
-      "description": "The properties of the cost tag.",
+    "CostTagsModel": {
+      "description": "The cost tag.",
       "properties": {
         "costTags": {
           "description": "Cost tags.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CostTag"
+            "$ref": "#/definitions/CostTagProperties"
           }
         }
       }
     },
-    "CostTag": {
-      "description": "The cost tag.",
+    "CostTagProperties": {
+      "description": "The properties of the cost tag.",
       "properties": {
         "key": {
           "description": "Cost tag key.",
