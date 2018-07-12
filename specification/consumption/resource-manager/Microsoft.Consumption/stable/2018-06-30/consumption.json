@@ -2878,8 +2878,8 @@
         }
       }
     },
-    "ReservationSummaries": {
-      "description": "reservation summaries resource.",
+    "ReservationSummary": {
+      "description": "reservation summary resource.",
       "type": "object",
       "allOf": [
         {
@@ -2889,8 +2889,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReservationSummariesProperties",
-          "title": "Reservation Summaries properties"
+          "$ref": "#/definitions/ReservationSummaryProperties",
+          "title": "Reservation Summary properties"
         }
       }
     },
@@ -2902,7 +2902,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ReservationSummaries"
+            "$ref": "#/definitions/ReservationSummary"
           }
         },
         "nextLink": {
@@ -2912,8 +2912,8 @@
         }
       }
     },
-    "ReservationSummariesProperties": {
-      "description": "The properties of the reservation summaries.",
+    "ReservationSummaryProperties": {
+      "description": "The properties of the reservation summary.",
       "properties": {
         "reservationOrderId": {
           "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
@@ -2968,8 +2968,8 @@
         }
       }
     },
-    "ReservationDetails": {
-      "description": "reservation details resource.",
+    "ReservationDetail": {
+      "description": "reservation detail resource.",
       "type": "object",
       "allOf": [
         {
@@ -2979,8 +2979,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReservationDetailsProperties",
-          "title": "Reservation Details properties"
+          "$ref": "#/definitions/ReservationDetailProperties",
+          "title": "Reservation Detail properties"
         }
       }
     },
@@ -2992,7 +2992,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ReservationDetails"
+            "$ref": "#/definitions/ReservationDetail"
           }
         },
         "nextLink": {
@@ -3002,11 +3002,97 @@
         }
       }
     },
-    "ReservationRecommendationsProperties": {
-      "description": "The properties of the reservation recommendations.",
+    "ReservationDetailProperties": {
+      "description": "The properties of the reservation detail.",
+      "properties": {
+        "reservationOrderId": {
+          "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationId": {
+          "description": "The reservation ID is the identifier of a reservation within a reservation order. Each reservation is the grouping for applying the benefit scope and also specifies the number of instances to which the reservation benefit can be applied to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuName": {
+          "description": "This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedHours": {
+          "description": "This is the total hours reserved for the day. E.g. if reservation for 1 instance was made on 1 PM, this will be 11 hours for that day and 24 hours from subsequent days.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "usageDate": {
+          "description": "The date on which consumption occurred.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "usedHours": {
+          "description": "This is the total hours used by the instance.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "instanceId": {
+          "description": "This identifier is the name of the resource or the fully qualified Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalReservedQuantity": {
+          "description": "This is the total count of instances that are reserved for the reservationid.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendation": {
+      "description": "Reservation recommendation resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/ResourceAttributes"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationRecommendationProperties",
+          "title": "Reservation Recommendation properties"
+        }
+      }
+    },
+    "ReservationRecommendationsListResult": {
+      "description": "Result of listing reservation recommendations.",
+      "properties": {
+        "value": {
+          "description": "The list of reservation recommendations.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReservationRecommendation"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationProperties": {
+      "description": "The properties of the reservation recommendation.",
       "properties": {
         "lookBackPeriod": {
-          "description": "The number of days of usage to look back for recommendations.",
+          "description": "The number of days of usage to look back for recommendation.",
           "type": "string",
           "readOnly": true
         },
@@ -3054,92 +3140,6 @@
         "scope": {
           "description": "Shared or single recommendation.",
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ReservationRecommendations": {
-      "description": "Reservation recommendations resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/ResourceAttributes"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReservationRecommendationsProperties",
-          "title": "Reservation Recommendations properties"
-        }
-      }
-    },
-    "ReservationRecommendationsListResult": {
-      "description": "Result of listing reservation recommendations.",
-      "properties": {
-        "value": {
-          "description": "The list of reservation recommendations.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ReservationRecommendations"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ReservationDetailsProperties": {
-      "description": "The properties of the reservation details.",
-      "properties": {
-        "reservationOrderId": {
-          "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
-          "type": "string",
-          "readOnly": true
-        },
-        "reservationId": {
-          "description": "The reservation ID is the identifier of a reservation within a reservation order. Each reservation is the grouping for applying the benefit scope and also specifies the number of instances to which the reservation benefit can be applied to.",
-          "type": "string",
-          "readOnly": true
-        },
-        "skuName": {
-          "description": "This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.",
-          "type": "string",
-          "readOnly": true
-        },
-        "reservedHours": {
-          "description": "This is the total hours reserved for the day. E.g. if reservation for 1 instance was made on 1 PM, this will be 11 hours for that day and 24 hours from subsequent days.",
-          "type": "number",
-          "format": "decimal",
-          "readOnly": true
-        },
-        "usageDate": {
-          "description": "The date on which consumption occurred.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "usedHours": {
-          "description": "This is the total hours used by the instance.",
-          "type": "number",
-          "format": "decimal",
-          "readOnly": true
-        },
-        "instanceId": {
-          "description": "This identifier is the name of the resource or the fully qualified Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "totalReservedQuantity": {
-          "description": "This is the total count of instances that are reserved for the reservationid.",
-          "type": "number",
-          "format": "decimal",
           "readOnly": true
         }
       }
