@@ -934,6 +934,13 @@
           },
           {
             "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by permission. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -985,6 +992,68 @@
           },
           {
             "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by permission. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/providers/Microsoft.Consumption/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsByProject",
+        "description": "Lists the products by projectId for given start date and end date.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ProductsListByBillingProfile": {
+            "$ref": "./examples/ProductsListByProject.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by permission. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {

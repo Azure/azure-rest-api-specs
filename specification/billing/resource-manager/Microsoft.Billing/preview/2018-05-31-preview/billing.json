@@ -44,13 +44,6 @@
             "in": "query",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter by permission. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -88,13 +81,6 @@
           {
             "name": "$expand",
             "description": "May be used to expand the projects and billingProfiles.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter by permission. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -334,10 +320,105 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Project creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "operationId": "Projects_Create",
+        "description": "The operation to create a project.",
+        "x-ms-examples": {
+          "CreateProject": {
+            "$ref": "./examples/CreateProject.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$filter",
-            "description": "May be used to filter by permission. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            },
+            "description": "Parameters supplied to the Create Project operation."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/listProjectsWithCreateProjectPermission": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "x-ms-examples": {
+          "ProjectsListByBillingAccountId": {
+            "$ref": "./examples/ProjectsListByBillingAccountIdWithCreateSubPermission.json"
+          },
+          "ProjectsListByBillingAccountIdWithExpand": {
+            "$ref": "./examples/ProjectsListByBillingAccountIdWithExpandAndCreateSubPermission.json"
+          }
+        },
+        "operationId": "Projects_ListWithCreateSubscriptionPermission",
+        "description": "Lists all projects with create subscription permission for a user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the eligibleOffers.",
             "in": "query",
             "required": false,
             "type": "string"

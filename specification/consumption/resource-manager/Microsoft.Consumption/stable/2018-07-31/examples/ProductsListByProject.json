@@ -2,6 +2,7 @@
   "parameters": {
     "api-version": "2018-07-31",
     "billingAccountId": "1234",
+    "projectId": "42425",
     "startDate": "2018-04-01",
     "endDate": "2018-05-30",
     "$filter": "productType eq 'Reservation' or productType eq 'Azure subscription'"
@@ -11,11 +12,10 @@
       "body": {
         "value": [
           {
-            "id":
-            "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/42425/providers/Microsoft.Consumption/products/productSummaryId1",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/Projects/42425/providers/Microsoft.Consumption/products/productSummaryId1",
             "name": "productSummaryId1",
-            "type": "Microsoft.Consumption/products",            
-            "properties":{
+            "type": "Microsoft.Consumption/products",
+            "properties": {
               "displayName": "Eng Reservation (1a13s21awe)",
               "purchaseDate": "2018-05-01",
               "productType": "Reservation",
@@ -29,15 +29,14 @@
                 "reservationType":"",
                 "quantity":2,
                 "charge":5000.00,
-                "utilization":"Contoso Operation dev/test context"
+                "utilization":"Contoos Operation dev/test context"
               }
             }
           },
           {
-            "id":
-            "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/42425/providers/Microsoft.Consumption/products/productSummaryId2",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/BillingProfiles/42425/providers/Microsoft.Consumption/products/productSummaryId2",
             "name": "productSummaryId2",
-            "type": "Microsoft.Consumption/products",            
+            "type": "Microsoft.Consumption/products",
             "properties": {
               "displayName": "Engineering Email",
               "purchaseDate": "2018-04-01",
@@ -50,7 +49,7 @@
               "subscriptionProperties":{
                 "subscriptionGuid":"300de4e3-b973-4d69-8b57-da07971b428a",
                 "monthToDateCharges":50.00,
-                "eligibleOffer":"Contoso Operation dev/test context",
+                "eligibleOffer":"Contoos Operation dev/test context",
                 "status":"Active"
               },
               "reservationProperties":null  
