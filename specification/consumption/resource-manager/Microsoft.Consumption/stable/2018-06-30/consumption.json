@@ -1141,7 +1141,7 @@
           "Marketplaces"
         ],
         "x-ms-odata": "#/definitions/Marketplace",
-        "operationId": "Marketplaces_ListByEnrollmentAccounts",
+        "operationId": "Marketplaces_ListByEnrollmentAccount",
         "description": "Lists the marketplaces for a scope by enrollmentAccountId and current billing period. Marketplaces are available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1207,7 +1207,7 @@
           "Marketplaces"
         ],
         "x-ms-odata": "#/definitions/Marketplace",
-        "operationId": "Marketplaces_ListForBillingPeriodByEnrollmentAccounts",
+        "operationId": "Marketplaces_ListForBillingPeriodByEnrollmentAccount",
         "description": "Lists the marketplaces for a scope by billing period and enrollmentAccountId. Marketplaces are available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -2138,7 +2138,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostTagsResult"
+              "$ref": "#/definitions/CostTag"
             }
           },
           "default": {
@@ -2175,7 +2175,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CostTagsResult"
+              "$ref": "#/definitions/CostTag"
             },
             "description": "Parameters supplied to the Create cost tags operation."
           }
@@ -2184,13 +2184,13 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostTagsResult"
+              "$ref": "#/definitions/CostTag"
             }
           },
           "201": {
             "description": "Created.",
             "schema": {
-              "$ref": "#/definitions/CostTagsResult"
+              "$ref": "#/definitions/CostTag"
             }
           },
           "default": {
@@ -3416,7 +3416,7 @@
         "contactEmails"
       ]
     },
-    "CostTagsResult": {
+    "CostTag": {
       "description": "A cost tag resource.",
       "type": "object",
       "allOf": [
