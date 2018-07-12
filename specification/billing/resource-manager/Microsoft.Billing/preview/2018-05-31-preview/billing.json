@@ -400,10 +400,10 @@
           "Projects"
         ],
         "x-ms-examples": {
-          "ProjectsListByBillingAccountId": {
+          "ProjectsListByBillingAccountIdWithCreateSubPermission": {
             "$ref": "./examples/ProjectsListByBillingAccountIdWithCreateSubPermission.json"
           },
-          "ProjectsListByBillingAccountIdWithExpand": {
+          "ProjectsListByBillingAccountIdWithExpandAndCreateSubPermission": {
             "$ref": "./examples/ProjectsListByBillingAccountIdWithExpandAndCreateSubPermission.json"
           }
         },
@@ -442,49 +442,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "string"
               }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Projects"
-        ],
-        "operationId": "Projects_Create",
-        "description": "The operation to create a project.",
-        "x-ms-examples": {
-          "CreateProject": {
-            "$ref": "./examples/CreateProject.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Project"
-            },
-            "description": "Parameters supplied to the Create Project operation."
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created.",
-            "schema": {
-              "$ref": "#/definitions/Project"
             }
           },
           "default": {
