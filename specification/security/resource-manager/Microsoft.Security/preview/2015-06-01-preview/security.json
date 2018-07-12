@@ -1087,7 +1087,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyActionType}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}": {
             "post": {
                 "x-ms-examples": {
                     "Initiate an action on a JIT network access policy": {
@@ -1095,7 +1095,7 @@
                     }
                 },
                 "tags": ["JitNetworkAccessPolicies"],
-                "description": "Perform an action on a specific Just-in-Time policy configuration.",
+                "description": "Initiate a JIT access from a specific Just-in-Time policy configuration.",
                 "operationId": "JitNetworkAccessPolicies_Initiate",
                 "parameters": [{
                         "$ref": "#/parameters/SubscriptionId"
@@ -1110,18 +1110,21 @@
                         "$ref": "#/parameters/JitNetworkAccessPolicyName"
                     },
                     {
-                        "$ref": "#/parameters/JitNetworkAccessPolicyActionType"
+                        "$ref": "#/parameters/JitNetworkAccessPolicyInitiateType"
                     },
                     {
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/JitNetworkAccessPolicyAction"
+                        "$ref": "#/parameters/JitNetworkAccessPolicyInitiateRequest"
                     }
                 ],
                 "responses": {
                     "202": {
-                        "description": "Accepted"
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/JitNetworkAccessRequest"
+                        }
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -1307,7 +1310,6 @@
             "description": "Describes an Azure resource with kind",
             "properties": {
                 "kind": {
-                    "readOnly": true,
                     "type": "string",
                     "description": "Kind of the resource"
                 }
@@ -1882,7 +1884,16 @@
                     }
                 },
                 "allowedSourceAddressPrefix": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Mutually exclusive with the \"allowedSourceAddressPrefixes\" parameter. Should be an IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+                },
+                "allowedSourceAddressPrefixes": {
+                    "type": "array",
+                    "description": "Mutually exclusive with the \"allowedSourceAddressPrefix\" parameter.",
+                    "items": {
+                        "type": "string",
+                        "description": "IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+                    }
                 },
                 "maxRequestAccessDuration": {
                     "type": "string",
@@ -1890,7 +1901,6 @@
                 }
             },
             "required": [
-                "allowedSourceAddressPrefix",
                 "maxRequestAccessDuration",
                 "number",
                 "protocol"
@@ -1949,12 +1959,13 @@
                 },
                 "allowedSourceAddressPrefix": {
                     "type": "string",
-                    "description": "The IP address range that the port was opened for"
+                    "description": "Mutually exclusive with the \"allowedSourceAddressPrefixes\" parameter. Should be an IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
                 },
                 "allowedSourceAddressPrefixes": {
                     "type": "array",
-                    "description": "The IP address ranges that the port was opened for",
+                    "description": "Mutually exclusive with the \"allowedSourceAddressPrefix\" parameter.",
                     "items": {
+                        "description": "IP addess or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\".",
                         "type": "string"
                     }
                 },
@@ -2013,14 +2024,14 @@
                 "statusReason"
             ]
         },
-        "JitNetworkAccessPolicyAction": {
+        "JitNetworkAccessPolicyInitiateRequest": {
             "type": "object",
             "properties": {
                 "virtualMachines": {
                     "type": "array",
                     "description": "A list of virtual machines & ports to open access for",
                     "items": {
-                        "$ref": "#/definitions/JitNetworkAccessPolicyActionVirtualMachine"
+                        "$ref": "#/definitions/JitNetworkAccessPolicyInitiateVirtualMachine"
                     }
                 }
             },
@@ -2028,7 +2039,7 @@
                 "virtualMachines"
             ]
         },
-        "JitNetworkAccessPolicyActionVirtualMachine": {
+        "JitNetworkAccessPolicyInitiateVirtualMachine": {
             "type": "object",
             "properties": {
                 "id": {
@@ -2039,7 +2050,7 @@
                     "type": "array",
                     "description": "The ports to open for the resource with the `id`",
                     "items": {
-                        "$ref": "#/definitions/JitNetworkAccessPolicyActionPort"
+                        "$ref": "#/definitions/JitNetworkAccessPolicyInitiatePort"
                     }
                 }
             },
@@ -2048,14 +2059,15 @@
                 "ports"
             ]
         },
-        "JitNetworkAccessPolicyActionPort": {
+        "JitNetworkAccessPolicyInitiatePort": {
             "type": "object",
             "properties": {
                 "number": {
                     "$ref": "#/definitions/PortNumber"
                 },
                 "allowedSourceAddressPrefix": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Source of the allowed traffic. If omitted, the request will be for the source IP address of the initiate request."
                 },
                 "endTimeUtc": {
                     "type": "string",
@@ -2064,13 +2076,12 @@
                 }
             },
             "required": [
-                "allowedSourceAddressPrefix",
                 "endTimeUtc",
                 "number"
             ]
         },
         "PortNumber": {
-            "type": "number",
+            "type": "integer",
             "minimum": 0,
             "maximum": 65535
         },
@@ -2397,8 +2408,8 @@
             "description": "Name of a Just-in-Time access configuration policy.",
             "x-ms-parameter-location": "method"
         },
-        "JitNetworkAccessPolicyActionType": {
-            "name": "jitNetworkAccessPolicyActionType",
+        "JitNetworkAccessPolicyInitiateType": {
+            "name": "jitNetworkAccessPolicyInitiateType",
             "type": "string",
             "in": "path",
             "required": true,
@@ -2408,12 +2419,12 @@
             ],
             "x-ms-parameter-location": "method"
         },
-        "JitNetworkAccessPolicyAction": {
+        "JitNetworkAccessPolicyInitiateRequest": {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-                "$ref": "#/definitions/JitNetworkAccessPolicyAction"
+                "$ref": "#/definitions/JitNetworkAccessPolicyInitiateRequest"
             },
             "x-ms-parameter-location": "method"
         },
