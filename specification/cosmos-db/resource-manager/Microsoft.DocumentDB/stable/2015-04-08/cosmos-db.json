@@ -433,6 +433,35 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys": {
       "get": {
+        "operationId": "DatabaseAccounts_GetReadOnlyKeys",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountListReadOnlyKeys": { "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys.json" }
+        },
+        "description": "Lists the read-only access keys for the specified Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+            }
+          }
+        }
+      },
+      "post": {
         "operationId": "DatabaseAccounts_ListReadOnlyKeys",
         "x-ms-examples": {
           "CosmosDBDatabaseAccountListReadOnlyKeys": { "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys.json" }

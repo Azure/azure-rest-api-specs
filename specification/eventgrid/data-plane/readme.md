@@ -51,6 +51,7 @@ input-file:
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
 - Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
+- Microsoft.Media/stable/2018-01-01/MediaServices.json
 ```
 
 ---
@@ -150,12 +151,28 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+azure-arm: true
+namespace: com.microsoft.azure.eventgrid
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-eventgrid
+```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2018-01
+```
+
+### Tag: package-2018-01 and java
+
+These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.eventgrid
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-eventgrid
+  namespace: com.microsoft.azure.eventgrid.v2018_01_01
+  output-folder: $(azure-libraries-for-java-folder)/eventgrid/data-plane/v2018_01_01
 ```
 

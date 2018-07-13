@@ -502,33 +502,6 @@
         }
       }
     },
-    "Sku": {
-      "description": "An ARM Resource SKU.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
-          "type": "string"
-        },
-        "tier": {
-          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
-          "type": "string"
-        },
-        "size": {
-          "description": "Size of the particular SKU",
-          "type": "string"
-        },
-        "family": {
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "description": "Capacity of the particular SKU.",
-          "type": "integer"
-        }
-      }
-    },
     "DatabaseProperties": {
       "description": "The database's properties.",
       "type": "object",
@@ -718,57 +691,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "Database": {
       "description": "A database resource.",
       "required": [
@@ -777,12 +699,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
           "description": "The name and tier of the SKU."
         },
         "kind": {
@@ -802,7 +724,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
           "description": "The name and tier of the SKU."
         },
         "properties": {
@@ -816,128 +738,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "DatabaseOperationListResult": {
-      "description": "The response to a list database operations request",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatabaseOperation"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DatabaseOperationProperties": {
-      "description": "The properties of a database operation.",
-      "type": "object",
-      "properties": {
-        "databaseName": {
-          "description": "The name of the database the operation is being performed on.",
-          "type": "string",
-          "readOnly": true
-        },
-        "operation": {
-          "description": "The name of operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "operationFriendlyName": {
-          "description": "The friendly name of operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "percentComplete": {
-          "format": "int32",
-          "description": "The percentage of the operation completed.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "serverName": {
-          "description": "The name of the server.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "The operation start time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "state": {
-          "description": "The operation state.",
-          "enum": [
-            "Pending",
-            "InProgress",
-            "Succeeded",
-            "Failed",
-            "CancelInProgress",
-            "Cancelled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ManagementOperationState",
-            "modelAsString": true
-          }
-        },
-        "errorCode": {
-          "format": "int32",
-          "description": "The operation error code.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "errorDescription": {
-          "description": "The operation error description.",
-          "type": "string",
-          "readOnly": true
-        },
-        "errorSeverity": {
-          "format": "int32",
-          "description": "The operation error severity.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "isUserError": {
-          "description": "Whether or not the error is a user error.",
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
-    },
-    "DatabaseOperation": {
-      "description": "A database operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DatabaseOperationProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     },
@@ -1081,7 +881,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
