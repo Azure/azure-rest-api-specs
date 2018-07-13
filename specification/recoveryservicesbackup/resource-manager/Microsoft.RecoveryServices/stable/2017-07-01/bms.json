@@ -630,7 +630,7 @@
             "description": "resource validate operation request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ValidateOperationRequestResource"
+              "$ref": "#/definitions/ValidateOperationRequest"
             }
           }
         ],
@@ -4108,20 +4108,6 @@
         }
       },
       "discriminator": "objectType"
-    },
-    "ValidateOperationRequestResource": {
-      "description": "Base class for validate operation request.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ValidateOperationRequest",
-          "description": "ValidateOperationRequestResource properties"
-        }
-      }
     },
     "ValidateOperationResponse": {
       "description": "Base class for validate operation response.",
