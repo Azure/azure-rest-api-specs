@@ -2219,7 +2219,10 @@
           },
           "Create a custom-image scale set from an unmanaged generalized os image.": {
             "$ref": "./examples/CreateACustomImageScaleSetFromAnUnmanagedGeneralizedOsImage.json"
-          }
+          },
+          "Create a scale set with virtual machines in different zones.": {
+            "$ref": "./examples/CreateAScaleSetWithVMsInDifferentZones.json"
+          }         
         }
       },
       "patch": {
@@ -6294,6 +6297,11 @@
           "$ref": "#/definitions/CreateOption",
           "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+        },
         "osType": {
           "type": "string",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
@@ -6336,6 +6344,11 @@
         "writeAcceleratorEnabled": {
           "type": "boolean",
           "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
@@ -6381,7 +6394,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -7535,6 +7548,14 @@
             "$ref": "#/definitions/VirtualMachineExtension"
           },
           "description": "The virtual machine child extension resources."
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine zones."
         }
       },
       "allOf": [
