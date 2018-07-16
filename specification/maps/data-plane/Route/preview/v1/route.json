@@ -850,7 +850,8 @@
             "description": "Returns raw instruction data with tagged human-readable messages to permit formatting."
           }
         ]
-      }
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -1647,22 +1648,7 @@
       "allOf": [
         {
           "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
-          "type": "object",
-          "discriminator": "type",
-          "properties": {
-            "type": {
-              "description": "Specifies the `type` for the geometry object. This value must be one of: `FeatureCollection`, `GeometryCollection` and `Polygon`.",
-              "type": "string",
-              "enum": [
-                "FeatureCollection",
-                "GeometryCollection",
-                "Polygon"
-              ]
-            }
-          },
-          "required": [
-            "type"
-          ]
+          "type": "object"
         },
         {
           "type": "object",
@@ -1791,16 +1777,19 @@
       }
     },
     "Coordinate": {
+      "description": "A location represented as a latitude and longitude.",
       "type": "object",
       "properties": {
         "latitude": {
           "description": "Latitude property",
           "type": "number",
+          "format": "double",
           "readOnly": true
         },
         "longitude": {
           "description": "Longitude property",
           "type": "number",
+          "format": "double",
           "readOnly": true
         }
       }
@@ -1849,36 +1838,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "lengthInMeters": {
-              "description": "Length In Meters property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "travelTimeInSeconds": {
-              "description": "Travel Time In Seconds property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "trafficDelayInSeconds": {
-              "description": "Traffic Delay In Seconds property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "departureTime": {
-              "description": "Departure Time property",
-              "type": "string",
-              "readOnly": true
-            },
-            "arrivalTime": {
-              "description": "Arrival Time property",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/RouteDirectionsSummary"
         },
         "legs": {
           "description": "Legs array",
@@ -1897,27 +1857,39 @@
           }
         },
         "guidance": {
-          "description": "Contains guidance related elements. This field is present only when guidance was requested and is available.",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "instructions": {
-              "description": "A list of instructions describing maneuvers.",
-              "type": "array",
-              "readOnly": true,
-              "items": {
-                "$ref": "#/definitions/RouteResultInstruction"
-              }
-            },
-            "instructionGroups": {
-              "description": "Groups a sequence of instruction elements which are related to each other.",
-              "type": "array",
-              "readOnly": true,
-              "items": {
-                "$ref": "#/definitions/RouteResultInstructionGroup"
-              }
-            }
-          }
+          "$ref": "#/definitions/RouteResultGuidance"
+        }
+      }
+    },
+    "RouteDirectionsSummary": {
+      "description": "Summary object",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "lengthInMeters": {
+          "description": "Length In Meters property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "travelTimeInSeconds": {
+          "description": "Travel Time In Seconds property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "trafficDelayInSeconds": {
+          "description": "Traffic Delay In Seconds property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "departureTime": {
+          "description": "Departure Time property",
+          "type": "string",
+          "readOnly": true
+        },
+        "arrivalTime": {
+          "description": "Arrival Time property",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1941,63 +1913,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "lengthInMeters": {
-              "description": "Length In Meters property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "travelTimeInSeconds": {
-              "description": "Estimated travel Time In Seconds property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "trafficDelayInSeconds": {
-              "description": "Traffic Delay In Seconds property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "departureTime": {
-              "description": "Departure Time property",
-              "type": "string",
-              "readOnly": true
-            },
-            "arrivalTime": {
-              "description": "Arrival Time property",
-              "type": "string",
-              "readOnly": true
-            },
-            "noTrafficTravelTimeInSeconds": {
-              "description": "Estimated travel time calculated as if there are no delays on the route due to traffic conditions (e.g. congestion). Included only if computeTravelTimeFor = all is used in the query.",
-              "type": "integer",
-              "readOnly": true
-            },
-            "historicTrafficTravelTimeInSeconds": {
-              "description": "Estimated travel time calculated using time-dependent historic traffic data. Included only if computeTravelTimeFor = all is used in the query.",
-              "type": "integer",
-              "readOnly": true
-            },
-            "liveTrafficIncidentsTravelTimeInSeconds": {
-              "description": "Estimated travel time calculated using real-time speed data. Included only if computeTravelTimeFor = all is used in the query.",
-              "type": "integer",
-              "readOnly": true
-            },
-            "fuelConsumptionInLiters": {
-              "description": "Estimated fuel consumption in liters using the Combustion Consumption Model. Included if vehicleEngineType is set to _combustion_ and constantSpeedConsumptionInLitersPerHundredkm is specified. The value will be non-negative.",
-              "type": "number",
-              "format": "float",
-              "readOnly": true
-            },
-            "batteryConsumptionInkWh": {
-              "description": "Estimated electric energy consumption in kilowatt hours (kWh) using the Electric Consumption Model. Included if vehicleEngineType is set to electric and constantSpeedConsumptionInkWhPerHundredkm is specified. The value of batteryConsumptionInkWh includes the recuperated electric energy and can therefore be negative (which indicates gaining energy). If both maxChargeInkWh and currentChargeInkWh are specified, recuperation will be capped to ensure that the battery charge level never exceeds maxChargeInkWh. If neither maxChargeInkWh nor currentChargeInkWh are specified, unconstrained recuperation is assumed in the consumption calculation.",
-              "type": "number",
-              "format": "float",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/RouteResultLegSummary"
         },
         "points": {
           "description": "Points array",
@@ -2006,6 +1922,65 @@
           "items": {
             "$ref": "#/definitions/Coordinate"
           }
+        }
+      }
+    },
+    "RouteResultLegSummary": {
+      "description": "Summary object for route section.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "lengthInMeters": {
+          "description": "Length In Meters property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "travelTimeInSeconds": {
+          "description": "Estimated travel Time In Seconds property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "trafficDelayInSeconds": {
+          "description": "Traffic Delay In Seconds property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "departureTime": {
+          "description": "Departure Time property",
+          "type": "string",
+          "readOnly": true
+        },
+        "arrivalTime": {
+          "description": "Arrival Time property",
+          "type": "string",
+          "readOnly": true
+        },
+        "noTrafficTravelTimeInSeconds": {
+          "description": "Estimated travel time calculated as if there are no delays on the route due to traffic conditions (e.g. congestion). Included only if computeTravelTimeFor = all is used in the query.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "historicTrafficTravelTimeInSeconds": {
+          "description": "Estimated travel time calculated using time-dependent historic traffic data. Included only if computeTravelTimeFor = all is used in the query.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "liveTrafficIncidentsTravelTimeInSeconds": {
+          "description": "Estimated travel time calculated using real-time speed data. Included only if computeTravelTimeFor = all is used in the query.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "fuelConsumptionInLiters": {
+          "description": "Estimated fuel consumption in liters using the Combustion Consumption Model. Included if vehicleEngineType is set to _combustion_ and constantSpeedConsumptionInLitersPerHundredkm is specified. The value will be non-negative.",
+          "type": "number",
+          "format": "float",
+          "readOnly": true
+        },
+        "batteryConsumptionInkWh": {
+          "description": "Estimated electric energy consumption in kilowatt hours (kWh) using the Electric Consumption Model. Included if vehicleEngineType is set to electric and constantSpeedConsumptionInkWhPerHundredkm is specified. The value of batteryConsumptionInkWh includes the recuperated electric energy and can therefore be negative (which indicates gaining energy). If both maxChargeInkWh and currentChargeInkWh are specified, recuperation will be capped to ensure that the battery charge level never exceeds maxChargeInkWh. If neither maxChargeInkWh nor currentChargeInkWh are specified, unconstrained recuperation is assumed in the consumption calculation.",
+          "type": "number",
+          "format": "float",
+          "readOnly": true
         }
       }
     },
@@ -2103,21 +2078,24 @@
           "description": "List of <cause> elements.",
           "type": "array",
           "items": {
-            "description": "The cause of the traffic event. Can contain <mainCauseCode> and <subCauseCode> elements. Can be used to define iconography and descriptions.",
-            "type": "object",
-            "properties": {
-              "mainCauseCode": {
-                "description": "The main cause of the traffic event. Contains a value in the tec002:CauseCode table, as defined in the TPEG2-TEC standard.",
-                "type": "integer",
-                "readOnly": true
-              },
-              "subCauseCode": {
-                "description": "The subcause of the traffic event. Contains a value in the sub cause table defined by the mainCauseCode, as defined in the TPEG2-TEC standard.",
-                "type": "integer",
-                "readOnly": true
-              }
-            }
+            "$ref": "#/definitions/RouteResultSectionTecCause"
           }
+        }
+      }
+    },
+    "RouteResultSectionTecCause": {
+      "description": "The cause of the traffic event. Can contain <mainCauseCode> and <subCauseCode> elements. Can be used to define iconography and descriptions.",
+      "type": "object",
+      "properties": {
+        "mainCauseCode": {
+          "description": "The main cause of the traffic event. Contains a value in the tec002:CauseCode table, as defined in the TPEG2-TEC standard.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "subCauseCode": {
+          "description": "The subcause of the traffic event. Contains a value in the sub cause table defined by the mainCauseCode, as defined in the TPEG2-TEC standard.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -2429,6 +2407,29 @@
         }
       }
     },
+    "RouteResultGuidance": {
+      "description": "Contains guidance related elements. This field is present only when guidance was requested and is available.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "instructions": {
+          "description": "A list of instructions describing maneuvers.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RouteResultInstruction"
+          }
+        },
+        "instructionGroups": {
+          "description": "Groups a sequence of instruction elements which are related to each other.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RouteResultInstructionGroup"
+          }
+        }
+      }
+    },
     "RouteRangeResponse": {
       "description": "This object is returned from a successful Route Reachable Range call",
       "type": "object",
@@ -2449,25 +2450,28 @@
           "readOnly": true
         },
         "reachableRange": {
-          "description": "Reachable Ranges",
-          "type": "object",
-          "properties": {
-            "center": {
-              "description": "Center point of the reachable range",
-              "$ref": "#/definitions/Coordinate"
-            },
-            "boundary": {
-              "description": "Polygon boundary of the reachable range represented as a list of points.",
-              "type": "array",
-              "readOnly": true,
-              "items": {
-                "$ref": "#/definitions/Coordinate"
-              }
-            }
-          }
+          "$ref": "#/definitions/RouteRange"
         },
         "report": {
           "$ref": "#/definitions/RouteResponseReport"
+        }
+      }
+    },
+    "RouteRange": {
+      "description": "Reachable Range",
+      "type": "object",
+      "properties": {
+        "center": {
+          "description": "Center point of the reachable range",
+          "$ref": "#/definitions/Coordinate"
+        },
+        "boundary": {
+          "description": "Polygon boundary of the reachable range represented as a list of points.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Coordinate"
+          }
         }
       }
     },
@@ -2480,21 +2484,24 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "description": "Effective parameter or data used when calling this Route API.",
-            "type": "object",
-            "properties": {
-              "key": {
-                "description": "Name of the parameter used.",
-                "type": "string",
-                "readOnly": true
-              },
-              "value": {
-                "description": "Value of the parameter used.",
-                "type": "string",
-                "readOnly": true
-              }
-            }
+            "$ref": "#/definitions/RouteResponseReportEffectiveSetting"
           }
+        }
+      }
+    },
+    "RouteResponseReportEffectiveSetting": {
+      "description": "Effective parameter or data used when calling this Route API.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Name of the parameter used.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Value of the parameter used.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2520,21 +2527,24 @@
           }
         },
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "successfulRoutes": {
-              "description": "Number of successful routes in the response.",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalRoutes": {
-              "description": "Total number of routes requested. Number of cells in the input matrix.",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/RouteMatrixSummary"
+        }
+      }
+    },
+    "RouteMatrixSummary": {
+      "description": "Summary object",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "successfulRoutes": {
+          "description": "Number of successful routes in the response.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalRoutes": {
+          "description": "Total number of routes requested. Number of cells in the input matrix.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -2549,58 +2559,17 @@
           "readOnly": true
         },
         "response": {
-          "description": "Response object of the current cell in the input matrix.",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "routeSummary": {
-              "description": "RouteSummary object for the current cell in the input matrix.",
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "lengthInMeters": {
-                  "description": "Length of the route In Meters.",
-                  "type": "integer",
-                  "readOnly": true
-                },
-                "travelTimeInSeconds": {
-                  "description": "Estimated travel Time In Seconds.",
-                  "type": "integer",
-                  "readOnly": true
-                },
-                "trafficDelayInSeconds": {
-                  "description": "Delay based on real-time traffic Vs free-flow conditions.",
-                  "type": "integer",
-                  "readOnly": true
-                },
-                "departureTime": {
-                  "description": "Estimated Departure Time.",
-                  "type": "string",
-                  "readOnly": true
-                },
-                "arrivalTime": {
-                  "description": "Estimated Arrival Time.",
-                  "type": "string",
-                  "readOnly": true
-                },
-                "noTrafficTravelTimeInSeconds": {
-                  "description": "Estimated travel time calculated as if there are no delays on the route due to traffic conditions (e.g. congestion). Included only if computeTravelTimeFor = all is used in the query.",
-                  "type": "integer",
-                  "readOnly": true
-                },
-                "historicTrafficTravelTimeInSeconds": {
-                  "description": "Estimated travel time calculated using time-dependent historic traffic data. Included only if computeTravelTimeFor = all is used in the query.",
-                  "type": "integer",
-                  "readOnly": true
-                },
-                "liveTrafficIncidentsTravelTimeInSeconds": {
-                  "description": "Estimated travel time calculated using real-time speed data. Included only if computeTravelTimeFor = all is used in the query.",
-                  "type": "integer",
-                  "readOnly": true
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/RouteMatrixResultResponse"
+        }
+      }
+    },
+    "RouteMatrixResultResponse": {
+      "description": "Response object of the current cell in the input matrix.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "routeSummary": {
+          "$ref": "#/definitions/RouteResultLegSummary"
         }
       }
     },

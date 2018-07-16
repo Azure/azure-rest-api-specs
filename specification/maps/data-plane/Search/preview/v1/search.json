@@ -335,7 +335,7 @@
     "/search/polygon/{format}": {
       "get": {
         "x-publish": true,
-        "description": "**Get Polygon**<br><br>The Get Polygon service allows you to request the geometry data such as a city or country outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. <br><br> Please note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client should not store geometry IDs in persistent storage for later referral,  as the stability of these identifiers is not guaranteed for a long period of time.  It is expected that a request to the Polygon method is made within a few minutes of the request to the Online Search method that provided the ID. The service allows for batch requests up to 20 identifiers.",
+        "description": "**Get Polygon**\n\nThe Get Polygon service allows you to request the geometry data such as a city or country  outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format.\n\nPlease note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client  should not store geometry IDs in persistent storage for later referral, as the stability of these identifiers is  not guaranteed for a long period of time. It is expected that a request to the Polygon method is made within a  few minutes of the request to the Online Search method that provided the ID. The service allows for batch  requests up to 20 identifiers.",
         "operationId": "Search_GetSearchPolygonPreview",
         "x-ms-examples": {
           "Get the Geometry using the geometry id returned by the previous Search": {
@@ -363,7 +363,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This object is returned from a successful Search Polygon call",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/SearchPolygonResponse"
             }
@@ -1672,22 +1672,7 @@
     },
     "Geometry": {
       "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
-      "type": "object",
-      "discriminator": "type",
-      "properties": {
-        "type": {
-          "description": "Specifies the `type` for the geometry object. This value must be one of: `FeatureCollection`, `GeometryCollection` and `Polygon`.",
-          "type": "string",
-          "enum": [
-            "FeatureCollection",
-            "GeometryCollection",
-            "Polygon"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ]
+      "type": "object"
     },
     "BatchRequestBody": {
       "description": "This type represents the request body for the Batch service.",
@@ -1740,46 +1725,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "query": {
-              "description": "Query property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryType": {
-              "description": "QueryType property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "offset": {
-              "description": "Offset property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalResults": {
-              "description": "TotalResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "fuzzyLevel": {
-              "description": "FuzzyLevel property",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/SearchFuzzySummary"
         },
         "results": {
           "description": "Results array",
@@ -1788,6 +1734,48 @@
           "items": {
             "$ref": "#/definitions/SearchFuzzyResult"
           }
+        }
+      }
+    },
+    "SearchFuzzySummary": {
+      "description": "Summary object for a Search Fuzzy response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "query": {
+          "description": "Query property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryType": {
+          "description": "QueryType property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "offset": {
+          "description": "Offset property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalResults": {
+          "description": "TotalResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "fuzzyLevel": {
+          "description": "FuzzyLevel property",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -1824,7 +1812,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchResultPosition"
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -1846,49 +1834,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "query": {
-              "description": "Query property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryType": {
-              "description": "QueryType property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "offset": {
-              "description": "Offset property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalResults": {
-              "description": "TotalResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "fuzzyLevel": {
-              "description": "FuzzyLevel property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "geoBias": {
-              "$ref": "#/definitions/SearchSummaryGeoBias"
-            }
-          }
+          "$ref": "#/definitions/SearchPoiSummary"
         },
         "results": {
           "description": "Results array",
@@ -1897,6 +1843,51 @@
           "items": {
             "$ref": "#/definitions/SearchPoiResult"
           }
+        }
+      }
+    },
+    "SearchPoiSummary": {
+      "description": "Summary object for a Search POI response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "query": {
+          "description": "Query property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryType": {
+          "description": "QueryType property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "offset": {
+          "description": "Offset property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalResults": {
+          "description": "TotalResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "fuzzyLevel": {
+          "description": "FuzzyLevel property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "geoBias": {
+          "$ref": "#/definitions/SearchSummaryGeoBias"
         }
       }
     },
@@ -1936,7 +1927,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchResultPosition"
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -1955,44 +1946,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "queryType": {
-              "description": "QueryType property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "offset": {
-              "description": "Offset property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalResults": {
-              "description": "TotalResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "fuzzyLevel": {
-              "description": "FuzzyLevel property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "geoBias": {
-              "$ref": "#/definitions/SearchSummaryGeoBias"
-            }
-          }
+          "$ref": "#/definitions/SearchNearbySummary"
         },
         "results": {
           "description": "Results array",
@@ -2001,6 +1955,46 @@
           "items": {
             "$ref": "#/definitions/SearchNearbyResult"
           }
+        }
+      }
+    },
+    "SearchNearbySummary": {
+      "description": "Summary object for a Search Nearby response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "queryType": {
+          "description": "QueryType property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "offset": {
+          "description": "Offset property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalResults": {
+          "description": "TotalResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "fuzzyLevel": {
+          "description": "FuzzyLevel property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "geoBias": {
+          "$ref": "#/definitions/SearchSummaryGeoBias"
         }
       }
     },
@@ -2035,7 +2029,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchResultPosition"
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2054,49 +2048,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "query": {
-              "description": "Query property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryType": {
-              "description": "QueryType property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "offset": {
-              "description": "Offset property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalResults": {
-              "description": "TotalResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "fuzzyLevel": {
-              "description": "FuzzyLevel property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "geoBias": {
-              "$ref": "#/definitions/SearchSummaryGeoBias"
-            }
-          }
+          "$ref": "#/definitions/SearchPoiCategorySummary"
         },
         "results": {
           "description": "Results array",
@@ -2105,6 +2057,51 @@
           "items": {
             "$ref": "#/definitions/SearchPoiCategoryResult"
           }
+        }
+      }
+    },
+    "SearchPoiCategorySummary": {
+      "description": "Summary object for a Search POI Category response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "query": {
+          "description": "Query property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryType": {
+          "description": "QueryType property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "offset": {
+          "description": "Offset property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalResults": {
+          "description": "TotalResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "fuzzyLevel": {
+          "description": "FuzzyLevel property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "geoBias": {
+          "$ref": "#/definitions/SearchSummaryGeoBias"
         }
       }
     },
@@ -2144,7 +2141,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchResultPosition"
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2163,46 +2160,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "query": {
-              "description": "Query property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryType": {
-              "description": "QueryType property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "offset": {
-              "description": "Offset property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalResults": {
-              "description": "TotalResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "fuzzyLevel": {
-              "description": "FuzzyLevel property",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/SearchAddressSummary"
         },
         "results": {
           "description": "Results array",
@@ -2211,6 +2169,48 @@
           "items": {
             "$ref": "#/definitions/SearchAddressResult"
           }
+        }
+      }
+    },
+    "SearchAddressSummary": {
+      "description": "Summary object for a Search Address response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "query": {
+          "description": "Query property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryType": {
+          "description": "QueryType property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "offset": {
+          "description": "Offset property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalResults": {
+          "description": "TotalResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "fuzzyLevel": {
+          "description": "FuzzyLevel property",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -2234,7 +2234,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchResultPosition"
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2253,21 +2253,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/SearchAddressReverseSummary"
         },
         "addresses": {
           "description": "Addresses array",
@@ -2276,6 +2262,23 @@
           "items": {
             "$ref": "#/definitions/SearchAddressReverseResult"
           }
+        }
+      }
+    },
+    "SearchAddressReverseSummary": {
+      "description": "Summary object for a Search Address Reverse response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -2297,21 +2300,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/SearchAddressReverseCrossStreetSummary"
         },
         "addresses": {
           "description": "Addresses array",
@@ -2320,6 +2309,23 @@
           "items": {
             "$ref": "#/definitions/SearchAddressReverseCrossStreetResult"
           }
+        }
+      }
+    },
+    "SearchAddressReverseCrossStreetSummary": {
+      "description": "Summary object for a Search Address Reverse Cross Street response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -2341,54 +2347,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "query": {
-              "description": "Query property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryType": {
-              "description": "QueryType property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "limit": {
-              "description": "Maximum number of responses that will be returned",
-              "readOnly": true,
-              "type": "integer"
-            },
-            "offset": {
-              "description": "Offset property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalResults": {
-              "description": "TotalResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "fuzzyLevel": {
-              "description": "FuzzyLevel property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "geoBias": {
-              "$ref": "#/definitions/SearchSummaryGeoBias"
-            }
-          }
+          "$ref": "#/definitions/SearchAddressStructuredSummary"
         },
         "results": {
           "description": "Results array",
@@ -2397,6 +2356,56 @@
           "items": {
             "$ref": "#/definitions/SearchAddressStructuredResult"
           }
+        }
+      }
+    },
+    "SearchAddressStructuredSummary": {
+      "description": "Summary object for a Search Address Structured response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "query": {
+          "description": "Query property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryType": {
+          "description": "QueryType property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "limit": {
+          "description": "Maximum number of responses that will be returned",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "Offset property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalResults": {
+          "description": "TotalResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "fuzzyLevel": {
+          "description": "FuzzyLevel property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "geoBias": {
+          "$ref": "#/definitions/SearchSummaryGeoBias"
         }
       }
     },
@@ -2423,7 +2432,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchResultPosition"
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2445,46 +2454,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "query": {
-              "description": "Query property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryType": {
-              "description": "QueryType property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "offset": {
-              "description": "Offset property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalResults": {
-              "description": "TotalResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "fuzzyLevel": {
-              "description": "FuzzyLevel property",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/SearchGeometrySummary"
         },
         "results": {
           "description": "A list of Search Inside Geometry results.",
@@ -2493,6 +2463,48 @@
           "items": {
             "$ref": "#/definitions/SearchGeometryResult"
           }
+        }
+      }
+    },
+    "SearchGeometrySummary": {
+      "description": "Summary object for a Search Geometry response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "query": {
+          "description": "Query property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryType": {
+          "description": "QueryType property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "offset": {
+          "description": "Offset property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalResults": {
+          "description": "TotalResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "fuzzyLevel": {
+          "description": "FuzzyLevel property",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -2530,7 +2542,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchResultPosition"
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2549,46 +2561,7 @@
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "query": {
-              "description": "Query property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryType": {
-              "description": "QueryType property",
-              "type": "string",
-              "readOnly": true
-            },
-            "queryTime": {
-              "description": "QueryTime property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "numResults": {
-              "description": "NumResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "offset": {
-              "description": "Offset property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalResults": {
-              "description": "TotalResults property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "fuzzyLevel": {
-              "description": "FuzzyLevel property",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/SearchAlongRouteSummary"
         },
         "results": {
           "description": "A list of Search Along Route results.",
@@ -2597,6 +2570,48 @@
           "items": {
             "$ref": "#/definitions/SearchAlongRouteResult"
           }
+        }
+      }
+    },
+    "SearchAlongRouteSummary": {
+      "description": "Summary object for a Search Along Route response",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "query": {
+          "description": "Query property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryType": {
+          "description": "QueryType property",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryTime": {
+          "description": "QueryTime property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numResults": {
+          "description": "NumResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "offset": {
+          "description": "Offset property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalResults": {
+          "description": "TotalResults property",
+          "type": "integer",
+          "readOnly": true
+        },
+        "fuzzyLevel": {
+          "description": "FuzzyLevel property",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -2634,7 +2649,22 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchResultPosition"
+          "description": "A location represented as a latitude and longitude.",
+          "type": "object",
+          "properties": {
+            "lat": {
+              "description": "Latitude property",
+              "type": "number",
+              "format": "double",
+              "readOnly": true
+            },
+            "lon": {
+              "description": "Longitude property",
+              "type": "number",
+              "format": "double",
+              "readOnly": true
+            }
+          }
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2745,21 +2775,24 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "description": "Name for the classification",
-            "type": "object",
-            "properties": {
-              "nameLocale": {
-                "description": "Name Locale property",
-                "type": "string",
-                "readOnly": true
-              },
-              "name": {
-                "description": "Name property",
-                "type": "string",
-                "readOnly": true
-              }
-            }
+            "$ref": "#/definitions/SearchResultPoiClassificationName"
           }
+        }
+      }
+    },
+    "SearchResultPoiClassificationName": {
+      "description": "Name for the classification",
+      "type": "object",
+      "properties": {
+        "nameLocale": {
+          "description": "Name Locale property",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name property",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2868,57 +2901,15 @@
         }
       }
     },
-    "SearchResultPosition": {
-      "description": "Coordinates of the result",
-      "type": "object",
-      "properties": {
-        "lat": {
-          "type": "number",
-          "readOnly": true,
-          "description": "Latitude property"
-        },
-        "lon": {
-          "type": "number",
-          "readOnly": true,
-          "description": "Longitude property"
-        }
-      }
-    },
     "SearchResultViewport": {
-      "description": "The viewport that covers the result",
+      "description": "The viewport that covers the result represented by the top-left and bottom-right coordinates of the  viewport.",
       "type": "object",
       "properties": {
         "topLeftPoint": {
-          "description": "Top left of the viewport",
-          "type": "object",
-          "properties": {
-            "lat": {
-              "type": "number",
-              "readOnly": true,
-              "description": "Latitude"
-            },
-            "lon": {
-              "type": "number",
-              "readOnly": true,
-              "description": "Longitude"
-            }
-          }
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         },
         "btmRightPoint": {
-          "description": "Bottom right of the viewport",
-          "type": "object",
-          "properties": {
-            "lat": {
-              "type": "number",
-              "readOnly": true,
-              "description": "Latitude"
-            },
-            "lon": {
-              "type": "number",
-              "readOnly": true,
-              "description": "Longitude"
-            }
-          }
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         }
       }
     },
@@ -2936,25 +2927,12 @@
           ]
         },
         "position": {
-          "description": "Name property",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "lat": {
-              "description": "Latitude property",
-              "type": "number",
-              "readOnly": true
-            },
-            "lon": {
-              "description": "Longitude property",
-              "type": "number",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         }
       }
     },
     "SearchResultAddressRanges": {
+      "description": "Describes the address range on both sides of the street for a search result. Coordinates for the start and end locations of the address range are included.",
       "type": "object",
       "properties": {
         "rangeLeft": {
@@ -2964,36 +2942,10 @@
           "type": "string"
         },
         "from": {
-          "description": "A postion of start point",
-          "type": "object",
-          "properties": {
-            "lon": {
-              "description": "longitude of start point",
-              "type": "number",
-              "format": "double"
-            },
-            "lat": {
-              "description": "latitude of start point",
-              "type": "number",
-              "format": "double"
-            }
-          }
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         },
         "to": {
-          "description": "A postion of destination",
-          "type": "object",
-          "properties": {
-            "lon": {
-              "description": "longitude of destination",
-              "type": "number",
-              "format": "double"
-            },
-            "lat": {
-              "description": "latitude of destination",
-              "type": "number",
-              "format": "double"
-            }
-          }
+          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
         }
       }
     },

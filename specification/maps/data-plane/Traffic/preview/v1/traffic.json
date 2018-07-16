@@ -787,16 +787,19 @@
       }
     },
     "Coordinate": {
+      "description": "A location represented as a latitude and longitude.",
       "type": "object",
       "properties": {
         "latitude": {
           "description": "Latitude property",
           "type": "number",
+          "format": "double",
           "readOnly": true
         },
         "longitude": {
           "description": "Longitude property",
           "type": "number",
+          "format": "double",
           "readOnly": true
         }
       }
@@ -863,6 +866,11 @@
             "@version": {
               "description": "@Version property",
               "type": "string",
+              "readOnly": true
+            },
+            "openlr": {
+              "description": "OpenLR code for segment",
+              "type": "number",
               "readOnly": true
             }
           }
