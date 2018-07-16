@@ -34,9 +34,23 @@ directive:
   - suppress: OperationsAPIImplementation
     reason: We do have a operations api as "/providers/Microsoft.Network/operations"
     from: trafficmanager.json
-    where:
-      - $.paths["/providers/Microsoft.Network/operations"]
-
+    where: $.paths
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.HeatMapModel
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.TrafficManagerGeographicHierarchy
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.Profile
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.Endpoint
 ```
 
 ### Tag: package-2018-04
