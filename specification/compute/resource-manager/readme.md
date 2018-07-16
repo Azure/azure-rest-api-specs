@@ -184,6 +184,7 @@ These settings apply only when `--tag=package-compute-only-2018-06` is specified
 ``` yaml $(tag) == 'package-compute-only-2018-06'
 input-file:
 - Microsoft.Compute/stable/2018-06-01/compute.json
+- Microsoft.Compute/stable/2018-06-01/runCommands.json
 - Microsoft.Compute/stable/2018-06-01/gallery.json
 ```
 
