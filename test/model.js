@@ -8,7 +8,7 @@ var assert = require('assert'),
 
 describe('Azure swagger model validation using x-ms-examples and examples in spec', function () {
   let swaggersToProcess = utils.getFilesChangedInPR();
-  // Useful when debugging a test for a particular swagger. 
+  // Useful when debugging a test for a particular swagger.
   // Just update the regex. That will return an array of filtered items.
   // swaggersToProcess = swaggersToProcess.filter(function(item) {
   //   return (item.match(/.*Microsoft.Logic.*2016-06-01.*/ig) !== null);
@@ -16,7 +16,7 @@ describe('Azure swagger model validation using x-ms-examples and examples in spe
   for (const swagger of swaggersToProcess) {
     it(swagger + ' should have valid examples.', async function () {
       try {
-        const validationResult = await oav.validateExamples(swagger, null, {consoleLogLevel: 'error'});
+        const validationResult = await oav.validateExamples(swagger, null, {consoleLogLevel: 'error', pretty: true});
         return assert(
           validationResult.validityStatus === true,
           `swagger "${swagger}" contains model validation errors.`);
