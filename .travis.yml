@@ -87,7 +87,7 @@ script:
     fi
   - >-
     if [[ $MODE == 'model' ]]; then
-      npm test -- test/model.js
+      node scripts/modelValidation.js
     fi
   - >-
     if [[ $MODE == 'BreakingChange' ]]; then
