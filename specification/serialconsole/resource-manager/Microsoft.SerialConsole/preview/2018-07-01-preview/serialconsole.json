@@ -1,0 +1,169 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "MicrosoftSerialConsoleClient",
+        "version": "2018-05-01",
+        "description": "Azure Virtual Machine Serial Console allows you to access serial console of a Virtual Machine"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "text/json"
+    ],
+    "produces": [
+        "application/json",
+        "text/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}": {
+            "get": {
+                "tags": [
+                    "ConsoleDisabled"
+                ],
+                "operationId": "ListConsole_Disabled",
+                "description": "Gets if Serial Console is disabled for a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Returns a JSON object"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/providers/consoleServices/{default}/enableConsole": {
+            "post": {
+                "tags": [
+                    "EnableConsole"
+                ],
+                "operationId": "Console_enableconsole",
+                "description": "Enables Serial Console for a VM",
+                "parameters": [
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ConsoleProperties"
+                        },
+                        "description": "Parameters for Console enablement"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Serial Console disabled"
+                    },
+                    "500": {
+                        "description": " Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/DeploymentValidateResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/providers/consoleServices/{default}/disableConsole": {
+            "post": {
+                "tags": [
+                    "DisableConsole"
+                ],
+                "operationId": "Console_disableconsole",
+                "description": "Disables Serial Console for a VM",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Serial Console disabled"
+                    },
+                    "500": {
+                        "description": " Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/DeploymentValidateResult"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "SerialConsoleGetResult": {
+            "properties": {
+                "value": {
+                    "type": "boolean",
+                    "description": "Returns whether or not Serial Console is disabled."
+                }
+            }
+        },
+        "ConsoleProperties": {
+            "properties": {
+                "vmSubId": {
+                    "type": "string",
+                    "description": "VM's subscription ID"
+                }
+            }
+        },
+        "DeploymentValidateResult": {
+            "properties": {
+                "ErrorMessage": {
+                    "type": "string",
+                    "description": "Details on Failure"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the target subscription."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for this operation."
+        }
+    }
+}
