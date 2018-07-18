@@ -677,7 +677,8 @@
             "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"          }
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
         ],
         "x-ms-request-id": "request-id",
         "responses": {
@@ -686,8 +687,8 @@
           },
           "404": {
             "description": "The provided skillset name is not found."
-           }
-         }
+          }
+        }
       }
     },
     "/skillsets": {
@@ -696,33 +697,32 @@
         "operationId": "Skillsets_List",
         "x-ms-examples": {
           "SearchServiceListSkillsets": { "$ref": "./examples/SearchServiceListSkillsets.json" }
-         },
-         "description": "List all cognitive skillsets in an Azure Search service.",
+        },
+        "description": "List all cognitive skillsets in an Azure Search service.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/list-skillset"
-         },
+        },
         "parameters": [
-           {
-             "$ref": "#/parameters/ClientRequestIdParameter"
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-             "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-request-id": "request-id",
- 
         "responses": {
-           "200": {
+          "200": {
             "description": "The list is successfully returned.",
             "schema": {
               "$ref": "#/definitions/SkillsetListResult"
             }
-           }
+          }
 		}
       },
       "post": {
-         "tags": ["Skillsets"],
-         "operationId": "Skillsets_Create",
+        "tags": ["Skillsets"],
+        "operationId": "Skillsets_Create",
         "x-ms-examples": {
           "SearchServiceCreateSkillset": {
             "$ref": "./examples/SearchServiceCreateSkillset.json"
@@ -740,7 +740,7 @@
             "schema": {
               "$ref": "#/definitions/Skillset"
             },
-    "description": "The skillset containing one or more cognitive skills to create in an Azure Search service."
+            "description": "The skillset containing one or more cognitive skills to create in an Azure Search service."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -3458,6 +3458,16 @@
             "url": "https://docs.microsoft.com/azure/search/search-indexer-field-mappings"
           }
         },
+		"outputFieldMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldMapping"
+          },
+          "description": "Output field mappings are applied after enrichment and immediately before indexing.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/azure/search/search-indexer-field-mappings"
+          }
+        },
         "disabled": {
           "x-ms-client-name": "IsDisabled",
           "type": "boolean",
@@ -4201,7 +4211,7 @@
 			},
 			"context": {
 				"type": "string",
-				"description": "Represents the level at which operations take place, such as the document root or document path (for example, document/sentiment or document/content)."
+				"description": "Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content)."
 			},
 			"inputs": {
 				"type": "array",
@@ -4246,15 +4256,15 @@
 		"properties": {
 			"name": {
 				"type": "string",
-				"description": "The name path of the output."
+				"description": "The name of the output defined by the skill."
 			},
 			"targetName": {
 				"type": "string",
-				"description": "The target name of the output."
+				"description": "The target name of the output. It is optional and default to name."
 			}
 		},
 		"required": [
-		    "name", "targetName"
+		    "name"
 		],
 		"externalDocs": {
 			"url": "https://docs.microsoft.com/rest/api/searchservice/naming-rules"
@@ -4307,7 +4317,7 @@
 		"externalDocs": {
 			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-ocr"
 	    },
-		"description": "A skill extracts text from image files."
+		"description": "A skill that extracts text from image files."
 	},
 	"ImageAnalysisSkill": {
 		"x-ms-discriminator-value": "#Microsoft.Skills.Vision.ImageAnalysisSkill",
@@ -4339,7 +4349,7 @@
 		"externalDocs": {
 			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-image-analysis"
 	    },
-		"description": "A skill analyzes image files. It extracts a rich set of visual features based on the image content."
+		"description": "A skill that analyzes image files. It extracts a rich set of visual features based on the image content."
 	},
 	"LanguageDetectionSkill": {
 		"x-ms-discriminator-value": "#Microsoft.Skills.Text.LanguageDetectionSkill",
@@ -4349,7 +4359,7 @@
 		"externalDocs": {
 			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-language-detection"
 	    },
-		"description": "A skill detects the language of input text and reports a single language code for every document submitted on the request. The language code is paired with a score indicating the confidence of the analysis."
+		"description": "A skill that detects the language of input text and reports a single language code for every document submitted on the request. The language code is paired with a score indicating the confidence of the analysis."
 	},
 	"ShaperSkill": {
 		"x-ms-discriminator-value": "#Microsoft.Skills.Util.ShaperSkill",
