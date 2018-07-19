@@ -3,8 +3,7 @@
 
 'use strict';
 
-const octokit = require('@octokit/rest')(),
-      fs = require('fs'),
+const fs = require('fs'),
       crypto = require('crypto'),
       utils = require('../test/util/utils'),
       path = require('path');
@@ -66,28 +65,8 @@ let sdkFileSummaries = '', armFileSummaries = '';
 let data = fs.readFileSync(logFilepath, 'utf8');
 let jsonData = JSON.parse(data);
 
-let token = process.env.GH_TOKEN;
-
-octokit.authenticate({
-    type: 'token',
-    token: token
-});
-
 function compareJsonRef(beforeJsonRef, afterJsonRef) {
     return (beforeJsonRef.replace(/json:\d+:\d+/, '') == afterJsonRef.replace(/json:\d+:\d+/, ''));
-}
-
-function postGithubComment(owner, repository, prNumber, commentBody) {
-    octokit.issues.createComment({
-        "owner": owner,
-        "repo": repository,
-        "number": prNumber,
-        "body": commentBody
-    }).then(data => {
-        console.log("Comment has been posted");
-    }). catch(err => {
-        console.log(err);
-    });
 }
 
 function postSummariesToGithub(summaryTitle, fileSummaries, org, repository, prNumber, contactMessage) {
@@ -95,7 +74,12 @@ function postSummariesToGithub(summaryTitle, fileSummaries, org, repository, prN
     githubTemplateCopy = githubTemplateCopy.replace("{title}", summaryTitle);
     githubTemplateCopy = githubTemplateCopy.replace("{file_summaries}", fileSummaries);
     githubTemplateCopy = githubTemplateCopy.replace("{contact_message}", contactMessage);
-    postGithubComment(org, repository, prNumber, githubTemplateCopy);
+    console.log("---output");
+    console.log("{");
+    console.log('"title": "Moment of Truth Validation Results",');
+    console.log('"summary": "', githubTemplateCopy, '"')
+    console.log("}");
+    console.log("---");
 }
 
 function compareBeforeAfterArrays(afterArray, beforeArray, newArray) {
