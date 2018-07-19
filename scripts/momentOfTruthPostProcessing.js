@@ -9,6 +9,7 @@ const fs = require('fs'),
       path = require('path');
 
 let pullRequestNumber = utils.getPullRequestNumber();
+let targetBranch = utils.getTargetBranch();
 let filename = `${pullRequestNumber}.json`;
 let logFilepath = path.join(getLogDir(), filename);
 
@@ -25,7 +26,9 @@ let githubTemplate = `
 {contact_message}
 
 {file_summaries}
+`;
 
+let githubFooter = `
 [AutoRest Linter Guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) | [AutoRest Linter Issues](https://github.com/Azure/azure-openapi-validator/issues) | Send <a href='mailto:azure-swag-tooling@microsoft.com?subject=Feedback%20|%20AutoRest%20Linter%20Azure%20Bot'>feedback</a>
 
 Thanks for your co-operation.
@@ -69,17 +72,28 @@ function compareJsonRef(beforeJsonRef, afterJsonRef) {
     return (beforeJsonRef.replace(/json:\d+:\d+/, '') == afterJsonRef.replace(/json:\d+:\d+/, ''));
 }
 
-function postSummariesToGithub(summaryTitle, fileSummaries, org, repository, prNumber, contactMessage) {
+function getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount) {
+    const totalNewErrors = newSDKErrorsCount + newARMErrorsCount;
+    const totalNewWarnings = newSDKWarningsCount + newARMWarningsCount;
+    const pluralize = (word, num) => num !== 1 ? `${word}s` : word;
+    const iconFor = (type, num) => num > 0 ? (type === 'error' ? ':x:' : ':warning:') : ':white_check_mark:';
+
+    const title = `${totalNewErrors} new ${pluralize('error', totalNewErrors)} / ${totalNewWarnings} new ${pluralize('warning', totalNewWarnings)}`;
+    let summary = `Compared to the target branch (**${targetBranch}**), this pull request introduces:\n\n`;
+    summary += `&nbsp;&nbsp;&nbsp;${iconFor('error', newSDKErrorsCount)}&nbsp;&nbsp;&nbsp;**${newSDKErrorsCount}** new SDK ${pluralize('error', newSDKErrorsCount)}\n\n`;
+    summary += `&nbsp;&nbsp;&nbsp;${iconFor('error', newARMErrorsCount)}&nbsp;&nbsp;&nbsp;**${newARMErrorsCount}** new ARM ${pluralize('error', newARMErrorsCount)}\n\n`;
+    summary += `&nbsp;&nbsp;&nbsp;${iconFor('warning', newSDKWarningsCount)}&nbsp;&nbsp;&nbsp;**${newSDKWarningsCount}** new SDK ${pluralize('warning', newSDKWarningsCount)}\n\n`;
+    summary += `&nbsp;&nbsp;&nbsp;${iconFor('warning', newARMWarningsCount)}&nbsp;&nbsp;&nbsp;**${newARMWarningsCount}** new ARM ${pluralize('warning', newARMWarningsCount)}\n\n`;
+
+    return [title, summary];
+}
+
+function getSummaryBlock(summaryTitle, fileSummaries, contactMessage) {
     let githubTemplateCopy = githubTemplate;
     githubTemplateCopy = githubTemplateCopy.replace("{title}", summaryTitle);
-    githubTemplateCopy = githubTemplateCopy.replace("{file_summaries}", fileSummaries);
+    githubTemplateCopy = githubTemplateCopy.replace("{file_summaries}", fileSummaries !== '' ? fileSummaries : `**There were no files containing new ${summaryTitle}.**`);
     githubTemplateCopy = githubTemplateCopy.replace("{contact_message}", contactMessage);
-    console.log("---output");
-    console.log("{");
-    console.log('"title": "Moment of Truth Validation Results",');
-    console.log('"summary": "', githubTemplateCopy, '"')
-    console.log("}");
-    console.log("---");
+    return githubTemplateCopy;
 }
 
 function compareBeforeAfterArrays(afterArray, beforeArray, newArray) {
@@ -176,6 +190,8 @@ function getFileSummary(fileName, beforeWarningsArray, afterWarningsArray, befor
 }
 
 function postProcessing() {
+    let newSDKErrorsCount = 0, newARMErrorsCount = 0, newSDKWarningsCount = 0, newARMWarningsCount = 0;
+
     for(var fileName in jsonData['files']) {
         let beforeErrorsSDKArray = [], beforeWarningsSDKArray = [], beforeErrorsARMArray = [], beforeWarningsARMArray = [];
         let afterErrorsSDKArray = [], afterWarningsSDKArray = [], afterErrorsARMArray = [], afterWarningsARMArray = [];
@@ -239,16 +255,34 @@ function postProcessing() {
         console.log("New ARM Warnings: ", newARMWarnings.length);
         console.log();
 
+        newSDKErrorsCount += newSDKErrors.length;
+        newARMErrorsCount += newARMErrors.length;
+        newSDKWarningsCount += newSDKWarnings.length;
+        newARMWarningsCount += newARMWarnings.length;
+
         let fileSummaryCopy = getFileSummary(fileName, beforeWarningsSDKArray, afterWarningsSDKArray, beforeErrorsSDKArray, afterErrorsSDKArray, newSDKWarnings, newSDKErrors, pullRequestNumber);
         sdkFileSummaries = sdkFileSummaries.concat(fileSummaryCopy);
         fileSummaryCopy = getFileSummary(fileName, beforeWarningsARMArray, afterWarningsARMArray, beforeErrorsARMArray, afterErrorsARMArray, newARMWarnings, newARMErrors, pullRequestNumber);
         armFileSummaries = armFileSummaries.concat(fileSummaryCopy);
     }
 
-    let slug = process.env.TRAVIS_REPO_SLUG;
-    slug = slug.split("/")[1];
-    postSummariesToGithub("SDK Related Validation Errors/Warnings", sdkFileSummaries, "Azure", slug, pullRequestNumber, sdkContactMessage);
-    postSummariesToGithub("ARM Related Validation Errors/Warnings", armFileSummaries, "Azure", slug, pullRequestNumber, armContactMessage);
+    const sdkSummary = getSummaryBlock("SDK-related validation Errors / Warnings", sdkFileSummaries, sdkContactMessage);
+    const armSummary = getSummaryBlock("ARM-related validation Errors / Warnings", armFileSummaries, armContactMessage);
+    
+    const [title, summary] = getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount);
+    const output = {
+        title,
+        summary,
+        text: `${sdkSummary}\n<br><br>\n${armSummary}\n<br><br>\n${githubFooter}`
+    }
+
+    console.log("---output");
+    console.log(JSON.stringify(output));
+    console.log("---");
+
+    if (newSDKErrorsCount > 0 || newARMErrorsCount > 0) {
+        process.exitCode = 1;
+    }
 }
 
 postProcessing();
