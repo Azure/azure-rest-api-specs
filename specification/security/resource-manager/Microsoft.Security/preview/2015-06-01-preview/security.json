@@ -2105,17 +2105,12 @@
             "description": "Represents a security solution external to Azure Security Center which sends information to an OMS workspace and whos data is displayed by Azure Security Center.",
             "discriminator": "kind",
             "properties": {
-                "properties":{
-                    "additionalProperties": {
-                        "type": "object"
-                    }
-                }
             },
             "allOf": [{
                     "$ref": "#/definitions/Resource"
                 },
                 {
-                    "$ref": "#/definitions/Kind"
+                    "$ref": "#/definitions/ExternalSecuritySolutionKind"
                 },
                 {
                     "$ref": "#/definitions/Location"
@@ -2162,31 +2157,38 @@
             }
         },
         "ExternalSecuritySolutionKind": {
-            "type": "string",
-            "description": "The kind of the external solution",
-            "enum": [
-                "CEF",
-                "ATA",
-                "AAD"
-            ],
-            "x-ms-enum": {
-                "name": "ExternalSecuritySolutionKind",
-                "modelAsString": true,
-                "values": [{
-                        "value": "CEF"
-                    },
-                    {
-                        "value": "ATA"
-                    },
-                    {
-                        "value": "AAD"
+            "type": "object",
+            "description": "Describes an Azure resource with kind",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The kind of the external solution",
+                    "enum": [
+                        "CEF",
+                        "ATA",
+                        "AAD"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ExternalSecuritySolutionKind",
+                        "modelAsString": true,
+                        "values": [{
+                                "value": "CEF"
+                            },
+                            {
+                                "value": "ATA"
+                            },
+                            {
+                                "value": "AAD"
+                            }
+                        ]
                     }
-                ]
+                }
             }
         },
         "ExternalSecuritySolutionProperties": {
             "type": "object",
             "description": "The solution properties (correspond to the solution kind)",
+            "additionalProperties": true,
             "properties": {
                 "deviceVendor": {
                     "type": "string"
