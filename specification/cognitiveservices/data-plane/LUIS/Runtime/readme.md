@@ -37,6 +37,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
 ```
 
 ### Runtime 2.0 - CSharp Settings
