@@ -17,7 +17,7 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-luis/azure/cognitiveservices/vision/language/luis/runtime
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-luis/azure/cognitiveservices/language/luis/runtime
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
