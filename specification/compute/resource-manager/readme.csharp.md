@@ -51,5 +51,5 @@ namespace: Microsoft.Azure.Management.Profiles.$(profile).Compute
 output-folder: $(csharp-sdks-folder)/$(profile)/Compute/Management.Compute/Generated
 
 batch:
- - tag: package-2015-07-authorization-only
+ - tag: package-compute-2016-03
  ```
