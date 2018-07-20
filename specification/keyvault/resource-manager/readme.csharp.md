@@ -37,3 +37,11 @@ batch:
   - tag: package-2016-10
   - tag: package-2015-06
 ```
+
+``` yaml $(profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).KeyVault
+output-folder: $(csharp-sdks-folder)/$(profile)/KeyVault/Management.KeyVault/Generated
+
+batch:
+ - tag: package-2016-10
+ ```

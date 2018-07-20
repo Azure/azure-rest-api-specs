@@ -44,3 +44,11 @@ batch:
   - tag: package-2018-05
   - tag: package-2017-10
 ```
+
+``` yaml $(profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Network
+output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Generated
+
+batch:
+ - tag: package-2015-06split
+ ```

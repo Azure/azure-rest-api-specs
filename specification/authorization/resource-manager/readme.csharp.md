@@ -39,3 +39,11 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authori
 batch:
  - tag: package-2015-07
  ```
+
+ ``` yaml $(profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authorization/Generated
+
+batch:
+ - tag: package-compute-2016-03
+ ```

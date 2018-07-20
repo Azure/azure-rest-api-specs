@@ -43,3 +43,10 @@ batch:
   - tag: package-2017-10
   - tag: package-2016-01
 ```
+
+```yaml $(profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Storage
+output-folder: $(csharp-sdks-folder)/$(profile)/Storage/Management.Storage/Generated
+batch:
+  - tag: package-2016-01
+```

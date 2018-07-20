@@ -46,4 +46,10 @@ batch:
   - tag: package-compute-2017-03
 ```
 
+``` yaml $(profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Compute
+output-folder: $(csharp-sdks-folder)/$(profile)/Compute/Management.Compute/Generated
 
+batch:
+ - tag: package-2015-07-authorization-only
+ ```

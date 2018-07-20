@@ -274,3 +274,13 @@ batch:
   - tag: package-resources-2016-09
   - tag: package-subscriptions-2016-06
 ```
+
+``` yaml $(profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(profile)/Resource/Management.ResourceManager/Generated
+
+batch:
+ - tag: package-resources-2016-02
+ - tag: package-links-2016-09
+ - tag: package-subscriptions-2016-06
+ ```
