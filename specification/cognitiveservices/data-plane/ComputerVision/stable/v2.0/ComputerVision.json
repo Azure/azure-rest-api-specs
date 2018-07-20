@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2.0",
-    "title": "Computer Vision API",
+    "title": "Computer Vision Client",
     "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the faces in an image.  It also has other features like estimating dominant and accent colors, categorizing the content of images, and describing an image with complete English sentences.  Additionally, it can also intelligently generate images thumbnails for displaying large images effectively."
   },
   "securityDefinitions": {
@@ -18,10 +18,11 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/AzureRegion"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
@@ -1554,32 +1555,14 @@
         "format": "file"
       }
     },
-    "AzureRegion": {
-      "name": "AzureRegion",
-      "description": "Supported Azure regions for Cognitive Services endpoints",
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
       "in": "path",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-enum": {
-        "name": "AzureRegions",
-        "modelAsString": false
-      },
-      "enum": [
-        "westus",
-        "westeurope",
-        "southeastasia",
-        "eastus2",
-        "westcentralus",
-        "westus2",
-        "eastus",
-        "southcentralus",
-        "northeurope",
-        "eastasia",
-        "australiaeast",
-        "brazilsouth"
-      ]
+      "x-ms-skip-url-encoding": true
     }
   }
 }
