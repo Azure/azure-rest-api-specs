@@ -7,7 +7,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   package-name: azure-cognitiveservices-autosuggest
   package-version: 0.1.0-preview
-  output-folder: $(node-sdks-folder)/lib/services/autosuggest
+  output-folder: $(node-sdks-folder)/lib/services/cognitiveServicesAutoSuggest
   override-client-name: AutoSuggestAPIClient
   azure-arm: true
   generate-license-txt: true
