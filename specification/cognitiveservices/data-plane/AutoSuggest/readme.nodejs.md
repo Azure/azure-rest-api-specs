@@ -6,11 +6,11 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-autosuggest
-  package-version: 1.1.0
+  package-version: 0.1.0-preview
   output-folder: $(node-sdks-folder)/lib/services/autosuggest
   override-client-name: AutoSuggestAPIClient
-  azure-arm: false
+  azure-arm: true
   generate-license-txt: true
   generate-package-json: true
-  generate-readme-md: false
+  generate-readme-md: true
 ```
