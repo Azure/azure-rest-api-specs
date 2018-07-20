@@ -101,8 +101,11 @@ async function runScript() {
     await processViaAutoRest(swagger);
   }
 
+  let newSwaggers = [];
   if (isRunningInTraviCI) {
-    utils.checkoutTargetBranch();
+    newSwaggers = await utils.doOnBranch(utils.getTargetBranch(), async () => {
+      return swaggersToProcess.filter(s => !fs.existsSync(s))
+    });
   }
 
   console.log(`Resolved map for the new specification is:`);
@@ -110,7 +113,7 @@ async function runScript() {
 
   for (const swagger of swaggersToProcess) {
     // If file does not exists in the previous commits then we ignore it as it's new file
-    if (!fs.existsSync(swagger)) {
+    if (newSwaggers.includes(swagger)) {
       console.log(`File: "${swagger}" looks to be newly added in this PR.`);
       continue;
     }

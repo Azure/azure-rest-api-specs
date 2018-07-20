@@ -108,11 +108,11 @@ async function runScript() {
             await runTools(configFile, 'after');
         }
 
-        utils.checkoutTargetBranch();
-
-        for (const configFile of configsToProcess) {
-            await runTools(configFile, 'before');
-        }
+        await utils.doOnBranch(utils.getTargetBranch(), async () => {
+            for (const configFile of configsToProcess) {
+                await runTools(configFile, 'before');
+            }
+        });
     }
 
     writeContent(JSON.stringify(finalResult, null, 2));
