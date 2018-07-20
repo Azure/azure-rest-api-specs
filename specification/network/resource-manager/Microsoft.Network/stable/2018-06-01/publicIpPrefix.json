@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIpPrefixName}": {
       "delete": {
         "tags": [
-          "PublicIPAddresses"
+          "PublicIPPrefixes"
         ],
-        "operationId": "PublicIPAddresses_Delete",
-        "description": "Deletes the specified public IP address.",
+        "operationId": "PublicIPPrefixes_Delete",
+        "description": "Deletes the specified public IP prefix.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -50,11 +50,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "publicIpAddressName",
+            "name": "publicIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the subnet."
+            "description": "The name of the publicIPPrefix."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -75,16 +75,16 @@
           }
         },
         "x-ms-examples": {
-          "Delete public IP address": { "$ref": "./examples/PublicIpAddressDelete.json" }
+          "Delete public IP prefix": { "$ref": "./examples/PublicIpPrefixDelete.json" }
         },
         "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
-          "PublicIPAddresses"
+          "PublicIPPrefixes"
         ],
-        "operationId": "PublicIPAddresses_Get",
-        "description": "Gets the specified public IP address in a specified resource group.",
+        "operationId": "PublicIPPrefixes_Get",
+        "description": "Gets the specified public IP prefix in a specified resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -94,11 +94,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "publicIpAddressName",
+            "name": "publicIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the subnet."
+            "description": "The name of the publicIPPrefix."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -116,22 +116,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting PublicIPAddress resource.",
+            "description": "Request successful. The operation returns the resulting PublicIPPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/PublicIPAddress"
+              "$ref": "#/definitions/PublicIPPrefix"
             }
           }
         },
         "x-ms-examples": {
-          "Get public IP address": { "$ref": "./examples/PublicIpAddressGet.json" }
+          "Get public IP prefix": { "$ref": "./examples/PublicIpPrefixGet.json" }
         }
       },
       "put": {
         "tags": [
-          "PublicIPAddresses"
+          "PublicIPPrefixes"
         ],
-        "operationId": "PublicIPAddresses_CreateOrUpdate",
-        "description": "Creates or updates a static or dynamic public IP address.",
+        "operationId": "PublicIPPrefixes_CreateOrUpdate",
+        "description": "Creates or updates a static or dynamic public IP prefix.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -141,20 +141,20 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "publicIpAddressName",
+            "name": "publicIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the public IP address."
+            "description": "The name of the public IP prefix."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PublicIPAddress"
+              "$ref": "#/definitions/PublicIPPrefix"
             },
-            "description": "Parameters supplied to the create or update public IP address operation."
+            "description": "Parameters supplied to the create or update public IP prefix operation."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -165,31 +165,30 @@
         ],
         "responses": {
           "201": {
-            "description": "Create successful. The operation returns the resulting PublicIPAddress resource.",
+            "description": "Create successful. The operation returns the resulting PublicIPPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/PublicIPAddress"
+              "$ref": "#/definitions/PublicIPPrefix"
             }
           },
           "200": {
-            "description": "Update successful. The operation returns the resulting PublicIPAddress resource.",
+            "description": "Update successful. The operation returns the resulting PublicIPPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/PublicIPAddress"
+              "$ref": "#/definitions/PublicIPPrefix"
             }
           }
         },
         "x-ms-examples": {
-          "Create public IP address defaults": { "$ref": "./examples/PublicIpAddressCreateDefaults.json" },
-          "Create public IP address allocation method": { "$ref": "./examples/PublicIpAddressCreateCustomizedValues.json" },
-          "Create public IP address DNS": { "$ref": "./examples/PublicIpAddressCreateDns.json" }
+          "Create public IP prefix defaults": { "$ref": "./examples/PublicIpPrefixCreateDefaults.json" },
+          "Create public IP prefix allocation method": { "$ref": "./examples/PublicIpPrefixCreateCustomizedValues.json" }
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
-          "PublicIPAddresses"
+          "PublicIPPrefix"
         ],
-        "operationId": "PublicIPAddresses_UpdateTags",
-        "description": "Updates public IP address tags.",
+        "operationId": "PublicIPPrefixes_UpdateTags",
+        "description": "Updates public IP prefix tags.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -199,11 +198,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "publicIpAddressName",
+            "name": "publicIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the public IP address."
+            "description": "The name of the public IP prefix."
           },
           {
             "name": "parameters",
@@ -212,7 +211,7 @@
             "schema": {
               "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update public IP address tags."
+            "description": "Parameters supplied to update public IP prefix tags."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -223,25 +222,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting PublicIPAddress resource.",
+            "description": "Update successful. The operation returns the resulting PublicIPPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/PublicIPAddress"
+              "$ref": "#/definitions/PublicIPPrefix"
             }
           }
         },
         "x-ms-examples": {
-          "Update public IP address tags": { "$ref": "./examples/PublicIpAddressUpdateTags.json" }
+          "Update public IP prefix tags": { "$ref": "./examples/PublicIpPrefixUpdateTags.json" }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPAddresses": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPPrefixes": {
       "get": {
         "tags": [
-          "PublicIPAddresses"
+          "PublicIPPrefixes"
         ],
-        "operationId": "PublicIPAddresses_ListAll",
-        "description": "Gets all the public IP addresses in a subscription.",
+        "operationId": "PublicIPPrefixes_ListAll",
+        "description": "Gets all the public IP prefixes in a subscription.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -252,27 +251,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of PublicIPAddress resources.",
+            "description": "Request successful. The operation returns a list of PublicIPPrefix resources.",
             "schema": {
-              "$ref": "#/definitions/PublicIPAddressListResult"
+              "$ref": "#/definitions/PublicIPPrefixListResult"
             }
           }
         },
         "x-ms-examples": {
-          "List all public IP addresses": { "$ref": "./examples/PublicIpAddressListAll.json" }
+          "List all public IP prefixes": { "$ref": "./examples/PublicIpPrefixListAll.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes": {
       "get": {
         "tags": [
-          "PublicIPAddresses"
+          "PublicIPPrefixes"
         ],
-        "operationId": "PublicIPAddresses_List",
-        "description": "Gets all public IP addresses in a resource group.",
+        "operationId": "PublicIPPrefixes_List",
+        "description": "Gets all public IP prefixes in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -290,14 +289,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of PublicIPAddress resources.",
+            "description": "Request successful. The operation returns a list of PublicIPPrefix resources.",
             "schema": {
-              "$ref": "#/definitions/PublicIPAddressListResult"
+              "$ref": "#/definitions/PublicIPPrefixListResult"
             }
           }
         },
         "x-ms-examples": {
-          "List resource group public IP addresses": { "$ref": "./examples/PublicIpAddressList.json" }
+          "List resource group public IP prefixes": { "$ref": "./examples/PublicIpPrefixList.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -306,37 +305,24 @@
     }
   },
   "definitions": {
-    "PublicIPAddressSku": {
+    "PublicIPPrefixSku": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of a public IP address SKU.",
+          "description": "Name of a public IP prefix SKU.",
           "enum": [
-            "Basic",
             "Standard"
           ],
           "x-ms-enum": {
-            "name": "PublicIPAddressSkuName",
+            "name": "PublicIPPrefixSkuName",
             "modelAsString": true
           }
         }
       },
-      "description": "SKU of a public IP address"
+      "description": "SKU of a public IP prefix"
     },
-    "PublicIPAddressPropertiesFormat": {
+    "PublicIPPrefixPropertiesFormat": {
       "properties": {
-        "publicIPAllocationMethod": {
-          "type": "string",
-          "description": "The public IP allocation method. Possible values are: 'Static' and 'Dynamic'.",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IPAllocationMethod",
-            "modelAsString": true
-          }
-        },
         "publicIPAddressVersion": {
           "type": "string",
           "description": "The public IP address version. Possible values are: 'IPv4' and 'IPv6'.",
@@ -352,53 +338,51 @@
         "ipConfiguration": {
           "readOnly": true,
           "$ref": "./networkInterface.json#/definitions/IPConfiguration",
-          "description": "The IP configuration associated with the public IP address."
-        },
-        "dnsSettings": {
-          "$ref": "#/definitions/PublicIPAddressDnsSettings",
-          "description": "The FQDN of the DNS record associated with the public IP address."
+          "description": "The IP configuration associated with the public IP prefix."
         },
         "ipTags": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpTag"
           },
-          "description": "The list of tags associated with the public IP address."
+          "description": "The list of tags associated with the public IP prefix."
         },
-        "ipAddress": {
-          "type": "string",
-          "description": "The IP address associated with the public IP address resource."
+        "PrefixLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Prefix Length of the IPPrefix."
         },
-        "publicIPPrefix": {
+        "IPPrefix": {
+          "readOnly": true,
           "type": "string",
-          "description": "The Public IP Prefix this Public IP Address should be allocated from."
+          "description": "The IPPrefix generated."
         },
         "idleTimeoutInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "The idle timeout of the public IP address."
+          "description": "The idle timeout of the public IP prefix."
         },
         "resourceGuid": {
           "type": "string",
-          "description": "The resource GUID property of the public IP resource."
+          "description": "The resource GUID property of the public IP Prefix resource."
         },
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the PublicIPPrefix resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
-      "description": "Public IP address properties."
+      "description": "Public IP prefix properties."
     },
-    "PublicIPAddress": {
+    "PublicIPPrefix": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/PublicIPAddressSku",
-          "description": "The public IP address SKU."
+          "$ref": "#/definitions/PublicIPPrefixSku",
+          "description": "The public IP prefix SKU."
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PublicIPAddressPropertiesFormat",
-          "description": "Public IP address properties."
+          "$ref": "#/definitions/PublicIPPrefixPropertiesFormat",
+          "description": "Public IP prefix properties."
         },
         "etag": {
           "type": "string",
@@ -409,7 +393,7 @@
           "items": {
             "type": "string"
           },
-          "description": "A list of availability zones denoting the IP allocated for the resource needs to come from."
+          "description": "A list of availability zones denoting the IP Prefix allocated for the resource needs to come from."
         }
       },
       "allOf": [
@@ -417,40 +401,23 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "Public IP address resource."
+      "description": "Public IP prefix resource."
     },
-    "PublicIPAddressListResult": {
+    "PublicIPPrefixListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PublicIPAddress"
+            "$ref": "#/definitions/PublicIPPrefix"
           },
-          "description": "A list of public IP addresses that exists in a resource group."
+          "description": "A list of public IP prefixes that exists in a resource group."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for ListPublicIpAddresses API service call."
-    },
-    "PublicIPAddressDnsSettings": {
-      "properties": {
-        "domainNameLabel": {
-          "type": "string",
-          "description": "Gets or sets the Domain name label.The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
-        },
-        "fqdn": {
-          "type": "string",
-          "description": "Gets the FQDN, Fully qualified domain name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone."
-        },
-        "reverseFqdn": {
-          "type": "string",
-          "description": "Gets or Sets the Reverse FQDN. A user-visible, fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN. "
-        }
-      },
-      "description": "Contains FQDN of the DNS record associated with the public IP address"
+      "description": "Response for ListPublicIpPrefixes API service call."
     },
     "IpTag": {
       "properties": {
@@ -460,10 +427,10 @@
         },
         "tag": {
           "type": "string",
-          "description": "Gets or sets value of the IpTag associated with the public IP. Example SQL, Storage etc"
+          "description": "Gets or sets value of the IpTag associated with the public IP Prefix. Example SQL, Storage etc"
         }
       },
-      "description": "Contains the IpTag associated with the public IP address"
+      "description": "Contains the IpTag associated with the public IP prefix"
     }
   }
 }
