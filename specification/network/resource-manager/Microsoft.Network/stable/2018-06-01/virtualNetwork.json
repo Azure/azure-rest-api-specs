@@ -884,7 +884,7 @@
         "serviceEndpointPolicies": {
         "type": "array",
           "items": {
-            "$ref": "#/definitions/serviceEndpointPoliciesFormat"
+            "$ref": "./serviceEndpointPolicy.json#/definitions/ServiceEndpointPolicy"
           },
           "description": "An array of service endpoint policies."
         },
@@ -936,34 +936,6 @@
         "$ref": "#/definitions/ServiceEndpointPolicyDefinitionsFormat"
       },
       "description": "An array of service endpoint policies."
-    },
-    "ServiceEndpointPolicyDefinitionsFormat": {
-      "name": {
-        "type": "string",
-        "description": "The name of service endpoint policy definition."
-      },
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "The description of service endpoint policy definition."
-        },
-        "service": {
-          "type": "string",
-          "description": "Service Endpoint name."
-        },
-        "serviceResources": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of service resources."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the resource."
-        }
-      },
-      "description": "The service endpoint definition properties."
     },
     "VirtualNetworkPeeringPropertiesFormat": {
       "properties": {
