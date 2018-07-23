@@ -1366,15 +1366,15 @@
           "type": "string",
           "description": "The replication role of the server."
         },
-        "primaryServerId": {
+        "masterServerId": {
           "type": "string",
-          "description": "The primary server id of a relica server."
+          "description": "The master server id of a relica server."
         },
         "replicaCapacity": {
           "type": "integer",
           "format": "int32",
           "minimum": 0,
-          "description": "The maximum number of replicas that a primary server can have."
+          "description": "The maximum number of replicas that a master server can have."
         }
       },
       "description": "The properties of a server."
@@ -1516,7 +1516,7 @@
       "properties": {
         "sourceServerId": {
           "type": "string",
-          "description": "The primary server id to create replica from."
+          "description": "The master server id to create replica from."
         }
       },
       "required": [
