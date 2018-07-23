@@ -103,6 +103,7 @@ input-file:
 - Microsoft.Network/stable/2018-06-01/virtualWan.json
 - Microsoft.Network/stable/2018-06-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2018-06-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2018-06-01/serviceEndpointPolicy.json
 ```
 
 ### Tag: package-2018-04
