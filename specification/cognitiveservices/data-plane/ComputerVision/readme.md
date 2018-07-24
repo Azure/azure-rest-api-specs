@@ -129,7 +129,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.vision.computervision
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/vision/computervision
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/vision/computervision
   with-optional-parameters: true
   with-single-async-method: true
   with-default-group-name: ComputerVision
