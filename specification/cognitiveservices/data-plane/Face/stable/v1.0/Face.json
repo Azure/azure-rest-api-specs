@@ -239,8 +239,8 @@
           }
         },
         "x-ms-examples": {
-          "Create new person example": {
-            "$ref": "./examples/CreateNewPerson.json"
+          "Create new person for person group example": {
+            "$ref": "./examples/CreateNewPersonGroupPerson.json"
           }
         }
       },
@@ -294,7 +294,7 @@
     },
     "/persongroups/{personGroupId}/persons/{personId}": {
       "delete": {
-        "description": "Delete an existing person from a person group. Persisted face images of the person will also be deleted.",
+        "description": "Delete an existing person from a person group. All stored person data, and face features in the person entry will be deleted.",
         "operationId": "PersonGroupPerson_Delete",
         "parameters": [
           {
@@ -317,7 +317,7 @@
         },
         "x-ms-examples": {
           "Delete an existing person example": {
-            "$ref": "./examples/DeletePerson.json"
+            "$ref": "./examples/DeletePersonGroupPerson.json"
           }
         }
       },
@@ -351,7 +351,7 @@
         },
         "x-ms-examples": {
           "Get person example": {
-            "$ref": "./examples/GetPerson.json"
+            "$ref": "./examples/GetPersonGroupPerson.json"
           }
         }
       },
@@ -392,14 +392,14 @@
         },
         "x-ms-examples": {
           "Update person example": {
-            "$ref": "./examples/UpdatePerson.json"
+            "$ref": "./examples/UpdatePersonGroupPerson.json"
           }
         }
       }
     },
     "/persongroups/{personGroupId}/persons/{personId}/persistedFaces/{persistedFaceId}": {
       "delete": {
-        "description": "Delete a face from a person. Relative image for the persisted face will also be deleted.",
+        "description": "Delete a face from a person. Relative feature for the persisted face will also be deleted.",
         "operationId": "PersonGroupPerson_DeleteFace",
         "parameters": [
           {
@@ -425,7 +425,7 @@
         },
         "x-ms-examples": {
           "Delete face from person example": {
-            "$ref": "./examples/DeletePersonFace.json"
+            "$ref": "./examples/DeletePersonGroupPersonFace.json"
           }
         }
       },
@@ -462,7 +462,7 @@
         },
         "x-ms-examples": {
           "Get persisted face example": {
-            "$ref": "./examples/GetPersistedFace.json"
+            "$ref": "./examples/GetPersonGroupPersistedFace.json"
           }
         }
       },
@@ -506,7 +506,7 @@
         },
         "x-ms-examples": {
           "Update person face example": {
-            "$ref": "./examples/UpdatePersonFace.json"
+            "$ref": "./examples/UpdatePersonGroupPersonFace.json"
           }
         }
       }
@@ -551,7 +551,7 @@
         }
       },
       "delete": {
-        "description": "Delete an existing person group. Persisted face images of all people in the person group will also be deleted.",
+        "description": "Delete an existing person group. Persisted face features of all people in the person group will also be deleted.",
         "operationId": "PersonGroup_Delete",
         "parameters": [
           {
@@ -672,8 +672,8 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Get training status example": {
-            "$ref": "./examples/GetTrainingStatus.json"
+          "Get person group's training status example": {
+            "$ref": "./examples/GetPersonGroupTrainingStatus.json"
           }
         }
       }
@@ -751,7 +751,7 @@
         },
         "x-ms-examples": {
           "Queue person group training": {
-            "$ref": "./examples/QueueTraining.json"
+            "$ref": "./examples/QueuePersonGroupTraining.json"
           }
         }
       }
@@ -1094,6 +1094,563 @@
         "x-ms-examples": {
           "Create face list face example": {
             "$ref": "./examples/AddFaceListFaceFromUrl.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/persons": {
+      "post": {
+        "description": "Create a new person in a specified large person group.",
+        "operationId": "LargePersonGroupPerson_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for creating new person.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns a new personId created.",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create new person for large person group example": {
+            "$ref": "./examples/CreateNewLargePersonGroupPerson.json"
+          }
+        }
+      },
+      "get": {
+        "description": "List all persons in a large person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
+        "operationId": "LargePersonGroupPerson_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "name": "start",
+            "description": "Starting person id to return (used to list a range of persons).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "description": "Number of persons to return starting with the person id indicated by the 'start' parameter.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an array of person information that belong to the large person group.",
+            "schema": {
+              "$ref": "#/definitions/Persons"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List persons in person group": {
+            "$ref": "./examples/ListLargePersonGroupPersons.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}": {
+      "delete": {
+        "description": "Delete an existing person from a large person group. All stored person data, and face features in the person entry will be deleted.",
+        "operationId": "LargePersonGroupPerson_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an existing person example": {
+            "$ref": "./examples/DeleteLargePersonGroupPerson.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a person's information, including registered persisted faces, name and userData.",
+        "operationId": "LargePersonGroupPerson_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the person's information.",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get person example": {
+            "$ref": "./examples/GetLargePersonGroupPerson.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update name or userData of a person.",
+        "operationId": "LargePersonGroupPerson_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for person update operation.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update person example": {
+            "$ref": "./examples/UpdateLargePersonGroupPerson.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedFaces/{persistedFaceId}": {
+      "delete": {
+        "description": "Delete a face from a person. Relative feature for the persisted face will also be deleted.",
+        "operationId": "LargePersonGroupPerson_DeleteFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete face from person example": {
+            "$ref": "./examples/DeleteLargePersonGroupPersonFace.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging largePersonGroupId).",
+        "operationId": "LargePersonGroupPerson_GetFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get persisted face example": {
+            "$ref": "./examples/GetLargePersonGroupPersistedFace.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a person persisted face's userData field.",
+        "operationId": "LargePersonGroupPerson_UpdateFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for updating persisted face.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/UpdatePersonFaceRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update person face example": {
+            "$ref": "./examples/UpdateLargePersonGroupPersonFace.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}": {
+      "put": {
+        "description": "Create a new large person group with specified largePersonGroupId, name and user-provided userData.",
+        "operationId": "LargePersonGroup_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for creating new large person group.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create new large person group example": {
+            "$ref": "./examples/CreateNewLargePersonGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an existing large person group. Persisted face features of all people in the large person group will also be deleted.",
+        "operationId": "LargePersonGroup_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a large person group example": {
+            "$ref": "./examples/DeleteLargePersonGroup.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve the information of a large person group, including its name and userData.",
+        "operationId": "LargePersonGroup_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the large person group's information.",
+            "schema": {
+              "$ref": "#/definitions/LargePersonGroup"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get large person group example": {
+            "$ref": "./examples/GetLargePersonGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update an existing large person group's display name and userData. The properties which does not appear in request body will not be updated.",
+        "operationId": "LargePersonGroup_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for updating large person group.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update large person group example": {
+            "$ref": "./examples/UpdateLargePersonGroup.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/training": {
+      "get": {
+        "description": "Retrieve the training status of a large person group (completed or ongoing).",
+        "operationId": "LargePersonGroup_GetTrainingStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the large person group's training status.",
+            "schema": {
+              "$ref": "#/definitions/TrainingStatus"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get large person group's training status example": {
+            "$ref": "./examples/GetLargePersonGroupTrainingStatus.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups": {
+      "get": {
+        "description": "List large person groups and their information.",
+        "operationId": "LargePersonGroup_List",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "description": "List large person groups from the least largePersonGroupId greater than the \"start\".",
+            "type": "string",
+            "maxLength": 64
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "description": "The number of large person groups to list.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 1000
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an array of large person groups and their information.",
+            "schema": {
+              "$ref": "#/definitions/LargePersonGroups"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get large person groups example": {
+            "$ref": "./examples/GetLargePersonGroups.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/train": {
+      "post": {
+        "description": "Queue a large person group training task, the training task may not be started immediately.",
+        "operationId": "LargePersonGroup_Train",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The training task was queued successfully."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Queue large person group training": {
+            "$ref": "./examples/QueueLargePersonGroupTraining.json"
           }
         }
       }
@@ -2151,7 +2708,7 @@
       "description": "Person group object.",
       "properties": {
         "personGroupId": {
-          "description": "PersonGroupId of the existing person groups.",
+          "description": "PersonGroupId of the target person group.",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
@@ -2224,6 +2781,33 @@
         }
       }
     },
+    "LargePersonGroup": {
+      "type": "object",
+      "required": [
+        "largePersonGroupId"
+      ],
+      "description": "Large person group object.",
+      "properties": {
+        "largePersonGroupId": {
+          "description": "LargePersonGroupId of the target large person groups",
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NameAndUserDataContract"
+        }
+      ]
+    },
+    "LargePersonGroups": {
+      "type": "array",
+      "description": "An array of large person groups.",
+      "items": {
+        "$ref": "#/definitions/LargePersonGroup"
+      }
+    },
     "UpdatePersonFaceRequest": {
       "type": "object",
       "description": "Request to update person face data.",
@@ -2264,6 +2848,12 @@
           "x-ms-client-name": "created"
         },
         "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Person group last modify time in the UTC, could be null value when the person group is not successfully trained.",
+          "x-ms-client-name": "lastAction"
+        },
+        "lastSuccessfulTrainingDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Person group last modify time in the UTC, could be null value when the person group is not successfully trained.",
@@ -2379,6 +2969,17 @@
       "name": "personGroupId",
       "in": "path",
       "description": "Id referencing a particular person group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
+    },
+    "largePersonGroupId": {
+      "name": "largePersonGroupId",
+      "in": "path",
+      "description": "Id referencing a particular large person group.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
