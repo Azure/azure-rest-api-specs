@@ -1,17 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "LUIS Authoring API",
-    "version": "v2.0 preview"
+    "title": "LUIS Authoring Client",
+    "version": "2.0"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
-      }
-    ]
-  },
+  "host": "api.cognitive.microsoft.com",
   "basePath": "/luis/api/v2.0",
   "schemes": [
     "https"
@@ -3082,7 +3075,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful response provides an array of training status details for a LUIS app that you submitted for training. Each element in the response array provides training status for a model (intent or entity) in the LUIS app. Note: Training status is not provided for prebuilt entities because they are pretrained. The \"modelId\" property identifies which intent or entity the training status corresponds to. To get the name and type of each model, use the models API which has a request URL in this format: https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/models The details property for each model can contain the following fields: \"statusId\": An integer from 0 to 3 that corresponds to the value of the status field. \"status\": A string with one of the following values: “Success”, “UpToDate”, “InProgress”, “Fail”. If the status is “Fail”, the \"failureReason\" property provides the reason for failure. \"exampleCount\": The number of examples used for training. In the case of the None intent or prebuilt domain intents and entities, this number includes example provided internally by the system as well as examples you added to your LUIS app. \"failureReason\": A string that indicates the reason training failed.  The value \"FewLabels\" means that no labeled examples were provided for training. \"trainingDateTime\": A string indicating the time the model was last trained. The value uses the ISO 8601 format for representing times in UTC (Coordinated Universal Time) with a UTC designator (“Z”), for example: \"2017-08-10T01:08:34Z\".",
+            "description": "A successful response provides an array of training status details for a LUIS app that you submitted for training. Each element in the response array provides training status for a model (intent or entity) in the LUIS app. Note: Training status is not provided for prebuilt entities because they are pretrained. The \"modelId\" property identifies which intent or entity the training status corresponds to. To get the name and type of each model, use the models API which has a request URL in this format: https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/models The details property for each model can contain the following fields: \"statusId\": An integer from 0 to 3 that corresponds to the value of the status field. \"status\": A string with one of the following values: \"Success\", \"UpToDate\", \"InProgress\", \"Fail\". If the status is \"Fail\", the \"failureReason\" property provides the reason for failure. \"exampleCount\": The number of examples used for training. In the case of the None intent or prebuilt domain intents and entities, this number includes example provided internally by the system as well as examples you added to your LUIS app. \"failureReason\": A string that indicates the reason training failed.  The value \"FewLabels\" means that no labeled examples were provided for training. \"trainingDateTime\": A string indicating the time the model was last trained. The value uses the ISO 8601 format for representing times in UTC (Coordinated Universal Time) with a UTC designator (\"Z\"), for example: \"2017-08-10T01:08:34Z\".",
             "schema": {
               "$ref": "#/definitions/ModelTrainingInfoList"
             }

@@ -52,42 +52,6 @@
     }
   },
   "definitions": {
-    "DeletedSite": {
-      "description": "A deleted app.",
-      "type": "object",
-      "properties": {
-        "deletedSiteId": {
-          "format": "int32",
-          "description": "Numeric id for the deleted site",
-          "type": "integer"
-        },
-        "deletedTimestamp": {
-          "description": "Time in UTC when the app was deleted.",
-          "type": "string",
-          "readOnly": true
-        },
-        "subscription": {
-          "description": "Subscription containing the deleted site",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceGroup": {
-          "description": "ResourceGroup that contained the deleted site",
-          "type": "string",
-          "readOnly": true
-        },
-        "deletedSiteName": {
-          "description": "Name of the deleted site",
-          "type": "string",
-          "readOnly": true
-        },
-        "slot": {
-          "description": "Slot of the deleted site",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "DeletedWebAppCollection": {
       "description": "Collection of deleted apps.",
       "required": [
@@ -99,7 +63,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeletedSite"
+            "$ref": "./CommonDefinitions.json#/definitions/DeletedSite"
           }
         },
         "nextLink": {

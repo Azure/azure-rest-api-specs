@@ -189,6 +189,12 @@
             "type": "string"
           },
           {
+            "name": "osType",
+            "in": "query",
+            "description": "App Service OS type meters used for",
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -312,6 +318,12 @@
             "name": "linuxWorkersEnabled",
             "in": "query",
             "description": "Specify <code>true</code> if you want to filter to only regions that support Linux workers.",
+            "type": "boolean"
+          },
+          {
+            "name": "xenonWorkersEnabled",
+            "in": "query",
+            "description": "Specify <code>true</code> if you want to filter to only regions that support Xenon workers.",
             "type": "boolean"
           },
           {
@@ -622,6 +634,10 @@
             },
             "resourceType": {
               "description": "App Service ResourceType meter used for",
+              "type": "string"
+            },
+            "osType": {
+              "description": "App Service OS type meter used for",
               "type": "string"
             }
           },
@@ -1051,6 +1067,10 @@
         "hostingEnvironment": {
           "description": "Name of App Service Environment where app or App Service plan should be created.",
           "type": "string"
+        },
+        "isXenon": {
+          "description": "<code>true</code> if App Service plan is running as a windows container",
+          "type": "boolean"
         }
       }
     },

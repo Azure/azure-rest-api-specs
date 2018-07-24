@@ -254,6 +254,14 @@
         "hasLinuxWorkers": {
           "description": "Flag that displays whether an ASE has linux workers or not",
           "type": "boolean"
+        },
+        "sslCertKeyVaultId": {
+          "description": "Key Vault ID for ILB App Service Environment default SSL certificate",
+          "type": "string"
+        },
+        "sslCertKeyVaultSecretName": {
+          "description": "Key Vault Secret Name for ILB App Service Environment default SSL certificate",
+          "type": "string"
         }
       }
     },
@@ -333,6 +341,11 @@
             "spotExpirationTime": {
               "format": "date-time",
               "description": "The time when the server farm expires. Valid only if it is a spot server farm.",
+              "type": "string"
+            },
+            "freeOfferExpirationTime": {
+              "format": "date-time",
+              "description": "The time when the server farm free offer expires.",
               "type": "string"
             },
             "resourceGroup": {
@@ -787,6 +800,43 @@
         }
       }
     },
+    "DeletedSite": {
+      "description": "A deleted app.",
+      "type": "object",
+      "properties": {
+        "deletedSiteId": {
+          "format": "int32",
+          "description": "Numeric id for the deleted site",
+          "type": "integer",
+          "readOnly": true
+        },
+        "deletedTimestamp": {
+          "description": "Time in UTC when the app was deleted.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscription": {
+          "description": "Subscription containing the deleted site",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "ResourceGroup that contained the deleted site",
+          "type": "string",
+          "readOnly": true
+        },
+        "deletedSiteName": {
+          "description": "Name of the deleted site",
+          "type": "string",
+          "readOnly": true
+        },
+        "slot": {
+          "description": "Slot of the deleted site",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Dimension": {
       "description": "Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app, \nwhere instance name is dimension of the metric HTTP request",
       "type": "object",
@@ -1074,11 +1124,40 @@
       "type": "object",
       "properties": {
         "ipAddress": {
-          "description": "IP address the security restriction is valid for.",
+          "description": "IP address the security restriction is valid for.\nIt can be in form of pure ipv4 address (required SubnetMask property) or\nCIDR notation such as ipv4/mask (leading bit match). For CIDR,\nSubnetMask property must not be specified.",
           "type": "string"
         },
         "subnetMask": {
           "description": "Subnet mask for the range of IP addresses the restriction is valid for.",
+          "type": "string"
+        },
+        "action": {
+          "description": "Allow or Deny access for this IP range.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Defines what this IP filter will be used for. This is to support IP filtering on proxies.",
+          "enum": [
+            "Default",
+            "XffProxy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IpFilterTag",
+            "modelAsString": false
+          }
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Priority of IP restriction rule.",
+          "type": "integer"
+        },
+        "name": {
+          "description": "IP restriction rule name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "IP restriction rule description.",
           "type": "string"
         }
       }
@@ -1093,6 +1172,21 @@
         },
         "localizedValue": {
           "description": "Localized name.",
+          "type": "string"
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Log Definition of a single resource metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
           "type": "string"
         }
       }
@@ -1725,6 +1819,12 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
         }
       }
     },
@@ -1913,13 +2013,6 @@
                 "create"
               ]
             },
-            "snapshotInfo": {
-              "$ref": "#/definitions/SnapshotRecoveryRequest",
-              "description": "If specified during app creation, the app is created from a previous snapshot.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
             "resourceGroup": {
               "description": "Name of the resource group the app belongs to. Read-only.",
               "type": "string",
@@ -1989,7 +2082,7 @@
           "description": "Linux App Framework and version",
           "type": "string"
         },
-        "xenonFxVersion": {
+        "windowsFxVersion": {
           "description": "Xenon App Framework and version",
           "type": "string"
         },
@@ -2238,6 +2331,13 @@
             "name": "FtpsState",
             "modelAsString": true
           }
+        },
+        "reservedInstanceCount": {
+          "format": "int32",
+          "description": "Number of reserved instances.\nThis setting only applies to the Consumption Plan",
+          "maximum": 10,
+          "minimum": 0,
+          "type": "integer"
         }
       }
     },
@@ -2395,8 +2495,8 @@
         }
       }
     },
-    "SnapshotRecoveryRequest": {
-      "description": "Details about app recovery operation.",
+    "Snapshot": {
+      "description": "A snapshot of an app.",
       "type": "object",
       "allOf": [
         {
@@ -2405,47 +2505,15 @@
       ],
       "properties": {
         "properties": {
-          "description": "SnapshotRecoveryRequest resource specific properties",
-          "required": [
-            "overwrite"
-          ],
+          "description": "Snapshot resource specific properties",
           "properties": {
-            "snapshotTime": {
-              "description": "Point in time in which the app recovery should be attempted, formatted as a DateTime string.",
-              "type": "string"
-            },
-            "recoveryTarget": {
-              "$ref": "#/definitions/SnapshotRecoveryTarget",
-              "description": "Specifies the web app that snapshot contents will be written to."
-            },
-            "overwrite": {
-              "description": "If <code>true</code> the recovery operation can overwrite source app; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "recoverConfiguration": {
-              "description": "If true, site configuration, in addition to content, will be reverted.",
-              "type": "boolean"
-            },
-            "ignoreConflictingHostNames": {
-              "description": "If true, custom hostname conflicts will be ignored when recovering to a target web app.\nThis setting is only necessary when RecoverConfiguration is enabled.",
-              "type": "boolean"
+            "time": {
+              "description": "The time the snapshot was taken.",
+              "type": "string",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SnapshotRecoveryTarget": {
-      "description": "Specifies the web app that snapshot contents will be written to.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "Geographical location of the target web app, e.g. SouthEastAsia, SouthCentralUS",
-          "type": "string"
-        },
-        "id": {
-          "description": "ARM resource ID of the target app. \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
-          "type": "string"
         }
       }
     },

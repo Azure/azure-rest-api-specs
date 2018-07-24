@@ -637,7 +637,6 @@
           "Workspaces"
         ],
         "description": "Purges data in an Log Analytics workspace by a set of user-defined filters.",
-        "x-ms-long-running-operation": true,
         "operationId": "Workspaces_Purge",
         "parameters": [
           {
@@ -661,12 +660,12 @@
             "description": "Accepted request for purging an Log Analytics workspace.",
             "schema": {
               "$ref": "#/definitions/WorkspacePurgeResponse"
-            }
-          },
-          "200": {
-            "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
-            "schema": {
-              "$ref": "#/definitions/WorkspacePurgeStatusResponse"
+            },
+            "headers": {
+              "x-ms-status-location": {
+                "type": "string",
+                "description": "The location from which to request the operation status."
+              }
             }
           }
         },
@@ -676,7 +675,46 @@
           }
         }
       }
-    }    
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/operations/{purgeId}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets status of an ongoing purge operation.",
+        "operationId": "Workspaces_GetPurgeStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePurgeIdParameter"
+          }         
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeStatusResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePurgeOperation": {
+            "$ref": "./examples/WorkspacesPurgeOperation.json"
+          }
+        }
+      }
+    }   
   },
   "definitions": {
     "OperationListResult": {
@@ -1349,8 +1387,8 @@
           "description": "Status of the operation represented by the requested Id.",
           "type": "string",
           "enum": [
-            "Pending",
-            "Completed"
+            "pending",
+            "completed"
           ],
           "x-ms-enum": {
             "name": "PurgeState",
