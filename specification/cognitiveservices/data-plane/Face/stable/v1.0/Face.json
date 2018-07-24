@@ -163,7 +163,7 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Request body for verify operation.",
+            "description": "Request body for face to face verification.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -1853,14 +1853,14 @@
     }
   },
   "x-ms-paths": {
-    "/verify?overload=persongroup": {
+    "/verify?overload=person": {
       "post": {
         "description": "Verify whether two faces belong to a same person. Compares a face Id with a Person Id",
         "operationId": "Face_VerifyFaceToPerson",
         "parameters": [
           {
             "name": "body",
-            "description": "Request body for verifying two faces in a person group",
+            "description": "Request body for face to person verification.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -2727,13 +2727,13 @@
       "description": "Request body for identify face operation.",
       "properties": {
         "personGroupId": {
-          "description": "PersonGroupId of the target person group, created by PersonGroup.Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
+          "description": "PersonGroupId of the target person group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
         },
         "largePersonGroupId": {
-          "description": "LargePersonGroupId of the target large person group, created by LargePersonGroup.Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
+          "description": "LargePersonGroupId of the target large person group, created by LargePersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
@@ -2815,15 +2815,21 @@
         "personId",
         "personGroupId"
       ],
-      "description": "Request body for verify operation.",
+      "description": "Request body for face to person verification.",
       "properties": {
         "faceId": {
           "type": "string",
           "format": "uuid",
-          "description": "FaceId the face, comes from Face - Detect"
+          "description": "FaceId of the face, comes from Face - Detect"
         },
         "personGroupId": {
-          "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in Person Groups.Create.",
+          "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        },
+        "largePersonGroupId": {
+          "description": "Using existing largePersonGroupId and personId for fast loading a specified person. largePersonGroupId is created in LargePersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
@@ -2831,7 +2837,7 @@
         "personId": {
           "type": "string",
           "format": "uuid",
-          "description": "Specify a certain person in a person group. personId is created in Persons.Create."
+          "description": "Specify a certain person in a person group or a large person group. personId is created in PersonGroup Person - Create or LargePersonGroup Person - Create."
         }
       }
     },
@@ -2841,7 +2847,7 @@
         "faceId1",
         "faceId2"
       ],
-      "description": "Request body for verify operation.",
+      "description": "Request body for face to face verification.",
       "properties": {
         "faceId1": {
           "type": "string",
