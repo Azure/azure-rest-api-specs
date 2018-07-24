@@ -1654,6 +1654,202 @@
           }
         }
       }
+    },
+    "/largefacelists/{largeFaceListId}": {
+      "put": {
+        "description": "Create an empty large face list. Up to 64 large face lists are allowed to exist in one subscription.",
+        "operationId": "LargeFaceList_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for creating a large face list.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create new large face list example": {
+            "$ref": "./examples/CreateNewLargeFaceList.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a large face list's information.",
+        "operationId": "LargeFaceList_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the large face list's information.",
+            "schema": {
+              "$ref": "#/definitions/LargeFaceList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get large face list example": {
+            "$ref": "./examples/GetLargeFaceList.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update information of a large face list.",
+        "operationId": "LargeFaceList_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for updating a large face list.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update large face list example": {
+            "$ref": "./examples/UpdateLargeFaceList.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an existing large face list according to faceListId. Persisted face images in the large face list will also be deleted.",
+        "operationId": "LargeFaceList_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete large face list example": {
+            "$ref": "./examples/DeleteLargeFaceList.json"
+          }
+        }
+      }
+    },
+    "/largefacelists": {
+      "get": {
+        "description": "Retrieve information about all existing large face lists. Only largeFaceListId, name and userData will be returned.",
+        "operationId": "LargeFaceList_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an array of largeFaceList.",
+            "schema": {
+              "$ref": "#/definitions/LargeFaceLists"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get large face lists example": {
+            "$ref": "./examples/GetLargeFaceLists.json"
+          }
+        }
+      }
+    },
+    "/largefacelists/{largeFaceListId}/persistedFaces/{persistedFaceId}": {
+      "delete": {
+        "description": "Delete an existing face from a large face list (given by a persisitedFaceId and a largeFaceListId). Persisted image related to the face will also be deleted.",
+        "operationId": "LargeFaceList_DeleteFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete face in large face list example": {
+            "$ref": "./examples/DeleteLargeFaceListFace.json"
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -2781,6 +2977,33 @@
         }
       }
     },
+    "LargeFaceList": {
+      "description": "Large face list object.",
+      "type": "object",
+      "required": [
+        "largeFaceListId"
+      ],
+      "properties": {
+        "largeFaceListId": {
+          "type": "string",
+          "description": "LargeFaceListId of the target large face list.",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NameAndUserDataContract"
+        }
+      ]
+    },
+    "LargeFaceLists": {
+      "type": "array",
+      "description": "An array of large face list results, with fields of largeFaceListId, name and userData",
+      "items": {
+        "$ref": "#/definitions/LargeFaceList"
+      }
+    },
     "LargePersonGroup": {
       "type": "object",
       "required": [
@@ -2969,6 +3192,17 @@
       "name": "personGroupId",
       "in": "path",
       "description": "Id referencing a particular person group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
+    },
+    "largeFaceListId": {
+      "name": "largeFaceListId",
+      "in": "path",
+      "description": "Id referencing a particular large face list.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
