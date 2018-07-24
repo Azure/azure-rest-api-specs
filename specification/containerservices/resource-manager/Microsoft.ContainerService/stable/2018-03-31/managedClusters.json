@@ -876,15 +876,6 @@
           "type": "string",
           "description": "FDQN for the agent pool."
         },
-        "ports": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 65535
-          },
-          "description": "Ports number array used to expose on this agent pool. The default opened ports are different based on your choice of orchestrator."
-        },
         "storageProfile": {
           "$ref": "#/definitions/ContainerServiceStorageProfile",
           "description": "Storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
