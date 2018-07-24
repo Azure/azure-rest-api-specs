@@ -4,11 +4,15 @@
     "title": "LUIS Authoring Client",
     "version": "2.0"
   },
-  "host": "api.cognitive.microsoft.com",
-  "basePath": "/luis/api/v2.0",
-  "schemes": [
-    "https"
-  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/luis/api/v2.0",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "securityDefinitions": {
     "apiKeyHeader": {
       "type": "apiKey",
@@ -9784,6 +9788,15 @@
       "minimum": 0,
       "maximum": 500,
       "x-ms-parameter-location": "method"
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
