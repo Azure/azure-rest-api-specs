@@ -115,7 +115,7 @@
     },
     "/identify": {
       "post": {
-        "description": "Identify unknown faces from a person group.",
+        "description": "1-to-many identification to find the closest matches of the specific query person face from a person group or large person group.",
         "operationId": "Face_Identify",
         "parameters": [
           {
@@ -2722,13 +2722,18 @@
     "IdentifyRequest": {
       "type": "object",
       "required": [
-        "personGroupId",
         "faceIds"
       ],
       "description": "Request body for identify face operation.",
       "properties": {
         "personGroupId": {
-          "description": "PersonGroupId of the target person group, created by PersonGroups.Create",
+          "description": "PersonGroupId of the target person group, created by PersonGroup.Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        },
+        "largePersonGroupId": {
+          "description": "LargePersonGroupId of the target large person group, created by LargePersonGroup.Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
