@@ -8,7 +8,7 @@ nodejs:
   azure-arm: true
   package-name: azure-arm-website
   package-version: 4.0.0
-  output-folder: $(node-sdks-folder)/lib/services/websiteManagement2
+  output-folder: $(node-sdks-folder)/lib/services/webSiteManagement2
   payload-flattening-threshold: 1
   generate-license-txt: true
   generate-package-json: true
