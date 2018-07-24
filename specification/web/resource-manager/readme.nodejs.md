@@ -7,7 +7,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-website
-  package-version: 3.0.0-preview
+  package-version: 4.0.0
   output-folder: $(node-sdks-folder)/lib/services/websiteManagement2
   payload-flattening-threshold: 1
   generate-license-txt: true
