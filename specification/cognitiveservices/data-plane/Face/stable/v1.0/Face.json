@@ -29,7 +29,7 @@
   "paths": {
     "/findsimilars": {
       "post": {
-        "description": "Given query face's faceId, find the similar-looking faces from a faceId array or a faceListId.",
+        "description": "Given query face's faceId, find the similar-looking faces from a faceId array, a face list or a large face list.",
         "operationId": "Face_FindSimilar",
         "parameters": [
           {
@@ -2599,13 +2599,19 @@
         },
         "faceListId": {
           "type": "string",
-          "description": "An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId and faceIds should not be provided at the same time",
+          "description": "An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time。",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        },
+        "largeFaceListId": {
+          "type": "string",
+          "description": "An existing user-specified unique candidate large face list, created in LargeFaceList - Create. Large face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
         },
         "faceIds": {
           "type": "array",
-          "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call.",
+          "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.",
           "maxItems": 1000,
           "items": {
             "type": "string",
