@@ -36,25 +36,24 @@ Thanks for your co-operation.
 
 let fileSummaryTemplate = `
 
-**File**: {file_name}
+**File**: [{file_name}]({file_href})
 
 <details>
-    <summary>:warning:<strong>{new_warnings}</strong> new Warnings.(<strong>{total_warnings}</strong> total)</summary>
-    <br/>
+    <summary>:warning:<strong>{new_warnings}</strong> new Warnings ({total_warnings} total)</summary>
     {potential_new_warnings}
 </details>
 
 <details>
-    <summary>:x:<strong>{new_errors}</strong> new Errors.(<strong>{total_errors}</strong> total)</summary>
-    <br/>
+    <summary>:x:<strong>{new_errors}</strong> new Errors ({total_errors} total)</summary>
     {potential_new_errors}
 </details>
 
 `;
 
 let potentialNewWarningErrorSummaryHeader = `
-|   Code  |  Id |  Source   |   Message  |
-|---------|----------|-------|-----------|
+<br>
+| Code | Id | Source | Message |
+|------|----|--------|---------|
 {list_of_new_warnings_errors}
 `;
 
@@ -142,9 +141,14 @@ function getLink(jsonRef, prNumber){
     return link;
 }
 
+function blobHref(file) {
+    return `https://github.com/${process.env.TRAVIS_PULL_REQUEST_SLUG}/blob/${process.env.TRAVIS_PULL_REQUEST_SHA}/${file}`;
+}
+
 function getFileSummary(fileName, beforeWarningsArray, afterWarningsArray, beforeErrorsArray, afterErrorsArray, newWarnings, newErrors, prNumber) {
     let fileSummaryCopy = fileSummaryTemplate;
     fileSummaryCopy = fileSummaryCopy.replace("{file_name}", fileName);
+    fileSummaryCopy = fileSummaryCopy.replace("{file_href}", blobHref(fileName));
     fileSummaryCopy = fileSummaryCopy.replace("{before_warnings}", beforeWarningsArray.length);
     fileSummaryCopy = fileSummaryCopy.replace("{after_warnings}", afterWarningsArray.length);
     fileSummaryCopy = fileSummaryCopy.replace("{before_errors}", beforeErrorsArray.length);

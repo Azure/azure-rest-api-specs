@@ -16,8 +16,8 @@ let outputFolder = path.join(os.tmpdir(), "resolved");
 let isRunningInTravisCI = process.env.TRAVIS === 'true';
 
 const headerText = `
-| | Rule | File | Message | Path |
-|-|------|------|---------| ---- |
+| | Rule | File | Message | Location |
+|-|------|------|---------| -------- |
 `;
 
 function iconFor(type) {
@@ -33,7 +33,7 @@ function iconFor(type) {
 }
 
 function tableLine(filePath, diff) {
-  return `|${iconFor(diff['type'])}|**${diff['type']} [${diff['id']} - ${diff['code']}](https://github.com/Azure/openapi-diff/blob/master/docs/rules/${diff['id']}.md)**|[${path.basename(filePath)}](${blobHref(filePath)})|${diff['message']}|${diff['json-path']}|\n`;
+  return `|${iconFor(diff['type'])}|**${diff['type']} [${diff['id']} - ${diff['code']}](https://github.com/Azure/openapi-diff/blob/master/docs/rules/${diff['id']}.md)**|[${path.basename(filePath)}](${blobHref(filePath)} "${filePath}")|${diff['message']}|<details><summary>JSONPath</summary>\`${diff['json-path']}\`</details>|\n`;
 }
 
 function blobHref(file) {
@@ -183,7 +183,7 @@ async function runScript() {
       message += '**There were no files containing new errors or warnings.**\n';
     }
 
-    message += '<br><br>\nThanks for using breaking change tool to review.\nIf you encounter any issue(s), please open issue(s) at https://github.com/Azure/openapi-diff/issues.';
+    message += '\n<br><br>\nThanks for using breaking change tool to review.\nIf you encounter any issue(s), please open issue(s) at https://github.com/Azure/openapi-diff/issues.';
 
     const output = {
       title: `${errors === 0 ? 'No' : errors} potential breaking change${errors !== 1 ? 's' : ''}`,
