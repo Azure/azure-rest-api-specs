@@ -995,7 +995,7 @@
         },
         "x-ms-examples": {
           "Add Person face example": {
-            "$ref": "./examples/AddPersonFaceFromUrl.json"
+            "$ref": "./examples/AddPersonGroupPersonFaceFromUrl.json"
           }
         }
       }
@@ -1655,6 +1655,54 @@
         }
       }
     },
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedFaces": {
+      "post": {
+        "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
+        "operationId": "LargePersonGroupPerson_AddPersonFaceFromUrl",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/faceUserData"
+          },
+          {
+            "$ref": "#/parameters/targetFace"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add Person face example": {
+            "$ref": "./examples/AddLargePersonGroupPersonFaceFromUrl.json"
+          }
+        }
+      }
+    },
     "/largefacelists/{largeFaceListId}": {
       "put": {
         "description": "Create an empty large face list. Up to 64 large face lists are allowed to exist in one subscription.",
@@ -1850,6 +1898,51 @@
           }
         }
       }
+    },
+    "/largefacelists/{largeFaceListId}/persistedFaces": {
+      "post": {
+        "description": "Add a face to a large face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.",
+        "operationId": "LargeFaceList_AddFaceFromUrl",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/faceUserData"
+          },
+          {
+            "$ref": "#/parameters/targetFace"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns a new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create large face list face example": {
+            "$ref": "./examples/AddLargeFaceListFaceFromUrl.json"
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -1992,7 +2085,7 @@
         },
         "x-ms-examples": {
           "Add face to person with stream example": {
-            "$ref": "./examples/AddPersonFaceFromStream.json"
+            "$ref": "./examples/AddPersonGroupPersonFaceFromStream.json"
           }
         }
       }
@@ -2038,6 +2131,99 @@
         "x-ms-examples": {
           "Add face to face list from stream example": {
             "$ref": "./examples/AddFaceListFaceFromStream.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedFaces?overload=stream": {
+      "post": {
+        "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
+        "operationId": "LargePersonGroupPerson_AddLargePersonGroupPersonFaceFromStream",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/faceUserData"
+          },
+          {
+            "$ref": "#/parameters/targetFace"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add face to person with stream example": {
+            "$ref": "./examples/AddLargePersonGroupPersonFaceFromStream.json"
+          }
+        }
+      }
+    },
+    "/largefacelists/{largeFaceListId}/persistedFaces?overload=stream": {
+      "post": {
+        "description": "Add a face to a large face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.",
+        "operationId": "LargeFaceList_AddFaceFromStream",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/faceUserData"
+          },
+          {
+            "$ref": "#/parameters/targetFace"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+          }
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns a new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Add face to large face list from stream example": {
+            "$ref": "./examples/AddLargeFaceListFaceFromStream.json"
           }
         }
       }
