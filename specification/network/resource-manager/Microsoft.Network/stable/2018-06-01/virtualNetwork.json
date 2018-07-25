@@ -881,6 +881,13 @@
           },
           "description": "An array of service endpoints."
         },
+        "serviceEndpointPolicies": {
+        "type": "array",
+          "items": {
+            "$ref": "./serviceEndpointPolicy.json#/definitions/ServiceEndpointPolicy"
+          },
+          "description": "An array of service endpoint policies."
+        },
         "ipConfigurations": {
           "readOnly": true,
           "type": "array",
@@ -922,6 +929,13 @@
         }
       },
       "description": "The service endpoint properties."
+    },
+    "serviceEndpointPoliciesFormat": {
+     "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceEndpointPolicyDefinitionsFormat"
+      },
+      "description": "An array of service endpoint policies."
     },
     "VirtualNetworkPeeringPropertiesFormat": {
       "properties": {
