@@ -66,6 +66,32 @@
                     "description": "Type of Resource.",
                     "type": "string"
                 },
+                "etag": {
+                    "description": "The entity tag used for optimistic concurency when modifying the resource.",
+                    "type": "string"
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+		"TrackedResource": {
+            "description": "Base resource object.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "description": "ID of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "readOnly": true,
+                    "description": "Name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "readOnly": true,
+                    "description": "Type of Resource.",
+                    "type": "string"
+                },
                 "location": {
                     "description": "Location of the resource.",
                     "type": "string",
