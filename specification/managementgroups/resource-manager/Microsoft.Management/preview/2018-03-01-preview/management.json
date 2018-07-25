@@ -955,6 +955,11 @@
             "$ref": "#/definitions/EntityInfo"
           }
         },
+        "count": {
+          "description": "Total count of records that match the filter",
+          "type": "integer",
+          "readOnly": true
+        },
         "nextLink": {
           "description": "The URL to use for getting the next set of results.",
           "type": "string",
@@ -1021,6 +1026,18 @@
         },
         "numberOfDescendants": {
           "title": "Number of Descendants",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "numberOfChildren": {
+          "title": "Number of Children",
+          "description": "Number of children is the number of Groups and Subscriptions that are exactly one level underneath the current Group.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "numberOfChildGroups": {
+          "title": "Number of Child Groups",
+          "description": "Number of child groups is the number of Groups that are exactly one level underneath the current Group.",
           "type": "integer",
           "x-nullable": true
         },
@@ -1407,7 +1424,9 @@
       "enum": [
         "AllowedParents",
         "AllowedChildren",
-        "ParentAndFirstLevelChildren"
+        "ParentAndFirstLevelChildren",
+        "ParentOnly",
+        "ChildrenOnly"
       ],
       "x-ms-parameter-location": "method",
       "description": "The $search parameter is used in conjunction with the $filter parameter to return three different outputs depending on the parameter passed in. With $search=AllowedParents the API will return the entity info of all groups that the requested entity will be able to reparent to as determined by the user's permissions. With $search=AllowedChildren the API will return the entity info of all entities that can be added as children of the requested entity. With $search=ParentAndFirstLevelChildren the API will return the parent and  first level of children that the user has either direct access to or indirect access via one of their descendants."

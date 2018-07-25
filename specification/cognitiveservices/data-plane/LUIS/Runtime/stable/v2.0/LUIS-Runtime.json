@@ -1,18 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Language Understanding Intelligent Service (LUIS) Endpoint API for running predictions and extracting user intentions and entities from utterances.",
-    "version": "v2.0 preview"
+    "title": "LUIS Runtime Client",
+    "version": "2.0"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
-      }
-    ]
-  },
-  "basePath": "/luis/v2.0/apps",
+  "host": "api.cognitive.microsoft.com",
+  "basePath": "/luis/v2.0",
   "schemes": [
     "https"
   ],
@@ -29,7 +22,7 @@
     }
   ],
   "paths": {
-    "/{appId}": {
+    "/apps/{appId}": {
       "get": {
         "description": "Gets predictions for a given utterance, in the form of intents and entities. The current maximum query size is 500 characters.",
         "operationId": "Prediction_Resolve2",

@@ -3,6 +3,7 @@
 
 'use strict';
 var assert = require("assert"),
+  os = require('os'),
   fs = require('fs-extra'),
   glob = require('glob'),
   path = require('path'),
@@ -74,19 +75,36 @@ exports.getTargetBranch = function getTargetBranch() {
 };
 
 /**
- * Checkout the targetBranch
+ * Check out a copy of a branch to a temporary location, execute a function, and then restore the previous state
  */
-exports.checkoutTargetBranch = function checkoutTargetBranch() {
-  let targetBranch = exports.getTargetBranch();
-  let cmds = [`git remote -vv`, `git branch --all`,
-    `git remote set-branches origin --add ${targetBranch}`,
-    `git fetch origin ${targetBranch}`,
-    `git diff`,
-    `git stash`,
-    `git checkout ${targetBranch}`,
-    `git log -3`];
+exports.doOnBranch = async function doOnBranch(ref, func) {
+  const currentDir = process.cwd();
+  const branchSha = execSync(`git rev-parse origin/${ref}`, { encoding: 'utf8' }).trim();
+  const tmpDir = path.join(os.tmpdir(), branchSha);
 
-  console.log(`Changing the branch to ${targetBranch}...`);
+  exports.checkoutBranch(ref, tmpDir);
+  console.log(`Changing directory and executing the function...`)
+  process.chdir(tmpDir);
+
+  const result = await func();
+
+  console.log(`Restoring previous directory and deleting secondary working tree...`)
+  process.chdir(currentDir);
+  execSync(`rm -rf ${tmpDir}`)
+  
+  return result;
+}
+
+/**
+ * Checkout a copy of branch to location
+ */
+exports.checkoutBranch = function checkoutBranch(ref, location) {
+  let cmds = [`git remote -vv`, `git branch --all`,
+    `git remote set-branches origin --add ${ref}`,
+    `git fetch origin ${ref}`,
+    `git worktree add -f ${location} origin/${ref}`];
+
+  console.log(`Checking out a copy of branch ${ref} to ${location}...`);
   for (let cmd of cmds) {
     console.log(cmd);
     execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
