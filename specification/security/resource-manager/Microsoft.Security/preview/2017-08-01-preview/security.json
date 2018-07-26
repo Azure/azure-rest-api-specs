@@ -827,7 +827,7 @@
                         "$ref": "#/parameters/SettingName"
                     },
                     {
-                        "$ref": "#/definitions/Settings"
+                        "$ref": "#/parameters/Settings"
                     }
                 ],
                 "responses": {
@@ -1432,6 +1432,16 @@
                 "MCAS",
                 "WDATP"
             ],
+            "x-ms-parameter-location": "method"
+        },
+        "Settings": {
+            "name": "Settings",
+            "in": "body",
+            "required": true,
+            "description": "Settings object",
+            "schema": {
+                "$ref": "#/definitions/Settings"
+            },
             "x-ms-parameter-location": "method"
         },
         "AutoProvisioningSettingName": {
