@@ -123,7 +123,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.vision.customvision.prediction
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/vision/customvision/prediction
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/vision/customvision/prediction
   with-optional-parameters: true
   with-single-async-method: true
 ```
