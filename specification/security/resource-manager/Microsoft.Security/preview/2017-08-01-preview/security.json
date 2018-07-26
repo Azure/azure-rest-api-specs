@@ -6,22 +6,14 @@
         "version": "2017-08-01-preview"
     },
     "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "security": [{
+        "azure_auth": [
+            "user_impersonation"
+        ]
+    }],
     "securityDefinitions": {
         "azure_auth": {
             "type": "oauth2",
@@ -41,19 +33,14 @@
                         "$ref": "./examples/Pricings/GetPricingsSubscription_example.json"
                     }
                 },
-                "tags": [
-                    "Pricings"
-                ],
+                "tags": ["Pricings"],
                 "description": "Security pricing configurations in the subscription",
                 "operationId": "Pricings_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -80,22 +67,16 @@
                         "$ref": "./examples/Pricings/GetPricingsResourceGroup_example.json"
                     }
                 },
-                "tags": [
-                    "Pricings"
-                ],
+                "tags": ["Pricings"],
                 "description": "Security pricing configurations in the resource group",
                 "operationId": "Pricings_ListByResourceGroup",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/ResourceGroupName"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -122,22 +103,16 @@
                         "$ref": "./examples/Pricings/GetPricingSubscription_example.json"
                     }
                 },
-                "tags": [
-                    "Pricings"
-                ],
+                "tags": ["Pricings"],
                 "description": "Security pricing configuration in the subscriptionSecurity pricing configuration in the subscription",
                 "operationId": "Pricings_GetSubscriptionPricing",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/PricingName"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/PricingName"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -159,25 +134,18 @@
                         "$ref": "./examples/Pricings/CreatePricingsSubscription_example.json"
                     }
                 },
-                "tags": [
-                    "Pricings"
-                ],
+                "tags": ["Pricings"],
                 "description": "Security pricing configuration in the subscription",
                 "operationId": "Pricings_UpdateSubscriptionPricing",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/PricingName"
-                    },
-                    {
-                        "$ref": "#/parameters/Pricing"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/PricingName"
+                }, {
+                    "$ref": "#/parameters/Pricing"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -201,25 +169,18 @@
                         "$ref": "./examples/Pricings/GetPricingResourceGroup_example.json"
                     }
                 },
-                "tags": [
-                    "Pricings"
-                ],
+                "tags": ["Pricings"],
                 "description": "Security pricing configuration in the resource group",
                 "operationId": "Pricings_GetResourceGroupPricing",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    },
-                    {
-                        "$ref": "#/parameters/PricingName"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/ResourceGroupName"
+                }, {
+                    "$ref": "#/parameters/PricingName"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -241,28 +202,20 @@
                         "$ref": "./examples/Pricings/CreatePricingsResourceGroup_example.json"
                     }
                 },
-                "tags": [
-                    "Pricings"
-                ],
+                "tags": ["Pricings"],
                 "description": "Security pricing configuration in the resource group",
                 "operationId": "Pricings_CreateOrUpdateResourceGroupPricing",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    },
-                    {
-                        "$ref": "#/parameters/PricingName"
-                    },
-                    {
-                        "$ref": "#/parameters/Pricing"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/ResourceGroupName"
+                }, {
+                    "$ref": "#/parameters/PricingName"
+                }, {
+                    "$ref": "#/parameters/Pricing"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -286,19 +239,14 @@
                         "$ref": "./examples/SecurityContacts/GetSecurityContactsSubscription_example.json"
                     }
                 },
-                "tags": [
-                    "Security Contacts"
-                ],
+                "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
                 "operationId": "SecurityContacts_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -325,22 +273,16 @@
                         "$ref": "./examples/SecurityContacts/GetSecurityContact_example.json"
                     }
                 },
-                "tags": [
-                    "Security Contacts"
-                ],
+                "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
                 "operationId": "SecurityContacts_Get",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/SecurityContactName"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/SecurityContactName"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -362,25 +304,18 @@
                         "$ref": "./examples/SecurityContacts/CreateSecurityContact_example.json"
                     }
                 },
-                "tags": [
-                    "Security Contacts"
-                ],
+                "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
                 "operationId": "SecurityContacts_Create",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/SecurityContactName"
-                    },
-                    {
-                        "$ref": "#/parameters/SecurityContact"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/SecurityContactName"
+                }, {
+                    "$ref": "#/parameters/SecurityContact"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -402,22 +337,16 @@
                         "$ref": "./examples/SecurityContacts/DeleteSecurityContact_example.json"
                     }
                 },
-                "tags": [
-                    "Security Contacts"
-                ],
+                "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
                 "operationId": "SecurityContacts_Delete",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/SecurityContactName"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/SecurityContactName"
+                }],
                 "responses": {
                     "204": {
                         "description": "No Content"
@@ -436,25 +365,18 @@
                         "$ref": "./examples/SecurityContacts/UpdateSecurityContact_example.json"
                     }
                 },
-                "tags": [
-                    "Security Contacts"
-                ],
+                "tags": ["Security Contacts"],
                 "description": "Security contact configurations for the subscription",
                 "operationId": "SecurityContacts_Update",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/SecurityContactName"
-                    },
-                    {
-                        "$ref": "#/parameters/SecurityContact"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/SecurityContactName"
+                }, {
+                    "$ref": "#/parameters/SecurityContact"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -478,19 +400,14 @@
                         "$ref": "./examples/WorkspaceSettings/GetWorkspaceSettings_example.json"
                     }
                 },
-                "tags": [
-                    "Workspace Settings"
-                ],
+                "tags": ["Workspace Settings"],
                 "description": "Settings about where we should store your security data and logs",
                 "operationId": "WorkspaceSettings_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -517,22 +434,16 @@
                         "$ref": "./examples/WorkspaceSettings/GetWorkspaceSetting_example.json"
                     }
                 },
-                "tags": [
-                    "Workspace Settings"
-                ],
+                "tags": ["Workspace Settings"],
                 "description": "Settings about where we should store your security data and logs",
                 "operationId": "WorkspaceSettings_Get",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceSettingName"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/WorkspaceSettingName"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -554,25 +465,18 @@
                         "$ref": "./examples/WorkspaceSettings/CreateWorkspaceSetting_example.json"
                     }
                 },
-                "tags": [
-                    "Workspace Settings"
-                ],
+                "tags": ["Workspace Settings"],
                 "description": "creating settings about where we should store your security data and logs",
                 "operationId": "WorkspaceSettings_Create",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceSettingName"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceSetting"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/WorkspaceSettingName"
+                }, {
+                    "$ref": "#/parameters/WorkspaceSetting"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -594,25 +498,18 @@
                         "$ref": "./examples/WorkspaceSettings/UpdateWorkspaceSetting_example.json"
                     }
                 },
-                "tags": [
-                    "Workspace Settings"
-                ],
+                "tags": ["Workspace Settings"],
                 "description": "Settings about where we should store your security data and logs",
                 "operationId": "WorkspaceSettings_Update",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceSettingName"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceSetting"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/WorkspaceSettingName"
+                }, {
+                    "$ref": "#/parameters/WorkspaceSetting"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -634,22 +531,16 @@
                         "$ref": "./examples/WorkspaceSettings/DeleteWorkspaceSetting_example.json"
                     }
                 },
-                "tags": [
-                    "Workspace Settings"
-                ],
+                "tags": ["Workspace Settings"],
                 "description": "Deletes the custom workspace settings for this subscription. new VMs will report to the default workspace",
                 "operationId": "WorkspaceSettings_Delete",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceSettingName"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/WorkspaceSettingName"
+                }],
                 "responses": {
                     "204": {
                         "description": "No Content"
@@ -670,13 +561,10 @@
                         "$ref": "./examples/AutoProvisioningSettings/GetAutoProvisioningSettingsSubscription_example.json"
                     }
                 },
-                "tags": [
-                    "AutoProvisioningSettings"
-                ],
+                "tags": ["AutoProvisioningSettings"],
                 "description": "Exposes the auto provisioning settings of the subscriptions",
                 "operationId": "AutoProvisioningSettings_List",
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
@@ -709,22 +597,16 @@
                         "$ref": "./examples/AutoProvisioningSettings/GetAutoProvisioningSettingSubscription_example.json"
                     }
                 },
-                "tags": [
-                    "AutoProvisioningSettings"
-                ],
+                "tags": ["AutoProvisioningSettings"],
                 "description": "Details of a specific setting",
                 "operationId": "AutoProvisioningSettings_Get",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/AutoProvisioningSettingName"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/AutoProvisioningSettingName"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -746,25 +628,18 @@
                         "$ref": "./examples/AutoProvisioningSettings/CreateAutoProvisioningSettingsSubscription_example.json"
                     }
                 },
-                "tags": [
-                    "AutoProvisioningSettings"
-                ],
+                "tags": ["AutoProvisioningSettings"],
                 "description": "Details of a specific setting",
                 "operationId": "AutoProvisioningSettings_Create",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/AutoProvisioningSettingName"
-                    },
-                    {
-                        "$ref": "#/parameters/AutoProvisioningSetting"
-                    }
-                ],
+                "parameters": [{
+                    "$ref": "#/parameters/ApiVersion"
+                }, {
+                    "$ref": "#/parameters/SubscriptionId"
+                }, {
+                    "$ref": "#/parameters/AutoProvisioningSettingName"
+                }, {
+                    "$ref": "#/parameters/AutoProvisioningSetting"
+                }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -788,13 +663,10 @@
                         "$ref": "./examples/Compliances/GetCompliances_example.json"
                     }
                 },
-                "tags": [
-                    "Compliances"
-                ],
+                "tags": ["Compliances"],
                 "description": "The Compliance scores of the specific management group.",
                 "operationId": "Compliances_List",
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
@@ -827,13 +699,10 @@
                         "$ref": "./examples/Compliances/GetCompliance_example.json"
                     }
                 },
-                "tags": [
-                    "Compliances"
-                ],
+                "tags": ["Compliances"],
                 "description": "Details of a specific Compliance.",
                 "operationId": "Compliances_Get",
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
@@ -1069,11 +938,9 @@
                     "$ref": "#/definitions/SecurityContactProperties"
                 }
             },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ]
+            "allOf": [{
+                "$ref": "#/definitions/Resource"
+            }]
         },
         "SecurityContactProperties": {
             "type": "object",
@@ -1090,15 +957,11 @@
                 },
                 "alertNotifications": {
                     "type": "string",
-                    "enum": [
-                        "On",
-                        "Off"
-                    ],
+                    "enum": ["On", "Off"],
                     "x-ms-enum": {
                         "name": "alertNotifications",
                         "modelAsString": true,
-                        "values": [
-                            {
+                        "values": [{
                                 "value": "On",
                                 "description": "Get notifications on new alerts"
                             },
@@ -1112,15 +975,11 @@
                 },
                 "alertsToAdmins": {
                     "type": "string",
-                    "enum": [
-                        "On",
-                        "Off"
-                    ],
+                    "enum": ["On", "Off"],
                     "x-ms-enum": {
                         "name": "alertsToAdmins",
                         "modelAsString": true,
-                        "values": [
-                            {
+                        "values": [{
                                 "value": "On",
                                 "description": "Send notification on new alerts to the subscription's admins"
                             },
@@ -1170,11 +1029,9 @@
                     "$ref": "#/definitions/PricingProperties"
                 }
             },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ]
+            "allOf": [{
+                "$ref": "#/definitions/Resource"
+            }]
         },
         "PricingProperties": {
             "type": "object",
@@ -1183,15 +1040,11 @@
                 "pricingTier": {
                     "type": "string",
                     "description": "Pricing tier type",
-                    "enum": [
-                        "Free",
-                        "Standard"
-                    ],
+                    "enum": ["Free", "Standard"],
                     "x-ms-enum": {
                         "name": "pricingTier",
                         "modelAsString": true,
-                        "values": [
-                            {
+                        "values": [{
                                 "value": "Free",
                                 "description": "Get free Azure security center experience with basic security features"
                             },
@@ -1237,11 +1090,9 @@
                     "$ref": "#/definitions/WorkspaceSettingProperties"
                 }
             },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ]
+            "allOf": [{
+                "$ref": "#/definitions/Resource"
+            }]
         },
         "WorkspaceSettingProperties": {
             "type": "object",
@@ -1289,11 +1140,9 @@
                     "$ref": "#/definitions/AutoProvisioningSettingProperties"
                 }
             },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ]
+            "allOf": [{
+                "$ref": "#/definitions/Resource"
+            }]
         },
         "AutoProvisioningSettingProperties": {
             "type": "object",
@@ -1306,8 +1155,7 @@
                     "x-ms-enum": {
                         "name": "autoProvision",
                         "modelAsString": true,
-                        "values": [
-                            {
+                        "values": [{
                                 "value": "On",
                                 "description": "Install missing security agent on VMs automatically"
                             },
@@ -1353,11 +1201,9 @@
                     "$ref": "#/definitions/ComplianceProperties"
                 }
             },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ]
+            "allOf": [{
+                "$ref": "#/definitions/Resource"
+            }]
         },
         "ComplianceProperties": {
             "type": "object",
@@ -1439,6 +1285,8 @@
             "x-ms-discriminator-value": "DataExportSettings",
             "properties": {
                 "properties": {
+				    "x-ms-client-flatten": true,
+                    "description": "Data export setting data",
                     "$ref": "#/definitions/DataExportSettingsProperties"
                 }
             },
@@ -1472,7 +1320,7 @@
         },
         "DataExportSettingsProperties": {
             "type": "object",
-            "title": "The data export settings properties",
+            "description": "The data export settings properties",
             "properties": {
                 "enabled": {
                     "type": "boolean",
@@ -1509,9 +1357,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "enum": [
-                "2017-08-01-preview"
-            ],
+            "enum": ["2017-08-01-preview"],
             "description": "API version for the operation"
         },
         "Scope": {
