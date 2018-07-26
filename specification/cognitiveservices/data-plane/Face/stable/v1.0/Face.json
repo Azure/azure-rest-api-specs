@@ -2323,7 +2323,7 @@
     "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedFaces?overload=stream": {
       "post": {
         "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-        "operationId": "LargePersonGroupPerson_AddLargePersonGroupPersonFaceFromStream",
+        "operationId": "LargePersonGroupPerson_AddPersonFaceFromStream",
         "parameters": [
           {
             "$ref": "#/parameters/largePersonGroupId"
@@ -3097,6 +3097,16 @@
       ],
       "description": "Request body for identify face operation.",
       "properties": {
+        "faceIds": {
+          "type": "array",
+          "description": "Array of query faces faceIds, created by the Face - Detect. Each of the faces are identified independently. The valid number of faceIds is between [1, 10].",
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        },
         "personGroupId": {
           "description": "PersonGroupId of the target person group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
           "type": "string",
@@ -3108,16 +3118,6 @@
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
-        },
-        "faceIds": {
-          "type": "array",
-          "description": "Array of query faces faceIds, created by the Face - Detect. Each of the faces are identified independently. The valid number of faceIds is between [1, 10].",
-          "maxItems": 10,
-          "items": {
-            "type": "string",
-            "format": "uuid",
-            "x-nullable": false
-          }
         },
         "maxNumOfCandidatesReturned": {
           "type": "integer",
@@ -3183,8 +3183,7 @@
       "type": "object",
       "required": [
         "faceId",
-        "personId",
-        "personGroupId"
+        "personId"
       ],
       "description": "Request body for face to person verification.",
       "properties": {
