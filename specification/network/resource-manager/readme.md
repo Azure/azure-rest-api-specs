@@ -28,7 +28,40 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-06
+tag: package-2018-07
+```
+
+### Tag: package-2018-07
+
+These settings apply only when `--tag=package-2018-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07'
+
+input-file:
+- Microsoft.Network/stable/2018-07-01/azureFirewall.json
+- Microsoft.Network/stable/2018-07-01/applicationGateway.json
+- Microsoft.Network/stable/2018-07-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2018-07-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-07-01/ddosProtectionPlan.json
+- Microsoft.Network/stable/2018-07-01/endpointService.json
+- Microsoft.Network/stable/2018-07-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-07-01/expressRouteCrossConnection.json
+- Microsoft.Network/stable/2018-07-01/loadBalancer.json
+- Microsoft.Network/stable/2018-07-01/network.json
+- Microsoft.Network/stable/2018-07-01/networkInterface.json
+- Microsoft.Network/stable/2018-07-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2018-07-01/networkWatcher.json
+- Microsoft.Network/stable/2018-07-01/operation.json
+- Microsoft.Network/stable/2018-07-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-07-01/routeFilter.json
+- Microsoft.Network/stable/2018-07-01/routeTable.json
+- Microsoft.Network/stable/2018-07-01/serviceCommunity.json
+- Microsoft.Network/stable/2018-07-01/usage.json
+- Microsoft.Network/stable/2018-07-01/virtualNetwork.json
+- Microsoft.Network/stable/2018-07-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-07-01/virtualWan.json
+- Microsoft.Network/stable/2018-07-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2018-07-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2018-06
@@ -745,7 +778,7 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: networkwatcher.json
     where: $.definitions.ProtocolConfiguration.properties.HTTPConfiguration
-    reason: Accidentally shipped with wrong casing – however fixing the casing is introducing a breaking change which is worse than living with the naming violation
+    reason: Accidentally shipped with wrong casing â€“ however fixing the casing is introducing a breaking change which is worse than living with the naming violation
 ```
 
 ### Tag: package-2018-01 and go
