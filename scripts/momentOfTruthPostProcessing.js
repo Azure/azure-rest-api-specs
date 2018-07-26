@@ -29,7 +29,7 @@ let githubTemplate = `
 `;
 
 let githubFooter = `
-[AutoRest Linter Guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) | [AutoRest Linter Issues](https://github.com/Azure/azure-openapi-validator/issues) | Send <a href='mailto:azure-swag-tooling@microsoft.com?subject=Feedback%20|%20AutoRest%20Linter%20Azure%20Bot'>feedback</a>
+[AutoRest Linter Guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) | [AutoRest Linter Issues](https://github.com/Azure/azure-openapi-validator/issues) | Send ${emailLink("feedback", "azure-swag-tooling@microsoft.com", "Feedback | AutoRest Linter Diff Tool")}
 
 Thanks for your co-operation.
 `;
@@ -52,20 +52,28 @@ let fileSummaryTemplate = `
 
 let potentialNewWarningErrorSummaryHeader = `
 <br>
+
 | Code | Id | Source | Message |
 |------|----|--------|---------|
 {list_of_new_warnings_errors}
 `;
 
-let potentialNewWarningErrorSummary = `| {warning_error_code} | {warning_error_id} | [Link]({warning_error_source}) | {warning_error_message} |
-`;
+let potentialNewWarningErrorSummary = `|{warning_error_code}|{warning_error_id}|[Link]({warning_error_source})|{warning_error_message}|\n`;
 
 let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reachout to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";;
 let armContactMessage = "These errors are reported by the ARM team's validation tools, reachout to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
 let sdkFileSummaries = '', armFileSummaries = '';
 
-let data = fs.readFileSync(logFilepath, 'utf8');
-let jsonData = JSON.parse(data);
+let data = undefined;
+let jsonData = undefined;
+try {
+    data = fs.readFileSync(logFilepath, 'utf8');
+    jsonData = JSON.parse(data);
+} catch (e) {
+    console.log(`Failed to read diff results from file ${logFilepath}`);
+    console.log("File content:");
+    console.log(data);
+}
 
 function compareJsonRef(beforeJsonRef, afterJsonRef) {
     return (beforeJsonRef.replace(/json:\d+:\d+/, '') == afterJsonRef.replace(/json:\d+:\d+/, ''));
@@ -193,8 +201,43 @@ function getFileSummary(fileName, beforeWarningsArray, afterWarningsArray, befor
     return fileSummaryCopy;
 }
 
+function emailLink(title, addr, subject = "", body = "") {
+    let link = `<a href='mailto:${addr}'`;
+    let sep = "?";
+    if (subject && subject.length > 0) {
+        link += `${sep}subject=${encodeURIComponent(subject)}`;
+        sep = "&";
+    }
+    if (body && body.length > 0) {
+        link += `${sep}body=${encodeURIComponent(body)}`;
+    }
+    link += `'>${title}</a>`
+
+    return link;
+}
+
 function postProcessing() {
     let newSDKErrorsCount = 0, newARMErrorsCount = 0, newSDKWarningsCount = 0, newARMWarningsCount = 0;
+
+    if (!jsonData) {
+        const reportLink = emailLink(
+            "report this failure",
+            "azure-swag-tooling@microsoft.com",
+            "Failure | AutoRest Linter Diff Tool",
+            `Please examine the failure in PR https://github.com/${process.env.TRAVIS_REPO_SLUG}/pull/${pullRequestNumber}\r\nThe failing job is https://travis-ci.org/${process.env.TRAVIS_REPO_SLUG}/jobs/${process.env.TRAVIS_JOB_ID}`
+        );
+
+        const output = {
+            title: "Failed to produce a result",
+            summary: `The Linter Diff tool failed to produce a result. Work with your reviewer to examine the lint results manually before merging.\n\nPlease ${reportLink}!`
+        };
+
+        console.log("---output");
+        console.log(JSON.stringify(output));
+        console.log("---");
+
+        return;
+    }
 
     for(var fileName in jsonData['files']) {
         let beforeErrorsSDKArray = [], beforeWarningsSDKArray = [], beforeErrorsARMArray = [], beforeWarningsARMArray = [];
