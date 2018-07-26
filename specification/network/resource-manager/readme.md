@@ -778,7 +778,7 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: networkwatcher.json
     where: $.definitions.ProtocolConfiguration.properties.HTTPConfiguration
-    reason: Accidentally shipped with wrong casing â€“ however fixing the casing is introducing a breaking change which is worse than living with the naming violation
+    reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
 ```
 
 ### Tag: package-2018-01 and go
