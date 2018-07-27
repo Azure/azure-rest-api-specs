@@ -53,6 +53,7 @@ input-file:
 - Microsoft.Network/stable/2018-07-01/networkWatcher.json
 - Microsoft.Network/stable/2018-07-01/operation.json
 - Microsoft.Network/stable/2018-07-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-07-01/publicIpPrefix.json
 - Microsoft.Network/stable/2018-07-01/routeFilter.json
 - Microsoft.Network/stable/2018-07-01/routeTable.json
 - Microsoft.Network/stable/2018-07-01/serviceCommunity.json
