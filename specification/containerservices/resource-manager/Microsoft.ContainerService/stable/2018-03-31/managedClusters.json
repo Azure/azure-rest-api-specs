@@ -750,28 +750,7 @@
         "Standard_NV6"
       ]
     },
-    "KeyVaultSecretRef": {
-      "properties": {
-        "vaultID": {
-          "type": "string",
-          "description": "Key vault identifier."
-        },
-        "secretName": {
-          "type": "string",
-          "description": "The secret name."
-        },
-        "version": {
-          "type": "string",
-          "description": "The secret version."
-        }
-      },
-      "description": "Reference to a secret stored in Azure Key Vault.",
-      "required": [
-        "vaultID",
-        "secretName"
-      ]
-    },
-    "ContainerServiceServicePrincipalProfile": {
+    "ManagedClusterServicePrincipalProfile": {
       "properties": {
         "clientId": {
           "type": "string",
@@ -780,13 +759,9 @@
         "secret": {
           "type": "string",
           "description": "The secret password associated with the service principal in plain text."
-        },
-        "keyVaultSecretRef": {
-          "$ref": "#/definitions/KeyVaultSecretRef",
-          "description": "Reference to a secret stored in Azure Key Vault."
         }
       },
-      "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified.",
+      "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs.",
       "required": [
         "clientId"
       ]
@@ -1121,8 +1096,8 @@
           "description": "Profile for Linux VMs in the container service cluster."
         },
         "servicePrincipalProfile": {
-          "$ref": "#/definitions/ContainerServiceServicePrincipalProfile",
-          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified."
+          "$ref": "#/definitions/ManagedClusterServicePrincipalProfile",
+          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs."
         },
         "addonProfiles": {
           "additionalProperties": {
