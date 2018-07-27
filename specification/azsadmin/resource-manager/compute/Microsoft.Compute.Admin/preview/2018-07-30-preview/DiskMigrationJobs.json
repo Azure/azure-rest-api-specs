@@ -16,17 +16,17 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrationjobs": {
       "get": {
         "x-ms-examples": {
           "Returns a list of disk migration jobs.": {
-            "$ref": "./examples/DiskMigrations/List.json"
+            "$ref": "./examples/DiskMigrationJobs/List.json"
           }
         },
         "tags": [
-          "DiskMigrations"
+          "DiskMigrationJobs"
         ],
-        "operationId": "DiskMigrations_List",
+        "operationId": "DiskMigrationJobs_List",
         "description": "Returns a list of disk migration jobs.",
         "parameters": [
           {
@@ -36,7 +36,7 @@
             "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "DiskMigrations.json#/parameters/MigrationJobStatusParameter"
+            "$ref": "DiskMigrationJobs.json#/parameters/MigrationJobStatusParameter"
           },
           {
             "$ref": "Disks.json#/parameters/ApiVersionParameter"
@@ -46,7 +46,7 @@
           "200": {
             "description": "OK -- The list of disk migration jobs has been returned.",
             "schema": {
-              "$ref": "DiskMigrations.json#/definitions/DiskMigrationList"
+              "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJobList"
             }
           }
         },
@@ -55,17 +55,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrations/{migrationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrationjobs/{migrationId}": {
       "get": {
         "x-ms-examples": {
           "Returns the requested disk migration job.": {
-            "$ref": "./examples/DiskMigrations/Get.json"
+            "$ref": "./examples/DiskMigrationJobs/Get.json"
           }
         },
         "tags": [
-          "DiskMigrations"
+          "DiskMigrationJobs"
         ],
-        "operationId": "DiskMigrations_Get",
+        "operationId": "DiskMigrationJobs_Get",
         "description": "Returns the requested disk migration job.",
         "parameters": [
           {
@@ -75,7 +75,7 @@
             "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "DiskMigrations.json#/parameters/MigrationIdParameter"
+            "$ref": "DiskMigrationJobs.json#/parameters/MigrationIdParameter"
           },
           {
             "$ref": "Disks.json#/parameters/ApiVersionParameter"
@@ -85,7 +85,7 @@
           "200": {
             "description": "OK -- The disk migration job has been returned.",
             "schema": {
-              "$ref": "DiskMigrations.json#/definitions/DiskMigration"
+              "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
             }
           }
         }
@@ -93,13 +93,13 @@
       "put": {
         "x-ms-examples": {
           "Create a disk migration job.": {
-            "$ref": "./examples/DiskMigrations/Create.json"
+            "$ref": "./examples/DiskMigrationJobs/Create.json"
           }
         },
         "tags": [
-          "DiskMigrations"
+          "DiskMigrationJobs"
         ],
-        "operationId": "DiskMigrations_Create",
+        "operationId": "DiskMigrationJobs_Create",
         "description": "Create a disk migration job.",
         "parameters": [
           {
@@ -109,13 +109,13 @@
             "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "DiskMigrations.json#/parameters/MigrationIdParameter"
+            "$ref": "DiskMigrationJobs.json#/parameters/MigrationIdParameter"
           },
           {
-            "$ref": "DiskMigrations.json#/parameters/TargetShareParameter"
+            "$ref": "DiskMigrationJobs.json#/parameters/TargetShareParameter"
           },
           {
-            "$ref": "DiskMigrations.json#/parameters/DiskListParameter"
+            "$ref": "DiskMigrationJobs.json#/parameters/DiskListParameter"
           },
           {
             "$ref": "Disks.json#/parameters/ApiVersionParameter"
@@ -125,23 +125,23 @@
           "200": {
             "description": "OK --  Disk migration job is created successfully.",
             "schema": {
-              "$ref": "DiskMigrations.json#/definitions/DiskMigration"
+              "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrations/{migrationId}/Cancel": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrationjobs/{migrationId}/Cancel": {
       "post": {
         "x-ms-examples": {
           "Cancel a disk migration job.": {
-            "$ref": "./examples/DiskMigrations/Cancel.json"
+            "$ref": "./examples/DiskMigrationJobs/Cancel.json"
           }
         },
         "tags": [
-          "DiskMigrations"
+          "DiskMigrationJobs"
         ],
-        "operationId": "DiskMigrations_Cancel",
+        "operationId": "DiskMigrationJobs_Cancel",
         "description": "Cancel a disk migration job.",
         "parameters": [
           {
@@ -151,7 +151,7 @@
             "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "DiskMigrations.json#/parameters/MigrationIdParameter"
+            "$ref": "DiskMigrationJobs.json#/parameters/MigrationIdParameter"
           },
           {
             "$ref": "Disks.json#/parameters/ApiVersionParameter"
@@ -161,7 +161,7 @@
           "200": {
             "description": "OK --  Disk migration job cancallation is called.",
             "schema": {
-              "$ref": "DiskMigrations.json#/definitions/DiskMigration"
+              "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
             }
           }
         }
@@ -208,7 +208,7 @@
       "properties": {
         "migrationSubtaskStatus": {
           "description": "The disk migration child task status.",
-          "$ref": "DiskMigrations.json#/definitions/MigrationSubTaskStatus",
+          "$ref": "DiskMigrationJobs.json#/definitions/MigrationSubTaskStatus",
           "readOnly": true
         },
         "reason": {
@@ -254,7 +254,7 @@
       "description": "List of disk migration tasks.",
       "type": "array",
       "items": {
-        "$ref": "DiskMigrations.json#/definitions/MigrationSubTask"
+        "$ref": "DiskMigrationJobs.json#/definitions/MigrationSubTask"
       }
     },
     "MigrationSubTask": {
@@ -268,28 +268,27 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "DiskMigrations.json#/definitions/MigrationSubTaskProperties",
+          "$ref": "DiskMigrationJobs.json#/definitions/MigrationSubTaskProperties",
           "description": "Disk migration child task properties."
         }
       }
     },
-    "DiskMigrationProperties": {
+    "DiskMigrationJobProperties": {
       "description": "Disk migration job properties.",
       "type": "object",
       "properties": {
         "migrationId": {
           "description": "The disk migration id.",
-          "type": "string",
-          "readOnly": false
+          "type": "string"
         },
         "status": {
           "description": "The current status of disk migration job.",
-          "$ref": "DiskMigrations.json#/definitions/MigrationJobStatus",
+          "$ref": "DiskMigrationJobs.json#/definitions/MigrationJobStatus",
           "readOnly": true
         },
         "subtasks": {
           "description": "The list of child migration tasks.",
-          "$ref": "DiskMigrations.json#/definitions/MigrationSubTaskList",
+          "$ref": "DiskMigrationJobs.json#/definitions/MigrationSubTaskList",
           "readOnly": true
         },
         "creationTime": {
@@ -317,13 +316,13 @@
         }
       }
     },
-    "DiskMigration": {
+    "DiskMigrationJob": {
       "description": "Disk migration job.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "DiskMigrations.json#/definitions/DiskMigrationProperties",
+          "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJobProperties",
           "description": "Disk migration properties."
         }
       },
@@ -333,7 +332,7 @@
         }
       ]
     },
-    "DiskMigrationList": {
+    "DiskMigrationJobList": {
       "type": "object",
       "description": "List of disk migration jobs.",
       "properties": {
@@ -341,7 +340,7 @@
           "description": "List of disk migration jobs.",
           "type": "array",
           "items": {
-            "$ref": "DiskMigrations.json#/definitions/DiskMigration"
+            "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
           }
         },
         "nextLink": {
@@ -389,7 +388,7 @@
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "DiskMigrations.json#/definitions/DiskListInput"
+        "$ref": "DiskMigrationJobs.json#/definitions/DiskListInput"
       },
       "x-ms-parameter-location": "method"
     }

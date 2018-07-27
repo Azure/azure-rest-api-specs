@@ -36,7 +36,7 @@
             "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "Disks.json#/parameters/TenantSubscriptionIdParameter"
+            "$ref": "Disks.json#/parameters/UserSubscriptionIdParameter"
           },
           {
             "$ref": "Disks.json#/parameters/DiskStateParameter"
@@ -111,44 +111,47 @@
       "properties": {
         "diskId": {
           "description": "The disk id.",
-          "type": "string",
-          "readOnly": false
+          "type": "string"
         },
         "status": {
           "description": "The disk status.",
-          "$ref": "Disks.json#/definitions/DiskState",
-          "readOnly": false
+          "$ref": "Disks.json#/definitions/DiskState"
         },
         "sharePath": {
           "description": "The disk share path.",
-          "type": "string",
-          "readOnly": false
+          "type": "string"
         },
         "actualSize": {
           "description": "The actual size of disk.",
           "type": "integer",
           "format": "int64",
-          "readOnly": false
+          "readOnly": true
+        },
+        "provisionSize": {
+          "description": "The provision size of disk.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
         },
         "managedBy": {
           "description": "Compute resource Uri which owns this disk.",
           "type": "string",
-          "readOnly": false
+          "readOnly": true
         },
-        "tenantId": {
+        "userResourceId": {
           "description": "The disk resource Uri from tenant view.",
           "type": "string",
-          "readOnly": false
+          "readOnly": true
         },
         "resourceType": {
           "description": "The type of the resource.",
           "$ref": "Disks.json#/definitions/DiskResourceType",
-          "readOnly": false
+          "readOnly": true
         },
         "diskSku": {
           "description": "the disk sku.",
           "$ref": "Disks.json#/definitions/AccountType",
-          "readOnly": false
+          "readOnly": true
         }
       }
     },
@@ -247,9 +250,9 @@
       "type": "string",
       "default": "2018-07-30-preview"
     },
-    "TenantSubscriptionIdParameter": {
+    "UserSubscriptionIdParameter": {
       "description": "Tenant Subscription Id which the resource belongs to.",
-      "name": "tenantSubscriptionId",
+      "name": "userSubscriptionId",
       "type": "string",
       "in": "query",
       "required": false,
