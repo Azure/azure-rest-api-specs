@@ -630,6 +630,9 @@ directive:
     from: publicIpAddress.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: publicIpPrefix.json
+    reason: name, id and type properties are inherited from the upper level    
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: routeFilter.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
