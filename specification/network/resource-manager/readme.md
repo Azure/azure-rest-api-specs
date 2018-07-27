@@ -683,6 +683,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-06
   - tag: package-2018-05
   - tag: package-2018-04
   - tag: package-2018-02
@@ -886,6 +887,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-06
   - tag: package-2018-04
   - tag: package-2018-02
   - tag: package-2018-01
@@ -1051,6 +1053,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 
 ```yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-06
   - tag: package-2018-04
   - tag: package-2018-05
   - tag: package-2017-10
