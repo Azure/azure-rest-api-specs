@@ -830,7 +830,7 @@
             "name": "ReasonCode",
             "modelAsString": true
           },
-          "description": "The reason for the restriction. As of now this can be “QuotaId” or “NotAvailableForSubscription”. Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The “NotAvailableForSubscription” is related to capacity at DC."
+          "description": "The reason for the restriction. As of now this can be \"QuotaId\" or \"NotAvailableForSubscription\". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The \"NotAvailableForSubscription\" is related to capacity at DC."
         }
       },
       "description": "The restriction because of which SKU cannot be used."
@@ -1208,6 +1208,12 @@
           "default": false,
           "x-ms-client-name": "EnableHttpsTrafficOnly",
           "description": "Allows https traffic only to storage service if sets to true."
+        },
+        "isHnsEnabled": {
+          "type": "boolean",
+          "default": false,
+           "x-ms-client-name": "IsHnsEnabled",
+           "description": "Account HierarchicalNamespace enabled if sets to true."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1309,9 +1315,19 @@
           "readOnly": true,
           "type": "string",
           "description": "Gets the file endpoint."
+        },
+        "web": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the web endpoint."
+        },
+        "dfs": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the dfs endpoint."
         }
       },
-      "description": "The URIs that are used to perform a retrieval of a public blob, queue, or table object."
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object."
     },
     "StorageAccountProperties": {
       "properties": {
@@ -1421,6 +1437,12 @@
           "x-ms-client-name": "NetworkRuleSet",
           "description": "Network rule set",
           "readOnly": true
+        },
+        "isHnsEnabled": {
+          "type": "boolean",
+          "default": false,
+           "x-ms-client-name": "IsHnsEnabled",
+           "description": "Account HierarchicalNamespace enabled if sets to true."
         }
       },
       "description": "Properties of the storage account."

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0",
-    "title": "Face API",
+    "title": "Face Client",
     "description": "An API for face detection, verification, and identification."
   },
   "securityDefinitions": {
@@ -18,17 +18,14 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
+    "hostTemplate": "{Endpoint}/face/v1.0",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
-  "basePath": "/face/v1.0",
-  "schemes": [
-    "https"
-  ],
   "paths": {
     "/findsimilars": {
       "post": {
@@ -2408,6 +2405,15 @@
       "format": "uuid",
       "x-ms-parameter-location": "method",
       "collectionFormat": "csv"
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }

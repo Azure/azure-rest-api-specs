@@ -1,19 +1,27 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "ASC API",
+        "title": "Security Center",
         "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
         "version": "2015-06-01-preview"
     },
     "host": "management.azure.com",
-    "schemes": ["https"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
-    "security": [{
-        "azure_auth": [
-            "user_impersonation"
-        ]
-    }],
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
     "securityDefinitions": {
         "azure_auth": {
             "type": "oauth2",
@@ -28,12 +36,16 @@
     "paths": {
         "/providers/Microsoft.Security/operations": {
             "get": {
-                "tags": ["Operations"],
+                "tags": [
+                    "Operations"
+                ],
                 "description": "Exposes all available operations for discovery purposes.",
                 "operationId": "Operations_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -47,6 +59,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -57,14 +72,19 @@
                         "$ref": "./examples/Locations/GetLocations_example.json"
                     }
                 },
-                "tags": ["Locations"],
-                "description": "The location of the responsible ASC of the specific subscription. For each subscription there is only one responsible location. The location in the response should be used to read or write other resources in ASC according to their ID.",
+                "tags": [
+                    "Locations"
+                ],
+                "description": "The location of the responsible ASC of the specific subscription (home region). For each subscription there is only one responsible location. The location in the response should be used to read or write other resources in ASC according to their ID.",
                 "operationId": "Locations_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -78,6 +98,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -88,16 +111,22 @@
                         "$ref": "./examples/Locations/GetLocation_example.json"
                     }
                 },
-                "tags": ["Locations"],
+                "tags": [
+                    "Locations"
+                ],
                 "description": "Details of a specific location",
                 "operationId": "Locations_Get",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -121,21 +150,27 @@
                         "$ref": "./examples/Tasks/GetTasksSubscription_example.json"
                     }
                 },
-                "tags": ["Tasks"],
+                "tags": [
+                    "Tasks"
+                ],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksSubscription_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/ODataFilter"
-                }],
+                "operationId": "Tasks_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataFilter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TaskList"
+                            "$ref": "#/definitions/SecurityTaskList"
                         }
                     },
                     "default": {
@@ -157,23 +192,30 @@
                         "$ref": "./examples/Tasks/GetTasksSubscriptionLocation_example.json"
                     }
                 },
-                "tags": ["Tasks"],
+                "tags": [
+                    "Tasks"
+                ],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksSubscriptionLocation_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/ODataFilter"
-                }],
+                "operationId": "Tasks_ListByHomeRegion",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataFilter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TaskList"
+                            "$ref": "#/definitions/SecurityTaskList"
                         }
                     },
                     "default": {
@@ -195,23 +237,30 @@
                         "$ref": "./examples/Tasks/GetTaskSubscriptionLocation_example.json"
                     }
                 },
-                "tags": ["Tasks"],
+                "tags": [
+                    "Tasks"
+                ],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksSubscriptionLocation_Get",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/TaskName"
-                }],
+                "operationId": "Tasks_GetSubscriptionLevelTask",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/TaskName"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Task"
+                            "$ref": "#/definitions/SecurityTask"
                         }
                     },
                     "default": {
@@ -230,20 +279,28 @@
                         "$ref": "./examples/Tasks/UpdateTaskSubscriptionLocation_example.json"
                     }
                 },
-                "tags": ["Tasks"],
+                "tags": [
+                    "Tasks"
+                ],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksSubscriptionLocation_Update",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/TaskName"
-                }, {
-                    "$ref": "#/parameters/TaskUpdateActionType"
-                }],
+                "operationId": "Tasks_UpdateSubscriptionLevelTaskState",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/TaskName"
+                    },
+                    {
+                        "$ref": "#/parameters/TaskUpdateActionType"
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "No Content"
@@ -264,25 +321,33 @@
                         "$ref": "./examples/Tasks/GetTasksResourceGroupLocation_example.json"
                     }
                 },
-                "tags": ["Tasks"],
+                "tags": [
+                    "Tasks"
+                ],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksResourceGroupLocation_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/ODataFilter"
-                }],
+                "operationId": "Tasks_ListByResourceGroup",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataFilter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TaskList"
+                            "$ref": "#/definitions/SecurityTaskList"
                         }
                     },
                     "default": {
@@ -304,25 +369,33 @@
                         "$ref": "./examples/Tasks/GetTaskResourceGroupLocation_example.json"
                     }
                 },
-                "tags": ["Tasks"],
+                "tags": [
+                    "Tasks"
+                ],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksResourceGroupLocation_Get",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/TaskName"
-                }],
+                "operationId": "Tasks_GetResourceGroupLevelTask",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/TaskName"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Task"
+                            "$ref": "#/definitions/SecurityTask"
                         }
                     },
                     "default": {
@@ -341,22 +414,31 @@
                         "$ref": "./examples/Tasks/UpdateTaskResourceGroupLocation_example.json"
                     }
                 },
-                "tags": ["Tasks"],
+                "tags": [
+                    "Tasks"
+                ],
                 "description": "Recommended tasks that will help improve the security of the subscription proactively",
-                "operationId": "TasksResourceGroupLocation_Update",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/TaskName"
-                }, {
-                    "$ref": "#/parameters/TaskUpdateActionType"
-                }],
+                "operationId": "Tasks_UpdateResourceGroupLevelTaskState",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/TaskName"
+                    },
+                    {
+                        "$ref": "#/parameters/TaskUpdateActionType"
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "No Content"
@@ -377,20 +459,28 @@
                         "$ref": "./examples/Alerts/GetAlertsSubscription_example.json"
                     }
                 },
-                "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsSubscription_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/ODataFilter"
-                }, {
-                    "$ref": "#/parameters/ODataSelect"
-                }, {
-                    "$ref": "#/parameters/ODataExpand"
-                }],
+                "tags": [
+                    "Alerts"
+                ],
+                "description": "List all the alerts that are associated with the subscription",
+                "operationId": "Alerts_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataSelect"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataExpand"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -417,22 +507,31 @@
                         "$ref": "./examples/Alerts/GetAlertsResourceGroup_example.json"
                     }
                 },
-                "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsResourceGroup_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }, {
-                    "$ref": "#/parameters/ODataFilter"
-                }, {
-                    "$ref": "#/parameters/ODataSelect"
-                }, {
-                    "$ref": "#/parameters/ODataExpand"
-                }],
+                "tags": [
+                    "Alerts"
+                ],
+                "description": "List all the alerts alerts that are associated with the resource group",
+                "operationId": "Alerts_ListByResourceGroup",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataSelect"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataExpand"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -459,22 +558,31 @@
                         "$ref": "./examples/Alerts/GetAlertsSubscriptionsLocation_example.json"
                     }
                 },
-                "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsSubscriptionLocation_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/ODataFilter"
-                }, {
-                    "$ref": "#/parameters/ODataSelect"
-                }, {
-                    "$ref": "#/parameters/ODataExpand"
-                }],
+                "tags": [
+                    "Alerts"
+                ],
+                "description": "List all the alerts that are associated with the subscription that are stored in a specific location",
+                "operationId": "Alerts_ListSubscriptionLevelAlertsByRegion",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataSelect"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataExpand"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -501,24 +609,34 @@
                         "$ref": "./examples/Alerts/GetAlertsResourceGroupLocation_example.json"
                     }
                 },
-                "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsResourceGroupLocation_List",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }, {
-                    "$ref": "#/parameters/ODataFilter"
-                }, {
-                    "$ref": "#/parameters/ODataSelect"
-                }, {
-                    "$ref": "#/parameters/ODataExpand"
-                }],
+                "tags": [
+                    "Alerts"
+                ],
+                "description": "List all the alerts that are associated with the resource group that are stored in a specific location",
+                "operationId": "Alerts_ListResourceGroupLevelAlertsByRegion",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataSelect"
+                    },
+                    {
+                        "$ref": "#/parameters/ODataExpand"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -545,18 +663,25 @@
                         "$ref": "./examples/Alerts/GetAlertSubscriptionLocation_example.json"
                     }
                 },
-                "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsSubscriptionLocation_Get",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/AlertName"
-                }],
+                "tags": [
+                    "Alerts"
+                ],
+                "description": "Get an alert that is associated with a subscription",
+                "operationId": "Alerts_GetSubscriptionLevelAlert",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/AlertName"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -580,20 +705,28 @@
                         "$ref": "./examples/Alerts/GetAlertResourceGroupLocation_example.json"
                     }
                 },
-                "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsResourceGroupLocation_Get",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/AlertName"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }],
+                "tags": [
+                    "Alerts"
+                ],
+                "description": "Get an alert that is associated a resource group or a resource in a resource group",
+                "operationId": "Alerts_GetResourceGroupLevelAlerts",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/AlertName"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -617,20 +750,28 @@
                         "$ref": "./examples/Alerts/UpdateAlertSubscriptionLocation_example.json"
                     }
                 },
-                "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsSubscriptionLocation_Update",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/AlertName"
-                }, {
-                    "$ref": "#/parameters/AlertUpdateActionType"
-                }],
+                "tags": [
+                    "Alerts"
+                ],
+                "description": "Update the alert's state",
+                "operationId": "Alerts_UpdateSubscriptionLevelAlertState",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/AlertName"
+                    },
+                    {
+                        "$ref": "#/parameters/AlertUpdateActionType"
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "No Content"
@@ -651,22 +792,31 @@
                         "$ref": "./examples/Alerts/UpdateAlertResourceGroupLocation_example.json"
                     }
                 },
-                "tags": ["Alerts"],
-                "description": "Alerts on security events that happened on the subscription",
-                "operationId": "AlertsResourceGroupLocation_Update",
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersion"
-                }, {
-                    "$ref": "#/parameters/SubscriptionId"
-                }, {
-                    "$ref": "#/parameters/AscLocation"
-                }, {
-                    "$ref": "#/parameters/AlertName"
-                }, {
-                    "$ref": "#/parameters/AlertUpdateActionType"
-                }, {
-                    "$ref": "#/parameters/ResourceGroupName"
-                }],
+                "tags": [
+                    "Alerts"
+                ],
+                "description": "Update the alert's state",
+                "operationId": "Alerts_UpdateResourceGroupLevelAlertState",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/AscLocation"
+                    },
+                    {
+                        "$ref": "#/parameters/AlertName"
+                    },
+                    {
+                        "$ref": "#/parameters/AlertUpdateActionType"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "No Content"
@@ -687,10 +837,13 @@
                         "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscription_example.json"
                     }
                 },
-                "tags": ["DiscoveredSecuritySolutions"],
+                "tags": [
+                    "DiscoveredSecuritySolutions"
+                ],
                 "description": "Gets a list of discovered Security Solutions for the subscription.",
-                "operationId": "DiscoveredSecuritySolutionsSubscription_List",
-                "parameters": [{
+                "operationId": "DiscoveredSecuritySolutions_List",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -710,6 +863,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -720,10 +876,13 @@
                         "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscriptionLocation_example.json"
                     }
                 },
-                "tags": ["DiscoveredSecuritySolutions"],
+                "tags": [
+                    "DiscoveredSecuritySolutions"
+                ],
                 "description": "Gets a list of discovered Security Solutions for the subscription and location.",
-                "operationId": "DiscoveredSecuritySolutionsSubscriptionLocation_List",
-                "parameters": [{
+                "operationId": "DiscoveredSecuritySolutions_ListByHomeRegion",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -746,6 +905,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -756,10 +918,13 @@
                         "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionResourceGroupLocation_example.json"
                     }
                 },
-                "tags": ["DiscoveredSecuritySolutions"],
+                "tags": [
+                    "DiscoveredSecuritySolutions"
+                ],
                 "description": "Gets a specific discovered Security Solution.",
-                "operationId": "DiscoveredSecuritySolutionsSubscriptionLocation_Get",
-                "parameters": [{
+                "operationId": "DiscoveredSecuritySolutions_Get",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -798,10 +963,13 @@
                         "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesSubscription_example.json"
                     }
                 },
-                "tags": ["JitNetworkAccessPolicies"],
+                "tags": [
+                    "JitNetworkAccessPolicies"
+                ],
                 "description": "Policies for protecting resources using Just-in-Time access control.",
-                "operationId": "JitNetworkAccessPoliciesSubscription_List",
-                "parameters": [{
+                "operationId": "JitNetworkAccessPolicies_List",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -821,6 +989,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -831,10 +1002,13 @@
                         "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesSubscriptionLocation_example.json"
                     }
                 },
-                "tags": ["JitNetworkAccessPolicies"],
+                "tags": [
+                    "JitNetworkAccessPolicies"
+                ],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPoliciesSubscriptionLocation_List",
-                "parameters": [{
+                "operationId": "JitNetworkAccessPolicies_ListByRegion",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -857,6 +1031,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -867,10 +1044,13 @@
                         "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesResourceGroup_example.json"
                     }
                 },
-                "tags": ["JitNetworkAccessPolicies"],
+                "tags": [
+                    "JitNetworkAccessPolicies"
+                ],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPoliciesResourceGroup_List",
-                "parameters": [{
+                "operationId": "JitNetworkAccessPolicies_ListByResourceGroup",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -893,6 +1073,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -903,13 +1086,16 @@
                         "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesResourceGroupLocation_example.json"
                     }
                 },
-                "tags": ["JitNetworkAccessPolicies"],
+                "tags": [
+                    "JitNetworkAccessPolicies"
+                ],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_List",
+                "operationId": "JitNetworkAccessPolicies_ListByResourceGroupAndRegion",
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -935,6 +1121,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -945,10 +1134,13 @@
                         "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPolicy_example.json"
                     }
                 },
-                "tags": ["JitNetworkAccessPolicies"],
+                "tags": [
+                    "JitNetworkAccessPolicies"
+                ],
                 "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_Get",
-                "parameters": [{
+                "operationId": "JitNetworkAccessPolicies_Get",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -985,10 +1177,13 @@
                         "$ref": "./examples/JitNetworkAccessPolicies/CreateJitNetworkAccessPolicy_example.json"
                     }
                 },
-                "tags": ["JitNetworkAccessPolicies"],
+                "tags": [
+                    "JitNetworkAccessPolicies"
+                ],
                 "description": "Create a policy for protecting resources using Just-in-Time access control",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_Create",
-                "parameters": [{
+                "operationId": "JitNetworkAccessPolicies_CreateOrUpdate",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -1024,14 +1219,17 @@
             },
             "delete": {
                 "x-ms-examples": {
-                    "Delete JIT network access policy": {
+                    "Delete a JIT network access policy": {
                         "$ref": "./examples/JitNetworkAccessPolicies/DeleteJitNetworkAccessPolicy_example.json"
                     }
                 },
-                "tags": ["JitNetworkAccessPolicies"],
+                "tags": [
+                    "JitNetworkAccessPolicies"
+                ],
                 "description": "Delete a Just-in-Time access control policy.",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_Delete",
-                "parameters": [{
+                "operationId": "JitNetworkAccessPolicies_Delete",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -1048,8 +1246,11 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK - Resource was deleted"
+                    },
                     "204": {
-                        "description": "No Content"
+                        "description": "No Content - Resource does not exist"
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -1060,17 +1261,20 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyActionType}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}": {
             "post": {
                 "x-ms-examples": {
-                    "Invoke an action on a JIT network access policy": {
-                        "$ref": "./examples/JitNetworkAccessPolicies/InvokeJitNetworkAccessPolicy_example.json"
+                    "Initiate an action on a JIT network access policy": {
+                        "$ref": "./examples/JitNetworkAccessPolicies/InitiateJitNetworkAccessPolicy_example.json"
                     }
                 },
-                "tags": ["JitNetworkAccessPolicies"],
-                "description": "Perform an action on a specific Just-in-Time policy configuration.",
-                "operationId": "JitNetworkAccessPoliciesResourceGroupLocation_Update",
-                "parameters": [{
+                "tags": [
+                    "JitNetworkAccessPolicies"
+                ],
+                "description": "Initiate a JIT access from a specific Just-in-Time policy configuration.",
+                "operationId": "JitNetworkAccessPolicies_Initiate",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -1083,18 +1287,21 @@
                         "$ref": "#/parameters/JitNetworkAccessPolicyName"
                     },
                     {
-                        "$ref": "#/parameters/JitNetworkAccessPolicyActionType"
+                        "$ref": "#/parameters/JitNetworkAccessPolicyInitiateType"
                     },
                     {
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/JitNetworkAccessPolicyAction"
+                        "$ref": "#/parameters/JitNetworkAccessPolicyInitiateRequest"
                     }
                 ],
                 "responses": {
-                    "204": {
-                        "description": "No Content"
+                    "202": {
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/JitNetworkAccessRequest"
+                        }
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -1113,9 +1320,12 @@
                     }
                 },
                 "description": "Gets a list of external security solutions for the subscription.",
-                "tags": ["ExternalSecuritySolutions"],
-                "operationId": "ExternalSecuritySolutionsSubscription_List",
-                "parameters": [{
+                "tags": [
+                    "ExternalSecuritySolutions"
+                ],
+                "operationId": "ExternalSecuritySolutions_List",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
@@ -1135,6 +1345,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -1146,9 +1359,12 @@
                     }
                 },
                 "description": "Gets a list of external Security Solutions for the subscription and location.",
-                "tags": ["ExternalSecuritySolutions"],
-                "operationId": "ExternalSecuritySolutionsSubscriptionLocation_List",
-                "parameters": [{
+                "tags": [
+                    "ExternalSecuritySolutions"
+                ],
+                "operationId": "ExternalSecuritySolutions_ListByHomeRegion",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -1171,6 +1387,9 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -1182,9 +1401,12 @@
                     }
                 },
                 "description": "Gets a specific external Security Solution.",
-                "tags": ["ExternalSecuritySolutions"],
-                "operationId": "ExternalSecuritySolutionsSubscriptionLocation_Get",
-                "parameters": [{
+                "tags": [
+                    "ExternalSecuritySolutions"
+                ],
+                "operationId": "ExternalSecuritySolutions_Get",
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -1274,7 +1496,6 @@
             "description": "Describes an Azure resource with kind",
             "properties": {
                 "kind": {
-                    "readOnly": true,
                     "type": "string",
                     "description": "Kind of the resource"
                 }
@@ -1301,6 +1522,11 @@
                     "items": {
                         "$ref": "#/definitions/Operation"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -1349,7 +1575,7 @@
                 }
             }
         },
-        "TaskList": {
+        "SecurityTaskList": {
             "type": "object",
             "description": "List of security task recommendations",
             "properties": {
@@ -1357,7 +1583,7 @@
                     "readOnly": true,
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Task"
+                        "$ref": "#/definitions/SecurityTask"
                     }
                 },
                 "nextLink": {
@@ -1367,20 +1593,22 @@
                 }
             }
         },
-        "Task": {
+        "SecurityTask": {
             "type": "object",
             "description": "Security task that we recommend to do in order to strengthen security",
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/TaskProperties"
+                    "$ref": "#/definitions/SecurityTaskProperties"
                 }
             },
-            "allOf": [{
-                "$ref": "#/definitions/Resource"
-            }]
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
         },
-        "TaskProperties": {
+        "SecurityTaskProperties": {
             "type": "object",
             "description": "Describes properties of a task.",
             "properties": {
@@ -1435,6 +1663,11 @@
                     "items": {
                         "$ref": "#/definitions/AscLocation"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -1447,9 +1680,11 @@
                     "$ref": "#/definitions/AscLocationProperties"
                 }
             },
-            "allOf": [{
-                "$ref": "#/definitions/Resource"
-            }]
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
         },
         "AscLocationProperties": {
             "type": "object",
@@ -1481,9 +1716,11 @@
                     "$ref": "#/definitions/AlertProperties"
                 }
             },
-            "allOf": [{
-                "$ref": "#/definitions/Resource"
-            }]
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
         },
         "AlertProperties": {
             "type": "object",
@@ -1648,6 +1885,11 @@
                     "items": {
                         "$ref": "#/definitions/DiscoveredSecuritySolution"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -1662,7 +1904,8 @@
             "required": [
                 "properties"
             ],
-            "allOf": [{
+            "allOf": [
+                {
                     "$ref": "#/definitions/Resource"
                 },
                 {
@@ -1685,7 +1928,8 @@
                     "x-ms-enum": {
                         "name": "securityFamily",
                         "modelAsString": true,
-                        "values": [{
+                        "values": [
+                            {
                                 "value": "Waf"
                             },
                             {
@@ -1728,6 +1972,11 @@
                     "items": {
                         "$ref": "#/definitions/JitNetworkAccessPolicy"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -1742,7 +1991,8 @@
             "required": [
                 "properties"
             ],
-            "allOf": [{
+            "allOf": [
+                {
                     "$ref": "#/definitions/Resource"
                 },
                 {
@@ -1815,7 +2065,8 @@
                     "x-ms-enum": {
                         "name": "protocol",
                         "modelAsString": true,
-                        "values": [{
+                        "values": [
+                            {
                                 "value": "TCP"
                             },
                             {
@@ -1829,7 +2080,16 @@
                     }
                 },
                 "allowedSourceAddressPrefix": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Mutually exclusive with the \"allowedSourceAddressPrefixes\" parameter. Should be an IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+                },
+                "allowedSourceAddressPrefixes": {
+                    "type": "array",
+                    "description": "Mutually exclusive with the \"allowedSourceAddressPrefix\" parameter.",
+                    "items": {
+                        "type": "string",
+                        "description": "IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+                    }
                 },
                 "maxRequestAccessDuration": {
                     "type": "string",
@@ -1837,7 +2097,6 @@
                 }
             },
             "required": [
-                "allowedSourceAddressPrefix",
                 "maxRequestAccessDuration",
                 "number",
                 "protocol"
@@ -1896,12 +2155,13 @@
                 },
                 "allowedSourceAddressPrefix": {
                     "type": "string",
-                    "description": "The IP address range that the port was opened for"
+                    "description": "Mutually exclusive with the \"allowedSourceAddressPrefixes\" parameter. Should be an IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
                 },
                 "allowedSourceAddressPrefixes": {
                     "type": "array",
-                    "description": "The IP address ranges that the port was opened for",
+                    "description": "Mutually exclusive with the \"allowedSourceAddressPrefix\" parameter.",
                     "items": {
+                        "description": "IP addess or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\".",
                         "type": "string"
                     }
                 },
@@ -1920,7 +2180,8 @@
                     "x-ms-enum": {
                         "name": "status",
                         "modelAsString": true,
-                        "values": [{
+                        "values": [
+                            {
                                 "value": "Revoked"
                             },
                             {
@@ -1940,7 +2201,8 @@
                     "x-ms-enum": {
                         "name": "statusReason",
                         "modelAsString": true,
-                        "values": [{
+                        "values": [
+                            {
                                 "value": "Expired"
                             },
                             {
@@ -1960,14 +2222,14 @@
                 "statusReason"
             ]
         },
-        "JitNetworkAccessPolicyAction": {
+        "JitNetworkAccessPolicyInitiateRequest": {
             "type": "object",
             "properties": {
                 "virtualMachines": {
                     "type": "array",
                     "description": "A list of virtual machines & ports to open access for",
                     "items": {
-                        "$ref": "#/definitions/JitNetworkAccessPolicyActionVirtualMachine"
+                        "$ref": "#/definitions/JitNetworkAccessPolicyInitiateVirtualMachine"
                     }
                 }
             },
@@ -1975,7 +2237,7 @@
                 "virtualMachines"
             ]
         },
-        "JitNetworkAccessPolicyActionVirtualMachine": {
+        "JitNetworkAccessPolicyInitiateVirtualMachine": {
             "type": "object",
             "properties": {
                 "id": {
@@ -1986,7 +2248,7 @@
                     "type": "array",
                     "description": "The ports to open for the resource with the `id`",
                     "items": {
-                        "$ref": "#/definitions/JitNetworkAccessPolicyActionPort"
+                        "$ref": "#/definitions/JitNetworkAccessPolicyInitiatePort"
                     }
                 }
             },
@@ -1995,14 +2257,15 @@
                 "ports"
             ]
         },
-        "JitNetworkAccessPolicyActionPort": {
+        "JitNetworkAccessPolicyInitiatePort": {
             "type": "object",
             "properties": {
                 "number": {
                     "$ref": "#/definitions/PortNumber"
                 },
                 "allowedSourceAddressPrefix": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Source of the allowed traffic. If omitted, the request will be for the source IP address of the initiate request."
                 },
                 "endTimeUtc": {
                     "type": "string",
@@ -2011,13 +2274,12 @@
                 }
             },
             "required": [
-                "allowedSourceAddressPrefix",
                 "endTimeUtc",
                 "number"
             ]
         },
         "PortNumber": {
-            "type": "number",
+            "type": "integer",
             "minimum": 0,
             "maximum": 65535
         },
@@ -2028,6 +2290,11 @@
                     "items": {
                         "$ref": "#/definitions/ExternalSecuritySolution"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
@@ -2035,18 +2302,13 @@
             "type": "object",
             "description": "Represents a security solution external to Azure Security Center which sends information to an OMS workspace and whos data is displayed by Azure Security Center.",
             "discriminator": "kind",
-            "properties": {
-                "properties": {
-                    "additionalProperties": {
-                        "type": "object"
-                    }
-                }
-            },
-            "allOf": [{
+            "properties": {},
+            "allOf": [
+                {
                     "$ref": "#/definitions/Resource"
                 },
                 {
-                    "$ref": "#/definitions/Kind"
+                    "$ref": "#/definitions/ExternalSecuritySolutionKind"
                 },
                 {
                     "$ref": "#/definitions/Location"
@@ -2057,9 +2319,11 @@
             "x-ms-discriminator-value": "CEF",
             "type": "object",
             "description": "Represents a security solution which sends CEF logs to an OMS workspace",
-            "allOf": [{
-                "$ref": "#/definitions/ExternalSecuritySolution"
-            }],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExternalSecuritySolution"
+                }
+            ],
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/CefSolutionProperties"
@@ -2070,9 +2334,11 @@
             "x-ms-discriminator-value": "ATA",
             "type": "object",
             "description": "Represents an ATA security solution which sends logs to an OMS workspace",
-            "allOf": [{
-                "$ref": "#/definitions/ExternalSecuritySolution"
-            }],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExternalSecuritySolution"
+                }
+            ],
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/AtaSolutionProperties"
@@ -2083,9 +2349,11 @@
             "x-ms-discriminator-value": "AAD",
             "type": "object",
             "description": "Represents an AAD identity protection solution which sends logs to an OMS workspace.",
-            "allOf": [{
-                "$ref": "#/definitions/ExternalSecuritySolution"
-            }],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExternalSecuritySolution"
+                }
+            ],
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/AadSolutionProperties"
@@ -2093,31 +2361,39 @@
             }
         },
         "ExternalSecuritySolutionKind": {
-            "type": "string",
-            "description": "The kind of the external solution",
-            "enum": [
-                "CEF",
-                "ATA",
-                "AAD"
-            ],
-            "x-ms-enum": {
-                "name": "ExternalSecuritySolutionKind",
-                "modelAsString": true,
-                "values": [{
-                        "value": "CEF"
-                    },
-                    {
-                        "value": "ATA"
-                    },
-                    {
-                        "value": "AAD"
+            "type": "object",
+            "description": "Describes an Azure resource with kind",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The kind of the external solution",
+                    "enum": [
+                        "CEF",
+                        "ATA",
+                        "AAD"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ExternalSecuritySolutionKind",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "CEF"
+                            },
+                            {
+                                "value": "ATA"
+                            },
+                            {
+                                "value": "AAD"
+                            }
+                        ]
                     }
-                ]
+                }
             }
         },
         "ExternalSecuritySolutionProperties": {
             "type": "object",
             "description": "The solution properties (correspond to the solution kind)",
+            "additionalProperties": true,
             "properties": {
                 "deviceVendor": {
                     "type": "string"
@@ -2141,32 +2417,40 @@
             }
         },
         "AadConnectivityState": {
-            "type": "string",
-            "title": "The connectivity state of the external AAD solution ",
-            "enum": [
-                "Discovered",
-                "NotLicensed",
-                "Connected"
-            ],
-            "x-ms-enum": {
-                "name": "AadConnectivityState",
-                "modelAsString": true,
-                "values": [{
-                        "value": "Discovered"
-                    },
-                    {
-                        "value": "NotLicensed"
-                    },
-                    {
-                        "value": "Connected"
+            "type": "object",
+            "description": "Describes an Azure resource with kind",
+            "properties": {
+                "connectivityState": {
+                    "type": "string",
+                    "title": "The connectivity state of the external AAD solution ",
+                    "enum": [
+                        "Discovered",
+                        "NotLicensed",
+                        "Connected"
+                    ],
+                    "x-ms-enum": {
+                        "name": "AadConnectivityState",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Discovered"
+                            },
+                            {
+                                "value": "NotLicensed"
+                            },
+                            {
+                                "value": "Connected"
+                            }
+                        ]
                     }
-                ]
+                }
             }
         },
         "AadSolutionProperties": {
             "type": "object",
             "title": "The external security solution properties for AAD solutions",
-            "allOf": [{
+            "allOf": [
+                {
                     "$ref": "#/definitions/ExternalSecuritySolutionProperties"
                 },
                 {
@@ -2178,7 +2462,7 @@
             "type": "object",
             "title": "The external security solution properties for CEF solutions",
             "properties": {
-                "hostName": {
+                "hostname": {
                     "type": "string"
                 },
                 "agent": {
@@ -2188,9 +2472,11 @@
                     "type": "string"
                 }
             },
-            "allOf": [{
-                "$ref": "#/definitions/ExternalSecuritySolutionProperties"
-            }]
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExternalSecuritySolutionProperties"
+                }
+            ]
         },
         "AtaSolutionProperties": {
             "type": "object",
@@ -2200,9 +2486,11 @@
                     "type": "string"
                 }
             },
-            "allOf": [{
-                "$ref": "#/definitions/ExternalSecuritySolutionProperties"
-            }]
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExternalSecuritySolutionProperties"
+                }
+            ]
         }
     },
     "parameters": {
@@ -2230,7 +2518,9 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "enum": ["2015-06-01-preview"],
+            "enum": [
+                "2015-06-01-preview"
+            ],
             "description": "API version for the operation"
         },
         "AscLocation": {
@@ -2302,7 +2592,13 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "enum": ["Activate", "Dismiss", "Start", "Resolve", "Close"],
+            "enum": [
+                "Activate",
+                "Dismiss",
+                "Start",
+                "Resolve",
+                "Close"
+            ],
             "description": "Type of the action to do on the task",
             "x-ms-parameter-location": "method"
         },
@@ -2319,7 +2615,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "enum": ["Dismiss", "Reactivate"],
+            "enum": [
+                "Dismiss",
+                "Reactivate"
+            ],
             "description": "Type of the action to do on the alert",
             "x-ms-parameter-location": "method"
         },
@@ -2339,8 +2638,8 @@
             "description": "Name of a Just-in-Time access configuration policy.",
             "x-ms-parameter-location": "method"
         },
-        "JitNetworkAccessPolicyActionType": {
-            "name": "jitNetworkAccessPolicyActionType",
+        "JitNetworkAccessPolicyInitiateType": {
+            "name": "jitNetworkAccessPolicyInitiateType",
             "type": "string",
             "in": "path",
             "required": true,
@@ -2350,12 +2649,12 @@
             ],
             "x-ms-parameter-location": "method"
         },
-        "JitNetworkAccessPolicyAction": {
+        "JitNetworkAccessPolicyInitiateRequest": {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-                "$ref": "#/definitions/JitNetworkAccessPolicyAction"
+                "$ref": "#/definitions/JitNetworkAccessPolicyInitiateRequest"
             },
             "x-ms-parameter-location": "method"
         },

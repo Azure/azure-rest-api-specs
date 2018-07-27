@@ -26,8 +26,20 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-10
+tag: package-2018-02
 ```
+
+
+### Tag: package-2018-02
+
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02'
+input-file:
+- Microsoft.KeyVault/stable/2018-02-14/keyvault.json
+- Microsoft.KeyVault/stable/2018-02-14/providers.json
+```
+
 
 
 ### Tag: package-2016-10
@@ -63,39 +75,14 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-keyvault
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_key_vault']
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.keyvault
-  package-name: azure-mgmt-keyvault
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-keyvault/azure/mgmt/keyvault
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-keyvault
 ```
 
 
@@ -114,8 +101,18 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-02
   - tag: package-2016-10
   - tag: package-2015-06
+```
+
+### Tag: package-2018-02 and go
+
+These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(go)
+output-folder: $(go-sdk-folder)/services/keyvault/mgmt/2018-02-14/keyvault
 ```
 
 ### Tag: package-2016-10 and go
@@ -143,10 +140,47 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+azure-arm: true
+namespace: com.microsoft.azure.management.keyvault
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-keyvault
+```
+
+### Java multi-api
+
+```yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2016-10
+  - tag: package-2015-06
+```
+
+### Tag: package-2016-10 and java
+
+These settings apply only when `--tag=package-2016-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-10' && $(java) && $(multiapi)
 java:
-  azure-arm: true
-  namespace: com.microsoft.azure.management.keyvault
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-keyvault
+  namespace: com.microsoft.azure.management.keyvault.v2016_10_01
+  output-folder: $(azure-libraries-for-java-folder)/keyvault/resource-manager/v2016_10_01
+regenerate-manager: true
+generate-interface: true
+directive:
+  from: keyvault.json
+  where: $.paths["/subscriptions/{subscriptionId}/resources"].get
+  transform: $['operationId'] = 'Vaults_ListResource'
+```
+
+### Tag: package-2015-06 and java
+
+These settings apply only when `--tag=package-2015-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.keyvault.v2015_06_01
+  output-folder: $(azure-libraries-for-java-folder)/keyvault/resource-manager/v2015_06_01
+regenerate-manager: true
+generate-interface: true
 ```
