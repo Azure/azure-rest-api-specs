@@ -4383,6 +4383,10 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
           }
         },
+        "encryptionKey": {
+          "$ref": "#/definitions/EncryptionKey",
+          "description": "Encryption key used to encrypt the synonym map."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -5162,6 +5166,10 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Synonym-Map#SynonymMapFormat"
           }
         },
+        "encryptionKey": {
+          "$ref": "#/definitions/EncryptionKey",
+          "description": "Encryption key used to encrypt the synonym map."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -5188,6 +5196,44 @@
         }
       },
       "description": "Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps."
+    },
+    "EncryptionKey": {
+      "properties": {
+        "keyVaultKeyName": {
+          "type": "string",
+          "description": "The name of the key vault key."
+        },
+        "keyVaultKeyVersion": {
+          "type": "string",
+          "description": "The version of the key vault key."
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The URI of the key vault."
+        },
+        "accessCredentials": {
+          "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
+          "description": "The credentials to use to authenticate to the provided key vault. Can be left null if MSI (Managed Service Identity) is to be used instead."
+        }
+      },
+      "required": [
+        "keyVaultKeyName",
+        "keyVaultKeyVersion",
+        "keyVaultUri"
+      ],
+      "description": "Represents an encryption key in Azure Search."
+    },
+    "AzureActiveDirectoryApplicationCredentials": {
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The application id."
+        },
+        "applicationSecret": {
+          "type": "string",
+          "description": "The application secret."
+        }
+      }
     },
     "ServiceStatistics": {
       "properties": {
