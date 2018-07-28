@@ -884,6 +884,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 
 ```yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-06
   - tag: package-2018-04
   - tag: package-2018-05
   - tag: package-2017-10
