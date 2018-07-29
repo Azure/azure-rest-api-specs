@@ -21,7 +21,24 @@ These are the global settings for the Serial Console API.
 
 ``` yaml
 openapi-type: arm
+azure-arm: true
 tag: package-2018-07
 input-file:
 - Microsoft.SerialConsole/preview/2018-07-01-preview/serialconsole.json
+output-folder: ./Generated
+```
+
+
+---
+# Code Generation
+
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  output-folder: ./Generated
+  clear-output-folder: true
 ```
