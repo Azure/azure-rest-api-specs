@@ -794,7 +794,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Settings"
+                            "$ref": "#/definitions/Setting"
                         }
                     },
                     "default": {
@@ -827,14 +827,14 @@
                         "$ref": "#/parameters/SettingName"
                     },
                     {
-                        "$ref": "#/parameters/Settings"
+                        "$ref": "#/parameters/Setting"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Settings"
+                            "$ref": "#/definitions/Setting"
                         }
                     },
                     "default": {
@@ -1255,7 +1255,7 @@
                     "type": "array",
                     "description": "The settings list.",
                     "items": {
-                        "$ref": "#/definitions/Settings"
+                        "$ref": "#/definitions/Setting"
                     }
                 },
                 "nextLink": {
@@ -1265,7 +1265,7 @@
                 }
             }
         },
-        "Settings": {
+        "Setting": {
             "type": "object",
             "description": "Represents a security setting in Azure Security Center.",
             "discriminator": "kind",
@@ -1275,52 +1275,52 @@
                     "$ref": "#/definitions/Resource"
                 },
                 {
-                    "$ref": "#/definitions/SettingsKind"
+                    "$ref": "#/definitions/SettingKind"
                 }
             ]
         },
-        "DataExportSettings": {
+        "DataExportSetting": {
             "type": "object",
             "description": "Represents a data export setting",
-            "x-ms-discriminator-value": "DataExportSettings",
+            "x-ms-discriminator-value": "DataExportSetting",
             "properties": {
                 "properties": {
 				    "x-ms-client-flatten": true,
                     "description": "Data export setting data",
-                    "$ref": "#/definitions/DataExportSettingsProperties"
+                    "$ref": "#/definitions/DataExportSettingProperties"
                 }
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Settings"
+                    "$ref": "#/definitions/Setting"
                 }
             ]
         },
-        "SettingsKind": {
+        "SettingKind": {
             "type": "object",
-            "description": "The kind of the security settings",
+            "description": "The kind of the security setting",
             "properties": {
                 "kind": {
                     "type": "string",
                     "description": "the kind of the settings string",
                     "enum": [
-                        "DataExportSettings"
+                        "DataExportSetting"
                     ],
                     "x-ms-enum": {
                         "name": "SettingsKind",
                         "modelAsString": true,
                         "values": [
                             {
-                                "value": "DataExportSettings"
+                                "value": "DataExportSetting"
                             }
                         ]
                     }
                 }
             }
         },
-        "DataExportSettingsProperties": {
+        "DataExportSettingProperties": {
             "type": "object",
-            "description": "The data export settings properties",
+            "description": "The data export setting properties",
             "properties": {
                 "enabled": {
                     "type": "boolean",
@@ -1434,13 +1434,13 @@
             ],
             "x-ms-parameter-location": "method"
         },
-        "Settings": {
-            "name": "settings",
+        "Setting": {
+            "name": "setting",
             "in": "body",
             "required": true,
-            "description": "Settings object",
+            "description": "Setting object",
             "schema": {
-                "$ref": "#/definitions/Settings"
+                "$ref": "#/definitions/Setting"
             },
             "x-ms-parameter-location": "method"
         },
