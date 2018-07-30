@@ -62,7 +62,7 @@
           "200": {
             "description": "A list containing 0 or more workbook definitions.",
             "schema": {
-              "$ref": "#/definitions/Workbooks"
+              "$ref": "#/definitions/WorkbooksListResult"
             }
           },
           "default": {
@@ -71,6 +71,9 @@
               "$ref": "#/definitions/WorkbookError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "WorkbooksList": {
@@ -82,7 +85,7 @@
     "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {  
       "get": {
         "description": "Get a single workbook by its resourceName.",
-        "operationId": "Workbook_Get",
+        "operationId": "Workbooks_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -119,7 +122,7 @@
       },
       "delete": {
         "description": "Delete a workbook.",
-        "operationId": "Workbook_Delete",
+        "operationId": "Workbooks_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -156,7 +159,7 @@
       },
       "put": {
         "description": "Create a new workbook.",
-        "operationId": "Workbook_CreateOrUpdate",
+        "operationId": "Workbooks_CreateOrUpdate",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -208,7 +211,7 @@
       },
       "patch": {
         "description": "Updates a workbook that has already been added.",
-        "operationId": "Workbook_Update",
+        "operationId": "Workbooks_Update",
         "parameters": [          
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -290,10 +293,11 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "Workbooks": {
+    "WorkbooksListResult": {
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Workbook"
           },

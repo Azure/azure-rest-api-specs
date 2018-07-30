@@ -75,6 +75,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/ApplicationInsights/DataPlane/ApplicationInsights/Generated
   clear-output-folder: true
   payload-flattening-threshold: 3
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
 ```
 
 ``` yaml $(python)
@@ -85,6 +89,10 @@ python:
   namespace: azure.applicationinsights
   package-name: azure-applicationinsights
   package-version: 0.1.0
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
