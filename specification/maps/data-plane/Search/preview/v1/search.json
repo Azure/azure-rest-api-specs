@@ -1077,7 +1077,7 @@
           {
             "name": "countryCode",
             "in": "query",
-            "description": "The 2 or 3 letter country code portion of an address. E.g. US",
+            "description": "The 2 or 3 letter [ISO3166-1](https://www.iso.org/iso-3166-country-codes.html) country code portion of an address. E.g. US.",
             "required": true,
             "default": "US",
             "type": "string"
@@ -1344,9 +1344,12 @@
     "/search/fuzzy/batch/{format}": {
       "post": {
         "x-publish": true,
-        "description": "**Search Fuzzy Batch API**<br><br> The Search Fuzzy Batch API allows the caller to batch up to 10,000 [Search Fuzzy API](https://docs.microsoft.com/en-us/rest/api/maps/searchservice/getsearchfuzzy) queries/requests using just a single API call. To send the _search fuzzy_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`.<br><br>A _search fuzzy_ query in a batch is just a partial URL without the protocol, base URL, path, api-version and subscription-key. All these values will be reused from the Search Fuzzy Batch API call itself. The string values in the _search fuzzy_ query must be properly escaped (e.g. \" character should be escaped with \\\\) and it should also be properly URL-encoded.<br><br> for example: \"?_query_=atm&_lat_=47.639769&_lon_=-122.128362&_radius_=5000&_limit_=5\"<br><br> The maximum number of queries that can be specified in the batch is 10,000  and the batch should contain at least 1 query.<br><br>Please note that the Search Fuzzy Batch API is a long-running request. When the client `POST`'s the initial batch request, the server responds immediately with a `202 Accepted` response with the `Location` header containing the URL to download the results of the batch request later. To download the batch results you will issue a `GET` request to this download endpoint. If the batch processing has finished, this call returns a `200 OK` response with all the batch results, else it continues to return a `202 Accepted` response. Please, be aware that batch results are available for download for 14 days, after which the request for results download will return `400 Bad Request` response.",
+        "description": "\n## Search Fuzzy Batch API\nThe Search Fuzzy Batch API allows the caller to batch up to 10,000 [Search Fuzzy API](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchfuzzy) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _search fuzzy_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _search fuzzy_ queries:\n<br>\n```json\n{\n    \"queries\": [\n        \"?query=atm&lat=47.639769&lon=-122.128362&radius=5000&limit=5\",\n        \"?query=Statue Of Liberty&limit=2\",\n        \"?query=Starbucks&lat=47.639769&lon=-122.128362&radius=5000\",\n        \"?query=Space Needle\",\n        \"?query=pizza&limit=10\"\n    ]\n}\n```    \n<br> A _search fuzzy_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _search fuzzy_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchfuzzy#uri-parameters). The string values in the _search fuzzy_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.     \n<br>\nThe maximum number of queries that can be specified in the batch is **10,000** and the batch should contain at least **1** query.    \n<br>\nPlease note that the Search Fuzzy Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Search Fuzzy Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n \n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}    \n```\n<br>     Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`SearchFuzzyResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchfuzzy#searchfuzzyresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n\n<br>     Here's a sample Batch Response with 2 _successful_ and 1 _failed_ result:\n<br>\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 2,\n        \"totalRequests\": 3\n    },\n    \"batchResults\": [\n        {\n            \"summary\": {\n                \"query\": \"atm\"\n            },\n            \"results\": [\n                {\n                    \"type\": \"POI\",\n                    \"poi\": {\n                        \"name\": \"ATM at Wells Fargo\"\n                    },\n                    \"address\": {\n                        \"country\": \"United States Of America\",\n                        \"freeformAddress\": \"3240 157th Ave NE, Redmond, WA 98052\"\n                    }\n                }\n            ]\n        },\n        {\n            \"summary\": {\n                \"query\": \"statue of liberty\"\n            },\n            \"results\": [\n                {\n                    \"type\": \"POI\",\n                    \"poi\": {\n                        \"name\": \"Statue of Liberty\"\n                    },\n                    \"address\": {\n                        \"country\": \"United States Of America\",\n                        \"freeformAddress\": \"New York, NY 10004\"\n                    }\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
         "operationId": "Search_PostSearchFuzzyBatchPreview",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+        },
         "x-ms-examples": {
           "A Search Fuzzy Batch API call containing 5 Search Fuzzy API queries": {
             "$ref": "./examples/PostSearchFuzzyBatch.json"
@@ -1397,9 +1400,12 @@
     "/search/address/batch/{format}": {
       "post": {
         "x-publish": true,
-        "description": "**Address Geocoding Batch API**<br><br> The Address Geocoding Batch API allows the caller to batch up to 10,000 [Address Geocoding API](https://docs.microsoft.com/en-us/rest/api/maps/searchservice/getsearchaddress) queries/requests using just a single API call. To send the _address geocoding_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`.<br><br>An _address geocoding_ query in a batch is just a partial URL without the protocol, base URL, path, api-version and subscription-key. All these values will be reused from the Address Geocoding Batch API call itself. The string values in the _address geocoding_ query must be properly escaped (e.g. \" character should be escaped with \\\\) and it should also be properly URL-encoded.<br><br> for example: \"?_query_=Pike Pl, Seattle, WA 98101&_lat_=47.610970&_lon_=-122.342469&_radius_=1000&_limit_=3\"<br><br> The maximum number of queries that can be specified in the batch is 10,000  and the batch should contain at least 1 query.<br><br>Please note that the Address Geocoding Batch API is a long-running request. When the client `POST`'s the initial batch request, the server responds immediately with a `202 Accepted` response with the `Location` header containing the URL to download the results of the batch request later. To download the batch results you will issue a `GET` request to this download endpoint. If the batch processing has finished, this call returns a `200 OK` response with all the batch results, else it continues to return a `202 Accepted` response. Please, be aware that batch results are available for download for 14 days, after which the request for results download will return `400 Bad Request` response.",
+        "description": "\n## Search Address Batch API\nThe Search Address Batch API allows the caller to batch up to 10,000 [Search Address API](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddress) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _search address_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _search address_ queries:  \n<br>\n```json\n{\n    \"queries\": [\n        \"?query=400 Broad St, Seattle, WA 98109&limit=3\",\n        \"?query=One, Microsoft Way, Redmond, WA 98052&limit=3\",\n        \"?query=350 5th Ave, New York, NY 10118&limit=1\",\n        \"?query=Pike Pl, Seattle, WA 98101&lat=47.610970&lon=-122.342469&radius=1000\",\n        \"?query=Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France&limit=1\"\n    ]\n}\n```\n<br> A _search address_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _search address_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddress#uri-parameters). The string values in the _search address_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.    \n<br>\nThe maximum number of queries that can be specified in the batch is **10,000** and the batch should contain at least **1** query.   \n<br>\nPlease note that the Search Address Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Search Address Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\n<br> Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`SearchAddressResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddress#searchaddressresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n  \n<br> Here's a sample Batch Response with 2 _successful_ and 1 _failed_ result:\n<br>\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 2,\n        \"totalRequests\": 3\n    },\n    \"batchResults\": [\n        {\n            \"summary\": {\n                \"query\": \"one microsoft way redmond wa 98052\"\n            },\n            \"results\": [\n                {\n                    \"position\": {\n                        \"lat\": 47.63989,\n                        \"lon\": -122.12509\n                    }\n                }\n            ]\n        },\n        {\n            \"summary\": {\n                \"query\": \"pike pl seattle wa 98101\"\n            },\n            \"results\": [\n                {\n                    \"position\": {\n                        \"lat\": 47.60963,\n                        \"lon\": -122.34215\n                    }\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
         "operationId": "Search_PostSearchAddressBatchPreview",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+        },
         "x-ms-examples": {
           "An Address Geocoding Batch API call containing 5 Address Geocoding API queries": {
             "$ref": "./examples/PostSearchAddressBatch.json"
@@ -1450,9 +1456,12 @@
     "/search/address/reverse/batch/{format}": {
       "post": {
         "x-publish": true,
-        "description": "**Reverse Geocoding Batch API**<br><br> The Reverse Geocoding Batch API allows the caller to batch up to 10,000 [Reverse Geocoding API](https://docs.microsoft.com/en-us/rest/api/maps/searchservice/getsearchaddressreverse) queries/requests using just a single API call. To send the _reverse geocoding_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`.<br><br>An _reverse geocoding_ query in a batch is just a partial URL without the protocol, base URL, path, api-version and subscription-key. All these values will be reused from the Reverse Geocoding Batch API call itself. The string values in the _reverse geocoding_ query must be properly escaped (e.g. \" character should be escaped with \\\\) and it should also be properly URL-encoded.<br><br> for example: \"?_query_=47.639765,-122.127896&_radius_=5000&_limit_=2\"<br><br> The maximum number of queries that can be specified in the batch is 10,000  and the batch should contain at least 1 query.<br><br>Please note that the Reverse Geocoding Batch API is a long-running request. When the client `POST`'s the initial batch request, the server responds immediately with a `202 Accepted` response with the `Location` header containing the URL to download the results of the batch request later. To download the batch results you will issue a `GET` request to this download endpoint. If the batch processing has finished, this call returns a `200 OK` response with all the batch results, else it continues to return a `202 Accepted` response. Please, be aware that batch results are available for download for 14 days, after which the request for results download will return `400 Bad Request` response.",
+        "description": "\n## Search Address Reverse Batch API\nThe Search Address Reverse Batch API allows the caller to batch up to 10,000 [Search Address Reverse API](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddressreverse) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _search address reverse_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _search address reverse_ queries:\n<br>\n```json\n{\n    \"queries\": [\n        \"?query=48.858561,2.294911\",\n        \"?query=47.639765,-122.127896&radius=5000&limit=2\",\n        \"?query=47.621028,-122.348170\",\n        \"?query=43.722990,10.396695\",\n        \"?query=40.750958,-73.982336\"\n    ]\n}\n```\n<br> A _search address reverse_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _search address reverse_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddressreverse#uri-parameters). The string values in the _search address reverse_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.  \n<br>\nThe maximum number of queries that can be specified in the batch is **10,000** and the batch should contain at least **1** query.   \n<br>\nPlease note that the Search Address Reverse Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Search Address Reverse Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:   \n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\n<br> Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`SearchAddressReverseResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddressreverse#searchaddressreverseresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n  \n<br> Here's a sample Batch Response with 2 _successful_ and 1 _failed_ result:\n<br>\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 2,\n        \"totalRequests\": 3\n    },\n    \"batchResults\": [\n        {\n            \"summary\": {\n                \"queryTime\": 11\n            },\n            \"addresses\": [\n                {\n                    \"address\": {\n                        \"country\": \"France\",\n                        \"freeformAddress\": \"Avenue Anatole France, 75007 Paris\"\n                    },\n                    \"position\": \"48.858490,2.294820\"\n                }\n            ]\n        },\n        {\n            \"summary\": {\n                \"queryTime\": 1\n            },\n            \"addresses\": [\n                {\n                    \"address\": {\n                        \"country\": \"United States of America\",\n                        \"freeformAddress\": \"157th Pl NE, Redmond WA 98052\"\n                    },\n                    \"position\": \"47.640470,-122.129430\"\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
         "operationId": "Search_PostSearchAddressReverseBatchPreview",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+        },
         "x-ms-examples": {
           "A Reverse Geocoding Batch API call containing 5 Reverse Geocoding API queries": {
             "$ref": "./examples/PostSearchAddressReverseBatch.json"
@@ -1540,6 +1549,46 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "CoordinateAbbreviated": {
+      "description": "A location represented as a latitude and longitude.",
+      "type": "object",
+      "properties": {
+        "lat": {
+          "description": "Latitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "lon": {
+          "description": "Longitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        }
+      }
+    },
+    "GeoJSONLineString": {
+      "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Specifies the `type` for the geometry. Value should always be equal to \"LineString\".",
+          "type": "string"
+        },
+        "coordinates": {
+          "description": "Coordinates for the `LineString` geometry.",
+          "type": "array",
+          "items": {
+            "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, , precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           }
         }
       }
@@ -1669,7 +1718,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -1784,7 +1833,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -1886,7 +1935,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -1998,7 +2047,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2091,7 +2140,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2289,7 +2338,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2399,7 +2448,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2506,22 +2555,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "description": "A location represented as a latitude and longitude.",
-          "type": "object",
-          "properties": {
-            "lat": {
-              "description": "Latitude property",
-              "type": "number",
-              "format": "double",
-              "readOnly": true
-            },
-            "lon": {
-              "description": "Longitude property",
-              "type": "number",
-              "format": "double",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2557,26 +2591,7 @@
       "type": "object",
       "properties": {
         "route": {
-          "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
-          "type": "object",
-          "properties": {
-            "type": {
-              "description": "Specifies the `type` for the geometry. Value should always be equal to \"LineString\".",
-              "type": "string"
-            },
-            "coordinates": {
-              "description": "Coordinates for the `LineString` geometry.",
-              "type": "array",
-              "items": {
-                "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, , precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
-                "type": "array",
-                "items": {
-                  "type": "number",
-                  "format": "double"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/GeoJSONLineString"
         }
       }
     },
@@ -2763,10 +2778,10 @@
       "type": "object",
       "properties": {
         "topLeftPoint": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "btmRightPoint": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         }
       }
     },
@@ -2784,7 +2799,7 @@
           ]
         },
         "position": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         }
       }
     },
@@ -2799,10 +2814,10 @@
           "type": "string"
         },
         "from": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         },
         "to": {
-          "$ref": "#/definitions/SearchAlongRouteResult/properties/position"
+          "$ref": "#/definitions/CoordinateAbbreviated"
         }
       }
     },
