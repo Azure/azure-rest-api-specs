@@ -100,6 +100,8 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
+- Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 
 
 # Needed when there is more than one input file
@@ -171,6 +173,8 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
+- Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 
 # Needed when there is more than one input file
 override-info:
@@ -235,6 +239,8 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
+- Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 
 # Needed when there is more than one input file
 override-info:
@@ -397,6 +403,8 @@ input-file:
  - ./Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 
 # Needed when there is more than one input file
 override-info:
