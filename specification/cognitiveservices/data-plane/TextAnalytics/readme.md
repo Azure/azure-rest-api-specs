@@ -222,7 +222,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.language.textanalytics
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/language/textanalytics
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/language/textanalytics
   with-optional-parameters: true
   with-single-async-method: true
 ```

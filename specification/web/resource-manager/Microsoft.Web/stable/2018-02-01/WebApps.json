@@ -479,57 +479,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/discover": {
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Discovers an existing app backup that can be restored from a blob in Azure storage.",
-        "description": "Discovers an existing app backup that can be restored from a blob in Azure storage.",
-        "operationId": "WebApps_DiscoverRestore",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/{backupId}": {
       "get": {
         "tags": [
@@ -1590,6 +1539,180 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/virtualNetwork": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a Swift Virtual Network connection.",
+        "description": "Gets a Swift Virtual Network connection.",
+        "operationId": "WebApps_GetSwiftVirtualNetworkConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "description": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "operationId": "WebApps_DeleteSwiftVirtualNetwork",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted virtual network."
+          },
+          "404": {
+            "description": "Virtual network does not exist."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web": {
       "get": {
         "tags": [
@@ -2395,6 +2518,57 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/discoverbackup": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.",
+        "description": "Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.",
+        "operationId": "WebApps_DiscoverBackup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestoreRequest"
             }
           },
           "default": {
@@ -5253,6 +5427,62 @@
             "description": "Succesfully deleted premier add-on."
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates a named add-on of an app.",
+        "description": "Updates a named add-on of an app.",
+        "operationId": "WebApps_UpdatePremierAddOn",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOnName",
+            "in": "path",
+            "description": "Add-on name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOn",
+            "in": "body",
+            "description": "A JSON representation of the edited premier add-on.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PremierAddOnPatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PremierAddOn"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/privateAccess/virtualNetworks": {
@@ -6852,64 +7082,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backups/discover": {
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Discovers an existing app backup that can be restored from a blob in Azure storage.",
-        "description": "Discovers an existing app backup that can be restored from a blob in Azure storage.",
-        "operationId": "WebApps_DiscoverRestoreSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will perform discovery for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backups/{backupId}": {
       "get": {
         "tags": [
@@ -8026,6 +8198,208 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/virtualNetwork": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a Swift Virtual Network connection.",
+        "description": "Gets a Swift Virtual Network connection.",
+        "operationId": "WebApps_GetSwiftVirtualNetworkConnectionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get a gateway for the production slot's Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "description": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "operationId": "WebApps_DeleteSwiftVirtualNetworkSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will delete the connection for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted virtual network."
+          },
+          "404": {
+            "description": "Virtual network does not exist."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnectionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/web": {
       "get": {
         "tags": [
@@ -8957,6 +9331,64 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/discoverbackup": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.",
+        "description": "Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.",
+        "operationId": "WebApps_DiscoverBackupSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreRequest"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will perform discovery for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestoreRequest"
             }
           },
           "default": {
@@ -12096,6 +12528,69 @@
             "description": "Succesfully deleted premier add-on."
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates a named add-on of an app.",
+        "description": "Updates a named add-on of an app.",
+        "operationId": "WebApps_UpdatePremierAddOnSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOnName",
+            "in": "path",
+            "description": "Add-on name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOn",
+            "in": "body",
+            "description": "A JSON representation of the edited premier add-on.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PremierAddOnPatchResource"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will update the named add-on for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PremierAddOn"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/privateAccess/virtualNetworks": {
@@ -13706,16 +14201,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted source control for web app.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Succesfully deleted source control for web app."
           },
           "202": {
-            "description": "Source control delete operation in progress.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Source control delete operation in progress."
           },
           "404": {
             "description": "Source control does not exist."
@@ -13765,12 +14254,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
@@ -15200,16 +15695,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted source control for web app.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Succesfully deleted source control for web app."
           },
           "202": {
-            "description": "Source control delete operation in progress.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Source control delete operation in progress."
           },
           "404": {
             "description": "Source control does not exist."
@@ -15252,12 +15741,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
@@ -17731,6 +18226,43 @@
         }
       }
     },
+    "PremierAddOnPatchResource": {
+      "description": "ARM resource for a PremierAddOn.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "PremierAddOnPatchResource resource specific properties",
+          "properties": {
+            "sku": {
+              "description": "Premier add on SKU.",
+              "type": "string"
+            },
+            "product": {
+              "description": "Premier add on Product.",
+              "type": "string"
+            },
+            "vendor": {
+              "description": "Premier add on Vendor.",
+              "type": "string"
+            },
+            "marketplacePublisher": {
+              "description": "Premier add on Marketplace publisher.",
+              "type": "string"
+            },
+            "marketplaceOffer": {
+              "description": "Premier add on Marketplace offer.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "PrivateAccess": {
       "description": "Description of the parameters of Private Access for a Web Site.",
       "type": "object",
@@ -19037,13 +19569,6 @@
                 "create"
               ]
             },
-            "snapshotInfo": {
-              "$ref": "./CommonDefinitions.json#/definitions/SnapshotRecoveryRequest",
-              "description": "If specified during app creation, the app is created from a previous snapshot.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
             "resourceGroup": {
               "description": "Name of the resource group the app belongs to. Read-only.",
               "type": "string",
@@ -19272,28 +19797,6 @@
         }
       }
     },
-    "Snapshot": {
-      "description": "A snapshot of an app.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Snapshot resource specific properties",
-          "properties": {
-            "time": {
-              "description": "The time the snapshot was taken.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "SnapshotCollection": {
       "description": "Collection of snapshots which can be used to revert an app to a previous time.",
       "required": [
@@ -19305,7 +19808,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Snapshot"
+            "$ref": "./CommonDefinitions.json#/definitions/Snapshot"
           }
         },
         "nextLink": {
@@ -19456,6 +19959,31 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SwiftVirtualNetwork": {
+      "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SwiftVirtualNetwork resource specific properties",
+          "properties": {
+            "subnetResourceId": {
+              "description": "The Virtual Network subnet's resource ID. This is the subnet that this Web App will join. This subnet must have a delegation to Microsoft.Web/serverFarms defined first.",
+              "type": "string"
+            },
+            "swiftSupported": {
+              "description": "A flag that specifies if the scale unit this Web App is on supports Swift integration.",
+              "type": "boolean"
+            }
           },
           "x-ms-client-flatten": true
         }

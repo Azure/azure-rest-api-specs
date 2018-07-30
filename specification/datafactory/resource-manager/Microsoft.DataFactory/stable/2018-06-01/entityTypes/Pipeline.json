@@ -64,11 +64,11 @@
           }
         },
         "userProperties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Activity user properties." 
+          "type": "array",
+          "description": "Activity user properties.",
+          "items": {
+            "$ref": "#/definitions/UserProperty"
+          }
         }
       },
       "additionalProperties": {
@@ -77,6 +77,24 @@
       "required": [
         "name",
         "type"
+      ]
+    },
+    "UserProperty": {
+      "description": "User property.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "User proprety name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "User proprety value. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "value"
       ]
     },
     "ActivityDependency": {
@@ -2875,10 +2893,121 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "libraries": {
+          "description": "A list of libraries to be installed on the cluster that will execute the job.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Databricks library definition.",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
         }
       },
       "required": [
         "notebookPath"
+      ]
+    },
+    "DatabricksSparkJarActivity": {
+      "description": "DatabricksSparkJar activity.",
+      "x-ms-discriminator-value": "DatabricksSparkJar",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Databricks SparkJar activity properties.",
+          "$ref": "#/definitions/DatabricksSparkJarActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DatabricksSparkJarActivityTypeProperties": {
+      "description": "Databricks SparkJar activity properties.",
+      "properties": {
+        "mainClassName": {
+          "type": "object",
+          "description": "The full name of the class containing the main method to be executed. This class must be contained in a JAR provided as a library. Type: string (or Expression with resultType string)."
+        },
+        "parameters": {
+          "description": "Parameters that will be passed to the main method.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "libraries": {
+          "description": "A list of libraries to be installed on the cluster that will execute the job.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Databricks library definition.",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "required": [
+        "mainClassName"
+      ]
+    },
+    "DatabricksSparkPythonActivity": {
+      "description": "DatabricksSparkPython activity.",
+      "x-ms-discriminator-value": "DatabricksSparkPython",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Databricks SparkPython activity properties.",
+          "$ref": "#/definitions/DatabricksSparkPythonActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DatabricksSparkPythonActivityTypeProperties": {
+      "description": "Databricks SparkPython activity properties.",
+      "properties": {
+        "pythonFile": {
+          "type": "object",
+          "description": "The URI of the Python file to be executed. DBFS paths are supported. Type: string (or Expression with resultType string)."
+        },
+        "parameters": {
+          "description": "Command line parameters that will be passed to the Python file.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "libraries": {
+          "description": "A list of libraries to be installed on the cluster that will execute the job.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Databricks library definition.",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "required": [
+        "pythonFile"
       ]
     }
   }
