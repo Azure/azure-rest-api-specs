@@ -17,11 +17,15 @@
       "apim_key": []
     }
   ],
-  "host": "api.cognitive.microsoft.com",
-  "basePath": "/face/v1.0",
-  "schemes": [
-    "https"
-  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/face/v1.0",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "paths": {
     "/findsimilars": {
       "post": {
@@ -2401,6 +2405,15 @@
       "format": "uuid",
       "x-ms-parameter-location": "method",
       "collectionFormat": "csv"
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
