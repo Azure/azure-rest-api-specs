@@ -347,6 +347,17 @@
             "format":"int32",
             "description": "The Length of the Public IP Prefix."
           },
+          "ipPrefix" : {
+            "type":"string",
+            "description": "The allocated Prefix"
+          },
+          "publicIPAddresses": {
+            "type":"array",
+            "items":{
+             "$ref": "#/definitions/ReferencedPublicIpAddress"
+            },
+            "description":"The list of all referenced PublicIPAddresses"
+          },
           "idleTimeoutInMinutes": {
             "type": "integer",
             "format": "int32",
@@ -421,6 +432,14 @@
           }
         },
         "description": "Contains the IpTag associated with the object"
+      },
+      "ReferencedPublicIpAddress":{
+        "properties":{
+          "id":{
+            "type":"string",
+            "description":"The PublicIPAddress Reference"
+          }
+        }
       }
     }
 }
