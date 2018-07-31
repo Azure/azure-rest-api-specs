@@ -59,8 +59,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Kusto
-  output-folder: $(csharp-sdks-folder)/Microsoft.Kusto/Generated
+  namespace: Microsoft.Azure.Management.Kusto
+  output-folder: $(csharp-sdks-folder)/Kusto/Management.Kusto/Generated
   clear-output-folder: true
 ```
 
@@ -68,12 +68,28 @@ csharp:
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
+python-mode: create
 python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
+  azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.Kusto
+  namespace: azure.mgmt.kusto
+  package-name: azure-mgmt-kusto
+  package-version: 1.0.0
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-kusto/azure/mgmt/kusto
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-kusto
+```
 ```
