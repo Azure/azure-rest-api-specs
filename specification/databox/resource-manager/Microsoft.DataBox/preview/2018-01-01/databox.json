@@ -148,40 +148,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/serviceHealth": {
-      "get": {
-        "tags": [
-          "Service"
-        ],
-        "description": "This method returns the health of partner services.",
-        "operationId": "Service_GetHealth",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The service health response.",
-            "schema": {
-              "$ref": "#/definitions/ServiceHealthResponseList"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/validateAddress": {
       "post": {
         "tags": [
@@ -1986,47 +1952,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ServiceHealthResponse": {
-      "description": "Response of the GetServiceHealth api.",
-      "type": "object",
-      "properties": {
-        "connectorType": {
-          "description": "Name of the connector.",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Time when the action was triggered.",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Time when the action got completed.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Status of the service.",
-          "type": "boolean"
-        }
-      }
-    },
-    "ServiceHealthResponseList": {
-      "description": "List of service health response.",
-      "type": "object",
-      "properties": {
-        "dependencies": {
-          "description": "List of ServiceHealthResponse.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceHealthResponse"
-          }
-        },
-        "serviceVersion": {
-          "description": "Version of the service.",
-          "type": "string"
-        }
-      }
     },
     "ShareCredentialDetails": {
       "description": "Credential details of the shares in account.",
