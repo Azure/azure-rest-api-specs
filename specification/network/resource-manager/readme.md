@@ -53,6 +53,7 @@ input-file:
 - Microsoft.Network/stable/2018-07-01/networkWatcher.json
 - Microsoft.Network/stable/2018-07-01/operation.json
 - Microsoft.Network/stable/2018-07-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-07-01/publicIpPrefix.json
 - Microsoft.Network/stable/2018-07-01/routeFilter.json
 - Microsoft.Network/stable/2018-07-01/routeTable.json
 - Microsoft.Network/stable/2018-07-01/serviceCommunity.json
@@ -629,6 +630,9 @@ directive:
     from: publicIpAddress.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: publicIpPrefix.json
+    reason: name, id and type properties are inherited from the upper level    
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: routeFilter.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -716,7 +720,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2018-05
+  - tag: package-2018-06
   - tag: package-2018-04
   - tag: package-2018-02
   - tag: package-2018-01
@@ -734,13 +738,13 @@ batch:
   - tag: package-2015-05-preview
 ```
 
-### Tag: package-2018-05 and go
+### Tag: package-2018-06 and go
 
-These settings apply only when `--tag=package-2018-05 --go` is specified on the command line.
+These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-05' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2018-05-01/network
+``` yaml $(tag) == 'package-2018-06' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2018-06-01/network
 ```
 
 ### Tag: package-2018-04 and go
@@ -917,8 +921,8 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 
 ```yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-06
   - tag: package-2018-04
-  - tag: package-2018-05
   - tag: package-2017-10
 ```
 
@@ -935,15 +939,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2018-05 and java
+### Tag: package-2018-06 and java
 
-These settings apply only when `--tag=package-2018-05 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-06 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-05' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.network.v2018_05_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_05_01
+  namespace: com.microsoft.azure.management.network.v2018_06_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_06_01
 regenerate-manager: true
 generate-interface: true
 ```

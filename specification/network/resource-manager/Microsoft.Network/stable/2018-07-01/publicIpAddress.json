@@ -369,6 +369,10 @@
           "type": "string",
           "description": "The IP address associated with the public IP address resource."
         },
+        "publicIPPrefix": {
+          "$ref":"./publicIpPrefix.json#/definitions/PublicIPPrefix",
+          "description": "The Public IP Prefix this Public IP Address should be allocated from."
+        },
         "idleTimeoutInMinutes": {
           "type": "integer",
           "format": "int32",
@@ -459,7 +463,7 @@
           "description": "Gets or sets value of the IpTag associated with the public IP. Example SQL, Storage etc"
         }
       },
-      "description": "Contains the IpTag associated with the public IP address"
+      "description": "Contains the IpTag associated with the object"
     }
   }
 }
