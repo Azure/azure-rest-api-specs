@@ -63,7 +63,12 @@
                     "200": {
                         "description": "OK - Returns a JSON object"
                     }
-                }
+                },
+                "x-ms-examples": {
+                    "Get whether or not Serial Console is disabled": {
+                    "$ref": "./examples/GetConsoleDisabledExample.json"
+                    }
+                },
             }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/providers/consoleServices/{default}/enableConsole": {
@@ -110,7 +115,12 @@
                             "$ref": "#/definitions/DeploymentValidateResult"
                         }
                     }
-                }
+                },
+                "x-ms-examples": {
+                    "Enable console successfully": {
+                    "$ref": "./examples/EnableConsoleExample.json"
+                    }
+                },
             }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/providers/consoleServices/{default}/disableConsole": {
@@ -148,7 +158,12 @@
                             "$ref": "#/definitions/DeploymentValidateResult"
                         }
                     }
-                }
+                },
+                "x-ms-examples": {
+                    "Attempt to disable console and receive a 500 error": {
+                    "$ref": "./examples/DisableConsoleExample.json"
+                    }
+                },
             }
         }
     },
