@@ -10,12 +10,10 @@
         "https"
     ],
     "consumes": [
-        "application/json",
-        "text/json"
+        "application/json"
     ],
     "produces": [
-        "application/json",
-        "text/json"
+        "application/json"
     ],
     "security": [
         {
@@ -159,6 +157,7 @@
             "properties": {
                 "value": {
                     "type": "boolean",
+                    "title": "Serial Console GET Result",
                     "description": "Returns whether or not Serial Console is disabled."
                 }
             }
@@ -167,14 +166,16 @@
             "properties": {
                 "vmSubId": {
                     "type": "string",
+                    "title": "VM's subscription ID",
                     "description": "VM's subscription ID"
                 }
             }
         },
         "DeploymentValidateResult": {
             "properties": {
-                "ErrorMessage": {
+                "errorMessage": {
                     "type": "string",
+                    "title": "Details on Failure",
                     "description": "Details on Failure"
                 }
             }
