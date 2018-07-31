@@ -53,6 +53,7 @@ input-file:
 - Microsoft.Network/stable/2018-07-01/networkWatcher.json
 - Microsoft.Network/stable/2018-07-01/operation.json
 - Microsoft.Network/stable/2018-07-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-07-01/publicIpPrefix.json
 - Microsoft.Network/stable/2018-07-01/routeFilter.json
 - Microsoft.Network/stable/2018-07-01/routeTable.json
 - Microsoft.Network/stable/2018-07-01/serviceCommunity.json
@@ -628,6 +629,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: publicIpAddress.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: publicIpPrefix.json
+    reason: name, id and type properties are inherited from the upper level    
   - suppress: RequiredPropertiesMissingInResourceModel
     from: routeFilter.json
     reason: name, id and type properties are inherited from the upper level
