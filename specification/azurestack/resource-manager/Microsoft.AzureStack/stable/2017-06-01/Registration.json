@@ -45,9 +45,12 @@
                             "$ref": "#/definitions/RegistrationList"
                         }
                     },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
+                    "default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
+						}
+					}
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
@@ -87,9 +90,12 @@
                             "$ref": "#/definitions/Registration"
                         }
                     },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
+                    "default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
+						}
+					}
                 }
             },
             "delete": {
@@ -124,9 +130,12 @@
                     "204": {
                         "description": "NO CONTENT"
                     },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
+                    "default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
+						}
+					}
                 }
             },
             "put": {
@@ -207,9 +216,12 @@
                             "$ref": "#/definitions/Registration"
                         }
                     },
-					"404": {
-                        "description": "NOT FOUND"
-                    }
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
+						}
+					}
                 }
             }
         },
