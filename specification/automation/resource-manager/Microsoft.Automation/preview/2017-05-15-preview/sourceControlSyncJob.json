@@ -260,9 +260,13 @@
       "properties": {
         "commitId": {
           "type": "string",
-          "description": "Sets the commit id of the source control sync job."
+          "description": "Sets the commit id of the source control sync job. If not syncing to a commitId, enter an empty string.",
+          "minLength": 0
         }
       },
+      "required": [
+        "commitId"
+      ],
       "description": "Definition of create source control sync job properties."
     },
     "SourceControlSyncJobById": {
