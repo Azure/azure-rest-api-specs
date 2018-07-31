@@ -66,6 +66,7 @@
                     "enableFloatingIP": true,
                     "idleTimeoutInMinutes": 15,
                     "protocol": "Tcp",
+                    "enableTcpReset": true,
                     "loadDistribution": "Default",
                     "backendAddressPool": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/belb"
@@ -108,7 +109,8 @@
                     "backendPort": 3389,
                     "enableFloatingIP": true,
                     "idleTimeoutInMinutes": 15,
-                    "protocol": "Tcp"
+                    "protocol": "Tcp",
+                    "enableTcpReset": true
                   }
                 }
               ],
