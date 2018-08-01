@@ -121,14 +121,14 @@
           "description": "The disk share path.",
           "type": "string"
         },
-        "actualSize": {
-          "description": "The actual size of disk.",
+        "actualSizeGB": {
+          "description": "The actual size of disk in GB.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
         },
-        "provisionSize": {
-          "description": "The provision size of disk.",
+        "provisionSizeGB": {
+          "description": "The provision size of disk in GB.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -139,12 +139,12 @@
           "readOnly": true
         },
         "userResourceId": {
-          "description": "The disk resource Uri from tenant view.",
+          "description": "The disk resource Uri from user view.",
           "type": "string",
           "readOnly": true
         },
-        "resourceType": {
-          "description": "The type of the resource.",
+        "diskType": {
+          "description": "The type of the disk resource.",
           "$ref": "Disks.json#/definitions/DiskResourceType",
           "readOnly": true
         },
@@ -251,7 +251,7 @@
       "default": "2018-07-30-preview"
     },
     "UserSubscriptionIdParameter": {
-      "description": "Tenant Subscription Id which the resource belongs to.",
+      "description": "User Subscription Id which the resource belongs to.",
       "name": "userSubscriptionId",
       "type": "string",
       "in": "query",
