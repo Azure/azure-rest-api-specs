@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2015-12-01-preview",
+        "version": "2018-02-09",
         "title": "Compute Admin Client"
     },
     "host": "adminmanagement.local.azurestack.external",
@@ -30,23 +30,23 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "#/parameters/QuotaParameter"
+                        "$ref": "Quotas.json#/parameters/QuotaParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
+                        "$ref": "Quotas.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Quota"
+                            "$ref": "Quotas.json#/definitions/Quota"
                         }
                     },
                     "404": {
@@ -74,26 +74,26 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "#/parameters/QuotaParameter"
+                        "$ref": "Quotas.json#/parameters/QuotaParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
+                        "$ref": "Quotas.json#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/NewQuotaParameter"
+                        "$ref": "Quotas.json#/parameters/NewQuotaParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Quota"
+                            "$ref": "Quotas.json#/definitions/Quota"
                         }
                     }
                 }
@@ -118,22 +118,25 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "#/parameters/QuotaParameter"
+                        "$ref": "Quotas.json#/parameters/QuotaParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
+                        "$ref": "Quotas.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK"
-                    }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }					
                 }
             }
         },
@@ -158,20 +161,20 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
+                        "$ref": "Quotas.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/QuotaList"
+                            "$ref": "Quotas.json#/definitions/QuotaList"
                         }
                     },
                     "404": {
@@ -197,7 +200,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "Compute.json#/definitions/Resource"
+                    "$ref": "../2015-12-01-preview/Compute.json#/definitions/Resource"
                 }
             ]
         },
@@ -255,13 +258,21 @@
                     "description": "List of quotas",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Quota"
+                        "$ref": "Quotas.json#/definitions/Quota"
                     }
                 }
             }
         }
     },
     "parameters": {
+		"ApiVersionParameter": {
+		  "name": "api-version",
+		  "in": "query",
+		  "description": "Client API Version.",
+		  "required": true,
+		  "type": "string",
+		  "default": "2018-02-09"
+		},	
         "QuotaParameter": {
             "description": "Name of the quota.",
             "name": "quotaName",
