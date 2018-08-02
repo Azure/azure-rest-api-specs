@@ -24,14 +24,14 @@ These are the global settings for the Compute API.
 title: ComputeAdminClient
 description: Compute Admin Client
 openapi-type: arm
-tag: package-2015-12-01-preview
+tag: package-2018-02-09
 ```
 
-### Tag: package-2015-12-01-preview
+### Tag: package-2018-02-09
 
-These settings apply only when `--tag=package-2015-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-02-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-12-01-preview'
+``` yaml $(tag) == 'package-2018-02-09'
 input-file:
     - Microsoft.Compute.Admin/preview/2015-12-01-preview/Compute.json
     - Microsoft.Compute.Admin/preview/2015-12-01-preview/PlatformImages.json
