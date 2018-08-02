@@ -1,0 +1,7514 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-10-01",
+    "title": "StorSimpleManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorSimple/managers": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of StorSimple managers.",
+            "schema": {
+              "$ref": "#/definitions/ManagerList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorSimple/operations": {
+      "get": {
+        "tags": [
+          "AvailableProviderOperations"
+        ],
+        "operationId": "AvailableProviderOperations_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailableProviderOperations"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorSimple/register": {
+      "post": {
+        "tags": [
+          "AvailableProviderOperations"
+        ],
+        "operationId": "AvailableProviderOperations_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_ListByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of StorSimple managers.",
+            "schema": {
+              "$ref": "#/definitions/ManagerList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The StorSimple manager.",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Manager",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The StorSimple manager has been successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          },
+          "201": {
+            "description": "The StorSimple manager has been successfully created",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The StorSimple manager has been successfully deleted"
+          },
+          "204": {
+            "description": "The StorSimple manager is already in a deleted state"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords": {
+      "get": {
+        "tags": [
+          "AccessControlRecords"
+        ],
+        "operationId": "AccessControlRecords_ListByManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of access control records.",
+            "schema": {
+              "$ref": "#/definitions/AccessControlRecordList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords/{accessControlRecordName}": {
+      "get": {
+        "tags": [
+          "AccessControlRecords"
+        ],
+        "operationId": "AccessControlRecords_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accessControlRecordName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The access control record.",
+            "schema": {
+              "$ref": "#/definitions/AccessControlRecord"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "AccessControlRecords"
+        ],
+        "operationId": "AccessControlRecords_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accessControlRecordName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessControlRecord",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessControlRecord"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the access control record.",
+            "schema": {
+              "$ref": "#/definitions/AccessControlRecord"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the access control record."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AccessControlRecords"
+        ],
+        "operationId": "AccessControlRecords_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accessControlRecordName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the access control record."
+          },
+          "204": {
+            "description": "Successfully deleted the access control record."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/alerts": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_ListByManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of alerts.",
+            "schema": {
+              "$ref": "#/definitions/AlertList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/AlertFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/backups": {
+      "get": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_ListByManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of backups.",
+            "schema": {
+              "$ref": "#/definitions/BackupList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/BackupFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/certificates/{certificateName}": {
+      "put": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_UploadRegistrationCertificate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "uploadCertificateRequestrequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadCertificateRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Upload Vault Certificate",
+            "schema": {
+              "$ref": "#/definitions/UploadCertificateResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/clearAlerts": {
+      "post": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_Clear",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClearAlertRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully cleared the alerts."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_ListByManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify $expand=details to populate additional fields related to the device.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of devices.",
+            "schema": {
+              "$ref": "#/definitions/DeviceList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify $expand=details to populate additional fields related to the device.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The device.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the device."
+          },
+          "204": {
+            "description": "Successfully deleted the device."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_Patch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devicePatch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevicePatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully patched the device.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to patch the device."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/alertSettings/default": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_GetAlertSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The alert settings.",
+            "schema": {
+              "$ref": "#/definitions/AlertSettings"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_CreateOrUpdateAlertSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertSettings",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertSettings"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the network settings.",
+            "schema": {
+              "$ref": "#/definitions/AlertSettings"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the network settings."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups": {
+      "get": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_ListByDevice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forFailover",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of backups.",
+            "schema": {
+              "$ref": "#/definitions/BackupList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/BackupFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups/{backupName}": {
+      "delete": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the backup."
+          },
+          "204": {
+            "description": "Successfully deleted the backup."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups/{backupName}/elements/{elementName}/clone": {
+      "post": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Clone",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "elementName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloneRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloneRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully cloned."
+          },
+          "202": {
+            "description": "Accepted the request to clone."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupScheduleGroups": {
+      "get": {
+        "tags": [
+          "BackupScheduleGroups"
+        ],
+        "operationId": "BackupScheduleGroups_ListByDevice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of backup schedule groups.",
+            "schema": {
+              "$ref": "#/definitions/BackupScheduleGroupList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupScheduleGroups/{scheduleGroupName}": {
+      "get": {
+        "tags": [
+          "BackupScheduleGroups"
+        ],
+        "operationId": "BackupScheduleGroups_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The backup schedule group.",
+            "schema": {
+              "$ref": "#/definitions/BackupScheduleGroup"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "BackupScheduleGroups"
+        ],
+        "operationId": "BackupScheduleGroups_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleGroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupScheduleGroup"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the backup schedule group.",
+            "schema": {
+              "$ref": "#/definitions/BackupScheduleGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the backup schedule group."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "BackupScheduleGroups"
+        ],
+        "operationId": "BackupScheduleGroups_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the backup schedule group."
+          },
+          "204": {
+            "description": "Successfully deleted the backup schedule group."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/chapSettings": {
+      "get": {
+        "tags": [
+          "ChapSettings"
+        ],
+        "operationId": "ChapSettings_ListByDevice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of chap settings.",
+            "schema": {
+              "$ref": "#/definitions/ChapSettingsList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/chapSettings/{chapUserName}": {
+      "get": {
+        "tags": [
+          "ChapSettings"
+        ],
+        "operationId": "ChapSettings_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chapUserName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The chap setting.",
+            "schema": {
+              "$ref": "#/definitions/ChapSettings"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "ChapSettings"
+        ],
+        "operationId": "ChapSettings_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chapUserName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chapSetting",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChapSettings"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the chap setting.",
+            "schema": {
+              "$ref": "#/definitions/ChapSettings"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the chap setting."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ChapSettings"
+        ],
+        "operationId": "ChapSettings_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chapUserName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the chap setting."
+          },
+          "204": {
+            "description": "Successfully deleted the chap setting."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/deactivate": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_Deactivate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to deactivate the device."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/disks": {
+      "get": {
+        "tags": [
+          "IscsiDisks"
+        ],
+        "operationId": "IscsiDisks_ListByDevice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of iscsi disks.",
+            "schema": {
+              "$ref": "#/definitions/ISCSIDiskList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/download": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_DownloadUpdates",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to download updates."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/failover": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_Failover",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FailoverRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to failover the device."
+          },
+          "204": {
+            "description": "Successfully completed failover of the device."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/failoverTargets": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_ListFailoverTarget",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify $expand=details to populate additional fields related to the device.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of devices for failover.",
+            "schema": {
+              "$ref": "#/definitions/DeviceList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers": {
+      "get": {
+        "tags": [
+          "FileServers"
+        ],
+        "operationId": "FileServers_ListByDevice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of file servers.",
+            "schema": {
+              "$ref": "#/definitions/FileServerList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}": {
+      "get": {
+        "tags": [
+          "FileServers"
+        ],
+        "operationId": "FileServers_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file server.",
+            "schema": {
+              "$ref": "#/definitions/FileServer"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "FileServers"
+        ],
+        "operationId": "FileServers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServer",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileServer"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the file server.",
+            "schema": {
+              "$ref": "#/definitions/FileServer"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the file server."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "FileServers"
+        ],
+        "operationId": "FileServers_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the file server."
+          },
+          "204": {
+            "description": "Successfully deleted the file server."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/backup": {
+      "post": {
+        "tags": [
+          "FileServers"
+        ],
+        "operationId": "FileServers_BackupNow",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to backup the file server."
+          },
+          "204": {
+            "description": "Successfully completed backup of the file server."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/metrics": {
+      "get": {
+        "tags": [
+          "FileServers"
+        ],
+        "operationId": "FileServers_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metrics.",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "FileServers"
+        ],
+        "operationId": "FileServers_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metric definitions.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/shares": {
+      "get": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_ListByFileServer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of file shares.",
+            "schema": {
+              "$ref": "#/definitions/FileShareList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/shares/{shareName}": {
+      "get": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file share.",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileShare",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the file share.",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the file share."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the file share."
+          },
+          "204": {
+            "description": "Successfully deleted the file share."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/shares/{shareName}/metrics": {
+      "get": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metrics.",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/shares/{shareName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metric definitions.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/install": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_InstallUpdates",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to install updates."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers": {
+      "get": {
+        "tags": [
+          "IscsiServers"
+        ],
+        "operationId": "IscsiServers_ListByDevice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of iscsi servers.",
+            "schema": {
+              "$ref": "#/definitions/ISCSIServerList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}": {
+      "get": {
+        "tags": [
+          "IscsiServers"
+        ],
+        "operationId": "IscsiServers_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The iscsi server.",
+            "schema": {
+              "$ref": "#/definitions/ISCSIServer"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "IscsiServers"
+        ],
+        "operationId": "IscsiServers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServer",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ISCSIServer"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the iscsi server.",
+            "schema": {
+              "$ref": "#/definitions/ISCSIServer"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the iscsi server."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "IscsiServers"
+        ],
+        "operationId": "IscsiServers_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the iscsi server."
+          },
+          "204": {
+            "description": "Successfully deleted the iscsi server."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/backup": {
+      "post": {
+        "tags": [
+          "IscsiServers"
+        ],
+        "operationId": "IscsiServers_BackupNow",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to backup the iscsi server."
+          },
+          "204": {
+            "description": "Successfully completed backup of the iscsi server."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks": {
+      "get": {
+        "tags": [
+          "IscsiDisks"
+        ],
+        "operationId": "IscsiDisks_ListByIscsiServer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of iscsi disks.",
+            "schema": {
+              "$ref": "#/definitions/ISCSIDiskList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}": {
+      "get": {
+        "tags": [
+          "IscsiDisks"
+        ],
+        "operationId": "IscsiDisks_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The iscsi disk.",
+            "schema": {
+              "$ref": "#/definitions/ISCSIDisk"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "IscsiDisks"
+        ],
+        "operationId": "IscsiDisks_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiDisk",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ISCSIDisk"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the iscsi disk.",
+            "schema": {
+              "$ref": "#/definitions/ISCSIDisk"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the iscsi disk."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "IscsiDisks"
+        ],
+        "operationId": "IscsiDisks_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the iscsi disk."
+          },
+          "204": {
+            "description": "Successfully deleted the iscsi disk."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}/metrics": {
+      "get": {
+        "tags": [
+          "IscsiDisks"
+        ],
+        "operationId": "IscsiDisks_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metrics.",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "IscsiDisks"
+        ],
+        "operationId": "IscsiDisks_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metric definitions.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/metrics": {
+      "get": {
+        "tags": [
+          "IscsiServers"
+        ],
+        "operationId": "IscsiServers_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metrics.",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "IscsiServers"
+        ],
+        "operationId": "IscsiServers_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metric definitions.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/jobs": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_ListByDevice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of jobs.",
+            "schema": {
+              "$ref": "#/definitions/JobList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/JobFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The job.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metrics": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metrics.",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metric definitions.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/networkSettings/default": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_GetNetworkSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The network settings.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/publishSupportPackage": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_PublishSupportPackage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "supportPackageRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportPackageRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to publish support package of the device."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/scanForUpdates": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_ScanForUpdates",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to scan for updates."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/securitySettings/default/update": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_CreateOrUpdateSecuritySettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securitySettings",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecuritySettings"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the security settings."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/sendTestAlertEmail": {
+      "post": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_SendTestEmail",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendTestAlertEmailRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully sent the test email."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/shares": {
+      "get": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_ListByDevice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of file shares.",
+            "schema": {
+              "$ref": "#/definitions/FileShareList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/timeSettings/default": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_GetTimeSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The time settings.",
+            "schema": {
+              "$ref": "#/definitions/TimeSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/updateSummary/default": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_GetUpdateSummary",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update summary.",
+            "schema": {
+              "$ref": "#/definitions/Updates"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/encryptionSettings/default": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_GetEncryptionSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The encryption settings.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/extendedInformation/vaultExtendedInfo": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_GetExtendedInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The manager extended information.",
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_CreateExtendedInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ManagerExtendedInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The extended information on the manager has been successfully created",
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_DeleteExtendedInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The extended information on the manager has been successfully deleted"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_UpdateExtendedInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ManagerExtendedInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Pass the ETag of ExtendedInfo fetched from GET call",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The extended information on the manager has been successfully created",
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/fileservers": {
+      "get": {
+        "tags": [
+          "FileServers"
+        ],
+        "operationId": "FileServers_ListByManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of file servers.",
+            "schema": {
+              "$ref": "#/definitions/FileServerList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/getActivationKey": {
+      "post": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_GetActivationKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The activation key.",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/getEncryptionKey": {
+      "post": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_GetEncryptionKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The encryption key.",
+            "schema": {
+              "$ref": "#/definitions/SymmetricEncryptedSecret"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/iscsiservers": {
+      "get": {
+        "tags": [
+          "IscsiServers"
+        ],
+        "operationId": "IscsiServers_ListByManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of iscsi servers.",
+            "schema": {
+              "$ref": "#/definitions/ISCSIServerList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/jobs": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_ListByManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of jobs.",
+            "schema": {
+              "$ref": "#/definitions/JobList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/JobFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/metrics": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metrics.",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metric definitions.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenarateRegistationCertificate": {
+      "post": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_RegenerateRegistrationCertificate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Registration Certificate.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationCertificate"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenerateActivationKey": {
+      "post": {
+        "tags": [
+          "Managers"
+        ],
+        "operationId": "Managers_RegenerateActivationKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The regenerated activation key.",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials": {
+      "get": {
+        "tags": [
+          "StorageAccountCredentials"
+        ],
+        "operationId": "StorageAccountCredentials_ListByManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of storage account credentials.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCredentialList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials/{credentialName}": {
+      "get": {
+        "tags": [
+          "StorageAccountCredentials"
+        ],
+        "operationId": "StorageAccountCredentials_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The storage account credential.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCredential"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "StorageAccountCredentials"
+        ],
+        "operationId": "StorageAccountCredentials_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageAccount",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCredential"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the storage account credential.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCredential"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the storage account credential."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StorageAccountCredentials"
+        ],
+        "operationId": "StorageAccountCredentials_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the storage account credential."
+          },
+          "204": {
+            "description": "Successfully deleted the storage account credential."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageDomains": {
+      "get": {
+        "tags": [
+          "StorageDomains"
+        ],
+        "operationId": "StorageDomains_ListByManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of storage domains.",
+            "schema": {
+              "$ref": "#/definitions/StorageDomainList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageDomains/{storageDomainName}": {
+      "get": {
+        "tags": [
+          "StorageDomains"
+        ],
+        "operationId": "StorageDomains_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "storageDomainName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The storage domain.",
+            "schema": {
+              "$ref": "#/definitions/StorageDomain"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "StorageDomains"
+        ],
+        "operationId": "StorageDomains_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "storageDomainName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageDomain",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageDomain"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the storage domain.",
+            "schema": {
+              "$ref": "#/definitions/StorageDomain"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the storage domain."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StorageDomains"
+        ],
+        "operationId": "StorageDomains_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "storageDomainName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the storage domain."
+          },
+          "204": {
+            "description": "Successfully deleted the storage domain."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AccessControlRecord": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccessControlRecordProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AccessControlRecordList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessControlRecord"
+          }
+        }
+      }
+    },
+    "AccessControlRecordProperties": {
+      "required": [
+        "initiatorName"
+      ],
+      "type": "object",
+      "properties": {
+        "initiatorName": {
+          "type": "string"
+        }
+      }
+    },
+    "Alert": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AlertErrorDetails": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "occurences": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "AlertFilter": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "Active",
+            "Cleared"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertStatus",
+            "modelAsString": false
+          }
+        },
+        "severity": {
+          "enum": [
+            "Informational",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertSeverity",
+            "modelAsString": false
+          }
+        },
+        "sourceType": {
+          "enum": [
+            "Resource",
+            "Device"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertSourceType",
+            "modelAsString": false
+          }
+        },
+        "sourceName": {
+          "type": "string"
+        },
+        "appearedOnTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "AlertList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "AlertProperties": {
+      "required": [
+        "title",
+        "scope",
+        "alertType",
+        "appearedAtTime",
+        "appearedAtSourceTime",
+        "source",
+        "severity",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "Resource",
+            "Device"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertScope",
+            "modelAsString": false
+          }
+        },
+        "alertType": {
+          "type": "string"
+        },
+        "appearedAtTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "appearedAtSourceTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "clearedAtTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "clearedAtSourceTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/AlertSource"
+        },
+        "recommendation": {
+          "type": "string"
+        },
+        "resolutionReason": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "Informational",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertSeverity",
+            "modelAsString": false
+          }
+        },
+        "status": {
+          "enum": [
+            "Active",
+            "Cleared"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertStatus",
+            "modelAsString": false
+          }
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/AlertErrorDetails"
+        },
+        "detailedInformation": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AlertSettings": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertSettingsProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AlertSettingsProperties": {
+      "required": [
+        "emailNotification",
+        "notificationToServiceOwners",
+        "alertNotificationCulture"
+      ],
+      "type": "object",
+      "properties": {
+        "emailNotification": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertEmailNotificationStatus",
+            "modelAsString": false
+          }
+        },
+        "notificationToServiceOwners": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceOwnersAlertNotificationStatus",
+            "modelAsString": false
+          }
+        },
+        "alertNotificationCulture": {
+          "type": "string"
+        },
+        "additionalRecipientEmailList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AlertSource": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string"
+        },
+        "alertSourceType": {
+          "enum": [
+            "Resource",
+            "Device"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertSourceType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "AsymmetricEncryptedSecret": {
+      "required": [
+        "value",
+        "encryptionAlgorithm"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "encryptionCertificateThumbprint": {
+          "type": "string"
+        },
+        "encryptionAlgorithm": {
+          "enum": [
+            "None",
+            "AES256",
+            "RSAES_PKCS1_v_1_5"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionAlgorithm",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "AvailableProviderOperation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableProviderOperationDisplay"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AvailableProviderOperationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AvailableProviderOperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "AvailableProviderOperationProperties": {
+      "type": "object",
+      "properties": {}
+    },
+    "AvailableProviderOperations": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableProviderOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "Backup": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BackupElement": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupElementProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BackupElementProperties": {
+      "required": [
+        "sizeInBytes",
+        "endpointName",
+        "dataPolicy"
+      ],
+      "type": "object",
+      "properties": {
+        "sizeInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "endpointName": {
+          "type": "string"
+        },
+        "dataPolicy": {
+          "enum": [
+            "Invalid",
+            "Local",
+            "Tiered",
+            "Cloud"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataPolicy",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "BackupFilter": {
+      "type": "object",
+      "properties": {
+        "initiatedBy": {
+          "enum": [
+            "Manual",
+            "Scheduled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InitiatedBy",
+            "modelAsString": false
+          }
+        },
+        "createdTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "BackupList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Backup"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "BackupProperties": {
+      "required": [
+        "sizeInBytes",
+        "initiatedBy",
+        "deviceId",
+        "elements"
+      ],
+      "type": "object",
+      "properties": {
+        "targetId": {
+          "type": "string"
+        },
+        "targetType": {
+          "type": "string"
+        },
+        "sizeInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "createdTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "expirationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "initiatedBy": {
+          "enum": [
+            "Manual",
+            "Scheduled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InitiatedBy",
+            "modelAsString": false
+          }
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupElement"
+          }
+        }
+      }
+    },
+    "BackupScheduleGroup": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupScheduleGroupProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BackupScheduleGroupList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupScheduleGroup"
+          }
+        }
+      }
+    },
+    "BackupScheduleGroupProperties": {
+      "required": [
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "$ref": "#/definitions/Time"
+        }
+      }
+    },
+    "BaseModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "ChapProperties": {
+      "required": [
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "password": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret"
+        }
+      }
+    },
+    "ChapSettings": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChapProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ChapSettingsList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChapSettings"
+          }
+        }
+      }
+    },
+    "ClearAlertRequest": {
+      "required": [
+        "alerts"
+      ],
+      "type": "object",
+      "properties": {
+        "resolutionMessage": {
+          "type": "string"
+        },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CloneRequest": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloneRequestProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CloneRequestProperties": {
+      "required": [
+        "targetDeviceId",
+        "targetAccessPointId",
+        "newEndpointName"
+      ],
+      "type": "object",
+      "properties": {
+        "targetDeviceId": {
+          "type": "string"
+        },
+        "targetAccessPointId": {
+          "type": "string"
+        },
+        "newEndpointName": {
+          "type": "string"
+        },
+        "share": {
+          "$ref": "#/definitions/FileShare"
+        },
+        "disk": {
+          "$ref": "#/definitions/ISCSIDisk"
+        }
+      }
+    },
+    "Device": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeviceDetails": {
+      "type": "object",
+      "properties": {
+        "endpointCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalStorageInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalLocalStorageInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "provisionedStorageInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "provisionedLocalStorageInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "usingStorageInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "usingLocalStorageInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalBackupSizeInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "availableStorageInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "availableLocalStorageInBytes": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "DeviceList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        }
+      }
+    },
+    "DevicePatch": {
+      "type": "object",
+      "properties": {
+        "deviceDescription": {
+          "type": "string"
+        }
+      }
+    },
+    "DeviceProperties": {
+      "type": "object",
+      "properties": {
+        "activationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "allowedDeviceOperations": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "None",
+              "Delete",
+              "DeleteWithWarning",
+              "DRSource",
+              "DRTarget",
+              "Browsable",
+              "ReadOnlyForDR",
+              "Deactivate"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DeviceOperation",
+              "modelAsString": false
+            }
+          }
+        },
+        "culture": {
+          "type": "string"
+        },
+        "deviceCapabilities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "Invalid",
+              "FileServer",
+              "IscsiServer"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SupportedDeviceCapabilities",
+              "modelAsString": false
+            }
+          }
+        },
+        "deviceDescription": {
+          "type": "string"
+        },
+        "domainName": {
+          "type": "string"
+        },
+        "deviceSoftwareVersion": {
+          "type": "string"
+        },
+        "friendlySoftwareName": {
+          "type": "string"
+        },
+        "deviceConfigurationStatus": {
+          "enum": [
+            "Complete",
+            "Pending"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeviceConfigurationStatus",
+            "modelAsString": false
+          }
+        },
+        "modelDescription": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "Unknown",
+            "Online",
+            "Offline",
+            "RequiresAttention",
+            "MaintenanceMode",
+            "Creating",
+            "Provisioning",
+            "Deleted",
+            "ReadyToSetup",
+            "Deactivated",
+            "Deactivating"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeviceStatus",
+            "modelAsString": false
+          }
+        },
+        "type": {
+          "enum": [
+            "Invalid",
+            "Appliance",
+            "VirtualAppliance",
+            "Series9000OnPremVirtualAppliance",
+            "Series9000VirtualAppliance",
+            "Series9000PhysicalAppliance"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeviceType",
+            "modelAsString": false
+          }
+        },
+        "details": {
+          "$ref": "#/definitions/DeviceDetails"
+        }
+      }
+    },
+    "EncryptionSettings": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EncryptionSettingsProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EncryptionSettingsProperties": {
+      "required": [
+        "encryptionStatus",
+        "keyRolloverStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "encryptionStatus": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionStatus",
+            "modelAsString": false
+          }
+        },
+        "keyRolloverStatus": {
+          "enum": [
+            "Required",
+            "NotRequired"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyRolloverStatus",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "FailoverRequest": {
+      "type": "object",
+      "properties": {
+        "accesspointIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targetDeviceId": {
+          "type": "string"
+        },
+        "skipValidation": {
+          "type": "boolean"
+        },
+        "keepSourceDevice": {
+          "type": "boolean"
+        }
+      }
+    },
+    "FileServer": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileServerProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FileServerList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileServer"
+          }
+        }
+      }
+    },
+    "FileServerProperties": {
+      "required": [
+        "domainName",
+        "storageDomainId",
+        "backupScheduleGroupId"
+      ],
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "type": "string"
+        },
+        "storageDomainId": {
+          "type": "string"
+        },
+        "backupScheduleGroupId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "FileShare": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileShareProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FileShareList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileShare"
+          }
+        }
+      }
+    },
+    "FileShareProperties": {
+      "required": [
+        "shareStatus",
+        "dataPolicy",
+        "adminUser",
+        "provisionedCapacityInBytes",
+        "monitoringStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "shareStatus": {
+          "enum": [
+            "Online",
+            "Offline"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShareStatus",
+            "modelAsString": false
+          }
+        },
+        "dataPolicy": {
+          "enum": [
+            "Invalid",
+            "Local",
+            "Tiered",
+            "Cloud"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataPolicy",
+            "modelAsString": false
+          }
+        },
+        "adminUser": {
+          "type": "string"
+        },
+        "provisionedCapacityInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "usedCapacityInBytes": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "localUsedCapacityInBytes": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "monitoringStatus": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MonitoringStatus",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "IPConfig": {
+      "required": [
+        "ipAddress",
+        "gateway"
+      ],
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "type": "string"
+        },
+        "prefixLength": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "gateway": {
+          "type": "string"
+        }
+      }
+    },
+    "ISCSIDisk": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ISCSIDiskProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ISCSIDiskList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ISCSIDisk"
+          }
+        }
+      }
+    },
+    "ISCSIDiskProperties": {
+      "required": [
+        "diskStatus",
+        "accessControlRecords",
+        "dataPolicy",
+        "provisionedCapacityInBytes",
+        "monitoringStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "diskStatus": {
+          "enum": [
+            "Online",
+            "Offline"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DiskStatus",
+            "modelAsString": false
+          }
+        },
+        "accessControlRecords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataPolicy": {
+          "enum": [
+            "Invalid",
+            "Local",
+            "Tiered",
+            "Cloud"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataPolicy",
+            "modelAsString": false
+          }
+        },
+        "provisionedCapacityInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "usedCapacityInBytes": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "localUsedCapacityInBytes": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "monitoringStatus": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MonitoringStatus",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "ISCSIServer": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ISCSIServerProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ISCSIServerList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ISCSIServer"
+          }
+        }
+      }
+    },
+    "ISCSIServerProperties": {
+      "required": [
+        "storageDomainId",
+        "backupScheduleGroupId"
+      ],
+      "type": "object",
+      "properties": {
+        "storageDomainId": {
+          "type": "string"
+        },
+        "backupScheduleGroupId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "chapId": {
+          "type": "string"
+        },
+        "reverseChapId": {
+          "type": "string"
+        }
+      }
+    },
+    "Job": {
+      "required": [
+        "status",
+        "percentComplete"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "Invalid",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Paused",
+            "Scheduled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": false
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "percentComplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "error": {
+          "$ref": "#/definitions/JobErrorDetails"
+        },
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JobErrorDetails": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "errorDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorItem"
+          }
+        },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "JobErrorItem": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "JobFilter": {
+      "required": [
+        "jobType",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "jobType": {
+          "enum": [
+            "Backup",
+            "Clone",
+            "Failover",
+            "DownloadUpdates",
+            "InstallUpdates"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": false
+          }
+        },
+        "status": {
+          "enum": [
+            "Invalid",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Paused",
+            "Scheduled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": false
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "JobList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "JobProperties": {
+      "required": [
+        "jobType"
+      ],
+      "type": "object",
+      "properties": {
+        "jobType": {
+          "enum": [
+            "Backup",
+            "Clone",
+            "Failover",
+            "DownloadUpdates",
+            "InstallUpdates"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": false
+          }
+        },
+        "targetId": {
+          "type": "string"
+        },
+        "entityId": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "jobStages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobStage"
+          }
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "isCancellable": {
+          "type": "boolean"
+        },
+        "stats": {
+          "$ref": "#/definitions/JobStats"
+        },
+        "targetType": {
+          "enum": [
+            "FileServer",
+            "DiskServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TargetType",
+            "modelAsString": false
+          }
+        },
+        "sourceDeviceId": {
+          "type": "string"
+        },
+        "backupPointInTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "downloadProgress": {
+          "$ref": "#/definitions/UpdateDownloadProgress"
+        },
+        "installProgress": {
+          "$ref": "#/definitions/UpdateInstallProgress"
+        }
+      }
+    },
+    "JobStage": {
+      "required": [
+        "stageStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "stageStatus": {
+          "enum": [
+            "Invalid",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Paused",
+            "Scheduled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": false
+          }
+        },
+        "detail": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        }
+      }
+    },
+    "JobStats": {
+      "type": "object",
+      "properties": {
+        "completedWorkItemCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalWorkItemCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "estimatedTimeRemaining": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Key": {
+      "required": [
+        "activationKey"
+      ],
+      "type": "object",
+      "properties": {
+        "activationKey": {
+          "type": "string"
+        }
+      }
+    },
+    "Manager": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagerProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagerExtendedInfo": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagerExtendedInfoProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagerExtendedInfoProperties": {
+      "required": [
+        "integrityKey",
+        "algorithm"
+      ],
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "integrityKey": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "type": "string"
+        },
+        "encryptionKeyThumbprint": {
+          "type": "string"
+        },
+        "portalCertificateThumbprint": {
+          "type": "string"
+        },
+        "algorithm": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagerIntrinsicSettings": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "GardaV1",
+            "HelsinkiV1"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagerType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "ManagerList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Manager"
+          }
+        }
+      }
+    },
+    "ManagerProperties": {
+      "type": "object",
+      "properties": {
+        "cisIntrinsicSettings": {
+          "$ref": "#/definitions/ManagerIntrinsicSettings"
+        },
+        "sku": {
+          "$ref": "#/definitions/ManagerSku"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagerSku": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "enum": [
+            "Standard"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagerSkuType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "MetricAvailablity": {
+      "required": [
+        "timeGrain",
+        "retention"
+      ],
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "retention": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricData": {
+      "required": [
+        "timeStamp",
+        "sum",
+        "count",
+        "average",
+        "minimum",
+        "maximum"
+      ],
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sum": {
+          "format": "double",
+          "type": "number"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "average": {
+          "format": "double",
+          "type": "number"
+        },
+        "minimum": {
+          "format": "double",
+          "type": "number"
+        },
+        "maximum": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "MetricDefinition": {
+      "required": [
+        "name",
+        "unit",
+        "primaryAggregationType",
+        "resourceId",
+        "metricAvailabilities",
+        "dimensions",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MetricName"
+        },
+        "unit": {
+          "enum": [
+            "Bytes",
+            "BytesPerSecond",
+            "Count",
+            "CountPerSecond",
+            "Percent",
+            "Seconds"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "modelAsString": false
+          }
+        },
+        "primaryAggregationType": {
+          "enum": [
+            "Average",
+            "Last",
+            "Maximum",
+            "Minimum",
+            "None",
+            "Total"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "modelAsString": false
+          }
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "metricAvailabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailablity"
+          }
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricDefinitionList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDefinition"
+          }
+        }
+      }
+    },
+    "MetricDimension": {
+      "required": [
+        "name",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricFilter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MetricNameFilter"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "timeGrain": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metrics"
+          }
+        }
+      }
+    },
+    "MetricName": {
+      "required": [
+        "value",
+        "localizedValue"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "localizedValue": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricNameFilter": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "Metrics": {
+      "required": [
+        "resourceId",
+        "startTime",
+        "endTime",
+        "timeGrain",
+        "primaryAggregation",
+        "name",
+        "dimensions",
+        "unit",
+        "type",
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "timeGrain": {
+          "type": "string"
+        },
+        "primaryAggregation": {
+          "enum": [
+            "Average",
+            "Last",
+            "Maximum",
+            "Minimum",
+            "None",
+            "Total"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        },
+        "unit": {
+          "enum": [
+            "Bytes",
+            "BytesPerSecond",
+            "Count",
+            "CountPerSecond",
+            "Percent",
+            "Seconds"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "modelAsString": false
+          }
+        },
+        "type": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricData"
+          }
+        }
+      }
+    },
+    "NetworkAdapter": {
+      "required": [
+        "networkAdapterName",
+        "dhcpStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "networkAdapterName": {
+          "type": "string"
+        },
+        "iPv4Info": {
+          "$ref": "#/definitions/IPConfig"
+        },
+        "iPv6Info": {
+          "$ref": "#/definitions/IPConfig"
+        },
+        "dhcpStatus": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DhcpStatus",
+            "modelAsString": false
+          }
+        },
+        "linkSpeed": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "NetworkSettings": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSettingsProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSettingsProperties": {
+      "required": [
+        "primaryDNSServer",
+        "nodeNetworks"
+      ],
+      "type": "object",
+      "properties": {
+        "primaryDNSServer": {
+          "type": "string"
+        },
+        "secondaryDNSServer": {
+          "type": "string"
+        },
+        "nodeNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeNetwork"
+          }
+        }
+      }
+    },
+    "NodeNetwork": {
+      "required": [
+        "networkAdapters"
+      ],
+      "type": "object",
+      "properties": {
+        "networkAdapters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkAdapter"
+          }
+        }
+      }
+    },
+    "RawCertificateData": {
+      "required": [
+        "certificate"
+      ],
+      "type": "object",
+      "properties": {
+        "authType": {
+          "enum": [
+            "Invalid",
+            "AccessControlService",
+            "AzureActiveDirectory"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": false
+          }
+        },
+        "certificate": {
+          "type": "string"
+        }
+      }
+    },
+    "RegistrationCertificate": {
+      "required": [
+        "certificate"
+      ],
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceCertificateAndAADDetails": {
+      "required": [
+        "certificate",
+        "resourceId",
+        "aadAuthority",
+        "aadTenantId",
+        "servicePrincipalClientId",
+        "servicePrincipalObjectId",
+        "azureManagementEndpointAudience",
+        "subject",
+        "validFrom",
+        "validTo",
+        "thumbprint",
+        "friendlyName",
+        "issuer"
+      ],
+      "type": "object",
+      "properties": {
+        "authType": {
+          "enum": [
+            "Invalid",
+            "AccessControlService",
+            "AzureActiveDirectory"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": false
+          }
+        },
+        "certificate": {
+          "type": "string"
+        },
+        "resourceId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "aadAuthority": {
+          "type": "string"
+        },
+        "aadTenantId": {
+          "type": "string"
+        },
+        "servicePrincipalClientId": {
+          "type": "string"
+        },
+        "servicePrincipalObjectId": {
+          "type": "string"
+        },
+        "azureManagementEndpointAudience": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "validFrom": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "validTo": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "thumbprint": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        }
+      }
+    },
+    "SecuritySettings": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecuritySettingsProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SecuritySettingsProperties": {
+      "required": [
+        "deviceAdminPassword"
+      ],
+      "type": "object",
+      "properties": {
+        "deviceAdminPassword": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret"
+        }
+      }
+    },
+    "SendTestAlertEmailRequest": {
+      "required": [
+        "emailList"
+      ],
+      "type": "object",
+      "properties": {
+        "emailList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StorageAccountCredential": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountCredentialProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StorageAccountCredentialList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccountCredential"
+          }
+        }
+      }
+    },
+    "StorageAccountCredentialProperties": {
+      "required": [
+        "cloudType",
+        "endPoint",
+        "login",
+        "enableSSL"
+      ],
+      "type": "object",
+      "properties": {
+        "cloudType": {
+          "enum": [
+            "Azure",
+            "S3",
+            "S3_RRS",
+            "OpenStack",
+            "HP"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CloudType",
+            "modelAsString": false
+          }
+        },
+        "endPoint": {
+          "type": "string"
+        },
+        "login": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "enableSSL": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SslStatus",
+            "modelAsString": false
+          }
+        },
+        "accessKey": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret"
+        }
+      }
+    },
+    "StorageDomain": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageDomainProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StorageDomainList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageDomain"
+          }
+        }
+      }
+    },
+    "StorageDomainProperties": {
+      "required": [
+        "storageAccountCredentialIds",
+        "encryptionStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "storageAccountCredentialIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "encryptionKey": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret"
+        },
+        "encryptionStatus": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionStatus",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "SupportPackageRequest": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupportPackageRequestProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SupportPackageRequestProperties": {
+      "required": [
+        "sdpPassKey"
+      ],
+      "type": "object",
+      "properties": {
+        "sdpPassKey": {
+          "type": "string"
+        },
+        "packageType": {
+          "enum": [
+            "None",
+            "IncludeDefault",
+            "IncludeAll",
+            "Mini",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportPackageType",
+            "modelAsString": false
+          }
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "includeArchived": {
+          "type": "boolean"
+        },
+        "sourceType": {
+          "enum": [
+            "None",
+            "OpsTriggered",
+            "ClientTriggered"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportPackageSourceType",
+            "modelAsString": false
+          }
+        },
+        "customIncludeList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SymmetricEncryptedSecret": {
+      "required": [
+        "value",
+        "encryptionAlgorithm"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "valueCertificateThumbprint": {
+          "type": "string"
+        },
+        "encryptionAlgorithm": {
+          "enum": [
+            "None",
+            "AES256",
+            "RSAES_PKCS1_v_1_5"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionAlgorithm",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Time": {
+      "required": [
+        "hour",
+        "minute"
+      ],
+      "type": "object",
+      "properties": {
+        "hour": {
+          "format": "int32",
+          "maximum": 23,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "minute": {
+          "format": "int32",
+          "maximum": 59,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "TimeSettings": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TimeSettingsProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TimeSettingsProperties": {
+      "required": [
+        "timeZone",
+        "primaryTimeServer"
+      ],
+      "type": "object",
+      "properties": {
+        "timeZone": {
+          "type": "string"
+        },
+        "primaryTimeServer": {
+          "type": "string"
+        },
+        "secondaryTimeServer": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateDownloadProgress": {
+      "type": "object",
+      "properties": {
+        "downloadPhase": {
+          "enum": [
+            "Unknown",
+            "Initializing",
+            "Downloading",
+            "Verifying"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DownloadPhase",
+            "modelAsString": false
+          }
+        },
+        "percentComplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalBytesToDownload": {
+          "format": "double",
+          "type": "number"
+        },
+        "totalBytesDownloaded": {
+          "format": "double",
+          "type": "number"
+        },
+        "numberOfUpdatesToDownload": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfUpdatesDownloaded": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "UpdateInstallProgress": {
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfUpdatesToInstall": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfUpdatesInstalled": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Updates": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdatesProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UpdatesProperties": {
+      "type": "object",
+      "properties": {
+        "deviceVersion": {
+          "type": "string"
+        },
+        "deviceLastScannedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "regularUpdatesAvailable": {
+          "type": "boolean"
+        },
+        "rebootRequiredForInstall": {
+          "type": "boolean"
+        },
+        "totalItemsPendingForDownload": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalItemsPendingForInstall": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "Idle",
+            "Scanning",
+            "Downloading",
+            "Installing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UpdateOperation",
+            "modelAsString": false
+          }
+        },
+        "lastCompletedScanTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastCompletedDownloadJobTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastCompletedInstallJobTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "inProgressDownloadJobId": {
+          "type": "string"
+        },
+        "inProgressInstallJobId": {
+          "type": "string"
+        },
+        "inProgressScanStartedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "inProgressDownloadJobStartedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "inProgressInstallJobStartedTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "UploadCertificateRequest": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawCertificateData",
+          "x-ms-client-flatten": true
+        },
+        "contractVersion": {
+          "enum": [
+            "InvalidVersion",
+            "V2011_09",
+            "V2012_02",
+            "V2012_05",
+            "V2012_12",
+            "V2013_04",
+            "V2013_10",
+            "V2013_11",
+            "V2014_04",
+            "V2014_06",
+            "V2014_07",
+            "V2014_09",
+            "V2014_10",
+            "V2014_12",
+            "V2015_01",
+            "V2015_02",
+            "V2015_04",
+            "V2015_05",
+            "V2015_06",
+            "V2015_07",
+            "V2015_08",
+            "V2015_10",
+            "V2015_12",
+            "V2016_01",
+            "V2016_02",
+            "V2016_04",
+            "V2016_05",
+            "V2016_07",
+            "V2016_08"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ContractVersions",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "UploadCertificateResponse": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceCertificateAndAADDetails",
+          "x-ms-client-flatten": true
+        },
+        "contractVersion": {
+          "enum": [
+            "InvalidVersion",
+            "V2011_09",
+            "V2012_02",
+            "V2012_05",
+            "V2012_12",
+            "V2013_04",
+            "V2013_10",
+            "V2013_11",
+            "V2014_04",
+            "V2014_06",
+            "V2014_07",
+            "V2014_09",
+            "V2014_10",
+            "V2014_12",
+            "V2015_01",
+            "V2015_02",
+            "V2015_04",
+            "V2015_05",
+            "V2015_06",
+            "V2015_07",
+            "V2015_08",
+            "V2015_10",
+            "V2015_12",
+            "V2016_01",
+            "V2016_02",
+            "V2016_04",
+            "V2016_05",
+            "V2016_07",
+            "V2016_08"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ContractVersions",
+            "modelAsString": false
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version",
+      "required": true,
+      "type": "string"
+    },
+    "managerNameParameter": {
+      "name": "managerName",
+      "in": "path",
+      "description": "The manager name",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 2,
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription id",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

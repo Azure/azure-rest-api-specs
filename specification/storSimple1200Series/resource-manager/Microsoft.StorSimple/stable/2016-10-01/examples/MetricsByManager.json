@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "9eb689cd-7243-43b4-b6f6-5c65cb296641",
+    "resourceGroupName": "ResourceGroupForSDKTest",
+    "managerName": "hManagerForSDKTest4",
+    "api-version": "2016-10-01",
+    "$filter": "startTime%20ge%20'2018-07-24T18:30:00Z'%20and%20endTime%20le%20'2018-07-31T18:30:00Z'",
+    "x-ms-client-request-id": [
+      "21756c43-1c24-48ec-9116-bc3581328b09"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.26328.01",
+      "Microsoft.Azure.Management.StorSimple1200Series.StorSimple1200SeriesManagementClient/0.0.0.0"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceId": "https://pod01-cis2.sea.storsimple.windowsazure.com/managers/2100512071120191679",
+            "startTime": "2018-07-24T18:30:00Z",
+            "endTime": "2018-07-31T18:30:00Z",
+            "timeGrain": "1.00:00:00",
+            "primaryAggregation": "Average",
+            "name": {
+              "value": "HostUsedStorage",
+              "localizedValue": "Primary Storage Used"
+            },
+            "dimensions": [
+              {
+                "name": "Manager",
+                "value": "hManagerForSDKTest4"
+              }
+            ],
+            "unit": "Bytes",
+            "type": "Microsoft.StorSimple/managers/metrics",
+            "values": [
+              {
+                "timeStamp": "2018-07-31T00:00:00Z",
+                "sum": 0,
+                "count": 1,
+                "average": 0,
+                "minimum": 0,
+                "maximum": 0
+              }
+            ]
+          },
+          {
+            "resourceId": "https://pod01-cis2.sea.storsimple.windowsazure.com/managers/2100512071120191679",
+            "startTime": "2018-07-24T18:30:00Z",
+            "endTime": "2018-07-31T18:30:00Z",
+            "timeGrain": "1.00:00:00",
+            "primaryAggregation": "Average",
+            "name": {
+              "value": "CloudConsumedStorage",
+              "localizedValue": "Cloud Storage Used"
+            },
+            "dimensions": [
+              {
+                "name": "Manager",
+                "value": "hManagerForSDKTest4"
+              }
+            ],
+            "unit": "Bytes",
+            "type": "Microsoft.StorSimple/managers/metrics",
+            "values": [
+              {
+                "timeStamp": "2018-07-31T00:00:00Z",
+                "sum": 3230,
+                "count": 1,
+                "average": 3230,
+                "minimum": 3230,
+                "maximum": 3230
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
