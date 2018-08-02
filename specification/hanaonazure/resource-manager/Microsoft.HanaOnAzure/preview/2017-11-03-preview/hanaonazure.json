@@ -288,6 +288,18 @@
                 "powerState": {
                     "readOnly": true,
                     "type": "string",
+                    "enum": [
+                        "starting",
+                        "started",
+                        "stopping",
+                        "stopped",
+                        "restarting",
+                        "unknown"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HanaInstancePowerStateEnum",
+                        "modelAsString": true
+                    },
                     "description": "Resource power state"
                 }
             },
