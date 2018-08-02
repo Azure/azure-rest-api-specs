@@ -34,6 +34,45 @@
         }
     },
     "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/operations": {
+            "get": {
+                "tags": [
+                    "SerialConsole"
+                ],
+                "operationId": "List_Operations",
+                "description": "Gets a list of Serial Console API operations.",
+                "x-ms-examples": {
+                    "List all Serial Console management operations supported by Serial Console RP": {
+                        "$ref": "./examples/GetOperationsExample.json"
+                    }
+                },
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/default"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - returns a JSON object",
+                        "schema": {
+                            "$ref": "#/definitions/SerialConsoleOperations"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}": {
             "get": {
                 "tags": [
@@ -49,24 +88,26 @@
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "default",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "Default string modeled as parameter for URL to work correctly.",
-                        "enum": [
-                          "default"
-                        ]
+                        "$ref": "#/parameters/default"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK - Returns a JSON object"
+                        "description": "OK - Returns a JSON object",
+                        "schema": {
+                            "$ref": "#/definitions/GetDisabledResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/DeploymentValidateResult"
+                        }
                     }
                 },
                 "x-ms-examples": {
                     "Get whether or not Serial Console is disabled": {
-                    "$ref": "./examples/GetConsoleDisabledExample.json"
+                        "$ref": "./examples/GetConsoleDisabledExample.json"
                     }
                 }
             }
@@ -80,37 +121,24 @@
                 "description": "Enables Serial Console for a VM",
                 "parameters": [
                     {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ConsoleProperties"
-                        },
-                        "description": "Parameters for Console enablement"
-                    },
-                    {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "default",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "Default string modeled as parameter for URL to work correctly.",
-                        "enum": [
-                          "default"
-                        ]
+                        "$ref": "#/parameters/default"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK - Serial Console disabled"
+                        "description": "OK - Serial Console disabled",
+                        "schema": {
+                            "$ref": "#/definitions/SetDisabledResult"
+                        }
                     },
-                    "500": {
-                        "description": " Internal Server Error",
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
                         "schema": {
                             "$ref": "#/definitions/DeploymentValidateResult"
                         }
@@ -118,7 +146,7 @@
                 },
                 "x-ms-examples": {
                     "Enable console successfully": {
-                    "$ref": "./examples/EnableConsoleExample.json"
+                        "$ref": "./examples/EnableConsoleExample.json"
                     }
                 }
             }
@@ -138,22 +166,18 @@
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "default",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "Default string modeled as parameter for URL to work correctly.",
-                        "enum": [
-                          "default"
-                        ]
+                        "$ref": "#/parameters/default"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK - Serial Console disabled"
+                        "description": "OK - Serial Console disabled",
+                        "schema": {
+                            "$ref": "#/definitions/SetDisabledResult"
+                        }
                     },
-                    "500": {
-                        "description": " Internal Server Error",
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
                         "schema": {
                             "$ref": "#/definitions/DeploymentValidateResult"
                         }
@@ -169,29 +193,53 @@
     },
     "definitions": {
         "SerialConsoleGetResult": {
+            "title": "Serial Console GET Result",
+            "description": "Returns whether or not Serial Console is disabled.",
             "properties": {
                 "value": {
-                    "type": "boolean",
-                    "title": "Serial Console GET Result",
-                    "description": "Returns whether or not Serial Console is disabled."
+                    "description": "Whether or not Serial Console is disabled.",
+                    "type": "boolean"
                 }
             }
         },
-        "ConsoleProperties": {
+        "GetDisabledResult": {
+            "title": "Get Disabled result",
+            "description": "Returns whether or not Serial Console is disabled for ths given subscription",
             "properties": {
-                "vmSubId": {
-                    "type": "string",
-                    "title": "VM's subscription ID",
-                    "description": "VM's subscription ID"
+                "disabled": {
+                    "description": "Disabled result",
+                    "type": "boolean"
+                }
+            }
+        },
+        "SetDisabledResult": {
+            "title": "Set Disabled result",
+            "description": "Sets disable status and returns whether or not Serial Console is now disabled for ths given subscription",
+            "properties": {
+                "disabled": {
+                    "description": "Disabled result",
+                    "type": "boolean"
                 }
             }
         },
         "DeploymentValidateResult": {
+            "title": "Details on Failure",
+            "description": "Details on Failure",
             "properties": {
                 "errorMessage": {
-                    "type": "string",
-                    "title": "Details on Failure",
-                    "description": "Details on Failure"
+                    "description": "Error message",
+                    "type": "string"
+                }
+            }
+        },
+        "SerialConsoleOperations": {
+            "title": "Serial Console operations",
+            "description": "Serial Console operations",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Serial Console operations",
+                    "type": "string"
                 }
             }
         }
@@ -210,6 +258,18 @@
             "required": true,
             "type": "string",
             "description": "The API version to use for this operation."
+        },
+        "default" :{
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for URL to work correctly.",
+            "enum": [
+                "default"
+            ],
+            "x-ms-parameter-location": "client"
         }
+
     }
 }
