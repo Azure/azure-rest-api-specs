@@ -50,6 +50,39 @@ input-file:
 - Microsoft.DataMigration/stable/2018-04-19/definitions/MigrationValidation.json
 ```
 
+### Tag: package-2018-07-15-preview
+
+These settings apply only when `--tag=package-2018-07-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-15-preview'
+input-file:
+- Microsoft.DataMigration/preview/2018-07-15-preview/datamigration.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Commands.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Common.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceMySqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetAzureDbForMySqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlMITask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlSqlDbSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetProjectDetailsMySqlSqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateMySqlSqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlMITask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetTdeCertificatesSqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Tasks.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/TasksCommon.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ValidateSyncMigrationInputSqlServerTask.json
+```
+
 ### Tag: package-2018-03-31-preview
 
 These settings apply only when `--tag=package-2018-03-31-preview` is specified on the command line.

@@ -17,31 +17,44 @@
   },
   "paths": {},
   "definitions": {
-    "ConnectToTargetSqlMITaskInput": {
+    "ConnectToTargetAzureDbForMySqlTaskInput": {
       "type": "object",
-      "description": "Input for the task that validates connection to Azure SQL Database Managed Instance.",
+      "description": "Input for the task that validates connection to Azure Database for MySQL and target server requirements",
       "properties": {
+        "sourceConnectionInfo": {
+          "description": "Connection information for source MySQL server",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
         "targetConnectionInfo": {
-          "description": "Connection information for target SQL Server",
-          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+          "description": "Connection information for target Azure Database for MySQL server",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
         }
       },
       "required": [
+        "sourceConnectionInfo",
         "targetConnectionInfo"
       ]
     },
-    "ConnectToTargetSqlMITaskOutput": {
+    "ConnectToTargetAzureDbForMySqlTaskOutput": {
       "type": "object",
-      "description": "Output for the task that validates connection to Azure SQL Database Managed Instance.",
+      "description": "Output for the task that validates connection to Azure Database for MySQL and target server requirements",
       "properties": {
         "id": {
           "type": "string",
           "description": "Result identifier",
           "readOnly": true
         },
-        "targetServerVersion": {
+        "serverVersion": {
           "type": "string",
-          "description": "Target server version",
+          "description": "Version of the target server",
+          "readOnly": true
+        },
+        "databases": {
+          "type": "array",
+          "description": "List of databases on target server",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "targetServerBrandVersion": {
@@ -49,24 +62,8 @@
           "description": "Target server brand version",
           "readOnly": true
         },
-        "logins": {
-          "type": "array",
-          "description": "List of logins on the target server.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "agentJobs": {
-          "type": "array",
-          "description": "List of agent jobs on the target server.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
         "validationErrors": {
-          "description": "Validation errors",
+          "description": "Validation errors associated with the task",
           "type": "array",
           "items": {
             "$ref": "./Common.json#/definitions/ReportableException"

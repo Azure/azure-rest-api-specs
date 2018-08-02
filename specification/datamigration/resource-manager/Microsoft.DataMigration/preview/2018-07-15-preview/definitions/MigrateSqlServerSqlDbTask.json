@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview"
+    "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -25,7 +25,7 @@
           "type": "array",
           "description": "Databases to migrate",
           "items": {
-            "$ref": "#/definitions/MigrateSqlServerSqlDbDatabaseInput"
+            "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlDbDatabaseInput"
           }
         },
         "validationOptions": {
@@ -54,10 +54,9 @@
         "resultType": {
           "description": "Result type",
           "type": "string",
-          "readOnly":  true
+          "readOnly": true
         }
       },
-      "required": [ "resultType" ],
       "discriminator": "resultType"
     },
     "MigrateSqlServerSqlDbTaskOutputMigrationLevel": {
@@ -112,6 +111,11 @@
             "$ref": "#/definitions/DatabaseSummaryResult"
           },
           "readOnly": true
+        },
+        "migrationValidationResult": {
+          "type": "object",
+          "description": "Migration Validation Results",
+          "$ref": "./MigrationValidation.json#/definitions/MigrationValidationResult"
         },
         "migrationReportResult": {
           "type": "object",
@@ -325,31 +329,6 @@
           "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
         }
       ]
-    },
-    "MigrateSqlServerSqlDbDatabaseInput": {
-      "type": "object",
-      "description": "Database specific information for SQL to Azure SQL DB migration task inputs",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the database"
-        },
-        "targetDatabaseName": {
-          "type": "string",
-          "description": "Name of target database. Note: Target database will be truncated before starting migration."
-        },
-        "makeSourceDbReadOnly": {
-          "type": "boolean",
-          "description": "Whether to set database read only before migration"
-        },
-        "tableMap": {
-          "type": "object",
-          "description": "Mapping of source to target tables",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "DatabaseSummaryResult": {
       "type": "object",

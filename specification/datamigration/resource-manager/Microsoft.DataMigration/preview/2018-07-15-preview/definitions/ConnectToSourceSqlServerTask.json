@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview"
+    "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -29,14 +29,19 @@
           "$ref": "./Common.json#/definitions/ServerLevelPermissionsGroup",
           "description": "Permission group for validations"
         },
-        "CollectLogins": {
+        "collectLogins": {
           "type": "boolean",
           "description": "Flag for whether to collect logins from source server.",
           "default": false
         },
-        "CollectAgentJobs": {
+        "collectAgentJobs": {
           "type": "boolean",
           "description": "Flag for whether to collect agent jobs from source server.",
+          "default": false
+        },
+        "collectTdeCertificateInfo": {
+          "type": "boolean",
+          "description": "Flag for whether to collect TDE Certificate names from source server.",
           "default": false
         }
       },
@@ -59,7 +64,6 @@
           "readOnly": true
         }
       },
-      "required": [ "resultType" ],
       "discriminator": "resultType"
     },
     "ConnectToSourceSqlServerTaskOutputTaskLevel": {
@@ -75,7 +79,7 @@
           },
           "readOnly": true
         },
-        "Logins": {
+        "logins": {
           "type": "string",
           "description": "Source logins as a map from login name to login id.",
           "additionalProperties": {
@@ -83,9 +87,17 @@
           },
           "readOnly": true
         },
-        "AgentJobs": {
+        "agentJobs": {
           "type": "string",
           "description": "Source agent jobs as a map from agent job name to id.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "databaseTdeCertificateMapping": {
+          "type": "string",
+          "description": "Mapping from database name to TDE certificate name, if applicable",
           "additionalProperties": {
             "type": "string"
           },
@@ -224,6 +236,14 @@
           "format": "date-time",
           "readOnly": true,
           "description": "UTC Date and time when the AgentJob was last executed."
+        },
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
         },
         "migrationEligibility": {
           "$ref": "./TasksCommon.json#/definitions/MigrationEligibilityInfo",

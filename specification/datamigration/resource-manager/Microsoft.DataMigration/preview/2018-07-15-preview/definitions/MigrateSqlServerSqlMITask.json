@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview"
+    "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -54,6 +54,10 @@
         "backupBlobShare": {
           "$ref": "./TasksCommon.json#/definitions/BlobShare",
           "description": "SAS URI of Azure Storage Account Container to be used for storing backup files."
+        },
+        "backupMode": {
+          "$ref": "./TasksCommon.json#/definitions/BackupMode",
+          "description": "Backup Mode to specify whether to use existing backup or create new backup. If using existing backups, backup file paths are required to be provided in selectedDatabases."
         }
       },
       "required": [
@@ -76,7 +80,6 @@
           "readOnly": true
         }
       },
-      "required": [ "resultType" ],
       "discriminator": "resultType"
     },
     "MigrateSqlServerSqlMITaskOutputMigrationLevel": {
@@ -253,7 +256,7 @@
           "description": "AgentJob name.",
           "readOnly": true
         },
-        "isEnabled": {
+        "isEnabled" : {
           "type": "boolean",
           "description": "The state of the original AgentJob.",
           "readOnly": true
@@ -304,7 +307,7 @@
           "description": "Login name.",
           "readOnly": true
         },
-        "state": {
+        "state" : {
           "$ref": "TasksCommon.json#/definitions/MigrationState",
           "description": "Current state of login",
           "readOnly": true

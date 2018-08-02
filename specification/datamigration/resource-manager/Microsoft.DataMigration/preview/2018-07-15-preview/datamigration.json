@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview",
+    "version": "2018-07-15-preview",
     "description": "The Data Migration Service helps people migrate their data from on-premise database servers to Azure, or from older database software to newer software. The service manages one or more workers that are joined to a customer's virtual network, which is assumed to provide connectivity to their databases. To avoid frequent updates to the resource provider, data migration tasks are implemented by the resource provider in a generic way as task resources, each of which has a task type (which identifies the type of work to run), input, and output. The client is responsible for providing appropriate task type and inputs, which will be passed through unexamined to the machines that implement the functionality, and for understanding the output, which is passed back unexamined to the client.",
     "x-ms-code-generation-settings": {
       "name": "DataMigrationServiceClient",
@@ -800,6 +800,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks/{taskName}/command": {
+      "post": {
+        "summary": "Execute a command on a task",
+        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. This method executes a command on a running task.",
+        "tags": [
+          "Task resource",
+          "Custom operation",
+          "POST"
+        ],
+        "operationId": "Tasks_Command",
+        "x-ms-examples": {
+          "Tasks_Command": { "$ref": "./examples/Tasks_Command.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/taskName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/command"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Command executed",
+            "schema": {
+              "$ref": "./definitions/Commands.json#/definitions/CommandProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects": {
       "get": {
         "summary": "Get projects in a service",
@@ -994,6 +1046,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/accessArtifacts": {
+      "post": {
+        "summary": "Generates a URL to access project artifacts",
+        "description": "The project resource is a nested resource representing a stored migration project. This method generates a URL that provides an access to project-related artifacts required to work with the project in the custom tool. User will be able to use the provided URL for a limited time to upload or download project artifacts.",
+        "tags": [
+          "Project resource",
+          "Custom operation",
+          "POST"
+        ],
+        "operationId": "Projects_AccessArtifacts",
+        "x-ms-examples": {
+          "Projects_AccessArtifacts": { "$ref": "./examples/Projects_AccessArtifacts.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artifacts drop location",
+            "schema": {
+              "$ref": "./definitions/Projects.json#/definitions/ProjectArtifactsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataMigration/locations/{location}/checkNameAvailability": {
       "post": {
         "summary": "Check name validity and availability",
@@ -1011,10 +1109,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/apiVersion"
+            "$ref": "#/parameters/location"
           },
           {
-            "$ref": "#/parameters/location"
+            "$ref": "#/parameters/apiVersion"
           },
           {
             "$ref": "#/parameters/requestedName"
@@ -1233,6 +1331,16 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "command": {
+      "name": "parameters",
+      "description": "Command to execute",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "./definitions/Commands.json#/definitions/CommandProperties"
+      },
       "x-ms-parameter-location": "method"
     }
   }

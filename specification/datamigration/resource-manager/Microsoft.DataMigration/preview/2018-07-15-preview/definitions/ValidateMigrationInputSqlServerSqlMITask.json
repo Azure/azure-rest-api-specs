@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview"
+    "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -21,6 +21,10 @@
       "type": "object",
       "description": "Input for task that validates migration input for SQL to Azure SQL Managed Instance",
       "properties": {
+        "sourceConnectionInfo": {
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Information for connecting to source"
+        },
         "targetConnectionInfo": {
           "$ref": "./Common.json#/definitions/SqlConnectionInfo",
           "description": "Information for connecting to target"
@@ -32,6 +36,13 @@
             "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlMIDatabaseInput"
           }
         },
+        "selectedLogins": {
+          "type": "array",
+          "description": "Logins to migrate",
+          "items": {
+            "type": "string"
+          }
+        },
         "backupFileShare": {
           "$ref": "./TasksCommon.json#/definitions/FileShare",
           "description": "Backup file share information for all selected databases."
@@ -39,9 +50,14 @@
         "backupBlobShare": {
           "$ref": "./TasksCommon.json#/definitions/BlobShare",
           "description": "SAS URI of Azure Storage Account Container to be used for storing backup files."
+        },
+        "backupMode": {
+          "$ref": "./TasksCommon.json#/definitions/BackupMode",
+          "description": "Backup Mode to specify whether to use existing backup or create new backup."
         }
       },
       "required": [
+        "sourceConnectionInfo",
         "targetConnectionInfo",
         "selectedDatabases",
         "backupBlobShare"
@@ -92,6 +108,18 @@
             "$ref": "./Common.json#/definitions/ReportableException"
           },
           "readOnly": true
+        },
+        "existingBackupErrors": {
+          "description": "Errors associated with existing backup files.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "databaseBackupInfo": {
+          "$ref": "./TasksCommon.json#/definitions/DatabaseBackupInfo",
+          "description": "Information about backup files when existing backup mode is used."
         }
       }
     }

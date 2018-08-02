@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
@@ -17,49 +17,48 @@
   },
   "paths": {},
   "definitions": {
-    "GetUserTablesSqlTaskInput": {
+    "ValidateSyncMigrationInputSqlServerTaskInput": {
       "type": "object",
-      "description": "Input for the task that collects user tables for the given list of databases",
+      "description": "Input for task that validates migration input for SQL sync migrations",
       "properties": {
-        "connectionInfo": {
-          "description": "Connection information for SQL Server",
+        "sourceConnectionInfo": {
+          "description": "Information for connecting to source SQL server",
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        },
+        "targetConnectionInfo": {
+          "description": "Information for connecting to target",
           "$ref": "./Common.json#/definitions/SqlConnectionInfo"
         },
         "selectedDatabases": {
           "type": "array",
-          "description": "List of database names to collect tables for",
+          "description": "Databases to migrate",
           "items": {
-            "type": "string"
+            "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlDbSyncDatabaseInput"
           }
         }
       },
       "required": [
-        "connectionInfo",
+        "targetConnectionInfo",
+        "sourceConnectionInfo",
         "selectedDatabases"
       ]
     },
-    "GetUserTablesSqlTaskOutput": {
+    "ValidateSyncMigrationInputSqlServerTaskOutput": {
       "type": "object",
-      "description": "Output of the task that collects user tables for the given list of databases",
+      "description": "Output for task that validates migration input for SQL sync migrations",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Result identifier",
+          "description": "Database identifier",
           "readOnly": true
         },
-        "databasesToTables": {
+        "name": {
           "type": "string",
-          "description": "Mapping from database name to list of tables",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "$ref": "./TasksCommon.json#/definitions/DatabaseTable"
-            }
-          },
+          "description": "Name of database",
           "readOnly": true
         },
         "validationErrors": {
-          "description": "Validation errors",
+          "description": "Errors associated with a selected database object",
           "type": "array",
           "items": {
             "$ref": "./Common.json#/definitions/ReportableException"

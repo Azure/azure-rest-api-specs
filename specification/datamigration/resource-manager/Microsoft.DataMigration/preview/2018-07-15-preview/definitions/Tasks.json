@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview"
+    "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -50,6 +50,14 @@
           "x-ms-enum": {
             "name": "TaskState",
             "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "commands": {
+          "description": "Array of command properties.",
+          "type": "array",
+          "items": {
+            "$ref": "./Commands.json#/definitions/CommandProperties"
           },
           "readOnly": true
         }
@@ -117,20 +125,20 @@
         }
       ]
     },
-    "ConnectToTargetSqlMITaskProperties": {
-      "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI",
+    "ConnectToSourceSqlServerSyncTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToSource.SqlServer.Sync",
       "type": "object",
-      "description": "Properties for the task that validates connection to Azure SQL Database Managed Instance",
+      "description": "Properties for the task that validates connection to SQL Server and also validates source server requirements",
       "properties": {
         "input": {
           "description": "Task input",
-          "$ref": "./ConnectToTargetSqlMITask.json#/definitions/ConnectToTargetSqlMITaskInput"
+          "$ref": "./ConnectToSourceSqlServerTask.json#/definitions/ConnectToSourceSqlServerTaskInput"
         },
         "output": {
           "description": "Task output. This is ignored if submitted.",
           "type": "array",
           "items": {
-            "$ref": "./ConnectToTargetSqlMITask.json#/definitions/ConnectToTargetSqlMITaskOutput"
+            "$ref": "./ConnectToSourceSqlServerTask.json#/definitions/ConnectToSourceSqlServerTaskOutput"
           },
           "readOnly": true
         }
@@ -165,6 +173,30 @@
         }
       ]
     },
+    "ConnectToTargetSqlSqlDbSyncTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToTarget.SqlDb.Sync",
+      "type": "object",
+      "description": "Properties for the task that validates connection to SQL DB and target server requirements for sync scenario",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ConnectToTargetSqlSqlDbSyncTask.json#/definitions/ConnectToTargetSqlSqlDbSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ConnectToTargetSqlDbTask.json#/definitions/ConnectToTargetSqlDbTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "GetUserTablesSqlTaskProperties": {
       "x-ms-discriminator-value": "GetUserTables.Sql",
       "type": "object",
@@ -179,6 +211,102 @@
           "type": "array",
           "items": {
             "$ref": "./GetUserTablesSqlTask.json#/definitions/GetUserTablesSqlTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "GetUserTablesSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "GetUserTables.AzureSqlDb.Sync",
+      "type": "object",
+      "description": "Properties for the task that collects user tables for the given list of databases",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./GetUserTablesSqlSyncTask.json#/definitions/GetUserTablesSqlSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./GetUserTablesSqlSyncTask.json#/definitions/GetUserTablesSqlSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ConnectToTargetSqlMITaskProperties": {
+      "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI",
+      "type": "object",
+      "description": "Properties for the task that validates connection to Azure SQL Database Managed Instance",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ConnectToTargetSqlMITask.json#/definitions/ConnectToTargetSqlMITaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ConnectToTargetSqlMITask.json#/definitions/ConnectToTargetSqlMITaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ConnectToTargetAzureDbForMySqlTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToTarget.AzureDbForMySql",
+      "type": "object",
+      "description": "Properties for the task that validates connection to Azure Database for MySQL and target server requirements",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ConnectToTargetAzureDbForMySqlTask.json#/definitions/ConnectToTargetAzureDbForMySqlTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ConnectToTargetAzureDbForMySqlTask.json#/definitions/ConnectToTargetAzureDbForMySqlTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "GetProjectDetailsMySqlSqlTaskProperties": {
+      "x-ms-discriminator-value": "GetProjectDetails.MySql.Sql",
+      "type": "object",
+      "description": "Properties for task that reads information from project artifacts for MySQL as source",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./TasksCommon.json#/definitions/GetProjectDetailsNonSqlTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./GetProjectDetailsMySqlSqlTask.json#/definitions/GetProjectDetailsMySqlSqlTaskOutput"
           },
           "readOnly": true
         }
@@ -237,6 +365,78 @@
         }
       ]
     },
+    "MigrateSqlServerSqlDbSyncTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.SqlServer.AzureSqlDb.Sync",
+      "type": "object",
+      "description": "Properties for the task that migrates on-prem SQL Server databases to Azure SQL Database with continuous sync",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigrateSqlServerSqlDbSyncTask.json#/definitions/MigrateSqlServerSqlDbSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigrateSqlServerSqlDbSyncTask.json#/definitions/MigrateSqlServerSqlDbSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.MySql.AzureDbForMySql.Sync",
+      "type": "object",
+      "description": "Properties for the task that migrates MySQL databases to Azure Database for MySQL with continuous sync",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigrateMySqlAzureDbForMySqlSyncTask.json#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigrateMySqlAzureDbForMySqlSyncTask.json#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ValidateMigrationInputSqlServerSqlDbSyncTaskProperties": {
+      "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+      "type": "object",
+      "description": "Properties for task that validates migration input for SQL to Azure SQL DB sync migrations",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ValidateSyncMigrationInputSqlServerTask.json#/definitions/ValidateSyncMigrationInputSqlServerTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ValidateSyncMigrationInputSqlServerTask.json#/definitions/ValidateSyncMigrationInputSqlServerTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ValidateMigrationInputSqlServerSqlMITaskProperties": {
       "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
       "type": "object",
@@ -251,6 +451,30 @@
           "type": "array",
           "items": {
             "$ref": "./ValidateMigrationInputSqlServerSqlMITask.json#/definitions/ValidateMigrationInputSqlServerSqlMITaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "GetTdeCertificatesSqlTaskProperties": {
+      "x-ms-discriminator-value": "GetTDECertificates.Sql",
+      "type": "object",
+      "description": "Properties for the task that gets TDE certificates in Base64 encoded format.",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./GetTdeCertificatesSqlTask.json#/definitions/GetTdeCertificatesSqlTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./GetTdeCertificatesSqlTask.json#/definitions/GetTdeCertificatesSqlTaskOutput"
           },
           "readOnly": true
         }

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
-    "version": "2018-03-31-preview"
+    "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -32,6 +32,16 @@
           "$ref": "./Common.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "ProjectArtifactsResponse": {
+      "type": "object",
+      "description": "Project artifacts properties",
+      "properties": {
+        "artifactsLocation": {
+          "type": "string",
+          "description": "An URL that points to the drop location to access project artifacts. When accessing this URL, requestor should provide an Authorization header with the Bearer authorization scheme, followed by his ARM JWT signature. Typical JWT will look like three dot-separated base64 encoded strings. We use last string as a shared secret between client and our artifacts service.\n"
+        }
+      }
     },
     "ProjectList": {
       "type": "object",
@@ -95,6 +105,19 @@
             "name": "ProjectProvisioningState",
             "modelAsString": true
           }
+        },
+        "dataMovement": {
+          "type": "string",
+          "description": "Type of data movement",
+          "default": "OneTimeMigration",
+          "enum": [
+            "OneTimeMigration",
+            "Continuous"
+          ],
+          "x-ms-enum": {
+            "name": "DataMovement",
+            "modelAsString": true
+          }
         }
       },
       "required": [ "sourcePlatform", "targetPlatform" ]
@@ -115,6 +138,7 @@
       "description": "Source platform of the project",
       "enum": [
         "SQL",
+        "MySQL",
         "Unknown"
       ],
       "x-ms-enum": {
@@ -128,6 +152,7 @@
       "enum": [
         "SQLDB",
         "SQLMI",
+        "AzureDbForMySql",
         "Unknown"
       ],
       "x-ms-enum": {
