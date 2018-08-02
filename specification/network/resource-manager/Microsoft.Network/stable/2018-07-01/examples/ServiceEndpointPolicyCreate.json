@@ -3,7 +3,7 @@
     "api-version": "2018-07-01",
     "subscriptionId" : "subid",
     "resourceGroupName" : "rg1",
-    "networkSecurityGroupName" : "testPolicy",
+    "serviceEndpointPolicyName" : "testPolicy",
     "parameters": {}
   },
   "responses" : {
@@ -15,48 +15,20 @@
         "location": "westus",
         "properties": 
          {
-          "serviceEndpointPolicyDefinitions": [
-          {
-            "name": "StorageServiceEndpointPolicyDefinition",
-            "properties": {
-             "description": "Storage Service EndpointPolicy Definition",
-             "service": "Microsoft.Storage",
-             "serviceResources": [
-                "/subscriptions/subid1",
-                "/subscriptions/subid1/resourceGroups/storageRg",
-                "/subscriptions/subid1/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/stAccount"
-             ]
-            },
-           "provisioningState" : "Succeeded"
-           }
-          ]
-         },
+          "serviceEndpointPolicyDefinitions": [ ]
+         }
       }
     },
     "201" : {
       "body" : {
         "name": "testnsg",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg",
-        "type": "Microsoft.Network/networkSecurityGroups",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testpolicy",
+        "type": "Microsoft.Network/ServiceEndpointPolicies",
         "location": "westus",
         "properties": 
          {
-          "serviceEndpointPolicyDefinitions": [
-          {
-            "name": "StorageServiceEndpointPolicyDefinition",
-            "properties": {
-             "description": "Storage Service EndpointPolicy Definition",
-             "service": "Microsoft.Storage",
-             "serviceResources": [
-                "/subscriptions/subid1",
-                "/subscriptions/subid1/resourceGroups/storageRg",
-                "/subscriptions/subid1/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/stAccount"
-             ]
-            },
-           "provisioningState" : "Succeeded"
-           }
-          ]
-         },
+          "serviceEndpointPolicyDefinitions": []
+         }
       }
     }
   }

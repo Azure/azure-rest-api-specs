@@ -178,7 +178,8 @@
           }
         },
         "x-ms-examples": {
-          "Create network security group": { "$ref": "./examples/ServiceEndpointPolicyCreate.json" }
+          "Create service endpoint policy": { "$ref": "./examples/ServiceEndpointPolicyCreate.json" },
+          "Create service endpoint policy with definition": { "$ref": "./examples/ServiceEndpointPolicyCreateWithDefinition.json" }
         },
         "x-ms-long-running-operation": true
       },
@@ -186,8 +187,8 @@
         "tags": [
           "ServiceEndpointPolicies"
         ],
-        "operationId": "ServiceEndpointPolicies_UpdateTags",
-        "description": "Updates service Endpoint Policies tags.",
+        "operationId": "ServiceEndpointPolicies_Update",
+        "description": "Updates service Endpoint Policies.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -197,7 +198,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "ServiceEndpointPolicyName",
+            "name": "serviceEndpointPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -237,7 +238,7 @@
         "tags": [
           "ServiceEndpointPolicies"
         ],
-        "operationId": "ServiceEndpointPolicies_ListAll",
+        "operationId": "ServiceEndpointPolicies_List",
         "description": "Gets all the service endpoint policies in a subscription.",
         "parameters": [
           {
@@ -256,7 +257,7 @@
           }
         },
         "x-ms-examples": {
-          "List all network security groups": { "$ref": "./examples/ServiceEndpointPolicyListAll.json" }
+          "List all service endpoint policy": { "$ref": "./examples/ServiceEndpointPolicyListAll.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -268,7 +269,7 @@
         "tags": [
           "serviceEndpointPolicies"
         ],
-        "operationId": "serviceEndpointPolicies_List",
+        "operationId": "serviceEndpointPolicies_ListByResourceGroup",
         "description": "Gets all service endpoint Policies in a resource group.",
         "parameters": [
           {
@@ -328,7 +329,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the security rule."
+            "description": "The name of the service endpoint policy definition."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -397,7 +398,7 @@
           }
         },
         "x-ms-examples": {
-          "Get network security rule in network security group": { "$ref": "./examples/ServiceEndpointPolicyDefinitionGet.json" }
+          "Get service endpoint definition in service endpoint policy": { "$ref": "./examples/ServiceEndpointPolicyDefinitionGet.json" }
         }
       },
       "put": {
@@ -405,7 +406,7 @@
           "SecurityRules"
         ],
         "operationId": "ServiceEndpointPolicyDefinitions_CreateOrUpdate",
-        "description": "Creates or updates a security rule in the specified service endpoint policy.",
+        "description": "Creates or updates a service endpoint policy definition in the specified service endpoint policy.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -429,7 +430,7 @@
             "description": "The name of the service endpoint policy definition name."
           },
           {
-            "name": "ServiceEndpointPolicyDefinitionParameters",
+            "name": "ServiceEndpointPolicyDefinitions",
             "in": "body",
             "required": true,
             "schema": {
@@ -459,17 +460,17 @@
           }
         },
         "x-ms-examples": {
-          "Create security rule": { "$ref": "./examples/ServiceEndpointPolicyDefinitionCreate.json" }
+          "Create service endpoint policy definition": { "$ref": "./examples/ServiceEndpointPolicyDefinitionCreate.json" }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceEndpointPolicies/{ServiceEndpointPolicyName}/serviceEndpointPolicyDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions": {
       "get": {
         "tags": [
           "ServiceEndpointPolicyDefinitions"
         ],
-        "operationId": "ServiceEndpointPolicyDefinitions_List",
+        "operationId": "ServiceEndpointPolicyDefinitions_ListByResourceGroup",
         "description": "Gets all service endpoint policy definitions in a service end point policy.",
         "parameters": [
           {
