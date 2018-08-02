@@ -35,6 +35,17 @@ input-file:
 - Microsoft.CostManagement/stable/2018-05-31/costmanagement.json
 ```
 
+
+### Tag: package-2018-09-preview
+
+These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-preview'
+input-file:
+- Microsoft.CostManagement/preview/2018-09-01-preview/costmanagement.json
+```
+
+
 ---
 # Code Generation
 
@@ -110,6 +121,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
    - tag: package-2018-05
+   - tag: package-2018-09-preview
 ```
 
 ### Tag: package-2018-05 and go
@@ -119,6 +131,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2018-05' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-05-31/$(namespace)
 ```
+
+### Tag: package-2018-09-preview and go
+These settings apply only when `--tag=package-2018-09-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-09-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-09-01-preview/$(namespace)
+```
+
 
 ## Java
 
@@ -139,6 +160,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-costmanagement
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-05
+  - tag: package-2018-09-preview
 ```
 
 ### Tag: package-2018-05 and java
@@ -150,6 +172,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.costmanagement.v2018_05_31
   output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_05_31
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-09-preview and java
+
+These settings apply only when `--tag=package-2018-09-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-09-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.costmanagement.v2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_09_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
