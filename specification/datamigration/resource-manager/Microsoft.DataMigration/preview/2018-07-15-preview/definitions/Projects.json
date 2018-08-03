@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Data Migration Service Resource Provider",
+    "title": "Azure Database Migration Service Resource Provider",
     "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
@@ -32,16 +32,6 @@
           "$ref": "./Common.json#/definitions/TrackedResource"
         }
       ]
-    },
-    "ProjectArtifactsResponse": {
-      "type": "object",
-      "description": "Project artifacts properties",
-      "properties": {
-        "artifactsLocation": {
-          "type": "string",
-          "description": "A URL that points to the drop location to access project artifacts. When accessing this URL, requestor should provide an Authorization header with the Bearer authorization scheme, followed by his ARM JWT signature. Typical JWT will look like three dot-separated base64 encoded strings. We use last string as a shared secret between client and our artifacts service.\n"
-        }
-      }
     },
     "ProjectList": {
       "type": "object",

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Data Migration Service Resource Provider",
+    "title": "Azure Database Migration Service Resource Provider",
     "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
@@ -209,33 +209,33 @@
     "ConnectToSourceSqlServerTaskOutputAgentJobLevel": {
       "x-ms-discriminator-value": "AgentJobLevelOutput",
       "type": "object",
-      "description": "AgentJob level output for the task that validates connection to SQL Server and also validates source server requirements",
+      "description": "Agent Job level output for the task that validates connection to SQL Server and also validates source server requirements",
       "properties": {
         "name": {
           "type": "string",
-          "description": "AgentJob name",
+          "description": "Agent Job name",
           "readOnly": true
         },
         "jobCategory": {
           "type": "string",
-          "description": "The type of AgentJob.",
+          "description": "The type of Agent Job.",
           "readOnly": true
         },
         "isEnabled": {
           "type": "boolean",
-          "description": "The state of the original AgentJob.",
+          "description": "The state of the original Agent Job.",
           "readOnly": true
         },
         "jobOwner": {
           "type": "string",
-          "description": "The owner of the AgentJob",
+          "description": "The owner of the Agent Job",
           "readOnly": true
         },
         "lastExecutedOn": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "UTC Date and time when the AgentJob was last executed."
+          "description": "UTC Date and time when the Agent Job was last executed."
         },
         "validationErrors": {
           "description": "Validation errors",
