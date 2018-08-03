@@ -1117,10 +1117,11 @@
       },
       "required": [
         "heatMapType"
-      ],
+      ]
     },
-    "default":{
-      "description": "Sub-class representing Traffic Manager HeatMap default properties.",
+    "HeatMapProperties":{
+      "description": "Sub-class representing default Traffic Manager HeatMap properties.",
+       "x-ms-discriminator-value": "default",
       "allOf": [
         {
           "$ref": "#/definitions/HeatMapPropertyBase",
@@ -1156,8 +1157,9 @@
         }
       ]
     },
-    "asn":{
+    "HeatMapPropertyAsn":{
       "description": "Sub-class representing Traffic Manager HeatMap ASN location properties.",
+       "x-ms-discriminator-value": "asn",
       "allOf": [
         {
           "$ref": "#/definitions/HeatMapPropertyBase",
@@ -1175,8 +1177,9 @@
         }
       ]
     },
-    "country":{
+    "HeatMapPropertyCountry":{
       "description": "Sub-class representing Traffic Manager HeatMap country location properties.",
+       "x-ms-discriminator-value": "country",
       "allOf": [
         {
           "$ref": "#/definitions/HeatMapPropertyBase",
@@ -1194,8 +1197,9 @@
         }
       ]        
     },
-    "state":{
+    "HeatMapPropertyState":{
       "description": "Sub-class representing Traffic Manager HeatMap state location properties.",
+       "x-ms-discriminator-value": "state",
       "allOf": [
         {
           "$ref": "#/definitions/HeatMapPropertyBase",
@@ -1226,7 +1230,7 @@
       },
       "description": "Class which is a sparse representation of a Traffic Manager endpoint."
     },
-    "HeatMapLocation": {
+    "TrafficLocation": {
       "properties": {
         "location": {
           "type": "string",
