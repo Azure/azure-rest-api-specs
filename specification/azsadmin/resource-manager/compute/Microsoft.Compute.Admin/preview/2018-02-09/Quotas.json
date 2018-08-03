@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2015-12-01-preview",
+        "version": "2018-02-09",
         "title": "Compute Admin Client"
     },
     "host": "adminmanagement.local.azurestack.external",
@@ -12,15 +12,15 @@
         "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/quotas/{quotaName}": {
             "get": {
                 "x-ms-examples": {
-                    "Get an existing Quota.": {
+                    "Get an existing Compute Quota.": {
                         "$ref": "examples/Quotas/Get.json"
                     }
                 },
                 "tags": [
                     "Quotas"
                 ],
-                "summary": "Returns the requested quota.",
-                "description": "Get an existing Quota.",
+                "summary": "Returns the requested Compute quota.",
+                "description": "Get an existing Compute Quota.",
                 "operationId": "Quotas_Get",
                 "consumes": [
                     "application/json"
@@ -30,38 +30,38 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "#/parameters/QuotaParameter"
+                        "$ref": "Quotas.json#/parameters/QuotaParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
+                        "$ref": "Quotas.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Quota"
+                            "$ref": "Quotas.json#/definitions/Quota"
                         }
                     }
                 }
             },
             "put": {
                 "x-ms-examples": {
-                    "Creates or Updates a Quota.": {
+                    "Creates or Updates a Compute Quota.": {
                         "$ref": "examples/Quotas/Create.json"
                     }
                 },
                 "tags": [
                     "Quotas"
                 ],
-                "description": "Creates or Updates a Quota.",
-                "summary": "Creates or Updates a Quota.",
+                "description": "Creates or Updates a Compute Quota with the provided quota parameters.",
+                "summary": "Creates or Updates a Compute Quota.",
                 "operationId": "Quotas_CreateOrUpdate",
                 "consumes": [
                     "application/json"
@@ -71,41 +71,41 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "#/parameters/QuotaParameter"
+                        "$ref": "Quotas.json#/parameters/QuotaParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
+                        "$ref": "Quotas.json#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/NewQuotaParameter"
+                        "$ref": "Quotas.json#/parameters/NewQuotaParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Quota"
+                            "$ref": "Quotas.json#/definitions/Quota"
                         }
                     }
                 }
             },
             "delete": {
                 "x-ms-examples": {
-                    "Deletes specified quota.": {
+                    "Deletes specified Compute quota.": {
                         "$ref": "examples/Quotas/Delete.json"
                     }
                 },
                 "tags": [
                     "Quotas"
                 ],
-                "summary": "Deletes specified quota",
-                "description": "Delete an existing quota.",
+                "summary": "Deletes specified Compute quota",
+                "description": "Delete an existing Compute quota.",
                 "operationId": "Quotas_Delete",
                 "consumes": [
                     "application/json"
@@ -115,37 +115,37 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "#/parameters/QuotaParameter"
+                        "$ref": "Quotas.json#/parameters/QuotaParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
+                        "$ref": "Quotas.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK"
-                    }
+                    }				
                 }
             }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/quotas": {
             "get": {
                 "x-ms-examples": {
-                    "Get a list of existing quotas.": {
+                    "Get a list of existing Compute quotas.": {
                         "$ref": "examples/Quotas/List.json"
                     }
                 },
                 "tags": [
                     "Quotas"
                 ],
-                "summary": "Lists all quotas.",
-                "description": "Get a list of existing quotas.",
+                "summary": "Lists all Compute quotas.",
+                "description": "Get a list of existing Compute quotas.",
                 "operationId": "Quotas_List",
                 "consumes": [
                     "application/json"
@@ -155,20 +155,20 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
+                        "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
+                        "$ref": "Quotas.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/QuotaList"
+                            "$ref": "Quotas.json#/definitions/QuotaList"
                         }
                     }
                 },
@@ -180,23 +180,23 @@
     },
     "definitions": {
         "Quota": {
-            "description": "Holds quota information used to control resource allocation.",
+            "description": "Holds Compute quota information used to control resource allocation.",
             "type": "object",
             "properties": {
                 "properties": {
-                    "description": "Quota properties.",
+                    "description": "Compute Quota properties.",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/QuotaProperties"
                 }
             },
             "allOf": [
                 {
-                    "$ref": "Compute.json#/definitions/Resource"
+                    "$ref": "../2015-12-01-preview/Compute.json#/definitions/Resource"
                 }
             ]
         },
         "QuotaProperties": {
-            "description": "Properties for a Quota",
+            "description": "Properties for a Compute Quota",
             "type": "object",
             "properties": {
                 "availabilitySetCount": {
@@ -206,7 +206,7 @@
                     "minimum": 0
                 },
                 "coresLimit": {
-                    "description": "Maximum number of core allowed.",
+                    "description": "Maximum number of cores allowed.",
                     "format": "int32",
                     "type": "integer",
                     "minimum": 0
@@ -222,11 +222,23 @@
                     "format": "int32",
                     "type": "integer",
                     "minimum": 0
+                },
+                "maxAllocationStandardManagedDisksAndSnapshots": {
+                    "description": "Maximum number of managed disks and snapshots of type standard allowed.",
+                    "format": "int32",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "maxAllocationPremiumManagedDisksAndSnapshots": {
+                    "description": "Maximum number of managed disks and snapshots of type premium allowed.",
+                    "format": "int32",
+                    "type": "integer",
+                    "minimum": 0
                 }
             }
         },
         "QuotaList": {
-            "description": "List of quotas",
+            "description": "List of Compute quotas",
             "type": "object",
             "properties": {
                 "nextLink": {
@@ -234,16 +246,23 @@
                     "type": "string"
                 },
                 "value": {
-                    "description": "List of quotas",
+                    "description": "List of Compute quotas",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Quota"
+                        "$ref": "Quotas.json#/definitions/Quota"
                     }
                 }
             }
         }
     },
     "parameters": {
+		"ApiVersionParameter": {
+		  "name": "api-version",
+		  "in": "query",
+		  "description": "Client API Version.",
+		  "required": true,
+		  "type": "string"
+		},	
         "QuotaParameter": {
             "description": "Name of the quota.",
             "name": "quotaName",
