@@ -1062,6 +1062,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/removeLinks": {
+      "post": {
+        "tags": [
+          "integrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_RemoveLinks",
+        "x-ms-examples": {
+          "IntegrationRuntimes_Upgrade": {
+            "$ref": "./examples/IntegrationRuntimes_RemoveLinks.json"
+          }
+        },
+        "description": "Remove all linked integration runtimes under specific data factory in a self-hosted integration runtime.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "linkedIntegrationRuntimeRequest",
+            "description": "The data factory name for the linked integration runtime.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedIntegrationRuntimeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}": {
       "delete": {
         "tags": [
@@ -2718,6 +2769,20 @@
         }
       }
     },
+    "LinkedIntegrationRuntimeRequest": {
+      "description": "Data factory name for linked integration runtime request.",
+      "type": "object",
+      "properties": {
+        "factoryName": {
+          "description": "The data factory name for linked integration runtime.",
+          "type": "string",
+          "x-ms-client-name": "linkedFactoryName"
+        }
+      },
+      "required": [
+        "factoryName"
+      ]
+    },
     "LinkedServiceListResponse": {
       "description": "A list of linked service resources.",
       "type": "object",
@@ -2972,8 +3037,7 @@
       ],
       "properties": {
         "hostName": {
-          "description": "GitHub repo host name.",
-          "readOnly": true,
+          "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
           "type": "string"
         }
       }

@@ -62,6 +62,46 @@
         "typeProperties"
       ]
     },
+    "AzureBlobStorageLinkedService": {
+      "x-ms-discriminator-value": "AzureBlobStorage",
+      "description": "The azure blob storage linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Blob Storage linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBlobStorageLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureTableStorageLinkedService": {
+      "x-ms-discriminator-value": "AzureTableStorage",
+      "description": "The azure table storage linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Table Storage linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureStorageLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "AzureStorageLinkedServiceTypeProperties": {
       "description": "Azure Storage linked service properties.",
       "properties": {
@@ -74,7 +114,40 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureBlobStorageLinkedServiceTypeProperties": {
+      "description": "Azure Blob Storage linked service properties.",
+      "properties": {
+        "connectionString": {
           "type": "object",
+          "description": "The connection string. It is mutually exclusive with sasUri, serviceEndpoint property. Type: string, SecureString or AzureKeyVaultSecretReference."          
+        },
+        "sasUri": {
+          "description": "SAS URI of the Azure Blob Storage resource. It is mutually exclusive with connectionString, serviceEndpoint property.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Blob service endpoint of the Azure Blob Storage resource. It is mutually exclusive with connectionString, sasUri property."          
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The ID of the service principal used to authenticate against Azure SQL Data Warehouse. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The key of the service principal used to authenticate against Azure SQL Data Warehouse."
+        },
+        "tenant": {
+          "type": "object",
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
       }
@@ -4015,6 +4088,14 @@
         },
         "newClusterSparkConf": {
           "description": "a set of optional, user-specified Spark configuration key-value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "newClusterCustomTags": {
+          "description": "Additional tags for cluster resources.",
           "type": "object",
           "additionalProperties": {
             "type": "object",

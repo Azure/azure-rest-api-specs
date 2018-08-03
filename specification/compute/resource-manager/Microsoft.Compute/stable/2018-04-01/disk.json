@@ -783,7 +783,8 @@
           "type": "string",
           "enum": [
             "Standard_LRS",
-            "Premium_LRS"
+            "Premium_LRS",
+            "StandardSSD_LRS"
           ],
           "x-ms-enum": {
             "name": "StorageAccountTypes",
@@ -798,7 +799,7 @@
           "description": "The sku tier."
         }
       },
-      "description": "The disks sku name. Can be Standard_LRS or Premium_LRS."
+      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, or StandardSSD_LRS."
     },
     "SnapshotSku": {
       "properties": {
@@ -1037,6 +1038,26 @@
       "description": "Data used for requesting a SAS."
     },
     "AccessUri": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessUriOutput",
+          "description": "Operation output data (raw JSON)"
+        }
+      },
+      "description": "A disk access SAS uri."
+    },
+    "AccessUriOutput": {
+      "properties": {
+        "output": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessUriRaw",
+          "description": "Operation output data (raw JSON)"
+        }
+      },
+      "description": "Azure properties, including output."
+    },
+    "AccessUriRaw": {
       "properties": {
         "accessSAS": {
           "readOnly": true,

@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "ASC API",
+        "title": "Security Center",
         "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
         "version": "2017-08-01-preview"
     },
@@ -348,8 +348,8 @@
                     "$ref": "#/parameters/SecurityContactName"
                 }],
                 "responses": {
-                    "200": {
-                        "description": "OK"
+                    "204": {
+                        "description": "No Content"
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -1020,15 +1020,15 @@
             "type": "object",
             "description": "describes properties of an auto provisioning setting",
             "properties": {
-                "provisioningSetting": {
+                "autoProvision": {
                     "type": "string",
                     "description": "Describes what kind of security agent provisioning action to take",
-                    "enum": ["Automatic", "Off"],
+                    "enum": ["On", "Off"],
                     "x-ms-enum": {
-                        "name": "provisioningSetting",
+                        "name": "autoProvision",
                         "modelAsString": true,
                         "values": [{
-                                "value": "Automatic",
+                                "value": "On",
                                 "description": "Install missing security agent on VMs automatically"
                             },
                             {
@@ -1040,7 +1040,7 @@
                 }
             },
             "required": [
-                "provisioningSetting"
+                "autoProvision"
             ]
         },
         "ComplianceList": {

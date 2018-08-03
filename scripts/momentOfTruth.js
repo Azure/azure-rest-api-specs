@@ -4,21 +4,13 @@
 'use strict';
 
 const exec = require('child_process').exec,
-    execSync = require('child_process').execSync,
     path = require('path'),
-    util = require('util'),
     utils = require('../test/util/utils'),
-    fs = require('fs'),
-    request = require('request');
+    fs = require('fs');
 
-// let blobService = azure.createBlobService();
 let configsToProcess = utils.getConfigFilesChangedInPR();
-let targetBranch = utils.getTargetBranch();
-let sourceBranch = utils.getSourceBranch();
 let pullRequestNumber = utils.getPullRequestNumber();
 let linterCmd = `npx autorest@2.0.4152 --validation --azure-validator --message-format=json `;
-let gitCheckoutCmd = `git checkout ${targetBranch}`;
-let gitLogCmd = `git log -3`;
 var filename = `${pullRequestNumber}.json`;
 var logFilepath = path.join(getLogDir(), filename);
 var finalResult = {};
@@ -85,20 +77,6 @@ async function getLinterResult(swaggerPath) {
     return [];
 };
 
-// Uploads the result file to Azure Blob Storage
-async function uploadToAzureStorage(json) {
-    console.log(`Uploading data...`);
-
-    const { error, response, body } = await new Promise(res => request({
-        url: "http://az-bot.azurewebsites.net/process",
-        method: "POST",
-        json: true,
-        body: json
-    }, (error, response, body) => res({ error: error, response: response, body: body })));
-
-    console.log(body);
-}
-
 // Run linter tool
 async function runTools(swagger, beforeOrAfter) {
     console.log(`Processing "${swagger}":`);
@@ -120,32 +98,29 @@ async function updateResult(spec, errors, beforeOrAfter) {
 
 //main function
 async function runScript() {
-    // Useful when debugging a test for a particular swagger.
-    // Just update the regex. That will return an array of filtered items.
-    // configsToProcess = ['/Users/vishrut/git-repos/azure-rest-api-specs/specification/storage/resource-manager/readme.md',
-    //                    '/Users/vishrut/git-repos/azure-rest-api-specs/specification/web/resource-manager/readme.md'];
-    configsToProcess = configsToProcess.filter(function (configFile) {
-        return configFile.indexOf('.md') != -1;
-    });
+    console.log('Processing configs:');
     console.log(configsToProcess);
     createLogFile();
     console.log(`The results will be logged here: "${logFilepath}".`)
 
-    for (const configFile of configsToProcess) {
-        await runTools(configFile, 'after');
+    if (configsToProcess.length > 0) {
+        for (const configFile of configsToProcess) {
+            await runTools(configFile, 'after');
+        }
+
+        await utils.doOnBranch(utils.getTargetBranch(), async () => {
+            for (const configFile of configsToProcess) {
+                await runTools(configFile, 'before');
+            }
+        });
     }
 
-    utils.checkoutTargetBranch();
-
-    for (const configFile of configsToProcess) {
-        await runTools(configFile, 'before');
-    }
     writeContent(JSON.stringify(finalResult, null, 2));
 }
 
 // magic starts here
-runScript().then(success => {
+runScript().then(_ => {
     process.exit(0);
-}).catch(err => {
+}).catch(_ => {
     process.exit(1);
 })
