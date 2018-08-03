@@ -389,6 +389,14 @@
       "type": "object",
       "description": "Database specific information for SQL to Azure SQL DB sync migration task inputs",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for database"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of database"
+        },
         "targetDatabaseName": {
           "type": "string",
           "description": "Target database name"
@@ -424,14 +432,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for database"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of database"
         }
       }
     },
@@ -469,7 +469,7 @@
         },
         "projectLocation": {
           "type": "string",
-          "description": "An URL that points to the drop location to access project artifacts"
+          "description": "A URL that points to the drop location to access project artifacts"
         },
         "selectedTables": {
           "type": "array",
@@ -889,7 +889,7 @@
     },
     "StartMigrationScenarioServerRoleResult": {
       "type": "object",
-      "description": "",
+      "description": "Server role migration result",
       "properties": {
         "name": {
           "type": "string",
@@ -966,22 +966,6 @@
         }
       }
     },
-    "SyncMigrationState": {
-      "type": "string",
-      "description": "Enum of the different state of online migration.",
-      "enum": [
-        "UNDEFINED",
-        "VALIDATING",
-        "PENDING",
-        "COMPLETE",
-        "ACTION_REQUIRED",
-        "FAILED"
-      ],
-      "x-ms-enum": {
-        "name": "SyncMigrationState",
-        "modelAsString": true
-      }
-    },
     "SyncDatabaseMigrationReportingState": {
       "type": "string",
       "description": "Enum of the different state of database level online migration.",
@@ -1034,7 +1018,7 @@
           "readOnly": true
         },
         "eventText": {
-          "description": "Error text.",
+          "description": "Event text.",
           "type": "string",
           "readOnly": true
         }

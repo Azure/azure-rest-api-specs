@@ -19,33 +19,33 @@
   "definitions": {
     "MigrateMySqlAzureDbForMySqlSyncTaskInput": {
       "type": "object",
-      "description": "Input for the task that migrates MySQL databases to Azure Database for MySQL with continuous sync",
+      "description": "Input for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
       "properties": {
+        "sourceConnectionInfo": {
+          "description": "Connection information for source MySQL",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
+        "targetConnectionInfo": {
+          "description": "Connection information for target Azure Database for MySQL",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
         "selectedDatabases": {
           "type": "array",
           "description": "Databases to migrate",
           "items": {
             "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncDatabaseInput"
           }
-        },
-        "targetConnectionInfo": {
-          "description": "Connection information for target Azure Database for MySQL",
-          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
-        },
-        "sourceConnectionInfo": {
-          "description": "Connection information for source MySQL",
-          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
         }
       },
       "required": [
-        "targetConnectionInfo",
         "sourceConnectionInfo",
+        "targetConnectionInfo",
         "selectedDatabases"
       ]
     },
     "MigrateMySqlAzureDbForMySqlSyncTaskOutput": {
       "type": "object",
-      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL with continuous sync",
+      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
       "properties": {
         "id": {
           "type": "string",
@@ -74,11 +74,6 @@
           "type": "string",
           "format": "date-time",
           "description": "Migration end time",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "./TasksCommon.json#/definitions/SyncMigrationState",
-          "description": "Current state of migration",
           "readOnly": true
         },
         "sourceServerVersion": {
@@ -238,7 +233,7 @@
         "fullLoadEstFinishTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Estimate to finish FullLoad",
+          "description": "Estimate to finish full load",
           "readOnly": true
         },
         "fullLoadStartedOn": {

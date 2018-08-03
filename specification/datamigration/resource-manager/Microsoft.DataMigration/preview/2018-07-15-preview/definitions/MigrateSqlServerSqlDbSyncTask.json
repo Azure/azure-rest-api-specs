@@ -19,7 +19,7 @@
   "definitions": {
     "MigrateSqlServerSqlDbSyncTaskInput": {
       "type": "object",
-      "description": "Input for the task that migrates on-prem SQL Server databases to Azure SQL Database with continuous sync",
+      "description": "Input for the task that migrates on-prem SQL Server databases to Azure SQL Database for online migrations",
       "properties": {
         "selectedDatabases": {
           "type": "array",
@@ -44,7 +44,7 @@
     },
     "MigrateSqlServerSqlDbSyncTaskOutput": {
       "type": "object",
-      "description": "Output for the task that migrates on-prem SQL Server databases to Azure SQL Database with continuous sync",
+      "description": "Output for the task that migrates on-prem SQL Server databases to Azure SQL Database for online migrations",
       "properties": {
         "id": {
           "type": "string",
@@ -73,11 +73,6 @@
           "type": "string",
           "format": "date-time",
           "description": "Migration end time",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "./TasksCommon.json#/definitions/SyncMigrationState",
-          "description": "Current state of migration",
           "readOnly": true
         },
         "sourceServerVersion": {
@@ -245,7 +240,7 @@
         "fullLoadEstFinishTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Estimate to finish FullLoad",
+          "description": "Estimate to finish full load",
           "readOnly": true
         },
         "fullLoadStartedOn": {
