@@ -293,30 +293,6 @@
         }
       ]
     },
-    "GetProjectDetailsMySqlSqlTaskProperties": {
-      "x-ms-discriminator-value": "GetProjectDetails.MySql.Sql",
-      "type": "object",
-      "description": "Properties for task that reads information from project artifacts for MySQL as source",
-      "properties": {
-        "input": {
-          "description": "Task input",
-          "$ref": "./TasksCommon.json#/definitions/GetProjectDetailsNonSqlTaskInput"
-        },
-        "output": {
-          "description": "Task output. This is ignored if submitted.",
-          "type": "array",
-          "items": {
-            "$ref": "./GetProjectDetailsMySqlSqlTask.json#/definitions/GetProjectDetailsMySqlSqlTaskOutput"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProjectTaskProperties"
-        }
-      ]
-    },
     "MigrateSqlServerSqlMITaskProperties": {
       "x-ms-discriminator-value": "Migrate.SqlServer.AzureSqlDbMI",
       "type": "object",
