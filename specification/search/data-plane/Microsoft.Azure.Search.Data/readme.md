@@ -101,3 +101,23 @@ csharp:
   clear-output-folder: true
   output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search.Data/Generated
 ```
+
+### Tweak generated code
+
+This directive adds a final parameter to all the operations so that a `Newtonsoft.Json.JsonSerializerSettings` can be added as the final parameter.
+
+This enables the SDK to delegate serialization to the custom serializer on a per-call basis.
+
+``` yaml $(csharp)
+directive:
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.replace(/(Async\(.*, CancellationToken cancellationToken = default\(CancellationToken\))/g, "$1, Newtonsoft.Json.JsonSerializerSettings requestSerializerSettings = null, Newtonsoft.Json.JsonSerializerSettings requestDeserializerSettings = null" ).
+        replace( /DeserializeObject<(.*?)>\((.*?), Client\.DeserializationSettings\)/g, "DeserializeObject<$1>($2, requestDeserializerSettings == null ? Client.DeserializationSettings : requestDeserializerSettings)" ).
+        replace( /SerializeObject\((.*?), Client\.SerializationSettings\)/g , "SerializeObject($1, requestSerializerSettings == null ? Client.SerializationSettings : requestSerializerSettings)" ).
+        replace( /WithHttpMessagesAsync\((.*?, cancellationToken)\)/g, "WithHttpMessagesAsync($1, requestSerializerSettings, requestDeserializerSettings)" ).
+        replace( /DocumentSearchResult/g, "DocumentSearchResultProxy" ).
+        replace( /public IList<string> ScoringParameterStrings { get; set; }/g, "protected internal IList<string> ScoringParameterStrings { get { return ScoringParameters == null ? Empty : ScoringParameters.Select(p => p.ToString()).ToList(); } set { } }" ).
+        replace( /public SearchParameters\(bool/g, "private SearchParameters(bool" )
+```
