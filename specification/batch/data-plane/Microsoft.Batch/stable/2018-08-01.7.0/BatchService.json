@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchService",
-    "version": "2018-03-01.6.1",
+    "version": "2018-08-01.7.0",
     "description": "A client for issuing REST requests to the Azure Batch service.",
     "x-ms-code-generation-settings": {
       "name": "BatchServiceClient"
@@ -542,7 +542,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -1712,7 +1712,8 @@
             },
             "description": "A response containing the file content.",
             "schema": {
-              "type": "file"
+              "type": "object",
+              "format": "file"
             }
           },
           "default": {
@@ -2168,7 +2169,8 @@
             },
             "description": "The file content.",
             "schema": {
-              "type": "file"
+              "type": "object",
+              "format": "file"
             }
           },
           "default": {
@@ -5751,7 +5753,7 @@
           "Job get task counts": { "$ref": "./examples/JobGetTaskCounts.json" }
         },
         "summary": "Gets the task counts for the specified job.",
-        "description": "Task counts provide a count of the tasks by active, running or completed task state, and a count of tasks which succeeded or failed. Tasks in the preparing state are counted as running. If the validationStatus is unvalidated, then the Batch service has not been able to check state counts against the task states as reported in the List Tasks API. The validationStatus may be unvalidated if the job contains more than 200,000 tasks.",
+        "description": "Task counts provide a count of the tasks by active, running or completed task state, and a count of tasks which succeeded or failed. Tasks in the preparing state are counted as running.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -10319,7 +10321,8 @@
             },
             "description": "A response containing the RDP information.",
             "schema": {
-              "type": "file"
+              "type": "object",
+              "format": "file"
             }
           },
           "default": {
@@ -10610,7 +10613,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines in pools, see Choose a VM size for compute nodes in an Azure Batch pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes). Batch supports all Cloud Services VM sizes except ExtraSmall, STANDARD_A1_V2 and STANDARD_A2_V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines in pools, see Choose a VM size for compute nodes in an Azure Batch pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes)."
         },
         "totalCoreHours": {
           "type": "number",
@@ -11893,7 +11896,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of the virtual machines in the pool. All virtual machines in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines in pools, see Choose a VM size for compute nodes in an Azure Batch pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
@@ -11983,7 +11986,7 @@
             "type": "string"
             },
           "title": "The list of application licenses the Batch service will make available on each compute node in the pool.",
-          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, pool creation will fail."
+          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, pool creation will fail. The permitted licenses available on the pool are 'maya', 'vray', '3dsmax', 'arnold'. An additional charge applies for each application license added to the pool."
         },
         "userAccounts": {
           "type": "array",
@@ -12900,31 +12903,9 @@
           "type": "integer",
           "format": "int32",
           "title": "The number of tasks which failed. A task fails if its result (found in the executionInfo property) is 'failure'."
-        },
-        "validationStatus": {
-          "type": "string",
-          "title": "Whether the task counts have been validated.",
-          "enum": [
-            "validated",
-            "unvalidated"
-          ],
-          "x-ms-enum": {
-            "name": "TaskCountValidationStatus",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "validated",
-                "description": "The Batch service has validated the state counts against the task states as reported in the List Tasks API."
-              },
-              {
-                "value": "unvalidated",
-                "description": "The Batch service has not been able to check state counts against the task states as reported in the List Tasks API. The validationStatus may be unvalidated if the job contains more than 200,000 tasks."
-              }
-            ]
-          }
         }
       },
-      "required": ["active", "running", "completed", "succeeded", "failed", "validationStatus"],
+      "required": [ "active", "running", "completed", "succeeded", "failed" ],
       "title": "The task counts for a job."
     },
     "AutoScaleRunError": {
@@ -13043,7 +13024,7 @@
       "properties": {
         "caching": {
           "title": "The type of caching to enable for the OS disk.",
-          "description": "The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.",
+          "description": "The default value for caching is readwrite. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.",
           "$ref": "#/definitions/CachingType"
         }
       },
@@ -13070,7 +13051,7 @@
         "caching": {
           "$ref": "#/definitions/CachingType",
           "title": "The type of caching to be enabled for the data disks.",
-          "description": "The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/."
+          "description": "The default value for caching is readwrite. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -13211,15 +13192,15 @@
           "type": "string",
           "title": "The container technology to be used.",
           "enum": [
-            "docker"
+            "dockerCompatible"
           ],
           "x-ms-enum": {
             "name": "ContainerType",
             "modelAsString": false,
             "values": [
               {
-                "value": "docker",
-                "description": "Docker will be used to launch the containers."
+                "value": "dockerCompatible",
+                "description": "A Docker compatible container technology will be used to launch the containers."
               }
             ]
           }
@@ -13362,7 +13343,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All virtual machines in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines in pools, see Choose a VM size for compute nodes in an Azure Batch pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
@@ -13758,6 +13739,24 @@
       },
       "title": "Information about the compute node on which a task ran."
     },
+    "NodeAgentInformation": {
+      "properties": {
+        "version": {
+          "type": "string",
+          "title":"The version of the Batch node agent running on the compute node.",
+          "description":"This version number can be checked against the node agent release notes located at https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time when the node agent was updated on the compute node.",
+          "description": "This is the most recent time that the node agent was updated to a new version."
+        }
+      },
+      "required": [ "version", "lastUpdateTime" ],
+      "title": "Information about the node agent.",
+      "description": "The Batch node agent is a program that runs on each node in the pool and provides Batch capability on the compute node."
+    },
     "MultiInstanceSettings": {
       "properties": {
         "numberOfInstances": {
@@ -14119,7 +14118,7 @@
             "$ref": "#/definitions/TaskAddParameter"
           },
           "maxItems": 100,
-          "title": "The collection of tasks to add.",
+          "title": "The collection of tasks to add. The maximum count of tasks is 100.",
           "description": "The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer tasks."
         }
       },
@@ -14556,7 +14555,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of the virtual machine hosting the compute node.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines in pools, see Choose a VM size for compute nodes in an Azure Batch pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes)."
         },
         "totalTasksRun": {
           "type": "integer",
@@ -14611,6 +14610,10 @@
         "endpointConfiguration": {
           "$ref": "#/definitions/ComputeNodeEndpointConfiguration",
           "title": "The endpoint configuration for the compute node."
+        },
+        "nodeAgentInfo": {
+          "$ref":"#/definitions/NodeAgentInformation",
+          "title": "Information about the node agent version and the time the node upgraded to a new version."
         }
       },
       "title": "A compute node in the Batch service."
