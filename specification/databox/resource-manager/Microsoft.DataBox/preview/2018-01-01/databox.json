@@ -373,10 +373,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted request for delete Job."
+          },
           "204": {
             "description": "Job deleted."
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "JobsDelete": {
             "$ref": "./examples/JobsDelete.json"
@@ -1234,7 +1238,7 @@
           }
         },
         "passKey": {
-          "description": "PaasKey for the disk Job.",
+          "description": "PassKey for the disk Job.",
           "type": "string"
         },
         "isPasskeyUserDefined": {
@@ -1529,7 +1533,7 @@
           "type": "string"
         },
         "passkey": {
-          "description": "User entered passkey for Disk job.",
+          "description": "User entered passkey for  DataBox Disk job.",
           "type": "string"
         }
       }
