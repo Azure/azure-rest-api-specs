@@ -323,11 +323,11 @@
           "items": {
             "$ref": "#/definitions/SourceControl"
           },
-          "description": "Gets or sets a list of souce controls."
+          "description": "The list of souce controls."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the next link."
+          "description": "The next link."
         }
       },
       "description": "The response model for the list source controls operation."
@@ -336,28 +336,27 @@
       "properties": {
         "branch": {
           "type": "string",
-          "description": "Gets or sets the repo branch of the source control."
+          "description": "The repo branch of the source control."
         },
         "folderPath": {
           "type": "string",
-          "description": "Gets or sets the folder path of the source control. Path must be relative."
+          "description": "The folder path of the source control. Path must be relative."
         },
         "autoSync": {
           "type": "boolean",
-          "description": "Gets or sets auto async of the source control. Default is false."
+          "description": "The auto sync of the source control. Default is false."
         },
         "publishRunbook": {
           "type": "boolean",
-          "description": "Gets or sets the auto publish of the source control. Default is true."
+          "description": "The auto publish of the source control. Default is true."
         },
         "securityToken": {
-          "type": "string",
-          "description": "Gets or sets the authorization token for the repo of the source control.",
+          "description": "The authorization token for the repo of the source control.",
           "$ref": "#/definitions/SourceControlSecurityTokenProperties"
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the user description of the source control."
+          "description": "The user description of the source control."
         }
       },
       "description": "The properties of the update source control"
@@ -367,7 +366,7 @@
         "properties": {
           "$ref": "#/definitions/SourceControlUpdateProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the value of the source control."
+          "description": "The value of the source control."
         }
       },
       "description": "The parameters supplied to the update source control operation."
@@ -377,7 +376,7 @@
         "properties": {
           "$ref": "#/definitions/SourceControlProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the properties of the source control."
+          "description": "The properties of the source control."
         }
       },
       "allOf": [
@@ -391,23 +390,23 @@
       "properties": {
         "repoUrl": {
           "type": "string",
-          "description": "Gets or sets the repo url of the source control."
+          "description": "The repo url of the source control."
         },
         "branch": {
           "type": "string",
-          "description": "Gets or sets the repo branch of the source control. Include branch as empty string for VsoTfvc."
+          "description": "The repo branch of the source control. Include branch as empty string for VsoTfvc."
         },
         "folderPath": {
           "type": "string",
-          "description": "Gets or sets the folder path of the source control."
+          "description": "The folder path of the source control."
         },
         "autoSync": {
           "type": "boolean",
-          "description": "Gets or sets auto async of the source control. Default is false."
+          "description": "The auto sync of the source control. Default is false."
         },
         "publishRunbook": {
           "type": "boolean",
-          "description": "Gets or sets the auto publish of the source control. Default is true."
+          "description": "The auto publish of the source control. Default is true."
         },
         "sourceType": {
           "type": "string",
@@ -424,19 +423,19 @@
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description."
+          "description": "The description."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
           "x-nullable": false,
-          "description": "Gets or sets the creation time."
+          "description": "The creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "x-nullable": false,
-          "description": "Gets or sets the last modified time."
+          "description": "The last modified time."
         }
       },
       "description": "Definition of the source control properties"
@@ -446,7 +445,7 @@
         "properties": {
           "$ref": "#/definitions/SourceControlCreateOrUpdateProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the properties of the source control."
+          "description": "The properties of the source control."
         }
       },
       "required": [
@@ -459,25 +458,25 @@
         "repoUrl": {
           "type": "string",
           "maxLength": 2000,
-          "description": "Gets or sets the repo url of the source control."
+          "description": "The repo url of the source control."
         },
         "branch": {
           "type": "string",
           "maxLength": 255,
-          "description": "Gets or sets the repo branch of the source control. Include branch as empty string for VsoTfvc."
+          "description": "The repo branch of the source control. Include branch as empty string for VsoTfvc."
         },
         "folderPath": {
           "type": "string",
           "maxLength": 255,
-          "description": "Gets or sets the folder path of the source control. Path must be relative."
+          "description": "The folder path of the source control. Path must be relative."
         },
         "autoSync": {
           "type": "boolean",
-          "description": "Gets or sets auto async of the source control. Default is false."
+          "description": "The auto async of the source control. Default is false."
         },
         "publishRunbook": {
           "type": "boolean",
-          "description": "Gets or sets the auto publish of the source control. Default is true."
+          "description": "The auto publish of the source control. Default is true."
         },
         "sourceType": {
           "type": "string",
@@ -493,14 +492,13 @@
           }
         },
         "securityToken": {
-          "type": "string",
-          "description": "Gets or sets the authorization token for the repo of the source control.",
+          "description": "The authorization token for the repo of the source control.",
           "$ref": "#/definitions/SourceControlSecurityTokenProperties"
         },
         "description": {
           "type": "string",
           "maxLength": 512,
-          "description": "Gets or sets the user description of the source control."
+          "description": "The user description of the source control."
         }
       },
       "description": "The properties of the create source control operation."
@@ -510,12 +508,12 @@
         "accessToken":{
           "type":"string",
           "maxLength":1024,
-          "description":"Gets or sets the access token."
+          "description":"The access token."
         },
         "refreshToken":{
           "type":"string",
           "maxLength":1024,
-          "description":"Gets or sets the refresh token."
+          "description":"The refresh token."
         },
         "tokenType":{
           "type": "string",
