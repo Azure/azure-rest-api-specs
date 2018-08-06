@@ -81,7 +81,7 @@ async function getLinterResult(swaggerPath) {
 async function runTools(swagger, beforeOrAfter) {
     console.log(`Processing "${swagger}":`);
     const linterErrors = await getLinterResult(swagger);
-    console.log(linterErrors);
+    console.log(`Linter produced ${linterErrors.length} results`);
     await updateResult(swagger, linterErrors, beforeOrAfter);
 };
 
