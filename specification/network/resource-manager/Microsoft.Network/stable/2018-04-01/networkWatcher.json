@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -68,10 +66,10 @@
             "description": "Parameters that define the network watcher resource."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -87,6 +85,9 @@
               "$ref": "#/definitions/NetworkWatcher"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create network watcher": { "$ref": "./examples/NetworkWatcherCreate.json" }
         }
       },
       "get": {
@@ -111,10 +112,10 @@
             "description": "The name of the network watcher."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -124,6 +125,9 @@
               "$ref": "#/definitions/NetworkWatcher"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get network watcher": { "$ref": "./examples/NetworkWatcherGet.json" }
         }
       },
       "delete": {
@@ -149,10 +153,10 @@
             "description": "The name of the network watcher."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -162,6 +166,9 @@
           "204": {
             "description": "Delete successful."
           }
+        },
+        "x-ms-examples": {
+          "Delete network watcher": { "$ref": "./examples/NetworkWatcherDelete.json" }
         }
       },
       "patch": {
@@ -195,10 +202,10 @@
             "description": "Parameters supplied to update network watcher tags."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -230,10 +237,10 @@
             "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -246,6 +253,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List network watchers": { "$ref": "./examples/NetworkWatcherList.json" }
         }
       }
     },
@@ -258,10 +268,10 @@
         "description": "Gets all network watchers by subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -274,6 +284,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List all network watchers": { "$ref": "./examples/NetworkWatcherListAll.json" }
         }
       }
     },
@@ -309,10 +322,10 @@
             "description": "Parameters that define the representation of topology."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -363,10 +376,10 @@
             "description": "Parameters that define the IP flow to be verified."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -382,6 +395,9 @@
               "$ref": "#/definitions/VerificationIPFlowResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Ip flow verify": { "$ref": "./examples/NetworkWatcherIpFlowVerify.json" }
         }
       }
     },
@@ -418,10 +434,10 @@
             "description": "Parameters that define the source and destination endpoint."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -437,6 +453,9 @@
               "$ref": "#/definitions/NextHopResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get next hop": { "$ref": "./examples/NetworkWatcherNextHopGet.json" }
         }
       }
     },
@@ -473,10 +492,10 @@
             "description": "Parameters that define the VM to check security groups for."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -492,6 +511,9 @@
               "$ref": "#/definitions/SecurityGroupViewResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get security group view": { "$ref": "./examples/NetworkWatcherSecurityGroupViewGet.json" }
         }
       }
     },
@@ -535,10 +557,10 @@
             "description": "Parameters that define the create packet capture operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -548,6 +570,9 @@
               "$ref": "#/definitions/PacketCaptureResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureCreate.json" }
         }
       },
       "get": {
@@ -579,10 +604,10 @@
             "description": "The name of the packet capture session."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -592,6 +617,9 @@
               "$ref": "#/definitions/PacketCaptureResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureGet.json" }
         }
       },
       "delete": {
@@ -624,10 +652,10 @@
             "description": "The name of the packet capture session."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -637,6 +665,9 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Delete packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureDelete.json" }
         }
       }
     },
@@ -671,10 +702,10 @@
             "description": "The name of the packet capture session."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -684,6 +715,9 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Stop packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureStop.json" }
         }
       }
     },
@@ -718,10 +752,10 @@
             "description": "The name given to the packet capture session."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -737,6 +771,9 @@
               "$ref": "#/definitions/PacketCaptureQueryStatusResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Query packet capture status": { "$ref": "./examples/NetworkWatcherPacketCaptureQueryStatus.json" }
         }
       }
     },
@@ -763,10 +800,10 @@
             "description": "The name of the Network Watcher resource."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -779,6 +816,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List packet captures": { "$ref": "./examples/NetworkWatcherPacketCapturesList.json" }
         }
       }
     },
@@ -815,10 +855,10 @@
             "description": "Parameters that define the resource to troubleshoot."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -834,6 +874,9 @@
               "$ref": "#/definitions/TroubleshootingResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get troubleshooting": { "$ref": "./examples/NetworkWatcherTroubleshootGet.json" }
         }
       }
     },
@@ -870,10 +913,10 @@
             "description": "Parameters that define the resource to query the troubleshooting result."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -889,17 +932,21 @@
               "$ref": "#/definitions/TroubleshootingResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get troubleshoot result": { "$ref": "./examples/NetworkWatcherTroubleshootResultQuery.json" }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog": {
       "post": {
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "TrafficAnalytics"
         ],
         "operationId": "NetworkWatchers_SetFlowLogConfiguration",
         "x-ms-long-running-operation": true,
-        "description": "Configures flow log on a specified resource.",
+        "description": "Configures flow log  and traffic analytics (optional) on a specified resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -925,15 +972,15 @@
             "description": "Parameters that define the configuration of flow log."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful request for setting flow log configuration.",
+            "description": "Successful request for setting flow log  and traffic analytics (optional) configuration.",
             "schema": {
               "$ref": "#/definitions/FlowLogInformation"
             }
@@ -944,17 +991,21 @@
               "$ref": "#/definitions/FlowLogInformation"
             }
           }
+        },
+        "x-ms-examples": {
+          "Configure flow log": { "$ref": "./examples/NetworkWatcherFlowLogConfigure.json" }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus": {
       "post": {
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "TrafficAnalytics"
         ],
         "operationId": "NetworkWatchers_GetFlowLogStatus",
         "x-ms-long-running-operation": true,
-        "description": "Queries status of flow log on a specified resource.",
+        "description": "Queries status of flow log and traffic analytics (optional) on a specified resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -977,18 +1028,18 @@
             "schema": {
               "$ref": "#/definitions/FlowLogStatusParameters"
             },
-            "description": "Parameters that define a resource to query flow log status."
+            "description": "Parameters that define a resource to query flow log and traffic analytics (optional)  status."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful request for query flow log status.",
+            "description": "Successful request for query flow log and traffic analytics (optional) status.",
             "schema": {
               "$ref": "#/definitions/FlowLogInformation"
             }
@@ -999,6 +1050,9 @@
               "$ref": "#/definitions/FlowLogInformation"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get flow log status": { "$ref": "./examples/NetworkWatcherFlowLogStatusQuery.json" }
         }
       }
     },
@@ -1035,10 +1089,10 @@
             "description": "Parameters that determine how the connectivity check will be performed."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1054,6 +1108,9 @@
               "$ref": "#/definitions/ConnectivityInformation"
             }
           }
+        },
+        "x-ms-examples": {
+          "Check connectivity": { "$ref": "./examples/NetworkWatcherConnectivityCheck.json" }
         }
       }
     },
@@ -1090,10 +1147,10 @@
             "description": "Parameters that determine Azure reachability report configuration."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1150,10 +1207,10 @@
             "description": "Parameters that scope the list of available providers."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1171,7 +1228,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Azure Reachability Report": {
+          "Get Available Providers List": {
             "$ref": "./examples/NetworkWatcherAvailableProvidersListGet.json"
           }
         }
@@ -1217,10 +1274,10 @@
             "description": "Parameters that define the operation to create a connection monitor."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1236,6 +1293,9 @@
               "$ref": "#/definitions/ConnectionMonitorResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorCreate.json" }
         }
       },
       "get": {
@@ -1267,10 +1327,10 @@
             "description": "The name of the connection monitor."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1280,6 +1340,9 @@
               "$ref": "#/definitions/ConnectionMonitorResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorGet.json" }
         }
       },
       "delete": {
@@ -1312,10 +1375,10 @@
             "description": "The name of the connection monitor."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1325,6 +1388,9 @@
           "202": {
             "description": "Accepted. The operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Delete connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorDelete.json" }
         }
       }
     },
@@ -1359,10 +1425,10 @@
             "description": "The name of the connection monitor."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1372,6 +1438,9 @@
           "202": {
             "description": "Accepted. The operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Stop connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorStop.json" }
         }
       }
     },
@@ -1406,10 +1475,10 @@
             "description": "The name of the connection monitor."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1419,6 +1488,9 @@
           "202": {
             "description": "Accepted. The operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Start connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorStart.json" }
         }
       }
     },
@@ -1453,10 +1525,10 @@
             "description": "The name given to the connection monitor."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1472,6 +1544,9 @@
               "$ref": "#/definitions/ConnectionMonitorQueryResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Query connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorQuery.json" }
         }
       }
     },
@@ -1498,10 +1573,10 @@
             "description": "The name of the Network Watcher resource."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1514,6 +1589,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List connection monitors": { "$ref": "./examples/NetworkWatcherConnectionMonitorList.json" }
         }
       }
     }
@@ -2252,13 +2330,13 @@
       }
     },
     "FlowLogStatusParameters": {
-      "description": "Parameters that define a resource to query flow log status.",
+      "description": "Parameters that define a resource to query flow log and traffic analytics (optional) status.",
       "required": [
         "targetResourceId"
       ],
       "properties": {
         "targetResourceId": {
-          "description": "The target resource where getting the flow logging status.",
+          "description": "The target resource where getting the flow log and traffic analytics (optional) status.",
           "type": "string"
         }
       }
@@ -2279,19 +2357,60 @@
       }
     },
     "FlowLogInformation": {
-      "description": "Information on the configuration of flow log.",
+      "description": "Information on the configuration of flow log and traffic analytics (optional) .",
       "required": [
         "targetResourceId",
         "properties"
       ],
       "properties": {
         "targetResourceId": {
-          "description": "The ID of the resource to configure for flow logging.",
+          "description": "The ID of the resource to configure for flow log and traffic analytics (optional) .",
           "type": "string"
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FlowLogProperties"
+        },
+        "flowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsProperties"
+        }
+      }
+    },
+     "TrafficAnalyticsProperties": {
+      "description": "Parameters that define the configuration of traffic analytics.",
+      "required": [
+        "networkWatcherFlowAnalyticsConfiguration"
+      ],
+      "properties": {
+        "networkWatcherFlowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsConfigurationProperties"
+        }
+      }
+    },
+    "TrafficAnalyticsConfigurationProperties": {
+      "description": "Parameters that define the configuration of traffic analytics.",
+      "required": [
+        "enabled",
+        "workspaceId",
+        "workspaceRegion",
+        "workspaceResourceId"
+      ],
+      "properties": {
+        "enabled": {
+          "description": "Flag to enable/disable traffic analytics.",
+          "type": "boolean"
+        },
+        "workspaceId": {
+          "description": "The resource guid of the attached workspace",
+          "type": "string"
+        },
+        "workspaceRegion": {
+          "description": "The location of the attached workspace",
+          "type": "string"
+        },
+        "workspaceResourceId": {
+          "description": "Resource Id of the attached workspace ",
+         "type": "string"
         }
       }
     },
@@ -3029,22 +3148,6 @@
         }
       },
       "description": "Connection state snapshot."
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }

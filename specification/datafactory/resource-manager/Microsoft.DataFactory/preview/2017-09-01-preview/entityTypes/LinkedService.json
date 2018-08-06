@@ -3173,7 +3173,7 @@
       ] 
     }, 
     "QuickBooksLinkedServiceTypeProperties": { 
-      "description": "QuickBooks server linked service properties.", 
+      "description": "QuickBooks server linked service properties.",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the QuickBooks server. (i.e. quickbooks.api.intuit.com)",
@@ -3182,6 +3182,14 @@
         "companyId": {
           "description": "The company ID of the QuickBooks company to authorize.",
           "type": "object"
+        },
+        "consumerKey": {
+          "description": "The consumer key for OAuth 1.0 authentication.",
+          "type": "object"
+        },
+        "consumerSecret": {
+          "description": "The consumer secret for OAuth 1.0 authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessToken": {
           "description": "The access token for OAuth 1.0 authentication.",
@@ -3195,14 +3203,18 @@
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "endpoint",
-        "companyId"
+        "companyId",
+        "consumerKey",
+        "consumerSecret",
+        "accessToken",
+        "accessTokenSecret"
       ] 
     },
     "ServiceNowLinkedService": { 
@@ -3229,7 +3241,7 @@
       "description": "ServiceNow server linked service properties.", 
       "properties": {
         "endpoint": {
-          "description": "The endpoint of the ServiceNow server. (i.e. ServiceNowData.com)",
+          "description": "The endpoint of the ServiceNow server. (i.e. <instance>.service-now.com)",
           "type": "object"
         },
         "authenticationType": {

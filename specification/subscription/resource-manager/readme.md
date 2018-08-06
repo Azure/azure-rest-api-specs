@@ -72,20 +72,6 @@ swagger-to-sdk:
 ```
 
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-```yaml $(csharp)
-csharp:
-  azure-arm: true
-  namespace: Microsoft.Azure.Management.Subscription
-  license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
-  clear-output-folder: true
-```
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
@@ -129,6 +115,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2018-03-preview
+  - tag: package-2017-11-preview
 ```
 
 ### Tag: package-2018-03-preview and go
@@ -156,11 +143,32 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.subscription
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-subscription
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.subscription
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-subscription
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-11-preview
+```
+
+### Tag: package-2017-11-preview and java
+
+These settings apply only when `--tag=package-2017-11-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-11-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.subscription.v2017_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/subscription/resource-manager/v2017_11_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+

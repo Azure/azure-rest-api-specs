@@ -108,6 +108,7 @@ batch:
       - ../specification/datamigration/resource-manager/Microsoft.DataMigration/2017-11-15-preview/datamigration.json
       - ../specification/datamigration/resource-manager/Microsoft.DataMigration/2018-03-15-preview/datamigration.json
       - ../specification/datamigration/resource-manager/Microsoft.DataMigration/2018-03-31-preview/datamigration.json
+      - ../specification/datamigration/resource-manager/Microsoft.DataMigration/2018-04-19/datamigration.json
       - ../specification/devtestlabs/resource-manager/Microsoft.DevTestLab/2015-05-21-preview/DTL.json
       - ../specification/devtestlabs/resource-manager/Microsoft.DevTestLab/2016-05-15/DTL.json
       - ../specification/dns/resource-manager/Microsoft.Network/2015-05-04-preview/dns.json
@@ -283,6 +284,7 @@ batch:
       - ../specification/web/resource-manager/Microsoft.Web/2016-08-01/WebApps.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-09-01/AppServiceEnvironments.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-09-01/AppServicePlans.json
+      - ../specification/kusto/resource-manager/Microsoft.Kusto/2017-09-07-privatepreview/kusto.json
       
       # some invalid swagger
       # - ../specification/timeseriesinsights/resource-manager/Microsoft.TimeSeriesInsights/2017-02-28-preview/timeseriesinsights.json

@@ -6,9 +6,8 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-textanalytics
-  package-version: 1.0.0-preview
+  package-version: 1.0.0
   output-folder: $(node-sdks-folder)/lib/services/textAnalytics
-  override-client-name: TextAnalyticsAPIClient
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true

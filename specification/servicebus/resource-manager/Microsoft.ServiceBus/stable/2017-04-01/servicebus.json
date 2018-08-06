@@ -1431,6 +1431,12 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -1925,6 +1931,12 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -2425,6 +2437,12 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -2626,6 +2644,12 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -4198,6 +4222,12 @@
                 "modelAsString": false
               }
             },
+            "pendingReplicationOperationsCount": {
+              "readOnly": true,
+              "format": "int64",
+              "type": "integer",
+              "description": "Number of entities pending to be replicated."
+            },
             "partnerNamespace": {
               "type": "string",
               "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
@@ -4257,6 +4287,12 @@
               "readOnly": true,
               "type": "string",
               "description": "Provisioning state of Migration Configuration "
+            },
+            "pendingReplicationOperationsCount": {
+              "readOnly": true,
+              "format": "int64",
+              "type": "integer",
+              "description": "Number of entities pending to be replicated."
             },
             "targetNamespace": {
               "type": "string",
@@ -4415,6 +4451,26 @@
         "name": "MigrationConfigurationName",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "SkipParameter": {
+      "name": "$skip",
+      "description": "Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "description": "May be used to limit the number of results to the most recent N usageDetails.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
       "x-ms-parameter-location": "method"
     }
   }

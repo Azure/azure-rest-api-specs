@@ -2,10 +2,10 @@
 
 These settings apply only when `--ruby` is specified on the command line.
 
-``` yaml $(ruby)
-ruby:
-  package-name: azure_mgmt_cdn
-  package-version": "0.16.0"
+``` yaml
+package-name: azure_mgmt_cdn
+package-version: "0.16.0"
+azure-arm: true
 ```
 
 ### Ruby multi-api
@@ -25,8 +25,8 @@ These settings apply only when `--tag=package-2017-10 --ruby` is specified on th
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2017-10' && $(ruby)
-namespace: "Azure::CDN::Mgmt::V2017_10_23"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2017-10-12
+namespace: "Azure::CDN::Mgmt::V2017_10_12"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib
 ```
 
 
@@ -37,7 +37,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2017-04' && $(ruby)
 namespace: "Azure::CDN::Mgmt::V2017_04_02"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2017-04-02
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib
 ```
 
 ### Tag: package-2016-10 and ruby
@@ -47,7 +47,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2016-10'  && $(ruby)
 namespace: "Azure::CDN::Mgmt::V2016_10_02"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2016-10-02
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib
 ```
 
 ### Tag: package-2016-04 and ruby
@@ -57,7 +57,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2016-04'  && $(ruby)
 namespace: "Azure::CDN::Mgmt::V2016_04_02"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2016-04-02
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib
 ```
 
 ### Tag: package-2015-06 and ruby
@@ -67,5 +67,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2015-06' && $(ruby)
 namespace: "Azure::CDN::Mgmt::V2015_06_01"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib/2015-06-01
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib
 ```

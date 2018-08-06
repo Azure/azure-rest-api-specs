@@ -70,7 +70,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
@@ -83,18 +82,27 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
+- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
 - Microsoft.Sql/preview/2017-10-01-preview/databases.json
 - Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
+- Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
+- Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 
 
 # Needed when there is more than one input file
@@ -138,7 +146,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
@@ -151,16 +158,25 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
+- Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 
 # Needed when there is more than one input file
 override-info:
@@ -198,7 +214,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
@@ -211,15 +226,24 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
+- Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 
 # Needed when there is more than one input file
 override-info:
@@ -256,7 +280,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
@@ -268,13 +291,19 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
+- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 
 # Needed when there is more than one input file
@@ -313,7 +342,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/usages.json
 - Microsoft.Sql/stable/2015-05-01/capabilities.json
-- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/preview/2015-05-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
@@ -372,11 +401,14 @@ These can be regenerated by running the following PowerShell script from this re
 input-file:
  - ./Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/databases.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 
 # Needed when there is more than one input file
 override-info:
@@ -395,15 +427,21 @@ These can be regenerated by running the following PowerShell script from this re
 
 ``` yaml $(tag) == 'package-pure-2017-03-preview'
 input-file:
+ - ./Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/databases.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/jobs.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
 
 # Needed when there is more than one input file
 override-info:
@@ -423,7 +461,7 @@ These can be regenerated by running the following PowerShell script from this re
 ``` yaml $(tag) == 'package-pure-2015-05-preview'
 input-file:
  - ./Microsoft.Sql/preview/2015-05-01-preview/advisors.json
- - ./Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/blobAuditing.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
@@ -501,9 +539,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_sql']
 ```
 
 ### C#
@@ -615,14 +656,49 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.sql
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-sql
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.sql
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-sql
 ```
+
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-pure-2017-10-preview
+  - tag: package-2014-04
+```
+
+### Tag: package-pure-2017-10-preview and java
+
+These settings apply only when `--tag=package-pure-2017-10-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-pure-2017-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.sql.v2017_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2017_10_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2014-04 and java
+
+These settings apply only when `--tag=package-2014-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2014-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.sql.v2014_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2014_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
 
 ## Validation
 
