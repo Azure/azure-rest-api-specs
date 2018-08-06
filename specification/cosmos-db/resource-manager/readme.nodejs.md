@@ -7,7 +7,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-cosmosdb
-  package-version: 1.1.1-preview
+  package-version: 2.0.0
   output-folder: $(node-sdks-folder)/lib/services/cosmosdbManagement
   override-client-name: CosmosDBManagementClient
   generate-license-txt: true

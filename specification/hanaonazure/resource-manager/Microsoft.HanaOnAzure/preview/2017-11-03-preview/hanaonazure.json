@@ -284,6 +284,23 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "Specifies the HANA instance unique ID."
+                },
+                "powerState": {
+                    "readOnly": true,
+                    "type": "string",
+                    "enum": [
+                        "starting",
+                        "started",
+                        "stopping",
+                        "stopped",
+                        "restarting",
+                        "unknown"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HanaInstancePowerStateEnum",
+                        "modelAsString": true
+                    },
+                    "description": "Resource power state"
                 }
             },
             "description": "Describes the properties of a HANA instance."
@@ -452,7 +469,7 @@
                 "provider": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with “Microsoft” for 1st party services."
+                    "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with \"Microsoft\" for 1st party services."
                 },
                 "resource": {
                     "readOnly": true,
