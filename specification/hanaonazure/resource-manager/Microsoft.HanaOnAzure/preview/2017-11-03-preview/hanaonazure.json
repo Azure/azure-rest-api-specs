@@ -284,6 +284,23 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "Specifies the HANA instance unique ID."
+                },
+                "powerState": {
+                    "readOnly": true,
+                    "type": "string",
+                    "enum": [
+                        "starting",
+                        "started",
+                        "stopping",
+                        "stopped",
+                        "restarting",
+                        "unknown"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HanaInstancePowerStateEnum",
+                        "modelAsString": true
+                    },
+                    "description": "Resource power state"
                 }
             },
             "description": "Describes the properties of a HANA instance."
