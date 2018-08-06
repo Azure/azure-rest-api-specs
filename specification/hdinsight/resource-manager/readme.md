@@ -37,7 +37,7 @@ tag: package-2018-06-preview
  directive:
    - suppress: DefinitionsPropertiesNamesCamelCase
      reason: This would require a breaking change, and the capabilities API was removed in version 2018-06-01-preview.
-     from: locations.json
+     from: Microsoft.HDInsight/preview/2015-03-01-1/preview/locations.json
      where:
        - $.definitions.CapabilitiesResult.properties.vmSize_filters
        - $.definitions.RegionalQuotaCapability.properties.cores_available
