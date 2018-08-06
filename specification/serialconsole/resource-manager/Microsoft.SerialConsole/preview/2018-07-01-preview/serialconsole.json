@@ -103,8 +103,11 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Get whether or not Serial Console is disabled": {
-                        "$ref": "./examples/GetConsoleDisabledExample.json"
+                    "Successfully get whether or not Serial Console is disabled": {
+                        "$ref": "./examples/GetConsoleDisabledSuccessExample.json"
+                    },
+                    "Get whether or not Serial Console is disabled and receive error": {
+                        "$ref": "./examples/GetConsoleDisabledErrorExample.json"
                     }
                 }
             }
@@ -114,7 +117,7 @@
                 "tags": [
                     "EnableConsole"
                 ],
-                "operationId": "Console_enableconsole",
+                "operationId": "Console_EnableConsole",
                 "description": "Enables Serial Console for a VM",
                 "parameters": [
                     {
@@ -143,7 +146,10 @@
                 },
                 "x-ms-examples": {
                     "Enable console successfully": {
-                        "$ref": "./examples/EnableConsoleExample.json"
+                        "$ref": "./examples/EnableConsoleSuccessExample.json"
+                    },
+                    "Enable console with error": {
+                        "$ref": "./examples/EnableConsoleErrorExample.json"
                     }
                 }
             }
@@ -153,7 +159,7 @@
                 "tags": [
                     "DisableConsole"
                 ],
-                "operationId": "Console_disableconsole",
+                "operationId": "Console_DisableConsole",
                 "description": "Disables Serial Console for a VM",
                 "parameters": [
                     {
@@ -181,8 +187,11 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Attempt to disable console and receive a 500 error": {
-                    "$ref": "./examples/DisableConsoleExample.json"
+                    "Enable console successfully": {
+                        "$ref": "./examples/DisableConsoleSuccessExample.json"
+                    },
+                    "Disable console with error": {
+                        "$ref": "./examples/DisableConsoleErrorExample.json"
                     }
                 }
             }
@@ -201,7 +210,7 @@
         },
         "GetDisabledResult": {
             "title": "Get Disabled result",
-            "description": "Returns whether or not Serial Console is disabled for ths given subscription",
+            "description": "Returns whether or not Serial Console is disabled for this given subscription",
             "properties": {
                 "disabled": {
                     "description": "Disabled result",
@@ -211,7 +220,7 @@
         },
         "SetDisabledResult": {
             "title": "Set Disabled result",
-            "description": "Sets disable status and returns whether or not Serial Console is now disabled for ths given subscription",
+            "description": "Sets disable status and returns whether or not Serial Console is now disabled for this given subscription",
             "properties": {
                 "disabled": {
                     "description": "Disabled result",
