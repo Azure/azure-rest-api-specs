@@ -48,7 +48,7 @@
             "required": true,
             "type": "string",
             "description": "The location where resource usage is queried.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._ ]+$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -66,7 +66,8 @@
           }
         },
         "x-ms-examples": {
-          "List usages": { "$ref": "./examples/UsageList.json" }
+          "List usages": { "$ref": "./examples/UsageList.json" },
+          "List usages spaced location": { "$ref": "./examples/UsageListSpacedLocation.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
