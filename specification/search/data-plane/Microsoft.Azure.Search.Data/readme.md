@@ -118,6 +118,6 @@ directive:
         replace( /SerializeObject\((.*?), Client\.SerializationSettings\)/g , "SerializeObject($1, requestSerializerSettings == null ? Client.SerializationSettings : requestSerializerSettings)" ).
         replace( /WithHttpMessagesAsync\((.*?, cancellationToken)\)/g, "WithHttpMessagesAsync($1, requestSerializerSettings, requestDeserializerSettings)" ).
         replace( /DocumentSearchResult/g, "DocumentSearchResultProxy" ).
-        replace( /public IList<string> ScoringParameterStrings { get; set; }/g, "protected internal IList<string> ScoringParameterStrings { get { return ScoringParameters == null ? Empty : ScoringParameters.Select(p => p.ToString()).ToList(); } set { } }" ).
+        replace( /public IList<string> ScoringParameterStrings/g, "protected internal IList<string> ScoringParameterStrings" ).
         replace( /public SearchParameters\(bool/g, "private SearchParameters(bool" )
 ```

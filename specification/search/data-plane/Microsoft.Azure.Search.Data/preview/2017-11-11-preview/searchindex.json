@@ -70,6 +70,9 @@
           "Search"
         ],
         "operationId": "DocumentsProxy_SearchGet",
+        "x-ms-examples": {
+          "SearchIndexGetSearch": { "$ref": "./examples/SearchIndexGetSearch.json" }
+        },        
         "description": "Searches for documents in the Azure Search index.",
         "parameters": [
           {
@@ -193,6 +196,7 @@
             },
             "collectionFormat": "multi",
             "x-ms-client-name": "ScoringParameterStrings",
+            "description": "The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name:value. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation:-122.2,44.8\"(without the quotes).",
             "x-ms-parameter-grouping": {
               "name": "SearchParameters"
             }
@@ -300,7 +304,8 @@
         ],
         "operationId": "DocumentsProxy_SearchPost",
         "x-ms-examples": {
-        },
+          "SearchIndexPostSearch": { "$ref": "./examples/SearchIndexPostSearch.json" }
+        },        
         "description": "Searches for documents in the Azure Search index.",
         "parameters": [
           {
@@ -341,7 +346,8 @@
         ],
         "operationId": "DocumentsProxy_DocumentIndexPost",
         "x-ms-examples": {
-        },
+          "SearchIndexPostIndex": { "$ref": "./examples/SearchIndexPostIndex.json" }
+        },        
         "description": "Sends a batch of upload, merge, and/or delete actions to the Azure Search index.",
         "parameters": [
           {
@@ -353,6 +359,7 @@
           {
             "name": "IndexBatch",
             "in": "body",
+            "description": "The batch of index actions.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/IndexBatch"
@@ -948,7 +955,7 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "description": "",
+      "description": "The accept parameter in HTTP header advertises which content types, expressed as MIME types, the client is able to understand.",
       "x-ms-parameter-location": "method"
     },
     "SearchServiceNameParameter": {
