@@ -2504,7 +2504,7 @@
         "tags": [
           "AggregatedCost"
         ],
-        "operationId": "AggregatedCost_ByManagementGroup",
+        "operationId": "AggregatedCost_GetByManagementGroup",
         "description": "Provides the aggregate cost of a management group and all child management groups by current billing period.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -2543,7 +2543,7 @@
         "tags": [
           "AggregatedCost"
         ],
-        "operationId": "AggregatedCost_ForBillingPeriodByManagementGroup",
+        "operationId": "AggregatedCost_GetForBillingPeriodByManagementGroup",
         "description": "Provides the aggregate cost of a management group and all child management groups by specified billing period",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -4216,7 +4216,8 @@
       "in": "path",
       "description": "Azure Management Group ID.",
       "required": true,
-      "type": "string"
+      "type": "string",
+	  "x-ms-parameter-location": "method"
     }
   }
 }
