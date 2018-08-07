@@ -113,7 +113,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.search.visualsearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/search/bingvisualsearch
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/search/bingvisualsearch
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true
