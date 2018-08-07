@@ -32,6 +32,23 @@ azure-arm: true
 tag: package-2018-06-preview
 ```
 
+## Suppression
+ ``` yaml
+ directive:
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: This would require a breaking change, and the capabilities API was removed in version 2018-06-01-preview.
+     from: Microsoft.HDInsight/preview/2015-03-01-1/preview/locations.json
+     where:
+       - $.definitions.CapabilitiesResult.properties.vmSize_filters
+       - $.definitions.RegionalQuotaCapability.properties.cores_available
+       - $.definitions.RegionalQuotaCapability.properties.cores_used
+       - $.definitions.RegionalQuotaCapability.properties.region_name
+       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
+       - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
+       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
+       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
+       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+ ```
 
 ### Tag: package-2018-06-preview
 
