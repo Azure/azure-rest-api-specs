@@ -89,6 +89,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) | ARM and Data plane OpenAPI(swagger) specs |
 | [R3013](#R3013)	| [DeleteMustNotHaveRequestBody](#R3013) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4001](#R4001) | [XmsParameterLocation](#R4001) | ARM and Data plan OpenAPI(swagger) specs |
 
 #### SDK Warnings
 
@@ -1775,5 +1776,30 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Why the rule is important**: The description must provide a detailed description of the current context. This will ensure that all the operations and models are well documented. 
 
 **How to fix the violation**: Provide detailed description of the node in the description section.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R4001" ></a>R4001 XmsParameterLocation
+
+**Category** : SDK Error
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : The parameter 'managementGroupId' is defined in global parameters section without 'x-ms-parameter-location' extension. This would add the parameter as the client property. Please ensure that this is exactly you want. If so, apply the extension "x-ms-parameter-location": "client". Else, apply the extension "x-ms-parameter-location": "method".
+
+**Description** : By default Autorest processes global parameters as properties on the client. For example subscriptionId and apiVersion which are defined in the global parameters section end up being properties of the client. It would be natural to define resourceGroupName once in the global parameters section and then reference it everywhere, rather than repeating the same definition inline everywhere. One may not want resourceGroupName as a property on the client, just because it is defined in the global parameters section. This extension helps you achieve that. You can add this extension with value "method" "x-ms-parameter-location": "method" and resourceGroupName will not be a client property.
+
+**Why this rule is important**: Without providing the paramter-location, constructor parameter lists end up incorporating parameters that are only relevant to one of the methods that belong to a type. Needlees to say, this can spiral out of control and turn your SDKs into gunk.
+
+**How to fix the violation**: For each parameter in the document-level "parameters" section of your document provide either:
+``` json
+"x-ms-parameter-location":"method"
+```
+
+or 
+
+``` json
+"x-ms-parameter-location":"client"
+```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
