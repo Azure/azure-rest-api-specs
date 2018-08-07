@@ -1,0 +1,65 @@
+{
+    "parameters": {
+        "api-version": "2015-06-01-preview",
+        "subscriptionId": "3eeab341-f466-499c-a8be-85427e154bad",
+        "ascLocation": "centralus"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [
+                    {
+                        "type": "Microsoft.Security/locations/allowedConnections",
+                        "properties": {
+                            "calculatedDateTime": "2018-08-06T14:55:32.3518545Z",
+                            "connectableResources": [
+                                {
+                                    "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/Amit-VA/providers/Microsoft.Compute/virtualMachines/Amit-Baracuda-Test",
+                                    "inboundConnectedResources": [
+                                        {
+                                            "connectedResourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/Amit-VA/providers/Microsoft.Compute/virtualMachines/Amit-Linux-PG",
+                                            "tcpPorts": "[0-21,23-3388,3390-5984,5987-65535]",
+                                            "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                                        }
+                                    ],
+                                    "outboundConnectedResources": [
+                                        {
+                                            "connectedResourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/Amit-VA/providers/Microsoft.Compute/virtualMachines/Amit-Linux-PG",
+                                            "tcpPorts": "[0-21,23-3388,3390-5984,5987-65535]",
+                                            "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/Amit-VA/providers/Microsoft.Compute/virtualMachines/Amit-Linux-PG",
+                                    "inboundConnectedResources": [
+                                        {
+                                            "connectedResourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/Amit-VA/providers/Microsoft.Compute/virtualMachines/Amit-Baracuda-Test",
+                                            "tcpPorts": "[0-21,23-3388,3390-5984,5987-65535]",
+                                            "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                                        }
+                                    ],
+                                    "outboundConnectedResources": [
+                                        {
+                                            "connectedResourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/Amit-VA/providers/Microsoft.Compute/virtualMachines/Amit-Baracuda-Test",
+                                            "tcpPorts": "[0-21,23-3388,3390-5984,5987-65535]",
+                                            "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/amit-va/providers/Microsoft.Compute/virtualMachines/Amit-Win",
+                                    "inboundConnectedResources": [],
+                                    "outboundConnectedResources": []
+                                }
+                            ]
+                        },
+                        "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/Amit-VA/providers/Microsoft.Security/locations/westcentralus/allowedConnections/Internal",
+                        "name": "Internal",
+                        "location": "centralus"
+                    }
+                ]
+            }
+        }
+    }
+}
