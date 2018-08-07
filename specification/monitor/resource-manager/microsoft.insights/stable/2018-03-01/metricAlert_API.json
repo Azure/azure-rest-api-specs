@@ -551,6 +551,7 @@
           "description": "Namespace of the metric."
         },
         "operator": {
+          "type": "string",
           "enum": [
             "Equals",
             "NotEquals",
@@ -560,12 +561,13 @@
             "LessThanOrEqual"
           ],
           "x-ms-enum": {
-            "name": "Operator",
+            "name": "MetricCriteriaOperator",
             "modelAsString": true
           },
           "description": "the criteria operator."
         },
         "timeAggregation": {
+          "type": "string",
           "enum": [
             "Average",
             "Minimum",
@@ -573,7 +575,7 @@
             "Total"
           ],
           "x-ms-enum": {
-            "name": "AggregationType",
+            "name": "MetricCriteriaAggregationType",
             "modelAsString": true
           },
           "description": "the criteria time aggregation types."
