@@ -4,9 +4,10 @@
 
 This is the AutoRest configuration file for ServiceFabricClient.
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for ServiceFabricClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -14,18 +15,18 @@ To build the SDK for ServiceFabricClient, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.3'
+tag: package-6.4
 ```
 
 ### Suppression
@@ -65,6 +66,15 @@ directive:
 
 ```
 
+
+### Tag: package-6.4
+
+These settings apply only when `--tag=package-6.4` is specified on the command line.
+
+```yaml $(tag) == 'package-6.4'
+input-file:
+  - Microsoft.ServiceFabric/stable/6.4/servicefabric.json
+```
 ### Tag: 6.2
 
 These settings apply only when `--tag=6.2` is specified on the command line.
@@ -86,6 +96,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -118,17 +129,18 @@ python:
   add-credentials: true
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-servicefabric/azure/servicefabric
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-servicefabric
 ```
-
 
 ## Go
 
@@ -156,7 +168,6 @@ These settings apply only when `--tag=6.2 --go` is specified on the command line
 ``` yaml $(tag) == '6.2' && $(go)
 output-folder: $(go-sdk-folder)/services/servicefabric/6.2/servicefabric
 ```
-
 
 ### Tag: 6.3 and go
 
