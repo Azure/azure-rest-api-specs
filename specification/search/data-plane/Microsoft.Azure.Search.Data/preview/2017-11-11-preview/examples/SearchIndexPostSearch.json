@@ -1,68 +1,69 @@
 {
-   "parameters":{
-      "searchServiceName":"myservice",
-      "searchDnsSuffix":"search.windows.net",
-      "indexName":"myindex",
-      "api-version":"2017-11-11-Preview",
-      "searchRequest":{
-         "count":true,
-         "facets":[
-            "category,count:10,sort:count"
+   "parameters": {
+      "searchServiceName": "myservice",
+      "searchDnsSuffix": "search.windows.net",
+      "indexName": "myindex",
+      "api-version": "2017-11-11-Preview",
+      "searchRequest": {
+         "count": true,
+         "facets": [
+            "category,count: 10,sort: count"
          ],
-         "highlight":"title",
-         "highlightPostTag":"</em>",
-         "highlightPreTag":"<em>",
-         "minimumCoverage":80,
-         "orderby":"search.score() desc,rating desc",
-         "scoringParameters":[
+         "filter": "rating gt 4.0",
+         "highlight": "title",
+         "highlightPostTag": "</em>",
+         "highlightPreTag": "<em>",
+         "minimumCoverage": 80,
+         "orderby": "search.score() desc,rating desc",
+         "scoringParameters": [
             "currentLocation--122.123,44.77233"
          ],
-         "scoringProfile":"sp",
-         "search":"nice hotels",
-         "searchFields":"title,description",
-         "searchMode":"any",
-         "select":"docId,title,description",
-         "skip":"100",
-         "top":"10"
+         "scoringProfile": "sp",
+         "search": "nice hotels",
+         "searchFields": "title,description",
+         "searchMode": "any",
+         "select": "docId,title,description",
+         "skip": "100",
+         "top": "10"
       }
    },
-   "responses":{
-      "200":{
-         "body":{
-            "@search.facets":{
-               "category":[
+   "responses": {
+      "200": {
+         "body": {
+            "@search.facets": {
+               "category": [
                   {
-                     "count":1,
-                     "value":"Economy"
+                     "count": 1,
+                     "value": "Economy"
                   },
                   {
-                     "count":1,
-                     "value":"Luxury"
+                     "count": 1,
+                     "value": "Luxury"
                   }
                ]
             },
-            "value":[
+            "value": [
                {
-                  "@search.score":1.50,
-                  "@search.highlights":{
-                     "title":[
+                  "@search.score": 1.50,
+                  "@search.highlights": {
+                     "title": [
                         "<em>Nice</em> <em>Hotel</em>"
                      ]
                   },
-                  "description":"Cheapest hotel in town",
-                  "docId":"1",
-                  "title":"Nice Hotel"
+                  "description": "Cheapest hotel in town",
+                  "docId": "1",
+                  "title": "Nice Hotel"
                },
                {
-                  "@search.score":0.70,
-                  "@search.highlights":{
-                     "title":[
+                  "@search.score": 0.70,
+                  "@search.highlights": {
+                     "title": [
                         "Fancy <em>Hotel</em>"
                      ]
                   },
-                  "description":"Best hotel in town",
-                  "docId":"2",
-                  "title":"Fancy Hotel"
+                  "description": "Best hotel in town",
+                  "docId": "2",
+                  "title": "Fancy Hotel"
                }
             ]
          }
