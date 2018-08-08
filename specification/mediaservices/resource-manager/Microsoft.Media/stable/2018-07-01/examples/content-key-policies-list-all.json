@@ -21,7 +21,6 @@
               "options": [
                 {
                   "policyOptionId": "a3448d09-567a-4642-8309-d17e846be59f",
-                  "name": null,
                   "configuration": {
                     "@odata.type": "#Microsoft.Media.ContentKeyPolicyClearKeyConfiguration"
                   },
@@ -30,22 +29,19 @@
                     "issuer": "http://testacs",
                     "audience": "urn:test",
                     "primaryVerificationKey": {
-                      "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
-                      "keyValue": ""
+                      "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey"
                     },
                     "alternateVerificationKeys": [],
                     "requiredClaims": [
                       {
-                        "claimType": "urn:microsoft:azure:mediaservices:contentkeyidentifier",
-                        "claimValue": null
+                        "claimType": "urn:microsoft:azure:mediaservices:contentkeyidentifier"
                       },
                       {
                         "claimType": "DRM",
                         "claimValue": "Widevine"
                       }
                     ],
-                    "restrictionTokenType": "Jwt",
-                    "openIdConnectDiscoveryDocument": null
+                    "restrictionTokenType": "Jwt"
                   }
                 }
               ]
@@ -63,7 +59,6 @@
               "options": [
                 {
                   "policyOptionId": "caf1e28c-8288-4301-8c46-c0f9312c512f",
-                  "name": null,
                   "configuration": {
                     "@odata.type": "#Microsoft.Media.ContentKeyPolicyClearKeyConfiguration"
                   },
@@ -72,27 +67,23 @@
                     "issuer": "http://testacs",
                     "audience": "urn:test",
                     "primaryVerificationKey": {
-                      "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
-                      "keyValue": ""
+                      "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey"
                     },
                     "alternateVerificationKeys": [],
                     "requiredClaims": [
                       {
-                        "claimType": "urn:microsoft:azure:mediaservices:contentkeyidentifier",
-                        "claimValue": null
+                        "claimType": "urn:microsoft:azure:mediaservices:contentkeyidentifier"
                       },
                       {
                         "claimType": "DRM",
                         "claimValue": "Widevine"
                       }
                     ],
-                    "restrictionTokenType": "Jwt",
-                    "openIdConnectDiscoveryDocument": null
+                    "restrictionTokenType": "Jwt"
                   }
                 },
                 {
                   "policyOptionId": "da346259-0cd6-4609-89dc-15ac131bd92f",
-                  "name": null,
                   "configuration": {
                     "@odata.type": "#Microsoft.Media.ContentKeyPolicyWidevineConfiguration",
                     "widevineTemplate": "{\"allowed_track_types\":\"SD_HD\",\"content_key_specs\":[{\"track_type\":\"SD\",\"security_level\":1,\"required_output_protection\":{\"hdcp\":\"HDCP_V2\"}}],\"policy_overrides\":{\"can_play\":true,\"can_persist\":true,\"can_renew\":false}}"
@@ -116,31 +107,16 @@
               "options": [
                 {
                   "policyOptionId": "294a833f-f128-48be-9edf-8d1bb5b35ff3",
-                  "name": null,
                   "configuration": {
                     "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyConfiguration",
                     "licenses": [
                       {
                         "allowTestDevices": false,
-                        "beginDate": null,
-                        "expirationDate": null,
-                        "relativeBeginDate": null,
-                        "relativeExpirationDate": null,
-                        "gracePeriod": null,
                         "playRight": {
-                          "firstPlayExpiration": null,
-                          "scmsRestriction": null,
-                          "agcAndColorStripeRestriction": null,
-                          "explicitAnalogTelevisionOutputRestriction": null,
                           "digitalVideoOnlyContentRestriction": false,
                           "imageConstraintForAnalogComponentVideoRestriction": false,
                           "imageConstraintForAnalogComputerMonitorRestriction": false,
-                          "allowPassingVideoContentToUnknownOutput": "NotAllowed",
-                          "uncompressedDigitalVideoOpl": null,
-                          "compressedDigitalVideoOpl": null,
-                          "analogVideoOpl": null,
-                          "compressedDigitalAudioOpl": null,
-                          "uncompressedDigitalAudioOpl": null
+                          "allowPassingVideoContentToUnknownOutput": "NotAllowed"
                         },
                         "licenseType": "NonPersistent",
                         "contentKeyLocation": {

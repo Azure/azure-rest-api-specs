@@ -1296,7 +1296,7 @@
         },
         "alternativeMediaId": {
           "type": "string",
-          "description": "An Alternative Media Identifier associated with the preview url.  This identifier can be used to distinguish the preview of different live events for authorization purposes in the CustomLicenseAcquisitionUrlTemplate or the CustomKeyAcquisitionUrlTemplate of the StreamingPolicy specified in the StreamingPolicyName field."
+          "description": "The alternative Media-Id associated with the preview"
         }
       },
       "description": "The Live Event preview."
@@ -1520,6 +1520,7 @@
       "description": "scale units definition"
     },
     "StreamingEndpointProperties": {
+      "required": ["scaleUnits"],
       "properties": {
         "description": {
           "type": "string",
@@ -1528,8 +1529,7 @@
         "scaleUnits": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of scale units.",
-          "x-nullable": false
+          "description": "The number of scale units."
         },
         "availabilitySetName": {
           "type": "string",
@@ -1684,7 +1684,8 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/ODataError",
-          "description": "The error properties."
+          "description": "The error properties.",
+          "title": "ApiError"
         }
       },
       "type": "object",
