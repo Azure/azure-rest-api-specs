@@ -44,13 +44,13 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithWidevineOptionAndJwtTokenRestriction",
         "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
         "properties": {
-          "policyId": "f5f2f742-e073-4a7a-8663-09ffdad9d2c0",
-          "created": "2018-03-07T18:49:21.007Z",
-          "lastModified": "2018-03-07T18:49:21.007Z",
+          "policyId": "bad1d030-7d5c-4643-8f1e-49807a4bf64c",
+          "created": "2018-08-08T18:29:29.663Z",
+          "lastModified": "2018-08-08T18:29:29.663Z",
           "description": "ArmPolicyDescription",
           "options": [
             {
-              "policyOptionId": "56af71e4-6e97-4588-a162-bad1f5b03074",
+              "policyOptionId": "26fee004-8dfa-4828-bcad-5e63c637534f",
               "name": "widevineoption",
               "configuration": {
                 "@odata.type": "#Microsoft.Media.ContentKeyPolicyWidevineConfiguration",
@@ -61,61 +61,15 @@
                 "issuer": "urn:issuer",
                 "audience": "urn:audience",
                 "primaryVerificationKey": {
-                  "@odata.type": "#Microsoft.Media.ContentKeyPolicyRsaTokenKey",
-                  "exponent": "",
-                  "modulus": ""
+                  "@odata.type": "#Microsoft.Media.ContentKeyPolicyRsaTokenKey"
                 },
                 "alternateVerificationKeys": [
                   {
-                    "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
-                    "keyValue": ""
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey"
                   }
                 ],
                 "requiredClaims": [],
-                "restrictionTokenType": "Jwt",
-                "openIdConnectDiscoveryDocument": null
-              }
-            }
-          ]
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "name": "PolicyWithWidevineOptionAndJwtTokenRestriction",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithWidevineOptionAndJwtTokenRestriction",
-        "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
-        "properties": {
-          "policyId": "f5f2f742-e073-4a7a-8663-09ffdad9d2c0",
-          "created": "2018-03-07T18:49:21.007Z",
-          "lastModified": "2018-03-07T18:49:21.007Z",
-          "description": "ArmPolicyDescription",
-          "options": [
-            {
-              "policyOptionId": "56af71e4-6e97-4588-a162-bad1f5b03074",
-              "name": "widevineoption",
-              "configuration": {
-                "@odata.type": "#Microsoft.Media.ContentKeyPolicyWidevineConfiguration",
-                "widevineTemplate": "{\"allowed_track_types\":\"SD_HD\",\"content_key_specs\":[{\"track_type\":\"SD\",\"security_level\":1,\"required_output_protection\":{\"hdcp\":\"HDCP_V2\"}}],\"policy_overrides\":{\"can_play\":true,\"can_persist\":true,\"can_renew\":false}}"
-              },
-              "restriction": {
-                "@odata.type": "#Microsoft.Media.ContentKeyPolicyTokenRestriction",
-                "issuer": "urn:issuer",
-                "audience": "urn:audience",
-                "primaryVerificationKey": {
-                  "@odata.type": "#Microsoft.Media.ContentKeyPolicyRsaTokenKey",
-                  "exponent": "",
-                  "modulus": ""
-                },
-                "alternateVerificationKeys": [
-                  {
-                    "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
-                    "keyValue": ""
-                  }
-                ],
-                "requiredClaims": [],
-                "restrictionTokenType": "Jwt",
-                "openIdConnectDiscoveryDocument": null
+                "restrictionTokenType": "Jwt"
               }
             }
           ]

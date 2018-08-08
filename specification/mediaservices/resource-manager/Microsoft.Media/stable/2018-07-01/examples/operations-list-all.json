@@ -378,6 +378,94 @@
             }
           },
           {
+            "name": "Microsoft.Media/mediaservices/streamingEndpoints/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Streaming Endpoints",
+              "operation": "Read diagnostic setting",
+              "description": "Gets the diagnostic setting for the resource."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/streamingEndpoints/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Streaming Endpoints",
+              "operation": "Write diagnostic setting",
+              "description": "Creates or updates the diagnostic setting for the resource."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/streamingEndpoints/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Streaming Endpoints",
+              "operation": "Get list of Media Services Streaming Endpoint Metrics definitions.",
+              "description": "Get list of Media Services Streaming Endpoint Metrics definitions."
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "Egress",
+                    "displayName": "Egress",
+                    "displayDescription": "The amount of Egress data, in bytes.",
+                    "unit": "Bytes",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "OutputFormat",
+                        "displayName": "Output Format",
+                        "toBeExportedForShoebox": true
+                      }
+                    ]
+                  },
+                  {
+                    "name": "SuccessE2ELatency",
+                    "displayName": "Success end to end Latency",
+                    "displayDescription": "The average latency for successful requests in milliseconds.",
+                    "unit": "Milliseconds",
+                    "aggregationType": "Average",
+                    "dimensions": [
+                      {
+                        "name": "OutputFormat",
+                        "displayName": "Output Format",
+                        "toBeExportedForShoebox": true
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Requests",
+                    "displayName": "Requests",
+                    "displayDescription": "Requests to a Streaming Endpoint.",
+                    "unit": "Count",
+                    "aggregationType": "Count",
+                    "dimensions": [
+                      {
+                        "name": "OutputFormat",
+                        "displayName": "Output Format",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "HttpStatusCode",
+                        "displayName": "HTTP Status Code",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ErrorCode",
+                        "displayName": "Error Code",
+                        "toBeExportedForShoebox": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
             "name": "Microsoft.Media/mediaservices/liveEvents/read",
             "display": {
               "provider": "Microsoft Media Services",
