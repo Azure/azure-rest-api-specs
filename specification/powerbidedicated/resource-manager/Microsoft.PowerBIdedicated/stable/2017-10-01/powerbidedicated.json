@@ -758,7 +758,7 @@
         }
       }
     },
-    "ErrorResponse": {   
+    "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
@@ -771,33 +771,6 @@
           "type": "string"
         }
       }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The client API version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method",
-      "description": "The name of the Azure Resource group of which a given PowerBIDedicated capacity is part. This name must be at least 1 character in length, and no more than 90."
     },
     "CheckCapacityNameAvailabilityParameters": {
       "description": "Details of capacity name request body.",
@@ -834,6 +807,33 @@
           "description": "The detailed message of the request unavailability."
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The client API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Azure Resource group of which a given PowerBIDedicated capacity is part. This name must be at least 1 character in length, and no more than 90."
     }
   }
 }
