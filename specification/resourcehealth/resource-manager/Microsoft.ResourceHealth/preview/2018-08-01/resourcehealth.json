@@ -171,13 +171,13 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ResourceHealth/insights": {
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/events": {
       "get": {
         "tags": [
-          "Insights"
+          "Events"
         ],
-        "operationId": "Insights_List",
-        "description": "Lists all historical insights for a single resource. Use the nextLink property in the response to get the next page of insights",
+        "operationId": "Events_List",
+        "description": "Lists all historical health events for a single resource. Use the nextLink property in the response to get the next page of health events",
         "parameters": [
           {
             "name": "resourceUri",
@@ -211,14 +211,14 @@
             "in": "query",
             "required": false,
             "type": "number",
-            "description": "The number of insights to return from top."
+            "description": "The number of health events to return from top."
           }
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of the historical insights for a single resource",
+            "description": "The body contains the list of the historical health events for a single resource",
             "schema": {
-              "$ref": "#/definitions/insights"
+              "$ref": "#/definitions/events"
             }
           },
           "default": {
@@ -232,8 +232,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetHealthHistoryByResource": {
-            "$ref": "./examples/Insights_GetByResource.json"
+          "GetHealthEventsByResource": {
+            "$ref": "./examples/Events_GetByResource.json"
           }
         }
       }
@@ -318,33 +318,33 @@
     }
   },
   "definitions": {
-    "insights": {
+    "events": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/insight"
+            "$ref": "#/definitions/event"
           },
-          "description": "The list of insight."
+          "description": "The list of health event."
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI to fetch the next page of insights. Call ListNext() with this URI to fetch the next page of insights."
+          "description": "The URI to fetch the next page of events. Call ListNext() with this URI to fetch the next page of health events."
         }
       },
       "required": [
         "value"
       ],
-      "description": "The List insights operation response."
+      "description": "The List health events operation response."
     },
-    "insight": {
+    "event": {
       "type": "object",
-      "description": "Service health insight",
+      "description": "Service health event",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "type": "object",
-          "description": "Properties of insight.",
+          "description": "Properties of health event.",
           "properties": {
             "availabilityState": {
               "type": "string",
@@ -362,11 +362,11 @@
             },
             "annotation": {
               "type": "string",
-              "description": "Annotation text of insight."
+              "description": "Annotation text of health event."
             },
             "summary": {
               "type": "string",
-              "description": "Summary text of insight."
+              "description": "Summary text of health event."
             },
             "healthEventType": {
               "type": "string",
@@ -428,7 +428,7 @@
             },
             "customerReadyContent": {
               "type": "string",
-              "description": "Customer ready content of insight."
+              "description": "Customer ready content of health event."
             }
           }
         }
