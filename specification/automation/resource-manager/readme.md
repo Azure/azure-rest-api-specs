@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2018-01-preview
+tag: package-2018-06
 ```
 
 ### Tag: package-2015-10
@@ -103,6 +103,41 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
 - Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
 - Microsoft.Automation/stable/2015-10-31/module.json
+- Microsoft.Automation/stable/2015-10-31/runbook.json
+- Microsoft.Automation/stable/2015-10-31/schedule.json
+- Microsoft.Automation/stable/2015-10-31/variable.json
+- Microsoft.Automation/stable/2015-10-31/webhook.json
+- Microsoft.Automation/stable/2015-10-31/watcher.json
+- Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
+- Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJobStreams.json
+- Microsoft.Automation/preview/2017-05-15-preview/job.json
+- Microsoft.Automation/stable/2018-01-15/dscNode.json
+- Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
+- Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2018-01-15/dscNodeCounts.json
+```
+
+### Tag: package-2018-06
+
+These settings apply only when `--tag=package-2018-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06'
+input-file:
+- Microsoft.Automation/stable/2015-10-31/account.json
+- Microsoft.Automation/stable/2015-10-31/certificate.json
+- Microsoft.Automation/stable/2015-10-31/connection.json
+- Microsoft.Automation/stable/2015-10-31/connectionType.json
+- Microsoft.Automation/stable/2015-10-31/credential.json
+- Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
+- Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2015-10-31/jobSchedule.json
+- Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
+- Microsoft.Automation/stable/2015-10-31/module.json
+- Microsoft.Automation/stable/2018-06-30/python2package.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
@@ -224,6 +259,7 @@ batch:
   - tag: package-2015-10
   - tag: package-2017-05-preview
   - tag: package-2018-01-preview
+  - tag: package-2018-06
 ```
 
 ### Tag: package-2015-10 and go
@@ -251,6 +287,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-01-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2018-01-preview/automation
+```
+
+### Tag: package-2018-06 and go
+
+These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-06' && $(go)
+output-folder: $(go-sdk-folder)/services/automation/mgmt/2018-06-30/automation
 ```
 
 ## Java
