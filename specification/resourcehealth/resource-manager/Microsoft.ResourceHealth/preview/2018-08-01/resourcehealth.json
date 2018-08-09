@@ -171,6 +171,47 @@
         }
       }
     },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/events/{eventId}": {
+      "get": {
+        "tags": [
+          "EventById"
+        ],
+        "operationId": "EventById",
+        "description": "Gets the health event by event id.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API support not nested and one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name} and /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains health event by event id",
+            "schema": {
+              "$ref": "#/definitions/event"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetHealthEventByEventId": {
+            "$ref": "./examples/Events_GetByEventId.json"
+          }
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.ResourceHealth/events": {
       "get": {
         "tags": [
