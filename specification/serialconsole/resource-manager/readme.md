@@ -22,7 +22,7 @@ These are the global settings for the Serial Console API.
 ``` yaml
 openapi-type: arm
 azure-arm: true
-tag: package-2018-07
+tag: package-2018-05
 input-file:
 - Microsoft.SerialConsole/preview/2018-05-01/serialconsole.json
 output-folder: ./Generated
