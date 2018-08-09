@@ -29,6 +29,16 @@ openapi-type: arm
 tag: package-2017-10
 ```
 
+### Tag: package-2018-09
+
+These settings apply only when `--tag=package-2018-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09'
+input-file:
+- Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
+- Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
+```
+
 ### Tag: package-2018-02-preview
 
 These settings apply only when `--tag=package-2018-02-preview` is specified on the command line.
