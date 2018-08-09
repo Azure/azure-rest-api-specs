@@ -313,7 +313,8 @@
         },
         "x-ms-examples": {
           "SearchIndexLookup": { "$ref": "./examples/SearchIndexLookup.json" }
-        },        
+        },
+        "description": "Retrieves a document from the Azure Search index.",
         "parameters": [
           {
             "name": "key",
@@ -533,7 +534,7 @@
         "x-ms-request-id": "request-id",
         "responses": {
           "200": {
-            "description": "",
+            "description": "Response containing suggested documents that match the partial input.",
             "schema": {
               "$ref": "#/definitions/DocumentSuggestResult"
             }
@@ -557,6 +558,7 @@
             "name": "SuggestRequest",
             "in": "body",
             "required": true,
+            "description": "The Suggest request",
             "schema": {
               "$ref": "#/definitions/SuggestParametersPayload"
             }
@@ -574,7 +576,7 @@
         "x-ms-request-id": "request-id",
         "responses": {
           "200": {
-            "description": "Response containing documents that match the search criteria.",
+            "description": "Response containing suggested documents that match the partial input.",
             "schema": {
               "$ref": "#/definitions/DocumentSuggestResult"
             }
@@ -872,9 +874,9 @@
     "DocumentLookupResult": {
       "type": "object",
       "properties": {
-          "Document": {
-            "type": "object"
-          }
+        "document": {
+          "type": "object"
+        }
       }
     },
     "DocumentSuggestResult": {
