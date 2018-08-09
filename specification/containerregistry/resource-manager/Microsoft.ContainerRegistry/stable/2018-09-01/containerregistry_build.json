@@ -1182,13 +1182,6 @@
         "trigger": {
           "$ref": "#/definitions/TriggerProperties",
           "description": "The properties that describe all triggers for the task."
-        },
-        "secrets": {
-          "description": "The collection of secrets for the task.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TaskSecret"
-          }
         }
       }
     },
@@ -1227,36 +1220,6 @@
         "baseImageTrigger": {
           "$ref": "#/definitions/BaseImageTrigger",
           "description": "The trigger based on base image dependencies."
-        }
-      }
-    },
-    "TaskSecret": {
-      "description": "The properties of a task secret object.",
-      "required": [
-        "type",
-        "name",
-        "valueJson"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the secret.",
-          "enum": [
-            "DockerCredentials"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SecretType",
-            "modelAsString": true
-          }
-        },
-        "name": {
-          "description": "The name of the secret.",
-          "type": "string"
-        },
-        "valueJson": {
-          "description": "The serialized Json value of the secret.",
-          "type": "string"
         }
       }
     },
@@ -1486,35 +1449,6 @@
         "trigger": {
           "$ref": "#/definitions/TriggerProperties",
           "description": "The properties that describe all triggers for the task."
-        },
-        "secrets": {
-          "description": "The collection of secrets for the task.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TaskSecret"
-          }
-        }
-      }
-    },
-    "DockerRegistryCredentials": {
-      "description": "The properties of a docker registry credentials.",
-      "required": [
-        "userName",
-        "password"
-      ],
-      "type": "object",
-      "properties": {
-        "loginServer": {
-          "description": "The registry login server.",
-          "type": "string"
-        },
-        "userName": {
-          "description": "The username of the registry.",
-          "type": "string"
-        },
-        "password": {
-          "description": "The password to the registry.",
-          "type": "string"
         }
       }
     },
