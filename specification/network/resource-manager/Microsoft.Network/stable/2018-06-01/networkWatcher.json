@@ -1602,6 +1602,9 @@
         ],
         "operationId": "NetworkWatchers_GetNetworkConfigurationDiagnostic",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": { 
+          "final-state-via": "location" 
+        },
         "description": "Get network configuration diagnostic.",
         "parameters": [
           {
@@ -1649,7 +1652,7 @@
           }
         },
         "x-ms-examples": {
-          "Ip flow verify": { "$ref": "./examples/NetworkWatcherNetworkConfigurationDiagnostic.json" }
+          "Network configuration diagnostic": { "$ref": "./examples/NetworkWatcherNetworkConfigurationDiagnostic.json" }
         }
       }
     }
