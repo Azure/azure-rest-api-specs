@@ -211,7 +211,6 @@
             "in": "query",
             "type": "string",
             "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results.",
-            "x-ms-client-name": "ScoringProfile",
             "x-ms-parameter-grouping": {
               "name": "SearchParameters"
             }
@@ -443,6 +442,7 @@
             "type": "boolean",
             "description": "A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.",
             "x-ms-client-name": "UseFuzzyMatching",
+            "x-nullable": false,
             "x-ms-parameter-grouping": {
               "name": "SuggestParameters"
             }
@@ -908,11 +908,26 @@
     },
     "IndexBatch": {
       "properties": {
-        "name": {
-          "type": "string"
+        "value": {
+          "x-ms-client-name": "Actions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndexAction"
+          }
         }
-      },
-      "x-ms-external": true
+      }
+    },
+    "IndexAction": {
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/IndexActionType",
+          "x-nullable": false
+        },
+        "document": {
+          "type": "object",
+          "x-nullable": false
+        }
+      }
     },
     "IndexingResult": {
       "properties": {
