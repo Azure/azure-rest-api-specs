@@ -37,6 +37,17 @@ openapi-type: arm
 tag: package-2018-03
 ```
 
+### Tag: package-2018-08-preview
+
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08-preview'
+input-file:
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/preview/2018-08-01-preview/managedClusters.json
+- Microsoft.ContainerService/stable/2017-09-30/location.json
+```
+
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
@@ -136,6 +147,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+        - python ./scripts/multiapi_init_gen.py azure-mgmt-containerservice
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -212,25 +225,44 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: create
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.containerservice
   package-name: azure-mgmt-containerservice
-  package-version: 4.1.0
+  package-version: 4.2.2
   clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+
+### Python multi-api
+``` yaml $(python) && $(multiapi)
+batch:
+  - tag: package-2018-08-preview
+  - tag: package-2018-03
+```
+
+### Tag: package-2018-08-preview and python
+
+These settings apply only when `--tag=package-2018-08-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-08-preview' && $(python)
 python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice
+  namespace: azure.mgmt.containerservice.v2018_08_01_preview
+  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_08_01_preview
+```
+
+### Tag: package-2018-03 and python
+
+These settings apply only when `--tag=package-2018-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(python)
+python:
+  namespace: azure.mgmt.containerservice.v2018_03_31
+  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_03_31
 ```
 
 
