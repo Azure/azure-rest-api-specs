@@ -24,7 +24,7 @@ openapi-type: arm
 azure-arm: true
 tag: package-2018-05
 input-file:
-- Microsoft.SerialConsole/preview/2018-05-01/serialconsole.json
+- Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json
 output-folder: ./Generated
 ```
 
