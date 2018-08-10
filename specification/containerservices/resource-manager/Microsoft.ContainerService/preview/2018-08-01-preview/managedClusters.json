@@ -908,12 +908,7 @@
           "description": "Wheter to enable auto-scaler"
         },
         "type": {
-          "type": "string",
-          "enum": [
-            "VirtualMachineScaleSets",
-            "AvailabilitySet"
-          ],
-          "default": "VirtualMachineScaleSets",
+          "$ref": "#/definitions/AgentPoolType",
           "description": "AgentPoolType represents types of agentpool"
         }
       },
@@ -923,6 +918,19 @@
         "count"
       ],
       "description": "Profile for the container service agent pool."
+    },
+    "AgentPoolType":{
+      "type": "string",
+      "enum": [
+        "VirtualMachineScaleSets",
+        "AvailabilitySet"
+      ],
+      "default": "VirtualMachineScaleSets",
+      "x-ms-enum": {
+        "name": "AgentPoolType",
+        "modelAsString": true
+      },
+      "description": "AgentPoolType represents types of agentpool"
     },
     "ContainerServiceWindowsProfile": {
       "properties": {
