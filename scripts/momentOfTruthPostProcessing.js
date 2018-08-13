@@ -4,7 +4,6 @@
 'use strict';
 
 const fs = require('fs'),
-      crypto = require('crypto'),
       utils = require('../test/util/utils'),
       path = require('path');
 
@@ -18,49 +17,28 @@ function getLogDir() {
     return logDir;
 }
 
-let githubTemplate = `
-<h1>
-    AutoRest linter results for {title}
-</h1>
+let githubTemplate = (title, contact_message, file_summaries) => `# AutoRest linter results for ${title}\n${contact_message}\n\n${file_summaries}`;
 
-{contact_message}
+let githubFooter = `[AutoRest Linter Guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) | ` +
+    `[AutoRest Linter Issues](https://github.com/Azure/azure-openapi-validator/issues) | ` +
+    `Send ${emailLink("feedback", "azure-swag-tooling@microsoft.com", "Feedback | AutoRest Linter Diff Tool")}` +
+    `\n\nThanks for your co-operation.`;
 
-{file_summaries}
-`;
-
-let githubFooter = `
-[AutoRest Linter Guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) | [AutoRest Linter Issues](https://github.com/Azure/azure-openapi-validator/issues) | Send ${emailLink("feedback", "azure-swag-tooling@microsoft.com", "Feedback | AutoRest Linter Diff Tool")}
-
-Thanks for your co-operation.
-`;
-
-let fileSummaryTemplate = `
-
-**File**: [{file_name}]({file_href})
-
-<details>
-    <summary>:warning:<strong>{new_warnings}</strong> new Warnings ({total_warnings} total)</summary>
-    {potential_new_warnings}
-</details>
-
-<details>
-    <summary>:x:<strong>{new_errors}</strong> new Errors ({total_errors} total)</summary>
-    {potential_new_errors}
-</details>
-
-`;
+let fileSummaryHeader = (file_name, file_href) => `## Config file: [${file_name}](${file_href})\n`;
+let fileSummaryNewTemplate = (issue_type, issue_count, issue_table) => `### <a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}\n\n${issue_table}\n`;
+let fileSummaryExistingTemplate = (issue_type, issue_count, issue_table) => `<details><summary>${iconFor(issue_type)} ${issue_count} existing ${pluralize(issue_type, issue_count)}</summary><br>\n\n${issue_table}\n</details>\n\n`;
 
 let potentialNewWarningErrorSummaryHeader = `
-<br>
-
-| Code | Id | Source | Message |
-|------|----|--------|---------|
-{list_of_new_warnings_errors}
+| | Rule | Location | Message |
+|-|------|----------|---------|
 `;
 
-let potentialNewWarningErrorSummary = `|{warning_error_code}|{warning_error_id}|[Link]({warning_error_source})|{warning_error_message}|\n`;
+let potentialNewWarningErrorSummary = (count, warning_error_id, warning_error_code, warning_error_file, warning_error_line, warning_error_message) =>
+    `|${count}|[${warning_error_id} - ${warning_error_code}](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md#${warning_error_id})|` +
+    `[${shortName(warning_error_file)}:${warning_error_line}](${blobHref(warning_error_file)}#L${warning_error_line} "${warning_error_file}")|` +
+    `${warning_error_message}|\n`;
 
-let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reachout to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";;
+let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reachout to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";
 let armContactMessage = "These errors are reported by the ARM team's validation tools, reachout to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
 let sdkFileSummaries = '', armFileSummaries = '';
 
@@ -82,28 +60,39 @@ function compareJsonRef(beforeJsonRef, afterJsonRef) {
 function getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount) {
     const totalNewErrors = newSDKErrorsCount + newARMErrorsCount;
     const totalNewWarnings = newSDKWarningsCount + newARMWarningsCount;
-    const pluralize = (word, num) => num !== 1 ? `${word}s` : word;
-    const iconFor = (type, num) => num > 0 ? (type === 'error' ? ':x:' : ':warning:') : ':white_check_mark:';
 
     const title = `${totalNewErrors} new ${pluralize('error', totalNewErrors)} / ${totalNewWarnings} new ${pluralize('warning', totalNewWarnings)}`;
     let summary = `Compared to the target branch (**${targetBranch}**), this pull request introduces:\n\n`;
-    summary += `&nbsp;&nbsp;&nbsp;${iconFor('error', newSDKErrorsCount)}&nbsp;&nbsp;&nbsp;**${newSDKErrorsCount}** new SDK ${pluralize('error', newSDKErrorsCount)}\n\n`;
-    summary += `&nbsp;&nbsp;&nbsp;${iconFor('error', newARMErrorsCount)}&nbsp;&nbsp;&nbsp;**${newARMErrorsCount}** new ARM ${pluralize('error', newARMErrorsCount)}\n\n`;
-    summary += `&nbsp;&nbsp;&nbsp;${iconFor('warning', newSDKWarningsCount)}&nbsp;&nbsp;&nbsp;**${newSDKWarningsCount}** new SDK ${pluralize('warning', newSDKWarningsCount)}\n\n`;
-    summary += `&nbsp;&nbsp;&nbsp;${iconFor('warning', newARMWarningsCount)}&nbsp;&nbsp;&nbsp;**${newARMWarningsCount}** new ARM ${pluralize('warning', newARMWarningsCount)}\n\n`;
+    summary += formatSummaryLine("SDK Error", newSDKErrorsCount);
+    summary += formatSummaryLine("ARM Error", newARMErrorsCount);
+    summary += formatSummaryLine("SDK Warning", newSDKWarningsCount);
+    summary += formatSummaryLine("ARM Warning", newARMWarningsCount);
 
     return [title, summary];
 }
 
-function getSummaryBlock(summaryTitle, fileSummaries, contactMessage) {
-    let githubTemplateCopy = githubTemplate;
-    githubTemplateCopy = githubTemplateCopy.replace("{title}", summaryTitle);
-    githubTemplateCopy = githubTemplateCopy.replace("{file_summaries}", fileSummaries !== '' ? fileSummaries : `**There were no files containing new ${summaryTitle}.**`);
-    githubTemplateCopy = githubTemplateCopy.replace("{contact_message}", contactMessage);
-    return githubTemplateCopy;
+function formatSummaryLine(issueType, count) {
+    let line = `&nbsp;&nbsp;&nbsp;${iconFor(issueType, count)}&nbsp;&nbsp;&nbsp;`;
+    if (count > 0) {
+        line += '[';
+    }
+    line += `**${count}** new ${pluralize(issueType, count)}`;
+    if (count > 0) {
+        line += `](#user-content-${issueType.replace(/\s/g, "-")}s)`;
+    }
+    line += "\n\n";
+    return line;
 }
 
-function compareBeforeAfterArrays(afterArray, beforeArray, newArray) {
+function getSummaryBlock(summaryTitle, fileSummaries, contactMessage) {
+    return githubTemplate(
+        summaryTitle,
+        contactMessage,
+        fileSummaries !== "" ? fileSummaries : `**There were no files containing ${summaryTitle}.**`
+    );
+}
+
+function compareBeforeAfterArrays(afterArray, beforeArray, existingArray, newArray) {
     if(afterArray.length > beforeArray.length){
         afterArray.forEach(afterValue => {
             let errorFound = false;
@@ -122,87 +111,131 @@ function compareBeforeAfterArrays(afterArray, beforeArray, newArray) {
                     errorFound = true;
                 }
             });
-            if(!errorFound) {
+            if(errorFound) {
+                existingArray.push(afterValue);
+            } else {
                 newArray.push(afterValue);
             }
         });
     }
 }
 
-function getLink(jsonRef, prNumber){    
-    let line = "1";
-    
-    try {
-        line = jsonRef.substr(jsonRef.indexOf(".json:") + 6).split(':')[0];
-    } catch(error) {
-        line = "1";
+function iconFor(type, num = undefined) {
+    if (num === 0) {
+        return ':white_check_mark:';
     }
+    
+    if (type.toLowerCase().includes('error')) {
+        return ':x:';
+    } else {
+        return ':warning:';
+    }
+}
 
-    let fileName = jsonRef.substr(jsonRef.indexOf("specification"), (jsonRef.indexOf(".json") + 5) - jsonRef.indexOf("specification"));
-    let md5 = crypto.createHash('md5').update(fileName).digest("hex");
+function pluralize(word, num) {
+    return num !== 1 ? `${word}s` : word;
+}
 
-    let link = "https://github.com/" + process.env.TRAVIS_REPO_SLUG + "/pull/"
-                        + prNumber 
-                        + "/files?diff=unified#diff-" 
-                        + md5 + "R" + line;
+function getLine(jsonRef) {
+    try {
+        return jsonRef.substr(jsonRef.indexOf(".json:") + 6).split(':')[0];
+    } catch (error) {
+        return undefined;
+    }
+}
 
-    return link;
+function getFile(jsonRef) {
+    try {
+        const start = jsonRef.indexOf("specification");
+        return jsonRef.substr(start, (jsonRef.indexOf(".json") + 5) - start);
+    } catch (error) {
+        return undefined;
+    }
+}
+
+function shortName(filePath) {
+    return `${path.basename(path.dirname(filePath))}/&#8203;<strong>${path.basename(filePath)}</strong>`;
 }
 
 function blobHref(file) {
     return `https://github.com/${process.env.TRAVIS_PULL_REQUEST_SLUG}/blob/${process.env.TRAVIS_PULL_REQUEST_SHA}/${file}`;
 }
 
-function getFileSummary(fileName, beforeWarningsArray, afterWarningsArray, beforeErrorsArray, afterErrorsArray, newWarnings, newErrors, prNumber) {
-    let fileSummaryCopy = fileSummaryTemplate;
-    fileSummaryCopy = fileSummaryCopy.replace("{file_name}", fileName);
-    fileSummaryCopy = fileSummaryCopy.replace("{file_href}", blobHref(fileName));
-    fileSummaryCopy = fileSummaryCopy.replace("{before_warnings}", beforeWarningsArray.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{after_warnings}", afterWarningsArray.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{before_errors}", beforeErrorsArray.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{after_errors}", afterErrorsArray.length);
+function getFileSummaryTable(issues, prNumber) {
+    let potentialNewIssues = potentialNewWarningErrorSummaryHeader;
 
-    
-    fileSummaryCopy = fileSummaryCopy.replace("{new_warnings}", newWarnings.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{new_errors}", newErrors.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{total_warnings}", afterWarningsArray.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{total_errors}", afterErrorsArray.length);
+    issues.sort((a, b) => {
+        if (!a.filePath) {
+            a.filePath = getFile(a.jsonref) || "";
+            a.lineNumber = getLine(a.jsonref) || "1";
+        }
 
-    if(newWarnings.length > 0){
-        let potentialNewWarnings = '';
-        newWarnings.forEach(function(newWarning) {
-            let potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummary;
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_code}", newWarning.code);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_message}", newWarning.message);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_id}", newWarning.id);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_source}", getLink(newWarning.jsonref, prNumber));
-            potentialNewWarnings = potentialNewWarnings.concat(potentialNewWarningErrorSummaryCopy);
-        });
-        fileSummaryCopy = fileSummaryCopy.replace("{potential_new_warnings}", potentialNewWarningErrorSummaryHeader.replace("{list_of_new_warnings_errors}", potentialNewWarnings).replace("{table_title}", "Potential New Warnings"))
-    } else {
-        fileSummaryCopy = fileSummaryCopy.replace("{potential_new_warnings}", "");
+        if (!b.filePath) {
+            b.filePath = getFile(b.jsonref) || "";
+            b.lineNumber = getLine(b.jsonref) || "1";
+        }
+
+        const comparison = a.filePath.localeCompare(b.filePath);
+        if (comparison !== 0) {
+            return comparison;
+        } else if (a.lineNumber !== b.lineNumber) {
+            return a.lineNumber - b.lineNumber;
+        } else {
+            return a.id.localeCompare(b.id);
+        }
+    });
+
+    issues.forEach(function (issue, count) {
+        if (!issue.filePath) {
+            issue.filePath = getFile(issue.jsonref) || "";
+            issue.lineNumber = getLine(issue.jsonref) || "1";
+        }
+
+        potentialNewIssues += potentialNewWarningErrorSummary(
+            count + 1,
+            issue.id,
+            issue.code,
+            issue.filePath,
+            issue.lineNumber,
+            issue.message
+        );
+    });
+
+    return potentialNewIssues;
+}
+
+function getFileSummary(issueType, fileName, existingWarnings, existingErrors, newWarnings, newErrors, prNumber) {
+    let fileSummary = "";
+
+    if (newErrors.length > 0) {
+        fileSummary += fileSummaryNewTemplate(`${issueType} Error`, newErrors.length, getFileSummaryTable(newErrors, prNumber));
     }
 
-    if(newErrors.length > 0){
-        let potentialNewErrors = '';
-        newErrors.forEach(function(newError) {
-            let potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummary;
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_code}", newError.code);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_message}", newError.message);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_id}", newError.id);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_source}", getLink(newError.jsonref, prNumber));
-            potentialNewErrors = potentialNewErrors.concat(potentialNewWarningErrorSummaryCopy);
-        });
-        fileSummaryCopy = fileSummaryCopy.replace("{potential_new_errors}", potentialNewWarningErrorSummaryHeader.replace("{list_of_new_warnings_errors}", potentialNewErrors).replace("{table_title}", "Potential New Errors"))
-    } else {
-        fileSummaryCopy = fileSummaryCopy.replace("{potential_new_errors}", "");
+    if (existingErrors.length > 0) {
+        fileSummary += fileSummaryExistingTemplate(`${issueType} Error`, existingErrors.length, getFileSummaryTable(existingErrors, prNumber));
     }
 
-    return fileSummaryCopy;
+    if (fileSummary !== "") {
+        fileSummary += "<br>\n\n";
+    }
+
+    if (newWarnings.length > 0) {
+        fileSummary += fileSummaryNewTemplate(`${issueType} Warning`, newWarnings.length, getFileSummaryTable(newWarnings, prNumber));
+    }
+
+    if (existingWarnings.length > 0) {
+        fileSummary += fileSummaryExistingTemplate(`${issueType} Warning`, existingWarnings.length, getFileSummaryTable(existingWarnings, prNumber));
+    }
+
+    if (fileSummary !== "") {
+        return fileSummaryHeader(fileName, blobHref(fileName)) + fileSummary;
+    } else {
+        return "";
+    }
 }
 
 function emailLink(title, addr, subject = "", body = "") {
-    let link = `<a href='mailto:${addr}'`;
+    let link = `<a href='mailto:${addr}`;
     let sep = "?";
     if (subject && subject.length > 0) {
         link += `${sep}subject=${encodeURIComponent(subject)}`;
@@ -211,7 +244,7 @@ function emailLink(title, addr, subject = "", body = "") {
     if (body && body.length > 0) {
         link += `${sep}body=${encodeURIComponent(body)}`;
     }
-    link += `'>${title}</a>`
+    link += `'>${title}</a>`;
 
     return link;
 }
@@ -239,10 +272,14 @@ function postProcessing() {
         return;
     }
 
-    for(var fileName in jsonData['files']) {
+    const configFiles = Object.keys(jsonData['files']);
+    configFiles.sort();
+
+    for (const fileName of configFiles) {
         let beforeErrorsSDKArray = [], beforeWarningsSDKArray = [], beforeErrorsARMArray = [], beforeWarningsARMArray = [];
         let afterErrorsSDKArray = [], afterWarningsSDKArray = [], afterErrorsARMArray = [], afterWarningsARMArray = [];
         let newSDKErrors = [], newSDKWarnings = [], newARMErrors = [], newARMWarnings = [];
+        let existingSDKErrors = [], existingSDKWarnings = [], existingARMErrors = [], existingARMWarnings = [];
 
         let beforeErrorsAndWarningsArray = jsonData['files'][fileName]['before'];
         beforeErrorsAndWarningsArray.forEach(beforeErrorOrWarning => {
@@ -282,10 +319,10 @@ function postProcessing() {
             }
         });
 
-        compareBeforeAfterArrays(afterErrorsARMArray, beforeErrorsARMArray, newARMErrors);
-        compareBeforeAfterArrays(afterErrorsSDKArray, beforeErrorsSDKArray, newSDKErrors);
-        compareBeforeAfterArrays(afterWarningsARMArray, beforeWarningsARMArray, newARMWarnings);
-        compareBeforeAfterArrays(afterWarningsSDKArray, beforeWarningsSDKArray, newSDKWarnings);
+        compareBeforeAfterArrays(afterErrorsARMArray, beforeErrorsARMArray, existingARMErrors, newARMErrors);
+        compareBeforeAfterArrays(afterErrorsSDKArray, beforeErrorsSDKArray, existingSDKErrors, newSDKErrors);
+        compareBeforeAfterArrays(afterWarningsARMArray, beforeWarningsARMArray, existingARMWarnings, newARMWarnings);
+        compareBeforeAfterArrays(afterWarningsSDKArray, beforeWarningsSDKArray, existingSDKWarnings, newSDKWarnings);
 
         console.log("SDK Errors/Warnings");
         console.log("===================");
@@ -293,6 +330,8 @@ function postProcessing() {
         console.log("Warnings:  Before: ", beforeWarningsSDKArray.length, " - After: ", afterWarningsSDKArray.length);
         console.log("New SDK Errors: ", newSDKErrors.length);
         console.log("New SDK Warnings: ", newSDKWarnings.length);
+        console.log("Existing SDK Errors: ", existingSDKErrors.length);
+        console.log("Existing SDK Warnings: ", existingSDKWarnings.length);
         console.log();
         console.log("ARM Errors/Warnings");
         console.log("===================");
@@ -300,6 +339,8 @@ function postProcessing() {
         console.log("Warnings:  Before: ", beforeWarningsARMArray.length, " - After: ", afterWarningsARMArray.length);
         console.log("New ARM Errors: ", newARMErrors.length);
         console.log("New ARM Warnings: ", newARMWarnings.length);
+        console.log("Existing ARM Errors: ", existingARMErrors.length);
+        console.log("Existing ARM Warnings: ", existingARMWarnings.length);
         console.log();
 
         newSDKErrorsCount += newSDKErrors.length;
@@ -307,10 +348,8 @@ function postProcessing() {
         newSDKWarningsCount += newSDKWarnings.length;
         newARMWarningsCount += newARMWarnings.length;
 
-        let fileSummaryCopy = getFileSummary(fileName, beforeWarningsSDKArray, afterWarningsSDKArray, beforeErrorsSDKArray, afterErrorsSDKArray, newSDKWarnings, newSDKErrors, pullRequestNumber);
-        sdkFileSummaries = sdkFileSummaries.concat(fileSummaryCopy);
-        fileSummaryCopy = getFileSummary(fileName, beforeWarningsARMArray, afterWarningsARMArray, beforeErrorsARMArray, afterErrorsARMArray, newARMWarnings, newARMErrors, pullRequestNumber);
-        armFileSummaries = armFileSummaries.concat(fileSummaryCopy);
+        sdkFileSummaries += getFileSummary("SDK", fileName, existingSDKWarnings, existingSDKErrors, newSDKWarnings, newSDKErrors, pullRequestNumber);
+        armFileSummaries += getFileSummary("ARM", fileName, existingARMWarnings, existingARMErrors, newARMWarnings, newARMErrors, pullRequestNumber);
     }
 
     const sdkSummary = getSummaryBlock("SDK-related validation Errors / Warnings", sdkFileSummaries, sdkContactMessage);
@@ -320,11 +359,11 @@ function postProcessing() {
     const output = {
         title,
         summary,
-        text: `${sdkSummary}\n<br><br>\n${armSummary}\n<br><br>\n${githubFooter}`
+        text: `${sdkSummary}<br><br>\n\n${armSummary}<br><br>\n\n${githubFooter}`
     }
 
     console.log("---output");
-    console.log(JSON.stringify(output));
+    console.log(JSON.stringify(output, null, 2));
     console.log("---");
 
     if (newSDKErrorsCount > 0 || newARMErrorsCount > 0) {

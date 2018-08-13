@@ -63,6 +63,7 @@ input-file:
 - Microsoft.Network/stable/2018-07-01/virtualWan.json
 - Microsoft.Network/stable/2018-07-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2018-07-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2018-07-01/serviceEndpointPolicy.json
 ```
 
 ### Tag: package-2018-06
@@ -646,6 +647,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetwork.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: serviceEndpointPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json

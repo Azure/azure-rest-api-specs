@@ -16,8 +16,8 @@ let outputFolder = path.join(os.tmpdir(), "resolved");
 let isRunningInTravisCI = process.env.TRAVIS === 'true';
 
 const headerText = `
-| | Rule | File | Message | Location |
-|-|------|------|---------| -------- |
+| | Rule | Location | Message |
+|-|------|----------|---------|
 `;
 
 function iconFor(type) {
@@ -32,8 +32,12 @@ function iconFor(type) {
   }
 }
 
+function shortName(filePath) {
+  return `${path.basename(path.dirname(filePath))}/&#8203;<strong>${path.basename(filePath)}</strong>`;
+}
+
 function tableLine(filePath, diff) {
-  return `|${iconFor(diff['type'])}|**${diff['type']} [${diff['id']} - ${diff['code']}](https://github.com/Azure/openapi-diff/blob/master/docs/rules/${diff['id']}.md)**|[${path.basename(filePath)}](${blobHref(filePath)} "${filePath}")|${diff['message']}|<details><summary>JSONPath</summary>\`${diff['json-path']}\`</details>|\n`;
+  return `|${iconFor(diff['type'])}|[${diff['type']} ${diff['id']} - ${diff['code']}](https://github.com/Azure/openapi-diff/blob/master/docs/rules/${diff['id']}.md)|[${shortName(filePath)}](${blobHref(filePath)} "${filePath}")|${diff['message']}|\n`;
 }
 
 function blobHref(file) {
@@ -130,7 +134,7 @@ async function runScript() {
   console.dir(resolvedMapForNewSpecs);
 
   let errors = 0, warnings = 0;
-  const diffFiles = [];
+  const diffFiles = {};
   const newFiles = [];
 
   for (const swagger of swaggersToProcess) {
@@ -146,7 +150,10 @@ async function runScript() {
     if (resolvedMapForNewSpecs[outputFileNameWithExt]) {
       const diff = await runOad(swagger, resolvedMapForNewSpecs[outputFileNameWithExt]);
       if (diff) {
-        diffFiles.push([swagger, diff]);
+        if (!diffFiles[swagger]) {
+          diffFiles[swagger] = [];
+        }
+        diffFiles[swagger].push(diff);
         if (diff['type'] === 'Error') {
           if (errors === 0) {
             console.log(`There are potential breaking changes in this PR. Please review before moving forward. Thanks!`);
@@ -171,14 +178,40 @@ async function runScript() {
 
     let message = '';
     if (newFiles.length > 0) {
-      message += 'The following files look to be newly added in this PR:\n';
-      newFiles.forEach(f => message += `* [${f}](${blobHref(f)})\n`);
+      message += '### The following files look to be newly added in this PR:\n';
+      newFiles.sort();
+      for (const swagger of newFiles) {
+        message += `* [${swagger}](${blobHref(swagger)})\n`;
+      }
       message += '<br><br>\n';
     }
 
-    if (diffFiles.length > 0) {
+    const diffFileNames = Object.keys(diffFiles);
+    if (diffFileNames.length > 0) {
+      message += '### OpenAPI diff results\n';
       message += headerText;
-      diffFiles.forEach(([swagger, diff]) => message += tableLine(swagger, diff));
+
+      diffFileNames.sort();
+      for (const swagger of diffFileNames) {
+        const diffs = diffFiles[swagger];
+        diffs.sort((a, b) => {
+          if (a.type === b.type) {
+            return a.id.localeCompare(b.id);
+          } else if (a.type === "Error") {
+            return 1;
+          } else if (b.type === "Error") {
+            return -1;
+          } else if (a.type === "Warning") {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+
+        for (const diff of diffs) {
+          message += tableLine(swagger, diff);
+        }
+      }
     } else {
       message += '**There were no files containing new errors or warnings.**\n';
     }
