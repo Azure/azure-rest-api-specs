@@ -211,7 +211,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssetProperties",
-          "description": "The resource properties.",		  
+          "description": "The resource properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -350,7 +350,8 @@
       "type": "object",
       "required": [
         "bitrate"
-      ]
+      ],
+      "description": "Filter First Quality"
     },
     "FilterTrackSelection": {
       "properties": {
@@ -362,7 +363,8 @@
           "description": "The track selections."
         }
       },
-      "type": "object"
+      "type": "object",
+      "description": "Representing a list of FilterTrackPropertyConditions to select a track.  The filters are combined using a logical AND operation."
     },
     "MediaFilterProperties": {
       "properties": {
@@ -397,7 +399,8 @@
           "x-ms-client-flatten": true
         }
       },
-      "type": "object"
+      "type": "object",
+      "description": "An Asset Filter."
     },
     "ODataError": {
       "properties": {
@@ -452,10 +455,10 @@
       "description": "A collection of Asset items."
     },
     "ListContainerSasInput": {
-      "description": "The parameters to the list SAS request.",	
+      "description": "The parameters to the list SAS request.",
       "properties": {
         "permissions": {
-          "description": "The permissions to set on the SAS URL.",		
+          "description": "The permissions to set on the SAS URL.",
           "type": "string",
           "enum": [
             "Read",
@@ -482,7 +485,7 @@
           }
         },
         "expiryTime": {
-          "description": "The SAS URL expiration time.  This must be less than 24 hours from the current time.",		
+          "description": "The SAS URL expiration time.  This must be less than 24 hours from the current time.",
           "type": "string",
           "format": "date-time"
         }
@@ -978,6 +981,9 @@
             "$ref": "#/parameters/ApiVersion"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "List all Asset Filters": {
             "$ref": "examples/assetFilters-list-all.json"
