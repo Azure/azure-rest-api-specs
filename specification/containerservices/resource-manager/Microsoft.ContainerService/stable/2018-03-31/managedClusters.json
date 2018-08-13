@@ -231,6 +231,96 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterAdminCredential": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ListClusterAdminCredentials",
+        "summary": "Gets clusteradmin credential of a managed cluster.",
+        "description": "Gets clusteradmin credential of the managed cluster with a specified resource group and name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CredentialResults"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Cluster": {
+            "$ref": "./examples/ManagedClustersListClusterCredentialResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterUserCredential": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ListClusterUserCredentials",
+        "summary": "Gets clusteruser credential of a managed cluster.",
+        "description": "Gets clusteruser credential of the managed cluster with a specified resource group and name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CredentialResults"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Cluster": {
+            "$ref": "./examples/ManagedClustersListClusterCredentialResult.json"
+          }
+        }
+      } 
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}": {
       "get": {
         "tags": [
@@ -331,6 +421,59 @@
         "x-ms-examples": {
           "Create/Update Managed Cluster": {
             "$ref": "./examples/ManagedClustersCreate_Update.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_UpdateTags",
+        "summary": "Updates tags on a managed cluster.",
+        "description": "Updates a managed cluster with the specified tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the Update Managed Cluster Tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update Managed Cluster Tags": {
+            "$ref": "./examples/ManagedClustersUpdateTags.json"
           }
         }
       },
@@ -478,6 +621,18 @@
       ],
       "x-ms-azure-resource": true
     },
+    "TagsObject": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    },
     "ContainerServiceOSDisk": {
       "type": "integer",
       "format": "int32",
@@ -486,7 +641,6 @@
       "description": "OS Disk Size in GB to be used to specify the disk size for every machine in this master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified."
     },
     "ContainerServiceStorageProfile": {
-
       "type": "string",
       "x-ms-enum": {
         "name": "ContainerServiceStorageProfileTypes",
@@ -686,28 +840,7 @@
         "Standard_NV6"
       ]
     },
-    "KeyVaultSecretRef": {
-      "properties": {
-        "vaultID": {
-          "type": "string",
-          "description": "Key vault identifier."
-        },
-        "secretName": {
-          "type": "string",
-          "description": "The secret name."
-        },
-        "version": {
-          "type": "string",
-          "description": "The secret version."
-        }
-      },
-      "description": "Reference to a secret stored in Azure Key Vault.",
-      "required": [
-        "vaultID",
-        "secretName"
-      ]
-    },
-    "ContainerServiceServicePrincipalProfile": {
+    "ManagedClusterServicePrincipalProfile": {
       "properties": {
         "clientId": {
           "type": "string",
@@ -716,13 +849,9 @@
         "secret": {
           "type": "string",
           "description": "The secret password associated with the service principal in plain text."
-        },
-        "keyVaultSecretRef": {
-          "$ref": "#/definitions/KeyVaultSecretRef",
-          "description": "Reference to a secret stored in Azure Key Vault."
         }
       },
-      "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified.",
+      "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs.",
       "required": [
         "clientId"
       ]
@@ -803,27 +932,10 @@
           "$ref": "#/definitions/ContainerServiceOSDisk",
           "description": "OS Disk Size in GB to be used to specify the disk size for every machine in this master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified."
         },
-        "dnsPrefix": {
-          "type": "string",
-          "description": "DNS prefix to be used to create the FQDN for the agent pool."
-        },
-        "fqdn": {
-          "readOnly": true,
-          "type": "string",
-          "description": "FDQN for the agent pool."
-        },
-        "ports": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 65535
-          },
-          "description": "Ports number array used to expose on this agent pool. The default opened ports are different based on your choice of orchestrator."
-        },
         "storageProfile": {
+          "readOnly": true,
           "$ref": "#/definitions/ContainerServiceStorageProfile",
-          "description": "Storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
+          "description": "Storage profile specifies what kind of storage used. Defaults to ManagedDisks."
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
@@ -869,7 +981,7 @@
         "adminUsername": {
           "type": "string",
           "description": "The administrator username to use for Linux VMs.",
-          "pattern": "^[a-z][a-z0-9_-]*$"
+          "pattern": "^[A-Za-z][-A-Za-z0-9_]*$"
         },
         "ssh": {
           "$ref": "#/definitions/ContainerServiceSshConfiguration",
@@ -1057,8 +1169,8 @@
           "description": "Profile for Linux VMs in the container service cluster."
         },
         "servicePrincipalProfile": {
-          "$ref": "#/definitions/ContainerServiceServicePrincipalProfile",
-          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified."
+          "$ref": "#/definitions/ManagedClusterServicePrincipalProfile",
+          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs."
         },
         "addonProfiles": {
           "additionalProperties": {
@@ -1272,6 +1384,35 @@
         "modelAsString": true
       },
       "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
+    },
+    "CredentialResults":{
+      "properties": {
+        "kubeconfigs": {
+          "type" : "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CredentialResult"
+          }
+        }
+      },
+      "description": "The list of credential result response."
+    },
+    "CredentialResult": {
+      "type": "object",
+      "properties": {
+        "name":{
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the credential."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "readOnly": true,
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "The credential result response." 
     }
   },
   "parameters": {

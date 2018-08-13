@@ -42,6 +42,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-node
 ```
 
 ## CSharp Settings
@@ -121,7 +123,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.vision.customvision.prediction
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/vision/customvision/prediction
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/vision/customvision/prediction
   with-optional-parameters: true
   with-single-async-method: true
 ```

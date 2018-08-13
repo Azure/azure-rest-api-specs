@@ -60,13 +60,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
 ```
 
 ### Authoring 2.0 - CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  override-client-name: LuisAuthoringAPI
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
@@ -114,7 +114,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.language.luis.authoring
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/language/luis/authoring
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/language/luis/authoring
   with-optional-parameters: true
   with-single-async-method: true
 ```

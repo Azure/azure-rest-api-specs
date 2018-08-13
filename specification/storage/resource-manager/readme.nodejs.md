@@ -7,7 +7,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-storage
-  package-version: 0.12.1
+  package-version: 5.1.1-preview
   output-folder: $(node-sdks-folder)/lib/services/storageManagement2
   payload-flattening-threshold: 2
   override-client-name: StorageManagementClient
