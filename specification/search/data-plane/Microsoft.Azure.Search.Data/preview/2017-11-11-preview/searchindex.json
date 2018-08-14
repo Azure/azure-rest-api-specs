@@ -264,7 +264,6 @@
             "type": "integer",
             "format": "int32",
             "description": "The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use Skip due to this limitation, consider using OrderBy on a totally-ordered key and Filter with a range query instead.",
-            "x-ms-client-name": "Skip",
             "x-ms-parameter-grouping": {
               "name": "SearchParameters"
             }
@@ -275,7 +274,6 @@
             "type": "integer",
             "format": "int32",
             "description": "The number of search results to retrieve. This can be used in conjunction with Skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be passed to ContinueSearch to retrieve the next page of results. See DocumentSearchResponse.ContinuationToken for more information.",
-            "x-ms-client-name": "Top",
             "x-ms-parameter-grouping": {
               "name": "SearchParameters"
             }
@@ -409,14 +407,14 @@
         "x-ms-examples": {
           "SuggestIndexGetSearch": { "$ref": "./examples/SearchIndexGetSuggest.json" }
         },
-        "description": "Suggests query terms based on input text and matching documents in the Azure Search index.",
+        "description": "Suggests documents in the Azure Search index that match the given partial query text.",
         "parameters": [
           {
             "name": "search",
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The search text to use to suggest queries. Must be at least 1 character, and no more than 100 characters.",
+            "description": "The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters.",
             "x-ms-client-name": "searchText"
           },
           {
@@ -431,7 +429,6 @@
             "in": "query",
             "type": "string",
             "description": "An expression that filters the documents considered for suggestions.",
-            "x-ms-client-name": "Filter",
             "x-ms-parameter-grouping": {
               "name": "SuggestParameters"
             }
@@ -440,7 +437,7 @@
             "name":"fuzzy",
             "in": "query",
             "type": "boolean",
-            "description": "A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.",
+            "description": "A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources.",
             "x-ms-client-name": "UseFuzzyMatching",
             "x-nullable": false,
             "x-ms-parameter-grouping": {
@@ -451,7 +448,7 @@
             "name":"highlightPostTag",
             "in": "query",
             "type": "string",
-            "description": "A string tag that is appended to hit highlights. Must be set with HighlightPreTag. Default is \"\".",
+            "description": "A string tag that is appended to hit highlights. Must be set with HighlightPreTag. Default is the empty string",
             "x-ms-parameter-grouping": {
               "name": "SuggestParameters"
             }
@@ -460,7 +457,7 @@
             "name":"highlightPreTag",
             "in": "query",
             "type": "string",
-            "description": "A string tag that is prepended to hit highlights. Must be set with HighlightPostTag. Default is \"\".",
+            "description": "A string tag that is prepended to hit highlights. Must be set with HighlightPostTag. Default is the empty string.",
             "x-ms-parameter-grouping": {
               "name": "SuggestParameters"
             }
@@ -482,8 +479,8 @@
             "items": {
               "type": "string"
             },
-            "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses.",
             "x-ms-client-name": "OrderBy",
+            "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses.",
             "x-ms-parameter-grouping": {
               "name": "SuggestParameters"
             }
@@ -516,7 +513,6 @@
             "type": "integer",
             "format": "int32",
             "description": "The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is to 5.",
-            "x-ms-client-name": "Top",
             "x-ms-parameter-grouping": {
               "name": "SuggestParameters"
             }
@@ -552,7 +548,7 @@
         "x-ms-examples": {
           "SuggestIndexPostSearch": { "$ref": "./examples/SearchIndexPostSuggest.json" }
         },
-        "description": "Suggests query terms based on input text and matching documents in the Azure Search index.",
+        "description": "Suggests documents in the Azure Search index that match the given partial query text.",
         "parameters": [
           {
             "name": "SuggestRequest",
