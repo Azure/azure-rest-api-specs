@@ -160,6 +160,9 @@
         "x-ms-examples": {
           "ApiManagementGetApiContract": {
             "$ref": "./examples/ApiManagementGetApiContract.json"
+          },
+          "ApiManagementGetApiRevisionContract": {
+            "$ref": "./examples/ApiManagementGetApiRevision.json"
           }
         },
         "produces": [
@@ -3679,6 +3682,16 @@
           "type": "boolean",
           "description": "Indicates if API revision is accessible via the gateway.",
           "readOnly": true
+        },
+        "apiRevisionDescription": {
+          "type": "string",
+          "description": "Description of the Api Revision.",          
+          "maxLength": 256
+        },
+        "apiVersionDescription": {
+          "type": "string",
+          "description": "Description of the Api Version.",
+          "maxLength": 256
         },
         "apiVersionSetId": {
           "type": "string",

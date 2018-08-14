@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2016-09
+tag: package-2018-02
 ```
 
 ### Tag: package-2018-02
@@ -392,6 +392,13 @@ namespace: com.microsoft.azure.management.appservice
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-appservice
+directive:
+  from: WebApps.json
+  where: $.definitions.MSDeploy.properties.properties
+  transform: >
+    delete $.$ref;
+    $['allOf'] = [{'$ref':'#/definitions/MSDeployCore'}];
+    return $;
 ```
 
 ### Java multi-api

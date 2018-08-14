@@ -4,11 +4,11 @@
 
 Configuration for generating Custom Vision Training SDK.
 
-The current release is `release_1_0`.
+The current release is `release_2_1`.
 
 ``` yaml
 
-tag: release_1_0
+tag: release_2_1
 openapi-type: data-plane
 ```
 # Releases
@@ -20,6 +20,12 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 input-file: stable/v2.0/Training.json
 ```
 
+### Release 2.1
+These settings apply only when `--tag=release_2_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_1'
+input-file: stable/v2.1/Training.json
+```
 # Validation
 
 ## Suppression
@@ -101,6 +107,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: release_1_0
+  - tag: release_2_1
 ```
 
 ### Tag: release_1_0 and go
@@ -112,6 +119,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.2/customvision/$(namespace)
 ```
 
+### Tag: release_2_1 and go
+
+These settings apply only when `--tag=release_2_1 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'release_2_1' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.1/customvision/$(namespace)
+```
 
 ## Java
 
@@ -124,7 +139,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.vision.customvision.training
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/vision/customvision/training
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/vision/customvision/training
   with-optional-parameters: true
   with-single-async-method: true
 ```

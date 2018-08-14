@@ -18,7 +18,7 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: stable/V1.0/SpellCheck.json
+input-file: stable/v1.0/SpellCheck.json
 ```
 
 ## Swagger to SDK
@@ -113,7 +113,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.language.spellcheck
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/language/bingspellcheck
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/language/bingspellcheck
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true
