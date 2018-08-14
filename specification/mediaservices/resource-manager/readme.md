@@ -36,8 +36,9 @@ These settings apply only when `--tag=package-2018-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-07'
 input-file:
+  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - Microsoft.Media/stable/2018-07-01/Accounts.json
-  - Microsoft.Media/stable/2018-07-01/Assets.json
+  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
   - Microsoft.Media/stable/2018-07-01/Common.json
   - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
   - Microsoft.Media/stable/2018-07-01/Encoding.json
@@ -164,6 +165,7 @@ batch:
   - tag: package-2015-10
   - tag: package-2018-03-preview
   - tag: package-2018-06-preview
+  - tag: package-2018-07
 ```
 
 ### Tag: package-2015-10 and go
@@ -193,6 +195,15 @@ Please also specify the `--go-sdk-folder=<path to the root directory of your azu
 output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-06-01-preview/media
 ```
 
+### Tag: package-2018-07 and go
+
+These settings apply only when `--tag=package-2018-07 --go` is specified on the command line.
+Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-07' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-07-01/media
+```
+
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -214,6 +225,7 @@ batch:
   - tag: package-2015-10
   - tag: package-2018-03-preview
   - tag: package-2018-06-preview
+  - tag: package-2018-07
 ```
 
 ### Tag: package-2015-10 and java
@@ -251,6 +263,19 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_06_01_preview
   output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_06_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-07 and java
+
+These settings apply only when `--tag=package-2018-07 --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.mediaservices.v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_07_01
 regenerate-manager: true
 generate-interface: true
 ```
