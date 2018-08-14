@@ -390,20 +390,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The task filter to apply on the operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "$skipToken is supported on get list of tasks, which provides the next page in the list of tasks.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -417,7 +403,6 @@
             "description": "Error response describing why the operation failed."
           }
         },
-        "x-ms-odata": "#/definitions/TaskFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -597,7 +582,7 @@
             "description": "The parameters for updating a task.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TaskUpdateParameters"
+              "$ref": "#/definitions/Task"
             }
           }
         ],
@@ -1114,7 +1099,6 @@
     "TaskProperties": {
       "description": "The properties of a task.",
       "required": [
-        "alias",
         "platform",
         "step"
       ],
@@ -1142,10 +1126,6 @@
           "description": "The creation date of task.",
           "type": "string",
           "readOnly": true
-        },
-        "alias": {
-          "description": "The alternative updatable name for a task.",
-          "type": "string"
         },
         "status": {
           "description": "The current status of task.",
@@ -1376,79 +1356,6 @@
           "format": "int32",
           "description": "Time in seconds that the token remains valid",
           "type": "integer"
-        }
-      }
-    },
-    "TaskFilter": {
-      "description": "The filter that can be used for listing tasks.",
-      "type": "object",
-      "properties": {
-        "alias": {
-          "description": "The alternative name for task.",
-          "type": "string"
-        }
-      }
-    },
-    "TaskUpdateParameters": {
-      "description": "The parameters for updating a task.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TaskPropertiesUpdateParameters",
-          "description": "The properties for updating a task.",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "description": "The ARM resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "TaskPropertiesUpdateParameters": {
-      "description": "The properties for updating a task.",
-      "type": "object",
-      "properties": {
-        "alias": {
-          "description": "The alternative updatable name for a task.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The current status of task.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TaskStatus",
-            "modelAsString": true
-          }
-        },
-        "platform": {
-          "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the run has to happen."
-        },
-        "agentConfiguration": {
-          "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the run agent."
-        },
-        "timeout": {
-          "format": "int32",
-          "description": "Run timeout in seconds.",
-          "maximum": 28800,
-          "minimum": 300,
-          "type": "integer"
-        },
-        "step": {
-          "$ref": "#/definitions/TaskStepProperties",
-          "description": "The properties for updating a task step."
-        },
-        "trigger": {
-          "$ref": "#/definitions/TriggerProperties",
-          "description": "The properties that describe all triggers for the task."
         }
       }
     },
@@ -1770,6 +1677,9 @@
     },
     "BuildTaskStep": {
       "description": "The properties of a build task step.",
+      "required": [
+        "definitionFilePath"
+      ],
       "type": "object",
       "allOf": [
         {
