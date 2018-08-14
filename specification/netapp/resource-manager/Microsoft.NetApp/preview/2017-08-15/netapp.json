@@ -5,7 +5,7 @@
     "description": "Microsoft NetApp Azure Resource Provider specification",
     "version": "2017-08-15",
     "x-ms-code-generation-settings": {
-      "name": "CloudVolumeManagementClient"
+      "name": "AzureNetAppFilesManagementClient"
     }
   },
   "consumes": [
@@ -78,7 +78,7 @@
         }
       ],
       "get": {
-        "description": "Lists all NetApp accounts in the subscription",
+        "description": "Lists all NetApp accounts in the resource group",
         "tags": [
           "NetApp Accounts"
         ],
@@ -908,7 +908,7 @@
       }
     },
     "Operation": {
-      "description": "Storage REST API operation definition.",
+      "description": "Microsoft.NetApp REST API operation definition.",
       "type": "object",
       "properties": {
         "name": {
@@ -941,8 +941,87 @@
           "description": "The origin of operations."
         },
         "properties": {
+          "$ref": "#/definitions/OperationProperties",
           "description": "Properties of operation, include metric specifications.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of operation, include metric specifications.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "One property of operation, include metric specifications.",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Metric specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Metric specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit could be Bytes or Count."
+        },
+        "dimensions": {
+          "description": "Dimensions of blobs, including blob type and access tier.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type could be Average."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "The property to decide fill gap with zero or not."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category this metric specification belong to, could be Capacity."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "Account Resource Id."
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Dimension of blobs, possiblly be blob type or access tier.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
         }
       }
     },
