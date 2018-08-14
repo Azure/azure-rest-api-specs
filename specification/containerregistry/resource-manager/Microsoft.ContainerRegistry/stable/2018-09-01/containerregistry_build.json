@@ -582,7 +582,7 @@
             "description": "The parameters for updating a task.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Task"
+              "$ref": "#/definitions/TaskUpdateParameters"
             }
           }
         ],
@@ -1356,6 +1356,69 @@
           "format": "int32",
           "description": "Time in seconds that the token remains valid",
           "type": "integer"
+        }
+      }
+    },
+    "TaskUpdateParameters": {
+      "description": "The parameters for updating a task.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TaskPropertiesUpdateParameters",
+          "description": "The properties for updating a task.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The ARM resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TaskPropertiesUpdateParameters": {
+      "description": "The properties for updating a task.",
+      "type": "object",
+      "properties": {
+        "alias": {
+          "description": "The alternative updatable name for a task.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of task.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TaskStatus",
+            "modelAsString": true
+          }
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the run has to happen."
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentProperties",
+          "description": "The machine configuration of the run agent."
+        },
+        "timeout": {
+          "format": "int32",
+          "description": "Run timeout in seconds.",
+          "maximum": 28800,
+          "minimum": 300,
+          "type": "integer"
+        },
+        "step": {
+          "$ref": "#/definitions/TaskStepProperties",
+          "description": "The properties for updating a task step."
+        },
+        "trigger": {
+          "$ref": "#/definitions/TriggerProperties",
+          "description": "The properties that describe all triggers for the task."
         }
       }
     },
