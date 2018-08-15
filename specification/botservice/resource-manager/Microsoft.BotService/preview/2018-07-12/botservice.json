@@ -2477,7 +2477,12 @@
       "properties": {
         "state": {
           "type": "string",
-          "description": "The current state of the Enterprise Channel"
+          "description": "The current state of the Enterprise Channel",
+          "enum": ["Creating", "CreateFailed", "Started", "Starting", "StartFailed", "Stopped", "Stopping", "StopFailed", "Deleting", "DeleteFailed"],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
         },
         "nodes": {
           "type": "array",
@@ -2501,7 +2506,12 @@
         },
         "state": {
           "type": "string",
-          "description": "The current state of the Enterprise Channel Node"
+          "description": "The current state of the Enterprise Channel Node",
+          "enum": ["Creating", "CreateFailed", "Started", "Starting", "StartFailed", "Stopped", "Stopping", "StopFailed", "Deleting", "DeleteFailed"],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
         },
         "name": {
           "type": "string",
