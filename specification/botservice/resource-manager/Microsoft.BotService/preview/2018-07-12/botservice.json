@@ -1021,7 +1021,7 @@
         "description": "Check whether an Enterprise Channel name is available.",
         "operationId": "EnterpriseChannels_GetCheckNameAvailability",
         "x-ms-examples": {
-          "List Bots by Subscription": {
+          "Check Enterprise Channel Name Availability": {
             "$ref": "./examples/EnterpriseChannelCheckNameAvailability.json"
           }
         },
@@ -1104,8 +1104,12 @@
         ],
         "description": "Creates an Enterprise Channel.",
         "operationId": "EnterpriseChannels_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
-          "Create Bot": {
+          "Create Enterprise Channel": {
             "$ref": "./examples/CreateEnterpriseChannel.json"
           }
         },
@@ -1159,8 +1163,12 @@
         ],
         "description": "Updates an Enterprise Channel.",
         "operationId": "EnterpriseChannels_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
-          "Create Bot": {
+          "Update Enterprise Channel": {
             "$ref": "./examples/UpdateEnterpriseChannel.json"
           }
         },
@@ -1215,8 +1223,12 @@
         ],
         "description": "Deletes an Enterprise Channel from the resource group",
         "operationId": "EnterpriseChannels_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
-          "Delete Bot": {
+          "Delete Enterprise Channel": {
             "$ref": "./examples/DeleteEnterpriseChannel.json"
           }
         },
@@ -1256,7 +1268,7 @@
         "description": "Returns an Enterprise Channel specified by the parameters.",
         "operationId": "EnterpriseChannels_Get",
         "x-ms-examples": {
-          "Get Bot": {
+          "Get Enterprise Channel": {
             "$ref": "./examples/GetEnterpriseChannel.json"
           }
         },
