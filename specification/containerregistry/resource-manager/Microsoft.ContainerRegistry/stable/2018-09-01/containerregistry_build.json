@@ -68,13 +68,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/getBuildSourceUploadUrl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listBuildSourceUploadUrl": {
       "post": {
         "tags": [
           "Registries"
         ],
         "description": "Get the upload location for the user to be able to upload the source.",
-        "operationId": "Registries_GetBuildSourceUploadUrl",
+        "operationId": "Registries_ListBuildSourceUploadUrl",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -101,8 +101,8 @@
           }
         },
         "x-ms-examples": {
-          "Registries_GetBuildSourceUploadUrl": {
-            "$ref": "./examples/RegistriesGetBuildSourceUploadUrl.json"
+          "Registries_ListBuildSourceUploadUrl": {
+            "$ref": "./examples/RegistriesListBuildSourceUploadUrl.json"
           }
         }
       }
@@ -130,7 +130,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The runs filter to apply on the operation.",
+            "description": "The runs filter to apply on the operation. Arithmetic operators are not supported. The allowed string function is 'contains'. All logical operators except 'Not', 'Has', 'All' are allowed.",
             "required": false,
             "type": "string"
           },
@@ -278,13 +278,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs/{runId}/getLogSasUrl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs/{runId}/listLogSasUrl": {
       "post": {
         "tags": [
           "Runs"
         ],
         "description": "Gets a link to download the run logs.",
-        "operationId": "Runs_GetLogSasUrl",
+        "operationId": "Runs_ListLogSasUrl",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -318,8 +318,8 @@
           }
         },
         "x-ms-examples": {
-          "Runs_GetLogSasUrl": {
-            "$ref": "./examples/RunsGetLogSasUrl.json"
+          "Runs_ListLogSasUrl": {
+            "$ref": "./examples/RunsListLogSasUrl.json"
           }
         }
       }
@@ -1213,7 +1213,7 @@
       "type": "object",
       "properties": {
         "sourceRepository": {
-          "$ref": "#/definitions/SourceRepositoryProperties",
+          "$ref": "#/definitions/SourceProperties",
           "description": "The properties that describes the source(code) for the task."
         },
         "sourceTriggerEvents": {
@@ -1287,11 +1287,12 @@
         }
       }
     },
-    "SourceRepositoryProperties": {
+    "SourceProperties": {
       "description": "The properties of the source code repository.",
       "required": [
         "sourceControlType",
-        "repositoryUrl"
+        "repositoryUrl",
+        "sourceControlAuthProperties"
       ],
       "type": "object",
       "properties": {
@@ -1316,14 +1317,15 @@
           "type": "string"
         },
         "sourceControlAuthProperties": {
-          "$ref": "#/definitions/SourceControlAuthInfo",
+          "$ref": "#/definitions/AuthInfo",
           "description": "The authorization properties for accessing the source code repository and to set up\r\nwebhooks for notifications."
         }
       }
     },
-    "SourceControlAuthInfo": {
+    "AuthInfo": {
       "description": "The authorization properties for accessing the source code repository.",
       "required": [
+        "tokenType",
         "token"
       ],
       "type": "object",
@@ -1381,10 +1383,6 @@
       "description": "The properties for updating a task.",
       "type": "object",
       "properties": {
-        "alias": {
-          "description": "The alternative updatable name for a task.",
-          "type": "string"
-        },
         "status": {
           "description": "The current status of task.",
           "enum": [
@@ -1398,7 +1396,7 @@
           }
         },
         "platform": {
-          "$ref": "#/definitions/PlatformProperties",
+          "$ref": "#/definitions/PlatformUpdateParameters",
           "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
@@ -1408,17 +1406,243 @@
         "timeout": {
           "format": "int32",
           "description": "Run timeout in seconds.",
-          "maximum": 28800,
-          "minimum": 300,
           "type": "integer"
         },
         "step": {
-          "$ref": "#/definitions/TaskStepProperties",
+          "$ref": "#/definitions/TaskStepUpdateParameters",
           "description": "The properties for updating a task step."
         },
         "trigger": {
-          "$ref": "#/definitions/TriggerProperties",
-          "description": "The properties that describe all triggers for the task."
+          "$ref": "#/definitions/TriggerUpdateParameters",
+          "description": "The properties for updating trigger properties."
+        }
+      }
+    },
+    "PlatformUpdateParameters": {
+      "description": "The properties for updating the platform configuration.",
+      "type": "object",
+      "properties": {
+        "os": {
+          "description": "The operating system type required for the run.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OS",
+            "modelAsString": true
+          }
+        },
+        "architecture": {
+          "description": "The OS architecture.",
+          "enum": [
+            "amd64",
+            "x86",
+            "arm"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString": true
+          }
+        },
+        "variant": {
+          "description": "Variant of the CPU.",
+          "enum": [
+            "v6",
+            "v7",
+            "v8"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Variant",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TaskStepUpdateParameters": {
+      "description": "Base properties for updating any task step.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the step.",
+          "enum": [
+            "Docker",
+            "BuildTask",
+            "RunTask"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StepType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type"
+    },
+    "TriggerUpdateParameters": {
+      "description": "The properties for updating build triggers.",
+      "type": "object",
+      "properties": {
+        "sourceTriggers": {
+          "description": "The collection of triggers based on source code repository.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceTriggerUpdateParameters"
+          }
+        },
+        "baseImageTrigger": {
+          "$ref": "#/definitions/BaseImageTriggerUpdateParameters",
+          "description": "The trigger based on base image dependencies."
+        }
+      }
+    },
+    "SourceTriggerUpdateParameters": {
+      "description": "The properties for updating a source based trigger.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceRepository": {
+          "$ref": "#/definitions/SourceUpdateParameters",
+          "description": "The properties that describes the source(code) for the task."
+        },
+        "sourceTriggerEvents": {
+          "description": "The source event corresponding to the trigger.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "commit",
+              "pullrequest"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SourceTriggerEvent",
+              "modelAsString": true
+            }
+          }
+        },
+        "status": {
+          "description": "The current status of build trigger.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name of the trigger.",
+          "type": "string"
+        }
+      }
+    },
+    "BaseImageTriggerUpdateParameters": {
+      "description": "The properties for updating base image dependency trigger.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "baseImageTriggerType": {
+          "description": "The type of the auto trigger for base image dependency updates.",
+          "enum": [
+            "All",
+            "Runtime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BaseImageTriggerType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "The current status of build trigger.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name of the trigger.",
+          "type": "string"
+        }
+      }
+    },
+    "SourceUpdateParameters": {
+      "description": "The properties for updating the source code repository.",
+      "type": "object",
+      "properties": {
+        "sourceControlType": {
+          "description": "The type of source control service.",
+          "enum": [
+            "Github",
+            "VisualStudioTeamService"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SourceControlType",
+            "modelAsString": true
+          }
+        },
+        "repositoryUrl": {
+          "description": "The full URL to the source code respository",
+          "type": "string"
+        },
+        "branch": {
+          "description": "The branch name of the source code.",
+          "type": "string"
+        },
+        "sourceControlAuthProperties": {
+          "$ref": "#/definitions/AuthInfoUpdateParameters",
+          "description": "The authorization properties for accessing the source code repository and to set up\r\nwebhooks for notifications."
+        }
+      }
+    },
+    "AuthInfoUpdateParameters": {
+      "description": "The authorization properties for accessing the source code repository.",
+      "type": "object",
+      "properties": {
+        "tokenType": {
+          "description": "The type of Auth token.",
+          "enum": [
+            "PAT",
+            "OAuth"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenType",
+            "modelAsString": true
+          }
+        },
+        "token": {
+          "description": "The access token used to access the source control provider.",
+          "type": "string"
+        },
+        "refreshToken": {
+          "description": "The refresh token used to refresh the access token.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "The scope of the access token.",
+          "type": "string"
+        },
+        "expiresIn": {
+          "format": "int32",
+          "description": "Time in seconds that the token remains valid",
+          "type": "integer"
         }
       }
     },
@@ -1650,6 +1874,9 @@
     },
     "DockerBuildStep": {
       "description": "The Docker build step.",
+      "required": [
+        "dockerFilePath"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1783,6 +2010,99 @@
       "allOf": [
         {
           "$ref": "#/definitions/TaskStepProperties"
+        }
+      ],
+      "properties": {
+        "taskDefinitionContent": {
+          "description": "Base64 encoded value of the template/definition file content.",
+          "type": "string"
+        },
+        "valuesContent": {
+          "description": "Base64 encoded value of the parameters/values file content.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "RunTask"
+    },
+    "DockerBuildStepUpdateParameters": {
+      "description": "The properties for updating a docker build step.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskStepUpdateParameters"
+        }
+      ],
+      "properties": {
+        "imageNames": {
+          "description": "The fully qualified image names including the repository and tag.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isPushEnabled": {
+          "description": "The value of this property indicates whether the image built should be pushed to the registry or not.",
+          "type": "boolean"
+        },
+        "noCache": {
+          "description": "The value of this property indicates whether the image cache is enabled or not.",
+          "type": "boolean"
+        },
+        "dockerFilePath": {
+          "description": "The Docker file path relative to the source context.",
+          "type": "string"
+        },
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
+          "type": "string"
+        },
+        "arguments": {
+          "description": "The collection of override arguments to be used when executing this build step.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Docker"
+    },
+    "BuildTaskStepUpdateParameters": {
+      "description": "The properties of updating a build task step.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskStepUpdateParameters"
+        }
+      ],
+      "properties": {
+        "definitionFilePath": {
+          "description": "The build task template/definition file path relative to the source context.",
+          "type": "string"
+        },
+        "valuesFilePath": {
+          "description": "The task values/parameters file path relative to the source context.",
+          "type": "string"
+        },
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
+          "type": "string"
+        },
+        "arguments": {
+          "description": "The collection of override arguments to be used when executing this build step.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "BuildTask"
+    },
+    "RunTaskStepUpdateParameters": {
+      "description": "The properties for updating generic task run step.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskStepUpdateParameters"
         }
       ],
       "properties": {
