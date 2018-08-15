@@ -1435,6 +1435,23 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }, 
+        "protocol": {
+           "type": "string",
+           "description": "Protocol - TCP, UDP or All",
+           "enum": [
+            "Tcp",
+            "Udp", 
+            "All"
+          ]
+        },
+        "enableTcpReset": {
+           "type": "boolean",
+           "description": "Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP."
+        },
+        "idleTimeoutInMinutes": {
+           "type": "integer",
+           "description": "The timeout for the TCP idle connection"
         }
       },
       "required": [
