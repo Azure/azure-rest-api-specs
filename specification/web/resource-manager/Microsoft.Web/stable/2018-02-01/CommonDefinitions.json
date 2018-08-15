@@ -507,6 +507,54 @@
         }
       }
     },
+    "AzureStorageInfoValue": {
+      "description": "Azure Files or Blob Storage access information value for dictionary storage.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of storage.",
+          "enum": [
+            "AzureFiles",
+            "AzureBlob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureStorageType",
+            "modelAsString": false
+          }
+        },
+        "accountName": {
+          "description": "Name of the storage account.",
+          "type": "string"
+        },
+        "shareName": {
+          "description": "Name of the file share (container name, for Blob storage).",
+          "type": "string"
+        },
+        "accessKey": {
+          "description": "Access key for the storage account.",
+          "type": "string"
+        },
+        "mountPath": {
+          "description": "Path to mount the storage within the site's runtime environment.",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the storage account.",
+          "enum": [
+            "Ok",
+            "InvalidCredentials",
+            "InvalidShare"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AzureStorageState",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "Capability": {
       "description": "Describes the capabilities/features allowed for a specific SKU.",
       "type": "object",
@@ -2125,6 +2173,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NameValuePair"
+          }
+        },
+        "azureStorageAccounts": {
+          "description": "User-provided Azure storage accounts.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AzureStorageInfoValue"
           }
         },
         "connectionStrings": {

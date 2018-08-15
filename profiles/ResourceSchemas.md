@@ -284,6 +284,7 @@ batch:
       - ../specification/web/resource-manager/Microsoft.Web/2016-08-01/WebApps.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-09-01/AppServiceEnvironments.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-09-01/AppServicePlans.json
+      - ../specification/kusto/resource-manager/Microsoft.Kusto/2017-09-07-privatepreview/kusto.json
       
       # some invalid swagger
       # - ../specification/timeseriesinsights/resource-manager/Microsoft.TimeSeriesInsights/2017-02-28-preview/timeseriesinsights.json
