@@ -1844,77 +1844,7 @@
           "Network configuration diagnostic": { "$ref": "./examples/NetworkWatcherNetworkConfigurationDiagnostic.json" }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/queryConnectionMonitors": {
-      "post": {
-        "tags": [
-          "NetworkWatchers"
-        ],
-        "operationId": "NetworkWatchers_QueryConnectionMonitors",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": { 
-          "final-state-via": "location" 
-        },
-        "description": "Query connection monitors.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "networkWatcherName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the network watcher."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueryConnectionMonitorsParameters"
-            },
-            "description": "Parameters to get network configuration diagnostic."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns the result of network condifuration diagnostic.",
-            "schema": {
-              "$ref": "#/definitions/QueryConnectionMonitorsResponse"
-            }
-          },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/QueryConnectionMonitorsResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Query connection monitors": { "$ref": "./examples/NetworkWatcherQueryConnectionMonitors.json" }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    }  
+    }
   },
   "definitions": {
     "ErrorResponse": {
@@ -3666,46 +3596,6 @@
         "destinationPortMatched": {
           "type": "boolean",
           "description": "Value indicating whether destination port is matched."
-        }
-      }
-    },
-    "QueryConnectionMonitorsParameters": {
-      "description": "Parameters to query connection monitors.",
-      "properties": {
-        "connectionMonitorIds": {
-          "type": "array",
-          "description": "List of connection monitors ID.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "QueryConnectionMonitorsResponse": {
-      "description": "Results of query connection monitors.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConnectionMonitorsQueryResultItem"
-          },
-          "description": "The list query connection monitor results."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of results."
-        }
-      }
-    },    
-    "ConnectionMonitorsQueryResultItem": {
-      "description": "Results of query particular connection monitor.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Connection monitor resource ID."
-        },
-        "report": {
-          "$ref": "#/definitions/ConnectionMonitorQueryResult"
         }
       }
     }
