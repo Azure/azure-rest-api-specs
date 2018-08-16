@@ -68,6 +68,7 @@ input-file:
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
+- Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlMITask.json

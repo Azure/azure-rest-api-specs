@@ -389,6 +389,30 @@
         }
       ]
     },
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.PostgreSql.AzureDbForPostgreSql.Sync",
+      "type": "object",
+      "description": "Properties for the task that migrates PostgreSQL databases to Azure Database for PostgreSQL for online migrations",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ValidateMigrationInputSqlServerSqlDbSyncTaskProperties": {
       "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.SqlDb.Sync",
       "type": "object",

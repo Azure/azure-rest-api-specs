@@ -341,6 +341,34 @@
         "port"
       ]
     },
+    "PostgreSqlConnectionInfo": { 
+      "x-ms-discriminator-value": "PostgreSqlConnectionInfo", 
+      "type": "object",
+      "description": "Information for connecting to PostgreSQL server",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of the server"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port for Server"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "serverName",
+        "port"
+      ]
+    }, 
     "MySqlTargetPlatform": {
       "type": "string",
       "description": "An enumeration of possible target types when migrating from MySQL",
