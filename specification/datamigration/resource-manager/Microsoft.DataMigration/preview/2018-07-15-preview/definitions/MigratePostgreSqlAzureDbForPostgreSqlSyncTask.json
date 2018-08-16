@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Data Migration Service Resource Provider",
-    "version": "2017-11-15-privatepreview"
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2017-11-15-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -63,7 +63,6 @@
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel": {
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "type": "object",
-      "description": "Output info on the migration level",
       "properties": {
         "startedOn": {
           "type": "string",
@@ -106,7 +105,6 @@
     },
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseLevel": {
       "type": "object",
-      "description": "Output info on the database level",
       "x-ms-discriminator-value": "DatabaseLevelOutput",
       "properties": {
         "databaseName": {
@@ -205,7 +203,6 @@
     },
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputTableLevel": {
       "type": "object",
-      "description": "Output info on the table level",
       "x-ms-discriminator-value": "TableLevelOutput",
       "properties": {
         "tableName": {
@@ -219,24 +216,27 @@
           "readOnly": true
         },
         "cdcInsertCounter": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Number of applied inserts",
           "readOnly": true
         },
         "cdcUpdateCounter": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Number of applied updates",
           "readOnly": true
         },
         "cdcDeleteCounter": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Number of applied deletes",
           "readOnly": true
         },
         "fullLoadEstFinishTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Estimate to finish FullLoad",
+          "description": "Estimate to finish full load",
           "readOnly": true
         },
         "fullLoadStartedOn": {
@@ -289,7 +289,6 @@
     },
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputError": {
       "type": "object",
-      "description": "Output task error",
       "x-ms-discriminator-value": "ErrorOutput",
       "properties": {
         "error": {
@@ -306,7 +305,6 @@
     },
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseError": {
       "type": "object",
-      "description": "Output database task error",
       "x-ms-discriminator-value": "DatabaseLevelErrorOutput",
       "properties": {
         "errorMessage": {
