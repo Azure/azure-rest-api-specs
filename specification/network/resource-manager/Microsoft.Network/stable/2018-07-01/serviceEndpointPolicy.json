@@ -302,7 +302,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinition/{serviceEndpointPolicyDefinitionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}": {
       "delete": {
         "tags": [
           "ServiceEndpointPolicyDefinitions"
@@ -356,7 +356,7 @@
       },
       "get": {
         "tags": [
-          "SecurityRules"
+          "serviceEndpointPolicyDefinitions"
         ],
         "operationId": "ServiceEndpointPolicyDefinitions_Get",
         "description": "Get the specified service endpoint policy definitions from service endpoint policy.",
@@ -391,7 +391,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting SecurityRule resource.",
+            "description": "Request successful. The operation returns the resulting ServiceEndpointPolicyDefinition resource.",
             "schema": {
               "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
             }
@@ -403,7 +403,7 @@
       },
       "put": {
         "tags": [
-          "SecurityRules"
+          "serviceEndpointPolicyDefinitions"
         ],
         "operationId": "ServiceEndpointPolicyDefinitions_CreateOrUpdate",
         "description": "Creates or updates a service endpoint policy definition in the specified service endpoint policy.",
@@ -447,13 +447,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting SecurityRule resource.",
+            "description": "Update successful. The operation returns the resulting ServiceEndpointPolicyDefinition resource.",
             "schema": {
               "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting SecurityRule resource.",
+            "description": "Create successful. The operation returns the resulting ServiceEndpointPolicyDefinition resource.",
             "schema": {
               "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
             }
@@ -496,7 +496,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of SecurityRule resources.",
+            "description": "Request successful. The operation returns a list of ServiceEndpointPolicyDefinition resources.",
             "schema": {
               "$ref": "#/definitions/ServiceEndpointPolicyDefinitionListResult"
             }
