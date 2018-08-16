@@ -977,7 +977,7 @@
           },
           "description": "Read only. Inbound pools URIs that use this frontend IP."
         },
-        "outboundNatRules": {
+        "outboundRules": {
           "readOnly": true,
           "type": "array",
           "items": {
@@ -1016,6 +1016,10 @@
         "publicIPAddress": {
           "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
           "description": "The reference of the Public IP resource."
+        },
+        "publicIPPrefix": {
+          "$ref":"./network.json#/definitions/SubResource",
+          "description": "The reference of the Public IP Prefix resource."
         },
         "provisioningState": {
           "type": "string",
@@ -1072,7 +1076,7 @@
           },
           "description": "Gets load balancing rules that use this backend address pool."
         },
-        "outboundNatRule": {
+        "outboundRule": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Gets outbound rules that use this backend address pool."
@@ -1414,7 +1418,7 @@
       ],
       "description": "Inbound NAT pool of the load balancer."
     },
-    "OutboundNatRulePropertiesFormat": {
+    "OutboundRulePropertiesFormat": {
       "properties": {
         "allocatedOutboundPorts": {
           "type": "integer",
@@ -1435,19 +1439,36 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }, 
+        "protocol": {
+           "type": "string",
+           "description": "Protocol - TCP, UDP or All",
+           "enum": [
+            "Tcp",
+            "Udp", 
+            "All"
+          ]
+        },
+        "enableTcpReset": {
+           "type": "boolean",
+           "description": "Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP."
+        },
+        "idleTimeoutInMinutes": {
+           "type": "integer",
+           "description": "The timeout for the TCP idle connection"
         }
       },
       "required": [
         "backendAddressPool"
       ],
-      "description": "Outbound NAT pool of the load balancer."
+      "description": "Outbound pool of the load balancer."
     },
-    "OutboundNatRule": {
+    "OutboundRule": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OutboundNatRulePropertiesFormat",
-          "description": "Properties of load balancer outbound nat rule."
+          "$ref": "#/definitions/OutboundRulePropertiesFormat",
+          "description": "Properties of load balancer outbound rule."
         },
         "name": {
           "type": "string",
@@ -1463,7 +1484,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "Outbound NAT pool of the load balancer."
+      "description": "Outbound pool of the load balancer."
     },
     "LoadBalancerPropertiesFormat": {
       "properties": {
@@ -1509,12 +1530,12 @@
           },
           "description": "Defines an external port range for inbound NAT to a single backend port on NICs associated with a load balancer. Inbound NAT rules are created automatically for each NIC associated with the Load Balancer using an external port from this range. Defining an Inbound NAT pool on your Load Balancer is mutually exclusive with defining inbound Nat rules. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an inbound NAT pool. They have to reference individual inbound NAT rules."
         },
-        "outboundNatRules": {
+        "outboundRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OutboundNatRule"
+            "$ref": "#/definitions/OutboundRule"
           },
-          "description": "The outbound NAT rules."
+          "description": "The outbound rules."
         },
         "resourceGuid": {
           "type": "string",
