@@ -4,10 +4,10 @@
     "version": "2018-09-01",
     "title": "ContainerRegistryManagementClient"
   },
-  "host": "management.azure.com",
+  "host": "localhost:3941",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/json"
@@ -97,7 +97,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned."
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-examples": {
@@ -786,8 +786,8 @@
           "$ref": "#/definitions/ImageUpdateTrigger",
           "description": "The image update trigger that caused the run. This is applicable if the task is of build type."
         },
-        "gitCommitTrigger": {
-          "$ref": "#/definitions/GitCommitTrigger",
+        "sourceTrigger": {
+          "$ref": "#/definitions/SourceTriggerDescriptor",
           "description": "The git commit trigger that caused the run."
         },
         "isArchiveEnabled": {
@@ -865,7 +865,7 @@
         }
       }
     },
-    "GitCommitTrigger": {
+    "SourceTriggerDescriptor": {
       "description": "The git commit trigger that caused a build.",
       "type": "object",
       "properties": {
@@ -873,8 +873,16 @@
           "description": "The unique ID of the trigger.",
           "type": "string"
         },
+        "eventType": {
+          "description": "The event type of the trigger.",
+          "type": "string"
+        },
         "commitId": {
           "description": "The unique ID that identifies a commit.",
+          "type": "string"
+        },
+        "pullRequestId": {
+          "description": "The unique ID that identifies pull request.",
           "type": "string"
         },
         "repositoryUrl": {
