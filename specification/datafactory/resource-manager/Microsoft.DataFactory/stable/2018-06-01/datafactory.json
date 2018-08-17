@@ -395,6 +395,108 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken": {
+      "post": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_GetGitHubAccessToken",
+        "x-ms-examples": {
+          "Factories_GetGitHubAccessToken": {
+            "$ref": "./examples/Factories_GetGitHubAccessToken.json"
+          }
+        },
+        "description": "Get GitHub Access Token",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "gitHubAccessTokenRequest",
+            "description": "Get GitHub access token request definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitHubAccessTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GitHubAccessTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getFeatureValue": {
+      "post": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_GetFeatureValue",
+        "x-ms-examples": {
+          "Factories_GetFeatureValue": {
+            "$ref": "./examples/Factories_GetFeatureValue.json"
+          }
+        },
+        "description": "Get Feature Value",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlRequest",
+            "description": "Get feature value request definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes": {
       "get": {
         "tags": [
@@ -3176,6 +3278,60 @@
           "description": "Git repo information of the factory."
         }
       }
+    },
+    "GitHubAccessTokenRequest": {
+      "description": "Get GitHub access token request definition.",
+      "properties": {
+        "gitHubAccessCode": {
+          "description": "GitHub access code.",
+          "type": "string"
+        },
+        "gitHubClientId": {
+          "description": "GitHub application client ID.",
+          "type": "string"
+        },
+        "gitHubAccessTokenBaseUrl": {
+            "description": "GitHub access token base URL.",
+            "type": "string"
+        }
+      },
+      "required": [
+        "gitHubAccessCode",
+        "gitHubAccessTokenBaseUrl"
+      ]
+    },
+    "GitHubAccessTokenResponse": {
+      "description": "Get GitHub access token response definition.",
+      "properties": {
+        "gitHubAccessToken": {
+          "description": "GitHub access token.",
+          "type": "string"
+        }
+      }
+    },
+    "ExposureControlRequest": {
+      "description": "Get feature value request definition.",
+      "properties": {
+        "featureName": {
+          "description": "Feature name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "featureName"
+      ]
+    },
+    "ExposureControlResponse": {
+      "description": "Get feature value response definition.",
+      "properties": {
+        "value": {
+          "description": "Feature Value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "FactoryProperties": {
       "description": "Factory resource properties.",
