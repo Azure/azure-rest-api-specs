@@ -46,6 +46,30 @@ directive:
   - suppress: R2063
     from: BatchManagement.json
     reason: Bug in linter
+
+  - from:
+     - 2017-09-01/BatchManagement.json
+     - 2017-05-01/BatchManagement.json
+     - 2017-01-01/BatchManagement.json
+     - 2015-12-01/BatchManagement.json
+    where:
+    - $.definitions.Application
+    - $.definitions.ApplicationPackage
+    suppress:
+    - R2020
+    reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future next API versions.
+
+  - from:
+     - 2017-09-01/BatchManagement.json
+     - 2017-05-01/BatchManagement.json
+     - 2017-01-01/BatchManagement.json
+     - 2015-12-01/BatchManagement.json
+    where:
+    - $.definitions.Application.properties
+    - $.definitions.ApplicationPackage.properties
+    suppress:
+    - R3006
+    reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future API versions.
 ```
 
 
