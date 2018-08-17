@@ -8,7 +8,6 @@ nodejs:
   package-name: azure-cognitiveservices-contentmoderator
   package-version: 3.0.0
   output-folder: $(node-sdks-folder)/lib/services/contentModerator
-  override-client-name: ContentModeratorAPIClient
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true
