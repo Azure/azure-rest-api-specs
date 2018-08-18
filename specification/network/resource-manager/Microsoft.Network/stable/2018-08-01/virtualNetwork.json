@@ -860,6 +860,15 @@
       ],
       "description": "ResourceNavigationLink resource."
     },
+    "ServiceDelegationPropertiesFormat": {
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers)"
+        }
+      },
+      "description": "Properties of a service delegation."
+    },
     "SubnetPropertiesFormat": {
       "properties": {
         "addressPrefix": {
@@ -902,6 +911,13 @@
             "$ref": "#/definitions/ResourceNavigationLink"
           },
           "description": "Gets an array of references to the external resources using subnet."
+        },
+        "delegations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceDelegationPropertiesFormat"
+          },
+          "description": "Gets an array of references to the delegations on the subnet."
         },
         "provisioningState": {
           "type": "string",
