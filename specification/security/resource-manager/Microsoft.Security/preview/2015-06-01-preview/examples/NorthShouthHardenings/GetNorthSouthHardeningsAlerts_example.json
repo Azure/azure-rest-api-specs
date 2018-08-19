@@ -1,0 +1,30 @@
+{
+    "parameters": {
+        "api-version": "2015-06-01-preview",
+        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+        "resourceGroupName": "rg1",
+        "northSouthResourceName": "vm1",
+        "northSouthAlertName": "20180815TCP3379"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/rg1/providers/Microsoft.Security/northSouthHardenings/vm1/alerts/20180815TCP3379",
+                "name": "20180815TCP3379",
+                "properties": {
+                    "date": "2018-08-15T00:00:00.0000000Z",
+                    "destinationPort": "3379",
+                    "protocol": "TCP",
+                    "traffic": [{
+                        "sourceAddress": "100.10.1.1",
+                        "attempts": "5"
+                        }, {
+                        "sourceAddress": "200.20.2.1",
+                        "attempts": "3"
+                        }
+                    ]
+                }
+            }          
+        }
+    }
+}

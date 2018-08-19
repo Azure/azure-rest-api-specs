@@ -1,0 +1,62 @@
+{
+    "parameters": {
+        "api-version": "2015-06-01-preview",
+        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+        "resourceGroupName": "rg1",
+        "northSouthResourceName": "vm1"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [
+                    {
+                        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/rg1/providers/Microsoft.Security/northSouthHardenings/vm1/policies/recommended",
+                        "name": "recommended",
+                        "properties": {
+                            "active": false,
+                            "createdOn": "2018-08-15T00:00:00.0000000Z",
+                            "rules": [
+                                {
+                                  "name": "rule1",
+                                  "access" "Allow",
+                                  "destinationPort": "3389",
+                                  "protocols": ["TCP"],
+                                  "sourceAddresses": ["100.10.1.1", "200.20.2.2"]
+                                }, {
+                                  "name": "rule1_deny",
+                                  "access" "Deny",
+                                  "destinationPort": "3389",
+                                  "protocols": ["TCP"],
+                                  "sourceAddresses": ["*"]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/rg1/providers/Microsoft.Security/northSouthHardenings/vm1/policies/default",
+                        "name": "default",
+                        "properties": {
+                            "active": true,
+                            "createdOn": "2018-08-16T00:00:00.0000000Z",
+                            "rules": [
+                                {
+                                  "name": "rule1",
+                                  "access" "Allow",
+                                  "destinationPort": "3389",
+                                  "protocols": ["TCP"],
+                                  "sourceAddresses": ["100.10.1.1", "200.20.2.2", "300.30.3.3", ]
+                                }, {
+                                  "name": "rule1_deny",
+                                  "access" "Deny",
+                                  "destinationPort": "3389",
+                                  "protocols": ["TCP"],
+                                  "sourceAddresses": ["*"]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }            
+        }
+    }
+}
