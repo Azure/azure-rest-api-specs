@@ -36,13 +36,13 @@ input-file:
 ```
 
 
-### Tag: package-2018-09-preview
+### Tag: package-2018-08-preview
 
-These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09-preview'
+``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
-- Microsoft.CostManagement/preview/2018-09-01-preview/costmanagement.json
+- Microsoft.CostManagement/preview/2018-08-01-preview/costmanagement.json
 ```
 
 
@@ -125,7 +125,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-costmanagement
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-05
-  - tag: package-2018-09-preview
+  - tag: package-2018-08-preview
 ```
 
 ### Tag: package-2018-05 and java
@@ -141,15 +141,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2018-09-preview and java
+### Tag: package-2018-08-preview and java
 
-These settings apply only when `--tag=package-2018-09-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-08-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-09-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.costmanagement.v2018_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_09_01_preview
+  namespace: com.microsoft.azure.management.costmanagement.v2018_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_08_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
