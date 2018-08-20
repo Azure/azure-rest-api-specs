@@ -4,8 +4,7 @@
     "title": "AutomationManagement",
     "version": "2018-01-15",
     "x-ms-code-generation-settings": {
-      "useDateTimeOffset": true,
-      "syncMethods": "None"
+      "useDateTimeOffset": true
     }
   },
   "host": "management.azure.com",
@@ -55,16 +54,16 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -77,7 +76,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -100,13 +99,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "parameters",
@@ -118,7 +117,7 @@
             "description": "The name of the agent registration key to be regenerated"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -131,7 +130,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -154,10 +153,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "nodeId",
@@ -167,10 +166,10 @@
             "description": "The node id."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -183,7 +182,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -204,10 +203,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "nodeId",
@@ -217,10 +216,10 @@
             "description": "The node id."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -233,7 +232,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -254,10 +253,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "nodeId",
@@ -276,10 +275,10 @@
             "description": "Parameters supplied to the update dsc node."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -292,7 +291,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -311,14 +310,35 @@
         "x-ms-examples": {
           "List DSC nodes by Automation Account": {
             "$ref": "./examples/listAllDscNodesByAutomationAccount.json"
+          },
+          "List Paged DSC nodes by Automation Account with no filters": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithNoFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account with name filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithNameFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account with node status filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithStatusFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account with Node Configuration Custom filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithNodeConfigurationCustomFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account where Node Configurations are not assigned filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithNodeConfigurationNotAssignedFilter.json"
+          },
+          "List Paged DSC nodes by Automation Account with version filter": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithVersionFilter.json"
+          },
+          "List Paged DSC nodes with filters separated by 'and'": {
+            "$ref": "./examples/listPagedDscNodesByAutomationAccountWithCompositeFilter.json"
           }
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "$filter",
@@ -328,10 +348,31 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The number of rows to skip."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "The the number of rows to take."
+          },
+          {
+            "name": "$inlinecount",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Return total rows."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -344,7 +385,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -371,10 +412,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "nodeId",
@@ -391,10 +432,10 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -407,7 +448,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -434,10 +475,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "nodeId",
@@ -454,10 +495,10 @@
             "description": "The report id."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -470,7 +511,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -493,10 +534,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "nodeId",
@@ -513,10 +554,10 @@
             "description": "The report id."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -529,7 +570,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -602,17 +643,20 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the node report."
+          "description": "Gets or sets the end time of the node report.",
+          "x-nullable": true
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the lastModifiedTime of the node report."
+          "description": "Gets or sets the lastModifiedTime of the node report.",
+          "x-nullable": false
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the node report."
+          "description": "Gets or sets the start time of the node report.",
+          "x-nullable": true
         },
         "type": {
           "type": "string",
@@ -739,7 +783,8 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start date of the resource."
+          "description": "Gets or sets the start date of the resource.",
+          "x-nullable": false
         }
       },
       "description": "Definition of the DSC Report Resource."
@@ -818,7 +863,7 @@
       },
       "allOf": [
         {
-          "$ref": "./definitions.json#/definitions/ProxyResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -828,12 +873,14 @@
         "lastSeen": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last seen time of the node."
+          "description": "Gets or sets the last seen time of the node.",
+          "x-nullable": false
         },
         "registrationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the registration time of the node."
+          "description": "Gets or sets the registration time of the node.",
+          "x-nullable": false
         },
         "ip": {
           "type": "string",
@@ -844,6 +891,7 @@
           "description": "Gets or sets the account id of the node."
         },
         "nodeConfiguration": {
+          "x-nullable": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
           "description": "Gets or sets the configuration of the node."
@@ -859,6 +907,10 @@
         "etag": {
           "type": "string",
           "description": "Gets or sets the etag of the resource."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets the total number of records matching filter criteria."
         },
         "extensionHandler": {
           "type": "array",
@@ -940,6 +992,10 @@
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the next link."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets the total number of nodes matching filter criteria."
         }
       },
       "description": "The response model for the list dsc nodes operation."

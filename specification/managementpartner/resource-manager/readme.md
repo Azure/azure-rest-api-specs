@@ -7,6 +7,28 @@ This is the AutoRest configuration file for ManagementPartner RP.
 
 
 ---
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2018-02
+```
+
+### Tag: package-2018-02 and java
+
+These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementpartner.v2018_02_01
+  output-folder: $(azure-libraries-for-java-folder)/managementpartner/resource-manager/v2018_02_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
 ## Getting Started 
 To build the SDK for ManagementPartner, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
@@ -91,7 +113,7 @@ These settings apply only when `--tag=package-2018-02 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2018-02' && $(go)
-output-folder: $(go-sdk-folder)/services/managementpartner/mgmt/2018-02-01/managementpartner
+output-folder: $(go-sdk-folder)/services/preview/managementpartner/mgmt/2018-02-01/managementpartner
 ```
 
 ## Python

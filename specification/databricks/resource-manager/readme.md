@@ -7,6 +7,28 @@ This is the AutoRest configuration file for Databricks.
 
 
 ---
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2018-04-01
+```
+
+### Tag: package-2018-04-01 and java
+
+These settings apply only when `--tag=package-2018-04-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-04-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databricks.v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/databricks/resource-manager/v2018_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
 ## Getting Started 
 To build the SDK for Databricks, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
@@ -26,7 +48,7 @@ These are the global settings for the Databricks API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-01-preview
+tag: package-2018-04-01
 ```
 
 

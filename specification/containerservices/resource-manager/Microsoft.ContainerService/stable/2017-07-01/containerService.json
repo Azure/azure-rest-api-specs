@@ -309,7 +309,7 @@
     },
     "ContainerServiceVnetSubnetID": {
       "type": "string",
-      "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+      "description": "VNet SubnetID specifies the vnet's subnet identifier."
     },
     "ContainerServiceVMSize": {
       "type": "string",
@@ -319,7 +319,6 @@
       },
       "description": "Size of agent VMs.",
       "enum": [
-        "Standard_A0",
         "Standard_A1",
         "Standard_A10",
         "Standard_A11",
@@ -338,8 +337,6 @@
         "Standard_A8_v2",
         "Standard_A8m_v2",
         "Standard_A9",
-        "Standard_B1ms",
-        "Standard_B1s",
         "Standard_B2ms",
         "Standard_B2s",
         "Standard_B4ms",
@@ -609,7 +606,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "firstConsecutiveStaticIP": {
           "type": "string",
@@ -678,18 +675,10 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "osType": {
-          "type": "string",
-          "default": "Linux",
-          "enum": [
-            "Linux",
-            "Windows"
-          ],
-          "x-ms-enum": {
-            "name": "OSType"
-          },
+          "$ref": "#/definitions/OSType",
           "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
         }
       },
@@ -723,7 +712,7 @@
         "adminUsername": {
           "type": "string",
           "description": "The administrator username to use for Linux VMs.",
-          "pattern": "^[a-z][a-z0-9_-]*$"
+          "pattern": "^[A-Za-z][-A-Za-z0-9_]*$"
         },
         "ssh": {
           "$ref": "#/definitions/ContainerServiceSshConfiguration",
@@ -875,6 +864,19 @@
         "linuxProfile"
       ],
       "description": "Properties of the container service."
+    },
+    "OSType": {
+      "type": "string",
+      "default": "Linux",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "name": "OSType",
+        "modelAsString": true
+      },
+      "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
     }
   },
   "parameters": {

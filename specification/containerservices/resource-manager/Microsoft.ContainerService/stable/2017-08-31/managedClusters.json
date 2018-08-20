@@ -154,6 +154,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/accessProfiles/{roleName}/listCredential": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_GetAccessProfile",
+        "summary": "Gets an access profile of a managed cluster.",
+        "description": "Gets the accessProfile for the specified role name of the managed cluster with a specified resource group and name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role for managed cluster accessProfile resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterAccessProfile"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Cluster": {
+            "$ref": "./examples/ManagedClustersGetAccessProfile.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/accessProfiles/{roleName}": {
       "get": {
         "tags": [
@@ -161,7 +213,8 @@
         ],
         "operationId": "ManagedClusters_GetAccessProfiles",
         "summary": "Gets access profile of a managed cluster.",
-        "description": "Gets the accessProfile for the specified role name of the managed cluster with a specified resource group and name.",
+        "deprecated": true,
+        "description": "Use ManagedClusters_GetAccessProfile instead.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -416,7 +469,7 @@
     },
     "ContainerServiceVnetSubnetID": {
       "type": "string",
-      "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+      "description": "VNet SubnetID specifies the vnet's subnet identifier."
     },
     "ContainerServiceVMSize": {
       "type": "string",
@@ -426,7 +479,6 @@
       },
       "description": "Size of agent VMs.",
       "enum": [
-        "Standard_A0",
         "Standard_A1",
         "Standard_A10",
         "Standard_A11",
@@ -445,8 +497,6 @@
         "Standard_A8_v2",
         "Standard_A8m_v2",
         "Standard_A9",
-        "Standard_B1ms",
-        "Standard_B1s",
         "Standard_B2ms",
         "Standard_B2s",
         "Standard_B4ms",
@@ -677,7 +727,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "firstConsecutiveStaticIP": {
           "type": "string",
@@ -746,7 +796,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "osType": {
           "$ref": "#/definitions/OSType",
@@ -783,7 +833,7 @@
         "adminUsername": {
           "type": "string",
           "description": "The administrator username to use for Linux VMs.",
-          "pattern": "^[a-z][a-z0-9_-]*$"
+          "pattern": "^[A-Za-z][-A-Za-z0-9_]*$"
         },
         "ssh": {
           "$ref": "#/definitions/ContainerServiceSshConfiguration",

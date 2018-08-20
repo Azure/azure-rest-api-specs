@@ -15,7 +15,8 @@
                             "168934",
                             "168973"
                         ],
-                        "includedUpdateClassifications": "Critical"
+                        "includedUpdateClassifications": "Critical",
+                        "rebootSetting": "IfRequired"
                     },
                     "azureVirtualMachines": [
                         "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
@@ -136,8 +137,7 @@
                         "frequency": "Week",
                         "creationTime": "2017-10-19T18:54:50.5233333+00:00",
                         "lastModifiedTime": "2017-10-19T18:54:50.5233333+00:00",
-                        "timeZone": "America/Los_Angeles",
-                        "advancedSchedule": null
+                        "timeZone": "America/Los_Angeles"
                     },
                     "provisioningState": "Provisioning",
                     "error": {},
@@ -146,18 +146,6 @@
                     "lastModifiedTime": "2017-10-19T18:54:50.68+00:00"
                 }
             }
-        },
-        "400": {
-            "code": "BadRequest",
-            "message": "{\"Message\":\"The request is invalid.\",\"ModelState\":{\"softwareUpdateConfiguration.properties.scheduleInfo\":[\"The scheduleInfo field is required.\"]}}"
-        },
-        "404": {
-            "code": "NotFound",
-            "message": "{\"Message\":\"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount\"}"
-        },
-        "409": {
-            "code": "Conflict",
-            "message": "\"Software update configuration with the same name already exist.\""
         }
     }
 }
