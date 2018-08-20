@@ -818,6 +818,49 @@
       ],
       "description": "Authentication certificates of an application gateway."
     },
+    "ApplicationGatewayTrustedRootCertificatePropertiesFormat": {
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Certificate public data."
+        },
+        "keyvaultSecretId": {
+          "type": "string",
+          "description": "KeyVault Secret Id for certificate."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the trusted root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Trusted Root certificates properties of an application gateway."
+    },
+    "ApplicationGatewayTrustedRootCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayTrustedRootCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the trusted root certificate that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Trusted Root certificates of an application gateway."
+    },
     "ApplicationGatewaySslCertificatePropertiesFormat": {
       "properties": {
         "data": {
@@ -1072,6 +1115,13 @@
             "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Array of references to application gateway authentication certificates."
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Array of references to application gateway trusted root certificates."
         },
         "connectionDraining": {
           "$ref": "#/definitions/ApplicationGatewayConnectionDraining",
@@ -1532,6 +1582,13 @@
             "$ref": "#/definitions/ApplicationGatewayAuthenticationCertificate"
           },
           "description": "Authentication certificates of the application gateway resource."
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayTrustedRootCertificate"
+          },
+          "description": "Trusted Root certificates of the application gateway resource."
         },
         "sslCertificates": {
           "type": "array",
