@@ -65,12 +65,15 @@ async function runOad(oldSpec, newSpec) {
   console.log(`New Spec: "${newSpec}"`);
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
-  const result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
+  let result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
   console.log(result);
 
   if (!result) {
     return;
   }
+
+  // fix up output from OAD, it does not output valid JSON
+  result = '[' + result.replace(/}\s+{/gi,"},{") + ']'
 
   return JSON.parse(result);
 }
