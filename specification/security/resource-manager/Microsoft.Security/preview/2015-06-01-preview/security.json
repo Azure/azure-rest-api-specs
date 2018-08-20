@@ -3006,11 +3006,11 @@
 			"type": "string",
 			"enum": [
 				"TCP",
-				"UDP",
+				"UDP"
 			],
 			"x-ms-enum": {
 				"name": "protocol",
-				"modelAsString": true,
+				"modelAsString": true
 			}
 		},
 		"NorthSouthHardeningsTrafficItem": {
@@ -3029,7 +3029,7 @@
 			"properties": {
 				"date": {
 					"type": "string",
-					"format": "date-time",
+					"format": "date-time"
 				},
 				"destinationPort": {
 					"$ref": "#/definitions/PortNumber"
@@ -3051,14 +3051,14 @@
 				"properties": {
 					"description": "Properties of the north-south hardening alert",
 					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/NorthSouthHardeningsAlertProperties",
-				},
+					"$ref": "#/definitions/NorthSouthHardeningsAlertProperties"
+				}
 			},
 			"allOf": [
 				{
 					"$ref": "#/definitions/SubResource"
 				}
-			],
+			]
 		},
 		"NorthSouthHardeningsAlertList": {
 			"description": "Response for ListNorthSouthHardeningsAlert API service call. Retrieves all north-south hardening alerts that belongs to a north-south hardening resource",
@@ -3068,29 +3068,29 @@
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/NorthSouthHardeningsAlert"
-					},
+					}
 				},
 				"nextLink": {
 					"description": "The URL to get the next set of results",
-					"type": "string",
+					"type": "string"
 				}
-			},
+			}
 		},
 		"NorthSouthHardeningsPolicyRule": {
 			"description": "A north-south hardening policy rule",
 			"properties": {
 				"name": {
-					"type": "string",
+					"type": "string"
 				},
 				"access": {
 					"type": "string",
 					"enum": [
 						"Allow",
-						"Deny",
+						"Deny"
 					],
 					"x-ms-enum": {
 						"name": "accees",
-						"modelAsString": true,
+						"modelAsString": true
 					}
 				},
 				"destinationPort": {
@@ -3136,14 +3136,14 @@
 				"properties": {
 					"description": "Properties of the north-south hardening policy",
 					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/NorthSouthHardeningsPolicyProperties",
-				},
+					"$ref": "#/definitions/NorthSouthHardeningsPolicyProperties"
+				}
 			},
 			"allOf": [
 				{
 					"$ref": "#/definitions/SubResource"
 				}
-			],
+			]
 		},
 		"NorthSouthHardeningsPolicyList": {
 			"description": "Response for ListNorthSouthHardeningsPolicy API service call. Retrieves all north-south hardening policies that belongs to a north-south hardening resource",
@@ -3153,13 +3153,13 @@
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/NorthSouthHardeningsPolicy"
-					},
+					}
 				},
 				"nextLink": {
 					"description": "The URL to get the next set of results",
-					"type": "string",
+					"type": "string"
 				}
-			},
+			}
 		}
 	},
 	"parameters": {
