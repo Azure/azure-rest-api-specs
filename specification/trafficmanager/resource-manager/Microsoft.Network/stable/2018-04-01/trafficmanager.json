@@ -1028,21 +1028,15 @@
         }
       },
       "description": "Class representing a Traffic Manager endpoint properties."
-    },
-    "HeatMapModel": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/HeatMapPropertyBase",
-          "description": "The properties of the Traffic Manager HeatMap."
-        }
-      },
+    },    
+    "HeatMapModel": {  
+      "description": "Super-class representing a Traffic Manager HeatMap.",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
       ],
-      "description": "Class representing a Traffic Manager HeatMap."
+      "discriminator": "name"
     },
     "UserMetricsModel": {
       "properties": {
@@ -1107,24 +1101,27 @@
       },
       "description": "Class representing a Traffic Manager HeatMap traffic flow properties."
     },
-    "HeatMapPropertyBase": {
-      "type": "object",
-      "discriminator": "heatMapType",
-      "properties": {
-        "heatMapType": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "heatMapType"
-      ]
-    },
-    "HeatMapProperties":{
-      "description": "Sub-class representing default Traffic Manager HeatMap properties.",
-       "x-ms-discriminator-value": "Microsoft.Network/trafficManagerProfiles/heatMaps/latencyVolumeByLocation",
+    "HeatMapModelDefault": {   
+      "x-ms-discriminator-value": "default",
       "allOf": [
         {
-          "$ref": "#/definitions/HeatMapPropertyBase",
+          "$ref": "#/definitions/HeatMapModel",
+          "type": "object"
+        },
+      ],    
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HeatMapProperties",
+          "description": "The properties of the Traffic Manager HeatMap Traffic Flow."
+        }
+      },
+      "description": "Sub-class representing model for default Traffic Manager HeatMap traffic flow."
+    },
+    "HeatMapProperties":{     
+      "allOf": [
+        {
+          "$ref": "#/definitions/HeatMapModelDefault",
           "type": "object"
         },
         {
@@ -1155,14 +1152,30 @@
             }
           }
         }
-      ]
+      ],
+      "description": "Sub-class representing default Traffic Manager HeatMap traffic flow properties."
     },
-    "HeatMapPropertyAsn":{
-      "description": "Sub-class representing Traffic Manager HeatMap ASN location properties.",
-       "x-ms-discriminator-value": "Microsoft.Network/trafficManagerProfiles/heatMaps/asnTrafficFraction",
+    "HeatMapModelAsn": {
+      "x-ms-discriminator-value": "asnTrafficFraction",
       "allOf": [
         {
-          "$ref": "#/definitions/HeatMapPropertyBase",
+          "$ref": "#/definitions/HeatMapModel",
+          "type": "object"
+        },
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HeatMapAsnProperties",
+          "description": "The properties of the Traffic Manager HeatMap traffic fraction by ASN."
+        }
+      },
+      "description": "Sub-class representing model for Traffic Manager HeatMap traffic fraction by ASN."
+    },
+    "HeatMapAsnProperties":{     
+      "allOf": [
+        {
+          "$ref": "#/definitions/HeatMapModelAsn",
           "type": "object"
         },
         {
@@ -1175,14 +1188,30 @@
             }
           }
         }
-      ]
+      ],
+      "description": "Sub-class representing properties for Traffic Manager HeatMap traffic fraction by ASN."
     },
-    "HeatMapPropertyCountry":{
-      "description": "Sub-class representing Traffic Manager HeatMap country location properties.",
-       "x-ms-discriminator-value": "Microsoft.Network/trafficManagerProfiles/heatMaps/countryTrafficFraction",
+    "HeatMapModelCountry": {
+      "x-ms-discriminator-value": "countryTrafficFraction",
       "allOf": [
         {
-          "$ref": "#/definitions/HeatMapPropertyBase",
+          "$ref": "#/definitions/HeatMapModel",
+          "type": "object"
+        },
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HeatMapCountryProperties",
+          "description": "The properties of the Traffic Manager HeatMap traffic fraction by country."
+        }
+      },
+      "description": "Sub-class representing model for Traffic Manager HeatMap traffic fraction by country."
+    },
+    "HeatMapCountryProperties":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/HeatMapModelCountry",
           "type": "object"
         },
         {
@@ -1195,14 +1224,30 @@
             }
           }
         }
-      ]        
-    },
-    "HeatMapPropertyState":{
-      "description": "Sub-class representing Traffic Manager HeatMap state location properties.",
-       "x-ms-discriminator-value": "Microsoft.Network/trafficManagerProfiles/heatMaps/stateTrafficFraction",
+      ],
+      "description": "Sub-class representing properties forTraffic Manager HeatMap traffic fraction by country."
+    },    
+    "HeatMapModelState": {      
+      "x-ms-discriminator-value": "stateTrafficFraction",
       "allOf": [
         {
-          "$ref": "#/definitions/HeatMapPropertyBase",
+          "$ref": "#/definitions/HeatMapModel",
+          "type": "object"
+        },
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HeatMapStateProperties",
+          "description": "The properties of the Traffic Manager HeatMap traffic fraction by country-state."
+        }
+      },
+      "description": "Sub-class representing model for Traffic Manager HeatMap traffic fraction by country-state."
+    },
+    "HeatMapStateProperties":{   
+      "allOf": [
+        {
+          "$ref": "#/definitions/HeatMapModelState",
           "type": "object"
         },
         {
@@ -1215,7 +1260,8 @@
             }
           }
         }
-      ]        
+      ],
+      "description": "Sub-class representing properties for Traffic Manager HeatMap traffic fraction by country-state."
     },
     "HeatMapEndpoint": {
       "properties": {
