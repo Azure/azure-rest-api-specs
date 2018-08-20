@@ -59,6 +59,9 @@
           },
           "ImportImageByManifestDigest": {
             "$ref": "./examples/ImportImageByManifestDigest.json"
+          },
+          "ImportImageFromPublicRegistry": {
+            "$ref": "./examples/ImportImageFromPublicRegistry.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1189,13 +1192,16 @@
     },
     "ImportSource": {
       "required": [
-        "resourceId",
         "sourceImage"
       ],
       "type": "object",
       "properties": {
         "resourceId": {
-          "description": "The resource identifier of the target Azure Container Registry.",
+          "description": "The resource identifier of the source Azure Container Registry.",
+          "type": "string"
+        },
+        "registryUri": {
+          "description": "The address of the source registry.",
           "type": "string"
         },
         "sourceImage": {
