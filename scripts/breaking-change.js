@@ -147,10 +147,7 @@ async function runScript() {
     if (resolvedMapForNewSpecs[swagger]) {
       const diffs = await runOad(swagger, resolvedMapForNewSpecs[swagger]);
       if (diffs) {
-        if (!diffFiles[swagger]) {
-          diffFiles[swagger] = [];
-        }
-        diffFiles[swagger].push(diffs);
+        diffFiles[swagger] = diffs;
         for (const diff of diffs) {
           if (diff['type'] === 'Error') {
             if (errors === 0) {
