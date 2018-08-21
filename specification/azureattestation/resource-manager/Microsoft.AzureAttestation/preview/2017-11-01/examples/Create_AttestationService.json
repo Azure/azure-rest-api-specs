@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "resourceGroupName": "sample-resource-group",
+    "serviceName": "sampleservicename",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2017-11-01"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id":
+          "subscriptions/6c96b33e-f5b8-40a6-9011-5cb1c58b0915/resourceGroups/testrg/providers/Microsoft.AzureAttestation/service/codes1",
+        "name": "codes1",
+        "type": "Microsoft.AzureAttestation/service",
+        "properties": {
+          "status": "Ready",
+          "ask": null,
+          "cek": null,
+          "cskmaps": null
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "DuplicateTenant",
+          "message":
+            "The given service URI 'sampleservicename' is already in use. Please try again with a different name."
+        }
+      }
+    }
+  }
+}

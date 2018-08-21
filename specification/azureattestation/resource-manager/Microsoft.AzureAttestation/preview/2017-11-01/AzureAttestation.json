@@ -1,0 +1,433 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureAttestation",
+    "description": "The service for managing azure attestation.",
+    "version": "2017-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.AzureAttestation/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Azure attestation operations.",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all the operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}": {
+      "get": {
+        "tags": [
+          "AttestationService"
+        ],
+        "operationId": "AttestationService_List",
+        "description": "Get the status of Attestation Service.",
+        "x-ms-examples": {
+          "AttestationService_List": {
+            "$ref": "./examples/Get_AttestationService_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the attestation service"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the status of attestation service",
+            "schema": {
+              "$ref": "#/definitions/StatusResult"
+            }
+          },
+          "default": {
+            "description": "Error result from Attestation service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AttestationService"
+        ],
+        "operationId": "Create_AttestationService",
+        "description": "Creates or updates the Attestation Service.",
+        "x-ms-examples": {
+          "AddOrUpdate_AttestationService": {
+            "$ref": "./examples/Create_AttestationService.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the attestation service"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created or updated attestation service",
+            "schema": {
+              "$ref": "#/definitions/AttestationResponseMessage"
+            }
+          },
+          "200": {
+            "description": "Created or updated attestation service",
+            "schema": {
+              "$ref": "#/definitions/AttestationResponseMessage"
+            }
+          },
+          "default": {
+            "description": "Error result from Attestation service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResult"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AttestationService"
+        ],
+        "operationId": "Delete_AttestationService",
+        "description": "Delete Attestation Service.",
+        "x-ms-examples": {
+          "Delete_AttestationService": {
+            "$ref": "./examples/Delete_AttestationService.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the attestation service"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request accepted for deletion of attestation service"
+          },
+          "default": {
+            "description": "Error result from Attestation service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}/metadata/signingKeys": {
+      "get": {
+        "tags": [
+          "AttestationSigningKeys"
+        ],
+        "operationId": "AttestationSigningKey_list",
+        "description": "Returns attestation service signing keys.",
+        "x-ms-examples": {
+          "AttestationSigningKey_list": {
+            "$ref": "./examples/Get_AttestationSigningKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the attestation service"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AttestationSigningKeys"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "Attestation service error result",
+            "schema": {
+              "$ref": "#/definitions/ErrorResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationList": {
+      "type": "array",
+      "description": "List of supported operations.",
+      "items": {
+        "$ref": "#/definitions/OperationsDefinition"
+      }
+    },
+    "OperationsDefinition": {
+      "type": "object",
+      "description": "Definition object with the name and properties of an operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationsDisplayDefinition",
+          "description": "Display object with properties of the operation."
+        }
+      }
+    },
+    "OperationsDisplayDefinition": {
+      "type": "object",
+      "description": "Display object with properties of the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Resource provider of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource for the operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Short description of the operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation."
+        }
+      }
+    },
+    "AttestationResponseMessage": {
+      "type": "object",
+      "description": "Attestation service response message.",
+      "required": [
+        "properties"
+      ],
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The id of the ARM resource, e.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}\""
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the  attestation service."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Microsoft.AzureAttestation/service"
+        }
+		"properties":{
+		  "type": "object",
+          "$ref": "#/definitions/StatusResult",
+          "description": "Describes Attestation service status.",
+          "x-ms-client-flatten": true
+		}
+      }
+    },
+    "StatusResult": {
+      "type": "object",
+      "description": "Status of attestation service.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of attestation service."
+        },
+        "ask": {
+          "type": "string",
+          "description": "This is the key used by the attestation service to sign artifacts, such as tokens"
+        },
+        "cek": {
+          "type": "string",
+          "description": "This key is used by administrators to encrypt data for sending sensitive configuration to the attestation enclave"
+        },
+        "cskMap": {
+          "type": "array",
+          "description": "These keys are used by administrators to updates changes to the attestation service instance"
+        }
+      }
+    },
+    "ErrorResult": {
+      "type": "object",
+      "title": "Error",
+      "description": "Error description and code explaining why an operation failed.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "Error object.",
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "type": "object",
+      "title": "Error",
+      "description": "Error description and code explaining why an operation failed.",
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Description of the error."
+        },
+        "code": {
+          "type": "string",
+          "description": "Service specific error code"
+        }
+      }
+    },
+    "AttestationSigningKeys": {
+      "type": "object",
+      "description": "Attestation signing keys.",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "Attestation signing keys.",
+          "items": {
+            "$ref": "#/definitions/SigningKey"
+          }
+        }
+      }
+    },
+    "SigningKey": {
+      "type": "object",
+      "description": "Attestation signing keys.",
+      "properties": {
+        "kid": {
+          "type": "string",
+          "description": "Attestation signing keys."
+        },
+        "kty": {
+          "type": "string",
+          "description": "Attestation signing keys."
+        },
+        "n": {
+          "type": "string",
+          "description": "Attestation signing keys."
+        },
+        "e": {
+          "type": "string",
+          "description": "Attestation signing keys."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials that uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    }
+  }
+}
