@@ -2,11 +2,11 @@
 // Licensed under the MIT License. See License in the project root for license information.
 
 'use strict';
-var utils = require('../test/util/utils'),
+const utils = require('../test/util/utils'),
   path = require('path'),
-  fs = require('fs'),
+  fs = require('fs-extra'),
   os = require('os'),
-  execSync = require('child_process').execSync,
+  exec = require('util').promisify(require('child_process').exec),
   oad = require('oad');
 
 // This map is used to store the mapping between files resolved and stored location
@@ -65,12 +65,15 @@ async function runOad(oldSpec, newSpec) {
   console.log(`New Spec: "${newSpec}"`);
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
-  const result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
+  let result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
   console.log(result);
 
   if (!result) {
     return;
   }
+
+  // fix up output from OAD, it does not output valid JSON
+  result = '[' + result.replace(/}\s+{/gi,"},{") + ']'
 
   return JSON.parse(result);
 }
@@ -80,27 +83,24 @@ async function runOad(oldSpec, newSpec) {
  *
  * @param {string} swaggerPath Path to the swagger specification file.
  */
-function processViaAutoRest(swaggerPath) {
+async function processViaAutoRest(swaggerPath) {
   if (swaggerPath === null || swaggerPath === undefined || typeof swaggerPath.valueOf() !== 'string' || !swaggerPath.trim().length) {
-    return Promise.reject(new Error('swaggerPath is a required parameter of type "string" and it cannot be an empty string.'));
+    throw new Error('swaggerPath is a required parameter of type "string" and it cannot be an empty string.');
   }
 
-  console.log(`Processing via AutoRest...`);
-
-  let outputFileNameWithExt = path.basename(swaggerPath);
-  let outputFileNameWithoutExt = path.basename(swaggerPath, '.json');
-  let autoRestCmd = `autorest --input-file=${swaggerPath} --output-artifact=swagger-document.json --output-file=${outputFileNameWithoutExt} --output-folder=${outputFolder}`;
+  const swaggerOutputFolder = path.join(outputFolder, path.dirname(swaggerPath));
+  const swaggerOutputFileNameWithoutExt = path.basename(swaggerPath, '.json');
+  const autoRestCmd = `autorest --input-file=${swaggerPath} --output-artifact=swagger-document.json --output-file=${swaggerOutputFileNameWithoutExt} --output-folder=${swaggerOutputFolder}`;
 
   console.log(`Executing : ${autoRestCmd}`);
 
   try {
-    let result = execSync(`${autoRestCmd}`, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
-    resolvedMapForNewSpecs[outputFileNameWithExt] = path.join(outputFolder, outputFileNameWithExt);
+    await fs.ensureDir(swaggerOutputFolder);
+    await exec(`${autoRestCmd}`, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
+    resolvedMapForNewSpecs[swaggerPath] = path.join(swaggerOutputFolder, swaggerOutputFileNameWithoutExt + '.json');
   } catch (err) {
-    // Do not update map in case of errors.
+    console.log(`Error processing via AutoRest: ${err}`);
   }
-
-  return Promise.resolve();
 }
 
 //main function
@@ -108,21 +108,13 @@ async function runScript() {
   // See whether script is in Travis CI context
   console.log(`isRunningInTravisCI: ${isRunningInTravisCI}`);
 
-  // Create directory to store the processed & resolved swaggers
-  if (!fs.existsSync(outputFolder)) {
-    fs.mkdirSync(outputFolder);
-  }
-
   let targetBranch = utils.getTargetBranch();
   let swaggersToProcess = utils.getFilesChangedInPR();
 
   console.log('Processing swaggers:');
   console.log(swaggersToProcess);
 
-  for (const swagger of swaggersToProcess) {
-    await processViaAutoRest(swagger);
-  }
-
+  console.log('Finding new swaggers...')
   let newSwaggers = [];
   if (isRunningInTravisCI && swaggersToProcess.length > 0) {
     newSwaggers = await utils.doOnBranch(utils.getTargetBranch(), async () => {
@@ -130,7 +122,14 @@ async function runScript() {
     });
   }
 
-  console.log(`Resolved map for the new specification is:`);
+  console.log('Processing via AutoRest...');
+  for (const swagger of swaggersToProcess) {
+    if (!newSwaggers.includes(swagger)) {
+      await processViaAutoRest(swagger);
+    }
+  }
+
+  console.log(`Resolved map for the new specifications:`);
   console.dir(resolvedMapForNewSpecs);
 
   let errors = 0, warnings = 0;
@@ -145,23 +144,20 @@ async function runScript() {
       continue;
     }
 
-    let outputFileNameWithExt = path.basename(swagger);
-    console.log(outputFileNameWithExt);
-    if (resolvedMapForNewSpecs[outputFileNameWithExt]) {
-      const diff = await runOad(swagger, resolvedMapForNewSpecs[outputFileNameWithExt]);
-      if (diff) {
-        if (!diffFiles[swagger]) {
-          diffFiles[swagger] = [];
-        }
-        diffFiles[swagger].push(diff);
-        if (diff['type'] === 'Error') {
-          if (errors === 0) {
-            console.log(`There are potential breaking changes in this PR. Please review before moving forward. Thanks!`);
-            process.exitCode = 1;
+    if (resolvedMapForNewSpecs[swagger]) {
+      const diffs = await runOad(swagger, resolvedMapForNewSpecs[swagger]);
+      if (diffs) {
+        diffFiles[swagger] = diffs;
+        for (const diff of diffs) {
+          if (diff['type'] === 'Error') {
+            if (errors === 0) {
+              console.log(`There are potential breaking changes in this PR. Please review before moving forward. Thanks!`);
+              process.exitCode = 1;
+            }
+            errors += 1;
+          } else if (diff['type'] === 'Warning') {
+            warnings += 1;
           }
-          errors += 1;
-        } else if (diff['type'] === 'Warning') {
-          warnings += 1;
         }
       }
     }
