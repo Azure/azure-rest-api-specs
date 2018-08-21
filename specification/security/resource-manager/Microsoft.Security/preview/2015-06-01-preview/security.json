@@ -1922,16 +1922,6 @@
             },
             "x-ms-azure-resource": true
         },
-        "SubResource": {
-            "description": "A nested resource",
-            "properties": {
-                "id": {
-                    "description": "Sub resource ID",
-                    "type": "string"
-                }
-            },
-            "x-ms-azure-resource": true
-        },
         "Kind": {
             "type": "object",
             "description": "Describes an Azure resource with kind",
@@ -3056,7 +3046,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/SubResource"
+                    "$ref": "#/definitions/Resource"
                 }
             ]
         },
@@ -3145,7 +3135,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/SubResource"
+                    "$ref": "#/definitions/Resource"
                 }
             ]
         },
