@@ -2219,6 +2219,9 @@
           },
           "Create a custom-image scale set from an unmanaged generalized os image.": {
             "$ref": "./examples/CreateACustomImageScaleSetFromAnUnmanagedGeneralizedOsImage.json"
+          },
+          "Create a scale set with virtual machines in different zones.": {
+            "$ref": "./examples/CreateAScaleSetWithVMsInDifferentZones.json"
           }
         }
       },
@@ -3037,7 +3040,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_PerformMaintenance",
-        "description": "Perform maintenance on one or more virtual machines in a VM scale set.",
+        "description": "Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3305,6 +3308,51 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetRollingUpgrades"
+        ],
+        "operationId": "VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade",
+        "description": "Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Start an extension rolling upgrade.": {
+            "$ref": "./examples/VMScaleSetExtensionRollingUpgrade.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest": {
@@ -6326,6 +6374,11 @@
           "$ref": "#/definitions/CreateOption",
           "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+        },
         "osType": {
           "type": "string",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
@@ -6368,6 +6421,11 @@
         "writeAcceleratorEnabled": {
           "type": "boolean",
           "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
@@ -6413,7 +6471,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -6814,9 +6872,9 @@
         "ipTags": {
           "type": "array",
           "items": {
-          "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
+            "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
           },
-        "description": "The list of IP tags associated with the public IP address."
+          "description": "The list of IP tags associated with the public IP address."
         },
         "publicIPPrefix" : {
           "$ref":"#/definitions/SubResource",
@@ -7585,6 +7643,14 @@
             "$ref": "#/definitions/VirtualMachineExtension"
           },
           "description": "The virtual machine child extension resources."
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine zones."
         }
       },
       "allOf": [
