@@ -11,7 +11,7 @@ nodejs:
   output-folder: $(node-sdks-folder)/lib/services/storageManagement2
   payload-flattening-threshold: 2
   override-client-name: StorageManagementClient
-  generate-license-txt: false
-  generate-package-json: false
+  generate-license-txt: true
+  generate-package-json: true
   generate-readme-md: false
 ```
