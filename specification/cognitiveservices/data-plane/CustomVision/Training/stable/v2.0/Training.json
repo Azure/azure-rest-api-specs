@@ -2,15 +2,15 @@
     "swagger": "2.0",
     "info": {
         "version": "2.0",
-        "title": "Training Client"
+        "title": "TrainingApi"
     },
-    "host": "api.cognitive.microsoft.com",
-    "basePath": "/customvision/v2.0",
+    "host": "southcentralus.api.cognitive.microsoft.com",
+    "basePath": "/customvision/v2.0/Training",
     "schemes": [
         "https"
     ],
     "paths": {
-        "/training/domains": {
+        "/domains": {
             "get": {
                 "tags": [
                     "DomainsApi"
@@ -48,7 +48,7 @@
                 }
             }
         },
-        "/training/domains/{domainId}": {
+        "/domains/{domainId}": {
             "get": {
                 "tags": [
                     "DomainsApi"
@@ -91,7 +91,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/tagged": {
+        "/projects/{projectId}/images/tagged": {
             "get": {
                 "tags": [
                     "ImageApi"
@@ -191,7 +191,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/untagged": {
+        "/projects/{projectId}/images/untagged": {
             "get": {
                 "tags": [
                     "ImageApi"
@@ -278,7 +278,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/tagged/count": {
+        "/projects/{projectId}/images/tagged/count": {
             "get": {
                 "tags": [
                     "ImageApi"
@@ -346,7 +346,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/untagged/count": {
+        "/projects/{projectId}/images/untagged/count": {
             "get": {
                 "tags": [
                     "ImageApi"
@@ -401,7 +401,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/id": {
+        "/projects/{projectId}/images/id": {
             "get": {
                 "tags": [
                     "ImageApi"
@@ -471,7 +471,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images": {
+        "/projects/{projectId}/images": {
             "post": {
                 "tags": [
                     "ImageApi"
@@ -583,7 +583,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/files": {
+        "/projects/{projectId}/images/files": {
             "post": {
                 "tags": [
                     "ImageApi"
@@ -642,7 +642,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/urls": {
+        "/projects/{projectId}/images/urls": {
             "post": {
                 "tags": [
                     "ImageApi"
@@ -701,7 +701,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/predictions": {
+        "/projects/{projectId}/images/predictions": {
             "post": {
                 "tags": [
                     "ImageApi"
@@ -760,7 +760,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/tags": {
+        "/projects/{projectId}/images/tags": {
             "post": {
                 "tags": [
                     "ImageApi"
@@ -877,7 +877,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/images/regions": {
+        "/projects/{projectId}/images/regions": {
             "post": {
                 "tags": [
                     "ImageApi"
@@ -982,7 +982,7 @@
                 }
             }
         },
-        "/training/{projectId}/images/{imageId}/regionproposals": {
+        "/{projectId}/images/{imageId}/regionproposals": {
             "post": {
                 "tags": [
                     "ImageRegionProposalApi"
@@ -1033,7 +1033,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/predictions": {
+        "/projects/{projectId}/predictions": {
             "delete": {
                 "tags": [
                     "PredictionsApi"
@@ -1081,7 +1081,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/predictions/query": {
+        "/projects/{projectId}/predictions/query": {
             "post": {
                 "tags": [
                     "PredictionsApi"
@@ -1139,7 +1139,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/quicktest/url": {
+        "/projects/{projectId}/quicktest/url": {
             "post": {
                 "tags": [
                     "PredictionsApi"
@@ -1206,7 +1206,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/quicktest/image": {
+        "/projects/{projectId}/quicktest/image": {
             "post": {
                 "tags": [
                     "PredictionsApi"
@@ -1267,7 +1267,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/train": {
+        "/projects/{projectId}/train": {
             "post": {
                 "tags": [
                     "ProjectApi"
@@ -1310,7 +1310,7 @@
                 }
             }
         },
-        "/training/projects": {
+        "/projects": {
             "get": {
                 "tags": [
                     "ProjectApi"
@@ -1405,7 +1405,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}": {
+        "/projects/{projectId}": {
             "get": {
                 "tags": [
                     "ProjectApi"
@@ -1537,7 +1537,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/iterations": {
+        "/projects/{projectId}/iterations": {
             "get": {
                 "tags": [
                     "ProjectApi"
@@ -1584,7 +1584,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/iterations/{iterationId}": {
+        "/projects/{projectId}/iterations/{iterationId}": {
             "get": {
                 "tags": [
                     "ProjectApi"
@@ -1743,7 +1743,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/iterations/{iterationId}/performance": {
+        "/projects/{projectId}/iterations/{iterationId}/performance": {
             "get": {
                 "tags": [
                     "ProjectApi"
@@ -1811,7 +1811,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/iterations/{iterationId}/performance/images": {
+        "/projects/{projectId}/iterations/{iterationId}/performance/images": {
             "get": {
                 "tags": [
                     "ProjectApi"
@@ -1911,7 +1911,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/iterations/{iterationId}/performance/images/count": {
+        "/projects/{projectId}/iterations/{iterationId}/performance/images/count": {
             "get": {
                 "tags": [
                     "ProjectApi"
@@ -1979,7 +1979,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/iterations/{iterationId}/export": {
+        "/projects/{projectId}/iterations/{iterationId}/export": {
             "get": {
                 "tags": [
                     "ProjectApi"
@@ -2101,7 +2101,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/tags/{tagId}": {
+        "/projects/{projectId}/tags/{tagId}": {
             "get": {
                 "tags": [
                     "TagsApi"
@@ -2269,7 +2269,7 @@
                 }
             }
         },
-        "/training/projects/{projectId}/tags": {
+        "/projects/{projectId}/tags": {
             "get": {
                 "tags": [
                     "TagsApi"

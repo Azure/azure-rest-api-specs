@@ -51,6 +51,9 @@
                     },
                     "Create Secure Hadoop cluster": {
                         "$ref": "./examples/CreateLinuxHadoopSecureHadoop.json"
+                    },
+                    "Create Hadoop cluster with Azure Data Lake Storage Gen 2": {
+                        "$ref": "./examples/CreateLinuxHadoopAdlsGen2.json"
                     }
                 },
                 "parameters": [
@@ -604,7 +607,11 @@
                 },
                 "container": {
                     "type": "string",
-                    "description": "The container in the storage account."
+                    "description": "The container in the storage account, only to be specified for WASB storage accounts."
+                },
+                "fileSystem": {
+                    "type": "string",
+                    "description": "The filesystem, only to be specified for Azure Data Lake Storage Gen 2."
                 },
                 "key": {
                     "type": "string",
