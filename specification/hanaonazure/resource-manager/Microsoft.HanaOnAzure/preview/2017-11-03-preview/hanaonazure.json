@@ -1,0 +1,544 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "HanaManagementClient",
+        "description": "The SAP HANA on Azure Management Client.",
+        "version": "2017-11-03-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/providers/Microsoft.HanaOnAzure/operations": {
+            "get": {
+                "tags": [
+                    "HanaOnAzure"
+                ],
+                "operationId": "Operations_List",
+                "description": "Gets a list of SAP HANA management operations.",
+                "x-ms-examples": {
+                    "List all HANA management operations supported by HANA RP": {
+                        "$ref": "./examples/HanaOperations_List.json"
+                    }
+                },
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OperationList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/hanaInstances": {
+            "get": {
+                "tags": [
+                    "HanaOnAzure"
+                ],
+                "operationId": "HanaInstances_List",
+                "summary": "Gets a list of SAP HANA instances in the specified subscription.",
+                "description": "Gets a list of SAP HANA instances in the specified subscription. The operations returns various properties of each SAP HANA on Azure instance.",
+                "x-ms-examples": {
+                    "List all HANA instances in a subscription": {
+                        "$ref": "./examples/HanaInstances_List.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/HanaInstancesListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances": {
+            "get": {
+                "tags": [
+                    "HanaOnAzure"
+                ],
+                "operationId": "HanaInstances_ListByResourceGroup",
+                "summary": "Gets a list of SAP HANA instances in the specified subscription and the resource group.",
+                "description": "Gets a list of SAP HANA instances in the specified subscription and the resource group. The operations returns various properties of each SAP HANA on Azure instance.",
+                "x-ms-examples": {
+                    "List all HANA instances in a resource group": {
+                        "$ref": "./examples/HanaInstances_ListByResourceGroup.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/HanaInstancesListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}": {
+            "get": {
+                "tags": [
+                    "HanaOnAzure"
+                ],
+                "operationId": "HanaInstances_Get",
+                "summary": "Gets properties of a SAP HANA instance.",
+                "description": "Gets properties of a SAP HANA instance for the specified subscription, resource group, and instance name.",
+                "x-ms-examples": {
+                    "Get properties of a HANA instance": {
+                        "$ref": "./examples/HanaInstances_Get.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HanaInstanceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/HanaInstance"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Resource": {
+            "description": "The resource model definition.",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource ID"
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "location": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource location"
+                },
+                "tags": {
+                    "readOnly": true,
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "HanaInstancesListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HanaInstance"
+                    },
+                    "description": "The list of SAP HANA on Azure instances."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URL to get the next set of HANA instances."
+                }
+            },
+            "description": "The response from the List HANA Instances operation."
+        },
+        "HanaInstance": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/HanaInstanceProperties",
+                    "description": "HANA instance properties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "HANA instance info on Azure (ARM properties and HANA properties)"
+        },
+        "HanaInstanceProperties": {
+            "properties": {
+                "hardwareProfile": {
+                    "$ref": "#/definitions/HardwareProfile",
+                    "description": "Specifies the hardware settings for the HANA instance."
+                },
+                "storageProfile": {
+                    "$ref": "#/definitions/StorageProfile",
+                    "description": "Specifies the storage settings for the HANA instance disks."
+                },
+                "osProfile": {
+                    "$ref": "#/definitions/OSProfile",
+                    "description": "Specifies the operating system settings for the HANA instance."
+                },
+                "networkProfile": {
+                    "$ref": "#/definitions/NetworkProfile",
+                    "description": "Specifies the network settings for the HANA instance."
+                },
+                "hanaInstanceId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Specifies the HANA instance unique ID."
+                },
+                "powerState": {
+                    "readOnly": true,
+                    "type": "string",
+                    "enum": [
+                        "starting",
+                        "started",
+                        "stopping",
+                        "stopped",
+                        "restarting",
+                        "unknown"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HanaInstancePowerStateEnum",
+                        "modelAsString": true
+                    },
+                    "description": "Resource power state"
+                }
+            },
+            "description": "Describes the properties of a HANA instance."
+        },
+        "HardwareProfile": {
+            "properties": {
+                "hardwareType": {
+                    "readOnly": true,
+                    "type": "string",
+                    "enum": [
+                        "Cisco_UCS",
+                        "HPE"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HanaHardwareTypeNamesEnum",
+                        "modelAsString": true
+                    },
+                    "description": "Name of the hardware type (vendor and/or their product name)"
+                },
+                "hanaInstanceSize": {
+                    "readOnly": true,
+                    "type": "string",
+                    "enum": [
+                        "S72m",
+                        "S144m",
+                        "S72",
+                        "S144",
+                        "S192",
+                        "S192m",
+                        "S192xm",
+                        "S384",
+                        "S384m",
+                        "S384xm",
+                        "S384xxm",
+                        "S576m",
+                        "S576xm",
+                        "S768",
+                        "S768m",
+                        "S768xm",
+                        "S960m"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HanaInstanceSizeNamesEnum",
+                        "modelAsString": true
+                    },
+                    "description": "Specifies the HANA instance SKU."
+                }
+            },
+            "description": "Specifies the hardware settings for the HANA instance."
+        },
+        "Disk": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The disk name."
+                },
+                "diskSizeGB": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Specifies the size of an empty data disk in gigabytes."
+                },
+                "lun": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
+                }
+            },
+            "description": "Specifies the disk information fo the HANA instance"
+        },
+        "StorageProfile": {
+            "properties": {
+                "nfsIpAddress": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "IP Address to connect to storage."
+                },
+                "osDisks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Disk"
+                    },
+                    "description": "Specifies information about the operating system disk used by the hana instance."
+                }
+            },
+            "description": "Specifies the storage settings for the HANA instance disks."
+        },
+        "OSProfile": {
+            "properties": {
+                "computerName": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Specifies the host OS name of the HANA instance."
+                },
+                "osType": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "This property allows you to specify the type of the OS."
+                },
+                "version": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Specifies version of operating system."
+                }
+            },
+            "description": "Specifies the operating system settings for the HANA instance."
+        },
+        "NetworkProfile": {
+            "properties": {
+                "networkInterfaces": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IpAddress"
+                    },
+                    "description": "Specifies the network interfaces for the HANA instance."
+                },
+                "circuitId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Specifies the circuit id for connecting to express route."
+                }
+            },
+            "description": "Specifies the network settings for the HANA instance disks."
+        },
+        "IpAddress": {
+            "properties": {
+                "ipAddress": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Specifies the IP address of the network interface."
+                }
+            },
+            "description": "Specifies the IP address of the network interaface."
+        },
+        "OperationList": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Operation"
+                    },
+                    "description": "List of HANA operations"
+                }
+            },
+            "description": "List of HANA operations"
+        },
+        "Operation": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
+                },
+                "display": {
+                    "$ref": "#/definitions/Display",
+                    "description": "Displayed HANA operation information"
+                }
+            },
+            "description": "HANA operation information"
+        },
+        "Display": {
+            "type": "object",
+            "properties": {
+                "provider": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with \"Microsoft\" for 1st party services."
+                },
+                "resource": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the “name” section."
+                },
+                "operation": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The localized friendly name for the operation as shown to the user. This name should be concise (to fit in drop downs), but clear (self-documenting). Use Title Casing and include the entity/resource to which it applies."
+                },
+                "description": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The localized friendly description for the operation as shown to the user. This description should be thorough, yet concise. It will be used in tool-tips and detailed views."
+                },
+                "origin": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is 'user,system'"
+                }
+            },
+            "description": "Detailed HANA operation information"
+        },
+        "ErrorResponse": {
+            "description": "Describes the format of Error response.",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error code",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "Error message indicating why the operation failed.",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Subscription ID which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ResourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the resource group.",
+            "x-ms-parameter-location": "method"
+        },
+        "HanaInstanceNameParameter": {
+            "name": "hanaInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the SAP HANA on Azure instance.",
+            "x-ms-parameter-location": "method"
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client API version."
+        }
+    }
+}

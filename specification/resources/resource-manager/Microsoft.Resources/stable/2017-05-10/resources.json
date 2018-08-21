@@ -2318,6 +2318,7 @@
     "DeploymentExtended": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The ID of the deployment."
         },
@@ -2333,6 +2334,7 @@
       "required": [
         "name"
       ],
+      "x-ms-azure-resource": true,
       "description": "Deployment information."
     },
     "DeploymentListResult": {
@@ -2421,6 +2423,10 @@
         "promotionCode": {
           "type": "string",
           "description": "The promotion code."
+        },
+        "version": {
+          "type": "string",
+          "description": "The plan's version."
         }
       },
       "description": "Plan for the resource."
@@ -2514,7 +2520,7 @@
         },
         "location": {
           "type": "string",
-          "description": "The location of the resource group. It cannot be changed after the resource group has been created. It muct be one of the supported Azure locations."
+          "description": "The location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations."
         },
         "managedBy": {
           "type": "string",
@@ -2532,6 +2538,7 @@
       "required": [
         "location"
       ],
+      "x-ms-azure-resource": true,
       "description": "Resource group information."
     },
     "ResourceGroupPatchable": {
@@ -2633,6 +2640,7 @@
     "TagValue": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The tag ID."
         },
@@ -2645,11 +2653,13 @@
           "description": "The tag value count."
         }
       },
+      "x-ms-azure-resource": true,
       "description": "Tag information."
     },
     "TagDetails": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The tag ID."
         },
@@ -2739,7 +2749,6 @@
         },
         "statusMessage": {
           "readOnly": true,
-          "type": "object",
           "description": "Operation status message."
         },
         "targetResource": {
@@ -2812,7 +2821,7 @@
         },
         "operation": {
           "type": "string",
-          "description": "Operation."
+          "description": "The operation name."
         },
         "description": {
           "type": "string",
@@ -2851,7 +2860,7 @@
         }
       },
       "x-ms-azure-resource": true,
-      "description": "Resource."
+      "description": "Basic set of the resource properties."
     },
     "SubResource": {
       "properties": {

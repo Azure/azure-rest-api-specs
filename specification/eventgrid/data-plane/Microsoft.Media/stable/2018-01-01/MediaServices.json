@@ -1,0 +1,115 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure Media Services events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure Media Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "MediaJobStateChangeEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobStateChange event.",
+      "type": "object",
+      "properties": {
+        "previousState": {
+          "type": "string",
+          "enum": [
+            "Canceled",
+            "Canceling",
+            "Error",
+            "Finished",
+            "Processing",
+            "Queued",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "JobState",
+            "values": [
+              {
+                "value": "Canceled",
+                "description": "The job was canceled. This is a final state for the job."
+              },
+              {
+                "value": "Canceling",
+                "description": "The job is in the process of being canceled. This is a transient state for the job."
+              },
+              {
+                "value": "Error",
+                "description": "The job has encountered an error. This is a final state for the job."
+              },
+              {
+                "value": "Finished",
+                "description": "The job is finished. This is a final state for the job."
+              },
+              {
+                "value": "Processing",
+                "description": "The job is processing. This is a transient state for the job."
+              },
+              {
+                "value": "Queued",
+                "description": "The job is in a queued state, waiting for resources to become available. This is a transient state."
+              },
+              {
+                "value": "Scheduled",
+                "description": "The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states."
+              }
+            ],
+            "modelAsExtensible": true
+          },
+          "description": "The previous state of the Job.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Canceled",
+            "Canceling",
+            "Error",
+            "Finished",
+            "Processing",
+            "Queued",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "JobState",
+            "values": [
+              {
+                "value": "Canceled",
+                "description": "The job was canceled. This is a final state for the job."
+              },
+              {
+                "value": "Canceling",
+                "description": "The job is in the process of being canceled. This is a transient state for the job."
+              },
+              {
+                "value": "Error",
+                "description": "The job has encountered an error. This is a final state for the job."
+              },
+              {
+                "value": "Finished",
+                "description": "The job is finished. This is a final state for the job."
+              },
+              {
+                "value": "Processing",
+                "description": "The job is processing. This is a transient state for the job."
+              },
+              {
+                "value": "Queued",
+                "description": "The job is in a queued state, waiting for resources to become available. This is a transient state."
+              },
+              {
+                "value": "Scheduled",
+                "description": "The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states."
+              }
+            ],
+            "modelAsExtensible": true
+          },
+          "description": "The new state of the Job.",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      }
+    }
+  }
+}

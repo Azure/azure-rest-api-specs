@@ -16,6 +16,194 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors": {
+      "get": {
+        "tags": [
+          "ServerAdvisors"
+        ],
+        "description": "Gets a list of server advisors.",
+        "operationId": "ServerAdvisors_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of server advisors.",
+            "schema": {
+              "$ref": "#/definitions/AdvisorListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "List of server advisors": {
+            "$ref": "./examples/ServerAdvisorList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors/{advisorName}": {
+      "get": {
+        "tags": [
+          "ServerAdvisors"
+        ],
+        "description": "Gets a server advisor.",
+        "operationId": "ServerAdvisors_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Server Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of specified server advisor.",
+            "schema": {
+              "$ref": "#/definitions/Advisor"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Get server advisor": {
+            "$ref": "./examples/ServerAdvisorGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServerAdvisors"
+        ],
+        "description": "Updates a server advisor.",
+        "operationId": "ServerAdvisors_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Server Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested advisor resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Advisor"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified server advisor.",
+            "schema": {
+              "$ref": "#/definitions/Advisor"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Update server advisor": {
+            "$ref": "./examples/ServerAdvisorUpdate.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerAdvisors"
+        ],
+        "description": "Creates or updates a server advisor.",
+        "operationId": "ServerAdvisors_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Server Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested advisor resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Advisor"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified server advisor.",
+            "schema": {
+              "$ref": "#/definitions/Advisor"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update server advisor": {
+            "$ref": "./examples/ServerAdvisorCreateOrUpdate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors": {
       "get": {
         "tags": [
@@ -25,7 +213,7 @@
         "operationId": "DatabaseAdvisors_ListByDatabase",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -34,10 +222,10 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -64,7 +252,7 @@
         "operationId": "DatabaseAdvisors_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -76,10 +264,10 @@
             "$ref": "#/parameters/AdvisorNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -104,7 +292,7 @@
         "operationId": "DatabaseAdvisors_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -125,10 +313,10 @@
             }
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -148,38 +336,6 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
-    },
     "AdvisorProperties": {
       "description": "Properties for a Database, Server or Elastic Pool Advisor.",
       "required": [
@@ -233,7 +389,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -268,30 +424,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription ID that identifies an Azure subscription.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The API version to use for the request.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",

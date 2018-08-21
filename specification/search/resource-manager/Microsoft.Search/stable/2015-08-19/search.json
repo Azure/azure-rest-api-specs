@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -36,12 +34,40 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Search/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.Search provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listAdminKeys": {
       "post": {
         "tags": [
           "AdminKeys"
         ],
         "operationId": "AdminKeys_Get",
+        "x-ms-examples": {
+          "SearchGetAdminKeys": { "$ref": "./examples/SearchGetAdminKeys.json" }
+        },
         "description": "Gets the primary and secondary admin API keys for the specified Azure Search service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -68,12 +94,6 @@
             "description": "The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform any operations on your Search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.",
             "schema": {
               "$ref": "#/definitions/AdminKeyResult"
-            },
-            "examples": {
-              "application/json": {
-                "primaryKey": "<your primary admin API key>",  
-                "secondaryKey": "<your secondary admin API key>"
-              }  
             }
           },
           "default": {
@@ -91,6 +111,9 @@
           "AdminKeys"
         ],
         "operationId": "AdminKeys_Regenerate",
+        "x-ms-examples": {
+          "SearchRegenerateAdminKey": { "$ref": "./examples/SearchRegenerateAdminKey.json" }
+        },
         "description": "Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -132,12 +155,6 @@
             "description": "The specified admin key was successfully regenerated. Both admin keys are included in the response, including the newly-regenerated key.",
             "schema": {
               "$ref": "#/definitions/AdminKeyResult"
-            },
-            "examples": {
-              "application/json": {
-                "primaryKey": "<your primary admin API key>",  
-                "secondaryKey": "<your secondary admin API key>"
-              }  
             }
           },
           "default": {
@@ -155,6 +172,9 @@
           "QueryKeys"
         ],
         "operationId": "QueryKeys_Create",
+        "x-ms-examples": {
+          "SearchCreateQueryKey": { "$ref": "./examples/SearchCreateQueryKey.json" }
+        },
         "description": "Generates a new query key for the specified Search service. You can create up to 50 query keys per service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -188,13 +208,7 @@
             "description": "The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/QueryKey"
-            },
-            "examples": {
-              "application/json": {
-                "name": "Query key for browser-based clients",  
-                "key": "<a query API key>"
-              }
-            }  
+            }
           },
           "default": {
             "description": "HTTP 404 (Not Found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
@@ -214,6 +228,9 @@
           "nextLinkName": null
         },
         "operationId": "QueryKeys_ListBySearchService",
+        "x-ms-examples": {
+          "SearchListQueryKeysBySearchService": { "$ref": "./examples/SearchListQueryKeysBySearchService.json" }
+        },
         "description": "Returns the list of query API keys for the given Azure Search service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -240,21 +257,6 @@
             "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
-            },
-            "examples": {
-              "application/json": {
-                "value": [  
-                    {  
-                      "name": "Query key for browser-based clients",
-                      "key": "<a query API key>"
-                    },
-                    {  
-                      "name": "Query key for mobile clients",
-                      "key": "<another query API key>"
-                    }
-                ],
-                "nextLink": null
-              }
             }
           },
           "default": {
@@ -272,6 +274,9 @@
           "QueryKeys"
         ],
         "operationId": "QueryKeys_Delete",
+        "x-ms-examples": {
+          "SearchDeleteQueryKey": { "$ref": "./examples/SearchDeleteQueryKey.json" }
+        },
         "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -325,6 +330,9 @@
           "Services"
         ],
         "operationId": "Services_CreateOrUpdate",
+        "x-ms-examples": {
+          "SearchCreateOrUpdateService": { "$ref": "./examples/SearchCreateOrUpdateService.json" }
+        },
         "description": "Creates or updates a Search service in the given resource group. If the Search service already exists, all properties will be updated with the given values.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -364,56 +372,12 @@
             "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/SearchService"
-            },
-            "examples": {
-              "application/json": {
-                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here",
-                "name": "your-service-name-here",
-                "location": "westus",
-                "type": "Microsoft.Search/searchServices",
-                "tags": {  
-                    "app-name": "My e-commerce app"
-                },
-                "sku": {  
-                    "name": "standard"
-                },
-                "properties":{  
-                    "replicaCount": 3,
-                    "partitionCount": 1,
-                    "status": "provisioning",
-                    "statusDetails": "",
-                    "hostingMode": "default",
-                    "provisioningState": "provisioning"
-                }
-              }
             }
           },
           "201": {
             "description": "If you requested creation of a free Search service, the service is now provisioned and ready to use, subject to DNS propagation delay. For other SKU types, provisioning happens asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/SearchService"
-            },
-            "examples": {
-              "application/json": {
-                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here",
-                "name": "your-service-name-here",
-                "location": "westus",
-                "type": "Microsoft.Search/searchServices",
-                "tags": {  
-                    "app-name": "My e-commerce app"
-                },
-                "sku": {  
-                    "name": "standard"
-                },
-                "properties":{  
-                    "replicaCount": 3,
-                    "partitionCount": 1,
-                    "status": "provisioning",
-                    "statusDetails": "",
-                    "hostingMode": "default",
-                    "provisioningState": "provisioning"
-                }
-              }
             }
           },
           "default": {
@@ -425,11 +389,71 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Update",
+        "x-ms-examples": {
+          "SearchUpdateService": { "$ref": "./examples/SearchUpdateService.json" }
+        },
+        "description": "Updates an existing Search service in the given resource group.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure Search service to update."
+          },
+          {
+            "name": "service",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            },
+            "description": "The definition of the Search service to update."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            }
+          },
+          "default": {
+            "description": "HTTP 400 (Bad Request): The given service definition is invalid or you attempted to change a property that is immutable; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription or resource group could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Services"
         ],
         "operationId": "Services_Get",
+        "x-ms-examples": {
+          "SearchGetService": { "$ref": "./examples/SearchGetService.json" }
+        },
         "description": "Gets the Search service with the given name in the given resource group.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -456,28 +480,6 @@
             "description": "The Search service definition was successfully retrieved and is in the response. If you are polling for the completion of a provisioning or scale operation, you can check its status via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/SearchService"
-            },
-            "examples": {
-              "application/json": {
-                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here",
-                "name": "your-service-name-here",
-                "location": "westus",
-                "type": "Microsoft.Search/searchServices",
-                "tags": {  
-                    "app-name": "My e-commerce app"
-                },
-                "sku": {  
-                    "name": "standard"
-                },
-                "properties":{  
-                    "replicaCount": 3,
-                    "partitionCount": 1,
-                    "status": "running",
-                    "statusDetails": "",
-                    "hostingMode": "default",
-                    "provisioningState": "succeeded"
-                }
-              }
             }
           },
           "default": {
@@ -493,6 +495,9 @@
           "Services"
         ],
         "operationId": "Services_Delete",
+        "x-ms-examples": {
+          "SearchDeleteService": { "$ref": "./examples/SearchDeleteService.json" }
+        },
         "description": "Deletes a Search service in the given resource group, along with its associated resources.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -542,6 +547,9 @@
           "nextLinkName": null
         },
         "operationId": "Services_ListByResourceGroup",
+        "x-ms-examples": {
+          "SearchListServicesByResourceGroup": { "$ref": "./examples/SearchListServicesByResourceGroup.json" }
+        },
         "description": "Gets a list of all Search services in the given resource group.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -565,52 +573,6 @@
             "description": "The operation succeeded. The response contains the list of all Search service definitions for the given resource group.",
             "schema": {
               "$ref": "#/definitions/SearchServiceListResult"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here",
-                    "name": "your-service-name-here",
-                    "location": "westus",
-                    "type": "Microsoft.Search/searchServices",
-                    "tags": {  
-                        "app-name": "My e-commerce app"
-                    },
-                    "sku": {  
-                        "name": "standard"
-                    },
-                    "properties":{  
-                        "replicaCount": 3,
-                        "partitionCount": 1,
-                        "status": "running",
-                        "statusDetails": "",
-                        "hostingMode": "default",
-                        "provisioningState": "succeeded"
-                    }
-                  },
-                  {
-                    "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-second-service-name-here",
-                    "name": "your-second-service-name-here",
-                    "location": "eastus",
-                    "type": "Microsoft.Search/searchServices",
-                    "tags": {  
-                        "app-name": "My e-commerce app"
-                    },
-                    "sku": {  
-                        "name": "basic"
-                    },
-                    "properties":{  
-                        "replicaCount": 1,
-                        "partitionCount": 1,
-                        "status": "running",
-                        "statusDetails": "",
-                        "hostingMode": "default",
-                        "provisioningState": "succeeded"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -632,6 +594,9 @@
           "url": "https://aka.ms/search-manage"
         },
         "operationId": "Services_CheckNameAvailability",
+        "x-ms-examples": {
+          "SearchCheckNameAvailability": { "$ref": "./examples/SearchCheckNameAvailability.json" }
+        },
         "parameters": [
           {
             "name": "checkNameAvailabilityInput",
@@ -658,13 +623,6 @@
             "description": "The name check completed. The response contains details of whether the name is valid and available. If the name is invalid, the response also contains a message explaining why not.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityOutput"
-            },
-            "examples": {
-              "application/json": {
-                "nameAvailable": false,  
-                "reason": "AlreadyExists",  
-                "message": ""
-              }  
             }
           },
           "default": {
@@ -701,11 +659,7 @@
           }
         }
       },
-      "description": "Input of check name availability API.",
-      "example": {
-        "name": "your-service-name-here",  
-        "type": "searchServices"  
-      }
+      "description": "Input of check name availability API."
     },
     "CheckNameAvailabilityOutput": {
       "type": "object",
@@ -813,35 +767,18 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Search Service, which determines price tier and capacity limits.",
+          "description": "The SKU of the Search Service, which determines price tier and capacity limits. This property is required when creating a new Search Service.",
           "externalDocs": {
             "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
           }
         }
       },
-      "required": [
-        "sku"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Describes an Azure Search service and its current state.",
-      "example": {
-        "location": "westus",
-        "tags":{  
-            "app-name": "My e-commerce app"
-        },
-        "sku":{  
-            "name": "standard"
-        },
-        "properties":{  
-            "replicaCount": 3,
-            "partitionCount": 1,
-            "hostingMode": "default"
-        }
-      }
+      "description": "Describes an Azure Search service and its current state."
     },
     "SearchServiceProperties": {
       "properties": {
@@ -952,7 +889,7 @@
         },
         "location": {
           "type": "string",
-          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth).",
+          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.",
           "externalDocs": {
             "url": "https://aka.ms/search-rp-info"
           },
@@ -967,11 +904,12 @@
             "type": "string"
           },
           "description": "Tags to help categorize the resource in the Azure portal."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
-      "required": [
-        "location"
-      ],
       "description": "Base type for all Azure resources.",
       "x-ms-azure-resource": true
     },
@@ -979,7 +917,8 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Describes a particular API error with an error code and a message."
         }
       },
       "description": "Contains information about an API error.",
@@ -1010,6 +949,90 @@
             }
         },
         "x-ms-external": true
+    },
+    "Operation": {
+      "description": "Describes a REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation. This name is of the form {provider}/{resource}/{operation}.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that describes the operation.",
+          "readOnly": true,
+          "properties": {
+            "provider": {
+              "description": "The friendly name of the resource provider.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "operation": {
+              "description": "The operation type: read, write, delete, listKeys/action, etc.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "resource": {
+              "description": "The resource type on which the operation is performed.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "description": {
+              "description": "The friendly name of the operation.",
+              "readOnly": true,
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "The result of the request to list REST API operations. It contains a list of operations and a URL  to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "description": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of operation list results, if any."
+        }
+      }
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Identity for the resource."
     }
   },
   "parameters": {

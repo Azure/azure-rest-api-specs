@@ -6,15 +6,43 @@ var utils = require('../test/util/utils'),
   path = require('path'),
   fs = require('fs'),
   os = require('os'),
-  exec = require('child_process').exec,
   execSync = require('child_process').execSync,
   oad = require('oad');
 
-  // This map is used to store the mapping between files resolved and stored location
+// This map is used to store the mapping between files resolved and stored location
 var resolvedMapForNewSpecs = {};
 let outputFolder = path.join(os.tmpdir(), "resolved");
 // Used to enable running script outside TravisCI for debugging
-let isRunningInTraviCI = process.env.MODE === 'BreakingChange' && process.env.PR_ONLY === 'true';
+let isRunningInTravisCI = process.env.TRAVIS === 'true';
+
+const headerText = `
+| | Rule | Location | Message |
+|-|------|----------|---------|
+`;
+
+function iconFor(type) {
+  if (type === 'Error') {
+    return ':x:';
+  } else if (type === 'Warning') {
+    return ':warning:';
+  } else if (type === 'Info') {
+    return ':speech_balloon:';
+  } else {
+    return '';
+  }
+}
+
+function shortName(filePath) {
+  return `${path.basename(path.dirname(filePath))}/&#8203;<strong>${path.basename(filePath)}</strong>`;
+}
+
+function tableLine(filePath, diff) {
+  return `|${iconFor(diff['type'])}|[${diff['type']} ${diff['id']} - ${diff['code']}](https://github.com/Azure/openapi-diff/blob/master/docs/rules/${diff['id']}.md)|[${shortName(filePath)}](${blobHref(filePath)} "${filePath}")|${diff['message']}|\n`;
+}
+
+function blobHref(file) {
+  return `https://github.com/${process.env.TRAVIS_PULL_REQUEST_SLUG}/blob/${process.env.TRAVIS_PULL_REQUEST_SHA}/${file}`;
+}
 
 /**
  * Compares old and new specifications for breaking change detection.
@@ -23,13 +51,13 @@ let isRunningInTraviCI = process.env.MODE === 'BreakingChange' && process.env.PR
  *
  * @param {string} newSpec Path to the new swagger specification file.
  */
-function runOad(oldSpec, newSpec) {
+async function runOad(oldSpec, newSpec) {
   if (oldSpec === null || oldSpec === undefined || typeof oldSpec.valueOf() !== 'string' || !oldSpec.trim().length) {
-    return Promise.reject(new Error('oldSpec is a required parameter of type "string" and it cannot be an empty string.'));
+    throw new Error('oldSpec is a required parameter of type "string" and it cannot be an empty string.');
   }
 
   if (newSpec === null || newSpec === undefined || typeof newSpec.valueOf() !== 'string' || !newSpec.trim().length) {
-    return Promise.reject(new Error('newSpec is a required parameter of type "string" and it cannot be an empty string.'));
+    throw new Error('newSpec is a required parameter of type "string" and it cannot be an empty string.');
   }
 
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
@@ -37,16 +65,14 @@ function runOad(oldSpec, newSpec) {
   console.log(`New Spec: "${newSpec}"`);
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
-  return oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true }).then((result) => {
-    console.log(result);
-    if (result !== undefined && typeof result.valueOf() === 'string' && result.indexOf(`"type": "Error"`) > -1) {
-      console.log(`There are potential breaking changes in this PR. Please review before moving forward. Thanks!`);
-      process.exitCode = 1;
-    }
-    return Promise.resolve();
-  }).catch(err => {
-    console.log(err);
-  });
+  const result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
+  console.log(result);
+
+  if (!result) {
+    return;
+  }
+
+  return JSON.parse(result);
 }
 
 /**
@@ -71,7 +97,7 @@ function processViaAutoRest(swaggerPath) {
     let result = execSync(`${autoRestCmd}`, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
     resolvedMapForNewSpecs[outputFileNameWithExt] = path.join(outputFolder, outputFileNameWithExt);
   } catch (err) {
-    // Do not update map in case of errors
+    // Do not update map in case of errors.
   }
 
   return Promise.resolve();
@@ -80,45 +106,127 @@ function processViaAutoRest(swaggerPath) {
 //main function
 async function runScript() {
   // See whether script is in Travis CI context
-  console.log(`isRunningInTraviCI: ${isRunningInTraviCI}`);
+  console.log(`isRunningInTravisCI: ${isRunningInTravisCI}`);
 
   // Create directory to store the processed & resolved swaggers
   if (!fs.existsSync(outputFolder)) {
     fs.mkdirSync(outputFolder);
   }
 
+  let targetBranch = utils.getTargetBranch();
   let swaggersToProcess = utils.getFilesChangedInPR();
 
-  // For debugging in your repo, please uncomment following section and update swaggersToProcess array for the desired swaggers
-  // if (!isRunningInTraviCI) {
-  //   swaggersToProcess = [ '/Users/vishrut/git-repos/azure-rest-api-specs/specification/storage/resource-manager/Microsoft.Storage/2017-06-01/storage.json',
-  //                         '/Users/vishrut/git-repos/azure-rest-api-specs/specification/network/resource-manager/Microsoft.Network/2017-06-01/applicationGateway.json' ];
-  // }
+  console.log('Processing swaggers:');
   console.log(swaggersToProcess);
 
   for (const swagger of swaggersToProcess) {
     await processViaAutoRest(swagger);
   }
 
-  if (isRunningInTraviCI) {
-    utils.checkoutTargetBranch();
+  let newSwaggers = [];
+  if (isRunningInTravisCI && swaggersToProcess.length > 0) {
+    newSwaggers = await utils.doOnBranch(utils.getTargetBranch(), async () => {
+      return swaggersToProcess.filter(s => !fs.existsSync(s))
+    });
   }
 
   console.log(`Resolved map for the new specification is:`);
   console.dir(resolvedMapForNewSpecs);
 
+  let errors = 0, warnings = 0;
+  const diffFiles = {};
+  const newFiles = [];
+
   for (const swagger of swaggersToProcess) {
     // If file does not exists in the previous commits then we ignore it as it's new file
-    if (!fs.existsSync(swagger)) {
+    if (newSwaggers.includes(swagger)) {
       console.log(`File: "${swagger}" looks to be newly added in this PR.`);
+      newFiles.push(swagger);
       continue;
     }
 
     let outputFileNameWithExt = path.basename(swagger);
     console.log(outputFileNameWithExt);
     if (resolvedMapForNewSpecs[outputFileNameWithExt]) {
-      await runOad(swagger, resolvedMapForNewSpecs[outputFileNameWithExt]);
+      const diff = await runOad(swagger, resolvedMapForNewSpecs[outputFileNameWithExt]);
+      if (diff) {
+        if (!diffFiles[swagger]) {
+          diffFiles[swagger] = [];
+        }
+        diffFiles[swagger].push(diff);
+        if (diff['type'] === 'Error') {
+          if (errors === 0) {
+            console.log(`There are potential breaking changes in this PR. Please review before moving forward. Thanks!`);
+            process.exitCode = 1;
+          }
+          errors += 1;
+        } else if (diff['type'] === 'Warning') {
+          warnings += 1;
+        }
+      }
     }
+  }
+
+  if (isRunningInTravisCI) {
+    let summary = '';
+    if (errors > 0) {
+      summary += '**There are potential breaking changes in this PR. Please review before moving forward. Thanks!**\n\n';
+    }
+    summary += `Compared to the target branch (**${targetBranch}**), this pull request introduces:\n\n`;
+    summary += `&nbsp;&nbsp;&nbsp;${errors > 0 ? iconFor('Error') : ':white_check_mark:'}&nbsp;&nbsp;&nbsp;**${errors}** new error${errors !== 1 ? 's' : ''}\n\n`;
+    summary += `&nbsp;&nbsp;&nbsp;${warnings > 0 ? iconFor('Warning') : ':white_check_mark:'}&nbsp;&nbsp;&nbsp;**${warnings}** new warning${warnings !== 1 ? 's' : ''}\n\n`;
+
+    let message = '';
+    if (newFiles.length > 0) {
+      message += '### The following files look to be newly added in this PR:\n';
+      newFiles.sort();
+      for (const swagger of newFiles) {
+        message += `* [${swagger}](${blobHref(swagger)})\n`;
+      }
+      message += '<br><br>\n';
+    }
+
+    const diffFileNames = Object.keys(diffFiles);
+    if (diffFileNames.length > 0) {
+      message += '### OpenAPI diff results\n';
+      message += headerText;
+
+      diffFileNames.sort();
+      for (const swagger of diffFileNames) {
+        const diffs = diffFiles[swagger];
+        diffs.sort((a, b) => {
+          if (a.type === b.type) {
+            return a.id.localeCompare(b.id);
+          } else if (a.type === "Error") {
+            return 1;
+          } else if (b.type === "Error") {
+            return -1;
+          } else if (a.type === "Warning") {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+
+        for (const diff of diffs) {
+          message += tableLine(swagger, diff);
+        }
+      }
+    } else {
+      message += '**There were no files containing new errors or warnings.**\n';
+    }
+
+    message += '\n<br><br>\nThanks for using breaking change tool to review.\nIf you encounter any issue(s), please open issue(s) at https://github.com/Azure/openapi-diff/issues.';
+
+    const output = {
+      title: `${errors === 0 ? 'No' : errors} potential breaking change${errors !== 1 ? 's' : ''}`,
+      summary,
+      text: message
+    };
+
+    console.log('---output');
+    console.log(JSON.stringify(output));
+    console.log('---');
   }
 }
 

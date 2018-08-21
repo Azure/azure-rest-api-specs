@@ -148,30 +148,6 @@
             }
           },
           {
-            "name": "skipDnsRegistration",
-            "in": "query",
-            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\n only used for app creation.",
-            "type": "boolean"
-          },
-          {
-            "name": "skipCustomDomainVerification",
-            "in": "query",
-            "description": "If true, custom (non *.azurewebsites.net) domains associated with web app are not verified.",
-            "type": "boolean"
-          },
-          {
-            "name": "forceDnsRegistration",
-            "in": "query",
-            "description": "If true, web app hostname is force registered with DNS.",
-            "type": "boolean"
-          },
-          {
-            "name": "ttlInSeconds",
-            "in": "query",
-            "description": "Time to live in seconds for web app's default domain name.",
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -225,12 +201,6 @@
             "type": "boolean"
           },
           {
-            "name": "skipDnsRegistration",
-            "in": "query",
-            "description": "If true, DNS registration is skipped.",
-            "type": "boolean"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -275,30 +245,6 @@
             "schema": {
               "$ref": "#/definitions/SitePatchResource"
             }
-          },
-          {
-            "name": "skipDnsRegistration",
-            "in": "query",
-            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\n only used for app creation.",
-            "type": "boolean"
-          },
-          {
-            "name": "skipCustomDomainVerification",
-            "in": "query",
-            "description": "If true, custom (non *.azurewebsites.net) domains associated with web app are not verified.",
-            "type": "boolean"
-          },
-          {
-            "name": "forceDnsRegistration",
-            "in": "query",
-            "description": "If true, web app hostname is force registered with DNS.",
-            "type": "boolean"
-          },
-          {
-            "name": "ttlInSeconds",
-            "in": "query",
-            "description": "Time to live in seconds for web app's default domain name.",
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2262,7 +2208,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IdentifierCollection"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/IdentifierCollection"
             }
           }
         },
@@ -2308,7 +2254,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -2344,7 +2290,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           },
           {
@@ -2358,7 +2304,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -2435,7 +2381,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           },
           {
@@ -2449,7 +2395,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -8252,7 +8198,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IdentifierCollection"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/IdentifierCollection"
             }
           }
         },
@@ -8305,7 +8251,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -8341,7 +8287,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           },
           {
@@ -8362,7 +8308,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -8446,7 +8392,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           },
           {
@@ -8467,7 +8413,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Identifier"
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/Identifier"
             }
           }
         }
@@ -12374,10 +12320,23 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
+          },
+          "201": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+
           }
         }
       },
@@ -12424,12 +12383,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
@@ -13768,10 +13733,23 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
+          },
+          "201": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
+            "description": "Create or update source control for web app still in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+
           }
         }
       },
@@ -13811,12 +13789,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
@@ -15059,7 +15043,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15579,7 +15564,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15715,7 +15701,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15879,7 +15866,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15894,47 +15882,6 @@
         "azureBlobStorage": {
           "$ref": "#/definitions/AzureBlobStorageHttpLogsConfig",
           "description": "Http logs to azure blob storage configuration."
-        }
-      }
-    },
-    "Identifier": {
-      "description": "A domain specific resource identifier.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Identifier resource specific properties",
-          "properties": {
-            "id": {
-              "description": "String representation of the identity.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "IdentifierCollection": {
-      "description": "Collection of identifiers.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Identifier"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string"
         }
       }
     },
@@ -16250,7 +16197,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -16593,7 +16541,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -16675,7 +16624,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -16768,7 +16718,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -16828,7 +16779,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17207,7 +17159,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17256,7 +17209,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17387,7 +17341,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17852,7 +17807,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -17894,7 +17850,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -18030,7 +17987,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -18200,7 +18158,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -18220,7 +18179,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -18301,7 +18261,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     }

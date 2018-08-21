@@ -26,6 +26,22 @@
    },
    "x-ms-azure-resource": true
   },
+  "AzureEntityResource": {
+    "x-ms-client-name": "AzureEntityResource",
+    "description": "The resource model definition for a Azure Resource Manager resource with an etag.",
+    "properties": {
+      "etag": {
+        "type": "string",
+        "readOnly": true,
+        "description": "Resource Etag."
+      }
+    },
+    "allOf": [
+      {
+        "$ref": "#/definitions/Resource"
+      }
+    ]
+  },
   "TrackedResource": {
    "description": "The resource model definition for a ARM tracked top level resource",
    "properties": {
@@ -279,7 +295,8 @@
    "description": "The name of the resource group. The name is case insensitive.",
    "pattern": "^[-\\w\\._\\(\\)]+$",
    "minLength": 1,
-   "maxLength": 90
+   "maxLength": 90,
+   "x-ms-parameter-location": "method"
   }
  }
 }
