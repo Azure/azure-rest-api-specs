@@ -148,6 +148,52 @@
         }
       }
     },
+    "/{tenantID}/deletedApplications/{objectId}/restore": {
+      "post": {
+        "tags": [
+          "deletedApplications"
+        ],
+        "operationId": "DeletedApplications_Restore",
+        "description": "Restores the deleted application in the directory.",
+        "responses": {
+          "200": {
+            "description": "The application was restored successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/deletedApplications": {
+      "get": {
+        "tags": [
+          "deletedApplications"
+        ],
+        "operationId": "DeletedApplications_Get",
+        "description": "Gets a list of deleted applications in the directory.",
+        "responses": {
+          "200": {
+            "description": "The applications were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/applications/{applicationObjectId}": {
       "delete": {
         "tags": [
