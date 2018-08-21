@@ -1,7 +1,7 @@
 {
   "parameters" : {
-    "api-version": "2018-07-01",
-    "subscriptionId" : "subid",
+    "api-version": "2018-08-01",
+    "subscriptionId" : "subId",
     "resourceGroupName" : "rg1",
     "virtualNetworkName" : "test-vnet",
     "parameters": {
@@ -15,7 +15,15 @@
           {
             "name": "test-1",
             "properties": {
-              "addressPrefix": "10.0.0.0/24"
+              "addressPrefix": "10.0.0.0/24",
+              "delegations": [
+                {
+                  "name": "myDelegation",
+                  "properties": {
+                    "serviceName": "Microsoft.Provider/resourceType"
+                  }
+                }
+              ]
             }
           }
         ]
@@ -26,7 +34,7 @@
     "200" : {
       "body" : {
         "name" : "test-vnet",
-        "id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
+        "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "type" : "Microsoft.Network/virtualNetworks",
         "location" : "westus",
         "properties" : {
@@ -38,11 +46,23 @@
           },
           "subnets": [
             {
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1",
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1",
               "name": "test-1",
               "properties": {
                 "addressPrefix": "10.0.0.0/24",
-                "provisioningState": "Succeeded"
+                "provisioningState": "Succeeded",
+                "delegations": [
+                  {
+                    "name": "myDelegation",
+                    "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1/delegations/myDelegation",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "serviceName": "Microsoft.Provider/resourceType",
+                      "actions": []
+                    }
+                  }
+                ],
+                "purpose": ""
               }
             }
           ],
@@ -53,7 +73,7 @@
     "201" : {
       "body" : {
         "name" : "test-vnet",
-        "id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
+        "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "type" : "Microsoft.Network/virtualNetworks",
         "location" : "westus",
         "properties" : {
@@ -65,11 +85,23 @@
           },
           "subnets": [
             {
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1",
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1",
               "name": "test-1",
               "properties": {
                 "addressPrefix": "10.0.0.0/24",
-                "provisioningState": "Succeeded"
+                "provisioningState": "Succeeded",
+                "delegations": [
+                  {
+                    "name": "myDelegation",
+                    "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1/delegations/myDelegation",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "serviceName": "Microsoft.Provider/resourceType",
+                      "actions": []
+                    }
+                  }
+                ],
+                "purpose": ""
               }
             }
           ],

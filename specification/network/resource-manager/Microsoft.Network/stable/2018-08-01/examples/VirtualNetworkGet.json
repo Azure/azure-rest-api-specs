@@ -1,7 +1,7 @@
 {
   "parameters" : {
-    "api-version": "2018-07-01",
-    "subscriptionId" : "subid",
+    "api-version": "2018-08-01",
+    "subscriptionId" : "subId",
     "resourceGroupName" : "rg1",
     "virtualNetworkName" : "test-vnet"
   },
@@ -9,7 +9,7 @@
     "200" : {
       "body" : {
         "name" : "test-vnet",
-        "id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
+        "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "type" : "Microsoft.Network/virtualNetworks",
         "location" : "westus",
         "properties" : {
@@ -19,17 +19,30 @@
               "10.0.0.0/16"
             ]
           },
-          "subnets" : [{
+          "subnets" : [
+            {
               "name" : "subnet1",
-              "id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1",
+              "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1",
               "properties" : {
                 "provisioningState" : "Succeeded",
-
                 "addressPrefix" : "10.0.1.0/24",
-                "ipConfigurations" : [{
-                    "id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe"
+                "ipConfigurations" : [
+                  {
+                    "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe"
                   }
-                ]
+                ],
+                "delegations": [
+                  {
+                    "name": "myDelegation",
+                    "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1/delegations/myDelegation",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "serviceName": "Microsoft.Provider/resourceType",
+                      "actions": []
+                    }
+                  }
+                ],
+                "purpose": ""
               }
             }
           ],
