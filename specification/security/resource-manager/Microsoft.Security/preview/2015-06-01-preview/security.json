@@ -1441,7 +1441,7 @@
         "/subscriptions/{subscriptionId}/providers/Microsoft.Security/northSouthHardenings": {
             "get": {
                 "x-ms-examples": {
-                    "Get the north-south hardening resources for a subscription": {
+                    "List all north-south hardening resources for a subscription": {
                         "$ref": "./examples/NorthSouthHardenings/ListAllNorthSouthHardenings_example.json"
                     }
                 },
@@ -1480,7 +1480,7 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/northSouthHardenings": {
             "get": {
                 "x-ms-examples": {
-                    "Get the north-south hardening resources for a subscription": {
+                    "List north-south hardening resources for a resource group": {
                         "$ref": "./examples/NorthSouthHardenings/ListNorthSouthHardenings_example.json"
                     }
                 },
@@ -2923,33 +2923,39 @@
                 }
             ]
         },
-    "NorthSouthHardeningsPolicySummary": {
-      "description": "North-south hardening policy summary",
+        "NorthSouthHardeningsPolicySummary": {
+            "description": "North-south hardening policy summary",
             "properties": {
                 "id": {
+                    "description": "The north-south policy id",
                     "type": "string"
                 },
                 "active": {
+                    "description": "The activation satte of the north-south policy",
                     "type": "boolean"
                 },
                 "rulesCount": {
+                    "description": "The amount of policy rules",
                     "type": "number"
                 }
-      }
-    },
+            }
+        },
         "NorthSouthHardeningsProperties": {
             "description": "North-south hardening resource",
             "properties": {
                 "protectedResourceId": {
+                    "description": "The north south protected resource id",
                     "type": "string"
                 },
                 "policies": {
+                    "description": "A list of policies summaries for the north south resource",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/NorthSouthHardeningsPolicySummary"
                     }          
                 },
                 "alertsCountHistory": {
+                    "description": "A list of alerts count for the north south resource",
                     "type": "array",
                     "items": {
                         "type": "number"
@@ -2989,6 +2995,7 @@
             }
         },
         "NorthSouthProtocol": {
+            "description": "The north south protocol",
             "type": "string",
             "enum": [
                 "TCP",
@@ -3003,9 +3010,11 @@
             "description": "North-south hardening traffic attempt",
             "properties": {
                 "sourceAddress": {
+                    "description": "The traffic source address",
                     "type": "string"
                 },
                 "attempts": {
+                    "description": "The traffic attempts count",
                     "type": "number"
                 }
             }
@@ -3014,16 +3023,20 @@
             "description": "A north-south hardening alert",
             "properties": {
                 "date": {
+                    "description": "The date of the alert",
                     "type": "string",
                     "format": "date-time"
                 },
                 "destinationPort": {
+                    "description": "The alert destination port",
                     "$ref": "#/definitions/PortNumber"
                 },
                 "protocol": {
+                    "description": "The alert protocol",
                     "$ref": "#/definitions/NorthSouthProtocol"
                 },
                 "traffic": {
+                    "description": "The list of traffics that generated the alert",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/NorthSouthHardeningsTrafficItem"
@@ -3038,10 +3051,6 @@
                     "description": "Properties of the north-south hardening alert",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/NorthSouthHardeningsAlertProperties"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The name of the north-south hardening alert"
                 }
             },
             "allOf": [
@@ -3070,9 +3079,11 @@
             "description": "A north-south hardening policy rule",
             "properties": {
                 "name": {
+                    "description": "A policy rule name",
                     "type": "string"
                 },
                 "access": {
+                    "description": "A policy rule access",
                     "type": "string",
                     "enum": [
                         "Allow",
@@ -3084,15 +3095,18 @@
                     }
                 },
                 "destinationPort": {
+                    "description": "A policy rule detination port",
                     "$ref": "#/definitions/PortNumber"
                 },
                 "protocols": {
+                    "description": "A policy rule protocol",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/NorthSouthHardeningsTrafficItem"
                     }
                 },
                 "sourceAddresses": {
+                    "description": "A policy rule source address",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -3104,15 +3118,18 @@
             "description": "A north-south hardening policy",
             "properties": {
                 "active": {
+                    "description": "A policy activation state",
                     "type": "boolean",
                     "readOnly": true
                 },
                 "createdOn": {
+                    "description": "The date in which the policy created",
                     "type": "string",
-          "format": "date-time",
+                    "format": "date-time",
                     "readOnly": true
                 },
                 "rules": {
+                    "description": "A list of policy rules",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/NorthSouthHardeningsPolicyRule"
@@ -3127,10 +3144,6 @@
                     "description": "Properties of the north-south hardening policy",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/NorthSouthHardeningsPolicyProperties"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The name of the north-south hardening policy"
                 }
             },
             "allOf": [
