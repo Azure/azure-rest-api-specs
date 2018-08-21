@@ -566,6 +566,35 @@
               "category": {
                   "description": "The name of the metric category that the metric belongs to. A metric can only belong to a single category.",
                   "type": "string"
+              },
+              "dimensions": {
+                  "description": "The dimensions of the metrics.",
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/Dimension"
+                  }
+              }
+          }
+      },
+      "Dimension": {
+          "description": "Specifications of the Dimension of metrics.",
+          "type": "object",
+          "properties": {
+              "name": {
+                  "description": "The public facing name of the dimension.",
+                  "type": "string"
+              },
+              "displayName": {
+                  "description": "Localized friendly display name of the dimension.",
+                  "type": "string"
+              },
+              "internalName": {
+                  "description": "Name of the dimension as it appears in MDM.",
+                  "type": "string"
+              },
+              "toBeExportedForShoebox": {
+                  "description": "A Boolean flag indicating whether this dimension should be included for the shoebox export scenario.",
+                  "type": "boolean"
               }
           }
       },
@@ -800,6 +829,10 @@
                   "description": "The publicly accessibly port of the SignalR service which is designed for customer server side usage.",
                   "type": "integer",
                   "readOnly": true
+              },
+              "version": {
+                  "description": "Version of the SignalR resource. Probably you need the same or higher version of client SDKs.",
+                  "type": "string"
               }
           }
       },
@@ -823,6 +856,14 @@
               },
               "secondaryKey": {
                   "description": "The secondary access key.",
+                  "type": "string"
+              },
+              "primaryConnectionString": {
+                  "description": "SignalR connection string constructed via the primaryKey",
+                  "type": "string"
+              },
+              "secondaryConnectionString": {
+                  "description": "SignalR connection string constructed via the secondaryKey",
                   "type": "string"
               }
           }
