@@ -1905,7 +1905,6 @@
             "description": "Describes an Azure resource.",
             "properties": {
                 "id": {
-                    "readOnly": true,
                     "type": "string",
                     "description": "Resource Id"
                 },
@@ -1927,10 +1926,6 @@
             "properties": {
                 "id": {
                     "description": "Sub resource ID",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "The name of the nested resource",
                     "type": "string"
                 }
             },
@@ -3052,6 +3047,10 @@
                     "description": "Properties of the north-south hardening alert",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/NorthSouthHardeningsAlertProperties"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the north-south hardening alert"
                 }
             },
             "allOf": [
@@ -3137,6 +3136,10 @@
                     "description": "Properties of the north-south hardening policy",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/NorthSouthHardeningsPolicyProperties"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the north-south hardening policy"
                 }
             },
             "allOf": [
