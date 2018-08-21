@@ -17213,6 +17213,10 @@
             "storageAccountUrl"
           ],
           "properties": {
+            "backupName": {
+              "description": "Name of the backup.",
+              "type": "string"
+            },
             "enabled": {
               "description": "True if the backup schedule is enabled (must be included in that case), false if the backup schedule should be disabled.",
               "type": "boolean"
@@ -17460,6 +17464,10 @@
             "name": "PublishingProfileFormat",
             "modelAsString": true
           }
+        },
+        "includeDisasterRecoveryEndpoints": {
+          "description": "Include the DisasterRecover endpoint if true",
+          "type": "boolean"
         }
       }
     },

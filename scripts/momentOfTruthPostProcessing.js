@@ -166,12 +166,12 @@ function getFileSummaryTable(issues, prNumber) {
 
     issues.sort((a, b) => {
         if (!a.filePath) {
-            a.filePath = getFile(a.jsonref);
+            a.filePath = getFile(a.jsonref) || "";
             a.lineNumber = getLine(a.jsonref) || "1";
         }
 
         if (!b.filePath) {
-            b.filePath = getFile(b.jsonref);
+            b.filePath = getFile(b.jsonref) || "";
             b.lineNumber = getLine(b.jsonref) || "1";
         }
 
@@ -186,6 +186,11 @@ function getFileSummaryTable(issues, prNumber) {
     });
 
     issues.forEach(function (issue, count) {
+        if (!issue.filePath) {
+            issue.filePath = getFile(issue.jsonref) || "";
+            issue.lineNumber = getLine(issue.jsonref) || "1";
+        }
+
         potentialNewIssues += potentialNewWarningErrorSummary(
             count + 1,
             issue.id,

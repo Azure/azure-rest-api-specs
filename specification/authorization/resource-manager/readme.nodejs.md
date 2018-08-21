@@ -7,7 +7,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-authorization
-  package-version: 4.1.0
+  package-version: 5.0.1
   output-folder: $(node-sdks-folder)/lib/services/authorizationManagement
   payload-flattening-threshold: 1
   generate-license-txt: true
