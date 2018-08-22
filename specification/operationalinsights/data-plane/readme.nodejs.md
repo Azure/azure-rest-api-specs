@@ -6,7 +6,7 @@ Please also specify `--node-sdks-folder=<path to the root directory of your azur
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-loganalytics
-  package-version: 0.1.0
+  package-version: 0.1.1
   output-folder: $(node-sdks-folder)/lib/services/loganalytics
   override-client-name: LogAnalyticsClient
   generate-license-txt: true
