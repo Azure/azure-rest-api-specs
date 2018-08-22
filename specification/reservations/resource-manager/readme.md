@@ -90,7 +90,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.reservations
   package-name: azure-mgmt-reservations
-  package-version: 0.2.0
+  package-version: 0.2.2
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
