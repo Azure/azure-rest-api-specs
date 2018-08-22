@@ -54,7 +54,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}":
+    {
       "get": {
         "tags": [
           "AttestationService"
@@ -182,7 +183,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}/metadata/signingKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}/metadata/signingKeys":
+    {
       "get": {
         "tags": [
           "AttestationSigningKeys"
@@ -288,7 +290,8 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The id of the ARM resource, e.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}\""
+          "description":
+            "The id of the ARM resource, e.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}\""
         },
         "name": {
           "readOnly": true,
@@ -299,13 +302,13 @@
           "readOnly": true,
           "type": "string",
           "description": "Microsoft.AzureAttestation/service"
-        }
-		"properties":{
-		  "type": "object",
+        },
+        "properties": {
+          "type": "object",
           "$ref": "#/definitions/StatusResult",
           "description": "Describes Attestation service status.",
           "x-ms-client-flatten": true
-		}
+        }
       }
     },
     "StatusResult": {
@@ -325,7 +328,8 @@
         },
         "cek": {
           "type": "string",
-          "description": "This key is used by administrators to encrypt data for sending sensitive configuration to the attestation enclave"
+          "description":
+            "This key is used by administrators to encrypt data for sending sensitive configuration to the attestation enclave"
         },
         "cskMap": {
           "type": "array",
@@ -420,7 +424,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials that uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description":
+        "Subscription credentials that uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
