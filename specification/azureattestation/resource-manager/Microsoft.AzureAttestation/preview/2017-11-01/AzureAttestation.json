@@ -69,6 +69,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -81,9 +84,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -113,6 +113,12 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "serviceName",
             "in": "path",
@@ -158,6 +164,12 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "serviceName",
             "in": "path",
@@ -332,7 +344,7 @@
             "This key is used by administrators to encrypt data for sending sensitive configuration to the attestation enclave"
         },
         "cskMap": {
-          "type": "array",
+          "type": "string",
           "description": "These keys are used by administrators to updates changes to the attestation service instance"
         }
       }
@@ -341,9 +353,6 @@
       "type": "object",
       "title": "Error",
       "description": "Error description and code explaining why an operation failed.",
-      "required": [
-        "properties"
-      ],
       "properties": {
         "error": {
           "type": "object",
