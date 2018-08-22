@@ -194,6 +194,40 @@
         }
       }
     },
+    "/{tenantID}/deletedApplications/{applicationObjectId}": {
+      "delete": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_HardDelete",
+        "description": "Hard-delete an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
     "/{tenantID}/applications/{applicationObjectId}": {
       "delete": {
         "tags": [
