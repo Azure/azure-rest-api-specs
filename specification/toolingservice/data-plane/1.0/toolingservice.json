@@ -1,0 +1,925 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Tooling Service Client",
+    "description": "Client that can be used to access Tooling services to run linter, static and api validations.",
+    "version": "1.0"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "<TBD>",
+  "basePath": "/api/",
+  "schemes": [
+    "https", "http"
+  ],
+  "paths": {
+    "/tools/lint": {
+      "post": {
+        "tags": [
+          "Linter"
+        ],
+        "operationId": "Tools_Linter",
+        "description": "Get Linter Result",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Repository"
+          },
+          {
+            "$ref": "#/parameters/Branch"
+          },
+          {
+            "$ref": "#/parameters/ConfigPath"
+          },
+          {
+            "$ref": "#/parameters/ApiTag"
+          },
+          {
+            "$ref": "#/parameters/CommitHash"
+          },
+          {
+            "$ref": "#/parameters/ResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/StartDate"
+          },
+          {
+            "$ref": "#/parameters/EndDate"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/Files"
+          },
+          {
+            "$ref": "#/parameters/GitHubToken"
+          },
+          {
+            "$ref": "#/parameters/Mode"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          },
+          {
+            "$ref": "#/parameters/Env"
+          }          
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MissingParameters",
+              "description": "Missing Parameters"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LinterValidationResult",
+              "description": "Linter Result"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LinterValidationResult",
+              "description": "Linter Result"
+            }
+          }
+        }
+      }
+    },
+    "/tools/validation/semantic": {
+      "post": {
+        "tags": [
+          "semantic"
+        ],
+        "operationId": "Tools_Semantic",
+        "description": "Get Semantic validation result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Repository"
+          },
+          {
+            "$ref": "#/parameters/Branch"
+          },
+          {
+            "$ref": "#/parameters/ConfigPath"
+          },
+          {
+            "$ref": "#/parameters/ApiTag"
+          },
+          {
+            "$ref": "#/parameters/CommitHash"
+          },
+          {
+            "$ref": "#/parameters/ResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/StartDate"
+          },
+          {
+            "$ref": "#/parameters/EndDate"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/Files"
+          },
+          {
+            "$ref": "#/parameters/GitHubToken"
+          },
+          {
+            "$ref": "#/parameters/Mode"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          },
+          {
+            "$ref": "#/parameters/Env"
+          }          
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MissingParametersResult",
+              "description": "Missing Parameters"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SemanticValidationResult",
+              "description": "Semantic Result"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SemanticValidationResult",
+              "description": "Semantic Result"
+            }
+          }
+        }
+      }
+    },
+    "/tools/validation/model": {
+      "post": {
+        "tags": [
+          "model"
+        ],
+        "operationId": "Tools_Model",
+        "description": "Get Model validation result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Repository"
+          },
+          {
+            "$ref": "#/parameters/Branch"
+          },
+          {
+            "$ref": "#/parameters/ConfigPath"
+          },
+          {
+            "$ref": "#/parameters/ApiTag"
+          },
+          {
+            "$ref": "#/parameters/CommitHash"
+          },
+          {
+            "$ref": "#/parameters/ResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/StartDate"
+          },
+          {
+            "$ref": "#/parameters/EndDate"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/Files"
+          },
+          {
+            "$ref": "#/parameters/GitHubToken"
+          },
+          {
+            "$ref": "#/parameters/Mode"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          },
+          {
+            "$ref": "#/parameters/Env"
+          }          
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MissingParametersResult",
+              "description": "Missing Parameters"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ModelValidationResult",
+              "description": "Semantic Result"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ModelValidationResult",
+              "description": "Semantic Result"
+            }
+          }
+        }
+    },
+    "/tools/apiValidate": {
+      "post": {
+        "tags": [
+          "semantic"
+        ],
+        "operationId": "Tools_ApiValidate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Repository"
+          },
+          {
+            "$ref": "#/parameters/Branch"
+          },
+          {
+            "$ref": "#/parameters/ConfigPath"
+          },
+          {
+            "$ref": "#/parameters/ApiTag"
+          },
+          {
+            "$ref": "#/parameters/CommitHash"
+          },
+          {
+            "$ref": "#/parameters/ResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/StartDate"
+          },
+          {
+            "$ref": "#/parameters/EndDate"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/Files"
+          },
+          {
+            "$ref": "#/parameters/GitHubToken"
+          },
+          {
+            "$ref": "#/parameters/Mode"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          },
+          {
+            "$ref": "#/parameters/Env"
+          }          
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MissingParametersResult",
+              "description": "Missing Parameters"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "properties": {
+                "validationId": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiSpecsValidation",
+              "description": "Semantic Result"
+            }
+          }
+        }
+      }
+
+    },
+    "/tools/apiValidate/result": {
+      "get": {
+        "operationId": "Tools_ApiValidateResult",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Repository"
+          },
+          {
+            "$ref": "#/parameters/Branch"
+          },
+          {
+            "$ref": "#/parameters/ConfigPath"
+          },
+          {
+            "$ref": "#/parameters/ApiTag"
+          },
+          {
+            "$ref": "#/parameters/CommitHash"
+          },
+          {
+            "$ref": "#/parameters/ResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/StartDate"
+          },
+          {
+            "$ref": "#/parameters/EndDate"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/Files"
+          },
+          {
+            "$ref": "#/parameters/GitHubToken"
+          },
+          {
+            "$ref": "#/parameters/Mode"
+          },
+          {
+            "$ref": "#/parameters/ValidationId"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          },
+          {
+            "$ref": "#/parameters/Env"
+          }          
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MissingParametersResult",
+              "description": "Missing Parameters"
+            }
+          },
+          "404": {
+            "description": "",            
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiSpecsValidation",
+              "description": "Semantic Result"
+            }
+          }
+        }
+      }
+    },
+    "/tools/apiValidate/summary": {
+      "get": {
+        "operationId": "Tools_ApiValidateSummary",
+        "parameters": [
+          {
+            "name": "query",
+            "type": "object",
+            "properties": {
+              "validationId": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MissingParametersResult",
+              "description": "Missing Parameters"
+            }
+          },
+          "404": {
+            "description": "",            
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiSpecsValidation",
+              "description": "Semantic Result"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BaseValidationError": {
+      "type": "object",
+      "properties": {
+        "severity": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Error",
+            "Warning",
+            "Information",
+            "Verbose"
+          ]
+        },
+        "errorCode":{
+          "type": "string"
+        },
+        "errorDetails": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "response",
+            "request",
+            "global"
+          ]
+        }
+      }
+    },
+    "BaseValidation": {
+      "type": "object",
+      "description": "Base Validation Object.",
+      "properties": {
+        "isDone": {
+          "type": "boolean",
+          "description": "Indicates if a validation is done."
+        },
+        "isFailed": {
+          "type": "boolean",
+          "description": "Indicates if a validation is failed."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Indicates the time of creation."
+        },
+        "validationId": {
+          "type": "string",
+          "description": "Indicates the validation id"
+        },
+        "tries": {
+          "type": "integer",
+          "description": "Indicates the number of times tried."
+        }
+      }
+    },
+    "LinterValidationResult": {
+      "type": "object",
+      "description": "Linter Validation Result Object.",
+      "properties": {
+        "commitHash": {
+          "type": "string",
+          "description": "Commit Hash"
+        },
+        "configPath": {
+          "type": "string",
+          "description": "Config Path"
+        },
+        "apiTag": {
+          "type": "string",
+          "description": "API Tag"
+        },
+        "branch": {
+          "type": "string",
+          "description": "Name of the branch"
+        },
+        "repoUrl": {
+          "type": "string",
+          "description": "URL of the repository"
+        },
+        "validationResults": {
+          "type": "array",
+          "description": "Validation results from Linter",
+          "items": {
+            "$ref": "#/definitions/LinterValidationResultsObject"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseValidation"
+        }
+      ]
+    },
+    "LinterValidationResultsObject": {
+      "type": "object",
+      "description": "Linter Validation Results Object",
+      "properties": {
+        "issues": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/LinterValidationResultsIssue"
+          }
+        }
+      }
+    },
+    "LinterValidationResultsIssue": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/LinterValidationResultsIssueDetails"
+        },
+        "source": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinterValidationResultsIssueSource"
+          }          
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity"
+        }
+      }
+    },
+    "LinterValidationResultsIssueDetails": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "validationCategory": {
+          "type": "string"
+        },
+        "providerNamespace": {
+          "type": "boolean"
+        },
+        "resourceType": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LinterValidationResultsIssueSource": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "document": {
+          "type": "string"
+        },
+        "Position": {
+          "$ref": "#/definitions/LinterValidationResultsIssueSourcePosition"
+        }
+      }
+    },
+    "LinterValidationResultsIssueSourcePosition": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "column": {
+          "type": "integer"
+        },
+        "line": {
+          "type": "integer"
+        },
+        "path": {
+          "type": "integer"
+        },
+        "length": {
+          "type": "integer"
+        },
+        "valueOffset": {
+          "type": "integer"
+        },
+        "valueLength": {
+          "type": "integer"
+        }
+      }
+    },
+    "SemanticValidationResult": {
+      "type": "object",
+      "description": "Semantic Validation Result.",
+      "properties": {
+        "commitHash": {
+          "type": "string"
+        },
+        "fileUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validationResults": {
+          "type": "array",
+          "description": "Validation results from Semantic Validator",
+          "items": {
+            "$ref": "#/definitions/SemanticValidationResultsObject"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseValidation"
+        }
+      ]
+    },
+    "SemanticValidationResultsObject": {
+      "type": "object",
+      "description": "Static Validation Results Object.",
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticValidationError"
+          }
+        }
+      }
+    },
+    "SemanticValidationError": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseValidationError"
+        }
+      ]
+    },
+    "ModelValidationResult": {
+      "type": "object",
+      "description": "Model Validation Result.",
+      "properties": {
+        "commitHash": {
+          "type": "string"
+        },
+        "fileUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validationResults": {
+          "type": "array",
+          "description": "Validation results from Model Validator",
+          "items": {
+            "$ref": "#/definitions/ModelValidationResultsObject"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseValidation"
+        }
+      ]
+    },
+    "SemanticValidationResultsObject": {
+      "type": "object",
+      "description": "Model Validation Results Object.",
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelValidationError"
+          }
+        }
+      }
+    },
+    "ModelValidationError": { 
+      "type": "object",
+      "description": "Need to check all of on this one",
+      "properties": {
+        "operationId": {
+          "type": "string"
+        },
+        "scenario": {
+          "type": "string"
+        },
+        "responseCode": {
+          "type": "string"
+        },
+        "innerErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelValidationError"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseValidationError"
+        }
+      ]
+    },
+    "ApiSpecsValidation": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "resourceProvider": {
+          "type": "string"
+        },
+        "apiVersion": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "validationResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LiveValidationResult"
+          }
+        },
+        "operationsNotFound": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LiveValidationResult"
+          }
+        },
+        "uniqueErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseValidationError"
+          }
+        }
+      }
+    },
+    "MissingParameters":{
+      "type": "string"
+    }
+  },
+  "parameters": {
+    "Repository": {
+      "name":"repository",
+      "in": "body",
+      "type": "string",
+      "required": true,
+      "description": "Name of the repository"
+    },
+    "Branch": {
+      "name":"branch",
+      "in": "body",
+      "type": "string",
+      "required": true,
+      "description": "Name of the specific branch in the repository."
+    },
+    "ConfigPath": {
+      "name":"configPath",
+      "in": "body",
+      "type": "string",
+      "required": true,
+      "description": "Configuration path of the file."
+    },
+    "ApiTag": {
+      "name":"apiTag",
+      "in": "body",
+      "type": "string",
+      "required": true,
+      "description": "API Tag to be validated."
+    },
+    "CommitHash": {
+      "name":"commitHash",
+      "in": "body",
+      "type": "string",
+      "description": "Commit hash to be validated."
+    },
+    "ResourceProvider": {
+      "name":"resourceProvider",
+      "in": "body",
+      "type": "string",
+      "description": "Name of the resource provider."
+    },
+    "ApiVersionParameter": {
+      "name":"apiVersion",
+      "in": "body",
+      "type": "string",
+      "description": "API Version to be validated."
+    },
+    "StartDate": {
+      "name":"startDate",
+      "in": "body",
+      "type": "string",
+      "description": "Start Date"
+    },
+    "EndDate": {
+      "name":"endDate",
+      "in": "body",
+      "type": "string",
+      "description": "End Date"
+    },
+    "ValidationId": {
+      "name":"validationId",
+      "in": "body",
+      "type": "string",
+      "description": "Validation Id."
+    },
+    "Files": {
+      "name":"files",
+      "in": "body",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of files."
+    },
+    "GitHubToken": {
+      "name":"githubToken",
+      "in": "body",
+      "type": "string",
+      "description": "Github Token"
+    },
+    "Mode": {
+      "name":"mode",
+      "in": "query",
+      "type": "string",
+      "description": "Mode"
+    },
+    "ValidationId": {
+      "name":"validationId",
+      "in": "query",
+      "type": "string",
+      "description": "Validation Id"
+    },
+    "OperationId": {
+      "name":"operationId",
+      "in": "query",
+      "type": "string",
+      "description": "Operation Id."
+    },
+    "Env": {
+      "name":"env",
+      "in": "query",
+      "type": "string",
+      "description": "Environment"
+    }
+  }
+}
