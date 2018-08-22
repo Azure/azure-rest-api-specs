@@ -37,7 +37,7 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2018-03
+tag: package-policy-2018-05
 ```
 
 ``` yaml $(package-resources)
