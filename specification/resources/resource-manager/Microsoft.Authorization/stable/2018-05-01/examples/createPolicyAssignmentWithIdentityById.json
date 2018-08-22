@@ -3,6 +3,10 @@
     "policyAssignmentId": "providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/policyAssignments/LowCostStorage",
     "api-version": "2018-05-01",
     "parameters": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "eastus",
       "properties": {
         "displayName": "Enforce storage account SKU",
         "description": "Allow only storage accounts of SKU Standard_GRS or Standard_LRS to be created",
@@ -42,6 +46,12 @@
             }
           }
         },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "e6d23f8d-af97-4fbc-bda6-00604e4e3d0a",
+          "tenantId": "4bee2b8a-1bee-47c2-90e9-404241551135"
+        },
+        "location": "eastus",
         "id": "/providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/policyAssignments/LowCostStorage",
         "type": "Microsoft.Authorization/policyAssignments",
         "name": "LowCostStorage"

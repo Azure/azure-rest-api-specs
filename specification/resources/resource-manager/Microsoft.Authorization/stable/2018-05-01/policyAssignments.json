@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2018-03-01",
+    "version": "2018-05-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -95,6 +95,9 @@
         "x-ms-examples": {
           "Create or update a policy assignment": {
             "$ref": "./examples/createPolicyAssignment.json"
+          },
+          "Create or update a policy assignment with a managed identity": {
+            "$ref": "./examples/createPolicyAssignmentWithIdentity.json"
           }
         },
         "parameters": [
@@ -151,6 +154,9 @@
         "x-ms-examples": {
           "Retrieve a policy assignment": {
             "$ref": "./examples/getPolicyAssignment.json"
+          },
+          "Retrieve a policy assignment with a managed identity": {
+            "$ref": "./examples/getPolicyAssignmentWithIdentity.json"
           }
         },
         "parameters": [
@@ -438,6 +444,9 @@
         "x-ms-examples": {
           "Create or update policy assignment by ID": {
             "$ref": "./examples/createPolicyAssignmentById.json"
+          },
+          "Create or update policy assignment with a managed identity by ID": {
+            "$ref": "./examples/createPolicyAssignmentWithIdentityById.json"
           }
         },
         "parameters": [
@@ -487,6 +496,9 @@
         "x-ms-examples": {
           "Retrieve a policy assignment by ID": {
             "$ref": "./examples/getPolicyAssignmentById.json"
+          },
+          "Retrieve a policy assignment with a managed identity by ID": {
+            "$ref": "./examples/getPolicyAssignmentWithIdentityById.json"
           }
         },
         "parameters": [
@@ -597,6 +609,14 @@
         "sku": {
           "$ref": "#/definitions/PolicySku",
           "description": "The policy sku. This property is optional, obsolete, and will be ignored."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the policy assignment. Only required when utilizing managed identity."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The managed identity associated with the policy assignment."
         }
       },
       "description": "The policy assignment.",
@@ -617,6 +637,37 @@
         }
       },
       "description": "List of policy assignments."
+    },
+    "ManagedIdentity": {
+      "description": "The managed identity assigned to a resource.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used for the resource. 'SystemAssigned' includes both an implicitly created identity. 'None' will remove any identities from the resource.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedIdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "description": "The tenant ID associated with the managed identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "The principal ID associated with the managed identity.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type"
+      ]
     },
     "ErrorResponse": {
       "description": "Error reponse indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message.",
