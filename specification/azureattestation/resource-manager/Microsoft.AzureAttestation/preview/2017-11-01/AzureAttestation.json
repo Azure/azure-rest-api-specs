@@ -234,9 +234,6 @@
               "$ref": "#/definitions/AttestationSigningKeys"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Attestation service error result",
             "schema": {
@@ -399,19 +396,19 @@
       "properties": {
         "kid": {
           "type": "string",
-          "description": "Attestation signing keys."
+          "description": "Unique Key Identifier."
         },
         "kty": {
           "type": "string",
-          "description": "Attestation signing keys."
+          "description": "JsonWebKey key types (kty) for Elliptic curve."
         },
         "n": {
           "type": "string",
-          "description": "Attestation signing keys."
+          "description": "RSA modulus, in Base64."
         },
         "e": {
           "type": "string",
-          "description": "Attestation signing keys."
+          "description": "RSA public exponent, in Base64."
         }
       }
     }
