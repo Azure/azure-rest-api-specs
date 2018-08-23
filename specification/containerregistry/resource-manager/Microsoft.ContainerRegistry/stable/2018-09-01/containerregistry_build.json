@@ -4,10 +4,10 @@
     "version": "2018-09-01",
     "title": "ContainerRegistryManagementClient"
   },
-  "host": "localhost:3941",
+  "host": "management.azure.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
@@ -664,38 +664,13 @@
           "type": "string",
           "readOnly": true
         },
-        "arguments": {
-          "description": "The collection of override arguments to be used when executing the run.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Argument"
-          }
-        }
-      },
-      "discriminator": "type"
-    },
-    "Argument": {
-      "description": "The properties of a run argument.",
-      "required": [
-        "name",
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the argument.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The value of the argument.",
-          "type": "string"
-        },
-        "isSecret": {
-          "description": "Flag to indicate whether the argument represents a secret and want to be removed from build logs.",
+        "isArchiveEnabled": {
+          "description": "The value that indicates whether archiving is enabled for the run or not.",
           "default": false,
           "type": "boolean"
         }
-      }
+      },
+      "discriminator": "type"
     },
     "Run": {
       "description": "Run resource properties",
@@ -788,7 +763,7 @@
         },
         "sourceTrigger": {
           "$ref": "#/definitions/SourceTriggerDescriptor",
-          "description": "The git commit trigger that caused the run."
+          "description": "The source trigger that caused the run."
         },
         "isArchiveEnabled": {
           "description": "The value that indicates whether archiving is enabled or not.",
@@ -866,7 +841,7 @@
       }
     },
     "SourceTriggerDescriptor": {
-      "description": "The git commit trigger that caused a build.",
+      "description": "The source trigger that caused a run.",
       "type": "object",
       "properties": {
         "id": {
@@ -1190,6 +1165,14 @@
             "name": "StepType",
             "modelAsString": true
           }
+        },
+        "baseImageDependencies": {
+          "description": "List of base image dependencies for a step.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseImageDependency"
+          },
+          "readOnly": true
         }
       },
       "discriminator": "type"
@@ -1211,6 +1194,40 @@
         }
       }
     },
+    "BaseImageDependency": {
+      "description": "Properties that describe a base image dependency.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the base image dependency.",
+          "enum": [
+            "BuildTime",
+            "RunTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BaseImageDependencyType",
+            "modelAsString": true
+          }
+        },
+        "registry": {
+          "description": "The registry login server.",
+          "type": "string"
+        },
+        "repository": {
+          "description": "The repository name.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "The tag name.",
+          "type": "string"
+        },
+        "digest": {
+          "description": "The sha256-based digest of the image manifest.",
+          "type": "string"
+        }
+      }
+    },
     "SourceTrigger": {
       "description": "The properties of a source based trigger.",
       "required": [
@@ -1229,8 +1246,7 @@
           "type": "array",
           "items": {
             "enum": [
-              "commit",
-              "pullrequest"
+              "commit"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1524,8 +1540,7 @@
           "type": "array",
           "items": {
             "enum": [
-              "commit",
-              "pullrequest"
+              "commit"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1750,6 +1765,13 @@
           "description": "The Docker file path relative to the source location.",
           "type": "string"
         },
+        "arguments": {
+          "description": "The collection of override arguments to be used when executing the run.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          }
+        },
         "sourceLocation": {
           "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
           "type": "string"
@@ -1772,6 +1794,29 @@
         }
       },
       "x-ms-discriminator-value": "DockerBuildRequest"
+    },
+    "Argument": {
+      "description": "The properties of a run argument.",
+      "required": [
+        "name",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the argument.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the argument.",
+          "type": "string"
+        },
+        "isSecret": {
+          "description": "Flag to indicate whether the argument represents a secret and want to be removed from build logs.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
     },
     "BuildTaskRequest": {
       "description": "The request parameters for a quick task build.",
@@ -1796,6 +1841,13 @@
           "description": "The values/parameters file path relative to the source.",
           "type": "string"
         },
+        "values": {
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          }
+        },
         "sourceLocation": {
           "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
           "type": "string"
@@ -1819,6 +1871,29 @@
       },
       "x-ms-discriminator-value": "BuildTaskRequest"
     },
+    "SetValue": {
+      "description": "The properties of a overridable value that can be passed to a task template.",
+      "required": [
+        "name",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the overridable value.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The overridable value.",
+          "type": "string"
+        },
+        "isSecret": {
+          "description": "Flag to indicate whether the value represents a secret or not.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
     "TaskRunRequest": {
       "description": "The parameters for a task run request.",
       "required": [
@@ -1835,6 +1910,13 @@
         "taskName": {
           "description": "The name of task against which run has to be queued.",
           "type": "string"
+        },
+        "values": {
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          }
         }
       },
       "x-ms-discriminator-value": "TaskRunRequest"
@@ -1860,6 +1942,13 @@
         "valuesContent": {
           "description": "Base64 encoded value of the parameters/values file content.",
           "type": "string"
+        },
+        "values": {
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          }
         },
         "timeout": {
           "format": "int32",
@@ -1913,10 +2002,6 @@
           "description": "The Docker file path relative to the source context.",
           "type": "string"
         },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
-        },
         "arguments": {
           "description": "The collection of override arguments to be used when executing this build step.",
           "type": "array",
@@ -1924,49 +2009,12 @@
             "$ref": "#/definitions/Argument"
           }
         },
-        "baseImageDependencies": {
-          "description": "List of base image dependencies for a step.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseImageDependency"
-          }
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Docker"
-    },
-    "BaseImageDependency": {
-      "description": "Properties that describe a base image dependency.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the base image dependency.",
-          "enum": [
-            "BuildTime",
-            "RunTime"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BaseImageDependencyType",
-            "modelAsString": true
-          }
-        },
-        "registry": {
-          "description": "The registry login server.",
-          "type": "string"
-        },
-        "repository": {
-          "description": "The repository name.",
-          "type": "string"
-        },
-        "tag": {
-          "description": "The tag name.",
-          "type": "string"
-        },
-        "digest": {
-          "description": "The sha256-based digest of the image manifest.",
-          "type": "string"
-        }
-      }
     },
     "BuildTaskStep": {
       "description": "The properties of a build task step.",
@@ -1988,23 +2036,16 @@
           "description": "The task values/parameters file path relative to the source context.",
           "type": "string"
         },
+        "values": {
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          }
+        },
         "contextPath": {
           "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
           "type": "string"
-        },
-        "arguments": {
-          "description": "The collection of override arguments to be used when executing this build step.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Argument"
-          }
-        },
-        "baseImageDependencies": {
-          "description": "List of base image dependencies for a step.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseImageDependency"
-          }
         }
       },
       "x-ms-discriminator-value": "BuildTask"
@@ -2028,6 +2069,13 @@
         "valuesContent": {
           "description": "Base64 encoded value of the parameters/values file content.",
           "type": "string"
+        },
+        "values": {
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          }
         }
       },
       "x-ms-discriminator-value": "RunTask"
@@ -2060,16 +2108,16 @@
           "description": "The Docker file path relative to the source context.",
           "type": "string"
         },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
-        },
         "arguments": {
           "description": "The collection of override arguments to be used when executing this build step.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Argument"
           }
+        },
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Docker"
@@ -2091,16 +2139,16 @@
           "description": "The task values/parameters file path relative to the source context.",
           "type": "string"
         },
+        "values": {
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          }
+        },
         "contextPath": {
           "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
           "type": "string"
-        },
-        "arguments": {
-          "description": "The collection of override arguments to be used when executing this build step.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Argument"
-          }
         }
       },
       "x-ms-discriminator-value": "BuildTask"
@@ -2121,6 +2169,13 @@
         "valuesContent": {
           "description": "Base64 encoded value of the parameters/values file content.",
           "type": "string"
+        },
+        "values": {
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          }
         }
       },
       "x-ms-discriminator-value": "RunTask"
