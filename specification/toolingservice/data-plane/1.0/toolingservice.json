@@ -26,52 +26,44 @@
         "description": "Get Linter Result",
         "parameters": [
           {
-            "$ref": "#/parameters/Repository"
+            "name":"repository",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "Name of the repository"
           },
           {
-            "$ref": "#/parameters/Branch"
+            "name":"branch",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "Name of the specific branch in the repository."
           },
           {
-            "$ref": "#/parameters/ConfigPath"
+            "name":"configPath",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "Configuration path of the file."
           },
           {
-            "$ref": "#/parameters/ApiTag"
+            "name":"apiTag",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "API Tag to be validated."
           },
           {
-            "$ref": "#/parameters/CommitHash"
+            "name":"commitHash",
+            "in": "body",
+            "type": "string",
+            "description": "Commit hash to be validated."
           },
           {
-            "$ref": "#/parameters/ResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/StartDate"
-          },
-          {
-            "$ref": "#/parameters/EndDate"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/Files"
-          },
-          {
-            "$ref": "#/parameters/GitHubToken"
-          },
-          {
-            "$ref": "#/parameters/Mode"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/OperationId"
-          },
-          {
-            "$ref": "#/parameters/Env"
+            "name":"mode",
+            "in": "query",
+            "type": "string",
+            "description": "Mode"
           }          
         ],
         "responses": {
@@ -97,7 +89,8 @@
             }
           }
         }
-      }
+      },
+      "x-ms-long-running-operation": true
     },
     "/tools/validation/semantic": {
       "post": {
@@ -108,52 +101,32 @@
         "description": "Get Semantic validation result.",
         "parameters": [
           {
-            "$ref": "#/parameters/Repository"
+            "name":"files",
+            "in": "body",
+            "type": "array",
+            "required": true,
+            "items": {
+              "type": "string"
+            },
+            "description": "List of files."
           },
           {
-            "$ref": "#/parameters/Branch"
+            "name":"commitHash",
+            "in": "body",
+            "type": "string",
+            "description": "Commit hash to be validated."
           },
           {
-            "$ref": "#/parameters/ConfigPath"
+            "name":"validationId",
+            "in": "body",
+            "type": "string",
+            "description": "Validation Id."
           },
           {
-            "$ref": "#/parameters/ApiTag"
-          },
-          {
-            "$ref": "#/parameters/CommitHash"
-          },
-          {
-            "$ref": "#/parameters/ResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/StartDate"
-          },
-          {
-            "$ref": "#/parameters/EndDate"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/Files"
-          },
-          {
-            "$ref": "#/parameters/GitHubToken"
-          },
-          {
-            "$ref": "#/parameters/Mode"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/OperationId"
-          },
-          {
-            "$ref": "#/parameters/Env"
+            "name":"githubToken",
+            "in": "body",
+            "type": "string",
+            "description": "Github Token"
           }          
         ],
         "responses": {
@@ -178,7 +151,8 @@
               "description": "Semantic Result"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/tools/validation/model": {
@@ -190,52 +164,32 @@
         "description": "Get Model validation result.",
         "parameters": [
           {
-            "$ref": "#/parameters/Repository"
+            "name":"files",
+            "in": "body",
+            "type": "array",
+            "required": true,
+            "items": {
+              "type": "string"
+            },
+            "description": "List of files."
           },
           {
-            "$ref": "#/parameters/Branch"
+            "name":"commitHash",
+            "in": "body",
+            "type": "string",
+            "description": "Commit hash to be validated."
           },
           {
-            "$ref": "#/parameters/ConfigPath"
+            "name":"validationId",
+            "in": "body",
+            "type": "string",
+            "description": "Validation Id."
           },
           {
-            "$ref": "#/parameters/ApiTag"
-          },
-          {
-            "$ref": "#/parameters/CommitHash"
-          },
-          {
-            "$ref": "#/parameters/ResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/StartDate"
-          },
-          {
-            "$ref": "#/parameters/EndDate"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/Files"
-          },
-          {
-            "$ref": "#/parameters/GitHubToken"
-          },
-          {
-            "$ref": "#/parameters/Mode"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/OperationId"
-          },
-          {
-            "$ref": "#/parameters/Env"
+            "name":"githubToken",
+            "in": "body",
+            "type": "string",
+            "description": "Github Token"
           }          
         ],
         "responses": {
@@ -260,7 +214,8 @@
               "description": "Semantic Result"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
     },
     "/tools/apiValidate": {
       "post": {
@@ -270,52 +225,51 @@
         "operationId": "Tools_ApiValidate",
         "parameters": [
           {
-            "$ref": "#/parameters/Repository"
+            "name":"repository",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "Name of the repository"
           },
           {
-            "$ref": "#/parameters/Branch"
+            "name":"branch",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "Name of the specific branch in the repository."
           },
           {
-            "$ref": "#/parameters/ConfigPath"
+            "name":"resourceProvider",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "Name of the resource provider."
           },
           {
-            "$ref": "#/parameters/ApiTag"
+            "name":"apiVersion",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "API Version to be validated."
           },
           {
-            "$ref": "#/parameters/CommitHash"
+            "name":"validationId",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "Validation Id"
           },
           {
-            "$ref": "#/parameters/ResourceProvider"
+            "name":"startDate",
+            "in": "body",
+            "type": "string",
+            "description": "Start Date"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/StartDate"
-          },
-          {
-            "$ref": "#/parameters/EndDate"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/Files"
-          },
-          {
-            "$ref": "#/parameters/GitHubToken"
-          },
-          {
-            "$ref": "#/parameters/Mode"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/OperationId"
-          },
-          {
-            "$ref": "#/parameters/Env"
+            "name":"endDate",
+            "in": "body",
+            "type": "string",
+            "description": "End Date"
           }          
         ],
         "responses": {
@@ -343,61 +297,32 @@
               "description": "Semantic Result"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
-
     },
     "/tools/apiValidate/result": {
       "get": {
         "operationId": "Tools_ApiValidateResult",
         "parameters": [
           {
-            "$ref": "#/parameters/Repository"
+            "name":"validationId",
+            "in": "query",
+            "type": "string",
+            "description": "Validation Id",
+            "required": true
           },
           {
-            "$ref": "#/parameters/Branch"
+            "name":"operationId",
+            "in": "query",
+            "type": "string",
+            "description": "Operation Id."
           },
           {
-            "$ref": "#/parameters/ConfigPath"
-          },
-          {
-            "$ref": "#/parameters/ApiTag"
-          },
-          {
-            "$ref": "#/parameters/CommitHash"
-          },
-          {
-            "$ref": "#/parameters/ResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/StartDate"
-          },
-          {
-            "$ref": "#/parameters/EndDate"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/Files"
-          },
-          {
-            "$ref": "#/parameters/GitHubToken"
-          },
-          {
-            "$ref": "#/parameters/Mode"
-          },
-          {
-            "$ref": "#/parameters/ValidationId"
-          },
-          {
-            "$ref": "#/parameters/OperationId"
-          },
-          {
-            "$ref": "#/parameters/Env"
+            "name":"env",
+            "in": "query",
+            "type": "string",
+            "description": "Environment"
           }          
         ],
         "responses": {
@@ -818,108 +743,5 @@
     }
   },
   "parameters": {
-    "Repository": {
-      "name":"repository",
-      "in": "body",
-      "type": "string",
-      "required": true,
-      "description": "Name of the repository"
-    },
-    "Branch": {
-      "name":"branch",
-      "in": "body",
-      "type": "string",
-      "required": true,
-      "description": "Name of the specific branch in the repository."
-    },
-    "ConfigPath": {
-      "name":"configPath",
-      "in": "body",
-      "type": "string",
-      "required": true,
-      "description": "Configuration path of the file."
-    },
-    "ApiTag": {
-      "name":"apiTag",
-      "in": "body",
-      "type": "string",
-      "required": true,
-      "description": "API Tag to be validated."
-    },
-    "CommitHash": {
-      "name":"commitHash",
-      "in": "body",
-      "type": "string",
-      "description": "Commit hash to be validated."
-    },
-    "ResourceProvider": {
-      "name":"resourceProvider",
-      "in": "body",
-      "type": "string",
-      "description": "Name of the resource provider."
-    },
-    "ApiVersionParameter": {
-      "name":"apiVersion",
-      "in": "body",
-      "type": "string",
-      "description": "API Version to be validated."
-    },
-    "StartDate": {
-      "name":"startDate",
-      "in": "body",
-      "type": "string",
-      "description": "Start Date"
-    },
-    "EndDate": {
-      "name":"endDate",
-      "in": "body",
-      "type": "string",
-      "description": "End Date"
-    },
-    "ValidationId": {
-      "name":"validationId",
-      "in": "body",
-      "type": "string",
-      "description": "Validation Id."
-    },
-    "Files": {
-      "name":"files",
-      "in": "body",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "List of files."
-    },
-    "GitHubToken": {
-      "name":"githubToken",
-      "in": "body",
-      "type": "string",
-      "description": "Github Token"
-    },
-    "Mode": {
-      "name":"mode",
-      "in": "query",
-      "type": "string",
-      "description": "Mode"
-    },
-    "ValidationId": {
-      "name":"validationId",
-      "in": "query",
-      "type": "string",
-      "description": "Validation Id"
-    },
-    "OperationId": {
-      "name":"operationId",
-      "in": "query",
-      "type": "string",
-      "description": "Operation Id."
-    },
-    "Env": {
-      "name":"env",
-      "in": "query",
-      "type": "string",
-      "description": "Environment"
-    }
   }
 }
