@@ -1,6 +1,6 @@
 ﻿# Swagger Checklist for Microsoft Azure #
 
-## Introduction - Test ##
+## Introduction ##
 
 This checklist is a current snapshot of requirements for developing Swagger specifications. The checklist will be continuously updated to reflect issues uncovered during Swagger specification reviews.
 
