@@ -8,7 +8,7 @@ nodejs:
   azure-arm: true
   batch: true
   package-name: azure-arm-resource
-  package-version: 4.0.0-preview
+  package-version: 4.1.0-preview
   generate-license-txt: true
   generate-package-json: false
   generate-readme-md: false
