@@ -74,7 +74,7 @@
           "Registries"
         ],
         "description": "Get the upload location for the user to be able to upload the source.",
-        "operationId": "Registries_ListBuildSourceUploadUrl",
+        "operationId": "Registries_GetBuildSourceUploadUrl",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -101,8 +101,8 @@
           }
         },
         "x-ms-examples": {
-          "Registries_ListBuildSourceUploadUrl": {
-            "$ref": "./examples/RegistriesListBuildSourceUploadUrl.json"
+          "Registries_GetBuildSourceUploadUrl": {
+            "$ref": "./examples/RegistriesGetBuildSourceUploadUrl.json"
           }
         }
       }
@@ -141,13 +141,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "$skipToken is supported on get list of runs, which provides the next page in the list of runs.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -284,7 +277,7 @@
           "Runs"
         ],
         "description": "Gets a link to download the run logs.",
-        "operationId": "Runs_ListLogSasUrl",
+        "operationId": "Runs_GetLogSasUrl",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -318,8 +311,8 @@
           }
         },
         "x-ms-examples": {
-          "Runs_ListLogSasUrl": {
-            "$ref": "./examples/RunsListLogSasUrl.json"
+          "Runs_GetLogSasUrl": {
+            "$ref": "./examples/RunsGetLogSasUrl.json"
           }
         }
       }
@@ -617,7 +610,7 @@
           "Tasks"
         ],
         "description": "Returns a task with extended information that includes all secrets.",
-        "operationId": "Tasks_ListDetails",
+        "operationId": "Tasks_GetDetails",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -647,8 +640,8 @@
           }
         },
         "x-ms-examples": {
-          "Tasks_ListDetails": {
-            "$ref": "./examples/TasksListDetails.json"
+          "Tasks_GetDetails": {
+            "$ref": "./examples/TasksGetDetails.json"
           }
         }
       }
