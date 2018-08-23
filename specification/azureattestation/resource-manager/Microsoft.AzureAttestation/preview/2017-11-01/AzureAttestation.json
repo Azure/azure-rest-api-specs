@@ -44,6 +44,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "List all the operations.",
@@ -60,10 +63,10 @@
         "tags": [
           "AttestationService"
         ],
-        "operationId": "Get_AttestationService",
+        "operationId": "AttestationService_Get",
         "description": "Get the status of Attestation Service.",
         "x-ms-examples": {
-          "Get_AttestationService": {
+          "AttestationService_Get": {
             "$ref": "./examples/Get_AttestationService.json"
           }
         },
@@ -105,10 +108,10 @@
         "tags": [
           "AttestationService"
         ],
-        "operationId": "Create_AttestationService",
+        "operationId": "AttestationService_Create",
         "description": "Creates or updates the Attestation Service.",
         "x-ms-examples": {
-          "Create_AttestationService": {
+          "AttestationService_Create": {
             "$ref": "./examples/Create_AttestationService.json"
           }
         },
@@ -156,10 +159,10 @@
         "tags": [
           "AttestationService"
         ],
-        "operationId": "Delete_AttestationService",
+        "operationId": "AttestationService_Delete",
         "description": "Delete Attestation Service.",
         "x-ms-examples": {
-          "Delete_AttestationService": {
+          "AttestationService_Delete": {
             "$ref": "./examples/Delete_AttestationService.json"
           }
         },
@@ -201,10 +204,10 @@
         "tags": [
           "AttestationSigningKeys"
         ],
-        "operationId": "AttestationSigningKey_list",
+        "operationId": "AttestationSigningKey_List",
         "description": "Returns attestation service signing keys.",
         "x-ms-examples": {
-          "AttestationSigningKey_list": {
+          "AttestationSigningKey_List": {
             "$ref": "./examples/Get_AttestationSigningKeys.json"
           }
         },
@@ -227,6 +230,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "keys"
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -246,11 +253,16 @@
   },
   "definitions": {
     "OperationList": {
-      "type": "array",
-      "description": "List of supported operations.",
-      "items": {
-        "$ref": "#/definitions/OperationsDefinition"
-      }
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of supported operations.",
+          "items": {
+            "$ref": "#/definitions/OperationsDefinition"
+          }
+        }
+      },
+      "description": "List of supported operations."
     },
     "OperationsDefinition": {
       "type": "object",
@@ -342,7 +354,8 @@
         },
         "cskMap": {
           "type": "string",
-          "description": "These keys are used by administrators to updates changes to the attestation service instance"
+          "description":
+            "These keys are used by administrators to updates changes to the attestation service instance"
         }
       }
     },
@@ -378,10 +391,9 @@
       }
     },
     "AttestationSigningKeys": {
-      "type": "object",
       "description": "Attestation signing keys.",
       "properties": {
-        "keys": {
+        "value": {
           "type": "array",
           "description": "Attestation signing keys.",
           "items": {
