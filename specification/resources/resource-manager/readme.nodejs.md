@@ -8,8 +8,8 @@ nodejs:
   azure-arm: true
   batch: true
   package-name: azure-arm-resource
-  package-version: 3.1.1-preview
-  generate-license-txt: false
+  package-version: 4.0.0-preview
+  generate-license-txt: true
   generate-package-json: false
   generate-readme-md: false
   output-folder: $(node-sdks-folder)/lib/services/resourceManagement
