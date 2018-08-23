@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2018-09-30-preview",
+    "subscriptionId": "subid1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/providers/Microsoft.ContainerService/openShiftManagedClusters",
+            "location": "location1",
+            "name": "clustername1",
+            "tags": {
+              "archv2": "",
+              "tier": "production"
+            },
+            "type": "Microsoft.ContainerService/OpenShiftManagedClusters",
+            "plan" : {
+
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "openShiftVersion": "v3.10",
+              "publicHostname": "openshift.rg1.openshift.test",
+              "fqdn": "rg1.eastus.cloudapp.azure.com",
+              "routerProfiles": [
+                {
+                  "name": "default",
+                  "publicSubdomain": "rg1.openshift.test",
+                  "fqdn": "rg1-router.eastus.cloudapp.azure.com"
+                }
+              ],
+              "masterPoolProfile": [
+                {
+                  "name": "master",
+                  "count": 3,
+                  "vmSize": "Standard_D2s_v3",
+                  "osType": "Linux"
+                }
+              ],
+              "agentPoolProfiles": [
+                {
+                  "name": "infra",
+                  "count": 1,
+                  "vmSize": "Standard_D2s_v3",
+                  "osType": "Linux",
+                  "role": "infra"
+                },
+                {
+                  "name": "compute",
+                  "count": 3,
+                  "vmSize": "Standard_D2s_v3",
+                  "osType": "Linux",
+                  "role": "compute"
+                }
+              ],
+              "servicePrincipalProfile": {
+                "clientId": "clientid"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
