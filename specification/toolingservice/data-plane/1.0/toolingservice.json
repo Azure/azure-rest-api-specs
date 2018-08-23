@@ -70,7 +70,7 @@
           "400": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/MissingParameters",
+              "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
@@ -133,7 +133,7 @@
           "400": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/MissingParameters",
+              "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
@@ -196,7 +196,7 @@
           "400": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/MissingParameters",
+              "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
@@ -276,7 +276,7 @@
           "400": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/MissingParameters",
+              "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
@@ -329,7 +329,7 @@
           "400": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/MissingParameters",
+              "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
@@ -364,7 +364,7 @@
           "400": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/MissingParameters",
+              "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
@@ -561,7 +561,10 @@
           "type": "integer"
         },
         "path": {
-          "type": "integer"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "length": {
           "type": "integer"
@@ -738,7 +741,7 @@
         }
       }
     },
-    "MissingParameters":{
+    "ErrorObject":{
       "type": "object",
       "properties": {
         "error": {
