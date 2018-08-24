@@ -853,6 +853,26 @@
         "modelAsString": true
       }
     },
+    "SchemaMigrationStage": {
+      "type": "string",
+      "description": "Current stage of schema migration",
+      "enum": [
+        "NotStarted",
+        "ValidatingInputs",
+        "CollectingObjects",
+        "DownloadingScript",
+        "GeneratingScript",
+        "UploadingScript",
+        "DeployingSchema",
+        "Completed",
+        "CompletedWithWarnings",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "SchemaMigrationStage",
+        "modelAsString": true
+      }
+    },
     "BlobShare": {
       "type": "object",
       "description": "Blob container storage information.",
