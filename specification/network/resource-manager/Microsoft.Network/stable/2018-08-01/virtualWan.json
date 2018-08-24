@@ -2240,7 +2240,7 @@
           "200": {
             "description": "VPN profile package URL.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/VpnProfileResponse"
             }
           },
           "202": {
@@ -3315,6 +3315,15 @@
         }
       },
       "description": "Vpn Client Parameters for package generation"
+    },
+    "VpnProfileResponse": {
+      "properties": {
+        "profileUrl": {
+          "type": "string",
+          "description": "URL to the VPN profile"
+        }
+      },
+      "description": "Vpn Profile Response for package generation"
     }	
   }
 }
