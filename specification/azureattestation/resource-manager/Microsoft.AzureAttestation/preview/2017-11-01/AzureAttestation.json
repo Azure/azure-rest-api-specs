@@ -57,7 +57,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}":
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/attestationProvider/{providerName}":
     {
       "get": {
         "tags": [
@@ -78,7 +78,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
+            "name": "providerName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -123,7 +123,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
+            "name": "providerName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -174,7 +174,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
+            "name": "providerName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -198,7 +198,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}/metadata/signingKeys":
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/attestationProvider/{providerName}/metadata/signingKeys":
     {
       "get": {
         "tags": [
@@ -216,7 +216,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
+            "name": "providerName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -312,7 +312,7 @@
           "readOnly": true,
           "type": "string",
           "description":
-            "The id of the ARM resource, e.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/service/{serviceName}\""
+            "The id of the ARM resource, e.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureAttestation/attestationProvider/{providerName}\""
         },
         "name": {
           "readOnly": true,
