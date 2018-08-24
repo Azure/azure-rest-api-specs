@@ -295,7 +295,8 @@
             "$ref": "./examples/ManagersDelete.json"
           }
         }
-      },
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords": {
       "get": {
         "tags": [
@@ -908,7 +909,8 @@
             }
           }
         }
-      },
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/alertSettings/default": {
       "get": {
         "tags": [
@@ -1649,7 +1651,8 @@
           },
           "x-ms-long-running-operation": true
         }
-      },
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/deactivate": {
       "post": {
         "tags": [
@@ -5143,2825 +5146,2825 @@
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "AccessControlRecord": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
+    },
+    "definitions": {
+      "AccessControlRecord": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
         "properties": {
-          "$ref": "#/definitions/AccessControlRecordProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AccessControlRecordList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessControlRecord"
+          "properties": {
+            "$ref": "#/definitions/AccessControlRecordProperties",
+            "x-ms-client-flatten": true
           }
         }
-      }
-    },
-    "AccessControlRecordProperties": {
-      "required": [
-        "initiatorName"
-      ],
-      "type": "object",
-      "properties": {
-        "initiatorName": {
-          "type": "string"
-        }
-      }
-    },
-    "Alert": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
+      },
+      "AccessControlRecordList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
         "properties": {
-          "$ref": "#/definitions/AlertProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AlertErrorDetails": {
-      "type": "object",
-      "properties": {
-        "errorCode": {
-          "type": "string"
-        },
-        "errorMessage": {
-          "type": "string"
-        },
-        "occurences": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "AlertFilter": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "enum": [
-            "Active",
-            "Cleared"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AlertStatus",
-            "modelAsString": false
-          }
-        },
-        "severity": {
-          "enum": [
-            "Informational",
-            "Warning",
-            "Critical"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AlertSeverity",
-            "modelAsString": false
-          }
-        },
-        "sourceType": {
-          "enum": [
-            "Resource",
-            "Device"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AlertSourceType",
-            "modelAsString": false
-          }
-        },
-        "sourceName": {
-          "type": "string"
-        },
-        "appearedOnTime": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
-    "AlertList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Alert"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "AlertProperties": {
-      "required": [
-        "title",
-        "scope",
-        "alertType",
-        "appearedAtTime",
-        "appearedAtSourceTime",
-        "source",
-        "severity",
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "scope": {
-          "enum": [
-            "Resource",
-            "Device"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AlertScope",
-            "modelAsString": false
-          }
-        },
-        "alertType": {
-          "type": "string"
-        },
-        "appearedAtTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "appearedAtSourceTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "clearedAtTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "clearedAtSourceTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "source": {
-          "$ref": "#/definitions/AlertSource"
-        },
-        "recommendation": {
-          "type": "string"
-        },
-        "resolutionReason": {
-          "type": "string"
-        },
-        "severity": {
-          "enum": [
-            "Informational",
-            "Warning",
-            "Critical"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AlertSeverity",
-            "modelAsString": false
-          }
-        },
-        "status": {
-          "enum": [
-            "Active",
-            "Cleared"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AlertStatus",
-            "modelAsString": false
-          }
-        },
-        "errorDetails": {
-          "$ref": "#/definitions/AlertErrorDetails"
-        },
-        "detailedInformation": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "AlertSettings": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AlertSettingsProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AlertSettingsProperties": {
-      "required": [
-        "emailNotification",
-        "notificationToServiceOwners",
-        "alertNotificationCulture"
-      ],
-      "type": "object",
-      "properties": {
-        "emailNotification": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AlertEmailNotificationStatus",
-            "modelAsString": false
-          }
-        },
-        "notificationToServiceOwners": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServiceOwnersAlertNotificationStatus",
-            "modelAsString": false
-          }
-        },
-        "alertNotificationCulture": {
-          "type": "string"
-        },
-        "additionalRecipientEmailList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "AlertSource": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "timeZone": {
-          "type": "string"
-        },
-        "alertSourceType": {
-          "enum": [
-            "Resource",
-            "Device"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AlertSourceType",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "AsymmetricEncryptedSecret": {
-      "required": [
-        "value",
-        "encryptionAlgorithm"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string"
-        },
-        "encryptionCertificateThumbprint": {
-          "type": "string"
-        },
-        "encryptionAlgorithm": {
-          "enum": [
-            "None",
-            "AES256",
-            "RSAES_PKCS1_v_1_5"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EncryptionAlgorithm",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "AvailableProviderOperation": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "display": {
-          "$ref": "#/definitions/AvailableProviderOperationDisplay"
-        },
-        "origin": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/AvailableProviderOperationProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AvailableProviderOperationDisplay": {
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string"
-        },
-        "resource": {
-          "type": "string"
-        },
-        "operation": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "AvailableProviderOperationProperties": {
-      "type": "object",
-      "properties": {}
-    },
-    "AvailableProviderOperations": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AvailableProviderOperation"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "Backup": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BackupProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "BackupElement": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BackupElementProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "BackupElementProperties": {
-      "required": [
-        "sizeInBytes",
-        "endpointName",
-        "dataPolicy"
-      ],
-      "type": "object",
-      "properties": {
-        "sizeInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "endpointName": {
-          "type": "string"
-        },
-        "dataPolicy": {
-          "enum": [
-            "Invalid",
-            "Local",
-            "Tiered",
-            "Cloud"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataPolicy",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "BackupFilter": {
-      "type": "object",
-      "properties": {
-        "initiatedBy": {
-          "enum": [
-            "Manual",
-            "Scheduled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "InitiatedBy",
-            "modelAsString": false
-          }
-        },
-        "createdTime": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
-    "BackupList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Backup"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "BackupProperties": {
-      "required": [
-        "sizeInBytes",
-        "initiatedBy",
-        "deviceId",
-        "elements"
-      ],
-      "type": "object",
-      "properties": {
-        "targetId": {
-          "type": "string"
-        },
-        "targetType": {
-          "type": "string"
-        },
-        "sizeInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "createdTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "expirationTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "initiatedBy": {
-          "enum": [
-            "Manual",
-            "Scheduled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "InitiatedBy",
-            "modelAsString": false
-          }
-        },
-        "deviceId": {
-          "type": "string"
-        },
-        "elements": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BackupElement"
-          }
-        }
-      }
-    },
-    "BackupScheduleGroup": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BackupScheduleGroupProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "BackupScheduleGroupList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BackupScheduleGroup"
-          }
-        }
-      }
-    },
-    "BackupScheduleGroupProperties": {
-      "required": [
-        "startTime"
-      ],
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "$ref": "#/definitions/Time"
-        }
-      }
-    },
-    "BaseModel": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
-    "ChapProperties": {
-      "required": [
-        "password"
-      ],
-      "type": "object",
-      "properties": {
-        "password": {
-          "$ref": "#/definitions/AsymmetricEncryptedSecret"
-        }
-      }
-    },
-    "ChapSettings": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ChapProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ChapSettingsList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChapSettings"
-          }
-        }
-      }
-    },
-    "ClearAlertRequest": {
-      "required": [
-        "alerts"
-      ],
-      "type": "object",
-      "properties": {
-        "resolutionMessage": {
-          "type": "string"
-        },
-        "alerts": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "CloneRequest": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CloneRequestProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "CloneRequestProperties": {
-      "required": [
-        "targetDeviceId",
-        "targetAccessPointId",
-        "newEndpointName"
-      ],
-      "type": "object",
-      "properties": {
-        "targetDeviceId": {
-          "type": "string"
-        },
-        "targetAccessPointId": {
-          "type": "string"
-        },
-        "newEndpointName": {
-          "type": "string"
-        },
-        "share": {
-          "$ref": "#/definitions/FileShare"
-        },
-        "disk": {
-          "$ref": "#/definitions/ISCSIDisk"
-        }
-      }
-    },
-    "Device": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DeviceProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DeviceDetails": {
-      "type": "object",
-      "properties": {
-        "endpointCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "totalStorageInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "totalLocalStorageInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "provisionedStorageInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "provisionedLocalStorageInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "usingStorageInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "usingLocalStorageInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "totalBackupSizeInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "availableStorageInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "availableLocalStorageInBytes": {
-          "format": "int64",
-          "type": "integer"
-        }
-      }
-    },
-    "DeviceList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Device"
-          }
-        }
-      }
-    },
-    "DevicePatch": {
-      "type": "object",
-      "properties": {
-        "deviceDescription": {
-          "type": "string"
-        }
-      }
-    },
-    "DeviceProperties": {
-      "type": "object",
-      "properties": {
-        "activationTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "allowedDeviceOperations": {
-          "type": "array",
-          "items": {
-            "enum": [
-              "None",
-              "Delete",
-              "DeleteWithWarning",
-              "DRSource",
-              "DRTarget",
-              "Browsable",
-              "ReadOnlyForDR",
-              "Deactivate"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "DeviceOperation",
-              "modelAsString": false
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AccessControlRecord"
             }
           }
-        },
-        "culture": {
-          "type": "string"
-        },
-        "deviceCapabilities": {
-          "type": "array",
-          "items": {
-            "enum": [
-              "Invalid",
-              "FileServer",
-              "IscsiServer"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "SupportedDeviceCapabilities",
-              "modelAsString": false
-            }
-          }
-        },
-        "deviceDescription": {
-          "type": "string"
-        },
-        "domainName": {
-          "type": "string"
-        },
-        "deviceSoftwareVersion": {
-          "type": "string"
-        },
-        "friendlySoftwareName": {
-          "type": "string"
-        },
-        "deviceConfigurationStatus": {
-          "enum": [
-            "Complete",
-            "Pending"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeviceConfigurationStatus",
-            "modelAsString": false
-          }
-        },
-        "modelDescription": {
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "Unknown",
-            "Online",
-            "Offline",
-            "RequiresAttention",
-            "MaintenanceMode",
-            "Creating",
-            "Provisioning",
-            "Deleted",
-            "ReadyToSetup",
-            "Deactivated",
-            "Deactivating"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeviceStatus",
-            "modelAsString": false
-          }
-        },
-        "type": {
-          "enum": [
-            "Invalid",
-            "Appliance",
-            "VirtualAppliance",
-            "Series9000OnPremVirtualAppliance",
-            "Series9000VirtualAppliance",
-            "Series9000PhysicalAppliance"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeviceType",
-            "modelAsString": false
-          }
-        },
-        "details": {
-          "$ref": "#/definitions/DeviceDetails"
         }
-      }
-    },
-    "EncryptionSettings": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
+      },
+      "AccessControlRecordProperties": {
+        "required": [
+          "initiatorName"
+        ],
+        "type": "object",
         "properties": {
-          "$ref": "#/definitions/EncryptionSettingsProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "EncryptionSettingsProperties": {
-      "required": [
-        "encryptionStatus",
-        "keyRolloverStatus"
-      ],
-      "type": "object",
-      "properties": {
-        "encryptionStatus": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EncryptionStatus",
-            "modelAsString": false
-          }
-        },
-        "keyRolloverStatus": {
-          "enum": [
-            "Required",
-            "NotRequired"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "KeyRolloverStatus",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "FailoverRequest": {
-      "type": "object",
-      "properties": {
-        "accesspointIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "targetDeviceId": {
-          "type": "string"
-        },
-        "skipValidation": {
-          "type": "boolean"
-        },
-        "keepSourceDevice": {
-          "type": "boolean"
-        }
-      }
-    },
-    "FileServer": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FileServerProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "FileServerList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileServer"
-          }
-        }
-      }
-    },
-    "FileServerProperties": {
-      "required": [
-        "domainName",
-        "storageDomainId",
-        "backupScheduleGroupId"
-      ],
-      "type": "object",
-      "properties": {
-        "domainName": {
-          "type": "string"
-        },
-        "storageDomainId": {
-          "type": "string"
-        },
-        "backupScheduleGroupId": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "FileShare": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FileShareProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "FileShareList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileShare"
-          }
-        }
-      }
-    },
-    "FileShareProperties": {
-      "required": [
-        "shareStatus",
-        "dataPolicy",
-        "adminUser",
-        "provisionedCapacityInBytes",
-        "monitoringStatus"
-      ],
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "shareStatus": {
-          "enum": [
-            "Online",
-            "Offline"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ShareStatus",
-            "modelAsString": false
-          }
-        },
-        "dataPolicy": {
-          "enum": [
-            "Invalid",
-            "Local",
-            "Tiered",
-            "Cloud"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataPolicy",
-            "modelAsString": false
-          }
-        },
-        "adminUser": {
-          "type": "string"
-        },
-        "provisionedCapacityInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "usedCapacityInBytes": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "localUsedCapacityInBytes": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "monitoringStatus": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MonitoringStatus",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "IPConfig": {
-      "required": [
-        "ipAddress",
-        "gateway"
-      ],
-      "type": "object",
-      "properties": {
-        "ipAddress": {
-          "type": "string"
-        },
-        "prefixLength": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "gateway": {
-          "type": "string"
-        }
-      }
-    },
-    "ISCSIDisk": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ISCSIDiskProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ISCSIDiskList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ISCSIDisk"
-          }
-        }
-      }
-    },
-    "ISCSIDiskProperties": {
-      "required": [
-        "diskStatus",
-        "accessControlRecords",
-        "dataPolicy",
-        "provisionedCapacityInBytes",
-        "monitoringStatus"
-      ],
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "diskStatus": {
-          "enum": [
-            "Online",
-            "Offline"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DiskStatus",
-            "modelAsString": false
-          }
-        },
-        "accessControlRecords": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "dataPolicy": {
-          "enum": [
-            "Invalid",
-            "Local",
-            "Tiered",
-            "Cloud"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataPolicy",
-            "modelAsString": false
-          }
-        },
-        "provisionedCapacityInBytes": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "usedCapacityInBytes": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "localUsedCapacityInBytes": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "monitoringStatus": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MonitoringStatus",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "ISCSIServer": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ISCSIServerProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ISCSIServerList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ISCSIServer"
-          }
-        }
-      }
-    },
-    "ISCSIServerProperties": {
-      "required": [
-        "storageDomainId",
-        "backupScheduleGroupId"
-      ],
-      "type": "object",
-      "properties": {
-        "storageDomainId": {
-          "type": "string"
-        },
-        "backupScheduleGroupId": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "chapId": {
-          "type": "string"
-        },
-        "reverseChapId": {
-          "type": "string"
-        }
-      }
-    },
-    "Job": {
-      "required": [
-        "status",
-        "percentComplete"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "status": {
-          "enum": [
-            "Invalid",
-            "Running",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Paused",
-            "Scheduled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "percentComplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "error": {
-          "$ref": "#/definitions/JobErrorDetails"
-        },
-        "properties": {
-          "$ref": "#/definitions/JobProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "JobErrorDetails": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "errorDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobErrorItem"
-          }
-        },
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "JobErrorItem": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "recommendations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "JobFilter": {
-      "required": [
-        "jobType",
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "jobType": {
-          "enum": [
-            "Backup",
-            "Clone",
-            "Failover",
-            "DownloadUpdates",
-            "InstallUpdates"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": false
-          }
-        },
-        "status": {
-          "enum": [
-            "Invalid",
-            "Running",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Paused",
-            "Scheduled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
-    "JobList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Job"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "JobProperties": {
-      "required": [
-        "jobType"
-      ],
-      "type": "object",
-      "properties": {
-        "jobType": {
-          "enum": [
-            "Backup",
-            "Clone",
-            "Failover",
-            "DownloadUpdates",
-            "InstallUpdates"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": false
-          }
-        },
-        "targetId": {
-          "type": "string"
-        },
-        "entityId": {
-          "type": "string"
-        },
-        "entityType": {
-          "type": "string"
-        },
-        "jobStages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobStage"
-          }
-        },
-        "deviceId": {
-          "type": "string"
-        },
-        "isCancellable": {
-          "type": "boolean"
-        },
-        "stats": {
-          "$ref": "#/definitions/JobStats"
-        },
-        "targetType": {
-          "enum": [
-            "FileServer",
-            "DiskServer"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TargetType",
-            "modelAsString": false
-          }
-        },
-        "sourceDeviceId": {
-          "type": "string"
-        },
-        "backupPointInTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "downloadProgress": {
-          "$ref": "#/definitions/UpdateDownloadProgress"
-        },
-        "installProgress": {
-          "$ref": "#/definitions/UpdateInstallProgress"
-        }
-      }
-    },
-    "JobStage": {
-      "required": [
-        "stageStatus"
-      ],
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string"
-        },
-        "stageStatus": {
-          "enum": [
-            "Invalid",
-            "Running",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Paused",
-            "Scheduled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": false
-          }
-        },
-        "detail": {
-          "type": "string"
-        },
-        "errorCode": {
-          "type": "string"
-        }
-      }
-    },
-    "JobStats": {
-      "type": "object",
-      "properties": {
-        "completedWorkItemCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "totalWorkItemCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "estimatedTimeRemaining": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "Key": {
-      "required": [
-        "activationKey"
-      ],
-      "type": "object",
-      "properties": {
-        "activationKey": {
-          "type": "string"
-        }
-      }
-    },
-    "Manager": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagerProperties",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string"
-        }
-      }
-    },
-    "ManagerExtendedInfo": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagerExtendedInfoProperties",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string"
-        }
-      }
-    },
-    "ManagerExtendedInfoProperties": {
-      "required": [
-        "integrityKey",
-        "algorithm"
-      ],
-      "type": "object",
-      "properties": {
-        "version": {
-          "type": "string"
-        },
-        "integrityKey": {
-          "type": "string"
-        },
-        "encryptionKey": {
-          "type": "string"
-        },
-        "encryptionKeyThumbprint": {
-          "type": "string"
-        },
-        "portalCertificateThumbprint": {
-          "type": "string"
-        },
-        "algorithm": {
-          "type": "string"
-        }
-      }
-    },
-    "ManagerIntrinsicSettings": {
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "GardaV1",
-            "HelsinkiV1"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ManagerType",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "ManagerList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Manager"
-          }
-        }
-      }
-    },
-    "ManagerProperties": {
-      "type": "object",
-      "properties": {
-        "cisIntrinsicSettings": {
-          "$ref": "#/definitions/ManagerIntrinsicSettings"
-        },
-        "sku": {
-          "$ref": "#/definitions/ManagerSku"
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ManagerSku": {
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "enum": [
-            "Standard"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ManagerSkuType",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "MetricAvailablity": {
-      "required": [
-        "timeGrain",
-        "retention"
-      ],
-      "type": "object",
-      "properties": {
-        "timeGrain": {
-          "type": "string"
-        },
-        "retention": {
-          "type": "string"
-        }
-      }
-    },
-    "MetricData": {
-      "required": [
-        "timeStamp",
-        "sum",
-        "count",
-        "average",
-        "minimum",
-        "maximum"
-      ],
-      "type": "object",
-      "properties": {
-        "timeStamp": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "sum": {
-          "format": "double",
-          "type": "number"
-        },
-        "count": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "average": {
-          "format": "double",
-          "type": "number"
-        },
-        "minimum": {
-          "format": "double",
-          "type": "number"
-        },
-        "maximum": {
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
-    "MetricDefinition": {
-      "required": [
-        "name",
-        "unit",
-        "primaryAggregationType",
-        "resourceId",
-        "metricAvailabilities",
-        "dimensions",
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/MetricName"
-        },
-        "unit": {
-          "enum": [
-            "Bytes",
-            "BytesPerSecond",
-            "Count",
-            "CountPerSecond",
-            "Percent",
-            "Seconds"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MetricUnit",
-            "modelAsString": false
-          }
-        },
-        "primaryAggregationType": {
-          "enum": [
-            "Average",
-            "Last",
-            "Maximum",
-            "Minimum",
-            "None",
-            "Total"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MetricAggregationType",
-            "modelAsString": false
-          }
-        },
-        "resourceId": {
-          "type": "string"
-        },
-        "metricAvailabilities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricAvailablity"
-          }
-        },
-        "dimensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricDimension"
-          }
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
-    "MetricDefinitionList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricDefinition"
-          }
-        }
-      }
-    },
-    "MetricDimension": {
-      "required": [
-        "name",
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        }
-      }
-    },
-    "MetricFilter": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/MetricNameFilter"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "timeGrain": {
-          "type": "string"
-        }
-      }
-    },
-    "MetricList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Metrics"
-          }
-        }
-      }
-    },
-    "MetricName": {
-      "required": [
-        "value",
-        "localizedValue"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string"
-        },
-        "localizedValue": {
-          "type": "string"
-        }
-      }
-    },
-    "MetricNameFilter": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string"
-        }
-      }
-    },
-    "Metrics": {
-      "required": [
-        "resourceId",
-        "startTime",
-        "endTime",
-        "timeGrain",
-        "primaryAggregation",
-        "name",
-        "dimensions",
-        "unit",
-        "type",
-        "values"
-      ],
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "timeGrain": {
-          "type": "string"
-        },
-        "primaryAggregation": {
-          "enum": [
-            "Average",
-            "Last",
-            "Maximum",
-            "Minimum",
-            "None",
-            "Total"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MetricAggregationType",
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "$ref": "#/definitions/MetricName"
-        },
-        "dimensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricDimension"
-          }
-        },
-        "unit": {
-          "enum": [
-            "Bytes",
-            "BytesPerSecond",
-            "Count",
-            "CountPerSecond",
-            "Percent",
-            "Seconds"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MetricUnit",
-            "modelAsString": false
-          }
-        },
-        "type": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricData"
-          }
-        }
-      }
-    },
-    "NetworkAdapter": {
-      "required": [
-        "networkAdapterName",
-        "dhcpStatus"
-      ],
-      "type": "object",
-      "properties": {
-        "networkAdapterName": {
-          "type": "string"
-        },
-        "iPv4Info": {
-          "$ref": "#/definitions/IPConfig"
-        },
-        "iPv6Info": {
-          "$ref": "#/definitions/IPConfig"
-        },
-        "dhcpStatus": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DhcpStatus",
-            "modelAsString": false
-          }
-        },
-        "linkSpeed": {
-          "format": "int64",
-          "type": "integer"
-        }
-      }
-    },
-    "NetworkSettings": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkSettingsProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "NetworkSettingsProperties": {
-      "required": [
-        "primaryDNSServer",
-        "nodeNetworks"
-      ],
-      "type": "object",
-      "properties": {
-        "primaryDNSServer": {
-          "type": "string"
-        },
-        "secondaryDNSServer": {
-          "type": "string"
-        },
-        "nodeNetworks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeNetwork"
-          }
-        }
-      }
-    },
-    "NodeNetwork": {
-      "required": [
-        "networkAdapters"
-      ],
-      "type": "object",
-      "properties": {
-        "networkAdapters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkAdapter"
-          }
-        }
-      }
-    },
-    "RawCertificateData": {
-      "required": [
-        "certificate"
-      ],
-      "type": "object",
-      "properties": {
-        "authType": {
-          "enum": [
-            "Invalid",
-            "AccessControlService",
-            "AzureActiveDirectory"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AuthType",
-            "modelAsString": false
-          }
-        },
-        "certificate": {
-          "type": "string"
-        }
-      }
-    },
-    "RegistrationCertificate": {
-      "required": [
-        "certificate"
-      ],
-      "type": "object",
-      "properties": {
-        "certificate": {
-          "type": "string"
-        }
-      }
-    },
-    "Resource": {
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
+          "initiatorName": {
             "type": "string"
           }
         }
       },
-      "x-ms-azure-resource": true
-    },
-    "ResourceCertificateAndAADDetails": {
-      "required": [
-        "certificate",
-        "resourceId",
-        "aadAuthority",
-        "aadTenantId",
-        "servicePrincipalClientId",
-        "servicePrincipalObjectId",
-        "azureManagementEndpointAudience",
-        "subject",
-        "validFrom",
-        "validTo",
-        "thumbprint",
-        "friendlyName",
-        "issuer"
-      ],
-      "type": "object",
-      "properties": {
-        "authType": {
-          "enum": [
-            "Invalid",
-            "AccessControlService",
-            "AzureActiveDirectory"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AuthType",
-            "modelAsString": false
+      "Alert": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
           }
-        },
-        "certificate": {
-          "type": "string"
-        },
-        "resourceId": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "aadAuthority": {
-          "type": "string"
-        },
-        "aadTenantId": {
-          "type": "string"
-        },
-        "servicePrincipalClientId": {
-          "type": "string"
-        },
-        "servicePrincipalObjectId": {
-          "type": "string"
-        },
-        "azureManagementEndpointAudience": {
-          "type": "string"
-        },
-        "subject": {
-          "type": "string"
-        },
-        "validFrom": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "validTo": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "thumbprint": {
-          "type": "string"
-        },
-        "friendlyName": {
-          "type": "string"
-        },
-        "issuer": {
-          "type": "string"
-        }
-      }
-    },
-    "SecuritySettings": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
+        ],
         "properties": {
-          "$ref": "#/definitions/SecuritySettingsProperties",
-          "x-ms-client-flatten": true
+          "properties": {
+            "$ref": "#/definitions/AlertProperties",
+            "x-ms-client-flatten": true
+          }
         }
-      }
-    },
-    "SecuritySettingsProperties": {
-      "required": [
-        "deviceAdminPassword"
-      ],
-      "type": "object",
-      "properties": {
-        "deviceAdminPassword": {
-          "$ref": "#/definitions/AsymmetricEncryptedSecret"
+      },
+      "AlertErrorDetails": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string"
+          },
+          "errorMessage": {
+            "type": "string"
+          },
+          "occurences": {
+            "format": "int32",
+            "type": "integer"
+          }
         }
-      }
-    },
-    "SendTestAlertEmailRequest": {
-      "required": [
-        "emailList"
-      ],
-      "type": "object",
-      "properties": {
-        "emailList": {
-          "type": "array",
-          "items": {
+      },
+      "AlertFilter": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "Active",
+              "Cleared"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AlertStatus",
+              "modelAsString": false
+            }
+          },
+          "severity": {
+            "enum": [
+              "Informational",
+              "Warning",
+              "Critical"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AlertSeverity",
+              "modelAsString": false
+            }
+          },
+          "sourceType": {
+            "enum": [
+              "Resource",
+              "Device"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AlertSourceType",
+              "modelAsString": false
+            }
+          },
+          "sourceName": {
+            "type": "string"
+          },
+          "appearedOnTime": {
+            "format": "date-time",
             "type": "string"
           }
         }
-      }
-    },
-    "StorageAccountCredential": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
+      },
+      "AlertList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
         "properties": {
-          "$ref": "#/definitions/StorageAccountCredentialProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "StorageAccountCredentialList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageAccountCredential"
-          }
-        }
-      }
-    },
-    "StorageAccountCredentialProperties": {
-      "required": [
-        "cloudType",
-        "endPoint",
-        "login",
-        "enableSSL"
-      ],
-      "type": "object",
-      "properties": {
-        "cloudType": {
-          "enum": [
-            "Azure",
-            "S3",
-            "S3_RRS",
-            "OpenStack",
-            "HP"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CloudType",
-            "modelAsString": false
-          }
-        },
-        "endPoint": {
-          "type": "string"
-        },
-        "login": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "enableSSL": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SslStatus",
-            "modelAsString": false
-          }
-        },
-        "accessKey": {
-          "$ref": "#/definitions/AsymmetricEncryptedSecret"
-        }
-      }
-    },
-    "StorageDomain": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StorageDomainProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "StorageDomainList": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageDomain"
-          }
-        }
-      }
-    },
-    "StorageDomainProperties": {
-      "required": [
-        "storageAccountCredentialIds",
-        "encryptionStatus"
-      ],
-      "type": "object",
-      "properties": {
-        "storageAccountCredentialIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "encryptionKey": {
-          "$ref": "#/definitions/AsymmetricEncryptedSecret"
-        },
-        "encryptionStatus": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EncryptionStatus",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "SupportPackageRequest": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SupportPackageRequestProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SupportPackageRequestProperties": {
-      "required": [
-        "sdpPassKey"
-      ],
-      "type": "object",
-      "properties": {
-        "sdpPassKey": {
-          "type": "string"
-        },
-        "packageType": {
-          "enum": [
-            "None",
-            "IncludeDefault",
-            "IncludeAll",
-            "Mini",
-            "Custom"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SupportPackageType",
-            "modelAsString": false
-          }
-        },
-        "endTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "includeArchived": {
-          "type": "boolean"
-        },
-        "sourceType": {
-          "enum": [
-            "None",
-            "OpsTriggered",
-            "ClientTriggered"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SupportPackageSourceType",
-            "modelAsString": false
-          }
-        },
-        "customIncludeList": {
-          "type": "array",
-          "items": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "nextLink": {
             "type": "string"
           }
         }
-      }
-    },
-    "SymmetricEncryptedSecret": {
-      "required": [
-        "value",
-        "encryptionAlgorithm"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string"
-        },
-        "valueCertificateThumbprint": {
-          "type": "string"
-        },
-        "encryptionAlgorithm": {
-          "enum": [
-            "None",
-            "AES256",
-            "RSAES_PKCS1_v_1_5"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EncryptionAlgorithm",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "Time": {
-      "required": [
-        "hour",
-        "minute"
-      ],
-      "type": "object",
-      "properties": {
-        "hour": {
-          "format": "int32",
-          "maximum": 23,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "minute": {
-          "format": "int32",
-          "maximum": 59,
-          "minimum": 0,
-          "type": "integer"
-        }
-      }
-    },
-    "TimeSettings": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
+      },
+      "AlertProperties": {
+        "required": [
+          "title",
+          "scope",
+          "alertType",
+          "appearedAtTime",
+          "appearedAtSourceTime",
+          "source",
+          "severity",
+          "status"
+        ],
+        "type": "object",
         "properties": {
-          "$ref": "#/definitions/TimeSettingsProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TimeSettingsProperties": {
-      "required": [
-        "timeZone",
-        "primaryTimeServer"
-      ],
-      "type": "object",
-      "properties": {
-        "timeZone": {
-          "type": "string"
-        },
-        "primaryTimeServer": {
-          "type": "string"
-        },
-        "secondaryTimeServer": {
-          "type": "string"
-        }
-      }
-    },
-    "UpdateDownloadProgress": {
-      "type": "object",
-      "properties": {
-        "downloadPhase": {
-          "enum": [
-            "Unknown",
-            "Initializing",
-            "Downloading",
-            "Verifying"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DownloadPhase",
-            "modelAsString": false
+          "title": {
+            "type": "string"
+          },
+          "scope": {
+            "enum": [
+              "Resource",
+              "Device"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AlertScope",
+              "modelAsString": false
+            }
+          },
+          "alertType": {
+            "type": "string"
+          },
+          "appearedAtTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "appearedAtSourceTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "clearedAtTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "clearedAtSourceTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/definitions/AlertSource"
+          },
+          "recommendation": {
+            "type": "string"
+          },
+          "resolutionReason": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "Informational",
+              "Warning",
+              "Critical"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AlertSeverity",
+              "modelAsString": false
+            }
+          },
+          "status": {
+            "enum": [
+              "Active",
+              "Cleared"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AlertStatus",
+              "modelAsString": false
+            }
+          },
+          "errorDetails": {
+            "$ref": "#/definitions/AlertErrorDetails"
+          },
+          "detailedInformation": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
-        },
-        "percentComplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "totalBytesToDownload": {
-          "format": "double",
-          "type": "number"
-        },
-        "totalBytesDownloaded": {
-          "format": "double",
-          "type": "number"
-        },
-        "numberOfUpdatesToDownload": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfUpdatesDownloaded": {
-          "format": "int32",
-          "type": "integer"
         }
-      }
-    },
-    "UpdateInstallProgress": {
-      "type": "object",
-      "properties": {
-        "percentComplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfUpdatesToInstall": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfUpdatesInstalled": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "Updates": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
+      },
+      "AlertSettings": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
         "properties": {
-          "$ref": "#/definitions/UpdatesProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "UpdatesProperties": {
-      "type": "object",
-      "properties": {
-        "deviceVersion": {
-          "type": "string"
-        },
-        "deviceLastScannedTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "regularUpdatesAvailable": {
-          "type": "boolean"
-        },
-        "rebootRequiredForInstall": {
-          "type": "boolean"
-        },
-        "totalItemsPendingForDownload": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "totalItemsPendingForInstall": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "status": {
-          "enum": [
-            "Idle",
-            "Scanning",
-            "Downloading",
-            "Installing"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UpdateOperation",
-            "modelAsString": false
+          "properties": {
+            "$ref": "#/definitions/AlertSettingsProperties",
+            "x-ms-client-flatten": true
           }
-        },
-        "lastCompletedScanTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastCompletedDownloadJobTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastCompletedInstallJobTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "inProgressDownloadJobId": {
-          "type": "string"
-        },
-        "inProgressInstallJobId": {
-          "type": "string"
-        },
-        "inProgressScanStartedTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "inProgressDownloadJobStartedTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "inProgressInstallJobStartedTime": {
-          "format": "date-time",
-          "type": "string"
         }
-      }
-    },
-    "UploadCertificateRequest": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
+      },
+      "AlertSettingsProperties": {
+        "required": [
+          "emailNotification",
+          "notificationToServiceOwners",
+          "alertNotificationCulture"
+        ],
+        "type": "object",
         "properties": {
-          "$ref": "#/definitions/RawCertificateData",
-          "x-ms-client-flatten": true
-        },
-        "contractVersion": {
-          "enum": [
-            "InvalidVersion",
-            "V2011_09",
-            "V2012_02",
-            "V2012_05",
-            "V2012_12",
-            "V2013_04",
-            "V2013_10",
-            "V2013_11",
-            "V2014_04",
-            "V2014_06",
-            "V2014_07",
-            "V2014_09",
-            "V2014_10",
-            "V2014_12",
-            "V2015_01",
-            "V2015_02",
-            "V2015_04",
-            "V2015_05",
-            "V2015_06",
-            "V2015_07",
-            "V2015_08",
-            "V2015_10",
-            "V2015_12",
-            "V2016_01",
-            "V2016_02",
-            "V2016_04",
-            "V2016_05",
-            "V2016_07",
-            "V2016_08"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ContractVersions",
-            "modelAsString": false
+          "emailNotification": {
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AlertEmailNotificationStatus",
+              "modelAsString": false
+            }
+          },
+          "notificationToServiceOwners": {
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ServiceOwnersAlertNotificationStatus",
+              "modelAsString": false
+            }
+          },
+          "alertNotificationCulture": {
+            "type": "string"
+          },
+          "additionalRecipientEmailList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
-      }
-    },
-    "UploadCertificateResponse": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseModel"
-        }
-      ],
-      "properties": {
+      },
+      "AlertSource": {
+        "type": "object",
         "properties": {
-          "$ref": "#/definitions/ResourceCertificateAndAADDetails",
-          "x-ms-client-flatten": true
+          "name": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          },
+          "alertSourceType": {
+            "enum": [
+              "Resource",
+              "Device"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AlertSourceType",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "AsymmetricEncryptedSecret": {
+        "required": [
+          "value",
+          "encryptionAlgorithm"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "encryptionCertificateThumbprint": {
+            "type": "string"
+          },
+          "encryptionAlgorithm": {
+            "enum": [
+              "None",
+              "AES256",
+              "RSAES_PKCS1_v_1_5"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithm",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "AvailableProviderOperation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "display": {
+            "$ref": "#/definitions/AvailableProviderOperationDisplay"
+          },
+          "origin": {
+            "type": "string"
+          },
+          "properties": {
+            "$ref": "#/definitions/AvailableProviderOperationProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "AvailableProviderOperationDisplay": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string"
+          },
+          "resource": {
+            "type": "string"
+          },
+          "operation": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "AvailableProviderOperationProperties": {
+        "type": "object",
+        "properties": {}
+      },
+      "AvailableProviderOperations": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AvailableProviderOperation"
+            }
+          },
+          "nextLink": {
+            "type": "string"
+          }
+        }
+      },
+      "Backup": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/BackupProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "BackupElement": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/BackupElementProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "BackupElementProperties": {
+        "required": [
+          "sizeInBytes",
+          "endpointName",
+          "dataPolicy"
+        ],
+        "type": "object",
+        "properties": {
+          "sizeInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "endpointName": {
+            "type": "string"
+          },
+          "dataPolicy": {
+            "enum": [
+              "Invalid",
+              "Local",
+              "Tiered",
+              "Cloud"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DataPolicy",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "BackupFilter": {
+        "type": "object",
+        "properties": {
+          "initiatedBy": {
+            "enum": [
+              "Manual",
+              "Scheduled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "InitiatedBy",
+              "modelAsString": false
+            }
+          },
+          "createdTime": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "BackupList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Backup"
+            }
+          },
+          "nextLink": {
+            "type": "string"
+          }
+        }
+      },
+      "BackupProperties": {
+        "required": [
+          "sizeInBytes",
+          "initiatedBy",
+          "deviceId",
+          "elements"
+        ],
+        "type": "object",
+        "properties": {
+          "targetId": {
+            "type": "string"
+          },
+          "targetType": {
+            "type": "string"
+          },
+          "sizeInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "createdTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "expirationTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiatedBy": {
+            "enum": [
+              "Manual",
+              "Scheduled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "InitiatedBy",
+              "modelAsString": false
+            }
+          },
+          "deviceId": {
+            "type": "string"
+          },
+          "elements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/BackupElement"
+            }
+          }
+        }
+      },
+      "BackupScheduleGroup": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/BackupScheduleGroupProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "BackupScheduleGroupList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/BackupScheduleGroup"
+            }
+          }
+        }
+      },
+      "BackupScheduleGroupProperties": {
+        "required": [
+          "startTime"
+        ],
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "$ref": "#/definitions/Time"
+          }
+        }
+      },
+      "BaseModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "ChapProperties": {
+        "required": [
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "password": {
+            "$ref": "#/definitions/AsymmetricEncryptedSecret"
+          }
+        }
+      },
+      "ChapSettings": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ChapProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "ChapSettingsList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ChapSettings"
+            }
+          }
+        }
+      },
+      "ClearAlertRequest": {
+        "required": [
+          "alerts"
+        ],
+        "type": "object",
+        "properties": {
+          "resolutionMessage": {
+            "type": "string"
+          },
+          "alerts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CloneRequest": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/CloneRequestProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "CloneRequestProperties": {
+        "required": [
+          "targetDeviceId",
+          "targetAccessPointId",
+          "newEndpointName"
+        ],
+        "type": "object",
+        "properties": {
+          "targetDeviceId": {
+            "type": "string"
+          },
+          "targetAccessPointId": {
+            "type": "string"
+          },
+          "newEndpointName": {
+            "type": "string"
+          },
+          "share": {
+            "$ref": "#/definitions/FileShare"
+          },
+          "disk": {
+            "$ref": "#/definitions/ISCSIDisk"
+          }
+        }
+      },
+      "Device": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/DeviceProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "DeviceDetails": {
+        "type": "object",
+        "properties": {
+          "endpointCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "totalStorageInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "totalLocalStorageInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "provisionedStorageInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "provisionedLocalStorageInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "usingStorageInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "usingLocalStorageInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "totalBackupSizeInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "availableStorageInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "availableLocalStorageInBytes": {
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      },
+      "DeviceList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        }
+      },
+      "DevicePatch": {
+        "type": "object",
+        "properties": {
+          "deviceDescription": {
+            "type": "string"
+          }
+        }
+      },
+      "DeviceProperties": {
+        "type": "object",
+        "properties": {
+          "activationTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "allowedDeviceOperations": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "None",
+                "Delete",
+                "DeleteWithWarning",
+                "DRSource",
+                "DRTarget",
+                "Browsable",
+                "ReadOnlyForDR",
+                "Deactivate"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DeviceOperation",
+                "modelAsString": false
+              }
+            }
+          },
+          "culture": {
+            "type": "string"
+          },
+          "deviceCapabilities": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "Invalid",
+                "FileServer",
+                "IscsiServer"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "SupportedDeviceCapabilities",
+                "modelAsString": false
+              }
+            }
+          },
+          "deviceDescription": {
+            "type": "string"
+          },
+          "domainName": {
+            "type": "string"
+          },
+          "deviceSoftwareVersion": {
+            "type": "string"
+          },
+          "friendlySoftwareName": {
+            "type": "string"
+          },
+          "deviceConfigurationStatus": {
+            "enum": [
+              "Complete",
+              "Pending"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DeviceConfigurationStatus",
+              "modelAsString": false
+            }
+          },
+          "modelDescription": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "Unknown",
+              "Online",
+              "Offline",
+              "RequiresAttention",
+              "MaintenanceMode",
+              "Creating",
+              "Provisioning",
+              "Deleted",
+              "ReadyToSetup",
+              "Deactivated",
+              "Deactivating"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DeviceStatus",
+              "modelAsString": false
+            }
+          },
+          "type": {
+            "enum": [
+              "Invalid",
+              "Appliance",
+              "VirtualAppliance",
+              "Series9000OnPremVirtualAppliance",
+              "Series9000VirtualAppliance",
+              "Series9000PhysicalAppliance"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DeviceType",
+              "modelAsString": false
+            }
+          },
+          "details": {
+            "$ref": "#/definitions/DeviceDetails"
+          }
+        }
+      },
+      "EncryptionSettings": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/EncryptionSettingsProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "EncryptionSettingsProperties": {
+        "required": [
+          "encryptionStatus",
+          "keyRolloverStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "encryptionStatus": {
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "EncryptionStatus",
+              "modelAsString": false
+            }
+          },
+          "keyRolloverStatus": {
+            "enum": [
+              "Required",
+              "NotRequired"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "KeyRolloverStatus",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "FailoverRequest": {
+        "type": "object",
+        "properties": {
+          "accesspointIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "targetDeviceId": {
+            "type": "string"
+          },
+          "skipValidation": {
+            "type": "boolean"
+          },
+          "keepSourceDevice": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FileServer": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/FileServerProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "FileServerList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FileServer"
+            }
+          }
+        }
+      },
+      "FileServerProperties": {
+        "required": [
+          "domainName",
+          "storageDomainId",
+          "backupScheduleGroupId"
+        ],
+        "type": "object",
+        "properties": {
+          "domainName": {
+            "type": "string"
+          },
+          "storageDomainId": {
+            "type": "string"
+          },
+          "backupScheduleGroupId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "FileShare": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/FileShareProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "FileShareList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FileShare"
+            }
+          }
+        }
+      },
+      "FileShareProperties": {
+        "required": [
+          "shareStatus",
+          "dataPolicy",
+          "adminUser",
+          "provisionedCapacityInBytes",
+          "monitoringStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "shareStatus": {
+            "enum": [
+              "Online",
+              "Offline"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ShareStatus",
+              "modelAsString": false
+            }
+          },
+          "dataPolicy": {
+            "enum": [
+              "Invalid",
+              "Local",
+              "Tiered",
+              "Cloud"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DataPolicy",
+              "modelAsString": false
+            }
+          },
+          "adminUser": {
+            "type": "string"
+          },
+          "provisionedCapacityInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "usedCapacityInBytes": {
+            "format": "int64",
+            "type": "integer",
+            "readOnly": true
+          },
+          "localUsedCapacityInBytes": {
+            "format": "int64",
+            "type": "integer",
+            "readOnly": true
+          },
+          "monitoringStatus": {
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MonitoringStatus",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "IPConfig": {
+        "required": [
+          "ipAddress",
+          "gateway"
+        ],
+        "type": "object",
+        "properties": {
+          "ipAddress": {
+            "type": "string"
+          },
+          "prefixLength": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "gateway": {
+            "type": "string"
+          }
+        }
+      },
+      "ISCSIDisk": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ISCSIDiskProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "ISCSIDiskList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ISCSIDisk"
+            }
+          }
+        }
+      },
+      "ISCSIDiskProperties": {
+        "required": [
+          "diskStatus",
+          "accessControlRecords",
+          "dataPolicy",
+          "provisionedCapacityInBytes",
+          "monitoringStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "diskStatus": {
+            "enum": [
+              "Online",
+              "Offline"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DiskStatus",
+              "modelAsString": false
+            }
+          },
+          "accessControlRecords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dataPolicy": {
+            "enum": [
+              "Invalid",
+              "Local",
+              "Tiered",
+              "Cloud"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DataPolicy",
+              "modelAsString": false
+            }
+          },
+          "provisionedCapacityInBytes": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "usedCapacityInBytes": {
+            "format": "int64",
+            "type": "integer",
+            "readOnly": true
+          },
+          "localUsedCapacityInBytes": {
+            "format": "int64",
+            "type": "integer",
+            "readOnly": true
+          },
+          "monitoringStatus": {
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MonitoringStatus",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "ISCSIServer": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ISCSIServerProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "ISCSIServerList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ISCSIServer"
+            }
+          }
+        }
+      },
+      "ISCSIServerProperties": {
+        "required": [
+          "storageDomainId",
+          "backupScheduleGroupId"
+        ],
+        "type": "object",
+        "properties": {
+          "storageDomainId": {
+            "type": "string"
+          },
+          "backupScheduleGroupId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "chapId": {
+            "type": "string"
+          },
+          "reverseChapId": {
+            "type": "string"
+          }
+        }
+      },
+      "Job": {
+        "required": [
+          "status",
+          "percentComplete"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "Invalid",
+              "Running",
+              "Succeeded",
+              "Failed",
+              "Canceled",
+              "Paused",
+              "Scheduled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobStatus",
+              "modelAsString": false
+            }
+          },
+          "startTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "percentComplete": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "error": {
+            "$ref": "#/definitions/JobErrorDetails"
+          },
+          "properties": {
+            "$ref": "#/definitions/JobProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "JobErrorDetails": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "errorDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/JobErrorItem"
+            }
+          },
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "JobErrorItem": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "JobFilter": {
+        "required": [
+          "jobType",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "jobType": {
+            "enum": [
+              "Backup",
+              "Clone",
+              "Failover",
+              "DownloadUpdates",
+              "InstallUpdates"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobType",
+              "modelAsString": false
+            }
+          },
+          "status": {
+            "enum": [
+              "Invalid",
+              "Running",
+              "Succeeded",
+              "Failed",
+              "Canceled",
+              "Paused",
+              "Scheduled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobStatus",
+              "modelAsString": false
+            }
+          },
+          "startTime": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "JobList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "nextLink": {
+            "type": "string"
+          }
+        }
+      },
+      "JobProperties": {
+        "required": [
+          "jobType"
+        ],
+        "type": "object",
+        "properties": {
+          "jobType": {
+            "enum": [
+              "Backup",
+              "Clone",
+              "Failover",
+              "DownloadUpdates",
+              "InstallUpdates"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobType",
+              "modelAsString": false
+            }
+          },
+          "targetId": {
+            "type": "string"
+          },
+          "entityId": {
+            "type": "string"
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "jobStages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/JobStage"
+            }
+          },
+          "deviceId": {
+            "type": "string"
+          },
+          "isCancellable": {
+            "type": "boolean"
+          },
+          "stats": {
+            "$ref": "#/definitions/JobStats"
+          },
+          "targetType": {
+            "enum": [
+              "FileServer",
+              "DiskServer"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "TargetType",
+              "modelAsString": false
+            }
+          },
+          "sourceDeviceId": {
+            "type": "string"
+          },
+          "backupPointInTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "downloadProgress": {
+            "$ref": "#/definitions/UpdateDownloadProgress"
+          },
+          "installProgress": {
+            "$ref": "#/definitions/UpdateInstallProgress"
+          }
+        }
+      },
+      "JobStage": {
+        "required": [
+          "stageStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "stageStatus": {
+            "enum": [
+              "Invalid",
+              "Running",
+              "Succeeded",
+              "Failed",
+              "Canceled",
+              "Paused",
+              "Scheduled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobStatus",
+              "modelAsString": false
+            }
+          },
+          "detail": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string"
+          }
+        }
+      },
+      "JobStats": {
+        "type": "object",
+        "properties": {
+          "completedWorkItemCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "totalWorkItemCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "estimatedTimeRemaining": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "Key": {
+        "required": [
+          "activationKey"
+        ],
+        "type": "object",
+        "properties": {
+          "activationKey": {
+            "type": "string"
+          }
+        }
+      },
+      "Manager": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ManagerProperties",
+            "x-ms-client-flatten": true
+          },
+          "etag": {
+            "type": "string"
+          }
+        }
+      },
+      "ManagerExtendedInfo": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ManagerExtendedInfoProperties",
+            "x-ms-client-flatten": true
+          },
+          "etag": {
+            "type": "string"
+          }
+        }
+      },
+      "ManagerExtendedInfoProperties": {
+        "required": [
+          "integrityKey",
+          "algorithm"
+        ],
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "integrityKey": {
+            "type": "string"
+          },
+          "encryptionKey": {
+            "type": "string"
+          },
+          "encryptionKeyThumbprint": {
+            "type": "string"
+          },
+          "portalCertificateThumbprint": {
+            "type": "string"
+          },
+          "algorithm": {
+            "type": "string"
+          }
+        }
+      },
+      "ManagerIntrinsicSettings": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "GardaV1",
+              "HelsinkiV1"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ManagerType",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "ManagerList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Manager"
+            }
+          }
+        }
+      },
+      "ManagerProperties": {
+        "type": "object",
+        "properties": {
+          "cisIntrinsicSettings": {
+            "$ref": "#/definitions/ManagerIntrinsicSettings"
+          },
+          "sku": {
+            "$ref": "#/definitions/ManagerSku"
+          },
+          "provisioningState": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "ManagerSku": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "enum": [
+              "Standard"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ManagerSkuType",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "MetricAvailablity": {
+        "required": [
+          "timeGrain",
+          "retention"
+        ],
+        "type": "object",
+        "properties": {
+          "timeGrain": {
+            "type": "string"
+          },
+          "retention": {
+            "type": "string"
+          }
+        }
+      },
+      "MetricData": {
+        "required": [
+          "timeStamp",
+          "sum",
+          "count",
+          "average",
+          "minimum",
+          "maximum"
+        ],
+        "type": "object",
+        "properties": {
+          "timeStamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "sum": {
+            "format": "double",
+            "type": "number"
+          },
+          "count": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "average": {
+            "format": "double",
+            "type": "number"
+          },
+          "minimum": {
+            "format": "double",
+            "type": "number"
+          },
+          "maximum": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "MetricDefinition": {
+        "required": [
+          "name",
+          "unit",
+          "primaryAggregationType",
+          "resourceId",
+          "metricAvailabilities",
+          "dimensions",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/definitions/MetricName"
+          },
+          "unit": {
+            "enum": [
+              "Bytes",
+              "BytesPerSecond",
+              "Count",
+              "CountPerSecond",
+              "Percent",
+              "Seconds"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MetricUnit",
+              "modelAsString": false
+            }
+          },
+          "primaryAggregationType": {
+            "enum": [
+              "Average",
+              "Last",
+              "Maximum",
+              "Minimum",
+              "None",
+              "Total"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MetricAggregationType",
+              "modelAsString": false
+            }
+          },
+          "resourceId": {
+            "type": "string"
+          },
+          "metricAvailabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/MetricAvailablity"
+            }
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/MetricDimension"
+            }
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "MetricDefinitionList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/MetricDefinition"
+            }
+          }
+        }
+      },
+      "MetricDimension": {
+        "required": [
+          "name",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "MetricFilter": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/definitions/MetricNameFilter"
+          },
+          "startTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "timeGrain": {
+            "type": "string"
+          }
+        }
+      },
+      "MetricList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Metrics"
+            }
+          }
+        }
+      },
+      "MetricName": {
+        "required": [
+          "value",
+          "localizedValue"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "localizedValue": {
+            "type": "string"
+          }
+        }
+      },
+      "MetricNameFilter": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "Metrics": {
+        "required": [
+          "resourceId",
+          "startTime",
+          "endTime",
+          "timeGrain",
+          "primaryAggregation",
+          "name",
+          "dimensions",
+          "unit",
+          "type",
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "resourceId": {
+            "type": "string"
+          },
+          "startTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "timeGrain": {
+            "type": "string"
+          },
+          "primaryAggregation": {
+            "enum": [
+              "Average",
+              "Last",
+              "Maximum",
+              "Minimum",
+              "None",
+              "Total"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MetricAggregationType",
+              "modelAsString": false
+            }
+          },
+          "name": {
+            "$ref": "#/definitions/MetricName"
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/MetricDimension"
+            }
+          },
+          "unit": {
+            "enum": [
+              "Bytes",
+              "BytesPerSecond",
+              "Count",
+              "CountPerSecond",
+              "Percent",
+              "Seconds"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MetricUnit",
+              "modelAsString": false
+            }
+          },
+          "type": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/MetricData"
+            }
+          }
+        }
+      },
+      "NetworkAdapter": {
+        "required": [
+          "networkAdapterName",
+          "dhcpStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "networkAdapterName": {
+            "type": "string"
+          },
+          "iPv4Info": {
+            "$ref": "#/definitions/IPConfig"
+          },
+          "iPv6Info": {
+            "$ref": "#/definitions/IPConfig"
+          },
+          "dhcpStatus": {
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DhcpStatus",
+              "modelAsString": false
+            }
+          },
+          "linkSpeed": {
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      },
+      "NetworkSettings": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/NetworkSettingsProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "NetworkSettingsProperties": {
+        "required": [
+          "primaryDNSServer",
+          "nodeNetworks"
+        ],
+        "type": "object",
+        "properties": {
+          "primaryDNSServer": {
+            "type": "string"
+          },
+          "secondaryDNSServer": {
+            "type": "string"
+          },
+          "nodeNetworks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/NodeNetwork"
+            }
+          }
+        }
+      },
+      "NodeNetwork": {
+        "required": [
+          "networkAdapters"
+        ],
+        "type": "object",
+        "properties": {
+          "networkAdapters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/NetworkAdapter"
+            }
+          }
+        }
+      },
+      "RawCertificateData": {
+        "required": [
+          "certificate"
+        ],
+        "type": "object",
+        "properties": {
+          "authType": {
+            "enum": [
+              "Invalid",
+              "AccessControlService",
+              "AzureActiveDirectory"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AuthType",
+              "modelAsString": false
+            }
+          },
+          "certificate": {
+            "type": "string"
+          }
+        }
+      },
+      "RegistrationCertificate": {
+        "required": [
+          "certificate"
+        ],
+        "type": "object",
+        "properties": {
+          "certificate": {
+            "type": "string"
+          }
+        }
+      },
+      "Resource": {
+        "required": [
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
         },
-        "contractVersion": {
-          "enum": [
-            "InvalidVersion",
-            "V2011_09",
-            "V2012_02",
-            "V2012_05",
-            "V2012_12",
-            "V2013_04",
-            "V2013_10",
-            "V2013_11",
-            "V2014_04",
-            "V2014_06",
-            "V2014_07",
-            "V2014_09",
-            "V2014_10",
-            "V2014_12",
-            "V2015_01",
-            "V2015_02",
-            "V2015_04",
-            "V2015_05",
-            "V2015_06",
-            "V2015_07",
-            "V2015_08",
-            "V2015_10",
-            "V2015_12",
-            "V2016_01",
-            "V2016_02",
-            "V2016_04",
-            "V2016_05",
-            "V2016_07",
-            "V2016_08"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ContractVersions",
-            "modelAsString": false
+        "x-ms-azure-resource": true
+      },
+      "ResourceCertificateAndAADDetails": {
+        "required": [
+          "certificate",
+          "resourceId",
+          "aadAuthority",
+          "aadTenantId",
+          "servicePrincipalClientId",
+          "servicePrincipalObjectId",
+          "azureManagementEndpointAudience",
+          "subject",
+          "validFrom",
+          "validTo",
+          "thumbprint",
+          "friendlyName",
+          "issuer"
+        ],
+        "type": "object",
+        "properties": {
+          "authType": {
+            "enum": [
+              "Invalid",
+              "AccessControlService",
+              "AzureActiveDirectory"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AuthType",
+              "modelAsString": false
+            }
+          },
+          "certificate": {
+            "type": "string"
+          },
+          "resourceId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "aadAuthority": {
+            "type": "string"
+          },
+          "aadTenantId": {
+            "type": "string"
+          },
+          "servicePrincipalClientId": {
+            "type": "string"
+          },
+          "servicePrincipalObjectId": {
+            "type": "string"
+          },
+          "azureManagementEndpointAudience": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "validFrom": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "validTo": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "thumbprint": {
+            "type": "string"
+          },
+          "friendlyName": {
+            "type": "string"
+          },
+          "issuer": {
+            "type": "string"
+          }
+        }
+      },
+      "SecuritySettings": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/SecuritySettingsProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "SecuritySettingsProperties": {
+        "required": [
+          "deviceAdminPassword"
+        ],
+        "type": "object",
+        "properties": {
+          "deviceAdminPassword": {
+            "$ref": "#/definitions/AsymmetricEncryptedSecret"
+          }
+        }
+      },
+      "SendTestAlertEmailRequest": {
+        "required": [
+          "emailList"
+        ],
+        "type": "object",
+        "properties": {
+          "emailList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "StorageAccountCredential": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/StorageAccountCredentialProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "StorageAccountCredentialList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/StorageAccountCredential"
+            }
+          }
+        }
+      },
+      "StorageAccountCredentialProperties": {
+        "required": [
+          "cloudType",
+          "endPoint",
+          "login",
+          "enableSSL"
+        ],
+        "type": "object",
+        "properties": {
+          "cloudType": {
+            "enum": [
+              "Azure",
+              "S3",
+              "S3_RRS",
+              "OpenStack",
+              "HP"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "CloudType",
+              "modelAsString": false
+            }
+          },
+          "endPoint": {
+            "type": "string"
+          },
+          "login": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "enableSSL": {
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SslStatus",
+              "modelAsString": false
+            }
+          },
+          "accessKey": {
+            "$ref": "#/definitions/AsymmetricEncryptedSecret"
+          }
+        }
+      },
+      "StorageDomain": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/StorageDomainProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "StorageDomainList": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/StorageDomain"
+            }
+          }
+        }
+      },
+      "StorageDomainProperties": {
+        "required": [
+          "storageAccountCredentialIds",
+          "encryptionStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "storageAccountCredentialIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "encryptionKey": {
+            "$ref": "#/definitions/AsymmetricEncryptedSecret"
+          },
+          "encryptionStatus": {
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "EncryptionStatus",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "SupportPackageRequest": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/SupportPackageRequestProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "SupportPackageRequestProperties": {
+        "required": [
+          "sdpPassKey"
+        ],
+        "type": "object",
+        "properties": {
+          "sdpPassKey": {
+            "type": "string"
+          },
+          "packageType": {
+            "enum": [
+              "None",
+              "IncludeDefault",
+              "IncludeAll",
+              "Mini",
+              "Custom"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SupportPackageType",
+              "modelAsString": false
+            }
+          },
+          "endTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "startTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "includeArchived": {
+            "type": "boolean"
+          },
+          "sourceType": {
+            "enum": [
+              "None",
+              "OpsTriggered",
+              "ClientTriggered"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SupportPackageSourceType",
+              "modelAsString": false
+            }
+          },
+          "customIncludeList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SymmetricEncryptedSecret": {
+        "required": [
+          "value",
+          "encryptionAlgorithm"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "valueCertificateThumbprint": {
+            "type": "string"
+          },
+          "encryptionAlgorithm": {
+            "enum": [
+              "None",
+              "AES256",
+              "RSAES_PKCS1_v_1_5"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithm",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "Time": {
+        "required": [
+          "hour",
+          "minute"
+        ],
+        "type": "object",
+        "properties": {
+          "hour": {
+            "format": "int32",
+            "maximum": 23,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "minute": {
+            "format": "int32",
+            "maximum": 59,
+            "minimum": 0,
+            "type": "integer"
+          }
+        }
+      },
+      "TimeSettings": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/TimeSettingsProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "TimeSettingsProperties": {
+        "required": [
+          "timeZone",
+          "primaryTimeServer"
+        ],
+        "type": "object",
+        "properties": {
+          "timeZone": {
+            "type": "string"
+          },
+          "primaryTimeServer": {
+            "type": "string"
+          },
+          "secondaryTimeServer": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateDownloadProgress": {
+        "type": "object",
+        "properties": {
+          "downloadPhase": {
+            "enum": [
+              "Unknown",
+              "Initializing",
+              "Downloading",
+              "Verifying"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DownloadPhase",
+              "modelAsString": false
+            }
+          },
+          "percentComplete": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "totalBytesToDownload": {
+            "format": "double",
+            "type": "number"
+          },
+          "totalBytesDownloaded": {
+            "format": "double",
+            "type": "number"
+          },
+          "numberOfUpdatesToDownload": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "numberOfUpdatesDownloaded": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "UpdateInstallProgress": {
+        "type": "object",
+        "properties": {
+          "percentComplete": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "numberOfUpdatesToInstall": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "numberOfUpdatesInstalled": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "Updates": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/UpdatesProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "UpdatesProperties": {
+        "type": "object",
+        "properties": {
+          "deviceVersion": {
+            "type": "string"
+          },
+          "deviceLastScannedTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "regularUpdatesAvailable": {
+            "type": "boolean"
+          },
+          "rebootRequiredForInstall": {
+            "type": "boolean"
+          },
+          "totalItemsPendingForDownload": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "totalItemsPendingForInstall": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "Idle",
+              "Scanning",
+              "Downloading",
+              "Installing"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "UpdateOperation",
+              "modelAsString": false
+            }
+          },
+          "lastCompletedScanTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastCompletedDownloadJobTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastCompletedInstallJobTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "inProgressDownloadJobId": {
+            "type": "string"
+          },
+          "inProgressInstallJobId": {
+            "type": "string"
+          },
+          "inProgressScanStartedTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "inProgressDownloadJobStartedTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "inProgressInstallJobStartedTime": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "UploadCertificateRequest": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/RawCertificateData",
+            "x-ms-client-flatten": true
+          },
+          "contractVersion": {
+            "enum": [
+              "InvalidVersion",
+              "V2011_09",
+              "V2012_02",
+              "V2012_05",
+              "V2012_12",
+              "V2013_04",
+              "V2013_10",
+              "V2013_11",
+              "V2014_04",
+              "V2014_06",
+              "V2014_07",
+              "V2014_09",
+              "V2014_10",
+              "V2014_12",
+              "V2015_01",
+              "V2015_02",
+              "V2015_04",
+              "V2015_05",
+              "V2015_06",
+              "V2015_07",
+              "V2015_08",
+              "V2015_10",
+              "V2015_12",
+              "V2016_01",
+              "V2016_02",
+              "V2016_04",
+              "V2016_05",
+              "V2016_07",
+              "V2016_08"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ContractVersions",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "UploadCertificateResponse": {
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseModel"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ResourceCertificateAndAADDetails",
+            "x-ms-client-flatten": true
+          },
+          "contractVersion": {
+            "enum": [
+              "InvalidVersion",
+              "V2011_09",
+              "V2012_02",
+              "V2012_05",
+              "V2012_12",
+              "V2013_04",
+              "V2013_10",
+              "V2013_11",
+              "V2014_04",
+              "V2014_06",
+              "V2014_07",
+              "V2014_09",
+              "V2014_10",
+              "V2014_12",
+              "V2015_01",
+              "V2015_02",
+              "V2015_04",
+              "V2015_05",
+              "V2015_06",
+              "V2015_07",
+              "V2015_08",
+              "V2015_10",
+              "V2015_12",
+              "V2016_01",
+              "V2016_02",
+              "V2016_04",
+              "V2016_05",
+              "V2016_07",
+              "V2016_08"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ContractVersions",
+              "modelAsString": false
+            }
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version",
-      "required": true,
-      "type": "string"
     },
-    "managerNameParameter": {
-      "name": "managerName",
-      "in": "path",
-      "description": "The manager name",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 2,
-      "x-ms-parameter-location": "method"
-    },
-    "resourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The resource group name",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription id",
-      "required": true,
-      "type": "string"
-    }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
+    "parameters": {
+      "apiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "description": "The api version",
+        "required": true,
+        "type": "string"
+      },
+      "managerNameParameter": {
+        "name": "managerName",
+        "in": "path",
+        "description": "The manager name",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 2,
+        "x-ms-parameter-location": "method"
+      },
+      "resourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "description": "The resource group name",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "subscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "The subscription id",
+        "required": true,
+        "type": "string"
       }
-    }
-  },
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ]
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ]
+  }
 }
