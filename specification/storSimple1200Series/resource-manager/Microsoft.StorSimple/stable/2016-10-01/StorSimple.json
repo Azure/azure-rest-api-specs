@@ -46,6 +46,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ManagersList": {
+            "$ref": "../examples/ManagersList.json"
+          }
         }
       }
     },
@@ -148,6 +153,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ManagersListByResourceGroup": {
+            "$ref": "../examples/ManagersListByResourceGroup.json"
+          }
         }
       }
     },
@@ -185,7 +195,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersGet": {
+            "$ref": "../examples/ManagersGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -234,7 +249,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersCreateOrUpdate": {
+            "$ref": "../examples/ManagersCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -269,9 +289,13 @@
             "description": "The StorSimple manager is already in a deleted state"
           }
         },
-        "deprecated": false
-      }
-    },
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersDelete": {
+            "$ref": "./examples/ManagersDelete.json"
+          }
+        }
+      },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords": {
       "get": {
         "tags": [
@@ -309,6 +333,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "AccessControlRecordsListByManager": {
+            "$ref": "../examples/AccessControlRecordsListByManager.json"
+          }
         }
       }
     },
@@ -352,7 +381,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "AccessControlRecordsGet": {
+            "$ref": "../examples/AccessControlRecordsGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -405,7 +439,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AccessControlRecordsCreateOrUpdate": {
+            "$ref": "../examples/AccessControlRecordsCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -447,7 +486,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AccessControlRecordsDelete": {
+            "$ref": "../examples/AccessControlRecordsDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/alerts": {
@@ -495,6 +539,11 @@
         "x-ms-odata": "#/definitions/AlertFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AlertsListByManager": {
+            "$ref": "../examples/AlertsListByManager.json"
+          }
         }
       }
     },
@@ -543,6 +592,11 @@
         "x-ms-odata": "#/definitions/BackupFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BackupsListByManager": {
+            "$ref": "../examples/BackupsListByManager.json"
+          }
         }
       }
     },
@@ -636,7 +690,12 @@
             "description": "Successfully cleared the alerts."
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "TestClearAlertsPOST112": {
+            "$ref": "../examples/TestClearAlerts-POST-example-112.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices": {
@@ -683,6 +742,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "DevicesListByManager": {
+            "$ref": "../examples/DevicesListByManager.json"
+          }
         }
       }
     },
@@ -733,7 +797,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "DevicesGet": {
+            "$ref": "../examples/DevicesGet.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -775,62 +844,71 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "tags": [
-          "Devices"
-        ],
-        "operationId": "Devices_Patch",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "deviceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+        "x-ms-examples": {
+          "ManagersDelete": {
+            "$ref": "./examples/DevicesDelete.json"
           },
-          {
-            "name": "devicePatch",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DevicePatch"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully patched the device.",
-            "schema": {
-              "$ref": "#/definitions/Device"
-            }
-          },
-          "202": {
-            "description": "Accepted the request to patch the device."
-          }
+          "x-ms-long-running-operation": true
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      }
-    },
+        "patch": {
+          "tags": [
+            "Devices"
+          ],
+          "operationId": "Devices_Patch",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "deviceName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "devicePatch",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DevicePatch"
+              }
+            },
+            {
+              "$ref": "#/parameters/subscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/resourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/managerNameParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully patched the device.",
+              "schema": {
+                "$ref": "#/definitions/Device"
+              }
+            },
+            "202": {
+              "description": "Accepted the request to patch the device."
+            }
+          },
+          "deprecated": false,
+          "x-ms-long-running-operation": true,
+          "x-ms-examples": {
+            "DevicesPatch": {
+              "$ref": "../examples/DevicesPatch.json"
+            }
+          }
+        }
+      },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/alertSettings/default": {
       "get": {
         "tags": [
@@ -871,7 +949,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "DevicesGetAlertSettings": {
+            "$ref": "../examples/DevicesGetAlertSettings.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -924,7 +1007,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DevicesCreateOrUpdateAlertSettings": {
+            "$ref": "../examples/DevicesCreateOrUpdateAlertSettings.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups": {
@@ -984,6 +1072,11 @@
         "x-ms-odata": "#/definitions/BackupFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BackupsListByDevice": {
+            "$ref": "../examples/BackupsListByDevice.json"
+          }
         }
       }
     },
@@ -1034,7 +1127,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BackupsDelete": {
+            "$ref": "../examples/BackupsDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups/{backupName}/elements/{elementName}/clone": {
@@ -1098,7 +1196,15 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestFileServerBackupAndClonePOST1712": {
+            "$ref": "../examples/TestFileServerBackupAndClone-POST-example-1712.json"
+          },
+          "TestIscsiServerBackupAndClonePOST1712": {
+            "$ref": "../examples/TestIscsiServerBackupAndClone-POST-example-1712.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupScheduleGroups": {
@@ -1144,6 +1250,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "BackupScheduleGroupsListByDevice": {
+            "$ref": "../examples/BackupScheduleGroupsListByDevice.json"
+          }
         }
       }
     },
@@ -1193,7 +1304,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "BackupScheduleGroupsGet": {
+            "$ref": "../examples/BackupScheduleGroupsGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -1252,7 +1368,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BackupScheduleGroupsCreateOrUpdate": {
+            "$ref": "../examples/BackupScheduleGroupsCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1300,7 +1421,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BackupScheduleGroupsDelete": {
+            "$ref": "../examples/BackupScheduleGroupsDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/chapSettings": {
@@ -1346,6 +1472,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ChapSettingsListByDevice": {
+            "$ref": "../examples/ChapSettingsListByDevice.json"
+          }
         }
       }
     },
@@ -1395,7 +1526,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ChapSettingsGet": {
+            "$ref": "../examples/ChapSettingsGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -1454,7 +1590,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ChapSettingsCreateOrUpdate": {
+            "$ref": "../examples/ChapSettingsCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1502,9 +1643,13 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
-      }
-    },
+        "x-ms-examples": {
+          "ManagersDelete": {
+            "$ref": "../examples/ChapSettingsDelete.json"
+          },
+          "x-ms-long-running-operation": true
+        }
+      },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/deactivate": {
       "post": {
         "tags": [
@@ -1589,6 +1734,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "IscsiDisksListByDevice": {
+            "$ref": "../examples/IscsiDisksListByDevice.json"
+          }
         }
       }
     },
@@ -1682,7 +1832,15 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestFileServerFailoverPOST2513": {
+            "$ref": "../examples/TestFileServerFailover-POST-example-2513.json"
+          },
+          "TestIscsiServerFailoverPOST2513": {
+            "$ref": "../examples/TestIscsiServerFailover-POST-example-2513.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/failoverTargets": {
@@ -1735,6 +1893,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "DevicesListFailoverTarget": {
+            "$ref": "../examples/DevicesListFailoverTarget.json"
+          }
         }
       }
     },
@@ -1781,6 +1944,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "FileServersListByDevice": {
+            "$ref": "../examples/FileServersListByDevice.json"
+          }
         }
       }
     },
@@ -1830,7 +1998,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "FileServersGet": {
+            "$ref": "../examples/FileServersGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -1889,7 +2062,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "FileServersCreateOrUpdate": {
+            "$ref": "../examples/FileServersCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1937,7 +2115,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "FileServersDelete": {
+            "$ref": "../examples/FileServersDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/backup": {
@@ -1987,7 +2170,18 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestBackupJobPOST294": {
+            "$ref": "../examples/TestBackupJob-POST-example-294.json"
+          },
+          "TestFileServerBackupAndClonePOST296": {
+            "$ref": "../examples/TestFileServerBackupAndClone-POST-example-296.json"
+          },
+          "TestFileServerFailoverPOST294": {
+            "$ref": "../examples/TestFileServerFailover-POST-example-294.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/metrics": {
@@ -2047,6 +2241,11 @@
         "x-ms-odata": "#/definitions/MetricFilter",
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "FileServersListMetrics": {
+            "$ref": "../examples/FileServersListMetrics.json"
+          }
         }
       }
     },
@@ -2099,6 +2298,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "FileServersListMetricDefinition": {
+            "$ref": "../examples/FileServersListMetricDefinition.json"
+          }
         }
       }
     },
@@ -2151,6 +2355,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "FileSharesListByFileServer": {
+            "$ref": "../examples/FileSharesListByFileServer.json"
+          }
         }
       }
     },
@@ -2206,7 +2415,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "FileSharesGet": {
+            "$ref": "../examples/FileSharesGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -2271,7 +2485,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "FileSharesCreateOrUpdate": {
+            "$ref": "../examples/FileSharesCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2325,7 +2544,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "FileSharesDelete": {
+            "$ref": "../examples/FileSharesDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/shares/{shareName}/metrics": {
@@ -2391,6 +2615,11 @@
         "x-ms-odata": "#/definitions/MetricFilter",
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "FileSharesListMetrics": {
+            "$ref": "../examples/FileSharesListMetrics.json"
+          }
         }
       }
     },
@@ -2449,6 +2678,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "FileSharesListMetricDefinition": {
+            "$ref": "../examples/FileSharesListMetricDefinition.json"
+          }
         }
       }
     },
@@ -2536,6 +2770,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "IscsiServersListByDevice": {
+            "$ref": "../examples/IscsiServersListByDevice.json"
+          }
         }
       }
     },
@@ -2585,7 +2824,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "IscsiServersGet": {
+            "$ref": "../examples/IscsiServersGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -2644,7 +2888,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "IscsiServersCreateOrUpdate": {
+            "$ref": "../examples/IscsiServersCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2692,7 +2941,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "IscsiServersDelete": {
+            "$ref": "../examples/IscsiServersDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/backup": {
@@ -2742,7 +2996,15 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestIscsiServerBackupAndClonePOST396": {
+            "$ref": "../examples/TestIscsiServerBackupAndClone-POST-example-396.json"
+          },
+          "TestIscsiServerFailoverPOST394": {
+            "$ref": "../examples/TestIscsiServerFailover-POST-example-394.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks": {
@@ -2794,6 +3056,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "IscsiDisksListByIscsiServer": {
+            "$ref": "../examples/IscsiDisksListByIscsiServer.json"
+          }
         }
       }
     },
@@ -2849,7 +3116,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "IscsiDisksGet": {
+            "$ref": "../examples/IscsiDisksGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -2914,7 +3186,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "IscsiDisksCreateOrUpdate": {
+            "$ref": "../examples/IscsiDisksCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2968,7 +3245,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "IscsiDisksDelete": {
+            "$ref": "../examples/IscsiDisksDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}/metrics": {
@@ -3034,6 +3316,11 @@
         "x-ms-odata": "#/definitions/MetricFilter",
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "IscsiDisksListMetrics": {
+            "$ref": "../examples/IscsiDisksListMetrics.json"
+          }
         }
       }
     },
@@ -3092,6 +3379,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "IscsiDisksListMetricDefinition": {
+            "$ref": "../examples/IscsiDisksListMetricDefinition.json"
+          }
         }
       }
     },
@@ -3152,6 +3444,11 @@
         "x-ms-odata": "#/definitions/MetricFilter",
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "IscsiServersListMetrics": {
+            "$ref": "../examples/IscsiServersListMetrics.json"
+          }
         }
       }
     },
@@ -3204,6 +3501,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "IscsiServersListMetricDefinition": {
+            "$ref": "../examples/IscsiServersListMetricDefinition.json"
+          }
         }
       }
     },
@@ -3258,6 +3560,11 @@
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobsListByDevice": {
+            "$ref": "../examples/JobsListByDevice.json"
+          }
         }
       }
     },
@@ -3307,7 +3614,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "JobsGet": {
+            "$ref": "../examples/JobsGet.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metrics": {
@@ -3361,6 +3673,11 @@
         "x-ms-odata": "#/definitions/MetricFilter",
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "DevicesListMetrics": {
+            "$ref": "../examples/DevicesListMetrics.json"
+          }
         }
       }
     },
@@ -3407,6 +3724,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "DevicesListMetricDefinition": {
+            "$ref": "../examples/DevicesListMetricDefinition.json"
+          }
         }
       }
     },
@@ -3450,7 +3772,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "DevicesGetNetworkSettings": {
+            "$ref": "../examples/DevicesGetNetworkSettings.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/publishSupportPackage": {
@@ -3540,7 +3867,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestDeviceUpdatesPOST522": {
+            "$ref": "../examples/TestDeviceUpdates-POST-example-522.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/securitySettings/default/update": {
@@ -3589,7 +3921,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DevicesCreateOrUpdateSecuritySettings": {
+            "$ref": "../examples/DevicesCreateOrUpdateSecuritySettings.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/sendTestAlertEmail": {
@@ -3637,7 +3974,12 @@
             "description": "Successfully sent the test email."
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "TestSendTestAlertEmailAPIPOST542": {
+            "$ref": "../examples/TestSendTestAlertEmailAPI-POST-example-542.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/shares": {
@@ -3683,6 +4025,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "FileSharesListByDevice": {
+            "$ref": "../examples/FileSharesListByDevice.json"
+          }
         }
       }
     },
@@ -3726,7 +4073,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "DevicesGetTimeSettings": {
+            "$ref": "../examples/DevicesGetTimeSettings.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/updateSummary/default": {
@@ -3769,7 +4121,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "DevicesGetUpdateSummary": {
+            "$ref": "../examples/DevicesGetUpdateSummary.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/encryptionSettings/default": {
@@ -3806,7 +4163,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersGetEncryptionSettings": {
+            "$ref": "../examples/ManagersGetEncryptionSettings.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/extendedInformation/vaultExtendedInfo": {
@@ -3843,7 +4205,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersGetExtendedInfo": {
+            "$ref": "../examples/ManagersGetExtendedInfo.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -3918,7 +4285,12 @@
             "description": "The extended information on the manager has been successfully deleted"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersDeleteExtendedInfo": {
+            "$ref": "../examples/ManagersDeleteExtendedInfo.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -3968,7 +4340,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersUpdateExtendedInfo": {
+            "$ref": "../examples/ManagersUpdateExtendedInfo.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/fileservers": {
@@ -4008,6 +4385,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "FileServersListByManager": {
+            "$ref": "../examples/FileServersListByManager.json"
+          }
         }
       }
     },
@@ -4082,7 +4464,18 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "TestCreateOrUpdateChapSettingsPOST623": {
+            "$ref": "../examples/TestCreateOrUpdateChapSettings-POST-example-623.json"
+          },
+          "TestDeviceSettingsPOST629": {
+            "$ref": "../examples/TestDeviceSettings-POST-example-629.json"
+          },
+          "TestServiceConfigurationPOST623": {
+            "$ref": "../examples/TestServiceConfiguration-POST-example-623.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/iscsiservers": {
@@ -4122,6 +4515,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "IscsiServersListByManager": {
+            "$ref": "../examples/IscsiServersListByManager.json"
+          }
         }
       }
     },
@@ -4170,6 +4568,11 @@
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobsListByManager": {
+            "$ref": "../examples/JobsListByManager.json"
+          }
         }
       }
     },
@@ -4218,6 +4621,11 @@
         "x-ms-odata": "#/definitions/MetricFilter",
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ManagersListMetrics": {
+            "$ref": "../examples/ManagersListMetrics.json"
+          }
         }
       }
     },
@@ -4258,6 +4666,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ManagersListMetricDefinition": {
+            "$ref": "../examples/ManagersListMetricDefinition.json"
+          }
         }
       }
     },
@@ -4372,6 +4785,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "StorageAccountCredentialsListByManager": {
+            "$ref": "../examples/StorageAccountCredentialsListByManager.json"
+          }
         }
       }
     },
@@ -4415,7 +4833,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "StorageAccountCredentialsGet": {
+            "$ref": "../examples/StorageAccountCredentialsGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -4468,7 +4891,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageAccountCredentialsCreateOrUpdate": {
+            "$ref": "../examples/StorageAccountCredentialsCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -4510,7 +4938,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageAccountCredentialsDelete": {
+            "$ref": "../examples/StorageAccountCredentialsDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageDomains": {
@@ -4550,6 +4983,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "StorageDomainsListByManager": {
+            "$ref": "../examples/StorageDomainsListByManager.json"
+          }
         }
       }
     },
@@ -4593,7 +5031,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "StorageDomainsGet": {
+            "$ref": "../examples/StorageDomainsGet.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -4646,7 +5089,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageDomainsCreateOrUpdate": {
+            "$ref": "../examples/StorageDomainsCreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -4688,7 +5136,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageDomainsDelete": {
+            "$ref": "../examples/StorageDomainsDelete.json"
+          }
+        }
       }
     }
   },
