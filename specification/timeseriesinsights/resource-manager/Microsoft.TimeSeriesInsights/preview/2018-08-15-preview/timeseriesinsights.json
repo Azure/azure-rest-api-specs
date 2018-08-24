@@ -1169,7 +1169,7 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "Sku": {
@@ -1185,13 +1185,13 @@
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The capacity of the sku. This value can be changed to support scale out of environments after they have been created.",
+          "description": "The capacity of the sku. For standard environments, this value can be changed to support scale out of environments after they have been created.",
           "minimum": 1,
           "maximum": 10
         }
@@ -1200,7 +1200,7 @@
         "name",
         "capacity"
       ],
-      "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
+      "description": "The sku determines the type of environment, either standard (S1 or S2) or long-term (L1). For standard environments the sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
     },
     "LongTermStorageConfigurationInput": {
       "type": "object",
@@ -1278,7 +1278,7 @@
           ],
           "x-ms-enum": {
             "name": "Kind",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "sku": {
@@ -1418,9 +1418,6 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
-        },
-        {
           "$ref": "#/definitions/TrackedResource"
         }
       ],
@@ -1475,7 +1472,7 @@
           "enum": [ "PurgeOldData", "PauseIngress" ],
           "x-ms-enum": {
             "name": "StorageLimitExceededBehavior",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "partitionKeyProperties": {
@@ -1596,7 +1593,7 @@
           "enum": [ "PurgeOldData", "PauseIngress" ],
           "x-ms-enum": {
             "name": "StorageLimitExceededBehavior",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "partitionKeyProperties": {
@@ -1673,7 +1670,7 @@
           ],
           "x-ms-enum": {
             "name": "IngressState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "stateDetails": {
@@ -1709,7 +1706,7 @@
           ],
           "x-ms-enum": {
             "name": "Kind",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -2026,7 +2023,7 @@
           ],
           "x-ms-enum": {
             "name": "LocalTimestampFormat",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "timeZoneOffset": {
@@ -2155,7 +2152,7 @@
           "enum": [ "Ordinal", "OrdinalIgnoreCase" ],
           "x-ms-enum": {
             "name": "DataStringComparisonBehavior",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -2195,7 +2192,7 @@
           ],
           "x-ms-enum": {
             "name": "ReferenceDataKeyPropertyType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -2267,7 +2264,7 @@
             ],
             "x-ms-enum": {
               "name": "AccessPolicyRole",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           "description": "The list of roles the principal is assigned on the environment."
@@ -2293,7 +2290,7 @@
             ],
             "x-ms-enum": {
               "name": "AccessPolicyRole",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           "description": "The list of roles the principal is assigned on the environment."
