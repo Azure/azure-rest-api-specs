@@ -5,7 +5,7 @@ These settings apply only when `--ruby` is specified on the command line.
 ``` yaml $(ruby)
 ruby:
   package-name: azure_mgmt_storage
-  package-version: "0.16.0"
+  package-version: "0.16.1"
   azure-arm: true
 ```
 
@@ -13,12 +13,23 @@ ruby:
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2017-06
   - tag: package-2016-12
   - tag: package-2016-01
   - tag: package-2015-06
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2018-02 and ruby
+
+These settings apply only when `--tag=package-2018-02 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2018-02' && $(ruby)
+namespace: "Azure::Storage::Mgmt::V2018_02_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
 
 ### Tag: package-2017-10 and ruby

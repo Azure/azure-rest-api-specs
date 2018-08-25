@@ -1172,6 +1172,18 @@
             "$ref": "#/definitions/Endpoint"
           },
           "description": "The list of endpoints in the Traffic Manager profile."
+        },
+        "trafficViewEnrollmentStatus": {
+          "type": "string",
+          "description": "Indicates whether Traffic View is 'Enabled' or 'Disabled' for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature will increase the cost of the Traffic Manage profile.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TrafficViewEnrollmentStatus",
+            "modelAsString": true
+          }
         }
       },
       "description": "Class representing the Traffic Manager profile properties."

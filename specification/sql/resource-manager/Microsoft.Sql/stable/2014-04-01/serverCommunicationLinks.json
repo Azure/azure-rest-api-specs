@@ -223,7 +223,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Server communication link."
@@ -239,35 +239,6 @@
         }
       },
       "description": "A list of server communication links."
-    },
-    "Resource":{
-      "description":"ARM resource.",
-      "properties":{
-        "id":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource ID."
-        },
-        "name":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource name."
-        },
-        "type":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource":{
-      "description":"ARM proxy resource.",
-      "allOf":[
-        {
-          "$ref":"#/definitions/Resource"
-        }
-      ]
     }
   },
   "parameters": {

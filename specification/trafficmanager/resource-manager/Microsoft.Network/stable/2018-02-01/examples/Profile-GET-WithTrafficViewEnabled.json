@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "e68d4145-c9ae-4667-925d-c51c8d88ad73",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager1323",
+    "profileName": "azuresdkfornetautoresttrafficmanager3880",
+    "api-version": "2018-02-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/e68d4145-c9ae-4667-925d-c51c8d88ad73/resourceGroups/azuresdkfornetautoresttrafficmanager1323/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3880",
+        "name": "azuresdkfornetautoresttrafficmanager3880",
+        "type": "Microsoft.Network/trafficManagerProfiles",
+        "location": "global",
+        "tags": {},
+        "properties": {
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "Performance",
+          "dnsConfig": {
+            "relativeName": "azuresdkfornetautoresttrafficmanager3880",
+            "fqdn": "azuresdkfornetautoresttrafficmanager3880.tmpreview.watmtest.azure-test.net",
+            "ttl": 35
+          },
+          "monitorConfig": {
+            "profileMonitorStatus": "CheckingEndpoints",
+            "protocol": "HTTP",
+            "port": 80,
+            "path": "/testpath.aspx",
+            "intervalInSeconds": 30,
+            "toleratedNumberOfFailures": 3,
+            "timeoutInSeconds": 10
+          },
+          "endpoints": [
+            {
+              "id": "/subscriptions/e68d4145-c9ae-4667-925d-c51c8d88ad73/resourceGroups/azuresdkfornetautoresttrafficmanager1323/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3880/externalEndpoints/My external endpoint",
+              "name": "My external endpoint",
+              "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+              "properties": {
+                "endpointStatus": "Enabled",
+                "endpointMonitorStatus": "CheckingEndpoint",
+                "target": "foobar.contoso.com",
+                "weight": 1,
+                "priority": 1,
+                "endpointLocation": "North Europe"
+              }
+            }
+          ],
+          "trafficViewEnrollmentStatus": "Enabled"
+        }
+      }
+    }
+  }
+}
