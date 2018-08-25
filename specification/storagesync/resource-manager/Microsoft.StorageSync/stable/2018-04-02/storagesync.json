@@ -2450,25 +2450,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource": {
-      "description": "ARM tracked resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "The location of the resource.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object"
-        }
-      }
-    },
     "SubscriptionState": {
       "type": "object",
       "description": "Subscription State object.",
@@ -2505,7 +2486,7 @@
       "description": "Storage Sync Service object.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
         },
         {
           "properties": {
