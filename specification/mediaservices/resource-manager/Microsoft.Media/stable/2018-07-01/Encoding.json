@@ -135,7 +135,7 @@
       "properties": {
         "audioLanguage": {
           "type": "string",
-          "description": "The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of supported languages are, 'en-US', 'en-GB', 'es-ES', 'es-MX', 'fr-FR', 'it-IT', 'ja-JP', 'pt-BR', 'zh-CN', 'de-DE', 'ar-EG', 'ru-RU', 'hi-IN'."
+          "description": "The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of supported languages are, 'en-US', 'en-GB', 'es-ES', 'es-MX', 'fr-FR', 'it-IT', 'ja-JP', 'pt-BR', 'zh-CN', 'de-DE', 'ar-EG', 'ru-RU', 'hi-IN'. If not specified, automatic language detection would be employed. This feature currently supports English, Chinese, French, German, Italian, Japanese, Spanish, Russian, and Portuguese. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to English."
         }
       },
       "type": "object",
@@ -896,9 +896,32 @@
         }
       ],
       "properties": {
-        "audioInsightsOnly": {
-          "type": "boolean",
-          "description": "Whether to only extract audio insights when processing a video file."
+        "insightsToExtract": {
+          "type": "string",
+          "enum": [
+            "AudioInsightsOnly",
+            "VideoInsightsOnly",
+            "AllInsights"
+          ],
+          "x-ms-enum": {
+            "name": "InsightsType",
+            "values": [
+              {
+                "value": "AudioInsightsOnly",
+                "description": "Generate audio only insights. Ignore video even if present. Fails if no audio is present."
+              },
+              {
+                "value": "VideoInsightsOnly",
+                "description": "Generate video only insights. Ignore audio if present. Fails if no video is present."
+              },
+              {
+                "value": "AllInsights",
+                "description": "Generate both audio and video insights. Fails if either audio or video Insights fail."
+              }
+            ],
+            "modelAsExtensible": true
+          },
+          "description": "The type of insights to be extracted. If not set then based on the content the type will selected.  If the content is audi only then only audio insights are extraced and if it is video only."
         }
       },
       "type": "object",
@@ -962,7 +985,7 @@
             ],
             "modelAsExtensible": true
           },
-          "description": "A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The default is stop."
+          "description": "A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with 'ContinueJob'. The default is 'StopProcessingJob'."
         },
         "relativePriority": {
           "type": "string",
