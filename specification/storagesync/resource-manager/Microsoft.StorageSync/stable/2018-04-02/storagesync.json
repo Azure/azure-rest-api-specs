@@ -243,7 +243,7 @@
             "in": "body",
             "description": "Storage Sync Service resource.",
             "schema": {
-              "$ref": "#/definitions/StorageSyncService"
+              "$ref": "#/definitions/StorageSyncServiceUpdateParameters"
             }
           }
         ],
@@ -1605,7 +1605,7 @@
             "in": "body",
             "description": "Any of the properties applicable in PUT request.",
             "schema": {
-              "$ref": "#/definitions/ServerEndpoint"
+              "$ref": "#/definitions/ServerEndpointUpdateParameters"
             }
           }
         ],
@@ -2538,6 +2538,23 @@
       ],
       "x-ms-azure-resource": true
     },
+    "ServerEndpointUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the server endpoint."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerEndpointUpdateProperties",
+          "description": "The properties of the serverendpoint."
+        }
+      },
+      "description": "Parameters for updating an Server Endpoint."
+    },
     "ServerEndpoint": {
       "type": "object",
       "description": "Server Endpoint object.",
@@ -2966,6 +2983,29 @@
         }
       }
     },
+    "StorageSyncServiceUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the storage sync service."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageSyncServiceUpdateProperties",
+          "description": "The properties of the storage sync service."
+        }
+      },
+      "description": "Parameters for updating an Storage sync service."
+    },
+    "StorageSyncServiceUpdateProperties": {
+      "type": "object",
+      "description": "Storage Sync Service Update Properties object.",
+      "properties": {
+      }
+    },
     "StorageSyncServiceProperties": {
       "type": "object",
       "description": "Storage Sync Service Properties object.",
@@ -3149,6 +3189,22 @@
         "lastOperationName": {
           "type": "string",
           "description": "Resource Last Operation Name"
+        }
+      }
+    },
+    "ServerEndpointUpdateProperties": {
+      "type": "object",
+      "description": "ServerEndpoint Update Properties object.",
+      "properties": {
+        "cloudTiering": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Cloud Tiering."
+        },
+        "volumeFreeSpacePercent": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         }
       }
     },
