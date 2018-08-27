@@ -3103,13 +3103,8 @@
           "type": "string",
           "readOnly": true
         },
-        "additionalInfo": {
-          "description": "Additional info of this usage item.",
-          "type": "string",
-          "readOnly": true
-        },
         "isRecurringCharge": {
-          "description": "",
+          "description": "Flag indicating whether this is a recurring charge or not.",
           "type": "boolean",
           "readOnly": true
         }
@@ -4018,6 +4013,11 @@
       "description": "The properties of the Management Group Aggregated Cost.",
       "type": "object",
       "properties": {
+        "billingPeriodId": {
+          "description": "The id of the billing period resource that the aggregated cost belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
         "usageStart": {
           "description": "The start of the date time range covered by aggregated cost.",
           "type": "string",
