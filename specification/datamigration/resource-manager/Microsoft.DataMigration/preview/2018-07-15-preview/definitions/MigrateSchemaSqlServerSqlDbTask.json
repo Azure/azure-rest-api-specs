@@ -66,11 +66,11 @@
       "type": "object",
       "description": "Database input for migrate schema Sql Server to Azure SQL Server scenario",
       "properties": {
-        "TargetDatabaseName": {
+        "targetDatabaseName": {
           "type": "string",
           "description": "Name of target database"
         },
-        "SchemaSetting": {
+        "schemaSetting": {
           "$ref": "#/definitions/SchemaMigrationSetting",
           "description": "Database schema migration settings"
         }
@@ -80,11 +80,11 @@
       "type": "object",
       "description": "Settings for migrating schema from source to target",
       "properties": {
-        "SchemaOption": {
+        "schemaOption": {
           "$ref": "#/definitions/SchemaMigrationOption",
           "description": "Option on how to migrate the schema"
         },
-        "FileId": {
+        "fileId": {
           "type": "string",
           "description": "Resource Identifier of a file resource containing the uploaded schema file"
         }
@@ -268,7 +268,6 @@
           "readOnly": true
         }
       },
-      "required": [ "resultType" ],
       "discriminator": "resultType"
     }
   }
