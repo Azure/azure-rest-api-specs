@@ -259,22 +259,18 @@
    "definitions":{  
       "AzureFirewallIPConfigurationPropertiesFormat":{  
          "properties":{  
-			"privateIPAddress": {
-			  "type": "string",
-			  "description": "The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes."
-			},
+            "privateIPAddress": {
+              "type": "string",
+              "description": "The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes."
+            },
             "subnet":{  
                "$ref":"./network.json#/definitions/SubResource",
                "description":"Reference of the subnet resource. This resource must be named 'AzureFirewallSubnet'."
             },
-			"internalPublicIpAddress":{  
-               "$ref":"./network.json#/definitions/SubResource",
-               "description":"Reference of the PublicIP resource. This field is a mandatory input."
+            "publicIPAddress": {
+               "$ref": "./network.json#/definitions/SubResource",
+               "description": "Reference of the PublicIP resource. This field is a mandatory input if subnet is not null."
             },
-			"publicIPAddress": {
-			  "$ref": "./network.json#/definitions/SubResource",
-			  "description": "Reference of the PublicIP resource. This field is populated in the output."
-			},
             "provisioningState":{  
                "description":"The provisioning state of the resource.",
                "$ref":"#/definitions/ProvisioningState"
