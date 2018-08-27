@@ -82,9 +82,23 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
+            "name":"search",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "The incomplete term which should be auto-completed.",
+            "x-ms-client-name": "searchText"
+          },
+          {
+            "name":"suggesterName",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "The name of the suggester as specified in the suggesters collection that's part of the index definition."
+          },
+          {
             "name": "autocompleteMode",
             "in": "query",
-            "required": true,      
             "type": "string",
             "enum": [
               "oneTerm",
@@ -95,25 +109,17 @@
              "name": "AutocompleteMode",
              "modelAsString": false
             },
-            "description": "Autocomplete mode."
-          },
-          {
-            "name":"search",
-            "in": "query",
-            "type": "string",
-            "description": "The incomplete term which should be auto-completed."
-          },
-          {
-            "name":"suggesterName",
-            "in": "query",
-            "type": "string",
-            "description": "The name of the suggester as specified in the suggesters collection that's part of the index definition."
+            "description": "Autocomplete mode.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteParameters"
+            }
           },
           {
             "name":"fuzzy",
             "in": "query",
             "type": "boolean",
             "description": "A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.",
+            "x-ms-client-name": "UseFuzzyMatching",
             "x-ms-parameter-grouping": {
               "name": "AutocompleteParameters"
             }
@@ -411,7 +417,7 @@
         },
         "fuzzy": {
           "type": "boolean",
-          "description": "A value indicating whether to use fuzzy matching for the suggestion query. Default is false. when set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources."
+          "description": "A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources."
         },
         "highlightPostTag": {
           "type": "string",
@@ -457,13 +463,19 @@
     },    
     "AutocompleteRequest": {
       "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search text on which to base autocomplete results.",
+          "x-ms-client-name": "searchText"
+        },
         "autocompleteMode": {
           "$ref": "#/definitions/AutocompleteMode",
           "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms."
         },
         "fuzzy": {
           "type": "boolean",
-          "description": "A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. when set to true, the query will autocomplete terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources."
+          "description": "A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will autocomplete terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.",
+          "x-ms-client-name": "UseFuzzyMatching"
         },
         "highlightPostTag": {
           "type": "string",
@@ -477,10 +489,6 @@
           "type": "number",
           "format": "double",
           "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by am autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
-        },
-        "search": {
-          "type": "string",
-          "description": "The search text on which to base autocomplete results."
         },
         "searchFields": {
           "type": "string",

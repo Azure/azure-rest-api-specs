@@ -3,7 +3,7 @@
   "info": {
     "title": "AutomationManagementClient",
     "version": "2015-10-31",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -53,20 +53,16 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -79,7 +75,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -102,14 +98,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "webhookName",
@@ -119,10 +111,10 @@
             "description": "The webhook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -132,7 +124,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -153,14 +145,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "webhookName",
@@ -170,23 +158,23 @@
             "description": "The webhook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Webhook"
+              "$ref": "#/definitions/Webhook"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -207,14 +195,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "webhookName",
@@ -228,34 +212,34 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/WebhookCreateOrUpdateParameters"
+              "$ref": "#/definitions/WebhookCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for webhook."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Webhook"
+              "$ref": "#/definitions/Webhook"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Webhook"
+              "$ref": "#/definitions/Webhook"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -276,14 +260,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "webhookName",
@@ -297,28 +277,28 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/WebhookUpdateParameters"
+              "$ref": "#/definitions/WebhookUpdateParameters"
             },
             "description": "The update parameters for webhook."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Webhook"
+              "$ref": "#/definitions/Webhook"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -341,14 +321,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "$filter",
@@ -358,33 +334,225 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/WebhookListResult"
+              "$ref": "#/definitions/WebhookListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./definitions.json#/definitions/Webhook"
+        "x-ms-odata": "#/definitions/Webhook"
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "WebhookProperties": {
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Gets or sets the value of the enabled flag of the webhook."
+        },
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the webhook uri."
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the expiry time.",
+          "x-nullable": false
+        },
+        "lastInvokedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last invoked time.",
+          "x-nullable": true
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with."
+        },
+        "runbook": {
+          "$ref": "#/definitions/RunbookAssociationProperty",
+          "description": "Gets or sets the runbook the webhook is associated with."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the name of the hybrid worker group the webhook job will run on."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Details of the user who last modified the Webhook"
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of the webhook properties"
+    },
+    "Webhook": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebhookProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the webhook properties."
+        }
+      },
+      "description": "Definition of the webhook type.",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebhookListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Webhook"
+          },
+          "description": "Gets or sets a list of webhooks."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list webhook operation."
+    },
+    "WebhookUpdateProperties": {
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets the value of the enabled flag of webhook."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the name of the hybrid worker group the webhook job will run on."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the job."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the webhook."
+        }
+      },
+      "description": "The properties of the update webhook."
+    },
+    "WebhookUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the webhook."
+        },
+        "properties": {
+          "$ref": "#/definitions/WebhookUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the value of the webhook."
+        }
+      },
+      "description": "The parameters supplied to the update webhook operation."
+    },
+    "RunbookAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the runbook."
+        }
+      },
+      "description": "The runbook property associated with the entity."
+    },
+    "WebhookCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the webhook."
+        },
+        "properties": {
+          "$ref": "#/definitions/WebhookCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the webhook."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update webhook operation."
+    },
+    "WebhookCreateOrUpdateProperties": {
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets the value of the enabled flag of webhook."
+        },
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the uri."
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the expiry time.",
+          "x-nullable": false
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the job."
+        },
+        "runbook": {
+          "$ref": "#/definitions/RunbookAssociationProperty",
+          "description": "Gets or sets the runbook."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the name of the hybrid worker group the webhook job will run on."
+        }
+      },
+      "description": "The properties of the create webhook operation."
+    }
+  },
   "parameters": {}
 }
