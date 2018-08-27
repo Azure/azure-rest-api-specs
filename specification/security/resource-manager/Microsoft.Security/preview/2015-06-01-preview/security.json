@@ -2930,9 +2930,9 @@
                     "description": "The north-south policy id",
                     "type": "string"
                 },
-                "active": {
-                    "description": "The activation satte of the north-south policy",
-                    "type": "boolean"
+                "state": {
+                    "description": "The activation state of the north-south policy",
+                    "$ref": "#/definitions/NorthSouthPolicyState"
                 },
                 "rulesCount": {
                     "description": "The amount of policy rules",
@@ -3003,6 +3003,18 @@
             ],
             "x-ms-enum": {
                 "name": "northSouthProtocol",
+                "modelAsString": true
+            }
+        },
+        "NorthSouthPolicyState": {
+            "description": "The north south policy state",
+            "type": "string",
+            "enum": [
+                "Active",
+                "InActive"
+            ],
+            "x-ms-enum": {
+                "name": "northSouthPolicyState",
                 "modelAsString": true
             }
         },
@@ -3117,10 +3129,9 @@
         "NorthSouthHardeningsPolicyProperties": {
             "description": "A north-south hardening policy",
             "properties": {
-                "active": {
+                "state": {
                     "description": "A policy activation state",
-                    "type": "boolean",
-                    "readOnly": true
+                    "$ref": "#/definitions/NorthSouthPolicyState"
                 },
                 "createdOn": {
                     "description": "The date in which the policy created",
