@@ -80,9 +80,9 @@
         "tags": [
           "Projects"
         ],
-        "summary": "Projects_Create",
-        "description": "Creates a Team Services project in the collection with the specified name. 'VersionControlOption' and 'ProcessTemplateId' must be specified in the resource properties. Valid values for VersionControlOption: Git, Tfvc. Valid values for ProcessTemplateId: 6B724908-EF14-45CF-84F8-768B5384DA45, ADCC42AB-9882-485E-A3ED-7678F01F66BC, 27450541-8E31-4150-9947-DC59F998FC01 (these IDs correspond to Scrum, Agile, and CMMI process templates).",
-        "operationId": "Projects_Create",
+        "summary": "Projects_CreateOrUpdate",
+        "description": "Creates or updates a Team Services project in the collection with the specified name. 'VersionControlOption' and 'ProcessTemplateId' must be specified in the resource properties. Valid values for VersionControlOption: Git, Tfvc. Valid values for ProcessTemplateId: 6B724908-EF14-45CF-84F8-768B5384DA45, ADCC42AB-9882-485E-A3ED-7678F01F66BC, 27450541-8E31-4150-9947-DC59F998FC01 (these IDs correspond to Scrum, Agile, and CMMI process templates).",
+        "operationId": "Projects_CreateOrUpdate",
         "parameters": [
           {
             "in": "body",
@@ -132,7 +132,7 @@
             }
           },
           "202": {
-            "description": "The operation succeeded. A job to create the team project resource has been queued. The URI to monitor the status of the job is provided in the 'location' header."
+            "description": "The operation succeeded. A job to create/update the team project resource has been queued. The URI to monitor the status of the job is provided in the 'location' header."
           }
         },
         "x-ms-long-running-operation": true,
@@ -290,6 +290,7 @@
         },
         "location": {
           "description": "Resource location.",
+          "readOnly": true,
           "type": "string"
         },
         "name": {
@@ -321,7 +322,7 @@
       ],
       "properties": {
         "kind": {
-          "description": "Kind of project resource",
+          "description": "Kind of project resource. A bootStrappedProject is a project which has additional bootstrap information to create a CI/CD pipeline in the project.",
           "type": "string",
           "enum": [
             "project",
