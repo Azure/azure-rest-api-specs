@@ -3,14 +3,14 @@
     "api-version": "2018-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "MYDEVTESTRG",
-    "reportConfigName": "TestReportConfig"
+    "reportName": "TestReport"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "subscriptions/{subscription-id}/providers/Microsoft.Consumption/reportconfigs/TestReportConfig",
-        "name": "TestReportConfig",
-        "type": "Microsoft.Consumption/reportconfigs",
+        "id": "subscriptions/{subscription-id}/providers/Microsoft.CostManagement/reports/TestReport",
+        "name": "TestReport",
+        "type": "Microsoft.CostManagement/reports",
         "properties": {
           "format": "Csv",
           "deliveryInfo": {
@@ -46,11 +46,11 @@
               },
               "grouping": [
                 {
-                  "columnType": "Dimension",
+                  "type": "Dimension",
                   "name": "SubscriptionName"
                 },
                 {
-                  "columnType": "Tag",
+                  "type": "Tag",
                   "name": "Environment"
                 }
               ],
