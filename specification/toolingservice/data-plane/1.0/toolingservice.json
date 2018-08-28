@@ -17,13 +17,13 @@
     "https", "http"
   ],
   "paths": {
-    "/tools/lint": {
+    "/tools/validation/lint": {
       "post": {
         "tags": [
           "Linter"
         ],
-        "operationId": "Tools_Linter",
-        "description": "Get Linter Result",
+        "operationId": "Tools_GetLinterValidationResults",
+        "description": "Get Linter Validation results",
         "parameters": [
           {
             "name":"repository",
@@ -33,11 +33,11 @@
             "description": "Name of the repository"
           },
           {
-            "name":"branch",
+            "name":"ref",
             "in": "body",
             "type": "string",
             "required": true,
-            "description": "Name of the specific branch in the repository."
+            "description": "Name of the specific reference(Branch/Commit) in the repository."
           },
           {
             "name":"configPath",
@@ -54,35 +54,42 @@
             "description": "API Tag to be validated."
           },
           {
-            "name":"commitHash",
-            "in": "body",
-            "type": "string",
-            "description": "Commit hash to be validated."
-          },
-          {
-            "name":"mode",
+            "name":"filterType",
             "in": "query",
             "type": "string",
-            "description": "Mode"
-          }          
+            "description": "Type of filter(ARM/SDK,etc)"
+          },
+          {
+            "name":"githubToken",
+            "in": "body",
+            "type": "string",
+            "description": "Github Token to access private repositories."
+          }
         ],
         "responses": {
+          "503": {
+            "description": "Error when the workers are not available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Workers not available"
+            }
+          },
           "400": {
-            "description": "",
+            "description": "Error when the parameters are missing.",
             "schema": {
               "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
           "201": {
-            "description": "",
+            "description": "Initial response for the Long Running Operation: Tools_GetLinterValidationResults",
             "schema": {
               "$ref": "#/definitions/LinterValidationResult",
               "description": "Linter Result"
             }
           },
           "200": {
-            "description": "",
+            "description": "Final Response that contains the Linter Validation results.",
             "schema": {
               "$ref": "#/definitions/LinterValidationResult",
               "description": "Linter Result"
@@ -92,12 +99,61 @@
       },
       "x-ms-long-running-operation": true
     },
+    "/tools/validation/lint/result": {
+      "get": {
+        "tags": [
+          "Linter Results"
+        ],
+        "operationId": "Tools_GetLinterValidationResultsForValidationId",
+        "description": "Get Linter Validation results for the specific validation id.",
+        "parameters": [
+          {
+            "name":"validationId",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Validation Id for which the results must be retrieved."
+          }
+        ],
+        "responses": {
+          "503": {
+            "description": "Error when the workers are not available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Workers not available"
+            }
+          },
+          "400": {
+            "description": "Error when the parameters are missing.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Missing Parameters"
+            }
+          },
+          "201": {
+            "description": "Initial response for the Long Running Operation: Tools_GetLinterValidationResultsForValidationId",
+            "schema": {
+              "$ref": "#/definitions/LinterValidationResult",
+              "description": "Linter Result"
+            }
+          },
+          "200": {
+            "description": "Final Response that contains the Linter Validation results.",
+            "schema": {
+              "$ref": "#/definitions/LinterValidationResult",
+              "description": "Linter Result"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/tools/validation/semantic": {
       "post": {
         "tags": [
           "semantic"
         ],
-        "operationId": "Tools_Semantic",
+        "operationId": "Tools_GetSemanticValidationResults",
         "description": "Get Semantic validation result.",
         "parameters": [
           {
@@ -108,19 +164,7 @@
             "items": {
               "type": "string"
             },
-            "description": "List of files."
-          },
-          {
-            "name":"commitHash",
-            "in": "body",
-            "type": "string",
-            "description": "Commit hash to be validated."
-          },
-          {
-            "name":"validationId",
-            "in": "body",
-            "type": "string",
-            "description": "Validation Id."
+            "description": "List of files.File URLs must be an absolute path."
           },
           {
             "name":"githubToken",
@@ -130,15 +174,71 @@
           }          
         ],
         "responses": {
+          "503": {
+            "description": "Error when the workers are not available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Workers not available"
+            }
+          },
           "400": {
-            "description": "",
+            "description": "Error when the parameters are missing.",
             "schema": {
               "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
           "201": {
+            "description": "Initial response for the Long Running Operation: Tools_GetSemanticValidationResults",
+            "schema": {
+              "$ref": "#/definitions/SemanticValidationResult",
+              "description": "Semantic Result"
+            }
+          },
+          "200": {
             "description": "",
+            "schema": {
+              "$ref": "#/definitions/SemanticValidationResult",
+              "description": "Semantic Result"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/tools/validation/semantic/result": {
+      "get": {
+        "tags": [
+          "semantic results"
+        ],
+        "operationId": "Tools_GetSemanticValidationResultsForValidationId",
+        "description": "Get Semantic validation results for the specific validation id.",
+        "parameters": [
+          {
+            "name":"validationId",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Validation Id for which the results must be retrieved."
+          }
+        ],
+        "responses": {
+          "503": {
+            "description": "Error when the workers are not available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Workers not available"
+            }
+          },
+          "400": {
+            "description": "Error when the parameters are missing.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Missing Parameters"
+            }
+          },
+          "201": {
+            "description": "Initial response for the Long Running Operation: Tools_GetSemanticValidationResultsForValidationId",
             "schema": {
               "$ref": "#/definitions/SemanticValidationResult",
               "description": "Semantic Result"
@@ -160,7 +260,7 @@
         "tags": [
           "model"
         ],
-        "operationId": "Tools_Model",
+        "operationId": "Tools_GetModelValidationResults",
         "description": "Get Model validation result.",
         "parameters": [
           {
@@ -190,18 +290,25 @@
             "in": "body",
             "type": "string",
             "description": "Github Token"
-          }          
+          }
         ],
         "responses": {
+          "503": {
+            "description": "Error when the workers are not available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Workers not available"
+            }
+          },
           "400": {
-            "description": "",
+            "description": "Error when the parameters are missing.",
             "schema": {
               "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
           "201": {
-            "description": "",
+            "description": "Initial response for the Long Running Operation: Tools_GetModelValidationResults",
             "schema": {
               "$ref": "#/definitions/ModelValidationResult",
               "description": "Semantic Result"
@@ -217,12 +324,62 @@
         },
         "x-ms-long-running-operation": true
     },
-    "/tools/apiValidate": {
+    "/tools/validation/model/result": {
+      "get": {
+        "tags": [
+          "model results"
+        ],
+        "operationId": "Tools_GetModelValidationResultsForValidationId",
+        "description": "Get Model validation results for the specific validation id.",
+        "parameters": [
+          {
+            "name":"validationId",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Validation Id for which the results must be retrieved."
+          }
+        ],
+        "responses": {
+          "503": {
+            "description": "Error when the workers are not available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Workers not available"
+            }
+          },
+          "400": {
+            "description": "Error when the parameters are missing.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Missing Parameters"
+            }
+          },
+          "201": {
+            "description": "Initial response for the Long Running Operation: Tools_GetModelValidationResultsForValidationId",
+            "schema": {
+              "$ref": "#/definitions/ModelValidationResult",
+              "description": "Semantic Result"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ModelValidationResult",
+              "description": "Semantic Result"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+
+      }
+    },    
+    "/tools/validation/api": {
       "post": {
         "tags": [
           "semantic"
         ],
-        "operationId": "Tools_ApiValidate",
+        "operationId": "Tools_GetApiValidationResults",
         "parameters": [
           {
             "name":"repository",
@@ -232,7 +389,7 @@
             "description": "Name of the repository"
           },
           {
-            "name":"branch",
+            "name":"ref",
             "in": "body",
             "type": "string",
             "required": true,
@@ -253,57 +410,113 @@
             "description": "API Version to be validated."
           },
           {
-            "name":"validationId",
-            "in": "body",
-            "type": "string",
-            "required": true,
-            "description": "Validation Id"
-          },
-          {
             "name":"startDate",
             "in": "body",
             "type": "string",
+            "required": true,
             "description": "Start Date"
           },
           {
             "name":"endDate",
             "in": "body",
             "type": "string",
+            "required": true,
             "description": "End Date"
-          }          
+          },
+          {
+            "name":"githubToken",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "description": "Github Token"
+          }
         ],
         "responses": {
+          "503": {
+            "description": "Error when the workers are not available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Workers not available"
+            }
+          },
           "400": {
-            "description": "",
+            "description": "Error when the parameters are missing.",
             "schema": {
               "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
           "201": {
-            "description": "",
+            "description": "Initial response for the Long Running Operation: Tools_GetApiValidationResults",
             "schema": {
-              "properties": {
-                "validationId": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/ApiSpecsValidationSummary",
+              "description": "Api Validation Summary"
             }
           },
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ApiSpecsValidation",
-              "description": "Semantic Result"
+              "$ref": "#/definitions/ApiSpecsValidationSummary",
+              "description": "Api Validation Summary"
             }
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/tools/apiValidate/result": {
+    "/tools/validation/api/result": {
       "get": {
-        "operationId": "Tools_ApiValidateResult",
+        "tags": [
+          "api results"
+        ],
+        "operationId": "Tools_GetApiValidationResultsForValidationId",
+        "description": "Get Api validation results for the specific validation id.",
+        "parameters": [
+          {
+            "name":"validationId",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Validation Id for which the results must be retrieved."
+          }
+        ],
+        "responses": {
+          "503": {
+            "description": "Error when the workers are not available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Workers not available"
+            }
+          },
+          "400": {
+            "description": "Error when the parameters are missing.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Missing Parameters"
+            }
+          },
+          "201": {
+            "description": "Initial response for the Long Running Operation: Tools_GetApiValidationResultsForValidationId",
+            "schema": {
+              "$ref": "#/definitions/ApiSpecsValidationSummary",
+              "description": "Api Validation Summary"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiSpecsValidationSummary",
+              "description": "Api Validation Summary"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+
+      }
+    },
+    "/tools/validation/api/details": {
+      "get": {
+        "operationId": "Tools_GetApiValidationDetailsForValidationId",
         "parameters": [
           {
             "name":"validationId",
@@ -311,71 +524,35 @@
             "type": "string",
             "description": "Validation Id",
             "required": true
-          },
-          {
-            "name":"operationId",
-            "in": "query",
-            "type": "string",
-            "description": "Operation Id."
-          },
-          {
-            "name":"env",
-            "in": "query",
-            "type": "string",
-            "description": "Environment"
           }          
         ],
         "responses": {
+          "503": {
+            "description": "Error when the workers are not available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObject",
+              "description": "Workers not available"
+            }
+          },
           "400": {
-            "description": "",
+            "description": "Error when the parameters are missing.",
             "schema": {
               "$ref": "#/definitions/ErrorObject",
               "description": "Missing Parameters"
             }
           },
-          "404": {
-            "description": "",            
+          "201": {
+            "description": "Initial response for the Long Running Operation: Tools_GetApiValidationDetailsForValidationId",
+            "schema": {
+              "$ref": "#/definitions/ApiSpecsValidationDetails",
+              "description": "Api Validation Summary"
+            }
           },
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ApiSpecsValidation",
-              "description": "Semantic Result"
-            }
-          }
-        }
-      }
-    },
-    "/tools/apiValidate/summary": {
-      "get": {
-        "operationId": "Tools_ApiValidateSummary",
-        "parameters": [
-          {
-            "name": "query",
-            "type": "object",
-            "properties": {
-              "validationId": {
-                "type": "string"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ErrorObject",
-              "description": "Missing Parameters"
-            }
-          },
-          "404": {
-            "description": "",            
-          },
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ApiSpecsValidation",
-              "description": "Semantic Result"
+              "$ref": "#/definitions/ApiSpecsValidationDetails",
+              "description": "Api Validation Summary"
             }
           }
         }
@@ -396,14 +573,11 @@
             "Verbose"
           ]
         },
-        "errorCode":{
+        "code":{
           "type": "string"
         },
-        "errorDetails": {
-          "type": "string"
-        },
-        "count": {
-          "type": "integer"
+        "details": {
+          "type": "object"
         },
         "source": {
           "type": "string",
@@ -415,39 +589,30 @@
         }
       }
     },
-    "BaseValidation": {
+    "ApiValidationError": {
       "type": "object",
-      "description": "Base Validation Object.",
       "properties": {
-        "isDone": {
-          "type": "boolean",
-          "description": "Indicates if a validation is done."
-        },
-        "isFailed": {
-          "type": "boolean",
-          "description": "Indicates if a validation is failed."
-        },
-        "createdAt": {
-          "type": "string",
-          "description": "Indicates the time of creation."
-        },
-        "validationId": {
-          "type": "string",
-          "description": "Indicates the validation id"
-        },
-        "tries": {
-          "type": "integer",
-          "description": "Indicates the number of times tried."
+        "occurence": {
+          "type": "integer"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseValidationError"
+        }
+      ]
     },
     "LinterValidationResult": {
       "type": "object",
       "description": "Linter Validation Result Object.",
       "properties": {
-        "commitHash": {
+        "repository": {
           "type": "string",
-          "description": "Commit Hash"
+          "description": "Name of the repository."
+        },
+        "ref": {
+          "type": "string",
+          "description": "Name of the specific reference(Branch/Commit) in the repository."
         },
         "configPath": {
           "type": "string",
@@ -457,35 +622,13 @@
           "type": "string",
           "description": "API Tag"
         },
-        "branch": {
+        "filterType": {
           "type": "string",
-          "description": "Name of the branch"
-        },
-        "repoUrl": {
-          "type": "string",
-          "description": "URL of the repository"
+          "description": "Type of filter(ARM/SDK,etc)"
         },
         "validationResults": {
           "type": "array",
           "description": "Validation results from Linter",
-          "items": {
-            "$ref": "#/definitions/LinterValidationResultsObject"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseValidation"
-        }
-      ]
-    },
-    "LinterValidationResultsObject": {
-      "type": "object",
-      "description": "Linter Validation Results Object",
-      "properties": {
-        "issues": {
-          "type": "array",
-          "description": "",
           "items": {
             "$ref": "#/definitions/LinterValidationResultsIssue"
           }
@@ -565,15 +708,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "length": {
-          "type": "integer"
-        },
-        "valueOffset": {
-          "type": "integer"
-        },
-        "valueLength": {
-          "type": "integer"
         }
       }
     },
@@ -581,9 +715,6 @@
       "type": "object",
       "description": "Semantic Validation Result.",
       "properties": {
-        "commitHash": {
-          "type": "string"
-        },
         "fileUrls": {
           "type": "array",
           "items": {
@@ -597,12 +728,7 @@
             "$ref": "#/definitions/SemanticValidationResultsObject"
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseValidation"
-        }
-      ]
+      }
     },
     "SemanticValidationResultsObject": {
       "type": "object",
@@ -652,12 +778,7 @@
             "$ref": "#/definitions/ModelValidationResultsObject"
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseValidation"
-        }
-      ]
+      }
     },
     "SemanticValidationResultsObject": {
       "type": "object",
@@ -700,13 +821,13 @@
         }
       ]
     },
-    "ApiSpecsValidation": {
+    "ApiSpecsValidationDetails": {
       "type": "object",
       "properties": {
         "repository": {
           "type": "string"
         },
-        "branch": {
+        "ref": {
           "type": "string"
         },
         "resourceProvider": {
@@ -736,16 +857,62 @@
         "uniqueErrors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BaseValidationError"
+            "$ref": "#/definitions/ApiValidationError"
           }
+        }
+      }
+    },
+    "LiveValidationResult": {
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "type": "string"
+        },
+        "originalCorrelationId": {
+          "type": "string"
+        },
+        "isAggregateSuccess": {
+          "type": "boolean"
+        },
+        "path": {
+          "type": "string"
+        },
+        "operationSeverity": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Error",
+            "Warning",
+            "Information",
+            "Verbose"
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiValidationError"
+          }
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "canary",
+            "prod"
+          ]
         }
       }
     },
     "ErrorObject":{
       "type": "object",
       "properties": {
-        "error": {
+        "code": {
           "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "innererror": {
+          "type": "object"
         }
       }
     }
