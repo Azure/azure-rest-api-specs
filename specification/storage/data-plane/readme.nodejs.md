@@ -7,7 +7,6 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-storage-datalake
-  package-version: 0.1.0-preview
   output-folder: $(node-sdks-folder)/lib/services/storageDatalake
   generate-license-txt: false
   generate-package-json: false
