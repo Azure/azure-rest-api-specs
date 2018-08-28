@@ -26,9 +26,35 @@ These are the global settings for the DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-preview
+tag: package-2018-05-01
 ```
+### Tag: package-2018-05-01
 
+These settings apply only when `--tag=package-2018-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05-01'
+input-file:
+- Microsoft.Network/stable/2018-05-01/dns.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+  - where:
+      - $.definitions.RecordSetProperties.properties.TTL
+      - $.definitions.RecordSetProperties.properties.ARecords
+      - $.definitions.RecordSetProperties.properties.AAAARecords
+      - $.definitions.RecordSetProperties.properties.MXRecords
+      - $.definitions.RecordSetProperties.properties.NSRecords
+      - $.definitions.RecordSetProperties.properties.PTRRecords
+      - $.definitions.RecordSetProperties.properties.SRVRecords
+      - $.definitions.RecordSetProperties.properties.TXTRecords
+      - $.definitions.RecordSetProperties.properties.CNAMERecord
+      - $.definitions.RecordSetProperties.properties.SOARecord
+      - $.definitions.RecordSetUpdateParameters.properties.RecordSet
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+```
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
