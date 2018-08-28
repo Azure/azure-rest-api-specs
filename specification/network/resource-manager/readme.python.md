@@ -40,7 +40,7 @@ batch:
 These settings apply only when `--tag=package-2018-08 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2018-07' && $(python)
+``` yaml $(tag) == 'package-2018-08' && $(python)
 python:
   namespace: azure.mgmt.network.v2018_08_01
   output-folder: $(python-sdks-folder)/azure-mgmt-network/azure/mgmt/network/v2018_08_01
