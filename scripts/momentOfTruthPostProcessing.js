@@ -19,6 +19,12 @@ function getLogDir() {
 
 let githubTemplate = (title, contact_message, file_summaries) => `# AutoRest linter results for ${title}\n${contact_message}\n\n${file_summaries}`;
 
+let tooManyResults = "# Result limit exceeded, check build output\n" +
+    "The linter diff produced too many results to display here. Please view the build output to see the results. " +
+    "For help with SDK-related validation Errors / Warnings, reach out to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com). " +
+    "For help with ARM-related validation Errors / Warnings, reach out to [ARM RP API Review](mailto:armrpapireview@microsoft.com).\n\n" +
+    `### [View Build Output](https://travis-ci.org/${process.env.TRAVIS_REPO_SLUG}/jobs/${process.env.TRAVIS_JOB_ID})`;
+
 let githubFooter = `[AutoRest Linter Guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) | ` +
     `[AutoRest Linter Issues](https://github.com/Azure/azure-openapi-validator/issues) | ` +
     `Send ${emailLink("feedback", "azure-swag-tooling@microsoft.com", "Feedback | AutoRest Linter Diff Tool")}` +
@@ -33,13 +39,18 @@ let potentialNewWarningErrorSummaryHeader = `
 |-|------|----------|---------|
 `;
 
-let potentialNewWarningErrorSummary = (count, warning_error_id, warning_error_code, warning_error_file, warning_error_line, warning_error_message) =>
+let potentialNewWarningErrorSummaryMarkdown = (count, warning_error_id, warning_error_code, warning_error_file, warning_error_line, warning_error_message) =>
     `|${count}|[${warning_error_id} - ${warning_error_code}](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md#${warning_error_id})|` +
     `[${shortName(warning_error_file)}:${warning_error_line}](${blobHref(warning_error_file)}#L${warning_error_line} "${warning_error_file}")|` +
     `${warning_error_message}|\n`;
 
-let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reachout to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";
-let armContactMessage = "These errors are reported by the ARM team's validation tools, reachout to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
+let potentialNewWarningErrorSummaryPlain = (count, warning_error_id, warning_error_code, warning_error_file, warning_error_line, warning_error_message) =>
+    `${warning_error_id} - ${warning_error_code}\n` +
+    `${warning_error_message}\n` +
+    `  at ${warning_error_file}:${warning_error_line}\n`;
+
+let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reach out to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";
+let armContactMessage = "These errors are reported by the ARM team's validation tools, reach out to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
 let sdkFileSummaries = '', armFileSummaries = '';
 
 let data = undefined;
@@ -161,7 +172,7 @@ function blobHref(file) {
     return `https://github.com/${process.env.TRAVIS_PULL_REQUEST_SLUG}/blob/${process.env.TRAVIS_PULL_REQUEST_SHA}/${file}`;
 }
 
-function getFileSummaryTable(issues, prNumber) {
+function getFileSummaryTable(issues, formatter) {
     let potentialNewIssues = potentialNewWarningErrorSummaryHeader;
 
     issues.sort((a, b) => {
@@ -191,7 +202,7 @@ function getFileSummaryTable(issues, prNumber) {
             issue.lineNumber = getLine(issue.jsonref) || "1";
         }
 
-        potentialNewIssues += potentialNewWarningErrorSummary(
+        potentialNewIssues += formatter(
             count + 1,
             issue.id,
             issue.code,
@@ -204,15 +215,15 @@ function getFileSummaryTable(issues, prNumber) {
     return potentialNewIssues;
 }
 
-function getFileSummary(issueType, fileName, existingWarnings, existingErrors, newWarnings, newErrors, prNumber) {
+function getFileSummary(issueType, fileName, existingWarnings, existingErrors, newWarnings, newErrors) {
     let fileSummary = "";
 
     if (newErrors.length > 0) {
-        fileSummary += fileSummaryNewTemplate(`${issueType} Error`, newErrors.length, getFileSummaryTable(newErrors, prNumber));
+        fileSummary += fileSummaryNewTemplate(`${issueType} Error`, newErrors.length, getFileSummaryTable(newErrors, potentialNewWarningErrorSummaryMarkdown));
     }
 
     if (existingErrors.length > 0) {
-        fileSummary += fileSummaryExistingTemplate(`${issueType} Error`, existingErrors.length, getFileSummaryTable(existingErrors, prNumber));
+        fileSummary += fileSummaryExistingTemplate(`${issueType} Error`, existingErrors.length, getFileSummaryTable(existingErrors, potentialNewWarningErrorSummaryMarkdown));
     }
 
     if (fileSummary !== "") {
@@ -220,11 +231,11 @@ function getFileSummary(issueType, fileName, existingWarnings, existingErrors, n
     }
 
     if (newWarnings.length > 0) {
-        fileSummary += fileSummaryNewTemplate(`${issueType} Warning`, newWarnings.length, getFileSummaryTable(newWarnings, prNumber));
+        fileSummary += fileSummaryNewTemplate(`${issueType} Warning`, newWarnings.length, getFileSummaryTable(newWarnings, potentialNewWarningErrorSummaryMarkdown));
     }
 
     if (existingWarnings.length > 0) {
-        fileSummary += fileSummaryExistingTemplate(`${issueType} Warning`, existingWarnings.length, getFileSummaryTable(existingWarnings, prNumber));
+        fileSummary += fileSummaryExistingTemplate(`${issueType} Warning`, existingWarnings.length, getFileSummaryTable(existingWarnings, potentialNewWarningErrorSummaryMarkdown));
     }
 
     if (fileSummary !== "") {
@@ -251,6 +262,8 @@ function emailLink(title, addr, subject = "", body = "") {
 
 function postProcessing() {
     let newSDKErrorsCount = 0, newARMErrorsCount = 0, newSDKWarningsCount = 0, newARMWarningsCount = 0;
+
+    console.log("\n---------- Linter Diff Results ----------\n")
 
     if (!jsonData) {
         const reportLink = emailLink(
@@ -324,6 +337,8 @@ function postProcessing() {
         compareBeforeAfterArrays(afterWarningsARMArray, beforeWarningsARMArray, existingARMWarnings, newARMWarnings);
         compareBeforeAfterArrays(afterWarningsSDKArray, beforeWarningsSDKArray, existingSDKWarnings, newSDKWarnings);
 
+        console.log("-----------------------------------------\n")
+        console.log(`Config file: ${fileName}\n`)
         console.log("SDK Errors/Warnings");
         console.log("===================");
         console.log("Errors:    Before: ", beforeErrorsSDKArray.length, " - After: ", afterErrorsSDKArray.length);
@@ -342,24 +357,49 @@ function postProcessing() {
         console.log("Existing ARM Errors: ", existingARMErrors.length);
         console.log("Existing ARM Warnings: ", existingARMWarnings.length);
         console.log();
+        if (newSDKErrors.length > 0) {
+            console.log(`Potential new SDK errors`)
+            console.log("========================");
+            console.log(getFileSummaryTable(newSDKErrors, potentialNewWarningErrorSummaryPlain));
+            console.log();
+        }
+        if (newSDKWarnings.length > 0) {
+            console.log(`Potential new SDK warnings`)
+            console.log("==========================");
+            console.log(getFileSummaryTable(newSDKWarnings, potentialNewWarningErrorSummaryPlain));
+            console.log();
+        }
+        if (newARMErrors.length > 0) {
+            console.log(`Potential new ARM errors`)
+            console.log("========================");
+            console.log(getFileSummaryTable(newARMErrors, potentialNewWarningErrorSummaryPlain));
+            console.log();
+        }
+        if (newARMWarnings.length > 0) {
+            console.log(`Potential new ARM warnings`)
+            console.log("==========================");
+            console.log(getFileSummaryTable(newARMWarnings, potentialNewWarningErrorSummaryPlain));
+            console.log();
+        }
 
         newSDKErrorsCount += newSDKErrors.length;
         newARMErrorsCount += newARMErrors.length;
         newSDKWarningsCount += newSDKWarnings.length;
         newARMWarningsCount += newARMWarnings.length;
 
-        sdkFileSummaries += getFileSummary("SDK", fileName, existingSDKWarnings, existingSDKErrors, newSDKWarnings, newSDKErrors, pullRequestNumber);
-        armFileSummaries += getFileSummary("ARM", fileName, existingARMWarnings, existingARMErrors, newARMWarnings, newARMErrors, pullRequestNumber);
+        sdkFileSummaries += getFileSummary("SDK", fileName, existingSDKWarnings, existingSDKErrors, newSDKWarnings, newSDKErrors);
+        armFileSummaries += getFileSummary("ARM", fileName, existingARMWarnings, existingARMErrors, newARMWarnings, newARMErrors);
     }
 
     const sdkSummary = getSummaryBlock("SDK-related validation Errors / Warnings", sdkFileSummaries, sdkContactMessage);
     const armSummary = getSummaryBlock("ARM-related validation Errors / Warnings", armFileSummaries, armContactMessage);
+    const text = `${sdkSummary}<br><br>\n\n${armSummary}<br><br>\n\n${githubFooter}`;
     
     const [title, summary] = getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount);
     const output = {
         title,
         summary,
-        text: `${sdkSummary}<br><br>\n\n${armSummary}<br><br>\n\n${githubFooter}`
+        text: text.length <= 65535 ? text : `${tooManyResults}<br><br>\n\n${githubFooter}`
     }
 
     console.log("---output");
