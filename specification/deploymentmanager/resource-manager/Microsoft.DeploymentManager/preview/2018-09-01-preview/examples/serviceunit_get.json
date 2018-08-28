@@ -1,0 +1,27 @@
+{
+    "parameters": {
+        "subscriptionId": "caac1590-e859-444f-a9e0-62091c0f5929",
+        "resourceGroupName": "myResourceGroup",
+        "topologyName": "myTopology",
+        "topologyGroupName": "myTopologyGroup",
+        "topologyUnitName": "myTopologyUnit",
+        "api-version": "2018-09-01-preview"
+    },
+    "responses": {
+        "201": {
+            "body": {
+                "name": "myTopologyUnit",
+                "type": "Microsoft.DeploymentManager/topologies/topologyGroups/topologyUnits",
+                "location": "centralus",
+                "tags": {},
+                "properties": {
+                    "targetResourceGroup": "myDeploymentResourceGroup",
+                    "deploymentMode": "Incremental",
+                    "templateUri": "https://teststorageaccount.blob.core.windows.net/artifactsContainer/myTopologyUnit.template.json",
+                    "parametersUri": "https://teststorageaccount.blob.core.windows.net/artifactsContainer/myTopologyUnit.parameters.json"
+                }
+            }
+        },
+        "404": {}
+    }
+}
