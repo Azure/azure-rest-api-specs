@@ -58,6 +58,7 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/WebApps.json
 - Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+- Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3019 error
 - where: $.definitions.Identifier.properties
