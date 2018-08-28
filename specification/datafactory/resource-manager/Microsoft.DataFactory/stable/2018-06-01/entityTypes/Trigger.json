@@ -382,7 +382,7 @@
               "$ref": "#/definitions/RetryPolicy",
               "description": "Retry policy that will be applied for failed pipeline runs."
             },
-			      "dependsOn": {
+            "dependsOn": {
               "type": "array",
               "description": "Triggers that this trigger depends on. Only tumbling window triggers are supported.",
               "items": {
@@ -493,14 +493,14 @@
       ],
       "properties": {
         "offset": {
-          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency, .Net timespan format.",
+          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
           "type": "string",
           "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
           "maxLength": 15
         },
         "size": {
-          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, .Net timespan format.",
+          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used.",
           "type": "string",
           "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
@@ -518,14 +518,14 @@
       ],
       "properties": {
         "offset": {
-          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency, .Net timespan format.",
+          "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
           "type": "string",
           "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
           "maxLength": 15
         },
         "size": {
-          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used, .Net timespan format.",
+          "description": "The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used.",
           "type": "string",
           "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
