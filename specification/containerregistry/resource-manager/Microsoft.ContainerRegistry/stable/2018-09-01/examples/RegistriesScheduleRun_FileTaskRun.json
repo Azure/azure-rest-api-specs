@@ -5,7 +5,8 @@
     "registryName": "myRegistry",
     "api-version": "2018-09-01",
     "runRequest": {
-      "type": "QuickTaskRunRequest",
+      "type": "FileTaskRunRequest",
+      "sourceLocation": "https://myaccount.blob.core.windows.net/sascontainer/source.zip?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D",
       "values": [
         {
           "name": "mytestargument",
@@ -19,14 +20,13 @@
         }
       ],
       "platform": {
-        "os": "Linux",
-        "architecture": "amd64"
+        "os": "Linux"
       },
       "agentConfiguration": {
         "cpu": 2
       },
-      "taskDefinitionContent": "c3RlcHM6Cnt7IGlmIFZhbHVlcy5lbnZpcm9ubWVudCA9PSAncHJvZCcgfX0KICAtIHJ1bjogcHJvZCBzZXR1cAp7eyBlbHNlIGlmIFZhbHVlcy5lbnZpcm9ubWVudCA9PSAnc3RhZ2luZycgfX0KICAtIHJ1bjogc3RhZ2luZyBzZXR1cAp7eyBlbHNlIH19CiAgLSBydW46IGRlZmF1bHQgc2V0dXAKe3sgZW5kIH19CgogIC0gcnVuOiBidWlsZCAtdCBGYW5jeVRoaW5nOnt7LlZhbHVlcy5lbnZpcm9ubWVudH19LXt7LlZhbHVlcy52ZXJzaW9ufX0gLgoKcHVzaDogWydGYW5jeVRoaW5nOnt7LlZhbHVlcy5lbnZpcm9ubWVudH19LXt7LlZhbHVlcy52ZXJzaW9ufX0nXQ==",
-      "valuesContent":"ZW52aXJvbm1lbnQ6IHByb2QKdmVyc2lvbjogMQ=="
+      "taskFilePath": "acb.yaml",
+      "valuesFilePath":"prod-values.yaml"
     }
   },
   "responses": {
