@@ -294,6 +294,7 @@
             },
             "etag":{  
                "type":"string",
+               "readOnly": true,
                "description":"A unique read-only string that changes whenever the resource is updated."
             }
          },
@@ -473,7 +474,7 @@
          },
          "description":"Properties of an application rule."
       },
-      "AzureFirewallNatRuleCollectionPropertiesFormat": {
+      "AzureFirewallNatRuleCollectionProperties": {
          "properties":{  
             "priority":{  
                "type":"integer",
@@ -506,7 +507,7 @@
          "properties":{  
             "properties":{  
                "x-ms-client-flatten":true,
-               "$ref":"#/definitions/AzureFirewallNatRuleCollectionPropertiesFormat"
+               "$ref":"#/definitions/AzureFirewallNatRuleCollectionProperties"
             },
             "name":{  
                "type":"string",
