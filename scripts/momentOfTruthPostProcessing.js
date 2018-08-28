@@ -47,7 +47,7 @@ let potentialNewWarningErrorSummaryMarkdown = (count, warning_error_id, warning_
 let potentialNewWarningErrorSummaryPlain = (count, warning_error_id, warning_error_code, warning_error_file, warning_error_line, warning_error_message) =>
     `${warning_error_id} - ${warning_error_code}\n` +
     `${warning_error_message}\n` +
-    `  at ${warning_error_file}:${warning_error_line}\n`;
+    `  at ${warning_error_file}:${warning_error_line}\n\n`;
 
 let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reach out to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";
 let armContactMessage = "These errors are reported by the ARM team's validation tools, reach out to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
@@ -172,8 +172,8 @@ function blobHref(file) {
     return `https://github.com/${process.env.TRAVIS_PULL_REQUEST_SLUG}/blob/${process.env.TRAVIS_PULL_REQUEST_SHA}/${file}`;
 }
 
-function getFileSummaryTable(issues, formatter) {
-    let potentialNewIssues = potentialNewWarningErrorSummaryHeader;
+function getFileSummaryTable(issues, header, formatter) {
+    let potentialNewIssues = header;
 
     issues.sort((a, b) => {
         if (!a.filePath) {
@@ -219,11 +219,11 @@ function getFileSummary(issueType, fileName, existingWarnings, existingErrors, n
     let fileSummary = "";
 
     if (newErrors.length > 0) {
-        fileSummary += fileSummaryNewTemplate(`${issueType} Error`, newErrors.length, getFileSummaryTable(newErrors, potentialNewWarningErrorSummaryMarkdown));
+        fileSummary += fileSummaryNewTemplate(`${issueType} Error`, newErrors.length, getFileSummaryTable(newErrors, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
     }
 
     if (existingErrors.length > 0) {
-        fileSummary += fileSummaryExistingTemplate(`${issueType} Error`, existingErrors.length, getFileSummaryTable(existingErrors, potentialNewWarningErrorSummaryMarkdown));
+        fileSummary += fileSummaryExistingTemplate(`${issueType} Error`, existingErrors.length, getFileSummaryTable(existingErrors, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
     }
 
     if (fileSummary !== "") {
@@ -231,11 +231,11 @@ function getFileSummary(issueType, fileName, existingWarnings, existingErrors, n
     }
 
     if (newWarnings.length > 0) {
-        fileSummary += fileSummaryNewTemplate(`${issueType} Warning`, newWarnings.length, getFileSummaryTable(newWarnings, potentialNewWarningErrorSummaryMarkdown));
+        fileSummary += fileSummaryNewTemplate(`${issueType} Warning`, newWarnings.length, getFileSummaryTable(newWarnings, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
     }
 
     if (existingWarnings.length > 0) {
-        fileSummary += fileSummaryExistingTemplate(`${issueType} Warning`, existingWarnings.length, getFileSummaryTable(existingWarnings, potentialNewWarningErrorSummaryMarkdown));
+        fileSummary += fileSummaryExistingTemplate(`${issueType} Warning`, existingWarnings.length, getFileSummaryTable(existingWarnings, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
     }
 
     if (fileSummary !== "") {
@@ -337,7 +337,6 @@ function postProcessing() {
         compareBeforeAfterArrays(afterWarningsARMArray, beforeWarningsARMArray, existingARMWarnings, newARMWarnings);
         compareBeforeAfterArrays(afterWarningsSDKArray, beforeWarningsSDKArray, existingSDKWarnings, newSDKWarnings);
 
-        console.log("-----------------------------------------\n")
         console.log(`Config file: ${fileName}\n`)
         console.log("SDK Errors/Warnings");
         console.log("===================");
@@ -360,27 +359,25 @@ function postProcessing() {
         if (newSDKErrors.length > 0) {
             console.log(`Potential new SDK errors`)
             console.log("========================");
-            console.log(getFileSummaryTable(newSDKErrors, potentialNewWarningErrorSummaryPlain));
-            console.log();
+            console.log(getFileSummaryTable(newSDKErrors, "", potentialNewWarningErrorSummaryPlain));
         }
         if (newSDKWarnings.length > 0) {
             console.log(`Potential new SDK warnings`)
             console.log("==========================");
-            console.log(getFileSummaryTable(newSDKWarnings, potentialNewWarningErrorSummaryPlain));
-            console.log();
+            console.log(getFileSummaryTable(newSDKWarnings, "", potentialNewWarningErrorSummaryPlain));
         }
         if (newARMErrors.length > 0) {
             console.log(`Potential new ARM errors`)
             console.log("========================");
-            console.log(getFileSummaryTable(newARMErrors, potentialNewWarningErrorSummaryPlain));
-            console.log();
+            console.log(getFileSummaryTable(newARMErrors, "", potentialNewWarningErrorSummaryPlain));
         }
         if (newARMWarnings.length > 0) {
             console.log(`Potential new ARM warnings`)
             console.log("==========================");
-            console.log(getFileSummaryTable(newARMWarnings, potentialNewWarningErrorSummaryPlain));
-            console.log();
+            console.log(getFileSummaryTable(newARMWarnings, "", potentialNewWarningErrorSummaryPlain));
         }
+
+        console.log("-----------------------------------------\n")
 
         newSDKErrorsCount += newSDKErrors.length;
         newARMErrorsCount += newARMErrors.length;
