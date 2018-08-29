@@ -862,6 +862,40 @@
         }
       }
     },
+    "ApiSpecsValidationSummary": {
+      "type": "object",
+      "properties": {
+        "specSummaryObject": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpecSummaryObject"
+          }
+        }
+      }
+    },
+    "SpecSummaryObject": {
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "totalCount": {
+          "type": "integer"
+        },
+        "uniqueErrorsCount": {
+          "type": "integer"
+        },
+        "failingCount": {
+          "type": "integer"
+        },
+        "passingCount": {
+          "type": "integer"
+        }
+      }
+    },
     "LiveValidationResult": {
       "type": "object",
       "properties": {
