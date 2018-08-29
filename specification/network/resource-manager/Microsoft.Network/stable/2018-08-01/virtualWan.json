@@ -2294,7 +2294,7 @@
         },
         "p2sVpnServerConfigurations": {
           "type": "array",
-          "description": "list of all P2SVpnServerConfigurationss to the virtual wan.",
+          "description": "list of all P2SVpnServerConfigurations associated with the virtual wan.",
           "items": {
             "$ref": "#/definitions/P2SVpnServerConfiguration"
           }
@@ -3164,7 +3164,6 @@
         },
         "name": {
           "type": "string",
-          "readOnly": true,
           "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
         "etag": {
@@ -3175,7 +3174,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "P2SVpnServerConfiguration Resource."
@@ -3241,7 +3240,7 @@
           "description": "The scale unit for this p2s vpn gateway."
         },
         "p2sVpnServerConfiguration": {
-          "$ref": "./network.json#/definitions/SubResource",
+          "$ref": "#/definitions/P2SVpnServerConfiguration",
           "description": "The P2SVpnServerConfiguration to which the p2sVpnGateway is attached to."
         },
         "vpnClientAddressPool": {
