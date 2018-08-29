@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ServiceBus2018PreviewManagementClient",
-    "description": "Azure Service Bus client for managing Namespace, IPFilter Rules, VirtualNetworkRules and Zone Redundant ",
+    "description": "Azure Service Bus client for managing Namespace, IPFilter Rules, VirtualNetworkRules and Zone Redundant",
     "version": "2018-01-01-preview"
   },
   "host": "management.azure.com",
@@ -358,53 +358,7 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListAuthorizationRules",
-        "x-ms-examples": {
-          "NameSpaceAutorizationRuleListAll": { "$ref": "./examples/NameSpaces/SBNameSpaceAutorizationRuleListAll.json" }
-        },
-        "description": "Gets the authorization rules for a namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/namespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace authorization rules returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/SBAuthorizationRuleListResult"
-            }
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
+    },    
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/ipfilterrules": {
       "get": {
         "tags": [
