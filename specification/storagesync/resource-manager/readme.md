@@ -77,7 +77,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.StorageSync
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/Storage/Management.StorageSync/Generated
+  output-folder: $(csharp-sdks-folder)/StorageSync/Management.StorageSync/Generated
   clear-output-folder: true
 ```
 
