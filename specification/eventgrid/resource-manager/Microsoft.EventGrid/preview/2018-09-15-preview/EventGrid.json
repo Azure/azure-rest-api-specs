@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2018-05-01-preview",
+        "version": "2018-09-15-preview",
         "title": "EventGridManagementClient",
         "description": "Azure EventGrid Management Client"
     },
@@ -16,6 +16,551 @@
         "application/json"
     ],
     "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}": {
+            "get": {
+                "tags": [
+                    "Domains"
+                ],
+                "summary": "Get a domain",
+                "description": "Get properties of a domain",
+                "operationId": "Domains_Get",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Name of the domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Domain"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-examples": {
+                    "Domains_Get": {
+                        "$ref": "./examples/Domains_Get.json"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Domains"
+                ],
+                "summary": "Create a domain",
+                "description": "Asynchronously creates a new domain with the specified parameters.",
+                "operationId": "Domains_CreateOrUpdate",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Name of the domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainInfo",
+                        "in": "body",
+                        "description": "Domain information",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Domain"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Domain"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-examples": {
+                    "Domains_CreateOrUpdate": {
+                        "$ref": "./examples/Domains_CreateOrUpdate.json"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [
+                    "Domains"
+                ],
+                "summary": "Delete a domain",
+                "description": "Delete existing domain",
+                "operationId": "Domains_Delete",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Name of the domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "NoContent"
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-examples": {
+                    "Domains_Delete": {
+                        "$ref": "./examples/Domains_Delete.json"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": [
+                    "Domains"
+                ],
+                "summary": "Update a domain",
+                "description": "Asynchronously updates a domain with the specified parameters.",
+                "operationId": "Domains_Update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Name of the domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainUpdateParameters",
+                        "in": "body",
+                        "description": "Domain update information",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DomainUpdateParameters"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Domain update request accepted.",
+                        "schema": {
+                            "$ref": "#/definitions/Domain"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-examples": {
+                    "Domains_Update": {
+                        "$ref": "./examples/Domains_Update.json"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/domains": {
+            "get": {
+                "tags": [
+                    "Domains"
+                ],
+                "summary": "List domains under an Azure subscription",
+                "description": "List all the domains under an Azure subscription",
+                "operationId": "Domains_ListBySubscription",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DomainsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                },
+                "x-ms-examples": {
+                    "Domains_ListBySubscription": {
+                        "$ref": "./examples/Domains_ListBySubscription.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains": {
+            "get": {
+                "tags": [
+                    "Domains"
+                ],
+                "summary": "List domains under a resource group",
+                "description": "List all the domains under a resource group",
+                "operationId": "Domains_ListByResourceGroup",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DomainsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                },
+                "x-ms-examples": {
+                    "Domains_ListByResourceGroup": {
+                        "$ref": "./examples/Domains_ListByResourceGroup.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/listKeys": {
+            "post": {
+                "tags": [
+                    "Domains"
+                ],
+                "summary": "List keys for a domain",
+                "description": "List the two keys used to publish to a domain",
+                "operationId": "Domains_ListSharedAccessKeys",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Name of the domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DomainSharedAccessKeys"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-examples": {
+                    "Domains_ListSharedAccessKeys": {
+                        "$ref": "./examples/Domains_ListSharedAccessKeys.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/regenerateKey": {
+            "post": {
+                "tags": [
+                    "Domains"
+                ],
+                "summary": "Regenerate key for a domain",
+                "description": "Regenerate a shared access key for a domain",
+                "operationId": "Domains_RegenerateKey",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Name of the domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "regenerateKeyRequest",
+                        "in": "body",
+                        "description": "Request body to regenerate key",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DomainRegenerateKeyRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DomainSharedAccessKeys"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-examples": {
+                    "Domains_RegenerateKey": {
+                        "$ref": "./examples/Domains_RegenerateKey.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}": {
+            "get": {
+                "tags": [
+                    "DomainTopics"
+                ],
+                "summary": "Get a domain topic",
+                "description": "Get properties of a domain topic",
+                "operationId": "DomainTopics_Get",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Name of the domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "topicName",
+                        "in": "path",
+                        "description": "Name of the topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DomainTopic"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-examples": {
+                    "DomainTopics_Get": {
+                        "$ref": "./examples/DomainTopics_Get.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics": {
+            "get": {
+                "tags": [
+                    "DomainTopics"
+                ],
+                "summary": "List domain topics.",
+                "description": "List all the topics in a domain.",
+                "operationId": "DomainTopics_ListByDomain",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Domain name.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DomainTopicsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                },
+                "x-ms-examples": {
+                    "DomainTopics_ListByDomain": {
+                        "$ref": "./examples/DomainTopics_ListByDomain.json"
+                    }
+                }
+            }
+        },
         "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}": {
             "get": {
                 "tags": [
@@ -814,6 +1359,68 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/providers/Microsoft.EventGrid/eventSubscriptions": {
+            "get": {
+                "tags": [
+                    "EventSubscriptions"
+                ],
+                "summary": "List all event subscriptions for a specific domain topic",
+                "description": "List all event subscriptions that have been created for a specific domain topic",
+                "operationId": "EventSubscriptions_ListByDomainTopic",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Name of the top level domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "topicName",
+                        "in": "path",
+                        "description": "Name of the domain topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/EventSubscriptionsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                },
+                "x-ms-examples": {
+                    "EventSubscriptions_ListByDomainTopic": {
+                        "$ref": "./examples/EventSubscriptions_ListByDomainTopic.json"
+                    }
+                }
+            }
+        },
         "/providers/Microsoft.EventGrid/operations": {
             "get": {
                 "tags": [
@@ -1479,6 +2086,141 @@
         }
     },
     "definitions": {
+        "DomainProperties": {
+            "description": "Properties of the Domain",
+            "type": "object",
+            "properties": {
+                "provisioningState": {
+                    "description": "Provisioning state of the domain.",
+                    "enum": [
+                        "Creating",
+                        "Updating",
+                        "Deleting",
+                        "Succeeded",
+                        "Canceled",
+                        "Failed"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "DomainProvisioningState",
+                        "modelAsString": true
+                    }
+                },
+                "endpoint": {
+                    "description": "Endpoint for the domain.",
+                    "type": "string"
+                },
+                "inputSchema": {
+                    "description": "This determines the format that Event Grid should expect for incoming events published to the domain.",
+                    "enum": [
+                        "EventGridSchema",
+                        "CustomEventSchema",
+                        "CloudEventV01Schema"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "InputSchema",
+                        "modelAsString": true
+                    }
+                },
+                "inputSchemaMapping": {
+                    "$ref": "#/definitions/InputSchemaMapping",
+                    "description": "Information about the InputSchemaMapping which specified the info about mapping event payload."
+                }
+            }
+        },
+        "Domain": {
+            "description": "EventGrid Domain",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TrackedResource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/DomainProperties",
+                    "description": "Properties of the domain",
+                    "x-ms-client-flatten": true
+                }
+            }
+        },
+        "DomainUpdateParameters": {
+            "description": "Properties of the Domain update",
+            "type": "object",
+            "properties": {
+                "tags": {
+                    "description": "Tags of the domains resource",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "DomainsListResult": {
+            "description": "Result of the List Domains operation",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "A collection of Domains",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Domain"
+                    }
+                }
+            }
+        },
+        "DomainSharedAccessKeys": {
+            "description": "Shared access keys of the Domain",
+            "type": "object",
+            "properties": {
+                "key1": {
+                    "description": "Shared access key1 for the domain.",
+                    "type": "string"
+                },
+                "key2": {
+                    "description": "Shared access key2 for the domain.",
+                    "type": "string"
+                }
+            }
+        },
+        "DomainRegenerateKeyRequest": {
+            "description": "Domain regenerate share access key request",
+            "required": [
+                "keyName"
+            ],
+            "type": "object",
+            "properties": {
+                "keyName": {
+                    "description": "Key name to regenerate key1 or key2",
+                    "type": "string"
+                }
+            }
+        },
+        "DomainTopic": {
+            "description": "Domain Topic",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {}
+        },
+        "DomainTopicsListResult": {
+            "description": "Result of the List Domain Topics operation",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "A collection of Domain Topics",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DomainTopic"
+                    }
+                }
+            }
+        },
         "EventSubscriptionProperties": {
             "description": "Properties of the Event Subscription",
             "type": "object",
@@ -1521,19 +2263,23 @@
                         "type": "string"
                     }
                 },
+                "expirationTimeUtc": {
+                    "format": "date-time",
+                    "description": "Expiration time of the event subscription.",
+                    "type": "string"
+                },
                 "eventDeliverySchema": {
                     "description": "The event delivery schema for the event subscription.",
                     "enum": [
                         "EventGridSchema",
-                        "InputEventSchema",
-                        "CloudEventV01Schema"
+                        "CloudEventV01Schema",
+                        "CustomInputSchema"
                     ],
                     "type": "string",
                     "x-ms-enum": {
                         "name": "EventDeliverySchema",
                         "modelAsString": true
-                    },
-                    "default": "InputEventSchema"
+                    }
                 },
                 "retryPolicy": {
                     "$ref": "#/definitions/RetryPolicy",
@@ -1590,6 +2336,13 @@
                     "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter \r\nshould be compared in a case sensitive manner.",
                     "default": false,
                     "type": "boolean"
+                },
+                "advancedFilters": {
+                    "description": "A list of advanced filters.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AdvancedFilter"
+                    }
                 }
             }
         },
@@ -1638,6 +2391,26 @@
                 }
             }
         },
+        "NumberInAdvancedFilter": {
+            "description": "NumberIn filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "values": {
+                    "description": "The set of filter values",
+                    "type": "array",
+                    "items": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                }
+            },
+            "x-ms-discriminator-value": "NumberIn"
+        },
         "StorageBlobDeadLetterDestination": {
             "description": "Information about the storage blob based dead letter destination.",
             "type": "object",
@@ -1654,6 +2427,200 @@
                 }
             },
             "x-ms-discriminator-value": "StorageBlob"
+        },
+        "NumberLessThanAdvancedFilter": {
+            "description": "NumberLessThan Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "value": {
+                    "description": "The filter value",
+                    "format": "double",
+                    "type": "number"
+                }
+            },
+            "x-ms-discriminator-value": "NumberLessThan"
+        },
+        "NumberGreaterThanAdvancedFilter": {
+            "description": "NumberGreaterThan Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "value": {
+                    "description": "The filter value",
+                    "format": "double",
+                    "type": "number"
+                }
+            },
+            "x-ms-discriminator-value": "NumberGreaterThan"
+        },
+        "NumberLessThanOrEqualsAdvancedFilter": {
+            "description": "NumberLessThanOrEquals Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "value": {
+                    "description": "The filter value",
+                    "format": "double",
+                    "type": "number"
+                }
+            },
+            "x-ms-discriminator-value": "NumberLessThanOrEquals"
+        },
+        "NumberGreaterThanOrEqualsAdvancedFilter": {
+            "description": "NumberGreaterThanOrEquals Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "value": {
+                    "description": "The filter value",
+                    "format": "double",
+                    "type": "number"
+                }
+            },
+            "x-ms-discriminator-value": "NumberGreaterThanOrEquals"
+        },
+        "BoolEqualsAdvancedFilter": {
+            "description": "BoolEquals Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "value": {
+                    "description": "The filter value",
+                    "type": "boolean"
+                }
+            },
+            "x-ms-discriminator-value": "BoolEquals"
+        },
+        "StringInAdvancedFilter": {
+            "description": "StringIn Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "values": {
+                    "description": "The set of filter values",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-ms-discriminator-value": "StringIn"
+        },
+        "StringNotInAdvancedFilter": {
+            "description": "StringNotIn Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "values": {
+                    "description": "The set of filter values",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-ms-discriminator-value": "StringNotIn"
+        },
+        "StringBeginsWithAdvancedFilter": {
+            "description": "StringBeginsWith Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "values": {
+                    "description": "The set of filter values",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-ms-discriminator-value": "StringBeginsWith"
+        },
+        "StringEndsWithAdvancedFilter": {
+            "description": "StringEndsWith Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "values": {
+                    "description": "The set of filter values",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-ms-discriminator-value": "StringEndsWith"
+        },
+        "AdvancedFilter": {
+            "description": "Represents an advanced filter that can be used to filter events based on various event envelope/data fields.",
+            "type": "object",
+            "required": [
+                "operatorType"
+            ],
+            "properties": {
+                "operatorType": {
+                    "description": "Represents the filter operator",
+                    "enum": [
+                        "NumberIn",
+                        "NumberLessThan",
+                        "NumberGreaterThan",
+                        "NumberLessThanOrEquals",
+                        "NumberGreaterThanOrEquals",
+                        "BoolEquals",
+                        "StringIn",
+                        "StringNotIn",
+                        "StringBeginsWith",
+                        "StringEndsWith"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "AdvancedFilterOperatorType",
+                        "modelAsString": true
+                    }
+                },
+                "key": {
+                    "description": "The filter key. Represents an event property with upto two levels of nesting.",
+                    "type": "string"
+                }
+            },
+            "discriminator": "operatorType"
         },
         "WebHookEventSubscriptionDestination": {
             "description": "Information about the webhook destination for an event subscription",
@@ -1837,12 +2804,17 @@
                         "type": "string"
                     }
                 },
+                "expirationTimeUtc": {
+                    "format": "date-time",
+                    "description": "Information about the expiration time for the event subscription.",
+                    "type": "string"
+                },
                 "eventDeliverySchema": {
                     "description": "The event delivery schema for the event subscription.",
                     "enum": [
                         "EventGridSchema",
-                        "InputEventSchema",
-                        "CloudEventV01Schema"
+                        "CloudEventV01Schema",
+                        "CustomInputSchema"
                     ],
                     "type": "string",
                     "x-ms-enum": {
