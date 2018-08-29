@@ -1,0 +1,47 @@
+{
+  "parameters" : {
+    "subscriptionId": "subid",
+    "resourceGroupName": "testrg",
+    "networkInterfaceName": "mynic",
+    "tapConfigurationName": "tapconfiguration1",
+    "api-version": "2018-08-01",
+    "parameters": {
+      "properties": {
+        "virtualNetworkTap": {
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap"
+          }
+        },
+        "location": "centraluseuap" 
+    },
+    "responses" : {
+    "200" : {
+      "body" : {
+        "name": "tapConfiguration1",
+        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1",
+        "etag": "etag",
+        "type": "Microsoft.Network/networkInterfaces/tapConfigurations",
+        "properties": {
+            "provisioningState": "Succeeded",
+            "virtualNetworkTap": {
+                "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap"
+            }
+        }
+      }
+    },
+    "201" : {
+      "body" : {
+        "name": "tapConfiguration1",
+        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1",
+        "etag": "etag",
+        "type": "Microsoft.Network/networkInterfaces/tapConfigurations",
+        "properties": {
+            "provisioningState": "Succeeded",
+            "virtualNetworkTap": {
+                "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap"
+            }
+        }      
+      }
+    }
+  }
+ }
+}

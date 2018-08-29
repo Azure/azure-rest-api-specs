@@ -69,7 +69,14 @@
                 },
                 "202": {
                     "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+                },
+                "204": {
+                    "description": "Request successful. Resource does not exist."
                 }
+            },
+            "x-ms-examples": 
+            {
+                "Delete Virtual Network Tap resource": { "$ref": "./examples/VirtualNetworkTapDelete.json" }
             },
             "x-ms-long-running-operation": true
         },
@@ -108,6 +115,10 @@
                         "$ref": "#/definitions/VirtualNetworkTap"
                     }
                 }
+            },
+            "x-ms-examples": 
+            {
+                "Get Virtual Network Tap": { "$ref": "./examples/VirtualNetworkTapGet.json" }
             }
         },
         "put": {
@@ -161,6 +172,10 @@
                     }
                 }
             },
+            "x-ms-examples": 
+            {
+                "Create Virtual Network Tap": { "$ref": "./examples/VirtualNetworkTapCreate.json" }
+            },
             "x-ms-long-running-operation": true
         },
         "patch": {
@@ -208,6 +223,9 @@
               }
              }
             },
+            "x-ms-examples": {
+                "Update virtual network tap tags": { "$ref": "./examples/VirtualNetworkTapUpdateTags.json" }
+            },
             "x-ms-long-running-operation": true
         }
     },
@@ -233,6 +251,9 @@
                         "$ref": "#/definitions/VirtualNetworkTapListResult"
                     }
                 }
+            },
+            "x-ms-examples": {
+                "List all virtual network taps": { "$ref": "./examples/VirtualNetworkTapListAll.json" }
             },
             "x-ms-pageable": {
                 "nextLinkName": "nextLink"
@@ -268,6 +289,9 @@
                         "$ref": "#/definitions/VirtualNetworkTapListResult"
                     }
                 }
+            },
+            "x-ms-examples": {
+                "List virtual network taps in resource group": { "$ref": "./examples/VirtualNetworkTapList.json" }
             },
             "x-ms-pageable": {
                 "nextLinkName": "nextLink"
