@@ -46,6 +46,7 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/endpointService.json
   - Microsoft.Network/stable/2018-08-01/expressRouteCircuit.json
   - Microsoft.Network/stable/2018-08-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-08-01/expressRouteGateway.json
   - Microsoft.Network/stable/2018-08-01/loadBalancer.json
   - Microsoft.Network/stable/2018-08-01/network.json
   - Microsoft.Network/stable/2018-08-01/networkInterface.json
@@ -644,6 +645,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: expressRouteCrossConnection.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRouteGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: loadBalancer.json
