@@ -458,7 +458,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AddOwnerParameters"
+              "$ref": "#/definitions/ApplicationAddOwnerParameters"
             },
             "description": "The URL of the owner object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
           },
@@ -2597,6 +2597,14 @@
         "type": "object"
       },
       "description": "Request parameters for adding a owner to an application."
+    },
+    "ApplicationAddOwnerParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AddOwnerParameters"
+        }
+      ]
     },
     "KeyCredentialListResult": {
       "type": "object",
