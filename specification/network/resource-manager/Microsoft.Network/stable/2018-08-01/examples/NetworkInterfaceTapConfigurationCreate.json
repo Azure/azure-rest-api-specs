@@ -5,14 +5,14 @@
     "networkInterfaceName": "mynic",
     "tapConfigurationName": "tapconfiguration1",
     "api-version": "2018-08-01",
-    "parameters": {
+    "tapConfigurationParameters": {
       "properties": {
         "virtualNetworkTap": {
             "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap"
           }
-        },
-        "location": "centraluseuap" 
-    },
+        }
+    }
+  },
     "responses" : {
     "200" : {
       "body" : {
@@ -21,7 +21,6 @@
         "etag": "etag",
         "type": "Microsoft.Network/networkInterfaces/tapConfigurations",
         "properties": {
-            "provisioningState": "Succeeded",
             "virtualNetworkTap": {
                 "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap"
             }
@@ -35,7 +34,6 @@
         "etag": "etag",
         "type": "Microsoft.Network/networkInterfaces/tapConfigurations",
         "properties": {
-            "provisioningState": "Succeeded",
             "virtualNetworkTap": {
                 "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap"
             }
@@ -43,5 +41,5 @@
       }
     }
   }
- }
 }
+
