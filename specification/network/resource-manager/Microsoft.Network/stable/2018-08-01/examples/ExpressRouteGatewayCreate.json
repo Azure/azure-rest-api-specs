@@ -1,26 +1,30 @@
 {
     "parameters": {
-        "expressRouteGatewayName": "expressRouteGatewayName",
+        "expressRouteGatewayName": "gateway-2",
+        "subscriptionId": "subid",
         "resourceGroupName": "resourceGroupName",
         "api-version": "2018-08-01",
-        "subscriptionId": "subid",
-        "properties": {
-            "virtualHub": {
-                "id": "/subscriptions/subid/resourceGroups/resourceGroupId/providers/Microsoft.Network/virtualHubs/virtualHubName"
-            },
-            "autoScaleConfiguration": {
-                "bounds": {
-                    "min": "3"
+        "putExpressRouteGatewayParameters": {
+            "name": "gateway-2",
+            "type": "Microsoft.Network/expressRouteGateways",
+            "location": "westus",
+            "properties": {
+                "virtualHub": {
+                    "id": "/subscriptions/subid/resourceGroups/resourceGroupId/providers/Microsoft.Network/virtualHubs/virtualHubName"
+                },
+                "autoScaleConfiguration": {
+                    "bounds": {
+                        "min": 3
+                    }
                 }
-            },
-            "location": "westus"
+            }
         }
     },
     "responses": {
         "201": {
             "body": {
-                "name": "expressRouteGatewayName",
-                "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName",
+                "name": "gateway-2",
+                "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/gateway-2",
                 "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
                 "location": "westus",
                 "type": "Microsoft.Network/expressRouteGateways",
@@ -28,14 +32,19 @@
                     "provisioningState": "Succeeded",
                     "virtualHub": {
                         "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
+                    },
+                    "autoScaleConfiguration": {
+                        "bounds": {
+                            "min": 3
+                        }
                     }
                 }
             }
         },
         "200": {
             "body": {
-                "name": "expressRouteGatewayName",
-                "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName",
+                "name": "gateway-2",
+                "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/gateway-2",
                 "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
                 "location": "westus",
                 "type": "Microsoft.Network/expressRouteGateways",
@@ -43,6 +52,11 @@
                     "provisioningState": "Succeeded",
                     "virtualHub": {
                         "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
+                    },
+                    "autoScaleConfiguration": {
+                        "bounds": {
+                            "min": 3
+                        }
                     }
                 }
             }

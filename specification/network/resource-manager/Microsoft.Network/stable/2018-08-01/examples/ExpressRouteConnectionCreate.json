@@ -5,11 +5,15 @@
         "api-version": "2018-08-01",
         "subscriptionId": "subid",
         "connectionName": "connectionName",
-        "properties": {
-            "routingWeight": "routingWeight",
-            "authorizationKey": "authorizationKey",
-            "expressRouteCircuitPeering": {
-                "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
+        "putExpressRouteConnectionParameters": {
+            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName",
+            "name": "connectionName",
+            "properties": {
+                "routingWeight": 2,
+                "authorizationKey": "authorizationKey",
+                "expressRouteCircuitPeering": {
+                    "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
+                }
             }
         }
     },
@@ -24,8 +28,7 @@
                         "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
                     },
                     "authorizationKey": "f28e9c99-78d8-4248-a855-c54cf6beb99d",
-                    "circuitConnectionStatus": "Connected",
-                    "routingWeight": "22"
+                    "routingWeight": 2
                 }
             }
         },
@@ -39,8 +42,7 @@
                         "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
                     },
                     "authorizationKey": "f28e9c99-78d8-4248-a855-c54cf6beb99d",
-                    "circuitConnectionStatus": "Connected",
-                    "routingWeight": "22"
+                    "routingWeight": 2
                 }
             }
         }
