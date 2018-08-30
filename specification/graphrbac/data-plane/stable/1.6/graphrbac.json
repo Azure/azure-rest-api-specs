@@ -164,6 +164,9 @@
             "description": "Application object ID."
           },
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -192,6 +195,9 @@
         "description": "Gets a list of deleted applications in the directory.",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -216,7 +222,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Applications_HardDelete",
+        "operationId": "DeletedApplications_HardDelete",
         "description": "Hard-delete an application.",
         "parameters": [
           {
@@ -1732,7 +1738,7 @@
         "operationId": "OAuth2_Post",
         "description": "Grants OAuth2 permissions for the relevant resource Ids of an app.",
         "produces" : [ "application/json" ],
-        "parameters" : [ 
+        "parameters" : [
           {
           "in" : "body",
           "name" : "body",
