@@ -2429,27 +2429,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "The Azure Resource Manager resource.",
-      "properties": {
-        "id": {
-          "description": "The id of the resource.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the resource",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "SubscriptionState": {
       "type": "object",
       "description": "Subscription State object.",
@@ -2487,56 +2466,47 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        },
-        {
-          "properties": {
+        }
+      ],
+      "properties": {
             "properties": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/StorageSyncServiceProperties",
               "description": "Storage Sync Service properties."
             }
-          }
-        }
-      ],
-      "x-ms-azure-resource": true
+      }
     },
     "SyncGroup": {
       "type": "object",
       "description": "Sync Group object.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+	  ],
+      "properties": {
+         "properties": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/SyncGroupProperties",
               "description": "SyncGroup properties."
-            }
-          }
-        }
-      ],
-      "x-ms-azure-resource": true
+         }
+      }
     },
     "CloudEndpoint": {
       "type": "object",
       "description": "Cloud Endpoint object.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/CloudEndpointProperties",
-              "description": "Cloud Endpoint properties."
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-      ],
-      "x-ms-azure-resource": true
+	  ],
+      "properties": {
+        "properties": {
+           "x-ms-client-flatten": true,
+           "$ref": "#/definitions/CloudEndpointProperties",
+            "description": "Cloud Endpoint properties."
+        }
+      }
     },
     "ServerEndpointUpdateParameters": {
       "properties": {
@@ -2560,19 +2530,16 @@
       "description": "Server Endpoint object.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ServerEndpointProperties",
-              "description": "Server Endpoint properties."
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-      ],
-      "x-ms-azure-resource": true
+	  ],
+      "properties": {
+         "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/ServerEndpointProperties",
+            "description": "Server Endpoint properties."
+         }
+      }
     },
     "RegisteredServer": {
       "type": "object",
@@ -2623,19 +2590,16 @@
       "description": "Workflow resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/WorkflowProperties",
-              "description": "Workflow properties."
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-      ],
-      "x-ms-azure-resource": true
+	  ],
+      "properties": {
+         "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/WorkflowProperties",
+            "description": "Workflow properties."
+         }
+      }
     },
     "OperationEntityListResult": {
       "description": "The list of storage sync operations.",
