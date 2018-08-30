@@ -47,6 +47,7 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/endpointService.json
   - Microsoft.Network/stable/2018-08-01/expressRouteCircuit.json
   - Microsoft.Network/stable/2018-08-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-08-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2018-08-01/loadBalancer.json
   - Microsoft.Network/stable/2018-08-01/network.json
   - Microsoft.Network/stable/2018-08-01/networkInterface.json
@@ -694,6 +695,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: interfaceEndpoint.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
