@@ -686,6 +686,9 @@ directive:
     from: serviceEndpointPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualNetworkTap.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: TrackedResourceListByImmediateParent
