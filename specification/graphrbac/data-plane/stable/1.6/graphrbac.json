@@ -39,9 +39,9 @@
     "/{tenantID}/me": {
       "get": {
         "tags": [
-          "Objects"
+          "SignedInUser"
         ],
-        "operationId": "Objects_GetCurrentUser",
+        "operationId": "SignedInUser_Get",
         "description": "Gets the details for the currently logged-in user.",
         "parameters": [
           {
@@ -55,7 +55,38 @@
           "200": {
             "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/AADObject"
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/me/ownedObjects": {
+      "get": {
+        "tags": [
+          "SignedInUser"
+        ],
+        "operationId": "SignedInUser_ListOwnedObjects",
+        "description": "Get the list of directory objects that are owned by the user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
             }
           },
           "default": {
@@ -1857,6 +1888,38 @@
     }
   },
   "x-ms-paths": {
+    "/{tenantID}/me": {
+      "get": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetCurrentUser",
+        "description": "Gets the details for the currently logged-in user.",
+        "deprecated": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/AADObject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/{nextLink}?Groups_ListNext": {
       "get": {
         "tags": [
