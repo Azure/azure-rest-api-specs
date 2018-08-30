@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ServiceBus2018PreviewManagementClient",
+    "title": "ServiceBusManagementClient",
     "description": "Azure Service Bus client for managing Namespace, IPFilter Rules, VirtualNetworkRules and Zone Redundant",
     "version": "2018-01-01-preview"
   },
@@ -34,40 +34,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.ServiceBus/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "OperationsList": { "$ref": "./examples/SBOperations_List.json" }
-        },
-        "description": "Lists all of the available ServiceBus REST API operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
       "get": {
         "tags": [
@@ -935,55 +901,6 @@
         "name"
       ],
       "description": "SKU of the namespace."
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list ServiceBus operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "description": "List of ServiceBus operations supported by the Microsoft.ServiceBus resource provider.",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "A ServiceBus REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation name: {provider}/{resource}/{operation}"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Service provider: Microsoft.ServiceBus"
-            },
-            "resource": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Resource on which the operation is performed: Invoice, etc."
-            },
-            "operation": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Operation type: Read, write, delete, etc."
-            }
-          }
-        }
-      }
     },
     "ErrorResponse": {
       "description": "Error reponse indicates ServiceBus service is not able to process the incoming request. The reason is provided in the error message.",
