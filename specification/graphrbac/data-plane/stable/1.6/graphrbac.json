@@ -427,7 +427,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApplicationAddOwnerParameters"
+              "$ref": "#/definitions/AddOwnerParameters"
             },
             "description": "The URL of the owner object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
           },
@@ -984,6 +984,92 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/{tenantID}/groups/{objectId}/owners": {
+      "get": {
+        "tags": [
+          "GroupOwners"
+        ],
+        "operationId": "Groups_ListOwners",
+        "summary": "Directory objects that are owners of the group.",
+        "description": "The owners are a set of non-admin users who are allowed to modify this object.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{tenantID}/groups/{objectId}/$links/owners": {
+      "post": {
+        "tags": [
+          "GroupsOwners"
+        ],
+        "operationId": "Groups_AddOwner",
+        "description": "Add an owner to a group.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the application to which to add the owner."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddOwnerParameters"
+            },
+            "description": "The URL of the owner object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
         }
       }
     },
@@ -2433,7 +2519,7 @@
         }
       }
     },
-    "ApplicationAddOwnerParameters": {
+    "AddOwnerParameters": {
       "type": "object",
       "properties": {
         "url": {
