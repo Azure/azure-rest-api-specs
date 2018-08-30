@@ -36,7 +36,11 @@
         "description": "Updates a record set within a DNS zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -94,10 +98,10 @@
             "description": "The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwritting concurrent changes."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -155,7 +159,11 @@
         "description": "Creates or updates a record set within a DNS zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -221,10 +229,10 @@
             "description": "Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -251,6 +259,9 @@
           "Create A recordset": {
             "$ref": "./examples/CreateOrUpdateARecordset.json"
           },
+          "Create A recordset with alias target resource": {
+            "$ref": "./examples/CreateOrUpdateARecordsetAlias.json"
+          },          
           "Create AAAA recordset": {
             "$ref": "./examples/CreateOrUpdateAAAARecordset.json"
           },
@@ -288,7 +299,11 @@
         "description": "Deletes a record set from a DNS zone. This operation cannot be undone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -337,10 +352,10 @@
             "description": "The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -395,7 +410,11 @@
         "description": "Gets a record set.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -436,10 +455,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -499,7 +518,11 @@
         "description": "Lists the record sets of a specified type in a DNS zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -547,10 +570,10 @@
             "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -613,7 +636,11 @@
         "description": "Lists all record sets in a DNS zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -638,10 +665,10 @@
             "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -677,7 +704,11 @@
         "description": "Lists all record sets in a DNS zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -703,10 +734,10 @@
             "x-ms-client-name": "recordSetNameSuffix"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -742,7 +773,11 @@
         "description": "Creates or updates a DNS zone. Does not modify DNS records within the zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -777,10 +812,10 @@
             "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -817,7 +852,11 @@
         "description": "Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -835,10 +874,10 @@
             "description": "The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -873,7 +912,11 @@
         "description": "Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -883,10 +926,10 @@
             "description": "The name of the DNS zone (without a terminating dot)."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -917,7 +960,11 @@
         "description": "Updates a DNS zone. Does not modify DNS records within the zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "zoneName",
@@ -944,10 +991,10 @@
             "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwritting any concurrent changes."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -980,7 +1027,11 @@
         "description": "Lists the DNS zones within a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "name": "$top",
@@ -991,10 +1042,10 @@
             "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1021,6 +1072,43 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference": {
+      "post": {
+        "operationId": "DnsResourceReference_GetByTargetResources",
+        "description": "Returns the DNS records specified by the referencing targetResourceIds.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsResourceReferenceRequest"
+            },
+            "description": "Properties for dns resource reference request."
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/DnsResourceReferenceResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones": {
       "get": {
         "tags": [
@@ -1038,10 +1126,10 @@
             "description": "The maximum number of DNS zones to return. If not specified, returns up to 100 zones."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1241,6 +1329,14 @@
           "description": "Fully qualified domain name of the record set.",
           "readOnly": true
         },
+        "provisioningState": {
+          "type": "string",
+          "description": "provisioning State of the record set.",
+          "readOnly": true
+        },
+        "targetResource":{
+          "$ref": "#/definitions/SubResource"
+        },
         "ARecords": {
           "type": "array",
           "items": {
@@ -1394,6 +1490,33 @@
           },
           "description": "The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
           "readOnly": true
+        },
+        "zoneType": {
+          "type": "string",
+          "enum": [
+            "Public",
+            "Private"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneType",
+            "modelAsString": false
+          },
+          "default": "Public",
+          "description": "The type of this DNS zone (Public or Private)."
+        },
+        "registrationVirtualNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private."
+        },
+        "resolutionVirtualNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private."
         }
       },
       "description": "Represents the properties of the zone."
@@ -1412,7 +1535,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Describes a DNS zone."
@@ -1446,6 +1569,102 @@
       },
       "description": "The response to a Zone List or ListAll operation."
     },
+    "DnsResourceReferenceRequest": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DnsResourceReferenceRequestProperties",
+          "description": "The properties of the Resource Reference Request."
+        }
+      }
+    },
+    "DnsResourceReferenceRequestProperties": {
+      "properties": {
+        "targetResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "A list of references to azure resources for which referencing dns records need to be queried."
+        }
+      },
+      "description": "Represents the properties of the Dns Resource Reference Request."
+    },
+    "DnsResourceReferenceResult": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DnsResourceReferenceResultProperties",
+          "description": "The result of dns resource reference request. Returns a list of dns resource references for each of the azure resource in the request."
+        }
+      }
+    },
+    "DnsResourceReferenceResultProperties": {
+      "properties": {
+        "dnsResourceReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DnsResourceReference"
+          },
+          "description": "The result of dns resource reference request. A list of dns resource references for each of the azure resource in the request"
+        }
+      },
+      "description": "The result of dns resource reference request. Returns a list of dns resource references for each of the azure resource in the request."
+    },
+    "DnsResourceReference": {
+      "properties": {
+        "dnsResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "A list of dns Records "
+        },
+        "targetResource":{
+          "$ref": "#/definitions/SubResource"
+        }
+      },
+      "description": "Represents a single Azure resource and its referencing DNS records."
+    },
+    "Resource": {
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Common properties of an Azure Resource Manager resource"
+    },
     "SubResource": {
       "properties": {
         "id": {
@@ -1453,7 +1672,6 @@
           "description": "Resource Id."
         }
       },
-      "x-ms-external": true,
       "description": "A reference to a another resource"
     },
     "CloudError": {
@@ -1494,5 +1712,20 @@
       "description": "The body of an error message"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Specifies the API version."
+    }
+  }
 }
