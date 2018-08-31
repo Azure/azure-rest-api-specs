@@ -2453,6 +2453,13 @@
     "ApplicationCreateParameters": {
       "type": "object",
       "properties": {
+        "appRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppRole"
+          },
+          "description": "The collection of application roles that an application may declare. These roles can be assigned to users, groups or service principals."
+        },
         "availableToOtherTenants": {
           "type": "boolean",
           "description": "Whether the application is available to other tenants."
@@ -2518,6 +2525,13 @@
     "ApplicationUpdateParameters": {
       "type": "object",
       "properties": {
+        "appRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppRole"
+          },
+          "description": "The collection of application roles that an application may declare. These roles can be assigned to users, groups or service principals."
+        },
         "availableToOtherTenants": {
           "type": "boolean",
           "description": "Whether the application is available to other tenants"
