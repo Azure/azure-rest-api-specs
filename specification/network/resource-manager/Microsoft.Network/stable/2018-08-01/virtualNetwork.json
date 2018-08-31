@@ -870,6 +870,17 @@
         "serviceName": {
           "type": "string",
           "description": "The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers)"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Describes the actions permitted to the service upon delegation"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource."
         }
       },
       "description": "Properties of a service delegation."
@@ -890,6 +901,11 @@
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "description": "Details the service to which the subnet is delegated."
     },
     "SubnetPropertiesFormat": {
