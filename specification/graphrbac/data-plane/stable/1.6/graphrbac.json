@@ -97,7 +97,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "SignedInUser_ListOwnedObjectsNext"
         }
       }
     },
@@ -1931,6 +1932,49 @@
               "$ref": "#/definitions/GraphError"
             }
           }
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?SignedInUser_ListOwnedObjectsNext": {
+      "get": {
+        "tags": [
+          "SignedInUser"
+        ],
+        "operationId": "SignedInUser_ListOwnedObjectsNext",
+        "description": "Get the list of directory objects that are owned by the user.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "SignedInUser_ListOwnedObjectsNext"
         }
       }
     },
