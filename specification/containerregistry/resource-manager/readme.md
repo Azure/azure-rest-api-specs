@@ -26,7 +26,17 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10
+tag: package-2018-09
+```
+
+### Tag: package-2018-09
+
+These settings apply only when `--tag=package-2018-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09'
+input-file:
+- Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
+- Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
 ```
 
 ### Tag: package-2018-02-preview
@@ -135,9 +145,21 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-09
   - tag: package-2018-02-preview
   - tag: package-2017-10
   - tag: package-2017-03
+```
+
+### Tag: package-2018-09 and python
+
+These settings apply only when `--tag=package-2018-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-09' && $(python)
+python:
+  namespace: azure.mgmt.containerregistry.v2018_09_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2018_09_01
 ```
 
 ### Tag: package-2018-02-preview and python
@@ -189,11 +211,21 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-09
   - tag: package-2018-02-preview
   - tag: package-2017-10
   - tag: package-2017-06-preview
   - tag: package-2017-03
   - tag: package-2016-06-preview
+```
+
+### Tag: package-2018-09 and go
+
+These settings apply only when `--tag=package-2018-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-09' && $(go)
+output-folder: $(go-sdk-folder)/services/containerregistry/mgmt/2018-09-01/containerregistry
 ```
 
 ### Tag: package-2018-02-preview and go
@@ -260,11 +292,25 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerregistry
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-09
   - tag: package-2018-02-preview
   - tag: package-2017-10
   - tag: package-2017-06-preview
   - tag: package-2017-03
   - tag: package-2016-06-preview
+```
+
+### Tag: package-2018-09 and java
+
+These settings apply only when `--tag=package-2018-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerregistry.v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/containerregistry/resource-manager/v2018_09_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-02-preview and java
