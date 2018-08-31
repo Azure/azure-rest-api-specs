@@ -6,9 +6,10 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   azure-arm: true
-  package-name: azure-arm-datafactory
-  output-folder: $(node-sdks-folder)/lib/services/datafactoryManagement
+  package-name: azure-batch
+  output-folder: $(node-sdks-folder)/lib/services/batch
+  payload-flattening-threshold: 1
   generate-license-txt: true
-  generate-package-json: true
-  generate-readme-md: true
+  generate-package-json: false
+  generate-readme-md: false
 ```
