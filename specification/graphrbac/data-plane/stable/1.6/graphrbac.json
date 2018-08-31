@@ -95,6 +95,9 @@
               "$ref": "#/definitions/GraphError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
         }
       }
     },
@@ -222,7 +225,7 @@
         "tags": [
           "deletedApplications"
         ],
-        "operationId": "DeletedApplications_Get",
+        "operationId": "DeletedApplications_List",
         "description": "Gets a list of deleted applications in the directory.",
         "parameters": [
           {
@@ -245,6 +248,10 @@
               "$ref": "#/definitions/GraphError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "DeletedApplications_ListNext"
         }
       }
     },
@@ -434,7 +441,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "odata.nextLink"
         }
       }
     },
@@ -1056,7 +1063,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "odata.nextLink"
         }
       }
     },
@@ -1294,7 +1301,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "odata.nextLink"
         }
       }
     },
@@ -2049,6 +2056,49 @@
         }
       }
     },
+    "/{tenantID}/{nextLink}?DeletedApplications_ListNext": {
+      "get": {
+        "tags": [
+          "deletedApplications"
+        ],
+        "operationId": "DeletedApplications_ListNext",
+        "description": "Gets a list of deleted applications in the directory.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "DeletedApplications_ListNext"
+        }
+      }
+    },
     "/{tenantID}/{nextLink}?ServicePrincipals_ListNext": {
       "get": {
         "tags": [
@@ -2628,6 +2678,10 @@
             "$ref": "#/definitions/DirectoryObject"
           },
           "description": "A collection of DirectoryObject."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "DirectoryObject list operation result."
