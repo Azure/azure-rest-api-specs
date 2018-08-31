@@ -111,7 +111,7 @@
             ],
             "responses":{  
                "200":{  
-                  "description":"Request successful. The operation returns a AzureFirewall resource.",
+                  "description":"Request successful. The operation returns an AzureFirewall resource.",
                   "schema":{  
                      "$ref":"#/definitions/AzureFirewall"
                   }
@@ -259,22 +259,18 @@
    "definitions":{  
       "AzureFirewallIPConfigurationPropertiesFormat":{  
          "properties":{  
-			"privateIPAddress": {
-			  "type": "string",
-			  "description": "The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes."
-			},
-            "subnet":{  
+            "privateIPAddress": {
+              "type": "string",
+              "description": "The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes."
+            },
+            "subnet":{
                "$ref":"./network.json#/definitions/SubResource",
                "description":"Reference of the subnet resource. This resource must be named 'AzureFirewallSubnet'."
             },
-			"internalPublicIpAddress":{  
-               "$ref":"./network.json#/definitions/SubResource",
-               "description":"Reference of the PublicIP resource. This field is a mandatory input."
+            "publicIPAddress": {
+               "$ref": "./network.json#/definitions/SubResource",
+               "description": "Reference of the PublicIP resource. This field is a mandatory input if subnet is not null."
             },
-			"publicIPAddress": {
-			  "$ref": "./network.json#/definitions/SubResource",
-			  "description": "Reference of the PublicIP resource. This field is populated in the output."
-			},
             "provisioningState":{  
                "description":"The provisioning state of the resource.",
                "$ref":"#/definitions/ProvisioningState"
@@ -294,6 +290,7 @@
             },
             "etag":{  
                "type":"string",
+               "readOnly": true,
                "description":"A unique read-only string that changes whenever the resource is updated."
             }
          },
@@ -311,14 +308,21 @@
                "items":{  
                   "$ref":"#/definitions/AzureFirewallApplicationRuleCollection"
                },
-               "description":"Collection of application rule collections used by a Azure Firewall."
+               "description":"Collection of application rule collections used by Azure Firewall."
+            },
+            "natRuleCollections":{  
+               "type":"array",
+               "items":{  
+                  "$ref":"#/definitions/AzureFirewallNatRuleCollection"
+               },
+               "description":"Collection of NAT rule collections used by Azure Firewall."
             },
             "networkRuleCollections":{  
                "type":"array",
                "items":{  
                   "$ref":"#/definitions/AzureFirewallNetworkRuleCollection"
                },
-               "description":"Collection of network rule collections used by a Azure Firewall."
+               "description":"Collection of network rule collections used by Azure Firewall."
             },
             "ipConfigurations":{  
                "type":"array",
@@ -360,7 +364,7 @@
                "items":{  
                   "$ref":"#/definitions/AzureFirewall"
                },
-               "description":"List of a Azure Firewalls in a resource group."
+               "description":"List of Azure Firewalls in a resource group."
             },
             "nextLink":{  
                "type":"string",
@@ -469,9 +473,138 @@
                "items":{  
                   "type":"string"
                }
+            },
+            "fqdnTags":{
+               "type":"array",
+               "description":"List of FQDN Tags for this rule.",
+               "items":{  
+                  "type":"string"
+               }
             }
          },
          "description":"Properties of an application rule."
+      },
+      "AzureFirewallNatRuleCollectionProperties": {
+         "properties":{  
+            "priority":{  
+               "type":"integer",
+               "format":"int32",
+               "maximum":65000,
+               "exclusiveMaximum":false,
+               "minimum":100,
+               "exclusiveMinimum":false,
+               "description":"Priority of the NAT rule collection resource."
+            },
+            "action":{  
+               "$ref":"#/definitions/AzureFirewallNatRCAction",
+               "description":"The action type of a NAT rule collection"
+            },
+            "rules":{  
+               "type":"array",
+               "items":{  
+                  "$ref":"#/definitions/AzureFirewallNatRule"
+               },
+               "description":"Collection of rules used by a NAT rule collection."
+            },
+            "provisioningState":{  
+               "description":"The provisioning state of the resource.",
+               "$ref":"#/definitions/ProvisioningState"
+            }
+         },
+         "description":"Properties of the NAT rule collection."
+      },
+      "AzureFirewallNatRuleCollection":{  
+         "properties":{  
+            "properties":{  
+               "x-ms-client-flatten":true,
+               "$ref":"#/definitions/AzureFirewallNatRuleCollectionProperties"
+            },
+            "name":{  
+               "type":"string",
+               "description":"Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+            },
+            "etag":{  
+               "type":"string",
+               "readOnly":true,
+               "description":"Gets a unique read-only string that changes whenever the resource is updated."
+            }
+         },
+         "allOf":[  
+            {  
+               "$ref":"./network.json#/definitions/SubResource"
+            }
+         ],
+         "description":"NAT rule collection resource"
+      },
+      "AzureFirewallNatRule":{  
+         "properties":{  
+            "name":{  
+               "type":"string",
+               "description":"Name of the NAT rule."
+            },
+            "description":{  
+               "type":"string",
+               "description":"Description of the rule."
+            },
+            "sourceAddresses":{  
+               "type":"array",
+               "description":"List of source IP addresses for this rule.",
+               "items":{  
+                  "type":"string"
+               }
+            },
+            "destinationAddresses":{  
+               "type":"array",
+               "description":"List of destination IP addresses for this rule.",
+               "items":{  
+                  "type":"string"
+               }
+            },
+            "destinationPorts":{  
+               "type":"array",
+               "description":"List of destination ports.",
+               "items":{  
+                  "type":"string"
+               }
+            },
+            "protocols":{  
+               "type":"array",
+               "items":{  
+                  "$ref":"#/definitions/AzureFirewallNetworkRuleProtocol"
+               },
+               "description":"Array of AzureFirewallNetworkRuleProtocols applicable to this NAT rule."
+            },
+            "translatedAddress":{  
+               "type":"string",
+               "description":"The translated address for this NAT rule."
+            },
+            "translatedPort":{  
+               "type":"string",
+               "description":"The translated port for this NAT rule."
+            }
+         },
+         "description":"Properties of a NAT rule."
+      },
+      "AzureFirewallNatRCAction":{  
+         "properties":{  
+            "type":{  
+               "description":"The type of action.",
+               "$ref":"#/definitions/AzureFirewallNatRCActionType"
+            }
+         },
+         "description":"AzureFirewall NAT Rule Collection Action."
+      },
+      "AzureFirewallNatRCActionType":{  
+         "type":"string",
+         "description":"The action type of a NAT rule collection",
+         "enum":[  
+            "Snat",
+            "Dnat"
+         ],
+         "x-ms-enum":{  
+            "name":"AzureFirewallNatRCActionType",
+            "modelAsString":true
+         }
       },
       "AzureFirewallNetworkRuleCollectionPropertiesFormat":{  
          "properties":{  
@@ -608,8 +741,7 @@
          "enum":[  
             "TCP",
             "UDP",
-            "Any",
-			"ICMP"
+            "Any"
          ],
          "x-ms-enum":{  
             "name":"AzureFirewallNetworkRuleProtocol",

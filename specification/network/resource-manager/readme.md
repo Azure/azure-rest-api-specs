@@ -41,12 +41,14 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/applicationGateway.json
   - Microsoft.Network/stable/2018-08-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2018-08-01/azureFirewall.json
+  - Microsoft.Network/stable/2018-08-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2018-08-01/checkDnsAvailability.json
   - Microsoft.Network/stable/2018-08-01/ddosProtectionPlan.json
   - Microsoft.Network/stable/2018-08-01/endpointService.json
   - Microsoft.Network/stable/2018-08-01/expressRouteCircuit.json
   - Microsoft.Network/stable/2018-08-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2018-08-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-08-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2018-08-01/loadBalancer.json
   - Microsoft.Network/stable/2018-08-01/network.json
   - Microsoft.Network/stable/2018-08-01/networkInterface.json
@@ -61,6 +63,7 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/serviceEndpointPolicy.json
   - Microsoft.Network/stable/2018-08-01/usage.json
   - Microsoft.Network/stable/2018-08-01/virtualNetwork.json
+  - Microsoft.Network/stable/2018-08-01/virtualNetworkTap.json
   - Microsoft.Network/stable/2018-08-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2018-08-01/virtualWan.json
   - Microsoft.Network/stable/2018-08-01/vmssNetworkInterface.json
@@ -632,6 +635,9 @@ directive:
     from: azureFirewall.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: azureFirewallFqdnTag.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: checkDnsAvailability.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -689,7 +695,13 @@ directive:
     from: serviceEndpointPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualNetworkTap.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: interfaceEndpoint.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
