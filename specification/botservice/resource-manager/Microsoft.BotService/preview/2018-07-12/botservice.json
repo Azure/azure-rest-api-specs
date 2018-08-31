@@ -1031,9 +1031,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnterpriseChannelCheckNameAvailabilityRequestBody"
+              "$ref": "#/definitions/EnterpriseChannelCheckNameAvailabilityRequest"
             },
-            "description": "The request body parameters to provide for the Enterprise Channel check name availability request"
+            "description": "The parameters to provide for the Enterprise Channel check name availability request."
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1041,13 +1041,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses. If a resource provider does not support paging, it should return the same body but leave nextLink empty for future compatibility.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. ",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses. If a resource provider does not support paging, it should return the same body but leave nextLink empty for future compatibility.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section.",
             "schema": {
-              "$ref": "#/definitions/EnterpriseChannelCheckNameAvailabilityResponseBody"
+              "$ref": "#/definitions/EnterpriseChannelCheckNameAvailabilityResponse"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1060,7 +1060,7 @@
         "tags": [
           "Enterprise Channel"
         ],
-        "description": "Returns all the resources of a particular type belonging to a resource group",
+        "description": "Returns all the resources of a particular type belonging to a resource group.",
         "operationId": "EnterpriseChannels_ListByResourceGroup",
         "x-ms-examples": {
           "List Enterprise Channels by Resource Group": {
@@ -1150,7 +1150,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -2417,26 +2417,26 @@
         }
       }
     },
-    "EnterpriseChannelCheckNameAvailabilityRequestBody": {
-      "description": "The request body for a request to Bot Service Management to check availability of an Enterprise Channel name.",
+    "EnterpriseChannelCheckNameAvailabilityRequest": {
+      "description": "A request to Bot Service Management to check availability of an Enterprise Channel name.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "the name of the Enterprise Channel for which availability needs to be checked.",
+          "description": "The name of the Enterprise Channel for which availability needs to be checked.",
           "type": "string"
         }
       }
     },
-    "EnterpriseChannelCheckNameAvailabilityResponseBody": {
-      "description": "The response body returned for a request to Bot Service Management to check availability of an Enterprise Channel name.",
+    "EnterpriseChannelCheckNameAvailabilityResponse": {
+      "description": "A request to Bot Service Management to check availability of an Enterprise Channel name.",
       "type": "object",
       "properties": {
         "valid": {
-          "description": "indicates if the Enterprise Channel name is valid.",
+          "description": "Indicates if the Enterprise Channel name is valid.",
           "type": "boolean"
         },
         "message": {
-          "description": "additional message from the bot management api showing why a bot name is not available",
+          "description": "Additional information about why a bot name is not available.",
           "type": "string"
         }
       }
@@ -2469,7 +2469,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EnterpriseChannelProperties",
-          "description": "The set of properties specific to an Enterprise Channel resource"
+          "description": "The set of properties specific to an Enterprise Channel resource."
         }
       }
     },
@@ -2477,7 +2477,7 @@
       "properties": {
         "state": {
           "type": "string",
-          "description": "The current state of the Enterprise Channel",
+          "description": "The current state of the Enterprise Channel.",
           "enum": ["Creating", "CreateFailed", "Started", "Starting", "StartFailed", "Stopped", "Stopping", "StopFailed", "Deleting", "DeleteFailed"],
           "x-ms-enum": {
             "name": "state",
@@ -2489,7 +2489,7 @@
           "items": {
             "$ref": "#/definitions/EnterpriseChannelNode"
           },
-          "description": "The nodes associated with the Enterprise Channel"
+          "description": "The nodes associated with the Enterprise Channel."
         }
       },
       "description": "The parameters to provide for the Enterprise Channel.",
@@ -2506,7 +2506,7 @@
         },
         "state": {
           "type": "string",
-          "description": "The current state of the Enterprise Channel Node",
+          "description": "The current state of the Enterprise Channel Node.",
           "enum": ["Creating", "CreateFailed", "Started", "Starting", "StartFailed", "Stopped", "Stopping", "StopFailed", "Deleting", "DeleteFailed"],
           "x-ms-enum": {
             "name": "state",
@@ -2515,15 +2515,15 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the Enterprise Channel Node"
+          "description": "The name of the Enterprise Channel Node."
         },
         "azureSku": {
           "type": "string",
-          "description": "The sku of the Enterprise Channel Node"
+          "description": "The sku of the Enterprise Channel Node."
         },
         "azureLocation": {
           "type": "string",
-          "description": "The location of the Enterprise Channel Node"
+          "description": "The location of the Enterprise Channel Node."
         }
       },
       "description": "The properties specific to an Enterprise Channel Node.",
