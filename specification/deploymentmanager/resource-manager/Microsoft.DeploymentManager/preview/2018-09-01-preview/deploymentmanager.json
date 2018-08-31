@@ -51,10 +51,10 @@
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
         "x-ms-examples": {
           "Create a topology": {
-            "$ref": "./examples/servicetopology_create.json"
+            "$ref": "./examples/servicetopology_createorupdate.json"
           },
           "Update a topology": {
-            "$ref": "./examples/servicetopology_create.json"
+            "$ref": "./examples/servicetopology_createorupdate.json"
           }
         },
         "parameters": [
@@ -76,7 +76,7 @@
             }
           },
           "default": {
-            "description": "All non-success conditions are handled using the standard error contract.",
+            "description": "All non-success conditions are handled using the standard Error contract.",
             "schema": {
               "$ref": "#/definitions/ErrorInfo"
             }
@@ -174,7 +174,7 @@
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
         "x-ms-examples": {
           "Create service": {
-            "$ref": "./examples/service_create.json"
+            "$ref": "./examples/service_createorupdate.json"
           }
         },
         "parameters": [
@@ -316,7 +316,7 @@
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
         "x-ms-examples": {
           "Create service unit": {
-            "$ref": "./examples/serviceunit_create.json"
+            "$ref": "./examples/serviceunit_createorupdate.json"
           }
         },
         "parameters": [
@@ -344,7 +344,7 @@
             "description": "The service unit resource object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceUnitRequestResource"
+              "$ref": "#/definitions/ServiceUnitResource"
             }
           }
         ],
@@ -358,7 +358,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ServiceUnitRequestResource"
+              "$ref": "#/definitions/ServiceUnitResource"
             }
           },
           "default": {
@@ -472,7 +472,7 @@
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
         "x-ms-examples": {
           "Create deployment step": {
-            "$ref": "./examples/step_create.json"
+            "$ref": "./examples/step_createorupdate.json"
           }
         },
         "parameters": [
@@ -604,7 +604,7 @@
         "description": "This is an asynchronous operation and can be polled to completion using the rollout identifier returned by this operation.",
         "x-ms-examples": {
           "Create rollout": {
-            "$ref": "./examples/rollout_create.json"
+            "$ref": "./examples/rollout_createorupdate.json"
           }
         },
         "parameters": [
@@ -847,7 +847,7 @@
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
         "x-ms-examples": {
           "Create artifact source": {
-            "$ref": "./examples/artifactsource_create.json"
+            "$ref": "./examples/artifactsource_createorupdate.json"
           }
         },
         "parameters": [
@@ -1058,14 +1058,41 @@
         }
       ]
     },
-    "RolloutRequest": {
-      "description": "Defines the resource format for creating a rollout.",
+    "IdentityResource": {
+      "description": "A tracked Azure resource which also holds identity information.",
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
         },
         {
-          "$ref": "#/definitions/Identity"
+          "type": "object",
+          "properties": {
+            "identity": {
+              "description": "Identity for the resource.",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The identity type."
+                },
+                "identityIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The list of identities."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RolloutRequest": {
+      "description": "Defines the resource format for creating a rollout.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityResource"
         },
         {
           "type": "object",
@@ -1086,28 +1113,6 @@
         }
       ]
     },
-    "Identity": {
-      "description": "Captures the managed identity information required for certain operations.",
-      "properties": {
-        "identity": {
-          "description": "Identity for the resource.",
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The identity type."
-            },
-            "identityIds": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "The list of identities."
-            }
-          }
-        }
-      }
-    },
     "RolloutRequestProperties": {
       "description": "The properties for defining a rollout.",
       "properties": {
@@ -1121,10 +1126,10 @@
           "description": "The reference to the ARM resource Id where the payload is located.",
           "example": "Microsoft.DeploymentManager/artifactSources/payloadStore1"
         },
-        "targetTopologyId": {
+        "targetServiceTopologyId": {
           "type": "string",
-          "description": "The reference to the ARM resource Id where the payload is located.",
-          "example": "Microsoft.DeploymentManager/topologies/myTopology"
+          "description": "The reference to the resource Id of the service topology from which services are chosen to be deployed.",
+          "example": "Microsoft.DeploymentManager/serviceTopologies/myServiceTopology"
         },
         "stepGroups": {
           "description": "The list of steps that define the orchestration.",
@@ -1216,7 +1221,7 @@
       "properties": {
         "sourceType": {
           "type": "string",
-          "description": "The of storage service used.",
+          "description": "The type of artifact source used.",
           "example": "AzureStorage"
         },
         "artifactRoot": {
@@ -1237,11 +1242,6 @@
         "type": {
           "type": "string",
           "description": "The authentication type"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "The properties that specify the authentication information for the type.",
-          "$ref": "#/definitions/SasAuthentication"
         }
       },
       "required": [
@@ -1255,8 +1255,21 @@
       "allOf": [
         {
           "$ref": "#/definitions/Authentication"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "The SAS properties",
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/SasProperties"
+            }
+          }
         }
-      ],
+      ]
+    },
+    "SasProperties": {
+      "description": "The properties that define SAS authentication.",
       "properties": {
         "sasUri": {
           "type": "string",
@@ -1343,9 +1356,9 @@
           "readOnly": true,
           "description": "The start time of the rollout in UTC. This property will not be set if the rollout has not completed yet."
         },
-        "errorInfo": {
+        "error": {
           "description": "The detailed error information for any failure.",
-          "$ref": "#/definitions/ErrorInfo"
+          "$ref": "#/definitions/ErrorProperties"
         }
       }
     },
@@ -1419,17 +1432,11 @@
       "description": "Defines a service.",
       "allOf": [
         {
+          "$ref": "#/definitions/ServiceProperties"
+        },
+        {
           "type": "object",
           "properties": {
-            "properties": {
-              "description": "The properties that define the service.",
-              "x-ms-client-flatten": true,
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ServiceProperties"
-                }
-              ]
-            },
             "name": {
               "type": "string",
               "description": "Name of the service."
@@ -1438,13 +1445,10 @@
               "description": "The detailed information about the units that make up the service.",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ServiceUnitModel"
+                "$ref": "#/definitions/ServiceUnit"
               }
             }
-          },
-          "required": [
-            "properties"
-          ]
+          }
         }
       ]
     },
@@ -1465,41 +1469,11 @@
         "targetSubscriptionId"
       ]
     },
-    "ServiceUnitRequestResource": {
-      "description": "The request representation of a service unit resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        },
-        {
-          "$ref": "#/definitions/Identity"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "The properties that define the service unit.",
-              "x-ms-client-flatten": true,
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ServiceUnitProperties"
-                }
-              ]
-            }
-          }
-        }
-      ],
-      "required": [
-        "name",
-        "type",
-        "properties"
-      ]
-    },
     "ServiceUnitResource": {
       "description": "Represents the response of a service unit resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/IdentityResource"
         },
         {
           "type": "object",
@@ -1522,33 +1496,27 @@
         "properties"
       ]
     },
-    "ServiceUnitModel": {
+    "ServiceUnit": {
       "description": "Defines a service unit.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceUnitProperties"
+        },
+        {
+          "type": "object"
+        }
+      ],
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "The properties that make up the service unit.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ServiceUnitProperties"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Name of the service unit."
-            },
-            "steps": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RolloutStep"
-              },
-              "description": "Detailed step information, if present."
-            }
-          }
+        "name": {
+          "type": "string",
+          "description": "Name of the service unit."
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RolloutStep"
+          },
+          "description": "Detailed step information, if present."
         }
       }
     },
@@ -1609,6 +1577,10 @@
           "readOnly": true,
           "description": "Current state of the step."
         },
+        "stepGroup": {
+          "type": "string",
+          "description": "The step group the current step is part of."
+        },
         "operationInfo": {
           "readOnly": true,
           "$ref": "#/definitions/StepOperationInfo",
@@ -1666,9 +1638,9 @@
           "readOnly": true,
           "description": "Last time in UTC this operation was updated."
         },
-        "errorInfo": {
+        "error": {
           "description": "The errors, if any, for the action.",
-          "$ref": "#/definitions/ErrorInfo"
+          "$ref": "#/definitions/ErrorProperties"
         }
       }
     },
@@ -1728,13 +1700,13 @@
           "description": "The properties that define the error.",
           "allOf": [
             {
-              "$ref": "#/definitions/ErrorInfoProperties"
+              "$ref": "#/definitions/ErrorProperties"
             }
           ]
         }
       }
     },
-    "ErrorInfoProperties": {
+    "ErrorProperties": {
       "description": "Detailed error information of any failure.",
       "properties": {
         "code": {
@@ -1750,13 +1722,13 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/ErrorPropertiesInner"
           },
           "description": "More detailed error information."
         }
       }
     },
-    "Error": {
+    "ErrorPropertiesInner": {
       "description": "Detailed error information of action failure if any.",
       "properties": {
         "code": {
@@ -1917,7 +1889,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "x-ms-parameter-location": "client",
+      "x-ms-parameter-location": "method",
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90
@@ -1935,7 +1907,7 @@
       "in": "query",
       "required": false,
       "type": "integer",
-      "description": "Rollout retry attempt ordinal to get the result of. If not specified, result of the   latest attempt will be returned.",
+      "description": "Rollout retry attempt ordinal to get the result of. If not specified, result of the latest attempt will be returned.",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {

@@ -3,10 +3,19 @@
         "subscriptionId": "caac1590-e859-444f-a9e0-62091c0f5929",
         "resourceGroupName": "myResourceGroup",
         "stepName": "deploymentStep1",
-        "api-version": "2018-09-01-preview"
+        "api-version": "2018-09-01-preview",
+        "stepInfo": {
+            "type": "Microsoft.DeploymentManager/steps",
+            "location": "centralus",
+            "tags": {},
+            "properties": {
+                "stepType": "stepType1", 
+                "attributes": {}
+            }
+        }
     },
     "responses": {
-        "200": {
+        "201": {
             "body": {
                 "name": "deploymentStep1",
                 "type": "Microsoft.DeploymentManager/steps",
@@ -17,7 +26,6 @@
                     "attributes": {}
                 }
             }
-        },
-        "404": {}
+        }
     }
 }
