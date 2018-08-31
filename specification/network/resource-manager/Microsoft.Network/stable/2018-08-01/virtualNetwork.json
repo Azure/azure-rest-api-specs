@@ -891,10 +891,17 @@
         },
         "serviceEndpointPolicies": {
           "type": "array",
-            "items": {
-              "$ref": "./serviceEndpointPolicy.json#/definitions/ServiceEndpointPolicy"
+          "items": {
+            "$ref": "./serviceEndpointPolicy.json#/definitions/ServiceEndpointPolicy"
           },
           "description": "An array of service endpoint policies."
+        },
+        "interfaceEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "An array of references to interface endpoints "
         },
         "ipConfigurations": {
           "readOnly": true,
