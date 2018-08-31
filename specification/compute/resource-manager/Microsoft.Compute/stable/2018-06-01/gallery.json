@@ -1053,12 +1053,12 @@
     },
     "GalleryArtifactPublishingProfileBase": {
       "properties": {
-        "regions": {
+        "targetRegions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/TargetRegion"
           },
-          "description": "The regions where the artifact is going to be published."
+          "description": "The target regions where the artifact is going to be published."
         },
         "source": {
           "$ref": "#/definitions/GalleryArtifactSource"
@@ -1068,6 +1068,20 @@
         "source"
       ],
       "description": "Describes the basic gallery artifact publishing profile."
+    },
+    "TargetRegion": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "regionalReplicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This is the number of source blob copies in this specific region."
+        }
+      },
+      "description": "Describes the target region information."
     },
     "GalleryArtifactSource": {
       "properties": {
@@ -1094,17 +1108,10 @@
     },
     "GalleryImageVersionPublishingProfile": {
       "properties": {
-        "scaleTier": {
-          "type": "string",
-          "description": "The scale tier of the gallery image version. Valid values are 'S30' and 'S100'",
-          "enum": [
-            "S30",
-            "S100"
-          ],
-          "x-ms-enum": {
-            "name": "ScaleTier",
-            "modelAsString": true
-          }
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This is the number of source blob copies in a region."
         },
         "excludeFromLatest": {
           "type": "boolean",
