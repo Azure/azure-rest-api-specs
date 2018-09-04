@@ -409,21 +409,44 @@
       ],
       "x-ms-azure-resource": true
     },
-    "TagsObject": {
+    "PurchasePlan": {
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The promotion code."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The plan ID."
         }
       },
-      "description": "Tags object for patch operations."
+      "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
     },
-    "ContainerServiceVnetSubnetID": {
-      "type": "string",
-      "description": "VNet SubnetID specifies the vnet's subnet identifier."
+    "OpenShiftRouterProfile": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the router profile."
+        },
+        "publicSubdomain" : {
+          "type": "string",
+          "description": "DNS subdomain for openshift router."
+        },
+        "fqdn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Auto-allocated FQDN for the OpenShift router."
+        }
+      },
+      "description": "Represents an OpenShift router"
     },
     "ContainerServiceVMSize": {
       "type": "string",
@@ -609,21 +632,9 @@
         "Standard_NV6"
       ]
     },
-    "ManagedClusterServicePrincipalProfile": {
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The ID for the service principal."
-        },
-        "secret": {
-          "type": "string",
-          "description": "The secret password associated with the service principal in plain text."
-        }
-      },
-      "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs.",
-      "required": [
-        "clientId"
-      ]
+    "ContainerServiceVnetSubnetID": {
+      "type": "string",
+      "description": "VNet SubnetID specifies the vnet's subnet identifier."
     },
     "OSType": {
       "type": "string",
@@ -638,75 +649,20 @@
       },
       "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
     },
-    "PurchasePlan": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The plan ID."
-        },
-        "product": {
-          "type": "string",
-          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
-        },
-        "promtionCode": {
-          "type": "string",
-          "description": "The promotion code."
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The plan ID."
-        }
-      },
-      "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
-    },
-    "OpenShiftManagedClusterListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OpenShiftManagedCluster"
-          },
-          "description": "The list of openshift managed clusters."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of openshift managed cluster results.",
-          "readOnly": true
-        }
-      },
-      "description": "The response from the List OpenShift Managed Clusters operation."
-    },
-    "OpenShiftRouterProfile": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the router profile."
-        },
-        "publicSubdomain" : {
-          "type": "string",
-          "description": "DNS subdomain for openshift router."
-        },
-        "fqdn": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Auto-allocated FQDN for the OpenShift router."
-        }
-      },
-      "description": "Represents an OpenShift router"
-    },
     "OpenShiftAgentPoolProfileRole": {
       "type": "string",
       "enum": [
         "compute",
-        "infra"
+        "infra",
+        "master"
       ],
       "x-ms-enum": {
         "name": "OpenShiftAgentPoolProfileRole",
         "modelAsString": true
       },
-      "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
+      "description": "OpenShiftAgentPoolProfileRole represents the role of the AgentPoolProfile."
     },
-    "OpenShiftManagedClusterProfileSpec": {
+    "OpenShiftManagedClusterAgentPoolProfile": {
       "properties": {
         "name": {
           "type": "string",
@@ -731,6 +687,10 @@
         "osType": {
           "$ref": "#/definitions/OSType",
           "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
+        },
+        "role" : {
+          "description": "Define the role of the AgentPoolProfile.",
+          "$ref": "#/definitions/OpenShiftAgentPoolProfileRole"
         }
       },
       "required": [
@@ -738,31 +698,111 @@
         "count",
         "vmSize"
       ],
-      "description": "Profile for the container service agent pool."
+      "description": "OpenShiftManagedClusterAgentPoolProfile represents configuration of OpenShift cluster VMs."
     },
-    "OpenShiftManagedClusterAgentPoolProfile": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/OpenShiftManagedClusterProfileSpec"
+    "OpenShiftManagedClusterIdentityProvider": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the provider."
         },
-        {
-          "properties": {
-            "role" : {
-              "description": "Define the role of the AgentPoolProfile.",
-              "$ref": "#/definitions/OpenShiftAgentPoolProfileRole"
-            }
-          }
+        "provider": {
+          "type": "object",
+          "description": "Configuration of the provider."
         }
-      ],
-      "description": "OpenShift's configuration of the AgentPoolProfile."
+      },
+      "description": "OpenShiftManagedClusterIdentityProvider is heavily cut down equivalent to IdentityProvider in the upstream."
     },
-    "OpenShiftManagedClusterMasterPoolProfile": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/OpenShiftManagedClusterProfileSpec"
+    "OpenShiftManagedClusterAuthProfile": {
+      "type": "array",
+      "items" : {
+        "$ref": "#/definitions/OpenShiftManagedClusterIdentityProvider"
+      },
+      "description": "OpenShiftManagedClusterAuthProfile defines all possible authentication profiles for the OpenShift cluster."
+    },
+    "ManagedClusterServicePrincipalProfile": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The ID for the service principal."
+        },
+        "secret": {
+          "type": "string",
+          "description": "The secret password associated with the service principal in plain text."
         }
+      },
+      "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs.",
+      "required": [
+        "clientId"
+      ]
+    },
+    "OpenShiftManagedClusterAzProfile": {
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId of the subscription where the cluster resides."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscriptionId f the subscription where the cluster resides."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resourceGroup f the subscription where the cluster resides."
+        }
+      },
+      "description": "AzProfile holds the azure context for where the cluster resides."
+    },
+    "OpenShiftManagedClusterProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response."
+        },
+        "openShiftVersion": {
+          "type": "string",
+          "description": "Version of OpenShift specified when creating the cluster."
+        },
+        "publicHostname": {
+          "type": "string",
+          "description": "Optional user-specified FQDN for OpenShift API server."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "User-specified FQDN for OpenShift API server loadbalancer internal hostname."
+        },
+        "routerProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenShiftRouterProfile"
+          },
+          "description": "Configuration for OpenShift router(s)."
+        },
+        "agentPoolProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenShiftManagedClusterAgentPoolProfile"
+          },
+          "description": "Configuration of OpenShift cluster VMs."
+        },
+        "authProfile": {
+          "$ref": "#/definitions/OpenShiftManagedClusterAuthProfile",
+          "description": "Configures OpenShift authentication."
+        },
+        "servicePrincipalProfile": {
+          "$ref": "#/definitions/ManagedClusterServicePrincipalProfile",
+          "description": "Service principal for OpenShift cluster."
+        },
+        "azProfile": {
+          "$ref": "#/definitions/OpenShiftManagedClusterAzProfile",
+          "description": "Azure context for where the cluster resides."
+        }
+      },
+      "required": [
+        "openShiftVersion"
       ],
-      "description": "OpenShift's configuration of the MasterPoolProfile."
+      "description": "Properties of the openshift managed cluster."
     },
     "OpenShiftManagedCluster": {
       "allOf": [
@@ -785,50 +825,51 @@
       ],
       "description": "OpenShift Managed cluster."
     },
-    "OpenShiftManagedClusterProperties": {
+    "OpenShiftManagedClusterServiceAADIdentityProvider": {
       "properties": {
-        "provisioningState": {
-          "readOnly": true,
+        "kind": {
           "type": "string",
-          "description": "The current deployment or provisioning state, which only appears in the response."
+          "description": "The kind of the provider."
         },
-        "openShiftVersion": {
+        "clientId": {
           "type": "string",
-          "description": "Version of OpenShift specified when creating the cluster."
+          "description": "The clientId password associated with the provider."
         },
-        "publicHostname": {
+        "secret": {
           "type": "string",
-          "description": "Public Hostname of the openshift managed cluster."
-        },
-        "fqdn": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Auto-allocated FQDN for OpenShift API server."
-        },
-        "routerProfiles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OpenShiftRouterProfile"
-          },
-          "description": "Configuration for OpenShift router(s)."
-        },
-        "masterPoolProfile": {
-          "$ref": "#/definitions/OpenShiftManagedClusterMasterPoolProfile",
-          "description": "Configuration for OpenShift master VMs."
-        },
-        "agentPoolProfiles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OpenShiftManagedClusterAgentPoolProfile"
-          },
-          "description": "Configuration of OpenShift cluster VMs."
-        },
-        "servicePrincipalProfile": {
-          "$ref": "#/definitions/ManagedClusterServicePrincipalProfile",
-          "description": "Service principal for OpenShift cluster."
+          "description": "The secret password associated with the provider."
         }
       },
-      "description": "Properties of the openshift managed cluster."
+      "description": "AADIdentityProvider defines Identity provider for MS AAD."
+    },
+    "TagsObject": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    },
+    "OpenShiftManagedClusterListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenShiftManagedCluster"
+          },
+          "description": "The list of openshift managed clusters."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of openshift managed cluster results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List OpenShift Managed Clusters operation."
     }
   },
   "parameters": {
