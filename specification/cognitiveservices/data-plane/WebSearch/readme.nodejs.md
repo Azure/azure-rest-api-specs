@@ -6,7 +6,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-websearch
-  output-folder: $(node-sdks-folder)/lib/services/webSearch
+  output-folder: $(node-sdks-folder)/lib/services/cognitiveServicesWebSearch
   override-client-name: WebSearchAPIClient
   azure-arm: false
   generate-license-txt: true
