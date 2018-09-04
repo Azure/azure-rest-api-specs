@@ -26,7 +26,16 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-06
+tag: package-2018-09
+```
+
+### Tag: package-2018-09
+
+These settings apply only when `--tag=package-2018-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09'
+input-file:
+- Microsoft.ContainerInstance/stable/2018-09-01/containerInstance.json
 ```
 
 ### Tag: package-2018-06

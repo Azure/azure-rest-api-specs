@@ -268,7 +268,7 @@
           }
         },
         "summary": "Restarts all containers in a container group.",
-        "description": "Restarts all containers in a contaienr group in place. If container image has updates, new image will be downloaded.",
+        "description": "Restarts all containers in a container group in place. If container image has updates, new image will be downloaded.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -300,7 +300,7 @@
           }
         },
         "summary": "Stops all containers in a container group.",
-        "description": "Stops all containers in a contaienr group. Compute resources will be deallocated and billing will stop.",
+        "description": "Stops all containers in a container group. Compute resources will be deallocated and billing will stop.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -975,6 +975,10 @@
                 "diagnostics": {
                   "description": "The diagnostic information for a container group.",
                   "$ref": "#/definitions/ContainerGroupDiagnostics"
+                },
+                "networkProfile": {
+                  "description": "The network profile information for a container group.",
+                  "$ref": "#/definitions/ContainerGroupNetworkProfile"
                 }
               },
               "required": [
@@ -1029,11 +1033,43 @@
         "workspaceKey": {
           "description": "The workspace key for log analytics",
           "type": "string"
+        },
+        "logType": {
+          "type": "string",
+          "description": "The log type to be used.",
+          "enum": [
+            "ContainerInsights",
+            "ContainerInstanceLogs"
+          ],
+          "x-ms-enum": {
+            "name": "LogAnalyticsLogType",
+            "modelAsString": true
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata for log analytics.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "workspaceId",
         "workspaceKey"
+      ]
+    },
+    "ContainerGroupNetworkProfile": {
+      "description": "Container group network profile information.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The identifier for a network profile.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "IpAddress": {
