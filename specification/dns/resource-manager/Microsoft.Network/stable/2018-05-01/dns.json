@@ -1105,7 +1105,12 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
+          },
+          "x-ms-examples": {
+            "List zones by resource group": {
+              "$ref": "./examples/ListZonesByResourceGroup.json"
+            }
+          }            
         }
       }
     },
@@ -1335,7 +1340,8 @@
           "readOnly": true
         },
         "targetResource":{
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SubResource",
+          "description": "A reference to an azure resource from where the dns resource value is taken."
         },
         "ARecords": {
           "type": "array",
@@ -1576,7 +1582,8 @@
           "$ref": "#/definitions/DnsResourceReferenceRequestProperties",
           "description": "The properties of the Resource Reference Request."
         }
-      }
+      },
+      "description": "Represents the properties of the Dns Resource Reference Request."
     },
     "DnsResourceReferenceRequestProperties": {
       "properties": {
@@ -1597,7 +1604,8 @@
           "$ref": "#/definitions/DnsResourceReferenceResultProperties",
           "description": "The result of dns resource reference request. Returns a list of dns resource references for each of the azure resource in the request."
         }
-      }
+      },
+      "description": "Represents the properties of the Dns Resource Reference Result."
     },
     "DnsResourceReferenceResultProperties": {
       "properties": {
@@ -1621,7 +1629,8 @@
           "description": "A list of dns Records "
         },
         "targetResource":{
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SubResource",
+          "description": "A reference to an azure resource from where the dns resource value is taken."
         }
       },
       "description": "Represents a single Azure resource and its referencing DNS records."
