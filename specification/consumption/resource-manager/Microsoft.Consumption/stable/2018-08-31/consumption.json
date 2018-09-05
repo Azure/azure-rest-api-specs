@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-06-30",
+    "version": "2018-08-31",
     "title": "ConsumptionManagementClient",
     "description": "Consumption management client provides access to consumption resources for Azure Enterprise Subscriptions."
   },
@@ -2111,97 +2111,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/costTags": {
-      "get": {
-        "tags": [
-          "CostTags"
-        ],
-        "operationId": "CostTags_Get",
-        "description": "Get cost tags for a billing account.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "CostTags_Get": {
-            "$ref": "./examples/CostTags.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CostTag"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "CostTags"
-        ],
-        "description": "The operation to create or update cost tags assiciated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
-        "operationId": "CostTags_CreateOrUpdate",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "CreateOrUpdateCostTags": {
-            "$ref": "./examples/CreateOrUpdateCostTags.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CostTag"
-            },
-            "description": "Parameters supplied to the Create cost tags operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CostTag"
-            }
-          },
-          "201": {
-            "description": "Created.",
-            "schema": {
-              "$ref": "#/definitions/CostTag"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.CostManagement/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/tags": {
       "get": {
         "tags": [
@@ -2328,7 +2237,7 @@
         }
       }
     },
-	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/usageDetails": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
         "tags": [
           "UsageDetails"
@@ -2498,8 +2407,8 @@
           "nextLinkName": "nextLink"
         }
       }
-	},
-	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/aggregatedcost": {
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/aggregatedcost": {
       "get": {
         "tags": [
           "AggregatedCost"
@@ -2512,7 +2421,11 @@
         "x-ms-examples": {
           "AggregatedCostByManagementGroup": {
             "$ref": "./examples/AggregatedCostByManagementGroup.json"
+          },
+          "AggregatedCostByManagementGroupFilterByDate": {
+            "$ref": "./examples/AggregatedCostByManagementGroupFilterByDate.json"
           }
+
         },
         "parameters": [
           {
@@ -2520,6 +2433,13 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter aggregated cost by properties/usageStart (Utc time), properties/usageEnd (Utc time). The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2536,9 +2456,9 @@
             }
           }
         }
-	 }
-   },
-   	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedcost": {
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedcost": {
       "get": {
         "tags": [
           "AggregatedCost"
@@ -2556,8 +2476,8 @@
         "parameters": [
           {
             "$ref": "#/parameters/managementGroupIdParameter"
-          },        
-		  {
+          },
+          {
             "$ref": "#/parameters/billingPeriodNameParameter"
           },
           {
@@ -2578,8 +2498,210 @@
             }
           }
         }
-	 }
-   }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Consumption/charges": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "operationId": "Charges_ListByEnrollmentAccount",
+        "description": "Lists the charges by enrollmentAccountId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ChargesListForEnrollmentAccount": {
+            "$ref": "./examples/ChargesListForEnrollmentAccountFilterByStartEndDate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter charges by properties/usageEnd (Utc time), properties/usageStart (Utc time). The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChargesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/charges": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "operationId": "Charges_ListForBillingPeriodByEnrollmentAccount",
+        "description": "Lists the charges based on enrollmentAccountId by billing period.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ChangesForBillingPeriodByEnrollmentAccount": {
+            "$ref": "./examples/ChargesForBillingPeriodByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter charges by properties/usageEnd (Utc time), properties/usageStart (Utc time). The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChargeSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Consumption/charges": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "operationId": "Charges_ListByDepartment",
+        "description": "Lists the charges by departmentId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ChargesListByDepartment": {
+            "$ref": "./examples/ChargesListForDepartmentFilterByStartEndDate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter charges by properties/usageEnd (Utc time), properties/usageStart (Utc time). The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChargesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/charges": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "operationId": "Charges_ListForBillingPeriodByDepartment",
+        "description": "Lists the charges based on departmentId by billing period.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ChangesForBillingPeriodByDepartmentt": {
+            "$ref": "./examples/ChargesForBillingPeriodByDepartment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter charges by properties/usageEnd (Utc time), properties/usageStart (Utc time). The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChargeSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
   },
   "definitions": {
     "MeterDetails": {
@@ -2979,6 +3101,11 @@
         "planName": {
           "description": "The name of plan.",
           "type": "string",
+          "readOnly": true
+        },
+        "isRecurringCharge": {
+          "description": "Flag indicating whether this is a recurring charge or not.",
+          "type": "boolean",
           "readOnly": true
         }
       }
@@ -3668,43 +3795,6 @@
         "contactEmails"
       ]
     },
-    "CostTag": {
-      "description": "A cost tag resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CostTagsModel",
-          "title": "Cost tag properties"
-        }
-      }
-    },
-    "CostTagsModel": {
-      "description": "The cost tag.",
-      "properties": {
-        "costTags": {
-          "description": "Cost tags.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CostTagProperties"
-          }
-        }
-      }
-    },
-    "CostTagProperties": {
-      "description": "The properties of the cost tag.",
-      "properties": {
-        "key": {
-          "description": "Cost tag key.",
-          "type": "string"
-        }
-      }
-    },
     "PriceSheetResult": {
       "description": "An pricesheet resource.",
       "type": "object",
@@ -3784,14 +3874,14 @@
           "description": "Currency Code",
           "type": "string",
           "readOnly": true
-        },        
+        },
         "offerId": {
           "description": "Offer Id",
           "type": "string",
           "readOnly": true
-		    }
-	    }
-    },   
+        }
+      }
+    },
     "Forecast": {
       "description": "A forecast resource.",
       "type": "object",
@@ -3903,7 +3993,7 @@
         }
       }
     },
-	"ManagementGroupAggregatedCostResult": {
+    "ManagementGroupAggregatedCostResult": {
       "description": "A management group aggregated cost resource.",
       "type": "object",
       "allOf": [
@@ -3928,19 +4018,31 @@
           "type": "string",
           "readOnly": true
         },
-         "azureCharges": {
+        "usageStart": {
+          "description": "The start of the date time range covered by aggregated cost.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "usageEnd": {
+          "description": "The end of the date time range covered by the aggregated cost.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "azureCharges": {
           "description": "Azure Charges.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
         },
-         "marketplaceCharges": {
+        "marketplaceCharges": {
           "description": "Marketplace Charges.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
         },
-         "chargesBilledSeparately": {
+        "chargesBilledSeparately": {
           "description": "Charges Billed Separately.",
           "type": "number",
           "format": "decimal",
@@ -3951,16 +4053,89 @@
           "type": "string",
           "readOnly": true
         },
-		"children": {
+        "children": {
           "description": "Children of a management group",
-		  "type": "array",
+          "type": "array",
           "items": {
-             "$ref": "#/definitions/ManagementGroupAggregatedCostResult"
-            }
-		}
+            "$ref": "#/definitions/ManagementGroupAggregatedCostResult"
+          }
+        }
       }
     },
-	"ErrorDetails": {
+    "ChargesListResult": {
+      "description": "Result of listing charge summary.",
+      "properties": {
+        "value": {
+          "description": "The list of charge summary",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ChargeSummary"
+          }
+        }
+      }
+    },
+    "ChargeSummary": {
+      "description": "A charge summary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ChargeSummaryProperties",
+          "title": "Charge summary properties"
+        }
+      }
+    },
+    "ChargeSummaryProperties": {
+      "description": "The properties of the charge summary.",
+      "type": "object",
+      "properties": {
+        "billingPeriodId": {
+          "description": "The id of the billing period resource that the charge belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usageStart": {
+          "description": "Usage start date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usageEnd": {
+          "description": " Usage end date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureCharges": {
+          "description": "Azure Charges.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "chargesBilledSeparately": {
+          "description": "Charges Billed separately.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "marketplaceCharges": {
+          "description": "Marketplace Charges.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "Currency Code",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetails": {
       "description": "The details of the error.",
       "properties": {
         "code": {
@@ -4110,7 +4285,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2018-06-30."
+      "description": "Version of the API to be used with the client request. The current version is 2018-08-31."
     },
     "billingAccountIdParameter": {
       "name": "billingAccountId",
