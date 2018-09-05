@@ -54,7 +54,7 @@
             "$ref": "#/parameters/IntervalParameter"
           },
           {
-            "$ref": "#/parameters/MetricParameter"
+            "$ref": "#/parameters/MetricNamesParameter"
           },
           {
             "$ref": "#/parameters/AggregationsParameter"
@@ -316,12 +316,12 @@
       "description": "The interval (i.e. timegrain) of the query.",
       "x-ms-parameter-location": "method"
     },
-    "MetricParameter": {
-      "name": "metric",
+    "MetricNamesParameter": {
+      "name": "metricnames",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The name of the metric to retrieve.",
+      "description": "The names of the metrics (comma separated) to retrieve.",
       "x-ms-parameter-location": "method"
     },
     "AggregationsParameter": {
@@ -336,7 +336,7 @@
       "name": "top",
       "in": "query",
       "required": false,
-      "type": "number",
+      "type": "integer",
       "format": "int32",
       "description": "The maximum number of records to retrieve.\nValid only if $filter is specified.\nDefaults to 10.",
       "x-ms-parameter-location": "method"
@@ -372,7 +372,7 @@
       "type": "string",
       "description": "Client Api Version."
     },
-	"MetricNamespaceParameter": {
+    "MetricNamespaceParameter": {
       "name": "metricnamespace",
       "in": "query",
       "required": false,

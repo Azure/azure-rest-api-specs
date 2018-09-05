@@ -30,6 +30,13 @@
         "parameters": {
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
           "description": "Parameters for dataset."
+        },
+        "annotations": {
+          "description": "List of tags that can be used for describing the Dataset.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
         }
       },
       "additionalProperties": {
@@ -892,7 +899,39 @@
         "path"
       ]
     },
-    "SqlServerTableDataset": {
+    "SapEccResourceDataset": {
+      "x-ms-discriminator-value": "SapEccResource",
+      "description": "The path of the SAP ECC OData entity.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP ECC OData resource dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapEccResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapEccResourceDatasetTypeProperties": {
+      "description": "Sap ECC OData resource dataset properties.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the SAP ECC OData entity. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+	"SqlServerTableDataset": {
       "x-ms-discriminator-value": "SqlServerTable",
       "description": "The on-premises SQL Server dataset.",
       "type": "object",
@@ -1351,6 +1390,54 @@
         } 
       ], 
       "properties": { 
+      }
+    },
+    "NetezzaTableDataset" : {
+      "x-ms-discriminator-value": "NetezzaTable",
+      "description": "Netezza dataset.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+            "$ref": "#/definitions/Dataset" 
+        } 
+      ], 
+      "properties": { 
+      }
+    },
+    "VerticaTableDataset" : {
+      "x-ms-discriminator-value": "VerticaTable",
+      "description": "Vertica dataset.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+            "$ref": "#/definitions/Dataset" 
+        } 
+      ], 
+      "properties": { 
+      }
+    },
+    "SalesforceMarketingCloudObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceMarketingCloudObject",
+      "description": "Salesforce Marketing Cloud dataset.",
+      "type": "object",
+      "allOf": [
+        {
+            "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+      }
+    },
+    "ResponsysObjectDataset": {
+      "x-ms-discriminator-value": "ResponsysObject",
+      "description": "Responsys dataset.",
+      "type": "object",
+      "allOf": [
+        {
+            "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
       }
     }
   }

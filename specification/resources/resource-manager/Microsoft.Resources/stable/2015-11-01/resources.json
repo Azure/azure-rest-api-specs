@@ -2474,6 +2474,7 @@
     "DeploymentExtended": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets or sets the ID of the deployment."
         },
@@ -2489,6 +2490,7 @@
       "required": [
         "name"
       ],
+      "x-ms-azure-resource": true,
       "description": "Deployment information."
     },
     "DeploymentListResult": {
@@ -2610,6 +2612,7 @@
       "required": [
         "location"
       ],
+      "x-ms-azure-resource": true,
       "description": "Resource group information."
     },
     "ResourceGroupProperties": {
@@ -2673,6 +2676,7 @@
     "TagValue": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets or sets the tag ID."
         },
@@ -2685,11 +2689,13 @@
           "description": "Gets or sets the tag value count."
         }
       },
+      "x-ms-azure-resource": true,
       "description": "Tag information."
     },
     "TagDetails": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets or sets the tag ID."
         },
@@ -2763,7 +2769,6 @@
           "description": "Gets or sets operation status code."
         },
         "statusMessage": {
-          "type": "object",
           "description": "Gets or sets operation status message."
         },
         "targetResource": {

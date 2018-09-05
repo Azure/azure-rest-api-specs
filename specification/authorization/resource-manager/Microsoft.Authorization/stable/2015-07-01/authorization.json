@@ -36,43 +36,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators": {
-      "get": {
-        "tags": [
-          "ClassicAdministrators"
-        ],
-        "operationId": "ClassicAdministrators_List",
-        "description": "Gets service administrator, account administrator, and co-administrators for the subscription.",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for this operation."
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns an array of administrators.",
-            "schema": {
-              "$ref": "#/definitions/ClassicAdministratorListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetClassicAdministrators.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions": {
       "get": {
         "tags": [
@@ -958,56 +921,6 @@
         }
       },
       "description": "Role Definitions filter"
-    },
-    "ClassicAdministratorProperties": {
-      "properties": {
-        "emailAddress": {
-          "type": "string",
-          "description": "The email address of the administrator."
-        },
-        "role": {
-          "type": "string",
-          "description": "The role of the administrator."
-        }
-      },
-      "description": "Classic Administrator properties."
-    },
-    "ClassicAdministrator": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the administrator."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the administrator."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the administrator."
-        },
-        "properties": {
-          "$ref": "#/definitions/ClassicAdministratorProperties",
-          "description": "Properties for the classic administrator."
-        }
-      },
-      "description": "Classic Administrators"
-    },
-    "ClassicAdministratorListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClassicAdministrator"
-          },
-          "description": "An array of administrators."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "ClassicAdministrator list result information."
     },
     "Permission": {
       "properties": {

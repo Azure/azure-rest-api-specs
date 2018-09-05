@@ -4,7 +4,7 @@
     "resourceGroupName": "rg",
     "automationAccountName": "sampleAccount9",
     "sourceControlName": "sampleSourceControl",
-    "api-version": "2015-10-31",
+    "api-version": "2017-05-15-preview",
     "parameters": {
       "properties": {
         "repoUrl": "https://sampleUser.visualstudio.com/myProject/_git/myRepository",
@@ -13,7 +13,10 @@
         "autoSync": true,
         "publishRunbook": true,
         "sourceType": "VsoGit",
-        "securityToken": "3a326f7a0dcd343ea58fee21f2fd5fb4c1234567",
+        "securityToken": {
+            "accessToken":"3a326f7a0dcd343ea58fee21f2fd5fb4c1234567",
+            "tokenType": "PersonalAccessToken"
+        },
         "description": "my description"
       }
     }

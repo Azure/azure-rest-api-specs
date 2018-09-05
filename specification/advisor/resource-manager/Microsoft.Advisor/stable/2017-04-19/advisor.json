@@ -41,6 +41,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "GetConfigurations": {
             "$ref": "./examples/ListConfigurations.json"
@@ -121,6 +124,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "GetConfigurations": {
             "$ref": "./examples/ListConfigurations.json"
@@ -250,8 +256,7 @@
           "CreateSuppression": {
             "$ref": "./examples/EmptyResponse.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
@@ -753,6 +758,13 @@
           "type": "array",
           "items": {
             "format": "uuid",
+            "type": "string"
+          }
+        },
+        "extendedProperties": {
+          "description": "Extended properties",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }

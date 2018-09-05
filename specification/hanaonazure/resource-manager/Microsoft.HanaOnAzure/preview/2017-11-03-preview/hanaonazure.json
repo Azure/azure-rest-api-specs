@@ -194,6 +194,39 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/restart": {
+            "post": {
+                "tags": [
+                    "HanaOnAzure"
+                ],
+                "operationId": "HanaInstances_Restart",
+                "description": "The operation to restart a SAP HANA instance.",
+                "x-ms-examples": {
+                    "Restart a HANA instance": {
+                        "$ref": "./examples/HanaInstances_Restart.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HanaInstanceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -284,6 +317,23 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "Specifies the HANA instance unique ID."
+                },
+                "powerState": {
+                    "readOnly": true,
+                    "type": "string",
+                    "enum": [
+                        "starting",
+                        "started",
+                        "stopping",
+                        "stopped",
+                        "restarting",
+                        "unknown"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HanaInstancePowerStateEnum",
+                        "modelAsString": true
+                    },
+                    "description": "Resource power state"
                 }
             },
             "description": "Describes the properties of a HANA instance."
@@ -294,13 +344,14 @@
                     "readOnly": true,
                     "type": "string",
                     "enum": [
-                        "Cisco_UCS"
+                        "Cisco_UCS",
+                        "HPE"
                     ],
                     "x-ms-enum": {
                         "name": "HanaHardwareTypeNamesEnum",
                         "modelAsString": true
                     },
-                    "description": "Name of the hardware type (vendor and/or thrie product name)"
+                    "description": "Name of the hardware type (vendor and/or their product name)"
                 },
                 "hanaInstanceSize": {
                     "readOnly": true,
@@ -311,7 +362,18 @@
                         "S72",
                         "S144",
                         "S192",
-                        "S192m"
+                        "S192m",
+                        "S192xm",
+                        "S384",
+                        "S384m",
+                        "S384xm",
+                        "S384xxm",
+                        "S576m",
+                        "S576xm",
+                        "S768",
+                        "S768m",
+                        "S768xm",
+                        "S960m"
                     ],
                     "x-ms-enum": {
                         "name": "HanaInstanceSizeNamesEnum",
@@ -322,12 +384,39 @@
             },
             "description": "Specifies the hardware settings for the HANA instance."
         },
+        "Disk": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The disk name."
+                },
+                "diskSizeGB": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Specifies the size of an empty data disk in gigabytes."
+                },
+                "lun": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
+                }
+            },
+            "description": "Specifies the disk information fo the HANA instance"
+        },
         "StorageProfile": {
             "properties": {
                 "nfsIpAddress": {
                     "readOnly": true,
                     "type": "string",
                     "description": "IP Address to connect to storage."
+                },
+                "osDisks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Disk"
+                    },
+                    "description": "Specifies information about the operating system disk used by the hana instance."
                 }
             },
             "description": "Specifies the storage settings for the HANA instance disks."
@@ -376,7 +465,8 @@
                     "type": "string",
                     "description": "Specifies the IP address of the network interface."
                 }
-            }
+            },
+            "description": "Specifies the IP address of the network interaface."
         },
         "OperationList": {
             "type": "object",
@@ -412,7 +502,7 @@
                 "provider": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with “Microsoft” for 1st party services."
+                    "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with \"Microsoft\" for 1st party services."
                 },
                 "resource": {
                     "readOnly": true,

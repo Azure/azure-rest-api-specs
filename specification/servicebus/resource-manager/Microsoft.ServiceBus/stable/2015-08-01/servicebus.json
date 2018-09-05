@@ -864,6 +864,47 @@
           }
         }
       },
+	  "post": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queues_PostAuthorizationRule",
+        "x-ms-examples": {
+          "QueueAutorizationRuleGet": { "$ref": "./examples/SBQueueAutorizationRuleGet.json" }
+        },
+        "description": "Gets an authorization rule for a queue by rule name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/queueNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rule successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Queues"
@@ -1295,6 +1336,47 @@
         "responses": {
           "200": {
             "description": "Topic authorization rule successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      },
+	  "post": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topics_PostAuthorizationRule",
+        "x-ms-examples": {
+          "TopicAutorizationRuleGet": { "$ref": "./examples/SBTopicAutorizationRuleGet.json" }
+        },
+        "description": "Returns the specified authorization rule.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/topicNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic authorization rule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -2279,10 +2361,6 @@
         "enablePartitioning": {
           "type": "boolean",
           "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
-        },
-        "enableSubscriptionPartitioning": {
-          "type": "boolean",
-          "description": "Value that indicates whether partitioning is enabled or disabled. NOTE: This property is unsupported, and may be deprecated."
         },
         "filteringMessagesBeforePublishing": {
           "type": "boolean",

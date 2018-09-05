@@ -414,7 +414,50 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{uid}": {
-      "put": {
+      "head": {
+        "tags": [
+          "GroupUsers"
+        ],
+        "operationId": "GroupUser_CheckEntityExists",
+        "description": "Checks that user entity specified by identifier is associated with the group entity.",
+        "x-ms-examples": {
+          "ApiManagementHeadGroupUser": {
+            "$ref": "./examples/ApiManagementHeadGroupUser.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "./apimusers.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "put": {
         "tags": [
           "GroupUsers"
         ],
@@ -582,7 +625,7 @@
       "required": [
         "displayName"
       ],
-      "description": "Developer group."
+      "description": "Group contract Properties."
     },
     "GroupCreateParameters": {
       "properties": {
