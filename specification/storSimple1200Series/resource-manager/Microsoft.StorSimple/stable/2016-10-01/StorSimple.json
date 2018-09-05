@@ -20,6 +20,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Retrieves all the managers in a subscription.",
         "operationId": "Managers_List",
         "consumes": [
           "application/json"
@@ -59,6 +60,7 @@
         "tags": [
           "AvailableProviderOperations"
         ],
+        "description": "List of AvailableProviderOperations",
         "operationId": "AvailableProviderOperations_List",
         "consumes": [
           "application/json"
@@ -93,6 +95,7 @@
         "tags": [
           "AvailableProviderOperations"
         ],
+        "description": "Registers Provider",
         "operationId": "AvailableProviderOperations_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -124,6 +127,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Retrieves all the managers in a resource group.",
         "operationId": "Managers_ListByResourceGroup",
         "consumes": [
           "application/json"
@@ -166,6 +170,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Returns the properties of the specified manager name.",
         "operationId": "Managers_Get",
         "consumes": [
           "application/json"
@@ -206,6 +211,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Creates or updates the manager.",
         "operationId": "Managers_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -217,6 +223,7 @@
           {
             "name": "Manager",
             "in": "body",
+            "description": "The manager.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Manager"
@@ -233,6 +240,14 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "Manager",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
           }
         ],
         "responses": {
@@ -260,6 +275,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Deletes the manager.",
         "operationId": "Managers_Delete",
         "consumes": [
           "application/json"
@@ -302,6 +318,7 @@
         "tags": [
           "AccessControlRecords"
         ],
+        "description": "Retrieves all the access control records in a manager.",
         "operationId": "AccessControlRecords_ListByManager",
         "consumes": [
           "application/json"
@@ -347,6 +364,7 @@
         "tags": [
           "AccessControlRecords"
         ],
+        "description": "Returns the properties of the specified access control record name.",
         "operationId": "AccessControlRecords_Get",
         "consumes": [
           "application/json"
@@ -358,6 +376,7 @@
           {
             "name": "accessControlRecordName",
             "in": "path",
+            "description": "Name of access control record to be fetched.",
             "required": true,
             "type": "string"
           },
@@ -372,6 +391,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "accessControlRecordName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -393,6 +418,7 @@
         "tags": [
           "AccessControlRecords"
         ],
+        "description": "Creates or Updates an access control record.",
         "operationId": "AccessControlRecords_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -404,12 +430,14 @@
           {
             "name": "accessControlRecordName",
             "in": "path",
+            "description": "The name of the access control record.",
             "required": true,
             "type": "string"
           },
           {
             "name": "accessControlRecord",
             "in": "body",
+            "description": "The access control record to be added or updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessControlRecord"
@@ -426,6 +454,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "accessControlRecordName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessControlRecord",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessControlRecord"
+            }
           }
         ],
         "responses": {
@@ -451,6 +493,7 @@
         "tags": [
           "AccessControlRecords"
         ],
+        "description": "Deletes the access control record.",
         "operationId": "AccessControlRecords_Delete",
         "consumes": [
           "application/json"
@@ -462,6 +505,7 @@
           {
             "name": "accessControlRecordName",
             "in": "path",
+            "description": "The name of the access control record to delete.",
             "required": true,
             "type": "string"
           },
@@ -476,6 +520,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "accessControlRecordName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -500,6 +550,7 @@
         "tags": [
           "Alerts"
         ],
+        "description": "Retrieves all the alerts in a manager.",
         "operationId": "Alerts_ListByManager",
         "consumes": [
           "application/json"
@@ -553,6 +604,7 @@
         "tags": [
           "Backups"
         ],
+        "description": "Retrieves all the backups in a manager.",
         "operationId": "Backups_ListByManager",
         "consumes": [
           "application/json"
@@ -606,6 +658,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Upload Vault Cred Certificate.\r\nReturns UploadCertificateResponse",
         "operationId": "Managers_UploadRegistrationCertificate",
         "consumes": [
           "application/json"
@@ -617,12 +670,14 @@
           {
             "name": "certificateName",
             "in": "path",
+            "description": "Certificate Name",
             "required": true,
             "type": "string"
           },
           {
             "name": "uploadCertificateRequestrequest",
             "in": "body",
+            "description": "UploadCertificateRequest Request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UploadCertificateRequest"
@@ -639,6 +694,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "uploadCertificateRequestrequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadCertificateRequest"
+            }
           }
         ],
         "responses": {
@@ -657,6 +726,7 @@
         "tags": [
           "Alerts"
         ],
+        "description": "Clear the alerts.",
         "operationId": "Alerts_Clear",
         "consumes": [
           "application/json"
@@ -668,6 +738,7 @@
           {
             "name": "request",
             "in": "body",
+            "description": "The clear alert request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClearAlertRequest"
@@ -684,6 +755,14 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClearAlertRequest"
+            }
           }
         ],
         "responses": {
@@ -704,6 +783,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Retrieves all the devices in a manager.",
         "operationId": "Devices_ListByManager",
         "consumes": [
           "application/json"
@@ -756,6 +836,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Returns the properties of the specified device name.",
         "operationId": "Devices_Get",
         "consumes": [
           "application/json"
@@ -767,6 +848,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -787,6 +869,12 @@
             "in": "query",
             "description": "Specify $expand=details to populate additional fields related to the device.",
             "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -809,6 +897,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Deletes the device.",
         "operationId": "Devices_Delete",
         "consumes": [
           "application/json"
@@ -820,6 +909,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -834,6 +924,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -856,6 +952,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Patches the device.",
         "operationId": "Devices_Patch",
         "consumes": [
           "application/json"
@@ -867,12 +964,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device Name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "devicePatch",
             "in": "body",
+            "description": "Patch representation of the device.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DevicePatch"
@@ -889,6 +988,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devicePatch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevicePatch"
+            }
           }
         ],
         "responses": {
@@ -916,6 +1029,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Returns the alert settings of the specified device name.",
         "operationId": "Devices_GetAlertSettings",
         "consumes": [
           "application/json"
@@ -927,6 +1041,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -941,6 +1056,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -962,6 +1083,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Creates or updates the alert settings",
         "operationId": "Devices_CreateOrUpdateAlertSettings",
         "consumes": [
           "application/json"
@@ -973,12 +1095,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "alertSettings",
             "in": "body",
+            "description": "The alert settings.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AlertSettings"
@@ -995,6 +1119,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertSettings",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertSettings"
+            }
           }
         ],
         "responses": {
@@ -1022,6 +1160,7 @@
         "tags": [
           "Backups"
         ],
+        "description": "Retrieves all the backups in a device. Can be used to get the backups for failover also.",
         "operationId": "Backups_ListByDevice",
         "consumes": [
           "application/json"
@@ -1033,12 +1172,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "forFailover",
             "in": "query",
+            "description": "Set to true if you need backups which can be used for failover.",
             "required": false,
             "type": "boolean"
           },
@@ -1060,6 +1201,18 @@
             "description": "OData Filter options",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forFailover",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -1087,6 +1240,7 @@
         "tags": [
           "Backups"
         ],
+        "description": "Deletes the backup.",
         "operationId": "Backups_Delete",
         "consumes": [
           "application/json"
@@ -1098,12 +1252,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "backupName",
             "in": "path",
+            "description": "The backup name.",
             "required": true,
             "type": "string"
           },
@@ -1118,6 +1274,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1142,6 +1310,7 @@
         "tags": [
           "Backups"
         ],
+        "description": "Clones the given backup element to a new disk or share with given details.",
         "operationId": "Backups_Clone",
         "consumes": [
           "application/json"
@@ -1150,6 +1319,48 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "elementName",
+            "in": "path",
+            "description": "The backup element name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloneRequest",
+            "in": "body",
+            "description": "The clone request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloneRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -1175,18 +1386,6 @@
             "schema": {
               "$ref": "#/definitions/CloneRequest"
             }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -1211,6 +1410,7 @@
         "tags": [
           "BackupScheduleGroups"
         ],
+        "description": "Retrieves all the backup schedule groups in a device.",
         "operationId": "BackupScheduleGroups_ListByDevice",
         "consumes": [
           "application/json"
@@ -1222,6 +1422,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The name of the device.",
             "required": true,
             "type": "string"
           },
@@ -1236,6 +1437,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1262,6 +1469,7 @@
         "tags": [
           "BackupScheduleGroups"
         ],
+        "description": "Returns the properties of the specified backup schedule group name.",
         "operationId": "BackupScheduleGroups_Get",
         "consumes": [
           "application/json"
@@ -1273,12 +1481,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The name of the device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleGroupName",
             "in": "path",
+            "description": "The name of the schedule group.",
             "required": true,
             "type": "string"
           },
@@ -1293,6 +1503,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1314,6 +1536,7 @@
         "tags": [
           "BackupScheduleGroups"
         ],
+        "description": "Creates or Updates the backup schedule Group.",
         "operationId": "BackupScheduleGroups_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -1322,6 +1545,41 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleGroupName",
+            "in": "path",
+            "description": "The name of the schedule group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleGroup",
+            "in": "body",
+            "description": "The schedule group to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupScheduleGroup"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -1341,18 +1599,6 @@
             "schema": {
               "$ref": "#/definitions/BackupScheduleGroup"
             }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -1378,6 +1624,7 @@
         "tags": [
           "BackupScheduleGroups"
         ],
+        "description": "Deletes the backup schedule group.",
         "operationId": "BackupScheduleGroups_Delete",
         "consumes": [
           "application/json"
@@ -1389,12 +1636,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The name of the device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleGroupName",
             "in": "path",
+            "description": "The name of the schedule group.",
             "required": true,
             "type": "string"
           },
@@ -1409,6 +1658,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1433,6 +1694,7 @@
         "tags": [
           "ChapSettings"
         ],
+        "description": "Retrieves all the chap settings in a device.",
         "operationId": "ChapSettings_ListByDevice",
         "consumes": [
           "application/json"
@@ -1444,6 +1706,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The name of the device.",
             "required": true,
             "type": "string"
           },
@@ -1458,6 +1721,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1484,6 +1753,7 @@
         "tags": [
           "ChapSettings"
         ],
+        "description": "Returns the properties of the specified chap setting name.",
         "operationId": "ChapSettings_Get",
         "consumes": [
           "application/json"
@@ -1495,12 +1765,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "chapUserName",
             "in": "path",
+            "description": "The user name of chap to be fetched.",
             "required": true,
             "type": "string"
           },
@@ -1515,6 +1787,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chapUserName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1536,6 +1820,7 @@
         "tags": [
           "ChapSettings"
         ],
+        "description": "Creates or updates the chap setting.",
         "operationId": "ChapSettings_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -1544,6 +1829,41 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chapUserName",
+            "in": "path",
+            "description": "The chap user name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chapSetting",
+            "in": "body",
+            "description": "The chap setting to be added or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChapSettings"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -1563,18 +1883,6 @@
             "schema": {
               "$ref": "#/definitions/ChapSettings"
             }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -1600,6 +1908,7 @@
         "tags": [
           "ChapSettings"
         ],
+        "description": "Deletes the chap setting.",
         "operationId": "ChapSettings_Delete",
         "consumes": [
           "application/json"
@@ -1611,12 +1920,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "chapUserName",
             "in": "path",
+            "description": "The chap user name.",
             "required": true,
             "type": "string"
           },
@@ -1631,6 +1942,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chapUserName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1650,6 +1973,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Deactivates the device.",
         "operationId": "Devices_Deactivate",
         "consumes": [
           "application/json"
@@ -1661,6 +1985,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -1675,6 +2000,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1691,6 +2022,7 @@
         "tags": [
           "IscsiDisks"
         ],
+        "description": "Retrieves all the iscsi disks in a device.",
         "operationId": "IscsiDisks_ListByDevice",
         "consumes": [
           "application/json"
@@ -1702,6 +2034,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -1716,6 +2049,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1742,6 +2081,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Downloads udpates on the device.",
         "operationId": "Devices_DownloadUpdates",
         "consumes": [
           "application/json"
@@ -1753,6 +2093,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -1767,6 +2108,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1783,6 +2130,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Fails over the device to another device.",
         "operationId": "Devices_Failover",
         "consumes": [
           "application/json"
@@ -1794,12 +2142,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "failoverRequest",
             "in": "body",
+            "description": "The failover request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/FailoverRequest"
@@ -1816,6 +2166,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FailoverRequest"
+            }
           }
         ],
         "responses": {
@@ -1840,6 +2204,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Retrieves all the devices which can be used as failover targets for the given device.",
         "operationId": "Devices_ListFailoverTarget",
         "consumes": [
           "application/json"
@@ -1851,6 +2216,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -1871,6 +2237,12 @@
             "in": "query",
             "description": "Specify $expand=details to populate additional fields related to the device.",
             "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -1898,6 +2270,7 @@
         "tags": [
           "FileServers"
         ],
+        "description": "Retrieves all the file servers in a device.",
         "operationId": "FileServers_ListByDevice",
         "consumes": [
           "application/json"
@@ -1909,6 +2282,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -1923,6 +2297,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1949,6 +2329,7 @@
         "tags": [
           "FileServers"
         ],
+        "description": "Returns the properties of the specified file server name.",
         "operationId": "FileServers_Get",
         "consumes": [
           "application/json"
@@ -1960,12 +2341,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileServerName",
             "in": "path",
+            "description": "The file server name.",
             "required": true,
             "type": "string"
           },
@@ -1980,6 +2363,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2001,6 +2396,7 @@
         "tags": [
           "FileServers"
         ],
+        "description": "Creates or updates the file server.",
         "operationId": "FileServers_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -2009,6 +2405,41 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "description": "The file server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServer",
+            "in": "body",
+            "description": "The file server.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileServer"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -2028,18 +2459,6 @@
             "schema": {
               "$ref": "#/definitions/FileServer"
             }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -2065,6 +2484,7 @@
         "tags": [
           "FileServers"
         ],
+        "description": "Deletes the file server.",
         "operationId": "FileServers_Delete",
         "consumes": [
           "application/json"
@@ -2076,12 +2496,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileServerName",
             "in": "path",
+            "description": "The file server name.",
             "required": true,
             "type": "string"
           },
@@ -2096,6 +2518,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2120,6 +2554,7 @@
         "tags": [
           "FileServers"
         ],
+        "description": "Backup the file server now.",
         "operationId": "FileServers_BackupNow",
         "consumes": [
           "application/json"
@@ -2131,12 +2566,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileServerName",
             "in": "path",
+            "description": "The file server name.",
             "required": true,
             "type": "string"
           },
@@ -2151,6 +2588,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2175,6 +2624,7 @@
         "tags": [
           "FileServers"
         ],
+        "description": "Gets the file server metrics.",
         "operationId": "FileServers_ListMetrics",
         "consumes": [
           "application/json"
@@ -2186,12 +2636,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The name of the device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileServerName",
             "in": "path",
+            "description": "The name of the file server name.",
             "required": true,
             "type": "string"
           },
@@ -2212,6 +2664,18 @@
             "in": "query",
             "description": "OData Filter options",
             "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -2240,6 +2704,7 @@
         "tags": [
           "FileServers"
         ],
+        "description": "Retrieves metric definitions of all metrics aggregated at the file server.",
         "operationId": "FileServers_ListMetricDefinition",
         "consumes": [
           "application/json"
@@ -2251,12 +2716,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The name of the device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileServerName",
             "in": "path",
+            "description": "The name of the file server.",
             "required": true,
             "type": "string"
           },
@@ -2271,6 +2738,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2297,6 +2776,7 @@
         "tags": [
           "FileShares"
         ],
+        "description": "Retrieves all the file shares in a file server.",
         "operationId": "FileShares_ListByFileServer",
         "consumes": [
           "application/json"
@@ -2308,12 +2788,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileServerName",
             "in": "path",
+            "description": "The file server name.",
             "required": true,
             "type": "string"
           },
@@ -2328,6 +2810,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2354,6 +2848,7 @@
         "tags": [
           "FileShares"
         ],
+        "description": "Returns the properties of the specified file share name.",
         "operationId": "FileShares_Get",
         "consumes": [
           "application/json"
@@ -2362,6 +2857,39 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "description": "The file server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The file share name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -2379,18 +2907,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -2412,6 +2928,7 @@
         "tags": [
           "FileShares"
         ],
+        "description": "Creates or updates the file share.",
         "operationId": "FileShares_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -2420,6 +2937,48 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "description": "The file server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The file share name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileShare",
+            "in": "body",
+            "description": "The file share.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -2445,18 +3004,6 @@
             "schema": {
               "$ref": "#/definitions/FileShare"
             }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -2482,6 +3029,7 @@
         "tags": [
           "FileShares"
         ],
+        "description": "Deletes the file share.",
         "operationId": "FileShares_Delete",
         "consumes": [
           "application/json"
@@ -2490,6 +3038,39 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "description": "The file server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The file share Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -2507,18 +3088,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -2543,6 +3112,7 @@
         "tags": [
           "FileShares"
         ],
+        "description": "Gets the file share metrics",
         "operationId": "FileShares_ListMetrics",
         "consumes": [
           "application/json"
@@ -2554,18 +3124,21 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileServerName",
             "in": "path",
+            "description": "The file server name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "shareName",
             "in": "path",
+            "description": "The file share name.",
             "required": true,
             "type": "string"
           },
@@ -2586,6 +3159,24 @@
             "in": "query",
             "description": "OData Filter options",
             "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -2614,6 +3205,7 @@
         "tags": [
           "FileShares"
         ],
+        "description": "Retrieves metric definitions of all metrics aggregated at the file share.",
         "operationId": "FileShares_ListMetricDefinition",
         "consumes": [
           "application/json"
@@ -2622,6 +3214,39 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServerName",
+            "in": "path",
+            "description": "The file server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The file share name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -2639,18 +3264,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -2677,6 +3290,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Installs the updates on the device.",
         "operationId": "Devices_InstallUpdates",
         "consumes": [
           "application/json"
@@ -2688,6 +3302,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -2702,6 +3317,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2718,6 +3339,7 @@
         "tags": [
           "IscsiServers"
         ],
+        "description": "Retrieves all the iscsi in a device.",
         "operationId": "IscsiServers_ListByDevice",
         "consumes": [
           "application/json"
@@ -2729,6 +3351,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -2743,6 +3366,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2769,6 +3398,7 @@
         "tags": [
           "IscsiServers"
         ],
+        "description": "Returns the properties of the specified iscsi server name.",
         "operationId": "IscsiServers_Get",
         "consumes": [
           "application/json"
@@ -2780,12 +3410,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "iscsiServerName",
             "in": "path",
+            "description": "The iscsi server name.",
             "required": true,
             "type": "string"
           },
@@ -2800,6 +3432,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2821,6 +3465,7 @@
         "tags": [
           "IscsiServers"
         ],
+        "description": "Creates or updates the iscsi server.",
         "operationId": "IscsiServers_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -2829,6 +3474,41 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "description": "The iscsi server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServer",
+            "in": "body",
+            "description": "The iscsi server.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ISCSIServer"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -2848,18 +3528,6 @@
             "schema": {
               "$ref": "#/definitions/ISCSIServer"
             }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -2885,6 +3553,7 @@
         "tags": [
           "IscsiServers"
         ],
+        "description": "Deletes the iscsi server.",
         "operationId": "IscsiServers_Delete",
         "consumes": [
           "application/json"
@@ -2896,12 +3565,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "iscsiServerName",
             "in": "path",
+            "description": "The iscsi server name.",
             "required": true,
             "type": "string"
           },
@@ -2916,6 +3587,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2940,6 +3623,7 @@
         "tags": [
           "IscsiServers"
         ],
+        "description": "Backup the iscsi server now.",
         "operationId": "IscsiServers_BackupNow",
         "consumes": [
           "application/json"
@@ -2951,12 +3635,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "iscsiServerName",
             "in": "path",
+            "description": "The iscsi server name.",
             "required": true,
             "type": "string"
           },
@@ -2971,6 +3657,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2995,6 +3693,7 @@
         "tags": [
           "IscsiDisks"
         ],
+        "description": "Retrieves all the disks in a iscsi server.",
         "operationId": "IscsiDisks_ListByIscsiServer",
         "consumes": [
           "application/json"
@@ -3006,12 +3705,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "iscsiServerName",
             "in": "path",
+            "description": "The iscsi server name.",
             "required": true,
             "type": "string"
           },
@@ -3026,6 +3727,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3052,6 +3765,7 @@
         "tags": [
           "IscsiDisks"
         ],
+        "description": "Returns the properties of the specified iscsi disk name.",
         "operationId": "IscsiDisks_Get",
         "consumes": [
           "application/json"
@@ -3060,6 +3774,39 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "description": "The iscsi server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The disk name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -3077,18 +3824,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -3110,6 +3845,7 @@
         "tags": [
           "IscsiDisks"
         ],
+        "description": "Creates or updates the iscsi disk.",
         "operationId": "IscsiDisks_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -3118,6 +3854,48 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "description": "The iscsi server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The disk name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiDisk",
+            "in": "body",
+            "description": "The iscsi disk.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ISCSIDisk"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -3143,18 +3921,6 @@
             "schema": {
               "$ref": "#/definitions/ISCSIDisk"
             }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -3180,6 +3946,7 @@
         "tags": [
           "IscsiDisks"
         ],
+        "description": "Deletes the iscsi disk.",
         "operationId": "IscsiDisks_Delete",
         "consumes": [
           "application/json"
@@ -3188,6 +3955,39 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "description": "The iscsi server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The disk name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -3205,18 +4005,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -3241,6 +4029,7 @@
         "tags": [
           "IscsiDisks"
         ],
+        "description": "Gets the iscsi disk metrics",
         "operationId": "IscsiDisks_ListMetrics",
         "consumes": [
           "application/json"
@@ -3252,18 +4041,21 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "iscsiServerName",
             "in": "path",
+            "description": "The iscsi server name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "diskName",
             "in": "path",
+            "description": "The iscsi disk name.",
             "required": true,
             "type": "string"
           },
@@ -3284,6 +4076,24 @@
             "in": "query",
             "description": "OData Filter options",
             "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -3312,6 +4122,7 @@
         "tags": [
           "IscsiDisks"
         ],
+        "description": "Retrieves metric definitions for all metric aggregated at the iscsi disk.",
         "operationId": "IscsiDisks_ListMetricDefinition",
         "consumes": [
           "application/json"
@@ -3320,6 +4131,39 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "description": "The iscsi server name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The iscsi disk name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "name": "deviceName",
             "in": "path",
@@ -3337,18 +4181,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -3375,6 +4207,7 @@
         "tags": [
           "IscsiServers"
         ],
+        "description": "Gets the iscsi server metrics",
         "operationId": "IscsiServers_ListMetrics",
         "consumes": [
           "application/json"
@@ -3386,12 +4219,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The devie name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "iscsiServerName",
             "in": "path",
+            "description": "The iscsi server name.",
             "required": true,
             "type": "string"
           },
@@ -3412,6 +4247,18 @@
             "in": "query",
             "description": "OData Filter options",
             "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -3440,6 +4287,7 @@
         "tags": [
           "IscsiServers"
         ],
+        "description": "Retrieves metric definitions for all metrics aggregated at iscsi server.",
         "operationId": "IscsiServers_ListMetricDefinition",
         "consumes": [
           "application/json"
@@ -3451,12 +4299,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The devie name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "iscsiServerName",
             "in": "path",
+            "description": "The iscsi server name.",
             "required": true,
             "type": "string"
           },
@@ -3471,6 +4321,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iscsiServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3497,6 +4359,7 @@
         "tags": [
           "Jobs"
         ],
+        "description": "Retrieves all the jobs in a device.",
         "operationId": "Jobs_ListByDevice",
         "consumes": [
           "application/json"
@@ -3508,6 +4371,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -3528,6 +4392,12 @@
             "in": "query",
             "description": "OData Filter options",
             "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -3556,6 +4426,7 @@
         "tags": [
           "Jobs"
         ],
+        "description": "Returns the properties of the specified job name.",
         "operationId": "Jobs_Get",
         "consumes": [
           "application/json"
@@ -3567,12 +4438,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "jobName",
             "in": "path",
+            "description": "The job name.",
             "required": true,
             "type": "string"
           },
@@ -3587,6 +4460,18 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3610,6 +4495,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Retrieves the device metrics.",
         "operationId": "Devices_ListMetrics",
         "consumes": [
           "application/json"
@@ -3621,6 +4507,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The name of the appliance.",
             "required": true,
             "type": "string"
           },
@@ -3641,6 +4528,12 @@
             "in": "query",
             "description": "OData Filter options",
             "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -3669,6 +4562,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Retrieves metric definition of all metrics aggregated at device.",
         "operationId": "Devices_ListMetricDefinition",
         "consumes": [
           "application/json"
@@ -3680,6 +4574,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The name of the appliance.",
             "required": true,
             "type": "string"
           },
@@ -3694,6 +4589,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3720,6 +4621,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Returns the network settings of the specified device name.",
         "operationId": "Devices_GetNetworkSettings",
         "consumes": [
           "application/json"
@@ -3731,6 +4633,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -3745,6 +4648,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3768,6 +4677,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Triggers collection of support package on a device.",
         "operationId": "Devices_PublishSupportPackage",
         "consumes": [
           "application/json"
@@ -3779,12 +4689,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "supportPackageRequest",
             "in": "body",
+            "description": "The publish support package request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SupportPackageRequest"
@@ -3801,6 +4713,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "supportPackageRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportPackageRequest"
+            }
           }
         ],
         "responses": {
@@ -3817,6 +4743,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Scans for updates on the device.",
         "operationId": "Devices_ScanForUpdates",
         "consumes": [
           "application/json"
@@ -3828,6 +4755,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -3842,6 +4770,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3863,6 +4797,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Creates or updates the security settings.",
         "operationId": "Devices_CreateOrUpdateSecuritySettings",
         "consumes": [
           "application/json"
@@ -3874,12 +4809,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "securitySettings",
             "in": "body",
+            "description": "The security settings.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SecuritySettings"
@@ -3896,6 +4833,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securitySettings",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecuritySettings"
+            }
           }
         ],
         "responses": {
@@ -3917,6 +4868,7 @@
         "tags": [
           "Alerts"
         ],
+        "description": "Sends a test alert email.",
         "operationId": "Alerts_SendTestEmail",
         "consumes": [
           "application/json"
@@ -3928,12 +4880,14 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "request",
             "in": "body",
+            "description": "The send test alert email request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SendTestAlertEmailRequest"
@@ -3950,6 +4904,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendTestAlertEmailRequest"
+            }
           }
         ],
         "responses": {
@@ -3970,6 +4938,7 @@
         "tags": [
           "FileShares"
         ],
+        "description": "Retrieves all the file shares in a device.",
         "operationId": "FileShares_ListByDevice",
         "consumes": [
           "application/json"
@@ -3981,6 +4950,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -3995,6 +4965,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4021,6 +4997,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Returns the time settings of the specified device name.",
         "operationId": "Devices_GetTimeSettings",
         "consumes": [
           "application/json"
@@ -4032,6 +5009,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -4046,6 +5024,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4069,6 +5053,7 @@
         "tags": [
           "Devices"
         ],
+        "description": "Returns the update summary of the specified device name.",
         "operationId": "Devices_GetUpdateSummary",
         "consumes": [
           "application/json"
@@ -4080,6 +5065,7 @@
           {
             "name": "deviceName",
             "in": "path",
+            "description": "The device name.",
             "required": true,
             "type": "string"
           },
@@ -4094,6 +5080,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4117,6 +5109,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Returns the encryption settings of the manager.",
         "operationId": "Managers_GetEncryptionSettings",
         "consumes": [
           "application/json"
@@ -4159,6 +5152,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Returns the extended information of the specified manager name.",
         "operationId": "Managers_GetExtendedInfo",
         "consumes": [
           "application/json"
@@ -4199,6 +5193,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Creates the extended info of the manager.",
         "operationId": "Managers_CreateExtendedInfo",
         "consumes": [
           "application/json"
@@ -4210,6 +5205,7 @@
           {
             "name": "ManagerExtendedInfo",
             "in": "body",
+            "description": "The manager extended information.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ManagerExtendedInfo"
@@ -4226,6 +5222,14 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "ManagerExtendedInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
           }
         ],
         "responses": {
@@ -4242,6 +5246,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Deletes the extended info of the manager.",
         "operationId": "Managers_DeleteExtendedInfo",
         "consumes": [
           "application/json"
@@ -4279,6 +5284,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Updates the extended info of the manager.",
         "operationId": "Managers_UpdateExtendedInfo",
         "consumes": [
           "application/json"
@@ -4290,6 +5296,7 @@
           {
             "name": "ManagerExtendedInfo",
             "in": "body",
+            "description": "The manager extended information.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ManagerExtendedInfo"
@@ -4313,6 +5320,14 @@
             "description": "Pass the ETag of ExtendedInfo fetched from GET call",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "ManagerExtendedInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
           }
         ],
         "responses": {
@@ -4336,6 +5351,7 @@
         "tags": [
           "FileServers"
         ],
+        "description": "Retrieves all the file servers in a manager.",
         "operationId": "FileServers_ListByManager",
         "consumes": [
           "application/json"
@@ -4381,6 +5397,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Returns the activation key of the manager.",
         "operationId": "Managers_GetActivationKey",
         "consumes": [
           "application/json"
@@ -4418,6 +5435,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Returns the symmetric encryption key of the manager.",
         "operationId": "Managers_GetEncryptionKey",
         "consumes": [
           "application/json"
@@ -4455,6 +5473,7 @@
         "tags": [
           "IscsiServers"
         ],
+        "description": "Retrieves all the iscsi servers in a manager.",
         "operationId": "IscsiServers_ListByManager",
         "consumes": [
           "application/json"
@@ -4500,6 +5519,7 @@
         "tags": [
           "Jobs"
         ],
+        "description": "Retrieves all the jobs in a manager.",
         "operationId": "Jobs_ListByManager",
         "consumes": [
           "application/json"
@@ -4553,6 +5573,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Gets the  manager metrics",
         "operationId": "Managers_ListMetrics",
         "consumes": [
           "application/json"
@@ -4606,6 +5627,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Retrieves metric definition of all metrics aggregated at manager.",
         "operationId": "Managers_ListMetricDefinition",
         "consumes": [
           "application/json"
@@ -4651,6 +5673,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Returns the Registration Certificate.",
         "operationId": "Managers_RegenerateRegistrationCertificate",
         "consumes": [
           "application/json"
@@ -4688,6 +5711,7 @@
         "tags": [
           "Managers"
         ],
+        "description": "Re-generates and returns the activation key of the manager.",
         "operationId": "Managers_RegenerateActivationKey",
         "consumes": [
           "application/json"
@@ -4725,6 +5749,7 @@
         "tags": [
           "StorageAccountCredentials"
         ],
+        "description": "Retrieves all the storage account credentials in a manager.",
         "operationId": "StorageAccountCredentials_ListByManager",
         "consumes": [
           "application/json"
@@ -4770,6 +5795,7 @@
         "tags": [
           "StorageAccountCredentials"
         ],
+        "description": "Returns the properties of the specified storage account credential name.",
         "operationId": "StorageAccountCredentials_Get",
         "consumes": [
           "application/json"
@@ -4781,6 +5807,7 @@
           {
             "name": "credentialName",
             "in": "path",
+            "description": "The name of storage account credential to be fetched.",
             "required": true,
             "type": "string"
           },
@@ -4795,6 +5822,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4816,6 +5849,7 @@
         "tags": [
           "StorageAccountCredentials"
         ],
+        "description": "Creates or updates the storage account credential",
         "operationId": "StorageAccountCredentials_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -4827,12 +5861,14 @@
           {
             "name": "credentialName",
             "in": "path",
+            "description": "The credential name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "storageAccount",
             "in": "body",
+            "description": "The storage account credential to be added or updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageAccountCredential"
@@ -4849,6 +5885,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageAccount",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCredential"
+            }
           }
         ],
         "responses": {
@@ -4874,6 +5924,7 @@
         "tags": [
           "StorageAccountCredentials"
         ],
+        "description": "Deletes the storage account credential",
         "operationId": "StorageAccountCredentials_Delete",
         "consumes": [
           "application/json"
@@ -4885,6 +5936,7 @@
           {
             "name": "credentialName",
             "in": "path",
+            "description": "The name of the storage account credential.",
             "required": true,
             "type": "string"
           },
@@ -4899,6 +5951,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4923,6 +5981,7 @@
         "tags": [
           "StorageDomains"
         ],
+        "description": "Retrieves all the storage domains in a manager.",
         "operationId": "StorageDomains_ListByManager",
         "consumes": [
           "application/json"
@@ -4968,6 +6027,7 @@
         "tags": [
           "StorageDomains"
         ],
+        "description": "Returns the properties of the specified storage domain name.",
         "operationId": "StorageDomains_Get",
         "consumes": [
           "application/json"
@@ -4979,6 +6039,7 @@
           {
             "name": "storageDomainName",
             "in": "path",
+            "description": "The storage domain name.",
             "required": true,
             "type": "string"
           },
@@ -4993,6 +6054,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "storageDomainName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -5014,6 +6081,7 @@
         "tags": [
           "StorageDomains"
         ],
+        "description": "Creates or updates the storage domain.",
         "operationId": "StorageDomains_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -5025,12 +6093,14 @@
           {
             "name": "storageDomainName",
             "in": "path",
+            "description": "The storage domain name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "storageDomain",
             "in": "body",
+            "description": "The storageDomain.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageDomain"
@@ -5047,6 +6117,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "storageDomainName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageDomain",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageDomain"
+            }
           }
         ],
         "responses": {
@@ -5072,6 +6156,7 @@
         "tags": [
           "StorageDomains"
         ],
+        "description": "Deletes the storage domain.",
         "operationId": "StorageDomains_Delete",
         "consumes": [
           "application/json"
@@ -5083,6 +6168,7 @@
           {
             "name": "storageDomainName",
             "in": "path",
+            "description": "The storage domain name.",
             "required": true,
             "type": "string"
           },
@@ -5097,6 +6183,12 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "storageDomainName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -5119,6 +6211,7 @@
   },
   "definitions": {
     "AccessControlRecord": {
+      "description": "The access control record",
       "required": [
         "properties"
       ],
@@ -5131,17 +6224,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccessControlRecordProperties",
+          "description": "Properties of AccessControlRecord",
           "x-ms-client-flatten": true
         }
       }
     },
     "AccessControlRecordList": {
+      "description": "Collection of AccessControlRecords",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessControlRecord"
@@ -5150,17 +6246,20 @@
       }
     },
     "AccessControlRecordProperties": {
+      "description": "Properties of access control record",
       "required": [
         "initiatorName"
       ],
       "type": "object",
       "properties": {
         "initiatorName": {
+          "description": "The Iscsi initiator name (IQN)",
           "type": "string"
         }
       }
     },
     "Alert": {
+      "description": "Alert class",
       "required": [
         "properties"
       ],
@@ -5173,29 +6272,36 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AlertProperties",
+          "description": "Properties of alert",
           "x-ms-client-flatten": true
         }
       }
     },
     "AlertErrorDetails": {
+      "description": "Errordetails for the alert",
       "type": "object",
       "properties": {
         "errorCode": {
+          "description": "Error code.",
           "type": "string"
         },
         "errorMessage": {
+          "description": "Error Message",
           "type": "string"
         },
         "occurences": {
           "format": "int32",
+          "description": "Number of occurences.",
           "type": "integer"
         }
       }
     },
     "AlertFilter": {
+      "description": "Filters that can be specified on the alert",
       "type": "object",
       "properties": {
         "status": {
+          "description": "Status of the alert",
           "enum": [
             "Active",
             "Cleared"
@@ -5207,6 +6313,7 @@
           }
         },
         "severity": {
+          "description": "Severity of the alert",
           "enum": [
             "Informational",
             "Warning",
@@ -5219,6 +6326,7 @@
           }
         },
         "sourceType": {
+          "description": "Source of the alert",
           "enum": [
             "Resource",
             "Device"
@@ -5230,32 +6338,38 @@
           }
         },
         "sourceName": {
+          "description": "Source name of the alert",
           "type": "string"
         },
         "appearedOnTime": {
           "format": "date-time",
+          "description": "UTC time on which the alert appeared",
           "type": "string"
         }
       }
     },
     "AlertList": {
+      "description": "Collection of Alerts",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Alert"
           }
         },
         "nextLink": {
+          "description": "Id of the next page of alerts",
           "type": "string"
         }
       }
     },
     "AlertProperties": {
+      "description": "Properties of alert",
       "required": [
         "title",
         "scope",
@@ -5269,9 +6383,11 @@
       "type": "object",
       "properties": {
         "title": {
+          "description": "Title of the alert",
           "type": "string"
         },
         "scope": {
+          "description": "Device or Resource alert",
           "enum": [
             "Resource",
             "Device"
@@ -5283,34 +6399,43 @@
           }
         },
         "alertType": {
+          "description": "Type of the alert",
           "type": "string"
         },
         "appearedAtTime": {
           "format": "date-time",
+          "description": "UTC time at which the alert appeared",
           "type": "string"
         },
         "appearedAtSourceTime": {
           "format": "date-time",
+          "description": "UTC time at which the alert appeared on the source",
           "type": "string"
         },
         "clearedAtTime": {
           "format": "date-time",
+          "description": "UTC time at which the alert got cleared",
           "type": "string"
         },
         "clearedAtSourceTime": {
           "format": "date-time",
+          "description": "UTC time at which the alert was cleared on the source",
           "type": "string"
         },
         "source": {
-          "$ref": "#/definitions/AlertSource"
+          "$ref": "#/definitions/AlertSource",
+          "description": "Source at which the alert was cleared"
         },
         "recommendation": {
+          "description": "Recommendation for acting on the alert",
           "type": "string"
         },
         "resolutionReason": {
+          "description": "Reason for resolving the alert",
           "type": "string"
         },
         "severity": {
+          "description": "Severity of the alert",
           "enum": [
             "Informational",
             "Warning",
@@ -5323,6 +6448,7 @@
           }
         },
         "status": {
+          "description": "Current status of the alert",
           "enum": [
             "Active",
             "Cleared"
@@ -5334,9 +6460,11 @@
           }
         },
         "errorDetails": {
-          "$ref": "#/definitions/AlertErrorDetails"
+          "$ref": "#/definitions/AlertErrorDetails",
+          "description": "ErrorDetails of the alert"
         },
         "detailedInformation": {
+          "description": "Other information about the alert",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -5345,6 +6473,7 @@
       }
     },
     "AlertSettings": {
+      "description": "AlertSettings on the device which represents how alerts will be processed",
       "required": [
         "properties"
       ],
@@ -5357,11 +6486,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AlertSettingsProperties",
+          "description": "Properties of AlertSettings",
           "x-ms-client-flatten": true
         }
       }
     },
     "AlertSettingsProperties": {
+      "description": "Class containing the properties of Alertsettings",
       "required": [
         "emailNotification",
         "notificationToServiceOwners",
@@ -5370,6 +6501,7 @@
       "type": "object",
       "properties": {
         "emailNotification": {
+          "description": "Value indicating whether user/admins will receive emails when an alert condition occurs on the system",
           "enum": [
             "Enabled",
             "Disabled"
@@ -5381,6 +6513,7 @@
           }
         },
         "notificationToServiceOwners": {
+          "description": "Value indicating whether service owners will receive emails when an alert condition occurs on the system. Applicable only if emailNotification flag is Enabled.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -5392,9 +6525,11 @@
           }
         },
         "alertNotificationCulture": {
+          "description": "Culture setting to be used while building alert emails. For eg: \"en-US\"",
           "type": "string"
         },
         "additionalRecipientEmailList": {
+          "description": "List of email addresses (apart from admin/coadmin of subscription) to whom the alert emails need to be sent",
           "type": "array",
           "items": {
             "type": "string"
@@ -5403,15 +6538,19 @@
       }
     },
     "AlertSource": {
+      "description": "source at which the alert can be raised",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of the source.",
           "type": "string"
         },
         "timeZone": {
+          "description": "The time zone.",
           "type": "string"
         },
         "alertSourceType": {
+          "description": "Source type of the alert.",
           "enum": [
             "Resource",
             "Device"
@@ -5425,6 +6564,7 @@
       }
     },
     "AsymmetricEncryptedSecret": {
+      "description": "This class can be used as the Type for any secret entity represented as Password, CertThumbprint, Algorithm. This class is intended to be used when the secret is encrypted with an asymmetric key pair. The encryptionAlgorithm field is mainly for future usage to potentially allow different entities encrypted using different algorithms.",
       "required": [
         "value",
         "encryptionAlgorithm"
@@ -5432,12 +6572,15 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value of the secret itself. If the secret is in plaintext then EncryptionAlgorithm will be none and EncryptionCertThumbprint will be null.",
           "type": "string"
         },
         "encryptionCertificateThumbprint": {
+          "description": "Thumbprint certificate that was used to encrypt \"Value\"",
           "type": "string"
         },
         "encryptionAlgorithm": {
+          "description": "Algorithm used to encrypt \"Value\"",
           "enum": [
             "None",
             "AES256",
@@ -5452,62 +6595,77 @@
       }
     },
     "AvailableProviderOperation": {
+      "description": "Class represents provider operation",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Gets or sets the name of the operation being performed on this particular object\r\nReturn value format: \"{resourceProviderNamespace}/{resourceType}/{read|write|deletion|action}\"\r\nEg: Microsoft.StorSimple/managers/devices/fileServers/read\r\n    Microsoft.StorSimple/managers/devices/alerts/clearAlerts/action",
           "type": "string"
         },
         "display": {
-          "$ref": "#/definitions/AvailableProviderOperationDisplay"
+          "$ref": "#/definitions/AvailableProviderOperationDisplay",
+          "description": "Gets or sets Display information\r\nContains the localized display information for this particular operation/action"
         },
         "origin": {
+          "description": "Gets or sets Origin\r\nThe intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.\r\nDefault value is “user,system”",
           "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/AvailableProviderOperationProperties",
+          "description": "Gets or sets Properties\r\nReserved for future use",
           "x-ms-client-flatten": true
         }
       }
     },
     "AvailableProviderOperationDisplay": {
+      "description": "Contains the localized display information for this particular operation / action. \r\nThese value will be used by several clients for \r\n(1) custom role definitions for RBAC; \r\n(2) complex query filters for the event service; and (3) audit history / records for management operations.",
       "type": "object",
       "properties": {
         "provider": {
+          "description": "Gets or sets Provider\r\nThe localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. \r\nIt should use Title Casing and begin with “Microsoft” for 1st party services.",
           "type": "string"
         },
         "resource": {
+          "description": "Gets or sets Resource\r\nThe localized friendly form of the resource type related to this action/operation – it should match the public documentation for the resource provider. \r\nIt should use Title Casing – for examples, please refer to the “name” section.",
           "type": "string"
         },
         "operation": {
+          "description": "Gets or sets Operation\r\nThe localized friendly name for the operation, as it should be shown to the user. \r\nIt should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing and include the entity/resource to which it applies.",
           "type": "string"
         },
         "description": {
+          "description": "Gets or sets Description\r\nThe localized friendly description for the operation, as it should be shown to the user. \r\nIt should be thorough, yet concise – it will be used in tool tips and detailed views.",
           "type": "string"
         }
       }
     },
     "AvailableProviderOperationProperties": {
+      "description": "Class represents Properties in AvailableProviderOperations",
       "type": "object",
       "properties": {}
     },
     "AvailableProviderOperations": {
+      "description": "Class for set of operations used for discovery of available provider operations.",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AvailableProviderOperation"
           }
         },
         "nextLink": {
+          "description": "The NextLink.",
           "type": "string"
         }
       }
     },
     "Backup": {
+      "description": "The backup.",
       "required": [
         "properties"
       ],
@@ -5520,11 +6678,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupProperties",
+          "description": "Properties of backup",
           "x-ms-client-flatten": true
         }
       }
     },
     "BackupElement": {
+      "description": "Class represents BackupElement",
       "required": [
         "properties"
       ],
@@ -5537,11 +6697,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupElementProperties",
+          "description": "The Properties of backup element",
           "x-ms-client-flatten": true
         }
       }
     },
     "BackupElementProperties": {
+      "description": "The backup element properties",
       "required": [
         "sizeInBytes",
         "endpointName",
@@ -5551,12 +6713,15 @@
       "properties": {
         "sizeInBytes": {
           "format": "int64",
+          "description": "The size in bytes.",
           "type": "integer"
         },
         "endpointName": {
+          "description": "The name of the endpoint.",
           "type": "string"
         },
         "dataPolicy": {
+          "description": "The data policy of backed up endpoint.",
           "enum": [
             "Invalid",
             "Local",
@@ -5572,9 +6737,11 @@
       }
     },
     "BackupFilter": {
+      "description": "Backup OData filter class",
       "type": "object",
       "properties": {
         "initiatedBy": {
+          "description": "InitiatedBy",
           "enum": [
             "Manual",
             "Scheduled"
@@ -5587,28 +6754,33 @@
         },
         "createdTime": {
           "format": "date-time",
+          "description": "CreatedTime",
           "type": "string"
         }
       }
     },
     "BackupList": {
+      "description": "Collection of backups",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Backup"
           }
         },
         "nextLink": {
+          "description": "The NextLink.",
           "type": "string"
         }
       }
     },
     "BackupProperties": {
+      "description": "Class represents Backup properties",
       "required": [
         "sizeInBytes",
         "initiatedBy",
@@ -5618,24 +6790,30 @@
       "type": "object",
       "properties": {
         "targetId": {
+          "description": "The path id of the target FileServer or IscsiServer for which the backup was taken.",
           "type": "string"
         },
         "targetType": {
+          "description": "Type of target, FileServer or IscsiServer",
           "type": "string"
         },
         "sizeInBytes": {
           "format": "int64",
+          "description": "The backup size in bytes.",
           "type": "integer"
         },
         "createdTime": {
           "format": "date-time",
+          "description": "The time when the backup was created.",
           "type": "string"
         },
         "expirationTime": {
           "format": "date-time",
+          "description": "The time when the backup will expire.",
           "type": "string"
         },
         "initiatedBy": {
+          "description": "Indicates how the backup was initiated \"Manual | Scheduled\".",
           "enum": [
             "Manual",
             "Scheduled"
@@ -5647,9 +6825,11 @@
           }
         },
         "deviceId": {
+          "description": "The Device Identifier.",
           "type": "string"
         },
         "elements": {
+          "description": "The backup elements.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BackupElement"
@@ -5658,6 +6838,7 @@
       }
     },
     "BackupScheduleGroup": {
+      "description": "The Backup Schedule Group",
       "required": [
         "properties"
       ],
@@ -5670,17 +6851,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupScheduleGroupProperties",
+          "description": "Properties of BackupScheduleGroup",
           "x-ms-client-flatten": true
         }
       }
     },
     "BackupScheduleGroupList": {
+      "description": "The list response of backup schedule groups",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BackupScheduleGroup"
@@ -5689,42 +6873,51 @@
       }
     },
     "BackupScheduleGroupProperties": {
+      "description": "The Backup Schedule Group Properties",
       "required": [
         "startTime"
       ],
       "type": "object",
       "properties": {
         "startTime": {
-          "$ref": "#/definitions/Time"
+          "$ref": "#/definitions/Time",
+          "description": "The start time. When this field is specified we will generate Default GrandFather Father Son Backup Schedules."
         }
       }
     },
     "BaseModel": {
+      "description": "Base class for models",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The identifier.",
           "type": "string"
         },
         "name": {
+          "description": "The name.",
           "type": "string"
         },
         "type": {
+          "description": "The type.",
           "type": "string"
         }
       }
     },
     "ChapProperties": {
+      "description": "Chap properties",
       "required": [
         "password"
       ],
       "type": "object",
       "properties": {
         "password": {
-          "$ref": "#/definitions/AsymmetricEncryptedSecret"
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "The chap password."
         }
       }
     },
     "ChapSettings": {
+      "description": "Challenge-Handshake Authentical Protocol (CHAP) setting",
       "required": [
         "properties"
       ],
@@ -5737,17 +6930,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ChapProperties",
+          "description": "Chap properties",
           "x-ms-client-flatten": true
         }
       }
     },
     "ChapSettingsList": {
+      "description": "Collection of Chap setting entities",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The chap settings entity collection",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChapSettings"
@@ -5756,15 +6952,18 @@
       }
     },
     "ClearAlertRequest": {
+      "description": "Request for clearing the alert",
       "required": [
         "alerts"
       ],
       "type": "object",
       "properties": {
         "resolutionMessage": {
+          "description": "Resolution message while clearing the request",
           "type": "string"
         },
         "alerts": {
+          "description": "List of alert Ids to be cleared",
           "type": "array",
           "items": {
             "type": "string"
@@ -5773,6 +6972,7 @@
       }
     },
     "CloneRequest": {
+      "description": "Clone Job Request Model.",
       "required": [
         "properties"
       ],
@@ -5780,11 +6980,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CloneRequestProperties",
+          "description": "CloneJob Properties are encapsulated in this object.",
           "x-ms-client-flatten": true
         }
       }
     },
     "CloneRequestProperties": {
+      "description": "Properties of CloneRequest",
       "required": [
         "targetDeviceId",
         "targetAccessPointId",
@@ -5793,23 +6995,29 @@
       "type": "object",
       "properties": {
         "targetDeviceId": {
+          "description": "DeviceId of the device which will act as the Clone target",
           "type": "string"
         },
         "targetAccessPointId": {
+          "description": "Accesspoint Id on which clone job will performed.",
           "type": "string"
         },
         "newEndpointName": {
+          "description": "Name of new endpoint which will created as part of clone job.",
           "type": "string"
         },
         "share": {
-          "$ref": "#/definitions/FileShare"
+          "$ref": "#/definitions/FileShare",
+          "description": "Share Object."
         },
         "disk": {
-          "$ref": "#/definitions/ISCSIDisk"
+          "$ref": "#/definitions/ISCSIDisk",
+          "description": "Disk Object"
         }
       }
     },
     "Device": {
+      "description": "Represents a StorSimple device object along with its properties",
       "type": "object",
       "allOf": [
         {
@@ -5819,62 +7027,76 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
+          "description": "Collection of properties for the device",
           "x-ms-client-flatten": true
         }
       }
     },
     "DeviceDetails": {
+      "description": "Class containing more granular details about the device",
       "type": "object",
       "properties": {
         "endpointCount": {
           "format": "int32",
+          "description": "Total number of endpoints that are currently on the device ( i.e. number of shares on FileServer or number of volumes on IscsiServer)",
           "type": "integer"
         },
         "totalStorageInBytes": {
           "format": "int64",
+          "description": "Total storage available on the device in bytes.",
           "type": "integer"
         },
         "totalLocalStorageInBytes": {
           "format": "int64",
+          "description": "Total local storage capacity in device in bytes.",
           "type": "integer"
         },
         "provisionedStorageInBytes": {
           "format": "int64",
+          "description": "Storage in bytes that has been provisioned on the device including both local and cloud",
           "type": "integer"
         },
         "provisionedLocalStorageInBytes": {
           "format": "int64",
+          "description": "Storage in bytes that has been provisioned locally on the device",
           "type": "integer"
         },
         "usingStorageInBytes": {
           "format": "int64",
+          "description": "Storage that is being currently used in bytes including both local and cloud",
           "type": "integer"
         },
         "usingLocalStorageInBytes": {
           "format": "int64",
+          "description": "Local Storage that is being currently used in bytes",
           "type": "integer"
         },
         "totalBackupSizeInBytes": {
           "format": "int64",
+          "description": "Total size taken up by backups in bytes",
           "type": "integer"
         },
         "availableStorageInBytes": {
           "format": "int64",
+          "description": "Total pending available storage on the device in bytes",
           "type": "integer"
         },
         "availableLocalStorageInBytes": {
           "format": "int64",
+          "description": "Local pending storage available on the device in bytes",
           "type": "integer"
         }
       }
     },
     "DeviceList": {
+      "description": "Collection of Devices",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Device"
@@ -5883,21 +7105,26 @@
       }
     },
     "DevicePatch": {
+      "description": "Class that represents the Input for the PATCH call on Device. Currently the only patchable property on device is \"DeviceDescription\"",
       "type": "object",
       "properties": {
         "deviceDescription": {
+          "description": "Short description given for the device",
           "type": "string"
         }
       }
     },
     "DeviceProperties": {
+      "description": "Encases all the properties of the Device",
       "type": "object",
       "properties": {
         "activationTime": {
           "format": "date-time",
+          "description": "The UTC time at which the device was activated",
           "type": "string"
         },
         "allowedDeviceOperations": {
+          "description": "Operations that are allowed on the device based on its current state",
           "type": "array",
           "items": {
             "enum": [
@@ -5918,9 +7145,11 @@
           }
         },
         "culture": {
+          "description": "Language culture setting on the device. For eg: \"en-US\"",
           "type": "string"
         },
         "deviceCapabilities": {
+          "description": "Device can be configured either as FileServer or IscsiServer",
           "type": "array",
           "items": {
             "enum": [
@@ -5936,18 +7165,23 @@
           }
         },
         "deviceDescription": {
+          "description": "Short description given for the device",
           "type": "string"
         },
         "domainName": {
+          "description": "Fully qualified name of the domain to which the device is attached",
           "type": "string"
         },
         "deviceSoftwareVersion": {
+          "description": "Version number of the software running on the device",
           "type": "string"
         },
         "friendlySoftwareName": {
+          "description": "Friendly name for the software version",
           "type": "string"
         },
         "deviceConfigurationStatus": {
+          "description": "\"Complete\" if the device has been successfully registered as File/IscsiServer and the creation of share/volume is complete, \"Pending\" if the device is only registered but the creation of share/volume is complete is still pending",
           "enum": [
             "Complete",
             "Pending"
@@ -5959,9 +7193,11 @@
           }
         },
         "modelDescription": {
+          "description": "Name of the device model",
           "type": "string"
         },
         "status": {
+          "description": "Current status of the device",
           "enum": [
             "Unknown",
             "Online",
@@ -5982,6 +7218,7 @@
           }
         },
         "type": {
+          "description": "Type of the device",
           "enum": [
             "Invalid",
             "Appliance",
@@ -5997,11 +7234,13 @@
           }
         },
         "details": {
-          "$ref": "#/definitions/DeviceDetails"
+          "$ref": "#/definitions/DeviceDetails",
+          "description": "subclass containing more storage-related information about the device. This field will be populated only if the get call is made with $expand = details."
         }
       }
     },
     "EncryptionSettings": {
+      "description": "The EncryptionSettings",
       "required": [
         "properties"
       ],
@@ -6014,11 +7253,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EncryptionSettingsProperties",
+          "description": "Properties of the EncryptionSettings.",
           "x-ms-client-flatten": true
         }
       }
     },
     "EncryptionSettingsProperties": {
+      "description": "The properties of EncryptionSettings",
       "required": [
         "encryptionStatus",
         "keyRolloverStatus"
@@ -6026,6 +7267,7 @@
       "type": "object",
       "properties": {
         "encryptionStatus": {
+          "description": "The encryption status which indicates if encryption is enabled or not.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -6037,6 +7279,7 @@
           }
         },
         "keyRolloverStatus": {
+          "description": "The key rollover status which indicates if key rollover is required or not. If secrets encryption has been upgraded, then it requires key rollover.",
           "enum": [
             "Required",
             "NotRequired"
@@ -6050,6 +7293,7 @@
       }
     },
     "FailoverRequest": {
+      "description": "The Failover request object.",
       "type": "object",
       "properties": {
         "accesspointIds": {
@@ -6070,6 +7314,7 @@
       }
     },
     "FileServer": {
+      "description": "The file server.",
       "required": [
         "properties"
       ],
@@ -6082,17 +7327,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FileServerProperties",
+          "description": "The properties.",
           "x-ms-client-flatten": true
         }
       }
     },
     "FileServerList": {
+      "description": "Collection of file servers",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FileServer"
@@ -6101,6 +7349,7 @@
       }
     },
     "FileServerProperties": {
+      "description": "The file server properties.",
       "required": [
         "domainName",
         "storageDomainId",
@@ -6109,20 +7358,25 @@
       "type": "object",
       "properties": {
         "domainName": {
+          "description": "Domain of the file server",
           "type": "string"
         },
         "storageDomainId": {
+          "description": "The storage domain id.",
           "type": "string"
         },
         "backupScheduleGroupId": {
+          "description": "The backup policy id.",
           "type": "string"
         },
         "description": {
+          "description": "The description of the file server",
           "type": "string"
         }
       }
     },
     "FileShare": {
+      "description": "The File Share.",
       "required": [
         "properties"
       ],
@@ -6135,17 +7389,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FileShareProperties",
+          "description": "The properties.",
           "x-ms-client-flatten": true
         }
       }
     },
     "FileShareList": {
+      "description": "Collection of file shares",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FileShare"
@@ -6154,6 +7411,7 @@
       }
     },
     "FileShareProperties": {
+      "description": "The File Share.",
       "required": [
         "shareStatus",
         "dataPolicy",
@@ -6164,9 +7422,11 @@
       "type": "object",
       "properties": {
         "description": {
+          "description": "Description for file share",
           "type": "string"
         },
         "shareStatus": {
+          "description": "The Share Status",
           "enum": [
             "Online",
             "Offline"
@@ -6178,6 +7438,7 @@
           }
         },
         "dataPolicy": {
+          "description": "The data policy",
           "enum": [
             "Invalid",
             "Local",
@@ -6191,23 +7452,28 @@
           }
         },
         "adminUser": {
+          "description": "The user/group who will have full permission in this share. Active directory email address. Example: xyz@contoso.com or Contoso\\xyz.",
           "type": "string"
         },
         "provisionedCapacityInBytes": {
           "format": "int64",
+          "description": "The total provisioned capacity in Bytes",
           "type": "integer"
         },
         "usedCapacityInBytes": {
           "format": "int64",
+          "description": "The used capacity in Bytes.",
           "type": "integer",
           "readOnly": true
         },
         "localUsedCapacityInBytes": {
           "format": "int64",
+          "description": "The local used capacity in Bytes.",
           "type": "integer",
           "readOnly": true
         },
         "monitoringStatus": {
+          "description": "The monitoring status",
           "enum": [
             "Enabled",
             "Disabled"
@@ -6221,6 +7487,7 @@
       }
     },
     "IPConfig": {
+      "description": "Details related to the IP address configuration",
       "required": [
         "ipAddress",
         "gateway"
@@ -6228,18 +7495,22 @@
       "type": "object",
       "properties": {
         "ipAddress": {
+          "description": "The ipaddress of the network adapter, either ipv4 or ipv6.",
           "type": "string"
         },
         "prefixLength": {
           "format": "int32",
+          "description": "The prefix length of the network adapter.",
           "type": "integer"
         },
         "gateway": {
+          "description": "The gateway of the network adapter.",
           "type": "string"
         }
       }
     },
     "ISCSIDisk": {
+      "description": "The iscsi disk.",
       "required": [
         "properties"
       ],
@@ -6252,17 +7523,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ISCSIDiskProperties",
+          "description": "The properties.",
           "x-ms-client-flatten": true
         }
       }
     },
     "ISCSIDiskList": {
+      "description": "Collection of Iscsi disk",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ISCSIDisk"
@@ -6271,6 +7545,7 @@
       }
     },
     "ISCSIDiskProperties": {
+      "description": "The iscsi disk properties.",
       "required": [
         "diskStatus",
         "accessControlRecords",
@@ -6281,9 +7556,11 @@
       "type": "object",
       "properties": {
         "description": {
+          "description": "The description.",
           "type": "string"
         },
         "diskStatus": {
+          "description": "The disk status.",
           "enum": [
             "Online",
             "Offline"
@@ -6295,12 +7572,14 @@
           }
         },
         "accessControlRecords": {
+          "description": "The access control records.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "dataPolicy": {
+          "description": "The data policy.",
           "enum": [
             "Invalid",
             "Local",
@@ -6315,19 +7594,23 @@
         },
         "provisionedCapacityInBytes": {
           "format": "int64",
+          "description": "The provisioned capacity in bytes.",
           "type": "integer"
         },
         "usedCapacityInBytes": {
           "format": "int64",
+          "description": "The used capacity in bytes.",
           "type": "integer",
           "readOnly": true
         },
         "localUsedCapacityInBytes": {
           "format": "int64",
+          "description": "The local used capacity in bytes.",
           "type": "integer",
           "readOnly": true
         },
         "monitoringStatus": {
+          "description": "The monitoring.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -6341,6 +7624,7 @@
       }
     },
     "ISCSIServer": {
+      "description": "The iscsi server.",
       "required": [
         "properties"
       ],
@@ -6353,17 +7637,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ISCSIServerProperties",
+          "description": "The properties.",
           "x-ms-client-flatten": true
         }
       }
     },
     "ISCSIServerList": {
+      "description": "Collection of Iscsi servers",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ISCSIServer"
@@ -6372,6 +7659,7 @@
       }
     },
     "ISCSIServerProperties": {
+      "description": "The iscsi server properties.",
       "required": [
         "storageDomainId",
         "backupScheduleGroupId"
@@ -6379,23 +7667,29 @@
       "type": "object",
       "properties": {
         "storageDomainId": {
+          "description": "The storage domain id.",
           "type": "string"
         },
         "backupScheduleGroupId": {
+          "description": "The backup policy id.",
           "type": "string"
         },
         "description": {
+          "description": "The description.",
           "type": "string"
         },
         "chapId": {
+          "description": "The chap id.",
           "type": "string"
         },
         "reverseChapId": {
+          "description": "The reverse chap id.",
           "type": "string"
         }
       }
     },
     "Job": {
+      "description": "The Job.",
       "required": [
         "status",
         "percentComplete"
@@ -6408,6 +7702,7 @@
       ],
       "properties": {
         "status": {
+          "description": "Current status of the job",
           "enum": [
             "Invalid",
             "Running",
@@ -6425,26 +7720,32 @@
         },
         "startTime": {
           "format": "date-time",
+          "description": "The UTC time at which the job was started",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
+          "description": "The UTC time at which the job completed",
           "type": "string"
         },
         "percentComplete": {
           "format": "int32",
+          "description": "The percentage of the job that is already complete",
           "type": "integer"
         },
         "error": {
-          "$ref": "#/definitions/JobErrorDetails"
+          "$ref": "#/definitions/JobErrorDetails",
+          "description": "The Error details."
         },
         "properties": {
           "$ref": "#/definitions/JobProperties",
+          "description": "Other properties of the job",
           "x-ms-client-flatten": true
         }
       }
     },
     "JobErrorDetails": {
+      "description": "The job error information containing List of JobErrorItem.",
       "required": [
         "code",
         "message"
@@ -6452,20 +7753,24 @@
       "type": "object",
       "properties": {
         "errorDetails": {
+          "description": "The error details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobErrorItem"
           }
         },
         "code": {
+          "description": "The code intended for programmatic access",
           "type": "string"
         },
         "message": {
+          "description": "The message intended to describe the error in detail",
           "type": "string"
         }
       }
     },
     "JobErrorItem": {
+      "description": "The job error items.",
       "required": [
         "code",
         "message"
@@ -6473,20 +7778,24 @@
       "type": "object",
       "properties": {
         "recommendations": {
+          "description": "The recommended actions.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "code": {
+          "description": "The code intended for programmatic access",
           "type": "string"
         },
         "message": {
+          "description": "The message intended to describe the error in detail",
           "type": "string"
         }
       }
     },
     "JobFilter": {
+      "description": "Filters that can be specified for the job",
       "required": [
         "jobType",
         "status"
@@ -6494,6 +7803,7 @@
       "type": "object",
       "properties": {
         "jobType": {
+          "description": "The job type.",
           "enum": [
             "Backup",
             "Clone",
@@ -6508,6 +7818,7 @@
           }
         },
         "status": {
+          "description": "The job status.",
           "enum": [
             "Invalid",
             "Running",
@@ -6525,34 +7836,40 @@
         },
         "startTime": {
           "format": "date-time",
+          "description": "The start time of the job.",
           "type": "string"
         }
       }
     },
     "JobList": {
+      "description": "Collection of jobs",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Job"
           }
         },
         "nextLink": {
+          "description": "The NextLink.",
           "type": "string"
         }
       }
     },
     "JobProperties": {
+      "description": "properties for the job",
       "required": [
         "jobType"
       ],
       "type": "object",
       "properties": {
         "jobType": {
+          "description": "Type of the job",
           "enum": [
             "Backup",
             "Clone",
@@ -6567,30 +7884,38 @@
           }
         },
         "targetId": {
+          "description": "Id of the object that is created by the job",
           "type": "string"
         },
         "entityId": {
+          "description": "The entity identifier for which the job ran.",
           "type": "string"
         },
         "entityType": {
+          "description": "The entity type for which the job ran.",
           "type": "string"
         },
         "jobStages": {
+          "description": "The job stages.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobStage"
           }
         },
         "deviceId": {
+          "description": "The device id in which the job is currently running",
           "type": "string"
         },
         "isCancellable": {
+          "description": "Represents whether the job is cancellable or not",
           "type": "boolean"
         },
         "stats": {
-          "$ref": "#/definitions/JobStats"
+          "$ref": "#/definitions/JobStats",
+          "description": "stats properties for the job"
         },
         "targetType": {
+          "description": "The target type of the backup.",
           "enum": [
             "FileServer",
             "DiskServer"
@@ -6602,30 +7927,37 @@
           }
         },
         "sourceDeviceId": {
+          "description": "The source device identifier of the failover job.",
           "type": "string"
         },
         "backupPointInTime": {
           "format": "date-time",
+          "description": "The time of the backup used for the failover.",
           "type": "string"
         },
         "downloadProgress": {
-          "$ref": "#/definitions/UpdateDownloadProgress"
+          "$ref": "#/definitions/UpdateDownloadProgress",
+          "description": "The download progress."
         },
         "installProgress": {
-          "$ref": "#/definitions/UpdateInstallProgress"
+          "$ref": "#/definitions/UpdateInstallProgress",
+          "description": "The install progress."
         }
       }
     },
     "JobStage": {
+      "description": "Contains details about the multiple job stages of a job",
       "required": [
         "stageStatus"
       ],
       "type": "object",
       "properties": {
         "message": {
+          "description": "The message of the job stage.",
           "type": "string"
         },
         "stageStatus": {
+          "description": "The stage status.",
           "enum": [
             "Invalid",
             "Running",
@@ -6642,42 +7974,51 @@
           }
         },
         "detail": {
+          "description": "The details of the stage.",
           "type": "string"
         },
         "errorCode": {
+          "description": "The error code of the stage if any.",
           "type": "string"
         }
       }
     },
     "JobStats": {
+      "description": "Stats that are available for all jobs in common",
       "type": "object",
       "properties": {
         "completedWorkItemCount": {
           "format": "int32",
+          "description": "Completed work item count.",
           "type": "integer"
         },
         "totalWorkItemCount": {
           "format": "int32",
+          "description": "Total work item count.",
           "type": "integer"
         },
         "estimatedTimeRemaining": {
           "format": "int32",
+          "description": "The estimated time remaining.",
           "type": "integer"
         }
       }
     },
     "Key": {
+      "description": "The key.",
       "required": [
         "activationKey"
       ],
       "type": "object",
       "properties": {
         "activationKey": {
+          "description": "The activation key for the device",
           "type": "string"
         }
       }
     },
     "Manager": {
+      "description": "The StorSimple Manager",
       "type": "object",
       "allOf": [
         {
@@ -6687,14 +8028,17 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagerProperties",
+          "description": "List of properties of the Manager",
           "x-ms-client-flatten": true
         },
         "etag": {
+          "description": "ETag of the Manager",
           "type": "string"
         }
       }
     },
     "ManagerExtendedInfo": {
+      "description": "The extended info of the manager.",
       "required": [
         "properties"
       ],
@@ -6707,14 +8051,17 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagerExtendedInfoProperties",
+          "description": "The extended info properties.",
           "x-ms-client-flatten": true
         },
         "etag": {
+          "description": "ETag of the Resource",
           "type": "string"
         }
       }
     },
     "ManagerExtendedInfoProperties": {
+      "description": "Properties of the ManagerExtendedInfo",
       "required": [
         "integrityKey",
         "algorithm"
@@ -6722,32 +8069,40 @@
       "type": "object",
       "properties": {
         "version": {
+          "description": "Represents the version of the ExtendedInfo object being persisted",
           "type": "string"
         },
         "integrityKey": {
+          "description": "Represents the CIK of the resource",
           "type": "string"
         },
         "encryptionKey": {
+          "description": "Represents the CEK of the resource",
           "type": "string"
         },
         "encryptionKeyThumbprint": {
+          "description": "Represents the Cert thumbprint that was used to encrypt the CEK",
           "type": "string"
         },
         "portalCertificateThumbprint": {
+          "description": "Represents the portal thumbprint which can be used optionally to encrypt the entire data before storing it.",
           "type": "string"
         },
         "algorithm": {
+          "description": "Represents the encryption algorithm used to encrypt the other keys. None - if EncryptionKey is saved in plain text format. AlgorithmName - if encryption is used",
           "type": "string"
         }
       }
     },
     "ManagerIntrinsicSettings": {
+      "description": "Intrinsic settings which refers to the type of the Storsimple manager",
       "required": [
         "type"
       ],
       "type": "object",
       "properties": {
         "type": {
+          "description": "Refers to the type of the StorSimple Manager",
           "enum": [
             "GardaV1",
             "HelsinkiV1"
@@ -6761,12 +8116,14 @@
       }
     },
     "ManagerList": {
+      "description": "List of storsimple Managers under a particular resourceGroup",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of Managers",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Manager"
@@ -6775,27 +8132,33 @@
       }
     },
     "ManagerProperties": {
+      "description": "The properties of the Manager",
       "type": "object",
       "properties": {
         "cisIntrinsicSettings": {
-          "$ref": "#/definitions/ManagerIntrinsicSettings"
+          "$ref": "#/definitions/ManagerIntrinsicSettings",
+          "description": "Specifies if the Manager is Garda or Helsinki"
         },
         "sku": {
-          "$ref": "#/definitions/ManagerSku"
+          "$ref": "#/definitions/ManagerSku",
+          "description": "Specifies the Sku"
         },
         "provisioningState": {
+          "description": "Specifies the state of the resource as it is getting provisioned. Value of \"Succeeded\" means the Manager was successfully created",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "ManagerSku": {
+      "description": "The Sku.",
       "required": [
         "name"
       ],
       "type": "object",
       "properties": {
         "name": {
+          "description": "Refers to the sku name which should be \"Standard\"",
           "enum": [
             "Standard"
           ],
@@ -6808,6 +8171,7 @@
       }
     },
     "MetricAvailablity": {
+      "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain",
       "required": [
         "timeGrain",
         "retention"
@@ -6815,14 +8179,17 @@
       "type": "object",
       "properties": {
         "timeGrain": {
+          "description": "The time grain, specifies the aggregation interval for the metric.",
           "type": "string"
         },
         "retention": {
+          "description": "The retention period for the metric at the specified timegrain",
           "type": "string"
         }
       }
     },
     "MetricData": {
+      "description": "The metric data.",
       "required": [
         "timeStamp",
         "sum",
@@ -6835,31 +8202,38 @@
       "properties": {
         "timeStamp": {
           "format": "date-time",
+          "description": "The time when the metric data is fetched",
           "type": "string"
         },
         "sum": {
           "format": "double",
+          "description": "The sum of all the samples available in the given instance of time for the specific metric data",
           "type": "number"
         },
         "count": {
           "format": "int32",
+          "description": "The count of samples of the metric data available for the given instance",
           "type": "integer"
         },
         "average": {
           "format": "double",
+          "description": "The average of all sample for the given instance",
           "type": "number"
         },
         "minimum": {
           "format": "double",
+          "description": "The minimum of all samples available",
           "type": "number"
         },
         "maximum": {
           "format": "double",
+          "description": "The maximum of all samples available",
           "type": "number"
         }
       }
     },
     "MetricDefinition": {
+      "description": "Monitoring metric definition represents the metadata of the metrics.",
       "required": [
         "name",
         "unit",
@@ -6872,9 +8246,11 @@
       "type": "object",
       "properties": {
         "name": {
-          "$ref": "#/definitions/MetricName"
+          "$ref": "#/definitions/MetricName",
+          "description": "The metric name"
         },
         "unit": {
+          "description": "The metric unit",
           "enum": [
             "Bytes",
             "BytesPerSecond",
@@ -6890,6 +8266,7 @@
           }
         },
         "primaryAggregationType": {
+          "description": "The metric aggregation type",
           "enum": [
             "Average",
             "Last",
@@ -6905,32 +8282,38 @@
           }
         },
         "resourceId": {
+          "description": "The metric source id",
           "type": "string"
         },
         "metricAvailabilities": {
+          "description": "The available metric granularities",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricAvailablity"
           }
         },
         "dimensions": {
+          "description": "The supported dimensions",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
           }
         },
         "type": {
+          "description": "The metric definition type",
           "type": "string"
         }
       }
     },
     "MetricDefinitionList": {
+      "description": "List of metric definition",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The list of metric definition",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDefinition"
@@ -6939,6 +8322,7 @@
       }
     },
     "MetricDimension": {
+      "description": "Metric dimension",
       "required": [
         "name",
         "value"
@@ -6946,39 +8330,48 @@
       "type": "object",
       "properties": {
         "name": {
+          "description": "Metric dimension name",
           "type": "string"
         },
         "value": {
+          "description": "Metric dimension values",
           "type": "string"
         }
       }
     },
     "MetricFilter": {
+      "description": "class representing the filters to be passed while fetching metrics",
       "type": "object",
       "properties": {
         "name": {
-          "$ref": "#/definitions/MetricNameFilter"
+          "$ref": "#/definitions/MetricNameFilter",
+          "description": "filter for name property"
         },
         "startTime": {
           "format": "date-time",
+          "description": "starttime for fetching metrics",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
+          "description": "endtime for fetching metrics",
           "type": "string"
         },
         "timeGrain": {
+          "description": "timegrain of the metrics",
           "type": "string"
         }
       }
     },
     "MetricList": {
+      "description": "Collection of metrics",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Metrics"
@@ -6987,6 +8380,7 @@
       }
     },
     "MetricName": {
+      "description": "The name of the metric",
       "required": [
         "value",
         "localizedValue"
@@ -6994,22 +8388,27 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "Name of the metric",
           "type": "string"
         },
         "localizedValue": {
+          "description": "Localized name of the metric",
           "type": "string"
         }
       }
     },
     "MetricNameFilter": {
+      "description": "Class representing the name filter to be passed while fetching metrics",
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "string"
         }
       }
     },
     "Metrics": {
+      "description": "Monitoring metric",
       "required": [
         "resourceId",
         "startTime",
@@ -7025,20 +8424,25 @@
       "type": "object",
       "properties": {
         "resourceId": {
+          "description": "The id of metric source",
           "type": "string"
         },
         "startTime": {
           "format": "date-time",
+          "description": "The metric start time",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
+          "description": "The metric end time",
           "type": "string"
         },
         "timeGrain": {
+          "description": "The time grain, time grain indicates frequency of the metric data",
           "type": "string"
         },
         "primaryAggregation": {
+          "description": "The metric aggregation type",
           "enum": [
             "Average",
             "Last",
@@ -7054,15 +8458,18 @@
           }
         },
         "name": {
-          "$ref": "#/definitions/MetricName"
+          "$ref": "#/definitions/MetricName",
+          "description": "The name of the metrics"
         },
         "dimensions": {
+          "description": "The Metric dimension which indicates the source of the metric",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
           }
         },
         "unit": {
+          "description": "The unit of the metric data",
           "enum": [
             "Bytes",
             "BytesPerSecond",
@@ -7078,9 +8485,11 @@
           }
         },
         "type": {
+          "description": "The Type of the metric data",
           "type": "string"
         },
         "values": {
+          "description": "The metric data",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricData"
@@ -7089,6 +8498,7 @@
       }
     },
     "NetworkAdapter": {
+      "description": "Represents a networkAdapter in a particular node.",
       "required": [
         "networkAdapterName",
         "dhcpStatus"
@@ -7096,15 +8506,19 @@
       "type": "object",
       "properties": {
         "networkAdapterName": {
+          "description": "The name of the network adapter.",
           "type": "string"
         },
         "iPv4Info": {
-          "$ref": "#/definitions/IPConfig"
+          "$ref": "#/definitions/IPConfig",
+          "description": "The ipv4 configuration of the network adapter."
         },
         "iPv6Info": {
-          "$ref": "#/definitions/IPConfig"
+          "$ref": "#/definitions/IPConfig",
+          "description": "The ipv6 configuration of the network adapter."
         },
         "dhcpStatus": {
+          "description": "Represents state of DHCP.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -7117,11 +8531,13 @@
         },
         "linkSpeed": {
           "format": "int64",
+          "description": "The speed of the network adapter.",
           "type": "integer"
         }
       }
     },
     "NetworkSettings": {
+      "description": "The NetworkSettings of a device",
       "required": [
         "properties"
       ],
@@ -7134,11 +8550,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkSettingsProperties",
+          "description": "Properties.",
           "x-ms-client-flatten": true
         }
       }
     },
     "NetworkSettingsProperties": {
+      "description": "The properties of NetworkSettings",
       "required": [
         "primaryDNSServer",
         "nodeNetworks"
@@ -7146,12 +8564,15 @@
       "type": "object",
       "properties": {
         "primaryDNSServer": {
+          "description": "The Primary DNS server for the device",
           "type": "string"
         },
         "secondaryDNSServer": {
+          "description": "The secondary DNS server for the device",
           "type": "string"
         },
         "nodeNetworks": {
+          "description": "The NetworkAdapters under each node of the device.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NodeNetwork"
@@ -7160,12 +8581,14 @@
       }
     },
     "NodeNetwork": {
+      "description": "Represents a single node in a device.",
       "required": [
         "networkAdapters"
       ],
       "type": "object",
       "properties": {
         "networkAdapters": {
+          "description": "The array of network adapters in the node.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkAdapter"
@@ -7174,12 +8597,14 @@
       }
     },
     "RawCertificateData": {
+      "description": "Raw Certificate Data From IDM",
       "required": [
         "certificate"
       ],
       "type": "object",
       "properties": {
         "authType": {
+          "description": "Specify the Authentication type",
           "enum": [
             "Invalid",
             "AccessControlService",
@@ -7192,40 +8617,49 @@
           }
         },
         "certificate": {
+          "description": "Gets or sets the base64 encoded certificate raw data string",
           "type": "string"
         }
       }
     },
     "RegistrationCertificate": {
+      "description": "Registration Certificate.",
       "required": [
         "certificate"
       ],
       "type": "object",
       "properties": {
         "certificate": {
+          "description": "Registration Certificate which Needs to be Uploaded to IDM",
           "type": "string"
         }
       }
     },
     "Resource": {
+      "description": "The Azure Resource.",
       "required": [
         "location"
       ],
       "type": "object",
       "properties": {
         "id": {
+          "description": "The Resource Id",
           "type": "string"
         },
         "name": {
+          "description": "The Resource Name",
           "type": "string"
         },
         "type": {
+          "description": "The Resource type",
           "type": "string"
         },
         "location": {
+          "description": "The Geo location of the Manager",
           "type": "string"
         },
         "tags": {
+          "description": "Tags attached to the Manager",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -7235,6 +8669,7 @@
       "x-ms-azure-resource": true
     },
     "ResourceCertificateAndAADDetails": {
+      "description": "Resource Certificate And AAD Details from IDM",
       "required": [
         "certificate",
         "resourceId",
@@ -7253,6 +8688,7 @@
       "type": "object",
       "properties": {
         "authType": {
+          "description": "Specify the Authentication type",
           "enum": [
             "Invalid",
             "AccessControlService",
@@ -7265,50 +8701,64 @@
           }
         },
         "certificate": {
+          "description": "Gets or sets the base64 encoded certificate raw data string",
           "type": "string"
         },
         "resourceId": {
           "format": "int64",
+          "description": "Gets or Sets the ResourceId",
           "type": "integer"
         },
         "aadAuthority": {
+          "description": "AAD tenant authority",
           "type": "string"
         },
         "aadTenantId": {
+          "description": "AAD tenant Id",
           "type": "string"
         },
         "servicePrincipalClientId": {
+          "description": "AAD service principal clientId",
           "type": "string"
         },
         "servicePrincipalObjectId": {
+          "description": "AAD service principal ObjectId",
           "type": "string"
         },
         "azureManagementEndpointAudience": {
+          "description": "Azure Management Endpoint Audience",
           "type": "string"
         },
         "subject": {
+          "description": "Certificate Subject Name",
           "type": "string"
         },
         "validFrom": {
           "format": "date-time",
+          "description": "Certificate Validity start Date time",
           "type": "string"
         },
         "validTo": {
           "format": "date-time",
+          "description": "Certificate Validity End Date time",
           "type": "string"
         },
         "thumbprint": {
+          "description": "Certificate thumbrprint",
           "type": "string"
         },
         "friendlyName": {
+          "description": "Certificate friendlyname",
           "type": "string"
         },
         "issuer": {
+          "description": "Certificate issuer",
           "type": "string"
         }
       }
     },
     "SecuritySettings": {
+      "description": "The SecuritySettings of a device",
       "required": [
         "properties"
       ],
@@ -7321,28 +8771,33 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SecuritySettingsProperties",
+          "description": "Properties of the SecuritySettings.",
           "x-ms-client-flatten": true
         }
       }
     },
     "SecuritySettingsProperties": {
+      "description": "The properties of SecuritySettings",
       "required": [
         "deviceAdminPassword"
       ],
       "type": "object",
       "properties": {
         "deviceAdminPassword": {
-          "$ref": "#/definitions/AsymmetricEncryptedSecret"
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "Device administrator password as an encrypted string (encrypted using RSA PKCS #1) is used to log into the  local web UI of the device. Actual password could have at least 8 characters that are a combination of  uppercase, lowercase, numeric, and special characters"
         }
       }
     },
     "SendTestAlertEmailRequest": {
+      "description": "Request for sending test alert email",
       "required": [
         "emailList"
       ],
       "type": "object",
       "properties": {
         "emailList": {
+          "description": "List of emails to send the test alerts",
           "type": "array",
           "items": {
             "type": "string"
@@ -7351,6 +8806,7 @@
       }
     },
     "StorageAccountCredential": {
+      "description": "The storage account credential",
       "required": [
         "properties"
       ],
@@ -7363,17 +8819,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageAccountCredentialProperties",
+          "description": "Credential properties",
           "x-ms-client-flatten": true
         }
       }
     },
     "StorageAccountCredentialList": {
+      "description": "Collection of Storage account credential entities",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StorageAccountCredential"
@@ -7382,6 +8841,7 @@
       }
     },
     "StorageAccountCredentialProperties": {
+      "description": "Storage account properties",
       "required": [
         "cloudType",
         "endPoint",
@@ -7391,6 +8851,7 @@
       "type": "object",
       "properties": {
         "cloudType": {
+          "description": "The cloud service provider",
           "enum": [
             "Azure",
             "S3",
@@ -7405,15 +8866,19 @@
           }
         },
         "endPoint": {
+          "description": "The storage endpoint",
           "type": "string"
         },
         "login": {
+          "description": "The storage account login",
           "type": "string"
         },
         "location": {
+          "description": "The storage account's geo location",
           "type": "string"
         },
         "enableSSL": {
+          "description": "SSL needs to be enabled or not",
           "enum": [
             "Enabled",
             "Disabled"
@@ -7425,11 +8890,13 @@
           }
         },
         "accessKey": {
-          "$ref": "#/definitions/AsymmetricEncryptedSecret"
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "The details of the storage account password"
         }
       }
     },
     "StorageDomain": {
+      "description": "The storage domain.",
       "required": [
         "properties"
       ],
@@ -7442,17 +8909,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageDomainProperties",
+          "description": "The properties.",
           "x-ms-client-flatten": true
         }
       }
     },
     "StorageDomainList": {
+      "description": "Collection of storage domains",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StorageDomain"
@@ -7461,6 +8931,7 @@
       }
     },
     "StorageDomainProperties": {
+      "description": "The storage domain properties.",
       "required": [
         "storageAccountCredentialIds",
         "encryptionStatus"
@@ -7468,15 +8939,18 @@
       "type": "object",
       "properties": {
         "storageAccountCredentialIds": {
+          "description": "The storage account credentials.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "encryptionKey": {
-          "$ref": "#/definitions/AsymmetricEncryptedSecret"
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "The encryption key used to encrypt the data. This is a user secret."
         },
         "encryptionStatus": {
+          "description": "The encryption status \"Enabled | Disabled\".",
           "enum": [
             "Enabled",
             "Disabled"
@@ -7490,6 +8964,7 @@
       }
     },
     "SupportPackageRequest": {
+      "description": "Support package request entity",
       "required": [
         "properties"
       ],
@@ -7497,20 +8972,24 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SupportPackageRequestProperties",
+          "description": "Support Package Request properties",
           "x-ms-client-flatten": true
         }
       }
     },
     "SupportPackageRequestProperties": {
+      "description": "Support Package properties",
       "required": [
         "sdpPassKey"
       ],
       "type": "object",
       "properties": {
         "sdpPassKey": {
+          "description": "The SDPPassKey",
           "type": "string"
         },
         "packageType": {
+          "description": "The support package type",
           "enum": [
             "None",
             "IncludeDefault",
@@ -7526,16 +9005,20 @@
         },
         "endTime": {
           "format": "date-time",
+          "description": "The maximum time stamp of the logs.",
           "type": "string"
         },
         "startTime": {
           "format": "date-time",
+          "description": "The minimum time stamp of the logs.",
           "type": "string"
         },
         "includeArchived": {
+          "description": "The bool which determines whether the archived logs are included or not.",
           "type": "boolean"
         },
         "sourceType": {
+          "description": "The support package source type",
           "enum": [
             "None",
             "OpsTriggered",
@@ -7548,6 +9031,7 @@
           }
         },
         "customIncludeList": {
+          "description": "The list of log categories",
           "type": "array",
           "items": {
             "type": "string"
@@ -7556,6 +9040,7 @@
       }
     },
     "SymmetricEncryptedSecret": {
+      "description": "This class can be used as the Type for any secret entity represented as Value, ValueCertificateThumbprint, EncryptionAlgorithm. In this case, \"Value\" is a secret and the \"valueThumbprint\" represents the certificate thumbprint of the value. The algorithm field is mainly for future usage to potentially allow different entities encrypted using different algorithms.",
       "required": [
         "value",
         "encryptionAlgorithm"
@@ -7563,12 +9048,15 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value of the secret itself. If the secret is in plaintext or null then EncryptionAlgorithm will be none",
           "type": "string"
         },
         "valueCertificateThumbprint": {
+          "description": "Thumbprint cert that was used to encrypt \"Value\"",
           "type": "string"
         },
         "encryptionAlgorithm": {
+          "description": "Algorithm used to encrypt \"Value\"",
           "enum": [
             "None",
             "AES256",
@@ -7583,6 +9071,7 @@
       }
     },
     "Time": {
+      "description": "The Time.",
       "required": [
         "hour",
         "minute"
@@ -7591,12 +9080,14 @@
       "properties": {
         "hour": {
           "format": "int32",
+          "description": "The hour.",
           "maximum": 23,
           "minimum": 0,
           "type": "integer"
         },
         "minute": {
           "format": "int32",
+          "description": "The minute.",
           "maximum": 59,
           "minimum": 0,
           "type": "integer"
@@ -7604,6 +9095,7 @@
       }
     },
     "TimeSettings": {
+      "description": "The TimeSettings of a device",
       "required": [
         "properties"
       ],
@@ -7616,11 +9108,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/TimeSettingsProperties",
+          "description": "Properties of the TimeSettings.",
           "x-ms-client-flatten": true
         }
       }
     },
     "TimeSettingsProperties": {
+      "description": "The properties of TimeSettings",
       "required": [
         "timeZone",
         "primaryTimeServer"
@@ -7628,20 +9122,25 @@
       "type": "object",
       "properties": {
         "timeZone": {
+          "description": "The timezone of device, like '(UTC -06:00) Central America'",
           "type": "string"
         },
         "primaryTimeServer": {
+          "description": "The primary Network Time Protocol (NTP) server name, like 'time.windows.com'.",
           "type": "string"
         },
         "secondaryTimeServer": {
+          "description": "The secondary Network Time Protocol (NTP) server name, like 'time.contoso.com'. It's optional.",
           "type": "string"
         }
       }
     },
     "UpdateDownloadProgress": {
+      "description": "details available during the download",
       "type": "object",
       "properties": {
         "downloadPhase": {
+          "description": "The download phase.",
           "enum": [
             "Unknown",
             "Initializing",
@@ -7656,44 +9155,54 @@
         },
         "percentComplete": {
           "format": "int32",
+          "description": "Percentage of completion.",
           "type": "integer"
         },
         "totalBytesToDownload": {
           "format": "double",
+          "description": "Total bytes to download.",
           "type": "number"
         },
         "totalBytesDownloaded": {
           "format": "double",
+          "description": "Total bytes downloaded.",
           "type": "number"
         },
         "numberOfUpdatesToDownload": {
           "format": "int32",
+          "description": "Number of updates to download.",
           "type": "integer"
         },
         "numberOfUpdatesDownloaded": {
           "format": "int32",
+          "description": "Number of updates downloaded.",
           "type": "integer"
         }
       }
     },
     "UpdateInstallProgress": {
+      "description": "Class representing the progress during installation of updates",
       "type": "object",
       "properties": {
         "percentComplete": {
           "format": "int32",
+          "description": "Percentage of completion.",
           "type": "integer"
         },
         "numberOfUpdatesToInstall": {
           "format": "int32",
+          "description": "Number of updates to install.",
           "type": "integer"
         },
         "numberOfUpdatesInstalled": {
           "format": "int32",
+          "description": "Number of updates installed.",
           "type": "integer"
         }
       }
     },
     "Updates": {
+      "description": "The updates profile",
       "type": "object",
       "allOf": [
         {
@@ -7703,35 +9212,44 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdatesProperties",
+          "description": "Update properties.",
           "x-ms-client-flatten": true
         }
       }
     },
     "UpdatesProperties": {
+      "description": "Properties of the update profile",
       "type": "object",
       "properties": {
         "deviceVersion": {
+          "description": "The current Device version.",
           "type": "string"
         },
         "deviceLastScannedTime": {
           "format": "date-time",
+          "description": "The last time when the device did an update scan.",
           "type": "string"
         },
         "regularUpdatesAvailable": {
+          "description": "Set to true if regular updates were detected for the current version of the device.",
           "type": "boolean"
         },
         "rebootRequiredForInstall": {
+          "description": "Set to true if RegularUpdatesAvailable is true and if atleast one of the updateItems detected has needs a reboot to install.",
           "type": "boolean"
         },
         "totalItemsPendingForDownload": {
           "format": "int32",
+          "description": "The total number of items pending for download.",
           "type": "integer"
         },
         "totalItemsPendingForInstall": {
           "format": "int32",
+          "description": "The total number of items pending for install.",
           "type": "integer"
         },
         "status": {
+          "description": "The current update operation.",
           "enum": [
             "Idle",
             "Scanning",
@@ -7746,37 +9264,46 @@
         },
         "lastCompletedScanTime": {
           "format": "date-time",
+          "description": "The time when the last scan job was completed (success|cancelled|failed) on the device.",
           "type": "string"
         },
         "lastCompletedDownloadJobTime": {
           "format": "date-time",
+          "description": "The time when the last Download job was completed (success|cancelled|failed) on the device.",
           "type": "string"
         },
         "lastCompletedInstallJobTime": {
           "format": "date-time",
+          "description": "The time when the last Install job was completed (success|cancelled|failed) on the device.",
           "type": "string"
         },
         "inProgressDownloadJobId": {
+          "description": "If a download is in progress, this field contains the JobId of that particular download job",
           "type": "string"
         },
         "inProgressInstallJobId": {
+          "description": "If an install is in progress, this field contains the JobId of that particular install job",
           "type": "string"
         },
         "inProgressScanStartedTime": {
           "format": "date-time",
+          "description": "The time when the currently running scan (if any) started",
           "type": "string"
         },
         "inProgressDownloadJobStartedTime": {
           "format": "date-time",
+          "description": "The time when the currently running download (if any) started",
           "type": "string"
         },
         "inProgressInstallJobStartedTime": {
           "format": "date-time",
+          "description": "The time when the currently running install (if any) started",
           "type": "string"
         }
       }
     },
     "UploadCertificateRequest": {
+      "description": "Upload Certificate Request to IDM",
       "required": [
         "properties"
       ],
@@ -7784,9 +9311,11 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/RawCertificateData",
+          "description": "Gets or sets the base64 encoded certificate raw data string",
           "x-ms-client-flatten": true
         },
         "contractVersion": {
+          "description": "Gets ContractVersion",
           "enum": [
             "InvalidVersion",
             "V2011_09",
@@ -7828,6 +9357,7 @@
       }
     },
     "UploadCertificateResponse": {
+      "description": "Upload Certificate Response from IDM",
       "required": [
         "properties"
       ],
@@ -7840,9 +9370,11 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ResourceCertificateAndAADDetails",
+          "description": "Gets or sets Properties",
           "x-ms-client-flatten": true
         },
         "contractVersion": {
+          "description": "Constructor",
           "enum": [
             "InvalidVersion",
             "V2011_09",
