@@ -1201,6 +1201,48 @@
       }
     },
     "/{tenantID}/servicePrincipals/{objectId}": {
+      "patch": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipals_Update",
+        "description": "Updates a service principal in the directory.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal to delete."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalUpdateParameters"
+            },
+            "description": "Parameters to update a service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "ServicePrincipal"
@@ -3078,13 +3120,28 @@
     "ServicePrincipalCreateParameters": {
       "type": "object",
       "properties": {
+        "accountEnabled": {
+          "type": "boolean",
+          "description": "Whether the account is enabled"
+        },
         "appId": {
           "type": "string",
           "description": "application Id"
         },
-        "accountEnabled": {
+        "appRoleAssignmentRequired": {
           "type": "boolean",
-          "description": "Whether the account is enabled"
+          "description": "Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the service principal."
+        },
+        "errorUrl": {
+          "type": "string"
+        },
+        "homepage": {
+          "type": "string",
+          "description": "The URL to the homepage of the associated application."
         },
         "keyCredentials": {
           "type": "array",
@@ -3099,15 +3156,114 @@
             "$ref": "#/definitions/PasswordCredential"
           },
           "description": "A collection of PasswordCredential objects"
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "The display name of the tenant in which the associated application is specified."
+        },
+        "replyUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of reply URLs for the service principal."
+        },
+        "samlMetadataUrl": {
+          "type": "string"
+        },
+        "servicePrincipalNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of service principal names."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": {
         "type": "object"
       },
       "required": [
-        "appId",
-        "accountEnabled"
+        "appId"
       ],
+      "description": "Request parameters for creating a new service principal."
+    },
+    "ServicePrincipalUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "accountEnabled": {
+          "type": "boolean",
+          "description": "Whether the account is enabled"
+        },
+        "appId": {
+          "type": "string",
+          "description": "application Id"
+        },
+        "appRoleAssignmentRequired": {
+          "type": "boolean",
+          "description": "Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the service principal."
+        },
+        "errorUrl": {
+          "type": "string"
+        },
+        "homepage": {
+          "type": "string",
+          "description": "The URL to the homepage of the associated application."
+        },
+        "keyCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "A collection of KeyCredential objects."
+        },
+        "passwordCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "A collection of PasswordCredential objects"
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "The display name of the tenant in which the associated application is specified."
+        },
+        "replyUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of reply URLs for the service principal."
+        },
+        "samlMetadataUrl": {
+          "type": "string"
+        },
+        "servicePrincipalNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of service principal names."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Request parameters for creating a new service principal."
     },
     "ServicePrincipal": {
