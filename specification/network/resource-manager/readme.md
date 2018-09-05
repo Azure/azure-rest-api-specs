@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-2018-08` is specified on the comma
 input-file:
   - Microsoft.Network/stable/2018-08-01/applicationGateway.json
   - Microsoft.Network/stable/2018-08-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2018-08-01/availableDelegations.json
   - Microsoft.Network/stable/2018-08-01/azureFirewall.json
   - Microsoft.Network/stable/2018-08-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2018-08-01/checkDnsAvailability.json
@@ -702,6 +703,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: interfaceEndpoint.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: availableDelegations.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
