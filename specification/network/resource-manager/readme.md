@@ -704,6 +704,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: interfaceEndpoint.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: availableDelegations.json
+    reason: name, id and type properties are inherited from the upper level
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
   - suppress: EnumInsteadOfBoolean
