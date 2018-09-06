@@ -36,7 +36,7 @@ tag: package-2018-09
 
 These settings apply only when `--tag=package-2018-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-03'
+``` yaml $(tag) == 'package-2018-09'
 input-file:
 - microsoft.insights/stable/2015-04-01/autoscale_API.json
 - microsoft.insights/stable/2015-04-01/operations_API.json
