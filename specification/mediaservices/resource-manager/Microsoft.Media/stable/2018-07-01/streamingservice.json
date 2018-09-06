@@ -1103,7 +1103,7 @@
         },
         "manifestName": {
           "type": "string",
-          "description": "The manifest file name."
+          "description": "The manifest file name.  If not provided, the service will generate one automatically."
         },
         "hls": {
           "type": "object",
@@ -1199,12 +1199,22 @@
       },
       "description": "The Live Event endpoint."
     },
+    "LiveEventInputAccessControl": {
+      "properties": {
+        "ip": {
+          "type": "object",
+          "$ref": "#/definitions/IPAccessControl",
+          "description": "The IP access control properties."
+        }
+      },
+      "description": "The IP access control for Live Event Input."
+    },
     "LiveEventInput": {
       "required": ["streamingProtocol"],
       "properties": {
         "streamingProtocol": {
           "type": "string",
-          "description": "The streaming protocol for the Live Event.",
+          "description": "The streaming protocol for the Live Event.  This is specified at creation time and cannot be updated.",
           "enum": [
             "FragmentedMP4",
             "RTMP"
@@ -1214,13 +1224,18 @@
             "modelAsString": false
           }
         },
+        "accessControl": {
+          "type": "object",
+          "$ref": "#/definitions/LiveEventInputAccessControl",
+          "description": "The access control for LiveEvent Input."
+        },
         "keyFrameIntervalDuration": {
           "type": "string",
           "description": "ISO 8601 timespan duration of the key frame interval duration."
         },
         "accessToken": {
           "type": "string",
-          "description": "The access token."
+          "description": "A unique identifier for a stream.  This can be specified at creation time but cannot be updated.  If omitted, the service will generate a unique value."
         },
         "endpoints": {
           "type": "array",
@@ -1288,15 +1303,15 @@
         },
         "previewLocator": {
           "type": "string",
-          "description": "The preview locator Guid."
+          "description": "The identifier of the preview locator in Guid format.  Specifying this at creation time allows the caller to know the preview locator url before the event is created.  If omitted, the service will generate a random identifier.  This value cannot be updated once the live event is created."
         },
         "streamingPolicyName": {
           "type": "string",
-          "description": "The name of streaming policy used for LiveEvent preview"
+          "description": "The name of streaming policy used for the LiveEvent preview.  This value is specified at creation time and cannot be updated."
         },
         "alternativeMediaId": {
           "type": "string",
-          "description": "The alternative Media-Id associated with the preview"
+          "description": "An Alternative Media Identifier associated with the StreamingLocator created for the preview.  This value is specified at creation time and cannot be updated.  The identifier can be used in the CustomLicenseAcquisitionUrlTemplate or the CustomKeyAcquisitionUrlTemplate of the StreamingPolicy specified in the StreamingPolicyName field."
         }
       },
       "description": "The Live Event preview."
@@ -1305,7 +1320,7 @@
       "properties": {
         "encodingType": {
           "type": "string",
-          "description": "The encoding type for Live Event.",
+          "description": "The encoding type for Live Event.  This value is specified at creation time and cannot be updated.",
           "enum": [
             "None",
             "Basic"
@@ -1317,7 +1332,7 @@
         },
         "presetName": {
           "type": "string",
-          "description": "The encoding preset name."
+          "description": "The encoding preset name.  This value is specified at creation time and cannot be updated."
         }
       },
       "description": "The Live Event encoding."
@@ -1394,7 +1409,7 @@
         },
         "vanityUrl": {
           "type": "boolean",
-          "description": "The Live Event vanity URL flag."
+          "description": "Specifies whether to use a vanity url with the Live Event.  This value is specified at creation time and cannot be updated."
         },
         "streamOptions": {
           "type": "array",
@@ -1409,7 +1424,7 @@
               "modelAsString": false
             }
           },
-          "description": "The stream options."
+          "description": "The options to use for the LiveEvent.  This value is specified at creation time and cannot be updated."
         },
         "created": {
           "readOnly": true,
@@ -1476,7 +1491,7 @@
         "expiration": {
           "format": "date-time",
           "type": "string",
-          "description": "The exact time the authentication key."
+          "description": "The expiration time of the authentication key."
         }
       },
       "description": "Akamai Signature Header authentication key."
@@ -1513,8 +1528,7 @@
         "scaleUnit": {
           "type": "integer",
           "format": "int32",
-          "description": "The scale unit number of the StreamingEndpoint.",
-          "title": "ScaleUnit"
+          "description": "The scale unit number of the StreamingEndpoint."
         }
       },
       "description": "scale units definition"
@@ -1529,11 +1543,11 @@
         "scaleUnits": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of scale units."
+          "description": "The number of scale units.  Use the Scale operation to adjust this value."
         },
         "availabilitySetName": {
           "type": "string",
-          "description": "AvailabilitySet name"
+          "description": "The name of the AvailabilitySet used with this StreamingEndpoint for high availability streaming.  This value can only be set at creation time."
         },
         "accessControl": {
           "type": "object",
