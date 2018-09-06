@@ -328,6 +328,16 @@
             "$ref": "#/definitions/ContainerNetworkInterfaceConfiguration"
           },
           "description": "List of chid container network interface configurations."
+        },
+        "resourceGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource GUID property of the network interface resource."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource."
         }
       },
       "description": "Network profile properties."
@@ -376,6 +386,18 @@
         "container": {
           "$ref": "#/definitions/Container",
           "description": "Reference to the conatinaer to which this container network interface is attached."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerNetworkInterfaceIpConfiguration"
+          },
+          "description": "Reference to the ip configuration on this container nic."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource."
         }
       }
     },
@@ -385,6 +407,15 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ContainerNetworkInterfacePropertiesFormat",
           "description": "Container network interface properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Sub Resource type."
         },
         "etag": {
           "type": "string",
@@ -413,6 +444,11 @@
             "$ref": "#/definitions/ContainerNetworkInterface"
           },
           "description": "A list of container network interfaces created from this container network interface configuration."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource."
         }
       },
       "description": "Container network interface configuration properties."
@@ -423,6 +459,15 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ContainerNetworkInterfaceConfigurationPropertiesFormat",
           "description": "Container network interface configuration properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Sub Resource type."
         },
         "etag": {
           "type": "string",
@@ -441,6 +486,11 @@
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
           "description": "The reference of the subnet resource to create a contatainer network interface ip configruation."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource."
         }
       },
       "description": "IP configruation profile properties."
@@ -451,6 +501,15 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/IPConfigurationProfilePropertiesFormat",
           "description": "Properties of the IP configuration profile."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Sub Resource type."
         },
         "etag": {
           "type": "string",
@@ -464,28 +523,47 @@
       ],
       "description": "IP configuration profile child resource."
     },
-    "ContainerPropertiesFormat": {
+    "Container": {
+      "properties": { },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Reference to container resource in remote resource provider."
+    },
+    "ContainerNetworkInterfaceIpConfigurationPropertiesFormat": {
       "properties": {
-        "containerUri": {
+        "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "ARM Uri for the container."
+          "description": "The provisioning state of the resource."
         }
       },
-      "description": "Container resource properties."
+      "description": "Properties of the container network interface IP configuration."
     },
-    "Container": {
+    "ContainerNetworkInterfaceIpConfiguration": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ContainerPropertiesFormat",
-          "description": "Properties of the container."
+          "$ref": "#/definitions/ContainerNetworkInterfaceIpConfigurationPropertiesFormat",
+          "description": "Properties of the container network interface IP configuration."
+        },
+        "name": {   
+          "type": "string",
+          "description": "The name of the resource. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Sub Resource type."
         },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
-      "description": "Reference to container resource in remote resource provider."
+      "description": "The ip configuration for a container network interface."
     }
   }
 }
