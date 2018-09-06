@@ -17,7 +17,7 @@ typescript:
     - 2018-03-01-preview
 ```
 
-``` yaml $(typescript) && $(multiapi-root-path) == '2018-02-01'
+``` yaml $(typescript) && $(default-api-version) == '2018-02-01'
 typescript:
   output-folder: $(js-sdks-folder)/packages/arm-storage/lib
 ```
@@ -48,5 +48,5 @@ batch:
   - tag: package-2017-10
   - tag: package-2018-02
   - tag: package-2018-03
-  - multiapi-root-path: "2018-02-01"
+  - default-api-version: "2018-02-01"
 ```
