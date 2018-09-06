@@ -1448,8 +1448,14 @@
           "$ref": "#/definitions/Ipv6ExpressRouteCircuitPeeringConfig",
           "description": "The IPv6 peering configuration."
         },
-        "expressRouteConnection" : {
-          "$ref": "./expressRouteGateway.json#/definitions/ExpressRouteConnectionId",
+        "expressRouteConnection": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The ID of the ExpressRouteConnection."
+            }
+          },
           "description": "The ExpressRoute connection."
         },
         "connections": {
@@ -1699,7 +1705,7 @@
         "allowGlobalReach": {
           "type": "boolean",
           "description": "Flag to enable Global Reach on the circuit."
-        }        
+        }
       },
       "description": "Properties of ExpressRouteCircuit."
     },
