@@ -25,6 +25,7 @@ These are the global settings for the TrafficManager API.
 
 ``` yaml
 openapi-type: arm
+generate-empty-classes: true
 tag: package-2018-04
 ```
 
