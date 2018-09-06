@@ -2217,6 +2217,14 @@
             "$ref": "#/parameters/runId"
           },
           {
+            "name": "isRecursive",
+            "description": "If true, cancel all the Child pipelines that are triggered by the current pipeline.",
+            "in": "path",
+            "required": true,
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3041,6 +3049,39 @@
       "required": [
         "code",
         "message"
+      ]
+    },
+    "VariableDefinitionSpecification": {
+      "description": "Definition of all variables for an Pipeline.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/VariableSpecification"
+      }
+    },
+    "VariableSpecification": {
+      "description": "Definition of a single variable for an pipeline.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Parameter type.",
+          "enum": [
+            "String",
+            "Bool",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "ParameterType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value of parameter."
+        }
+      },
+      "required": [
+        "type"
       ]
     },
     "ParameterDefinitionSpecification": {
