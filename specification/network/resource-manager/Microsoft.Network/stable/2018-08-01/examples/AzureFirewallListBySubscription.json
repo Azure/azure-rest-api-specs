@@ -51,13 +51,42 @@
                                           "port":443
                                        }
                                     ],
-                                    "targetUrls":[  
+                                    "targetFqdns":[  
                                        "www.test.com"
                                     ],
                                     "sourceAddresses":[  
                                        "216.58.216.164",
                                        "10.0.0.0/24"
                                     ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "natRuleCollections":[  
+                        {  
+                           "name":"natrulecoll",
+                           "properties":{  
+                              "priority":112,
+                              "action":"Dnat",
+                              "rules":[  
+                                 {  
+                                    "name":"DNAT-HTTPS-traffic",
+                                    "description":"D-NAT all outbound web traffic for inspection",
+                                    "sourceAddresses":[  
+                                       "*"
+                                    ],
+                                    "destinationAddresses":[  
+                                          "1.2.3.4"
+                                    ],
+                                    "destinationPorts":[  
+                                       "443"
+                                    ],
+                                    "protocols":[  
+                                       "TCP"
+                                    ],
+                                    "translatedAddress": "1.2.3.5",
+                                    "translatedPort": "8443"
                                  }
                               ]
                            }
@@ -71,8 +100,8 @@
                               "action":"Deny",
                               "rules":[  
                                  {  
-                                    "name":"D-NAT-web-traffic",
-                                    "description":"D-NAT all outbound web traffic for inspection",
+                                    "name":"L4-traffic",
+                                    "description":"Block traffic based on source IPs and ports",
                                     "sourceAddresses":[  
                                        "192.168.1.1-192.168.1.12",
                                        "10.1.4.12-10.1.4.255"
@@ -85,8 +114,7 @@
                                        "*"
                                     ],
                                     "protocols":[  
-                                       "TCP",
-                                       "ICMP"
+                                       "TCP"
                                     ]
                                  }
                               ]

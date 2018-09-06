@@ -532,11 +532,266 @@
           "NetworkInterfaceLoadBalancerList": { "$ref": "./examples/NetworkInterfaceLoadBalancerList.json" }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/tapConfigurations/{tapConfigurationName}": {
+      "delete": {
+        "tags": [
+          "Network Interfaces"
+        ],
+        "operationId": "NetworkInterfaceTapConfigurations_Delete",
+        "description": "Deletes the specified tap configuration from the NetworkInterface.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "name": "tapConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the tap configuration."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-examples": 
+        {
+          "Delete tap configuration": { "$ref": "./examples/NetworkInterfaceTapConfigurationDelete.json" }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaceTapConfigurations_Get",
+        "description": "Get the specified tap configuration on a network interface.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "name": "tapConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the tap configuration."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a tap configuration.",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfaceTapConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": 
+        {
+          "Get Network Interface Tap Configurations": { "$ref": "./examples/NetworkInterfaceTapConfigurationGet.json" }
+        }
+      },
+      "put": {
+        "tags": [
+          "Network Interfaces"
+        ],
+        "operationId": "NetworkInterfaceTapConfigurations_CreateOrUpdate",
+        "description": "Creates or updates a Tap configuration in the specified NetworkInterface.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "name": "tapConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the tap configuration."
+          },
+          {
+            "name": "tapConfigurationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfaceTapConfiguration"
+            },
+            "description": "Parameters supplied to the create or update tap configuration operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Tap Configuration resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfaceTapConfiguration"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Tap configuration resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfaceTapConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": 
+        {
+          "Create Network Interface Tap Configurations": { "$ref": "./examples/NetworkInterfaceTapConfigurationCreate.json" }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/tapConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaceTapConfigurations_List",
+        "description": "Get all Tap configurations in a network interface",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of NetworkInterface TapConfiguration resources.",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfaceTapConfigurationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List virtual network tap configurations": { "$ref": "./examples/NetworkInterfaceTapConfigurationList.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
+    "NetworkInterfaceTapConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkInterfaceTapConfigurationPropertiesFormat",
+          "description": "Properties of the Virtual Network Tap configuration"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Sub Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Tap configuration in a Network Interface"
+    },
+    "NetworkInterfaceTapConfigurationPropertiesFormat": {
+      "properties": {
+        "virtualNetworkTap": {         
+            "$ref": "./virtualNetworkTap.json#/definitions/VirtualNetworkTap",
+            "description": "The reference of the Virtual Network Tap resource."
+          }
+        },  
+      "description": "Properties of Virtual Network Tap configuration."
+    },
     "NetworkInterfaceIPConfigurationPropertiesFormat": {
       "properties": {
+        "virtualNetworkTaps": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualNetworkTap.json#/definitions/VirtualNetworkTap"
+          },
+          "description": "The reference to Virtual Network Taps."
+        },
         "applicationGatewayBackendAddressPools": {
           "type": "array",
           "items": {
@@ -676,6 +931,10 @@
           "$ref": "./networkSecurityGroup.json#/definitions/NetworkSecurityGroup",
           "description": "The reference of the NetworkSecurityGroup resource."
         },
+        "interfaceEndpoint": {
+          "$ref": "./interfaceEndpoint.json#/definitions/InterfaceEndpoint",
+          "description": "A reference to the interface endpoint to which the network interface is linked."
+        },
         "ipConfigurations": {
           "type": "array",
           "items": {
@@ -702,6 +961,18 @@
         "enableIPForwarding": {
           "type": "boolean",
           "description": "Indicates whether IP forwarding is enabled on this network interface."
+        },
+        "hostedWorkloads": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "A list of references to linked BareMetal resources"
+        },
+        "linkedResourceType": {
+          "type": "string",
+          "description": "The type of resource to be linked to this network interface"
         },
         "resourceGuid": {
           "type": "string",
@@ -749,6 +1020,23 @@
         }
       },
       "description": "Response for the ListNetworkInterface API service call."
+    },
+    "NetworkInterfaceTapConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceTapConfiguration"
+          },
+          "description": "A list of tap configurations."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for list tap configurations API service call."
     },
     "NetworkInterfaceIPConfigurationListResult": {
       "properties": {

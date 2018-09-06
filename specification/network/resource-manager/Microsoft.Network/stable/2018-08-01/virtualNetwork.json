@@ -123,7 +123,8 @@
           }
         },
         "x-ms-examples": {
-          "Get virtual network": { "$ref": "./examples/VirtualNetworkGet.json" }
+          "Get virtual network": { "$ref": "./examples/VirtualNetworkGet.json" },
+          "Get virtual network with a delegated subnet": { "$ref": "./examples/VirtualNetworkGetWithSubnetDelegation.json" }
         }
       },
       "put": {
@@ -182,7 +183,8 @@
           "Create virtual network": { "$ref": "./examples/VirtualNetworkCreate.json" },
           "Create virtual network with subnet": { "$ref": "./examples/VirtualNetworkCreateSubnet.json" },
           "Create virtual network with subnet containing address prefixes": { "$ref": "./examples/VirtualNetworkCreateSubnetWithAddressPrefixes.json" },
-          "Create virtual network with service endpoints": { "$ref": "./examples/VirtualNetworkCreateServiceEndpoints.json" }
+          "Create virtual network with service endpoints": { "$ref": "./examples/VirtualNetworkCreateServiceEndpoints.json" },
+          "Create virtual network with delegated subnets": { "$ref": "./examples/VirtualNetworkCreateSubnetWithDelegation.json"}
         }
       },
       "patch": {
@@ -408,7 +410,8 @@
           }
         },
         "x-ms-examples": {
-          "Get subnet": { "$ref": "./examples/SubnetGet.json" }
+          "Get subnet": { "$ref": "./examples/SubnetGet.json" },
+          "Get subnet with a delegation": { "$ref": "./examples/SubnetGetWithDelegation.json" }
         }
       },
       "put": {
@@ -472,7 +475,8 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create subnet": { "$ref": "./examples/SubnetCreate.json" },
-          "Create subnet with service endpoints": { "$ref": "./examples/SubnetCreateServiceEndpoint.json" }
+          "Create subnet with service endpoints": { "$ref": "./examples/SubnetCreateServiceEndpoint.json" },
+          "Create subnet with a delegation": { "$ref": "./examples/SubnetCreateWithDelegation.json" }
         }
       }
     },
@@ -861,6 +865,50 @@
       ],
       "description": "ResourceNavigationLink resource."
     },
+    "ServiceDelegationPropertiesFormat": {
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers)"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Describes the actions permitted to the service upon delegation"
+        },
+        "provisioningState": {
+		  "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "Properties of a service delegation."
+    },
+    "Delegation": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceDelegationPropertiesFormat",
+          "description": "Properties of the subnet."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a subnet. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Details the service to which the subnet is delegated."
+    },
     "SubnetPropertiesFormat": {
       "properties": {
         "addressPrefix": {
@@ -891,10 +939,17 @@
         },
         "serviceEndpointPolicies": {
           "type": "array",
-            "items": {
-              "$ref": "./serviceEndpointPolicy.json#/definitions/ServiceEndpointPolicy"
+          "items": {
+            "$ref": "./serviceEndpointPolicy.json#/definitions/ServiceEndpointPolicy"
           },
           "description": "An array of service endpoint policies."
+        },
+        "interfaceEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "An array of references to interface endpoints "
         },
         "ipConfigurations": {
           "readOnly": true,
@@ -910,6 +965,18 @@
             "$ref": "#/definitions/ResourceNavigationLink"
           },
           "description": "Gets an array of references to the external resources using subnet."
+        },
+        "delegations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Delegation"
+          },
+          "description": "Gets an array of references to the delegations on the subnet."
+        },
+        "purpose": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A read-only string identifying the intention of use for this subnet based on delegations and other user-defined properties."
         },
         "provisioningState": {
           "type": "string",
