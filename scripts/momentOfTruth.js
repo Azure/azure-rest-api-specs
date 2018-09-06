@@ -67,18 +67,9 @@ async function getLinterResult(swaggerPath) {
     let resultString = stdout + stderr;
     if (resultString.indexOf('{') !== -1) {
         resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
-        //console.log('>>>>>> Trimmed Result...');
-        //console.log(resultString);
-        try {
-            jsonResult = JSON.parse(resultString);
-            //console.log('>>>>>> Parsed Result...');
-            //console.dir(resultObject, {depth: null, colors: true});
-            return jsonResult;
-        } catch (e) {
-            console.log(`An error occurred while executing JSON.parse() on the linter output for ${swaggerPath}:`);
-            console.dir(resultString);
-            console.dir(e, { depth: null, colors: true });
-        }
+        // Do not catch the JSON parse error
+        jsonResult = JSON.parse(resultString);
+        return jsonResult;
     }
     return [];
 };
