@@ -1698,7 +1698,7 @@
             "description": "The name of the VirtualWan."
           },
           {
-            "name": "p2sVpnServerConfigurationName",
+            "name": "p2SVpnServerConfigurationName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1726,7 +1726,7 @@
       "put": {
         "operationId": "P2SVpnServerConfigurations_CreateOrUpdate",
         "x-ms-examples": {
-          "VpnConnectionPut": {
+          "P2SVpnServerConfigurationPut": {
             "$ref": "./examples/P2SVpnServerConfigurationPut.json"
           }
         },
@@ -1750,7 +1750,7 @@
             "description": "The name of the VirtualWan."
           },
           {
-            "name": "p2sVpnServerConfigurationName",
+            "name": "p2SVpnServerConfigurationName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1760,7 +1760,7 @@
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "P2SVpnServerConfigurationParameters",
+            "name": "p2SVpnServerConfigurationParameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -1818,7 +1818,7 @@
             "description": "The name of the VirtualWan."
           },
           {
-            "name": "p2sVpnServerConfigurationName",
+            "name": "p2SVpnServerConfigurationName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1974,7 +1974,7 @@
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "p2sVpnGatewayParameters",
+            "name": "p2SVpnGatewayParameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -3274,11 +3274,8 @@
         },
         "vpnClientConnectionHealth": {
           "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VpnClientConnectionHealth"
-          },
-          "description": "Collection of the all P2S vpnclients' connection health status."
+		  "$ref": "#/definitions/VpnClientConnectionHealth"
+		  "description": "All P2S vpnclients' connection health status."
         }
       },
       "description": "Parameters for P2SVpnGateway"
