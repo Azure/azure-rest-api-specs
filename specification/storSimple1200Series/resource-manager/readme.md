@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-10'
 input-file:
-- Microsoft.StorSimple/stable/2016-10-01/storsimple.json
+- Microsoft.StorSimple/stable/2016-10-01/StorSimple.json
 directive:
   - suppress:
     - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
@@ -84,7 +84,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: storsimple
+  namespace: StorSimple
   clear-output-folder: true
 ```
 
@@ -101,7 +101,7 @@ These settings apply only when `--tag=package-2016-10 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-10' && $(go)
-output-folder: $(go-sdk-folder)/services/storsimple1200series/mgmt/2016-10-01/storsimple
+output-folder: $(go-sdk-folder)/services/storSimple1200Series/mgmt/2016-10-01/StorSimple
 ```
 
 
@@ -114,8 +114,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   azure-arm: true
   fluent: true
-  namespace: com.microsoft.azure.management.storsimple1200series
+  namespace: com.microsoft.azure.management.storSimple1200Series
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storsimple1200series
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storSimple1200Series
 ```
