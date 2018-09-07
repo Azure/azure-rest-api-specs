@@ -981,7 +981,7 @@
         "adminUsername": {
           "type": "string",
           "description": "The administrator username to use for Linux VMs.",
-          "pattern": "^[a-z][a-z0-9_-]*$"
+          "pattern": "^[A-Za-z][-A-Za-z0-9_]*$"
         },
         "ssh": {
           "$ref": "#/definitions/ContainerServiceSshConfiguration",
@@ -1387,7 +1387,7 @@
     },
     "CredentialResults":{
       "properties": {
-        "values": {
+        "kubeconfigs": {
           "type" : "array",
           "readOnly": true,
           "items": {
@@ -1407,8 +1407,9 @@
         },
         "value": {
           "type": "string",
+          "format": "byte",
           "readOnly": true,
-          "description": "The value of the credential."
+          "description": "Base64-encoded Kubernetes configuration file."
         }
       },
       "description": "The credential result response." 
