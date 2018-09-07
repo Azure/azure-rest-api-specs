@@ -345,6 +345,57 @@
             "$ref": "./examples/ManagersDelete.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Updates the StorSimple Manager.",
+        "operationId": "Managers_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The manager update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagerPatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The StorSimple manager has been successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords": {
@@ -4419,7 +4470,7 @@
             "description": "Accepted the request to publish support package of the device."
           },
           "204": {
-            "description": "Successfully published support package of the device.."
+            "description": "Successfully published support package of the device."
           },
           "default": {
             "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
@@ -6489,7 +6540,7 @@
       "type": "object",
       "properties": {
         "initiatedBy": {
-          "description": "InitiatedBy",
+          "description": "Gets or sets InitiatedBy",
           "enum": [
             "Manual",
             "Scheduled"
@@ -6502,7 +6553,7 @@
         },
         "createdTime": {
           "format": "date-time",
-          "description": "CreatedTime",
+          "description": "Gets or sets CreatedTime",
           "type": "string"
         }
       }
@@ -6639,15 +6690,18 @@
       "properties": {
         "id": {
           "description": "The identifier.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "description": "The name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "description": "The type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7915,6 +7969,19 @@
         }
       }
     },
+    "ManagerPatch": {
+      "description": "The StorSimple Manager patch.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The tags attached to the StorSimple Manager.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ManagerProperties": {
       "description": "The properties of the Manager",
       "type": "object",
@@ -8345,7 +8412,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkSettingsProperties",
-          "description": "Properties.",
+          "description": "Properties of the given NetworkSettings.",
           "x-ms-client-flatten": true
         }
       }
@@ -8353,16 +8420,16 @@
     "NetworkSettingsProperties": {
       "description": "The properties of NetworkSettings",
       "required": [
-        "primaryDNSServer",
+        "primaryDnsServer",
         "nodeNetworks"
       ],
       "type": "object",
       "properties": {
-        "primaryDNSServer": {
+        "primaryDnsServer": {
           "description": "The Primary DNS server for the device",
           "type": "string"
         },
-        "secondaryDNSServer": {
+        "secondaryDnsServer": {
           "description": "The secondary DNS server for the device",
           "type": "string"
         },
@@ -9100,14 +9167,13 @@
     "UploadCertificateRequest": {
       "description": "Upload Certificate Request to IDM",
       "required": [
-        "properties"
+        "rawCertificateDetails"
       ],
       "type": "object",
       "properties": {
-        "properties": {
+        "rawCertificateDetails": {
           "$ref": "#/definitions/RawCertificateData",
-          "description": "Gets or sets the base64 encoded certificate raw data string",
-          "x-ms-client-flatten": true
+          "description": "Gets or sets the base64 encoded certificate raw data string"
         },
         "contractVersion": {
           "description": "Gets ContractVersion",
@@ -9154,7 +9220,7 @@
     "UploadCertificateResponse": {
       "description": "Upload Certificate Response from IDM",
       "required": [
-        "properties"
+        "resourceAADDetails"
       ],
       "type": "object",
       "allOf": [
@@ -9163,10 +9229,9 @@
         }
       ],
       "properties": {
-        "properties": {
+        "resourceAADDetails": {
           "$ref": "#/definitions/ResourceCertificateAndAADDetails",
-          "description": "Gets or sets Properties",
-          "x-ms-client-flatten": true
+          "description": "Gets or sets Properties"
         },
         "contractVersion": {
           "description": "Constructor",
