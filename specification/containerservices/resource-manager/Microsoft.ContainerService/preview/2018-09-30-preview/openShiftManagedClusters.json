@@ -575,11 +575,15 @@
       "description": "OpenShiftManagedClusterIdentityProvider is heavily cut down equivalent to IdentityProvider in the upstream."
     },
     "OpenShiftManagedClusterAuthProfile": {
-      "type": "array",
-      "items" : {
-        "$ref": "#/definitions/OpenShiftManagedClusterIdentityProviders"
-      },
-      "description": "OpenShiftManagedClusterAuthProfile defines all possible authentication profiles for the OpenShift cluster."
+      "properties": {
+        "value": {
+          "type": "array",
+          "items" : {
+            "$ref": "#/definitions/OpenShiftManagedClusterIdentityProviders"
+          },
+          "description": "OpenShiftManagedClusterAuthProfile defines all possible authentication profiles for the OpenShift cluster."
+        }
+      }
     },
     "OpenShiftManagedClusterProperties": {
       "properties": {
