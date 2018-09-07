@@ -467,34 +467,6 @@
         }
     },
     "definitions": {
-        "VirtualHubId": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "The resource URI for the Virtual Hub where the ExpressRoute gateway is or will be deployed. The Virtual Hub resource and the ExpressRoute gateway resource reside in the same subscription."
-                }
-            },
-            "description": "Virtual Hub identifier."
-        },
-        "ExpressRouteCircuitPeeringId": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "The ID of the ExpressRoute circuit peering."
-                }
-            },
-            "description": "ExpressRoute circuit peering identifier."
-        },
-        "ExpressRouteConnectionId": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The ID of the ExpressRouteConnection."
-                }
-            },
-            "description": "The ID of the ExpressRouteConnection."
-        },
         "ExpressRouteGatewayProperties": {
             "required": [
                 "virtualHub"
@@ -542,7 +514,12 @@
                     }
                 },
                 "virtualHub": {
-                    "$ref": "#/definitions/VirtualHubId",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "The resource URI for the Virtual Hub where the ExpressRoute gateway is or will be deployed. The Virtual Hub resource and the ExpressRoute gateway resource reside in the same subscription."
+                        }
+                    },
                     "description": "The Virtual Hub where the ExpressRoute gateway is or will be deployed."
                 }
             },
@@ -600,7 +577,12 @@
                     }
                 },
                 "expressRouteCircuitPeering": {
-                    "$ref": "#/definitions/ExpressRouteCircuitPeeringId",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "The ID of the ExpressRoute circuit peering."
+                        }
+                    },
                     "description": "The ExpressRoute circuit peering."
                 },
                 "authorizationKey": {
