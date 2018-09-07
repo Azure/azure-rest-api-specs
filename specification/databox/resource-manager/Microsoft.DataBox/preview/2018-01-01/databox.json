@@ -722,10 +722,12 @@
   },
   "definitions": {
     "AccountCopyLogDetails": {
-      "description": "Copy log details for an storage account",
+      "description": "Copy log details for a storage account",
       "required": [
         "accountName",
-        "copyLogLink"
+        "copyLogLink",
+        "auditLogLink",
+        "bomPath"
       ],
       "type": "object",
       "allOf": [
@@ -741,6 +743,14 @@
         "copyLogLink": {
           "description": "Link for copy logs.",
           "type": "string"
+        },
+        "auditLogLink": {
+          "description": "Link for audit logs.",
+          "type": "string"
+        },
+        "bomPath": {
+          "description": "Link for BOM files.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Pod"
@@ -754,6 +764,10 @@
       "properties": {
         "accountName": {
           "description": "Name of the account.",
+          "type": "string"
+        },
+        "accountConnectionString": {
+          "description": "Connection string of the account endpoint to use the account as a storage endpoint on the device.",
           "type": "string"
         },
         "shareCredentialDetails": {
@@ -799,6 +813,20 @@
           "items": {
             "$ref": "#/definitions/ShippingAddress"
           }
+        }
+      }
+    },
+    "ApplianceNetworkConfiguration": {
+      "description": "The Network Adapter configuration of a Pod.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the network",
+          "type": "string"
+        },
+        "macAddress": {
+          "description": "Mac Address",
+          "type": "string"
         }
       }
     },
@@ -890,7 +918,7 @@
           }
         }
       },
-      "x-ms-discriminator-value": "Cabinet"
+      "x-ms-discriminator-value": "Heavy"
     },
     "CabinetPodSecret": {
       "description": "The secrets related to a cabinet pod.",
@@ -902,6 +930,17 @@
         },
         "devicePassword": {
           "description": "Password for out of the box experience on device.",
+          "type": "string"
+        },
+        "networkConfigurations": {
+          "description": "Network configuration of the appliance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplianceNetworkConfiguration"
+          }
+        },
+        "encodedValidationCertPubKey": {
+          "description": "The base 64 encoded public key to authenticate with the device",
           "type": "string"
         },
         "accountCredentialDetails": {
@@ -975,7 +1014,7 @@
           "enum": [
             "Pod",
             "Disk",
-            "Cabinet"
+            "Heavy"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -992,6 +1031,10 @@
       "properties": {
         "storageAccountName": {
           "description": "Name of the storage account where the data needs to be uploaded.",
+          "type": "string"
+        },
+        "accountId": {
+          "description": "Id of the account where the data needs to be uploaded.",
           "type": "string"
         },
         "bytesSentToCloud": {
@@ -1016,6 +1059,49 @@
         "accountId": {
           "description": "Destination storage account id.",
           "type": "string"
+        },
+        "sharedAccessSignature": {
+          "description": "Shared access signature for the storage account.",
+          "type": "string"
+        },
+        "accountType": {
+          "description": "Account type.",
+          "enum": [
+            "UnknownType",
+            "GeneralPurposeStorage",
+            "BlobStorage"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccountType",
+            "modelAsString": false
+          }
+        },
+        "storageAccessTier": {
+          "description": "Access tier of the account.",
+          "enum": [
+            "Invalid",
+            "Hot",
+            "Cool",
+            "Cold"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessTier",
+            "modelAsString": false
+          }
+        },
+        "storagePerformanceTier": {
+          "description": "Performance tier of the account.",
+          "enum": [
+            "Standard",
+            "Premium"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PerformanceTier",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -1146,6 +1232,14 @@
           "items": {
             "$ref": "#/definitions/DiskSecret"
           }
+        },
+        "passKey": {
+          "description": "PaasKey for the disk Job.",
+          "type": "string"
+        },
+        "isPasskeyUserDefined": {
+          "description": "Whether passkey is provided by user.",
+          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "Disk"
@@ -1198,6 +1292,72 @@
         }
       }
     },
+    "HeavyAccountCopyLogDetails": {
+      "description": "Copy log details for a storage account for heavy",
+      "required": [
+        "accountName",
+        "copyLogLink",
+        "auditLogLink",
+        "bomPath"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyLogDetails"
+        }
+      ],
+      "properties": {
+        "accountName": {
+          "description": "Destination account name.",
+          "type": "string"
+        },
+        "copyLogLink": {
+          "description": "Link for copy logs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auditLogLink": {
+          "description": "Link for audit logs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bomPath": {
+          "description": "Link for bill of material files.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Heavy"
+    },
+    "HeavyJobDetails": {
+      "description": "Heavy Device Job Details",
+      "required": [
+        "contactDetails",
+        "shippingAddress"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "copyProgress": {
+          "description": "Copy progress per account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CopyProgress"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Heavy"
+    },
     "JobDetails": {
       "description": "Job details.",
       "required": [
@@ -1238,7 +1398,7 @@
           "enum": [
             "Pod",
             "Disk",
-            "Cabinet"
+            "Heavy"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1284,7 +1444,7 @@
           "enum": [
             "Pod",
             "Disk",
-            "Cabinet"
+            "Heavy"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1294,6 +1454,10 @@
         },
         "isCancellable": {
           "description": "Describes whether the job is cancellable or not.",
+          "type": "boolean"
+        },
+        "isDeletable": {
+          "description": "Describes whether the job is deletable or not.",
           "type": "boolean"
         },
         "isShippingAddressEditable": {
@@ -1315,7 +1479,8 @@
             "Cancelled",
             "Failed_IssueReportedAtCustomer",
             "Failed_IssueDetectedAtAzureDC",
-            "Aborted"
+            "Aborted",
+            "Current"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1353,6 +1518,18 @@
         },
         "cancellationReason": {
           "description": "Reason for cancellation.",
+          "type": "string"
+        },
+        "reverseShipmentLabelSasKey": {
+          "description": "Sas Key of the return shipment label blob",
+          "type": "string"
+        },
+        "chainOfCustodySasKey": {
+          "description": "chain of custody blob Sas key",
+          "type": "string"
+        },
+        "passkey": {
+          "description": "User entered passkey for Disk job.",
           "type": "string"
         }
       }
@@ -1435,7 +1612,7 @@
           "enum": [
             "Pod",
             "Disk",
-            "Cabinet"
+            "Heavy"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1469,7 +1646,8 @@
             "Cancelled",
             "Failed_IssueReportedAtCustomer",
             "Failed_IssueDetectedAtAzureDC",
-            "Aborted"
+            "Aborted",
+            "Current"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1691,6 +1869,17 @@
           "description": "Password for out of the box experience on device.",
           "type": "string"
         },
+        "networkConfigurations": {
+          "description": "Network configuration of the appliance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplianceNetworkConfiguration"
+          }
+        },
+        "encodedValidationCertPubKey": {
+          "description": "The base 64 encoded public key to authenticate with the device",
+          "type": "string"
+        },
         "accountCredentialDetails": {
           "description": "Per account level access credentials.",
           "type": "array",
@@ -1738,8 +1927,7 @@
     "Resource": {
       "description": "Model of the Resource.",
       "required": [
-        "location",
-        "sku"
+        "location"
       ],
       "type": "object",
       "properties": {
@@ -1773,6 +1961,22 @@
           "description": "Name of the share.",
           "type": "string"
         },
+        "shareType": {
+          "description": "Type of the share.",
+          "enum": [
+            "UnknownType",
+            "HCS",
+            "BlockBlob",
+            "PageBlob",
+            "AzureFile",
+            "HDC"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShareDestinationFormatType",
+            "modelAsString": false
+          }
+        },
         "userName": {
           "description": "User name for the share.",
           "type": "string"
@@ -1780,6 +1984,21 @@
         "password": {
           "description": "Password for the share.",
           "type": "string"
+        },
+        "supportedAccessProtocols": {
+          "description": "Access protocols supported on the device.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "SMB",
+              "NFS"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AccessProtocol",
+              "modelAsString": false
+            }
+          }
         }
       }
     },
@@ -2028,7 +2247,7 @@
           "enum": [
             "Pod",
             "Disk",
-            "Cabinet"
+            "Heavy"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2058,14 +2277,18 @@
     },
     "UpdateJobProperties": {
       "description": "Job Properties for update",
-      "required": [
-        "details"
-      ],
       "type": "object",
       "properties": {
         "details": {
           "$ref": "#/definitions/UpdateJobDetails",
           "description": "Details of a job to be updated."
+        },
+        "destinationAccountDetails": {
+          "description": "Destination account details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DestinationAccountDetails"
+          }
         }
       }
     },
@@ -2082,7 +2305,7 @@
           "enum": [
             "Pod",
             "Disk",
-            "Cabinet"
+            "Heavy"
           ],
           "type": "string",
           "x-ms-enum": {
