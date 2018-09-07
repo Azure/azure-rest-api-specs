@@ -561,7 +561,7 @@
       ],
       "description": "OpenShiftManagedClusterAgentPoolProfile represents configuration of OpenShift cluster VMs."
     },
-    "OpenShiftManagedClusterIdentityProvider": {
+    "OpenShiftManagedClusterIdentityProviders": {
       "properties": {
         "name": {
           "type": "string",
@@ -577,7 +577,7 @@
     "OpenShiftManagedClusterAuthProfile": {
       "type": "array",
       "items" : {
-        "$ref": "#/definitions/OpenShiftManagedClusterIdentityProvider"
+        "$ref": "#/definitions/OpenShiftManagedClusterIdentityProviders"
       },
       "description": "OpenShiftManagedClusterAuthProfile defines all possible authentication profiles for the OpenShift cluster."
     },
@@ -607,7 +607,7 @@
           },
           "description": "Configuration for OpenShift router(s)."
         },
-        "masterPoolProfiles": {
+        "masterPoolProfile": {
           "$ref": "#/definitions/OpenShiftManagedClusterMasterPoolProfile",
           "description": "Configuration for OpenShift master VMs."
         },
