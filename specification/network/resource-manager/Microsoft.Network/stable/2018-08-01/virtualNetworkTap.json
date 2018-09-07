@@ -323,6 +323,7 @@
         "properties": {
           "networkInterfaceTapConfigurations": {
             "type": "array",
+			///// read only
             "items": {
                 "$ref": "./networkInterface.json#/definitions/NetworkInterfaceTapConfiguration",
                 "description": "The reference of the Network Interface."
@@ -339,9 +340,12 @@
           },
           "destinationPort": {
             "type": "integer",
+			//// PS: Not mandatory. Inform Neha.
             "description": "The VXLAN destination port that will receive the tapped traffic."
           }
         },
+		////// provisioningState
+		///// Add resourceguid
         "description": "Virtual Network Tap properties."
     },
     "VirtualNetworkTapListResult": {

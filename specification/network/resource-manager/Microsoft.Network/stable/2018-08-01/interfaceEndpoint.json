@@ -284,13 +284,14 @@
           "description": "A reference to the service being brought into the virtual network."
         },
         "subnet": {
-          "$ref": "./network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource", ===> this should change
           "description": "The ID of the subnet from which the private IP will be allocated."
         },
         "networkInterfaces": {
+          "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource" ===> this is wrong
           },
           "description": "Gets an array of references to the network interfaces created for this interface endpoint."
         },
@@ -299,6 +300,7 @@
           "readOnly": true,
           "description": "A read-only property that identifies who created this interface endpoint."
         }
+		//// No provisioning state
       },
       "description": "Properties of the interface endpoint."
     },
