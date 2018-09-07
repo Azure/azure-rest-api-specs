@@ -241,9 +241,9 @@
             "name": "maxCandidates",
             "in": "query",
             "description": "Maximum number of candidate descriptions to be returned.  The default is 1.",
-            "type": "string",
+            "type": "integer",
             "required": false,
-            "default": "1"
+            "default": 1
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -458,12 +458,21 @@
             "name": "details",
             "in": "query",
             "description": "A string indicating which domain-specific details to return. Multiple values should be comma-separated. Valid visual feature types include:Celebrities - identifies celebrities if detected in the image.",
-            "type": "string",
+            "type": "array",
             "required": false,
-            "enum": [
-              "Celebrities",
-              "Landmarks"
-            ]
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "x-nullable": false,
+              "x-ms-enum": {
+                "name": "Details",
+                "modelAsString": false
+              },
+              "enum": [
+                "Celebrities",
+                "Landmarks"
+              ]
+            }
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -615,9 +624,9 @@
             "name": "maxCandidates",
             "in": "query",
             "description": "Maximum number of candidate descriptions to be returned.  The default is 1.",
-            "type": "string",
+            "type": "integer",
             "required": false,
-            "default": "1"
+            "default": 1
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -1258,12 +1267,12 @@
       "description": "An object providing possible image types and matching confidence levels.",
       "properties": {
         "clipArtType": {
-          "type": "number",
+          "type": "integer",
           "x-nullable": false,
           "description": "Confidence level that the image is a clip art."
         },
         "lineDrawingType": {
-          "type": "number",
+          "type": "integer",
           "x-nullable": false,
           "description": "Confidence level that the image is a line drawing."
         }
@@ -1294,6 +1303,7 @@
         },
         "isBWImg": {
           "type": "boolean",
+          "x-nullable": false,
           "description": "A value indicating if the image is black and white."
         }
       }

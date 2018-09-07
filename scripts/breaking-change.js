@@ -2,11 +2,11 @@
 // Licensed under the MIT License. See License in the project root for license information.
 
 'use strict';
-var utils = require('../test/util/utils'),
+const utils = require('../test/util/utils'),
   path = require('path'),
-  fs = require('fs'),
+  fs = require('fs-extra'),
   os = require('os'),
-  execSync = require('child_process').execSync,
+  exec = require('util').promisify(require('child_process').exec),
   oad = require('oad');
 
 // This map is used to store the mapping between files resolved and stored location
@@ -16,8 +16,8 @@ let outputFolder = path.join(os.tmpdir(), "resolved");
 let isRunningInTravisCI = process.env.TRAVIS === 'true';
 
 const headerText = `
-| | Rule | File | Message | Location |
-|-|------|------|---------| -------- |
+| | Rule | Location | Message |
+|-|------|----------|---------|
 `;
 
 function iconFor(type) {
@@ -32,8 +32,12 @@ function iconFor(type) {
   }
 }
 
+function shortName(filePath) {
+  return `${path.basename(path.dirname(filePath))}/&#8203;<strong>${path.basename(filePath)}</strong>`;
+}
+
 function tableLine(filePath, diff) {
-  return `|${iconFor(diff['type'])}|**${diff['type']} [${diff['id']} - ${diff['code']}](https://github.com/Azure/openapi-diff/blob/master/docs/rules/${diff['id']}.md)**|[${path.basename(filePath)}](${blobHref(filePath)} "${filePath}")|${diff['message']}|<details><summary>JSONPath</summary>\`${diff['json-path']}\`</details>|\n`;
+  return `|${iconFor(diff['type'])}|[${diff['type']} ${diff['id']} - ${diff['code']}](https://github.com/Azure/openapi-diff/blob/master/docs/rules/${diff['id']}.md)|[${shortName(filePath)}](${blobHref(filePath)} "${filePath}")|${diff['message']}|\n`;
 }
 
 function blobHref(file) {
@@ -61,12 +65,15 @@ async function runOad(oldSpec, newSpec) {
   console.log(`New Spec: "${newSpec}"`);
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
-  const result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
+  let result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
   console.log(result);
 
   if (!result) {
     return;
   }
+
+  // fix up output from OAD, it does not output valid JSON
+  result = '[' + result.replace(/}\s+{/gi,"},{") + ']'
 
   return JSON.parse(result);
 }
@@ -76,27 +83,24 @@ async function runOad(oldSpec, newSpec) {
  *
  * @param {string} swaggerPath Path to the swagger specification file.
  */
-function processViaAutoRest(swaggerPath) {
+async function processViaAutoRest(swaggerPath) {
   if (swaggerPath === null || swaggerPath === undefined || typeof swaggerPath.valueOf() !== 'string' || !swaggerPath.trim().length) {
-    return Promise.reject(new Error('swaggerPath is a required parameter of type "string" and it cannot be an empty string.'));
+    throw new Error('swaggerPath is a required parameter of type "string" and it cannot be an empty string.');
   }
 
-  console.log(`Processing via AutoRest...`);
-
-  let outputFileNameWithExt = path.basename(swaggerPath);
-  let outputFileNameWithoutExt = path.basename(swaggerPath, '.json');
-  let autoRestCmd = `autorest --input-file=${swaggerPath} --output-artifact=swagger-document.json --output-file=${outputFileNameWithoutExt} --output-folder=${outputFolder}`;
+  const swaggerOutputFolder = path.join(outputFolder, path.dirname(swaggerPath));
+  const swaggerOutputFileNameWithoutExt = path.basename(swaggerPath, '.json');
+  const autoRestCmd = `autorest --input-file=${swaggerPath} --output-artifact=swagger-document.json --output-file=${swaggerOutputFileNameWithoutExt} --output-folder=${swaggerOutputFolder}`;
 
   console.log(`Executing : ${autoRestCmd}`);
 
   try {
-    let result = execSync(`${autoRestCmd}`, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
-    resolvedMapForNewSpecs[outputFileNameWithExt] = path.join(outputFolder, outputFileNameWithExt);
+    await fs.ensureDir(swaggerOutputFolder);
+    await exec(`${autoRestCmd}`, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
+    resolvedMapForNewSpecs[swaggerPath] = path.join(swaggerOutputFolder, swaggerOutputFileNameWithoutExt + '.json');
   } catch (err) {
-    // Do not update map in case of errors.
+    console.log(`Error processing via AutoRest: ${err}`);
   }
-
-  return Promise.resolve();
 }
 
 //main function
@@ -104,21 +108,13 @@ async function runScript() {
   // See whether script is in Travis CI context
   console.log(`isRunningInTravisCI: ${isRunningInTravisCI}`);
 
-  // Create directory to store the processed & resolved swaggers
-  if (!fs.existsSync(outputFolder)) {
-    fs.mkdirSync(outputFolder);
-  }
-
   let targetBranch = utils.getTargetBranch();
   let swaggersToProcess = utils.getFilesChangedInPR();
 
   console.log('Processing swaggers:');
   console.log(swaggersToProcess);
 
-  for (const swagger of swaggersToProcess) {
-    await processViaAutoRest(swagger);
-  }
-
+  console.log('Finding new swaggers...')
   let newSwaggers = [];
   if (isRunningInTravisCI && swaggersToProcess.length > 0) {
     newSwaggers = await utils.doOnBranch(utils.getTargetBranch(), async () => {
@@ -126,11 +122,18 @@ async function runScript() {
     });
   }
 
-  console.log(`Resolved map for the new specification is:`);
+  console.log('Processing via AutoRest...');
+  for (const swagger of swaggersToProcess) {
+    if (!newSwaggers.includes(swagger)) {
+      await processViaAutoRest(swagger);
+    }
+  }
+
+  console.log(`Resolved map for the new specifications:`);
   console.dir(resolvedMapForNewSpecs);
 
   let errors = 0, warnings = 0;
-  const diffFiles = [];
+  const diffFiles = {};
   const newFiles = [];
 
   for (const swagger of swaggersToProcess) {
@@ -141,20 +144,20 @@ async function runScript() {
       continue;
     }
 
-    let outputFileNameWithExt = path.basename(swagger);
-    console.log(outputFileNameWithExt);
-    if (resolvedMapForNewSpecs[outputFileNameWithExt]) {
-      const diff = await runOad(swagger, resolvedMapForNewSpecs[outputFileNameWithExt]);
-      if (diff) {
-        diffFiles.push([swagger, diff]);
-        if (diff['type'] === 'Error') {
-          if (errors === 0) {
-            console.log(`There are potential breaking changes in this PR. Please review before moving forward. Thanks!`);
-            process.exitCode = 1;
+    if (resolvedMapForNewSpecs[swagger]) {
+      const diffs = await runOad(swagger, resolvedMapForNewSpecs[swagger]);
+      if (diffs) {
+        diffFiles[swagger] = diffs;
+        for (const diff of diffs) {
+          if (diff['type'] === 'Error') {
+            if (errors === 0) {
+              console.log(`There are potential breaking changes in this PR. Please review before moving forward. Thanks!`);
+              process.exitCode = 1;
+            }
+            errors += 1;
+          } else if (diff['type'] === 'Warning') {
+            warnings += 1;
           }
-          errors += 1;
-        } else if (diff['type'] === 'Warning') {
-          warnings += 1;
         }
       }
     }
@@ -171,14 +174,40 @@ async function runScript() {
 
     let message = '';
     if (newFiles.length > 0) {
-      message += 'The following files look to be newly added in this PR:\n';
-      newFiles.forEach(f => message += `* [${f}](${blobHref(f)})\n`);
+      message += '### The following files look to be newly added in this PR:\n';
+      newFiles.sort();
+      for (const swagger of newFiles) {
+        message += `* [${swagger}](${blobHref(swagger)})\n`;
+      }
       message += '<br><br>\n';
     }
 
-    if (diffFiles.length > 0) {
+    const diffFileNames = Object.keys(diffFiles);
+    if (diffFileNames.length > 0) {
+      message += '### OpenAPI diff results\n';
       message += headerText;
-      diffFiles.forEach(([swagger, diff]) => message += tableLine(swagger, diff));
+
+      diffFileNames.sort();
+      for (const swagger of diffFileNames) {
+        const diffs = diffFiles[swagger];
+        diffs.sort((a, b) => {
+          if (a.type === b.type) {
+            return a.id.localeCompare(b.id);
+          } else if (a.type === "Error") {
+            return 1;
+          } else if (b.type === "Error") {
+            return -1;
+          } else if (a.type === "Warning") {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+
+        for (const diff of diffs) {
+          message += tableLine(swagger, diff);
+        }
+      }
     } else {
       message += '**There were no files containing new errors or warnings.**\n';
     }

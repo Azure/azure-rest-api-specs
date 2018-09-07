@@ -7,7 +7,6 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: false
   package-name: azure-servicefabric
-  package-version: 2.0.0-preview
   output-folder: $(node-sdks-folder)/lib/services/serviceFabric
   override-client-name: ServiceFabricClient
   generate-license-txt: true

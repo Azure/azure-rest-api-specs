@@ -1,0 +1,57 @@
+{
+    "parameters": {
+      "subscriptionId": "mySubscriptionId",
+      "resourceGroupName": "myResourceGroupName",
+      "vmName": "myVMName",
+      "api-version": "2018-06-30-preview"
+    },
+    "responses": {
+      "200": {
+        "headers": {},
+        "body": [
+            {  
+                "location":"westcentralus",
+                "id":"/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/SecureProtocol",
+                "name":"SecureProtocol",
+                "properties":{  
+                "complianceStatus": "InProgress",
+                "complianceReason":null,
+                "assignmentHash":null,
+                "guestConfiguration":{  
+                    "kind":null,
+                    "name":"SecureProtocol",
+                    "version":"",
+                    "configurationParameter":[  
+            
+                    ],
+                    "contentUri":null,
+                    "contentHash":null
+                },
+                "provisioningState":null
+                }
+            },
+            {  
+                "location":"westcentralus",
+                "id":"/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/BlacklistedApplication",
+                "name":"BlacklistedApplication",
+                "properties":{  
+                "complianceStatus": "Compliant",
+                "complianceReason":null,
+                "assignmentHash":null,
+                "guestConfiguration":{  
+                    "kind":null,
+                    "name":"BlacklistedApplication",
+                    "version":"",
+                    "configurationParameter":[  
+            
+                    ],
+                    "contentUri":null,
+                    "contentHash":null
+                },
+                "provisioningState":null
+                }
+            }
+        ]
+      }
+    }
+  }
