@@ -1074,6 +1074,10 @@
       "properties": {
         "location": {
           "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+           ],
           "description": "The location the resource resides in."
         },
         "tags": {
@@ -1569,6 +1573,7 @@
           "description": "Operation description."
         }
       },
+      "readOnly": true,
       "description": "Display metadata associated with the operation."
     },
     "Operation": {
@@ -1646,6 +1651,7 @@
         },
         "url": {
           "type": "string",
+          "readOnly": true,
           "description": "The url to download the log file from."
         }
       },

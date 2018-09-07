@@ -22,9 +22,11 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the Sql API.
+These are the global settings for the MariaDB API.
 
 ``` yaml
+title: MariaDBManagementClient
+description: MariaDB Client
 openapi-type: arm
 tag: package-2018-06-01-preview
 ```
