@@ -57,7 +57,6 @@ directive:
     where: $.paths
     reason: Microsoft.GuestConfiguration is a proxy resource provider under Microsoft.Compute. However, Operations API for is implmented. So, suppressing the false positive. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/540
 ```
-
 ---
 # Code Generation
 
