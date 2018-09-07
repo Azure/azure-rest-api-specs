@@ -103,6 +103,9 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
+- Microsoft.Sql/preview/2017-10-01-preview/InterfaceEndpointProfiles.json 
 
 
 # Needed when there is more than one input file
@@ -177,6 +180,9 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
+- Microsoft.Sql/preview/2017-10-01-preview/InterfaceEndpointProfiles.json 
 
 # Needed when there is more than one input file
 override-info:
@@ -244,6 +250,9 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
+- Microsoft.Sql/preview/2017-10-01-preview/InterfaceEndpointProfiles.json 
 
 # Needed when there is more than one input file
 override-info:
@@ -409,6 +418,8 @@ input-file:
  - ./Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
 
 # Needed when there is more than one input file
 override-info:
