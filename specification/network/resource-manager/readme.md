@@ -53,6 +53,7 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/loadBalancer.json
   - Microsoft.Network/stable/2018-08-01/network.json
   - Microsoft.Network/stable/2018-08-01/networkInterface.json
+  - Microsoft.Network/stable/2018-08-01/networkProfile.json
   - Microsoft.Network/stable/2018-08-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2018-08-01/networkWatcher.json
   - Microsoft.Network/stable/2018-08-01/operation.json
@@ -703,6 +704,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: interfaceEndpoint.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkProfile.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: availableDelegations.json
