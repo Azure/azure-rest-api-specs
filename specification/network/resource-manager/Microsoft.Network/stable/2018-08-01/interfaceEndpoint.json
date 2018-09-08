@@ -284,28 +284,29 @@
           "description": "A reference to the service being brought into the virtual network."
         },
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet",
-          "description": "Subnet bound to the IP configuration."
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The ID of the subnet from which the private IP will be allocated."
         },
         "networkInterfaces": {
-          "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./networkInterface.json#/definitions/NetworkInterface"
+            "$ref": "./network.json#/definitions/SubResource"
           },
-          "provisioningState": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The provisioning state of the network interface IP configuration. Possible values are: 'Updating', 'Deleting', and 'Failed'."
-          },
-          "owner": {
-            "type": "string",
-            "readOnly": true,
-            "description": "A read-only property that identifies who created this interface endpoint."
-          }
+          "description": "Gets an array of references to the network interfaces created for this interface endpoint."
         },
-        "description": "Properties of the interface endpoint."
+        "owner": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A read-only property that identifies who created this interface endpoint."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the network interface IP configuration. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
       },
+      "description": "Properties of the interface endpoint."
+    },
     "EndpointService": {
       "properties": {
         "id": {
