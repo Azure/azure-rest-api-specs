@@ -870,8 +870,7 @@
     "PlatformProperties": {
       "description": "The platform properties against which the run has to happen.",
       "required": [
-        "os",
-        "architecture"
+        "os"
       ],
       "type": "object",
       "properties": {
@@ -1149,8 +1148,8 @@
           "description": "The type of the step.",
           "enum": [
             "Docker",
-            "BuildTask",
-            "RunTask"
+            "FileTask",
+            "EncodedTask"
           ],
           "type": "string",
           "readOnly": true,
@@ -1486,8 +1485,8 @@
           "description": "The type of the step.",
           "enum": [
             "Docker",
-            "BuildTask",
-            "RunTask"
+            "FileTask",
+            "EncodedTask"
           ],
           "type": "string",
           "readOnly": true,
@@ -1810,11 +1809,11 @@
         }
       }
     },
-    "BuildTaskRequest": {
-      "description": "The request parameters for a quick task build.",
+    "FileTaskRunRequest": {
+      "description": "The request parameters for a scheduling run against a task file.",
       "required": [
         "type",
-        "definitionFilePath",
+        "taskFilePath",
         "sourceLocation",
         "platform"
       ],
@@ -1825,7 +1824,7 @@
         }
       ],
       "properties": {
-        "definitionFilePath": {
+        "taskFilePath": {
           "description": "The template/definition file path relative to the source.",
           "type": "string"
         },
@@ -1861,7 +1860,7 @@
           "description": "The machine configuration of the build agent."
         }
       },
-      "x-ms-discriminator-value": "BuildTaskRequest"
+      "x-ms-discriminator-value": "FileTaskRunRequest"
     },
     "SetValue": {
       "description": "The properties of a overridable value that can be passed to a task template.",
@@ -1913,11 +1912,11 @@
       },
       "x-ms-discriminator-value": "TaskRunRequest"
     },
-    "QuickTaskRunRequest": {
+    "EncodedTaskRunRequest": {
       "description": "The parameters for a quick task run request.",
       "required": [
         "type",
-        "taskDefinitionContent",
+        "encodedTaskContent",
         "platform"
       ],
       "type": "object",
@@ -1927,11 +1926,11 @@
         }
       ],
       "properties": {
-        "taskDefinitionContent": {
+        "encodedTaskContent": {
           "description": "Base64 encoded value of the template/definition file content.",
           "type": "string"
         },
-        "valuesContent": {
+        "encodedValuesContent": {
           "description": "Base64 encoded value of the parameters/values file content.",
           "type": "string"
         },
@@ -1959,7 +1958,7 @@
           "description": "The machine configuration of the build agent."
         }
       },
-      "x-ms-discriminator-value": "QuickTaskRunRequest"
+      "x-ms-discriminator-value": "EncodedTaskRunRequest"
     },
     "DockerBuildStep": {
       "description": "The Docker build step.",
@@ -2008,10 +2007,10 @@
       },
       "x-ms-discriminator-value": "Docker"
     },
-    "BuildTaskStep": {
-      "description": "The properties of a build task step.",
+    "FileTaskStep": {
+      "description": "The properties of a task step.",
       "required": [
-        "definitionFilePath"
+        "taskFilePath"
       ],
       "type": "object",
       "allOf": [
@@ -2020,8 +2019,8 @@
         }
       ],
       "properties": {
-        "definitionFilePath": {
-          "description": "The build task template/definition file path relative to the source context.",
+        "taskFilePath": {
+          "description": "The task template/definition file path relative to the source context.",
           "type": "string"
         },
         "valuesFilePath": {
@@ -2040,12 +2039,12 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "BuildTask"
+      "x-ms-discriminator-value": "FileTask"
     },
-    "RunTaskStep": {
-      "description": "The properties of a generic task run step.",
+    "EncodedTaskStep": {
+      "description": "The properties of a encoded task step.",
       "required": [
-        "taskDefinitionContent"
+        "encodedTaskContent"
       ],
       "type": "object",
       "allOf": [
@@ -2054,11 +2053,11 @@
         }
       ],
       "properties": {
-        "taskDefinitionContent": {
+        "encodedTaskContent": {
           "description": "Base64 encoded value of the template/definition file content.",
           "type": "string"
         },
-        "valuesContent": {
+        "encodedValuesContent": {
           "description": "Base64 encoded value of the parameters/values file content.",
           "type": "string"
         },
@@ -2070,7 +2069,7 @@
           }
         }
       },
-      "x-ms-discriminator-value": "RunTask"
+      "x-ms-discriminator-value": "EncodedTask"
     },
     "DockerBuildStepUpdateParameters": {
       "description": "The properties for updating a docker build step.",
@@ -2114,8 +2113,8 @@
       },
       "x-ms-discriminator-value": "Docker"
     },
-    "BuildTaskStepUpdateParameters": {
-      "description": "The properties of updating a build task step.",
+    "FileTaskStepUpdateParameters": {
+      "description": "The properties of updating a task step.",
       "type": "object",
       "allOf": [
         {
@@ -2123,12 +2122,12 @@
         }
       ],
       "properties": {
-        "definitionFilePath": {
-          "description": "The build task template/definition file path relative to the source context.",
+        "taskFilePath": {
+          "description": "The task template/definition file path relative to the source context.",
           "type": "string"
         },
         "valuesFilePath": {
-          "description": "The task values/parameters file path relative to the source context.",
+          "description": "The values/parameters file path relative to the source context.",
           "type": "string"
         },
         "values": {
@@ -2143,10 +2142,10 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "BuildTask"
+      "x-ms-discriminator-value": "FileTask"
     },
-    "RunTaskStepUpdateParameters": {
-      "description": "The properties for updating generic task run step.",
+    "EncodedTaskStepUpdateParameters": {
+      "description": "The properties for updating encoded task step.",
       "type": "object",
       "allOf": [
         {
@@ -2154,11 +2153,11 @@
         }
       ],
       "properties": {
-        "taskDefinitionContent": {
+        "encodedTaskContent": {
           "description": "Base64 encoded value of the template/definition file content.",
           "type": "string"
         },
-        "valuesContent": {
+        "encodedValuesContent": {
           "description": "Base64 encoded value of the parameters/values file content.",
           "type": "string"
         },
@@ -2170,7 +2169,7 @@
           }
         }
       },
-      "x-ms-discriminator-value": "RunTask"
+      "x-ms-discriminator-value": "EncodedTask"
     }
   },
   "parameters": {

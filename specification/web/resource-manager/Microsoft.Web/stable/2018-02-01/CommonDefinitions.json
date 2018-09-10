@@ -860,37 +860,53 @@
     "DeletedSite": {
       "description": "A deleted app.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "deletedSiteId": {
-          "format": "int32",
-          "description": "Numeric id for the deleted site",
-          "type": "integer",
-          "readOnly": true
-        },
-        "deletedTimestamp": {
-          "description": "Time in UTC when the app was deleted.",
-          "type": "string",
-          "readOnly": true
-        },
-        "subscription": {
-          "description": "Subscription containing the deleted site",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceGroup": {
-          "description": "ResourceGroup that contained the deleted site",
-          "type": "string",
-          "readOnly": true
-        },
-        "deletedSiteName": {
-          "description": "Name of the deleted site",
-          "type": "string",
-          "readOnly": true
-        },
-        "slot": {
-          "description": "Slot of the deleted site",
-          "type": "string",
-          "readOnly": true
+        "properties": {
+          "description": "DeletedSite resource specific properties",
+          "properties": {
+            "deletedSiteId": {
+              "format": "int32",
+              "description": "Numeric id for the deleted site",
+              "type": "integer",
+              "readOnly": true
+            },
+            "deletedTimestamp": {
+              "description": "Time in UTC when the app was deleted.",
+              "type": "string",
+              "readOnly": true
+            },
+            "subscription": {
+              "description": "Subscription containing the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "resourceGroup": {
+              "description": "ResourceGroup that contained the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "deletedSiteName": {
+              "description": "Name of the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "slot": {
+              "description": "Slot of the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "kind": {
+              "description": "Kind of site that was deleted",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },

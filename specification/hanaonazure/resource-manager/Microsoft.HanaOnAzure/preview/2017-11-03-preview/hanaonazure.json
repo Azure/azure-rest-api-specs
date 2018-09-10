@@ -194,6 +194,45 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/restart": {
+            "post": {
+                "tags": [
+                    "HanaOnAzure"
+                ],
+                "operationId": "HanaInstances_Restart",
+                "description": "The operation to restart a SAP HANA instance.",
+                "x-ms-examples": {
+                    "Restart a HANA instance": {
+                        "$ref": "./examples/HanaInstances_Restart.json"
+                    }
+                },
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HanaInstanceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                }
+            }
         }
     },
     "definitions": {

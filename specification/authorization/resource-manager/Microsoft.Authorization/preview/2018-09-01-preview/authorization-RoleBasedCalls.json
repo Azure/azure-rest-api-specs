@@ -1139,7 +1139,23 @@
         },
         "principalType": {
           "type": "string",
-          "description": "The principal type of the assigned principal ID, e.g. user, service principal."
+          "description": "The principal type of the assigned principal ID.",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal",
+            "Unknown",
+            "DirectoryRoleTemplate",
+            "ForeignGroup",
+            "Application",
+            "MSI",
+            "DirectoryObjectOrGroup",
+            "Everyone"
+          ],
+          "x-msenum": {
+            "name": "PrincipalType",
+            "modelAsString":  true
+          }
         },
         "canDelegate": {
           "type": "boolean",
