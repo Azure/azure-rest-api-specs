@@ -765,6 +765,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Sub Resource type."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the network interface IP configuration. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
       "allOf": [
@@ -932,6 +937,7 @@
           "description": "The reference of the NetworkSecurityGroup resource."
         },
         "interfaceEndpoint": {
+          "readOnly":  true,
           "$ref": "./interfaceEndpoint.json#/definitions/InterfaceEndpoint",
           "description": "A reference to the interface endpoint to which the network interface is linked."
         },
