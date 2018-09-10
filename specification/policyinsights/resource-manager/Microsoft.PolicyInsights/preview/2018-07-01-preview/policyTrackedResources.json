@@ -45,13 +45,13 @@
             "$ref": "#/parameters/policyTrackedResourcesResourceParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/topParameter"
           },
           {
             "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -87,19 +87,19 @@
         "description": "Queries policy tracked resources under the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/policyTrackedResourcesResourceParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "$ref": "#/parameters/topParameter"
           },
           {
             "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -135,22 +135,22 @@
         "description": "Queries policy tracked resources under the resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/policyTrackedResourcesResourceParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/topParameter"
           },
           {
             "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -192,13 +192,13 @@
             "$ref": "#/parameters/policyTrackedResourcesResourceParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/topParameter"
           },
           {
             "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -266,102 +266,103 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PolicyTrackedResource"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of results."
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
         }
       }
     },
     "PolicyTrackedResource": {
       "type": "object",
       "description": "Policy tracked resource record.",
-      "required" : [
-        "trackedResourceId",
-        "policyDetails",
-        "lastUpdateUtc"
-      ],
       "properties": {
         "trackedResourceId": {
           "description": "The ID of the policy tracked resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyDetails": {
           "$ref": "#/definitions/PolicyDetails",
-          "description": "The details of the policy that require the tracked resource."
+          "description": "The details of the policy that require the tracked resource.",
+          "readOnly": true
         },
         "createdBy": {
           "$ref": "#/definitions/TrackedResourceModificationDetails",
-          "description": "The details of the policy triggered deployment that created the tracked resource."
+          "description": "The details of the policy triggered deployment that created the tracked resource.",
+          "readOnly": true
         },
         "lastModifiedBy": {
           "$ref": "#/definitions/TrackedResourceModificationDetails",
-          "description": "The details of the policy triggered deployment that modified the tracked resource."
+          "description": "The details of the policy triggered deployment that modified the tracked resource.",
+          "readOnly": true
         },
         "lastUpdateUtc": {
           "description": "Timestamp of the last update to the tracked resource.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
     "TrackedResourceModificationDetails": {
       "type": "object",
       "description": "The details of the policy triggered deployment that created or modified the tracked resource.",
-      "required" : [
-        "policyDetails",
-        "deploymentId",
-        "deploymentTime"
-      ],
       "properties": {
         "policyDetails": {
           "$ref": "#/definitions/PolicyDetails",
-          "description": "The details of the policy that created or modified the tracked resource."
+          "description": "The details of the policy that created or modified the tracked resource.",
+          "readOnly": true
         },
         "deploymentId": {
           "description": "The ID of the deployment that created or modified the tracked resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "deploymentTime": {
           "description": "Timestamp of the deployment that created or modified the tracked resource.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
     "PolicyDetails": {
       "type": "object",
       "description": "The policy details.",
-      "required" : [
-        "policyDefinitionId",
-        "policyAssignmentId",
-        "policyAssignmentScope"
-      ],
       "properties": {
         "policyDefinitionId": {
           "description": "The ID of the policy definition.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyAssignmentId": {
           "description": "The ID of the policy assignment.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyAssignmentDisplayName": {
           "description": "The display name of the policy assignment.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyAssignmentScope": {
           "description": "The scope of the policy assignment.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policySetDefinitionId": {
           "description": "The ID of the policy set definition.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyDefinitionReferenceId": {
           "description": "The policy definition reference ID within the policy set definition.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -373,11 +374,13 @@
           "properties": {
             "code": {
               "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "message": {
               "description": "Description of the error.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             }
           }
         }
@@ -390,14 +393,16 @@
           "description": "OData entity count; represents the number of policy state records returned.",
           "type": "integer",
           "format": "int32",
-          "minimum": 0
+          "minimum": 0,
+          "readOnly": true
         },
         "value": {
           "description": "List of available operations.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -406,26 +411,31 @@
       "properties": {
         "name": {
           "description": "Operation name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "display": {
           "description": "Display metadata associated with the operation.",
           "properties": {
             "provider": {
               "description": "Resource provider name.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "resource": {
               "description": "Resource name on which the operation is performed.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "operation": {
               "description": "Operation name.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "description": {
               "description": "Operation description.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             }
           }
         }
@@ -463,14 +473,6 @@
       "description": "Management group name.",
       "x-ms-parameter-location": "method"
     },
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Microsoft Azure subscription ID.",
-      "x-ms-parameter-location": "method"
-    },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
@@ -487,14 +489,6 @@
       "description": "Resource ID.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
-    },
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "API version to use with the client requests.",
-      "x-ms-parameter-location": "client"
     },
     "topParameter": {
       "name": "$top",
@@ -521,6 +515,20 @@
         "name": "QueryOptions"
       },
       "x-ms-client-name": "Filter"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     }
   }
 }
