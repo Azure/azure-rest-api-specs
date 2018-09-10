@@ -22,7 +22,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProvider}/{resourceTypeName}/{resourceName}/metrics": {
       "post": {
         "summary": "Ingestion API used by Azure custom metrics\r\n            Responsible of below operation\r\n            1. Authorize the request\r\n            2. Deserialize payload request body\r\n            3. Perform validation of the payload\r\n            4. Commits the payload for metrics ingestion",
-        "operationId": "postSubscriptionsBySubscriptionIdResourcegroupsByResourceGroupNameProvidersByResourceProviderByResourceTypeNameByResourceNameMetrics",
+        "operationId": "azureMonitorCustomMetricsIngestionApi",
         "consumes": [
           "application/json"
         ],
@@ -101,47 +101,16 @@
               "$ref": "#/definitions/Microsoft.AspNetCore.Mvc.ObjectResult"
             }
           },
-          "400": {
-            "description": "Bad request with error message",
+          "default": {
+            "description": "An unexpected error from the server. See response object for the reason",
             "schema": {
               "$ref": "#/definitions/Microsoft.AspNetCore.Mvc.ObjectResult"
             }
-          },
-          "401": {
-            "description": "Unauthorized to publish metrics",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.AspNetCore.Mvc.ObjectResult"
-            }
-          },
-          "403": {
-            "description": "Forbidden to publish metrics",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.AspNetCore.Mvc.ObjectResult"
-            }
-          },
-          "404": {
-            "description": "The resource ID sent is not found",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.AspNetCore.Mvc.ObjectResult"
-            }
-          },
-          "411": {
-            "description": "The required Content-length header is missing.",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.AspNetCore.Mvc.ObjectResult"
-            }
-          },
-          "413": {
-            "description": "The request is too large for the server to process",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.AspNetCore.Mvc.ObjectResult"
-            }
-          },
-          "415": {
-            "description": "Unsupported media type received. Accepts only application/json and application/x-ndjson",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.AspNetCore.Mvc.ObjectResult"
-            }
+          }
+        },
+        "x-ms-example": {
+          "Post azure metrics for cows sold with related metadata as dimensions": {
+            "$ref": "./examples/AzureMetrics_IngestMetrics.json"
           }
         }
       }
