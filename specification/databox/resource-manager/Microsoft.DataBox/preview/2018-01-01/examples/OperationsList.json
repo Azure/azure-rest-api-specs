@@ -7,12 +7,23 @@
       "body": {
         "value": [
           {
-            "name": "Microsoft.DataBox/jobs/listSecrets/action",
+            "name": "Microsoft.DataBox/locations/validateAddress/action",
             "display": {
               "provider": "Azure Data Box",
-              "resource": "Orders",
-              "operation": "List Secrets",
-              "description": "Lists the unencrypted secrets related to the order."
+              "resource": "Validate Address",
+              "operation": "Validate Address",
+              "description": "Validates the shipping address and provides alternate addresses if any."
+            },
+            "properties": {},
+            "origin": "user"
+          },
+          {
+            "name": "Microsoft.DataBox/locations/availableSkus/action",
+            "display": {
+              "provider": "Azure Data Box",
+              "resource": "Available Skus",
+              "operation": "Availabe Skus",
+              "description": "This method returns the list of available skus."
             },
             "properties": {},
             "origin": "user"
@@ -24,39 +35,6 @@
               "resource": "Orders",
               "operation": "Cancel",
               "description": "Cancels an order in progress."
-            },
-            "properties": {},
-            "origin": "user"
-          },
-          {
-            "name": "Microsoft.DataBox/jobs/reportIssue/action",
-            "display": {
-              "provider": "Azure Data Box",
-              "resource": "Orders",
-              "operation": "Report Issue",
-              "description": "Reports an issue in the order."
-            },
-            "properties": {},
-            "origin": "user"
-          },
-          {
-            "name": "Microsoft.DataBox/jobs/copyLogsUri/action",
-            "display": {
-              "provider": "Azure Data Box",
-              "resource": "Orders",
-              "operation": "Copy Log URL",
-              "description": "Get URL for the copy logs of each destination account."
-            },
-            "properties": {},
-            "origin": "user"
-          },
-          {
-            "name": "Microsoft.DataBox/jobs/downloadShippingLabel/action",
-            "display": {
-              "provider": "Azure Data Box",
-              "resource": "Orders",
-              "operation": "Download Shipping Label",
-              "description": "Get shipping label for the return shipment."
             },
             "properties": {},
             "origin": "user"
@@ -106,32 +84,12 @@
             "origin": "user"
           },
           {
-            "name": "Microsoft.DataBox/locations/validateAddress/action",
+            "name": "Microsoft.DataBox/jobs/listSecrets/action",
             "display": {
               "provider": "Azure Data Box",
-              "resource": "Validate Address",
-              "operation": "Validate Address",
-              "description": "Validates the shipping address and provides alternate addresses if any."
-            },
-            "properties": {},
-            "origin": "user"
-          },
-          {
-            "name": "Microsoft.DataBox/locations/regionAvailability/action",
-            "display": {
-              "provider": "Azure Data Box",
-              "resource": "Region Availability",
-              "operation": "Region Availability",
-              "description": "This method returns the list of supported regions for the service and for destination storage accounts."
-            },
-            "properties": {},
-            "origin": "user"
-          },
-          {
-            "name": "Microsoft.DataBox/locations/availableSkus/action",
-            "display": {
-              "provider": "Azure Data Box",
-              "resource": "ArmApiRes_availableSkus"
+              "resource": "Orders",
+              "operation": "List Secrets",
+              "description": "Lists the unencrypted secrets related to the order."
             },
             "properties": {},
             "origin": "user"
