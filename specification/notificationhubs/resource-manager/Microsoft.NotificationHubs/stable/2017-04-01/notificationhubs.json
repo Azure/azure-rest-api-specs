@@ -820,6 +820,64 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "NotificationHubs"
+        ],
+        "x-ms-examples": {
+          "notificationhubPatch": {
+            "$ref": "./examples/NotificationHubs/NotificationHubPatch.json"
+          }
+        },
+        "operationId": "NotificationHubs_Patch",
+        "description": "Patch a NotificationHub in a namespace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "notificationHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The notification hub name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/NotificationHubPatchParameters"
+            },
+            "description": "Parameters supplied to patch a NotificationHub Resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NotificationHub is patched",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubResource"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "NotificationHubs"
@@ -911,6 +969,66 @@
             "description": "Get the NotificationHub",
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/debugsend": {
+      "post": {
+        "tags": [
+          "NotificationHubs"
+        ],
+        "x-ms-examples": {
+          "debugsend": {
+            "$ref": "./examples/NotificationHubs/NotificationHubDebugSend.json"
+          }
+        },
+        "operationId": "NotificationHubs_DebugSend",
+        "description": "test send a push notification",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "notificationHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The notification hub name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DebugSendParameters"
+            },
+            "description": "Debug send parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "push send status",
+            "schema": {
+              "$ref": "#/definitions/DebugSendResponse"
             }
           }
         }
@@ -1474,8 +1592,7 @@
         }
       },
       "required": [
-        "name",
-        "location"
+        "name"
       ],
       "description": "Parameters supplied to the Check Name Availability for Namespace and NotificationHubs."
     },
@@ -2017,11 +2134,45 @@
       ],
       "description": "Parameters supplied to the CreateOrUpdate NotificationHub operation."
     },
+    "NotificationHubPatchParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NotificationHubProperties",
+          "description": "Properties of the NotificationHub."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Parameters supplied to the patch NotificationHub operation."
+    },
+    "DebugSendParameters": {
+      "description": "Debug Send payload",
+      "type": "object"
+    },
     "NotificationHubResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NotificationHubProperties",
+          "description": "Properties of the NotificationHub."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a NotificationHub Resource."
+    },
+    "DebugSendResponse": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DebugSendResult",
           "description": "Properties of the NotificationHub."
         }
       },
@@ -2132,6 +2283,23 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DebugSendResult": {
+      "properties": {
+        "success": {
+          "type": "number",
+          "description": "successful send"
+        },
+        "failure": {
+          "type": "number",
+          "description": "send failure"
+        },
+        "results": {
+          "type": "object",
+          "description": "actual failure description"
         }
       },
       "x-ms-azure-resource": true

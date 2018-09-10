@@ -26,9 +26,17 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11
+tag: package-2018-06
 ```
 
+### Tag: package-2018-06
+
+These settings apply only when `--tag=package-2018-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06'
+input-file:
+- Microsoft.Capacity/preview/2018-06-01/reservations.json
+```
 
 ### Tag: package-2017-11
 
@@ -51,7 +59,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
 ```
 
@@ -83,6 +90,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.reservations
   package-name: azure-mgmt-reservations
+  package-version: 0.2.2
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -112,7 +120,17 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-06
   - tag: package-2017-11
+```
+
+### Tag: package-2018-06 and go
+
+These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-06' && $(go)
+output-folder: $(go-sdk-folder)/services/reservations/mgmt/2018-06-01/reservations
 ```
 
 ### Tag: package-2017-11 and go
@@ -122,20 +140,4 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2017-11' && $(go)
 output-folder: $(go-sdk-folder)/services/reservations/mgmt/2017-11-01/reservations
-```
-
-
-## Java
-
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.reservations
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-reservations
 ```

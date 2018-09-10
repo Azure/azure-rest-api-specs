@@ -469,7 +469,7 @@
     },
     "ContainerServiceVnetSubnetID": {
       "type": "string",
-      "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+      "description": "VNet SubnetID specifies the vnet's subnet identifier."
     },
     "ContainerServiceVMSize": {
       "type": "string",
@@ -727,7 +727,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "firstConsecutiveStaticIP": {
           "type": "string",
@@ -796,7 +796,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
+          "description": "VNet SubnetID specifies the vnet's subnet identifier."
         },
         "osType": {
           "$ref": "#/definitions/OSType",
@@ -833,7 +833,7 @@
         "adminUsername": {
           "type": "string",
           "description": "The administrator username to use for Linux VMs.",
-          "pattern": "^[a-z][a-z0-9_-]*$"
+          "pattern": "^[A-Za-z][-A-Za-z0-9_]*$"
         },
         "ssh": {
           "$ref": "#/definitions/ContainerServiceSshConfiguration",

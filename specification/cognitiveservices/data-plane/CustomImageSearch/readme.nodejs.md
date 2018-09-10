@@ -6,8 +6,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-customimagesearch
-  package-version: 1.0.0-preview
-  output-folder: $(node-sdks-folder)/lib/services/customImageSearch
+  output-folder: $(node-sdks-folder)/lib/services/cognitiveServicesCustomImageSearch
   override-client-name: CustomImageSearchAPIClient
   azure-arm: false
   generate-license-txt: true
