@@ -108,6 +108,7 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/InterfaceEndpointProfiles.json 
 
 
+
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient

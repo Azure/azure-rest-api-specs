@@ -625,6 +625,12 @@
           "description": "The latest version on download center.",
           "type": "string",
           "readOnly": true
+        },
+        "autoUpdateETA": {
+          "description": "The estimated time when the self-hosted integration runtime will be updated.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
@@ -761,6 +767,7 @@
           "description": "The result of the last integration runtime node update.",
           "type": "string",
           "enum": [
+            "None",
             "Succeed",
             "Fail"
           ],
