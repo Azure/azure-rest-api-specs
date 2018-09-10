@@ -8506,15 +8506,18 @@
       "properties": {
         "id": {
           "description": "The Resource Id",
-          "type": "string"
+          "type": "string",
+          "readOnly": true	  
         },
         "name": {
           "description": "The Resource Name",
-          "type": "string"
+          "type": "string",
+          "readOnly": true	  
         },
         "type": {
           "description": "The Resource type",
-          "type": "string"
+          "type": "string",
+          "readOnly": true	  
         },
         "location": {
           "description": "The Geo location of the Manager",
@@ -9220,7 +9223,7 @@
     "UploadCertificateResponse": {
       "description": "Upload Certificate Response from IDM",
       "required": [
-        "resourceAADDetails"
+        "resourceAadDetails"
       ],
       "type": "object",
       "allOf": [
@@ -9229,7 +9232,7 @@
         }
       ],
       "properties": {
-        "resourceAADDetails": {
+        "resourceAadDetails": {
           "$ref": "#/definitions/ResourceCertificateAndAADDetails",
           "description": "Gets or sets Properties"
         },
