@@ -2131,6 +2131,10 @@
             "modelAsString": true
           }
         },
+        "connectionProtocol": {
+          "$ref":  "#/definitions/ConnectionProtocol",
+          "description": "Connection protocol used for this connection"
+        },
         "routingWeight": {
           "type": "integer",
           "format": "int32",
@@ -2415,6 +2419,18 @@
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection"
     },
+    "ConnectionProtocol": {
+        "type": "string",
+        "description": "Gateway connection protocol. Possible values are: 'IKEv2', 'IKEv1'.",
+        "enum": [
+          "IKEv2",
+          "IKEv1"
+        ],
+        "x-ms-enum": {
+          "name": "VirtualNetworkGatewayConnectionProtocol",
+          "modelAsString": true
+        }
+    },
     "VpnClientIPsecParameters": {
       "properties": {
         "saLifeTimeSeconds": {
@@ -2653,6 +2669,10 @@
             "name": "VirtualNetworkGatewayConnectionType",
             "modelAsString": true
           }
+        },
+        "connectionProtocol": {
+            "$ref":  "#/definitions/ConnectionProtocol",
+            "description": "Connection protocol used for this connection"
         },
         "routingWeight": {
           "type": "integer",
