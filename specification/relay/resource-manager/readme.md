@@ -1,5 +1,5 @@
 # Relay
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Relay.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Relay.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Relay, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Relay API.
 
 ``` yaml
@@ -62,10 +62,16 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_relay']
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -98,7 +104,7 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-relay/azure/mgmt/remay
+  output-folder: $(python-sdks-folder)/azure-mgmt-relay/azure/mgmt/relay
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
@@ -118,6 +124,14 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-04
+  - tag: package-2016-07
+```
+
 ### Tag: package-2017-04 and go
 
 These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
@@ -135,3 +149,54 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2016-07' && $(go)
 output-folder: $(go-sdk-folder)/services/relay/mgmt/2016-07-01/relay
 ```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.relay
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-relay
+```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2016-07
+  - tag: package-2017-04
+```
+
+### Tag: package-2016-07 and java
+
+These settings apply only when `--tag=package-2016-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.relay.v2016_07_01
+  output-folder: $(azure-libraries-for-java-folder)/relay/resource-manager/v2016_07_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-04 and java
+
+These settings apply only when `--tag=package-2017-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.relay.v2017_04_01
+  output-folder: $(azure-libraries-for-java-folder)/relay/resource-manager/v2017_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+

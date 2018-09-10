@@ -1,5 +1,5 @@
 # GraphRbac
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for GraphRbac.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for GraphRbac.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for GraphRbac, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the GraphRbac API.
 
 ``` yaml
@@ -51,6 +51,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_graph_rbac']
 ```
 
 
@@ -108,6 +114,13 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: "1.6"
+```
+
 ### Tag: 1.6 and go
 
 These settings apply only when `--tag=1.6 --go` is specified on the command line.
@@ -116,7 +129,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == '1.6' && $(go)
 output-folder: $(go-sdk-folder)/services/graphrbac/1.6/graphrbac
 ```
-
 
 ## Python
 
@@ -129,4 +141,20 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.graphrbac
+```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.graphrbac
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-graphrbac
 ```

@@ -26,9 +26,17 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11
+tag: package-2018-06
 ```
 
+### Tag: package-2018-06
+
+These settings apply only when `--tag=package-2018-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06'
+input-file:
+- Microsoft.Capacity/preview/2018-06-01/reservations.json
+```
 
 ### Tag: package-2017-11
 
@@ -36,12 +44,8 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
-- Microsoft.Capacity/stable/2017-11-01/reservation.json
+- Microsoft.Capacity/stable/2017-11-01/reservations.json
 ```
-
----
-# Code Generation
-
 
 ---
 # Code Generation
@@ -55,6 +59,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 ## C# 
@@ -85,6 +90,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.reservations
   package-name: azure-mgmt-reservations
+  package-version: 0.2.2
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -108,6 +114,23 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
   namespace: reservations
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2018-06
+  - tag: package-2017-11
+```
+
+### Tag: package-2018-06 and go
+
+These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-06' && $(go)
+output-folder: $(go-sdk-folder)/services/reservations/mgmt/2018-06-01/reservations
 ```
 
 ### Tag: package-2017-11 and go

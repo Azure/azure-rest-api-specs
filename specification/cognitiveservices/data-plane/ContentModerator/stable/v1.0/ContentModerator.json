@@ -3,7 +3,7 @@
   "info": {
     "title": "Content Moderator Client",
     "version": "1.0",
-    "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue.\r\n\r\nThis API is currently available in:\r\n\r\n* West US - westus.api.cognitive.microsoft.com\r\n* East US 2 - eastus2.api.cognitive.microsoft.com\r\n* West Central US - westcentralus.api.cognitive.microsoft.com\r\n* West Europe - westeurope.api.cognitive.microsoft.com\r\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com ."
+    "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue."
   },
   "securityDefinitions": {
     "apim_key": {
@@ -18,17 +18,14 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{baseUrl}",
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/baseUrl"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
   "paths": {
     "/contentmoderator/moderate/v1.0/ProcessImage/FindFaces": {
       "post": {
@@ -209,7 +206,7 @@
 
         "parameters": [
           {
-            "$ref": "#/parameters/language"
+            "$ref": "#/parameters/textLanguage"
           },
           {
             "$ref": "#/parameters/autocorrect"
@@ -264,7 +261,7 @@
         },
         "x-ms-examples": {
           "Detect Language request": {
-            "$ref": "./examples/ScreenTextResource.JSON"
+            "$ref": "../v1.0/examples/ScreenTextResource.JSON"
           }
         },
         "produces": [
@@ -321,7 +318,7 @@
         },
         "x-ms-examples": {
           "Detect Language request": {
-            "$ref": "./examples/DetectLanguageResource.JSON"
+            "$ref": "../v1.0/examples/DetectLanguageResource.JSON"
           }
         },
         "produces": [
@@ -359,7 +356,7 @@
         },
         "x-ms-examples": {
           "Get List Id Details request": {
-            "$ref": "./examples/GetImageListIdDetailsResource.JSON"
+            "$ref": "../v1.0/examples/GetImageListIdDetailsResource.JSON"
           }
         },
         "produces": [
@@ -393,7 +390,7 @@
         },
         "x-ms-examples": {
           "Delete Imagelist request": {
-            "$ref": "./examples/DeleteImageListResource.JSON"
+            "$ref": "../v1.0/examples/DeleteImageListResource.JSON"
           }
         },
         "produces": [
@@ -440,7 +437,7 @@
         },
         "x-ms-examples": {
           "Update Imagelist request": {
-            "$ref": "./examples/UpdateImageListResource.JSON"
+            "$ref": "../v1.0/examples/UpdateImageListResource.JSON"
           }
         },
         "produces": [
@@ -486,7 +483,7 @@
         },
         "x-ms-examples": {
           "Create Imagelist request": {
-            "$ref": "./examples/CreateImageListResource.JSON"
+            "$ref": "../v1.0/examples/CreateImageListResource.JSON"
           }
         },
         "produces": [
@@ -518,7 +515,7 @@
         },
         "x-ms-examples": {
           "Get All Imagelists request": {
-            "$ref": "./examples/GetImageListsResource.JSON"
+            "$ref": "../v1.0/examples/GetImageListsResource.JSON"
           }
         },
         "produces": [
@@ -557,7 +554,7 @@
         },
         "x-ms-examples": {
           "Refresh Image Index request": {
-            "$ref": "./examples/RefreshImageIndexResource.JSON"
+            "$ref": "../v1.0/examples/RefreshImageIndexResource.JSON"
           }
         },
         "produces": [
@@ -593,7 +590,7 @@
         },
         "x-ms-examples": {
           "Get Term ListId Details request": {
-            "$ref": "./examples/GetTermListIdDetailsResource.JSON"
+            "$ref": "../v1.0/examples/GetTermListIdDetailsResource.JSON"
           }
         },
         "produces": [
@@ -627,7 +624,7 @@
         },
         "x-ms-examples": {
           "Delete Termlist request": {
-            "$ref": "./examples/DeleteTermListResource.JSON"
+            "$ref": "../v1.0/examples/DeleteTermListResource.JSON"
           }
         },
         "produces": [
@@ -674,7 +671,7 @@
         },
         "x-ms-examples": {
           "Update Termlist request": {
-            "$ref": "./examples/UpdateTermListResource.JSON"
+            "$ref": "../v1.0/examples/UpdateTermListResource.JSON"
           }
         },
         "produces": [
@@ -720,7 +717,7 @@
         },
         "x-ms-examples": {
           "Create Termlist request": {
-            "$ref": "./examples/CreateTermListResource.JSON"
+            "$ref": "../v1.0/examples/CreateTermListResource.JSON"
           }
         },
         "produces": [
@@ -752,7 +749,7 @@
         },
         "x-ms-examples": {
           "Get All Termlists request": {
-            "$ref": "./examples/GetTermListsResource.JSON"
+            "$ref": "../v1.0/examples/GetTermListsResource.JSON"
           }
         },
         "produces": [
@@ -795,7 +792,7 @@
         },
         "x-ms-examples": {
           "Refresh Term Index request": {
-            "$ref": "./examples/RefreshTermIndexResource.JSON"
+            "$ref": "../v1.0/examples/RefreshTermIndexResource.JSON"
           }
         },
         "produces": [
@@ -880,7 +877,7 @@
         },
         "x-ms-examples": {
           "Delete All Images request": {
-            "$ref": "./examples/DeleteAllImagesResource.JSON"
+            "$ref": "../v1.0/examples/DeleteAllImagesResource.JSON"
           }
         },
         "produces": [
@@ -914,7 +911,7 @@
         },
         "x-ms-examples": {
           "Get All Image Ids request": {
-            "$ref": "./examples/GetAllImageIdsResource.JSON"
+            "$ref": "../v1.0/examples/GetAllImageIdsResource.JSON"
           }
         },
         "produces": [
@@ -953,7 +950,7 @@
         },
         "x-ms-examples": {
           "Delete Image request": {
-            "$ref": "./examples/DeleteImageResource.JSON"
+            "$ref": "../v1.0/examples/DeleteImageResource.JSON"
           }
         },
         "produces": [
@@ -999,7 +996,7 @@
         },
         "x-ms-examples": {
           "Add Term request": {
-            "$ref": "./examples/AddTermResource.JSON"
+            "$ref": "../v1.0/examples/AddTermResource.JSON"
           }
         },
         "produces": [
@@ -1040,7 +1037,7 @@
         },
         "x-ms-examples": {
           "Delete Term request": {
-            "$ref": "./examples/DeleteTermResource.JSON"
+            "$ref": "../v1.0/examples/DeleteTermResource.JSON"
           }
         },
         "produces": [
@@ -1094,7 +1091,7 @@
         },
         "x-ms-examples": {
           "Get All Terms request": {
-            "$ref": "./examples/GetAllTermsResource.JSON"
+            "$ref": "../v1.0/examples/GetAllTermsResource.JSON"
           }
         },
         "produces": [
@@ -1131,7 +1128,7 @@
         },
         "x-ms-examples": {
           "Delete AllTerms request": {
-            "$ref": "./examples/DeleteAllTermsResource.JSON"
+            "$ref": "../v1.0/examples/DeleteAllTermsResource.JSON"
           }
         },
         "produces": [
@@ -1178,7 +1175,7 @@
         },
         "x-ms-examples": {
           "Get Review request": {
-            "$ref": "./examples/GetReviewResource.JSON"
+            "$ref": "../v1.0/examples/GetReviewResource.JSON"
           }
         },
         "produces": [
@@ -1225,7 +1222,7 @@
         },
         "x-ms-examples": {
           "Get Job Details request": {
-            "$ref": "./examples/GetJobDetailsResource.JSON"
+            "$ref": "../v1.0/examples/GetJobDetailsResource.JSON"
           }
         },
         "produces": [
@@ -1336,7 +1333,7 @@
         },
         "x-ms-examples": {
           "Create Review request": {
-            "$ref": "./examples/CreateReviewResource.JSON"
+            "$ref": "../v1.0/examples/CreateReviewResource.JSON"
           }
         },
         "produces": [
@@ -1423,7 +1420,7 @@
         },
         "x-ms-examples": {
           "Create Job request": {
-            "$ref": "./examples/CreateJobResource.JSON"
+            "$ref": "../v1.0/examples/CreateJobResource.JSON"
           }
         },
         "produces": [
@@ -1572,7 +1569,7 @@
         },
         "x-ms-examples": {
           "publish video request": {
-            "$ref": "./examples/PublishVideoReviewResource.JSON"
+            "$ref": "../v1.0/examples/PublishVideoReviewResource.JSON"
           }
         },
         "produces": [
@@ -1623,7 +1620,7 @@
         },
         "x-ms-examples": {
           "Transcript moderation result request": {
-            "$ref": "./examples/TranscriptModerationResult.JSON"
+            "$ref": "../v1.0/examples/TranscriptModerationResult.JSON"
           }
         },
         "produces": [
@@ -1678,7 +1675,7 @@
         },
         "x-ms-examples": {
           "Add transcript request": {
-            "$ref": "./examples/AddVideoTranscriptResource.JSON"
+            "$ref": "../v1.0/examples/AddVideoTranscriptResource.JSON"
           }
         },
         "produces": [
@@ -1831,7 +1828,7 @@
         },
         "x-ms-examples": {
           "Image OCR request": {
-            "$ref": "./examples/OCRResource.JSON"
+            "$ref": "../v1.0/examples/OCRResource.JSON"
           }
         },
         "produces": [
@@ -2028,7 +2025,7 @@
         },
         "x-ms-examples": {
           "Match Image request": {
-            "$ref": "./examples/MatchImageResource.JSON"
+            "$ref": "../v1.0/examples/MatchImageResource.JSON"
           }
         },
         "produces": [
@@ -2231,7 +2228,7 @@
         },
         "x-ms-examples": {
           "Create video review request": {
-            "$ref": "./examples/CreateVideoReviewResource.JSON"
+            "$ref": "../v1.0/examples/CreateVideoReviewResource.JSON"
           }
         },
         "produces": [
@@ -2468,17 +2465,32 @@
     "Classification": {
       "description": "The classification details of the text.",
       "properties": {
-        "AdultScore": {
-          "description": "The adult score.",
-          "type": "number"
+        "Category1": {
+          "description": "The category1 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+          "properties": {
+            "Score": {
+              "description": "The category1 score.",
+              "type": "number"
+            }
+          }
         },
-        "RacyScore": {
-          "description": "The racy score.",
-          "type": "number"
+        "Category2": {
+          "description": "The category2 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+          "properties": {
+            "Score": {
+              "description": "The category2 score.",
+              "type": "number"
+            }
+          }
         },
-        "OffensiveScore": {
-          "description": "The offensive score.",
-          "type": "number"
+        "Category3": {
+          "description": "The category3 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+          "properties": {
+            "Score": {
+              "description": "The category3 score.",
+              "type": "number"
+            }
+          }
         },
         "ReviewRecommended": {
           "description": "The review recommended flag.",
@@ -2486,6 +2498,7 @@
         }
       }
     },
+
     "PII": {
       "description": "Personal Identifier Information details.",
       "properties": {
@@ -2495,6 +2508,12 @@
             "$ref": "#/definitions/Email"
           }
 
+        },
+        "SSN": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SSN"
+          }
         },
         "IPA": {
           "type": "array",
@@ -2534,6 +2553,19 @@
         },
         "Index": {
           "description": "Index(Location) of the Email address in the input text content.",
+          "type": "integer"
+        }
+      }
+    },
+    "SSN": {
+      "description": "Detected SSN details.",
+      "properties": {
+        "Text": {
+          "description": "Detected SSN in the input text content.",
+          "type": "string"
+        },
+        "Index": {
+          "description": "Index(Location) of the SSN in the input text content.",
           "type": "integer"
         }
       }
@@ -2881,18 +2913,9 @@
         "Metadata": {
           "description": "Image List Metadata.",
           "type": "object",
-
-          "properties": {
-            "Key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "Key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
-
         }
       }
     },
@@ -2914,15 +2937,8 @@
         "Metadata": {
           "description": "Term list metadata.",
           "type": "object",
-          "properties": {
-            "Key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "Key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -2955,15 +2971,8 @@
           "type": "array",
           "items": {
             "type": "object",
-            "properties": {
-              "Key One": {
-                "description": "Key parameter to describe advanced info.",
-                "type": "string"
-              },
-              "Key Two": {
-                "description": "Key parameter to describe advanced info.",
-                "type": "string"
-              }
+            "additionalProperties": {
+              "type": "string"
             }
           }
         },
@@ -3287,7 +3296,13 @@
       "required": false,
       "type": "integer",
       "x-ms-parameter-location": "method"
-
+    },
+    "textLanguage": {
+      "name": "language",
+      "in": "query",
+      "description": "Language of the text.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "CallBackEndpoint": {
       "name": "CallBackEndpoint",
@@ -3424,8 +3439,8 @@
       "in": "body",
       "required": true,
       "schema": {
-        "format": "binary",
-        "type": "string"
+        "type": "object",
+        "format": "file"
       },
       "x-ms-parameter-location": "method"
     },
@@ -3667,18 +3682,9 @@
           "Metadata": {
             "description": "Metadata of the list.",
             "type": "object",
-
-            "properties": {
-              "Key One": {
-                "description": "Optional key value pair to describe your list.",
-                "type": "string"
-              },
-              "Key Two": {
-                "description": "Optional key value pair to describe your list.",
-                "type": "string"
-              }
+            "additionalProperties": {
+              "type": "string"
             }
-
           }
         }
 
@@ -3802,34 +3808,14 @@
       "description": "The image file.",
       "x-ms-parameter-location": "method"
     },
-    "baseUrl": {
-      "name": "baseUrl",
-      "description": "Supported Azure regions for Content Moderator endpoints",
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
       "in": "path",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-enum": {
-        "name": "azureRegionBaseUrl",
-        "modelAsString": true
-      },
-      "enum": [
-        "westus.api.cognitive.microsoft.com",
-        "westus2.api.cognitive.microsoft.com",
-        "eastus.api.cognitive.microsoft.com",
-        "eastus2.api.cognitive.microsoft.com",
-        "westcentralus.api.cognitive.microsoft.com",
-        "southcentralus.api.cognitive.microsoft.com",
-        "westeurope.api.cognitive.microsoft.com",
-        "northeurope.api.cognitive.microsoft.com",
-        "southeastasia.api.cognitive.microsoft.com",
-        "eastasia.api.cognitive.microsoft.com",
-        "australiaeast.api.cognitive.microsoft.com",
-        "brazilsouth.api.cognitive.microsoft.com",
-        "contentmoderatortest.azure-api.net"
-      ]
+      "x-ms-skip-url-encoding": true
     }
-
   }
 } 

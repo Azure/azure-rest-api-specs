@@ -9,12 +9,14 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 ## Index
 * [Error vs. Warning](#error-vs-warning)
 * [Automated Rules](#automated-rules)
-  * [RPC Violations](#rpc-violations)
-    * [RPC Errors](#rpc-errors)
-    * [RPC Warnings](#rpc-warnings)
+  * [ARM Violations](#arm-violations)
+    * [ARM Errors](#arm-errors)
+    * [ARM Warnings](#arm-warnings)
   * [SDK Violations](#sdk-violations)
     * [SDK Errors](#sdk-errors)
     * [SDK Warnings](#sdk-warnings)
+  * [Documentation](#documentation)
+    * [Documentation Errors](#documentation-errors)
 * [Rule Descriptions](#rule-descriptions)
 
 ## Error vs Warning
@@ -24,9 +26,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 ## Automated Rules
 
-### RPC Violations
+### ARM Violations
 
-#### RPC Errors
+#### ARM Errors
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
@@ -49,7 +51,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3011](#R3011)	| [DescriptionMustNotBeNodeName](#R3011) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2020](#R2020) | [RequiredPropertiesMissingInResourceModel](#R2020) | ARM OpenAPI(swagger) specs |
 
-#### RPC Warnings
+#### ARM Warnings
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
@@ -86,8 +88,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2054](#R2054)	| [SecurityDefinitionsStructure](#R2054) | ARM OpenAPI(swagger) specs |
 | [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2022](#R2022) | [XmsExamplesRequired](#R2022) | ARM and Data plane OpenAPI(swagger) specs |
 | [R3013](#R3013)	| [DeleteMustNotHaveRequestBody](#R3013) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4001](#R4001) | [XmsParameterLocation](#R4001) | ARM and Data plan OpenAPI(swagger) specs |
 
 #### SDK Warnings
 
@@ -116,10 +118,18 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2064](#R2064) | [LROStatusCodesReturnTypeSchema](#R2064) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2023](#R2023) | [SummaryAndDescriptionMustNotBeSame](#R2023) | ARM and Data plane OpenAPI(swagger) specs |
 
+### Documentation
+
+#### Documentation Errors
+
+| Id | Rule Name | Applies to |
+| --- | --- | --- |
+| [D5001](#D5001) | [XmsExamplesRequired](#D5001) | ARM and Data plane OpenAPI(swagger) specs |
+
 ## Rule Descriptions
 
 ### <a name="R3012" />R3012 APIVersionPattern 
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to**: ARM OpenAPI(swagger) specs
 
@@ -152,11 +162,13 @@ The date MAY optionally be followed by one of:
 * 2016-07-04-publicpreview - Use "-preview" to indicate a public preview
 * 2016-07-04-rc0 - Just use "rc", not "rc" + number
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3014" />R3014 BodyPropertiesNamesCamelCase
+ Please refer to [R3016](#R3016)
+
 ### <a name="R3016" />R3016 DefinitionsPropertiesNamesCamelCase
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
@@ -192,10 +204,10 @@ For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library
 * alllowercase - If there are multiple words, please capitalize starting with the second word
 * miXeDcApItAlIzAtIoN - Please capitalize the first letter of each word (and not seemingly random letters)
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3025" />R3025 TrackedResourceGetOperation
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -213,10 +225,10 @@ If the resource pointed by the rule is not a tracked resource, this warning may 
 
 **Examples**: N/A
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3026" />R3026 TrackedResourcePatchOperation
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -234,10 +246,10 @@ If the resource pointed by the rule is not a tracked resource, this warning may 
 
 **Examples**: N/A
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3027" />R3027 TrackedResourceListByResourceGroup
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -255,10 +267,10 @@ If the resource pointed by the rule is not a tracked resource or the operation t
 
 **Examples**: N/A
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3028" />R3028 TrackedResourceListBySubscription
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -276,10 +288,10 @@ If the resource pointed by the rule is not a tracked resource or the operation t
 
 **Examples**: N/A
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3010" />R3010 TrackedResourceListByImmediateParent
-**Category** : Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -297,10 +309,10 @@ If the resource pointed by the rule is not a tracked resource this warning may b
 
 **Examples**: N/A
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3018" />R3018 EnumInsteadOfBoolean
-**Category** : Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -316,7 +328,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: N/A
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R4002" />R4002	LocationMustHaveXmsMutability
 **Category** : SDK Warning
@@ -339,7 +351,7 @@ For example:
 }
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2028" />R2028 NonEmptyClientName
 **Category** : SDK Error
@@ -363,7 +375,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ...
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2066" />R2066	PostOperationIdContainsUrlVerb
 **Category** : SDK Warning
@@ -388,7 +400,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Impact on generated code**: Method generated for the POST operation will be named as indicated after the '__underscore__'. For eg., OperationId *SomeResourceTypes_ActivateResource* will generate a method named *ActivateResource*
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2009" />R2009 ArraySchemaMustHaveItems
 **Category** : SDK Error
@@ -423,7 +435,7 @@ Example with object reference type
 }
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2012" />R2012 XmsClientNameParameter
 **Category** : SDK Error
@@ -465,7 +477,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
     }
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2013" />R2013 XmsClientNameProperty
 **Category** : SDK Error
@@ -498,7 +510,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 }
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R1010" />R1010 AvoidMsdnReferences
 **Category** : SDK Warning
@@ -517,7 +529,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: N/A.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R1009" />R1009 DeleteInOperationName
 **Category** : SDK Warning
@@ -540,7 +552,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 * StorageAccounts_delete
 * delete
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R1005" />R1005 GetInOperationName
 **Category** : SDK Warning
@@ -563,7 +575,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 * Get
 * List
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R1003" />R1003 ListInOperationName
 **Category** : SDK Warning
@@ -585,7 +597,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 * Resources_ListBySubscriptions
 * List
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R1006" />R1006 PutInOperationName
 **Category** : SDK Warning
@@ -607,7 +619,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 * Resources_CreateOrUpdate
 * Create
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R1007" />R1007 PatchInOperationName
 **Category** : SDK Warning
@@ -628,10 +640,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 * Resources_Update
 * Update
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3017" />R3017 GuidUsage
-**Category** : Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -647,7 +659,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: N/A
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R1011" />R1011 HttpsSupportedScheme
 **Category** : SDK Warning
@@ -671,10 +683,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ]
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2004" />R2004 NonApplicationJsonType
-**Category** : RPC Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -688,10 +700,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: N/A
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2059" />R2059 UniqueResourcePaths
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -744,7 +756,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
       ....
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2006" />R2006 ControlCharactersNotAllowed
 **Category** : SDK Error
@@ -762,7 +774,7 @@ Control characters are not allowed in a specification.
 
 **Examples**: A list of control characters in unicode can be found [here](https://unicode-table.com/en/).
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2008" />R2008 MutabilityWithReadOnly
 **Category** : SDK Error
@@ -794,7 +806,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
   }
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2058" />R2058 XmsPathsMustOverloadPaths 
 **Category** : SDK Error
@@ -836,7 +848,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
   }
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2001" />R2001 AvoidNestedProperties
 **Category** : SDK Warning
@@ -851,10 +863,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Either eliminate nesting or use the `x-ms-client-flatten` property for a better user experience. More details about the extension can be found [here](https://github.com/Azure/azure-rest-api-specs/blob/dce4da0d748565efd2ab97a43d0683c2979a974a/documentation/swagger-extensions.md#x-ms-client-flatten).
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3008" />R3008 CollectionObjectPropertiesNaming
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -866,10 +878,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that the response object has a property named `value` of `array` type.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2027" />R2027 DefaultMustBeInEnum
-**Category** : Error
+**Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -895,7 +907,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 }
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2047" />R2047 NamePropertyDefinitionInParameter
 **Category** : SDK Error
@@ -929,7 +941,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 }
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R1001" />R1001 OperationIdNounVerb
 **Category** : SDK Error
@@ -954,7 +966,7 @@ CertificateActivate
 Certificate_Activate
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2055" />R2055 OneUnderscoreInOperationId
 **Category** : SDK Error
@@ -978,10 +990,10 @@ Activate_Primary_Certificate
 PrimaryCertificate_Activate
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3023" />R3023 OperationsAPIImplementation
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1074,7 +1086,7 @@ A typical `OperationsList` and `Operation` model would look like
 ```
 
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2015" />R2015 ParameterNotDefinedInGlobalParameters
 **Category** : SDK Warning
@@ -1091,10 +1103,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure `subscriptionId` and `api-version` are declared in the global parameters section of the document.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2020" />R2020 RequiredPropertiesMissingInResourceModel
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1106,7 +1118,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure the `Resource` type model has the properties `name`, `type` and `id` and they are marked as `readOnly:true`. 
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2056" />R2056 RequiredReadOnlyProperties
 **Category** : SDK Error
@@ -1135,7 +1147,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 }
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2014" />R2014 SubscriptionIdParameterInOperations
 **Category** : SDK Error
@@ -1150,7 +1162,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Remove `subscriptionId` from the operation parameters and add it to the global parameters section if it doesn't exist there.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2003" />R2003 ValidFormats
 **Category** : SDK Error
@@ -1165,10 +1177,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure format defined for property is valid. Please refer [here](https://github.com/Azure/autorest/blob/81d4d31d06637f4f9ef042d7f2ec64cfea29892f/docs/developer/validation-rules/valid-formats.md) for allowed types in OpenAPI.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="R2022" />R2022 XmsExamplesRequired
-**Category** : SDK Error
+### <a name="D5001" />D5001 XmsExamplesRequired
+**Category** : Documentation Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1184,7 +1196,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: Please refer the documentation of [x-ms-examples](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md#why-x-ms-examples).
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2065" />R2065 LicenseHeaderMustNotBeSpecified
 **Category** : SDK Warning
@@ -1197,7 +1209,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure the `x-ms-code-generation-settings` section does not have `header` property.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2025" />R2025 NextLinkPropertyMustExist
 **Category** : SDK Error
@@ -1216,7 +1228,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) and [examples](https://github.com/Azure/azure-rest-api-specs/tree/master/documentation/x-ms-pageable).
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2060" />R2060 PageableRequires200Response
 **Category** : SDK Error
@@ -1235,9 +1247,23 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable).
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2024" />R2024 AnonymousBodyParameter
+**Category** : SDK Error
+
+**Applies to** : ARM specs
+
+**Output Message**: Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.
+
+**Description**: This rule appears if in the parameter definition you have anonymous types. 
+
+**Why the rule is important**: Anonymous parameters will be autogenerated as non-descriptive parameters which the client will not be able to share across operations or provide good documentation for, thereby resulting in poor user experience.
+
+**How to fix the violation**: Move the schema to the definitions section and reference it using $ref.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
 ### <a name="R2026" />R2026 AvoidAnonymousTypes
 **Category** : SDK Error
 
@@ -1312,10 +1338,10 @@ public class FooCreationSettings {
 
 **Examples**: N/A.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3019" />R3019 ArmResourcePropertiesBag
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1367,10 +1393,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
   "x-ms-azure-resource": true
 }
 ```
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3006" />R3006 BodyTopLevelProperties
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1419,10 +1445,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
   ]
 }
 ```
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2057" />R2057 InvalidSkuModel
-**Category** : Warning
+**Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1436,7 +1462,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: N/A
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2018" />R2018 XmsEnumValidation
 **Category** : SDK Warning
@@ -1453,7 +1479,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: Please refer to [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum).
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2063" />R2063 OperationIdNounConflictingModelNames
 **Category** : SDK Warning
@@ -1468,7 +1494,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure operation Ids are named in such a way that the `Noun` in `Noun_Verb` is of the plural form and does not conflict with the names of any models in the definitions section of the spec.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2054" />R2054 SecurityDefinitionsStructure
 **Category** : SDK Error
@@ -1483,7 +1509,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that the document has a security definition section as described [here](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2019" />R2019 ResourceHasXMsResourceEnabled
 **Category** : SDK Error
@@ -1498,7 +1524,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that the 'Resource' definition has x-ms-azure-resource extension enabled and set to true.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2017" />R2017 PutRequestResponseScheme
 **Category** : SDK Warning
@@ -1513,7 +1539,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure the request & reponse('200') schema of the PUT operation must be same. This might involve a service side change which will result cause a breaking change in the generated SDK.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2005" />R2005 LongRunningResponseStatusCode
 **Category** : SDK Error
@@ -1528,10 +1554,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that the DELETE/POST/PUT operations have the allowed response codes.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2044" />R2044 InvalidVerbUsed
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1543,10 +1569,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Provide a correct HTTP verb.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3007" />R3007 PutGetPatchResponseSchema
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1558,7 +1584,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that, for a given path with PUT, GET and PATCH operations, the schema of the response is same. This might involve a service side change which will result in a breaking change in the generated SDK.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3013" />R3013 DeleteMustNotHaveRequestBody
 **Category** : SDK Error
@@ -1573,10 +1599,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that the request body of the delete operation is empty. This may involve a service side change and may cause a breaking change in the generated SDK.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2062" />R2062 XmsResourceInPutResponse
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1588,7 +1614,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that the 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3060" />R3060 XmsPageableListByRGAndSubscriptions
 **Category** : SDK Warning
@@ -1603,7 +1629,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that when a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values are same for both operations. This might involve a service side change which will result in a breaking change in the generated SDK.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2064" />R2064 LROStatusCodesReturnTypeSchema
 **Category** : SDK Warning
@@ -1618,10 +1644,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that the '200'/'201' responses of the long running operation has a schema definition. This might involve a service side change which will result in a breaking change in the generated SDK.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2016" />R2016 PatchBodyParametersSchema
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1633,7 +1659,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that the request parameter of the Patch Operation does not have a required/default value.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R4000-2" />R4000 ParameterDescriptionRequired
 **Category** : SDK Warning
@@ -1648,7 +1674,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: For each parameter, provide a 'description' property.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R4000-3" />R4000 DescriptiveDescriptionRequired
 **Category** : SDK Warning
@@ -1663,7 +1689,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: For each 'description' property, provide a detailed description value.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R4000-4" />R4000 DescriptionAndTitleMissing
 **Category** : SDK Warning
@@ -1678,7 +1704,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: For each definition, provide atleast one of the properties - description/title.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R4000-5" />R4000 OperationDescriptionOrSummaryRequired
 **Category** : SDK Warning
@@ -1693,7 +1719,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: For each operation, provide atleast one of the property - description/summary.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2023" />R2023 SummaryAndDescriptionMustNotBeSame
 **Category** : SDK Warning
@@ -1736,10 +1762,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ......
 ```
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3011" />R3011 DescriptionMustNotBeNodeName
-**Category** : Error
+**Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
@@ -1751,4 +1777,31 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Provide detailed description of the node in the description section.
 
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R4001" ></a>R4001 XmsParameterLocation
+
+**Category** : SDK Error
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : The parameter '{your parameter name}' is defined in global parameters section without 'x-ms-parameter-location' extension. This would add the parameter as the client property. Please ensure that this is exactly you want. If so, apply the extension "x-ms-parameter-location": "client". Else, apply the extension "x-ms-parameter-location": "method".
+
+**Description** : SDKs generated by AutoRest have two types of operation parameters: method arguments and client fields. The `x-ms-parameter-location` extension gives the Swagger author control of how an operation-parameter will be interpreted by AutoRest, and as such is one of few things in a Swagger document that has semantic value only relvant to the shape of the generated SDKs.
+
+Some parameters, such as API Version and Subscription ID will make sense as part of nearly every request. For these, having developers specify them for each method call would be burdensome; attaching them to the client and automatically including them in each request makes way more sense. Other parameters will be very operation specific and should be provided each time the method is called.
+
+**Why this rule is important**: Without providing the parameter-location, constructor parameter lists end up incorporating entries that are only relevant to one of the methods that belong to a type. Needlees to say, this can spiral out of control and turn your SDKs into gunk.
+
+**How to fix the violation**: For each parameter in the document-level "parameters" section of your document provide either:
+``` json
+"x-ms-parameter-location":"method"
+```
+
+or 
+
+``` json
+"x-ms-parameter-location":"client"
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)

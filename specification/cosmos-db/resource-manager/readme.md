@@ -1,5 +1,5 @@
 # Cosmos-DB
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Cosmos-DB.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Cosmos-DB.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Cosmos-DB, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,13 +21,12 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Cosmos-DB API.
 
 ``` yaml
 openapi-type: arm
 tag: package-2015-04
-azure-validator: true
 ```
 
 
@@ -55,6 +54,34 @@ directive:
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
     reason: The Metrics API has has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P10
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P25
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P50
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P75
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P90
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P95
+    reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.PercentileMetricValue.properties.P99
+    reason: The Metrics API has percentile metrics property names with leading capital letters
 ```
 
 ---
@@ -69,6 +96,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -86,6 +116,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.cosmosdb
   package-name: azure-mgmt-cosmosdb
+  package-version: 0.3.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -110,6 +141,13 @@ go:
   clear-output-folder: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2015-04
+```
+
 ### Tag: package-2015-04 and go
 
 These settings apply only when `--tag=package-2015-04 --go` is specified on the command line.
@@ -118,3 +156,40 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2015-04' && $(go)
 output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2015-04-08/documentdb
 ```
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.cosmosdb
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-cosmosdb
+```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-04
+```
+
+### Tag: package-2015-04 and java
+
+These settings apply only when `--tag=package-2015-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.cosmosdb.v2015_04_08
+  output-folder: $(azure-libraries-for-java-folder)/cosmosdb/resource-manager/v2015_04_08
+regenerate-manager: true
+generate-interface: true
+```
+
+

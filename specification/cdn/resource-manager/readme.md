@@ -26,7 +26,16 @@ These are the global settings for the Cdn API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2017-10
+```
+
+### Tag: package-2017-10
+
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- Microsoft.Cdn/stable/2017-10-12/cdn.json
 ```
 
 ### Tag: package-2017-04
@@ -78,95 +87,36 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_cdn']
 ```
 
 
 ## C# 
 
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # last generated with AutoRest.1.0.0-Nightly20170212
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Cdn
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/Cdn/Management.Cdn/Generated
-  clear-output-folder: true
-```
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.cdn
-  package-name: azure-mgmt-cdn
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-cdn/azure/mgmt/cdn
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-cdn
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: cdn
-  clear-output-folder: true
-```
+## Java
 
-### Tag: package-2017-04 and go
+See configuration in [readme.java.md](./readme.java.md)
 
-These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+## Node
 
-``` yaml $(tag) == 'package-2017-04' && $(go)
-output-folder: $(go-sdk-folder)/services/cdn/mgmt/2017-04-02/cdn
-```
+See configuration in [readme.node.md](./readme.node.md)
 
-### Tag: package-2016-10 and go
+## Ruby
 
-These settings apply only when `--tag=package-2016-10 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-10'  && $(go)
-output-folder: $(go-sdk-folder)/services/cdn/mgmt/2016-10-02/cdn
-```
-
-### Tag: package-2016-04 and go
-
-These settings apply only when `--tag=package-2016-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-04' && $(go)
-output-folder: $(go-sdk-folder)/services/cdn/mgmt/2016-04-02/cdn
-```
-
-### Tag: package-2015-06 and go
-
-These settings apply only when `--tag=package-2015-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-06' && $(go)
-output-folder: $(go-sdk-folder)/services/cdn/mgmt/2015-06-01/cdn
-```
+See configuration in [readme.ruby.md](./readme.ruby.md)

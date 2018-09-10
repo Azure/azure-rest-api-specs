@@ -39,6 +39,9 @@
         "tags": [
           "StorageInsights"
         ],
+        "x-ms-examples": {
+          "StorageInsightsCreate": { "$ref": "./examples/StorageInsightsCreateOrUpdate.json" }
+        },
         "operationId": "StorageInsights_CreateOrUpdate",
         "description": "Create or update a storage insight.",
         "parameters": [
@@ -94,6 +97,9 @@
         "tags": [
           "StorageInsights"
         ],
+        "x-ms-examples": {
+          "StorageInsightsGet": { "$ref": "./examples/StorageInsightsGet.json" }
+        },
         "operationId": "StorageInsights_Get",
         "description": "Gets a storage insight instance.",
         "parameters": [
@@ -134,6 +140,9 @@
         "tags": [
           "StorageInsights"
         ],
+        "x-ms-examples": {
+          "StorageInsightsDelete": { "$ref": "./examples/StorageInsightsDelete.json" }
+        },
         "operationId": "StorageInsights_Delete",
         "description": "Deletes a storageInsightsConfigs resource",
         "parameters": [
@@ -176,6 +185,9 @@
         "tags": [
           "StorageInsights"
         ],
+        "x-ms-examples": {
+          "StorageInsightsList": { "$ref": "./examples/StorageInsightsListByWorkspace.json" }
+        },
         "operationId": "StorageInsights_ListByWorkspace",
         "description": "Lists the storage insight instances within a workspace",
         "parameters": [
@@ -214,6 +226,9 @@
         "tags": [
           "Workspaces"
         ],
+        "x-ms-examples": {
+          "LinkTargetsList": { "$ref": "./examples/WorkspacesListLinkTargets.json" }
+        },
         "operationId": "Workspaces_ListLinkTargets",
         "description": "Get a list of workspaces which the current user has administrator privileges and are not associated with an Azure Subscription. The subscriptionId parameter in the Url is ignored.",
         "parameters": [
@@ -242,6 +257,9 @@
         "tags": [
           "SavedSearches"
         ],
+        "x-ms-examples": {
+          "SavedSearchesDelete": { "$ref": "./examples/WorkspacesDeleteSavedSearches.json" }
+        },
         "operationId": "SavedSearches_Delete",
         "description": "Deletes the specified saved search in a given workspace.",
         "parameters": [
@@ -279,6 +297,9 @@
         "tags": [
           "SavedSearches"
         ],
+        "x-ms-examples": {
+          "SavedSearchCreateOrUpdate": { "$ref": "./examples/WorkspacesSavedSearchesCreateOrUpdate.json" }
+        },
         "operationId": "SavedSearches_CreateOrUpdate",
         "description": "Creates or updates a saved search for a given workspace.",
         "parameters": [
@@ -328,6 +349,9 @@
         "tags": [
           "SavedSearches"
         ],
+        "x-ms-examples": {
+          "SavedSearchesGet": { "$ref": "./examples/WorkspacesSavedSearchesGet.json" }
+        },        
         "operationId": "SavedSearches_Get",
         "description": "Gets the specified saved search for a given workspace.",
         "parameters": [
@@ -370,6 +394,9 @@
         "tags": [
           "SavedSearches"
         ],
+        "x-ms-examples": {
+          "SavedSearchesList": { "$ref": "./examples/SavedSearchesListByWorkspace.json" }
+        },
         "operationId": "SavedSearches_ListByWorkspace",
         "description": "Gets the saved searches for a given Log Analytics Workspace",
         "parameters": [
@@ -405,6 +432,9 @@
         "tags": [
           "SavedSearches"
         ],
+        "x-ms-examples": {
+          "SaveSearchsListResults": { "$ref": "./examples/SavedSearchesGetResults.json" }
+        },
         "operationId": "SavedSearches_GetResults",
         "description": "Gets the results from a saved search for a given workspace.",
         "parameters": [
@@ -447,6 +477,9 @@
         "tags": [
           "Workspaces"
         ],
+        "x-ms-examples": {
+          "WorkspacesGetSchema": { "$ref": "./examples/SavedSearchesGetSchema.json" }
+        },
         "operationId": "Workspaces_GetSchema",
         "description": "Gets the schema for a given workspace.",
         "parameters": [
@@ -482,6 +515,9 @@
         "tags": [
           "Workspaces"
         ],
+        "x-ms-examples": {
+          "WorkspacesGetSearchResults": { "$ref": "./examples/WorkspacesGetSearchResults.json" }
+        },
         "operationId": "Workspaces_GetSearchResults",
         "description": "Submit a search for a given workspace. The response will contain an id to track the search. User can use the id to poll the search status and get the full search result later if the search takes long time to finish. ",
         "parameters": [
@@ -530,6 +566,9 @@
         "tags": [
           "Workspaces"
         ],
+        "x-ms-examples": {
+          "WorkspacesUpdateSearchResults": { "$ref": "./examples/WorkspacesUpdateSearchResults.json" }
+        },
         "operationId": "Workspaces_UpdateSearchResults",
         "description": "Gets updated search results for a given search query.",
         "parameters": [
@@ -566,9 +605,156 @@
           }
         }
       }
-    }
+    },
+    "/providers/Microsoft.OperationalInsights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-examples": {
+          "OperationsList": { "$ref": "./examples/OperationsList.json" }
+        },
+        "operationId": "Operations_List",
+        "description": "Lists all of the available OperationalInsights Rest API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purge": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Purges data in an Log Analytics workspace by a set of user-defined filters.",
+        "operationId": "Workspaces_Purge",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePurgeParameter"
+          }         
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted request for purging an Log Analytics workspace.",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeResponse"
+            },
+            "headers": {
+              "x-ms-status-location": {
+                "type": "string",
+                "description": "The location from which to request the operation status."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePurge": {
+            "$ref": "./examples/WorkspacesPurge.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/operations/{purgeId}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets status of an ongoing purge operation.",
+        "operationId": "Workspaces_GetPurgeStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePurgeIdParameter"
+          }         
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeStatusResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePurgeOperation": {
+            "$ref": "./examples/WorkspacesPurgeOperation.json"
+          }
+        }
+      }
+    }   
   },
   "definitions": {
+    "OperationListResult": {
+      "description": "Result of the request to list solution operations.",
+      "properties": {
+          "value": {
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/Operation"
+          },
+          "description": "List of solution operations supported by the OperationsManagement resource provider."
+          }
+      }
+    },
+    "Operation": {
+      "description": "Supported operation of OperationsManagement resource provider.",      
+      "properties": {
+          "name": {
+              "description": "Operation name: {provider}/{resource}/{operation}",
+              "type": "string"
+          },
+          "display": {
+              "description": "Display metadata associated with the operation.",
+              "properties": {
+                  "provider": {
+                      "description": "Service provider: Microsoft OperationsManagement.",
+                      "type": "string"
+                  },
+                  "resource": {
+                      "description": "Resource on which the operation is performed etc.",
+                      "type": "string"
+                  },
+                  "operation": {
+                      "description": "Type of operation: get, read, delete, etc.",
+                      "type": "string"
+                  }
+              }
+          }
+      }
+    },
     "LinkTarget": {
       "properties": {
         "customerId": {
@@ -593,43 +779,43 @@
     },
     "Tag": {
       "properties": {
-        "Name": {
+        "name": {
           "type": "string",
           "description": "The tag name."
         },
-        "Value": {
+        "value": {
           "type": "string",
           "description": "The tag value."
         }
       },
       "required": [
-        "Name",
-        "Value"
+        "name",
+        "value"
       ],
       "description": "A tag of a saved search."
     },
     "SavedSearchProperties": {
       "properties": {
-        "Category": {
+        "category": {
           "type": "string",
           "description": "The category of the saved search. This helps the user to find a saved search faster. "
         },
-        "DisplayName": {
+        "displayName": {
           "type": "string",
           "description": "Saved search display name."
         },
-        "Query": {
+        "query": {
           "type": "string",
           "description": "The query expression for the saved search. Please see https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-search-reference for reference."
         },
-        "Version": {
+        "version": {
           "type": "integer",
           "format": "int64",
           "minimum": 1,
           "maximum": 1,
           "description": "The version number of the query lanuage. Only verion 1 is allowed here."
         },
-        "Tags": {
+        "tags": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Tag"
@@ -638,27 +824,27 @@
         }
       },
       "required":[
-        "Category",
-        "DisplayName",
-        "Query",
-        "Version"
+        "category",
+        "displayName",
+        "query",
+        "version"
       ],
       "description": "Value object for saved search results."
     },
     "CoreSummary": {
       "properties": {
-        "Status": {
+        "status": {
           "type": "string",
           "description": "The status of a core summary."
         },
-        "NumberOfDocuments": {
+        "numberOfDocuments": {
           "type": "integer",
           "format": "int64",
           "description": "The number of documents of a core summary."
         }
       },
       "required": [
-        "NumberOfDocuments" 
+        "numberOfDocuments" 
       ],
       "description": "The core summary of a search."
     },
@@ -699,7 +885,7 @@
     },
     "SearchMetadata": {
       "properties": {
-        "RequestId": {
+        "requestId": {
           "x-ms-client-name": "SearchId",
           "type": "string",
           "description": "The request id of the search."
@@ -722,28 +908,28 @@
           "type": "string",
           "description": "The id of the search results request."
         },
-        "CoreSummaries": {
+        "coreSummaries": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CoreSummary"
           },
           "description": "The core summaries."
         },
-        "Status": {
+        "status": {
           "type": "string",
           "description": "The status of the search results."
         },
-        "StartTime": {
+        "startTime": {
           "type": "string",
           "format": "date-time",
           "description": "The start time for the search."
         },
-        "LastUpdated": {
+        "lastUpdated": {
           "type": "string",
           "format": "date-time",
           "description": "The time of last update."
         },
-        "ETag": {
+        "eTag": {
           "type": "string",
           "description": "The ETag of the search results."
         },
@@ -791,7 +977,17 @@
           "readOnly": true,
           "description": "The id of the saved search."
         },
-        "etag": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the saved search."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the saved search."
+        },
+        "eTag": {
           "type": "string",
           "description": "The etag of the saved search."
         },
@@ -804,11 +1000,12 @@
       "required": [
         "properties"
       ],
-      "description": "Value object for saved search results."
+      "description": "Value object for saved search results.",
+      "x-ms-azure-resource": true            
     },
     "SavedSearchesListResult": {
       "properties": {
-        "__metadata": {
+        "metaData": {
           "x-ms-client-name": "Metadata",
           "$ref": "#/definitions/SearchMetadata",
           "description": "The metadata from search results."
@@ -843,7 +1040,7 @@
           "readOnly": true,
           "description": "The id of the search, which includes the full url."
         },
-        "__metadata": {
+        "metaData": {
           "x-ms-client-name": "Metadata",
           "$ref": "#/definitions/SearchMetadata",
           "description": "The metadata from search results."
@@ -905,7 +1102,7 @@
     },
     "SearchGetSchemaResponse": {
       "properties": {
-        "__metadata": {
+        "metadata": {
           "x-ms-client-name": "Metadata",
           "$ref": "#/definitions/SearchMetadata",
           "description": "The metadata from search results."
@@ -1053,7 +1250,8 @@
           "$ref": "#/definitions/ProxyResource"
         }
       ],
-      "description": "The top level storage insight resource container."
+      "description": "The top level storage insight resource container.",
+      "x-ms-azure-resource": true            
     },
     "StorageInsightListResult": {
       "properties": {
@@ -1133,6 +1331,74 @@
         }
       }, 
       "description": "Common properties of proxy resource." 
+    },
+    "WorkspacePurgeBody": {
+      "description": "Describes the body of a purge request for an App Insights Workspace",
+      "required": [
+        "table",
+        "filters"
+      ],
+      "properties": {
+        "table": {
+          "type": "string",
+          "description": "Table from which to purge data."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The set of columns and filters (queries) to run over them to purge the resulting data.",
+          "items": {
+            "$ref": "#/definitions/WorkspacePurgeBodyFilters"
+          }
+        }
+      }
+    },
+    "WorkspacePurgeBodyFilters": {
+      "description": "User-defined filters to return data which will be purged from the table.",
+      "properties": {
+        "column": {
+          "description": "The column of the table over which the given query should run",
+          "type": "string"
+        },
+        "operator": {
+          "description": "A query operator to evaluate over the provided column and value(s).",
+          "type": "string"
+        },
+        "value": {
+          "description": "the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
+        }
+      }
+    },
+    "WorkspacePurgeResponse": {
+      "description": "Response containing operationId for a specific purge action.",
+      "properties": {
+        "operationId": {
+          "description": "Id to use when querying for status for a particular purge operation.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "WorkspacePurgeStatusResponse": {
+      "description": "Response containing status for a specific purge operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the operation represented by the requested Id.",
+          "type": "string",
+          "enum": [
+            "pending",
+            "completed"
+          ],
+          "x-ms-enum": {
+            "name": "PurgeState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "status"
+      ]
     }
   },
   "parameters": {
@@ -1160,6 +1426,32 @@
         "pattern": "^[-\\w\\._\\(\\)]+$",
         "minLength": 1,
         "maxLength": 90
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Log Analytics workspace name",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspacePurgeParameter": {
+      "name": "body",
+      "in": "body",
+      "description": "Describes the body of a request to purge data in a single table of an Log Analytics Workspace",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkspacePurgeBody"
+      },
+      "x-ms-parameter-location": "client"
+    },
+    "WorkspacePurgeIdParameter": {
+      "name": "purgeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "In a purge status request, this is the Id of the operation the status of which is returned.",
+      "x-ms-parameter-location": "client"
     }
   }
 }
