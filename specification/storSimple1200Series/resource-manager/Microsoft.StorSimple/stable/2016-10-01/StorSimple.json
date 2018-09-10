@@ -8507,17 +8507,17 @@
         "id": {
           "description": "The Resource Id",
           "type": "string",
-          "readOnly": true	  
+          "readOnly": true
         },
         "name": {
           "description": "The Resource Name",
           "type": "string",
-          "readOnly": true	  
+          "readOnly": true
         },
         "type": {
           "description": "The Resource type",
           "type": "string",
-          "readOnly": true	  
+          "readOnly": true
         },
         "location": {
           "description": "The Geo location of the Manager",
@@ -9170,13 +9170,13 @@
     "UploadCertificateRequest": {
       "description": "Upload Certificate Request to IDM",
       "required": [
-        "rawCertificateDetails"
+        "properties"
       ],
       "type": "object",
       "properties": {
-        "rawCertificateDetails": {
+        "properties": {
           "$ref": "#/definitions/RawCertificateData",
-          "description": "Gets or sets the base64 encoded certificate raw data string"
+          "x-ms-client-flatten": true
         },
         "contractVersion": {
           "description": "Gets ContractVersion",
@@ -9223,7 +9223,7 @@
     "UploadCertificateResponse": {
       "description": "Upload Certificate Response from IDM",
       "required": [
-        "resourceAadDetails"
+        "properties"
       ],
       "type": "object",
       "allOf": [
@@ -9232,9 +9232,9 @@
         }
       ],
       "properties": {
-        "resourceAadDetails": {
+        "properties": {
           "$ref": "#/definitions/ResourceCertificateAndAADDetails",
-          "description": "Gets or sets Properties"
+          "x-ms-client-flatten": true
         },
         "contractVersion": {
           "description": "Constructor",
