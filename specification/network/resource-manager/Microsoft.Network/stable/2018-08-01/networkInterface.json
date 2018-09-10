@@ -765,11 +765,6 @@
           "readOnly": true,
           "type": "string",
           "description": "Sub Resource type."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state of the network interface IP configuration. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
       "allOf": [
@@ -784,8 +779,13 @@
         "virtualNetworkTap": {         
             "$ref": "./virtualNetworkTap.json#/definitions/VirtualNetworkTap",
             "description": "The reference of the Virtual Network Tap resource."
+          },
+          "provisioningState": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The provisioning state of the network interface tap configuration. Possible values are: 'Updating', 'Deleting', and 'Failed'."
           }
-        },  
+      },
       "description": "Properties of Virtual Network Tap configuration."
     },
     "NetworkInterfaceIPConfigurationPropertiesFormat": {
