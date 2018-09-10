@@ -212,6 +212,7 @@ input-file:
 - Microsoft.Compute/stable/2018-06-01/compute.json
 - Microsoft.Compute/stable/2018-06-01/runCommands.json
 - Microsoft.Compute/stable/2018-06-01/gallery.json
+- Microsoft.Compute/stable/2018-06-01/disks.json
 ```
 
 ### Tag: package-2018-04-01
