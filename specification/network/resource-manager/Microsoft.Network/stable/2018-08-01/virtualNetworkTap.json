@@ -320,29 +320,40 @@
         "description": "Virtual Network Tap resource"
     },
     "VirtualNetworkTapPropertiesFormat": {
-        "properties": {
-          "networkInterfaceTapConfigurations": {
+      "properties": {
+        "networkInterfaceTapConfigurations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./networkInterface.json#/definitions/NetworkInterfaceTapConfiguration",
+            "description": "The reference of the Network Interface."
+          },
+          "description": "Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped.",
+          "provisioningState": {
             "readOnly": true,
-            "type": "array",
-            "items": {
-                "$ref": "./networkInterface.json#/definitions/NetworkInterfaceTapConfiguration",
-                "description": "The reference of the Network Interface."
-            },  
-            "description": "Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped."
-          },
-          "destinationNetworkInterfaceIPConfiguration": {
-            "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
-            "description": "The reference to the private IP Address of the collector nic that will receive the tap"
-          },
-          "destinationLoadBalancerFrontEndIPConfiguration": {
-            "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration",
-            "description": "The reference to the private IP address on the internal Load Balancer that will receive the tap"
-          },
-          "destinationPort": {
-            "type": "integer",
-            "description": "The VXLAN destination port that will receive the tapped traffic."
+            "type": "string",
+            "description": "The provisioning state of the network interface IP configuration. Possible values are: 'Updating', 'Deleting', and 'Failed'."
           }
         },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly":  true,
+          "description": "The resourceGuid property of the Virtual Network resource."
+        },
+        "description": "Virtual Network Tap properties.",
+        "destinationNetworkInterfaceIPConfiguration": {
+          "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+          "description": "The reference to the private IP Address of the collector nic that will receive the tap"
+        },
+        "destinationLoadBalancerFrontEndIPConfiguration": {
+          "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration",
+          "description": "The reference to the private IP address on the internal Load Balancer that will receive the tap"
+        },
+        "destinationPort": {
+          "type": "integer",
+          "description": "The VXLAN destination port that will receive the tapped traffic."
+        }
+      },
         "description": "Virtual Network Tap properties."
     },
     "VirtualNetworkTapListResult": {
