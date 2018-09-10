@@ -124,7 +124,8 @@
         },
         "x-ms-examples": {
           "Get virtual network": { "$ref": "./examples/VirtualNetworkGet.json" },
-          "Get virtual network with a delegated subnet": { "$ref": "./examples/VirtualNetworkGetWithSubnetDelegation.json" }
+          "Get virtual network with a delegated subnet": { "$ref": "./examples/VirtualNetworkGetWithSubnetDelegation.json" },
+          "Get virtual network with service association links": { "$ref": "./examples/VirtualNetworkGetWithServiceAssociationLink.json" }
         }
       },
       "put": {
@@ -184,7 +185,7 @@
           "Create virtual network with subnet": { "$ref": "./examples/VirtualNetworkCreateSubnet.json" },
           "Create virtual network with subnet containing address prefixes": { "$ref": "./examples/VirtualNetworkCreateSubnetWithAddressPrefixes.json" },
           "Create virtual network with service endpoints": { "$ref": "./examples/VirtualNetworkCreateServiceEndpoints.json" },
-          "Create virtual network with delegated subnets": { "$ref": "./examples/VirtualNetworkCreateSubnetWithDelegation.json"}
+          "Create virtual network with delegated subnets": { "$ref": "./examples/VirtualNetworkCreateSubnetWithDelegation.json" }
         }
       },
       "patch": {
@@ -823,6 +824,48 @@
     }
   },
   "definitions": {
+    "ServiceAssociationLinkPropertiesFormat": {
+      "properties": {
+        "linkedResourceType": {
+          "type": "string",
+          "description": "Resource type of the linked resource."
+        },
+        "link": {
+          "type": "string",
+          "description": "Link to the external resource."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the ServiceAssociationLink resource."
+        }
+      },
+      "description": "Properties of ServiceAssociationLink."
+    },
+    "ServiceAssociationLink": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceAssociationLinkPropertiesFormat",
+          "description": "Resource navigation link properties format."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "ServiceAssociationLink resource."
+    },
     "ResourceNavigationLinkFormat": {
       "properties": {
         "linkedResourceType": {
@@ -959,12 +1002,27 @@
           },
           "description": "Gets an array of references to the network interface IP configurations using subnet."
         },
+        "ipConfigurationProfiles": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./networkProfile.json#/definitions/IPConfigurationProfile"
+          },
+          "description": "Array of IP configuration profiles which reference this subnet."
+        },
         "resourceNavigationLinks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceNavigationLink"
           },
           "description": "Gets an array of references to the external resources using subnet."
+        },
+        "serviceAssociationLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceAssociationLink"
+          },
+          "description": "Gets an array of references to services injecting into this subnet."
         },
         "delegations": {
           "type": "array",
