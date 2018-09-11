@@ -27,18 +27,18 @@ These are the global settings for the MonitorClient API.
 ``` yaml
 title: MonitorClient
 description: Monitor Management Client
-openapi-type: arm
+openapi-type: data-plane
 
-tag: package-2018-09
+tag: package-2018-09-preview
 
 ```
-### Tag: package-2018-09
+### Tag: package-2018-09-preview
 
-These settings apply only when `--tag=package-2018-09` is specified on the command line.
+These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09'
+``` yaml $(tag) == 'package-2018-09-preview'
 input-file:
-- data-plane/preview/2018-09-01-preview/azureMonitorCustomMetricsIngestionApi.json
+- preview/2018-09-01-preview/azureMonitorCustomMetricsIngestionApi.json
 ```
 
 # Code Generation
@@ -57,7 +57,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_monitor']
+      - bundle install && rake arm:regen_all_profiles['azure_monitor_metrics']
 ```
 
 
@@ -71,8 +71,8 @@ csharp:
   azure-arm: true
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Monitor
-  output-folder: $(csharp-sdks-folder)/Monitor/Management.Monitor/Generated
+  namespace: Microsoft.Azure.Monitor.Metrics
+  output-folder: $(csharp-sdks-folder)/Monitor/Azure.Metrics/Generated
   clear-output-folder: true
 ```
 
@@ -84,7 +84,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: insights
+  namespace: azuremonitor
   clear-output-folder: true
 ```
 
@@ -92,16 +92,16 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2018-09
+  - tag: package-2018-09-preview
 ```
 
-### Tag: package-2018-09 and go
+### Tag: package-2018-09-preview and go
 
-These settings apply only when `--tag=package-2018-09 --go` is specified on the command line.
+These settings apply only when `--tag=package-2018-09-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-09' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2018-03-01/insights
+``` yaml $(tag) == 'package-2018-09-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/monitor/2018-09-01-preview/monitor
 ```
 
 ## Python
@@ -116,20 +116,20 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.monitor
-  package-name: azure-mgmt-monitor
+  namespace: microsoft.azure.monitor.metrics
+  package-name: microsoft.azure.monitor.metrics
   package-version: 0.5.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-monitor/azure/mgmt/monitor
+  output-folder: $(python-sdks-folder)/azure-monitor/azure/dataplane/monitor
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-monitor
+  output-folder: $(python-sdks-folder)/azure-monitor/azure/dataplane/monitor
 ```
 
 ## Java
@@ -140,8 +140,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 azure-arm: true
 fluent: true
-namespace: com.microsoft.azure.management.monitor
+namespace: com.microsoft.azure.dataplane.monitor
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
+output-folder: $(azure-libraries-for-java-folder)/azure-monitor
 ```
