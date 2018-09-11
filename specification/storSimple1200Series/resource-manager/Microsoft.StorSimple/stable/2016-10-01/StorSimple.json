@@ -107,49 +107,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.StorSimple/register": {
-      "post": {
-        "tags": [
-          "AvailableProviderOperations"
-        ],
-        "description": "Registers Provider",
-        "operationId": "AvailableProviderOperations_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Manager"
-            }
-          },
-          "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "AvailableProviderOperationsCreateOrUpdate": {
-            "$ref": "./examples/AvailableProviderOperationsCreateOrUpdate.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers": {
       "get": {
         "tags": [
