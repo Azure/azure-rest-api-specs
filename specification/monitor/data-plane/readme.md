@@ -84,7 +84,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: azuremonitor
+  namespace: monitor
   clear-output-folder: true
 ```
 
@@ -116,20 +116,20 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: microsoft.azure.monitor.metrics
-  package-name: microsoft.azure.monitor.metrics
+  namespace: azure.monitor
+  package-name: azure-monitor
   package-version: 0.5.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-monitor/azure/dataplane/monitor
+  output-folder: $(python-sdks-folder)/azure-monitor/azure/monitor
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-monitor/azure/dataplane/monitor
+  output-folder: $(python-sdks-folder)/azure-monitor/azure/monitor
 ```
 
 ## Java

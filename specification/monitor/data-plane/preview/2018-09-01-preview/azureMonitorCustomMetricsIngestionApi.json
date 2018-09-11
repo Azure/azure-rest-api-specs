@@ -90,7 +90,7 @@
             "description": "The Azure metrics document json payload",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Microsoft.Azure.Monitoring.Ingestion.Gateway.Models.AzureMetricsDocument"
+              "$ref": "#/definitions/AzureMetricsDocument"
             }
           }
         ],
@@ -108,7 +108,7 @@
             }
           }
         },
-        "x-ms-example": {
+        "x-ms-examples": {
           "Post azure metrics for cows sold with related metadata as dimensions": {
             "$ref": "./examples/AzureMetrics_IngestMetrics.json"
           }
@@ -117,7 +117,7 @@
     }
   },
   "definitions": {
-    "Microsoft.Azure.Monitoring.Ingestion.Gateway.Models.AzureMetricsDocument": {
+    "AzureMetricsDocument": {
       "type": "object",
       "properties": {
         "Time": {
@@ -125,19 +125,19 @@
           "type": "string"
         },
         "Data": {
-          "$ref": "#/definitions/Microsoft.Azure.Monitoring.Ingestion.Gateway.Models.AzureMetricsData"
+          "$ref": "#/definitions/AzureMetricsData"
         }
       }
     },
-    "Microsoft.Azure.Monitoring.Ingestion.Gateway.Models.AzureMetricsData": {
+    "AzureMetricsData": {
       "type": "object",
       "properties": {
         "BaseData": {
-          "$ref": "#/definitions/Microsoft.Azure.Monitoring.Ingestion.Gateway.Models.AzureMetricsBaseData"
+          "$ref": "#/definitions/AzureMetricsBaseData"
         }
       }
     },
-    "Microsoft.Azure.Monitoring.Ingestion.Gateway.Models.AzureMetricsBaseData": {
+    "AzureMetricsBaseData": {
       "type": "object",
       "properties": {
         "Metric": {
@@ -159,12 +159,12 @@
           "description": "Gets or sets the list of time series data for the metric (one per unique dimension combination)",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Azure.Monitoring.Ingestion.Gateway.Models.AzureTimeSeriesData"
+            "$ref": "#/definitions/AzureTimeSeriesData"
           }
         }
       }
     },
-    "Microsoft.Azure.Monitoring.Ingestion.Gateway.Models.AzureTimeSeriesData": {
+    "AzureTimeSeriesData": {
       "type": "object",
       "properties": {
         "DimValues": {
