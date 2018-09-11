@@ -1120,7 +1120,7 @@
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability":["read", "create"]
+          "x-ms-mutability": [ "read", "create" ]
         },
         "tags": {
           "type": "object",
@@ -1169,7 +1169,7 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "Sku": {
@@ -1180,17 +1180,18 @@
           "description": "The name of this SKU.",
           "enum": [
             "S1",
-            "S2"
+            "S2",
+            "L1"
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The capacity of the sku. This value can be changed to support scale out of environments after they have been created.",
+          "description": "The capacity of the sku. For standard environments, this value can be changed to support scale out of environments after they have been created.",
           "minimum": 1,
           "maximum": 10
         }
@@ -1199,14 +1200,58 @@
         "name",
         "capacity"
       ],
-      "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
+      "description": "The sku determines the type of environment, either standard (S1 or S2) or long-term (L1). For standard environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
+    },
+    "LongTermStorageConfigurationInput": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the storage account that will hold the environment's long term data."
+        },
+        "managementKey": {
+          "type": "string",
+          "description": "The value of the management key that grants the Time Series Insights service write access to the storage account. This property is not shown in environment responses."
+        }
+      },
+      "required": [
+        "accountName",
+        "managementKey"
+      ],
+      "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+    },
+    "LongTermStorageConfigurationOutput": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the storage account that will hold the environment's long term data."
+        }
+      },
+      "required": [
+        "accountName"
+      ],
+      "description": "The storage configuration provides the non-secret connection details about the customer storage account that is used to store the environment's data."
+    },
+    "LongTermStorageConfigurationMutableProperties": {
+      "type": "object",
+      "properties": {
+        "managementKey": {
+          "type": "string",
+          "description": "The value of the management key that grants the Time Series Insights service write access to the storage account. This property is not shown in environment responses."
+        }
+      },
+      "required": [
+        "managementKey"
+      ],
+      "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
     },
     "CreateOrUpdateTrackedResourceProperties": {
       "properties": {
         "location": {
           "type": "string",
           "description": "The location of the resource.",
-          "x-ms-mutability":["read", "create"]
+          "x-ms-mutability": [ "read", "create" ]
         },
         "tags": {
           "type": "object",
@@ -1222,17 +1267,27 @@
       "description": "Properties required to create any resource tracked by Azure Resource Manager."
     },
     "EnvironmentCreateOrUpdateParameters": {
+      "discriminator": "kind",
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the environment.",
+          "enum": [
+            "Standard",
+            "LongTerm"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EnvironmentCreationProperties"
+          "description": "The sku determines the type of environment, either standard (S1 or S2) or long-term (L1). For standard environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
         }
       },
       "required": [
+        "kind",
         "sku",
         "properties"
       ],
@@ -1243,27 +1298,90 @@
       ],
       "description": "Parameters supplied to the CreateOrUpdate Environment operation."
     },
+    "StandardEnvironmentCreateOrUpdateParameters": {
+      "x-ms-discriminator-value": "Standard",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StandardEnvironmentCreationProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentCreateOrUpdateParameters"
+        }
+      ],
+      "description": "Parameters supplied to the Create or Update Environment operation for a standard environment."
+    },
+    "LongTermEnvironmentCreateOrUpdateParameters": {
+      "x-ms-discriminator-value": "LongTerm",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LongTermEnvironmentCreationProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentCreateOrUpdateParameters"
+        }
+      ],
+      "description": "Parameters supplied to the Create or Update Environment operation for a long-term environment."
+    },
     "EnvironmentUpdateParameters": {
       "type": "object",
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The sku of the environment."
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "Key-value pairs of additional properties for the environment."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EnvironmentMutableProperties",
-          "description": "Properties of the environment."
         }
       },
       "description": "Parameters supplied to the Update Environment operation."
+    },
+    "StandardEnvironmentUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the environment."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StandardEnvironmentMutableProperties",
+          "description": "Properties of the standard environment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentUpdateParameters"
+        }
+      ],
+      "description": "Parameters supplied to the Update Environment operation to update a standard environment."
+    },
+    "LongTermEnvironmentUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LongTermEnvironmentMutableProperties",
+          "description": "Properties of the long-term environment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentUpdateParameters"
+        }
+      ],
+      "description": "Parameters supplied to the Update Environment operation to update a long-term environment."
     },
     "EnvironmentListResponse": {
       "properties": {
@@ -1278,16 +1396,26 @@
       "description": "The response of the List Environments operation."
     },
     "EnvironmentResource": {
+      "type": "object",
+      "discriminator": "kind",
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
+          "description": "The sku determines the type of environment, either standard (S1 or S2) or long-term (L1). For standard environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
         },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EnvironmentResourceProperties"
+        "kind": {
+          "type": "string",
+          "description": "The kind of the environment.",
+          "enum": [
+            "Standard",
+            "LongTerm"
+          ]
         }
       },
+      "required": [
+        "kind",
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
@@ -1295,7 +1423,43 @@
       ],
       "description": "An environment is a set of time-series data avaliable for query, and is the top level Azure Time Series Insights resource."
     },
-    "EnvironmentCreationProperties": {
+    "StandardEnvironmentResource": {
+      "x-ms-discriminator-value": "Standard",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StandardEnvironmentResourceProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentResource"
+        }
+      ],
+      "description": "An environment is a set of time-series data avaliable for query, and is the top level Azure Time Series Insights resource. Standard environments have data retention limits."
+    },
+    "LongTermEnvironmentResource": {
+      "x-ms-discriminator-value": "LongTerm",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LongTermEnvironmentResourceProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentResource"
+        }
+      ],
+      "description": "An environment is a set of time-series data avaliable for query, and is the top level Azure Time Series Insights resource. LongTerm environments do not have set data retention limits."
+    },
+    "StandardEnvironmentCreationProperties": {
       "properties": {
         "dataRetentionTime": {
           "type": "string",
@@ -1308,13 +1472,13 @@
           "enum": [ "PurgeOldData", "PauseIngress" ],
           "x-ms-enum": {
             "name": "StorageLimitExceededBehavior",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "partitionKeyProperties": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PartitionKeyProperty"
+            "$ref": "#/definitions/TimeSeriesIdProperty"
           },
           "description": "The list of event properties which will be used to partition data in the environment."
         }
@@ -1322,7 +1486,27 @@
       "required": [
         "dataRetentionTime"
       ],
-      "description": "Properties used to create an environment."
+      "description": "Properties used to create a standard environment."
+    },
+    "LongTermEnvironmentCreationProperties": {
+      "properties": {
+        "timeSeriesIdProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesIdProperty"
+          },
+          "description": "The list of event properties which will be used to define the environment's time series id."
+        },
+        "storageConfiguration": {
+          "$ref": "#/definitions/LongTermStorageConfigurationInput",
+          "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        }
+      },
+      "required": [
+        "timeSeriesIdProperties",
+        "storageConfiguration"
+      ],
+      "description": "Properties used to create a long-term environment."
     },
     "EnvironmentResourceProperties": {
       "properties": {
@@ -1339,12 +1523,23 @@
         },
         "status": {
           "$ref": "#/definitions/EnvironmentStatus",
-          "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service." 
+          "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/EnvironmentCreationProperties"
+          "$ref": "#/definitions/ResourceProperties"
+        }
+      ],
+      "description": "Properties of the environment."
+    },
+    "StandardEnvironmentResourceProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/StandardEnvironmentCreationProperties"
+        },
+        {
+          "$ref": "#/definitions/EnvironmentResourceProperties"
         },
         {
           "$ref": "#/definitions/ResourceProperties"
@@ -1353,10 +1548,38 @@
       "required": [
         "dataRetentionTime"
       ],
-      "description": "Properties of the environment."
+      "description": "Properties of the standard environment."
     },
-    "EnvironmentMutableProperties": {
-      "description": "An object that represents a set of mutable environment resource properties.",
+    "LongTermEnvironmentResourceProperties": {
+      "properties": {
+        "timeSeriesIdProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesIdProperty"
+          },
+          "description": "The list of event properties which will be used to define the environment's time series id."
+        },
+        "storageConfiguration": {
+          "$ref": "#/definitions/LongTermStorageConfigurationOutput",
+          "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        }
+      },
+      "required": [
+        "timeSeriesIdProperties",
+        "storageConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/ResourceProperties"
+        }
+      ],
+      "description": "Properties of the long-term environment."
+    },
+    "StandardEnvironmentMutableProperties": {
+      "description": "An object that represents a set of mutable standard environment resource properties.",
       "type": "object",
       "properties": {
         "dataRetentionTime": {
@@ -1370,19 +1593,36 @@
           "enum": [ "PurgeOldData", "PauseIngress" ],
           "x-ms-enum": {
             "name": "StorageLimitExceededBehavior",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "partitionKeyProperties": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PartitionKeyProperty"
+            "$ref": "#/definitions/TimeSeriesIdProperty"
           },
           "description": "The list of event properties which will be used to partition data in the environment."
         }
       }
     },
-    "PartitionKeyProperty": {
+    "LongTermEnvironmentMutableProperties": {
+      "description": "An object that represents a set of mutable long-term environment resource properties.",
+      "type": "object",
+      "properties": {
+        "storageConfiguration": {
+          "$ref": "#/definitions/LongTermStorageConfigurationMutableProperties",
+          "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        },
+        "timeSeriesIdProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesIdProperty"
+          },
+          "description": "The list of event properties which will be used to partition data in the environment."
+        }
+      }
+    },
+    "TimeSeriesIdProperty": {
       "properties": {
         "name": {
           "type": "string",
@@ -1400,7 +1640,7 @@
           }
         }
       },
-      "description": "The structure of the property that a partition key can have. An environment can have multiple such properties."
+      "description": "The structure of the property that a time series id can have. An environment can have multiple such properties."
     },
     "EnvironmentStatus": {
       "readOnly": true,
@@ -1421,16 +1661,16 @@
         "state": {
           "type": "string",
           "description": "This string represents the state of ingress operations on an environment. It can be \"Disabled\", \"Ready\", \"Running\", \"Paused\" or \"Unknown\"",
-          "enum": [ 
-            "Disabled", 
-            "Ready", 
-            "Running", 
-            "Paused", 
-            "Unknown" 
+          "enum": [
+            "Disabled",
+            "Ready",
+            "Running",
+            "Paused",
+            "Unknown"
           ],
           "x-ms-enum": {
             "name": "IngressState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "stateDetails": {
@@ -1443,7 +1683,7 @@
       "readOnly": true,
       "type": "object",
       "description": "An object that contains the details about an environment's state.",
-      "properties":{
+      "properties": {
         "code": {
           "type": "string",
           "description": "Contains the code that represents the reason of an environment being in a particular state. Can be used to programatically handle specific cases."
@@ -1466,7 +1706,7 @@
           ],
           "x-ms-enum": {
             "name": "Kind",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -1774,7 +2014,7 @@
       "type": "object",
       "properties": {
         "format": {
-          "description": "An enum that represents the format of the local timestamp property that needs to be set.", 
+          "description": "An enum that represents the format of the local timestamp property that needs to be set.",
           "type": "string",
           "enum": [
             "Embedded",
@@ -1783,7 +2023,7 @@
           ],
           "x-ms-enum": {
             "name": "LocalTimestampFormat",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "timeZoneOffset": {
@@ -1792,7 +2032,7 @@
           "properties": {
             "propertyName": {
               "type": "string",
-              "description":  "The event property that will be contain the offset information to calculate the local timestamp. When the LocalTimestampFormat is Iana, the property name will contain the name of the column which contains IANA Timezone Name (eg: Americas/Los Angeles). When LocalTimestampFormat is Timespan, it contains the name of property which contains values representing the offset (eg: P1D or 1.00:00:00)" 
+              "description": "The event property that will be contain the offset information to calculate the local timestamp. When the LocalTimestampFormat is Iana, the property name will contain the name of the column which contains IANA Timezone Name (eg: Americas/Los Angeles). When LocalTimestampFormat is Timespan, it contains the name of property which contains values representing the offset (eg: P1D or 1.00:00:00)"
             }
           }
         }
@@ -1808,7 +2048,7 @@
         },
         "localTimestamp": {
           "$ref": "#/definitions/LocalTimestamp",
-          "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events."          
+          "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events."
         }
       }
     },
@@ -1912,7 +2152,7 @@
           "enum": [ "Ordinal", "OrdinalIgnoreCase" ],
           "x-ms-enum": {
             "name": "DataStringComparisonBehavior",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -1952,7 +2192,7 @@
           ],
           "x-ms-enum": {
             "name": "ReferenceDataKeyPropertyType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -2024,7 +2264,7 @@
             ],
             "x-ms-enum": {
               "name": "AccessPolicyRole",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           "description": "The list of roles the principal is assigned on the environment."
@@ -2050,7 +2290,7 @@
             ],
             "x-ms-enum": {
               "name": "AccessPolicyRole",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           "description": "The list of roles the principal is assigned on the environment."
