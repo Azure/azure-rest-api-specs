@@ -5164,12 +5164,10 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS.",
       "description": "Specifies the storage account type for the managed disk. UltraSSD_LRS can only be used for data disks.",
       "enum": [
         "Standard_LRS",
         "Premium_LRS",
-        "StandardSSD_LRS"
         "StandardSSD_LRS",
         "UltraSSD_LRS"
       ],
@@ -5182,7 +5180,6 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
           "description": "Specifies the storage account type for the managed disk. UltraSSD_LRS can only be used for data disks."
         }
       },
