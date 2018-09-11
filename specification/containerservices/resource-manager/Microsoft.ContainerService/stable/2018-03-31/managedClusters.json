@@ -319,7 +319,7 @@
             "$ref": "./examples/ManagedClustersListClusterCredentialResult.json"
           }
         }
-      } 
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}": {
       "get": {
@@ -1162,7 +1162,7 @@
           "items": {
             "$ref": "#/definitions/ManagedClusterAgentPoolProfile"
           },
-          "description": "Properties of the agent pool."
+          "description": "Properties of the agent pool. Currently only one agent pool can exist."
         },
         "linuxProfile": {
           "$ref": "#/definitions/ContainerServiceLinuxProfile",
@@ -1412,7 +1412,7 @@
           "description": "Base64-encoded Kubernetes configuration file."
         }
       },
-      "description": "The credential result response." 
+      "description": "The credential result response."
     }
   },
   "parameters": {

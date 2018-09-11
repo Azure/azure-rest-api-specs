@@ -611,14 +611,14 @@
       }
     },
     "/providers/Microsoft.BotService/checkNameAvailability": {
-      "get": {
+      "post": {
         "tags": [
           "Bot"
         ],
         "description": "Check whether a bot name is available.",
         "operationId": "Bots_GetCheckNameAvailability",
         "x-ms-examples": {
-          "List Bots by Subscription": {
+          "check Name Availability": {
             "$ref": "./examples/CheckNameAvailability.json"
           }
         },
@@ -762,7 +762,7 @@
             }
           }
         }
-      }      
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/Connections/{connectionName}": {
       "put": {
@@ -1010,6 +1010,295 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BotService/checkEnterpriseChannelNameAvailability": {
+      "post": {
+        "tags": [
+          "Enterprise Channel"
+        ],
+        "description": "Check whether an Enterprise Channel name is available.",
+        "operationId": "EnterpriseChannels_CheckNameAvailability",
+        "x-ms-examples": {
+          "Check Enterprise Channel Name Availability": {
+            "$ref": "./examples/EnterpriseChannelCheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannelCheckNameAvailabilityRequest"
+            },
+            "description": "The parameters to provide for the Enterprise Channel check name availability request."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses. If a resource provider does not support paging, it should return the same body but leave nextLink empty for future compatibility.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannelCheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/enterpriseChannels": {
+      "get": {
+        "tags": [
+          "Enterprise Channel"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a resource group.",
+        "operationId": "EnterpriseChannels_ListByResourceGroup",
+        "x-ms-examples": {
+          "List Enterprise Channels by Resource Group": {
+            "$ref": "./examples/ListEnterpriseChannelsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannelResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/enterpriseChannels/{resourceName}": {
+      "put": {
+        "tags": [
+          "Enterprise Channel"
+        ],
+        "description": "Creates an Enterprise Channel.",
+        "operationId": "EnterpriseChannels_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create Enterprise Channel": {
+            "$ref": "./examples/CreateEnterpriseChannel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannel"
+            },
+            "description": "The parameters to provide for the new Enterprise Channel."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created successfully or already existed, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannel"
+            }
+          },
+          "201": {
+            "description": "If resource is created successfully, the service should return 201 (Created). Execution to continue asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Enterprise Channel"
+        ],
+        "description": "Updates an Enterprise Channel.",
+        "operationId": "EnterpriseChannels_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update Enterprise Channel": {
+            "$ref": "./examples/UpdateEnterpriseChannel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannel"
+            },
+            "description": "The parameters to provide to update the Enterprise Channel."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created successfully or already existed, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannel"
+            }
+          },
+          "201": {
+            "description": "If resource is created successfully, the service should return 201 (Created). Execution to continue asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Enterprise Channel"
+        ],
+        "description": "Deletes an Enterprise Channel from the resource group",
+        "operationId": "EnterpriseChannels_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete Enterprise Channel": {
+            "$ref": "./examples/DeleteEnterpriseChannel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "204": {
+            "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Enterprise Channel"
+        ],
+        "description": "Returns an Enterprise Channel specified by the parameters.",
+        "operationId": "EnterpriseChannels_Get",
+        "x-ms-examples": {
+          "Get Enterprise Channel": {
+            "$ref": "./examples/GetEnterpriseChannel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseChannel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
         }
       }
     }
@@ -1803,15 +2092,26 @@
         },
         "isEnabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for DirectLine channel"
+          "description": "Whether this site is enabled for DirectLine channel."
         },
         "isV1Enabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for Bot Framework V1 protocol"
+          "description": "Whether this site is enabled for Bot Framework V1 protocol."
         },
         "isV3Enabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for Bot Framework V1 protocol"
+          "description": "Whether this site is enabled for Bot Framework V1 protocol."
+        },
+        "isSecureSiteEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is enabled for authentication with Bot Framework."
+        },
+        "trustedOrigins": {
+          "type": "array",
+          "description": "List of Trusted Origin URLs for this site. This field is applicable only if isSecureSiteEnabled is True.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "A site for the Direct Line channel",
@@ -1892,7 +2192,7 @@
       ],
       "properties": {
         "properties": {
-        "$ref": "#/definitions/ConnectionSettingProperties",
+          "$ref": "#/definitions/ConnectionSettingProperties",
           "description": "The set of properties specific to bot channel resource"
         }
       }
@@ -1978,7 +2278,7 @@
           "description": "Diplay Name of the Service Provider",
           "readOnly": true
         },
-        "serviceProviderName": {  
+        "serviceProviderName": {
           "type": "string",
           "description": "Diplay Name of the Service Provider",
           "readOnly": true
@@ -2127,6 +2427,122 @@
           "type": "string"
         }
       }
+    },
+    "EnterpriseChannelCheckNameAvailabilityRequest": {
+      "description": "A request to Bot Service Management to check availability of an Enterprise Channel name.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Enterprise Channel for which availability needs to be checked.",
+          "type": "string"
+        }
+      }
+    },
+    "EnterpriseChannelCheckNameAvailabilityResponse": {
+      "description": "A request to Bot Service Management to check availability of an Enterprise Channel name.",
+      "type": "object",
+      "properties": {
+        "valid": {
+          "description": "Indicates if the Enterprise Channel name is valid.",
+          "type": "boolean"
+        },
+        "message": {
+          "description": "Additional information about why a bot name is not available.",
+          "type": "string"
+        }
+      }
+    },
+    "EnterpriseChannelResponseList": {
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of bot service resources.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnterpriseChannel"
+          },
+          "description": "The list of Enterprise Channels and their properties."
+        }
+      },
+      "description": "The list of  bot service operation response."
+    },
+    "EnterpriseChannel": {
+      "type": "object",
+      "description": "Enterprise Channel resource definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnterpriseChannelProperties",
+          "description": "The set of properties specific to an Enterprise Channel resource."
+        }
+      }
+    },
+    "EnterpriseChannelProperties": {
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The current state of the Enterprise Channel.",
+          "enum": ["Creating", "CreateFailed", "Started", "Starting", "StartFailed", "Stopped", "Stopping", "StopFailed", "Deleting", "DeleteFailed"],
+          "x-ms-enum": {
+            "name": "EnterpriseChannelState",
+            "modelAsString": true
+          }
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnterpriseChannelNode"
+          },
+          "description": "The nodes associated with the Enterprise Channel."
+        }
+      },
+      "description": "The parameters to provide for the Enterprise Channel.",
+      "required": [
+        "nodes"
+      ]
+    },
+    "EnterpriseChannelNode": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of Enterprise Channel Node. This is generated by the Bot Framework.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The current state of the Enterprise Channel Node.",
+          "enum": ["Creating", "CreateFailed", "Started", "Starting", "StartFailed", "Stopped", "Stopping", "StopFailed", "Deleting", "DeleteFailed"],
+          "x-ms-enum": {
+            "name": "EnterpriseChannelNodeState",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Enterprise Channel Node."
+        },
+        "azureSku": {
+          "type": "string",
+          "description": "The sku of the Enterprise Channel Node."
+        },
+        "azureLocation": {
+          "type": "string",
+          "description": "The location of the Enterprise Channel Node."
+        }
+      },
+      "description": "The properties specific to an Enterprise Channel Node.",
+      "required": [
+        "name",
+        "azureSku",
+        "azureLocation"
+      ]
     }
   },
   "parameters": {
@@ -2164,7 +2580,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2017-12-01"
+      "description": "Version of the API to be used with the client request."
     },
     "connectionNameParameter": {
       "name": "connectionName",
@@ -2200,34 +2616,34 @@
         "modelAsString": false,
         "values": [
           {
-            "value": "FacebookChannel"  
+            "value": "FacebookChannel"
           },
           {
-            "value": "EmailChannel"  
+            "value": "EmailChannel"
           },
           {
-            "value": "KikChannel"  
+            "value": "KikChannel"
           },
           {
-            "value": "TelegramChannel"  
+            "value": "TelegramChannel"
           },
           {
-            "value": "SlackChannel"  
+            "value": "SlackChannel"
           },
           {
-            "value": "MsTeamsChannel"  
+            "value": "MsTeamsChannel"
           },
           {
-            "value": "SkypeChannel"  
+            "value": "SkypeChannel"
           },
           {
-            "value": "WebChatChannel"  
+            "value": "WebChatChannel"
           },
           {
-            "value": "DirectLineChannel"  
+            "value": "DirectLineChannel"
           },
           {
-            "value": "SmsChannel"  
+            "value": "SmsChannel"
           }
         ]
       },
