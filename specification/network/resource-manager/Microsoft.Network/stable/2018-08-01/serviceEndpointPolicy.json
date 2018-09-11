@@ -530,6 +530,7 @@
           "description": "A list of service resources."
         },
         "provisioningState": {
+          "readOnly" : true,
           "type": "string",
           "description": "The provisioning state of the service end point policy definition. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
@@ -584,12 +585,22 @@
           },
           "description": "A collection of service endpoint policy definitions of the service endpoint policy."
         },
+        "subnets": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./virtualNetwork.json#/definitions/Subnet"
+          },
+          "description": "A collection of references to subnets."
+        },
         "resourceGuid": {
           "type": "string",
+          "readOnly": true,
           "description": "The resource GUID property of the service endpoint policy resource."
         },
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "The provisioning state of the service endpoint policy. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
