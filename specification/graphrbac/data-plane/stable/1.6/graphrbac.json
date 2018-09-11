@@ -473,7 +473,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApplicationAddOwnerParameters"
+              "$ref": "#/definitions/AddOwnerParameters"
             },
             "description": "The URL of the owner object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
           },
@@ -896,7 +896,7 @@
           "200": {
             "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/GetObjectsResult"
+              "$ref": "#/definitions/DirectoryObjectListResult"
             }
           },
           "default": {
@@ -1793,7 +1793,7 @@
           "200": {
             "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/GetObjectsResult"
+              "$ref": "#/definitions/DirectoryObjectListResult"
             }
           }
         },
@@ -1945,38 +1945,6 @@
     }
   },
   "x-ms-paths": {
-    "/{tenantID}/me": {
-      "get": {
-        "tags": [
-          "Objects"
-        ],
-        "operationId": "Objects_GetCurrentUser",
-        "description": "Gets the details for the currently logged-in user.",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/tenantIDInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The operation was successful.",
-            "schema": {
-              "$ref": "#/definitions/AADObject"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/GraphError"
-            }
-          }
-        }
-      }
-    },
     "/{tenantID}/{nextLink}?SignedInUser_ListOwnedObjectsNext": {
       "get": {
         "tags": [
@@ -2090,7 +2058,7 @@
           "200": {
             "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/GetObjectsResult"
+              "$ref": "#/definitions/DirectoryObjectListResult"
             }
           },
           "default": {
@@ -2305,7 +2273,7 @@
           "200": {
             "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/GetObjectsResult"
+              "$ref": "#/definitions/DirectoryObjectListResult"
             }
           }
         },
@@ -2755,14 +2723,6 @@
       },
       "description": "Request parameters for adding a owner to an application."
     },
-    "ApplicationAddOwnerParameters": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AddOwnerParameters"
-        }
-      ]
-    },
     "KeyCredentialListResult": {
       "type": "object",
       "properties": {
@@ -2837,124 +2797,6 @@
         "value"
       ],
       "description": "Request parameters for a PasswordCredentials update operation."
-    },
-    "AADObject": {
-      "type": "object",
-      "properties": {
-        "objectId": {
-          "type": "string",
-          "description": "The ID of the object."
-        },
-        "objectType": {
-          "type": "string",
-          "description": "The type of AAD object."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the object."
-        },
-        "userPrincipalName": {
-          "type": "string",
-          "description": "The principal name of the object."
-        },
-        "mail": {
-          "type": "string",
-          "description": "The primary email address of the object."
-        },
-        "mailEnabled": {
-          "type": "boolean",
-          "description": "Whether the AAD object is mail-enabled."
-        },
-        "mailNickname": {
-          "type": "string",
-          "description": "The mail alias for the user.",
-          "readOnly": true
-        },
-        "securityEnabled": {
-          "type": "boolean",
-          "description": "Whether the AAD object is security-enabled."
-        },
-        "signInName": {
-          "type": "string",
-          "description": "The sign-in name of the object."
-        },
-        "servicePrincipalNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A collection of service principal names associated with the object."
-        },
-        "userType": {
-          "type": "string",
-          "description": "The user type of the object."
-        },
-        "usageLocation": {
-          "type": "string",
-          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\".",
-          "readOnly": true
-        },
-        "appId": {
-          "type": "string",
-          "description": "The application ID.",
-          "readOnly": true
-        },
-        "appPermissions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The application permissions.",
-          "readOnly": true
-        },
-        "availableToOtherTenants": {
-          "type": "boolean",
-          "description": "Whether the application is be available to other tenants.",
-          "readOnly": true
-        },
-        "identifierUris": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A collection of URIs for the application.",
-          "readOnly": true
-        },
-        "replyUrls": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A collection of reply URLs for the application.",
-          "readOnly": true
-        },
-        "homepage": {
-          "type": "string",
-          "description": "The home page of the application.",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      },
-      "description": "The properties of an Active Directory object."
-    },
-    "GetObjectsResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AADObject"
-          },
-          "description": "A collection of Active Directory objects."
-        },
-        "odata.nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of results."
-        }
-      },
-      "description": "The response to an Active Directory object inquiry API request."
     },
     "GroupAddMemberParameters": {
       "type": "object",
