@@ -20,7 +20,7 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the Blueprint API.
 
-``` yam
+``` yaml
 title: BlueprintManagementClient
 description: Blueprint Client
 openapi-type: arm
