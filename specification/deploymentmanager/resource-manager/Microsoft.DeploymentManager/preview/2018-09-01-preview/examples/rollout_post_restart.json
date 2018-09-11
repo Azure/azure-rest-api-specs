@@ -7,25 +7,28 @@
         "api-version": "2018-09-01-preview"
     },
     "responses": {
-        "409": {},
-        "404": {},
         "200": {
             "body": {
                 "name": "myRollout",
                 "type": "Microsoft.DeploymentManager/rollouts",
                 "location": "centralus",
                 "tags": {},
+                "identity": {
+                    "type": "userAssigned",
+                    "identityIds": [
+                        "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userassignedidentities/myuseridentity"
+                    ]
+                },
                 "properties": {
                     "status": "Running",
                     "operationInfo": {
                         "startTime": "2018-08-28T03:33:56.386Z",
-                        "lastUpdatedTime": "2018-08-28T03:39:28.556Z",
                         "retryAttempt": 1
                     },
                     "totalRetryAttempts": 1,
                     "buildVersion": "1.0.0.1",
-                    "artifactSourceId": "Microsoft.DeploymentManager/artifactSources/myArtifactSource",
-                    "targetServiceTopologyId": "Microsoft.DeploymentManager/serviceTopologies/myTopology",
+                    "artifactSourceId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/artifactSources/myArtifactSource",
+                    "targetServiceTopologyId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/serviceTopologies/myTopology",
                     "stepGroups": [
                         {
                             "name": "FirstRegion",

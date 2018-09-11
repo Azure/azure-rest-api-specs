@@ -36,7 +36,21 @@ directive:
     from: deploymentmanager.json
   - suppress: TrackedResourceListByImmediateParent
     reason: Not available during preview.
-    from: deploymentmanager.json    
+  - suppress: TrackedResourcePatchOperation
+    reason: Not available at this time.
+    from: deploymentmanager.json     
+  - suppress: TrackedResourceListBySubscription
+    reason: Not available at this time.
+    from: deploymentmanager.json 
+  - suppress: TrackedResourceListByResourceGroup
+    reason: Not available at this time.
+    from: deploymentmanager.json 
+  - suppress: TrackedResourceGetOperation
+    reason: The rollout resource has a get operation. The request and response types are separated for clarity.
+    where: $.definitions.RolloutRequest     
+  - suppress: DescriptionAndTitleMissing
+    reason: Common types warning.
+    where: $.definitions.Resource       
 ```
 
 ### Tag: package-2018-09-01-preview
@@ -66,6 +80,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DeploymentManager
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DeploymentManager/Management.DeploymentManager/Generated
+  output-folder: $(csharp-sdks-folder)/DeploymentManager/Management/Generated
   clear-output-folder: true  
 ``` 

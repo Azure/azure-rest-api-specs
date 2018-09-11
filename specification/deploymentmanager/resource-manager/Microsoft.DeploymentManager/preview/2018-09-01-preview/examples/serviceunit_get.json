@@ -8,20 +8,19 @@
         "api-version": "2018-09-01-preview"
     },
     "responses": {
-        "201": {
+        "200": {
             "body": {
-                "name": "myTopologyUnit",
-                "type": "Microsoft.DeploymentManager/topologies/topologyGroups/topologyUnits",
+                "name": "myServiceUnit",
+                "type": "Microsoft.DeploymentManager/servicetopologies/services/serviceunits",
                 "location": "centralus",
                 "tags": {},
                 "properties": {
                     "targetResourceGroup": "myDeploymentResourceGroup",
                     "deploymentMode": "Incremental",
-                    "templateUri": "https://teststorageaccount.blob.core.windows.net/artifactsContainer/myTopologyUnit.template.json",
-                    "parametersUri": "https://teststorageaccount.blob.core.windows.net/artifactsContainer/myTopologyUnit.parameters.json"
+                    "templateArtifactSourceRelativePath": "templates/myTopologyUnit.template.json",
+                    "parametersArtifactSourceRelativePath": "parameter/myTopologyUnit.parameters.json"
                 }
             }
-        },
-        "404": {}
+        }
     }
 }

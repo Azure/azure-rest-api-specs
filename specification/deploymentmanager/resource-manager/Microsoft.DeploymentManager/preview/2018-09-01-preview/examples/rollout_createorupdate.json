@@ -8,10 +8,16 @@
             "type": "Microsoft.DeploymentManager/rollouts",
             "location": "centralus",
             "tags": {},
+            "identity": {
+                "type": "userAssigned",
+                "identityIds": [
+                    "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userassignedidentities/myuseridentity"
+                ]
+            },
             "properties": {
                 "buildVersion": "1.0.0.1",
-                "artifactSourceId": "Microsoft.DeploymentManager/artifactSources/myArtifactSource",
-                "targetServiceTopologyId": "Microsoft.DeploymentManager/serviceTopologies/myTopology",
+                "artifactSourceId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/artifactSources/myArtifactSource",
+                "targetServiceTopologyId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/serviceTopologies/myTopology",
                 "stepGroups": [
                     {
                         "name": "FirstRegion",
@@ -23,7 +29,7 @@
                                 "stepId": "Microsoft.DeploymentManager/steps/preDeployStep2"
                             }
                         ],
-                        "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myTopologyUnit1'",
+                        "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit1'",
                         "postDeploymentSteps": [
                             {
                                 "stepId": "Microsoft.DeploymentManager/steps/postDeployStep1"
@@ -40,7 +46,7 @@
                                 "stepId": "Microsoft.DeploymentManager/steps/preDeployStep4"
                             }
                         ],
-                        "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myTopologyUnit2'",
+                        "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit2'",
                         "postDeploymentSteps": [
                             {
                                 "stepId": "Microsoft.DeploymentManager/steps/postDeployStep5"
@@ -61,10 +67,16 @@
                 "type": "Microsoft.DeploymentManager/rollouts",
                 "location": "centralus",
                 "tags": {},
+                "identity": {
+                    "type": "userAssigned",
+                    "identityIds": [
+                        "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userassignedidentities/myuseridentity"
+                    ]
+                },
                 "properties": {
                     "buildVersion": "1.0.0.1",
-                    "artifactSourceId": "Microsoft.DeploymentManager/artifactSources/myArtifactSource",
-                    "targetServiceTopologyId": "Microsoft.DeploymentManager/serviceTopologies/myTopology",
+                    "artifactSourceId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/artifactSources/myArtifactSource",
+                    "targetServiceTopologyId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/serviceTopologies/myTopology",
                     "stepGroups": [
                         {
                             "name": "FirstRegion",
@@ -76,7 +88,7 @@
                                     "stepId": "Microsoft.DeploymentManager/steps/preDeployStep2"
                                 }
                             ],
-                            "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myTopologyUnit1'",
+                            "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit1'",
                             "postDeploymentSteps": [
                                 {
                                     "stepId": "Microsoft.DeploymentManager/steps/postDeployStep1"
@@ -93,7 +105,7 @@
                                     "stepId": "Microsoft.DeploymentManager/steps/preDeployStep4"
                                 }
                             ],
-                            "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myTopologyUnit2'",
+                            "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit2'",
                             "postDeploymentSteps": [
                                 {
                                     "stepId": "Microsoft.DeploymentManager/steps/postDeployStep5"

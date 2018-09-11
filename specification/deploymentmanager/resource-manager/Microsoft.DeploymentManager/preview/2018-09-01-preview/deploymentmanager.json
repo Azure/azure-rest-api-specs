@@ -78,7 +78,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard Error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -87,7 +87,7 @@
         "tags": [
           "ServiceTopologies"
         ],
-        "operationId": "Topologies_Get",
+        "operationId": "ServiceTopologies_Get",
         "summary": "Gets a topology resource.",
         "x-ms-examples": {
           "Get topology": {
@@ -118,7 +118,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -127,7 +127,7 @@
         "tags": [
           "ServiceTopologies"
         ],
-        "operationId": "Topologies_Delete",
+        "operationId": "ServiceTopologies_Delete",
         "summary": "Deletes a topology resource.",
         "x-ms-examples": {
           "Delete topology": {
@@ -158,7 +158,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -213,7 +213,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -256,7 +256,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -299,7 +299,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -364,7 +364,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -410,7 +410,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -456,7 +456,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -507,7 +507,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -547,7 +547,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -587,7 +587,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -645,7 +645,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -688,7 +688,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -726,13 +726,10 @@
           "204": {
             "description": "The rollout was not found and the operation is considered success."
           },
-          "409": {
-            "description": "The current state of the rollout does not allow a cancellation."
-          },
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -772,13 +769,10 @@
               "$ref": "#/definitions/Rollout"
             }
           },
-          "409": {
-            "description": "The current state of the rollout does not allow a cancellation."
-          },
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -825,13 +819,10 @@
               "$ref": "#/definitions/Rollout"
             }
           },
-          "409": {
-            "description": "The current state of the rollout does not allow a restart."
-          },
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -879,13 +870,10 @@
               "$ref": "#/definitions/ArtifactSource"
             }
           },
-          "400": {
-            "description": "Bad request."
-          },
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -925,7 +913,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -965,7 +953,7 @@
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -995,14 +983,13 @@
           "200": {
             "description": "The operation details are successfully returned. The response code does not determine if the request which this operation corresponds to is successful. Check the response content for the status and any error information on failures.",
             "schema": {
-              "type": "array",
               "$ref": "#/definitions/OperationsList"
             }
           },
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
             "schema": {
-              "$ref": "#/definitions/ErrorInfo"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1010,107 +997,48 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "An Azure resource.",
-      "x-ms-azure-resource": true,
+    "Identity": {
+      "description": "Identity for the resource.",
+      "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the resource."
-        },
         "type": {
           "type": "string",
-          "readOnly": true,
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.AzureDeploymentManager/rollouts."
+          "description": "The identity type."
         },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        }
-      }
-    },
-    "TrackedResource": {
-      "description": "A tracked Azure resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "location": {
-              "type": "string",
-              "description": "The geo-location where the resource lives."
-            },
-            "tags": {
-              "description": "The tags that is used to add a property to a resource.",
-              "additionalProperties": {
-                "description": "The tag to add to the resource.",
-                "type": "string"
-              }
-            }
+        "identityIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
           },
-          "required": [
-            "location"
-          ]
+          "description": "The list of identities."
         }
-      ]
-    },
-    "IdentityResource": {
-      "description": "A tracked Azure resource which also holds identity information.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "identity": {
-              "description": "Identity for the resource.",
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "The identity type."
-                },
-                "identityIds": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "The list of identities."
-                }
-              }
-            }
-          }
-        }
+      },
+      "required": [
+        "type",
+        "identityIds"
       ]
     },
     "RolloutRequest": {
       "description": "Defines the resource format for creating a rollout.",
       "allOf": [
         {
-          "$ref": "#/definitions/IdentityResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "Defines the properties that make up a rollout request.",
-              "x-ms-client-flatten": true,
-              "allOf": [
-                {
-                  "$ref": "#/definitions/RolloutRequestProperties"
-                }
-              ]
-            }
-          },
-          "required": [
-            "properties"
-          ]
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Identity for the resource.",
+          "$ref": "#/definitions/Identity"
+        },
+        "properties": {
+          "description": "Defines the properties that make up a rollout request.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RolloutRequestProperties"
+        }
+      },
+      "required": [
+        "identity",
+        "properties"
       ]
     },
     "RolloutRequestProperties": {
@@ -1141,7 +1069,7 @@
       },
       "required": [
         "stepGroups",
-        "artifactSourceId",
+        "targetServiceTopologyId",
         "buildVersion"
       ]
     },
@@ -1182,7 +1110,11 @@
             "$ref": "#/definitions/PrePostStep"
           }
         }
-      }
+      },
+      "required": [
+        "deploymentTargetId",
+        "name"
+      ]
     },
     "PrePostStep": {
       "description": "The properties that define a step.",
@@ -1192,29 +1124,29 @@
           "description": "The reference to the ARM resource Id of a step.",
           "example": "Microsoft.DeploymentManager/steps/healthCheckStep1"
         }
-      }
+      },
+      "required": [
+        "stepId"
+      ]
     },
     "ArtifactSource": {
       "description": "The resource that define the source location where the artifacts are located.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "Defines the properties that make up an artifact source.",
-              "x-ms-client-flatten": true,
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ArtifactSourceProperties"
-                }
-              ]
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "description": "Defines the properties that make up an artifact source.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArtifactSourceProperties"
+            }
+          ]
+        }
+      }
     },
     "ArtifactSourceProperties": {
       "description": "The properties that define the source location where the artifacts are located.",
@@ -1232,7 +1164,11 @@
           "description": "The authentication method to use to access the artifact source.",
           "$ref": "#/definitions/Authentication"
         }
-      }
+      },
+      "required": [
+        "sourceType",
+        "authentication"
+      ]
     },
     "Authentication": {
       "description": "Defines the authentication method and properties to access the artifacts.",
@@ -1255,18 +1191,15 @@
       "allOf": [
         {
           "$ref": "#/definitions/Authentication"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "The SAS properties",
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/SasProperties"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "description": "The SAS properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SasProperties"
+        }
+      }
     },
     "SasProperties": {
       "description": "The properties that define SAS authentication.",
@@ -1284,26 +1217,27 @@
       "description": "Defines the rollout resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "The properties that define a rollout.",
-              "x-ms-client-flatten": true,
-              "allOf": [
-                {
-                  "$ref": "#/definitions/RolloutRequestProperties"
-                },
-                {
-                  "$ref": "#/definitions/RolloutProperties"
-                }
-              ]
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "properties": {
+        "identity": {
+          "description": "Identity for the resource.",
+          "$ref": "#/definitions/Identity"
+        },
+        "properties": {
+          "description": "The properties that define a rollout.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RolloutRequestProperties"
+            },
+            {
+              "$ref": "#/definitions/RolloutProperties"
+            }
+          ]
+        }
+      }
     },
     "RolloutProperties": {
       "description": "Defines the properties of a rollout.",
@@ -1320,11 +1254,13 @@
           "description": "The cardinal count of total number of retries performed on the rollout at a given time."
         },
         "operationInfo": {
+          "readOnly": true,
           "$ref": "#/definitions/RolloutOperationInfo",
           "description": "Operational information of the rollout."
         },
         "services": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Service"
           },
@@ -1338,10 +1274,12 @@
         "retryAttempt": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "The ordinal count of retry attempt. 0 if no retries of the rollout have been performed."
         },
         "skipSucceededOnRetry": {
           "type": "boolean",
+          "readOnly": true,
           "description": "True if skipping all successful steps in the given retry attempt was chosen. False otherwise."
         },
         "startTime": {
@@ -1358,7 +1296,8 @@
         },
         "error": {
           "description": "The detailed error information for any failure.",
-          "$ref": "#/definitions/ErrorProperties"
+          "readOnly": true,
+          "$ref": "#/definitions/CloudErrorBody"
         }
       }
     },
@@ -1366,27 +1305,22 @@
       "description": "The resource representation of a service topology.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "The properties that define the service.",
-              "x-ms-client-flatten": true,
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ServiceTopologyProperties"
-                }
-              ]
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties that define the service.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceTopologyProperties"
             }
-          },
-          "required": [
-            "properties",
-            "name",
-            "type"
           ]
         }
+      },
+      "required": [
+        "properties"
       ]
     },
     "ServiceTopologyProperties": {
@@ -1396,36 +1330,28 @@
           "type": "string",
           "description": "The artifact source that contains the artifacts that can be referenced in the service units."
         }
-      },
-      "required": [
-        "artifactSourceId"
-      ]
+      }
     },
     "ServiceResource": {
       "description": "The resource representation of a service in a topology.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "The properties that define a service in a topology.",
-              "x-ms-client-flatten": true,
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ServiceProperties"
-                }
-              ]
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties that define a service in a topology.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceProperties"
             }
-          },
-          "required": [
-            "properties",
-            "name",
-            "type"
           ]
         }
+      },
+      "required": [
+        "properties"
       ]
     },
     "Service": {
@@ -1433,24 +1359,21 @@
       "allOf": [
         {
           "$ref": "#/definitions/ServiceProperties"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the service."
         },
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Name of the service."
-            },
-            "serviceUnits": {
-              "description": "The detailed information about the units that make up the service.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ServiceUnit"
-              }
-            }
+        "serviceUnits": {
+          "description": "The detailed information about the units that make up the service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceUnit"
           }
         }
-      ]
+      }
     },
     "ServiceProperties": {
       "description": "The properties of a service.",
@@ -1470,29 +1393,24 @@
       ]
     },
     "ServiceUnitResource": {
-      "description": "Represents the response of a service unit resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/IdentityResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "The properties that define the service unit.",
-              "x-ms-client-flatten": true,
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ServiceUnitProperties"
-                }
-              ]
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
+      "description": "Represents the response of a service unit resource.",
+      "properties": {
+        "properties": {
+          "description": "The properties that define the service unit.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceUnitProperties"
+            }
+          ]
+        }
+      },
       "required": [
-        "name",
-        "type",
         "properties"
       ]
     },
@@ -1501,9 +1419,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ServiceUnitProperties"
-        },
-        {
-          "type": "object"
         }
       ],
       "properties": {
@@ -1640,7 +1555,7 @@
         },
         "error": {
           "description": "The errors, if any, for the action.",
-          "$ref": "#/definitions/ErrorProperties"
+          "$ref": "#/definitions/CloudErrorBody"
         }
       }
     },
@@ -1693,20 +1608,17 @@
         }
       }
     },
-    "ErrorInfo": {
+    "CloudError": {
       "description": "The error information object.",
+      "x-ms-external": true,
       "properties": {
         "error": {
           "description": "The properties that define the error.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorProperties"
-            }
-          ]
+          "$ref": "#/definitions/CloudErrorBody"
         }
       }
     },
-    "ErrorProperties": {
+    "CloudErrorBody": {
       "description": "Detailed error information of any failure.",
       "properties": {
         "code": {
@@ -1719,27 +1631,16 @@
           "readOnly": true,
           "description": "Descriptive error information."
         },
+        "target": {
+          "type": "string",
+          "description": "Error target"
+        },
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorPropertiesInner"
+            "$ref": "#/definitions/CloudErrorBody"
           },
           "description": "More detailed error information."
-        }
-      }
-    },
-    "ErrorPropertiesInner": {
-      "description": "Detailed error information of action failure if any.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Error code string."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Descriptive error information."
         }
       }
     },
@@ -1797,19 +1698,16 @@
       "description": "The resource representation of a deployment step.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "description": "The properties for the resource.",
-              "$ref": "#/definitions/StepProperties"
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties for the resource.",
+          "$ref": "#/definitions/StepProperties"
+        }
+      }
     },
     "StepProperties": {
       "description": "The properties of a deployment step.",
