@@ -99,6 +99,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
         }
       }
     },
@@ -137,7 +142,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "AvailableProviderOperationsCreateOrUpdate": {
+            "$ref": "./examples/AvailableProviderOperationsCreateOrUpdate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers": {
@@ -395,7 +405,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersUpdate": {
+            "$ref": "./examples/ManagersUpdate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords": {
@@ -805,7 +820,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersUploadRegistrationCertificate": {
+            "$ref": "./examples/ManagersUploadRegistrationCertificate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/clearAlerts": {
@@ -1956,7 +1976,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ChapSettingsDelete": {
+            "$ref": "./examples/ChapSettingsDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/deactivate": {
@@ -2008,7 +2033,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DevicesDeactivate": {
+            "$ref": "./examples/DevicesDeactivate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/disks": {
@@ -2119,7 +2149,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DevicesDownloadUpdates": {
+            "$ref": "./examples/DevicesDownloadUpdates.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/failover": {
@@ -3205,7 +3240,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DevicesInstallUpdates": {
+            "$ref": "./examples/DevicesInstallUpdates.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers": {
@@ -4422,67 +4462,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/publishSupportPackage": {
-      "post": {
-        "tags": [
-          "Devices"
-        ],
-        "description": "Triggers collection of support package on a device.",
-        "operationId": "Devices_PublishSupportPackage",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The device name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "supportPackageRequest",
-            "in": "body",
-            "description": "The publish support package request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SupportPackageRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted the request to publish support package of the device."
-          },
-          "204": {
-            "description": "Successfully published support package of the device."
-          },
-          "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/scanForUpdates": {
       "post": {
         "tags": [
@@ -4985,7 +4964,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersCreateExtendedInfo": {
+            "$ref": "./examples/ManagersCreateExtendedInfo.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -5147,50 +5131,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/getActivationKey": {
-      "post": {
-        "tags": [
-          "Managers"
-        ],
-        "description": "Returns the activation key of the manager.",
-        "operationId": "Managers_GetActivationKey",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The activation key.",
-            "schema": {
-              "$ref": "#/definitions/Key"
-            }
-          },
-          "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/getEncryptionKey": {
       "post": {
         "tags": [
@@ -5232,7 +5172,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "ManagersGetEncryptionKey": {
+            "$ref": "./examples/ManagersGetEncryptionKey.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/iscsiservers": {
@@ -5457,94 +5402,6 @@
             "$ref": "./examples/ManagersListMetricDefinition.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenarateRegistationCertificate": {
-      "post": {
-        "tags": [
-          "Managers"
-        ],
-        "description": "Returns the Registration Certificate.",
-        "operationId": "Managers_RegenerateRegistrationCertificate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Registration Certificate.",
-            "schema": {
-              "$ref": "#/definitions/RegistrationCertificate"
-            }
-          },
-          "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenerateActivationKey": {
-      "post": {
-        "tags": [
-          "Managers"
-        ],
-        "description": "Re-generates and returns the activation key of the manager.",
-        "operationId": "Managers_RegenerateActivationKey",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The regenerated activation key.",
-            "schema": {
-              "$ref": "#/definitions/Key"
-            }
-          },
-          "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials": {
@@ -7842,19 +7699,6 @@
         }
       }
     },
-    "Key": {
-      "description": "The key.",
-      "required": [
-        "activationKey"
-      ],
-      "type": "object",
-      "properties": {
-        "activationKey": {
-          "description": "The activation key for the device",
-          "type": "string"
-        }
-      }
-    },
     "Manager": {
       "description": "The StorSimple Manager",
       "type": "object",
@@ -8484,19 +8328,6 @@
         }
       }
     },
-    "RegistrationCertificate": {
-      "description": "Registration Certificate.",
-      "required": [
-        "certificate"
-      ],
-      "type": "object",
-      "properties": {
-        "certificate": {
-          "description": "Registration Certificate which Needs to be Uploaded to IDM",
-          "type": "string"
-        }
-      }
-    },
     "Resource": {
       "description": "The Azure Resource.",
       "required": [
@@ -8824,82 +8655,6 @@
           "x-ms-enum": {
             "name": "EncryptionStatus",
             "modelAsString": false
-          }
-        }
-      }
-    },
-    "SupportPackageRequest": {
-      "description": "Support package request entity",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SupportPackageRequestProperties",
-          "description": "Support Package Request properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SupportPackageRequestProperties": {
-      "description": "Support Package properties",
-      "required": [
-        "sdpPassKey"
-      ],
-      "type": "object",
-      "properties": {
-        "sdpPassKey": {
-          "description": "The SDPPassKey",
-          "type": "string"
-        },
-        "packageType": {
-          "description": "The support package type",
-          "enum": [
-            "None",
-            "IncludeDefault",
-            "IncludeAll",
-            "Mini",
-            "Custom"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SupportPackageType",
-            "modelAsString": false
-          }
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "The maximum time stamp of the logs.",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "The minimum time stamp of the logs.",
-          "type": "string"
-        },
-        "includeArchived": {
-          "description": "The bool which determines whether the archived logs are included or not.",
-          "type": "boolean"
-        },
-        "sourceType": {
-          "description": "The support package source type",
-          "enum": [
-            "None",
-            "OpsTriggered",
-            "ClientTriggered"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SupportPackageSourceType",
-            "modelAsString": false
-          }
-        },
-        "customIncludeList": {
-          "description": "The list of log categories",
-          "type": "array",
-          "items": {
-            "type": "string"
           }
         }
       }
@@ -9235,46 +8990,6 @@
         "properties": {
           "$ref": "#/definitions/ResourceCertificateAndAADDetails",
           "x-ms-client-flatten": true
-        },
-        "contractVersion": {
-          "description": "Constructor",
-          "enum": [
-            "InvalidVersion",
-            "V2011_09",
-            "V2012_02",
-            "V2012_05",
-            "V2012_12",
-            "V2013_04",
-            "V2013_10",
-            "V2013_11",
-            "V2014_04",
-            "V2014_06",
-            "V2014_07",
-            "V2014_09",
-            "V2014_10",
-            "V2014_12",
-            "V2015_01",
-            "V2015_02",
-            "V2015_04",
-            "V2015_05",
-            "V2015_06",
-            "V2015_07",
-            "V2015_08",
-            "V2015_10",
-            "V2015_12",
-            "V2016_01",
-            "V2016_02",
-            "V2016_04",
-            "V2016_05",
-            "V2016_07",
-            "V2016_08"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ContractVersions",
-            "modelAsString": false
-          }
         }
       }
     }
