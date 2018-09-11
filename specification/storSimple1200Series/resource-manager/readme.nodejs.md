@@ -6,8 +6,8 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   azure-arm: true
-  package-name: azure-arm-storSimple1200Series
-  output-folder: $(node-sdks-folder)/lib/services/storSimple1200Series
+  package-name: azure-arm-storsimple1200series
+  output-folder: $(node-sdks-folder)/lib/services/storSimple1200SeriesManagement
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: true
