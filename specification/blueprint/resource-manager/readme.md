@@ -20,7 +20,7 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the Blueprint API.
 
-``` yaml
+``` yam
 title: BlueprintManagementClient
 description: Blueprint Client
 openapi-type: arm
@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2017-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-11-preview'
 input-file:
-- Microsoft.Blueprint/preview/2017-11-11-preview/Blueprint.json
+- Microsoft.Blueprint/preview/2017-11-11-preview/blueprint.json
 ```
 
 ---
