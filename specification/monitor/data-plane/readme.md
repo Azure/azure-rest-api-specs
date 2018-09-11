@@ -145,13 +145,3 @@ license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 ```
-
-# Validation
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
-    reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
-```
