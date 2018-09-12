@@ -163,9 +163,9 @@ directive:
 
       
   - where:
-      - $.definitions.AdditionalCapabilities.properties
+      - $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
     suppress:
-      - NO_CAMEL_CASE 
+      - DefinitionsPropertiesNamesCamelCase
 
 ```
 ### Tag: package-2018-06-exclude-gallery
