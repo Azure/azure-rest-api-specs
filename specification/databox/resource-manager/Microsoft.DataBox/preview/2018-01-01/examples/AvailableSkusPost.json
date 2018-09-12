@@ -1,8 +1,24 @@
 {
   "parameters": {
-    "subscriptionId": "3c66da21-607e-49b4-8bdf-f25fbb8f705f",
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
     "location": "westus",
     "api-version": "2018-01-01",
+    "x-ms-client-request-id": [
+      "a69a48a0-a372-444d-9251-83828238a521"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.26614.01",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.0.0"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "84"
+    ],
     "availableSkuRequest": {
       "country": "US",
       "location": "westus",
@@ -47,6 +63,18 @@
                 {
                   "destinationLocation": "westcentralus",
                   "serviceLocation": "westus"
+                },
+                {
+                  "destinationLocation": "westus2",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "destinationLocation": "centraluseuap",
+                  "serviceLocation": "centraluseuap"
+                },
+                {
+                  "destinationLocation": "eastus2euap",
+                  "serviceLocation": "eastus2euap"
                 }
               ],
               "capacity": {
@@ -61,11 +89,16 @@
                 {
                   "meterId": "a701f058-119b-4713-a923-bed7da4b7801",
                   "meterType": "DataBoxShippingFee"
+                },
+                {
+                  "meterId": "049fa331-0a48-4a81-9991-a6bef3c79fed",
+                  "meterType": "DataBoxExtraDayFee"
                 }
               ],
               "apiVersions": [
                 "2018-01-01"
-              ]
+              ],
+              "disabledReason": "None"
             }
           },
           {
@@ -102,21 +135,34 @@
                 {
                   "destinationLocation": "westcentralus",
                   "serviceLocation": "westus"
+                },
+                {
+                  "destinationLocation": "westus2",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "destinationLocation": "centraluseuap",
+                  "serviceLocation": "centraluseuap"
+                },
+                {
+                  "destinationLocation": "eastus2euap",
+                  "serviceLocation": "eastus2euap"
                 }
               ],
               "capacity": {
-                "usable": "18",
-                "maximum": "20"
+                "usable": "35",
+                "maximum": "40"
               },
               "costs": [],
               "apiVersions": [
                 "2018-01-01"
-              ]
+              ],
+              "disabledReason": "None"
             }
           },
           {
             "sku": {
-              "name": "DataBoxCabinet"
+              "name": "DataBoxHeavy"
             },
             "enabled": true,
             "properties": {
@@ -148,6 +194,18 @@
                 {
                   "destinationLocation": "westcentralus",
                   "serviceLocation": "westus"
+                },
+                {
+                  "destinationLocation": "westus2",
+                  "serviceLocation": "westus"
+                },
+                {
+                  "destinationLocation": "centraluseuap",
+                  "serviceLocation": "centraluseuap"
+                },
+                {
+                  "destinationLocation": "eastus2euap",
+                  "serviceLocation": "eastus2euap"
                 }
               ],
               "capacity": {
@@ -157,7 +215,9 @@
               "costs": [],
               "apiVersions": [
                 "2018-01-01"
-              ]
+              ],
+              "disabledReason": "None",
+              "requiredFeature": "HeavyCreateAccess"
             }
           }
         ]

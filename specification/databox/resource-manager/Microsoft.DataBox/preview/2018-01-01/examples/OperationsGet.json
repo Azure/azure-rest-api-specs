@@ -1,22 +1,21 @@
 {
   "parameters": {
-    "api-version": "2018-01-01"
+    "api-version": "2018-01-01",
+    "x-ms-client-request-id": [
+      "69fc02f6-5d9f-42d5-8d98-b5a943b8c888"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.26614.01",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.0.0"
+    ]
   },
   "responses": {
     "200": {
       "body": {
         "value": [
-          {
-            "name": "Microsoft.DataBox/jobs/listSecrets/action",
-            "display": {
-              "provider": "Azure Data Box",
-              "resource": "Orders",
-              "operation": "List Secrets",
-              "description": "Lists the unencrypted secrets related to the order."
-            },
-            "properties": {},
-            "origin": "user"
-          },
           {
             "name": "Microsoft.DataBox/jobs/cancel/action",
             "display": {
@@ -106,6 +105,17 @@
             "origin": "user"
           },
           {
+            "name": "Microsoft.DataBox/jobs/listSecrets/action",
+            "display": {
+              "provider": "Azure Data Box",
+              "resource": "Orders",
+              "operation": "List Secrets",
+              "description": "Lists the unencrypted secrets related to the order."
+            },
+            "properties": {},
+            "origin": "user"
+          },
+          {
             "name": "Microsoft.DataBox/locations/validateAddress/action",
             "display": {
               "provider": "Azure Data Box",
@@ -117,21 +127,12 @@
             "origin": "user"
           },
           {
-            "name": "Microsoft.DataBox/locations/regionAvailability/action",
-            "display": {
-              "provider": "Azure Data Box",
-              "resource": "Region Availability",
-              "operation": "Region Availability",
-              "description": "This method returns the list of supported regions for the service and for destination storage accounts."
-            },
-            "properties": {},
-            "origin": "user"
-          },
-          {
             "name": "Microsoft.DataBox/locations/availableSkus/action",
             "display": {
               "provider": "Azure Data Box",
-              "resource": "ArmApiRes_availableSkus"
+              "resource": "Available Skus",
+              "operation": "Availabe Skus",
+              "description": "This method returns the list of available skus."
             },
             "properties": {},
             "origin": "user"
