@@ -161,6 +161,12 @@ directive:
     suppress:
       - TrackedResourcePatchOperation
 
+      
+  - where:
+      - $.definitions.AdditionalCapabilities.properties
+    suppress:
+      - NO_CAMEL_CASE 
+
 ```
 ### Tag: package-2018-06-exclude-gallery
 
