@@ -26,7 +26,7 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-06
+tag: package-2018-08
 ```
 
 ### Tag: package-2017-11
@@ -76,6 +76,16 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 ``` yaml $(tag) == 'package-2018-06'
 input-file:
 - Microsoft.Consumption/stable/2018-06-30/consumption.json
+```
+
+---
+### Tag: package-2018-08
+
+These settings apply only when `--tag=package-2018-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08'
+input-file:
+- Microsoft.Consumption/stable/2018-08-31/consumption.json
 ```
 
 ## Suppression
@@ -191,6 +201,7 @@ batch:
    - tag: package-2018-03
    - tag: package-2018-05
    - tag: package-2018-06
+   - tag: package-2018-08
 ```
 
 
@@ -251,6 +262,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-06-30/consumption
 ```
 
+### Tag: package-2018-08 and go
+These settings apply only when `--tag=package-2018-08 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-08' && $(go)
+output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-08-31/consumption
+```
+
+
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -276,6 +296,7 @@ batch:
   - tag: package-2017-12-preview
   - tag: package-2018-05
   - tag: package-2018-06
+  - tag: package-2018-08
 ```
 
 ### Tag: package-2017-04-preview and java
@@ -369,4 +390,16 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2018-08 and java
+
+These settings apply only when `--tag=package-2018-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_08_31
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_08_31
+regenerate-manager: true
+generate-interface: true
+```
 

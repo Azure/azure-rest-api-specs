@@ -17213,6 +17213,10 @@
             "storageAccountUrl"
           ],
           "properties": {
+            "backupName": {
+              "description": "Name of the backup.",
+              "type": "string"
+            },
             "enabled": {
               "description": "True if the backup schedule is enabled (must be included in that case), false if the backup schedule should be disabled.",
               "type": "boolean"
@@ -19697,6 +19701,15 @@
               ]
             },
             "isXenon": {
+              "description": "Obsolete: Hyper-V sandbox.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
               "description": "Hyper-V sandbox.",
               "default": false,
               "type": "boolean",
