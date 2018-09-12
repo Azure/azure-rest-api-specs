@@ -561,13 +561,13 @@
           }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials": {
       "post": {
         "tags": [
           "Jobs"
         ],
         "description": "This method gets the unencrypted secrets related to the job.",
-        "operationId": "Jobs_ListSecrets",
+        "operationId": "Jobs_ListCredentials",
         "consumes": [
           "application/json"
         ],
@@ -590,9 +590,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The unencrypted secrets of the job.",
+            "description": "List of unencrypted credentials of the job.",
             "schema": {
-              "$ref": "#/definitions/UnencryptedSecrets"
+              "$ref": "#/definitions/UnencryptedCredentialsList"
             }
           }
         },
@@ -610,9 +610,6 @@
   "definitions": {
     "AccountCredentialDetails": {
       "description": "Credential details of the account.",
-      "required": [
-        "shareCredentialDetails"
-      ],
       "type": "object",
       "properties": {
         "accountName": {
@@ -2163,11 +2160,8 @@
         }
       }
     },
-    "UnencryptedSecrets": {
-      "description": "Unencrypted secrets for accessing device.",
-      "required": [
-        "jobName"
-      ],
+    "UnencryptedCredentials": {
+      "description": "Unencrypted credentials for accessing device.",
       "type": "object",
       "properties": {
         "jobName": {
@@ -2179,6 +2173,23 @@
           "$ref": "#/definitions/JobSecrets",
           "description": "Secrets related to this job.",
           "readOnly": true
+        }
+      }
+    },
+    "UnencryptedCredentialsList": {
+      "description": "List of unencrypted credentials for accessing device.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of unencrypted credentials.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnencryptedCredentials"
+          }
+        },
+        "nextLink": {
+          "description": "Link for the next set of unencrypted credentials.",
+          "type": "string"
         }
       }
     },
