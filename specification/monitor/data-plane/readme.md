@@ -140,8 +140,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 azure-arm: true
 fluent: true
-namespace: com.microsoft.azure.dataplane.monitor
+namespace: com.microsoft.azure.monitor
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-monitor
+output-folder: $(azure-libraries-for-java-folder)/monitor/data-plane
 ```
