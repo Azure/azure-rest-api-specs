@@ -4803,12 +4803,6 @@
           },
           "204": {
             "description": "No Content"
-          },
-          "default": {
-            "description": "Logic error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
@@ -5911,7 +5905,7 @@
             ],
             "x-ms-enum": {
               "name": "DaysOfWeek",
-              "modelAsString": true
+              "modelAsString": false
             }
           },
           "description": "The days of the week."
@@ -6125,7 +6119,7 @@
       ],
       "x-ms-enum": {
         "name": "DayOfWeek",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "GenerateUpgradedDefinitionParameters": {
@@ -6713,7 +6707,7 @@
       ],
       "x-ms-enum": {
         "name": "AgreementType",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "AgreementContent": {
@@ -7822,7 +7816,7 @@
       ],
       "x-ms-enum": {
         "name": "SegmentTerminatorSuffix",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "X12DateFormat": {
@@ -8741,7 +8735,7 @@
       ],
       "x-ms-enum": {
         "name": "EdifactDecimalIndicator",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "IntegrationAccountCertificateListResult": {
@@ -9139,7 +9133,7 @@
       ],
       "x-ms-enum": {
         "name": "EventLevel",
-        "modelAsString": true
+        "modelAsString": false
       },
       "description": "The event level."
     },
@@ -9180,31 +9174,6 @@
           "type": "string"
         }
       }
-    },
-    "AccessKeyRegenerateActionDefinition": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "keyType"
-      ],
-      "properties": {
-        "keyType": {
-          "$ref": "#/definitions/AccessKeyType"
-        }
-      }
-    },
-    "AccessKeyType": {
-      "type": "string",
-      "enum": [
-        "NotSpecified",
-        "Primary",
-        "Secondary"
-      ],
-      "x-ms-enum": {
-        "name": "AccessKeyType",
-        "modelAsString": true
-      },
-      "description": "The access key type."
     },
     "SetTriggerStateActionDefinition": {
       "type": "object",

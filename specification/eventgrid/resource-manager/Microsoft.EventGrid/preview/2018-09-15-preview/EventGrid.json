@@ -2101,6 +2101,7 @@
                         "Failed"
                     ],
                     "type": "string",
+                    "readOnly": true,
                     "x-ms-enum": {
                         "name": "DomainProvisioningState",
                         "modelAsString": true
@@ -2108,7 +2109,8 @@
                 },
                 "endpoint": {
                     "description": "Endpoint for the domain.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "inputSchema": {
                     "description": "This determines the format that Event Grid should expect for incoming events published to the domain.",
@@ -2428,6 +2430,26 @@
             },
             "x-ms-discriminator-value": "StorageBlob"
         },
+        "NumberNotInAdvancedFilter": {
+            "description": "NumberNotIn Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "values": {
+                    "description": "The set of filter values",
+                    "type": "array",
+                    "items": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                }
+            },
+            "x-ms-discriminator-value": "NumberNotIn"
+        },
         "NumberLessThanAdvancedFilter": {
             "description": "NumberLessThan Filter",
             "type": "object",
@@ -2588,6 +2610,25 @@
             },
             "x-ms-discriminator-value": "StringEndsWith"
         },
+        "StringContainsAdvancedFilter": {
+            "description": "StringContains Filter",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AdvancedFilter"
+                }
+            ],
+            "properties": {
+                "values": {
+                    "description": "The set of filter values",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-ms-discriminator-value": "StringContains"
+        },
         "AdvancedFilter": {
             "description": "Represents an advanced filter that can be used to filter events based on various event envelope/data fields.",
             "type": "object",
@@ -2599,6 +2640,7 @@
                     "description": "Represents the filter operator",
                     "enum": [
                         "NumberIn",
+                        "NumberNotIn",
                         "NumberLessThan",
                         "NumberGreaterThan",
                         "NumberLessThanOrEquals",
@@ -2607,7 +2649,8 @@
                         "StringIn",
                         "StringNotIn",
                         "StringBeginsWith",
-                        "StringEndsWith"
+                        "StringEndsWith",
+                        "StringContains"
                     ],
                     "type": "string",
                     "x-ms-enum": {

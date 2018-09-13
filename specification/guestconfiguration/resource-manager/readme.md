@@ -57,7 +57,6 @@ directive:
     where: $.paths
     reason: Microsoft.GuestConfiguration is a proxy resource provider under Microsoft.Compute. However, Operations API for is implmented. So, suppressing the false positive. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/540
 ```
-
 ---
 # Code Generation
 
@@ -71,8 +70,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.GuestConfiguration
-  output-folder: $(csharp-sdks-folder)/GuestConfiguration/Azure.GuestConfiguration/Generated
+  namespace: Microsoft.Azure.Management.GuestConfiguration
+  output-folder: $(csharp-sdks-folder)/GuestConfiguration/Management.GuestConfiguration/Generated
   clear-output-folder: true
 ```
 

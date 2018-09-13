@@ -6,63 +6,41 @@
       "guestConfigurationAssignmentName": "SecureProtocol",
       "api-version": "2018-06-30-preview",
       "parameters": {
-        "location" : "westcentralus",
-        "name": "SecureProtocol",
-        "properties" : {
-             "guestConfiguration" : { 
-                      "name" : "SecureProtocol",
-                      "version": "1.0.0.0 or 1.*"
-              }
+        "location": "westcentralus",
+        "name": "multiconfigassignment2",
+        "properties": {
+          "context": "Azure policy",
+          "guestConfiguration": {
+            "name": "AuditSecureProtocol",
+            "version": "1.0.0.3"
+          }
         }
-     }
+      }
     },
     "responses": {
       "201": {
         "headers": {},
-        "body": {  
-           "location":"westcentralus",
-           "id":"/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/SecureProtocol",
-           "name":"SecureProtocol",
-           "properties":{  
-              "complianceStatus": "InProgress",
-              "complianceReason":null,
-              "assignmentHash":null,
-              "guestConfiguration":{  
-                 "kind":null,
-                 "name":"SecureProtocol",
-                 "version":"",
-                 "configurationParameter":[  
-        
-                 ],
-                 "contentUri":null,
-                 "contentHash":null
-              },
-              "provisioningState":null
-           }
-        }
-      },
-      "200": {
-        "headers": {},
-        "body": {  
-            "location":"westcentralus",
-            "id":"/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/SecureProtocol",
-            "name":"SecureProtocol",
-            "properties":{  
-               "complianceStatus": "Compliant",
-               "complianceReason":null,
-               "assignmentHash":null,
-               "guestConfiguration":{  
-                  "kind":null,
-                  "name":"SecureProtocol",
-                  "version":"",
-                  "configurationParameter":[  
-         
-                  ],
-                  "contentUri":null,
-                  "contentHash":null
-               },
-               "provisioningState":null
-            }
+        "body": {
+          "location": "westcentralus",
+          "id": null,
+          "name": "multiconfigassignment2",
+          "properties": {
+            "complianceStatus": "Pending",
+            "assignmentHash": null,
+            "latestReportId": null,
+            "lastComplianceStatusChecked": null,
+            "context": "Azure policy A",
+            "guestConfiguration": {
+              "kind": null,
+              "name": "AuditSecureProtocol",
+              "version": "1.0.0.3",
+              "contentUri": null,
+              "contentHash": null,
+              "configurationParameter": null,
+              "configurationSetting": null
+            },
+            "provisioningState": "Succeeded"
+          }
         }
       }
     }
