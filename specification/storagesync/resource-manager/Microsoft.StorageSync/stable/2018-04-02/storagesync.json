@@ -2775,29 +2775,18 @@
     "RegisteredServer": {
       "type": "object",
       "description": "Registered Server resource.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RegisteredServerProperties",
-          "description": "RegisteredServer properties."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-      },
-      "x-ms-azure-resource": true
+	  ],
+      "properties": {
+         "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/RegisteredServerProperties",
+            "description": "RegisteredServer properties."
+         }
+      }
     },
     "ResourcesMoveInfo": {
       "type": "object",
