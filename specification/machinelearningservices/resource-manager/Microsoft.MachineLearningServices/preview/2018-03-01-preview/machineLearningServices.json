@@ -501,6 +501,7 @@
         ],
         "operationId": "MachineLearningCompute_CreateOrUpdate",
         "description": "Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a BatchAI Compute": { "$ref": "./examples/createBasicBatchAICompute.json" },
           "Create AKS Compute": { "$ref": "./examples/createBasicAKSCompute.json" },
@@ -529,6 +530,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Compute creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/ComputeResource"
+            }
+          },
           "201": {
             "description": "Compute creation or update initiated.",
             "headers": {
@@ -556,6 +563,7 @@
         ],
         "operationId": "MachineLearningCompute_Delete",
         "description": "Deletes specified Machine Learning compute.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Compute": { "$ref": "./examples/deleteCompute.json" }
         },
@@ -577,6 +585,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
           "202": {
             "description": "Compute deletion initiated.",
             "headers": {
@@ -605,6 +616,7 @@
         ],
         "operationId": "MachineLearningCompute_SystemUpdate",
         "description": "System Update On Machine Learning compute.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "System Update Compute": { "$ref": "./examples/systemUpdateCompute.json" }
         },
@@ -626,6 +638,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Compute System updated."
+          },
           "202": {
             "description": "Compute System Update initiated.",
             "headers": {
