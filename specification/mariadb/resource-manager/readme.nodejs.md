@@ -10,5 +10,5 @@ nodejs:
   output-folder: $(node-sdks-folder)/lib/services/mariadbManagement
   generate-license-txt: true
   generate-package-json: true
-  generate-readme-md: false
+  generate-readme-md: true
 ```
