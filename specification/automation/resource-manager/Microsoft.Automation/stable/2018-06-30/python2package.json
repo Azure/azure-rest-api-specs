@@ -167,7 +167,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ModuleCreateOrUpdateParameters"
+              "$ref": "#/definitions/PythonPackageCreateParameters"
             },
             "description": "The create or update parameters for python package."
           },
@@ -232,7 +232,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ModuleUpdateParameters"
+              "$ref": "#/definitions/PythonPackageUpdateParameters"
             },
             "description": "The update parameters for python package."
           },
@@ -533,7 +533,7 @@
       },
       "description": "Definition of the content link."
     },
-    "ModuleCreateOrUpdateProperties": {
+    "PythonPackageCreateProperties": {
       "properties": {
         "contentLink": {
           "$ref": "#/definitions/ContentLink",
@@ -545,20 +545,12 @@
       ],
       "description": "The parameters supplied to the create or update module properties."
     },
-    "ModuleCreateOrUpdateParameters": {
+    "PythonPackageCreateParameters": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ModuleCreateOrUpdateProperties",
+          "$ref": "#/definitions/PythonPackageCreateProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the module create properties."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
         },
         "tags": {
           "type": "object",
@@ -650,30 +642,8 @@
       },
       "description": "Definition of the module property type."
     },
-    "ModuleUpdateProperties": {
+    "PythonPackageUpdateParameters": {
       "properties": {
-        "contentLink": {
-          "$ref": "#/definitions/ContentLink",
-          "description": "Gets or sets the module content link."
-        }
-      },
-      "description": "The parameters supplied to the update properties."
-    },
-    "ModuleUpdateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ModuleUpdateProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the module update properties."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
