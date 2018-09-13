@@ -428,39 +428,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages": {
-      "get": {
-        "tags": [
-          "Usage"
-        ],
-        "operationId": "Usages_List",
-        "description": "Gets the current usage count and the limit for the resources under the subscription.",
-        "x-ms-examples": {
-          "UsageList": {
-            "$ref": "./examples/UsageList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- current usage count and limit retrieved and returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/UsageListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages": {
       "get": {
         "tags": [
