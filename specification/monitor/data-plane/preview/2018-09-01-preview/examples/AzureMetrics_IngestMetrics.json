@@ -4,7 +4,11 @@
         "Content-Type": "application/json",
         "Content-Length": "783",
         "Authorization": "Bearer {AAD JWT token issued for https:\\\\monitoring.azure.com}",
-        "path": "/subscriptions/b7ac8a0c-fbae-4e29-a0f7-09999b8857a1/resourceGroups/CowsSeller/providers/Microsoft.Storage/storageAccounts/cowssellerstore",
+        "subscriptionId": "b7ac8a0c-fbae-4e29-a0f7-09999b8857a1",
+        "resourceGroupName": "CowsSeller",
+        "resourceProvider": "Microsoft.Storage",
+        "resourceTypeName": "storageAccounts",
+        "resourceName": "cowssellerstore",
         "body" : {  
             "time":"2018-08-24T 11:02:00-7:00",
             "data":{  
@@ -34,7 +38,8 @@
         }
     },
     "responses": {
-        "200": {
+        "azureMetricsResult" : {
+            "statuscode": 200
         }
     }
 }
