@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2018-06-30",
+    "billingAccountId": "2000200",
+    "billingProfileId": "BillingProfileId1",
+    "periodStartDate": "2018-01-01",
+    "periodEndDate": "2018-06-30",
+    "$filter": "invoicePeriodStartDate le 2018-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/2000200/billingProfile/345986/invoices/1383723",
+            "name": "1383723",
+            "type": "Microsoft.Billing/invoices",
+            "properties": {
+              "date": "2018-01-16",
+              "status": "Due",
+              "amountDue": 2000.00,
+              "billedAmount": 2000.00,
+              "currency": "USD",
+              "invoicePeriodStartDate": "2018-01-01",
+              "invoicePeriodEndDate": "2018-01-15",
+              "billingProfile": "345986",
+              "purchaseOrderNumber": "123456",
+              "documentUrls": [
+                {
+                  "kind": "Invoice",
+                  "url": "https://microsoft.com/invoice.pdf"
+                },
+                {
+                  "kind": "Receipt",
+                  "url": "https://microsoft.com/taxDoc.pdf"
+                },
+                {
+                  "kind": "CreditNote",
+                  "url": "https://microsoft.com/creditNote.pdf"
+                }
+              ]
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/2000200/billingProfile/345986/invoices/1383724",
+            "name": "1383724",
+            "type": "Microsoft.Billing/invoices",
+            "properties": {
+              "date": "2018-03-01",
+              "status": "PastDue",
+              "amountDue": 2000.00,
+              "billedAmount": 2000.00,
+              "currency": "USD",
+              "invoicePeriodStartDate": "2018-02-01",
+              "invoicePeriodEndDate": "2018-02-30",
+              "billingProfile": "345987",
+              "purchaseOrderNumber": "123456",
+              "documentUrls": [
+                {
+                  "kind": "Invoice",
+                  "url": "https://microsoft.com/invoice.pdf"
+                },
+                {
+                  "kind": "Receipt",
+                  "url": "https://microsoft.com/taxDoc.pdf"
+                },
+                {
+                  "kind": "CreditNote",
+                  "url": "https://microsoft.com/creditNote.pdf"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
