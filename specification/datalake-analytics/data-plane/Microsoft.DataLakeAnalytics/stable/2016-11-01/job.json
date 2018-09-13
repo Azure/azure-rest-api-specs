@@ -865,14 +865,17 @@
       "properties": {
         "runtimeVersion": {
           "type": "string",
+          "readOnly": true,
           "description": "the runtime version of the Data Lake Analytics engine to use for the specific type of job being run."
         },
         "script": {
           "type": "string",
+          "readOnly": true,
           "description": "the script to run. Please note that the maximum script size is 3 MB."
         },
         "type": {
           "type": "string",
+          "readOnly": true,
           "description": "the job type of the current job (i.e. Hive or USql)."
         }
       },
@@ -1387,7 +1390,12 @@
           "type": "integer",
           "default": 1,
           "format": "int32",
-          "description": "the degree of parallelism to use for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "description": "the degree of parallelism used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "the degree of parallelism in percentage used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism."
         },
         "priority": {
           "type": "integer",
@@ -1460,10 +1468,12 @@
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "the friendly name of the job."
         },
         "type": {
           "type": "string",
+          "readOnly": true,
           "description": "the job type of the current job (Hive or USql).",
           "enum": [
             "USql",
@@ -1483,11 +1493,19 @@
           "type": "integer",
           "default": 1,
           "format": "int32",
-          "description": "the degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "readOnly": true,
+          "description": "the degree of parallelism used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the degree of parallelism in percentage used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism."
         },
         "priority": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "the priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0."
         },
         "submitTime": {
@@ -1554,6 +1572,7 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true,
           "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
         "related": {
