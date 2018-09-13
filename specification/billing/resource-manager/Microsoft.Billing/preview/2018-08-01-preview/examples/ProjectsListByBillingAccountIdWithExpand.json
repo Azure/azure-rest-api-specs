@@ -1,0 +1,146 @@
+{
+  "parameters": {
+    "api-version": "2018-05-31-preview",
+    "billingAccountId": "{billingAccountId}",
+    "$expand": "eligibleOffers",
+    "$filter": "permission eq 'canCreateSubscription'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId1",
+            "name": "ProjectId1",
+            "type": "Microsoft.Billing/projects",
+            "properties": {
+              "displayName": "ProjectName1",        
+              "eligibleOffers": [
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/eligibleOffers/DelegatedAssetId1",
+                  "name": "DelegatedAssetId1",
+                  "type": "Microsoft.Billing/eligibleOffers",
+                  "properties": {
+                    "displayName": "AssetSummaryDescription",
+                    "parentAssetId": "DirectAsset1",
+                    "owningProjectId": "12345",
+                    "startDate": "2017-02-01",
+                    "endDate": "2019-02-01",
+                    "billingProfiles": {
+                      "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
+                      "name": "BillingProfileId1",
+                      "type": "Microsoft.Billing/billingProfiles",
+                      "properties": {
+                        "displayName": "BillingProfileName1",
+                        "poNumber": "ABC12345"
+                      }
+                    },
+                    "productDetails": {
+                      "productName": "ProductName1",
+                      "skuId": "SKU12345",
+                      "availabilityId": "AvailabilityId1",
+                      "legacyId": "LegacyId1"
+                    }
+                  }
+                },
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/eligibleOffers/DelegatedAssetId2",
+                  "name": "DelegatedAssetId2",
+                  "type": "Microsoft.Billing/eligibleOffers",
+                  "properties": {
+                    "displayName": "AssetSummaryDescription",
+                    "parentAssetId": "DirectAsset2",
+                    "owningProjectId": "12345",
+                    "startDate": "2017-02-01",
+                    "endDate": "2019-02-01",
+                    "billingProfiles": {
+                      "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId2",
+                      "name": "BillingProfileId2",
+                      "type": "Microsoft.Billing/billingProfiles",
+                      "properties": {
+                        "displayName": "BillingProfileName2",
+                        "poNumber": "ABC12345"
+                      }
+                    },
+                    "productDetails": {
+                      "productName": "ProductName2",
+                      "skuId": "SKU56789",
+                      "availabilityId": "AvailabilityId2",
+                      "legacyId": "LegacyId2"
+                    }
+                  }
+                }
+              ],
+              "costCenter": "1376"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId2",
+            "name": "ProjectId2",
+            "type": "Microsoft.Billing/projects",
+            "properties": {
+              "displayName": "ProjectName2",         
+              "eligibleOffers": [
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/eligibleOffers/DelegatedAssetId3",
+                  "name": "DelegatedAssetId3",
+                  "type": "Microsoft.Billing/eligibleOffers",
+                  "properties": {
+                    "displayName": "AssetSummaryDescription",
+                    "parentAssetId": "DirectAsset3",
+                    "owningProjectId": "45678",
+                    "startDate": "2017-02-01",
+                    "endDate": "2019-02-01",
+                    "billingProfiles": {
+                      "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId3",
+                      "name": "BillingProfileId3",
+                      "type": "Microsoft.Billing/billingProfiles",
+                      "properties": {
+                        "displayName": "BillingProfileName3",
+                        "poNumber": "ABC12345"
+                      }
+                    },
+                    "productDetails": {
+                      "productName": "ProductName3",
+                      "skuId": "SKU56789",
+                      "availabilityId": "AvailabilityId3",
+                      "legacyId": "LegacyId3"
+                    }       
+                  }
+                },
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/eligibleOffers/DelegatedAssetId4",
+                  "name": "DelegatedAssetId4",
+                  "type": "Microsoft.Billing/eligibleOffers",
+                  "properties": {
+                    "displayName": "AssetSummaryDescription",
+                    "parentAssetId": "DirectAsset4",
+                    "owningProjectId": "56789",
+                    "startDate": "2017-02-01",
+                    "endDate": "2019-02-01",
+                    "billingProfiles": {
+                      "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId4",
+                      "name": "BillingProfileId4",
+                      "type": "Microsoft.Billing/billingProfiles",
+                      "properties": {
+                        "displayName": "BillingProfileName4",
+                        "poNumber": "ABC12345"
+                      }
+                    },
+                    "productDetails": {
+                      "productName": "ProductName4",
+                      "skuId": "SKU56789",
+                      "availabilityId": "AvailabilityId4",
+                      "legacyId": "LegacyId4"
+                    }
+                  }
+                }
+              ],
+              "costCenter": "1376"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
