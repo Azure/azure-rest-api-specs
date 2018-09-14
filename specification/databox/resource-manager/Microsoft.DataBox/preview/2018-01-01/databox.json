@@ -600,8 +600,8 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "JobsListSecrets": {
-            "$ref": "./examples/JobsListSecrets.json"
+          "JobsListCredentials": {
+            "$ref": "./examples/JobsListCredentials.json"
           }
         }
       }
@@ -658,7 +658,21 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AddressValidationStatus",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Address provided is valid."
+              },
+              {
+                "value": "Invalid",
+                "description": "Address provided is invalid or not supported."
+              },
+              {
+                "value": "Ambiguous",
+                "description": "Address provided is ambiguous, please choose one of the alternate addresses returned."
+              }
+            ]
           }
         },
         "alternateAddresses": {
@@ -675,12 +689,14 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the network",
-          "type": "string"
+          "description": "Name of the network.",
+          "type": "string",
+          "readOnly": true
         },
         "macAddress": {
-          "description": "Mac Address",
-          "type": "string"
+          "description": "Mac Address.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -722,7 +738,13 @@
           "type": "string",
           "x-ms-enum": {
             "name": "TransferType",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ImportToAzure",
+                "description": "Import data to azure."
+              }
+            ]
           }
         },
         "country": {
@@ -822,7 +844,21 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "ClassDiscriminator",
-            "modelAsString": false
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox orders."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy orders."
+              }
+            ]
           }
         }
       },
@@ -936,7 +972,33 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "CopyStatus",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "Data copy hasnt started yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Data copy is in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "Data copy completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Data copy completed with errors."
+              },
+              {
+                "value": "Failed",
+                "description": "Data copy failed. No data was copied."
+              },
+              {
+                "value": "NotReturned",
+                "description": "No copy triggered as device was not returned."
+              }
+            ]
           }
         }
       }
@@ -1218,49 +1280,6 @@
         "accountId": {
           "description": "Destination storage account id.",
           "type": "string"
-        },
-        "sharedAccessSignature": {
-          "description": "Shared access signature for the storage account.",
-          "type": "string"
-        },
-        "accountType": {
-          "description": "Account type.",
-          "enum": [
-            "UnknownType",
-            "GeneralPurposeStorage",
-            "BlobStorage"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AccountType",
-            "modelAsString": false
-          }
-        },
-        "storageAccessTier": {
-          "description": "Access tier of the account.",
-          "enum": [
-            "Invalid",
-            "Hot",
-            "Cool",
-            "Cold"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AccessTier",
-            "modelAsString": false
-          }
-        },
-        "storagePerformanceTier": {
-          "description": "Performance tier of the account.",
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PerformanceTier",
-            "modelAsString": false
-          }
         }
       }
     },
@@ -1377,7 +1396,21 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ClassDiscriminator",
-            "modelAsString": false
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox orders."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy orders."
+              }
+            ]
           }
         },
         "preferences": {
@@ -1462,14 +1495,67 @@
             "Cancelled",
             "Failed_IssueReportedAtCustomer",
             "Failed_IssueDetectedAtAzureDC",
-            "Aborted",
-            "Current"
+            "Aborted"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "StageName",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Device has been dispatched to the user of the order."
+              },
+              {
+                "value": "Delivered",
+                "description": "Device has been delivered to the user of the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Failed_IssueReportedAtCustomer",
+                "description": "Order has failed due to issue reported by user."
+              },
+              {
+                "value": "Failed_IssueDetectedAtAzureDC",
+                "description": "Order has failed due to issue detected at azure datacenter."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              }
+            ]
           }
         },
         "startTime": {
@@ -1577,7 +1663,21 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "ClassDiscriminator",
-            "modelAsString": false
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox orders."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy orders."
+              }
+            ]
           }
         }
       },
@@ -1606,13 +1706,66 @@
             "Cancelled",
             "Failed_IssueReportedAtCustomer",
             "Failed_IssueDetectedAtAzureDC",
-            "Aborted",
-            "Current"
+            "Aborted"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "StageName",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Device has been dispatched to the user of the order."
+              },
+              {
+                "value": "Delivered",
+                "description": "Device has been delivered to the user of the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Failed_IssueReportedAtCustomer",
+                "description": "Order has failed due to issue reported by user."
+              },
+              {
+                "value": "Failed_IssueDetectedAtAzureDC",
+                "description": "Order has failed due to issue detected at azure datacenter."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              }
+            ]
           }
         },
         "displayName": {
@@ -1633,7 +1786,37 @@
           "type": "string",
           "x-ms-enum": {
             "name": "StageStatus",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No status available yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Stage is in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Stage has succeeded."
+              },
+              {
+                "value": "Failed",
+                "description": "Stage has failed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Stage has been cancelled."
+              },
+              {
+                "value": "Cancelling",
+                "description": "Stage is cancelling."
+              },
+              {
+                "value": "SucceededWithErrors",
+                "description": "Stage has succeeded with errors."
+              }
+            ]
           }
         },
         "stageTime": {
@@ -1675,7 +1858,33 @@
           "type": "string",
           "x-ms-enum": {
             "name": "NotificationStageName",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DevicePrepared",
+                "description": "Notification at device prepared stage."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Notification at device dispatched stage."
+              },
+              {
+                "value": "Delivered",
+                "description": "Notification at device delivered stage."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Notification at device picked up from user stage."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Notification at device received at azure datacenter stage."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Notification at data copy started stage."
+              }
+            ]
           }
         },
         "sendNotification": {
@@ -1816,47 +2025,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "ServiceHealthResponse": {
-      "description": "Response of the GetServiceHealth api.",
-      "type": "object",
-      "properties": {
-        "connectorType": {
-          "description": "Name of the connector.",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Time when the action was triggered.",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Time when the action got completed.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Status of the service.",
-          "type": "boolean"
-        }
-      }
-    },
-    "ServiceHealthResponseList": {
-      "description": "List of service health response.",
-      "type": "object",
-      "properties": {
-        "dependencies": {
-          "description": "List of ServiceHealthResponse.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceHealthResponse"
-          }
-        },
-        "serviceVersion": {
-          "description": "Version of the service.",
-          "type": "string"
-        }
-      }
-    },
     "ShareCredentialDetails": {
       "description": "Credential details of the shares in account.",
       "type": "object",
@@ -1873,14 +2041,35 @@
             "HCS",
             "BlockBlob",
             "PageBlob",
-            "AzureFile",
-            "HDC"
+            "AzureFile"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ShareDestinationFormatType",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "UnknownType",
+                "description": "Unknown format."
+              },
+              {
+                "value": "HCS",
+                "description": "Storsimple data format."
+              },
+              {
+                "value": "BlockBlob",
+                "description": "Azure storage block blob format."
+              },
+              {
+                "value": "PageBlob",
+                "description": "Azure storage page blob format."
+              },
+              {
+                "value": "AzureFile",
+                "description": "Azure storage file format."
+              }
+            ]
           }
         },
         "userName": {
@@ -1904,7 +2093,17 @@
             "type": "string",
             "x-ms-enum": {
               "name": "AccessProtocol",
-              "modelAsString": false
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "SMB",
+                  "description": "Server Message Block protocol(SMB)."
+                },
+                {
+                  "value": "NFS",
+                  "description": "Network File System protocol(NFS)."
+                }
+              ]
             }
           },
           "readOnly": true
@@ -2008,7 +2207,21 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AddressType",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Address type not known."
+              },
+              {
+                "value": "Residential",
+                "description": "Residential Address."
+              },
+              {
+                "value": "Commercial",
+                "description": "Commercial Address."
+              }
+            ]
           }
         }
       }
@@ -2030,7 +2243,21 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy."
+              }
+            ]
           }
         },
         "displayName": {
@@ -2145,7 +2372,29 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "SkuDisabledReason",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "SKU is not disabled."
+              },
+              {
+                "value": "Country",
+                "description": "SKU is not available in the requested country."
+              },
+              {
+                "value": "Region",
+                "description": "SKU is not available to push data to the requested storage account region."
+              },
+              {
+                "value": "Feature",
+                "description": "Required features are not enabled for the SKU."
+              },
+              {
+                "value": "OfferType",
+                "description": "Subscription does not have required offer types for the SKU."
+              }
+            ]
           }
         },
         "disabledReasonMessage": {
@@ -2246,7 +2495,21 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy."
+              }
+            ]
           }
         }
       }

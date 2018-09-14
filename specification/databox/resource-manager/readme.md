@@ -26,9 +26,19 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2018-01
+```
 
+### Tag: package-2018-01
+These settings apply only when `--tag=package-2018-01` is specified on the command line. 
+
+``` yaml $(input-file)
 input-file:
 - Microsoft.DataBox\preview\2018-01-01\databox.json
+```
+
+### Suppression
+``` yaml $(directive)
 directive:
   - suppress:
     - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
@@ -78,10 +88,12 @@ go:
 
 ### Go multi-api
 
-``` yaml $(go) && $(multiapi)
+``` yaml $(batch)
+batch:
+  -tag: package-2018-01
 ```
 
-### Tag: package-2017-06 and go
+### Tag: package-2018-01 and go
 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
@@ -103,4 +115,23 @@ java:
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/databox
+```
+### Java multi-api
+
+``` yaml
+batch:
+  -tag: package-2018-01
+```
+
+### Tag: package-2018-01 and java
+
+These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml
+java:
+  namespace: com.microsoft.azure.management.databox.v2018_01_01
+  output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2018_01_01
+regenerate-manager: true
+generate-interface: true
 ```
