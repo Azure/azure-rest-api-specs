@@ -5164,11 +5164,12 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS.",
+      "description": "Specifies the storage account type for the managed disk. UltraSSD_LRS can only be used for data disks.",
       "enum": [
         "Standard_LRS",
         "Premium_LRS",
-        "StandardSSD_LRS"
+        "StandardSSD_LRS",
+        "UltraSSD_LRS"
       ],
       "x-ms-enum": {
         "name": "StorageAccountTypes",
@@ -5179,7 +5180,7 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
+          "description": "Specifies the storage account type for the managed disk. UltraSSD_LRS can only be used for data disks."
         }
       },
       "allOf": [
@@ -5312,6 +5313,15 @@
         }
       },
       "description": "Specifies the storage settings for the virtual machine disks."
+    },
+    "AdditionalCapabilities": {
+        "properties": {
+            "ultraSSDEnabled": {
+                "type": "boolean",
+                "description": "Enables or disables a capability to have 1 or more managed data disks with UltraSSD_LRS storage account on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
+            }
+        },
+        "description": "Enables or disables a capability on the virtual machine or virtual machine scale set"
     },
     "AdditionalUnattendContent": {
       "properties": {
@@ -5830,6 +5840,10 @@
           "$ref": "#/definitions/StorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
+		"additionalCapabilities": {
+		  "$ref": "#/definitions/AdditionalCapabilities",
+		  "description": "Specifies additional capabilities enabled or disabled on the virtual machine. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+		},
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
           "description": "Specifies the operating system settings for the virtual machine."
@@ -7022,6 +7036,10 @@
           "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
+		"additionalCapabilities": {
+		  "$ref": "#/definitions/AdditionalCapabilities",
+		  "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+		},		
         "networkProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
           "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
@@ -7588,6 +7606,10 @@
           "$ref": "#/definitions/StorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
+		"additionalCapabilities": {
+		  "$ref": "#/definitions/AdditionalCapabilities",
+		  "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+		},	
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
           "description": "Specifies the operating system settings for the virtual machine."
