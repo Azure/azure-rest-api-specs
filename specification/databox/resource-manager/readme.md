@@ -88,7 +88,7 @@ go:
 
 ### Go multi-api
 
-``` yaml $(batch)
+``` yaml $(go) && $(multiapi)
 batch:
   -tag: package-2018-01
 ```
@@ -98,7 +98,7 @@ batch:
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(go)
-output-folder: $(go-sdk-folder)/services/databox/mgmt/2018-01-01/databox
+output-folder: $(go-sdk-folder)/services/databox/preview/mgmt/2018-01-01/databox
 ```
 
 
