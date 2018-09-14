@@ -66,36 +66,40 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The metric dimension name."
+          "description": "The metric dimension name.",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
-          "description": "The display name for the dimension."
+          "description": "The display name for the dimension.",
+          "readOnly": true
         },
         "toBeExportedForShoebox": {
           "type": "boolean",
-          "description": "Whether to export metric to shoebox."
+          "description": "Whether to export metric to shoebox.",
+          "readOnly": true,
+          "x-nullable": false
         }
       },
       "type": "object",
-      "required": [
-        "toBeExportedForShoebox"
-      ],
       "description": "A metric dimension."
     },
     "Metric": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The metric name."
+          "description": "The metric name.",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
-          "description": "The metric display name."
+          "description": "The metric display name.",
+          "readOnly": true
         },
         "displayDescription": {
           "type": "string",
-          "description": "The metric display description."
+          "description": "The metric display description.",
+          "readOnly": true
         },
         "unit": {
           "type": "string",
@@ -108,18 +112,23 @@
             "name": "MetricUnit",
             "values": [
               {
-                "value": "Bytes"
+                "value": "Bytes",
+                "description": "The number of bytes."
               },
               {
-                "value": "Count"
+                "value": "Count",
+                "description": "The count."
               },
               {
-                "value": "Milliseconds"
+                "value": "Milliseconds",
+                "description": "The number of milliseconds."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "The metric unit"
+          "description": "The metric unit",
+          "readOnly": true,
+          "x-nullable": false
         },
         "aggregationType": {
           "type": "string",
@@ -132,32 +141,34 @@
             "name": "MetricAggregationType",
             "values": [
               {
-                "value": "Average"
+                "value": "Average",
+                "description": "The average."
               },
               {
-                "value": "Count"
+                "value": "Count",
+                "description": "The count of a number of items, usually requests."
               },
               {
-                "value": "Total"
+                "value": "Total",
+                "description": "The sum."
               }
             ],
             "modelAsExtensible": true
           },
-          "description": "The metric aggregation type"
+          "description": "The metric aggregation type",
+          "readOnly": true,
+          "x-nullable": false
         },
         "dimensions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
           },
-          "description": "The metric dimensions."
+          "description": "The metric dimensions.",
+          "readOnly": true
         }
       },
       "type": "object",
-      "required": [
-        "unit",
-        "aggregationType"
-      ],
       "description": "A metric emitted by service."
     },
     "ServiceSpecification": {
@@ -167,7 +178,8 @@
           "items": {
             "$ref": "#/definitions/Metric"
           },
-          "description": "List of metric specifications."
+          "description": "List of metric specifications.",
+          "readOnly": true
         }
       },
       "type": "object",
@@ -177,14 +189,15 @@
       "properties": {
         "serviceSpecification": {
           "$ref": "#/definitions/ServiceSpecification",
-          "description": "The service specifications."
+          "description": "The service specifications.",
+          "readOnly": true
         }
       },
       "type": "object",
       "description": "Metric properties."
     },
     "Operation": {
-      "description": "An operation.",	
+      "description": "An operation.",
       "properties": {
         "name": {
           "type": "string",
@@ -306,7 +319,7 @@
       "description": "Properties of the Media Services account."
     },
     "MediaService": {
-      "description": "A Media Services account.",	
+      "description": "A Media Services account.",
       "allOf": [
         {
           "$ref": "./Common.json#/definitions/TrackedResource"
@@ -322,7 +335,7 @@
       "type": "object"
     },
     "SubscriptionMediaService": {
-      "description": "A Media Services account.",	
+      "description": "A Media Services account.",
       "allOf": [
         {
           "$ref": "./Common.json#/definitions/TrackedResource"
@@ -407,14 +420,14 @@
       "description": "A collection of MediaService items."
     },
     "CheckNameAvailabilityInput": {
-      "description": "The input to the check name availability request.",	
+      "description": "The input to the check name availability request.",
       "properties": {
         "name": {
-          "description": "The account name.",		
+          "description": "The account name.",
           "type": "string"
         },
         "type": {
-          "description": "The account type. For a Media Services account, this should be 'MediaServices'.",		
+          "description": "The account type. For a Media Services account, this should be 'MediaServices'.",
           "type": "string"
         }
       },
@@ -865,7 +878,7 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "description": "The Media Services account name.",		  
+            "description": "The Media Services account name.",
             "name": "accountName",
             "in": "path",
             "required": true,
@@ -897,7 +910,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group within the Azure subscription.",
-      "x-ms-parameter-location": "method"	  
+      "x-ms-parameter-location": "method"
     },
     "ApiVersion": {
       "name": "api-version",
