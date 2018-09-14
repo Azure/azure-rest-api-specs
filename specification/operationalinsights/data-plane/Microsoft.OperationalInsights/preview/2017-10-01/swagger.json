@@ -45,6 +45,53 @@
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/query": {
+      "get": {
+        "operationId": "Query_Get",
+        "summary": "Execute an Analytics query",
+        "description": "Executes an Analytics query for data",
+        "x-ms-examples": {
+          "simple-query": {
+            "$ref": "examples/oms-get-example.json"
+          },
+          "cross-workspace": {
+            "$ref": "examples/oms-get-cross-workspace-example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/queryParam"
+          },
+          {
+            "$ref": "#/parameters/timespanParam"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
       "post": {
         "operationId": "Query_Execute",
         "summary": "Execute an Analytics query",
@@ -109,6 +156,15 @@
         "$ref": "#/definitions/queryBody"
       },
       "x-ms-parameter-location": "method"
+    },
+    "timespanParam": {
+      "name": "timespan",
+      "in": "query",
+      "required": false,
+      "format": "duration",
+      "x-ms-parameter-location": "method",
+      "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
+      "type": "string"
     },
     "apiVersion": {
       "name": "apiVersion",
