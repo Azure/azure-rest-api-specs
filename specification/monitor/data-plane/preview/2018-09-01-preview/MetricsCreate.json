@@ -21,8 +21,11 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProvider}/{resourceTypeName}/{resourceName}/metrics": {
       "post": {
-        "summary": "Ingestion API used by Azure custom metrics\r\n            Responsible of below operation\r\n            1. Authorize the request\r\n            2. Deserialize payload request body\r\n            3. Perform validation of the payload\r\n            4. Commits the payload for metrics ingestion",
-        "operationId": "azureMonitorCustomMetricsIngestionApi",
+        "tags": [
+          "Metrics"
+        ],
+        "operationId": "Metrics_Create",
+        "description": "**Post the metric values for a resource**.",
         "consumes": [
           "application/json"
         ],
