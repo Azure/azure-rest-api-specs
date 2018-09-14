@@ -26,11 +26,11 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-2018-01-01
 ```
 
-### Tag: package-2018-01
-These settings apply only when `--tag=package-2018-01` is specified on the command line. 
+### Tag: package-2018-01-01
+These settings apply only when `--tag=package-2018-01-01` is specified on the command line. 
 
 ``` yaml $(tag) == 'package-2018-01-01'
 input-file:
@@ -57,6 +57,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
 ```
 
 
@@ -89,14 +91,14 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  -tag: package-2018-01
+  -tag: package-2018-01-01
 ```
 
-### Tag: package-2018-01 and go
+### Tag: package-2018-01-01 and go
 These settings apply only when `--tag=package-2018-01-01 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-01' && $(go)
+``` yaml $(tag) == 'package-2018-01-01' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/databox/preview/mgmt/2018-01-01/databox
 ```
 
@@ -119,12 +121,12 @@ java:
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  -tag: package-2018-01
+  -tag: package-2018-01-01
 ```
 
-### Tag: package-2018-01 and java
+### Tag: package-2018-01-01 and java
 
-These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-01-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2018-01-01' && $(java) && $(multiapi)
