@@ -25,6 +25,8 @@ To see additional help and options, run:
 These are the global settings for the DataBox API.
 
 ``` yaml
+title: DataBoxManagementClient
+description: DataBox Client
 openapi-type: arm
 tag: package-2018-01
 ```
@@ -34,7 +36,7 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(input-file)
 input-file:
-- Microsoft.DataBox\preview\2018-01-01\databox.json
+- Microsoft.DataBox/preview/2018-01-01/databox.json
 ```
 
 ### Suppression
@@ -97,7 +99,7 @@ batch:
 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(go)
+``` yaml $(tag) == 'package-2018-01' && $(go) && $(multiapi)
 output-folder: $(go-sdk-folder)/services/databox/preview/mgmt/2018-01-01/databox
 ```
 
@@ -118,7 +120,7 @@ java:
 ```
 ### Java multi-api
 
-``` yaml
+``` yaml $(java) && $(multiapi)
 batch:
   -tag: package-2018-01
 ```
@@ -128,7 +130,7 @@ batch:
 These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml
+``` yaml $(tag) == 'package-2018-01-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databox.v2018_01_01
   output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2018_01_01
