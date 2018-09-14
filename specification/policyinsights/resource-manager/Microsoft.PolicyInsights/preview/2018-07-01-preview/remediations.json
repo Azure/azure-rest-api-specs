@@ -75,6 +75,45 @@
         }
       }
     },
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel": {
+      "post": {
+        "operationId": "Remediations_CancelAtManagementGroup",
+        "description": "Cancels a remediation at management group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The remediation that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a remediation at management group scope": {
+            "$ref": "./examples/Remediations_CancelManagementGroupScope.json"
+          }
+        }
+      }
+    },
     "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations": {
       "get": {
         "operationId": "Remediations_ListForManagementGroup",
@@ -296,6 +335,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel": {
+      "post": {
+        "operationId": "Remediations_CancelAtSubscription",
+        "description": "Cancels a remediation at subscription scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The remediation that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a remediation at subscription scope": {
+            "$ref": "./examples/Remediations_CancelSubscriptionScope.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/remediations": {
       "get": {
         "operationId": "Remediations_ListForSubscription",
@@ -507,6 +582,45 @@
         "x-ms-examples": {
           "List deployments for a remediation at resource group scope": {
             "$ref": "./examples/Remediations_ListDeploymentsResourceGroupScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel": {
+      "post": {
+        "operationId": "Remediations_CancelAtResourceGroup",
+        "description": "Cancels a remediation at resource group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The remediation that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a remediation at resource group scope": {
+            "$ref": "./examples/Remediations_CancelResourceGroupScope.json"
           }
         }
       }
@@ -728,6 +842,42 @@
         "x-ms-examples": {
           "List deployments for a remediation at individual resource scope": {
             "$ref": "./examples/Remediations_ListDeploymentsResourceScope.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel": {
+      "post": {
+        "operationId": "Remediations_CancelAtResource",
+        "description": "Cancel a remediation at resource scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The remediation that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a remediation at individual resource scope": {
+            "$ref": "./examples/Remediations_CancelResourceScope.json"
           }
         }
       }
