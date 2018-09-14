@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2016-05-01",
+        "version": "2018-09-01",
         "title": "BackupManagementClient",
         "description": "The Admin Backup Management Client."
     },
@@ -226,9 +226,14 @@
                     "description": "Password to access the location.",
                     "type": "string"
                 },
-                "encryptionKeyBase64": {
-                    "description": "Encryption key.",
+                "encryptionCertBase64": {
+                    "description": "The base64 raw data for the backup encryption certificate.",
                     "type": "string"
+                },
+                "encryptionCertThumbprint": {
+                    "description": "The thumbprint of the encryption certificate.",
+                    "type": "string",
+                    "readOnly": true
                 },
                 "backupFrequencyInHours": {
                     "description": "The interval, in hours, for the frequency that the scheduler takes a backup.",
@@ -236,7 +241,8 @@
                 },
                 "availableCapacity": {
                     "description": "Free space at the backup location.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "isBackupSchedulerEnabled": {
                     "description": "True if the backup scheduler is enabled.",
@@ -245,12 +251,14 @@
                 "nextBackupTime": {
                     "description": "The scheduled time of the next backup.",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "readOnly": true
                 },
                 "lastBackupTime": {
                     "description": "Time of backup.",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "readOnly": true
                 },
                 "backupRetentionPeriodInDays": {
                     "description": "The retention period, in days, for backs in the storage location.",

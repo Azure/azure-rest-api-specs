@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2016-05-01",
+        "version": "2018-09-01",
         "title": "BackupManagementClient",
         "description": "The Admin Backup Management Client."
     },
@@ -127,6 +127,9 @@
                     },
                     {
                         "$ref": "Backup.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/RestoreOptionsParameter"
                     }
                 ],
                 "responses": {
@@ -212,12 +215,17 @@
                     "readOnly": true
                 },
                 "stampVersion": {
-                    "description": "Current version.",
+                    "description": "Azure Stack stamp version of the backup.",
                     "type": "string",
                     "readOnly": true
                 },
                 "oemVersion": {
                     "description": "OEM version.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "encryptionCertThumbprint": {
+                    "description": "The thumbprint of the certificate used to encrypt the backup encryption key.",
                     "type": "string",
                     "readOnly": true
                 }
@@ -277,6 +285,19 @@
                     "type": "string"
                 }
             }
+        },
+        "RestoreOptions": {
+            "description": "Properties for restore options.",
+            "properties": {
+                "decryptionCertBase64": {
+                    "description": "The certificate file raw data in Base64 string. This should be the .pfx file with the private key.",
+                    "type": "string"
+                },
+                "decryptionCertPassword": {
+                    "description": "The password for the decryption certificate.",
+                    "type": "string"
+                }
+            }
         }
     },
     "parameters": {
@@ -286,6 +307,16 @@
             "description": "Name of the backup.",
             "required": true,
             "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "RestoreOptionsParameter": {
+            "name": "restoreOptions",
+            "in": "body",
+            "description": "Restore options.",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/RestoreOptions"
+            },
             "x-ms-parameter-location": "method"
         }
     },

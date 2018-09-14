@@ -6,54 +6,65 @@
         "backup": {
             "properties": {
                 "externalStoreDefault": {
-                    "path": "\\\\192.168.1.1\\Share",
-                    "userName": "UserName",
-                    "password": "secretPassword",
-                    "encryptionKeyBase64": "YVVOa0J3S2xTamhHZ1lyRU9wQ1pKQ0xWanhjaHlkaU5ZQnNDeHRPTGFQenJKdWZsRGtYT25oYmlaa1RMVWFKeQ==",
-                    "availableCapacity": "10GB",
-                    "isBackupSchedulerEnabled": false
+                    "path": "\\\\su1fileserver\\SU1_Infrastructure_2\\BackupStore",
+                    "userName": "azurestack\\azurestackadmin",
+                    "password": "password",
+                    "encryptionCertBase64": "encryptioncert",
+                    "backupFrequencyInHours": 10,
+                    "isBackupSchedulerEnabled": false,
+                    "backupRetentionPeriodInDays": 6
                 }
             },
             "location": "local",
             "tags": {}
         },
-        "api-version": "2016-05-01"
+        "api-version": "2018-09-01"
     },
     "responses": {
         "200": {
             "body": {
-                "id": "/subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourcegroups/System.local/providers/Microsoft.Backup.Admin/backupLocations/local",
+                "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/System.local/providers/Microsoft.Backup.Admin/backupLocations/local",
                 "name": "local",
                 "type": "Microsoft.Backup.Admin/backupLocations",
                 "location": "local",
                 "tags": {},
                 "properties": {
                     "externalStoreDefault": {
-                        "path": "\\\\192.168.1.1\\Share",
-                        "userName": "UserName",
-                        "password": "",
-                        "encryptionKeyBase64": "",
-                        "availableCapacity": "10GB",
-                        "isBackupSchedulerEnabled": false
+                        "path": "\\\\su1fileserver\\SU1_Infrastructure_2\\BackupStore",
+                        "userName": "azurestack\\azurestackadmin",
+                        "password": null,
+                        "encryptionCertBase64": null,
+                        "encryptionCertThumbprint": "BDB07F879C1F1A05B74EB43AEAF5E5B5F84DCEA8",
+                        "backupFrequencyInHours": 10,
+                        "availableCapacity": "29.6 TB",
+                        "isBackupSchedulerEnabled": false,
+                        "nextBackupTime": "2018-08-28T17:26:00.9454387Z",
+                        "lastBackupTime": "2018-08-28T07:47:11.3081476Z",
+                        "backupRetentionPeriodInDays": 6
                     }
                 }
             }
         },
         "202": {
             "body": {
-                "id": "/subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourcegroups/System.local/providers/Microsoft.Backup.Admin/backupLocations/local",
+                "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/System.local/providers/Microsoft.Backup.Admin/backupLocations/local",
                 "name": "local",
                 "type": "Microsoft.Backup.Admin/backupLocations",
                 "location": "local",
                 "tags": {},
                 "properties": {
                     "externalStoreDefault": {
-                        "path": "\\\\192.168.1.1\\Share",
-                        "userName": "UserName",
-                        "password": "",
-                        "encryptionKeyBase64": "",
-                        "availableCapacity": "10GB",
-                        "isBackupSchedulerEnabled": false
+                        "path": "\\\\su1fileserver\\SU1_Infrastructure_2\\BackupStore",
+                        "userName": "azurestack\\azurestackadmin",
+                        "password": null,
+                        "encryptionCertBase64": null,
+                        "encryptionCertThumbprint": "BDB07F879C1F1A05B74EB43AEAF5E5B5F84DCEA8",
+                        "backupFrequencyInHours": 10,
+                        "availableCapacity": "29.6 TB",
+                        "isBackupSchedulerEnabled": false,
+                        "nextBackupTime": "2018-08-28T17:26:00.9454387Z",
+                        "lastBackupTime": "2018-08-28T07:47:11.3081476Z",
+                        "backupRetentionPeriodInDays": 6
                     }
                 }
             }
