@@ -25,8 +25,6 @@ To see additional help and options, run:
 These are the global settings for the DataBox API.
 
 ``` yaml
-title: DataBoxManagementClient
-description: DataBox Client
 openapi-type: arm
 tag: package-2018-01
 ```
@@ -34,7 +32,7 @@ tag: package-2018-01
 ### Tag: package-2018-01
 These settings apply only when `--tag=package-2018-01` is specified on the command line. 
 
-``` yaml $(input-file)
+``` yaml $(tag) == 'package-2018-01-01'
 input-file:
 - Microsoft.DataBox/preview/2018-01-01/databox.json
 ```
@@ -57,6 +55,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
 ```
@@ -74,6 +74,34 @@ csharp:
   namespace: Microsoft.Azure.Management.DataBox
   output-folder: $(csharp-sdks-folder)/DataBox/Management.DataBox/Generated
   clear-output-folder: true
+```
+
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.databox
+  package-name: azure-mgmt-databox
+  package-version: 1.0.0
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-databox/azure/mgmt/databox
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-databox
 ```
 
 
@@ -96,11 +124,11 @@ batch:
 ```
 
 ### Tag: package-2018-01 and go
-
+These settings apply only when `--tag=package-2018-01-01 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-01' && $(go) && $(multiapi)
-output-folder: $(go-sdk-folder)/services/databox/preview/mgmt/2018-01-01/databox
+``` yaml $(tag) == 'package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/databox/preview/mgmt/2018-01-01/databox
 ```
 
 
@@ -116,7 +144,7 @@ java:
   namespace: com.microsoft.azure.management.databox
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/databox
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-databox
 ```
 ### Java multi-api
 
