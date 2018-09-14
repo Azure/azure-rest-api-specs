@@ -7,7 +7,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-databox
-  output-folder: $(node-sdks-folder)/lib/services/databox
+  output-folder: $(node-sdks-folder)/lib/services/databoxManagement
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: true
