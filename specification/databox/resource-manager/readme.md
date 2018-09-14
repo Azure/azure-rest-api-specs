@@ -37,13 +37,6 @@ input-file:
 - Microsoft.DataBox/preview/2018-01-01/databox.json
 ```
 
-### Suppression
-``` yaml $(directive)
-directive:
-  - suppress:
-    - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
-    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation)
-```
 ---
 # Code Generation
 
@@ -99,7 +92,7 @@ These settings apply only when `--tag=package-2018-01-01 --go` is specified on t
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-01-01' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/databox/preview/mgmt/2018-01-01/databox
+output-folder: $(go-sdk-folder)/services/preview/databox/mgmt/2018-01-01/databox
 ```
 
 
