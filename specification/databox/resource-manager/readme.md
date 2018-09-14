@@ -30,20 +30,13 @@ tag: package-2018-01
 ```
 
 ### Tag: package-2018-01
-These settings apply only when `--tag=package-2018-01` is specified on the command line. 
+These settings apply only when `--tag=package-2018-01 is specified on the command line. 
 
-``` yaml $(input-file)
+``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.DataBox\preview\2018-01-01\databox.json
+- Microsoft.DataBox/preview/2018-01-01/databox.json
 ```
 
-### Suppression
-``` yaml $(directive)
-directive:
-  - suppress:
-    - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
-    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation)
-```
 ---
 # Code Generation
 
@@ -57,6 +50,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
 ```
 
 
@@ -74,7 +69,6 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
@@ -88,17 +82,17 @@ go:
 
 ### Go multi-api
 
-``` yaml $(batch)
+``` yaml $(go) && $(multiapi)
 batch:
   -tag: package-2018-01
 ```
 
 ### Tag: package-2018-01 and go
-
+These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(go)
-output-folder: $(go-sdk-folder)/services/databox/mgmt/2018-01-01/databox
+``` yaml $(tag) == 'package-2018-01' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/databox/mgmt/2018-01-01/databox
 ```
 
 
@@ -114,11 +108,11 @@ java:
   namespace: com.microsoft.azure.management.databox
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/databox
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-databox
 ```
 ### Java multi-api
 
-``` yaml
+``` yaml $(java) && $(multiapi)
 batch:
   -tag: package-2018-01
 ```
@@ -128,7 +122,7 @@ batch:
 These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml
+``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databox.v2018_01_01
   output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2018_01_01
