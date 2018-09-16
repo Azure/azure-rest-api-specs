@@ -45,7 +45,7 @@
           "description": "**Gets the baseline values for a specific metric**.",
           "parameters": [
             {
-              "$ref": "#/parameters/ExtendedResourceUriParameter"            
+              "$ref": "#/parameters/ExtendedResourceUriParameter"
             },
             {
               "$ref": "#/parameters/MetricNameParameter"
@@ -67,6 +67,16 @@
             },
             {
               "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNamespaceParameter"
+            },
+            {
+              "name": "$filter",
+              "in": "query",
+              "type": "string",
+              "description": "The **$filter** is used to describe a set of dimensions with their concrete values which produce a specific metric’s time series, in which a baseline is requested for.",
+              "required": false
             }
           ],
           "responses": {
@@ -311,6 +321,14 @@
         "required": true,
         "type": "string",
         "description": "Client Api Version."
+      },
+      "MetricNamespaceParameter": {
+        "name": "metricnamespace",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "description": "Metric namespace to query metric definitions for.",
+        "x-ms-parameter-location": "method"
       }
     }
   }
