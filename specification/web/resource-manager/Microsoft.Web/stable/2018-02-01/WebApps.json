@@ -5138,9 +5138,12 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/Operation"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
             }
           },
           "202": {
@@ -5273,9 +5276,12 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/Operation"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
             }
           },
           "202": {
@@ -5327,16 +5333,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
-            "schema": {
-              "type": "string"
-            }
+            "description": "Stopped."
           },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
+          "204": {
+            "description": "Stopped."
           }
         },
         "x-ms-examples": {
@@ -12486,9 +12486,12 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/Operation"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
             }
           },
           "202": {
@@ -12635,9 +12638,12 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/Operation"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
             }
           },
           "202": {
@@ -12696,16 +12702,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
-            "schema": {
-              "type": "string"
-            }
+            "description": "Stopped."
           },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
+          "204": {
+            "description": "Stopped."
           }
         },
         "x-ms-examples": {
@@ -18742,29 +18742,18 @@
     "NetworkTrace": {
       "description": "Network trace",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "NetworkTrace resource specific properties",
-          "properties": {
-            "path": {
-              "description": "Local file path for the captured network trace file.",
-              "type": "string"
-            },
-            "status": {
-              "description": "Current status of the network trace operation, same as Operation.Status (InProgress/Succeeded/Failed).",
-              "type": "string"
-            },
-            "message": {
-              "description": "Detailed message of a network trace operation, e.g. error message in case of failure.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
+        "path": {
+          "description": "Local file path for the captured network trace file.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Current status of the network trace operation, same as Operation.Status (InProgress/Succeeded/Failed).",
+          "type": "string"
+        },
+        "message": {
+          "description": "Detailed message of a network trace operation, e.g. error message in case of failure.",
+          "type": "string"
         }
       }
     },
